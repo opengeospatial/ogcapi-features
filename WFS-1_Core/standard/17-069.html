@@ -524,7 +524,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (yyyy-mm-dd)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2017-07-31)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -670,7 +670,81 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong class="big">i.     Abstract</strong></p>
 </div>
 <div class="paragraph">
-<p>&lt;Insert Abstract Text here&gt;</p>
+<p>The Web Feature Service (WFS) offers the capability to create, modify and query geographic information on the Web. Rather than sharing geographic information at the dataset level, WFS offers direct fine-grained access to geographic information at the feature and feature property level.</p>
+</div>
+<div class="paragraph">
+<p>Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP standard.</p>
+</div>
+<div class="paragraph">
+<p>Implementations of WFS will support at least one of the encodings specified in this standard:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JSON</p>
+</li>
+<li>
+<p>HTML</p>
+</li>
+<li>
+<p>XML</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>WFS is a multi-part standard</p>
+</div>
+<div class="paragraph">
+<p>This International Standard specifies discovery operations, query operations, locking operations, transaction operations and operations to manage stored, parameterized query expressions.</p>
+</div>
+<div class="paragraph">
+<p>Discovery operations allow the service to be interrogated to determine its capabilities and to retrieve the application schema that defines the feature types that the service offers.</p>
+</div>
+<div class="paragraph">
+<p>Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon constraints, defined by the client, on feature properties.</p>
+</div>
+<div class="paragraph">
+<p>Locking operations allow exclusive access to features for the purpose of modifying or deleting features.</p>
+</div>
+<div class="paragraph">
+<p>Transaction operations allow features to be created, changed, replaced and deleted from the underlying data store.</p>
+</div>
+<div class="paragraph">
+<p>Stored query operations allow clients to create, drop, list and described parameterized query expressions that are stored by the server and can be repeatedly invoked using different parameter values.</p>
+</div>
+<div class="paragraph">
+<p>WFS Part 1 - Core defines n resources:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Dataset (discovery)</p>
+</li>
+<li>
+<p>Distribution (discovery)</p>
+</li>
+<li>
+<p>Schema (discovery)</p>
+</li>
+<li>
+<p>Feature Types</p>
+</li>
+<li>
+<p>Feature Type</p>
+</li>
+<li>
+<p>Feature</p>
+</li>
+<li>
+<p>Stored Queries</p>
+</li>
+<li>
+<p>Stored Query</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additional</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">ii.    Keywords</strong></p>
@@ -679,28 +753,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The following are keywords to be used by search engines and document catalogues.</p>
 </div>
 <div class="paragraph">
-<p>ogcdoc, OGC document,  &lt;tags separated by commas&gt;</p>
+<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">iii.   Preface</strong></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Insert Preface Text here. Give OGC specific commentary: describe the technical content, reason for document, history of the document and precursors, and plans for future work. &gt;
-Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.</p>
+<p><strong>OGC Declaration</strong></p>
+</div>
+<div class="paragraph">
+<p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.</p>
 </div>
 <div class="paragraph">
 <p>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p><strong>ISO Declaration</strong></p>
+</div>
+<div class="paragraph">
+<p>ISO (the International Organization for Standardization) is a worldwide federation of national standards bodies (ISO member bodies). The work of preparing International Standards is normally carried out through ISO technical committees. Each member body interested in a subject for which a technical committee has been established has the right to be represented on that committee. International organizations, governmental and non-governmental, in liaison with ISO, also take part in the work. ISO collaborates closely with the International Electrotechnical Commission (IEC) on all matters of electrotechnical standardization.</p>
+</div>
+<div class="paragraph">
+<p>International Standards are drafted in accordance with the rules given in the ISO/IEC Directives, Part 2.</p>
+</div>
+<div class="paragraph">
+<p>The main task of technical committees is to prepare International Standards. Draft International Standards adopted by the technical committees are circulated to the member bodies for voting. Publication as an International Standard requires approval by at least 75 % of the member bodies casting a vote.</p>
+</div>
+<div class="paragraph">
+<p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. ISO shall not be held responsible for identifying any or all such patent rights.</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">iv.    Submitting organizations</strong></p>
@@ -708,8 +788,18 @@ Attention is drawn to the possibility that some of the elements of this document
 <div class="paragraph">
 <p>The following organizations submitted this Document to the Open Geospatial Consortium (OGC):</p>
 </div>
-<div class="paragraph">
-<p>Organization name(s)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CubeWerx Inc.</p>
+</li>
+<li>
+<p>interactive instruments GmbH</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><strong class="big">v.     Submitters</strong></p>
@@ -717,9 +807,28 @@ Attention is drawn to the possibility that some of the elements of this document
 <div class="paragraph">
 <p>All questions regarding this submission should be directed to the editor or the submitters:</p>
 </div>
-<div class="paragraph">
-<p>Name  Affiliation</p>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Affiliation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clemens Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">interactive instruments GmbH</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Panagiotis (Peter) A. Vretanos</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">CubeWerx Inc.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -1172,7 +1281,7 @@ Place other Annex material in sequential annexes beginning with "B" and leave fi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-07-31 18:04:35 CEST
+Last updated 2017-07-31 18:09:24 CEST
 </div>
 </div>
 </body>

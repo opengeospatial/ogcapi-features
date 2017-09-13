@@ -1,0 +1,81 @@
+[big]*i.     Abstract*
+
+The Web Feature Service (WFS) offers the capability to create, modify and query geographic information on the Web. Rather than sharing geographic information at the dataset level, WFS offers direct fine-grained access to geographic information at the feature and feature property level.
+
+Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP standard.
+
+Implementations of WFS will support at least one of the encodings specified in this standard:
+
+* JSON
+* HTML
+* XML
+
+WFS is a multi-part standard
+
+This International Standard specifies discovery operations, query operations, locking operations, transaction operations and operations to manage stored, parameterized query expressions.
+
+Discovery operations allow the service to be interrogated to determine its capabilities and to retrieve the application schema that defines the feature types that the service offers.
+
+Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon constraints, defined by the client, on feature properties.
+
+Locking operations allow exclusive access to features for the purpose of modifying or deleting features.
+
+Transaction operations allow features to be created, changed, replaced and deleted from the underlying data store.
+
+Stored query operations allow clients to create, drop, list and described parameterized query expressions that are stored by the server and can be repeatedly invoked using different parameter values.
+
+WFS Part 1 - Core defines n resources:
+
+* Dataset (discovery)
+* Distribution (discovery)
+* Schema (discovery)
+* Feature Types
+* Feature Type
+* Feature
+* Stored Queries
+* Stored Query
+
+Additional
+
+[big]*ii.    Keywords*
+
+The following are keywords to be used by search engines and document catalogues.
+
+ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data
+
+[big]*iii.   Preface*
+
+*OGC Declaration*
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.
+
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
+
+*ISO Declaration*
+
+ISO (the International Organization for Standardization) is a worldwide federation of national standards bodies (ISO member bodies). The work of preparing International Standards is normally carried out through ISO technical committees. Each member body interested in a subject for which a technical committee has been established has the right to be represented on that committee. International organizations, governmental and non-governmental, in liaison with ISO, also take part in the work. ISO collaborates closely with the International Electrotechnical Commission (IEC) on all matters of electrotechnical standardization.
+
+International Standards are drafted in accordance with the rules given in the ISO/IEC Directives, Part 2.
+
+The main task of technical committees is to prepare International Standards. Draft International Standards adopted by the technical committees are circulated to the member bodies for voting. Publication as an International Standard requires approval by at least 75 % of the member bodies casting a vote.
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. ISO shall not be held responsible for identifying any or all such patent rights.
+
+[big]*iv.    Submitting organizations*
+
+The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
+
+* CubeWerx Inc.
+* interactive instruments GmbH
+* ...
+
+[big]*v.     Submitters*
+
+All questions regarding this submission should be directed to the editor or the submitters:
+
+|===
+|*Name* |*Affiliation*
+
+|Clemens Portele |interactive instruments GmbH
+|Panagiotis (Peter) A. Vretanos |CubeWerx Inc.
+|===
