@@ -1,0 +1,33 @@
+== Requirement Class "Core"
+NOTE: Add intro text for the requirement class.
+
+include::requirements/requirements_class_core.adoc[]
+
+=== OpenAPI definition
+Every WFS is defined by an OpenAPI definition document. That document describes
+the capabilities of the service and can be used by tools to support the
+implementation of servers and clients.
+
+include::requirements/requirement_oas-definition.adoc[]
+
+include::requirements/requirement_oas-impl.adoc[]
+
+NOTE: Currently, no tool is known to validate that a server implements the
+API specified in its OpenAPI definition.
+
+=== Feature collection metadata
+
+include::requirements/requirement_fc-metadata.adoc[]
+
+
+////
+Dictionary tables for requirements can be added as necessary. Modify the following example as needed.
+
+[width="90%",options="header"]
+|===
+|Names |Definition |Data types and values |Multiplicity and use
+|name 1 |definition of name 1 |float |One or more (mandatory)
+|name 2 |definition of name 2 |character string type, not empty |Zero or one (optional)
+|name 3 |definition of name 3 |GML:: Point PropertyType |One (mandatory)
+|===
+////

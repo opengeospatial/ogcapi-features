@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.5">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
 <title>OGC Web Feature Service 3.0 - Part 1: Core</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -89,13 +89,12 @@ strong,b{font-weight:bold;line-height:inherit}
 small{font-size:60%;line-height:inherit}
 code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
 ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
-ul,ol,ul.no-bullet,ol.no-bullet{margin-left:1.5em}
+ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
 ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
 ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
-ul.no-bullet{list-style:none}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -131,7 +130,11 @@ strong strong{font-weight:400}
 kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
 .keyseq kbd:last-child{margin-right:0}
-.menuseq,.menu{color:rgba(0,0,0,.8)}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
 b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
 b.button:before{content:"[";padding:0 3px 0 2px}
 b.button:after{content:"]";padding:0 2px 0 3px}
@@ -198,7 +201,7 @@ table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
 table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
 .admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
 .admonitionblock>table td.icon{text-align:center;width:80px}
-.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon img{max-width:initial}
 .admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
@@ -254,13 +257,13 @@ table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
 table.tableblock{max-width:100%;border-collapse:separate}
 table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
 table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
-table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
-table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
-table.grid-cols th.tableblock,table.grid-cols td.tableblock{border-width:0 1px 0 0}
-table.grid-all *>tr>.tableblock:last-child,table.grid-cols *>tr>.tableblock:last-child{border-right-width:0}
-table.grid-rows th.tableblock,table.grid-rows td.tableblock{border-width:0 0 1px 0}
-table.grid-all tbody>tr:last-child>th.tableblock,table.grid-all tbody>tr:last-child>td.tableblock,table.grid-all thead:last-child>tr>th.tableblock,table.grid-rows tbody>tr:last-child>th.tableblock,table.grid-rows tbody>tr:last-child>td.tableblock,table.grid-rows thead:last-child>tr>th.tableblock{border-bottom-width:0}
-table.grid-rows tfoot>tr>th.tableblock,table.grid-rows tfoot>tr>td.tableblock{border-width:1px 0 0 0}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
 table.frame-all{border-width:1px}
 table.frame-sides{border-width:0 1px}
 table.frame-topbot{border-width:1px 0}
@@ -281,10 +284,12 @@ ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
 ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
-ul.unstyled,ol.unnumbered,ul.checklist,ul.none{list-style-type:none}
-ul.unstyled,ol.unnumbered,ul.checklist{margin-left:.625em}
-ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1em;font-size:.85em}
-ul.checklist li>p:first-child>input[type="checkbox"]:first-child{width:1em;position:relative;top:1px}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
 ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
 ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
 ul.inline>li>*{display:block}
@@ -301,7 +306,8 @@ ol.lowergreek{list-style-type:lower-greek}
 td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
 td.hdlist1{font-weight:bold;padding-bottom:1.25em}
 .literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
-.colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
 .colist>table tr>td:last-of-type{padding:.25em 0}
 .thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
 .imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
@@ -364,6 +370,7 @@ div.unbreakable{page-break-inside:avoid}
 .yellow{color:#bfbf00}
 .yellow-background{background-color:#fafa00}
 span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
 .admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
 .admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
 .admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
@@ -419,74 +426,57 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <style>
 .listingblock .pygments .hll { background-color: #ffffcc }
-.listingblock .pygments, .listingblock .pygments code { background: #f8f8f8; }
-.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
-.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
-.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
-.listingblock .pygments .tok-o { color: #666666 } /* Operator */
-.listingblock .pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
-.listingblock .pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
-.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
-.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+.listingblock .pygments, .listingblock .pygments code { background: #ffffff; }
+.listingblock .pygments .tok-c { color: #008800; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.listingblock .pygments .tok-k { color: #000080; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-ch { color: #008800; font-style: italic } /* Comment.Hashbang */
+.listingblock .pygments .tok-cm { color: #008800; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #008080 } /* Comment.Preproc */
+.listingblock .pygments .tok-cpf { color: #008800; font-style: italic } /* Comment.PreprocFile */
+.listingblock .pygments .tok-c1 { color: #008800; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #008800; font-weight: bold } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
 .listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
-.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
-.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+.listingblock .pygments .tok-gr { color: #aa0000 } /* Generic.Error */
+.listingblock .pygments .tok-gh { color: #999999 } /* Generic.Heading */
+.listingblock .pygments .tok-gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
 .listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
-.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.listingblock .pygments .tok-gp { color: #555555 } /* Generic.Prompt */
 .listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
-.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
-.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
-.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
-.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
-.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
-.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
-.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
-.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
-.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
-.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
-.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
-.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
-.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
-.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
-.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-gu { color: #aaaaaa } /* Generic.Subheading */
+.listingblock .pygments .tok-gt { color: #aa0000 } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #000080; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #000080; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #000080; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #000080; font-weight: bold } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #000080; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #000080; font-weight: bold } /* Keyword.Type */
+.listingblock .pygments .tok-m { color: #0000FF } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #0000FF } /* Literal.String */
+.listingblock .pygments .tok-na { color: #FF0000 } /* Name.Attribute */
+.listingblock .pygments .tok-nt { color: #000080; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-ow { font-weight: bold } /* Operator.Word */
 .listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
-.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
-.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
-.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
-.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
-.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
-.listingblock .pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
-.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
-.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
-.listingblock .pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
-.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
-.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
-.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
-.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
-.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
-.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
-.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
-.listingblock .pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
-.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
-.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
-.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
-.listingblock .pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
-.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+.listingblock .pygments .tok-mb { color: #0000FF } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #0000FF } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #0000FF } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #0000FF } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #0000FF } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sa { color: #0000FF } /* Literal.String.Affix */
+.listingblock .pygments .tok-sb { color: #0000FF } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #800080 } /* Literal.String.Char */
+.listingblock .pygments .tok-dl { color: #0000FF } /* Literal.String.Delimiter */
+.listingblock .pygments .tok-sd { color: #0000FF } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #0000FF } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #0000FF } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #0000FF } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #0000FF } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #0000FF } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #0000FF } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #0000FF } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #0000FF } /* Literal.String.Symbol */
+.listingblock .pygments .tok-il { color: #0000FF } /* Literal.Number.Integer.Long */
 </style>
 </head>
 <body class="book">
@@ -524,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2017-07-31)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2017-10-05)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -626,27 +616,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_references">3. References</a></li>
 <li><a href="#_terms_and_definitions">4. Terms and Definitions</a>
 <ul class="sectlevel2">
-<li><a href="#__strong_term_name_strong">4.1. <strong>term name</strong></a></li>
+<li><a href="#_dataset">4.1. dataset</a></li>
+<li><a href="#_distribution">4.2. distribution</a></li>
+<li><a href="#_feature">4.3. feature</a></li>
+<li><a href="#_feature_collection">4.4. feature collection</a></li>
 </ul>
 </li>
 <li><a href="#_conventions">5. Conventions</a>
 <ul class="sectlevel2">
 <li><a href="#_identifiers">5.1. Identifiers</a></li>
+<li><a href="#_paths_in_openapi_definitions">5.2. Paths in OpenAPI definitions</a></li>
 </ul>
 </li>
-<li><a href="#_clauses_not_containing_normative_material">6. Clauses not Containing Normative Material</a>
+<li><a href="#_overview">6. Overview</a></li>
+<li><a href="#_requirement_class_core">7. Requirement Class "Core"</a>
 <ul class="sectlevel2">
-<li><a href="#_clauses_not_containing_normative_material_sub_clause_1">6.1. Clauses not containing normative material sub-clause 1</a></li>
-<li><a href="#_clauses_not_containing_normative_material_sub_clause_2">6.2. Clauses not containing normative material sub-clause 2</a></li>
-</ul>
-</li>
-<li><a href="#_clause_containing_normative_material">7. Clause containing normative material</a>
-<ul class="sectlevel2">
-<li><a href="#_requirement_class_a_or_requirement_a_example">7.1. Requirement Class A or Requirement A Example</a>
-<ul class="sectlevel3">
-<li><a href="#_requirement_1">7.1.1. Requirement 1</a></li>
-</ul>
-</li>
+<li><a href="#_openapi_definition">7.1. OpenAPI definition</a></li>
+<li><a href="#_feature_collection_metadata">7.2. Feature collection metadata</a></li>
 </ul>
 </li>
 <li><a href="#_media_types_for_any_data_encoding_s">8. Media Types for any data encoding(s)</a></li>
@@ -654,15 +640,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_conformance_class_a">A.1. Conformance Class A</a>
 <ul class="sectlevel3">
-<li><a href="#_requirement_1_2">A.1.1. Requirement 1</a></li>
+<li><a href="#_requirement_1">A.1.1. Requirement 1</a></li>
 <li><a href="#_requirement_2">A.1.2. Requirement 2</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_title_normative_informative">Annex B: Title ( {Normative/Informative} )</a></li>
-<li><a href="#_revision_history">Annex C: Revision History</a></li>
-<li><a href="#Bibliography">Annex D: Bibliography</a></li>
+<li><a href="#_revision_history">Annex B: Revision History</a></li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
@@ -670,7 +654,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong class="big">i.     Abstract</strong></p>
 </div>
 <div class="paragraph">
-<p>The Web Feature Service (WFS) offers the capability to create, modify and query geographic information on the Web. Rather than sharing geographic information at the dataset level, WFS offers direct fine-grained access to geographic information at the feature and feature property level.</p>
+<p>The Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct fine-grained access to the data at the feature (object) level.</p>
 </div>
 <div class="paragraph">
 <p>Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP standard.</p>
@@ -692,59 +676,35 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>WFS is a multi-part standard</p>
+<p>WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for updating data, more complex data models or queries.</p>
 </div>
 <div class="paragraph">
-<p>This International Standard specifies discovery operations, query operations, locking operations, transaction operations and operations to manage stored, parameterized query expressions.</p>
+<p>This International Standard specifies discovery and query operations.</p>
 </div>
 <div class="paragraph">
-<p>Discovery operations allow the service to be interrogated to determine its capabilities and to retrieve the application schema that defines the feature types that the service offers.</p>
+<p>Discovery operations allow the service to be interrogated to determine its capabilities and retrieve information (metadata) about this distribution of the dataset. This includes the OpenAPI 3.0 definition of the service as well as metadata about the feature collections provided by the service.</p>
 </div>
 <div class="paragraph">
 <p>Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon constraints, defined by the client, on feature properties.</p>
 </div>
 <div class="paragraph">
-<p>Locking operations allow exclusive access to features for the purpose of modifying or deleting features.</p>
-</div>
-<div class="paragraph">
-<p>Transaction operations allow features to be created, changed, replaced and deleted from the underlying data store.</p>
-</div>
-<div class="paragraph">
-<p>Stored query operations allow clients to create, drop, list and described parameterized query expressions that are stored by the server and can be repeatedly invoked using different parameter values.</p>
-</div>
-<div class="paragraph">
-<p>WFS Part 1 - Core defines n resources:</p>
+<p>This part of this International Standard defines the following resources:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Dataset (discovery)</p>
+<p>Service definition [1]</p>
 </li>
 <li>
-<p>Distribution (discovery)</p>
+<p>Feature collections metadata [1]</p>
 </li>
 <li>
-<p>Schema (discovery)</p>
+<p>Feature collection [1..n]</p>
 </li>
 <li>
-<p>Feature Types</p>
-</li>
-<li>
-<p>Feature Type</p>
-</li>
-<li>
-<p>Feature</p>
-</li>
-<li>
-<p>Stored Queries</p>
-</li>
-<li>
-<p>Stored Query</p>
+<p>Feature [0..n]</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Additional</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">ii.    Keywords</strong></p>
@@ -753,7 +713,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The following are keywords to be used by search engines and document catalogues.</p>
 </div>
 <div class="paragraph">
-<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data</p>
+<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">iii.   Preface</strong></p>
@@ -834,19 +794,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_scope"><a class="anchor" href="#_scope"></a>1. Scope</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Insert Scope text here. Give the subject of the document and the aspects of that scope covered by the document.</p>
+<p>This International Standard specifies the behaviour of a service that provides access to geographic features in a dataset in a manner independent of the underlying data store. It specifies discovery and query operations.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Discovery operations allow the service to be interrogated to determine its capabilities and retrieve information (metadata) about this distribution of the dataset. This includes the OpenAPI 3.0 definition of the service as well as metadata about the feature collections provided by the service.</p>
+</div>
+<div class="paragraph">
+<p>Query operations allow features to be retrieved from the underlying data store based upon simple selection criteria, defined by the client.</p>
 </div>
 </div>
 </div>
@@ -854,23 +809,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_conformance"><a class="anchor" href="#_conformance"></a>2. Conformance</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This standard defines XXXX.</p>
-</div>
-<div class="paragraph">
-<p>Requirements for N standardization target types are considered:
-* AAAA
-* BBBB</p>
+<p>This standard defines a single requirements and conformance class. The standardization targets are "web services".</p>
 </div>
 <div class="paragraph">
 <p>Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.</p>
 </div>
 <div class="paragraph">
-<p>In order to conform to this OGC® interface standard, a software implementation shall choose to implement:
-* Any one of the conformance levels specified in Annex B (normative).
-* Any one of the Distributed Computing Platform profiles specified in Annexes TBD through TBD (normative).</p>
-</div>
-<div class="paragraph">
-<p>All requirements-classes and conformance-classes described in this document are owned by the standard(s) identified.</p>
+<p>In order to conform to this OGC® interface standard, a software implementation will implement: &#8230;&#8203;</p>
 </div>
 </div>
 </div>
@@ -880,70 +825,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments to, or revisions of, any of these publications do not apply. For undated references, the latest edition of the normative document referred to applies.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Insert References here. If there are no references, state “There are no normative references”.</p>
+<p>Open API Initiative: OpenAPI Specification 3.0.0,
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md" class="bare">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md</a> (2017)</p>
 </div>
 <div class="paragraph">
-<p>References are to follow the Springer LNCS style, with the exception that optional information may be appended to references: DOIs are added after the date and web resource references may include an access date at the end of the reference in parentheses. See examples from Springer and OGC below.</p>
+<p>van den Brink, L., Portele, C., Vretanos, P.: OGC 10-100r3,
+Geography Markup Language (GML) Simple Features Profile, <a href="http://portal.opengeospatial.org/files/?artifact_id=42729" class="bare">http://portal.opengeospatial.org/files/?artifact_id=42729</a> (2011)</p>
 </div>
 <div class="paragraph">
-<p>Smith, T.F., Waterman, M.S.: Identification of Common Molecular Subsequences.
-J. Mol. Biol. 147, 195–197 (1981)</p>
-</div>
-<div class="paragraph">
-<p>May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline: Composing
-a Complex Biological Workflow through Web Services. In: Nagel, W.E., Walter,
-W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128, pp. 1148–1158. Springer,
-Heidelberg (2006)</p>
-</div>
-<div class="paragraph">
-<p>Foster, I., Kesselman, C.: The Grid: Blueprint for a New Computing Infrastructure.
-Morgan Kaufmann, San Francisco (1999)</p>
-</div>
-<div class="paragraph">
-<p>Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid Information Services
-for Distributed Resource Sharing. In: 10th IEEE International Symposium on High
-Performance Distributed Computing, pp. 181–184. IEEE Press, New York (2001)</p>
-</div>
-<div class="paragraph">
-<p>Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the Grid: an Open
-Grid Services Architecture for Distributed Systems Integration. Technical report,
-Global Grid Forum (2002)</p>
-</div>
-<div class="paragraph">
-<p>National Center for Biotechnology Information, <a href="http://www.ncbi.nlm.nih.gov" class="bare">http://www.ncbi.nlm.nih.gov</a></p>
-</div>
-<div class="paragraph">
-<p>ISO / TC 211: ISO 19115-1:2014 Geographic information&#8201;&#8212;&#8201;Metadata&#8201;&#8212;&#8201;Part 1: Fundamentals (2014)</p>
-</div>
-<div class="paragraph">
-<p>ISO / TC 211: ISO 19157:2013 Geographic information&#8201;&#8212;&#8201;Data quality (2013)</p>
-</div>
-<div class="paragraph">
-<p>ISO / TC 211: ISO 19139:2007 Geographic information&#8201;&#8212;&#8201;Metadata&#8201;&#8212;&#8201;XML schema implementation (2007)</p>
-</div>
-<div class="paragraph">
-<p>ISO / TC 211: ISO 19115-3: Geographic information&#8201;&#8212;&#8201;Metadata&#8201;&#8212;&#8201;Part 3: XML schemas (2016)</p>
-</div>
-<div class="paragraph">
-<p>OGC: OGC 15-097 OGC Geospatial User Feedback Standard. Conceptual Model (2016)</p>
-</div>
-<div class="paragraph">
-<p>OGC: OGC 12-019, OGC City Geography Markup Language (CityGML) Encoding Standard (2012)</p>
-</div>
-<div class="paragraph">
-<p>OGC: OGC 14-005r3, OGC IndoorGML (2014)</p>
-</div>
-</td>
-</tr>
-</table>
+<p>Butler, H., Daly, M., Doyle, A., Gillies, S., Hagen, S., Schaub, T.:
+IETF RFC 7946, The GeoJSON Format, <a href="https://tools.ietf.org/rfc/rfc7946.txt" class="bare">https://tools.ietf.org/rfc/rfc7946.txt</a> (2016)</p>
 </div>
 </div>
 </div>
@@ -957,9 +849,30 @@ Global Grid Forum (2002)</p>
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
 </div>
 <div class="sect2">
-<h3 id="__strong_term_name_strong"><a class="anchor" href="#__strong_term_name_strong"></a>4.1. <strong>term name</strong></h3>
+<h3 id="_dataset"><a class="anchor" href="#_dataset"></a>4.1. dataset</h3>
 <div class="paragraph">
-<p>text of the definition</p>
+<p>collection of data, published or curated by a single agent, and available for access or download in one or more formats [DCAT]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_distribution"><a class="anchor" href="#_distribution"></a>4.2. distribution</h3>
+<div class="paragraph">
+<p>represents an accessible form of a <strong>dataset</strong> [DCAT]</p>
+</div>
+<div class="paragraph">
+<p>EXAMPLE: a downloadable file, an RSS feed or a web service that provides the data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature"><a class="anchor" href="#_feature"></a>4.3. feature</h3>
+<div class="paragraph">
+<p>abstraction of real world phenomena [ISO 19101:2002, definition 4.11]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collection"><a class="anchor" href="#_feature_collection"></a>4.4. feature collection</h3>
+<div class="paragraph">
+<p>a set of <strong>features</strong> from a <strong>dataset</strong></p>
 </div>
 </div>
 </div>
@@ -967,54 +880,87 @@ Global Grid Forum (2002)</p>
 <div class="sect1">
 <h2 id="_conventions"><a class="anchor" href="#_conventions"></a>5. Conventions</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>This sections provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+This sections provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_identifiers"><a class="anchor" href="#_identifiers"></a>5.1. Identifiers</h3>
 <div class="paragraph">
-<p>The normative provisions in this specification are denoted by the URI</p>
-</div>
-<div class="paragraph">
-<p><a href="http://www.opengis.net/spec/{standard}/{m.n}" class="bare">http://www.opengis.net/spec/{standard}/{m.n}</a></p>
+<p>The normative provisions in this specification are denoted by the URI <code><a href="http://www.opengis.net/spec/wfs-1/3.0" class="bare">http://www.opengis.net/spec/wfs-1/3.0</a></code>.</p>
 </div>
 <div class="paragraph">
 <p>All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_paths_in_openapi_definitions"><a class="anchor" href="#_paths_in_openapi_definitions"></a>5.2. Paths in OpenAPI definitions</h3>
+<div class="paragraph">
+<p>All paths in an OpenAPI definition are relative to a base URL of the service.</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 1. URL of the OpenAPI definition</div>
+<div class="content">
+<div class="paragraph">
+<p>If the OpenAPI Server Object would look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>servers:
+  - url: https://dev.example.org/
+    description: Development server
+  - url: https://data.example.org/
+    description: Production server</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The path "/mypath" in the OpenAPI definition of a WFS would be the
+URL <code><a href="https://data.example.org/mypath" class="bare">https://data.example.org/mypath</a></code> for the production service.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_clauses_not_containing_normative_material"><a class="anchor" href="#_clauses_not_containing_normative_material"></a>6. Clauses not Containing Normative Material</h2>
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>6. Overview</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Paragraph</p>
-</div>
-<div class="sect2">
-<h3 id="_clauses_not_containing_normative_material_sub_clause_1"><a class="anchor" href="#_clauses_not_containing_normative_material_sub_clause_1"></a>6.1. Clauses not containing normative material sub-clause 1</h3>
-<div class="paragraph">
-<p>Paragraph</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_clauses_not_containing_normative_material_sub_clause_2"><a class="anchor" href="#_clauses_not_containing_normative_material_sub_clause_2"></a>6.2. Clauses not containing normative material sub-clause 2</h3>
-
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+to be added
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_clause_containing_normative_material"><a class="anchor" href="#_clause_containing_normative_material"></a>7. Clause containing normative material</h2>
+<h2 id="_requirement_class_core"><a class="anchor" href="#_requirement_class_core"></a>7. Requirement Class "Core"</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Paragraph</p>
-</div>
-<div class="sect2">
-<h3 id="_requirement_class_a_or_requirement_a_example"><a class="anchor" href="#_requirement_class_a_or_requirement_a_example"></a>7.1. Requirement Class A or Requirement A Example</h3>
-<div class="paragraph">
-<p>Paragraph – intro text for the requirement class.</p>
-</div>
-<div class="paragraph">
-<p>Use the following table for Requirements Classes.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Add intro text for the requirement class.
+</td>
+</tr>
+</table>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1023,47 +969,27 @@ Global Grid Forum (2002)</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class</strong> </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ABCD/m.n/req/req-class-a" class="bare">http://www.opengis.net/spec/ABCD/m.n/req/req-class-a</a></p></td>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/wfs-1/3.0/req/core" class="bare">http://www.opengis.net/spec/wfs-1/3.0/req/core</a> </p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Web service</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.example.org/req/blah" class="bare">http://www.example.org/req/blah</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">urn:iso:ts:iso:19139:clause:6</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ABCD/m.n/req/req-class-a/req-name-1" class="bare">http://www.opengis.net/spec/ABCD/m.n/req/req-class-a/req-name-1</a><br>
-requirement description</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ABCD/m.n/req/req-class-a/req-name-2" class="bare">http://www.opengis.net/spec/ABCD/m.n/req/req-class-a/req-name-2</a><br>
-requirement description</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ABCD/m.n/req/req-class-a/req-name-3" class="bare">http://www.opengis.net/spec/ABCD/m.n/req/req-class-a/req-name-3</a><br>
-requirement description</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">OpenAPI Specification 3.0.0</p></td>
 </tr>
 </tbody>
 </table>
-<div class="sect3">
-<h4 id="_requirement_1"><a class="anchor" href="#_requirement_1"></a>7.1.1. Requirement 1</h4>
+<div class="sect2">
+<h3 id="_openapi_definition"><a class="anchor" href="#_openapi_definition"></a>7.1. OpenAPI definition</h3>
 <div class="paragraph">
-<p>Paragraph - intro text for the requirement.</p>
-</div>
-<div class="paragraph">
-<p>Use the following table for Requirements, number sequentially.</p>
+<p>Every WFS is defined by an OpenAPI definition document. That document describes
+the capabilities of the service and can be used by tools to support the
+implementation of servers and clients.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1072,52 +998,157 @@ requirement description</p></td>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/req-class-a/req-name-1<br>
-<br>
-</p><p class="tableblock">Requirement 'shall' statement</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/oas-definition<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The service SHALL provide an OpenAPI definition in JSON that conforms to the
+OpenAPI Specification, version 3.0.0, at the path "/api".</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>Dictionary tables for requirements can be added as necessary. Modify the following example as needed.</p>
-</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 75%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Names</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Definition</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Data types and values</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Multiplicity and use</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">name 1</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">definition of name 1</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">float</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">One or more (mandatory)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">name 2</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">definition of name 2</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">character string type, not empty</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Zero or one (optional)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">name 3</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">definition of name 3</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GML:: Point PropertyType</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">One (mandatory)</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/core/oas-impl<br>
+<br></p>
+<p class="tableblock">The service SHALL implement all capabilities specified in the OpenAPI
+definition provided by the service.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Currently, no tool is known to validate that a server implements the
+API specified in its OpenAPI definition.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.2. Feature collection metadata</h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-md-1<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The service SHALL provide at the path "/" an operation with a <code>get</code> Operation
+Object with the <code>operationId</code> "describeCollections".</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-md-2<br>
+<br>
+The <code>describeCollection</code> operation SHALL include a Parameter Object with
+the name <code>f</code> and the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>in: query
+required: false
+style: form
+explode: false
+schema:
+  type: string</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/fc-md-3<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The Schema Object of parameter <code>f</code> SHOULD include the list of values
+supported by the service as an enum array.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-md-4<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The parameter <code>f</code> SHALL determine the format of the response. If no value is
+provided, the standard http rules apply, i.e., the accept header shall be
+used to determine the format.</p>
+</div>
+<div class="paragraph">
+<p>Reserved values for the parameter <code>f</code> are "xml" (media type "application/xml"),
+"json" (media type "application/json") and "html" (media type "text/html").
+The response to other values is determined by the server.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="title">Example 2. Values for the <code>f</code> parameter</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>schema:
+  type: string
+  enum:
+    - json
+    - xml
+    - html</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>A template for the definition of the parameter <code>f</code> is available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f-collection.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f-collection.yaml</a>.</p>
 </div>
 </div>
 </div>
@@ -1125,8 +1156,17 @@ requirement description</p></td>
 <div class="sect1">
 <h2 id="_media_types_for_any_data_encoding_s"><a class="anchor" href="#_media_types_for_any_data_encoding_s"></a>8. Media Types for any data encoding(s)</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>A section describing the MIME-types to be used is mandatory for any standard involving data encodings. If no suitable MIME type exists in <a href="http://www.iana.org/assignments/media-types/index.html" class="bare">http://www.iana.org/assignments/media-types/index.html</a> then this section may be used to define a new MIME type for registration with IANA.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+A section describing the MIME-types to be used is mandatory for any standard involving data encodings. If no suitable MIME type exists in <a href="http://www.iana.org/assignments/media-types/index.html" class="bare">http://www.iana.org/assignments/media-types/index.html</a> then this section may be used to define a new MIME type for registration with IANA.
+</td>
+</tr>
+</table>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1149,7 +1189,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 <div class="sect2">
 <h3 id="_conformance_class_a"><a class="anchor" href="#_conformance_class_a"></a>A.1. Conformance Class A</h3>
 <div class="sect3">
-<h4 id="_requirement_1_2"><a class="anchor" href="#_requirement_1_2"></a>A.1.1. Requirement 1</h4>
+<h4 id="_requirement_1"><a class="anchor" href="#_requirement_1"></a>A.1.1. Requirement 1</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 20%;">
@@ -1183,25 +1223,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_title_normative_informative"><a class="anchor" href="#_title_normative_informative"></a>Annex B: Title ( {Normative/Informative} )</h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Place other Annex material in sequential annexes beginning with "B" and leave final two annexes for the Revision History and Bibliography
-</td>
-</tr>
-</table>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex C: Revision History</h2>
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex B: Revision History</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1222,66 +1244,20 @@ Place other Annex material in sequential annexes beginning with "B" and leave fi
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2016-04-28</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-10-05</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.1</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">G. Editor</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">initial version</p></td>
 </tr>
 </tbody>
 </table>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex D: Bibliography</h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="title">Example Bibliography (Delete this note).</div>
-<div class="paragraph">
-<p>The TC has approved Springer LNCS as the official document citation type.</p>
-</div>
-<div class="paragraph">
-<p>Springer LNCS is widely used in technical and computer science journals and other publications</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>For citations in the text please use square brackets and consecutive numbers: [1], [2], [3]</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>– Actual References:</p>
-</div>
-<div class="paragraph">
-<p>[n] Journal: Author Surname, A.: Title. Publication Title. Volume number, Issue number, Pages Used (Year Published)</p>
-</div>
-<div class="paragraph">
-<p>[n] Web: Author Surname, A.: Title, <a href="http://Website-Url" class="bare">http://Website-Url</a></p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p></p>
-</div>
-<div id="OGC2015" class="paragraph">
-<p>[1] OGC: OGC Testbed 12 Annex B: Architecture. (2015).</p>
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-07-31 18:09:24 CEST
+Last updated 2017-10-05 15:51:47 CEST
 </div>
 </div>
 </body>

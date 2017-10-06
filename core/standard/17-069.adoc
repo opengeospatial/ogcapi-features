@@ -11,6 +11,12 @@
 :source-highlighter: pygments
 :figure-id: 0
 :table-id: 0
+:req-id: 0
+:rec-id: 0
+:per-id: 0
+:source-highlighter: pygments
+:pygments-style: borland
+:pygments-linenums-mode: table
 
 = {title}
 
@@ -24,7 +30,7 @@
 |Publication Date:   <yyyy-mm-dd>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/IS/wfs/3.0
 |Internal reference number of this OGC(R) document:    17-069
-|Version: 3.0_SNAPSHOT (2017-07-31)
+|Version: 3.0_SNAPSHOT (2017-10-05)
 |Category: OGC(R) Implementation Specification
 |Editor:   Panagiotis (Peter) A. Vretanos, Clemens Portele
 |===
@@ -93,9 +99,9 @@ include::clause_4_terms_and_definitions.adoc[]
 
 include::clause_5_conventions.adoc[]
 
-include::clause_6_informative_text.adoc[]
+include::clause_6_overview.adoc[]
 
-include::clause_7_normative_text.adoc[]
+include::clause_7_core.adoc[]
 
 include::clause_8_media_types.adoc[]
 
@@ -105,8 +111,11 @@ add or remove annexes after "A" as necessary
 ////
 include::annex-a.adoc[]
 
+////
+commented out for now
 <<<
 include::annex-n.adoc[]
+////
 
 <<<
 ////
@@ -115,5 +124,8 @@ Bibliography should be the last annex
 ////
 include::annex-history.adoc[]
 
+////
+commented out for now
 <<<
 include::annex-bibliography.adoc[]
+////

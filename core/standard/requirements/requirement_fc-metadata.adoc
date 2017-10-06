@@ -1,0 +1,104 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-md-1 +
+ +
+
+The service SHALL provide at the path "/" an operation with a `get` Operation
+Object with the `operationId` "describeCollections".
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}*
+|/req/core/fc-md-2 +
+ +
+The `describeCollection` operation SHALL include a Parameter Object with
+the name `f` and the following properties:
+
+[source,YAML]
+----
+in: query
+required: false
+style: form
+explode: false
+schema:
+  type: string
+----
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/fc-md-3 +
+ +
+
+The Schema Object of parameter `f` SHOULD include the list of values
+supported by the service as an enum array.
+{set:cellbgcolor:#FFFFFF}
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-md-4 +
+ +
+
+The parameter `f` SHALL determine the format of the response. If no value is
+provided, the standard http rules apply, i.e., the accept header shall be
+used to determine the format.
+
+Reserved values for the parameter `f` are "xml" (media type "application/xml"),
+"json" (media type "application/json") and "html" (media type "text/html").
+The response to other values is determined by the server.
+|===
+
+.Values for the `f` parameter
+=================
+[source,YAML]
+----
+schema:
+  type: string
+  enum:
+    - json
+    - xml
+    - html
+----
+=================
+
+A template for the definition of the parameter `f` is available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f-collection.yaml.
+
+////
+  responses:
+    '200':
+      description: The feature collections shared by this API.
+      content:
+        application/json:
+          schema:
+            $ref: core/schemas/content.yaml
+          examples:
+            ex1:
+              $ref: '#/components/examples/featureCollectionsJson'
+        application/xml:
+          schema:
+            $ref: core/schemas/content.yaml
+          examples:
+            ex1:
+              $ref: '#/components/examples/featureCollectionsXml'
+        text/html:
+          schema:
+            type: string
+          examples:
+            ex1:
+              $ref: '#/components/examples/featureCollectionsHtml'
+    default:
+      description: An error occured.
+      content:
+        application/json:
+          schema:
+            $ref: core/schemas/exception.yaml
+        application/xml:
+          schema:
+            $ref: core/schemas/exception.yaml
+        text/html:
+          schema:
+            type: string
+////

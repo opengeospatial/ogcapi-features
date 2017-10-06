@@ -1,0 +1,28 @@
+== Conventions
+NOTE: This sections provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+
+=== Identifiers
+The normative provisions in this specification are denoted by the URI `http://www.opengis.net/spec/wfs-1/3.0`.
+
+All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
+
+=== Paths in OpenAPI definitions
+
+All paths in an OpenAPI definition are relative to a base URL of the service.
+
+.URL of the OpenAPI definition
+===========================================
+If the OpenAPI Server Object would look like this:
+
+[source,YAML]
+----
+servers:
+  - url: https://dev.example.org/
+    description: Development server
+  - url: https://data.example.org/
+    description: Production server
+----
+
+The path "/mypath" in the OpenAPI definition of a WFS would be the
+URL `https://data.example.org/mypath` for the production service.
+===========================================

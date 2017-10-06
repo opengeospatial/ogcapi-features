@@ -1,6 +1,6 @@
 [big]*i.     Abstract*
 
-The Web Feature Service (WFS) offers the capability to create, modify and query geographic information on the Web. Rather than sharing geographic information at the dataset level, WFS offers direct fine-grained access to geographic information at the feature and feature property level.
+The Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct fine-grained access to the data at the feature (object) level.
 
 Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP standard.
 
@@ -10,38 +10,26 @@ Implementations of WFS will support at least one of the encodings specified in t
 * HTML
 * XML
 
-WFS is a multi-part standard
+WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for updating data, more complex data models or queries.
 
-This International Standard specifies discovery operations, query operations, locking operations, transaction operations and operations to manage stored, parameterized query expressions.
+This International Standard specifies discovery and query operations.
 
-Discovery operations allow the service to be interrogated to determine its capabilities and to retrieve the application schema that defines the feature types that the service offers.
+Discovery operations allow the service to be interrogated to determine its capabilities and retrieve information (metadata) about this distribution of the dataset. This includes the OpenAPI 3.0 definition of the service as well as metadata about the feature collections provided by the service.
 
 Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon constraints, defined by the client, on feature properties.
 
-Locking operations allow exclusive access to features for the purpose of modifying or deleting features.
+This part of this International Standard defines the following resources:
 
-Transaction operations allow features to be created, changed, replaced and deleted from the underlying data store.
-
-Stored query operations allow clients to create, drop, list and described parameterized query expressions that are stored by the server and can be repeatedly invoked using different parameter values.
-
-WFS Part 1 - Core defines n resources:
-
-* Dataset (discovery)
-* Distribution (discovery)
-* Schema (discovery)
-* Feature Types
-* Feature Type
-* Feature
-* Stored Queries
-* Stored Query
-
-Additional
+* Service definition [1]
+* Feature collections metadata [1]
+* Feature collection [1..n]
+* Feature [0..n]
 
 [big]*ii.    Keywords*
 
 The following are keywords to be used by search engines and document catalogues.
 
-ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data
+ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution
 
 [big]*iii.   Preface*
 
