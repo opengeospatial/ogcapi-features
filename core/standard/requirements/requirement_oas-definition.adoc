@@ -1,8 +1,19 @@
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/oas-definition +
- +
+|*Requirement {counter:req-id}* |/req/core/oas-definition-1 +
 
-The service SHALL provide an OpenAPI definition in JSON that conforms to the
-OpenAPI Specification, version 3.0.0, at the path "/api".
+The service SHALL provide an OpenAPI definition in at least JSON (media
+type "application/openapi+json;version=3.0") and HTML (media type "text/html")
+at the path "/api".
+|===
+
+NOTE: The media type for the OpenAPI definition has not yet been registered
+with IANA. See https://github.com/OAI/OpenAPI-Specification/issues/110.
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/oas-definition-2 +
+
+The JSON representation SHALL conform to the OpenAPI Specification,
+version 3.0.0.
 |===

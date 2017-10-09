@@ -1,24 +1,1035 @@
 == Requirement Class "Core"
+
+////
+for now, normative statements are often included inline. This will be re-factored later.
+////
+
 NOTE: Add intro text for the requirement class.
 
 include::requirements/requirements_class_core.adoc[]
 
 === OpenAPI definition
-Every WFS is defined by an OpenAPI definition document. That document describes
-the capabilities of the service and can be used by tools to support the
+
+Every WFS is defined by an link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument[OpenAPI Document].
+That document describes the capabilities of the service and can be used by tools to support the
 implementation of servers and clients.
 
 include::requirements/requirement_oas-definition.adoc[]
 
+.A sample /api operation
+=================
+[source,YAML]
+----
+/api:
+  get:
+    summary: the API definition - this document
+    operationId: getApiDefinition
+    tags:
+      - Capabilities
+    parameters:
+      name: f
+      in: query
+      description: >-
+        The format of the response. If no value is provided, the standard http
+        rules apply, i.e., the accept header shall be used to determine the
+        format. Allowed values are "json" and "html".
+      required: false
+      schema:
+        type: string
+        enum:
+          - json
+          - html
+      style: form
+      explode: false
+    responses:
+      '200':
+        description: >-
+          The formal documentation of this API according to the OpenAPI
+          specification, version 3.0. I.e., this document.
+        content:
+          application/openapi+json;version=3.0:
+            schema:
+              type: object
+          text/html:
+            schema:
+              type: string
+      default:
+        $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/responses/exception.yaml
+----
+=================
+
 include::requirements/requirement_oas-impl.adoc[]
 
-NOTE: Currently, no tool is known to validate that a server implements the
-API specified in its OpenAPI definition.
+=== HTTP status codes
+
+This document specifies link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Objects]
+for the regular, successful execution of an operation as well as for error situations (see the next section <<exceptions,'Exceptions'>>) that originate from the service implementation.
+
+[width="90%",cols="2,6a"]
+|===
+|Permission {counter:per-id} |/per/core/http-codes-1 +
+
+A service may specify additional link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#httpCodes[HTTP Status Codes]
+in a link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Object].
+|===
+
+Typical cases for this are services that make use of a security scheme (see the
+section <<security,'Security'>> below) or where HTTP redirection is used.
+
+NOTE: To be checked, if the approach is consistent with the security concepts
+identified in the upcoming "OGC Web Services Security" standard.
+
+Clients should be prepared to receive responses not documented in the
+OpenAPI definition. For example, additional errors may occur in the transport layer
+outside of the service.
+
+[[exceptions]]
+=== Exceptions
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/exceptions-1 +
+
+For error situations that originate from the service implementation, Response Objects in the API definition SHALL include
+the applicable link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#httpCodes[HTTP Status Codes].
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/exceptions-2 +
+
+A default link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Object]
+SHOULD be included in each operation with the schema https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/exceptions-3 +
+
+For error situations that are the result of a bad request by the client, error code "400" SHALL be used.
+|===
+
+NOTE: Add list of pre-defined WFS error codes for 400-responses, including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/exceptions-4 +
+
+For error situations that are the result of an internal server error, error code "500" SHALL be used.
+|===
+
+NOTE: Add list of pre-defined WFS error codes for 500-responses, including NoApplicableCode, OperationProcessingFailed.
+
+The exception schema supports both JSON and XML:
+
+[source,YAML]
+----
+type: object
+required:
+  - code
+xml:
+  name: Exception
+  namespace: 'http://www.opengis.net/wfs/3.0'
+  prefix: wfs
+properties:
+  code:
+    type: string
+    xml:
+      name: code
+      attribute: true
+  description:
+    type: string
+    xml:
+      name: description
+      namespace: 'http://www.opengis.net/wfs/3.0'
+      prefix: wfs
+----
+
+.An exception response object definition
+=================
+[source,YAML]
+----
+description: An error occurred.
+content:
+  application/json:
+    schema:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+  application/xml:
+    schema:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+  text/html:
+    schema:
+      type: string
+----
+=================
+
+[[security]]
+=== Security
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/security +
+
+For cases, where the operations of the service are secured, the security scheme
+SHALL be documented in the OpenAPI definition.
+|===
+
+The OpenAPI specification currently supports the following link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object[security schemes]:
+
+* HTTP authentication,
+* an API key (either as a header or as a query parameter),
+* OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
+* OpenID Connect Discovery.
 
 === Feature collection metadata
 
-include::requirements/requirement_fc-metadata.adoc[]
+==== Operation
 
+include::requirements/requirement_fc-md-op.adoc[]
+
+==== Parameter f
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-md-f-1 +
+
+The `describeCollection` operation SHALL include a
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject[Parameter Object]
+with the name `f` and the following properties:
+
+[source,YAML]
+----
+in: query
+required: false
+style: form
+explode: false
+schema:
+  type: string
+----
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/fc-md-f-2 +
+ +
+
+The Schema Object of parameter `f` SHOULD include the list of values
+supported by the service as an enum array.
+{set:cellbgcolor:#FFFFFF}
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-md-f-3 +
+ +
+
+The parameter `f` SHALL determine the format of the response. If no value is
+provided, the standard http rules apply, i.e., the accept header shall be
+used to determine the format.
+
+Reserved values for the parameter `f` are "xml" (media type "application/xml"),
+"json" (media type "application/json") and "html" (media type "text/html").
+The response to other values is determined by the server.
+|===
+
+.Values for the `f` parameter
+=================
+[source,YAML]
+----
+schema:
+  type: string
+  enum:
+    - json
+    - xml
+    - html
+----
+=================
+
+A template for the definition of the parameter `f` in YAML is available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml.
+
+==== Response
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-md-1 +
+
+A successful execution of the operation SHALL be reported as a response with a
+HTTP status code "200" with the schema https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml.
+|===
+
+The schema supports both JSON and XML responses:
+
+.link:https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml[Schema for the metadata about feature collections]
+[source,YAML]
+----
+type: object
+required:
+  - collections
+xml:
+  name: Collections
+  namespace: 'http://www.opengis.net/wfs/3.0'
+  prefix: wfs
+properties:
+  links:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/link.yaml
+    xml:
+      namespace: 'http://www.opengis.net/wfs/3.0'
+      prefix: wfs
+  collections:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/collectionInfo.yaml
+    xml:
+      namespace: 'http://www.opengis.net/wfs/3.0'
+      prefix: wfs
+----
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/fc-md-2 +
+
+If external schemas for the features (for example, XML Schema, Schematron, JSON Schema, etc.) exist, they SHOULD be referenced in the `link` property using a `describedBy` relation.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-md-3 +
+
+For each feature collection provided by the service, an item SHALL be provided in the property `collections`.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-md-4 +
+
+For each feature collection, the `links` property SHALL include an item with a link to the collection resource using an `about` relation.
+|===
+
+NOTE: TODO - check, if we can/should make use of the new link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject[Link Object] in OpenAPI 3.0.
+
+.link:https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
+[source,YAML]
+----
+type: object
+required:
+  - collectionId
+  - links
+properties:
+  collectionId:
+    description: identifier of the collection used, for example, in URIs
+    type: string
+  title:
+    description: human readable title of the collection
+    type: string
+  description:
+    description: a description of the features in the collection
+    type: string
+  links:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/link.yaml
+  extent:
+    $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/bbox.yaml
+  crs:
+    description: TODO - add description ... first crs is the default crs
+    type: array
+    items:
+      type: string
+    default:
+      - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+----
+
+.Feature collection metadata
+=================
+This feature collection metadata example response includes a single collection
+"buildings" with a link to the operation to access the collection.
+
+Additional links to a GML application schema for the building data and to
+a web page that has additional information about buildings are provided, too.
+
+Coordinate reference system information is not provided as the service provides
+geometries only in the default system (WGS84 longitude/latitude).
+
+[source,JSON]
+----
+{
+  "collections": [
+    {
+      "collectionId": "buildings",
+      "title": "Buildings",
+      "description": "Buildings in the city of Bonn.",
+      "links": [
+        { "href": "http://data.example.org/buildings", "rel": "about" },
+        { "href": "http://example.org/concepts/building.html", "rel": "describedBy", "type": "text/html" },
+        { "href": "http://example.org/schemas/buildings.xsd", "rel": "describedBy", "type": "application/xml" }
+      ],
+      "extent": {
+        "bbox": [ 7.01, 50.63, 7.22, 50.78 ]
+      }
+    }
+  ]
+}
+----
+=================
+
+=== Feature collections
+
+==== Operation
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-op +
+ +
+
+For every feature collection identified in the metadata about the feature collection (path "/"),
+the service SHALL provide at the path "/{collectionId}" an operation with a `get`
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject[Operation Object].
+
+`collectionId` is the property of the same name in the feature collection metadata.
+|===
+
+==== Parameter f
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-f-1 +
+
+Each feature collection operation SHALL include a
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject[Parameter Object]
+with the name `f` and the following properties:
+
+[source,YAML]
+----
+in: query
+required: false
+style: form
+explode: false
+schema:
+  type: string
+----
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/fc-f-2 +
+ +
+
+The Schema Object of parameter `f` SHOULD include the list of values
+supported by the service as an enum array.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-f-3 +
+ +
+
+The parameter `f` SHALL determine the format of the response. If no value is
+provided, the standard http rules apply, i.e., the accept header shall be
+used to determine the format.
+
+Reserved values for the parameter `f` are "xml" (media type "application/gml+xml;version=3.2"),
+"json" (media type "application/geo+json") and "html" (media type "text/html").
+The response to other values is determined by the server.
+|===
+
+.Values for the `f` parameter
+=================
+[source,YAML]
+----
+schema:
+  type: string
+  enum:
+    - json
+    - xml
+    - html
+----
+=================
+
+A template for the definition of the parameter in YAML is available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml.
+
+==== Parameter startIndex
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-startIndex-1 +
+
+Each feature collection operation SHALL include a
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject[Parameter Object]
+with the name `startIndex` and the following properties:
+
+[source,YAML]
+----
+name: startIndex
+in: query
+required: false
+schema:
+  type: integer
+  minimum: 0
+  default: 0
+style: form
+explode: false
+----
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-startIndex-2 +
+
+The optional `startIndex` parameter identifies the index within the result
+set from which the server SHALL begin presenting results in the
+response. The first element has an index of 0.
+|===
+
+A template for the definition of the parameter in YAML is available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/startIndex.yaml.
+
+==== Parameter count
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-count-1 +
+
+Each feature collection operation SHALL include a
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject[Parameter Object]
+with the name `count` and the following properties:
+
+[source,YAML]
+----
+name: count
+in: query
+required: false
+schema:
+  type: integer
+  minimum: 1
+  maximum: 10000
+  default: 10
+style: form
+explode: false
+----
+
+The values for `maximum` and `default` are only examples and MAY be changed.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-count-2 +
+
+The optional `count` parameter SHALL limit the number of items
+that are presented in the response.
+
+Only items are counted that are on the first level of the collection in the
+response. Any nested objects contained within the explicitly requested items
+SHALL not be counted.
+|===
+
+A template for the definition of the parameter in YAML is available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/count.yaml.
+
+==== Parameter bbox
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-bbox-1 +
+
+Each feature collection operation SHALL include a
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject[Parameter Object]
+with the name `bbox` and the following properties:
+
+[source,YAML]
+----
+name: bbox
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: number
+    minItems: 4
+    maxItems: 4
+    minimum: -180
+    maximum: 180
+style: form
+explode: false
+----
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-bbox-2 +
+
+Only features that have a geometry that intersects the bounding box SHALL be
+part of the result set, if the `bbox` parameter is provided.
+
+The bounding box is provided as four numbers:
+
+* Lower corner, coordinate axis 1 (minimum longitude)
+* Lower corner, coordinate axis 2 (minimum latitude)
+* Upper corner, coordinate axis 1 (maximum longitude)
+* Upper corner, coordinate axis 2 (maximum latitude)
+|===
+
+A template for the definition of the parameter in YAML is available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/bbox.yaml.
+
+==== Parameter resultType
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-resultType-1 +
+
+Each feature collection operation SHALL include a
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject[Parameter Object]
+with the name `resultType` and the following properties:
+
+[source,YAML]
+----
+name: resultType
+in: query
+required: false
+schema:
+  type: string
+  enum:
+    - hits
+    - results
+  default: results
+style: form
+explode: false
+----
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-resultType-2 +
+
+A successful execution of the operation SHALL respond to a query in one of two
+ways. It may either generate a complete response containing resources that satisfy the
+operation or it may simply generate an empty response container
+that indicates the count of the total number of resources that the
+operation would return. Which of these two responses is generated is
+determined by the value of the optional resultType parameter.
+
+The allowed values for this parameter are `results` and `hits`.
+
+If the value of the resultType parameter is set to `results`, the server
+SHALL generate a complete response document containing resources that
+satisfy the operation.
+
+If the value of the resultType attribute is set to `hits`, the server
+SHALL generate an empty response document containing no resource
+instances.
+
+If the parameter is not provided, `results` is used.
+|===
+
+A template for the definition of the parameter in YAML is available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/resultType.yaml.
+
+==== Parameters for filtering on feature properties
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/fc-filter-1 +
+
+If features in the feature collection include a feature property that has a
+simple value, for example, a string or integer, that is expected to be useful
+for applications using the service to filter the features of the collection
+based on this property, you SHOULD include a
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject[Parameter Object]
+with the name of the feature property and the following properties:
+
+[source,YAML]
+----
+in: query
+required: false
+style: form
+explode: false
+----
+
+The `schema` property SHALL be the same as the definition of the feature
+property in the response schema.
+|===
+
+.An additional parameter to filter buildings based on their function
+=================
+[source,YAML]
+----
+name: function
+in: query
+description: >-
+  Only return buildings of a particular function.\
+
+  Default = return all buildings.
+required: false
+schema:
+  type: string
+  enum:
+    - residential
+    - commercial
+    - public use
+style: form
+explode: false
+example: 'function=public+use'
+----
+=================
+
+==== Response
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-1 +
+
+A successful execution of the operation SHALL be reported as a response with a
+HTTP status code "200".
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-2 +
+
+At least one of the media types "application/geo+json", "application/gml+xml;version=3.2" or
+"text/html" SHALL be supported by the "200"-response of the operation.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-json +
+
+If the "200"-response includes the media type "application/geo+json" the response SHALL be a
+link:https://tools.ietf.org/html/rfc7946#section-3.3[GeoJSON FeatureCollection Object].
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-gml +
+
+If the "200"-response includes the media type "application/gml+xml;version=3.2" the response SHALL be a
+link:http://schemas.opengis.net/wfs/3.0/wfs.xsd[WFS 3.0 FeatureCollection Object] and all members SHALL
+be GML 3.2 features that conform to the GML Simple Features Profile, Level 0.
+|===
+
+[NOTE]
+.TODO
+=====================================================================
+We need to reword this so that other WFS conformance classes may support also
+other JSON or GML encodings.
+=====================================================================
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-html +
+
+If the "200"-response includes the media type "text/html" the response SHALL be a
+link:https://www.w3.org/TR/html5/[HTML 5 document] that includes ...
+
+NOTE: TODO - add details
+
+|===
+
+[NOTE]
+.TODO
+=====================================================================
+Add normative statements for the following properties of the
+feature collection in the response:
+
+* links
+** crs
+** prev
+** next
+* timeStamp: Time stamp of the moment when the service created the response.
+* numberMatched: The number of features of the feature type that match the selection parameters like `bbox`.
+* numberReturned: If the value is provided, the value shall be identical to the number
+of items in the "features" array. A server may omit this information in a response, if the information
+about the number of features is not known or difficult to compute. If the value of the resultType parameter is set to "hits",
+the value shall be set to "0", if provided.
+=====================================================================
+
+Template for the definition of generic schemas for the GeoJSON and GML responses are available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGeoJSON.yaml and
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGML.yaml.
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/fc-schema +
+
+The schema for the GeoJSON and GML responses SHOULD include also key feature
+properties of the features in the feature collection.
+|===
+
+=== Feature
+
+==== Operation
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-op +
+ +
+
+For every feature in a feature collection (path "/{collectionId}"),
+the service SHALL provide at the path "/{collectionId}/{id}" an operation with a `get`
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject[Operation Object].
+
+`collectionId` is the property of the same name in the feature collection metadata.
+
+`id` is the unique identifier of the feature within the dataset.
+|===
+
+NOTE: TODO - add more about the feature identifiers
+
+==== Parameter f
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-f-1 +
+
+Each feature operation SHALL include a
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject[Parameter Object]
+with the name `f` and the following properties:
+
+[source,YAML]
+----
+in: query
+required: false
+style: form
+explode: false
+schema:
+  type: string
+----
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/f-f-2 +
+ +
+
+The Schema Object of parameter `f` SHOULD include the list of values
+supported by the service as an enum array.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-f-3 +
+ +
+
+The parameter `f` SHALL determine the format of the response. If no value is
+provided, the standard http rules apply, i.e., the accept header shall be
+used to determine the format.
+
+Reserved values for the parameter `f` are "xml" (media type "application/gml+xml;version=3.2"),
+"json" (media type "application/geo+json") and "html" (media type "text/html").
+The response to other values is determined by the server.
+|===
+
+.Values for the `f` parameter
+=================
+[source,YAML]
+----
+schema:
+  type: string
+  enum:
+    - json
+    - xml
+    - html
+----
+=================
+
+A template for the definition of the parameter in YAML is available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml.
+
+==== Response
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-1 +
+
+A successful execution of the operation SHALL be reported as a response with a
+HTTP status code "200".
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-2 +
+
+At least one of the media types "application/geo+json", "application/gml+xml;version=3.2" or
+"text/html" SHALL be supported by the "200"-response of the operation.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-json +
+
+If the "200"-response includes the media type "application/geo+json" the response SHALL be a
+link:https://tools.ietf.org/html/rfc7946#section-3.2[GeoJSON Feature Object].
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-gml +
+
+If the "200"-response includes the media type "application/gml+xml;version=3.2" the response SHALL be a
+link:http://schemas.opengis.net/gml/3.2.1/feature.xsd[GML 3.2 Feature] that conforms
+to the GML Simple Features Profile, Level 0.
+|===
+
+[NOTE]
+.TODO
+=====================================================================
+We need to reword this so that other WFS conformance classes may support also
+other JSON or GML encodings.
+=====================================================================
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-html +
+
+If the "200"-response includes the media type "text/html" the response SHALL be a
+link:https://www.w3.org/TR/html5/[HTML 5 document] that includes ...
+
+NOTE: TODO - add details
+
+|===
+
+[NOTE]
+.TODO
+=====================================================================
+Add normative statements for the following properties of the
+feature collection in the response:
+
+* links
+** crs
+** prev
+** next
+* timeStamp: Time stamp of the moment when the service created the response.
+* numberMatched: The number of features of the feature type that match the selection parameters like `bbox`.
+* numberReturned: If the value is provided, the value shall be identical to the number
+of items in the "features" array. A server may omit this information in a response, if the information
+about the number of features is not known or difficult to compute. If the value of the resultType parameter is set to "hits",
+the value shall be set to "0", if provided.
+=====================================================================
+
+Template for the definition of generic schemas for the GeoJSON and GML responses are available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGeoJSON.yaml and
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGML.yaml.
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/fc-schema +
+
+The schema for the GeoJSON and GML responses SHOULD include also key feature
+properties of the features in the feature collection.
+|===
+
+
+.Feature operation for buildings
+=================
+[source,YAML]
+----
+paths:
+
+...
+
+  /buildings/{fid}:
+    get:
+      summary: retrieve a building
+      operationId: getBuilding
+      tags:
+        - Features
+      parameters:
+        - $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/fid.yaml
+        - $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml
+      responses:
+        '200':
+          description: A building.
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/buildingGeoJSON'
+            application/gml+xml;version=3.2:
+              schema:
+                $ref: '#/components/schemas/buildingGML'
+            text/html:
+              schema:
+                type: string
+        default:
+          $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/responses/exception.yaml
+
+...
+
+components:
+  schemas:
+    buildingGeoJSON:
+      type: object
+      required:
+        - type
+        - geometry
+        - properties
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        geometry:
+          $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/geometryGeoJSON.yaml
+        properties:
+          type: object
+          nullable: true
+          properties:
+            name:
+              type: string
+            function:
+              type: string
+              enum:
+                - residential
+                - commercial
+                - public use
+            levels:
+              type: integer
+              minimum: 1
+    buildingGML:
+      type: object
+      required:
+        - 'gml:id'
+      xml:
+        name: Building
+        namespace: 'http://data.example.org/schemas/building'
+        prefix: bui
+      properties:
+        'gml:id':
+          type: string
+          xml:
+            namespace: 'http://www.opengis.net/gml/3.2'
+            prefix: gml
+            attribute: true
+        name:
+          type: string
+          xml:
+            namespace: 'http://data.example.org/schemas/building'
+            prefix: bui
+        function:
+          type: string
+          enum:
+            - residential
+            - commercial
+            - public use
+          xml:
+            namespace: 'http://data.example.org/schemas/building'
+            prefix: bui
+        levels:
+          type: integer
+          minimum: 1
+          xml:
+            namespace: 'http://data.example.org/schemas/building'
+            prefix: bui
+        location:
+          type: object
+          xml:
+            namespace: 'http://data.example.org/schemas/building'
+            prefix: bui
+----
+=================
 
 ////
 Dictionary tables for requirements can be added as necessary. Modify the following example as needed.

@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2017-10-05)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2017-10-09)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -625,14 +625,49 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_conventions">5. Conventions</a>
 <ul class="sectlevel2">
 <li><a href="#_identifiers">5.1. Identifiers</a></li>
-<li><a href="#_paths_in_openapi_definitions">5.2. Paths in OpenAPI definitions</a></li>
+<li><a href="#_uml_model">5.2. UML model</a></li>
+<li><a href="#_openapi_definitions">5.3. OpenAPI definitions</a>
+<ul class="sectlevel3">
+<li><a href="#_openapi_fragments">5.3.1. OpenAPI fragments</a></li>
+<li><a href="#_reusable_openapi_components">5.3.2. Reusable OpenAPI components</a></li>
+<li><a href="#_paths_in_openapi_definitions">5.3.3. Paths in OpenAPI definitions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_overview">6. Overview</a></li>
 <li><a href="#_requirement_class_core">7. Requirement Class "Core"</a>
 <ul class="sectlevel2">
 <li><a href="#_openapi_definition">7.1. OpenAPI definition</a></li>
-<li><a href="#_feature_collection_metadata">7.2. Feature collection metadata</a></li>
+<li><a href="#_http_status_codes">7.2. HTTP status codes</a></li>
+<li><a href="#exceptions">7.3. Exceptions</a></li>
+<li><a href="#security">7.4. Security</a></li>
+<li><a href="#_feature_collection_metadata">7.5. Feature collection metadata</a>
+<ul class="sectlevel3">
+<li><a href="#_operation">7.5.1. Operation</a></li>
+<li><a href="#_parameter_f">7.5.2. Parameter f</a></li>
+<li><a href="#_response">7.5.3. Response</a></li>
+</ul>
+</li>
+<li><a href="#_feature_collections">7.6. Feature collections</a>
+<ul class="sectlevel3">
+<li><a href="#_operation_2">7.6.1. Operation</a></li>
+<li><a href="#_parameter_f_2">7.6.2. Parameter f</a></li>
+<li><a href="#_parameter_startindex">7.6.3. Parameter startIndex</a></li>
+<li><a href="#_parameter_count">7.6.4. Parameter count</a></li>
+<li><a href="#_parameter_bbox">7.6.5. Parameter bbox</a></li>
+<li><a href="#_parameter_resulttype">7.6.6. Parameter resultType</a></li>
+<li><a href="#_parameters_for_filtering_on_feature_properties">7.6.7. Parameters for filtering on feature properties</a></li>
+<li><a href="#_response_2">7.6.8. Response</a></li>
+</ul>
+</li>
+<li><a href="#_feature_2">7.7. Feature</a>
+<ul class="sectlevel3">
+<li><a href="#_operation_3">7.7.1. Operation</a></li>
+<li><a href="#_parameter_f_3">7.7.2. Parameter f</a></li>
+<li><a href="#_response_3">7.7.3. Response</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_media_types_for_any_data_encoding_s">8. Media Types for any data encoding(s)</a></li>
@@ -654,10 +689,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong class="big">i.     Abstract</strong></p>
 </div>
 <div class="paragraph">
-<p>The Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct fine-grained access to the data at the feature (object) level.</p>
+<p>The Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.</p>
 </div>
 <div class="paragraph">
-<p>Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP standard.</p>
+<p>Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP/HTTPS standards.</p>
 </div>
 <div class="paragraph">
 <p>Implementations of WFS will support at least one of the encodings specified in this standard:</p>
@@ -675,8 +710,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Whether we want/need a mandatory encoding is an open discussion item.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for updating data, more complex data models or queries.</p>
+<p>WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for updating data, more complex data models or richer queries.</p>
 </div>
 <div class="paragraph">
 <p>This International Standard specifies discovery and query operations.</p>
@@ -713,7 +760,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The following are keywords to be used by search engines and document catalogues.</p>
 </div>
 <div class="paragraph">
-<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution</p>
+<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution, openapi</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">iii.   Preface</strong></p>
@@ -795,7 +842,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_scope"><a class="anchor" href="#_scope"></a>1. Scope</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This International Standard specifies the behaviour of a service that provides access to geographic features in a dataset in a manner independent of the underlying data store. It specifies discovery and query operations.</p>
+<p>This International Standard specifies the behaviour of a service that provides access to features in a dataset in a manner independent of the underlying data store. It specifies discovery and query operations.</p>
 </div>
 <div class="paragraph">
 <p>Discovery operations allow the service to be interrogated to determine its capabilities and retrieve information (metadata) about this distribution of the dataset. This includes the OpenAPI 3.0 definition of the service as well as metadata about the feature collections provided by the service.</p>
@@ -809,13 +856,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_conformance"><a class="anchor" href="#_conformance"></a>2. Conformance</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This standard defines a single requirements and conformance class. The standardization targets are "web services".</p>
+<p>This standard defines a single requirements and conformance class.</p>
+</div>
+<div class="paragraph">
+<p>The standardization targets are "web services".</p>
 </div>
 <div class="paragraph">
 <p>Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.</p>
 </div>
 <div class="paragraph">
 <p>In order to conform to this OGC® interface standard, a software implementation will implement: &#8230;&#8203;</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -836,6 +898,9 @@ Geography Markup Language (GML) Simple Features Profile, <a href="http://portal.
 <div class="paragraph">
 <p>Butler, H., Daly, M., Doyle, A., Gillies, S., Hagen, S., Schaub, T.:
 IETF RFC 7946, The GeoJSON Format, <a href="https://tools.ietf.org/rfc/rfc7946.txt" class="bare">https://tools.ietf.org/rfc/rfc7946.txt</a> (2016)</p>
+</div>
+<div class="paragraph">
+<p>W3C: HTML5, W3C Recommendation 28 October 2014, <a href="http://www.w3.org/TR/html5/" class="bare">http://www.w3.org/TR/html5/</a> (2014)</p>
 </div>
 </div>
 </div>
@@ -902,7 +967,51 @@ This sections provides details and examples for any conventions used in the docu
 </div>
 </div>
 <div class="sect2">
-<h3 id="_paths_in_openapi_definitions"><a class="anchor" href="#_paths_in_openapi_definitions"></a>5.2. Paths in OpenAPI definitions</h3>
+<h3 id="_uml_model"><a class="anchor" href="#_uml_model"></a>5.2. UML model</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO, add explanation about UML diagrams - and add the diagrams!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_openapi_definitions"><a class="anchor" href="#_openapi_definitions"></a>5.3. OpenAPI definitions</h3>
+<div class="sect3">
+<h4 id="_openapi_fragments"><a class="anchor" href="#_openapi_fragments"></a>5.3.1. OpenAPI fragments</h4>
+<div class="paragraph">
+<p>In this document, fragments of OpenAPI definitions are shown in YAML since
+YAML is easier to read than JSON and is typically used in OpenAPI editors.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reusable_openapi_components"><a class="anchor" href="#_reusable_openapi_components"></a>5.3.2. Reusable OpenAPI components</h4>
+<div class="paragraph">
+<p>Reusable components for OpenAPI definitions of a WFS are referenced from
+this document.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+For now, these components use a base URL of "https://raw.githubusercontent.com/cportele/wfs-openapi/master/",
+but eventually these will be available using the base URL "http://schemas.opengis.net/wfs/3.0/openapi/".
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_paths_in_openapi_definitions"><a class="anchor" href="#_paths_in_openapi_definitions"></a>5.3.3. Paths in OpenAPI definitions</h4>
 <div class="paragraph">
 <p>All paths in an OpenAPI definition are relative to a base URL of the service.</p>
 </div>
@@ -924,6 +1033,7 @@ This sections provides details and examples for any conventions used in the docu
 <div class="paragraph">
 <p>The path "/mypath" in the OpenAPI definition of a WFS would be the
 URL <code><a href="https://data.example.org/mypath" class="bare">https://data.example.org/mypath</a></code> for the production service.</p>
+</div>
 </div>
 </div>
 </div>
@@ -987,8 +1097,8 @@ Add intro text for the requirement class.
 <div class="sect2">
 <h3 id="_openapi_definition"><a class="anchor" href="#_openapi_definition"></a>7.1. OpenAPI definition</h3>
 <div class="paragraph">
-<p>Every WFS is defined by an OpenAPI definition document. That document describes
-the capabilities of the service and can be used by tools to support the
+<p>Every WFS is defined by an <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument">OpenAPI Document</a>.
+That document describes the capabilities of the service and can be used by tools to support the
 implementation of servers and clients.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1000,16 +1110,29 @@ implementation of servers and clients.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/oas-definition<br>
-<br></p>
+<p>/req/core/oas-definition-1<br></p>
 </div>
 <div class="paragraph">
-<p>The service SHALL provide an OpenAPI definition in JSON that conforms to the
-OpenAPI Specification, version 3.0.0, at the path "/api".</p>
+<p>The service SHALL provide an OpenAPI definition in at least JSON (media
+type "application/openapi+json;version=3.0") and HTML (media type "text/html")
+at the path "/api".</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The media type for the OpenAPI definition has not yet been registered
+with IANA. See <a href="https://github.com/OAI/OpenAPI-Specification/issues/110" class="bare">https://github.com/OAI/OpenAPI-Specification/issues/110</a>.
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1018,6 +1141,68 @@ OpenAPI Specification, version 3.0.0, at the path "/api".</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/oas-definition-2<br></p>
+</div>
+<div class="paragraph">
+<p>The JSON representation SHALL conform to the OpenAPI Specification,
+version 3.0.0.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="title">Example 2. A sample /api operation</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>/api:
+  get:
+    summary: the API definition - this document
+    operationId: getApiDefinition
+    tags:
+      - Capabilities
+    parameters:
+      name: f
+      in: query
+      description: &gt;-
+        The format of the response. If no value is provided, the standard http
+        rules apply, i.e., the accept header shall be used to determine the
+        format. Allowed values are &quot;json&quot; and &quot;html&quot;.
+      required: false
+      schema:
+        type: string
+        enum:
+          - json
+          - html
+      style: form
+      explode: false
+    responses:
+      &#39;200&#39;:
+        description: &gt;-
+          The formal documentation of this API according to the OpenAPI
+          specification, version 3.0. I.e., this document.
+        content:
+          application/openapi+json;version=3.0:
+            schema:
+              type: object
+          text/html:
+            schema:
+              type: string
+      default:
+        $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/responses/exception.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/core/oas-impl<br>
 <br></p>
 <p class="tableblock">The service SHALL implement all capabilities specified in the OpenAPI
@@ -1040,7 +1225,11 @@ API specified in its OpenAPI definition.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.2. Feature collection metadata</h3>
+<h3 id="_http_status_codes"><a class="anchor" href="#_http_status_codes"></a>7.2. HTTP status codes</h3>
+<div class="paragraph">
+<p>This document specifies <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject">Response Objects</a>
+for the regular, successful execution of an operation as well as for error situations (see the next section <a href="#exceptions">'Exceptions'</a>) that originate from the service implementation.</p>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1048,14 +1237,56 @@ API specified in its OpenAPI definition.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 1</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-md-1<br>
-<br></p>
+<p>/per/core/http-codes-1<br></p>
 </div>
 <div class="paragraph">
-<p>The service SHALL provide at the path "/" an operation with a <code>get</code> Operation
-Object with the <code>operationId</code> "describeCollections".</p>
+<p>A service may specify additional <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#httpCodes">HTTP Status Codes</a>
+in a <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject">Response Object</a>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Typical cases for this are services that make use of a security scheme (see the
+section <a href="#security">'Security'</a> below) or where HTTP redirection is used.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+To be checked, if the approach is consistent with the security concepts
+identified in the upcoming "OGC Web Services Security" standard.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Clients should be prepared to receive responses not documented in the
+OpenAPI definition. For example, additional errors may occur in the transport layer
+outside of the service.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exceptions"><a class="anchor" href="#exceptions"></a>7.3. Exceptions</h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/exceptions-1<br></p>
+</div>
+<div class="paragraph">
+<p>For error situations that originate from the service implementation, Response Objects in the API definition SHALL include
+the applicable <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#httpCodes">HTTP Status Codes</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1067,12 +1298,204 @@ Object with the <code>operationId</code> "describeCollections".</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 1</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-md-2<br>
-<br>
-The <code>describeCollection</code> operation SHALL include a Parameter Object with
-the name <code>f</code> and the following properties:</p>
+<p>/rec/core/exceptions-2<br></p>
+</div>
+<div class="paragraph">
+<p>A default <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject">Response Object</a>
+SHOULD be included in each operation with the schema <a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml</a>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/exceptions-3<br></p>
+</div>
+<div class="paragraph">
+<p>For error situations that are the result of a bad request by the client, error code "400" SHALL be used.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Add list of pre-defined WFS error codes for 400-responses, including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/exceptions-4<br></p>
+</div>
+<div class="paragraph">
+<p>For error situations that are the result of an internal server error, error code "500" SHALL be used.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Add list of pre-defined WFS error codes for 500-responses, including NoApplicableCode, OperationProcessingFailed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The exception schema supports both JSON and XML:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
+required:
+  - code
+xml:
+  name: Exception
+  namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+  prefix: wfs
+properties:
+  code:
+    type: string
+    xml:
+      name: code
+      attribute: true
+  description:
+    type: string
+    xml:
+      name: description
+      namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+      prefix: wfs</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 3. An exception response object definition</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>description: An error occurred.
+content:
+  application/json:
+    schema:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+  application/xml:
+    schema:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+  text/html:
+    schema:
+      type: string</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="security"><a class="anchor" href="#security"></a>7.4. Security</h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/security<br></p>
+</div>
+<div class="paragraph">
+<p>For cases, where the operations of the service are secured, the security scheme
+SHALL be documented in the OpenAPI definition.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The OpenAPI specification currently supports the following <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object">security schemes</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP authentication,</p>
+</li>
+<li>
+<p>an API key (either as a header or as a query parameter),</p>
+</li>
+<li>
+<p>OAuth2&#8217;s common flows (implicit, password, application and access code) as defined in RFC6749, and</p>
+</li>
+<li>
+<p>OpenID Connect Discovery.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.5. Feature collection metadata</h3>
+<div class="sect3">
+<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.5.1. Operation</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-md-op<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The service SHALL provide at the path "/" an operation with a <code>get</code>
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">Operation Object</a>
+with the <code>operationId</code> "describeCollections".</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_parameter_f"><a class="anchor" href="#_parameter_f"></a>7.5.2. Parameter f</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-md-f-1<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>describeCollection</code> operation SHALL include a
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">Parameter Object</a>
+with the name <code>f</code> and the following properties:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1094,9 +1517,9 @@ schema:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 2</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/rec/core/fc-md-3<br>
+<p>/rec/core/fc-md-f-2<br>
 <br></p>
 </div>
 <div class="paragraph">
@@ -1113,9 +1536,9 @@ supported by the service as an enum array.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-md-4<br>
+<p>/req/core/fc-md-f-3<br>
 <br></p>
 </div>
 <div class="paragraph">
@@ -1132,7 +1555,7 @@ The response to other values is determined by the server.</p>
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 2. Values for the <code>f</code> parameter</div>
+<div class="title">Example 4. Values for the <code>f</code> parameter</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1147,8 +1570,1297 @@ The response to other values is determined by the server.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A template for the definition of the parameter <code>f</code> is available at
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f-collection.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f-collection.yaml</a>.</p>
+<p>A template for the definition of the parameter <code>f</code> in YAML is available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response"><a class="anchor" href="#_response"></a>7.5.3. Response</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-md-1<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a response with a
+HTTP status code "200" with the schema <a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml</a>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The schema supports both JSON and XML responses:</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml">Schema for the metadata about feature collections</a></div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
+required:
+  - collections
+xml:
+  name: Collections
+  namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+  prefix: wfs
+properties:
+  links:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/link.yaml
+    xml:
+      namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+      prefix: wfs
+  collections:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/collectionInfo.yaml
+    xml:
+      namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+      prefix: wfs</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 3</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/fc-md-2<br></p>
+</div>
+<div class="paragraph">
+<p>If external schemas for the features (for example, XML Schema, Schematron, JSON Schema, etc.) exist, they SHOULD be referenced in the <code>link</code> property using a <code>describedBy</code> relation.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-md-3<br></p>
+</div>
+<div class="paragraph">
+<p>For each feature collection provided by the service, an item SHALL be provided in the property <code>collections</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-md-4<br></p>
+</div>
+<div class="paragraph">
+<p>For each feature collection, the <code>links</code> property SHALL include an item with a link to the collection resource using an <code>about</code> relation.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO - check, if we can/should make use of the new <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject">Link Object</a> in OpenAPI 3.0.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/collectionInfo.yaml">Schema for the metadata about a feature collection</a></div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
+required:
+  - collectionId
+  - links
+properties:
+  collectionId:
+    description: identifier of the collection used, for example, in URIs
+    type: string
+  title:
+    description: human readable title of the collection
+    type: string
+  description:
+    description: a description of the features in the collection
+    type: string
+  links:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/link.yaml
+  extent:
+    $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/bbox.yaml
+  crs:
+    description: TODO - add description ... first crs is the default crs
+    type: array
+    items:
+      type: string
+    default:
+      - http://www.opengis.net/def/crs/OGC/1.3/CRS84</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 5. Feature collection metadata</div>
+<div class="content">
+<div class="paragraph">
+<p>This feature collection metadata example response includes a single collection
+"buildings" with a link to the operation to access the collection.</p>
+</div>
+<div class="paragraph">
+<p>Additional links to a GML application schema for the building data and to
+a web page that has additional information about buildings are provided, too.</p>
+</div>
+<div class="paragraph">
+<p>Coordinate reference system information is not provided as the service provides
+geometries only in the default system (WGS84 longitude/latitude).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>{
+  &quot;collections&quot;: [
+    {
+      &quot;collectionId&quot;: &quot;buildings&quot;,
+      &quot;title&quot;: &quot;Buildings&quot;,
+      &quot;description&quot;: &quot;Buildings in the city of Bonn.&quot;,
+      &quot;links&quot;: [
+        { &quot;href&quot;: &quot;http://data.example.org/buildings&quot;, &quot;rel&quot;: &quot;about&quot; },
+        { &quot;href&quot;: &quot;http://example.org/concepts/building.html&quot;, &quot;rel&quot;: &quot;describedBy&quot;, &quot;type&quot;: &quot;text/html&quot; },
+        { &quot;href&quot;: &quot;http://example.org/schemas/buildings.xsd&quot;, &quot;rel&quot;: &quot;describedBy&quot;, &quot;type&quot;: &quot;application/xml&quot; }
+      ],
+      &quot;extent&quot;: {
+        &quot;bbox&quot;: [ 7.01, 50.63, 7.22, 50.78 ]
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.6. Feature collections</h3>
+<div class="sect3">
+<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.6.1. Operation</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-op<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>For every feature collection identified in the metadata about the feature collection (path "/"),
+the service SHALL provide at the path "/{collectionId}" an operation with a <code>get</code>
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">Operation Object</a>.</p>
+</div>
+<div class="paragraph">
+<p><code>collectionId</code> is the property of the same name in the feature collection metadata.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_parameter_f_2"><a class="anchor" href="#_parameter_f_2"></a>7.6.2. Parameter f</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-f-1<br></p>
+</div>
+<div class="paragraph">
+<p>Each feature collection operation SHALL include a
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">Parameter Object</a>
+with the name <code>f</code> and the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>in: query
+required: false
+style: form
+explode: false
+schema:
+  type: string</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 4</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/fc-f-2<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The Schema Object of parameter <code>f</code> SHOULD include the list of values
+supported by the service as an enum array.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-f-3<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The parameter <code>f</code> SHALL determine the format of the response. If no value is
+provided, the standard http rules apply, i.e., the accept header shall be
+used to determine the format.</p>
+</div>
+<div class="paragraph">
+<p>Reserved values for the parameter <code>f</code> are "xml" (media type "application/gml+xml;version=3.2"),
+"json" (media type "application/geo+json") and "html" (media type "text/html").
+The response to other values is determined by the server.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="title">Example 6. Values for the <code>f</code> parameter</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>schema:
+  type: string
+  enum:
+    - json
+    - xml
+    - html</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>A template for the definition of the parameter in YAML is available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parameter_startindex"><a class="anchor" href="#_parameter_startindex"></a>7.6.3. Parameter startIndex</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-startIndex-1<br></p>
+</div>
+<div class="paragraph">
+<p>Each feature collection operation SHALL include a
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">Parameter Object</a>
+with the name <code>startIndex</code> and the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: startIndex
+in: query
+required: false
+schema:
+  type: integer
+  minimum: 0
+  default: 0
+style: form
+explode: false</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-startIndex-2<br></p>
+</div>
+<div class="paragraph">
+<p>The optional <code>startIndex</code> parameter identifies the index within the result
+set from which the server SHALL begin presenting results in the
+response. The first element has an index of 0.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A template for the definition of the parameter in YAML is available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/startIndex.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/startIndex.yaml</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.6.4. Parameter count</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-count-1<br></p>
+</div>
+<div class="paragraph">
+<p>Each feature collection operation SHALL include a
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">Parameter Object</a>
+with the name <code>count</code> and the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: count
+in: query
+required: false
+schema:
+  type: integer
+  minimum: 1
+  maximum: 10000
+  default: 10
+style: form
+explode: false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The values for <code>maximum</code> and <code>default</code> are only examples and MAY be changed.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-count-2<br></p>
+</div>
+<div class="paragraph">
+<p>The optional <code>count</code> parameter SHALL limit the number of items
+that are presented in the response.</p>
+</div>
+<div class="paragraph">
+<p>Only items are counted that are on the first level of the collection in the
+response. Any nested objects contained within the explicitly requested items
+SHALL not be counted.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A template for the definition of the parameter in YAML is available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/count.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/count.yaml</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.6.5. Parameter bbox</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-bbox-1<br></p>
+</div>
+<div class="paragraph">
+<p>Each feature collection operation SHALL include a
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">Parameter Object</a>
+with the name <code>bbox</code> and the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: bbox
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: number
+    minItems: 4
+    maxItems: 4
+    minimum: -180
+    maximum: 180
+style: form
+explode: false</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-bbox-2<br></p>
+</div>
+<div class="paragraph">
+<p>Only features that have a geometry that intersects the bounding box SHALL be
+part of the result set, if the <code>bbox</code> parameter is provided.</p>
+</div>
+<div class="paragraph">
+<p>The bounding box is provided as four numbers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Lower corner, coordinate axis 1 (minimum longitude)</p>
+</li>
+<li>
+<p>Lower corner, coordinate axis 2 (minimum latitude)</p>
+</li>
+<li>
+<p>Upper corner, coordinate axis 1 (maximum longitude)</p>
+</li>
+<li>
+<p>Upper corner, coordinate axis 2 (maximum latitude)</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A template for the definition of the parameter in YAML is available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/bbox.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/bbox.yaml</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parameter_resulttype"><a class="anchor" href="#_parameter_resulttype"></a>7.6.6. Parameter resultType</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-resultType-1<br></p>
+</div>
+<div class="paragraph">
+<p>Each feature collection operation SHALL include a
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">Parameter Object</a>
+with the name <code>resultType</code> and the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: resultType
+in: query
+required: false
+schema:
+  type: string
+  enum:
+    - hits
+    - results
+  default: results
+style: form
+explode: false</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-resultType-2<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL respond to a query in one of two
+ways. It may either generate a complete response containing resources that satisfy the
+operation or it may simply generate an empty response container
+that indicates the count of the total number of resources that the
+operation would return. Which of these two responses is generated is
+determined by the value of the optional resultType parameter.</p>
+</div>
+<div class="paragraph">
+<p>The allowed values for this parameter are <code>results</code> and <code>hits</code>.</p>
+</div>
+<div class="paragraph">
+<p>If the value of the resultType parameter is set to <code>results</code>, the server
+SHALL generate a complete response document containing resources that
+satisfy the operation.</p>
+</div>
+<div class="paragraph">
+<p>If the value of the resultType attribute is set to <code>hits</code>, the server
+SHALL generate an empty response document containing no resource
+instances.</p>
+</div>
+<div class="paragraph">
+<p>If the parameter is not provided, <code>results</code> is used.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A template for the definition of the parameter in YAML is available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/resultType.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/resultType.yaml</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.6.7. Parameters for filtering on feature properties</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 5</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/fc-filter-1<br></p>
+</div>
+<div class="paragraph">
+<p>If features in the feature collection include a feature property that has a
+simple value, for example, a string or integer, that is expected to be useful
+for applications using the service to filter the features of the collection
+based on this property, you SHOULD include a
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">Parameter Object</a>
+with the name of the feature property and the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>in: query
+required: false
+style: form
+explode: false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>schema</code> property SHALL be the same as the definition of the feature
+property in the response schema.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="title">Example 7. An additional parameter to filter buildings based on their function</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: function
+in: query
+description: &gt;-
+  Only return buildings of a particular function.\
+
+  Default = return all buildings.
+required: false
+schema:
+  type: string
+  enum:
+    - residential
+    - commercial
+    - public use
+style: form
+explode: false
+example: &#39;function=public+use&#39;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.6.8. Response</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-1<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a response with a
+HTTP status code "200".</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-2<br></p>
+</div>
+<div class="paragraph">
+<p>At least one of the media types "application/geo+json", "application/gml+xml;version=3.2" or
+"text/html" SHALL be supported by the "200"-response of the operation.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-json<br></p>
+</div>
+<div class="paragraph">
+<p>If the "200"-response includes the media type "application/geo+json" the response SHALL be a
+<a href="https://tools.ietf.org/html/rfc7946#section-3.3">GeoJSON FeatureCollection Object</a>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-gml<br></p>
+</div>
+<div class="paragraph">
+<p>If the "200"-response includes the media type "application/gml+xml;version=3.2" the response SHALL be a
+<a href="http://schemas.opengis.net/wfs/3.0/wfs.xsd">WFS 3.0 FeatureCollection Object</a> and all members SHALL
+be GML 3.2 features that conform to the GML Simple Features Profile, Level 0.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">TODO</div>
+<div class="paragraph">
+<p>We need to reword this so that other WFS conformance classes may support also
+other JSON or GML encodings.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/fc-html<br></p>
+</div>
+<div class="paragraph">
+<p>If the "200"-response includes the media type "text/html" the response SHALL be a
+<a href="https://www.w3.org/TR/html5/">HTML 5 document</a> that includes &#8230;&#8203;</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO - add details
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">TODO</div>
+<div class="paragraph">
+<p>Add normative statements for the following properties of the
+feature collection in the response:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>links</p>
+<div class="ulist">
+<ul>
+<li>
+<p>crs</p>
+</li>
+<li>
+<p>prev</p>
+</li>
+<li>
+<p>next</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>timeStamp: Time stamp of the moment when the service created the response.</p>
+</li>
+<li>
+<p>numberMatched: The number of features of the feature type that match the selection parameters like <code>bbox</code>.</p>
+</li>
+<li>
+<p>numberReturned: If the value is provided, the value shall be identical to the number
+of items in the "features" array. A server may omit this information in a response, if the information
+about the number of features is not known or difficult to compute. If the value of the resultType parameter is set to "hits",
+the value shall be set to "0", if provided.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Template for the definition of generic schemas for the GeoJSON and GML responses are available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGeoJSON.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGeoJSON.yaml</a> and
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGML.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGML.yaml</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 6</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/fc-schema<br></p>
+</div>
+<div class="paragraph">
+<p>The schema for the GeoJSON and GML responses SHOULD include also key feature
+properties of the features in the feature collection.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.7. Feature</h3>
+<div class="sect3">
+<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.7.1. Operation</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/f-op<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>For every feature in a feature collection (path "/{collectionId}"),
+the service SHALL provide at the path "/{collectionId}/{id}" an operation with a <code>get</code>
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">Operation Object</a>.</p>
+</div>
+<div class="paragraph">
+<p><code>collectionId</code> is the property of the same name in the feature collection metadata.</p>
+</div>
+<div class="paragraph">
+<p><code>id</code> is the unique identifier of the feature within the dataset.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO - add more about the feature identifiers
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parameter_f_3"><a class="anchor" href="#_parameter_f_3"></a>7.7.2. Parameter f</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/f-f-1<br></p>
+</div>
+<div class="paragraph">
+<p>Each feature operation SHALL include a
+<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">Parameter Object</a>
+with the name <code>f</code> and the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>in: query
+required: false
+style: form
+explode: false
+schema:
+  type: string</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/f-f-2<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The Schema Object of parameter <code>f</code> SHOULD include the list of values
+supported by the service as an enum array.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/f-f-3<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The parameter <code>f</code> SHALL determine the format of the response. If no value is
+provided, the standard http rules apply, i.e., the accept header shall be
+used to determine the format.</p>
+</div>
+<div class="paragraph">
+<p>Reserved values for the parameter <code>f</code> are "xml" (media type "application/gml+xml;version=3.2"),
+"json" (media type "application/geo+json") and "html" (media type "text/html").
+The response to other values is determined by the server.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="title">Example 8. Values for the <code>f</code> parameter</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>schema:
+  type: string
+  enum:
+    - json
+    - xml
+    - html</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>A template for the definition of the parameter in YAML is available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.7.3. Response</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/f-1<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a response with a
+HTTP status code "200".</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/f-2<br></p>
+</div>
+<div class="paragraph">
+<p>At least one of the media types "application/geo+json", "application/gml+xml;version=3.2" or
+"text/html" SHALL be supported by the "200"-response of the operation.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/f-json<br></p>
+</div>
+<div class="paragraph">
+<p>If the "200"-response includes the media type "application/geo+json" the response SHALL be a
+<a href="https://tools.ietf.org/html/rfc7946#section-3.2">GeoJSON Feature Object</a>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/f-gml<br></p>
+</div>
+<div class="paragraph">
+<p>If the "200"-response includes the media type "application/gml+xml;version=3.2" the response SHALL be a
+<a href="http://schemas.opengis.net/gml/3.2.1/feature.xsd">GML 3.2 Feature</a> that conforms
+to the GML Simple Features Profile, Level 0.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">TODO</div>
+<div class="paragraph">
+<p>We need to reword this so that other WFS conformance classes may support also
+other JSON or GML encodings.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/f-html<br></p>
+</div>
+<div class="paragraph">
+<p>If the "200"-response includes the media type "text/html" the response SHALL be a
+<a href="https://www.w3.org/TR/html5/">HTML 5 document</a> that includes &#8230;&#8203;</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO - add details
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">TODO</div>
+<div class="paragraph">
+<p>Add normative statements for the following properties of the
+feature collection in the response:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>links</p>
+<div class="ulist">
+<ul>
+<li>
+<p>crs</p>
+</li>
+<li>
+<p>prev</p>
+</li>
+<li>
+<p>next</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>timeStamp: Time stamp of the moment when the service created the response.</p>
+</li>
+<li>
+<p>numberMatched: The number of features of the feature type that match the selection parameters like <code>bbox</code>.</p>
+</li>
+<li>
+<p>numberReturned: If the value is provided, the value shall be identical to the number
+of items in the "features" array. A server may omit this information in a response, if the information
+about the number of features is not known or difficult to compute. If the value of the resultType parameter is set to "hits",
+the value shall be set to "0", if provided.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Template for the definition of generic schemas for the GeoJSON and GML responses are available at
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGeoJSON.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGeoJSON.yaml</a> and
+<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGML.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/wfsFeatureCollectionGML.yaml</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 8</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/fc-schema<br></p>
+</div>
+<div class="paragraph">
+<p>The schema for the GeoJSON and GML responses SHOULD include also key feature
+properties of the features in the feature collection.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="title">Example 9. Feature operation for buildings</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>paths:
+
+...
+
+  /buildings/{fid}:
+    get:
+      summary: retrieve a building
+      operationId: getBuilding
+      tags:
+        - Features
+      parameters:
+        - $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/fid.yaml
+        - $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml
+      responses:
+        &#39;200&#39;:
+          description: A building.
+          content:
+            application/geo+json:
+              schema:
+                $ref: &#39;#/components/schemas/buildingGeoJSON&#39;
+            application/gml+xml;version=3.2:
+              schema:
+                $ref: &#39;#/components/schemas/buildingGML&#39;
+            text/html:
+              schema:
+                type: string
+        default:
+          $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/responses/exception.yaml
+
+...
+
+components:
+  schemas:
+    buildingGeoJSON:
+      type: object
+      required:
+        - type
+        - geometry
+        - properties
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        geometry:
+          $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/geometryGeoJSON.yaml
+        properties:
+          type: object
+          nullable: true
+          properties:
+            name:
+              type: string
+            function:
+              type: string
+              enum:
+                - residential
+                - commercial
+                - public use
+            levels:
+              type: integer
+              minimum: 1
+    buildingGML:
+      type: object
+      required:
+        - &#39;gml:id&#39;
+      xml:
+        name: Building
+        namespace: &#39;http://data.example.org/schemas/building&#39;
+        prefix: bui
+      properties:
+        &#39;gml:id&#39;:
+          type: string
+          xml:
+            namespace: &#39;http://www.opengis.net/gml/3.2&#39;
+            prefix: gml
+            attribute: true
+        name:
+          type: string
+          xml:
+            namespace: &#39;http://data.example.org/schemas/building&#39;
+            prefix: bui
+        function:
+          type: string
+          enum:
+            - residential
+            - commercial
+            - public use
+          xml:
+            namespace: &#39;http://data.example.org/schemas/building&#39;
+            prefix: bui
+        levels:
+          type: integer
+          minimum: 1
+          xml:
+            namespace: &#39;http://data.example.org/schemas/building&#39;
+            prefix: bui
+        location:
+          type: object
+          xml:
+            namespace: &#39;http://data.example.org/schemas/building&#39;
+            prefix: bui</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1244,7 +2956,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-10-05</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-10-09</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.1</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
@@ -1257,7 +2969,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-05 15:51:47 CEST
+Last updated 2017-10-09 12:11:31 CEST
 </div>
 </div>
 </body>
