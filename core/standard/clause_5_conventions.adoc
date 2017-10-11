@@ -9,9 +9,24 @@ All requirements and conformance tests that appear in this document are denoted 
 
 === UML model
 
-NOTE: TODO, add explanation about UML diagrams - and add the diagrams!
+NOTE: TODO +
+Add explanation about UML diagrams - and add the diagrams!
+
+=== Link relations
+
+To express relationships between resources, <<rfc5988,RFC 5988 (Web Linking)>> and <<link-relations,registered link relation types>> are used.
+
+=== Use of HTTPS
+
+For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.
 
 === OpenAPI definitions
+
+==== General remarks
+
+NOTE: TODO +
+Add general considerations. +
+Clarify that additional operations, parameters, etc. may be added, either to implement additional conformance classes or for vendor-specific extensions.
 
 ==== OpenAPI fragments
 
@@ -25,6 +40,22 @@ this document.
 
 NOTE: For now, these components use a base URL of "https://raw.githubusercontent.com/cportele/wfs-openapi/master/",
 but eventually these will be available using the base URL "http://schemas.opengis.net/wfs/3.0/openapi/".
+
+==== References to OpenAPI components in normative statements
+
+Some normative statements (requirements, recommendations and permissions) use
+a phrase that a component in the OpenAPI definition of a WFS must be "based upon"
+a schema component in the OGC schema repository.
+
+In this case, the following changes to the pre-defined OpenAPI component are permitted:
+
+* If the OpenAPI schema component contains an `xml` property, but XML is not an encoding that is supported by the service, the xml properties may be removed.
+* The range of values of a parameter or property may be extended (additional values) or constrained (if only a subset of all possible values are applicable to the service). An example for a constrained range of values is to explicitly specify the supported values of a string parameter or property using an enum.
+* Additional properties may be added to the schema definition of a Response Object.
+* Informative text may be changed or added, like comments or description properties.
+
+NOTE: TODO +
+Check, that we cover all cases.
 
 ==== Paths in OpenAPI definitions
 

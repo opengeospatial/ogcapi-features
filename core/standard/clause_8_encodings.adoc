@@ -1,0 +1,162 @@
+== Requirements classes for encodings
+
+////
+for now, normative statements are often included inline. This will be re-factored later.
+////
+
+=== Overview
+
+This clause specifies four pre-defined requirements classes for encodings to be
+used in a WFS. These encodings are commonly used encodings for spatial data on
+the web:
+
+* <<rc_html,HTML>>
+* <<rc_geojson,GeoJSON>>
+* <<rc_gmlsf0,Geography Markup Language (GML), Simple Features Profile, Level 0>>
+* <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>
+
+None of these encodings is mandatory and an implementation of the <<rc_core,Core>>
+requirements class may also decide to use none of them, but to use another encoding
+instead.
+
+=== Requirement Class "HTML"
+
+NOTE: TODO +
+Add intro text for the requirement class. +
+Link to <<SDWBP>> and summarize the key points discussed around in BP2. +
+Also link to <<rec_html>>.
+
+include::requirements/requirements_class_html.adoc[]
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/html/definition +
+
+Every "200"-response of an operation in the OpenAPI definition of the service
+SHALL include an entry for the media type `text/html`.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/html/content +
+
+Every "200"-response of the service with the media type "text/html" SHALL be a
+link:https://www.w3.org/TR/html5/[HTML 5 document] that includes the following
+information in the HTML body:
+
+* all information identified in the schemas of the
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Object]
+in the HTML `<body/>`, and
+* all links in the HTTP headers in HTML `<a/>` elements in the HTML `<body/>`.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/html/schema-org +
+
+In a "200"-response with the media type `text/html`, include
+<<schema.org,Schema.org>> annotations.
+|===
+
+=== Requirement Class "GeoJSON"
+
+NOTE: TODO +
+Add intro text for the requirement class.
+
+include::requirements/requirements_class_geojson.adoc[]
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/geojson/definition +
+
+"200"-responses in the OpenAPI definition of the service
+SHALL include entries for the following media types:
+
+* `application/json` for feature collection metadata, and
+* `application/geo+json` for feature collections and features.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/geojson/content +
+
+Every "200"-response with the media type `application/geo+json` SHALL be
+
+* a link:https://tools.ietf.org/html/rfc7946#section-3.3[GeoJSON FeatureCollection Object] for feature collections, and
+* a link:https://tools.ietf.org/html/rfc7946#section-3.2[GeoJSON Feature Object] for features.
+|===
+
+Templates for the definition of the schemas for the GeoJSON responses are available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureCollectionGeoJSON.yaml and
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureGeoJSON.yaml.
+These are generic schemas that do not include any application schema information about
+specific feature types or their properties.
+
+=== Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"
+
+NOTE: TODO +
+Add intro text for the requirement class.
+
+include::requirements/requirements_class_gmlsf0.adoc[]
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/gmlsf0/definition +
+
+"200"-responses in the OpenAPI definition of the service
+SHALL include entries for the following media types:
+
+* `application/xml` for feature collection metadata, and
+* `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0` for feature collections and features.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/gmlsf0/content +
+
+Every "200"-response with the media type `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0` SHALL be
+
+* a link:http://schemas.opengis.net/wfs/3.0/wfs-core.xsd[WFS 3.0 Core FeatureCollection Object] for feature collections, and
+* a link:http://schemas.opengis.net/gml/3.2.1/feature.xsd[GML 3.2 Feature] for features.
+
+Every feature SHALL conform to the <<GMLSF,GML Simple Features Profile, Level 0>>.
+|===
+
+NOTE: TODO +
+The WFS 3.0 Core FeatureCollection Object has to be an XML schema element defined according to 8.4.2 Defining feature collections
+
+Templates for the definition of the schemas for the GML responses are available at
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureCollectionGML.yaml and
+https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureGML.yaml.
+These are generic schemas that do not include any application schema information about
+specific feature types or their properties.
+
+=== Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 2"
+
+NOTE: TODO +
+Add intro text for the requirement class.
+
+include::requirements/requirements_class_gmlsf2.adoc[]
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/gmlsf2/definition +
+
+"200"-responses in the OpenAPI definition of the service
+SHALL include entries for the following media types:
+
+* `application/xml` for feature collection metadata, and
+* `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` for feature collections and features.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/gmlsf2/content +
+
+Every "200"-response with the media type `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` SHALL be
+
+* a link:http://schemas.opengis.net/wfs/3.0/wfs-core.xsd[WFS 3.0 Core FeatureCollection Object] for feature collections, and
+* a link:http://schemas.opengis.net/gml/3.2.1/feature.xsd[GML 3.2 Feature] for features.
+
+Every feature SHALL conform to the <<GMLSF,GML Simple Features Profile, Level 2>>.
+|===

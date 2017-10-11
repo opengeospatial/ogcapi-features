@@ -4,14 +4,6 @@ The Web Feature Service (WFS) offers the capability to create, modify and query 
 
 Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP/HTTPS standards.
 
-Implementations of WFS will support at least one of the encodings specified in this standard:
-
-* JSON
-* HTML
-* XML
-
-NOTE: Whether we want/need a mandatory encoding is an open discussion item.
-
 WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for updating data, more complex data models or richer queries.
 
 This International Standard specifies discovery and query operations.
@@ -24,7 +16,7 @@ This part of this International Standard defines the following resources:
 
 * Service definition [1]
 * Feature collections metadata [1]
-* Feature collection [1..n]
+* Feature collection [0..n]
 * Feature [0..n]
 
 [big]*ii.    Keywords*
@@ -68,4 +60,5 @@ All questions regarding this submission should be directed to the editor or the 
 
 |Clemens Portele |interactive instruments GmbH
 |Panagiotis (Peter) A. Vretanos |CubeWerx Inc.
+|...   |...
 |===

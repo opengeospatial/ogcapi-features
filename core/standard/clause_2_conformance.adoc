@@ -1,10 +1,37 @@
 == Conformance
-This standard defines a single requirements and conformance class.
+This standard defines a five requirements and conformance classes.
 
-The standardization targets are "web services".
+The standardization targets of all conformance classes are "web services".
 
-Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
+The main requirements class is:
 
-In order to conform to this OGC® interface standard, a software implementation will implement: ...
+* <<rc_core,Core>>.
 
-NOTE: TODO
+It specifies requirements that all WFS have to meet.
+
+The "Core" does not mandate any encoding or format for representing features or
+feature collections. The other four requirements classes depend on the "Core"
+and specify representations for the WFS resources in commonly used encodings
+for spatial data on the web:
+
+* <<rc_html,HTML>>,
+* <<rc_geojson,GeoJSON>>,
+* <<rc_gmlsf0,Geography Markup Language (GML), Simple Features Profile, Level 0>>, and
+* <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>.
+
+None of these encodings is mandatory and an implementation of the "Core"
+requirements class may also decide to use none of them, but to use another encoding
+instead.
+
+The "Core" is intended to be the minimal useful service interface for fine-grained
+access to a spatial dataset.
+
+Additional capabilities, for example, support for transactions, complex data
+structures, rich queries, custom coordinate reference systems, etc., may be
+specified in future parts of WFS or as vendor-specific extensions.
+
+Conformance with this standard shall be checked using all the relevant tests
+specified in Annex A (normative) of this document. The framework, concepts, and
+methodology for testing, and the criteria to be achieved to claim conformance
+are specified in the OGC Compliance Testing Policies and Procedures and the
+OGC Compliance Testing web site.

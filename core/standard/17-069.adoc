@@ -30,7 +30,7 @@
 |Publication Date:   <yyyy-mm-dd>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/IS/wfs/3.0
 |Internal reference number of this OGC(R) document:    17-069
-|Version: 3.0_SNAPSHOT (2017-10-09)
+|Version: 3.0_SNAPSHOT (2017-10-11)
 |Category: OGC(R) Implementation Specification
 |Editor:   Panagiotis (Peter) A. Vretanos, Clemens Portele
 |===
@@ -103,13 +103,15 @@ include::clause_6_overview.adoc[]
 
 include::clause_7_core.adoc[]
 
-include::clause_8_media_types.adoc[]
+include::clause_8_encodings.adoc[]
+
+include::clause_9_media_types.adoc[]
 
 <<<
-////
-add or remove annexes after "A" as necessary
-////
 include::annex-a.adoc[]
+
+<<<
+include::annex-b.adoc[]
 
 ////
 commented out for now
@@ -124,8 +126,5 @@ Bibliography should be the last annex
 ////
 include::annex-history.adoc[]
 
-////
-commented out for now
 <<<
 include::annex-bibliography.adoc[]
-////
