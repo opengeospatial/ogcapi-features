@@ -646,28 +646,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_http_status_codes">7.2. HTTP status codes</a></li>
 <li><a href="#exceptions">7.3. Exceptions</a></li>
 <li><a href="#security">7.4. Security</a></li>
-<li><a href="#_encodings_parameter_f">7.5. Encodings / Parameter f</a></li>
-<li><a href="#_feature_collection_metadata">7.6. Feature collection metadata</a>
+<li><a href="#_web_caching">7.5. Web caching</a></li>
+<li><a href="#_encodings_parameter_f">7.6. Encodings / Parameter f</a></li>
+<li><a href="#_feature_collection_metadata">7.7. Feature collection metadata</a>
 <ul class="sectlevel3">
-<li><a href="#_operation">7.6.1. Operation</a></li>
-<li><a href="#_response">7.6.2. Response</a></li>
+<li><a href="#_operation">7.7.1. Operation</a></li>
+<li><a href="#_response">7.7.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_collections">7.7. Feature collections</a>
+<li><a href="#_feature_collections">7.8. Feature collections</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_2">7.7.1. Operation</a></li>
-<li><a href="#_parameter_startindex">7.7.2. Parameter startIndex</a></li>
-<li><a href="#_parameter_count">7.7.3. Parameter count</a></li>
-<li><a href="#_parameter_bbox">7.7.4. Parameter bbox</a></li>
-<li><a href="#_parameter_resulttype">7.7.5. Parameter resultType</a></li>
-<li><a href="#_parameters_for_filtering_on_feature_properties">7.7.6. Parameters for filtering on feature properties</a></li>
-<li><a href="#_response_2">7.7.7. Response</a></li>
+<li><a href="#_operation_2">7.8.1. Operation</a></li>
+<li><a href="#_parameter_startindex">7.8.2. Parameter startIndex</a></li>
+<li><a href="#_parameter_count">7.8.3. Parameter count</a></li>
+<li><a href="#_parameter_bbox">7.8.4. Parameter bbox</a></li>
+<li><a href="#_parameter_resulttype">7.8.5. Parameter resultType</a></li>
+<li><a href="#_parameters_for_filtering_on_feature_properties">7.8.6. Parameters for filtering on feature properties</a></li>
+<li><a href="#_response_2">7.8.7. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_2">7.8. Feature</a>
+<li><a href="#_feature_2">7.9. Feature</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_3">7.8.1. Operation</a></li>
-<li><a href="#_response_3">7.8.2. Response</a></li>
+<li><a href="#_operation_3">7.9.1. Operation</a></li>
+<li><a href="#_response_3">7.9.2. Response</a></li>
 </ul>
 </li>
 </ul>
@@ -691,8 +692,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_mapping_between_wfs_2_0_operations_and_wfs_3_0">B.4. Mapping between WFS 2.0 operations and WFS 3.0</a></li>
 </ul>
 </li>
-<li><a href="#_revision_history">Annex C: Revision History</a></li>
-<li><a href="#Bibliography">Annex D: Bibliography</a></li>
+<li><a href="#_openapi_definition_example_informative">Annex C: OpenAPI definition example (Informative)</a></li>
+<li><a href="#_revision_history">Annex D: Revision History</a></li>
+<li><a href="#Bibliography">Annex E: Bibliography</a></li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
@@ -894,7 +896,8 @@ access to a spatial dataset.</p>
 </div>
 <div class="paragraph">
 <p>Additional capabilities, for example, support for transactions, complex data
-structures, rich queries, custom coordinate reference systems, etc., may be
+structures, rich queries, other coordinate reference systems,
+subscription/notification, returning aggregated results, etc., may be
 specified in future parts of WFS or as vendor-specific extensions.</p>
 </div>
 <div class="paragraph">
@@ -917,6 +920,9 @@ OGC Compliance Testing web site.</p>
 <li>
 <p><a id="OpenAPI"></a> Open API Initiative: OpenAPI Specification 3.0.0,
 <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md" class="bare">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md</a></p>
+</li>
+<li>
+<p><a id="rfc2616"></a> IETF: HTTP/1.1, RFC 2616, <a href="http://tools.ietf.org/rfc/rfc2616.txt" class="bare">http://tools.ietf.org/rfc/rfc2616.txt</a></p>
 </li>
 <li>
 <p><a id="rfc5988"></a> IETF: Web Linking, RFC 5988, <a href="http://tools.ietf.org/rfc/rfc5988.txt" class="bare">http://tools.ietf.org/rfc/rfc5988.txt</a></p>
@@ -1204,6 +1210,10 @@ Add intro text for the requirement class.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc2616">RFC 2616 (HTTP/1.1)</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc5988">RFC 5988 (Web Linking)</a></p></td>
 </tr>
 </tbody>
@@ -1365,7 +1375,8 @@ in a <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/
 </table>
 <div class="paragraph">
 <p>Typical cases for this are services that are access-controlled (see the
-sub-clause <a href="#security">Security</a>) or where HTTP redirection is used.</p>
+sub-clause <a href="#security">Security</a>), web cache validation is supported or
+where HTTP redirection is used.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1576,7 +1587,45 @@ SHALL be documented in the OpenAPI definition.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encodings_parameter_f"><a class="anchor" href="#_encodings_parameter_f"></a>7.5. Encodings / Parameter f</h3>
+<h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.5. Web caching</h3>
+<div class="paragraph">
+<p>Entity tags are a mechanism for web cache validation and for supporting conditional
+requests to reduce network traffic. Entity tags are specified by <a href="#rfc2616">HTTP/1.1 (RFC 2616)</a>.</p>
+</div>
+<table id="rec_etag" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/etag<br></p>
+</div>
+<div class="paragraph">
+<p>The service SHOULD support entity tags and the associated headers as
+specified by HTTP/1.1.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO<br>
+Add an example OpenAPI operation (headers, response codes).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_encodings_parameter_f"><a class="anchor" href="#_encodings_parameter_f"></a>7.6. Encodings / Parameter f</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1699,7 +1748,7 @@ of the operation. If no HTML media type is included, the service MAY determine t
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 2</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/html<br></p>
 </div>
@@ -1716,9 +1765,9 @@ and index a dataset, implementations SHOULD consider to support an HTML encoding
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.6. Feature collection metadata</h3>
+<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.7. Feature collection metadata</h3>
 <div class="sect3">
-<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.6.1. Operation</h4>
+<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.7.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1741,7 +1790,7 @@ with the <code>operationId</code> "describeCollections".</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response"><a class="anchor" href="#_response"></a>7.6.2. Response</h4>
+<h4 id="_response"><a class="anchor" href="#_response"></a>7.7.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1826,7 +1875,7 @@ properties:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 2</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 3</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/fc-md-descriptions<br></p>
 </div>
@@ -2065,9 +2114,9 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.7. Feature collections</h3>
+<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.8. Feature collections</h3>
 <div class="sect3">
-<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.7.1. Operation</h4>
+<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.8.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2093,7 +2142,7 @@ the service SHALL provide at the path "/{collectionId}" an operation with a <cod
 </table>
 </div>
 <div class="sect3">
-<h4 id="_parameter_startindex"><a class="anchor" href="#_parameter_startindex"></a>7.7.2. Parameter startIndex</h4>
+<h4 id="_parameter_startindex"><a class="anchor" href="#_parameter_startindex"></a>7.8.2. Parameter startIndex</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2151,7 +2200,7 @@ response. The first element has an index of 0.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.7.3. Parameter count</h4>
+<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.8.3. Parameter count</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2217,7 +2266,7 @@ SHALL not be counted.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.7.4. Parameter bbox</h4>
+<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.8.4. Parameter bbox</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2297,7 +2346,7 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_resulttype"><a class="anchor" href="#_parameter_resulttype"></a>7.7.5. Parameter resultType</h4>
+<h4 id="_parameter_resulttype"><a class="anchor" href="#_parameter_resulttype"></a>7.8.5. Parameter resultType</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2376,7 +2425,7 @@ instances.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.7.6. Parameters for filtering on feature properties</h4>
+<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.8.6. Parameters for filtering on feature properties</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2384,7 +2433,7 @@ instances.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 3</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 4</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/fc-filters<br></p>
 </div>
@@ -2438,7 +2487,7 @@ example: &#39;function=public+use&#39;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.7.7. Response</h4>
+<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.8.7. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2570,7 +2619,7 @@ the information is "lost", but how much of a problem is that really?</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 4</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 5</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/fc-key-properties<br></p>
 </div>
@@ -2588,9 +2637,9 @@ collection (see recommendation <code>/rec/core/fc-filters</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.8. Feature</h3>
+<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.9. Feature</h3>
 <div class="sect3">
-<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.8.1. Operation</h4>
+<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.9.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2631,7 +2680,7 @@ Add more about the feature identifiers.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.8.2. Response</h4>
+<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.9.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2657,7 +2706,7 @@ HTTP status code "200".</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 5</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 6</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/f-schema<br></p>
 </div>
@@ -2970,7 +3019,7 @@ in the HTML <code>&lt;body/&gt;</code>, and</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 6</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/html/schema-org<br></p>
 </div>
@@ -3593,7 +3642,663 @@ TODO
 </div>
 </div>
 <div class="sect1">
-<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex C: Revision History</h2>
+<h2 id="_openapi_definition_example_informative"><a class="anchor" href="#_openapi_definition_example_informative"></a>Annex C: OpenAPI definition example (Informative)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This annex includes a complete example of an OpenAPI definition for a WFS.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>openapi: 3.0.0
+info:
+  title: A sample API conforming to the OGC Web Feature Service standard
+  version: 0.0.1
+  description: &gt;-
+    WARNING - THIS IS WORK IN PROGRESS\
+
+    TODO - Add a description of the sample service.\
+
+    TODO - Add security elements in a separate example.\
+
+    TODO - Connect to a live service.
+  contact:
+    name: Acme Corporation
+    email: info@example.org
+    url: http://example.org/
+  license:
+    name: CC-BY 4.0 license
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+  - url: https://dev.example.org/
+    description: Development server
+  - url: https://data.example.org/
+    description: Production server
+paths:
+  /:
+    get:
+      summary: describe the feature collections in the dataset
+      operationId: describeCollections
+      tags:
+        - Capabilities
+      parameters:
+        - $ref: &#39;#/components/parameters/f&#39;
+      responses:
+        &#39;200&#39;:
+          description: The feature collections shared by this API.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/content&#39;
+              examples:
+                ex1:
+                  $ref: &#39;#/components/examples/featureCollectionsJson&#39;
+            application/xml:
+              schema:
+                $ref: &#39;#/components/schemas/content&#39;
+              examples:
+                ex1:
+                  $ref: &#39;#/components/examples/featureCollectionsXml&#39;
+            text/html:
+              schema:
+                type: string
+              examples:
+                ex1:
+                  $ref: &#39;#/components/examples/featureCollectionsHtml&#39;
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            application/xml:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            text/html:
+              schema:
+                type: string
+  /api:
+    get:
+      summary: the API description - this document
+      operationId: getApiDescription
+      tags:
+        - Capabilities
+      parameters:
+        - $ref: &#39;#/components/parameters/f&#39;
+      responses:
+        &#39;200&#39;:
+          description: &gt;-
+            The formal documentation of this API according to the OpenAPI
+            specification, version 3.0. I.e., this document.
+          content:
+            application/openapi+json;version=3.0:
+              schema:
+                type: object
+            text/html:
+              schema:
+                type: string
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            application/xml:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            text/html:
+              schema:
+                type: string
+  /buildings:
+    get:
+      summary: retrieve building features
+      description: &gt;-
+        Every feature in a dataset belongs to one collection of features. A dataset may consist of multiple feature
+        collections. Typically, a feature collection is a collection of features of a similar type, based on a
+        common schema.
+
+        This sample WFS has a single feature collection for buildings.
+      operationId: getBuildings
+      tags:
+        - Features
+      parameters:
+        - $ref: &#39;#/components/parameters/f&#39;
+        - $ref: &#39;#/components/parameters/startIndex&#39;
+        - $ref: &#39;#/components/parameters/count&#39;
+        - $ref: &#39;#/components/parameters/bbox&#39;
+        - $ref: &#39;#/components/parameters/resultType&#39;
+        - $ref: &#39;#/components/parameters/function&#39;
+      responses:
+        &#39;200&#39;:
+          description: &gt;-
+            Information about the feature collection plus the first features matching the selection parameters.
+          content:
+            application/geo+json:
+              schema:
+                $ref: &#39;#/components/schemas/featureCollectionGeoJSON&#39;
+              examples:
+                ex1:
+                  $ref: &#39;#/components/examples/featuresJson&#39;
+            application/gml+xml;version=3.2:
+              schema:
+                $ref: &#39;#/components/schemas/featureCollectionGML&#39;
+              examples:
+                ex1:
+                  $ref: &#39;#/components/examples/featuresXml&#39;
+            text/html:
+              schema:
+                type: string
+              examples:
+                ex1:
+                  $ref: &#39;#/components/examples/featuresHtml&#39;
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            application/xml:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            text/html:
+              schema:
+                type: string
+  /buildings/{fid}:
+    get:
+      summary: retrieve a feature
+      operationId: getFeature
+      tags:
+        - Features
+      parameters:
+        - $ref: &#39;#/components/parameters/id&#39;
+        - $ref: &#39;#/components/parameters/f&#39;
+      responses:
+        &#39;200&#39;:
+          description: A feature.
+          content:
+            application/geo+json:
+              schema:
+                $ref: &#39;#/components/schemas/buildingGeoJSON&#39;
+            application/gml+xml;version=3.2:
+              schema:
+                $ref: &#39;#/components/schemas/buildingGML&#39;
+            text/html:
+              schema:
+                type: string
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            application/xml:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            text/html:
+              schema:
+                type: string
+components:
+  parameters:
+    f:
+      name: f
+      in: query
+      description: &gt;-
+        The format of the response. If no value is provided, the standard http
+        rules apply, i.e., the accept header shall be used to determine the
+        format.\
+
+        Pre-defined values are &quot;xml&quot;, &quot;json&quot; and &quot;html&quot;. The response to other
+        values is determined by the server.
+      required: false
+      schema:
+        type: string
+        enum:
+          - json
+          - xml
+          - html
+      style: form
+      explode: false
+    startIndex:
+      name: startIndex
+      in: query
+      description: &gt;-
+        The optional startIndex parameter indicates the index within the result
+        set from which the server shall begin presenting results in the
+        response document. The first element has an index of 0.\
+
+        Minimum = 0.\
+
+        Default = 0.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      style: form
+      explode: false
+    count:
+      name: count
+      in: query
+      description: &gt;-
+        The optional count parameter limits the number of items that are presented in the response document.\
+
+        Only items are counted that are on the first level of the collection in the response document.
+        Nested objects contained within the explicitly requested items shall not be counted.\
+
+        Minimum = 1.\
+
+        Maximum = 10000.\
+
+        Default = 10.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 10
+      style: form
+      explode: false
+    bbox:
+      name: bbox
+      in: query
+      description: &gt;-
+        Only features that have a geometry that intersects the bounding box are selected. The bounding box is provided as four numbers:
+
+        * Lower corner, coordinate axis 1 (minimum longitude)
+        * Lower corner, coordinate axis 2 (minimum latitude)
+        * Upper corner, coordinate axis 1 (maximum longitude)
+        * Upper corner, coordinate axis 2 (maximum latitude)
+      required: false
+      schema:
+        type: array
+        items:
+          type: number
+          minItems: 4
+          maxItems: 4
+          minimum: -180
+          maximum: 180
+      style: form
+      explode: false
+    resultType:
+      name: resultType
+      in: query
+      description: &gt;-
+        This service will respond to a query in one of two ways (excluding
+        an exception response). It may either generate a complete
+        response document containing resources that satisfy the
+        operation or it may simply generate an empty response container
+        that indicates the count of the total number of resources that the
+        operation would return. Which of these two responses is generated is
+        determined by the value of the optional resultType parameter.\
+
+        The allowed values for this parameter are &quot;results&quot; and &quot;hits&quot;.\
+
+        If the value of the resultType parameter is set to &quot;results&quot;, the server
+        will generate a complete response document containing resources that
+        satisfy the operation.\
+
+        If the value of the resultType attribute is set to &quot;hits&quot;, the server
+        will generate an empty response document containing no resource
+        instances.\
+
+        Default = &quot;results&quot;.
+      required: false
+      schema:
+        type: string
+        enum:
+          - hits
+          - results
+        default: results
+      style: form
+      explode: false
+      example: resultType=results
+    function:
+      name: function
+      in: query
+      description: &gt;-
+        Only return buildings of a particular function.\
+
+        Default = return all buildings.
+      required: false
+      schema:
+        type: string
+        enum:
+          - residential
+          - commercial
+          - public use
+      style: form
+      explode: false
+      example: &#39;function=public+use&#39;
+    id:
+      name: id
+      in: path
+      description: The id of a feature
+      required: true
+      schema:
+        type: string
+  schemas:
+    exception:
+      type: object
+      required:
+        - code
+      xml:
+        name: Exception
+        namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+        prefix: wfs
+      properties:
+        code:
+          type: string
+          xml:
+            name: code
+            attribute: true
+        description:
+          type: string
+          xml:
+            name: description
+            namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+            prefix: wfs
+    bbox:
+      type: object
+      required:
+        - bbox
+      properties:
+        crs:
+          type: string
+          enum:
+            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+        bbox:
+          description: minimum longitude, minimum latitude, maximum longitude, maximum latitude
+          type: array
+          items:
+            minItems: 4
+            maxItems: 4
+            type: number
+            minimum: -180
+            maximum: 180
+          example:
+            - -180
+            - -90
+            - 180
+            - 90
+    content:
+      type: object
+      required:
+        - collections
+      xml:
+        name: Collections
+        namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+        prefix: wfs
+      properties:
+        collections:
+          type: array
+          items:
+            $ref: &#39;#/components/schemas/collectionInfo&#39;
+          xml:
+            namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+            prefix: wfs
+    collectionInfo:
+      type: object
+      required:
+        - name
+        - links
+      properties:
+        name:
+          type: string
+          example: address
+        title:
+          type: string
+          example: address
+        description:
+          type: string
+          example: An address.
+        links:
+          type: array
+          items:
+            $ref: &#39;#/components/schemas/link&#39;
+          example:
+            - href: http://data.example.com/buildings
+              rel: item
+            - href: http://example.com/concepts/buildings.html
+              rel: describedBy
+              type: text/html
+            - href: http://example.com/schemas/buildings.xsd
+              rel: describedBy
+              type: application/xml
+        extent:
+          $ref: &#39;#/components/schemas/bbox&#39;
+        crs:
+          description: TODO - add description ... first crs is the default crs
+          type: array
+          items:
+            type: string
+          default:
+            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          example:
+            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+            - http://www.opengis.net/def/crs/EPSG/0/4326
+    link:
+      type: object
+      required:
+        - href
+      properties:
+        href:
+          type: string
+          xml:
+            attribute: true
+          example: http://data.example.com/buildings/123
+        rel:
+          type: string
+          xml:
+            attribute: true
+          example: prev
+        type:
+          type: string
+          xml:
+            attribute: true
+          example: application/gml+xml;version=3.2
+        hreflang:
+          type: string
+          xml:
+            attribute: true
+          example: en
+    featureCollectionGeoJSON:
+      type: object
+      required:
+        - features
+      properties:
+        features:
+          type: array
+          items:
+            $ref: &#39;#/components/schemas/featureGeoJSON&#39;
+    featureGeoJSON:
+      type: object
+      required:
+        - type
+        - geometry
+        - properties
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        geometry:
+          $ref: &#39;#/components/schemas/geometryGeoJSON&#39;
+        properties:
+          type: object
+          nullable: true
+        id:
+          oneOf:
+            - type: string
+            - type: integer
+    geometryGeoJSON:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - Point
+            - MultiPoint
+            - LineString
+            - MultiLineString
+            - Polygon
+            - MultiPolygon
+            - GeometryCollection
+    featureCollectionGML:
+      type: object
+      xml:
+        name: FeatureCollection
+        namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+        prefix: wfs
+      properties:
+        features:
+          type: array
+          items:
+            xml:
+              name: featureMember
+              namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
+              prefix: wfs
+            oneOf:
+              - $ref: &#39;#/components/schemas/referenceXlink&#39;
+              - $ref: &#39;#/components/schemas/featureGML&#39;
+    featureGML:
+      type: object
+      required:
+        - &#39;gml:id&#39;
+      xml:
+        name: AbstractFeature
+        namespace: &#39;http://www.opengis.net/gml/3.2&#39;
+        prefix: gml
+      properties:
+        &#39;gml:id&#39;:
+          type: string
+          xml:
+            namespace: &#39;http://www.opengis.net/gml/3.2&#39;
+            prefix: gml
+            attribute: true
+    referenceXlink:
+      type: object
+      required:
+        - href
+      properties:
+        href:
+          type: string
+          xml:
+            namespace: &#39;http://www.w3.org/1999/xlink&#39;
+            prefix: xlink
+            attribute: true
+        title:
+          type: string
+          xml:
+            namespace: &#39;http://www.w3.org/1999/xlink&#39;
+            prefix: xlink
+            attribute: true
+    buildingGeoJSON:
+      type: object
+      required:
+        - type
+        - geometry
+        - properties
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        geometry:
+          $ref: &#39;#/components/schemas/geometryGeoJSON&#39;
+        properties:
+          type: object
+          nullable: true
+          properties:
+            name:
+              type: string
+            function:
+              type: string
+              enum:
+                - residential
+                - commercial
+                - public use
+            floors:
+              type: integer
+              minimum: 1
+    buildingGML:
+      type: object
+      required:
+        - &#39;gml:id&#39;
+      xml:
+        name: Building
+        namespace: &#39;http://data.example.org/schemas/building&#39;
+        prefix: bui
+      properties:
+        &#39;gml:id&#39;:
+          type: string
+          xml:
+            namespace: &#39;http://www.opengis.net/gml/3.2&#39;
+            prefix: gml
+            attribute: true
+        name:
+          type: string
+          xml:
+            namespace: &#39;http://data.example.org/schemas/building&#39;
+            prefix: bui
+        function:
+          type: string
+          enum:
+            - residential
+            - commercial
+            - public use
+          xml:
+            namespace: &#39;http://data.example.org/schemas/building&#39;
+            prefix: bui
+        floors:
+          type: integer
+          minimum: 1
+          xml:
+            namespace: &#39;http://data.example.org/schemas/building&#39;
+            prefix: bui
+        location:
+          type: object
+          xml:
+            namespace: &#39;http://data.example.org/schemas/building&#39;
+            prefix: bui
+  examples:
+    apidocJson:
+      summary: An example for a WFS OpenAPI document in JSON
+      externalValue: http://example.org/examples/wfs/openapi.json
+    apidocHtml:
+      summary: An example for a WFS OpenAPI document in HTML
+      externalValue: http://example.org/examples/wfs/openapi.html
+    featureCollectionsJson:
+      summary: A capabilities example in JSON
+      externalValue: http://example.org/examples/wfs/ft.json
+    featureCollectionsXml:
+      summary: A capabilities example in XML
+      externalValue: http://example.org/examples/wfs/ft.xml
+    featureCollectionsHtml:
+      summary: A capabilities example in HTML
+      externalValue: http://example.org/examples/wfs/ft.html
+    featuresJson:
+      summary: A feature collection in JSON
+      externalValue: http://example.org/examples/wfs/f.geojson
+    featuresXml:
+      summary: A feature collection in XML
+      externalValue: http://example.org/examples/wfs/f.gml
+    featuresHtml:
+      summary: A feature collection in HTML
+      externalValue: http://example.org/examples/wfs/f.html
+tags:
+  - name: Capabilities
+    description: Essential characteristics of this API including information about the data.
+  - name: Features
+    description: Access to data (features).</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex D: Revision History</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3633,7 +4338,7 @@ TODO
 </div>
 </div>
 <div class="sect1">
-<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex D: Bibliography</h2>
+<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex E: Bibliography</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -3653,7 +4358,7 @@ TODO
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-11 12:21:50 CEST
+Last updated 2017-10-12 06:09:54 CEST
 </div>
 </div>
 </body>

@@ -81,7 +81,8 @@ in a link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.
 |===
 
 Typical cases for this are services that are access-controlled (see the
-sub-clause <<security,Security>>) or where HTTP redirection is used.
+sub-clause <<security,Security>>), web cache validation is supported or
+where HTTP redirection is used.
 
 NOTE: TODO +
 Check, if the approach is consistent with the security concepts
@@ -193,6 +194,23 @@ The OpenAPI specification currently supports the following link:https://github.c
 * an API key (either as a header or as a query parameter),
 * OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
 * OpenID Connect Discovery.
+
+=== Web caching
+
+Entity tags are a mechanism for web cache validation and for supporting conditional
+requests to reduce network traffic. Entity tags are specified by <<rfc2616,HTTP/1.1 (RFC 2616)>>.
+
+[[rec_etag]]
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/etag +
+
+The service SHOULD support entity tags and the associated headers as
+specified by HTTP/1.1.
+|===
+
+NOTE: TODO +
+Add an example OpenAPI operation (headers, response codes).
 
 === Encodings / Parameter f
 
