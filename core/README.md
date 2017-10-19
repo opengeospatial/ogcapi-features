@@ -1,6 +1,6 @@
 # Standard template
 
-This GitHub repository contains the content for an OGC standard.
+This folder contains the content for the WFS Part 1 (Core) standard.
 
 The repo is organized as follows:
 
