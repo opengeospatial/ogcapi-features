@@ -1,0 +1,221 @@
+featureCollection:
+  name: featureCollection
+  in: path
+  description: The name of a feature collection in the dataset
+  required: true
+  schema:
+    type: string
+filter:
+   name: filter
+   in: query
+   description: ... in the filterLanguage
+   required: false
+   schema:
+     type: string
+   style: form
+   explode: true
+   example: postalCode=54470
+filterLanguage:
+   name: filterLanguage
+   in: query
+   description: ...
+   required: false
+   schema:
+     type: string
+     enum:
+       - CQL
+       - FES
+     default: CQL
+   style: form
+   explode: false
+   example: filterLanguage=FES
+resolve:
+   name: resolve
+   in: query
+   description: >-
+     The optional resolve parameter controls whether resource  references are
+     resolved by an operation.\
+
+     If set to `false`, the default value, the server shall not  resolve any
+     resource references.\
+
+     If set to `true`, the server shall resolve references  In the event that
+     a server cannot resolve a resource  reference, the server shall simply
+     report the original  unresolved URI in the response. This is not
+     considered  an exception.
+   required: false
+   schema:
+     type: string
+     format: boolean
+     default: 'false'
+   style: form
+   explode: false
+   example: resolve=false
+resolveDepth:
+   name: resolveDepth
+   in: query
+   description: >-
+     The optional resolveDepth parameter indicates the depth  to which nested
+     resource references shall be resolved  in a response document.\
+
+     The value shall be ignored, if the resolve parameter is  set to
+     `false`.\
+
+     If the value of the resolveDepth parameter is specified  as "0" a server
+     shall not resolve any resource references.\
+
+     If the value of the resolveDepth parameter is specified  as "1", a
+     server shall resolve the immediate resource  references and include
+     their value in the response document. However, if those resolved
+     resources contain any nested resource references, those nested
+     references shall not be resolved.\
+
+     If the value of the resolveDepth parameter is specified  as "*" a server
+     shall resolve all immediate resource  references and all nested resource
+     references.\
+
+     Having resolved references to the specified resolveDepth  a server shall
+     arrange that any deeper nested references  shall be relocated to point
+     to their intended resources.\
+
+     EXAMPLE 1 This may require that references to local  resources within
+     the data store of a WFS be converted  to remote reference back to the
+     same server in a response  document.\
+
+     In the event that a circular reference is detected by the  server before
+     reaching the specified resolveDepth, the  server shall abort further
+     nested resource resolution  and arrange for the last reference in the
+     chain to  reference the appropriate, already resolved, resource.\
+
+     EXAMPLE 2 Consider the following chain of resource references. A -> B ->
+     C -> D -> E -> B. If the resolveDepth values is  set to 8, a server
+     would resolve all resources to E  (i.e. 4 levels) and then arrange for
+     resource E to point  to the already resolved resource B. At that point
+     the server  will cease resource resolution since the remaining
+     resources,  to a depth of 8 levels, have already been resolved due to 
+     the circular reference.
+   required: false
+   schema:
+     type: integer
+     minimum: 0
+     default: 0
+   style: form
+   explode: false
+   example: resolveDepth=2
+resolveTimeout:
+   name: resolveTimeout
+   in: query
+   description: >-
+     The optional resolveTimeout parameter controls how long a  server shall
+     wait to receive a response when resolving  resource references.\
+
+     The value shall be ignored, if the resolve parameter is  set to
+     `false`.\
+
+     The resolveTimeout parameter is a positive integer and  specifies the
+     expiry time in seconds. If the resolveTimeout parameter is not
+     specified, the default value of server  wait time is 30 seconds.
+   required: false
+   schema:
+     type: integer
+     minimum: 1
+     default: 30
+   style: form
+   explode: false
+   example: resolveTimeout=60
+resolution:
+   name: resolution
+   in: query
+   description: ...
+   required: false
+   schema:
+     type: number
+   style: form
+   explode: false
+   example: 100000
+crs:
+   name: crs
+   in: query
+   description: >-
+     The optional crs attribute may be used to assert a  specific
+     WFS-supported CRS transformation to be applied  to compatible geometries
+     of the features returned  in a response document.\
+
+     The value of the parameter may be the DefaultCRS or  any of the OtherCRS
+     values listed for the feature type  in a server’s capabilities
+     document.\
+
+     If no crs value is supplied, then the compatible feature  geometries
+     shall be encoded in the response document using  the advertised
+     DefaultCRS value.\
+
+     This attribute has no meaning for feature types with  no spatial
+     properties and shall be ignored.\
+
+     Servers that advertise more than one OtherCRS value in  their
+     capabilities document shall be able to transform  between the CRS used
+     to store feature geometries and  any compatible CRS requested using the
+     srsName attribute.\
+
+     Servers shall be able to process srsName attribute values  using the
+     following format model.\
+
+     "http://www.opengis.net/def/crs/[epsg|ogc]/0/{code}"\
+
+     In this format model, objectType shall have the value  of "crs"
+     authority shall have the value "crs" and the  valuetoken "{code}" is a
+     placeholder for  the actual EPSG or OGC CRS code value as defined by
+     the  authority "epsg" or "ogc".\
+
+     **Compatibility of coordinate reference systems**\
+
+     Coordinate reference systems that differ in dimensionality  or that have
+     no defined datum transformation between them  may be incompatible for
+     the purposes of geometry coordinate conversion. Where the request crs
+     references a CRS that  is incompatible with the storage CRS of a
+     geometry property,  the service shall encode that geometry property
+     using some  other CRS identified with an srsName attribute on that 
+     property; there is no requirement that this srsName attribute  be
+     DefaultCRS or one of those listed in OtherCRS.\
+
+     If a filter predicate compares two geometries with  incompatible CRS,
+     the server shall generate an InvalidParameterException.\
+
+     EXAMPLE 1 A feature with both 2D and 3D geometry properties  is
+     requested with srsName set to a 2D CRS; the 2D property  is encoded in
+     the requested CRS, and the 3D property is  encoded with some 3D CRS
+     identified in the srsName of the  geometry.\
+
+     EXAMPLE 2 A 1D geometry property whose coordinate is the  path length
+     along a LineString (itself defined in 3D with  some CRS) with
+     gml:id="geom.123" in the same response is  encoded with
+     srsName="#geom.123".\
+
+     EXAMPLE 3 A 1D geometry property whose coordinate is  defined in an
+     external resource is encoded with crs  set to an HTTP URI for that
+     external resource.\
+   required: false
+   schema:
+     type: string
+     default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
+   style: form
+   explode: false
+   example: crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FOGC%2F1.3%2FCRS84
+near:
+  name: near
+  in: query
+  description: >-
+   The items in the response shall be sorted by proximity to the ...
+   1. longitude
+   2. latitude
+  required: false
+  schema:
+   type: array
+   items:
+     type: number
+     minItems: 2
+     maxItems: 2
+     minimum: -180
+     maximum: 180
+  style: form
+  explode: false

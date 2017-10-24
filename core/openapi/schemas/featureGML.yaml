@@ -1,0 +1,14 @@
+type: object
+required:
+  - 'gml:id'
+xml:
+  name: AbstractFeature
+  namespace: 'http://www.opengis.net/gml/3.2'
+  prefix: gml
+properties:
+  'gml:id':
+    type: string
+    xml:
+      namespace: 'http://www.opengis.net/gml/3.2'
+      prefix: gml
+      attribute: true

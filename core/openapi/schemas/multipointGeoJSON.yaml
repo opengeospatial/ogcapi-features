@@ -1,0 +1,15 @@
+type: object
+required:
+  - type
+properties:
+  type:
+    type: string
+    enum:
+      - MultiPoint
+  coordinates:
+    type: array
+    items:
+      type: array
+      items:
+        type: number
+        minItems: 2

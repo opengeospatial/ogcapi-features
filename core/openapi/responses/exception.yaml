@@ -1,0 +1,11 @@
+description: An error occured.
+content:
+  application/json:
+    schema:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+  application/xml:
+    schema:
+      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+  text/html:
+    schema:
+      type: string

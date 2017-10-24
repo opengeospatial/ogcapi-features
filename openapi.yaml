@@ -1,0 +1,643 @@
+openapi: 3.0.0
+info:
+  title: A sample API conforming to the OGC Web Feature Service standard
+  version: 0.0.1
+  description: >-
+    WARNING - THIS IS WORK IN PROGRESS\
+    
+    TODO - Add a description of the sample service.\
+    
+    TODO - Add security elements in a separate example.\
+    
+    TODO - Connect to a live service.
+  contact:
+    name: Acme Corporation
+    email: info@example.org
+    url: http://example.org/
+  license:
+    name: CC-BY 4.0 license
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+  - url: https://dev.example.org/
+    description: Development server
+  - url: https://data.example.org/
+    description: Production server
+paths:
+  /:
+    get:
+      summary: describe the feature collections in the dataset
+      operationId: describeCollections
+      tags:
+        - Capabilities
+      parameters:
+        - $ref: '#/components/parameters/f'
+      responses:
+        '200':
+          description: The feature collections shared by this API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/content'
+              examples:
+                ex1:
+                  $ref: '#/components/examples/featureCollectionsJson'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/content'
+              examples:
+                ex1:
+                  $ref: '#/components/examples/featureCollectionsXml'
+            text/html:
+              schema:
+                type: string
+              examples:
+                ex1:
+                  $ref: '#/components/examples/featureCollectionsHtml'
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/exception'
+            text/html:
+              schema:
+                type: string
+  /api:
+    get:
+      summary: the API description - this document
+      operationId: getApiDescription
+      tags:
+        - Capabilities
+      parameters:
+        - $ref: '#/components/parameters/f'
+      responses:
+        '200':
+          description: >-
+            The formal documentation of this API according to the OpenAPI
+            specification, version 3.0. I.e., this document.
+          content:
+            application/openapi+json;version=3.0:
+              schema:
+                type: object
+            text/html:
+              schema:
+                type: string
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/exception'
+            text/html:
+              schema:
+                type: string
+  /buildings:
+    get:
+      summary: retrieve building features
+      description: >-
+        Every feature in a dataset belongs to one collection of features. A dataset may consist of multiple feature 
+        collections. Typically, a feature collection is a collection of features of a similar type, based on a 
+        common schema.
+        
+        This sample WFS has a single feature collection for buildings.
+      operationId: getBuildings
+      tags:
+        - Features
+      parameters:
+        - $ref: '#/components/parameters/f'
+        - $ref: '#/components/parameters/startIndex'
+        - $ref: '#/components/parameters/count'
+        - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/resultType'
+        - $ref: '#/components/parameters/function'
+      responses:
+        '200':
+          description: >-
+            Information about the feature collection plus the first features matching the selection parameters.
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/featureCollectionGeoJSON'
+              examples:
+                ex1:
+                  $ref: '#/components/examples/featuresJson'
+            application/gml+xml;version=3.2:
+              schema:
+                $ref: '#/components/schemas/featureCollectionGML'
+              examples:
+                ex1:
+                  $ref: '#/components/examples/featuresXml'
+            text/html:
+              schema:
+                type: string
+              examples:
+                ex1:
+                  $ref: '#/components/examples/featuresHtml'
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/exception'
+            text/html:
+              schema:
+                type: string
+  /buildings/{fid}:
+    get:
+      summary: retrieve a feature
+      operationId: getFeature
+      tags:
+        - Features
+      parameters:
+        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/f'
+      responses:
+        '200':
+          description: A feature.
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/buildingGeoJSON'
+            application/gml+xml;version=3.2:
+              schema:
+                $ref: '#/components/schemas/buildingGML'
+            text/html:
+              schema:
+                type: string
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/exception'
+            text/html:
+              schema:
+                type: string
+components:
+  parameters:
+    f:
+      name: f
+      in: query
+      description: >-
+        The format of the response. If no value is provided, the standard http
+        rules apply, i.e., the accept header shall be used to determine the
+        format.\
+      
+        Pre-defined values are "xml", "json" and "html". The response to other 
+        values is determined by the server.
+      required: false
+      schema:
+        type: string
+        enum:
+          - json
+          - xml
+          - html
+      style: form
+      explode: false    
+    startIndex:
+      name: startIndex
+      in: query
+      description: >-
+        The optional startIndex parameter indicates the index within the result
+        set from which the server shall begin presenting results in the
+        response document. The first element has an index of 0.\
+      
+        Minimum = 0.\
+      
+        Default = 0.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      style: form
+      explode: false    
+    count:
+      name: count
+      in: query
+      description: >-
+        The optional count parameter limits the number of items that are presented in the response document.\
+      
+        Only items are counted that are on the first level of the collection in the response document. 
+        Nested objects contained within the explicitly requested items shall not be counted.\
+      
+        Minimum = 1.\
+      
+        Maximum = 10000.\
+      
+        Default = 10.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 10
+      style: form
+      explode: false    
+    bbox:
+      name: bbox
+      in: query
+      description: >-
+        Only features that have a geometry that intersects the bounding box are selected. The bounding box is provided as four numbers:
+         
+        * Lower corner, coordinate axis 1 (minimum longitude)
+        * Lower corner, coordinate axis 2 (minimum latitude)
+        * Upper corner, coordinate axis 1 (maximum longitude)
+        * Upper corner, coordinate axis 2 (maximum latitude)
+      required: false
+      schema:
+        type: array
+        items:
+          type: number
+          minItems: 4
+          maxItems: 4
+          minimum: -180
+          maximum: 180
+      style: form
+      explode: false    
+    resultType:
+      name: resultType
+      in: query
+      description: >-
+        This service will respond to a query in one of two ways (excluding
+        an exception response). It may either generate a complete
+        response document containing resources that satisfy the
+        operation or it may simply generate an empty response container
+        that indicates the count of the total number of resources that the
+        operation would return. Which of these two responses is generated is
+        determined by the value of the optional resultType parameter.\
+      
+        The allowed values for this parameter are "results" and "hits".\
+      
+        If the value of the resultType parameter is set to "results", the server
+        will generate a complete response document containing resources that
+        satisfy the operation.\
+      
+        If the value of the resultType attribute is set to "hits", the server
+        will generate an empty response document containing no resource
+        instances.\
+      
+        Default = "results".
+      required: false
+      schema:
+        type: string
+        enum:
+          - hits
+          - results
+        default: results
+      style: form
+      explode: false
+      example: resultType=results
+    function:
+      name: function
+      in: query
+      description: >-
+        Only return buildings of a particular function.\
+              
+        Default = return all buildings.
+      required: false
+      schema:
+        type: string
+        enum:
+          - residential
+          - commercial
+          - public use
+      style: form
+      explode: false
+      example: 'function=public+use'
+    id:
+      name: id
+      in: path
+      description: The id of a feature
+      required: true
+      schema:
+        type: string    
+  schemas:
+    exception:
+      type: object
+      required:
+        - code
+      xml:
+        name: Exception
+        namespace: 'http://www.opengis.net/wfs/3.0'
+        prefix: wfs
+      properties:
+        code:
+          type: string
+          xml:
+            name: code
+            attribute: true
+        description:
+          type: string
+          xml:
+            name: description
+            namespace: 'http://www.opengis.net/wfs/3.0'
+            prefix: wfs    
+    bbox:
+      type: object
+      required:
+        - bbox
+      properties:
+        crs:
+          type: string
+          enum:
+            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+        bbox:
+          description: minimum longitude, minimum latitude, maximum longitude, maximum latitude 
+          type: array
+          items:
+            minItems: 4
+            maxItems: 4
+            type: number
+            minimum: -180
+            maximum: 180
+          example:
+            - -180
+            - -90
+            - 180
+            - 90    
+    content:
+      type: object
+      required:
+        - collections
+      xml:
+        name: Collections
+        namespace: 'http://www.opengis.net/wfs/3.0'
+        prefix: wfs
+      properties:
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/collectionInfo'
+          xml:
+            namespace: 'http://www.opengis.net/wfs/3.0'
+            prefix: wfs    
+    collectionInfo:
+      type: object
+      required:
+        - name
+        - links
+      properties:
+        name:
+          type: string
+          example: address
+        title:
+          type: string
+          example: address
+        description:
+          type: string
+          example: An address.
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+          example:
+            - href: http://data.example.com/buildings
+              rel: item
+            - href: http://example.com/concepts/buildings.html
+              rel: describedBy
+              type: text/html
+            - href: http://example.com/schemas/buildings.xsd
+              rel: describedBy
+              type: application/xml
+        extent:
+          $ref: '#/components/schemas/bbox'
+        crs:
+          description: TODO - add description ... first crs is the default crs
+          type: array
+          items:
+            type: string
+          default:
+            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          example:
+            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+            - http://www.opengis.net/def/crs/EPSG/0/4326
+    link:
+      type: object
+      required:
+        - href
+      properties:
+        href:
+          type: string
+          xml:
+            attribute: true
+          example: http://data.example.com/buildings/123
+        rel:
+          type: string
+          xml:
+            attribute: true
+          example: prev
+        type:
+          type: string
+          xml:
+            attribute: true
+          example: application/gml+xml;version=3.2
+        hreflang:
+          type: string
+          xml:
+            attribute: true
+          example: en    
+    featureCollectionGeoJSON:
+      type: object
+      required:
+        - features
+      properties:
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/featureGeoJSON'
+    featureGeoJSON:
+      type: object
+      required:
+        - type
+        - geometry
+        - properties
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        geometry:
+          $ref: '#/components/schemas/geometryGeoJSON'
+        properties:
+          type: object
+          nullable: true
+        id:
+          oneOf:
+            - type: string
+            - type: integer    
+    geometryGeoJSON:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - Point
+            - MultiPoint
+            - LineString
+            - MultiLineString
+            - Polygon
+            - MultiPolygon
+            - GeometryCollection    
+    featureCollectionGML:
+      type: object
+      xml:
+        name: FeatureCollection
+        namespace: 'http://www.opengis.net/wfs/3.0'
+        prefix: wfs
+      properties:
+        features:
+          type: array
+          items:
+            xml:
+              name: featureMember
+              namespace: 'http://www.opengis.net/wfs/3.0'
+              prefix: wfs
+            oneOf:
+              - $ref: '#/components/schemas/referenceXlink'
+              - $ref: '#/components/schemas/featureGML'    
+    featureGML:
+      type: object
+      required:
+        - 'gml:id'
+      xml:
+        name: AbstractFeature
+        namespace: 'http://www.opengis.net/gml/3.2'
+        prefix: gml
+      properties:
+        'gml:id':
+          type: string
+          xml:
+            namespace: 'http://www.opengis.net/gml/3.2'
+            prefix: gml
+            attribute: true    
+    referenceXlink:
+      type: object
+      required:
+        - href
+      properties:
+        href:
+          type: string
+          xml:
+            namespace: 'http://www.w3.org/1999/xlink'
+            prefix: xlink
+            attribute: true
+        title:
+          type: string
+          xml:
+            namespace: 'http://www.w3.org/1999/xlink'
+            prefix: xlink
+            attribute: true    
+    buildingGeoJSON:
+      type: object
+      required:
+        - type
+        - geometry
+        - properties
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        geometry:
+          $ref: '#/components/schemas/geometryGeoJSON'
+        properties:
+          type: object
+          nullable: true
+          properties:
+            name:
+              type: string
+            function:
+              type: string
+              enum:
+                - residential
+                - commercial
+                - public use
+            floors:
+              type: integer
+              minimum: 1
+    buildingGML:
+      type: object
+      required:
+        - 'gml:id'
+      xml:
+        name: Building
+        namespace: 'http://data.example.org/schemas/building'
+        prefix: bui
+      properties:
+        'gml:id':
+          type: string
+          xml:
+            namespace: 'http://www.opengis.net/gml/3.2'
+            prefix: gml
+            attribute: true
+        name:
+          type: string
+          xml:
+            namespace: 'http://data.example.org/schemas/building'
+            prefix: bui
+        function:
+          type: string
+          enum:
+            - residential
+            - commercial
+            - public use
+          xml:
+            namespace: 'http://data.example.org/schemas/building'
+            prefix: bui
+        floors:
+          type: integer
+          minimum: 1
+          xml:
+            namespace: 'http://data.example.org/schemas/building'
+            prefix: bui
+        location:
+          type: object
+          xml:
+            namespace: 'http://data.example.org/schemas/building'
+            prefix: bui
+  examples:
+    apidocJson:
+      summary: An example for a WFS OpenAPI document in JSON
+      externalValue: http://example.org/examples/wfs/openapi.json
+    apidocHtml:
+      summary: An example for a WFS OpenAPI document in HTML
+      externalValue: http://example.org/examples/wfs/openapi.html
+    featureCollectionsJson:
+      summary: A capabilities example in JSON
+      externalValue: http://example.org/examples/wfs/ft.json
+    featureCollectionsXml:
+      summary: A capabilities example in XML
+      externalValue: http://example.org/examples/wfs/ft.xml
+    featureCollectionsHtml:
+      summary: A capabilities example in HTML
+      externalValue: http://example.org/examples/wfs/ft.html
+    featuresJson:
+      summary: A feature collection in JSON
+      externalValue: http://example.org/examples/wfs/f.geojson
+    featuresXml:
+      summary: A feature collection in XML
+      externalValue: http://example.org/examples/wfs/f.gml
+    featuresHtml:
+      summary: A feature collection in HTML
+      externalValue: http://example.org/examples/wfs/f.html
+tags:
+  - name: Capabilities
+    description: Essential characteristics of this API including information about the data.
+  - name: Features
+    description: Access to data (features).

@@ -1,0 +1,24 @@
+type: object
+required:
+  - href
+properties:
+  href:
+    type: string
+    xml:
+      attribute: true
+    example: http://data.example.com/buildings/123
+  rel:
+    type: string
+    xml:
+      attribute: true
+    example: prev
+  type:
+    type: string
+    xml:
+      attribute: true
+    example: application/gml+xml;version=3.2
+  hreflang:
+    type: string
+    xml:
+      attribute: true
+    example: en

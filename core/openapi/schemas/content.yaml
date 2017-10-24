@@ -1,0 +1,15 @@
+type: object
+required:
+  - collections
+xml:
+  name: Collections
+  namespace: 'http://www.opengis.net/wfs/3.0'
+  prefix: wfs
+properties:
+  collections:
+    type: array
+    items:
+      $ref: collectionInfo.yaml
+    xml:
+      namespace: 'http://www.opengis.net/wfs/3.0'
+      prefix: wfs

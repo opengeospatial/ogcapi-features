@@ -1,0 +1,16 @@
+type: object
+required:
+  - href
+properties:
+  href:
+    type: string
+    xml:
+      namespace: 'http://www.w3.org/1999/xlink'
+      prefix: xlink
+      attribute: true
+  title:
+    type: string
+    xml:
+      namespace: 'http://www.w3.org/1999/xlink'
+      prefix: xlink
+      attribute: true

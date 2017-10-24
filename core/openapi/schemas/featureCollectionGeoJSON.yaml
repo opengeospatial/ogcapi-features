@@ -1,0 +1,8 @@
+type: object
+required:
+  - features
+properties:
+  features:
+    type: array
+    items:
+      $ref: featureGeoJSON.yaml

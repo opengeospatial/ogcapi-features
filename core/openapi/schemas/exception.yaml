@@ -1,0 +1,19 @@
+type: object
+required:
+  - code
+xml:
+  name: Exception
+  namespace: 'http://www.opengis.net/wfs/3.0'
+  prefix: wfs
+properties:
+  code:
+    type: string
+    xml:
+      name: code
+      attribute: true
+  description:
+    type: string
+    xml:
+      name: description
+      namespace: 'http://www.opengis.net/wfs/3.0'
+      prefix: wfs

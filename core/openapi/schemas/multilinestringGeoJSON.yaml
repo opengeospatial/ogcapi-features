@@ -1,0 +1,18 @@
+type: object
+required:
+  - type
+properties:
+  type:
+    type: string
+    enum:
+      - MultiLineString
+  coordinates:
+    type: array
+    items:
+      type: array
+      items:
+        type: array
+        minItems: 2
+        items:
+          type: number
+          minItems: 2

@@ -1,0 +1,32 @@
+name: resultType
+in: query
+description: >-
+  This service will respond to a query in one of two ways (excluding
+  an exception response). It may either generate a complete
+  response document containing resources that satisfy the
+  operation or it may simply generate an empty response container
+  that indicates the count of the total number of resources that the
+  operation would return. Which of these two responses is generated is
+  determined by the value of the optional resultType parameter.\
+
+  The allowed values for this parameter are "results" and "hits".\
+
+  If the value of the resultType parameter is set to "results", the server
+  will generate a complete response document containing resources that
+  satisfy the operation.\
+
+  If the value of the resultType attribute is set to "hits", the server
+  will generate an empty response document containing no resource
+  instances.\
+
+  Default = "results".
+required: false
+schema:
+  type: string
+  enum:
+    - hits
+    - results
+  default: results
+style: form
+explode: false
+example: resultType=results

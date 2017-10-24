@@ -1,0 +1,17 @@
+name: startIndex
+in: query
+description: >-
+  The optional startIndex parameter indicates the index within the result
+  set from which the server shall begin presenting results in the
+  response document. The first element has an index of 0.\
+
+  Minimum = 0.\
+
+  Default = 0.
+required: false
+schema:
+  type: integer
+  minimum: 0
+  default: 0
+style: form
+explode: false
