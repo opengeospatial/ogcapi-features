@@ -55,7 +55,7 @@ include::requirements/requirement_oas-definition.adoc[]
             schema:
               type: string
       default:
-        $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/responses/exception.yaml
+        $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/responses/exception.yaml
 ----
 =================
 
@@ -110,12 +110,12 @@ link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#
 |*Requirement {counter:req-id}* |/req/core/exceptions-schema +
 
 These link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Objects]
-SHALL be based upon the schema https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml.
+SHALL be based upon the schema https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml.
 |===
 
 The exception schema supports both JSON and XML encodings:
 
-.link:https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml[Schema for exceptions]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml[Schema for exceptions]
 [source,YAML]
 ----
 type: object
@@ -167,10 +167,10 @@ description: An error occurred.
 content:
   application/json:
     schema:
-      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
   application/xml:
     schema:
-      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
   text/html:
     schema:
       type: string
@@ -294,7 +294,7 @@ and index a dataset, implementations SHOULD consider to support an HTML encoding
 |===
 
 A template for the definition of the parameter `f` in YAML is available at
-https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml.
+https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml.
 
 === Feature collection metadata
 
@@ -309,12 +309,12 @@ include::requirements/requirement_fc-md-op.adoc[]
 |*Requirement {counter:req-id}* |/req/core/fc-md-success +
 
 A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200" based upon the schema https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml.
+HTTP status code "200" based upon the schema https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml.
 |===
 
 That schema supports both JSON and XML responses:
 
-.link:https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml[Schema for the metadata about feature collections]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml[Schema for the metadata about feature collections]
 [source,YAML]
 ----
 type: object
@@ -328,7 +328,7 @@ properties:
   collections:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/collectionInfo.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml
     xml:
       namespace: 'http://www.opengis.net/wfs/3.0'
       prefix: wfs
@@ -421,7 +421,7 @@ Additional links MAY be added by a service in each of the `links` properties.
 For each feature collection, the `extent` property, if provided, SHALL be a bounding box that includes all feature geometries in this collection.
 |===
 
-.link:https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
 [source,YAML]
 ----
 type: object
@@ -441,9 +441,9 @@ properties:
   links:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/link.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
   extent:
-    $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/bbox.yaml
+    $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/bbox.yaml
   crs:
     description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
     type: array
@@ -548,7 +548,7 @@ response. The first element has an index of 0.
 |===
 
 A template for the definition of the parameter in YAML is available at
-https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/startIndex.yaml.
+https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/startIndex.yaml.
 
 ==== Parameter count
 
@@ -590,7 +590,7 @@ SHALL not be counted.
 |===
 
 A template for the definition of the parameter in YAML is available at
-https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/count.yaml.
+https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml.
 
 ==== Parameter bbox
 
@@ -636,7 +636,7 @@ The bounding box is provided as four numbers:
 |===
 
 A template for the definition of the parameter in YAML is available at
-https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/bbox.yaml.
+https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml.
 
 ==== Parameter resultType
 
@@ -689,7 +689,7 @@ If the parameter is not provided, `results` is used.
 |===
 
 A template for the definition of the parameter in YAML is available at
-https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/resultType.yaml.
+https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/resultType.yaml.
 
 ==== Parameters for filtering on feature properties
 
@@ -794,12 +794,12 @@ Link: <http://data.example.org/buildings?f=json&startIndex=100&count=50>; rel="n
 |*Requirement {counter:req-id}* |/req/core/fc-timeStamp +
 
 A "200"-response SHALL include a property `timeStamp` based upon the schema
-https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/timeStamp.yaml.
+https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/timeStamp.yaml.
 |===
 
 The exception schema supports both JSON and XML encodings:
 
-.link:https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/timeStamp.yaml[Schema for the timeStamp property]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/timeStamp.yaml[Schema for the timeStamp property]
 [source,YAML]
 ----
 timeStamp:
@@ -921,8 +921,8 @@ paths:
       tags:
         - Features
       parameters:
-        - $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/id.yaml
-        - $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml
+        - $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/id.yaml
+        - $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml
       responses:
         '200':
           description: A building.
@@ -942,7 +942,7 @@ paths:
               schema:
                 type: string
         default:
-          $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/responses/exception.yaml
+          $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/responses/exception.yaml
 ...
 components:
   schemas:
@@ -962,7 +962,7 @@ components:
             - type: string
             - type: integer
         geometry:
-          $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/geometryGeoJSON.yaml
+          $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/geometryGeoJSON.yaml
         properties:
           type: object
           nullable: true

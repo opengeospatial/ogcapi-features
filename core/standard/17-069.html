@@ -1074,7 +1074,7 @@ this document.</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-For now, these components use a base URL of "https://raw.githubusercontent.com/cportele/wfs-openapi/master/",
+For now, these components use a base URL of "https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/",
 but eventually these will be available using the base URL "http://schemas.opengis.net/wfs/3.0/openapi/".
 </td>
 </tr>
@@ -1299,7 +1299,7 @@ version 3.0.0.</p>
             schema:
               type: string
       default:
-        $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/responses/exception.yaml</code></pre>
+        $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/responses/exception.yaml</code></pre>
 </div>
 </div>
 </div>
@@ -1433,7 +1433,7 @@ in the API definition SHALL be included for all applicable
 </div>
 <div class="paragraph">
 <p>These <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject">Response Objects</a>
-SHALL be based upon the schema <a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml</a>.</p>
+SHALL be based upon the schema <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1442,7 +1442,7 @@ SHALL be based upon the schema <a href="https://raw.githubusercontent.com/cporte
 <p>The exception schema supports both JSON and XML encodings:</p>
 </div>
 <div class="listingblock">
-<div class="title"><a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml">Schema for exceptions</a></div>
+<div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml">Schema for exceptions</a></div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
 required:
@@ -1534,10 +1534,10 @@ Add list of pre-defined WFS error codes for 500-responses, including NoApplicabl
 content:
   application/json:
     schema:
-      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
   application/xml:
     schema:
-      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/exception.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
   text/html:
     schema:
       type: string</code></pre>
@@ -1761,7 +1761,7 @@ and index a dataset, implementations SHOULD consider to support an HTML encoding
 </table>
 <div class="paragraph">
 <p>A template for the definition of the parameter <code>f</code> in YAML is available at
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml</a>.</p>
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1804,7 +1804,7 @@ with the <code>operationId</code> "describeCollections".</p>
 </div>
 <div class="paragraph">
 <p>A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200" based upon the schema <a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml</a>.</p>
+HTTP status code "200" based upon the schema <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1813,7 +1813,7 @@ HTTP status code "200" based upon the schema <a href="https://raw.githubusercont
 <p>That schema supports both JSON and XML responses:</p>
 </div>
 <div class="listingblock">
-<div class="title"><a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/content.yaml">Schema for the metadata about feature collections</a></div>
+<div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml">Schema for the metadata about feature collections</a></div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
 required:
@@ -1826,7 +1826,7 @@ properties:
   collections:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/collectionInfo.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml
     xml:
       namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
       prefix: wfs</code></pre>
@@ -2019,7 +2019,7 @@ Check, if we can/should make use of the new <a href="https://github.com/OAI/Open
 </tbody>
 </table>
 <div class="listingblock">
-<div class="title"><a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/collectionInfo.yaml">Schema for the metadata about a feature collection</a></div>
+<div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml">Schema for the metadata about a feature collection</a></div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
 required:
@@ -2038,9 +2038,9 @@ properties:
   links:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/link.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
   extent:
-    $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/bbox.yaml
+    $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/bbox.yaml
   crs:
     description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
     type: array
@@ -2196,7 +2196,7 @@ response. The first element has an index of 0.</p>
 </table>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML is available at
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/startIndex.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/startIndex.yaml</a>.</p>
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/startIndex.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/startIndex.yaml</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2262,7 +2262,7 @@ SHALL not be counted.</p>
 </table>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML is available at
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/count.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/count.yaml</a>.</p>
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2342,7 +2342,7 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 </table>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML is available at
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/bbox.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/bbox.yaml</a>.</p>
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2421,7 +2421,7 @@ instances.</p>
 </table>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML is available at
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/resultType.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/resultType.yaml</a>.</p>
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/resultType.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/resultType.yaml</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2778,8 +2778,8 @@ paths:
       tags:
         - Features
       parameters:
-        - $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/id.yaml
-        - $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/parameters/f.yaml
+        - $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/id.yaml
+        - $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml
       responses:
         &#39;200&#39;:
           description: A building.
@@ -2799,7 +2799,7 @@ paths:
               schema:
                 type: string
         default:
-          $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/responses/exception.yaml
+          $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/responses/exception.yaml
 ...
 components:
   schemas:
@@ -2819,7 +2819,7 @@ components:
             - type: string
             - type: integer
         geometry:
-          $ref: https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/geometryGeoJSON.yaml
+          $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/geometryGeoJSON.yaml
         properties:
           type: object
           nullable: true
@@ -3129,8 +3129,8 @@ SHALL include entries for the following media types:</p>
 </table>
 <div class="paragraph">
 <p>Templates for the definition of the schemas for the GeoJSON responses are available at
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureCollectionGeoJSON.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureCollectionGeoJSON.yaml</a> and
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureGeoJSON.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureGeoJSON.yaml</a>.
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureCollectionGeoJSON.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureCollectionGeoJSON.yaml</a> and
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureGeoJSON.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureGeoJSON.yaml</a>.
 These are generic schemas that do not include any application schema information about
 specific feature types or their properties.</p>
 </div>
@@ -3249,8 +3249,8 @@ The WFS 3.0 Core FeatureCollection Object has to be an XML schema element define
 </div>
 <div class="paragraph">
 <p>Templates for the definition of the schemas for the GML responses are available at
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureCollectionGML.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureCollectionGML.yaml</a> and
-<a href="https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureGML.yaml" class="bare">https://raw.githubusercontent.com/cportele/wfs-openapi/master/core/schemas/featureGML.yaml</a>.
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureCollectionGML.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureCollectionGML.yaml</a> and
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureGML.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureGML.yaml</a>.
 These are generic schemas that do not include any application schema information about
 specific feature types or their properties.</p>
 </div>
