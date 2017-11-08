@@ -77,4 +77,4 @@ bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkeh
 [https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?  
 f=json&  
 bahnhofskategorie=1010&  
-bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bbox=6.70%2C51.18%2C6.87%2C51.27)
+bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
