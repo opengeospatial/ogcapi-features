@@ -8,6 +8,7 @@ draft of part 1.
 
 Implementations:
 * [interactive instruments](#interactive-instruments)
+* ...
 
 ## interactive instruments
 
@@ -34,5 +35,3 @@ them on Swagger Hub, too:
 * https://app.swaggerhub.com/apis/cportele/topo-nrw/0.0.1
 
 The implementations are proxy services that sit on top of WFS 2.0 instances.
-
-NOTE: sddd
