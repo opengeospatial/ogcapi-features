@@ -35,3 +35,46 @@ them on Swagger Hub, too:
 * https://app.swaggerhub.com/apis/cportele/topo-nrw/0.0.1
 
 The implementations are proxy services that sit on top of WFS 2.0 instances.
+
+Here are some example requests for features using GeoJSON output (for HTML output simply change `f=json` to `f=html`):
+
+* Municipalities close to Bonn (attribute and spatial filter):  
+[https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?  
+f=json&  
+art=Gemeinde&  
+bbox=7.0,50.6,7.2,50.8&  
+count=20](https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?f=json&art=Gemeinde&bbox=7.0%2C50.6%2C7.2%2C50.8&count=20)  
+
+* Same filter, just to determine the number of selected municipalities (13):  
+[https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?  
+f=json&  
+art=Gemeinde&  
+bbox=7.0,50.6,7.2,50.8&  
+resultType=hits](https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?f=json&art=Gemeinde&bbox=7.0%2C50.6%2C7.2%2C50.8&resultType=hits)  
+
+* All municipalities that start with "Dü":  
+[https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?  
+f=json&  
+art=Gemeinde&  
+name=Dü\*](https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?f=json&art=Gemeinde&name=Dü*)  
+
+* Cadastral parcels at Schadowplatz in Düsseldorf:  
+[https://www.ldproxy.nrw.de/kataster/Flurstueck?  
+f=json&  
+lagebeztxt=Schadowplatz\*&  
+bbox=6.7,51.2,6.9,51.4](https://www.ldproxy.nrw.de/kataster/Flurstueck?f=json&lagebeztxt=Schadowplatz*&bbox=6.7%2C51.2%2C6.9%2C51.4)
+
+* Cadastral Parcel for Schadowplatz 14 in Düsseldorf:  
+[https://www.ldproxy.nrw.de/kataster/Flurstueck/DENW20AL0000qTfzFL?  
+f=json](https://www.ldproxy.nrw.de/kataster/Flurstueck/DENW20AL0000qTfzFL?f=json)
+
+* Railway stations, bus/tram stops, etc. near Düsseldorf:  
+[https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?  
+f=json&  
+bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bbox=6.70%2C51.18%2C6.87%2C51.27)
+
+* Railway stations near Düsseldorf:  
+[https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?  
+f=json&  
+bahnhofskategorie=1010&  
+bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bbox=6.70%2C51.18%2C6.87%2C51.27)
