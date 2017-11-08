@@ -20,6 +20,10 @@ To express relationships between resources, <<rfc5988,RFC 5988 (Web Linking)>> a
 
 For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/6[ISSUE 6] +
+Is this enough or should it be a recommendation to use HTTPS? +
+Is additional discussion needed?
+
 === OpenAPI definitions
 
 ==== General remarks
@@ -27,6 +31,10 @@ For simplicity, this document in general only refers to the HTTP protocol. This 
 NOTE: TODO +
 Add general considerations. +
 Clarify that additional operations, parameters, etc. may be added, either to implement additional conformance classes or for vendor-specific extensions.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/2[ISSUE 2] +
+Is the relationship between OpenAPI documents and normative statements
+sufficiently clear in this document? 
 
 ==== OpenAPI fragments
 

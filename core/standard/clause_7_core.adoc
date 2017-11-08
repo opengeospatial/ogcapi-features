@@ -59,11 +59,11 @@ include::requirements/requirement_oas-definition.adoc[]
 ----
 =================
 
-NOTE: TBD +
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/7[ISSUE 7] +
 It seems to be rather uncommon to include an operation in
-an OpenAPI definition that returns a OpenAPI document. Maybe we should simply
-require that the document is available at /api, drop the example and exclude
-the /api operation from all other examples, too?
+an OpenAPI definition that returns an OpenAPI document. +
+Proposal: Simply require that the OpenAPI definition is available at /api,
+but drop the example and exclude the /api operation from all other examples, too.
 
 include::requirements/requirement_oas-impl.adoc[]
 
@@ -195,6 +195,12 @@ The OpenAPI specification currently supports the following link:https://github.c
 * OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
 * OpenID Connect Discovery.
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/10[ISSUE 10] +
+If an implementation limits the access to a subset of the operations for some
+users (or if the server implements even more fine-grained access), it may no
+longer be possible for such a user to de-reference all links, including
+relationships between features. Does this require a discussion? Or more?
+
 === Web caching
 
 Entity tags are a mechanism for web cache validation and for supporting conditional
@@ -211,6 +217,68 @@ specified by HTTP/1.1.
 
 NOTE: TODO +
 Add an example OpenAPI operation (headers, response codes).
+
+=== Support for cross-origin requests
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/5[ISSUE 5] +
+Servers should support a mechanism to overcome cross-domain restrictions
+(CORS and/or JSONP). +
+Are recommendations sufficient or should those be requirements?
+
+////
+==== Support for JSONP
+
+JSONP  ("JSON with padding") is a convenient and popular method to overcome
+cross-domain restrictions. Cross-domain resources are loaded through script
+injection.
+
+[[rec_jsonp]]
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/jsonp +
+
+If a request includes the parameter `f` with the value `json` and a
+parameter `callback`, the response SHOULD be `{callbackValue}({originalJSONResponse});``
+where `{callbackValue}` is the value of the parameter `callback` in the request
+and `{originalJSONResponse}` the result of the request, if the callback parameter
+had been omitted. The HTTP status code of the response SHOULD be '200'.
+|===
+
+I.e., the client may make the request with a special callback parameter and the
+server responds with a JSON padded response that looks like:
+
+```
+ {callbackValue}({original_json_response});
+```
+
+NOTE:	One of the inconveniences of using JSONP is that the server always needs
+to respond with an HTTP status of 200. Otherwise the browser’s network stack
+rejects the response from the server, and the client callbacks are never
+even called. To overcome this, the errors  should be wrapped inside the
+response for requests with the `callback` parameter.
+
+==== Support for CORS
+
+Cross-origin resource sharing (CORS) is a draft W3C specification that defines
+ways for a web server to allow its resources to be accessed by a web page from
+a different domain.
+
+[[rec_cors]]
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/cors +
+
+The service SHOULD meet all requirements of the CORS specification related
+to resource authors.
+|===
+
+For example, a conforming implementation should support the configuration of
+origins that are allowed to access resources of a GeoServices REST API service.
+If a client submits a request using a "Origin" header that is in the list of
+origin, the response will include a "Access-Control-Allow-Origin" header
+with the value of the Origin header. See the CORS specification for details.
+
+////
 
 === Encodings / Parameter f
 
@@ -362,11 +430,15 @@ This applies to resources that describe to the whole dataset. For resources that
 Examples for descriptions are: XML Schema, Schematron, JSON Schema, RDF Schema, OWL, SHACL, a feature catalogue, etc.
 |===
 
-NOTE: TBD +
-Maybe we need something more specific than just `describedBy` so that the different cases can be distinguished by a client?
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/8[ISSUE 8] +
+Are link headers a problem as the server can only start to write the response
+once all links are known? +
+If we keep the link headers, do we need something more specific than just
+`describedBy` so that the different cases can be distinguished by a client?
 
 NOTE: TODO +
-Add recommendation about a link to the distribution resource in the dataset metadata (example in DCAT). Which link relation type?
+Add recommendation about a link to the distribution resource in the dataset
+metadata (example in DCAT). Which link relation type?
 
 .Link headers
 =================
@@ -398,8 +470,9 @@ For each feature collection in this distribution of the dataset, the `links` pro
 All links SHALL include the `rel` and `type` properties.
 |===
 
-NOTE: TBD +
-This would duplicate the links in the HTTP header, but maybe this is ok as these are the most important links?
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/8[ISSUE 8] +
+If we keep the links in the headers, this would duplicate the links in the HTTP
+header, but maybe this is ok as these are the most important links?
 
 NOTE: TODO +
 Check, if we can/should make use of the new link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject[Link Object] in OpenAPI 3.0.
@@ -763,6 +836,10 @@ A "200"-response SHALL include the following links as `Link` headers in the HTTP
 All links SHALL include the `rel` and `type` link parameters.
 |===
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/8[ISSUE 8] +
+Are link headers a problem as the server can only start to write the response
+when it knows whether to include a 'next' relation or not?
+
 .Link headers
 =================
 If the request is to return features from the 51st feature, using the default value of the `count` parameter "10", the Link headers in the response could be:
@@ -825,14 +902,13 @@ of items in the "features" array. A server may omit this information in a respon
 if the information about the number of features is not known or difficult to compute.
 If the value of the resultType parameter is set to "hits",
 the value shall be set to "0", if provided.
-
-TBD +
-Maybe it would be better to just use HTTP headers for this? This would have
-the great advantage that it will be possible to just reuse existing containers.
-For example, to conform to GML-SF0, the feature collection cannot have such
-attributes. The only disadvantage that I see is that if just the payload is saved
-the information is "lost", but how much of a problem is that really?
 =====================================================================
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/8[ISSUE 8] +
+Define these as headers or include them in the payload? `timeStamp`, for example, does
+not seem to be needed given the 'Date' HTTP header. For `numberMatched` and
+`numberReturned` headers do not seem to be a good idea as, for example,
+`numberReturned` can only be included at the end, if streaming is used.
 
 [width="90%",cols="2,6a"]
 |===
