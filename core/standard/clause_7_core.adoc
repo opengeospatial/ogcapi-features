@@ -282,6 +282,11 @@ with the value of the Origin header. See the CORS specification for details.
 
 === Encodings / Parameter f
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/12[ISSUE 12] +
+Proposal to drop f and define separate operations using file extensions
+instead, i.e. `/buildings`, `/buildings.json`, `/buildings.xml` and `/buildings.html`. This is clearer and avoids a conflict with content
+negotiation.
+
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |/req/core/param-f +
