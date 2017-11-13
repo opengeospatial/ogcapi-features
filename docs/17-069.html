@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2017-10-11)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2017-11-08)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -647,28 +647,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#exceptions">7.3. Exceptions</a></li>
 <li><a href="#security">7.4. Security</a></li>
 <li><a href="#_web_caching">7.5. Web caching</a></li>
-<li><a href="#_encodings_parameter_f">7.6. Encodings / Parameter f</a></li>
-<li><a href="#_feature_collection_metadata">7.7. Feature collection metadata</a>
+<li><a href="#_support_for_cross_origin_requests">7.6. Support for cross-origin requests</a></li>
+<li><a href="#_encodings_parameter_f">7.7. Encodings / Parameter f</a></li>
+<li><a href="#_feature_collection_metadata">7.8. Feature collection metadata</a>
 <ul class="sectlevel3">
-<li><a href="#_operation">7.7.1. Operation</a></li>
-<li><a href="#_response">7.7.2. Response</a></li>
+<li><a href="#_operation">7.8.1. Operation</a></li>
+<li><a href="#_response">7.8.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_collections">7.8. Feature collections</a>
+<li><a href="#_feature_collections">7.9. Feature collections</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_2">7.8.1. Operation</a></li>
-<li><a href="#_parameter_startindex">7.8.2. Parameter startIndex</a></li>
-<li><a href="#_parameter_count">7.8.3. Parameter count</a></li>
-<li><a href="#_parameter_bbox">7.8.4. Parameter bbox</a></li>
-<li><a href="#_parameter_resulttype">7.8.5. Parameter resultType</a></li>
-<li><a href="#_parameters_for_filtering_on_feature_properties">7.8.6. Parameters for filtering on feature properties</a></li>
-<li><a href="#_response_2">7.8.7. Response</a></li>
+<li><a href="#_operation_2">7.9.1. Operation</a></li>
+<li><a href="#_parameter_startindex">7.9.2. Parameter startIndex</a></li>
+<li><a href="#_parameter_count">7.9.3. Parameter count</a></li>
+<li><a href="#_parameter_bbox">7.9.4. Parameter bbox</a></li>
+<li><a href="#_parameter_resulttype">7.9.5. Parameter resultType</a></li>
+<li><a href="#_parameters_for_filtering_on_feature_properties">7.9.6. Parameters for filtering on feature properties</a></li>
+<li><a href="#_response_2">7.9.7. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_2">7.9. Feature</a>
+<li><a href="#_feature_2">7.10. Feature</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_3">7.9.1. Operation</a></li>
-<li><a href="#_response_3">7.9.2. Response</a></li>
+<li><a href="#_operation_3">7.10.1. Operation</a></li>
+<li><a href="#_response_3">7.10.2. Response</a></li>
 </ul>
 </li>
 </ul>
@@ -907,6 +908,20 @@ methodology for testing, and the criteria to be achieved to claim conformance
 are specified in the OGC Compliance Testing Policies and Procedures and the
 OGC Compliance Testing web site.</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/9">ISSUE 9</a><br>
+Include a list of conformance classes met by the server somewhere? In the
+OpenAPI document or in the root resource?
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -980,6 +995,21 @@ IETF RFC 7946, The GeoJSON Format, <a href="https://tools.ietf.org/rfc/rfc7946.t
 <div class="paragraph">
 <p>a set of <strong>features</strong> from a <strong>dataset</strong></p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/4">ISSUE 4</a><br>
+We need to make the document understandable to the developers that have no
+geo/OGC background, too. What do we need to explain in this section and what
+terms should we use in general?
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1034,6 +1064,20 @@ Add explanation about UML diagrams - and add the diagrams!
 <div class="paragraph">
 <p>For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/6">ISSUE 6</a><br>
+Is this enough or should it be a recommendation to use HTTPS?<br>
+Is additional discussion needed?
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_openapi_definitions"><a class="anchor" href="#_openapi_definitions"></a>5.5. OpenAPI definitions</h3>
@@ -1049,6 +1093,20 @@ Add explanation about UML diagrams - and add the diagrams!
 TODO<br>
 Add general considerations.<br>
 Clarify that additional operations, parameters, etc. may be added, either to implement additional conformance classes or for vendor-specific extensions.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/2">ISSUE 2</a><br>
+Is the relationship between OpenAPI documents and normative statements
+sufficiently clear in this document?
 </td>
 </tr>
 </table>
@@ -1304,18 +1362,18 @@ version 3.0.0.</p>
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<div class="title">Caution</div>
 </td>
 <td class="content">
-TBD<br>
+<a href="https://github.com/opengeospatial/WFS_FES/issues/7">ISSUE 7</a><br>
 It seems to be rather uncommon to include an operation in
-an OpenAPI definition that returns a OpenAPI document. Maybe we should simply
-require that the document is available at /api, drop the example and exclude
-the /api operation from all other examples, too?
+an OpenAPI definition that returns an OpenAPI document.<br>
+Proposal: Simply require that the OpenAPI definition is available at /api,
+but drop the example and exclude the /api operation from all other examples, too.
 </td>
 </tr>
 </table>
@@ -1585,6 +1643,22 @@ SHALL be documented in the OpenAPI definition.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/10">ISSUE 10</a><br>
+If an implementation limits the access to a subset of the operations for some
+users (or if the server implements even more fine-grained access), it may no
+longer be possible for such a user to de-reference all links, including
+relationships between features. Does this require a discussion? Or more?
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.5. Web caching</h3>
@@ -1625,7 +1699,40 @@ Add an example OpenAPI operation (headers, response codes).
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encodings_parameter_f"><a class="anchor" href="#_encodings_parameter_f"></a>7.6. Encodings / Parameter f</h3>
+<h3 id="_support_for_cross_origin_requests"><a class="anchor" href="#_support_for_cross_origin_requests"></a>7.6. Support for cross-origin requests</h3>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/5">ISSUE 5</a><br>
+Servers should support a mechanism to overcome cross-domain restrictions
+(CORS and/or JSONP).<br>
+Are recommendations sufficient or should those be requirements?
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_encodings_parameter_f"><a class="anchor" href="#_encodings_parameter_f"></a>7.7. Encodings / Parameter f</h3>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/12">ISSUE 12</a><br>
+Proposal to drop f and define separate operations using file extensions
+instead, i.e. <code>/buildings</code>, <code>/buildings.json</code>, <code>/buildings.xml</code> and <code>/buildings.html</code>. This is clearer and avoids a conflict with content
+negotiation.
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1765,9 +1872,9 @@ and index a dataset, implementations SHOULD consider to support an HTML encoding
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.7. Feature collection metadata</h3>
+<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.8. Feature collection metadata</h3>
 <div class="sect3">
-<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.7.1. Operation</h4>
+<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.8.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1790,7 +1897,7 @@ with the <code>operationId</code> "describeCollections".</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response"><a class="anchor" href="#_response"></a>7.7.2. Response</h4>
+<h4 id="_response"><a class="anchor" href="#_response"></a>7.8.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1894,15 +2001,18 @@ properties:
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<div class="title">Caution</div>
 </td>
 <td class="content">
-TBD<br>
-Maybe we need something more specific than just <code>describedBy</code> so that the different cases can be distinguished by a client?
+<a href="https://github.com/opengeospatial/WFS_FES/issues/8">ISSUE 8</a><br>
+Are link headers a problem as the server can only start to write the response
+once all links are known?<br>
+If we keep the link headers, do we need something more specific than just
+<code>describedBy</code> so that the different cases can be distinguished by a client?
 </td>
 </tr>
 </table>
@@ -1915,7 +2025,8 @@ Maybe we need something more specific than just <code>describedBy</code> so that
 </td>
 <td class="content">
 TODO<br>
-Add recommendation about a link to the distribution resource in the dataset metadata (example in DCAT). Which link relation type?
+Add recommendation about a link to the distribution resource in the dataset
+metadata (example in DCAT). Which link relation type?
 </td>
 </tr>
 </table>
@@ -1975,15 +2086,16 @@ Link: &lt;http://catalog.example.org/datasets/buildings#wfs&gt;; rel="???"; type
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<div class="title">Caution</div>
 </td>
 <td class="content">
-TBD<br>
-This would duplicate the links in the HTTP header, but maybe this is ok as these are the most important links?
+<a href="https://github.com/opengeospatial/WFS_FES/issues/8">ISSUE 8</a><br>
+If we keep the links in the headers, this would duplicate the links in the HTTP
+header, but maybe this is ok as these are the most important links?
 </td>
 </tr>
 </table>
@@ -2114,9 +2226,9 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.8. Feature collections</h3>
+<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.9. Feature collections</h3>
 <div class="sect3">
-<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.8.1. Operation</h4>
+<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.9.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2142,7 +2254,7 @@ the service SHALL provide at the path "/{collectionId}" an operation with a <cod
 </table>
 </div>
 <div class="sect3">
-<h4 id="_parameter_startindex"><a class="anchor" href="#_parameter_startindex"></a>7.8.2. Parameter startIndex</h4>
+<h4 id="_parameter_startindex"><a class="anchor" href="#_parameter_startindex"></a>7.9.2. Parameter startIndex</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2200,7 +2312,7 @@ response. The first element has an index of 0.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.8.3. Parameter count</h4>
+<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.9.3. Parameter count</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2266,7 +2378,7 @@ SHALL not be counted.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.8.4. Parameter bbox</h4>
+<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.9.4. Parameter bbox</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2346,7 +2458,7 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_resulttype"><a class="anchor" href="#_parameter_resulttype"></a>7.8.5. Parameter resultType</h4>
+<h4 id="_parameter_resulttype"><a class="anchor" href="#_parameter_resulttype"></a>7.9.5. Parameter resultType</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2423,9 +2535,22 @@ instances.</p>
 <p>A template for the definition of the parameter in YAML is available at
 <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/resultType.yaml" class="bare">https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/resultType.yaml</a>.</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/13">ISSUE 13</a><br>
+Support resultType that returns only the ids of the selected features?
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.8.6. Parameters for filtering on feature properties</h4>
+<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.9.6. Parameters for filtering on feature properties</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2487,7 +2612,7 @@ example: &#39;function=public+use&#39;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.8.7. Response</h4>
+<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.9.7. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2542,6 +2667,20 @@ HTTP status code "200".</p>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/8">ISSUE 8</a><br>
+Are link headers a problem as the server can only start to write the response
+when it knows whether to include a 'next' relation or not?
+</td>
+</tr>
+</table>
+</div>
 <div class="exampleblock">
 <div class="title">Example 8. Link headers</div>
 <div class="content">
@@ -2600,14 +2739,22 @@ the value shall be set to "0", if provided.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>TBD<br>
-Maybe it would be better to just use HTTP headers for this? This would have
-the great advantage that it will be possible to just reuse existing containers.
-For example, to conform to GML-SF0, the feature collection cannot have such
-attributes. The only disadvantage that I see is that if just the payload is saved
-the information is "lost", but how much of a problem is that really?</p>
+</td>
+</tr>
+</table>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/8">ISSUE 8</a><br>
+Define these as headers or include them in the payload? <code>timeStamp</code>, for example, does
+not seem to be needed given the 'Date' HTTP header. For <code>numberMatched</code> and
+<code>numberReturned</code> headers do not seem to be a good idea as, for example,
+<code>numberReturned</code> can only be included at the end, if streaming is used.
 </td>
 </tr>
 </table>
@@ -2637,9 +2784,9 @@ collection (see recommendation <code>/rec/core/fc-filters</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.9. Feature</h3>
+<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.10. Feature</h3>
 <div class="sect3">
-<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.9.1. Operation</h4>
+<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.10.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2680,7 +2827,7 @@ Add more about the feature identifiers.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.9.2. Response</h4>
+<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.10.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -3435,6 +3582,21 @@ TODO
 <div class="sect1">
 <h2 id="changes"><a class="anchor" href="#changes"></a>Annex B: Changes to the previous versions of WFS (Informative)</h2>
 <div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/3">ISSUE 3</a><br>
+Annex B is meant as a discussion / explanation to the community that uses
+WFS today. Maybe we should remove this from the document and make it a
+separate document (e.g., part of the release notes)?
+</td>
+</tr>
+</table>
+</div>
 <div class="sect2">
 <h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>B.1. Overview</h3>
 <div class="paragraph">
@@ -4358,7 +4520,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-12 06:09:54 CEST
+Last updated 2017-11-09 12:54:03 CET
 </div>
 </div>
 </body>
