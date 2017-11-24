@@ -9,6 +9,9 @@ Add intro text for the requirement class.
 
 include::requirements/requirements_class_core.adoc[]
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/15[ISSUE 15] +
+Considering streaming output
+
 === OpenAPI definition
 
 Every WFS is defined by an link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument[OpenAPI Document].
@@ -110,7 +113,7 @@ link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#
 |*Requirement {counter:req-id}* |/req/core/exceptions-schema +
 
 These link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Objects]
-SHALL be based upon the schema https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml.
+SHALL be based upon the schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml[exception.yaml].
 |===
 
 The exception schema supports both JSON and XML encodings:
@@ -367,7 +370,7 @@ and index a dataset, implementations SHOULD consider to support an HTML encoding
 |===
 
 A template for the definition of the parameter `f` in YAML is available at
-https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml.
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml[f.yaml].
 
 === Feature collection metadata
 
@@ -382,7 +385,7 @@ include::requirements/requirement_fc-md-op.adoc[]
 |*Requirement {counter:req-id}* |/req/core/fc-md-success +
 
 A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200" based upon the schema https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml.
+HTTP status code "200" based upon the schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml[content.yaml].
 |===
 
 That schema supports both JSON and XML responses:
@@ -592,6 +595,9 @@ link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#
 `collectionId` is the property of the same name in the feature collection metadata.
 |===
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/17[ISSUE 17] +
+Precision level filter responsibility?
+
 ==== Parameter startIndex
 
 [width="90%",cols="2,6a"]
@@ -626,7 +632,7 @@ response. The first element has an index of 0.
 |===
 
 A template for the definition of the parameter in YAML is available at
-https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/startIndex.yaml.
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/startIndex.yaml[startIndex.yaml].
 
 ==== Parameter count
 
@@ -668,7 +674,7 @@ SHALL not be counted.
 |===
 
 A template for the definition of the parameter in YAML is available at
-https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml.
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml[count.yaml].
 
 ==== Parameter bbox
 
@@ -714,7 +720,7 @@ The bounding box is provided as four numbers:
 |===
 
 A template for the definition of the parameter in YAML is available at
-https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml.
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
 
 ==== Parameter resultType
 
@@ -767,10 +773,13 @@ If the parameter is not provided, `results` is used.
 |===
 
 A template for the definition of the parameter in YAML is available at
-https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/resultType.yaml.
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/resultType.yaml[resultType.yaml].
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/13[ISSUE 13] +
 Support resultType that returns only the ids of the selected features?
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/16[ISSUE 16] +
+Ability to set no null/empty geometry in returned response
 
 ==== Parameters for filtering on feature properties
 
@@ -879,7 +888,7 @@ Link: <http://data.example.org/buildings?f=json&startIndex=100&count=50>; rel="n
 |*Requirement {counter:req-id}* |/req/core/fc-timeStamp +
 
 A "200"-response SHALL include a property `timeStamp` based upon the schema
-https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/timeStamp.yaml.
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/timeStamp.yaml[timeStamp.yaml].
 |===
 
 The exception schema supports both JSON and XML encodings:
