@@ -8,7 +8,8 @@ draft of part 1.
 
 Implementations:
 * [interactive instruments](#interactive-instruments)
-* ...
+* [CubeWerx Inc.](#CubeWerx-Inc.)
+* 
 
 ## interactive instruments
 
@@ -78,3 +79,37 @@ bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkeh
 f=json&  
 bahnhofskategorie=1010&  
 bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
+
+## CubeWerx Inc.
+
+The following server implements a good portion of the current draft part 1
+standard.  Just to illustrate that GML may still be used, and to contrast
+the interactive instruments examples, these queries will return GML rather
+than JSON (although GeoJSON can be returned by requesting the appropriate
+MIME type).
+
+Like the interactive instruments server, this 3.0 alpha implementation is a
+facade sitting on top of our previous WFS 2.X implementation.
+
+HTML landing page:
+* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation
+
+Here are some example requests for features using GML v3.2 output.
+
+* Built up areas around Washington DC:
+[http://www.cubewerx-pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?
+count=20&
+f=application/gml%2Bxml;%20version=3.2&
+bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.cubewerx-pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+
+* Same filter, just to determine the number of built up areas:  
+[http://www.cubewerx-pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?
+resultType=hits&
+f=application/gml%2Bxml;%20version=3.2&
+bbox=36.8207,-79.5854,39.7519,-74.4218]
+(http://www.cubewerx-pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+
+* All municipalities that start with "Wash":  
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?&
+f=application/gml%2Bxml;%20version=3.2&
+nam=Wash*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?&f=application/gml%2Bxml;%20version=3.2&nam=Wash*)
