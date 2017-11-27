@@ -80,7 +80,7 @@ f=json&
 bahnhofskategorie=1010&  
 bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
 
-## CubeWerx Inc.
+## CubeWerx-Inc.
 
 The following server implements a good portion of the current draft part 1
 standard.  Just to illustrate that GML may still be used, and to contrast
@@ -106,8 +106,7 @@ bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.cubewerx-pvretano.com/cubewer
 [http://www.cubewerx-pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?
 resultType=hits&
 f=application/gml%2Bxml;%20version=3.2&
-bbox=36.8207,-79.5854,39.7519,-74.4218]
-(http://www.cubewerx-pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.cubewerx-pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
 
 * All municipalities that start with "Wash":  
 [http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?&
