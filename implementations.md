@@ -37,7 +37,8 @@ them on Swagger Hub, too:
 
 The implementations are proxy services that sit on top of WFS 2.0 instances.
 
-Here are some example requests for features using GeoJSON output (for HTML output simply change `f=json` to `f=html`):
+Here are some example requests for features using GeoJSON output (for HTML output 
+simply change `f=json` to `f=html`, for GML to `f=xml`):
 
 * Municipalities close to Bonn (attribute and spatial filter):  
 [https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?  
@@ -99,19 +100,18 @@ NOTE: The landing page still uses the classic OGC request forms and has not yet 
 Here are some example requests for features using GML v3.2 output.
 
 * Built up areas around Washington DC:
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?
-count=20&
-f=application/gml%2Bxml;%20version=3.2&
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?  
+count=20&  
+f=application/gml%2Bxml;%20version=3.2&  
 bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
 
 * Same filter, just to determine the number of built up areas:  
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?
-resultType=hits&
-f=application/gml%2Bxml;%20version=3.2&
-bbox=36.8207,-79.5854,39.7519,-74.4218]
-(http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?  
+resultType=hits&  
+f=application/gml%2Bxml;%20version=3.2&  
+bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
 
 * All municipalities that start with "Wash":  
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?
-f=application/gml%2Bxml;%20version=3.2&
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?  
+f=application/gml%2Bxml;%20version=3.2&  
 nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation/builtupa_1m?&f=application/gml%2Bxml;%20version=3.2&nam=Wash*)
