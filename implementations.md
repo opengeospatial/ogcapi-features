@@ -8,7 +8,7 @@ draft of part 1.
 
 Implementations:
 * [interactive instruments](#interactive-instruments)
-* [CubeWerx Inc.](#CubeWerx-Inc.)
+* [CubeWerx Inc.](#cubeWerx)
 * 
 
 ## interactive instruments
@@ -92,7 +92,9 @@ Like the interactive instruments server, this 3.0 alpha implementation is a
 facade sitting on top of our previous WFS 2.X implementation.
 
 HTML landing page:
-* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation
+* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation 
+
+NOTE: The landing page still uses the classic OGC request forms and has not yet been updated to 3.0.
 
 Here are some example requests for features using GML v3.2 output.
 
