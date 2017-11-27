@@ -8,7 +8,7 @@ draft of part 1.
 
 Implementations:
 * [interactive instruments](#interactive-instruments)
-* [CubeWerx Inc.](#CubeWerx-Inc.)
+* [CubeWerx Inc.](#cubeWerx)
 * 
 
 ## interactive instruments
@@ -80,7 +80,7 @@ f=json&
 bahnhofskategorie=1010&  
 bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
 
-## CubeWerx-Inc.
+## CubeWerx Inc.
 
 The following server implements a good portion of the current draft part 1
 standard.  Just to illustrate that GML may still be used, and to contrast
@@ -92,7 +92,9 @@ Like the interactive instruments server, this 3.0 alpha implementation is a
 facade sitting on top of our previous WFS 2.X implementation.
 
 HTML landing page:
-* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation
+* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation 
+
+NOTE: The landing page still uses the classic OGC request forms and has not yet been updated to 3.0.
 
 Here are some example requests for features using GML v3.2 output.
 
