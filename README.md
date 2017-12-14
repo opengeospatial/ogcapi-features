@@ -1,5 +1,7 @@
 # The next version of the OGC Web Feature Service standard
 
+[![Join the chat at https://gitter.im/opengeospatial/WFS_FES](https://badges.gitter.im/opengeospatial/WFS_FES.svg)](https://gitter.im/opengeospatial/WFS_FES?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This GitHub repository is used by the OGC WFS/FES SWG and the ISO/TC 211/PT 19142+43 to develop the next major revision of the Web Feature Service and Filter Encoding standards.
 
 WARNING: This repository contains early drafts.
