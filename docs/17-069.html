@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2017-12-13)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2018-01-08)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -639,7 +639,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#_overview">6. Overview</a></li>
+<li><a href="#overview">6. Overview</a></li>
 <li><a href="#_requirement_class_core">7. Requirement Class "Core"</a>
 <ul class="sectlevel2">
 <li><a href="#_api_definition_2">7.1. API definition</a></li>
@@ -675,7 +675,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_requirements_classes_for_encodings">8. Requirements classes for encodings</a>
 <ul class="sectlevel2">
-<li><a href="#_overview_2">8.1. Overview</a></li>
+<li><a href="#_overview">8.1. Overview</a></li>
 <li><a href="#_requirement_class_html">8.2. Requirement Class "HTML"</a></li>
 <li><a href="#_requirement_class_geojson">8.3. Requirement Class "GeoJSON"</a></li>
 <li><a href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_0">8.4. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"</a></li>
@@ -697,7 +697,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a></li>
 <li><a href="#changes">Annex B: Changes to the previous versions of WFS (Informative)</a>
 <ul class="sectlevel2">
-<li><a href="#_overview_3">B.1. Overview</a></li>
+<li><a href="#_overview_2">B.1. Overview</a></li>
 <li><a href="#_wfs_as_a_restful_service">B.2. WFS as a RESTful service</a></li>
 <li><a href="#_mapping_between_ogc_capabilities_and_openapi">B.3. Mapping between OGC Capabilities and OpenAPI</a></li>
 <li><a href="#_mapping_between_wfs_2_0_operations_and_wfs_3_0">B.4. Mapping between WFS 2.0 operations and WFS 3.0</a></li>
@@ -900,6 +900,12 @@ for spatial data on the web:</p>
 <p>None of these encodings is mandatory and an implementation of the "Core"
 requirements class may also decide to use none of them, but to use another encoding
 instead.</p>
+</div>
+<div class="paragraph">
+<p>That said, the <a href="#rc_core">Core</a> requirements class includes recommendations to support
+<a href="#rec_html">HTML</a> and <a href="#rec_geojson">GeoJSON</a> as encodings, where practical.
+<a href="#overview">Clause 6 (Overview)</a> includes a discussion about recommended
+encodings.</p>
 </div>
 <div class="paragraph">
 <p>The "Core" does not mandate any encoding or format for the formal definition of
@@ -1266,7 +1272,7 @@ but eventually these will be available using the base URL
 </div>
 </div>
 <div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>6. Overview</h2>
+<h2 id="overview"><a class="anchor" href="#overview"></a>6. Overview</h2>
 <div class="sectionbody">
 <div class="admonitionblock note">
 <table>
@@ -1293,6 +1299,55 @@ rules for commonly used encodings for spatial data on the web are provided
 <p>None of these encodings is mandatory and an implementation of the "Core"
 requirements class may also decide to use none of them, but to use another encoding
 instead.</p>
+</div>
+<div class="paragraph">
+<p><a href="#rec_html">Support for HTML is recommended</a> as HTML is the core language of the World Wide Web.
+A server that supports HTML will support browsing the data with a web browser
+and it will enable search engines to crawl and index the dataset.</p>
+</div>
+<div class="paragraph">
+<p>GeoJSON is a commonly used format that is simple to understand and well
+supported by tools and software libraries. Since most Web developers are
+comfortable with using a JSON-based format, this version of the Web Feature
+Service standard <a href="#rec_geojson">recommends to support GeoJSON for encoding feature data</a>,
+if the feature data can be represented in GeoJSON for the intended use.</p>
+</div>
+<div class="paragraph">
+<p>Some examples for cases that are out-of-scope of GeoJSON are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>solids are used a geometries (e.g. in a 3D city model),</p>
+</li>
+<li>
+<p>geometries include non-linear curve interpolations
+that cannot be simplified (e.g., use of arcs in authoritative geometries),</p>
+</li>
+<li>
+<p>geometries have to be represented in a coordinate reference system that
+is not based on WGS 84 longitude/latitude (e.g. an authoritative national
+reference system),</p>
+</li>
+<li>
+<p>features have more than one geometric property, etc.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to HTML and GeoJSON, a significant amount of feature data is
+available in XML-based formats, notably GML. GML supports more complex requirements
+than GeoJSON and does not have any of the limitations mentioned in the
+previous paragraph, but as a result GML also more complex to handle for both servers
+and clients. Conformance classes for GML are, therefore, included in this
+standard, but it is expected that these will typically be supported by servers
+where users are known to expect feature data in XML/GML.</p>
+</div>
+<div class="paragraph">
+<p>The recommendations for HTML and GeoJSON reflect the importance of HTML and
+the current popularity of JSON-based data formats. As the practices
+in the Web community evolve, the recommendations will likely be updated, too,
+in future versions of this standard to provide guidance.</p>
 </div>
 <div class="paragraph">
 <p>This part of WFS 3.0 does not provide any guidance on other encodings. The
@@ -1640,6 +1695,29 @@ and index a dataset, implementations SHOULD consider to support an HTML encoding
 </tr>
 </tbody>
 </table>
+<table id="rec_geojson" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 5</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/rec/core/geojson<br></p>
+</div>
+<div class="paragraph">
+<p>If the feature data can be represented for the intended use in GeoJSON,
+implementations SHOULD consider to support GeoJSON as an
+encoding for features and feature collections.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#overview">Clause 6 (Overview)</a> includes a discussion about the recommended
+encodings.</p>
+</div>
 <div class="paragraph">
 <p>A template for the definition of the parameter <code>f</code> in YAML according to OpenAPI 3.0 is available at
 <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml">f.yaml</a>.</p>
@@ -1654,7 +1732,7 @@ and index a dataset, implementations SHOULD consider to support an HTML encoding
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 5</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 6</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/link-header<br></p>
 </div>
@@ -1814,7 +1892,7 @@ dataset for each supported encoding (relation: <code>item</code>), and</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 6</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/fc-md-descriptions<br></p>
 </div>
@@ -2398,7 +2476,7 @@ Ability to set no null/empty geometry in returned response
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 8</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/fc-filters<br></p>
 </div>
@@ -2737,7 +2815,7 @@ Link: &lt;http://data.example.org/buildings?f=json&gt;; rel="collection"; type="
 <h2 id="_requirements_classes_for_encodings"><a class="anchor" href="#_requirements_classes_for_encodings"></a>8. Requirements classes for encodings</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>8.1. Overview</h3>
+<h3 id="_overview"><a class="anchor" href="#_overview"></a>8.1. Overview</h3>
 <div class="paragraph">
 <p>This clause specifies four pre-defined requirements classes for encodings to be
 used in a WFS. These encodings are commonly used encodings for spatial data on
@@ -2763,6 +2841,12 @@ the web:</p>
 <p>None of these encodings is mandatory and an implementation of the <a href="#rc_core">Core</a>
 requirements class may also decide to use none of them, but to use another encoding
 instead.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="#rc_core">Core</a> requirements class includes recommendations to support
+<a href="#rec_html">HTML</a> and <a href="#rec_geojson">GeoJSON</a> as encodings, where practical.
+<a href="#overview">Clause 6 (Overview)</a> includes a discussion about recommended
+encodings.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2868,7 +2952,7 @@ in the HTML <code>&lt;body/&gt;</code>, and</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 8</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 9</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/html/schema-org<br></p>
 </div>
@@ -3560,7 +3644,7 @@ SHALL be "describeCollections".</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 9</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 10</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/oas30/fc-key-properties<br></p>
 </div>
@@ -3586,7 +3670,7 @@ collection (see recommendation <code>/rec/core/fc-filters</code>).</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 10</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 11</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/oas30/f-key-properties<br></p>
 </div>
@@ -3695,7 +3779,7 @@ separate document (e.g., part of the release notes)?
 </table>
 </div>
 <div class="sect2">
-<h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>B.1. Overview</h3>
+<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>B.1. Overview</h3>
 <div class="paragraph">
 <p>The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads as it was state-of-the-art in the late 1990s and early 2000s, when WFS was originally designed.</p>
 </div>
@@ -4624,7 +4708,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-13 17:34:52 CET
+Last updated 2018-01-08 14:02:48 CET
 </div>
 </div>
 </body>

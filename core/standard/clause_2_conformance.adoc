@@ -23,6 +23,11 @@ None of these encodings is mandatory and an implementation of the "Core"
 requirements class may also decide to use none of them, but to use another encoding
 instead.
 
+That said, the <<rc_core,Core>> requirements class includes recommendations to support
+<<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings, where practical.
+<<overview,Clause 6 (Overview)>> includes a discussion about recommended
+encodings.
+
 The "Core" does not mandate any encoding or format for the formal definition of
 the API either. One option is the OpenAPI 3.0 specification and a requirements
 class has been defined for this, which depends on the "Core":
