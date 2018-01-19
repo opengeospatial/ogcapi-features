@@ -15,14 +15,14 @@ A draft for part 1 of WFS 3.0 is available. It is basically a complete draft, ex
 * [OGC Web Feature Service 3.0 - Part 1: Core, Editors' draft](https://cdn.rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html)
 * [Implementations of the draft specification / demo services](implementations.md)
 
-The draft will be reviewed during November 2017 and this revision cycle is intended to be completed in December 2017.
+The draft is currently under review.
 
 * [Open issues](https://github.com/opengeospatial/WFS_FES/issues)
 * [Proposing changes](https://github.com/opengeospatial/WFS_FES/wiki/Propose-a-change-to-a-draft-of-a-WFS-specification-document)
 
-By January 2018, the draft should be ready for wider review, implementation and feedback. A revised version based on more implementation feedback could be available late in 2018.
+By February 2018, the draft should be ready for wider review, implementation and feedback. A revised version based on more implementation feedback could be available late in 2018.
 
-Depending on the progress and community interest, work on additional parts supporting transactions, more complex queries, etc. could start in early 2018.
+Depending on the progress and community interest, work on additional parts supporting transactions, more complex queries, etc. could start in March 2018.
 
 ## More Information
 
