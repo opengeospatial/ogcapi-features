@@ -12,7 +12,7 @@ WARNING: This repository contains early drafts.
 
 A draft for part 1 of WFS 3.0 is available. It is basically a complete draft, except for editorial sections:
 
-* [OGC Web Feature Service 3.0 - Part 1: Core, Editors' draft](https://cdn.rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html)
+* [OGC Web Feature Service 3.0 - Part 1: Core, Editors' draft](https://rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html)
 * [Implementations of the draft specification / demo services](implementations.md)
 
 The draft is currently under review.
