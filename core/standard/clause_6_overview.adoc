@@ -3,5 +3,27 @@
 NOTE: TODO +
 This includes also a discussion about the approach regarding OpenAPI and hypermedia controls. +
 Changes to previous versions of WFS are discussed in <<changes,Annex B>>. +
-Use of a simple example throughout the document - a WFS with a single feature collection (buildings) and three encodings GeoJSON, GML-SF0, HTML. +
-Put the complete OpenAPI definition of the example in an informative annex.
+Use of a simple example throughout the document - a WFS with a single feature collection (buildings) and three encodings GeoJSON, GML-SF0, HTML.
+
+This standard does not mandate any encoding or format for representing features or
+feature collections. In addition to HTML as the standard encoding for Web content,
+rules for commonly used encodings for spatial data on the web are provided
+(GeoJSON, GML).
+
+None of these encodings is mandatory and an implementation of the "Core"
+requirements class may also decide to use none of them, but to use another encoding
+instead.
+
+This part of WFS 3.0 does not provide any guidance on other encodings. The
+supported encodings, or more precisely the media types of the supported encodings,
+can be determined from the API definition. The desired encoding is selected
+using HTTP content negotiation.
+
+For example, if the server supports
+link:https://tools.ietf.org/html/rfc8142[GeoJSON Text Sequences],
+an encoding that is based on JSON text sequences and GeoJSON to support streaming
+by making the the data incrementally parseable, the media type `application/geo+json-seq`
+would be used.
+
+In addition, HTTP supports compression and the standard HTTP mechanisms can be
+used to reduce the size of the messages between the server and the client.
