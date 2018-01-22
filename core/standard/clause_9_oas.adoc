@@ -1,0 +1,159 @@
+== Requirements class "OpenAPI 3.0"
+
+////
+for now, normative statements are often included inline. This will be re-factored later.
+////
+
+=== Basic requirements
+
+The API of servers conforming to this requirements class are defined by an link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument[OpenAPI Document].
+
+include::requirements/requirements_class_oas30.adoc[]
+
+include::requirements/requirement_oas-definition.adoc[]
+
+An example OpenAPI document is included in <<oas30_example,Annex C>>.
+
+include::requirements/requirement_oas-impl.adoc[]
+
+=== Complete definition
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/oas30/completeness +
+
+The OpenAPI definition SHALL specify for each operation all
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#httpCodes[HTTP Status Codes]
+and
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Objects]
+that the server uses in responses.
+
+This includes the successful execution of an operation as well as all error
+situations that originate from the server.
+|===
+
+Note that servers that, for example, are access-controlled
+(see <<security,Security>>), that support web cache validation, CORS
+or that use HTTP redirection will make use of additional HTTP status codes
+beyond regular codes like `200` for successful GET requests
+and `400`, `404` or `500` for error situations.
+
+NOTE: TODO +
+Check, if the approach is consistent with the security concepts
+identified in the upcoming "OGC Web Services Security" standard.
+
+Clients should be prepared to receive responses not documented in the
+OpenAPI definition. For example, additional errors may occur in the transport
+layer outside of the server.
+
+[[exceptions]]
+=== Exceptions
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/oas30/exceptions-codes +
+
+For error situations that originate from the server, the API definition
+SHALL cover all applicable HTTP Status Codes.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/oas30/exceptions-400 +
+
+For error situations that are the result of a bad request by the client,
+error code "400" SHALL be used.
+|===
+
+NOTE: TODO +
+Add list of pre-defined WFS error codes for 400-responses,
+including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/oas30/exceptions-500 +
+
+For error situations that are the result of an internal server error,
+error code "500" SHALL be used.
+|===
+
+NOTE: TODO +
+Add list of pre-defined WFS error codes for 500-responses,
+including NoApplicableCode, OperationProcessingFailed.
+
+.An exception response object definition
+=================
+[source,YAML]
+----
+description: An error occurred.
+content:
+  application/json:
+    schema:
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
+  application/xml:
+    schema:
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
+  text/html:
+    schema:
+      type: string
+----
+=================
+
+[[security]]
+=== Security
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/oas30/security +
+
+For cases, where the operations of the server are access-controlled,
+the security scheme(s) SHALL be documented in the OpenAPI definition.
+|===
+
+The OpenAPI specification currently supports the following link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object[security schemes]:
+
+* HTTP authentication,
+* an API key (either as a header or as a query parameter),
+* OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
+* OpenID Connect Discovery.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/10[ISSUE 10] +
+If an implementation limits the access to a subset of the operations for some
+users (or if the server implements even more fine-grained access), it may no
+longer be possible for such a user to de-reference all links, including
+relationships between features. Does this require a discussion? Or more?
+
+=== Feature collection metadata
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/oas30/fc-md-op +
+
+The `operationId` of the HTTP GET operation for feature collection metadata
+SHALL be "describeCollections".
+|===
+
+=== Feature collections
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/oas30/fc-key-properties +
+
+The schema for the Response Objects of the HTTP GET operation for
+feature collections SHOULD include key feature properties
+of the features in the feature collection.
+
+This is in particular helpful, if filter parameters are defined for the
+collection (see recommendation `/rec/core/fc-filters`).
+|===
+
+=== Features
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/oas30/f-key-properties +
+
+The schema for the Response Objects of the HTTP GET operation for
+features SHOULD include key feature properties
+of the features.
+|===

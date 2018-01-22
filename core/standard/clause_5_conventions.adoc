@@ -23,11 +23,7 @@ To express relationships between resources, <<rfc5988,RFC 5988 (Web Linking)>> a
 
 For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/6[ISSUE 6] +
-Is this enough or should it be a recommendation to use HTTPS? +
-Is additional discussion needed?
-
-=== OpenAPI definitions
+=== API definition
 
 ==== General remarks
 
@@ -35,42 +31,54 @@ NOTE: TODO +
 Add general considerations. +
 Clarify that additional operations, parameters, etc. may be added, either to implement additional conformance classes or for vendor-specific extensions.
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/2[ISSUE 2] +
-Is the relationship between OpenAPI documents and normative statements
-sufficiently clear in this document?
+==== Role of OpenAPI
 
-==== OpenAPI fragments
+This document uses OpenAPI 3.0 fragments as examples and to formally state
+requirements. However, using OpenAPI 3.0 is not required.
+
+The "Core" requirements class, therefore, only requires that a formal API
+definition is provided at /api.
+
+A separate requirements class is specified for API definitions that follow the
+<<rc_oas,OpenAPI specification 3.0>>, but this does not preclude that in the
+future or in parallel other versions of OpenAPI or other descriptions are
+provided by a server.
+
+NOTE: This approach is used to avoid lock-in to a specific approach to
+defining an API as it is expected that the landscape will continue to
+evolve.
 
 In this document, fragments of OpenAPI definitions are shown in YAML since
 YAML is easier to read than JSON and is typically used in OpenAPI editors.
 
-==== Reusable OpenAPI components
-
-Reusable components for OpenAPI definitions of a WFS are referenced from
-this document.
-
-NOTE: For now, these components use a base URL of "https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/",
-but eventually these will be available using the base URL "http://schemas.opengis.net/wfs/3.0/openapi/".
-
 ==== References to OpenAPI components in normative statements
 
 Some normative statements (requirements, recommendations and permissions) use
-a phrase that a component in the OpenAPI definition of a WFS must be "based upon"
-a schema component in the OGC schema repository.
+a phrase that a component in the API definition of the server must be
+"based upon" a schema or parameter component in the OGC schema repository.
 
-In this case, the following changes to the pre-defined OpenAPI component are permitted:
+In this case, the following changes to the pre-defined OpenAPI component
+are permitted:
 
-* If the OpenAPI schema component contains an `xml` property, but XML is not an encoding that is supported by the service, the xml properties may be removed.
-* The range of values of a parameter or property may be extended (additional values) or constrained (if only a subset of all possible values are applicable to the service). An example for a constrained range of values is to explicitly specify the supported values of a string parameter or property using an enum.
+* If the OpenAPI schema component contains an `xml` property, but XML is not
+an encoding that is supported by the service, the xml properties may be removed.
+* The range of values of a parameter or property may be extended (additional
+values) or constrained (if only a subset of all possible values are applicable
+to the service). An example for a constrained range of values is to explicitly
+specify the supported values of a string parameter or property using an enum.
 * Additional properties may be added to the schema definition of a Response Object.
 * Informative text may be changed or added, like comments or description properties.
 
 NOTE: TODO +
 Check, that we cover all cases.
 
+For API definitions that do not conform to the <<rc_oas30,OpenAPI Specification 3.0>>
+the normative statement should be interpreted in the context of the
+API definition language used.
+
 ==== Paths in OpenAPI definitions
 
-All paths in an OpenAPI definition are relative to a base URL of the service.
+All paths in an OpenAPI definition are relative to a base URL of the server.
 
 .URL of the OpenAPI definition
 ===========================================
@@ -86,5 +94,15 @@ servers:
 ----
 
 The path "/mypath" in the OpenAPI definition of a WFS would be the
-URL `https://data.example.org/mypath` for the production service.
+URL `https://data.example.org/mypath` for the production server.
 ===========================================
+
+==== Reusable OpenAPI components
+
+Reusable components for OpenAPI definitions of a WFS are referenced from
+this document.
+
+NOTE: For now, these components use a base URL of
+"https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/",
+but eventually these will be available using the base URL
+"http://schemas.opengis.net/wfs/3.0/openapi/".
