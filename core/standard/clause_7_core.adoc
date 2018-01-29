@@ -654,11 +654,23 @@ part of the result set, if the `bbox` parameter is provided.
 
 The bounding box is provided as four numbers:
 
-* Lower corner, coordinate axis 1 (minimum longitude)
-* Lower corner, coordinate axis 2 (minimum latitude)
-* Upper corner, coordinate axis 1 (maximum longitude)
-* Upper corner, coordinate axis 2 (maximum latitude)
+* Left box edge, coordinate axis 1
+* Bottom box edge, coordinate axis 2
+* Right box edge, coordinate axis 1
+* Top box edge, coordinate axis 2
 |===
+
+For WGS84 longitude/latitude this is in most cases the sequence of
+minimum longitude, minimum latitude, maximum longitude and maximum latitude.
+However, in cases where the box spans the antimeridian the first value
+(left = west-most box edge) is larger than the third value (right = east-most
+box edge).
+
+.The bounding box of the New Zealand Exclusive Economic Zone
+=================
+The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
+would be represented in JSON as `[ 160.6, -55.95, -170, -25.89 ]`.
+=================
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at

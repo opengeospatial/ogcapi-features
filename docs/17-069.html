@@ -2341,22 +2341,38 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Lower corner, coordinate axis 1 (minimum longitude)</p>
+<p>Left box edge, coordinate axis 1</p>
 </li>
 <li>
-<p>Lower corner, coordinate axis 2 (minimum latitude)</p>
+<p>Bottom box edge, coordinate axis 2</p>
 </li>
 <li>
-<p>Upper corner, coordinate axis 1 (maximum longitude)</p>
+<p>Right box edge, coordinate axis 1</p>
 </li>
 <li>
-<p>Upper corner, coordinate axis 2 (maximum latitude)</p>
+<p>Top box edge, coordinate axis 2</p>
 </li>
 </ul>
 </div></div></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>For WGS84 longitude/latitude this is in most cases the sequence of
+minimum longitude, minimum latitude, maximum longitude and maximum latitude.
+However, in cases where the box spans the antimeridian the first value
+(left = west-most box edge) is larger than the third value (right = east-most
+box edge).</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 4. The bounding box of the New Zealand Exclusive Economic Zone</div>
+<div class="content">
+<div class="paragraph">
+<p>The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
+would be represented in JSON as <code>[ 160.6, -55.95, -170, -25.89 ]</code>.</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
@@ -2505,7 +2521,7 @@ property in the response schema.</p>
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 4. An additional parameter to filter buildings based on their function</div>
+<div class="title">Example 5. An additional parameter to filter buildings based on their function</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -2605,7 +2621,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 5. Links</div>
+<div class="title">Example 6. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>If the request is to return features from the 51st feature, using the default value of the <code>count</code> parameter "10", the links in the response could be (in this example represented as link headers):</p>
@@ -2793,7 +2809,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 6. Links</div>
+<div class="title">Example 7. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>The links in a feature could be (in this example represented as link headers):</p>
@@ -3533,7 +3549,7 @@ including NoApplicableCode, OperationProcessingFailed.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 7. An exception response object definition</div>
+<div class="title">Example 8. An exception response object definition</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -3935,7 +3951,7 @@ This part of WFS only specifies operations using GET.
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 8. An unsafe implementation of GET</div>
+<div class="title">Example 9. An unsafe implementation of GET</div>
 <div class="content">
 <div class="paragraph">
 <p>An unsafe implementation of the GET method would be to use the GET method to delete resource from the server using a URL such as " GET /buildings/1013/delete".</p>
@@ -4652,6 +4668,13 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add description of the UML diagram</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-01-29</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.5</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7.9.4</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue #31 (use west, south, east, north in bbox)</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -4678,7 +4701,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-01-22 18:36:47 CET
+Last updated 2018-01-29 13:59:29 CET
 </div>
 </div>
 </body>
