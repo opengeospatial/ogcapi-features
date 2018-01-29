@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2018-01-08)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2018-01-29)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -642,40 +642,41 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#overview">6. Overview</a></li>
 <li><a href="#_requirement_class_core">7. Requirement Class "Core"</a>
 <ul class="sectlevel2">
-<li><a href="#_api_definition_2">7.1. API definition</a></li>
-<li><a href="#_http_1_1">7.2. HTTP 1.1</a></li>
-<li><a href="#_web_caching">7.3. Web caching</a></li>
-<li><a href="#_support_for_cross_origin_requests">7.4. Support for cross-origin requests</a></li>
-<li><a href="#_encodings_parameter_f">7.5. Encodings / Parameter f</a></li>
-<li><a href="#_link_headers">7.6. Link headers</a></li>
-<li><a href="#_feature_collection_metadata">7.7. Feature collection metadata</a>
+<li><a href="#_overview">7.1. Overview</a></li>
+<li><a href="#_api_definition_2">7.2. API definition</a></li>
+<li><a href="#_http_1_1">7.3. HTTP 1.1</a></li>
+<li><a href="#_web_caching">7.4. Web caching</a></li>
+<li><a href="#_support_for_cross_origin_requests">7.5. Support for cross-origin requests</a></li>
+<li><a href="#_encodings_parameter_f">7.6. Encodings / Parameter f</a></li>
+<li><a href="#_link_headers">7.7. Link headers</a></li>
+<li><a href="#_feature_collection_metadata">7.8. Feature collection metadata</a>
 <ul class="sectlevel3">
-<li><a href="#_operation">7.7.1. Operation</a></li>
-<li><a href="#_response">7.7.2. Response</a></li>
+<li><a href="#_operation">7.8.1. Operation</a></li>
+<li><a href="#_response">7.8.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_collections">7.8. Feature collections</a>
+<li><a href="#_feature_collections">7.9. Feature collections</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_2">7.8.1. Operation</a></li>
-<li><a href="#_parameter_startindex">7.8.2. Parameter startIndex</a></li>
-<li><a href="#_parameter_count">7.8.3. Parameter count</a></li>
-<li><a href="#_parameter_bbox">7.8.4. Parameter bbox</a></li>
-<li><a href="#_parameter_resulttype">7.8.5. Parameter resultType</a></li>
-<li><a href="#_parameters_for_filtering_on_feature_properties">7.8.6. Parameters for filtering on feature properties</a></li>
-<li><a href="#_response_2">7.8.7. Response</a></li>
+<li><a href="#_operation_2">7.9.1. Operation</a></li>
+<li><a href="#_parameter_startindex">7.9.2. Parameter startIndex</a></li>
+<li><a href="#_parameter_count">7.9.3. Parameter count</a></li>
+<li><a href="#_parameter_bbox">7.9.4. Parameter bbox</a></li>
+<li><a href="#_parameter_resulttype">7.9.5. Parameter resultType</a></li>
+<li><a href="#_parameters_for_filtering_on_feature_properties">7.9.6. Parameters for filtering on feature properties</a></li>
+<li><a href="#_response_2">7.9.7. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_2">7.9. Feature</a>
+<li><a href="#_feature_2">7.10. Feature</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_3">7.9.1. Operation</a></li>
-<li><a href="#_response_3">7.9.2. Response</a></li>
+<li><a href="#_operation_3">7.10.1. Operation</a></li>
+<li><a href="#_response_3">7.10.2. Response</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#_requirements_classes_for_encodings">8. Requirements classes for encodings</a>
 <ul class="sectlevel2">
-<li><a href="#_overview">8.1. Overview</a></li>
+<li><a href="#_overview_2">8.1. Overview</a></li>
 <li><a href="#_requirement_class_html">8.2. Requirement Class "HTML"</a></li>
 <li><a href="#_requirement_class_geojson">8.3. Requirement Class "GeoJSON"</a></li>
 <li><a href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_0">8.4. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"</a></li>
@@ -697,7 +698,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a></li>
 <li><a href="#changes">Annex B: Changes to the previous versions of WFS (Informative)</a>
 <ul class="sectlevel2">
-<li><a href="#_overview_2">B.1. Overview</a></li>
+<li><a href="#_overview_3">B.1. Overview</a></li>
 <li><a href="#_wfs_as_a_restful_service">B.2. WFS as a RESTful service</a></li>
 <li><a href="#_mapping_between_ogc_capabilities_and_openapi">B.3. Mapping between OGC Capabilities and OpenAPI</a></li>
 <li><a href="#_mapping_between_wfs_2_0_operations_and_wfs_3_0">B.4. Mapping between WFS 2.0 operations and WFS 3.0</a></li>
@@ -1089,6 +1090,12 @@ This sections provides details and examples for any conventions used in the docu
 </div>
 <div class="sect2">
 <h3 id="_uml_model"><a class="anchor" href="#_uml_model"></a>5.2. UML model</h3>
+<div class="paragraph">
+<p>UML diagrams are included in this standard to illustrate the conceptual model that underpins Web Feature Service implementations. The UML model is not normative. The UML profile used is specified in ISO 19103:2015.</p>
+</div>
+<div class="paragraph">
+<p>Resources are modelled as UML interfaces.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1096,8 +1103,7 @@ This sections provides details and examples for any conventions used in the docu
 <div class="title">Note</div>
 </td>
 <td class="content">
-TODO<br>
-Add explanation about UML diagrams - and add the diagrams!
+The OpenAPI definition is not modelled explicitly.
 </td>
 </tr>
 </table>
@@ -1371,19 +1377,8 @@ used to reduce the size of the messages between the server and the client.</p>
 <div class="sect1">
 <h2 id="_requirement_class_core"><a class="anchor" href="#_requirement_class_core"></a>7. Requirement Class "Core"</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.
-</td>
-</tr>
-</table>
-</div>
+<div class="sect2">
+<h3 id="_overview"><a class="anchor" href="#_overview"></a>7.1. Overview</h3>
 <table id="rc_core" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1410,8 +1405,92 @@ Add intro text for the requirement class.
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Figure 1 illustrates the resources supported by the Core requirements class using
+UML. Each resource type available through the server is an «interface».</p>
+</div>
+<div class="paragraph">
+<p>A server that implements the WFS API provides access to the features in a dataset.
+In other words, the API is a distribution of that dataset. A file download, for example,
+would be another distribution.</p>
+</div>
+<div class="paragraph">
+<p>That is, each WFS has a single <code>DatasetDistribution</code> and the distribution
+consists of a set of feature collections. This specification does not
+include any requirements how the features in the dataset have to be aggregated
+into collections. A typical approach is to aggregate by feature type, but any other approach
+that fits the dataset or the applications using this distribution may be used, too.</p>
+</div>
+<div class="paragraph">
+<p>Accessing the <code>DatasetDistribution</code> using HTTP GET returns a
+<code>DatasetDistributionResponse</code>, which includes a link to each <code>Collection</code>
+in the distribution along with metadata about each collection (class
+<code>CollectionMetadata</code>):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a local identifier for the collection that is unique within the WFS;</p>
+</li>
+<li>
+<p>a list of coordinate reference systems in which geometries may be returned by
+the server, where the first one is the default coordinate reference system
+(in the Core, the default is always WGS 84 with axis order longitude/latitude);</p>
+</li>
+<li>
+<p>an optional title and description for the collection;</p>
+</li>
+<li>
+<p>an optional bounding box that can be used to provide an indication of the
+spatial extent of the collection - typically derived from the data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each <code>Collection</code> consists of the features in the collection where each
+feature in the distribution is part of exactly one collection.</p>
+</div>
+<div class="paragraph">
+<p>Accessing a <code>Collection</code> using HTTP GET returns a <code>CollectionResponse</code>,
+which basically consists of features in the collection. The features included
+in the response are determined by the server based on parameters of the request.</p>
+</div>
+<div class="paragraph">
+<p>A <code>bbox</code> parameter may be used to select only a subset of the features in
+the collection (the features that are located in the bounding box).</p>
+</div>
+<div class="paragraph">
+<p>The <code>startIndex</code> and <code>count</code> parameters may be used to request only a subset of the
+selected features and to support paging through a collection.</p>
+</div>
+<div class="paragraph">
+<p>The <code>CollectionResponse</code> may include metadata about the number of selected and returned
+features (<code>numberMatched</code> and <code>numberReturned</code>) as well as links to simplify
+paging (<code>next</code> and <code>prev</code>).</p>
+</div>
+<div class="paragraph">
+<p>If the <code>resultType</code> parameter is provided with a value "hits", the server will
+return no features, but only the number of selected features in <code>numberMatched</code>.</p>
+</div>
+<div class="paragraph">
+<p>Each <code>Feature</code> is also a separate resource and may be requested individually
+using HTTP GET.</p>
+</div>
+<div class="paragraph">
+<p>In addition, each server publishes a formal definition of the API (<code>APIDefinition</code>),
+which describes the capabilities of the server and which can be used by
+clients to connect to the server or
+by development tools to support the implementation of servers and clients.</p>
+</div>
+<div id="img_core" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="figures/PT1_FIG01.png" alt="PT1 FIG01">
+</div>
+<div class="title">Figure 1. Resources in the Core requirements class</div>
+</div>
+</div>
 <div class="sect2">
-<h3 id="_api_definition_2"><a class="anchor" href="#_api_definition_2"></a>7.1. API definition</h3>
+<h3 id="_api_definition_2"><a class="anchor" href="#_api_definition_2"></a>7.2. API definition</h3>
 <div class="paragraph">
 <p>Every WFS is defined by an API definition that describes the capabilities
 of the server and which can be used by clients to connect to the server or
@@ -1463,7 +1542,7 @@ there is no need to include the <code>/api</code> operation in the API definitio
 </div>
 </div>
 <div class="sect2">
-<h3 id="_http_1_1"><a class="anchor" href="#_http_1_1"></a>7.2. HTTP 1.1</h3>
+<h3 id="_http_1_1"><a class="anchor" href="#_http_1_1"></a>7.3. HTTP 1.1</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1486,7 +1565,7 @@ there is no need to include the <code>/api</code> operation in the API definitio
 </div>
 </div>
 <div class="sect2">
-<h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.3. Web caching</h3>
+<h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.4. Web caching</h3>
 <div class="paragraph">
 <p>Entity tags are a mechanism for web cache validation and for supporting conditional
 requests to reduce network traffic. Entity tags are specified by <a href="#rfc2616">HTTP/1.1 (RFC 2616)</a>.</p>
@@ -1524,7 +1603,7 @@ Add an example OpenAPI operation (headers, response codes). Here or in clause 9.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_support_for_cross_origin_requests"><a class="anchor" href="#_support_for_cross_origin_requests"></a>7.4. Support for cross-origin requests</h3>
+<h3 id="_support_for_cross_origin_requests"><a class="anchor" href="#_support_for_cross_origin_requests"></a>7.5. Support for cross-origin requests</h3>
 <div class="paragraph">
 <p>To access data from a HTML page where the data is on another host than
 the webpage is by default prohibited for security reasons ("same-origin policy").
@@ -1565,7 +1644,7 @@ proxy layer on top of the server.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encodings_parameter_f"><a class="anchor" href="#_encodings_parameter_f"></a>7.5. Encodings / Parameter f</h3>
+<h3 id="_encodings_parameter_f"><a class="anchor" href="#_encodings_parameter_f"></a>7.6. Encodings / Parameter f</h3>
 <div class="admonitionblock caution">
 <table>
 <tr>
@@ -1724,7 +1803,7 @@ encodings.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_link_headers"><a class="anchor" href="#_link_headers"></a>7.6. Link headers</h3>
+<h3 id="_link_headers"><a class="anchor" href="#_link_headers"></a>7.7. Link headers</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1750,9 +1829,9 @@ response are created.</p>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.7. Feature collection metadata</h3>
+<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.8. Feature collection metadata</h3>
 <div class="sect3">
-<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.7.1. Operation</h4>
+<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.8.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1772,7 +1851,7 @@ response are created.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response"><a class="anchor" href="#_response"></a>7.7.2. Response</h4>
+<h4 id="_response"><a class="anchor" href="#_response"></a>7.8.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2119,9 +2198,9 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.8. Feature collections</h3>
+<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.9. Feature collections</h3>
 <div class="sect3">
-<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.8.1. Operation</h4>
+<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.9.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2159,7 +2238,7 @@ Precision level filter responsibility?
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_startindex"><a class="anchor" href="#_parameter_startindex"></a>7.8.2. Parameter startIndex</h4>
+<h4 id="_parameter_startindex"><a class="anchor" href="#_parameter_startindex"></a>7.9.2. Parameter startIndex</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2217,7 +2296,7 @@ OpenAPI 3.0 is available at
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.8.3. Parameter count</h4>
+<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.9.3. Parameter count</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2283,7 +2362,7 @@ OpenAPI 3.0 is available at
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.8.4. Parameter bbox</h4>
+<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.9.4. Parameter bbox</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2363,7 +2442,7 @@ OpenAPI 3.0 is available at
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_resulttype"><a class="anchor" href="#_parameter_resulttype"></a>7.8.5. Parameter resultType</h4>
+<h4 id="_parameter_resulttype"><a class="anchor" href="#_parameter_resulttype"></a>7.9.5. Parameter resultType</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2468,7 +2547,7 @@ Ability to set no null/empty geometry in returned response
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.8.6. Parameters for filtering on feature properties</h4>
+<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.9.6. Parameters for filtering on feature properties</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2530,7 +2609,7 @@ example: &#39;function=public+use&#39;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.8.7. Response</h4>
+<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.9.7. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2684,9 +2763,9 @@ not seem to be needed given the 'Date' HTTP header. For <code>numberMatched</cod
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.9. Feature</h3>
+<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.10. Feature</h3>
 <div class="sect3">
-<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.9.1. Operation</h4>
+<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.10.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2726,7 +2805,7 @@ Add more about the feature identifiers.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.9.2. Response</h4>
+<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.10.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2815,7 +2894,7 @@ Link: &lt;http://data.example.org/buildings?f=json&gt;; rel="collection"; type="
 <h2 id="_requirements_classes_for_encodings"><a class="anchor" href="#_requirements_classes_for_encodings"></a>8. Requirements classes for encodings</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overview"><a class="anchor" href="#_overview"></a>8.1. Overview</h3>
+<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>8.1. Overview</h3>
 <div class="paragraph">
 <p>This clause specifies four pre-defined requirements classes for encodings to be
 used in a WFS. These encodings are commonly used encodings for spatial data on
@@ -3779,7 +3858,7 @@ separate document (e.g., part of the release notes)?
 </table>
 </div>
 <div class="sect2">
-<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>B.1. Overview</h3>
+<h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>B.1. Overview</h3>
 <div class="paragraph">
 <p>The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads as it was state-of-the-art in the late 1990s and early 2000s, when WFS was originally designed.</p>
 </div>
@@ -4047,38 +4126,6 @@ paths:
               examples:
                 ex1:
                   $ref: &#39;#/components/examples/featureCollectionsHtml&#39;
-        default:
-          description: An error occured.
-          content:
-            application/json:
-              schema:
-                $ref: &#39;#/components/schemas/exception&#39;
-            application/xml:
-              schema:
-                $ref: &#39;#/components/schemas/exception&#39;
-            text/html:
-              schema:
-                type: string
-  /api:
-    get:
-      summary: the API description - this document
-      operationId: getApiDescription
-      tags:
-        - Capabilities
-      parameters:
-        - $ref: &#39;#/components/parameters/f&#39;
-      responses:
-        &#39;200&#39;:
-          description: &gt;-
-            The formal documentation of this API according to the OpenAPI
-            specification, version 3.0. I.e., this document.
-          content:
-            application/openapi+json;version=3.0:
-              schema:
-                type: object
-            text/html:
-              schema:
-                type: string
         default:
           description: An error occured.
           content:
@@ -4682,6 +4729,20 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues #2, #5, #6, #7, #8, #14, #15, #19</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-01-22</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.4</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add description of the UML diagram</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-01-29</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.5</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue #25 (recommended encoding)</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -4708,7 +4769,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-01-08 14:02:48 CET
+Last updated 2018-01-29 13:44:41 CET
 </div>
 </div>
 </body>
