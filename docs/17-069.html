@@ -2341,16 +2341,16 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Left box edge, coordinate axis 1</p>
+<p>Lower left corner, coordinate axis 1</p>
 </li>
 <li>
-<p>Bottom box edge, coordinate axis 2</p>
+<p>Lower left corner, coordinate axis 2</p>
 </li>
 <li>
-<p>Right box edge, coordinate axis 1</p>
+<p>Upper right corner, coordinate axis 1</p>
 </li>
 <li>
-<p>Top box edge, coordinate axis 2</p>
+<p>Upper right corner, coordinate axis 2</p>
 </li>
 </ul>
 </div></div></td>
@@ -2361,8 +2361,7 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 <p>For WGS84 longitude/latitude this is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the antimeridian the first value
-(left = west-most box edge) is larger than the third value (right = east-most
-box edge).</p>
+(west-most box edge) is larger than the third value (east-most box edge).</p>
 </div>
 <div class="exampleblock">
 <div class="title">Example 4. The bounding box of the New Zealand Exclusive Economic Zone</div>

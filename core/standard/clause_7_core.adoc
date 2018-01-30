@@ -654,17 +654,16 @@ part of the result set, if the `bbox` parameter is provided.
 
 The bounding box is provided as four numbers:
 
-* Left box edge, coordinate axis 1
-* Bottom box edge, coordinate axis 2
-* Right box edge, coordinate axis 1
-* Top box edge, coordinate axis 2
+* Lower left corner, coordinate axis 1
+* Lower left corner, coordinate axis 2
+* Upper right corner, coordinate axis 1
+* Upper right corner, coordinate axis 2
 |===
 
 For WGS84 longitude/latitude this is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the antimeridian the first value
-(left = west-most box edge) is larger than the third value (right = east-most
-box edge).
+(west-most box edge) is larger than the third value (east-most box edge).
 
 .The bounding box of the New Zealand Exclusive Economic Zone
 =================
