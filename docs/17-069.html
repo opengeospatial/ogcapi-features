@@ -1189,8 +1189,8 @@ are permitted:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If the OpenAPI schema component contains an <code>xml</code> property, but XML is not
-an encoding that is supported by the service, the xml properties may be removed.</p>
+<p>If the server supports an XML encoding, <code>xml</code> properties may be added to
+the relevant OpenAPI schema components.</p>
 </li>
 <li>
 <p>The range of values of a parameter or property may be extended (additional
@@ -1654,9 +1654,8 @@ proxy layer on top of the server.</p>
 <td class="content">
 <a href="https://github.com/opengeospatial/WFS_FES/issues/12">ISSUE 12</a><br>
 Proposal to drop f and define separate operations using file extensions
-instead, i.e. <code>/buildings</code>, <code>/buildings.json</code>, <code>/buildings.xml</code> and
-<code>/buildings.html</code>. This is clearer and avoids a conflict with content
-negotiation.
+instead, e.g. <code>/buildings</code>, <code>/buildings.json</code> and <code>/buildings.html</code>.
+This is clearer and avoids a conflict with content negotiation.
 </td>
 </tr>
 </table>
@@ -1716,7 +1715,6 @@ supported by the server.</p>
   type: string
   enum:
     - json
-    - xml
     - html</code></pre>
 </div>
 </div>
@@ -1739,10 +1737,10 @@ provided, the standard HTTP rules SHALL apply, i.e., the accept header is
 used to determine the format.</p>
 </div>
 <div class="paragraph">
-<p><code>json</code> / <code>xml</code> / <code>html</code> are reserved values and SHALL return the first
-JSON / XML / HTML media type listed in the API definition. If no such
+<p><code>json</code> / <code>html</code> are reserved values and SHALL return the first
+JSON / HTML media type listed in the API definition. If no such
 media type is included in the API definition, the service MAY determine
-the format of the response or respond with HTTP status code <code>415</code>.</p>
+the format of the response or respond with HTTP status code <code>406</code>.</p>
 </div>
 <div class="paragraph">
 <p>If other values are provided, the service MAY determine the format of the response.</p>
@@ -1873,19 +1871,12 @@ HTTP status code <code>200</code>.</p>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>That schema supports both JSON and XML responses:</p>
-</div>
 <div class="listingblock">
 <div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml">Schema for the metadata about feature collections</a></div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="JSON"><span></span>type: object
 required:
   - collections
-xml:
-  name: Collections
-  namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
-  prefix: wfs
 properties:
   links:
     type: array
@@ -1918,10 +1909,7 @@ properties:
             type: string
           default:
             - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml
-    xml:
-      namespace: &#39;http://www.opengis.net/wfs/3.0&#39;
-      prefix: wfs</code></pre>
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
@@ -2152,8 +2140,6 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
   &quot;links&quot;: [
     { &quot;href&quot;: &quot;http://data.example.org/?f=json&quot;,
       &quot;rel&quot;: &quot;self&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;this document&quot; },
-    { &quot;href&quot;: &quot;http://data.example.org/?f=xml&quot;,
-      &quot;rel&quot;: &quot;alternate&quot;, &quot;type&quot;: &quot;application/xml&quot;, &quot;title&quot;: &quot;this document as XML&quot; },
     { &quot;href&quot;: &quot;http://data.example.org/?f=html&quot;,
       &quot;rel&quot;: &quot;alternate&quot;, &quot;type&quot;: &quot;text/html&quot;, &quot;title&quot;: &quot;this document as HTML&quot; },
     { &quot;href&quot;: &quot;http://data.example.org/api?f=json&quot;,
@@ -2175,18 +2161,12 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
         { &quot;href&quot;: &quot;http://data.example.org/buildings?f=json&quot;,
           &quot;rel&quot;: &quot;about&quot;, &quot;type&quot;: &quot;application/geo+json&quot;,
           &quot;title&quot;: &quot;Buildings as GeoJSON&quot; },
-        { &quot;href&quot;: &quot;http://data.example.org/buildings?f=xml&quot;,
-          &quot;rel&quot;: &quot;about&quot;, &quot;type&quot;: &quot;application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0&quot;,
-          &quot;title&quot;: &quot;Buildings as GML&quot; },
         { &quot;href&quot;: &quot;http://data.example.org/buildings?f=html&quot;,
           &quot;rel&quot;: &quot;about&quot;, &quot;type&quot;: &quot;text/html&quot;,
           &quot;title&quot;: &quot;Buildings as HTML&quot; },
         { &quot;href&quot;: &quot;http://example.org/concepts/building.html&quot;,
           &quot;rel&quot;: &quot;describedBy&quot;, &quot;type&quot;: &quot;text/html&quot;,
-          &quot;title&quot;: &quot;Feature catalogue for the buildings&quot; },
-        { &quot;href&quot;: &quot;http://example.org/schemas/buildings.xsd&quot;,
-          &quot;rel&quot;: &quot;describedBy&quot;, &quot;type&quot;: &quot;application/xml&quot;,
-          &quot;title&quot;: &quot;XML schema of the buildings&quot; }
+          &quot;title&quot;: &quot;Feature catalogue for the buildings&quot; }
       ]
     }
   ]
@@ -2691,7 +2671,6 @@ of the feature collection.
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings?f=json&amp;startIndex=50&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings?f=xml&amp;startIndex=50&gt;; rel="alternate"; type="application/gml+xml;version=3.2"
 Link: &lt;http://data.example.org/buildings?f=html&amp;startIndex=50&gt;; rel="alternate"; type="text/html"
 Link: &lt;http://data.example.org/buildings?f=json&amp;startIndex=40&gt;; rel="prev"; type="application/geo+json"
 Link: &lt;http://data.example.org/buildings?f=json&amp;startIndex=60&gt;; rel="next"; type="application/geo+json"</code></pre>
@@ -2703,7 +2682,6 @@ Link: &lt;http://data.example.org/buildings?f=json&amp;startIndex=60&gt;; rel="n
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings?f=json&amp;startIndex=50&amp;count=50&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings?f=xml&amp;startIndex=50&amp;count=50&gt;; rel="alternate"; type="application/gml+xml;version=3.2"
 Link: &lt;http://data.example.org/buildings?f=html&amp;startIndex=50&amp;count=50&gt;; rel="alternate"; type="text/html"
 Link: &lt;http://data.example.org/buildings?f=json&amp;startIndex=0&amp;count=50&gt;; rel="prev"; type="application/geo+json"
 Link: &lt;http://data.example.org/buildings?f=json&amp;startIndex=100&amp;count=50&gt;; rel="next"; type="application/geo+json"</code></pre>
@@ -2879,7 +2857,6 @@ of the feature collection.
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings/123?f=json&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings/123?f=xml&gt;; rel="alternate"; type="application/gml+xml;version=3.2"
 Link: &lt;http://data.example.org/buildings/123?f=html&gt;; rel="alternate"; type="text/html"
 Link: &lt;http://data.example.org/buildings?f=json&gt;; rel="collection"; type="application/geo+json"</code></pre>
 </div>
@@ -3626,9 +3603,6 @@ content:
   application/json:
     schema:
       $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
-  application/xml:
-    schema:
-      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
   text/html:
     schema:
       type: string</code></pre>
@@ -3789,10 +3763,10 @@ of the features.</p>
 <p><code>application/xml</code> for feature collection metadata,</p>
 </li>
 <li>
-<p><code>application/gml+xml;version=3.2</code> for any GML 3.2 feature collections and features, and</p>
+<p><code>application/gml+xml;version=3.2</code> for any GML 3.2 feature collections and features,</p>
 </li>
 <li>
-<p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> for GML 3.2 feature collections and features conforming to the GML Simple Feature Level 0 profile.</p>
+<p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> for GML 3.2 feature collections and features conforming to the GML Simple Feature Level 0 profile, and</p>
 </li>
 <li>
 <p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> for GML 3.2 feature collections and features conforming to the GML Simple Feature Level 2 profile.</p>
@@ -4743,6 +4717,13 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue #25 (recommended encoding)</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-01-30</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.6</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue #19 (XML output)</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -4769,7 +4750,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-01-29 13:44:41 CET
+Last updated 2018-01-30 16:46:24 CET
 </div>
 </div>
 </body>

@@ -2,22 +2,12 @@ type: object
 required:
   - links
   - collections
-xml:
-  name: Collections
-  namespace: 'http://www.opengis.net/wfs/3.0'
-  prefix: wfs
 properties:
   links:
     type: array
     items:
       $ref: link.yaml
-    xml:
-      namespace: 'http://www.opengis.net/wfs/3.0'
-      prefix: wfs
   collections:
     type: array
     items:
       $ref: collectionInfo.yaml
-    xml:
-      namespace: 'http://www.opengis.net/wfs/3.0'
-      prefix: wfs
