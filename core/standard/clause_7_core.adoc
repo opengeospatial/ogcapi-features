@@ -51,8 +51,14 @@ The `CollectionResponse` may include metadata about the number of selected and r
 features (`numberMatched` and `numberReturned`) as well as links to simplify
 paging (`next` and `prev`).
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/23[ISSUE 23] +
+Improve paging (startIndex, prev).
+
 If the `resultType` parameter is provided with a value "hits", the server will
 return no features, but only the number of selected features in `numberMatched`.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/22[ISSUE 22] +
+Remove 'resultType' from core and put in an extension.
 
 Each `Feature` is also a separate resource and may be requested individually
 using HTTP GET.
@@ -65,6 +71,9 @@ by development tools to support the implementation of servers and clients.
 [#img_core,reftext='{figure-caption} {counter:figure-num}']
 .Resources in the Core requirements class
 image::figures/PT1_FIG01.png[align="center"]
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/30[ISSUE 30] +
+Allow also features that do not belong to any collection?
 
 === API definition
 
@@ -660,6 +669,9 @@ The bounding box is provided as four numbers:
 * Upper corner, coordinate axis 2 (maximum latitude)
 |===
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/31[ISSUE 31] +
+Support boxes that span the antimeridian.
+
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
@@ -724,6 +736,9 @@ CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/16[ISSUE 16] +
 Ability to set no null/empty geometry in returned response
 
 ==== Parameters for filtering on feature properties
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/20[ISSUE 20] +
+Query parameter collisions.
 
 [width="90%",cols="2,6a"]
 |===

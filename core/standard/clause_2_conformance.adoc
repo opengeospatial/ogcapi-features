@@ -23,6 +23,12 @@ None of these encodings is mandatory and an implementation of the "Core"
 requirements class may also decide to use none of them, but to use another encoding
 instead.
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/24[ISSUE 24] +
+Move XML output to extension.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/25[ISSUE 25] +
+Pick a recommended encoding.
+
 The "Core" does not mandate any encoding or format for the formal definition of
 the API either. One option is the OpenAPI 3.0 specification and a requirements
 class has been defined for this, which depends on the "Core":
