@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2018-01-22)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2018-02-01)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -902,6 +902,32 @@ for spatial data on the web:</p>
 requirements class may also decide to use none of them, but to use another encoding
 instead.</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/24">ISSUE 24</a><br>
+Move XML output to extension.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/25">ISSUE 25</a><br>
+Pick a recommended encoding.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The "Core" does not mandate any encoding or format for the formal definition of
 the API either. One option is the OpenAPI 3.0 specification and a requirements
@@ -1003,6 +1029,19 @@ IETF RFC 7946, The GeoJSON Format, <a href="https://tools.ietf.org/rfc/rfc7946.t
 </li>
 </ul>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/32">ISSUE 32</a><br>
+Remove version date from HTML5 reference (date is 5.0, latest is 5.2)
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1098,6 +1137,19 @@ This sections provides details and examples for any conventions used in the docu
 </td>
 <td class="content">
 The OpenAPI definition is not modelled explicitly.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/36">ISSUE 36</a><br>
+A draft UML for OpenAPI 3.0 is available and could be reused.
 </td>
 </tr>
 </table>
@@ -1413,9 +1465,35 @@ selected features and to support paging through a collection.</p>
 features (<code>numberMatched</code> and <code>numberReturned</code>) as well as links to simplify
 paging (<code>next</code> and <code>prev</code>).</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/23">ISSUE 23</a><br>
+Improve paging (startIndex, prev).
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>If the <code>resultType</code> parameter is provided with a value "hits", the server will
 return no features, but only the number of selected features in <code>numberMatched</code>.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/22">ISSUE 22</a><br>
+Remove 'resultType' from core and put in an extension.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Each <code>Feature</code> is also a separate resource and may be requested individually
@@ -1432,6 +1510,19 @@ by development tools to support the implementation of servers and clients.</p>
 <img src="figures/PT1_FIG01.png" alt="PT1 FIG01">
 </div>
 <div class="title">Figure 1. Resources in the Core requirements class</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/30">ISSUE 30</a><br>
+Allow also features that do not belong to any collection?
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -2357,6 +2448,19 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/31">ISSUE 31</a><br>
+Support boxes that span the antimeridian.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
@@ -2470,6 +2574,19 @@ Ability to set no null/empty geometry in returned response
 </div>
 <div class="sect3">
 <h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.9.6. Parameters for filtering on feature properties</h4>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/20">ISSUE 20</a><br>
+Query parameter collisions.
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -4652,6 +4769,13 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add description of the UML diagram</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-01</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.5</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,3,5,7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -4678,7 +4802,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-01-22 18:36:47 CET
+Last updated 2018-02-01 13:25:47 CET
 </div>
 </div>
 </body>
