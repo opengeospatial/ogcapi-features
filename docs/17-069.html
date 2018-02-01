@@ -2419,34 +2419,36 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Lower corner, coordinate axis 1 (minimum longitude)</p>
+<p>Lower left corner, coordinate axis 1</p>
 </li>
 <li>
-<p>Lower corner, coordinate axis 2 (minimum latitude)</p>
+<p>Lower left corner, coordinate axis 2</p>
 </li>
 <li>
-<p>Upper corner, coordinate axis 1 (maximum longitude)</p>
+<p>Upper right corner, coordinate axis 1</p>
 </li>
 <li>
-<p>Upper corner, coordinate axis 2 (maximum latitude)</p>
+<p>Upper right corner, coordinate axis 2</p>
 </li>
 </ul>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Caution</div>
-</td>
-<td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/31">ISSUE 31</a><br>
-Support boxes that span the antimeridian.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>For WGS84 longitude/latitude this is in most cases the sequence of
+minimum longitude, minimum latitude, maximum longitude and maximum latitude.
+However, in cases where the box spans the antimeridian the first value
+(west-most box edge) is larger than the third value (east-most box edge).</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 4. The bounding box of the New Zealand Exclusive Economic Zone</div>
+<div class="content">
+<div class="paragraph">
+<p>The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
+would be represented in JSON as <code>[ 160.6, -55.95, -170, -25.89 ]</code>.</p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML according to
@@ -2609,7 +2611,7 @@ property in the response schema.</p>
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 4. An additional parameter to filter buildings based on their function</div>
+<div class="title">Example 5. An additional parameter to filter buildings based on their function</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -2709,7 +2711,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 5. Links</div>
+<div class="title">Example 6. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>If the request is to return features from the 51st feature, using the default value of the <code>count</code> parameter "10", the links in the response could be (in this example represented as link headers):</p>
@@ -2897,7 +2899,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 6. Links</div>
+<div class="title">Example 7. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>The links in a feature could be (in this example represented as link headers):</p>
@@ -3637,7 +3639,7 @@ including NoApplicableCode, OperationProcessingFailed.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 7. An exception response object definition</div>
+<div class="title">Example 8. An exception response object definition</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -4039,7 +4041,7 @@ This part of WFS only specifies operations using GET.
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 8. An unsafe implementation of GET</div>
+<div class="title">Example 9. An unsafe implementation of GET</div>
 <div class="content">
 <div class="paragraph">
 <p>An unsafe implementation of the GET method would be to use the GET method to delete resource from the server using a URL such as " GET /buildings/1013/delete".</p>
@@ -4761,7 +4763,7 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.5</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,3,5,7</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub, remove edition date in HTML5 reference</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub; address issues #31, #32</p></td>
 </tr>
 </tbody>
 </table>
@@ -4789,7 +4791,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-02-01 17:15:02 CET
+Last updated 2018-02-01 17:25:41 CET
 </div>
 </div>
 </body>
