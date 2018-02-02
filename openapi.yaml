@@ -195,10 +195,15 @@ components:
       description: >-
         Only features that have a geometry that intersects the bounding box are selected. The bounding box is provided as four numbers:
 
-        * Lower corner, coordinate axis 1 (minimum longitude)
-        * Lower corner, coordinate axis 2 (minimum latitude)
-        * Upper corner, coordinate axis 1 (maximum longitude)
-        * Upper corner, coordinate axis 2 (maximum latitude)
+        * Lower left corner, coordinate axis 1
+        * Lower left corner, coordinate axis 2
+        * Upper right corner, coordinate axis 1
+        * Upper right corner, coordinate axis 2
+
+        For WGS84 longitude/latitude this is in most cases the sequence of
+        minimum longitude, minimum latitude, maximum longitude and maximum latitude.
+        However, in cases where the box spans the antimeridian the first value
+        (west-most box edge) is larger than the third value (east-most box edge).
       required: false
       schema:
         type: array
@@ -288,7 +293,7 @@ components:
             - http://www.opengis.net/def/crs/OGC/1.3/CRS84
           default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
         bbox:
-          description: minimum longitude, minimum latitude, maximum longitude, maximum latitude
+          description: west, north, east, south edges of the bounding box
           type: array
           items:
             minItems: 4

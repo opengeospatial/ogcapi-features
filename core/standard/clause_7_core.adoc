@@ -51,8 +51,14 @@ The `CollectionResponse` may include metadata about the number of selected and r
 features (`numberMatched` and `numberReturned`) as well as links to simplify
 paging (`next` and `prev`).
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/23[ISSUE 23] +
+Improve paging (startIndex, prev).
+
 If the `resultType` parameter is provided with a value "hits", the server will
 return no features, but only the number of selected features in `numberMatched`.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/22[ISSUE 22] +
+Remove 'resultType' from core and put in an extension.
 
 Each `Feature` is also a separate resource and may be requested individually
 using HTTP GET.
@@ -65,6 +71,9 @@ by development tools to support the implementation of servers and clients.
 [#img_core,reftext='{figure-caption} {counter:figure-num}']
 .Resources in the Core requirements class
 image::figures/PT1_FIG01.png[align="center"]
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/30[ISSUE 30] +
+Allow also features that do not belong to any collection?
 
 === API definition
 
@@ -648,11 +657,22 @@ part of the result set, if the `bbox` parameter is provided.
 
 The bounding box is provided as four numbers:
 
-* Lower corner, coordinate axis 1 (minimum longitude)
-* Lower corner, coordinate axis 2 (minimum latitude)
-* Upper corner, coordinate axis 1 (maximum longitude)
-* Upper corner, coordinate axis 2 (maximum latitude)
+* Lower left corner, coordinate axis 1
+* Lower left corner, coordinate axis 2
+* Upper right corner, coordinate axis 1
+* Upper right corner, coordinate axis 2
 |===
+
+For WGS84 longitude/latitude this is in most cases the sequence of
+minimum longitude, minimum latitude, maximum longitude and maximum latitude.
+However, in cases where the box spans the antimeridian the first value
+(west-most box edge) is larger than the third value (east-most box edge).
+
+.The bounding box of the New Zealand Exclusive Economic Zone
+=================
+The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
+would be represented in JSON as `[ 160.6, -55.95, -170, -25.89 ]`.
+=================
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
@@ -718,6 +738,9 @@ CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/16[ISSUE 16] +
 Ability to set no null/empty geometry in returned response
 
 ==== Parameters for filtering on feature properties
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/20[ISSUE 20] +
+Query parameter collisions.
 
 [width="90%",cols="2,6a"]
 |===
