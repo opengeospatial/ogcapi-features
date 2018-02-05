@@ -1,5 +1,6 @@
 = WFS 3.0 Users Guide
 :author: Charles Heazel
+:revdate: February 5, 2018
 :doctype: article
 :encoding: utf-8
 :lang: en
@@ -17,9 +18,9 @@ WFS 3.0 is a modular standard consisting of a mandatory Core standard and a numb
 = WFS 2.0 vs. WFS 3
 
 .WFS 2.0 vs. WFS 3.0
-[width="100%",options="header"]
+[width="100%",options="header",align="center", valign="center"]
 |====================
-|Test #|WFS 2.0 Requirement|NA|OpenAPI|Core|FES|GML|Transaction|Paging|ResultType| 
+|Test #|WFS 2.0 Requirement|NA|Open-API|Core|FES|GML|Trans-action|Paging|Result-Type| 
 |A.1.1|Simple CC||||X|||||
 |A.2.2|Lists version numver 2.0.0 as a supported request version number||X|||||||  
 |A.2.3|Invalid version number|||X|||||| 
@@ -111,11 +112,9 @@ WFS 3.0 is a modular standard consisting of a mandatory Core standard and a numb
 
 Comments:
 
-1) Count Parameter: 
-
-2) OutputFormat Parameter: HTTP content negotiation will be used to implement this functionality.  If that proves to be insufficient, then an extension may be added.
-
-3) Timestamp Parameter: The HTTP response timestamp may be sufficient to implement this functionality.  
+. Count Parameter: 
+. OutputFormat Parameter: HTTP content negotiation will be used to implement this functionality.  If that proves to be insufficient, then an extension may be added.
+. Timestamp Parameter: The HTTP response timestamp may be sufficient to implement this functionality.  
 
 = OpenAPI vs. OWS Common
 = Information Assurance
