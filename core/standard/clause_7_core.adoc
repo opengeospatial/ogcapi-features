@@ -44,21 +44,13 @@ in the response are determined by the server based on parameters of the request.
 A `bbox` parameter may be used to select only a subset of the features in
 the collection (the features that are located in the bounding box).
 
-The `startIndex` and `count` parameters may be used to request only a subset of the
-selected features and to support paging through a collection.
+The `count` parameter may be used to request only a subset of the
+selected features and to indicate that the client wants to page through
+the selected features of the collection.
 
 The `CollectionResponse` may include metadata about the number of selected and returned
 features (`numberMatched` and `numberReturned`) as well as links to simplify
 paging (`next` and `prev`).
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/23[ISSUE 23] +
-Improve paging (startIndex, prev).
-
-If the `resultType` parameter is provided with a value "hits", the server will
-return no features, but only the number of selected features in `numberMatched`.
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/22[ISSUE 22] +
-Remove 'resultType' from core and put in an extension.
 
 Each `Feature` is also a separate resource and may be requested individually
 using HTTP GET.
@@ -113,6 +105,9 @@ specified by HTTP/1.1.
 
 NOTE: TODO +
 Add an example OpenAPI operation (headers, response codes). Here or in clause 9.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/38[ISSUE 38] +
+More detail / examples on caching
 
 === Support for cross-origin requests
 
@@ -190,70 +185,10 @@ with the value of the Origin header. See the CORS specification for details.
 
 ////
 
-=== Encodings / Parameter f
+=== Encodings
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/12[ISSUE 12] +
-Proposal to drop f and define separate operations using file extensions
-instead, e.g. `/buildings`, `/buildings.json` and `/buildings.html`.
-This is clearer and avoids a conflict with content negotiation.
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/param-f +
-
-All operations SHALL support a parameter `f` with the following
-characteristics (using an OpenAPI Specification 3.0 fragment):
-
-[source,YAML]
-----
-in: query
-required: false
-style: form
-explode: false
-schema:
-  type: string
-----
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/param-f-values +
-
-The API definition SHALL enumerate the list of values of parameter `f`
-supported by the server.
-|===
-
-.Values for the `f` parameter in an OpenAPI definition
-=================
-[source,YAML]
-----
-schema:
-  type: string
-  enum:
-    - json
-    - html
-----
-=================
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/param-f-predef +
-
-The parameter `f` SHALL determine the format of the response. If no value is
-provided, the standard HTTP rules SHALL apply, i.e., the accept header is
-used to determine the format.
-
-`json` / `html` are reserved values and SHALL return the first
-JSON / HTML media type listed in the API definition. If no such
-media type is included in the API definition, the service MAY determine
-the format of the response or respond with HTTP status code `406`.
-
-If other values are provided, the service MAY determine the format of the response.
-|===
-
-See <<encodings,Encodings>> for requirements classes for some formats.
-
-See <<mediatypes,Media Types>> for guidance on media types.
+While WFS 3.0 does not include any mandatory encoding, it recommends the following
+encodings. See <<overview,Clause 6 (Overview)>> for a discussion.
 
 [[rec_html]]
 [width="90%",cols="2,6a"]
@@ -274,11 +209,34 @@ implementations SHOULD consider to support GeoJSON as an
 encoding for features and feature collections.
 |===
 
-<<overview,Clause 6 (Overview)>> includes a discussion about the recommended
-encodings.
+<<_http_1_1,Requirement `/req/core/http`>> implies that the encoding of a server response
+is determined using content negotiation as specified by the HTTP specification.
 
-A template for the definition of the parameter `f` in YAML according to OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml[f.yaml].
+The section <<mediatypes,Media Types>> includes guidance on media types for
+<<encodings,encodings>> that are specified in this document.
+
+Note that any server that supports multiple encodings will have to support
+a mechanism to mint encoding-specific URIs for resources in order to express
+links, for example, to alternate representations of the same resource. This
+document does not mandate any particular approach how this is supported by
+the server.
+
+As clients simply need to dereference the URI of the link, the
+implementation details and the mechanism how the encoding is included in
+the URI of the link are not important. Developers interested in the
+approach of a particular implementation, for example, to manipulate ("hack")
+URIs in the browser address bar, can study the API definition.
+
+[NOTE]
+=====================================================================
+Two common approaches are:
+
+* an additional path for each encoding of each resource (this can be expressed,
+for example, using format specific suffixes like ".html");
+* an additional query parameter (for example, "accept" or "f") that overrides
+the Accept header of the HTTP request.
+=====================================================================
+
 
 === Link headers
 
@@ -417,7 +375,7 @@ All links SHALL include the `rel` and `type` properties.
 
 NOTE: TODO +
 Check, if we can/should make use of the new
-link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject[Link Object]
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#linkObject[Link Object]
 in OpenAPI 3.0.
 
 ////
@@ -489,13 +447,13 @@ geometries only in the default system (WGS84 longitude/latitude).
 ----
 {
   "links": [
-    { "href": "http://data.example.org/?f=json",
+    { "href": "http://data.example.org/index.json",
       "rel": "self", "type": "application/json", "title": "this document" },
-    { "href": "http://data.example.org/?f=html",
+    { "href": "http://data.example.org/index.html",
       "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
-    { "href": "http://data.example.org/api?f=json",
+    { "href": "http://data.example.org/api.json",
       "rel": "service", "type": "application/openapi+json;version=3.0", "title": "the OpenAPI definition as JSON" },
-    { "href": "http://data.example.org/api?f=html",
+    { "href": "http://data.example.org/api.html",
       "rel": "service", "type": "text/html", "title": "the OpenAPI definition as HTML" },
     { "href": "http://catalog.example.org/datasets/buildings#wfs",
       "rel": "???", "type": "application/json+ld" }
@@ -509,10 +467,10 @@ geometries only in the default system (WGS84 longitude/latitude).
         "bbox": [ 7.01, 50.63, 7.22, 50.78 ]
       },
       "links": [
-        { "href": "http://data.example.org/buildings?f=json",
+        { "href": "http://data.example.org/buildings.json",
           "rel": "about", "type": "application/geo+json",
           "title": "Buildings as GeoJSON" },
-        { "href": "http://data.example.org/buildings?f=html",
+        { "href": "http://data.example.org/buildings.html",
           "rel": "about", "type": "text/html",
           "title": "Buildings as HTML" },
         { "href": "http://example.org/concepts/building.html",
@@ -543,42 +501,6 @@ the server SHALL support the HTTP GET operation at the path `/{collectionId}`.
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/17[ISSUE 17] +
 Precision level filter responsibility?
 
-==== Parameter startIndex
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-startIndex-definition +
-
-Each feature collection operation SHALL support a parameter `startIndex`
-with the following characteristics (using an OpenAPI Specification 3.0 fragment):
-
-[source,YAML]
-----
-name: startIndex
-in: query
-required: false
-schema:
-  type: integer
-  minimum: 0
-  default: 0
-style: form
-explode: false
-----
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-startIndex-response +
-
-The optional `startIndex` parameter identifies the index within the result
-set from which the server SHALL begin presenting results in the
-response. The first element has an index of 0.
-|===
-
-A template for the definition of the parameter in YAML according to
-OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/startIndex.yaml[startIndex.yaml].
-
 ==== Parameter count
 
 [width="90%",cols="2,6a"]
@@ -601,20 +523,35 @@ schema:
 style: form
 explode: false
 ----
-
-The values for `maximum` and `default` are only examples and MAY be changed.
 |===
 
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-count-response +
+|*Permission {counter:per-id}* |/per/core/fc-count-default-maximum +
 
-The optional `count` parameter SHALL limit the number of items
-that are presented in the response.
+The values for `maximum` and `default` in requirement `/req/core/fc-count-definition`
+are only examples and MAY be changed.
+|===
 
-Only items are counted that are on the first level of the collection in the
-response. Any nested objects contained within the explicitly requested items
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-count-response-1 +
+
+The response SHALL not contain more features than specified by the
+optional `count` parameter. If the API definition specifies a maximum
+value for `count` parameter, the response SHALL not contain more
+features than this maximum value.
+
+Only items are counted that are on the first level of the collection.
+Any nested objects contained within the explicitly requested items
 SHALL not be counted.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Permission {counter:per-id}* |/per/core/fc-count-response-2 +
+
+The server MAY return less features than requested (but not more).
 |===
 
 A template for the definition of the parameter in YAML according to
@@ -678,65 +615,6 @@ A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
 
-==== Parameter resultType
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-resultType-definition +
-
-Each feature collection operation SHALL support a parameter `resultType`
-with the following characteristics (using an OpenAPI Specification 3.0 fragment):
-
-[source,YAML]
-----
-name: resultType
-in: query
-required: false
-schema:
-  type: string
-  enum:
-    - hits
-    - results
-  default: results
-style: form
-explode: false
-----
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-resultType-response +
-
-A successful execution of the operation SHALL respond in one of two
-ways. It may either generate a complete response containing resources that satisfy the
-operation or it may simply generate an empty response container
-that indicates the count of the total number of resources that the
-operation would return. Which of these two responses is generated is
-determined by the value of the optional resultType parameter.
-
-The allowed values for this parameter are `results` and `hits`.
-
-If the value of the resultType parameter is set to `results`, the server
-SHALL generate a complete response document containing resources that
-satisfy the operation.
-
-If the value of the resultType attribute is set to `hits`, the server
-SHALL generate an empty response document containing no resource
-instances.
-
-If the parameter is not provided, `results` is used.
-|===
-
-A template for the definition of the parameter in YAML according to
-OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/resultType.yaml[resultType.yaml].
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/13[ISSUE 13] +
-Support resultType that returns only the ids of the selected features?
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/16[ISSUE 16] +
-Ability to set no null/empty geometry in returned response
-
 ==== Parameters for filtering on feature properties
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/20[ISSUE 20] +
@@ -798,6 +676,28 @@ A successful execution of the operation SHALL be reported as a response with a
 HTTP status code "200".
 |===
 
+The response will only include features selected by the request.
+
+The number of features returned depends on the server and the parameter `count`:
+
+* The client can request a count it is interested in.
+* The server likely has a default value for the count, and a maximum limit.
+* If the server has any more results available than it returns (the
+number it returns is less than or equal to the requested/limited/default count)
+then the server will include a link to the next set of results.
+
+So (using the default/maximum values of 10/10000 from the OpenAPI
+fragment in requirement `/req/core/fc-count-definition`):
+
+* If you ask for 10, you will get 0 to 10 (as requested) and a `next` link,
+if there are more.
+* If you don't specify a count, you will get 0 to 10 (default) and a `next` link,
+if there are more.
+* If you ask for 50000, you might get up to 10000 (server-limited) and a `next`
+link, if there are more.
+* If you follow the next link from the previous response, you might get up
+to 10000 additional features and a `next` link, if there are more.
+
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-links +
@@ -806,13 +706,59 @@ A "200"-response SHALL include the following links:
 
 * a link to this response document (relation: `self`),
 * a link to the response document in every other media type supported
-by the service (relation: `alternate`),
-* a link to the previous "page", if the parameter `startIndex` was provided
-with a value `i` with `i > 0` and `i mod c = 0` where `c` is the value for the
-parameter `count` (relation: `prev`).
-* a link to the next "page", if the parameter `startIndex` was provided with
-a value `i` with `i + c < f` and `i mod c = 0` where `c` is the value for the
-parameter `count` and `f` is the number of features in the collection (relation: `next`).
+by the service (relation: `alternate`).
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Recommendation {counter:rec-id}* |/rec/core/fc-next-1 +
+
+A "200"-response SHOULD include a link to the next "page" (relation: `next`),
+if more features have been selected than returned in the response.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Recommendation {counter:rec-id}* |/rec/core/fc-next-2 +
+
+Dereferencing a `next` link SHOULD return additional features from the
+set of selected features that have not yet been returned.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Recommendation {counter:rec-id}* |/rec/core/fc-next-2 +
+
+The number of features in a response to a `next` link SHOULD follow the
+same rules as for the response to the original query and again include
+a `next` link, if there are more features in the selection that have
+not yet been returned.
+|===
+
+This document does not mandate any specific implementation approach for
+the `next` links.
+
+An implementation could use opaque links that are managed by the server.
+It is up to the server to determine how long these links can be de-referenced.
+Clients should be prepared to receive a 404 response.
+
+Another implementation approach is to use an implementation-specific parameter
+like the `startIndex` parameter that was used in previous versions of WFS.
+
+[width="90%",cols="2,6a"]
+|===
+|*Permission {counter:per-id}* |/per/core/fc-prev +
+
+A response to a `next` link MAY include a `prev` link to the resource that
+included the `next` link.
+|===
+
+Providing `prev` links supports navigating back and forth between pages,
+but depending on the implementation approach it may be complex to implement.
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-rel-type +
 
 All links SHALL include the `rel` and `type` link parameters.
 |===
@@ -822,24 +768,45 @@ of the feature collection.
 
 .Links
 =================
-If the request is to return features from the 51st feature, using the default value of the `count` parameter "10", the links in the response could be (in this example represented as link headers):
+If the request is to return building features and "10" is the default `count`,
+the links in the response could be (in this example represented as link headers
+and using an additional parameter `startIndex` to implement `next` links - and
+the optional `prev` links):
 
 [source]
 ----
-Link: <http://data.example.org/buildings?f=json&startIndex=50>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/buildings?f=html&startIndex=50>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/buildings?f=json&startIndex=40>; rel="prev"; type="application/geo+json"
-Link: <http://data.example.org/buildings?f=json&startIndex=60>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/buildings.json>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/buildings.html>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/buildings.json?startIndex=10>; rel="next"; type="application/geo+json"
+----
+
+Following the `next` link could return:
+
+[source]
+----
+Link: <http://data.example.org/buildings.json?startIndex=10>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/buildings.html?startIndex=10>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/buildings.json?startIndex=0>; rel="prev"; type="application/geo+json"
+Link: <http://data.example.org/buildings.json?startIndex=20>; rel="next"; type="application/geo+json"
 ----
 
 If an explicit `count` of "50" is used, the links in the response could be:
 
 [source]
 ----
-Link: <http://data.example.org/buildings?f=json&startIndex=50&count=50>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/buildings?f=html&startIndex=50&count=50>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/buildings?f=json&startIndex=0&count=50>; rel="prev"; type="application/geo+json"
-Link: <http://data.example.org/buildings?f=json&startIndex=100&count=50>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/buildings.json?count=50>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/buildings.html?count=50>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/buildings.json?count=50&startIndex=50>; rel="next"; type="application/geo+json"
+----
+
+Following the `next` link could return:
+
+[source]
+----
+Link: <http://data.example.org/buildings.json?count=50&startIndex=50>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/buildings.html?count=50&startIndex=50>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/buildings.json?count=50&startIndex=0>; rel="prev"; type="application/geo+json"
+Link: <http://data.example.org/buildings.json?count=50&startIndex=100>; rel="next"; type="application/geo+json"
 ----
 =================
 
@@ -935,9 +902,9 @@ The links in a feature could be (in this example represented as link headers):
 
 [source]
 ----
-Link: <http://data.example.org/buildings/123?f=json>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/buildings/123?f=html>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/buildings?f=json>; rel="collection"; type="application/geo+json"
+Link: <http://data.example.org/buildings/123.json>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/buildings/123.html>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/buildings.json>; rel="collection"; type="application/geo+json"
 ----
 =================
 
