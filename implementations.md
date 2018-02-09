@@ -8,7 +8,7 @@ draft of part 1.
 
 Implementations:
 * [interactive instruments](#interactive-instruments)
-* [CubeWerx](#cubeWerx)
+* [CubeWerx Inc.](#cubeWerx)
 
 ## interactive instruments
 
@@ -80,7 +80,7 @@ f=json&
 bahnhofskategorie=1010&  
 bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
 
-## CubeWerx
+## CubeWerx Inc.
 
 The following server implements a good portion of the current draft part 1
 standard.  Just to illustrate that GML may still be used, and to contrast
