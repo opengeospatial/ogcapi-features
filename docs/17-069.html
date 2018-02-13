@@ -643,7 +643,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_requirement_class_core">7. Requirement Class "Core"</a>
 <ul class="sectlevel2">
 <li><a href="#_overview">7.1. Overview</a></li>
-<li><a href="#_api_definition_2">7.2. API definition</a></li>
+<li><a href="#_api_definition_2">7.2. API definition</a>
+<ul class="sectlevel3">
+<li><a href="#_general_requirements">7.2.1. General requirements</a></li>
+<li><a href="#_requirements_specific_to_web_feature_services">7.2.2. Requirements specific to Web Feature Services</a></li>
+</ul>
+</li>
 <li><a href="#_http_1_1">7.3. HTTP 1.1</a></li>
 <li><a href="#_web_caching">7.4. Web caching</a></li>
 <li><a href="#_support_for_cross_origin_requests">7.5. Support for cross-origin requests</a></li>
@@ -956,20 +961,6 @@ specified in Annex A (normative) of this document. The framework, concepts, and
 methodology for testing, and the criteria to be achieved to claim conformance
 are specified in the OGC Compliance Testing Policies and Procedures and the
 OGC Compliance Testing web site.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Caution</div>
-</td>
-<td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/9">ISSUE 9</a><br>
-Include a list of conformance classes met by the server somewhere? In the
-OpenAPI document or in the root resource?
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -1512,6 +1503,8 @@ Allow also features that do not belong to any collection?
 </div>
 <div class="sect2">
 <h3 id="_api_definition_2"><a class="anchor" href="#_api_definition_2"></a>7.2. API definition</h3>
+<div class="sect3">
+<h4 id="_general_requirements"><a class="anchor" href="#_general_requirements"></a>7.2.1. General requirements</h4>
 <div class="paragraph">
 <p>Every WFS is defined by an API definition that describes the capabilities
 of the server and which can be used by clients to connect to the server or
@@ -1529,7 +1522,7 @@ by development tools to support the implementation of servers and clients.</p>
 <p>/req/core/api-definition<br></p>
 </div>
 <div class="paragraph">
-<p>The service SHALL provide an API definition document at the path "/api".</p>
+<p>The service SHALL provide an API definition document at the path <code>/api</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1558,8 +1551,102 @@ the document SHOULD conform to the
 content negotiation to select the desired representation.</p>
 </div>
 <div class="paragraph">
-<p>The API definition document is the "landing page" point" for the API. I.e.,
+<p>The API definition document is the "landing page" for the API. I.e.,
 there is no need to include the <code>/api</code> operation in the API definition itself.</p>
+</div>
+<div class="paragraph">
+<p>The idea is that any WFS can be used by developers that are familiar with
+the API definition language(s) supported by the server. For example, if
+an OpenAPI definition is used, it should be possible to create a working
+client using the OpenAPI definition. The developer may need to learn a little
+bit about geometry, etc., but it should not be required to read this standard
+to access the data via the API.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_requirements_specific_to_web_feature_services"><a class="anchor" href="#_requirements_specific_to_web_feature_services"></a>7.2.2. Requirements specific to Web Feature Services</h4>
+<div class="sect4">
+<h5 id="_support_for_generic_clients"><a class="anchor" href="#_support_for_generic_clients"></a>Support for generic clients</h5>
+<div class="paragraph">
+<p>In addition, it should be possible to write a "generic" client that can
+access Web Feature Services in general, i.e. that are not written for a
+specific server or API. To support such clients, the server has to declare the
+requirements classes it implements and conforms to.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/conformance-op<br></p>
+</div>
+<div class="paragraph">
+<p>The server SHALL support the HTTP GET operation at the path <code>/api/conformance</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/conformance-success<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a response with a
+HTTP status code <code>200</code>.</p>
+</div>
+<div class="paragraph">
+<p>The content of that response SHALL be based upon the OpenAPI 3.0 schema <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml">req-classes.yaml</a> and
+list all WFS 3.0 requirements classes that the server conforms to.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml">Schema for the list of requirements classes</a></div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>type: object
+required:
+  - conformsTo
+properties:
+  conformsTo:
+    type: array
+    items:
+      type: string</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 2. Requirements class response document</div>
+<div class="content">
+<div class="paragraph">
+<p>This example response in JSON is for a server that supports OpenAPI 3.0 for
+the API definition and HTML and GeoJSON as encodings for features.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>{
+  &quot;conformsTo&quot;: [
+    &quot;http://www.opengis.net/spec/wfs-1/3.0/req/core&quot;,
+    &quot;http://www.opengis.net/spec/wfs-1/3.0/req/oas30&quot;,
+    &quot;http://www.opengis.net/spec/wfs-1/3.0/req/html&quot;,
+    &quot;http://www.opengis.net/spec/wfs-1/3.0/req/geojson&quot;
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1571,7 +1658,7 @@ there is no need to include the <code>/api</code> operation in the API definitio
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/http<br></p>
 </div>
@@ -1806,7 +1893,7 @@ response are created.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-op<br></p>
 </div>
@@ -1826,7 +1913,7 @@ response are created.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-success<br></p>
 </div>
@@ -1888,7 +1975,7 @@ properties:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-links<br></p>
 </div>
@@ -1975,7 +2062,7 @@ metadata (example in DCAT). Which link relation type?
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-items<br></p>
 </div>
@@ -1993,7 +2080,7 @@ be provided in the property <code>collections</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-links<br></p>
 </div>
@@ -2030,7 +2117,7 @@ in OpenAPI 3.0.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-extent<br></p>
 </div>
@@ -2085,7 +2172,7 @@ The <code>crs</code> property is not used by this conformance class, but reserve
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 2. Feature collection metadata response document</div>
+<div class="title">Example 3. Feature collection metadata response document</div>
 <div class="content">
 <div class="paragraph">
 <p>This feature collection metadata example response in JSON is for a dataset with
@@ -2157,7 +2244,7 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-op<br>
 <br></p>
@@ -2195,7 +2282,7 @@ Precision level filter responsibility?
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-count-definition<br></p>
 </div>
@@ -2245,7 +2332,7 @@ are only examples and MAY be changed.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-count-response-1<br></p>
 </div>
@@ -2295,7 +2382,7 @@ OpenAPI 3.0 is available at
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-bbox-definition<br></p>
 </div>
@@ -2330,7 +2417,7 @@ explode: false</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-bbox-response<br></p>
 </div>
@@ -2367,7 +2454,7 @@ However, in cases where the box spans the antimeridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 3. The bounding box of the New Zealand Exclusive Economic Zone</div>
+<div class="title">Example 4. The bounding box of the New Zealand Exclusive Economic Zone</div>
 <div class="content">
 <div class="paragraph">
 <p>The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
@@ -2431,7 +2518,7 @@ property in the response schema.</p>
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 4. An additional parameter to filter buildings based on their function</div>
+<div class="title">Example 5. An additional parameter to filter buildings based on their function</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -2465,7 +2552,7 @@ example: &#39;function=public+use&#39;</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-response<br></p>
 </div>
@@ -2528,7 +2615,7 @@ to 10000 additional features and a <code>next</code> link, if there are more.</p
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-links<br></p>
 </div>
@@ -2647,7 +2734,7 @@ but depending on the implementation approach it may be complex to implement.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-rel-type<br></p>
 </div>
@@ -2671,7 +2758,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 5. Links</div>
+<div class="title">Example 6. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>If the request is to return building features and "10" is the default <code>count</code>,
@@ -2782,7 +2869,7 @@ not seem to be needed given the 'Date' HTTP header. For <code>numberMatched</cod
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-op<br></p>
 </div>
@@ -2822,7 +2909,7 @@ Add more about the feature identifiers.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-success<br></p>
 </div>
@@ -2840,7 +2927,7 @@ HTTP status code "200".</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-links<br></p>
 </div>
@@ -2880,7 +2967,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 6. Links</div>
+<div class="title">Example 7. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>The links in a feature could be (in this example represented as link headers):</p>
@@ -2990,7 +3077,7 @@ Also link to <a href="#rec_html">[rec_html]</a>.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/html/definition<br></p>
 </div>
@@ -3008,7 +3095,7 @@ SHALL support the media type <code>text/html</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/html/content<br></p>
 </div>
@@ -3099,7 +3186,7 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/geojson/definition<br></p>
 </div>
@@ -3109,7 +3196,7 @@ Add intro text for the requirement class.
 <div class="ulist">
 <ul>
 <li>
-<p><code>application/json</code> for feature collection metadata, and</p>
+<p><code>application/json</code> for feature collection metadata and the list of requirements classes, and</p>
 </li>
 <li>
 <p><code>application/geo+json</code> for feature collections and features.</p>
@@ -3126,7 +3213,7 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/geojson/content<br></p>
 </div>
@@ -3208,7 +3295,7 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf0/definition<br></p>
 </div>
@@ -3219,7 +3306,7 @@ SHALL support the following media types:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>application/xml</code> for feature collection metadata, and</p>
+<p><code>application/xml</code> for feature collection metadata and the list of requirements classes, and</p>
 </li>
 <li>
 <p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> for feature collections and features.</p>
@@ -3236,7 +3323,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf0/content<br></p>
 </div>
@@ -3330,7 +3417,7 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf2/definition<br></p>
 </div>
@@ -3341,7 +3428,7 @@ SHALL support the following media types:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>application/xml</code> for feature collection metadata, and</p>
+<p><code>application/xml</code> for feature collection metadata and the list of requirements classes, and</p>
 </li>
 <li>
 <p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> for feature collections and features.</p>
@@ -3358,7 +3445,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf2/content<br></p>
 </div>
@@ -3425,7 +3512,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/oas-definition-1<br></p>
 </div>
@@ -3443,7 +3530,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/oas-definition-2<br></p>
 </div>
@@ -3464,7 +3551,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/oas30/oas-impl<br>
 <br></p>
 <p class="tableblock">The server SHALL implement all capabilities specified in the OpenAPI
@@ -3495,7 +3582,7 @@ API specified in its OpenAPI definition.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/completeness<br></p>
 </div>
@@ -3549,7 +3636,7 @@ layer outside of the server.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-codes<br></p>
 </div>
@@ -3567,7 +3654,7 @@ SHALL cover all applicable HTTP Status Codes.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-400<br></p>
 </div>
@@ -3599,7 +3686,7 @@ including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-500<br></p>
 </div>
@@ -3625,7 +3712,7 @@ including NoApplicableCode, OperationProcessingFailed.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 7. An exception response object definition</div>
+<div class="title">Example 8. An exception response object definition</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -3651,7 +3738,7 @@ content:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/security<br></p>
 </div>
@@ -3707,7 +3794,7 @@ relationships between features. Does this require a discussion? Or more?
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/fc-md-op<br></p>
 </div>
@@ -4024,7 +4111,7 @@ This part of WFS only specifies operations using GET.
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 8. An unsafe implementation of GET</div>
+<div class="title">Example 9. An unsafe implementation of GET</div>
 <div class="content">
 <div class="paragraph">
 <p>An unsafe implementation of the GET method would be to use the GET method to delete resource from the server using a URL such as " GET /buildings/1013/delete".</p>
@@ -4779,7 +4866,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-02-06 13:49:53 CET
+Last updated 2018-02-12 17:47:39 CET
 </div>
 </div>
 </body>
