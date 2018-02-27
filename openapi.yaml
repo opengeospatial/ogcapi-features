@@ -41,12 +41,6 @@ paths:
               examples:
                 ex1:
                   $ref: '#/components/examples/featureCollectionsJson'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/content'
-              examples:
-                ex1:
-                  $ref: '#/components/examples/featureCollectionsXml'
             text/html:
               schema:
                 type: string
@@ -57,9 +51,6 @@ paths:
           description: An error occured.
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/exception'
-            application/xml:
               schema:
                 $ref: '#/components/schemas/exception'
             text/html:
@@ -95,12 +86,6 @@ paths:
               examples:
                 ex1:
                   $ref: '#/components/examples/featuresJson'
-            application/gml+xml;version=3.2:
-              schema:
-                $ref: '#/components/schemas/featureCollectionGML'
-              examples:
-                ex1:
-                  $ref: '#/components/examples/featuresXml'
             text/html:
               schema:
                 type: string
@@ -111,9 +96,6 @@ paths:
           description: An error occured.
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/exception'
-            application/xml:
               schema:
                 $ref: '#/components/schemas/exception'
             text/html:
@@ -135,9 +117,6 @@ paths:
             application/geo+json:
               schema:
                 $ref: '#/components/schemas/buildingGeoJSON'
-            application/gml+xml;version=3.2:
-              schema:
-                $ref: '#/components/schemas/buildingGML'
             text/html:
               schema:
                 type: string
@@ -145,9 +124,6 @@ paths:
           description: An error occured.
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/exception'
-            application/xml:
               schema:
                 $ref: '#/components/schemas/exception'
             text/html:
@@ -163,14 +139,13 @@ components:
         rules apply, i.e., the accept header shall be used to determine the
         format.\
 
-        Pre-defined values are "xml", "json" and "html". The response to other
+        Pre-defined values are "json" and "html". The response to other
         values is determined by the server.
       required: false
       schema:
         type: string
         enum:
           - json
-          - xml
           - html
       style: form
       explode: false
@@ -302,22 +277,11 @@ components:
       type: object
       required:
         - code
-      xml:
-        name: Exception
-        namespace: 'http://www.opengis.net/wfs/3.0'
-        prefix: wfs
       properties:
         code:
           type: string
-          xml:
-            name: code
-            attribute: true
         description:
           type: string
-          xml:
-            name: description
-            namespace: 'http://www.opengis.net/wfs/3.0'
-            prefix: wfs
     bbox:
       type: object
       required:
@@ -346,18 +310,11 @@ components:
       type: object
       required:
         - collections
-      xml:
-        name: Collections
-        namespace: 'http://www.opengis.net/wfs/3.0'
-        prefix: wfs
       properties:
         collections:
           type: array
           items:
             $ref: '#/components/schemas/collectionInfo'
-          xml:
-            namespace: 'http://www.opengis.net/wfs/3.0'
-            prefix: wfs
     collectionInfo:
       type: object
       required:
@@ -383,9 +340,6 @@ components:
             - href: http://example.com/concepts/buildings.html
               rel: describedBy
               type: text/html
-            - href: http://example.com/schemas/buildings.xsd
-              rel: describedBy
-              type: application/xml
         extent:
           $ref: '#/components/schemas/bbox'
         crs:
@@ -405,23 +359,15 @@ components:
       properties:
         href:
           type: string
-          xml:
-            attribute: true
           example: http://data.example.com/buildings/123
         rel:
           type: string
-          xml:
-            attribute: true
-          example: prev
+          example: alternate
         type:
           type: string
-          xml:
-            attribute: true
-          example: application/gml+xml;version=3.2
+          example: application/geo+json
         hreflang:
           type: string
-          xml:
-            attribute: true
           example: en
     featureCollectionGeoJSON:
       type: object
@@ -467,55 +413,6 @@ components:
             - Polygon
             - MultiPolygon
             - GeometryCollection
-    featureCollectionGML:
-      type: object
-      xml:
-        name: FeatureCollection
-        namespace: 'http://www.opengis.net/wfs/3.0'
-        prefix: wfs
-      properties:
-        features:
-          type: array
-          items:
-            xml:
-              name: featureMember
-              namespace: 'http://www.opengis.net/wfs/3.0'
-              prefix: wfs
-            oneOf:
-              - $ref: '#/components/schemas/referenceXlink'
-              - $ref: '#/components/schemas/featureGML'
-    featureGML:
-      type: object
-      required:
-        - 'gml:id'
-      xml:
-        name: AbstractFeature
-        namespace: 'http://www.opengis.net/gml/3.2'
-        prefix: gml
-      properties:
-        'gml:id':
-          type: string
-          xml:
-            namespace: 'http://www.opengis.net/gml/3.2'
-            prefix: gml
-            attribute: true
-    referenceXlink:
-      type: object
-      required:
-        - href
-      properties:
-        href:
-          type: string
-          xml:
-            namespace: 'http://www.w3.org/1999/xlink'
-            prefix: xlink
-            attribute: true
-        title:
-          type: string
-          xml:
-            namespace: 'http://www.w3.org/1999/xlink'
-            prefix: xlink
-            attribute: true
     buildingGeoJSON:
       type: object
       required:
@@ -544,46 +441,6 @@ components:
             floors:
               type: integer
               minimum: 1
-    buildingGML:
-      type: object
-      required:
-        - 'gml:id'
-      xml:
-        name: Building
-        namespace: 'http://data.example.org/schemas/building'
-        prefix: bui
-      properties:
-        'gml:id':
-          type: string
-          xml:
-            namespace: 'http://www.opengis.net/gml/3.2'
-            prefix: gml
-            attribute: true
-        name:
-          type: string
-          xml:
-            namespace: 'http://data.example.org/schemas/building'
-            prefix: bui
-        function:
-          type: string
-          enum:
-            - residential
-            - commercial
-            - public use
-          xml:
-            namespace: 'http://data.example.org/schemas/building'
-            prefix: bui
-        floors:
-          type: integer
-          minimum: 1
-          xml:
-            namespace: 'http://data.example.org/schemas/building'
-            prefix: bui
-        location:
-          type: object
-          xml:
-            namespace: 'http://data.example.org/schemas/building'
-            prefix: bui
   examples:
     apidocJson:
       summary: An example for a WFS OpenAPI document in JSON
@@ -594,18 +451,12 @@ components:
     featureCollectionsJson:
       summary: A capabilities example in JSON
       externalValue: http://example.org/examples/wfs/ft.json
-    featureCollectionsXml:
-      summary: A capabilities example in XML
-      externalValue: http://example.org/examples/wfs/ft.xml
     featureCollectionsHtml:
       summary: A capabilities example in HTML
       externalValue: http://example.org/examples/wfs/ft.html
     featuresJson:
       summary: A feature collection in JSON
       externalValue: http://example.org/examples/wfs/f.geojson
-    featuresXml:
-      summary: A feature collection in XML
-      externalValue: http://example.org/examples/wfs/f.gml
     featuresHtml:
       summary: A feature collection in HTML
       externalValue: http://example.org/examples/wfs/f.html

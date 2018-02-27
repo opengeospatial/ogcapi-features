@@ -63,8 +63,8 @@ a phrase that a component in the API definition of the server must be
 In this case, the following changes to the pre-defined OpenAPI component
 are permitted:
 
-* If the OpenAPI schema component contains an `xml` property, but XML is not
-an encoding that is supported by the service, the xml properties may be removed.
+* If the server supports an XML encoding, `xml` properties may be added to
+the relevant OpenAPI schema components. 
 * The range of values of a parameter or property may be extended (additional
 values) or constrained (if only a subset of all possible values are applicable
 to the service). An example for a constrained range of values is to explicitly
