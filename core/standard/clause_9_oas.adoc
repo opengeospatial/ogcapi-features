@@ -57,6 +57,9 @@ For error situations that originate from the server, the API definition
 SHALL cover all applicable HTTP Status Codes.
 |===
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/45[ISSUE 45] +
+Listing of all applicable HTTP Status Codes
+
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |/req/oas30/exceptions-400 +
@@ -114,11 +117,8 @@ The OpenAPI specification currently supports the following link:https://github.c
 * OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
 * OpenID Connect Discovery.
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/10[ISSUE 10] +
-If an implementation limits the access to a subset of the operations for some
-users (or if the server implements even more fine-grained access), it may no
-longer be possible for such a user to de-reference all links, including
-relationships between features. Does this require a discussion? Or more?
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/41[ISSUE 41] +
+How does a client determine which security protocols/standards/etc. a server supports
 
 === Feature collection metadata
 
