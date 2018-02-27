@@ -9,7 +9,6 @@ draft of part 1.
 Implementations:
 * [interactive instruments](#interactive-instruments)
 * [CubeWerx Inc.](#cubeWerx)
-* 
 
 ## interactive instruments
 

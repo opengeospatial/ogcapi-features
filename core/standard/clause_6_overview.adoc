@@ -1,10 +1,29 @@
 [[overview]]
 == Overview
 
+=== Evolution from previous versions of WFS
+
+The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads as it was state-of-the-art in the late 1990s and early 2000s, when WFS was originally designed. This version specifies a modernized service, that follows the current Web architecture and in particular the <<SDWBP,W3C/OGC best practices for sharing Spatial Data on the Web>> as well as the <<DWBP,W3C best practices for sharing Data on the Web>>.
+
+Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal is modularization. This has a few facets:
+
+* Clear separation between core requirements that almost everyone has who wants to share or use spatial data on a fine-grained level (this document) and more advanced capabilities that communities are using today (extensions specified in additional parts of WFS 3.0).
+* Technologies that change more frequently are decoupled and specified in separate modules ("requirements classes" in OGC terminology). This enables, for example, the use/re-use of new encodings for spatial data or API descriptions.
+* Modularization is not just about WFS modules, but about providing building blocks for fine-grained access to spatial data that can be used in data APIs in general. In other words, a server supporting WFS 3.0 should not be seen as a standalone WFS service. A corollary of this is that it should be possible to implement a data API that at the same time conforms to conformance classes from WFS 3.0 and from other OGC Web Service standards following a similar approach.
+
+This approach intends to support two types of client developers:
+
+* those that have never heard about WFS - it should be possible to create a client using the API definition without the need to read the WFS standard (they may need to learn a little bit about geometry, etc.);
+* those that want to write a "generic" client that can access WFSs, i.e. are not specific for a particular API/server.
+
+As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to an WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.
+
+The modernization is discussed in more detail link:https://github.com/opengeospatial/WFS_FES/blob/master/overview.md[here].
+
 NOTE: TODO +
-This includes also a discussion about the approach regarding OpenAPI and hypermedia controls. +
-Changes to previous versions of WFS are discussed in <<changes,Annex B>>. +
-Use of a simple example throughout the document - a WFS with a single feature collection (buildings) and three encodings GeoJSON, GML-SF0, HTML.
+Change this to a link to the WFS 3.0 Guide once a draft is available. Explain that the Guide includes a mapping between OGC Capabilities and OpenAPI as well as a mapping between WFS 2.0 operations and WFS 3.0.
+
+=== Encodings
 
 This standard does not mandate any encoding or format for representing features or
 feature collections. In addition to HTML as the standard encoding for Web content,
@@ -61,3 +80,13 @@ would be used.
 
 In addition, HTTP supports compression and the standard HTTP mechanisms can be
 used to reduce the size of the messages between the server and the client.
+
+=== Examples
+
+This document uses a simple example throughout the document: The dataset
+contains buildings and the server provides access to them through a single
+feature collection ("buildings") and two encodings GeoJSON and HTML.
+
+The buildings have a few (optional) properties: the polygon geometry of the
+building footprint, a name, the function of the building (residential,
+commercial or public use) and the floor count.
