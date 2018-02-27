@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2018-02-11)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2018-02-01)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -543,7 +543,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Copyright notice</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Copyright &#169; 2018 Open Geospatial Consortium</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Copyright &#169; 2017 Open Geospatial Consortium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/" class="bare">http://www.opengeospatial.org/legal/</a></p></td>
@@ -639,10 +639,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#overview">6. Overview</a></li>
+<li><a href="#_overview">6. Overview</a>
+<ul class="sectlevel2">
+<li><a href="#_evolution_from_previous_versions_of_wfs">6.1. Evolution from previous versions of WFS</a></li>
+<li><a href="#_encodings">6.2. Encodings</a></li>
+<li><a href="#_examples">6.3. Examples</a></li>
+</ul>
+</li>
 <li><a href="#_requirement_class_core">7. Requirement Class "Core"</a>
 <ul class="sectlevel2">
-<li><a href="#_overview">7.1. Overview</a></li>
+<li><a href="#_overview_2">7.1. Overview</a></li>
 <li><a href="#_api_definition_2">7.2. API definition</a></li>
 <li><a href="#_http_1_1">7.3. HTTP 1.1</a></li>
 <li><a href="#_web_caching">7.4. Web caching</a></li>
@@ -676,7 +682,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_requirements_classes_for_encodings">8. Requirements classes for encodings</a>
 <ul class="sectlevel2">
-<li><a href="#_overview_2">8.1. Overview</a></li>
+<li><a href="#_overview_3">8.1. Overview</a></li>
 <li><a href="#_requirement_class_html">8.2. Requirement Class "HTML"</a></li>
 <li><a href="#_requirement_class_geojson">8.3. Requirement Class "GeoJSON"</a></li>
 <li><a href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_0">8.4. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"</a></li>
@@ -696,17 +702,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#mediatypes">10. Media Types</a></li>
 <li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a></li>
-<li><a href="#changes">Annex B: Changes to the previous versions of WFS (Informative)</a>
-<ul class="sectlevel2">
-<li><a href="#_overview_3">B.1. Overview</a></li>
-<li><a href="#_wfs_as_a_restful_service">B.2. WFS as a RESTful service</a></li>
-<li><a href="#_mapping_between_ogc_capabilities_and_openapi">B.3. Mapping between OGC Capabilities and OpenAPI</a></li>
-<li><a href="#_mapping_between_wfs_2_0_operations_and_wfs_3_0">B.4. Mapping between WFS 2.0 operations and WFS 3.0</a></li>
-</ul>
-</li>
-<li><a href="#oas30_example">Annex C: OpenAPI definition example (Informative)</a></li>
-<li><a href="#_revision_history">Annex D: Revision History</a></li>
-<li><a href="#Bibliography">Annex E: Bibliography</a></li>
+<li><a href="#oas30_example">Annex B: OpenAPI definition example (Informative)</a></li>
+<li><a href="#_revision_history">Annex C: Revision History</a></li>
+<li><a href="#Bibliography">Annex D: Bibliography</a></li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
@@ -902,11 +900,31 @@ for spatial data on the web:</p>
 requirements class may also decide to use none of them, but to use another encoding
 instead.</p>
 </div>
-<div class="paragraph">
-<p>That said, the <a href="#rc_core">Core</a> requirements class includes recommendations to support
-<a href="#rec_html">HTML</a> and <a href="#rec_geojson">GeoJSON</a> as encodings, where practical.
-<a href="#overview">Clause 6 (Overview)</a> includes a discussion about recommended
-encodings.</p>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/24">ISSUE 24</a><br>
+Move XML output to extension.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/25">ISSUE 25</a><br>
+Pick a recommended encoding.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The "Core" does not mandate any encoding or format for the formal definition of
@@ -936,21 +954,6 @@ access to a spatial dataset.</p>
 structures, rich queries, other coordinate reference systems,
 subscription/notification, returning aggregated results, etc., may be
 specified in future parts of WFS or as vendor-specific extensions.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-The general idea is that it should be possible to implement a single API
-(e.g., have a single OpenAPI definition) that at the same time conforms to conformance classes from WFS 3.0 and from other OGC Web Service standards following a similar approach. In other words, the idea is not
-to define standalone services, but more to define "building blocks" for
-data APIs that supports spatial aspects.
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>Conformance with this standard shall be checked using all the relevant tests
@@ -1291,8 +1294,48 @@ but eventually these will be available using the base URL
 </div>
 </div>
 <div class="sect1">
-<h2 id="overview"><a class="anchor" href="#overview"></a>6. Overview</h2>
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>6. Overview</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_evolution_from_previous_versions_of_wfs"><a class="anchor" href="#_evolution_from_previous_versions_of_wfs"></a>6.1. Evolution from previous versions of WFS</h3>
+<div class="paragraph">
+<p>The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads as it was state-of-the-art in the late 1990s and early 2000s, when WFS was originally designed. This version specifies a modernized service, that follows the current Web architecture and in particular the <a href="#SDWBP">W3C/OGC best practices for sharing Spatial Data on the Web</a> as well as the <a href="#DWBP">W3C best practices for sharing Data on the Web</a>.</p>
+</div>
+<div class="paragraph">
+<p>Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal is modularization. This has a few facets:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Clear separation between core requirements that almost everyone has who wants to share or use spatial data on a fine-grained level (this document) and more advanced capabilities that communities are using today (extensions specified in additional parts of WFS 3.0).</p>
+</li>
+<li>
+<p>Technologies that change more frequently are decoupled and specified in separate modules ("requirements classes" in OGC terminology). This enables, for example, the use/re-use of new encodings for spatial data or API descriptions.</p>
+</li>
+<li>
+<p>Modularization is not just about WFS modules, but about providing building blocks for fine-grained access to spatial data that can be used in data APIs in general. In other words, a server supporting WFS 3.0 should not be seen as a standalone WFS service. A corollary of this is that it should be possible to implement a data API that at the same time conforms to conformance classes from WFS 3.0 and from other OGC Web Service standards following a similar approach.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This approach intends to support two types of client developers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>those that have never heard about WFS - it should be possible to create a client using the API definition without the need to read the WFS standard (they may need to learn a little bit about geometry, etc.);</p>
+</li>
+<li>
+<p>those that want to write a "generic" client that can access WFSs, i.e. are not specific for a particular API/server.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to an WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.</p>
+</div>
+<div class="paragraph">
+<p>The modernization is discussed in more detail <a href="https://github.com/opengeospatial/WFS_FES/blob/master/overview.md">here</a>.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1301,13 +1344,14 @@ but eventually these will be available using the base URL
 </td>
 <td class="content">
 TODO<br>
-This includes also a discussion about the approach regarding OpenAPI and hypermedia controls.<br>
-Changes to previous versions of WFS are discussed in <a href="#changes">Annex B</a>.<br>
-Use of a simple example throughout the document - a WFS with a single feature collection (buildings) and three encodings GeoJSON, GML-SF0, HTML.
+Change this to a link to the WFS 3.0 Guide once a draft is available. Explain that the Guide includes a mapping between OGC Capabilities and OpenAPI as well as a mapping between WFS 2.0 operations and WFS 3.0.
 </td>
 </tr>
 </table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_encodings"><a class="anchor" href="#_encodings"></a>6.2. Encodings</h3>
 <div class="paragraph">
 <p>This standard does not mandate any encoding or format for representing features or
 feature collections. In addition to HTML as the standard encoding for Web content,
@@ -1318,55 +1362,6 @@ rules for commonly used encodings for spatial data on the web are provided
 <p>None of these encodings is mandatory and an implementation of the "Core"
 requirements class may also decide to use none of them, but to use another encoding
 instead.</p>
-</div>
-<div class="paragraph">
-<p><a href="#rec_html">Support for HTML is recommended</a> as HTML is the core language of the World Wide Web.
-A server that supports HTML will support browsing the data with a web browser
-and it will enable search engines to crawl and index the dataset.</p>
-</div>
-<div class="paragraph">
-<p>GeoJSON is a commonly used format that is simple to understand and well
-supported by tools and software libraries. Since most Web developers are
-comfortable with using a JSON-based format, this version of the Web Feature
-Service standard <a href="#rec_geojson">recommends to support GeoJSON for encoding feature data</a>,
-if the feature data can be represented in GeoJSON for the intended use.</p>
-</div>
-<div class="paragraph">
-<p>Some examples for cases that are out-of-scope of GeoJSON are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>solids are used a geometries (e.g. in a 3D city model),</p>
-</li>
-<li>
-<p>geometries include non-linear curve interpolations
-that cannot be simplified (e.g., use of arcs in authoritative geometries),</p>
-</li>
-<li>
-<p>geometries have to be represented in a coordinate reference system that
-is not based on WGS 84 longitude/latitude (e.g. an authoritative national
-reference system),</p>
-</li>
-<li>
-<p>features have more than one geometric property, etc.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In addition to HTML and GeoJSON, a significant amount of feature data is
-available in XML-based formats, notably GML. GML supports more complex requirements
-than GeoJSON and does not have any of the limitations mentioned in the
-previous paragraph, but as a result GML also more complex to handle for both servers
-and clients. Conformance classes for GML are, therefore, included in this
-standard, but it is expected that these will typically be supported by servers
-where users are known to expect feature data in XML/GML.</p>
-</div>
-<div class="paragraph">
-<p>The recommendations for HTML and GeoJSON reflect the importance of HTML and
-the current popularity of JSON-based data formats. As the practices
-in the Web community evolve, the recommendations will likely be updated, too,
-in future versions of this standard to provide guidance.</p>
 </div>
 <div class="paragraph">
 <p>This part of WFS 3.0 does not provide any guidance on other encodings. The
@@ -1386,12 +1381,26 @@ would be used.</p>
 used to reduce the size of the messages between the server and the client.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>6.3. Examples</h3>
+<div class="paragraph">
+<p>This document uses a simple example throughout the document: The dataset
+contains buildings and the server provides access to them through a single
+feature collection ("buildings") and two encodings GeoJSON and HTML.</p>
+</div>
+<div class="paragraph">
+<p>The buildings have a few (optional) properties: the polygon geometry of the
+building footprint, a name, the function of the building (residential,
+commercial or public use) and the floor count.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_requirement_class_core"><a class="anchor" href="#_requirement_class_core"></a>7. Requirement Class "Core"</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overview"><a class="anchor" href="#_overview"></a>7.1. Overview</h3>
+<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>7.1. Overview</h3>
 <table id="rc_core" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1826,29 +1835,6 @@ and index a dataset, implementations SHOULD consider to support an HTML encoding
 </tr>
 </tbody>
 </table>
-<table id="rec_geojson" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 5</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/rec/core/geojson<br></p>
-</div>
-<div class="paragraph">
-<p>If the feature data can be represented for the intended use in GeoJSON,
-implementations SHOULD consider to support GeoJSON as an
-encoding for features and feature collections.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><a href="#overview">Clause 6 (Overview)</a> includes a discussion about the recommended
-encodings.</p>
-</div>
 <div class="paragraph">
 <p>A template for the definition of the parameter <code>f</code> in YAML according to OpenAPI 3.0 is available at
 <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml">f.yaml</a>.</p>
@@ -1863,7 +1849,7 @@ encodings.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 6</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 5</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/link-header<br></p>
 </div>
@@ -2023,7 +2009,7 @@ dataset for each supported encoding (relation: <code>item</code>), and</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 6</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/fc-md-descriptions<br></p>
 </div>
@@ -2635,7 +2621,7 @@ Query parameter collisions.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 8</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/core/fc-filters<br></p>
 </div>
@@ -2974,7 +2960,7 @@ Link: &lt;http://data.example.org/buildings?f=json&gt;; rel="collection"; type="
 <h2 id="_requirements_classes_for_encodings"><a class="anchor" href="#_requirements_classes_for_encodings"></a>8. Requirements classes for encodings</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>8.1. Overview</h3>
+<h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>8.1. Overview</h3>
 <div class="paragraph">
 <p>This clause specifies four pre-defined requirements classes for encodings to be
 used in a WFS. These encodings are commonly used encodings for spatial data on
@@ -3000,12 +2986,6 @@ the web:</p>
 <p>None of these encodings is mandatory and an implementation of the <a href="#rc_core">Core</a>
 requirements class may also decide to use none of them, but to use another encoding
 instead.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="#rc_core">Core</a> requirements class includes recommendations to support
-<a href="#rec_html">HTML</a> and <a href="#rec_geojson">GeoJSON</a> as encodings, where practical.
-<a href="#overview">Clause 6 (Overview)</a> includes a discussion about recommended
-encodings.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3111,7 +3091,7 @@ in the HTML <code>&lt;body/&gt;</code>, and</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 9</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 8</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/html/schema-org<br></p>
 </div>
@@ -3803,7 +3783,7 @@ SHALL be "describeCollections".</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 10</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 9</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/oas30/fc-key-properties<br></p>
 </div>
@@ -3829,7 +3809,7 @@ collection (see recommendation <code>/rec/core/fc-filters</code>).</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 11</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Recommendation 10</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/rec/oas30/f-key-properties<br></p>
 </div>
@@ -3920,231 +3900,7 @@ TODO
 </div>
 </div>
 <div class="sect1">
-<h2 id="changes"><a class="anchor" href="#changes"></a>Annex B: Changes to the previous versions of WFS (Informative)</h2>
-<div class="sectionbody">
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Caution</div>
-</td>
-<td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/3">ISSUE 3</a><br>
-Annex B is meant as a discussion / explanation to the community that uses
-WFS today. Maybe we should remove this from the document and make it a
-separate document (e.g., part of the release notes)?
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>B.1. Overview</h3>
-<div class="paragraph">
-<p>The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads as it was state-of-the-art in the late 1990s and early 2000s, when WFS was originally designed.</p>
-</div>
-<div class="paragraph">
-<p>This version 3.0 specifies a modernized service, that is better alignment with the current architecture of the Web. Key changes are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Architecture</strong>: WFS now supports and is consistent with HTTP and HTTPS. In previous versions, HTTP has been used mainly as a tunnel for WFS messages. In addition, the resources provided by the service include hypermedia controls in their representations to guide the user of a WFS.</p>
-</li>
-<li>
-<p><strong>Encodings</strong>: Previous versions were strongly tied to XML (Capabilities documents, XML schemas, Filter Encoding expressions, GML encoding). This version has been written with HTML, JSON and XML as encodings in mind, because these are common encodings today, but no encoding is mandatory and other encodings may be used as well.</p>
-</li>
-<li>
-<p><strong>Reuse</strong>: The use of WFS-specific resources or components has been minimized and, where available, existing industry-standards that are commonly used by developers are used instead. An example is the use of OpenAPI (the successor of Swagger) instead of OGC-specific "Capabilities" documents.</p>
-</li>
-<li>
-<p><strong>Schemas</strong>: Previous versions required XML schemas for all feature types and valid XML documents. While the capability to support application schemas has been maintained, it is no longer mandatory that rigid schemas are provided and used for validation of feature data.</p>
-</li>
-<li>
-<p><strong>Modularization</strong>: The WFS 2.0 standard, together with the Filter Encoding 2.0 standard, specifies a powerful, but complex service interface. In order to better support implementations that only need a relatively simple service or client, this version is modularized into multiple parts. This first part represents a simple interface to access spatial data that is sufficient for cases that do not require support for transactions, complex data structures, rich queries, custom coordinate reference systems, etc. Additional parts will specify extensions to this part to meet the needs of use cases that require such capabilities.</p>
-</li>
-<li>
-<p><strong>Security</strong>: Built-in support for secured services using common security schemes</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>These changes align WFS with the <a href="#SDWBP">W3C/OGC best practices for sharing Spatial Data on the Web</a> and the general <a href="#DWBP">W3C best practices for sharing Data on the Web</a>.</p>
-</div>
-<div class="paragraph">
-<p>As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to an WFS 2.0 implementation - at least for the capabilities that were already in scope in WFS 2.0. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.</p>
-</div>
-<div class="paragraph">
-<p>The next sub-clauses in this Annex describe the following aspects:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>WFS as a RESTful service - the architectural design principles,</p>
-</li>
-<li>
-<p>how elements of a WFS 2.0 Capabilities document map to an OpenAPI definition, and</p>
-</li>
-<li>
-<p>how WFS 2.0 operations map to WFS 3.0 and vice versa.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_wfs_as_a_restful_service"><a class="anchor" href="#_wfs_as_a_restful_service"></a>B.2. WFS as a RESTful service</h3>
-<div class="paragraph">
-<p>This version of WFS uses the REST architectural style that is that basis of many current Web APIs. Key characteristics include:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>URIs</strong>:  Every URI designates exactly one resource.</p>
-</li>
-<li>
-<p><strong>Addressability</strong>:  All the interesting aspects of a service (e.g. features) are exposed as resources.</p>
-</li>
-<li>
-<p><strong>Statelessness</strong>:  Every HTTP request includes all necessary information for the server to fulfil the request without relying on previous requests.</p>
-</li>
-<li>
-<p><strong>Representation</strong>:  Each resource offered by the service has a representation that encodes useful information about the state of a resource.  For example, typical representations for feature resources, as defined in this standard, are GML, GeoJSON or HTML.</p>
-</li>
-<li>
-<p><strong>Connectedness</strong> : Resources will link to each other and alternate representations.</p>
-</li>
-<li>
-<p><strong>Uniform interface</strong>:  The server offers a uniform interface, using the HTTP verbs, for accessing and manipulating resources.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>GET</strong> to retrieve resources</p>
-</li>
-<li>
-<p><strong>POST</strong> to create resources</p>
-</li>
-<li>
-<p><strong>PUT</strong> to modify existing resources</p>
-</li>
-<li>
-<p><strong>DELETE</strong> to remove resources</p>
-</li>
-<li>
-<p><strong>HEAD</strong> to test for the existence of resources</p>
-</li>
-<li>
-<p><strong>OPTIONS</strong> to get available options for a resource (e.g. which HTTP methods can be used)</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-This part of WFS only specifies operations using GET.
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Safety and idempotence</strong>:  HTTP methods are characterized as safe and/or idempotent and servers should be mindful when processing HTTP requests to not violate the safety and/or idempotence of the requested method.  Safe methods are methods that do not modify the representation of a resource and so their results can be safely cached.  Idempotent methods are methods that can be repeatedly processed but their effect will always be the same.  For example, whether a resource is deleted once or a dozen times the effect is still the same – the resource remains removed from the system.  The following table provides an overview of the safety and /or idempotence of each HTTP method used in the REST binding:</p>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
-<caption class="title">Table 1. Safety and Idempotence of HTTP methods</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">HTTP Method</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Safe</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Idempotent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">YES</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">YES</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PUT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NO</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">YES</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NO</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NO</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DELETE</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NO</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">YES</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">HEAD</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">YES</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">YES</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">OPTIONS</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">YES</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">YES</p></td>
-</tr>
-</tbody>
-</table>
-<div class="exampleblock">
-<div class="title">Example 9. An unsafe implementation of GET</div>
-<div class="content">
-<div class="paragraph">
-<p>An unsafe implementation of the GET method would be to use the GET method to delete resource from the server using a URL such as " GET /buildings/1013/delete".</p>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_mapping_between_ogc_capabilities_and_openapi"><a class="anchor" href="#_mapping_between_ogc_capabilities_and_openapi"></a>B.3. Mapping between OGC Capabilities and OpenAPI</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_mapping_between_wfs_2_0_operations_and_wfs_3_0"><a class="anchor" href="#_mapping_between_wfs_2_0_operations_and_wfs_3_0"></a>B.4. Mapping between WFS 2.0 operations and WFS 3.0</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO
-</td>
-</tr>
-</table>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="oas30_example"><a class="anchor" href="#oas30_example"></a>Annex C: OpenAPI definition example (Informative)</h2>
+<h2 id="oas30_example"><a class="anchor" href="#oas30_example"></a>Annex B: OpenAPI definition example (Informative)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This annex includes a complete example of an OpenAPI definition for a WFS.</p>
@@ -4773,7 +4529,7 @@ tags:
 </div>
 </div>
 <div class="sect1">
-<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex D: Revision History</h2>
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex C: Revision History</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4828,20 +4584,13 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,3,5,7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub; address issues #31, #32</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-11</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.6</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,6,7,8</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue #25</p></td>
-</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex E: Bibliography</h2>
+<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex D: Bibliography</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -4861,7 +4610,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-02-11 13:11:09 CET
+Last updated 2018-02-06 13:40:35 CET
 </div>
 </div>
 </body>
