@@ -266,6 +266,19 @@ To support browsing a WFS with a web browser and to enable search engines to cra
 and index a dataset, implementations SHOULD consider to support an HTML encoding.
 |===
 
+[[rec_geojson]]
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/geojson +
+
+If the feature data can be represented for the intended use in GeoJSON,
+implementations SHOULD consider to support GeoJSON as an
+encoding for features and feature collections.
+|===
+
+<<overview,Clause 6 (Overview)>> includes a discussion about the recommended
+encodings.
+
 A template for the definition of the parameter `f` in YAML according to OpenAPI 3.0 is available at
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/f.yaml[f.yaml].
 

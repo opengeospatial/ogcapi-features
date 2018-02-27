@@ -1,3 +1,4 @@
+[[overview]]
 == Overview
 
 === Evolution from previous versions of WFS
@@ -32,6 +33,39 @@ rules for commonly used encodings for spatial data on the web are provided
 None of these encodings is mandatory and an implementation of the "Core"
 requirements class may also decide to use none of them, but to use another encoding
 instead.
+
+<<rec_html,Support for HTML is recommended>> as HTML is the core language of the World Wide Web.
+A server that supports HTML will support browsing the data with a web browser
+and it will enable search engines to crawl and index the dataset.
+
+GeoJSON is a commonly used format that is simple to understand and well
+supported by tools and software libraries. Since most Web developers are
+comfortable with using a JSON-based format, this version of the Web Feature
+Service standard <<rec_geojson,recommends to support GeoJSON for encoding feature data>>,
+if the feature data can be represented in GeoJSON for the intended use.
+
+Some examples for cases that are out-of-scope of GeoJSON are:
+
+* solids are used a geometries (e.g. in a 3D city model),
+* geometries include non-linear curve interpolations
+that cannot be simplified (e.g., use of arcs in authoritative geometries),
+* geometries have to be represented in a coordinate reference system that
+is not based on WGS 84 longitude/latitude (e.g. an authoritative national
+reference system),
+* features have more than one geometric property, etc.
+
+In addition to HTML and GeoJSON, a significant amount of feature data is
+available in XML-based formats, notably GML. GML supports more complex requirements
+than GeoJSON and does not have any of the limitations mentioned in the
+previous paragraph, but as a result GML also more complex to handle for both servers
+and clients. Conformance classes for GML are, therefore, included in this
+standard, but it is expected that these will typically be supported by servers
+where users are known to expect feature data in XML/GML.
+
+The recommendations for HTML and GeoJSON reflect the importance of HTML and
+the current popularity of JSON-based data formats. As the practices
+in the Web community evolve, the recommendations will likely be updated, too,
+in future versions of this standard to provide guidance.
 
 This part of WFS 3.0 does not provide any guidance on other encodings. The
 supported encodings, or more precisely the media types of the supported encodings,
