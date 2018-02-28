@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0_SNAPSHOT (2018-02-27)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0.0-SNAPSHOT (2018-02-28)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -4058,8 +4058,6 @@ paths:
       operationId: describeCollections
       tags:
         - Capabilities
-      parameters:
-        - $ref: &#39;#/components/parameters/f&#39;
       responses:
         &#39;200&#39;:
           description: The feature collections shared by this API.
@@ -4067,15 +4065,9 @@ paths:
             application/json:
               schema:
                 $ref: &#39;#/components/schemas/content&#39;
-              examples:
-                ex1:
-                  $ref: &#39;#/components/examples/featureCollectionsJson&#39;
             text/html:
               schema:
                 type: string
-              examples:
-                ex1:
-                  $ref: &#39;#/components/examples/featureCollectionsHtml&#39;
         default:
           description: An error occured.
           content:
@@ -4085,9 +4077,28 @@ paths:
             text/html:
               schema:
                 type: string
+  /api/conformance:
+    get:
+      summary: list all requirements classes specified in a standard (e.g., WFS 3.0) that the server conforms to
+      operationId: getRequirementsClasses
+      tags:
+        - Capabilities
+      responses:
+        &#39;200&#39;:
+          description: the URIs of all requirements classes supported by the server
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/req-classes&#39;
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
   /buildings:
     get:
-      summary: retrieve building features
+      summary: retrieve building features; use conneg to request HTML or GeoJSON
       description: &gt;-
         Every feature in a dataset belongs to one collection of features. A dataset may consist of multiple feature
         collections. Typically, a feature collection is a collection of features of a similar type, based on a
@@ -4098,11 +4109,8 @@ paths:
       tags:
         - Features
       parameters:
-        - $ref: &#39;#/components/parameters/f&#39;
-        - $ref: &#39;#/components/parameters/startIndex&#39;
         - $ref: &#39;#/components/parameters/count&#39;
         - $ref: &#39;#/components/parameters/bbox&#39;
-        - $ref: &#39;#/components/parameters/resultType&#39;
         - $ref: &#39;#/components/parameters/function&#39;
       responses:
         &#39;200&#39;:
@@ -4112,15 +4120,9 @@ paths:
             application/geo+json:
               schema:
                 $ref: &#39;#/components/schemas/featureCollectionGeoJSON&#39;
-              examples:
-                ex1:
-                  $ref: &#39;#/components/examples/featuresJson&#39;
             text/html:
               schema:
                 type: string
-              examples:
-                ex1:
-                  $ref: &#39;#/components/examples/featuresHtml&#39;
         default:
           description: An error occured.
           content:
@@ -4130,15 +4132,44 @@ paths:
             text/html:
               schema:
                 type: string
+  /buildings.json:
+    get:
+      summary: retrieve building features in GeoJSON
+      description: &gt;-
+        Every feature in a dataset belongs to one collection of features. A dataset may consist of multiple feature
+        collections. Typically, a feature collection is a collection of features of a similar type, based on a
+        common schema.
+
+        This sample WFS has a single feature collection for buildings.
+      operationId: getBuildingsJSON
+      tags:
+        - Features
+      parameters:
+        - $ref: &#39;#/components/parameters/count&#39;
+        - $ref: &#39;#/components/parameters/bbox&#39;
+        - $ref: &#39;#/components/parameters/function&#39;
+      responses:
+        &#39;200&#39;:
+          description: &gt;-
+            Information about the feature collection plus the first features matching the selection parameters.
+          content:
+            application/geo+json:
+              schema:
+                $ref: &#39;#/components/schemas/featureCollectionGeoJSON&#39;
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
   /buildings/{fid}:
     get:
-      summary: retrieve a feature
-      operationId: getFeature
+      summary: retrieve a building; use conneg to request HTML or GeoJSON
+      operationId: getBuilding
       tags:
         - Features
       parameters:
         - $ref: &#39;#/components/parameters/id&#39;
-        - $ref: &#39;#/components/parameters/f&#39;
       responses:
         &#39;200&#39;:
           description: A feature.
@@ -4158,44 +4189,29 @@ paths:
             text/html:
               schema:
                 type: string
+  /buildings/{fid}.json:
+    get:
+      summary: retrieve a building in GeoJSON
+      operationId: getBuildingJSON
+      tags:
+        - Features
+      parameters:
+        - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;200&#39;:
+          description: A feature.
+          content:
+            application/geo+json:
+              schema:
+                $ref: &#39;#/components/schemas/buildingGeoJSON&#39;
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
 components:
   parameters:
-    f:
-      name: f
-      in: query
-      description: &gt;-
-        The format of the response. If no value is provided, the standard http
-        rules apply, i.e., the accept header shall be used to determine the
-        format.\
-
-        Pre-defined values are &quot;json&quot; and &quot;html&quot;. The response to other
-        values is determined by the server.
-      required: false
-      schema:
-        type: string
-        enum:
-          - json
-          - html
-      style: form
-      explode: false
-    startIndex:
-      name: startIndex
-      in: query
-      description: &gt;-
-        The optional startIndex parameter indicates the index within the result
-        set from which the server shall begin presenting results in the
-        response document. The first element has an index of 0.\
-
-        Minimum = 0.\
-
-        Default = 0.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-      style: form
-      explode: false
     count:
       name: count
       in: query
@@ -4244,39 +4260,6 @@ components:
           maximum: 180
       style: form
       explode: false
-    resultType:
-      name: resultType
-      in: query
-      description: &gt;-
-        This service will respond to a query in one of two ways (excluding
-        an exception response). It may either generate a complete
-        response document containing resources that satisfy the
-        operation or it may simply generate an empty response container
-        that indicates the count of the total number of resources that the
-        operation would return. Which of these two responses is generated is
-        determined by the value of the optional resultType parameter.\
-
-        The allowed values for this parameter are &quot;results&quot; and &quot;hits&quot;.\
-
-        If the value of the resultType parameter is set to &quot;results&quot;, the server
-        will generate a complete response document containing resources that
-        satisfy the operation.\
-
-        If the value of the resultType attribute is set to &quot;hits&quot;, the server
-        will generate an empty response document containing no resource
-        instances.\
-
-        Default = &quot;results&quot;.
-      required: false
-      schema:
-        type: string
-        enum:
-          - hits
-          - results
-        default: results
-      style: form
-      explode: false
-      example: resultType=results
     function:
       name: function
       in: query
@@ -4311,6 +4294,20 @@ components:
           type: string
         description:
           type: string
+    req-classes:
+      type: object
+      required:
+        - conformsTo
+      properties:
+        conformsTo:
+          type: array
+          items:
+            type: string
+          example:
+            - http://www.opengis.net/spec/wfs-1/3.0/req/core
+            - http://www.opengis.net/spec/wfs-1/3.0/req/oas30
+            - http://www.opengis.net/spec/wfs-1/3.0/req/html
+            - http://www.opengis.net/spec/wfs-1/3.0/req/geojson
     bbox:
       type: object
       required:
@@ -4470,25 +4467,6 @@ components:
             floors:
               type: integer
               minimum: 1
-  examples:
-    apidocJson:
-      summary: An example for a WFS OpenAPI document in JSON
-      externalValue: http://example.org/examples/wfs/openapi.json
-    apidocHtml:
-      summary: An example for a WFS OpenAPI document in HTML
-      externalValue: http://example.org/examples/wfs/openapi.html
-    featureCollectionsJson:
-      summary: A capabilities example in JSON
-      externalValue: http://example.org/examples/wfs/ft.json
-    featureCollectionsHtml:
-      summary: A capabilities example in HTML
-      externalValue: http://example.org/examples/wfs/ft.html
-    featuresJson:
-      summary: A feature collection in JSON
-      externalValue: http://example.org/examples/wfs/f.geojson
-    featuresHtml:
-      summary: A feature collection in HTML
-      externalValue: http://example.org/examples/wfs/f.html
 tags:
   - name: Capabilities
     description: Essential characteristics of this API including information about the data.
@@ -4595,7 +4573,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-02-27 16:56:14 CET
+Last updated 2018-02-28 09:51:26 CET
 </div>
 </div>
 </body>
