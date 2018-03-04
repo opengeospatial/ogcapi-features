@@ -641,10 +641,10 @@ in: query
 required: false
 schema:
   type: array
+  minItems: 4
+  maxItems: 4
   items:
     type: number
-    minItems: 4
-    maxItems: 4
     minimum: -180
     maximum: 180
 style: form
