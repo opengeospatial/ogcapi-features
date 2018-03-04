@@ -13,9 +13,9 @@ properties:
       type: array
       items:
         type: array
+        minItems: 4
         items:
           type: array
-          minItems: 4
+          minItems: 2
           items:
             type: number
-            minItems: 2

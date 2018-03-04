@@ -10,9 +10,9 @@ properties:
   bbox:
     description: west, north, east, south edges of the bounding box
     type: array
+    minItems: 4
+    maxItems: 4
     items:
-      minItems: 4
-      maxItems: 4
       type: number
       minimum: -180
       maximum: 180
