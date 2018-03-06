@@ -57,10 +57,16 @@ The following test suites shall be used if the service description is provided u
 [width="100%"]
 |====================
 |A.1.1 API Definition
-| a) Test Purpose:
-| b) Pre-conditions:
+| a) Test Purpose: Validate that the serivce provides a landing page on the required path
+| b) Pre-conditions: Client is aware of the root path to the service
 | c) Test Method:
+|     1) Client issues a get request on {protocol}://{root_path}/api
+|         i) accept header is set to ?????
+|     2) Client receives an OpenAPI document in response to the get request
 | d) References: Requirement R1
+| e) Notes: This operation is usually where the client and server initially authenticate their
+|    identities to each other.  Intermediate challenges and responses in support of authentication
+|    do not invalidate the results of this test.
 |====================
 |====================
 |A.1.2 Support Get on the Root Path
