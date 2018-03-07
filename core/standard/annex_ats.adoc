@@ -63,11 +63,11 @@ Tests: A.1.n
 <TODO - find a better place for this>
 Conventions:
 URL templates are used throughout these test suites.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986.
-scheme: http | https
-authority: DNS name of the server with optional port number
-path: The slash delimited identifier for a resource on the server
-query: query parameters following the "?" character
-fragment: identifies an element within the resource. Preceded by the "\#" character
+. scheme: http | https
+. authority: DNS name of the server with optional port number
+. path: The slash delimited identifier for a resource on the server
+. query: query parameters following the "?" character
+. fragment: identifies an element within the resource. Preceded by the "\#" character
 
 === A.2: OpenAPI 3.0 Test Suites*
 The following test suites shall be used if the service description is provided using OpenAPI 3.0.
@@ -165,28 +165,43 @@ A.2.4.2.2 Feature Collection Metadata Collections Property Validation
  a) Test Purpose: Validate that the Collections property of the Feature Collection Metadata content is correct and complete
  b) Pre-conditions: A Feature Collection Metadata document has been received
  c) Test Method:
-     1) Validate that there is a collections property for every Feature Collection hosted on the server.
+     1) Validate that there is a collections property for every Feature Collection hosted on the server. (issue: where does this info come from?)
      2) Validate that each Collections property includes a links property
-     3) For each Collections property; validate that the links property includes entries for each encoding supported by the server.
-     4) For each links property of each Collections property; validate that each entry in the links property resolves to the proper Feature Collection and encoding.
+     3) For each Collections property; validate that the links property includes entries for each encoding supported by the server. (Issue: how do we know the encodings supported?)
+     4) For each links property of each Collections property; validate that each entry in the links property resolves to the proper Feature Collection and encoding. (Validate by matching Feature names)
      5) Validate that each collections propery includes a valid extent property
      6) For each Feature Collection, validate that all Features contained in that collection fall within the bounding box defined by the extent property.
  d) References: 
      Requirements: R8, R9, R10
 ----
 ----
-A.2.3 OpenAPI Definition
+A.2.5 Feature Collections
+ a) Test Purpose: Validate that the service provides valid Feature Collections on the mandated paths
+ b) Pre-conditions: Client possesses Feature Collection metadata which provides paths to each Feature Collection
+ c) Test Method: 
+     For each Feature Collection identified in the Feature Collection metadata
+     1) Client issues a get request on {scheme}://{authority}/{collectionId}
+         i) Accept header is set to ?????
+     2) Client receives an Feature Collection in response to the get request
+     3) Client validates the expected Features were returned given the default values of the query parameters.
+     4) Client re-issues the get request with non-default values for the query parameters.
+     5) Client validates the expected Features were returned given the non-default values of the query parameters.
+     6) Client validates the content of the returned feature set using test A.2.5.1
+ d) References: 
+     Requirements: R11, R12, R13, R14, R15, R16, 
+     Tests: A.2.5.1
+ e) Notes:
+    Query parameters are:
+    1) count: the maximum number of Features returned at one time (R12 & R13).
+    2) bbox: only Features which fall within or intersect the boundaries of this box should be returned (R14 & R15)  
+----
+----
+A.2.5.1 Feature Result Set
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
- d) References: Requirement R3
-----
-----
-A.2.4 OpenAPI Implementation
- a) Test Purpose:
- b) Pre-conditions:
- c) Test Method:
- d) References: Requirement R4
+ d) References: 
+     Requirements: R16, R17, R18
 ----
 ----
 A.2.5 WFS 3.0 Core
