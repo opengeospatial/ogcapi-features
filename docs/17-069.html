@@ -649,36 +649,44 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_requirement_class_core">7. Requirement Class "Core"</a>
 <ul class="sectlevel2">
 <li><a href="#_overview">7.1. Overview</a></li>
-<li><a href="#_api_definition_2">7.2. API definition</a>
+<li><a href="#_api_landing_page">7.2. API landing page</a>
 <ul class="sectlevel3">
-<li><a href="#_general_requirements">7.2.1. General requirements</a></li>
-<li><a href="#_requirements_specific_to_web_feature_services">7.2.2. Requirements specific to Web Feature Services</a></li>
+<li><a href="#_operation">7.2.1. Operation</a></li>
+<li><a href="#_response">7.2.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_http_1_1">7.3. HTTP 1.1</a></li>
-<li><a href="#_web_caching">7.4. Web caching</a></li>
-<li><a href="#_support_for_cross_origin_requests">7.5. Support for cross-origin requests</a></li>
-<li><a href="#_encodings_2">7.6. Encodings</a></li>
-<li><a href="#_link_headers">7.7. Link headers</a></li>
-<li><a href="#_feature_collection_metadata">7.8. Feature collection metadata</a>
+<li><a href="#_api_definition_2">7.3. API definition</a></li>
+<li><a href="#_declaration_of_conformance_classes">7.4. Declaration of conformance classes</a></li>
+<li><a href="#_http_1_1">7.5. HTTP 1.1</a></li>
+<li><a href="#_web_caching">7.6. Web caching</a></li>
+<li><a href="#_support_for_cross_origin_requests">7.7. Support for cross-origin requests</a></li>
+<li><a href="#_encodings_2">7.8. Encodings</a></li>
+<li><a href="#_link_headers">7.9. Link headers</a></li>
+<li><a href="#_feature_collections_metadata">7.10. Feature collections metadata</a>
 <ul class="sectlevel3">
-<li><a href="#_operation">7.8.1. Operation</a></li>
-<li><a href="#_response">7.8.2. Response</a></li>
+<li><a href="#_operation_2">7.10.1. Operation</a></li>
+<li><a href="#_response_2">7.10.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_collections">7.9. Feature collections</a>
+<li><a href="#_feature_collection_metadata">7.11. Feature collection metadata</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_2">7.9.1. Operation</a></li>
-<li><a href="#_parameter_count">7.9.2. Parameter count</a></li>
-<li><a href="#_parameter_bbox">7.9.3. Parameter bbox</a></li>
-<li><a href="#_parameters_for_filtering_on_feature_properties">7.9.4. Parameters for filtering on feature properties</a></li>
-<li><a href="#_response_2">7.9.5. Response</a></li>
+<li><a href="#_operation_3">7.11.1. Operation</a></li>
+<li><a href="#_response_3">7.11.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_2">7.10. Feature</a>
+<li><a href="#_feature_collections">7.12. Feature collections</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_3">7.10.1. Operation</a></li>
-<li><a href="#_response_3">7.10.2. Response</a></li>
+<li><a href="#_operation_4">7.12.1. Operation</a></li>
+<li><a href="#_parameter_count">7.12.2. Parameter count</a></li>
+<li><a href="#_parameter_bbox">7.12.3. Parameter bbox</a></li>
+<li><a href="#_parameters_for_filtering_on_feature_properties">7.12.4. Parameters for filtering on feature properties</a></li>
+<li><a href="#_response_4">7.12.5. Response</a></li>
+</ul>
+</li>
+<li><a href="#_feature_2">7.13. Feature</a>
+<ul class="sectlevel3">
+<li><a href="#_operation_5">7.13.1. Operation</a></li>
+<li><a href="#_response_5">7.13.2. Response</a></li>
 </ul>
 </li>
 </ul>
@@ -738,10 +746,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
+<p>Landing page [1]</p>
+</li>
+<li>
 <p>Service definition [1]</p>
 </li>
 <li>
+<p>Conformance classes [1]</p>
+</li>
+<li>
 <p>Feature collections metadata [1]</p>
+</li>
+<li>
+<p>Feature collection metadata [0..n]</p>
 </li>
 <li>
 <p>Feature collection [0..n]</p>
@@ -1519,6 +1536,9 @@ which describes the capabilities of the server and which can be used by
 clients to connect to the server or
 by development tools to support the implementation of servers and clients.</p>
 </div>
+<div class="paragraph">
+<p>!!! Update diagram and description</p>
+</div>
 <div id="img_core" class="imageblock" style="text-align: center">
 <div class="content">
 <img src="figures/PT1_FIG01.png" alt="PT1 FIG01">
@@ -1540,9 +1560,115 @@ Allow also features that do not belong to any collection?
 </div>
 </div>
 <div class="sect2">
-<h3 id="_api_definition_2"><a class="anchor" href="#_api_definition_2"></a>7.2. API definition</h3>
+<h3 id="_api_landing_page"><a class="anchor" href="#_api_landing_page"></a>7.2. API landing page</h3>
 <div class="sect3">
-<h4 id="_general_requirements"><a class="anchor" href="#_general_requirements"></a>7.2.1. General requirements</h4>
+<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.2.1. Operation</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/root-op<br></p>
+</div>
+<div class="paragraph">
+<p>The server SHALL support the HTTP GET operation at the path <code>/</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response"><a class="anchor" href="#_response"></a>7.2.2. Response</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/root-success<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a response with a
+HTTP status code <code>200</code>.</p>
+</div>
+<div class="paragraph">
+<p>The content of that response SHALL be based upon the OpenAPI 3.0 schema <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml">root.yaml</a>
+and include at least links to the following resources:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/api</code> (relation type 'service')</p>
+</li>
+<li>
+<p><code>/conformance</code> (relation type 'conformance')</p>
+</li>
+<li>
+<p><code>/collections</code> (relation type 'data')</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO<br>
+Check, if we can reuse existing relation types instead of 'conformance' and 'data'?
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml">Schema for the landing page</a></div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>type: object
+required:
+  - links
+properties:
+  links:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 2. Landing page response document</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>{
+  &quot;links&quot;: [
+    { &quot;href&quot;: &quot;http://data.example.org/&quot;,
+      &quot;rel&quot;: &quot;self&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;this document&quot; },
+    { &quot;href&quot;: &quot;http://data.example.org/api&quot;,
+      &quot;rel&quot;: &quot;service&quot;, &quot;type&quot;: &quot;application/openapi+json;version=3.0&quot;, &quot;title&quot;: &quot;the API definition&quot; },
+    { &quot;href&quot;: &quot;http://data.example.org/conformance&quot;,
+      &quot;rel&quot;: &quot;conformance&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;WFS 3.0 conformance classes implemented by this server&quot; },
+    { &quot;href&quot;: &quot;http://data.example.org/collections&quot;,
+      &quot;rel&quot;: &quot;data&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;Metadata about the feature collections&quot; }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api_definition_2"><a class="anchor" href="#_api_definition_2"></a>7.3. API definition</h3>
 <div class="paragraph">
 <p>Every WFS is defined by an API definition that describes the capabilities
 of the server and which can be used by clients to connect to the server or
@@ -1555,7 +1681,7 @@ by development tools to support the implementation of servers and clients.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/api-definition<br></p>
 </div>
@@ -1589,7 +1715,7 @@ the document SHOULD conform to the
 content negotiation to select the desired representation.</p>
 </div>
 <div class="paragraph">
-<p>The API definition document is the "landing page" for the API. I.e.,
+<p>The API definition document describes the API. I.e.,
 there is no need to include the <code>/api</code> operation in the API definition itself.</p>
 </div>
 <div class="paragraph">
@@ -1601,15 +1727,12 @@ bit about geometry, etc., but it should not be required to read this standard
 to access the data via the API.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_requirements_specific_to_web_feature_services"><a class="anchor" href="#_requirements_specific_to_web_feature_services"></a>7.2.2. Requirements specific to Web Feature Services</h4>
-<div class="sect4">
-<h5 id="_support_for_generic_clients"><a class="anchor" href="#_support_for_generic_clients"></a>Support for generic clients</h5>
+<div class="sect2">
+<h3 id="_declaration_of_conformance_classes"><a class="anchor" href="#_declaration_of_conformance_classes"></a>7.4. Declaration of conformance classes</h3>
 <div class="paragraph">
-<p>In addition, it should be possible to write a "generic" client that can
-access Web Feature Services in general, i.e. that are not written for a
-specific server or API. To support such clients, the server has to declare the
-requirements classes it implements and conforms to.</p>
+<p>To support "generic" clients for accessing Web Feature Services in general - and
+not "just" a specific API / server, the server has to declare the
+requirements classes it implements and conforms to, too.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1618,12 +1741,12 @@ requirements classes it implements and conforms to.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/conformance-op<br></p>
 </div>
 <div class="paragraph">
-<p>The server SHALL support the HTTP GET operation at the path <code>/api/conformance</code>.</p>
+<p>The server SHALL support the HTTP GET operation at the path <code>/conformance</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1635,7 +1758,7 @@ requirements classes it implements and conforms to.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/conformance-success<br></p>
 </div>
@@ -1664,7 +1787,7 @@ properties:
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 2. Requirements class response document</div>
+<div class="title">Example 3. Requirements class response document</div>
 <div class="content">
 <div class="paragraph">
 <p>This example response in JSON is for a server that supports OpenAPI 3.0 for
@@ -1685,10 +1808,8 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
 <div class="sect2">
-<h3 id="_http_1_1"><a class="anchor" href="#_http_1_1"></a>7.3. HTTP 1.1</h3>
+<h3 id="_http_1_1"><a class="anchor" href="#_http_1_1"></a>7.5. HTTP 1.1</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1696,7 +1817,7 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/http<br></p>
 </div>
@@ -1711,7 +1832,7 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.4. Web caching</h3>
+<h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.6. Web caching</h3>
 <div class="paragraph">
 <p>Entity tags are a mechanism for web cache validation and for supporting conditional
 requests to reduce network traffic. Entity tags are specified by <a href="#rfc2616">HTTP/1.1 (RFC 2616)</a>.</p>
@@ -1762,7 +1883,7 @@ More detail / examples on caching
 </div>
 </div>
 <div class="sect2">
-<h3 id="_support_for_cross_origin_requests"><a class="anchor" href="#_support_for_cross_origin_requests"></a>7.5. Support for cross-origin requests</h3>
+<h3 id="_support_for_cross_origin_requests"><a class="anchor" href="#_support_for_cross_origin_requests"></a>7.7. Support for cross-origin requests</h3>
 <div class="paragraph">
 <p>To access data from a HTML page where the data is on another host than
 the webpage is by default prohibited for security reasons ("same-origin policy").
@@ -1803,7 +1924,7 @@ proxy layer on top of the server.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encodings_2"><a class="anchor" href="#_encodings_2"></a>7.6. Encodings</h3>
+<h3 id="_encodings_2"><a class="anchor" href="#_encodings_2"></a>7.8. Encodings</h3>
 <div class="paragraph">
 <p>While WFS 3.0 does not include any mandatory encoding, it recommends the following
 encodings. See <a href="#overview">Clause 6 (Overview)</a> for a discussion.</p>
@@ -1895,7 +2016,7 @@ the Accept header of the HTTP request.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_link_headers"><a class="anchor" href="#_link_headers"></a>7.7. Link headers</h3>
+<h3 id="_link_headers"><a class="anchor" href="#_link_headers"></a>7.9. Link headers</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1921,9 +2042,9 @@ response are created.</p>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.8. Feature collection metadata</h3>
+<h3 id="_feature_collections_metadata"><a class="anchor" href="#_feature_collections_metadata"></a>7.10. Feature collections metadata</h3>
 <div class="sect3">
-<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.8.1. Operation</h4>
+<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.10.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1931,19 +2052,19 @@ response are created.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-op<br></p>
 </div>
 <div class="paragraph">
-<p>The server SHALL support the HTTP GET operation at the path <code>/</code>.</p>
+<p>The server SHALL support the HTTP GET operation at the path <code>/collections</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response"><a class="anchor" href="#_response"></a>7.8.2. Response</h4>
+<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.10.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1951,7 +2072,7 @@ response are created.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-success<br></p>
 </div>
@@ -1968,41 +2089,18 @@ HTTP status code <code>200</code>.</p>
 <div class="listingblock">
 <div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml">Schema for the metadata about feature collections</a></div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="JSON"><span></span>type: object
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
 required:
+  - links
   - collections
 properties:
   links:
     type: array
     items:
-      $ref: link.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
   collections:
     type: array
     items:
-      type: object
-      required:
-        - name
-        - links
-      properties:
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        links:
-          type: array
-          items:
-            $ref: link.yaml
-        extent:
-          $ref: bbox.yaml
-        crs:
-          description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
-          type: array
-          items:
-            type: string
-          default:
-            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
       $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml</code></pre>
 </div>
 </div>
@@ -2013,7 +2111,7 @@ properties:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-links<br></p>
 </div>
@@ -2032,11 +2130,7 @@ the server (relation: <code>alternate</code>),</p>
 </li>
 <li>
 <p>links to each feature collection resource in this distribution of the
-dataset for each supported encoding (relation: <code>item</code>), and</p>
-</li>
-<li>
-<p>links to the API definition document in each supported encoding
-(relation: <code>service</code>).</p>
+dataset for each supported encoding (relation: <code>item</code>).</p>
 </li>
 </ul>
 </div>
@@ -2100,7 +2194,7 @@ metadata (example in DCAT). Which link relation type?
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-items<br></p>
 </div>
@@ -2118,7 +2212,7 @@ be provided in the property <code>collections</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-links<br></p>
 </div>
@@ -2155,7 +2249,7 @@ in OpenAPI 3.0.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-extent<br></p>
 </div>
@@ -2170,10 +2264,10 @@ in OpenAPI 3.0.
 <div class="content">
 <pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
 required:
-  - collectionId
+  - name
   - links
 properties:
-  collectionId:
+  name:
     description: identifier of the collection used, for example, in URIs
     type: string
   title:
@@ -2210,7 +2304,7 @@ The <code>crs</code> property is not used by this conformance class, but reserve
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 3. Feature collection metadata response document</div>
+<div class="title">Example 4. Feature collection metadata response document</div>
 <div class="content">
 <div class="paragraph">
 <p>This feature collection metadata example response in JSON is for a dataset with
@@ -2232,35 +2326,28 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="JSON"><span></span>{
   &quot;links&quot;: [
-    { &quot;href&quot;: &quot;http://data.example.org/index.json&quot;,
+    { &quot;href&quot;: &quot;http://data.example.org/collections.json&quot;,
       &quot;rel&quot;: &quot;self&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;this document&quot; },
-    { &quot;href&quot;: &quot;http://data.example.org/index.html&quot;,
+    { &quot;href&quot;: &quot;http://data.example.org/collections.html&quot;,
       &quot;rel&quot;: &quot;alternate&quot;, &quot;type&quot;: &quot;text/html&quot;, &quot;title&quot;: &quot;this document as HTML&quot; },
-    { &quot;href&quot;: &quot;http://data.example.org/api.json&quot;,
-      &quot;rel&quot;: &quot;service&quot;, &quot;type&quot;: &quot;application/openapi+json;version=3.0&quot;, &quot;title&quot;: &quot;the OpenAPI definition as JSON&quot; },
-    { &quot;href&quot;: &quot;http://data.example.org/api.html&quot;,
-      &quot;rel&quot;: &quot;service&quot;, &quot;type&quot;: &quot;text/html&quot;, &quot;title&quot;: &quot;the OpenAPI definition as HTML&quot; },
-    { &quot;href&quot;: &quot;http://catalog.example.org/datasets/buildings#wfs&quot;,
-      &quot;rel&quot;: &quot;???&quot;, &quot;type&quot;: &quot;application/json+ld&quot; }
+    { &quot;href&quot;: &quot;http://schemas.example.org/1.0/foobar.xsd&quot;,
+      &quot;rel&quot;: &quot;describedBy&quot;, &quot;type&quot;: &quot;application/xml&quot;, &quot;title&quot;: &quot;XML schema for ACME Inc. data&quot; }
   ],
   &quot;collections&quot;: [
     {
-      &quot;collectionId&quot;: &quot;buildings&quot;,
+      &quot;name&quot;: &quot;buildings&quot;,
       &quot;title&quot;: &quot;Buildings&quot;,
       &quot;description&quot;: &quot;Buildings in the city of Bonn.&quot;,
       &quot;extent&quot;: {
         &quot;bbox&quot;: [ 7.01, 50.63, 7.22, 50.78 ]
       },
       &quot;links&quot;: [
-        { &quot;href&quot;: &quot;http://data.example.org/buildings.json&quot;,
-          &quot;rel&quot;: &quot;about&quot;, &quot;type&quot;: &quot;application/geo+json&quot;,
-          &quot;title&quot;: &quot;Buildings as GeoJSON&quot; },
-        { &quot;href&quot;: &quot;http://data.example.org/buildings.html&quot;,
-          &quot;rel&quot;: &quot;about&quot;, &quot;type&quot;: &quot;text/html&quot;,
-          &quot;title&quot;: &quot;Buildings as HTML&quot; },
+        { &quot;href&quot;: &quot;http://data.example.org/collections/buildings/items&quot;,
+          &quot;rel&quot;: &quot;item&quot;, &quot;type&quot;: &quot;application/geo+json&quot;,
+          &quot;title&quot;: &quot;Buildings&quot; }
         { &quot;href&quot;: &quot;http://example.org/concepts/building.html&quot;,
           &quot;rel&quot;: &quot;describedBy&quot;, &quot;type&quot;: &quot;text/html&quot;,
-          &quot;title&quot;: &quot;Feature catalogue for the buildings&quot; }
+          &quot;title&quot;: &quot;Feature catalogue for buildings&quot; }
       ]
     }
   ]
@@ -2272,9 +2359,9 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.9. Feature collections</h3>
+<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.11. Feature collection metadata</h3>
 <div class="sect3">
-<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.9.1. Operation</h4>
+<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.11.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2282,17 +2369,68 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/sfc-md-op<br></p>
+</div>
+<div class="paragraph">
+<p>The server SHALL support the HTTP GET operation at the path <code>/collections/{name}</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>name</code> is the property of the same name in the feature collections metadata.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.11.2. Response</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/sfc-md-success<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a response with a
+HTTP status code <code>200</code>.</p>
+</div>
+<div class="paragraph">
+<p>The content of that response SHALL be the same to the content for this feature
+collection in the <code>/collections</code> response.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.12. Feature collections</h3>
+<div class="sect3">
+<h4 id="_operation_4"><a class="anchor" href="#_operation_4"></a>7.12.1. Operation</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-op<br>
 <br></p>
 </div>
 <div class="paragraph">
 <p>For every feature collection identified in the metadata about the feature collection (path "/"),
-the server SHALL support the HTTP GET operation at the path <code>/{collectionId}</code>.</p>
+the server SHALL support the HTTP GET operation at the path <code>/collections/{name}/items</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>collectionId</code> is the property of the same name in the feature collection metadata.</p>
+<p><code>name</code> is the property of the same name in the feature collections metadata.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2312,7 +2450,7 @@ Precision level filter responsibility?
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.9.2. Parameter count</h4>
+<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.12.2. Parameter count</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2320,7 +2458,7 @@ Precision level filter responsibility?
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-count-definition<br></p>
 </div>
@@ -2370,7 +2508,7 @@ are only examples and MAY be changed.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-count-response-1<br></p>
 </div>
@@ -2412,7 +2550,7 @@ OpenAPI 3.0 is available at
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.9.3. Parameter bbox</h4>
+<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.12.3. Parameter bbox</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2420,7 +2558,7 @@ OpenAPI 3.0 is available at
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-bbox-definition<br></p>
 </div>
@@ -2455,7 +2593,7 @@ explode: false</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-bbox-response<br></p>
 </div>
@@ -2492,7 +2630,7 @@ However, in cases where the box spans the antimeridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 4. The bounding box of the New Zealand Exclusive Economic Zone</div>
+<div class="title">Example 5. The bounding box of the New Zealand Exclusive Economic Zone</div>
 <div class="content">
 <div class="paragraph">
 <p>The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
@@ -2507,7 +2645,7 @@ OpenAPI 3.0 is available at
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.9.4. Parameters for filtering on feature properties</h4>
+<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.12.4. Parameters for filtering on feature properties</h4>
 <div class="admonitionblock caution">
 <table>
 <tr>
@@ -2556,7 +2694,7 @@ property in the response schema.</p>
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 5. An additional parameter to filter buildings based on their function</div>
+<div class="title">Example 6. An additional parameter to filter buildings based on their function</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -2582,7 +2720,7 @@ example: &#39;function=public+use&#39;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.9.5. Response</h4>
+<h4 id="_response_4"><a class="anchor" href="#_response_4"></a>7.12.5. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2590,7 +2728,7 @@ example: &#39;function=public+use&#39;</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-response<br></p>
 </div>
@@ -2653,7 +2791,7 @@ to 10000 additional features and a <code>next</code> link, if there are more.</p
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-links<br></p>
 </div>
@@ -2772,7 +2910,7 @@ but depending on the implementation approach it may be complex to implement.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-rel-type<br></p>
 </div>
@@ -2796,7 +2934,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 6. Links</div>
+<div class="title">Example 7. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>If the request is to return building features and "10" is the default <code>count</code>,
@@ -2806,9 +2944,9 @@ the optional <code>prev</code> links):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings.json&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.html&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json?startIndex=10&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=10&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2816,10 +2954,10 @@ Link: &lt;http://data.example.org/buildings.json?startIndex=10&gt;; rel="next"; 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings.json?startIndex=10&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.html?startIndex=10&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json?startIndex=0&gt;; rel="prev"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.json?startIndex=20&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=10&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html?startIndex=10&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=0&gt;; rel="prev"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=20&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2827,9 +2965,9 @@ Link: &lt;http://data.example.org/buildings.json?startIndex=20&gt;; rel="next"; 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings.json?count=50&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.html?count=50&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=50&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html?count=50&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;startIndex=50&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2837,10 +2975,10 @@ Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=50&gt;;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=50&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.html?count=50&amp;startIndex=50&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=0&gt;; rel="prev"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=100&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;startIndex=50&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html?count=50&amp;startIndex=50&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;startIndex=0&gt;; rel="prev"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;startIndex=100&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 </div>
@@ -2897,9 +3035,9 @@ not seem to be needed given the 'Date' HTTP header. For <code>numberMatched</cod
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.10. Feature</h3>
+<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.13. Feature</h3>
 <div class="sect3">
-<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.10.1. Operation</h4>
+<h4 id="_operation_5"><a class="anchor" href="#_operation_5"></a>7.13.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2907,16 +3045,17 @@ not seem to be needed given the 'Date' HTTP header. For <code>numberMatched</cod
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-op<br></p>
 </div>
 <div class="paragraph">
-<p>For every feature in a feature collection (path "/{collectionId}"),
-the service SHALL support the HTTP GET operation at the path <code>/{collectionId}/{id}</code>.</p>
+<p>For every feature in a feature collection (path <code>/collections/{name}/items</code>),
+the service SHALL support the HTTP GET operation at the path
+<code>/collections/{name}/items/{id}</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>collectionId</code> is the property of the same name in the feature collection metadata.</p>
+<p><code>name</code> is the property of the same name in the feature collection metadata.</p>
 </div>
 <div class="paragraph">
 <p><code>id</code> is the unique identifier of the feature within the dataset.</p>
@@ -2953,7 +3092,7 @@ distinguish between them.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.10.2. Response</h4>
+<h4 id="_response_5"><a class="anchor" href="#_response_5"></a>7.13.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2961,7 +3100,7 @@ distinguish between them.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-success<br></p>
 </div>
@@ -2979,7 +3118,7 @@ HTTP status code "200".</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-links<br></p>
 </div>
@@ -3019,16 +3158,16 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 7. Links</div>
+<div class="title">Example 8. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>The links in a feature could be (in this example represented as link headers):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings/123.json&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings/123.html&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json&gt;; rel="collection"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items/123.json&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items/123.html&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json&gt;; rel="collection"; type="application/geo+json"</code></pre>
 </div>
 </div>
 </div>
@@ -3129,7 +3268,7 @@ Also link to <a href="#rec_html">[rec_html]</a>.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/html/definition<br></p>
 </div>
@@ -3147,7 +3286,7 @@ SHALL support the media type <code>text/html</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/html/content<br></p>
 </div>
@@ -3238,7 +3377,7 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/geojson/definition<br></p>
 </div>
@@ -3265,7 +3404,7 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/geojson/content<br></p>
 </div>
@@ -3347,7 +3486,7 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf0/definition<br></p>
 </div>
@@ -3375,7 +3514,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf0/content<br></p>
 </div>
@@ -3469,7 +3608,7 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf2/definition<br></p>
 </div>
@@ -3497,7 +3636,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf2/content<br></p>
 </div>
@@ -3564,7 +3703,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/oas-definition-1<br></p>
 </div>
@@ -3582,7 +3721,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/oas-definition-2<br></p>
 </div>
@@ -3603,7 +3742,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/oas30/oas-impl<br>
 <br></p>
 <p class="tableblock">The server SHALL implement all capabilities specified in the OpenAPI
@@ -3647,7 +3786,7 @@ OpenAPI Validation
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/completeness<br></p>
 </div>
@@ -3701,7 +3840,7 @@ layer outside of the server.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-codes<br></p>
 </div>
@@ -3732,7 +3871,7 @@ Listing of all applicable HTTP Status Codes
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 39</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-400<br></p>
 </div>
@@ -3764,7 +3903,7 @@ including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 40</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-500<br></p>
 </div>
@@ -3790,7 +3929,7 @@ including NoApplicableCode, OperationProcessingFailed.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 8. An exception response object definition</div>
+<div class="title">Example 9. An exception response object definition</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -3816,7 +3955,7 @@ content:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 41</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/security<br></p>
 </div>
@@ -3869,7 +4008,7 @@ How does a client determine which security protocols/standards/etc. a server sup
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 42</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/fc-md-op<br></p>
 </div>
@@ -4517,7 +4656,7 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.3</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues #2, #5, #6, #7, #8, #14, #15, #19</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/2">#2</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/5">#5</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/6">#6</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/7">#7</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/8">#8</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/14">#14</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/15">#15</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/19">#19</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-01-22</p></td>
@@ -4531,28 +4670,28 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.5</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,3,5,7</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub; address issues #31, #32</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub; address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/31">#31</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/32">#32</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-11</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.6</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,6,7,8</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue #25</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue <a href="https://github.com/opengeospatial/WFS_FES/issues/25">#25</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-27</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues #3, #9, #12, #22, #23, #24, #44; add links to issues #41, #45, #46, #47</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/3">#3</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/9">#9</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/12">#12</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/22">#22</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/23">#23</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/24">#24</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/44">#44</a>; add links to issues <a href="https://github.com/opengeospatial/WFS_FES/issues/41">#41</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/45">#45</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/46">#46</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/47">#47</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-04</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.8</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">T. Schaub</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7,B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JSON schema fixes #54, #55</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JSON schema fixes <a href="https://github.com/opengeospatial/WFS_FES/issues/54">#54</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/55">#55</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -4580,7 +4719,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-04 10:22:33 CET
+Last updated 2018-03-04 02:28:30 MST
 </div>
 </div>
 </body>
