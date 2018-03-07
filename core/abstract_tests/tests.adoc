@@ -1,60 +1,71 @@
-*Annex A: Abstract Test Suite*
-.Requirements Trace Matrix
-[width="100%"]
+[appendix]
+:appendix-caption: Annex A: Abstract Test Suite
+== Conformance Class Abstract Test Suite (Normative)
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/46[ISSUE 46] +
+OpenAPI Validation
+
+
+== Requirements Trace Matrix
+[cols=">20h,<80d"width="100%"]
 |====================
 |Requirement 1: API Definition
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirement_api-definition.adoc]
+|Description:
+|include::requirements/requirement_api-definition.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 2: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirement_fc-md-op.adoc]
+|Description:
+|include::/requirements/requirement_fc-md-op.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 3: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirement_oas-definition.adoc]
+|Description:
+|include::requirements/requirement_oas-definition.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 4: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirement_oas-impl.adoc]
+|include::requirements/requirement_oas-impl.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 5: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirements_class_core.adoc]
+|include::requirements/requirements_class_core.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 6: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirements_class_geojson.adoc]
+|include::requirements/requirements_class_geojson.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 7: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirements_class_gmlsf0.adoc]
+|include::requirements/requirements_class_gmlsf0.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 8: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirements_class_gmlsf2.adoc]
+|include::requirements/requirements_class_gmlsf2.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 9: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirements_class_html.adoc]
+|include::requirements/requirements_class_html.adoc[]
 |Tests: A.1.n
 |====================
 |====================
 |Requirement 10: TBD
-|Description: http://url[https://github.com/opengeospatial/WFS_FES/blob/master/core/standard/requirements/requirements_class_oas30.adoc]
+|Description:
+|include::requirements/requirements_class_oas30.adoc[]
 |Tests: A.1.n
 |====================
 
-*A.1: OpenAPI 3.0 Test Suites*
+=== A.1: OpenAPI 3.0 Test Suites*
 The following test suites shall be used if the service description is provided using OpenAPI 3.0.
-[width="100%"]
+[cols=">20h,<80d"width="100%"]
 |====================
 |A.1.1 API Definition
 | a) Test Purpose: Validate that the serivce provides a landing page on the required path
