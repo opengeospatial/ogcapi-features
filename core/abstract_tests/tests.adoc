@@ -60,7 +60,7 @@ Tests: A.1.n
 ----
 Requirement 10: TBD
 Description:
-include::requirements/requirements_class_oas30.adoc[]
+include::../standard/core/requirements/requirements_class_oas30.adoc[]
 Tests: A.1.n
 ----
 
@@ -76,8 +76,7 @@ A.1.1 API Definition
          i) accept header is set to ?????
      2) Client receives an OpenAPI document in response to the get request
  d) References: Requirement R1
- e) Notes: This operation is usually where the client and server initially authenticate their identities to each other.  
- Intermediate challenges and responses in support of authentication do not invalidate the results of this test.
+ e) Notes: This operation is usually where the client and server initially authenticate their identities to each other.  Intermediate challenges and responses in support of authentication do not invalidate the results of this test.
 ----
 ----
 A.1.2 Support Get on the Root Path
