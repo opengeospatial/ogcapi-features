@@ -101,6 +101,95 @@ link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openap
 These are generic schemas that do not include any application schema information about
 specific feature types or their properties.
 
+.A GeoJSON FeatureCollection Object response
+=================
+In the example below, only the first and tenth feature is shown. Coordinates are not shown.
+
+[source,JSON]
+----
+{
+  "type" : "FeatureCollection",
+  "links" : [ {
+    "href" : "http://data.example.com/collections/buildings/items/?f=json",
+    "rel" : "self",
+    "type" : "application/geo+json",
+    "title" : "this document"
+  }, {
+    "href" : "http://data.example.com/collections/buildings/items/?f=html",
+    "rel" : "alternate",
+    "type" : "text/html",
+    "title" : "this document as HTML"
+  }, {
+    "href" : "http://data.example.com/collections/buildings/items/?f=json&startIndex=10&count=10",
+    "rel" : "next",
+    "type" : "application/geo+json",
+    "title" : "next page"
+  } ],
+  "features" : [ {
+    "type" : "Feature",
+    "id" : "123",
+    "geometry" : {
+      "type" : "Polygon",
+      "coordinates" : [ ... ]
+    },
+    "properties" : {
+      "function" : "residential",
+      "floors" : "2"
+    }
+  }, { ...
+  }, {
+    "type" : "Feature",
+    "id" : "132",
+    "geometry" : {
+      "type" : "Polygon",
+      "coordinates" : [ ... ]
+    },
+    "properties" : {
+      "function" : "public use",
+      "floors" : "10"
+    }
+  } ]
+}
+----
+=================
+
+.A GeoJSON Feature Object response
+=================
+In the example below, coordinates are not shown.
+
+[source,JSON]
+----
+{
+  "type" : "Feature",
+  "links" : [ {
+    "href" : "http://data.example.com/collections/buildings/items/123/?f=json",
+    "rel" : "self",
+    "type" : "application/geo+json",
+    "title" : "this document"
+  }, {
+    "href" : "http://data.example.com/collections/buildings/items/123/?f=html",
+    "rel" : "alternate",
+    "type" : "text/html",
+    "title" : "this document as HTML"
+  }, {
+    "href" : "http://data.example.com/collections/buildings/items",
+    "rel" : "collection",
+    "type" : "application/geo+json",
+    "title" : "the collection document"
+  } ],
+  "id" : "123",
+  "geometry" : {
+    "type" : "Polygon",
+    "coordinates" : [ ... ]
+  },
+  "properties" : {
+    "function" : "residential",
+    "floors" : "2"
+  }
+}
+----
+=================
+
 === Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"
 
 NOTE: TODO +

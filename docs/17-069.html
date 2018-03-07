@@ -3475,6 +3475,101 @@ OpenAPI definitions are available at
 These are generic schemas that do not include any application schema information about
 specific feature types or their properties.</p>
 </div>
+<div class="exampleblock">
+<div class="title">Example 9. A GeoJSON FeatureCollection Object response</div>
+<div class="content">
+<div class="paragraph">
+<p>In the example below, only the first and tenth feature is shown. Coordinates are not shown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>{
+  &quot;type&quot; : &quot;FeatureCollection&quot;,
+  &quot;links&quot; : [ {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/?f=json&quot;,
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;type&quot; : &quot;application/geo+json&quot;,
+    &quot;title&quot; : &quot;this document&quot;
+  }, {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/?f=html&quot;,
+    &quot;rel&quot; : &quot;alternate&quot;,
+    &quot;type&quot; : &quot;text/html&quot;,
+    &quot;title&quot; : &quot;this document as HTML&quot;
+  }, {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/?f=json&amp;startIndex=10&amp;count=10&quot;,
+    &quot;rel&quot; : &quot;next&quot;,
+    &quot;type&quot; : &quot;application/geo+json&quot;,
+    &quot;title&quot; : &quot;next page&quot;
+  } ],
+  &quot;features&quot; : [ {
+    &quot;type&quot; : &quot;Feature&quot;,
+    &quot;id&quot; : &quot;123&quot;,
+    &quot;geometry&quot; : {
+      &quot;type&quot; : &quot;Polygon&quot;,
+      &quot;coordinates&quot; : [ ... ]
+    },
+    &quot;properties&quot; : {
+      &quot;function&quot; : &quot;residential&quot;,
+      &quot;floors&quot; : &quot;2&quot;
+    }
+  }, { ...
+  }, {
+    &quot;type&quot; : &quot;Feature&quot;,
+    &quot;id&quot; : &quot;132&quot;,
+    &quot;geometry&quot; : {
+      &quot;type&quot; : &quot;Polygon&quot;,
+      &quot;coordinates&quot; : [ ... ]
+    },
+    &quot;properties&quot; : {
+      &quot;function&quot; : &quot;public use&quot;,
+      &quot;floors&quot; : &quot;10&quot;
+    }
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 10. A GeoJSON Feature Object response</div>
+<div class="content">
+<div class="paragraph">
+<p>In the example below, coordinates are not shown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>{
+  &quot;type&quot; : &quot;Feature&quot;,
+  &quot;links&quot; : [ {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/123/?f=json&quot;,
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;type&quot; : &quot;application/geo+json&quot;,
+    &quot;title&quot; : &quot;this document&quot;
+  }, {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/123/?f=html&quot;,
+    &quot;rel&quot; : &quot;alternate&quot;,
+    &quot;type&quot; : &quot;text/html&quot;,
+    &quot;title&quot; : &quot;this document as HTML&quot;
+  }, {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items&quot;,
+    &quot;rel&quot; : &quot;collection&quot;,
+    &quot;type&quot; : &quot;application/geo+json&quot;,
+    &quot;title&quot; : &quot;the collection document&quot;
+  } ],
+  &quot;id&quot; : &quot;123&quot;,
+  &quot;geometry&quot; : {
+    &quot;type&quot; : &quot;Polygon&quot;,
+    &quot;coordinates&quot; : [ ... ]
+  },
+  &quot;properties&quot; : {
+    &quot;function&quot; : &quot;residential&quot;,
+    &quot;floors&quot; : &quot;2&quot;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_geography_markup_language_gml_simple_features_profile_level_0"><a class="anchor" href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_0"></a>8.4. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"</h3>
@@ -3967,7 +4062,7 @@ including NoApplicableCode, OperationProcessingFailed.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 9. An exception response object definition</div>
+<div class="title">Example 11. An exception response object definition</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
