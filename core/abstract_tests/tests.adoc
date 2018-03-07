@@ -12,125 +12,219 @@ include::requirements/requirement_api-definition.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 2: TBD
+Requirement 2: Conformance Report
 Description:
 include::requirements/requirement_fc-md-op.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 3: TBD
+Requirement 3: OpenAPI Definition
 Description:
 include::requirements/requirement_oas-definition.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 4: TBD
+Requirement 4: OpenAPI Implementation
 include::requirements/requirement_oas-impl.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 5: TBD
+Requirement 5: WFS 3.0 Core
 include::requirements/requirements_class_core.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 6: TBD
+Requirement 6: GeoJSON Extension
 include::requirements/requirements_class_geojson.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 7: TBD
+Requirement 7: GML Simple Features Level 0 Extension
 include::requirements/requirements_class_gmlsf0.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 8: TBD
+Requirement 8: GML Simple Features Level 2 Extension
 include::requirements/requirements_class_gmlsf2.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 9: TBD
+Requirement 9: HTML Extension
 include::requirements/requirements_class_html.adoc[]
 Tests: A.1.n
 ----
 ----
-Requirement 10: TBD
+Requirement 10: OpenAPI 3.0
 Description:
 include::requirements/requirements_class_oas30.adoc[]
 Tests: A.1.n
 ----
 
+<TODO - find a better place for this>
+Conventions:
+URL templates are used throughout these test suites.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986.
+scheme: http | https
+authority: DNS name of the server with optional port number
+path: The slash delimited identifier for a resource on the server
+query: query parameters following the "?" character
+fragment: identifies an element within the resource. Preceded by the "\#" character
+
 === A.2: OpenAPI 3.0 Test Suites*
 The following test suites shall be used if the service description is provided using OpenAPI 3.0.
 ----
-A.1.1 API Definition
- a) Test Purpose: Validate that the serivce provides a landing page on the required path
+A.2.1 API Definition
+ a) Test Purpose: Validate that the serivce provides an API definition page on the required path
  b) Pre-conditions: Client is aware of the root path to the service
  c) Test Method:
-     1) Client issues a get request on {protocol}://{root_path}/api
-         i) accept header is set to ?????
-     2) Client receives an OpenAPI document in response to the get request
+     1) Client issues a get request on {scheme}://{authority}/api
+         i) Accept header is set to ?????
+     2) Client receives an API defnintion document in response to the get request
+     3) Client validates that the API defnintion document complies with OpenAPI [red]#should reference the OpenAPI test#
  d) References: Requirement R1
- e) Notes: This operation is usually where the client and server initially authenticate their identities to each other.  Intermediate challenges and responses in support of authentication do not invalidate the results of this test.
+ e) Notes: 
+    1) This operation is usually where the client and server initially authenticate their identities to each other.  Intermediate challenges and responses in support of authentication do not invalidate the results of this test.
+    2) A server may have an open and protected API definition.  In that case, two get requests may be required; one to retrieve the open definition, and the second executed after authentication to retrieve the protected definition.  Subsequent testing should be performed using the protected definition whenever security policy allows.
 ----
 ----
-A.1.2 Support Get on the Root Path
- a) Test Purpose:
- b) Pre-conditions:
+A.2.2 Conformance Report
+ a) Test Purpose: Validate that the service provides a conformance report on the required path 
+ b) Pre-conditions: Client is aware of the root path to the service
  c) Test Method:
- d) References: Requirement R2
+     1) Client issues a get request on {scheme}://{authority}/api/conformance
+         i) Accept header is set to ?????
+     2) Client receives an API Conformance Report document in response to the get request
+     3) Client validates the Conformance Report document through test A.2.2.1
+ d) References: 
+     Requirements: R2, R3 
+     Tests: A.2.2.1
 ----
 ----
-A.1.3 OpenAPI Definition
+A.2.2.1 Conformance Report Validation
+ a) Test Purpose: Validate that the Conformance Report complies with the mandated format
+ b) Pre-conditions: A Conformance Report has been received
+ c) Test Method:
+     1) Validate the Conformance Report against the schema defined in req-classes.yaml 
+ d) References: 
+     Requirements: R3
+----
+----
+A.2.3 HTTP 1.1
+ a) Test Purpose: Validate that the service supports and conforms to HTTP 1.1
+ b) Pre-conditions: Client is aware of the root path to the service
+ c) Test Method: TBD - it is unknown if a conformance test for HTTP 1.1 exists.
+ d) References: 
+     Requirements: R4
+----
+----
+A.2.4 Feature Collection Metadata
+ a) Test Purpose: Validate that the service provides valid Feature Collection metadata on the mandated path
+ b) Pre-conditions: Client is aware of the root path to the service
+ c) Test Method:
+     1) Client issues a get request on {scheme}://{authority}/
+         i) Accept header is set to ?????
+     2) Client receives an Feature Collection Metadata document in response to the get request
+     3) Client validates the Feature Collection Metadata document schema through test A.2.4.1
+     4) Client Validates the contents of the Feature Collection Metadata document through test A.2.4.2
+ d) References: 
+     Requirements: R5
+     Tests: A.2.4.1, A.2.4.2
+----
+----
+A.2.4.1 Feature Collection Metadata Schema Validation
+ a) Test Purpose: Validate that the Feature Collection Metadata complies with the mandated format
+ b) Pre-conditions: A Feature Collection Metadata document has been received
+ c) Test Method:
+     1) Validate the Feature Collection Metadata document against the schema defined in content.yaml
+ d) References: 
+     Requirements: R6
+----
+----
+A.2.4.2 Feature Collection Metadata Content Validation
+ a) Test Purpose: Validate that the Feature Collection Metadata content is correct and complete
+ b) Pre-conditions: A Feature Collection Metadata document has been received
+ c) Test Method:
+     1) Validate the links property of the Feature Collection Metadata through test A.2.4.2.1
+     2) Validate the collections property of the Feature Collection Metadata through test A.2.4.2.2 (r8)
+ d) References: 
+     Tests: A.2.4.2.1, A.2.4.2.2
+----
+----
+A.2.4.2.1 Feature Collection Metadata Links Property Validation
+ a) Test Purpose: Validate that the LInkes property of the Feature Collection Metadata content is correct and complete
+ b) Pre-conditions: A Feature Collection Metadata document has been received
+ c) Test Method:
+     1) Validate the links property includes a valid link to the Feature Collection Metadata document on the server
+     2) Validate the links property includes valid links to Feature Collection Metadata documents in every media type offered by the server
+     3) For each Feature Collection and each media type offered by the server, validate that the links property includes a valid link to that resource.
+     4) Validate the links property includes valid links to API Definition documents in every media type offered by the server
+ d) References: 
+     Requirements: R7
+----
+----
+A.2.4.2.2 Feature Collection Metadata Collections Property Validation
+ a) Test Purpose: Validate that the Collections property of the Feature Collection Metadata content is correct and complete
+ b) Pre-conditions: A Feature Collection Metadata document has been received
+ c) Test Method:
+     1) Validate that there is a collections property for every Feature Collection hosted on the server.
+     2) Validate that each Collections property includes a links property
+     3) For each Collections property; validate that the links property includes entries for each encoding supported by the server.
+     4) For each links property of each Collections property; validate that each entry in the links property resolves to the proper Feature Collection and encoding.
+     5) Validate that each collections propery includes a valid extent property
+     6) For each Feature Collection, validate that all Features contained in that collection fall within the bounding box defined by the extent property.
+ d) References: 
+     Requirements: R8, R9, R10
+----
+----
+A.2.3 OpenAPI Definition
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
  d) References: Requirement R3
 ----
 ----
-A.1.4 OpenAPI Implementation
+A.2.4 OpenAPI Implementation
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
  d) References: Requirement R4
 ----
 ----
-A.1.5 WFS 3.0 Core
+A.2.5 WFS 3.0 Core
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
  d) References: Requirement R5
 ----
 ----
-A.1.6 GeoJSON Extension
+A.2.6 GeoJSON Extension
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
  d) References: Requirement R6
 ----
 ----
-A.1.7 GML Simple Features Level 0 Extension
+A.2.7 GML Simple Features Level 0 Extension
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
  d) References: Requirement R7
 ----
 ----
-A.1.8 GML Simple Features Level 2 Extension
+A.2.8 GML Simple Features Level 2 Extension
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
  d) References: Requirement R8
 ----
 ----
-A.1.9 HTML Extension
+A.2.9 HTML Extension
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
  d) References: Requirement R9
 ----
 ----
-A.1.10 OpenAPI 3.0 
+A.2.10 OpenAPI 3.0 
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
