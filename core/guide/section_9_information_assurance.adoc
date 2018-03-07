@@ -1,0 +1,25 @@
+== Information Assurance
+
+<the following sections have been retained for re-use>
+
+[[security]]
+=== Security
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/oas30/security +
+
+For cases, where the operations of the server are access-controlled,
+the security scheme(s) SHALL be documented in the OpenAPI definition.
+|===
+
+The OpenAPI specification currently supports the following link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object[security schemes]:
+
+* HTTP authentication,
+* an API key (either as a header or as a query parameter),
+* OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
+* OpenID Connect Discovery.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/41[ISSUE 41] +
+How does a client determine which security protocols/standards/etc. a server supports
+
