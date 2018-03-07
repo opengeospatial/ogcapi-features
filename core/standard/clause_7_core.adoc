@@ -364,6 +364,28 @@ for example, using format specific suffixes like ".html");
 the Accept header of the HTTP request.
 =====================================================================
 
+=== Coordinate reference systems
+
+As discussed in Chapter 9 of the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices>>,
+how to express and share the location of features in a consistent way is one
+of the most fundamental aspects of publishing geographic data and it is important
+to be clear about the coordinate reference system that coordinates are in.
+
+For the reasons discussed in the Best Practices, Web Feature Service 3.0 uses
+WGS84 longitude and latitude as the default coordinate reference system.
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/crs84 +
+
+Unless the client explicitly requests a different coordinate reference system,
+all spatial geometries SHALL be in the coordinate reference system
+http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude).
+|===
+
+The Core does not specify a capability to request geometries in a different
+coordinate reference system. Such a capability will be specified in another part
+of the WFS 3.0 series.
 
 === Link headers
 
