@@ -1,5 +1,6 @@
 [appendix]
 :appendix-caption: Annex A: Abstract Test Suite
+
 == Conformance Class Abstract Test Suite (Normative)
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/46[ISSUE 46] +
@@ -75,7 +76,8 @@ A.1.1 API Definition
          i) accept header is set to ?????
      2) Client receives an OpenAPI document in response to the get request
  d) References: Requirement R1
- e) Notes: This operation is usually where the client and server initially authenticate their identities to each other.  Intermediate challenges and responses in support of authentication do not invalidate the results of this test.
+ e) Notes: This operation is usually where the client and server initially authenticate their identities to each other.  
+ Intermediate challenges and responses in support of authentication do not invalidate the results of this test.
 ----
 ----
 A.1.2 Support Get on the Root Path
