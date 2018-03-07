@@ -1,6 +1,6 @@
 [appendix]
 :appendix-caption: Annex A: Abstract Test Suite
-
++ 
 == Conformance Class Abstract Test Suite (Normative)
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/46[ISSUE 46] +
@@ -60,13 +60,12 @@ Tests: A.1.n
 ----
 Requirement 10: TBD
 Description:
-include::../standard/core/requirements/requirements_class_oas30.adoc[]
+{include::../standard/core/requirements/requirements_class_oas30.adoc[]}
 Tests: A.1.n
 ----
 
 === A.1: OpenAPI 3.0 Test Suites*
 The following test suites shall be used if the service description is provided using OpenAPI 3.0.
-[width="100%"]
 ----
 A.1.1 API Definition
  a) Test Purpose: Validate that the serivce provides a landing page on the required path
