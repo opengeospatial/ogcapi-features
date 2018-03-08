@@ -59,7 +59,7 @@ in the response are determined by the server based on parameters of the request.
 A `bbox` parameter may be used to select only a subset of the features in
 the collection (the features that are located in the bounding box).
 
-The `count` parameter may be used to request only a subset of the
+The `limit` parameter may be used to request only a subset of the
 selected features and to indicate that the client wants to page through
 the selected features of the collection.
 
@@ -655,18 +655,18 @@ the server SHALL support the HTTP GET operation at the path `/collections/{name}
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/17[ISSUE 17] +
 Precision level filter responsibility?
 
-==== Parameter count
+==== Parameter limit
 
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-count-definition +
+|*Requirement {counter:req-id}* |/req/core/fc-limit-definition +
 
-Each feature collection operation SHALL support a parameter `count`
+Each feature collection operation SHALL support a parameter `limit`
 with the following characteristics (using an OpenAPI Specification 3.0 fragment):
 
 [source,YAML]
 ----
-name: count
+name: limit
 in: query
 required: false
 schema:
@@ -681,19 +681,19 @@ explode: false
 
 [width="90%",cols="2,6a"]
 |===
-|*Permission {counter:per-id}* |/per/core/fc-count-default-maximum +
+|*Permission {counter:per-id}* |/per/core/fc-limit-default-maximum +
 
-The values for `maximum` and `default` in requirement `/req/core/fc-count-definition`
+The values for `maximum` and `default` in requirement `/req/core/fc-limit-definition`
 are only examples and MAY be changed.
 |===
 
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-count-response-1 +
+|*Requirement {counter:req-id}* |/req/core/fc-limit-response-1 +
 
 The response SHALL not contain more features than specified by the
-optional `count` parameter. If the API definition specifies a maximum
-value for `count` parameter, the response SHALL not contain more
+optional `limit` parameter. If the API definition specifies a maximum
+value for `limit` parameter, the response SHALL not contain more
 features than this maximum value.
 
 Only items are counted that are on the first level of the collection.
@@ -703,14 +703,14 @@ SHALL not be counted.
 
 [width="90%",cols="2,6a"]
 |===
-|*Permission {counter:per-id}* |/per/core/fc-count-response-2 +
+|*Permission {counter:per-id}* |/per/core/fc-limit-response-2 +
 
 The server MAY return less features than requested (but not more).
 |===
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml[count.yaml].
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/limit.yaml[limit.yaml].
 
 ==== Parameter bbox
 
@@ -832,20 +832,20 @@ HTTP status code "200".
 
 The response will only include features selected by the request.
 
-The number of features returned depends on the server and the parameter `count`:
+The number of features returned depends on the server and the parameter `limit`:
 
-* The client can request a count it is interested in.
-* The server likely has a default value for the count, and a maximum limit.
+* The client can request a limit it is interested in.
+* The server likely has a default value for the limit, and a maximum limit.
 * If the server has any more results available than it returns (the
-number it returns is less than or equal to the requested/limited/default count)
+number it returns is less than or equal to the requested/default/maximum limit)
 then the server will include a link to the next set of results.
 
 So (using the default/maximum values of 10/10000 from the OpenAPI
-fragment in requirement `/req/core/fc-count-definition`):
+fragment in requirement `/req/core/fc-limit-definition`):
 
 * If you ask for 10, you will get 0 to 10 (as requested) and a `next` link,
 if there are more.
-* If you don't specify a count, you will get 0 to 10 (default) and a `next` link,
+* If you don't specify a limit, you will get 0 to 10 (default) and a `next` link,
 if there are more.
 * If you ask for 50000, you might get up to 10000 (server-limited) and a `next`
 link, if there are more.
@@ -922,7 +922,7 @@ of the feature collection.
 
 .Links
 =================
-If the request is to return building features and "10" is the default `count`,
+If the request is to return building features and "10" is the default `limit`,
 the links in the response could be (in this example represented as link headers
 and using an additional parameter `startIndex` to implement `next` links - and
 the optional `prev` links):
@@ -944,23 +944,23 @@ Link: <http://data.example.org/collections/buildings/items.json?startIndex=0>; r
 Link: <http://data.example.org/collections/buildings/items.json?startIndex=20>; rel="next"; type="application/geo+json"
 ----
 
-If an explicit `count` of "50" is used, the links in the response could be:
+If an explicit `limit` of "50" is used, the links in the response could be:
 
 [source]
 ----
-Link: <http://data.example.org/collections/buildings/items.json?count=50>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/collections/buildings/items.html?count=50>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/collections/buildings/items.json?count=50&startIndex=50>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.html?limit=50>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=50>; rel="next"; type="application/geo+json"
 ----
 
 Following the `next` link could return:
 
 [source]
 ----
-Link: <http://data.example.org/collections/buildings/items.json?count=50&startIndex=50>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/collections/buildings/items.html?count=50&startIndex=50>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/collections/buildings/items.json?count=50&startIndex=0>; rel="prev"; type="application/geo+json"
-Link: <http://data.example.org/collections/buildings/items.json?count=50&startIndex=100>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=50>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.html?limit=50&startIndex=50>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=0>; rel="prev"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=100>; rel="next"; type="application/geo+json"
 ----
 =================
 

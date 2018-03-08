@@ -678,7 +678,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_feature_collections">7.13. Feature collections</a>
 <ul class="sectlevel3">
 <li><a href="#_operation_4">7.13.1. Operation</a></li>
-<li><a href="#_parameter_count">7.13.2. Parameter count</a></li>
+<li><a href="#_parameter_limit">7.13.2. Parameter limit</a></li>
 <li><a href="#_parameter_bbox">7.13.3. Parameter bbox</a></li>
 <li><a href="#_parameters_for_filtering_on_feature_properties">7.13.4. Parameters for filtering on feature properties</a></li>
 <li><a href="#_response_4">7.13.5. Response</a></li>
@@ -742,7 +742,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon selection criteria, defined by the client, on feature properties.</p>
 </div>
 <div class="paragraph">
-<p>This standard defines the resources listed in the following table:</p>
+<p>This standard defines the resources listed in the following Table 1:</p>
 </div>
 <table id="tldnr" class="tableblock frame-all grid-all spread">
 <caption class="title">Table 1. Overview of resources, applicable HTTP methods and links to the document sections</caption>
@@ -1591,7 +1591,7 @@ in the response are determined by the server based on parameters of the request.
 the collection (the features that are located in the bounding box).</p>
 </div>
 <div class="paragraph">
-<p>The <code>count</code> parameter may be used to request only a subset of the
+<p>The <code>limit</code> parameter may be used to request only a subset of the
 selected features and to indicate that the client wants to page through
 the selected features of the collection.</p>
 </div>
@@ -2565,7 +2565,7 @@ Precision level filter responsibility?
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.13.2. Parameter count</h4>
+<h4 id="_parameter_limit"><a class="anchor" href="#_parameter_limit"></a>7.13.2. Parameter limit</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2575,15 +2575,15 @@ Precision level filter responsibility?
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-count-definition<br></p>
+<p>/req/core/fc-limit-definition<br></p>
 </div>
 <div class="paragraph">
-<p>Each feature collection operation SHALL support a parameter <code>count</code>
+<p>Each feature collection operation SHALL support a parameter <code>limit</code>
 with the following characteristics (using an OpenAPI Specification 3.0 fragment):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: count
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: limit
 in: query
 required: false
 schema:
@@ -2607,10 +2607,10 @@ explode: false</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 1</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/per/core/fc-count-default-maximum<br></p>
+<p>/per/core/fc-limit-default-maximum<br></p>
 </div>
 <div class="paragraph">
-<p>The values for <code>maximum</code> and <code>default</code> in requirement <code>/req/core/fc-count-definition</code>
+<p>The values for <code>maximum</code> and <code>default</code> in requirement <code>/req/core/fc-limit-definition</code>
 are only examples and MAY be changed.</p>
 </div></div></td>
 </tr>
@@ -2625,12 +2625,12 @@ are only examples and MAY be changed.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-count-response-1<br></p>
+<p>/req/core/fc-limit-response-1<br></p>
 </div>
 <div class="paragraph">
 <p>The response SHALL not contain more features than specified by the
-optional <code>count</code> parameter. If the API definition specifies a maximum
-value for <code>count</code> parameter, the response SHALL not contain more
+optional <code>limit</code> parameter. If the API definition specifies a maximum
+value for <code>limit</code> parameter, the response SHALL not contain more
 features than this maximum value.</p>
 </div>
 <div class="paragraph">
@@ -2650,7 +2650,7 @@ SHALL not be counted.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 2</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/per/core/fc-count-response-2<br></p>
+<p>/per/core/fc-limit-response-2<br></p>
 </div>
 <div class="paragraph">
 <p>The server MAY return less features than requested (but not more).</p>
@@ -2661,7 +2661,7 @@ SHALL not be counted.</p>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml">count.yaml</a>.</p>
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/limit.yaml">limit.yaml</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2858,26 +2858,26 @@ HTTP status code "200".</p>
 <p>The response will only include features selected by the request.</p>
 </div>
 <div class="paragraph">
-<p>The number of features returned depends on the server and the parameter <code>count</code>:</p>
+<p>The number of features returned depends on the server and the parameter <code>limit</code>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The client can request a count it is interested in.</p>
+<p>The client can request a limit it is interested in.</p>
 </li>
 <li>
-<p>The server likely has a default value for the count, and a maximum limit.</p>
+<p>The server likely has a default value for the limit, and a maximum limit.</p>
 </li>
 <li>
 <p>If the server has any more results available than it returns (the
-number it returns is less than or equal to the requested/limited/default count)
+number it returns is less than or equal to the requested/default/maximum limit)
 then the server will include a link to the next set of results.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>So (using the default/maximum values of 10/10000 from the OpenAPI
-fragment in requirement <code>/req/core/fc-count-definition</code>):</p>
+fragment in requirement <code>/req/core/fc-limit-definition</code>):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2886,7 +2886,7 @@ fragment in requirement <code>/req/core/fc-count-definition</code>):</p>
 if there are more.</p>
 </li>
 <li>
-<p>If you don&#8217;t specify a count, you will get 0 to 10 (default) and a <code>next</code> link,
+<p>If you don&#8217;t specify a limit, you will get 0 to 10 (default) and a <code>next</code> link,
 if there are more.</p>
 </li>
 <li>
@@ -3052,7 +3052,7 @@ of the feature collection.
 <div class="title">Example 7. Links</div>
 <div class="content">
 <div class="paragraph">
-<p>If the request is to return building features and "10" is the default <code>count</code>,
+<p>If the request is to return building features and "10" is the default <code>limit</code>,
 the links in the response could be (in this example represented as link headers
 and using an additional parameter <code>startIndex</code> to implement <code>next</code> links - and
 the optional <code>prev</code> links):</p>
@@ -3076,13 +3076,13 @@ Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=20
 </div>
 </div>
 <div class="paragraph">
-<p>If an explicit <code>count</code> of "50" is used, the links in the response could be:</p>
+<p>If an explicit <code>limit</code> of "50" is used, the links in the response could be:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/collections/buildings/items.html?count=50&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;startIndex=50&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html?limit=50&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;startIndex=50&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3090,10 +3090,10 @@ Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;startIndex=50&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/collections/buildings/items.html?count=50&amp;startIndex=50&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;startIndex=0&gt;; rel="prev"; type="application/geo+json"
-Link: &lt;http://data.example.org/collections/buildings/items.json?count=50&amp;startIndex=100&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;startIndex=50&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html?limit=50&amp;startIndex=50&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;startIndex=0&gt;; rel="prev"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;startIndex=100&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 </div>
@@ -3573,7 +3573,7 @@ specific feature types or their properties.</p>
     &quot;type&quot; : &quot;text/html&quot;,
     &quot;title&quot; : &quot;this document as HTML&quot;
   }, {
-    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/?f=json&amp;startIndex=10&amp;count=10&quot;,
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/?f=json&amp;startIndex=10&amp;limit=10&quot;,
     &quot;rel&quot; : &quot;next&quot;,
     &quot;type&quot; : &quot;application/geo+json&quot;,
     &quot;title&quot; : &quot;next page&quot;
