@@ -1,18 +1,18 @@
 [big]*i.     Abstract*
 
-The Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.
+A Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports and is restricted to read-access to data. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for creating and modifying data, more complex data models, richer queries, additional coordinate reference systems.
+
+By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.
 
 Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP/HTTPS standards.
 
-WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for updating data, more complex data models or richer queries.
-
-This International Standard specifies discovery and query operations.
+This standard specifies discovery and query operations that are implemented using the HTTP GET method. Support for additional methods (in particular POST, PUT, DELETE, PATCH) will be specified in additional parts.
 
 Discovery operations allow the server to be interrogated to determine its capabilities and retrieve information (metadata) about this distribution of the dataset. This includes the API definition of the server as well as metadata about the feature collections provided by the server.
 
-Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon constraints, defined by the client, on feature properties.
+Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon selection criteria, defined by the client, on feature properties.
 
-This part of this International Standard defines the following resources:
+This standard defines the following resources:
 
 * Landing page [1]
 * Service definition [1]
@@ -26,7 +26,7 @@ This part of this International Standard defines the following resources:
 
 The following are keywords to be used by search engines and document catalogues.
 
-ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution, openapi
+ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution, API, openapi, geojson, gml, html
 
 [big]*iii.   Preface*
 

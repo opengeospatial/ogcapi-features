@@ -724,25 +724,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong class="big">i.     Abstract</strong></p>
 </div>
 <div class="paragraph">
-<p>The Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.</p>
+<p>A Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports and is restricted to read-access to data. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for creating and modifying data, more complex data models, richer queries, additional coordinate reference systems.</p>
+</div>
+<div class="paragraph">
+<p>By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.</p>
 </div>
 <div class="paragraph">
 <p>Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP/HTTPS standards.</p>
 </div>
 <div class="paragraph">
-<p>WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for updating data, more complex data models or richer queries.</p>
-</div>
-<div class="paragraph">
-<p>This International Standard specifies discovery and query operations.</p>
+<p>This standard specifies discovery and query operations that are implemented using the HTTP GET method. Support for additional methods (in particular POST, PUT, DELETE, PATCH) will be specified in additional parts.</p>
 </div>
 <div class="paragraph">
 <p>Discovery operations allow the server to be interrogated to determine its capabilities and retrieve information (metadata) about this distribution of the dataset. This includes the API definition of the server as well as metadata about the feature collections provided by the server.</p>
 </div>
 <div class="paragraph">
-<p>Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon constraints, defined by the client, on feature properties.</p>
+<p>Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon selection criteria, defined by the client, on feature properties.</p>
 </div>
 <div class="paragraph">
-<p>This part of this International Standard defines the following resources:</p>
+<p>This standard defines the following resources:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -776,7 +776,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The following are keywords to be used by search engines and document catalogues.</p>
 </div>
 <div class="paragraph">
-<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution, openapi</p>
+<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution, API, openapi, geojson, gml, html</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">iii.   Preface</strong></p>
