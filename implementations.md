@@ -6,10 +6,16 @@ This page points to servers implementing WFS 3.0 drafts.
 For now this is limited to implementations of the current
 draft of part 1.
 
-Implementations:
+## Implementations:
+
+Servers:
+
 * [interactive instruments](#interactive-instruments)
 * [CubeWerx Inc.](#cubeWerx)
 * [GeoServer](#geoserver)
+
+Clients:
+* [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
 
 ## interactive instruments
 
