@@ -1508,6 +1508,19 @@ spatial extent of the collection - typically derived from the data.</p>
 <p>Each <code>Collection</code> consists of the features in the collection where each
 feature in the distribution is part of exactly one collection.</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/66">ISSUE 66</a><br>
+Support features that do belong to multiple collections?
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Accessing a <code>Collection</code> using HTTP GET returns a <code>CollectionResponse</code>,
 which basically consists of features in the collection. The features included

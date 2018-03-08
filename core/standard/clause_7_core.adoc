@@ -37,6 +37,9 @@ spatial extent of the collection - typically derived from the data.
 Each `Collection` consists of the features in the collection where each
 feature in the distribution is part of exactly one collection.
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/66[ISSUE 66] +
+Support features that do belong to multiple collections?
+
 Accessing a `Collection` using HTTP GET returns a `CollectionResponse`,
 which basically consists of features in the collection. The features included
 in the response are determined by the server based on parameters of the request.
