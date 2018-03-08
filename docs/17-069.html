@@ -742,33 +742,69 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon selection criteria, defined by the client, on feature properties.</p>
 </div>
 <div class="paragraph">
-<p>This standard defines the following resources:</p>
+<p>This standard defines the resources listed in the following table:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Landing page [1]</p>
-</li>
-<li>
-<p>Service definition [1]</p>
-</li>
-<li>
-<p>Conformance classes [1]</p>
-</li>
-<li>
-<p>Feature collections metadata [1]</p>
-</li>
-<li>
-<p>Feature collection metadata [0..n]</p>
-</li>
-<li>
-<p>Feature collection [0..n]</p>
-</li>
-<li>
-<p>Feature [0..n]</p>
-</li>
-</ul>
-</div>
+<table id="tldnr" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Overview of resources, applicable HTTP methods and links to the document sections</caption>
+<colgroup>
+<col style="width: 32%;">
+<col style="width: 25%;">
+<col style="width: 10%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Resource [Multiplicity]</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Path</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">HTTP method</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Document reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Landing page [1]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_api_landing_page">7.2 API landing page</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">API definition [1]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/api</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_api_definition_2">7.3 API definition</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conformance classes [1]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/conformance</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_declaration_of_conformance_classes">7.4 Declaration of conformance classes</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collections metadata [1]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_feature_collections_metadata">7.11 Feature collections metadata</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collection metadata [0..n]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_feature_collection_metadata">7.12 Feature collection metadata</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collection [0..n]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}/items</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_feature_collections">7.13 Feature collections</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature [0..n]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}/items/{fid}</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_feature_2">7.14 Feature</a></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><strong class="big">ii.    Keywords</strong></p>
 </div>

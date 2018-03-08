@@ -12,15 +12,21 @@ Discovery operations allow the server to be interrogated to determine its capabi
 
 Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon selection criteria, defined by the client, on feature properties.
 
-This standard defines the following resources:
+This standard defines the resources listed in the following Table 1:
 
-* Landing page [1]
-* Service definition [1]
-* Conformance classes [1]
-* Feature collections metadata [1]
-* Feature collection metadata [0..n]
-* Feature collection [0..n]
-* Feature [0..n]
+[[tldnr]]
+.Overview of resources, applicable HTTP methods and links to the document sections
+[cols="32,25,10,33",options="header"]
+!===
+|Resource [Multiplicity] |Path |HTTP method |Document reference
+|Landing page [1] |`/` |GET |<<_api_landing_page,7.2 API landing page>>
+|API definition [1] |`/api` |GET |<<_api_definition_2,7.3 API definition>>
+|Conformance classes [1] |`/conformance` |GET |<<_declaration_of_conformance_classes,7.4 Declaration of conformance classes>>
+|Feature collections metadata [1] |`/collections` |GET |<<_feature_collections_metadata,7.11 Feature collections metadata>>
+|Feature collection metadata [0..n] |`/collections/{name}` |GET |<<_feature_collection_metadata, 7.12 Feature collection metadata>>
+|Feature collection [0..n] |`/collections/{name}/items` |GET |<<_feature_collections,7.13 Feature collections>>
+|Feature [0..n] |`/collections/{name}/items/{fid}` |GET |<<_feature_2,7.14 Feature>>
+!===
 
 [big]*ii.    Keywords*
 
