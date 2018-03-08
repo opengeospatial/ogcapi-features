@@ -15,16 +15,28 @@ A server that implements the WFS API provides access to the features in a datase
 In other words, the API is a distribution of that dataset. A file download, for example,
 would be another distribution.
 
-That is, each WFS has a single `DatasetDistribution` and the distribution
-consists of a set of feature collections. This specification does not
+That is, each WFS has a single `LandingPage` (path `/`) that provides links to
+
+* the `APIDefinition` (path `/api`),
+* the `Conformance` statements (path `/conformance`),
+* the `DatasetDistribution` metadata (path `/collections`).
+
+The `APIDefinition` describes the capabilities of the server and which can be used by
+clients to connect to the server or by development tools to support the
+implementation of servers and clients. Accessing the `APIDefinition` using
+HTTP GET returns a description of the API.
+
+Accessing the `Conformance` using HTTP GET returns a list of URIs of
+requirements classes implemented by the server.
+
+The distribution consists of a set of feature collections. This specification does not
 include any requirements how the features in the dataset have to be aggregated
 into collections. A typical approach is to aggregate by feature type, but any other approach
 that fits the dataset or the applications using this distribution may be used, too.
 
 Accessing the `DatasetDistribution` using HTTP GET returns a
 `DatasetDistributionResponse`, which includes a link to each `Collection`
-in the distribution along with metadata about each collection (class
-`CollectionMetadata`):
+in the distribution along with metadata about each collection:
 
 * a local identifier for the collection that is unique within the WFS;
 * a list of coordinate reference systems in which geometries may be returned by
@@ -34,7 +46,7 @@ the server, where the first one is the default coordinate reference system
 * an optional bounding box that can be used to provide an indication of the
 spatial extent of the collection - typically derived from the data.
 
-Each `Collection` consists of the features in the collection where each
+Each `Collection` (path `/collections/{collection-name}/items`) consists of the features in the collection where each
 feature in the distribution is part of exactly one collection.
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/66[ISSUE 66] +
@@ -55,15 +67,8 @@ The `CollectionResponse` may include metadata about the number of selected and r
 features (`numberMatched` and `numberReturned`) as well as links to simplify
 paging (`next` and `prev`).
 
-Each `Feature` is also a separate resource and may be requested individually
-using HTTP GET.
-
-In addition, each server publishes a formal definition of the API (`APIDefinition`),
-which describes the capabilities of the server and which can be used by
-clients to connect to the server or
-by development tools to support the implementation of servers and clients.
-
-!!! Update diagram and description
+Each `Feature` (path `/collections/{collection-name}/items/{feature-id}`)
+is also a separate resource and may be requested individually using HTTP GET.
 
 [#img_core,reftext='{figure-caption} {counter:figure-num}']
 .Resources in the Core requirements class

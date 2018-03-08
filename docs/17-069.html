@@ -1473,8 +1473,33 @@ In other words, the API is a distribution of that dataset. A file download, for 
 would be another distribution.</p>
 </div>
 <div class="paragraph">
-<p>That is, each WFS has a single <code>DatasetDistribution</code> and the distribution
-consists of a set of feature collections. This specification does not
+<p>That is, each WFS has a single <code>LandingPage</code> (path <code>/</code>) that provides links to</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>APIDefinition</code> (path <code>/api</code>),</p>
+</li>
+<li>
+<p>the <code>Conformance</code> statements (path <code>/conformance</code>),</p>
+</li>
+<li>
+<p>the <code>DatasetDistribution</code> metadata (path <code>/collections</code>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>APIDefinition</code> describes the capabilities of the server and which can be used by
+clients to connect to the server or by development tools to support the
+implementation of servers and clients. Accessing the <code>APIDefinition</code> using
+HTTP GET returns a description of the API.</p>
+</div>
+<div class="paragraph">
+<p>Accessing the <code>Conformance</code> using HTTP GET returns a list of URIs of
+requirements classes implemented by the server.</p>
+</div>
+<div class="paragraph">
+<p>The distribution consists of a set of feature collections. This specification does not
 include any requirements how the features in the dataset have to be aggregated
 into collections. A typical approach is to aggregate by feature type, but any other approach
 that fits the dataset or the applications using this distribution may be used, too.</p>
@@ -1482,8 +1507,7 @@ that fits the dataset or the applications using this distribution may be used, t
 <div class="paragraph">
 <p>Accessing the <code>DatasetDistribution</code> using HTTP GET returns a
 <code>DatasetDistributionResponse</code>, which includes a link to each <code>Collection</code>
-in the distribution along with metadata about each collection (class
-<code>CollectionMetadata</code>):</p>
+in the distribution along with metadata about each collection:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1505,7 +1529,7 @@ spatial extent of the collection - typically derived from the data.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each <code>Collection</code> consists of the features in the collection where each
+<p>Each <code>Collection</code> (path <code>/collections/{collection-name}/items</code>) consists of the features in the collection where each
 feature in the distribution is part of exactly one collection.</p>
 </div>
 <div class="admonitionblock caution">
@@ -1541,17 +1565,8 @@ features (<code>numberMatched</code> and <code>numberReturned</code>) as well as
 paging (<code>next</code> and <code>prev</code>).</p>
 </div>
 <div class="paragraph">
-<p>Each <code>Feature</code> is also a separate resource and may be requested individually
-using HTTP GET.</p>
-</div>
-<div class="paragraph">
-<p>In addition, each server publishes a formal definition of the API (<code>APIDefinition</code>),
-which describes the capabilities of the server and which can be used by
-clients to connect to the server or
-by development tools to support the implementation of servers and clients.</p>
-</div>
-<div class="paragraph">
-<p>!!! Update diagram and description</p>
+<p>Each <code>Feature</code> (path <code>/collections/{collection-name}/items/{feature-id}</code>)
+is also a separate resource and may be requested individually using HTTP GET.</p>
 </div>
 <div id="img_core" class="imageblock" style="text-align: center">
 <div class="content">
