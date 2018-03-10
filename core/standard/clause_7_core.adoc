@@ -820,6 +820,30 @@ example: 'function=public+use'
 ----
 =================
 
+.An additional parameter to filter buildings based on their name
+=================
+[source,YAML]
+----
+name: name
+in: query
+description: >-
+  Only return buildings with a particular name. Use '*' as a wildcard.\
+
+  Default = return all buildings.
+required: false
+schema:
+  type: string
+style: form
+explode: false
+example: 'name=A*'
+----
+
+For string-valued properties, servers could support wildcard searches. The
+example included in the OpenAPI fragment would search for all buildings with
+a name that starts with "A".
+=================
+
+
 ==== Response
 
 [width="90%",cols="2,6a"]
