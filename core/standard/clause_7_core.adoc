@@ -449,7 +449,7 @@ properties:
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-md-links +
 
-A "200"-response SHALL include the following links in the `links` property
+A `200`-response SHALL include the following links in the `links` property
 of the response:
 
 * a link to this response document (relation: `self`),
@@ -467,7 +467,7 @@ All links SHALL include the `rel` and `type` link parameters.
 |Recommendation {counter:rec-id} |/rec/core/fc-md-descriptions +
 
 If external schemas or descriptions for the dataset exist that provide
-information about the structure or semantics of the data, a "200"-response
+information about the structure or semantics of the data, a `200`-response
 SHOULD include links to each of those resources in the `links` property
 of the response (relation: `describedBy`).
 
@@ -843,7 +843,6 @@ example included in the OpenAPI fragment would search for all buildings with
 a name that starts with "A".
 =================
 
-
 ==== Response
 
 [width="90%",cols="2,6a"]
@@ -851,7 +850,7 @@ a name that starts with "A".
 |*Requirement {counter:req-id}* |/req/core/fc-response +
 
 A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200".
+HTTP status code `200`.
 |===
 
 The response will only include features selected by the request.
@@ -880,7 +879,7 @@ to 10000 additional features and a `next` link, if there are more.
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-links +
 
-A "200"-response SHALL include the following links:
+A `200`-response SHALL include the following links:
 
 * a link to this response document (relation: `self`),
 * a link to the response document in every other media type supported
@@ -891,7 +890,7 @@ by the service (relation: `alternate`).
 |===
 |*Recommendation {counter:rec-id}* |/rec/core/fc-next-1 +
 
-A "200"-response SHOULD include a link to the next "page" (relation: `next`),
+A `200`-response SHOULD include a link to the next "page" (relation: `next`),
 if more features have been selected than returned in the response.
 |===
 
@@ -993,7 +992,7 @@ Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIn
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-timeStamp +
 
-A "200"-response SHALL include a property `timeStamp` based upon the schema
+A `200`-response SHALL include a property `timeStamp` based upon the schema
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/timeStamp.yaml[timeStamp.yaml].
 |===
 
@@ -1060,14 +1059,14 @@ distinguish between them.
 |*Requirement {counter:req-id}* |/req/core/f-success +
 
 A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200".
+HTTP status code `200`.
 |===
 
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |/req/core/f-links +
 
-A "200"-response SHALL include the following links in the response:
+A `200`-response SHALL include the following links in the response:
 
 * a link to the response document (relation: `self`),
 * a link to the response document in every other media type supported by the service (relation: `alternate`), and
