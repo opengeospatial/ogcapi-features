@@ -646,7 +646,7 @@ collection in the `/collections` response.
 |*Requirement {counter:req-id}* |/req/core/fc-op +
  +
 
-For every feature collection identified in the metadata about the feature collection (path "/"),
+For every feature collection identified in the metadata about the feature collection (path `/`),
 the server SHALL support the HTTP GET operation at the path `/collections/{name}/items`.
 
 `name` is the property of the same name in the feature collections metadata.
