@@ -37,7 +37,7 @@ include::requirements/requirements_class_html.adoc[]
 |===
 |*Requirement {counter:req-id}* |/req/html/definition +
 
-Every "200"-response of an operation of the server
+Every `200`-response of an operation of the server
 SHALL support the media type `text/html`.
 |===
 
@@ -45,7 +45,7 @@ SHALL support the media type `text/html`.
 |===
 |*Requirement {counter:req-id}* |/req/html/content +
 
-Every "200"-response of the server with the media type "text/html" SHALL be a
+Every `200`-response of the server with the media type "text/html" SHALL be a
 link:https://www.w3.org/TR/html5/[HTML 5 document] that includes the following
 information in the HTML body:
 
@@ -59,7 +59,7 @@ in the HTML `<body/>`, and
 |===
 |Recommendation {counter:rec-id} |/rec/html/schema-org +
 
-In a "200"-response with the media type `text/html`, SHOULD include
+In a `200`-response with the media type `text/html`, SHOULD include
 <<schema.org,Schema.org>> annotations.
 |===
 
@@ -74,7 +74,7 @@ include::requirements/requirements_class_geojson.adoc[]
 |===
 |*Requirement {counter:req-id}* |/req/geojson/definition +
 
-"200"-responses of the server SHALL support the following media types:
+`200`-responses of the server SHALL support the following media types:
 
 * `application/geo+json` for feature collections and features, and
 * `application/json` for all other resources.
@@ -84,7 +84,7 @@ include::requirements/requirements_class_geojson.adoc[]
 |===
 |*Requirement {counter:req-id}* |/req/geojson/content +
 
-Every "200"-response with the media type `application/geo+json` SHALL be
+Every `200`-response with the media type `application/geo+json` SHALL be
 
 * a link:https://tools.ietf.org/html/rfc7946#section-3.3[GeoJSON FeatureCollection Object] for feature collections, and
 * a link:https://tools.ietf.org/html/rfc7946#section-3.2[GeoJSON Feature Object] for features.
@@ -201,7 +201,7 @@ include::requirements/requirements_class_gmlsf0.adoc[]
 |===
 |*Requirement {counter:req-id}* |/req/gmlsf0/definition +
 
-"200"-responses of the server
+`200`-responses of the server
 SHALL support the following media types:
 
 * `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0` for feature collections and features,
@@ -212,7 +212,7 @@ SHALL support the following media types:
 |===
 |*Requirement {counter:req-id}* |/req/gmlsf0/content +
 
-Every "200"-response with the media type `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0` SHALL be
+Every `200`-response with the media type `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0` SHALL be
 
 * a link:http://schemas.opengis.net/wfs/3.0/wfs-core.xsd[WFS 3.0 Core FeatureCollection Object] for feature collections, and
 * a link:http://schemas.opengis.net/gml/3.2.1/feature.xsd[GML 3.2 Feature] for features.
@@ -242,7 +242,7 @@ include::requirements/requirements_class_gmlsf2.adoc[]
 |===
 |*Requirement {counter:req-id}* |/req/gmlsf2/definition +
 
-"200"-responses of the server
+`200`-responses of the server
 SHALL support the following media types:
 
 * `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` for feature collections and features,
@@ -253,7 +253,7 @@ SHALL support the following media types:
 |===
 |*Requirement {counter:req-id}* |/req/gmlsf2/content +
 
-Every "200"-response with the media type `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` SHALL be
+Every `200`-response with the media type `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` SHALL be
 
 * a link:http://schemas.opengis.net/wfs/3.0/wfs-core.xsd[WFS 3.0 Core FeatureCollection Object] for feature collections, and
 * a link:http://schemas.opengis.net/gml/3.2.1/feature.xsd[GML 3.2 Feature] for features.
