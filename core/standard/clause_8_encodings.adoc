@@ -76,8 +76,8 @@ include::requirements/requirements_class_geojson.adoc[]
 
 "200"-responses of the server SHALL support the following media types:
 
-* `application/json` for feature collection metadata and the list of requirements classes, and
-* `application/geo+json` for feature collections and features.
+* `application/geo+json` for feature collections and features, and
+* `application/json` for all other resources.
 |===
 
 [width="90%",cols="2,6a"]
