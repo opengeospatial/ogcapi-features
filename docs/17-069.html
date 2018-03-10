@@ -3334,20 +3334,31 @@ encodings.</p>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_html"><a class="anchor" href="#_requirement_class_html"></a>8.2. Requirement Class "HTML"</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.<br>
-Link to <a href="#SDWBP">[SDWBP]</a> and summarize the key points discussed around in BP2.<br>
-Also link to <a href="#rec_html">[rec_html]</a>.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Geographic information that is only accessible in formats like GeoJSON or GML
+has two issues:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>it is not discoverable using the most common mechanism for discovering information,
+that is the search engines of the Web;</p>
+</li>
+<li>
+<p>it can not be viewed directly in a browser - additional tools are required to
+view the data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Therefore, sharing data on the Web should include publication in HTML. To be consistent
+with the Web, it should be done in a way that enables users and search engines to
+access all data.</p>
+</div>
+<div class="paragraph">
+<p>This is discussed in detail in
+<a href="https://www.w3.org/TR/sdw-bp/#indexable-by-search-engines">Best Practice 2: Make your spatial data indexable by search engines</a>
+<a href="#SDWBP">[SDWBP]</a>. This standard therefore <a href="#rec_html">recommends to support HTML as an encoding</a>.</p>
 </div>
 <table id="rc_html" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3449,18 +3460,11 @@ in the HTML <code>&lt;body/&gt;</code>, and</p>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_geojson"><a class="anchor" href="#_requirement_class_geojson"></a>8.3. Requirement Class "GeoJSON"</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>GeoJSON is a commonly used format that is simple to understand and well
+supported by tools and software libraries. Since most Web developers are
+comfortable with using a JSON-based format, supporting GeoJSON is recommended,
+if the feature data can be represented in GeoJSON for the intended use.</p>
 </div>
 <table id="rc_geojson" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3653,18 +3657,13 @@ specific feature types or their properties.</p>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_geography_markup_language_gml_simple_features_profile_level_0"><a class="anchor" href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_0"></a>8.4. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>In addition to HTML and GeoJSON, a significant amount of feature data is
+available in XML-based formats, notably GML. Therefore, this standard
+specifies requirement classes for GML. The Simple Features Profile, Level 0, is
+the simplest profile of GML and is typically supported by tools. It is restricted
+to data with 2D geometries supported by most tools. In addition, the profile
+is limited to features that can be stored in a tabular data structure.</p>
 </div>
 <table id="rc_gmlsf0" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3775,18 +3774,10 @@ specific feature types or their properties.</p>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_geography_markup_language_gml_simple_features_profile_level_2"><a class="anchor" href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_2"></a>8.5. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 2"</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>The difference between this requirement class and the <a href="#rc_gmlsf0">Level 0</a>
+requirements class is that non-spatial feature properties are not restricted to
+atomic values (strings, numbers, etc.).</p>
 </div>
 <table id="rc_gmlsf2" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>

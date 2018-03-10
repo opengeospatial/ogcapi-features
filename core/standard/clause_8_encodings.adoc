@@ -26,10 +26,21 @@ encodings.
 
 === Requirement Class "HTML"
 
-NOTE: TODO +
-Add intro text for the requirement class. +
-Link to <<SDWBP>> and summarize the key points discussed around in BP2. +
-Also link to <<rec_html>>.
+Geographic information that is only accessible in formats like GeoJSON or GML
+has two issues:
+
+* it is not discoverable using the most common mechanism for discovering information,
+that is the search engines of the Web;
+* it can not be viewed directly in a browser - additional tools are required to
+view the data.
+
+Therefore, sharing data on the Web should include publication in HTML. To be consistent
+with the Web, it should be done in a way that enables users and search engines to
+access all data.
+
+This is discussed in detail in
+link:https://www.w3.org/TR/sdw-bp/#indexable-by-search-engines[Best Practice 2: Make your spatial data indexable by search engines]
+<<SDWBP>>. This standard therefore <<rec_html,recommends to support HTML as an encoding>>.
 
 include::requirements/requirements_class_html.adoc[]
 
@@ -65,8 +76,10 @@ In a `200`-response with the media type `text/html`, SHOULD include
 
 === Requirement Class "GeoJSON"
 
-NOTE: TODO +
-Add intro text for the requirement class.
+GeoJSON is a commonly used format that is simple to understand and well
+supported by tools and software libraries. Since most Web developers are
+comfortable with using a JSON-based format, supporting GeoJSON is recommended,
+if the feature data can be represented in GeoJSON for the intended use.
 
 include::requirements/requirements_class_geojson.adoc[]
 
@@ -192,8 +205,12 @@ In the example below, coordinates are not shown.
 
 === Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"
 
-NOTE: TODO +
-Add intro text for the requirement class.
+In addition to HTML and GeoJSON, a significant amount of feature data is
+available in XML-based formats, notably GML. Therefore, this standard
+specifies requirement classes for GML. The Simple Features Profile, Level 0, is
+the simplest profile of GML and is typically supported by tools. It is restricted
+to data with 2D geometries supported by most tools. In addition, the profile
+is limited to features that can be stored in a tabular data structure.
 
 include::requirements/requirements_class_gmlsf0.adoc[]
 
@@ -233,8 +250,9 @@ specific feature types or their properties.
 
 === Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 2"
 
-NOTE: TODO +
-Add intro text for the requirement class.
+The difference between this requirement class and the <<rc_gmlsf0,Level 0>>
+requirements class is that non-spatial feature properties are not restricted to
+atomic values (strings, numbers, etc.).
 
 include::requirements/requirements_class_gmlsf2.adoc[]
 
