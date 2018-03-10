@@ -395,7 +395,13 @@ components:
         extent:
           $ref: '#/components/schemas/bbox'
         crs:
-          description: TODO - add description ... first crs is the default crs
+          description: >-
+            The coordinate reference systems in which geometries
+            may be retrieved. Coordinate reference systems are identified
+            by a URI. The first coordinate reference system is the
+            coordinate reference system that is used by default. This
+            is always "http://www.opengis.net/def/crs/OGC/1.3/CRS84", i.e.
+            WGS84 longitude/latitude.
           type: array
           items:
             type: string
