@@ -176,7 +176,7 @@ A.2.4.2.2 Feature Collection Metadata Collections Property Validation
 ----
 ----
 A.2.5 Feature Collections
- a) Test Purpose: Validate that the service provides valid Feature Collections on the mandated paths
+ a) Test Purpose: Validate that the service provides Feature Collections on the mandated paths
  b) Pre-conditions: Client possesses Feature Collection metadata which provides paths to each Feature Collection
  c) Test Method: 
      For each Feature Collection identified in the Feature Collection metadata
@@ -197,47 +197,131 @@ A.2.5 Feature Collections
 ----
 ----
 A.2.5.1 Feature Result Set
- a) Test Purpose:
- b) Pre-conditions:
+ a) Test Purpose: Validate that the returned Features are complete and correct.
+ b) Pre-conditions: A Feature Collection has been received
  c) Test Method:
+     For each Feature in the Feature Collection
+     1) Client validates that the links property is present
+     2) Client validates that the links property includes an entry for each media type supported by the service.
+     3) Client validates that each entry in the links property includes the rel and type parameters
+     4) Client validates that all of the entries in the links property resolve to representations of the Feature in the appropriate media type.
  d) References: 
      Requirements: R16, R17, R18
 ----
 ----
-A.2.5 WFS 3.0 Core
- a) Test Purpose:
- b) Pre-conditions:
+A.2.6 Features
+ a) Test Purpose: Validate that individual Features can be retrieved
+ b) Pre-conditions: A Feature Collection has been received
  c) Test Method:
- d) References: Requirement R5
+    For each Feature in the Feature Collection:
+    1) Client issues a get request on {scheme}://{authority}/{collectionId}/{id}
+         i) Accept header is set to ?????
+    2) Client validates that a Feature document is returned.
+    3) Client validates that the name property of the Feature matches the {id} 
+    4) Client validates the Feature using test A.2.6.1
+ d) References: 
+     Requirements: R19, R20
+     Tests: A.2.6.1
 ----
 ----
-A.2.6 GeoJSON Extension
- a) Test Purpose:
- b) Pre-conditions:
+A.2.6.1 Feature Validation
+ a) Test Purpose: Validate the contents of a Feature
+ b) Pre-conditions: A Feature has been retrieved
  c) Test Method:
- d) References: Requirement R6
+     1) Client validates that the links property is present
+     2) Client validates that each entry in the links property includes the rel and type parameters
+     3) For every media type supported by the server:
+         i) Client validates that there is a link entry for the Feature (self) 
+         ii) Client validates that the entry resolves to representations of the Feature in the appropriate media type.
+     4) Client validates that the links property includes an entry for the Feature Collection.
+ d) References: 
+     Requirements: R20, R21
 ----
 ----
-A.2.7 GML Simple Features Level 0 Extension
- a) Test Purpose:
- b) Pre-conditions:
+A.2.7 HTML Extension
+ a) Test Purpose: Validate that HTML encoding is supported property
+ b) Pre-conditions: 
+    1) A request has been issued with the Accepts header set to "text/html"
+    2) A "200" response has been received with the Content-Type header set to "text/html"
  c) Test Method:
- d) References: Requirement R7
+    1) Client validates that HTML is one of the advertised media types supported by the server.
+    2) Client validates that the received payload includes <needs clarification in the spec>
+ d) References: 
+     Requirements: R22, R23
 ----
 ----
+A.2.8 GeoJSON Extension
+ a) Test Purpose: Validate that the GeoJSON extension is supported property
+ b) Pre-conditions: Client has determined that the server supports GeoJSON
+ c) Test Method:
+     1) Validate handling of Features and Feature Collections using test A.2.8.1
+     2) Validate handling of all other "200" responses using test A.2.8.2 
+ d) References: 
+     Requirements: R24, R25
+     Tests: A.2.8.1, A.2.8.2
+----
+----
+A.2.8.1 GeoJSON Response Validation
+ a) Test Purpose: Validate that GeoJSON responses are supported property
+ b) Pre-conditions: A Feature or Feature Collection response has been received
+ c) Test Method:
+     1) Validate that the request had the accepts header set to "application/geo+json"
+     2) Validate that the content-type header of the response is set to "application/geo+json"
+     3) Validate that the response complies with the GeoJSON standard.
+ d) References: 
+     Requirements: R24, R25
+----
+----
+A.2.8.2 JSON Response Validation
+ a) Test Purpose: Validate that JSON responses are supported property
+ b) Pre-conditions: A response has been received which is not a Feature or Feature Collection
+ c) Test Method:
+     1) Validate that the request had the accepts header set to "application/json" or "application/geo+json"
+     2) Validate that the content-type header of the response is set to "application/json"
+     3) Validate that the response complies with the JSON standard.
+ d) References: 
+     Requirements: R24, R25
+----
+----
+A.2.9 GML Simple Features Level 0 Extension
+ a) Test Purpose: Validate that the GML Simple Features Level 0 extension is supported property
+ b) Pre-conditions: Client has determined that the server supports GML SF Level 0
+ c) Test Method:
+     1) Validate handling of Features and Feature Collections using test A.2.9.1
+     2) Validate handling of all other "200" responses using test A.2.9.2 
+ d) References: 
+     Requirements: R26, R27
+     Tests: A.2.9.1, A.2.9.2
+----
+----
+A.2.8.1 GeoJSON Response Validation
+ a) Test Purpose: Validate that GeoJSON responses are supported property
+ b) Pre-conditions: A Feature or Feature Collection response has been received
+ c) Test Method:
+     1) Validate that the request had the accepts header set to "application/geo+json"
+     2) Validate that the content-type header of the response is set to "application/geo+json"
+     3) Validate that the response complies with the GeoJSON standard.
+ d) References: 
+     Requirements: R24, R25
+----
+----
+A.2.8.2 JSON Response Validation
+ a) Test Purpose: Validate that JSON responses are supported property
+ b) Pre-conditions: A response has been received which is not a Feature or Feature Collection
+ c) Test Method:
+     1) Validate that the request had the accepts header set to "application/json" or "application/geo+json"
+     2) Validate that the content-type header of the response is set to "application/json"
+     3) Validate that the response complies with the JSON standard.
+ d) References: 
+     Requirements: R24, R25
+--------
 A.2.8 GML Simple Features Level 2 Extension
  a) Test Purpose:
  b) Pre-conditions:
  c) Test Method:
  d) References: Requirement R8
 ----
-----
-A.2.9 HTML Extension
- a) Test Purpose:
- b) Pre-conditions:
- c) Test Method:
- d) References: Requirement R9
-----
+
 ----
 A.2.10 OpenAPI 3.0 
  a) Test Purpose:
