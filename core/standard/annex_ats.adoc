@@ -4,7 +4,21 @@
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/46[ISSUE 46] +
 OpenAPI Validation
 
-== A.1: Requirements Trace Matrix
+== A.1: Overview
+WFS 3.0 is a highly modular standard.  One result of this is that almost everything is optional.
+1) Are the advertised capabilities compliant with the WFS 3.0 standard?
+2) Does the service implement those capabilities as advertised?
+
+Conventions:
+URL templates are used throughout these test suites.  Path templating refers to the usage of curly braces ({}) to mark a section of a URL path as replaceable using path parameters.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986.
+. scheme: http | https
+. authority: DNS name of the server with optional port number
+. path: The slash delimited identifier for a resource on the server
+. query: query parameters following the "?" character
+. fragment: identifies an element within the resource. Preceded by the "\#" character
+
+
+== A.2: Requirements Trace Matrix
 ----
 Requirement 1: API Definition
 Description:
@@ -60,16 +74,117 @@ include::requirements/requirements_class_oas30.adoc[]
 Tests: A.1.n
 ----
 
-<TODO - find a better place for this>
-Conventions:
-URL templates are used throughout these test suites.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986.
-. scheme: http | https
-. authority: DNS name of the server with optional port number
-. path: The slash delimited identifier for a resource on the server
-. query: query parameters following the "?" character
-. fragment: identifies an element within the resource. Preceded by the "\#" character
+== A.3: Abstract Tests
+WFS 3.0 is a highly modular standard.  One result of this is that almost everything is optional.
+1) Are the advertised capabilities compliant with the WFS 3.0 standard?
+2) Does the service implement those capabilities as advertised?
 
-=== A.2: OpenAPI 3.0 Test Suites*
+=== A.3.1: Core Test:
+* Test Purpose: The core test which drives all other testing
+* Pre-conditions: Tester is is aware of the root path to the Service
+* References:
+* Discussion:
+* Variables: 
+  {Root_URL} the root URL for the service
+* Test Method:
+  1) Retrieve the API Description document from {Root_URL}/api
+  2) Process the API Description document based on the API standard used
+     a) For OpenAPI Version 3.x use test A.3.2
+  3) Report results of the tests.
+
+=== A.3.2: OpenAPI Core Test:
+* Test Purpose: Validate WFS 3.0 compliance based on the OpenAPI description of the Service.
+* Pre-conditions: Tester has retrieved an API Description document.
+* References:
+* Discussion:
+* Variables: 
+  {Root_URL} the root URL for the service
+  {API_Description} the API Description document
+  {Server_Object} metadata which describes a service
+* Test Method:
+  1) Validate that the API Description document complies with the OpenAPI standard.
+  2) Retrieve each of the security controls from {API_Description}/security
+  3) IF there are security controls which were not used to retrieve the API Description, retrieve the API Description using the most restrictive controls specified.  All further access to the service will be preformed using these controls.
+  4) Count the number of entries in {API_Description}/servers
+    (**ISSUE:** What do we do if there is more than one?)
+  5) Retrieve the first Server Object from {API_Description}/servers
+     a) Retrieve the /{Server_Object}/url value. 
+     b) Set {Root_URL} to this value
+     (Note: The url may contain variables (using the {var} construct).  The variable values are defined in the {Server_Object}/variables element.)
+     (**ISSUE:****** what do we do with multiple server URLs?)
+  6) Retrieve all Components Objects from {API_Description}/components and save for latter use.
+  7) Retrieve all Tag Objects from {API_Description}/tags and save for latter use.
+  8) Process each element in {API_Description}/paths using test A.3.3.
+
+=== A.3.3: OpenAPI Paths
+* Test Purpose: Validate WFS 3.0 compliance based on the OpenAPI description of the service operations.
+* Pre-conditions: Tester has retrieved and processed the top level of an OpenAPI document.
+* References:
+* Discussion: The /paths element in the OpenAPI document contains a sequence of Paths Objects.  Each Paths Object associates a path name with its' metadata, a Path Item Object.  The URL for a path is formed by concatenating the root URL for the server (from the Server Object) and the path name.
+* Variables: 
+  {API_Description} the API Description document
+  {path} a URL path identifying a resource
+* Test Method:
+{validate /compliance first to get the compliance information}
+  1) FOR EACH entry in {API_Description}/paths
+     If {API_Description}/paths/{path} is addressed by the WFS 3.0 standard
+        THEN Validate the Path Item Object using test A.3.4
+        ELSE ignore this path
+  2) Verify that all paths required by WFS 3.0 were included
+         
+=== A.3.4: OpenAPI Path Items     
+* Test Purpose: Validate WFS 3.0 compliance for a single resource path based on the OpenAPI description of that path.
+* Pre-conditions: Tester has extracted a Path Item Object from an OpenAPI document.
+* References:
+* Discussion: This test validates the metadata associated with a single resource path.
+* Variables: 
+  {Path_Item} the Path Item Object
+  {Server_Object} metadata which describes a service
+  {Root_URL} the root URL for the service
+* Test Method:
+  1) Count the number of entries in {Path_Item}/servers
+     (**ISSUE:** What do we do if there is more than one?)
+  2) Retrieve the first Server Object from {Path_Item}/servers
+     a) Retrieve the /{Server_Object}/url value. 
+     b) Set {Root_URL} to this value
+     (Note: The url may contain variables (using the {var} construct).  The variable values are defined in the {Server_Object}/variables element.)
+     (**ISSUE:****** what do we do with multiple server URLs?)
+  3) Retrieve the parameters from {Path_Item}/parameters.  Save for latter use.
+  5) Validate the operations described by this Path Item:
+      DO CASE OF:
+      "/api
+          Retrieve Operation Object from {Path_Item}/get
+          Perform Test A.*.* using {Operation_Object}
+      "/config"
+      
+
+
+
+Paths metadata:
+1) Identifies the HTTP operations (get, put, etc) that can be executed on this path.  EAch opearation identified has associated metadata in an Operations Object.
+2) Servers - a list of Server Objects which identify alternate servers for this operation.  ISSUE: If alternate servers are identified, do they need to be tested for compliance as well?
+3) Parameters which are applicable for all operations in this path.  These may be overridden at the operations level.
+
+Parameter Metadata:
+1) Retrieve the parameter name from {Parameter_Object}/name
+2) If the parameter is not defined in the WFS 3.0 standard (ISSUE: do we continue validation or skip this parameter)
+3) IF the parameter is required by the WFS 3.0 standard, verify that {Parameter_Object}/required == TRUE
+4) IF {Parameter_Object}/required == TRUE, verify that the parameter is present
+5) IF the parameter is present, verify that the parameter is in the correct location as specified in {Parameter_Object}/in (valid values are query, header, path, or cookie).
+6) IF the parameter has an empty value, verify that {Parmeter_Object}/allowEmptyValue is TRUE.
+
+Operations Metadata:
+{Operation_Object}/operationId - not required but may be helpful.
+{Operation_Object}/parameters - same as above
+{Operation_Object}/requestBody
+{Operation_Object}/responses
+{Operation_Object}/callbacks - not currently used by the WFS 3.0 standard
+{Operation_Object}/security
+{Operation_Object}/servers
+
+
+
+=== A.3: OpenAPI 3.0 Test Suites*
 The following test suites shall be used if the service description is provided using OpenAPI 3.0.
 ----
 A.2.1 API Definition
