@@ -1,18 +1,6 @@
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/api-definition +
+|*Requirement {counter:req-id}* |/req/core/api-definition-op +
 
-The service SHALL provide an API definition document at the path `/api`.
+The server SHALL support the HTTP GET operation at the path `/api`.
 |===
-
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/api-definition-oas +
-
-If the API definition document uses the OpenAPI Specification 3.0,
-the document SHOULD conform to the
-<<rc_oas30,OpenAPI Specification 3.0 requirements class>>.
-|===
-
-If multiple API definition formats are supported by a server, use
-content negotiation to select the desired representation.
