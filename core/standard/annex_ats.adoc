@@ -182,22 +182,21 @@ Test Method: +
   2) Receive an API definition document in response to the get request +
   3) Validates that the API definition document complies with OpenAPI (should reference the OpenAPI test) +
  +
-[%hardbreaks] 
 === A.3.6 Conformance Report
-* Test Purpose: Validate that the service provides a conformance report on the required path 
-* Pre-conditions: Tester is is aware of the root path to the Service
-* References:
-  Requirement R5
-* Discussion:
-* Variables: 
-  {Root_URL} the root URL for the service
-* Test Method:
-  1) Issue a get request on {scheme}://{authority}/conformance
-    i) Accept header is set to ?????
-  2) Receive an API Conformance Report document in response to the get request
-  3) Validates the Conformance Report document against the schema defined in the WFS 3.0 standard
-  4) Save the list of conformance classes from the conformsTo element for use latter. 
-----
+Test Purpose: Validate that the service provides a conformance report on the required path +
+Pre-conditions: Tester is is aware of the root path to the Service +
+References: +
+  Requirement R5 +
+Discussion: +
+Variables: +
+  {Root_URL} the root URL for the service +
+Test Method: +
+  1) Issue a get request on {scheme}://{authority}/conformance +
+    i) Accept header is set to ????? +
+  2) Receive an API Conformance Report document in response to the get request +
+  3) Validates the Conformance Report document against the schema defined in the WFS 3.0 standard +
+  4) Save the list of conformance classes from the conformsTo element for use latter. +
+ +
 === A.3.7: OpenAPI Get Collections Test
 * Test Purpose: Validate that the service provides valid Feature Collections metadata on the required path 
 * Pre-conditions: Tester is is aware of the root path to the Service
