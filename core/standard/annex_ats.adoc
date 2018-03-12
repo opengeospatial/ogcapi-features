@@ -6,18 +6,18 @@ OpenAPI Validation
 
 == A.1: Overview
 WFS 3.0 is a highly modular standard.  One result of this is that almost everything is optional. +
-. Are the advertised capabilities compliant with the WFS 3.0 standard? +
-. Does the service implement those capabilities as advertised? +
+1) Are the advertised capabilities compliant with the WFS 3.0 standard? +
+2) Does the service implement those capabilities as advertised? +
 
 This abstract Test Suite takes a follow-your-nose approach to testing compliance.  Starting with a landing page, the entire resource suite is explored by following URLs.  No capabilities are tested unless they are first identified by another resource. +
  +
 *Conventions:* +
-Path templates are used throughout these test suites.  Path templating refers to the usage of curly braces ({}) to mark a section of a URL path as replaceable using path parameters.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986.
-* scheme: http | https
-* authority: DNS name of the server with optional port number
-* path: The slash delimited identifier for a resource on the server
-* query: query parameters following the "?" character
-* fragment: identifies an element within the resource. Preceded by the "\#" character
+Path templates are used throughout these test suites.  Path templating refers to the usage of curly braces ({}) to mark a section of a URL path as replaceable using path parameters.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986. +
+* scheme: http | https +
+* authority: DNS name of the server with optional port number +
+* path: The slash delimited identifier for a resource on the server +
+* query: query parameters following the "?" character +
+* fragment: identifies an element within the resource. Preceded by the "\#" character +
 
 == A.2: Requirements Trace Matrix
 ----
