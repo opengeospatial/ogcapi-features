@@ -92,7 +92,7 @@ Test Method: +
   2) Process the API Description document based on the API standard used +
      a) For OpenAPI Version 3.x use test A.3.2 +
   3) Report results of the tests. +
- +
+
 === A.3.2: OpenAPI Core Test +
 Test Purpose: Validate WFS 3.0 compliance based on the OpenAPI description of the Service. +
 Pre-conditions: Tester has retrieved an API Description document. +
@@ -115,7 +115,7 @@ Test Method: +
  6) Retrieve all Components Objects from {API_Description}/components and save for latter use. +
  7) Retrieve all Tag Objects from {API_Description}/tags and save for latter use. +
  8) Process each element in {API_Description}/paths using test A.3.3. +
- +
+
 === A.3.3: OpenAPI Paths +
 Test Purpose: Validate WFS 3.0 compliance based on the OpenAPI description of the service operations. +
 Pre-conditions: Tester has retrieved and processed the top level of an OpenAPI document. +
@@ -133,7 +133,7 @@ Test Method: +
         THEN Validate the Path Item Object using test A.3.4 +
         ELSE ignore this path +
   5) Verify that all paths required by WFS 3.0 were included +
- +
+
 === A.3.4: OpenAPI Path Items  +   
 Test Purpose: Validate WFS 3.0 compliance for a single resource path based on the OpenAPI description of that path. +
 Pre-conditions: Tester has extracted a Path Item Object from an OpenAPI document. +
@@ -166,7 +166,7 @@ Test Method: +
           Perform test A.3.7 using {Operaton_Object} +
       "other"  +
           Ignore +
- +
+
 === A.3.5 OpenAPI Description +
 Test Purpose: Validate that the service provides an API definition page on the required path +
 Pre-conditions: Tester is is aware of the root path to the Service +
@@ -181,7 +181,7 @@ Test Method: +
      i) Accept header is set to ????? +
   2) Receive an API definition document in response to the get request +
   3) Validates that the API definition document complies with OpenAPI (should reference the OpenAPI test) +
- +
+
 === A.3.6 Conformance Report
 Test Purpose: Validate that the service provides a conformance report on the required path +
 Pre-conditions: Tester is is aware of the root path to the Service +
@@ -196,7 +196,7 @@ Test Method: +
   2) Receive an API Conformance Report document in response to the get request +
   3) Validates the Conformance Report document against the schema defined in the WFS 3.0 standard +
   4) Save the list of conformance classes from the conformsTo element for use latter. +
- +
+
 === A.3.7: OpenAPI Get Collections Test
 * Test Purpose: Validate that the service provides valid Feature Collections metadata on the required path 
 * Pre-conditions: Tester is is aware of the root path to the Service
@@ -213,7 +213,7 @@ Test Method: +
   4) Validate the contents of the Feature Collection Metadata document through test A.3.7.2
   5) Save a list of all of the Feature Collections for use latter.
   6) Validate the resources described by the Feature Collection Metadata using Test A.3.8.
-----
+
 ==== A.3.7.1: Feature Collection Metadata Schema Validation
 * Test Purpose: Validate the structure of the Feature Collection metadata 
 * Pre-conditions: A Feature Collection Metadata resouce has been received
@@ -224,7 +224,7 @@ Test Method: +
   {Collection_Metadata} the Feature Collection Metadata resource
 * Test Method:
   1) Validate the Feature Collection Metadata document against the schema defined in content.yaml
-----
+
 ==== A.3.7.2: Feature Collection Metadata Content Validation
 * Test Purpose: Validate that the Feature Collection Metadata content is correct and complete
 * Pre-conditions: A Feature Collection Metadata document has been received
@@ -236,7 +236,7 @@ Test Method: +
 * Test Method:
   1) Validate the links property of the Feature Collection Metadata through test A.3.7.2.1
   2) Validate the collections property of the Feature Collection Metadata through test A.3.7.2.2
-----
+
 ===== A.3.7.2.1: Feature Collection Metadata Links Property Validation
 * Test Purpose: Validate that the Links property of the Feature Collection Metadata content is correct and complete
 * Pre-conditions: A Feature Collection Metadata document has been received
@@ -250,7 +250,7 @@ Test Method: +
   2) Validate the links property includes valid links to Feature Collection Metadata documents in every media type offered by the server
   3) For each Feature Collection and each media type offered by the server, validate that the links property includes a valid link to that resource.
   4) Validate the links property includes valid links to API Definition documents in every media type offered by the server
-----
+
 ===== A.3.7.2.2 Feature Collection Metadata Collections Property Validation
 * Test Purpose: Validate that the Collections property of the Feature Collection Metadata content is correct and complete
 * Pre-conditions: A Feature Collection Metadata document has been received
@@ -266,7 +266,7 @@ Test Method: +
   4) For each links property of each Collections property; validate that each entry in the links property resolves to the proper Feature Collection and encoding. (Validate by matching Feature names)
   5) Validate that each collections property includes a valid extent property
   6) For each Feature Collection, validate that all Features contained in that collection fall within the bounding box defined by the extent property.
-----
+  
 === A.3.8 Feature Collections
 * Test Purpose: Validate that the service provides Feature Collections on the mandated paths
 * Pre-conditions: Tester possesses Feature Collection metadata which provides paths to each Feature Collection
@@ -288,7 +288,7 @@ Test Method: +
     Query parameters are:
     1) count: the maximum number of Features returned at one time (R12 & R13).
     2) bbox: only Features which fall within or intersect the boundaries of this box should be returned (R14 & R15)  
-----
+
 ==== A.3.8.1: Feature Result Set
 * Test Purpose: Validate that the returned Features are complete and correct.
 * Pre-conditions: A Feature Collection has been received
@@ -303,8 +303,8 @@ Test Method: +
   2) Validate that the links property includes an entry for each media type supported by the service.
   3) Validate that each entry in the links property includes the rel and type parameters
   4) Validate that all of the entries in the links property resolve to representations of the Feature in the appropriate media type.
-----
-== A.3.9: Features
+
+=== A.3.9: Features
 * Test Purpose:  Validate that individual Features can be retrieved
 * Pre-conditions: A Feature Collection has been received
 * References:
@@ -320,7 +320,7 @@ Test Method: +
     2) Validate that a Feature document is returned.
     3) Validate that the name property of the Feature matches the {id} 
     4) Validate the Feature using test A.3.9.1
-----
+
 === A.3.9.1: Feature Validation
 * Test Purpose: Validate the contents of a Feature
 * Pre-conditions: A Feature has been retrieved
@@ -336,7 +336,7 @@ Test Method: +
      a) Validate that there is a link entry for the Feature (self) 
      b) Validate that the entry resolves to representations of the Feature in the appropriate media type.
   4) Validate that the links property includes an entry for the Feature Collection.
-----
+
 === A.3.8: OpenAPI Parameter Test
 Parameter Metadata:
 1) Retrieve the parameter name from {Parameter_Object}/name
@@ -345,10 +345,8 @@ Parameter Metadata:
 4) IF {Parameter_Object}/required == TRUE, verify that the parameter is present
 5) IF the parameter is present, verify that the parameter is in the correct location as specified in {Parameter_Object}/in (valid values are query, header, path, or cookie).
 6) IF the parameter has an empty value, verify that {Parmeter_Object}/allowEmptyValue is TRUE.
-----
 
-----
-A.2.3 HTTP 1.1
+== A.2.3 HTTP 1.1
  a) Test Purpose: Validate that the service supports and conforms to HTTP 1.1
  b) Pre-conditions: Client is aware of the root path to the service
  c) Test Method: TBD - it is unknown if a conformance test for HTTP 1.1 exists.
