@@ -16,6 +16,7 @@ Servers:
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
+* [ogr/gdal WFS 3.0 client driver](http://gdal.org/drv_wfs3.html)
 
 ## interactive instruments
 
