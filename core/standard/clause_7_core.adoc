@@ -4,6 +4,7 @@
 for now, normative statements are often included inline. This will be re-factored later.
 ////
 
+[[core-overview]]
 === Overview
 
 include::requirements/requirements_class_core.adoc[]
@@ -15,16 +16,28 @@ A server that implements the WFS API provides access to the features in a datase
 In other words, the API is a distribution of that dataset. A file download, for example,
 would be another distribution.
 
-That is, each WFS has a single `DatasetDistribution` and the distribution
-consists of a set of feature collections. This specification does not
+That is, each WFS has a single `LandingPage` (path `/`) that provides links to
+
+* the `APIDefinition` (path `/api`),
+* the `Conformance` statements (path `/conformance`),
+* the `DatasetDistribution` metadata (path `/collections`).
+
+The `APIDefinition` describes the capabilities of the server and which can be used by
+clients to connect to the server or by development tools to support the
+implementation of servers and clients. Accessing the `APIDefinition` using
+HTTP GET returns a description of the API.
+
+Accessing the `Conformance` using HTTP GET returns a list of URIs of
+requirements classes implemented by the server.
+
+The distribution consists of a set of feature collections. This specification does not
 include any requirements how the features in the dataset have to be aggregated
 into collections. A typical approach is to aggregate by feature type, but any other approach
 that fits the dataset or the applications using this distribution may be used, too.
 
 Accessing the `DatasetDistribution` using HTTP GET returns a
 `DatasetDistributionResponse`, which includes a link to each `Collection`
-in the distribution along with metadata about each collection (class
-`CollectionMetadata`):
+in the distribution along with metadata about each collection:
 
 * a local identifier for the collection that is unique within the WFS;
 * a list of coordinate reference systems in which geometries may be returned by
@@ -34,8 +47,14 @@ the server, where the first one is the default coordinate reference system
 * an optional bounding box that can be used to provide an indication of the
 spatial extent of the collection - typically derived from the data.
 
-Each `Collection` consists of the features in the collection where each
+Each `Collection` (path `/collections/{collection-name}/items`) consists of the features in the collection where each
 feature in the distribution is part of exactly one collection.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/30[ISSUE 30] +
+Allow also features that do not belong to any collection?
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/66[ISSUE 66] +
+Support features that do belong to multiple collections?
 
 Accessing a `Collection` using HTTP GET returns a `CollectionResponse`,
 which basically consists of features in the collection. The features included
@@ -44,7 +63,7 @@ in the response are determined by the server based on parameters of the request.
 A `bbox` parameter may be used to select only a subset of the features in
 the collection (the features that are located in the bounding box).
 
-The `count` parameter may be used to request only a subset of the
+The `limit` parameter may be used to request only a subset of the
 selected features and to indicate that the client wants to page through
 the selected features of the collection.
 
@@ -52,32 +71,112 @@ The `CollectionResponse` may include metadata about the number of selected and r
 features (`numberMatched` and `numberReturned`) as well as links to simplify
 paging (`next` and `prev`).
 
-Each `Feature` is also a separate resource and may be requested individually
-using HTTP GET.
-
-In addition, each server publishes a formal definition of the API (`APIDefinition`),
-which describes the capabilities of the server and which can be used by
-clients to connect to the server or
-by development tools to support the implementation of servers and clients.
+Each `Feature` (path `/collections/{collection-name}/items/{feature-id}`)
+is also a separate resource and may be requested individually using HTTP GET.
 
 [#img_core,reftext='{figure-caption} {counter:figure-num}']
 .Resources in the Core requirements class
 image::figures/PT1_FIG01.png[align="center"]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/30[ISSUE 30] +
-Allow also features that do not belong to any collection?
+=== API landing page
+
+==== Operation
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/root-op +
+
+The server SHALL support the HTTP GET operation at the path `/`.
+|===
+
+==== Response
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/root-success +
+
+A successful execution of the operation SHALL be reported as a response with a
+HTTP status code `200`.
+
+The content of that response SHALL be based upon the OpenAPI 3.0 schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml[root.yaml]
+and include at least links to the following resources:
+
+* `/api` (relation type 'service')
+* `/conformance` (relation type 'conformance')
+* `/collections` (relation type 'data')
+|===
+
+NOTE: TODO +
+Check, if we can reuse existing relation types instead of 'conformance' and 'data'?
+
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml[Schema for the landing page]
+[source,JSON]
+----
+type: object
+required:
+  - links
+properties:
+  links:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
+----
+
+.Landing page response document
+=================
+[source,JSON]
+----
+{
+  "links": [
+    { "href": "http://data.example.org/",
+      "rel": "self", "type": "application/json", "title": "this document" },
+    { "href": "http://data.example.org/api",
+      "rel": "service", "type": "application/openapi+json;version=3.0", "title": "the API definition" },
+    { "href": "http://data.example.org/conformance",
+      "rel": "conformance", "type": "application/json", "title": "WFS 3.0 conformance classes implemented by this server" },
+    { "href": "http://data.example.org/collections",
+      "rel": "data", "type": "application/json", "title": "Metadata about the feature collections" }
+  ]
+}
+----
+=================
 
 === API definition
 
-==== General requirements
+==== Operation
 
-Every WFS is defined by an API definition that describes the capabilities
-of the server and which can be used by clients to connect to the server or
+Every WFS provides an API definition that describes the capabilities
+of the server and which can be used by developers to understand the API,
+by software clients to connect to the server or
 by development tools to support the implementation of servers and clients.
 
 include::requirements/requirement_api-definition.adoc[]
 
-The API definition document is the "landing page" for the API. I.e.,
+==== Response
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/api-definition-success +
+
+A successful execution of the operation SHALL be reported as a
+response with a HTTP status code `200`.
+
+The server SHALL return an API definition document.
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/api-definition-oas +
+
+If the API definition document uses the OpenAPI Specification 3.0,
+the document SHOULD conform to the
+<<rc_oas30,OpenAPI Specification 3.0 requirements class>>.
+|===
+
+If multiple API definition formats are supported by a server, use
+content negotiation to select the desired representation.
+
+The API definition document describes the API. I.e.,
 there is no need to include the `/api` operation in the API definition itself.
 
 The idea is that any WFS can be used by developers that are familiar with
@@ -87,21 +186,22 @@ client using the OpenAPI definition. The developer may need to learn a little
 bit about geometry, etc., but it should not be required to read this standard
 to access the data via the API.
 
-==== Requirements specific to Web Feature Services
+=== Declaration of conformance classes
 
-===== Support for generic clients
+==== Operation
 
-In addition, it should be possible to write a "generic" client that can
-access Web Feature Services in general, i.e. that are not written for a
-specific server or API. To support such clients, the server has to declare the
-requirements classes it implements and conforms to.
+To support "generic" clients for accessing Web Feature Services in general - and
+not "just" a specific API / server, the server has to declare the
+requirements classes it implements and conforms to, too.
 
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |/req/core/conformance-op +
 
-The server SHALL support the HTTP GET operation at the path `/api/conformance`.
+The server SHALL support the HTTP GET operation at the path `/conformance`.
 |===
+
+==== Response
 
 [width="90%",cols="2,6a"]
 |===
@@ -304,6 +404,28 @@ for example, using format specific suffixes like ".html");
 the Accept header of the HTTP request.
 =====================================================================
 
+=== Coordinate reference systems
+
+As discussed in Chapter 9 of the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices>>,
+how to express and share the location of features in a consistent way is one
+of the most fundamental aspects of publishing geographic data and it is important
+to be clear about the coordinate reference system that coordinates are in.
+
+For the reasons discussed in the Best Practices, Web Feature Service 3.0 uses
+WGS84 longitude and latitude as the default coordinate reference system.
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/crs84 +
+
+Unless the client explicitly requests a different coordinate reference system,
+all spatial geometries SHALL be in the coordinate reference system
+http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude).
+|===
+
+The Core does not specify a capability to request geometries in a different
+coordinate reference system. Such a capability will be specified in another part
+of the WFS 3.0 series.
 
 === Link headers
 
@@ -319,7 +441,7 @@ included in a response or a link is not known when the HTTP headers of the
 response are created.
 |===
 
-=== Feature collection metadata
+=== Feature collections metadata
 
 ==== Operation
 
@@ -338,43 +460,20 @@ The content of that response SHALL be based upon the OpenAPI 3.0 schema link:htt
 |===
 
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml[Schema for the metadata about feature collections]
-[source,JSON]
+[source,YAML]
 ----
 type: object
 required:
+  - links
   - collections
 properties:
   links:
     type: array
     items:
-      $ref: link.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
   collections:
     type: array
     items:
-      type: object
-      required:
-        - name
-        - links
-      properties:
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        links:
-          type: array
-          items:
-            $ref: link.yaml
-        extent:
-          $ref: bbox.yaml
-        crs:
-          description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
-          type: array
-          items:
-            type: string
-          default:
-            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
       $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml
 ----
 
@@ -382,16 +481,14 @@ properties:
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-md-links +
 
-A "200"-response SHALL include the following links in the `links` property
+A `200`-response SHALL include the following links in the `links` property
 of the response:
 
 * a link to this response document (relation: `self`),
 * a link to the response document in every other media type supported by
 the server (relation: `alternate`),
 * links to each feature collection resource in this distribution of the
-dataset for each supported encoding (relation: `item`), and
-* links to the API definition document in each supported encoding
-(relation: `service`).
+dataset for each supported encoding (relation: `item`).
 
 All links SHALL include the `rel` and `type` link parameters.
 |===
@@ -402,7 +499,7 @@ All links SHALL include the `rel` and `type` link parameters.
 |Recommendation {counter:rec-id} |/rec/core/fc-md-descriptions +
 
 If external schemas or descriptions for the dataset exist that provide
-information about the structure or semantics of the data, a "200"-response
+information about the structure or semantics of the data, a `200`-response
 SHOULD include links to each of those resources in the `links` property
 of the response (relation: `describedBy`).
 
@@ -416,6 +513,9 @@ object in the `collections` resource.
 Examples for descriptions are: XML Schema, Schematron, JSON Schema,
 RDF Schema, OWL, SHACL, a feature catalogue, etc.
 |===
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/56[ISSUE 56] +
+Lack of DescribeFeatureType request
 
 NOTE: TODO +
 Add recommendation about a link to the distribution resource in the dataset
@@ -467,10 +567,10 @@ For each feature collection, the `extent` property, if provided, SHALL be a boun
 ----
 type: object
 required:
-  - collectionId
+  - name
   - links
 properties:
-  collectionId:
+  name:
     description: identifier of the collection used, for example, in URIs
     type: string
   title:
@@ -514,41 +614,60 @@ geometries only in the default system (WGS84 longitude/latitude).
 ----
 {
   "links": [
-    { "href": "http://data.example.org/index.json",
+    { "href": "http://data.example.org/collections.json",
       "rel": "self", "type": "application/json", "title": "this document" },
-    { "href": "http://data.example.org/index.html",
+    { "href": "http://data.example.org/collections.html",
       "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
-    { "href": "http://data.example.org/api.json",
-      "rel": "service", "type": "application/openapi+json;version=3.0", "title": "the OpenAPI definition as JSON" },
-    { "href": "http://data.example.org/api.html",
-      "rel": "service", "type": "text/html", "title": "the OpenAPI definition as HTML" },
-    { "href": "http://catalog.example.org/datasets/buildings#wfs",
-      "rel": "???", "type": "application/json+ld" }
+    { "href": "http://schemas.example.org/1.0/foobar.xsd",
+      "rel": "describedBy", "type": "application/xml", "title": "XML schema for Acme Corporation data" }
   ],
   "collections": [
     {
-      "collectionId": "buildings",
+      "name": "buildings",
       "title": "Buildings",
       "description": "Buildings in the city of Bonn.",
       "extent": {
         "bbox": [ 7.01, 50.63, 7.22, 50.78 ]
       },
       "links": [
-        { "href": "http://data.example.org/buildings.json",
-          "rel": "about", "type": "application/geo+json",
-          "title": "Buildings as GeoJSON" },
-        { "href": "http://data.example.org/buildings.html",
-          "rel": "about", "type": "text/html",
-          "title": "Buildings as HTML" },
+        { "href": "http://data.example.org/collections/buildings/items",
+          "rel": "item", "type": "application/geo+json",
+          "title": "Buildings" }
         { "href": "http://example.org/concepts/building.html",
           "rel": "describedBy", "type": "text/html",
-          "title": "Feature catalogue for the buildings" }
+          "title": "Feature catalogue for buildings" }
       ]
     }
   ]
 }
 ----
 =================
+
+=== Feature collection metadata
+
+==== Operation
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/sfc-md-op +
+
+The server SHALL support the HTTP GET operation at the path `/collections/{name}`.
+
+`name` is the property of the same name in the feature collections metadata.
+|===
+
+==== Response
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/sfc-md-success +
+
+A successful execution of the operation SHALL be reported as a response with a
+HTTP status code `200`.
+
+The content of that response SHALL be the same to the content for this feature
+collection in the `/collections` response.
+|===
 
 === Feature collections
 
@@ -559,27 +678,27 @@ geometries only in the default system (WGS84 longitude/latitude).
 |*Requirement {counter:req-id}* |/req/core/fc-op +
  +
 
-For every feature collection identified in the metadata about the feature collection (path "/"),
-the server SHALL support the HTTP GET operation at the path `/{collectionId}`.
+For every feature collection identified in the metadata about the feature collection (path `/`),
+the server SHALL support the HTTP GET operation at the path `/collections/{name}/items`.
 
-`collectionId` is the property of the same name in the feature collection metadata.
+`name` is the property of the same name in the feature collections metadata.
 |===
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/17[ISSUE 17] +
 Precision level filter responsibility?
 
-==== Parameter count
+==== Parameter limit
 
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-count-definition +
+|*Requirement {counter:req-id}* |/req/core/fc-limit-definition +
 
-Each feature collection operation SHALL support a parameter `count`
+Each feature collection operation SHALL support a parameter `limit`
 with the following characteristics (using an OpenAPI Specification 3.0 fragment):
 
 [source,YAML]
 ----
-name: count
+name: limit
 in: query
 required: false
 schema:
@@ -594,19 +713,19 @@ explode: false
 
 [width="90%",cols="2,6a"]
 |===
-|*Permission {counter:per-id}* |/per/core/fc-count-default-maximum +
+|*Permission {counter:per-id}* |/per/core/fc-limit-default-maximum +
 
-The values for `maximum` and `default` in requirement `/req/core/fc-count-definition`
+The values for `maximum` and `default` in requirement `/req/core/fc-limit-definition`
 are only examples and MAY be changed.
 |===
 
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-count-response-1 +
+|*Requirement {counter:req-id}* |/req/core/fc-limit-response-1 +
 
 The response SHALL not contain more features than specified by the
-optional `count` parameter. If the API definition specifies a maximum
-value for `count` parameter, the response SHALL not contain more
+optional `limit` parameter. If the API definition specifies a maximum
+value for `limit` parameter, the response SHALL not contain more
 features than this maximum value.
 
 Only items are counted that are on the first level of the collection.
@@ -616,14 +735,14 @@ SHALL not be counted.
 
 [width="90%",cols="2,6a"]
 |===
-|*Permission {counter:per-id}* |/per/core/fc-count-response-2 +
+|*Permission {counter:per-id}* |/per/core/fc-limit-response-2 +
 
 The server MAY return less features than requested (but not more).
 |===
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml[count.yaml].
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/limit.yaml[limit.yaml].
 
 ==== Parameter bbox
 
@@ -733,6 +852,29 @@ example: 'function=public+use'
 ----
 =================
 
+.An additional parameter to filter buildings based on their name
+=================
+[source,YAML]
+----
+name: name
+in: query
+description: >-
+  Only return buildings with a particular name. Use '*' as a wildcard.\
+
+  Default = return all buildings.
+required: false
+schema:
+  type: string
+style: form
+explode: false
+example: 'name=A*'
+----
+
+For string-valued properties, servers could support wildcard searches. The
+example included in the OpenAPI fragment would search for all buildings with
+a name that starts with "A".
+=================
+
 ==== Response
 
 [width="90%",cols="2,6a"]
@@ -740,25 +882,25 @@ example: 'function=public+use'
 |*Requirement {counter:req-id}* |/req/core/fc-response +
 
 A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200".
+HTTP status code `200`.
 |===
 
 The response will only include features selected by the request.
 
-The number of features returned depends on the server and the parameter `count`:
+The number of features returned depends on the server and the parameter `limit`:
 
-* The client can request a count it is interested in.
-* The server likely has a default value for the count, and a maximum limit.
+* The client can request a limit it is interested in.
+* The server likely has a default value for the limit, and a maximum limit.
 * If the server has any more results available than it returns (the
-number it returns is less than or equal to the requested/limited/default count)
+number it returns is less than or equal to the requested/default/maximum limit)
 then the server will include a link to the next set of results.
 
 So (using the default/maximum values of 10/10000 from the OpenAPI
-fragment in requirement `/req/core/fc-count-definition`):
+fragment in requirement `/req/core/fc-limit-definition`):
 
 * If you ask for 10, you will get 0 to 10 (as requested) and a `next` link,
 if there are more.
-* If you don't specify a count, you will get 0 to 10 (default) and a `next` link,
+* If you don't specify a limit, you will get 0 to 10 (default) and a `next` link,
 if there are more.
 * If you ask for 50000, you might get up to 10000 (server-limited) and a `next`
 link, if there are more.
@@ -769,7 +911,7 @@ to 10000 additional features and a `next` link, if there are more.
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-links +
 
-A "200"-response SHALL include the following links:
+A `200`-response SHALL include the following links:
 
 * a link to this response document (relation: `self`),
 * a link to the response document in every other media type supported
@@ -780,7 +922,7 @@ by the service (relation: `alternate`).
 |===
 |*Recommendation {counter:rec-id}* |/rec/core/fc-next-1 +
 
-A "200"-response SHOULD include a link to the next "page" (relation: `next`),
+A `200`-response SHOULD include a link to the next "page" (relation: `next`),
 if more features have been selected than returned in the response.
 |===
 
@@ -810,7 +952,8 @@ It is up to the server to determine how long these links can be de-referenced.
 Clients should be prepared to receive a 404 response.
 
 Another implementation approach is to use an implementation-specific parameter
-like the `startIndex` parameter that was used in previous versions of WFS.
+like the `startIndex` parameter that was used in previous versions of WFS (and
+which may be added again in an extension to this specification).
 
 [width="90%",cols="2,6a"]
 |===
@@ -835,45 +978,45 @@ of the feature collection.
 
 .Links
 =================
-If the request is to return building features and "10" is the default `count`,
+If the request is to return building features and "10" is the default `limit`,
 the links in the response could be (in this example represented as link headers
 and using an additional parameter `startIndex` to implement `next` links - and
 the optional `prev` links):
 
 [source]
 ----
-Link: <http://data.example.org/buildings.json>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/buildings.html>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/buildings.json?startIndex=10>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.html>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json?startIndex=10>; rel="next"; type="application/geo+json"
 ----
 
 Following the `next` link could return:
 
 [source]
 ----
-Link: <http://data.example.org/buildings.json?startIndex=10>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/buildings.html?startIndex=10>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/buildings.json?startIndex=0>; rel="prev"; type="application/geo+json"
-Link: <http://data.example.org/buildings.json?startIndex=20>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?startIndex=10>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.html?startIndex=10>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json?startIndex=0>; rel="prev"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?startIndex=20>; rel="next"; type="application/geo+json"
 ----
 
-If an explicit `count` of "50" is used, the links in the response could be:
+If an explicit `limit` of "50" is used, the links in the response could be:
 
 [source]
 ----
-Link: <http://data.example.org/buildings.json?count=50>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/buildings.html?count=50>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/buildings.json?count=50&startIndex=50>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.html?limit=50>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=50>; rel="next"; type="application/geo+json"
 ----
 
 Following the `next` link could return:
 
 [source]
 ----
-Link: <http://data.example.org/buildings.json?count=50&startIndex=50>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/buildings.html?count=50&startIndex=50>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/buildings.json?count=50&startIndex=0>; rel="prev"; type="application/geo+json"
-Link: <http://data.example.org/buildings.json?count=50&startIndex=100>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=50>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.html?limit=50&startIndex=50>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=0>; rel="prev"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=100>; rel="next"; type="application/geo+json"
 ----
 =================
 
@@ -882,7 +1025,7 @@ Link: <http://data.example.org/buildings.json?count=50&startIndex=100>; rel="nex
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-timeStamp +
 
-A "200"-response SHALL include a property `timeStamp` based upon the schema
+A `200`-response SHALL include a property `timeStamp` based upon the schema
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/timeStamp.yaml[timeStamp.yaml].
 |===
 
@@ -926,10 +1069,11 @@ not seem to be needed given the 'Date' HTTP header. For `numberMatched` and
 |===
 |*Requirement {counter:req-id}* |/req/core/f-op +
 
-For every feature in a feature collection (path "/{collectionId}"),
-the service SHALL support the HTTP GET operation at the path `/{collectionId}/{id}`.
+For every feature in a feature collection (path `/collections/{name}/items`),
+the service SHALL support the HTTP GET operation at the path
+`/collections/{name}/items/{id}`.
 
-`collectionId` is the property of the same name in the feature collection metadata.
+`name` is the property of the same name in the feature collection metadata.
 
 `id` is the unique identifier of the feature within the dataset.
 |===
@@ -948,14 +1092,14 @@ distinguish between them.
 |*Requirement {counter:req-id}* |/req/core/f-success +
 
 A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200".
+HTTP status code `200`.
 |===
 
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |/req/core/f-links +
 
-A "200"-response SHALL include the following links in the response:
+A `200`-response SHALL include the following links in the response:
 
 * a link to the response document (relation: `self`),
 * a link to the response document in every other media type supported by the service (relation: `alternate`), and
@@ -973,9 +1117,9 @@ The links in a feature could be (in this example represented as link headers):
 
 [source]
 ----
-Link: <http://data.example.org/buildings/123.json>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/buildings/123.html>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/buildings.json>; rel="collection"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items/123.json>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items/123.html>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json>; rel="collection"; type="application/geo+json"
 ----
 =================
 

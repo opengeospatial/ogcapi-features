@@ -16,7 +16,7 @@ This approach intends to support two types of client developers:
 * those that have never heard about WFS - it should be possible to create a client using the API definition without the need to read the WFS standard (they may need to learn a little bit about geometry, etc.);
 * those that want to write a "generic" client that can access WFSs, i.e. are not specific for a particular API/server.
 
-As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to an WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.
+As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to a WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.
 
 The modernization is discussed in more detail link:https://github.com/opengeospatial/WFS_FES/blob/master/overview.md[here].
 
@@ -85,7 +85,7 @@ used to reduce the size of the messages between the server and the client.
 
 This document uses a simple example throughout the document: The dataset
 contains buildings and the server provides access to them through a single
-feature collection ("buildings") and two encodings GeoJSON and HTML.
+feature collection ("buildings") and two encodings, GeoJSON and HTML.
 
 The buildings have a few (optional) properties: the polygon geometry of the
 building footprint, a name, the function of the building (residential,

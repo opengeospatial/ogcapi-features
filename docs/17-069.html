@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>OGC Web Feature Service 3.0 - Part 1: Core</title>
+<title>OGC Web Feature Service 3.0: Part 1 - Core</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -481,7 +481,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book">
 <div id="header">
-<h1>OGC Web Feature Service 3.0 - Part 1: Core</h1>
+<h1>OGC Web Feature Service 3.0: Part 1 - Core</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -508,13 +508,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date:   &lt;yyyy-mm-dd&gt;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC&#174; document: <a href="http://www.opengis.net/doc/IS/wfs/3.0" class="bare">http://www.opengis.net/doc/IS/wfs/3.0</a></p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC&#174; document: <a href="http://www.opengis.net/doc/IS/wfs-1/3.0" class="bare">http://www.opengis.net/doc/IS/wfs-1/3.0</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0.0-SNAPSHOT (2018-03-04)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0.0-SNAPSHOT (2018-03-11)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -648,44 +648,63 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_requirement_class_core">7. Requirement Class "Core"</a>
 <ul class="sectlevel2">
-<li><a href="#_overview">7.1. Overview</a></li>
-<li><a href="#_api_definition_2">7.2. API definition</a>
+<li><a href="#core-overview">7.1. Overview</a></li>
+<li><a href="#_api_landing_page">7.2. API landing page</a>
 <ul class="sectlevel3">
-<li><a href="#_general_requirements">7.2.1. General requirements</a></li>
-<li><a href="#_requirements_specific_to_web_feature_services">7.2.2. Requirements specific to Web Feature Services</a></li>
+<li><a href="#_operation">7.2.1. Operation</a></li>
+<li><a href="#_response">7.2.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_http_1_1">7.3. HTTP 1.1</a></li>
-<li><a href="#_web_caching">7.4. Web caching</a></li>
-<li><a href="#_support_for_cross_origin_requests">7.5. Support for cross-origin requests</a></li>
-<li><a href="#_encodings_2">7.6. Encodings</a></li>
-<li><a href="#_link_headers">7.7. Link headers</a></li>
-<li><a href="#_feature_collection_metadata">7.8. Feature collection metadata</a>
+<li><a href="#_api_definition_2">7.3. API definition</a>
 <ul class="sectlevel3">
-<li><a href="#_operation">7.8.1. Operation</a></li>
-<li><a href="#_response">7.8.2. Response</a></li>
+<li><a href="#_operation_2">7.3.1. Operation</a></li>
+<li><a href="#_response_2">7.3.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_collections">7.9. Feature collections</a>
+<li><a href="#_declaration_of_conformance_classes">7.4. Declaration of conformance classes</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_2">7.9.1. Operation</a></li>
-<li><a href="#_parameter_count">7.9.2. Parameter count</a></li>
-<li><a href="#_parameter_bbox">7.9.3. Parameter bbox</a></li>
-<li><a href="#_parameters_for_filtering_on_feature_properties">7.9.4. Parameters for filtering on feature properties</a></li>
-<li><a href="#_response_2">7.9.5. Response</a></li>
+<li><a href="#_operation_3">7.4.1. Operation</a></li>
+<li><a href="#_response_3">7.4.2. Response</a></li>
 </ul>
 </li>
-<li><a href="#_feature_2">7.10. Feature</a>
+<li><a href="#_http_1_1">7.5. HTTP 1.1</a></li>
+<li><a href="#_web_caching">7.6. Web caching</a></li>
+<li><a href="#_support_for_cross_origin_requests">7.7. Support for cross-origin requests</a></li>
+<li><a href="#_encodings_2">7.8. Encodings</a></li>
+<li><a href="#_coordinate_reference_systems">7.9. Coordinate reference systems</a></li>
+<li><a href="#_link_headers">7.10. Link headers</a></li>
+<li><a href="#_feature_collections_metadata">7.11. Feature collections metadata</a>
 <ul class="sectlevel3">
-<li><a href="#_operation_3">7.10.1. Operation</a></li>
-<li><a href="#_response_3">7.10.2. Response</a></li>
+<li><a href="#_operation_4">7.11.1. Operation</a></li>
+<li><a href="#_response_4">7.11.2. Response</a></li>
+</ul>
+</li>
+<li><a href="#_feature_collection_metadata">7.12. Feature collection metadata</a>
+<ul class="sectlevel3">
+<li><a href="#_operation_5">7.12.1. Operation</a></li>
+<li><a href="#_response_5">7.12.2. Response</a></li>
+</ul>
+</li>
+<li><a href="#_feature_collections">7.13. Feature collections</a>
+<ul class="sectlevel3">
+<li><a href="#_operation_6">7.13.1. Operation</a></li>
+<li><a href="#_parameter_limit">7.13.2. Parameter limit</a></li>
+<li><a href="#_parameter_bbox">7.13.3. Parameter bbox</a></li>
+<li><a href="#_parameters_for_filtering_on_feature_properties">7.13.4. Parameters for filtering on feature properties</a></li>
+<li><a href="#_response_6">7.13.5. Response</a></li>
+</ul>
+</li>
+<li><a href="#_feature_2">7.14. Feature</a>
+<ul class="sectlevel3">
+<li><a href="#_operation_7">7.14.1. Operation</a></li>
+<li><a href="#_response_7">7.14.2. Response</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#_requirements_classes_for_encodings">8. Requirements classes for encodings</a>
 <ul class="sectlevel2">
-<li><a href="#_overview_2">8.1. Overview</a></li>
+<li><a href="#_overview">8.1. Overview</a></li>
 <li><a href="#_requirement_class_html">8.2. Requirement Class "HTML"</a></li>
 <li><a href="#_requirement_class_geojson">8.3. Requirement Class "GeoJSON"</a></li>
 <li><a href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_0">8.4. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"</a></li>
@@ -715,42 +734,87 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong class="big">i.     Abstract</strong></p>
 </div>
 <div class="paragraph">
-<p>The Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.</p>
+<p>A Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports and is restricted to read-access to data. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for creating and modifying data, more complex data models, richer queries, additional coordinate reference systems.</p>
+</div>
+<div class="paragraph">
+<p>By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.</p>
 </div>
 <div class="paragraph">
 <p>Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP/HTTPS standards.</p>
 </div>
 <div class="paragraph">
-<p>WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for updating data, more complex data models or richer queries.</p>
-</div>
-<div class="paragraph">
-<p>This International Standard specifies discovery and query operations.</p>
+<p>This standard specifies discovery and query operations that are implemented using the HTTP GET method. Support for additional methods (in particular POST, PUT, DELETE, PATCH) will be specified in additional parts.</p>
 </div>
 <div class="paragraph">
 <p>Discovery operations allow the server to be interrogated to determine its capabilities and retrieve information (metadata) about this distribution of the dataset. This includes the API definition of the server as well as metadata about the feature collections provided by the server.</p>
 </div>
 <div class="paragraph">
-<p>Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon constraints, defined by the client, on feature properties.</p>
+<p>Query operations allow features or values of feature properties to be retrieved from the underlying data store based upon selection criteria, defined by the client, on feature properties.</p>
 </div>
 <div class="paragraph">
-<p>This part of this International Standard defines the following resources:</p>
+<p>This standard defines the resources listed in Table 1. For an overview of the resources, see section <a href="#core-overview">7.1 Overview</a>.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Service definition [1]</p>
-</li>
-<li>
-<p>Feature collections metadata [1]</p>
-</li>
-<li>
-<p>Feature collection [0..n]</p>
-</li>
-<li>
-<p>Feature [0..n]</p>
-</li>
-</ul>
-</div>
+<table id="tldnr" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Overview of resources, applicable HTTP methods and links to the document sections</caption>
+<colgroup>
+<col style="width: 32%;">
+<col style="width: 25%;">
+<col style="width: 10%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Resource</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Path</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">HTTP method</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Document reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Landing page</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_api_landing_page">7.2 API landing page</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">API definition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/api</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_api_definition_2">7.3 API definition</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conformance classes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/conformance</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_declaration_of_conformance_classes">7.4 Declaration of conformance classes</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collections metadata</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_feature_collections_metadata">7.11 Feature collections metadata</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collection metadata</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_feature_collection_metadata">7.12 Feature collection metadata</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collection</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}/items</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_feature_collections">7.13 Feature collections</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}/items/{fid}</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#_feature_2">7.14 Feature</a></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><strong class="big">ii.    Keywords</strong></p>
 </div>
@@ -758,7 +822,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The following are keywords to be used by search engines and document catalogues.</p>
 </div>
 <div class="paragraph">
-<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution, openapi</p>
+<p>ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution, API, openapi, geojson, gml, html</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">iii.   Preface</strong></p>
@@ -960,10 +1024,11 @@ OGC Compliance Testing web site.</p>
 <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md" class="bare">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md</a></p>
 </li>
 <li>
-<p><a id="rfc2616"></a> IETF: HTTP/1.1, RFC 2616, <a href="http://tools.ietf.org/rfc/rfc2616.txt" class="bare">http://tools.ietf.org/rfc/rfc2616.txt</a></p>
+<p><a id="rfc2616"></a> Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L.,
+Leach, P., Berners-Lee, T.: IETF RFC 2616, HTTP/1.1, <a href="http://tools.ietf.org/rfc/rfc2616.txt" class="bare">http://tools.ietf.org/rfc/rfc2616.txt</a></p>
 </li>
 <li>
-<p><a id="rfc5988"></a> IETF: Web Linking, RFC 5988, <a href="http://tools.ietf.org/rfc/rfc5988.txt" class="bare">http://tools.ietf.org/rfc/rfc5988.txt</a></p>
+<p><a id="rfc5988"></a> Nottingham, M.: IETF RFC 5988, Web Linking, <a href="http://tools.ietf.org/rfc/rfc5988.txt" class="bare">http://tools.ietf.org/rfc/rfc5988.txt</a></p>
 </li>
 <li>
 <p><a id="GMLSF"></a> van den Brink, L., Portele, C., Vretanos, P.: OGC 10-100r3,
@@ -992,16 +1057,29 @@ IETF RFC 7946, The GeoJSON Format, <a href="https://tools.ietf.org/rfc/rfc7946.t
 <div class="paragraph">
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO<br>
+Add link to the informative WFS Guide, once it is available.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect2">
 <h3 id="_dataset"><a class="anchor" href="#_dataset"></a>4.1. dataset</h3>
 <div class="paragraph">
-<p>collection of data, published or curated by a single agent, and available for access or download in one or more formats [DCAT]</p>
+<p>collection of data, published or curated by a single agent, and available for access or download in one or more formats <a href="#DCAT">[DCAT]</a></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_distribution"><a class="anchor" href="#_distribution"></a>4.2. distribution</h3>
 <div class="paragraph">
-<p>represents an accessible form of a <strong>dataset</strong> [DCAT]</p>
+<p>represents an accessible form of a <strong>dataset</strong> <a href="#DCAT">[DCAT]</a></p>
 </div>
 <div class="paragraph">
 <p>EXAMPLE: a downloadable file, an RSS feed or a web service that provides the data.</p>
@@ -1010,35 +1088,8 @@ IETF RFC 7946, The GeoJSON Format, <a href="https://tools.ietf.org/rfc/rfc7946.t
 <div class="sect2">
 <h3 id="_feature"><a class="anchor" href="#_feature"></a>4.3. feature</h3>
 <div class="paragraph">
-<p>abstraction of real world phenomena [ISO 19101:2002, definition 4.11]</p>
+<p>abstraction of real world phenomena [ISO 19101-1:2014]</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_feature_collection"><a class="anchor" href="#_feature_collection"></a>4.4. feature collection</h3>
-<div class="paragraph">
-<p>a set of <strong>features</strong> from a <strong>dataset</strong></p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Caution</div>
-</td>
-<td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/4">ISSUE 4</a><br>
-We need to make the document understandable to the developers that have no
-geo/OGC background, too. What do we need to explain in this section and what
-terms should we use in general?
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_conventions"><a class="anchor" href="#_conventions"></a>5. Conventions</h2>
-<div class="sectionbody">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1046,11 +1097,26 @@ terms should we use in general?
 <div class="title">Note</div>
 </td>
 <td class="content">
-This sections provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+If you are unfamiliar with the term 'feature', the explanations in
+the <a href="#SDWBP">W3C/OGC Spatial Data on the Web Best Practice document</a> may help,
+in particular the section on
+<a href="https://www.w3.org/TR/sdw-bp/#spatial-things-features-and-geometry">Spatial Things, Features and Geometry</a>.
 </td>
 </tr>
 </table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collection"><a class="anchor" href="#_feature_collection"></a>4.4. feature collection</h3>
+<div class="paragraph">
+<p>a set of <strong>features</strong> from a <strong>dataset</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conventions"><a class="anchor" href="#_conventions"></a>5. Conventions</h2>
+<div class="sectionbody">
 <div class="sect2">
 <h3 id="_identifiers"><a class="anchor" href="#_identifiers"></a>5.1. Identifiers</h3>
 <div class="paragraph">
@@ -1068,31 +1134,6 @@ This sections provides details and examples for any conventions used in the docu
 <div class="paragraph">
 <p>Resources are modelled as UML interfaces.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-The OpenAPI definition is not modelled explicitly.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Caution</div>
-</td>
-<td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/36">ISSUE 36</a><br>
-A draft UML for OpenAPI 3.0 is available and could be reused.
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_link_relations"><a class="anchor" href="#_link_relations"></a>5.3. Link relations</h3>
@@ -1103,26 +1144,25 @@ A draft UML for OpenAPI 3.0 is available and could be reused.
 <div class="sect2">
 <h3 id="_use_of_https"><a class="anchor" href="#_use_of_https"></a>5.4. Use of HTTPS</h3>
 <div class="paragraph">
-<p>For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.</p>
+<p>For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_api_definition"><a class="anchor" href="#_api_definition"></a>5.5. API definition</h3>
 <div class="sect3">
 <h4 id="_general_remarks"><a class="anchor" href="#_general_remarks"></a>5.5.1. General remarks</h4>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add general considerations.<br>
-Clarify that additional operations, parameters, etc. may be added, either to implement additional conformance classes or for vendor-specific extensions.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Good documentation is essential for every API so that developers can learn how
+to use it. In the best case, documentation will be available in HTML and in
+a format that can be processed by software to connect to the API.</p>
+</div>
+<div class="paragraph">
+<p>This standard specifies requirements and recommendations for APIs that
+share feature data and that want to follow a standard way of doing so.
+In general, APIs will go beyond the requirements and recommendations
+stated in this standard - or other parts of the Web Feature Service
+standard series - and will support additional operations, parameters, etc.
+that are specific to the API or the software tool used to implement the API.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1132,7 +1172,7 @@ Clarify that additional operations, parameters, etc. may be added, either to imp
 requirements. However, using OpenAPI 3.0 is not required.</p>
 </div>
 <div class="paragraph">
-<p>The "Core" requirements class, therefore, only requires that a formal API
+<p>The "Core" requirements class, therefore, only requires that an API
 definition is provided at /api.</p>
 </div>
 <div class="paragraph">
@@ -1300,7 +1340,7 @@ but eventually these will be available using the base URL
 </ul>
 </div>
 <div class="paragraph">
-<p>As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to an WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.</p>
+<p>As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to a WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.</p>
 </div>
 <div class="paragraph">
 <p>The modernization is discussed in more detail <a href="https://github.com/opengeospatial/WFS_FES/blob/master/overview.md">here</a>.</p>
@@ -1404,7 +1444,7 @@ used to reduce the size of the messages between the server and the client.</p>
 <div class="paragraph">
 <p>This document uses a simple example throughout the document: The dataset
 contains buildings and the server provides access to them through a single
-feature collection ("buildings") and two encodings GeoJSON and HTML.</p>
+feature collection ("buildings") and two encodings, GeoJSON and HTML.</p>
 </div>
 <div class="paragraph">
 <p>The buildings have a few (optional) properties: the polygon geometry of the
@@ -1418,7 +1458,7 @@ commercial or public use) and the floor count.</p>
 <h2 id="_requirement_class_core"><a class="anchor" href="#_requirement_class_core"></a>7. Requirement Class "Core"</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overview"><a class="anchor" href="#_overview"></a>7.1. Overview</h3>
+<h3 id="core-overview"><a class="anchor" href="#core-overview"></a>7.1. Overview</h3>
 <table id="rc_core" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1455,8 +1495,33 @@ In other words, the API is a distribution of that dataset. A file download, for 
 would be another distribution.</p>
 </div>
 <div class="paragraph">
-<p>That is, each WFS has a single <code>DatasetDistribution</code> and the distribution
-consists of a set of feature collections. This specification does not
+<p>That is, each WFS has a single <code>LandingPage</code> (path <code>/</code>) that provides links to</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>APIDefinition</code> (path <code>/api</code>),</p>
+</li>
+<li>
+<p>the <code>Conformance</code> statements (path <code>/conformance</code>),</p>
+</li>
+<li>
+<p>the <code>DatasetDistribution</code> metadata (path <code>/collections</code>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>APIDefinition</code> describes the capabilities of the server and which can be used by
+clients to connect to the server or by development tools to support the
+implementation of servers and clients. Accessing the <code>APIDefinition</code> using
+HTTP GET returns a description of the API.</p>
+</div>
+<div class="paragraph">
+<p>Accessing the <code>Conformance</code> using HTTP GET returns a list of URIs of
+requirements classes implemented by the server.</p>
+</div>
+<div class="paragraph">
+<p>The distribution consists of a set of feature collections. This specification does not
 include any requirements how the features in the dataset have to be aggregated
 into collections. A typical approach is to aggregate by feature type, but any other approach
 that fits the dataset or the applications using this distribution may be used, too.</p>
@@ -1464,8 +1529,7 @@ that fits the dataset or the applications using this distribution may be used, t
 <div class="paragraph">
 <p>Accessing the <code>DatasetDistribution</code> using HTTP GET returns a
 <code>DatasetDistributionResponse</code>, which includes a link to each <code>Collection</code>
-in the distribution along with metadata about each collection (class
-<code>CollectionMetadata</code>):</p>
+in the distribution along with metadata about each collection:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1487,43 +1551,8 @@ spatial extent of the collection - typically derived from the data.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each <code>Collection</code> consists of the features in the collection where each
+<p>Each <code>Collection</code> (path <code>/collections/{collection-name}/items</code>) consists of the features in the collection where each
 feature in the distribution is part of exactly one collection.</p>
-</div>
-<div class="paragraph">
-<p>Accessing a <code>Collection</code> using HTTP GET returns a <code>CollectionResponse</code>,
-which basically consists of features in the collection. The features included
-in the response are determined by the server based on parameters of the request.</p>
-</div>
-<div class="paragraph">
-<p>A <code>bbox</code> parameter may be used to select only a subset of the features in
-the collection (the features that are located in the bounding box).</p>
-</div>
-<div class="paragraph">
-<p>The <code>count</code> parameter may be used to request only a subset of the
-selected features and to indicate that the client wants to page through
-the selected features of the collection.</p>
-</div>
-<div class="paragraph">
-<p>The <code>CollectionResponse</code> may include metadata about the number of selected and returned
-features (<code>numberMatched</code> and <code>numberReturned</code>) as well as links to simplify
-paging (<code>next</code> and <code>prev</code>).</p>
-</div>
-<div class="paragraph">
-<p>Each <code>Feature</code> is also a separate resource and may be requested individually
-using HTTP GET.</p>
-</div>
-<div class="paragraph">
-<p>In addition, each server publishes a formal definition of the API (<code>APIDefinition</code>),
-which describes the capabilities of the server and which can be used by
-clients to connect to the server or
-by development tools to support the implementation of servers and clients.</p>
-</div>
-<div id="img_core" class="imageblock" style="text-align: center">
-<div class="content">
-<img src="figures/PT1_FIG01.png" alt="PT1 FIG01">
-</div>
-<div class="title">Figure 1. Resources in the Core requirements class</div>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -1538,16 +1567,53 @@ Allow also features that do not belong to any collection?
 </tr>
 </table>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/66">ISSUE 66</a><br>
+Support features that do belong to multiple collections?
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Accessing a <code>Collection</code> using HTTP GET returns a <code>CollectionResponse</code>,
+which basically consists of features in the collection. The features included
+in the response are determined by the server based on parameters of the request.</p>
+</div>
+<div class="paragraph">
+<p>A <code>bbox</code> parameter may be used to select only a subset of the features in
+the collection (the features that are located in the bounding box).</p>
+</div>
+<div class="paragraph">
+<p>The <code>limit</code> parameter may be used to request only a subset of the
+selected features and to indicate that the client wants to page through
+the selected features of the collection.</p>
+</div>
+<div class="paragraph">
+<p>The <code>CollectionResponse</code> may include metadata about the number of selected and returned
+features (<code>numberMatched</code> and <code>numberReturned</code>) as well as links to simplify
+paging (<code>next</code> and <code>prev</code>).</p>
+</div>
+<div class="paragraph">
+<p>Each <code>Feature</code> (path <code>/collections/{collection-name}/items/{feature-id}</code>)
+is also a separate resource and may be requested individually using HTTP GET.</p>
+</div>
+<div id="img_core" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="figures/PT1_FIG01.png" alt="PT1 FIG01">
+</div>
+<div class="title">Figure 1. Resources in the Core requirements class</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_api_definition_2"><a class="anchor" href="#_api_definition_2"></a>7.2. API definition</h3>
+<h3 id="_api_landing_page"><a class="anchor" href="#_api_landing_page"></a>7.2. API landing page</h3>
 <div class="sect3">
-<h4 id="_general_requirements"><a class="anchor" href="#_general_requirements"></a>7.2.1. General requirements</h4>
-<div class="paragraph">
-<p>Every WFS is defined by an API definition that describes the capabilities
-of the server and which can be used by clients to connect to the server or
-by development tools to support the implementation of servers and clients.</p>
-</div>
+<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.2.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1557,10 +1623,148 @@ by development tools to support the implementation of servers and clients.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/api-definition<br></p>
+<p>/req/core/root-op<br></p>
 </div>
 <div class="paragraph">
-<p>The service SHALL provide an API definition document at the path <code>/api</code>.</p>
+<p>The server SHALL support the HTTP GET operation at the path <code>/</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response"><a class="anchor" href="#_response"></a>7.2.2. Response</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/root-success<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a response with a
+HTTP status code <code>200</code>.</p>
+</div>
+<div class="paragraph">
+<p>The content of that response SHALL be based upon the OpenAPI 3.0 schema <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml">root.yaml</a>
+and include at least links to the following resources:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/api</code> (relation type 'service')</p>
+</li>
+<li>
+<p><code>/conformance</code> (relation type 'conformance')</p>
+</li>
+<li>
+<p><code>/collections</code> (relation type 'data')</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO<br>
+Check, if we can reuse existing relation types instead of 'conformance' and 'data'?
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml">Schema for the landing page</a></div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>type: object
+required:
+  - links
+properties:
+  links:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 2. Landing page response document</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>{
+  &quot;links&quot;: [
+    { &quot;href&quot;: &quot;http://data.example.org/&quot;,
+      &quot;rel&quot;: &quot;self&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;this document&quot; },
+    { &quot;href&quot;: &quot;http://data.example.org/api&quot;,
+      &quot;rel&quot;: &quot;service&quot;, &quot;type&quot;: &quot;application/openapi+json;version=3.0&quot;, &quot;title&quot;: &quot;the API definition&quot; },
+    { &quot;href&quot;: &quot;http://data.example.org/conformance&quot;,
+      &quot;rel&quot;: &quot;conformance&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;WFS 3.0 conformance classes implemented by this server&quot; },
+    { &quot;href&quot;: &quot;http://data.example.org/collections&quot;,
+      &quot;rel&quot;: &quot;data&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;Metadata about the feature collections&quot; }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api_definition_2"><a class="anchor" href="#_api_definition_2"></a>7.3. API definition</h3>
+<div class="sect3">
+<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.3.1. Operation</h4>
+<div class="paragraph">
+<p>Every WFS provides an API definition that describes the capabilities
+of the server and which can be used by developers to understand the API,
+by software clients to connect to the server or
+by development tools to support the implementation of servers and clients.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/api-definition-op<br></p>
+</div>
+<div class="paragraph">
+<p>The server SHALL support the HTTP GET operation at the path <code>/api</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.3.2. Response</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/api-definition-success<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a
+response with a HTTP status code <code>200</code>.</p>
+</div>
+<div class="paragraph">
+<p>The server SHALL return an API definition document.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1589,7 +1793,7 @@ the document SHOULD conform to the
 content negotiation to select the desired representation.</p>
 </div>
 <div class="paragraph">
-<p>The API definition document is the "landing page" for the API. I.e.,
+<p>The API definition document describes the API. I.e.,
 there is no need to include the <code>/api</code> operation in the API definition itself.</p>
 </div>
 <div class="paragraph">
@@ -1601,15 +1805,15 @@ bit about geometry, etc., but it should not be required to read this standard
 to access the data via the API.</p>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_declaration_of_conformance_classes"><a class="anchor" href="#_declaration_of_conformance_classes"></a>7.4. Declaration of conformance classes</h3>
 <div class="sect3">
-<h4 id="_requirements_specific_to_web_feature_services"><a class="anchor" href="#_requirements_specific_to_web_feature_services"></a>7.2.2. Requirements specific to Web Feature Services</h4>
-<div class="sect4">
-<h5 id="_support_for_generic_clients"><a class="anchor" href="#_support_for_generic_clients"></a>Support for generic clients</h5>
+<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.4.1. Operation</h4>
 <div class="paragraph">
-<p>In addition, it should be possible to write a "generic" client that can
-access Web Feature Services in general, i.e. that are not written for a
-specific server or API. To support such clients, the server has to declare the
-requirements classes it implements and conforms to.</p>
+<p>To support "generic" clients for accessing Web Feature Services in general - and
+not "just" a specific API / server, the server has to declare the
+requirements classes it implements and conforms to, too.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1618,16 +1822,19 @@ requirements classes it implements and conforms to.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/conformance-op<br></p>
 </div>
 <div class="paragraph">
-<p>The server SHALL support the HTTP GET operation at the path <code>/api/conformance</code>.</p>
+<p>The server SHALL support the HTTP GET operation at the path <code>/conformance</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.4.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1635,7 +1842,7 @@ requirements classes it implements and conforms to.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/conformance-success<br></p>
 </div>
@@ -1664,7 +1871,7 @@ properties:
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 2. Requirements class response document</div>
+<div class="title">Example 3. Requirements class response document</div>
 <div class="content">
 <div class="paragraph">
 <p>This example response in JSON is for a server that supports OpenAPI 3.0 for
@@ -1686,9 +1893,8 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_http_1_1"><a class="anchor" href="#_http_1_1"></a>7.3. HTTP 1.1</h3>
+<h3 id="_http_1_1"><a class="anchor" href="#_http_1_1"></a>7.5. HTTP 1.1</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1696,7 +1902,7 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/http<br></p>
 </div>
@@ -1711,7 +1917,7 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.4. Web caching</h3>
+<h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.6. Web caching</h3>
 <div class="paragraph">
 <p>Entity tags are a mechanism for web cache validation and for supporting conditional
 requests to reduce network traffic. Entity tags are specified by <a href="#rfc2616">HTTP/1.1 (RFC 2616)</a>.</p>
@@ -1762,7 +1968,7 @@ More detail / examples on caching
 </div>
 </div>
 <div class="sect2">
-<h3 id="_support_for_cross_origin_requests"><a class="anchor" href="#_support_for_cross_origin_requests"></a>7.5. Support for cross-origin requests</h3>
+<h3 id="_support_for_cross_origin_requests"><a class="anchor" href="#_support_for_cross_origin_requests"></a>7.7. Support for cross-origin requests</h3>
 <div class="paragraph">
 <p>To access data from a HTML page where the data is on another host than
 the webpage is by default prohibited for security reasons ("same-origin policy").
@@ -1803,7 +2009,7 @@ proxy layer on top of the server.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encodings_2"><a class="anchor" href="#_encodings_2"></a>7.6. Encodings</h3>
+<h3 id="_encodings_2"><a class="anchor" href="#_encodings_2"></a>7.8. Encodings</h3>
 <div class="paragraph">
 <p>While WFS 3.0 does not include any mandatory encoding, it recommends the following
 encodings. See <a href="#overview">Clause 6 (Overview)</a> for a discussion.</p>
@@ -1895,7 +2101,44 @@ the Accept header of the HTTP request.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_link_headers"><a class="anchor" href="#_link_headers"></a>7.7. Link headers</h3>
+<h3 id="_coordinate_reference_systems"><a class="anchor" href="#_coordinate_reference_systems"></a>7.9. Coordinate reference systems</h3>
+<div class="paragraph">
+<p>As discussed in Chapter 9 of the <a href="#SDWBP">W3C/OGC Spatial Data on the Web Best Practices</a>,
+how to express and share the location of features in a consistent way is one
+of the most fundamental aspects of publishing geographic data and it is important
+to be clear about the coordinate reference system that coordinates are in.</p>
+</div>
+<div class="paragraph">
+<p>For the reasons discussed in the Best Practices, Web Feature Service 3.0 uses
+WGS84 longitude and latitude as the default coordinate reference system.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/crs84<br></p>
+</div>
+<div class="paragraph">
+<p>Unless the client explicitly requests a different coordinate reference system,
+all spatial geometries SHALL be in the coordinate reference system
+<a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84" class="bare">http://www.opengis.net/def/crs/OGC/1.3/CRS84</a> (WGS84 longitude/latitude).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Core does not specify a capability to request geometries in a different
+coordinate reference system. Such a capability will be specified in another part
+of the WFS 3.0 series.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_link_headers"><a class="anchor" href="#_link_headers"></a>7.10. Link headers</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1921,9 +2164,9 @@ response are created.</p>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.8. Feature collection metadata</h3>
+<h3 id="_feature_collections_metadata"><a class="anchor" href="#_feature_collections_metadata"></a>7.11. Feature collections metadata</h3>
 <div class="sect3">
-<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.8.1. Operation</h4>
+<h4 id="_operation_4"><a class="anchor" href="#_operation_4"></a>7.11.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1931,19 +2174,19 @@ response are created.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-op<br></p>
 </div>
 <div class="paragraph">
-<p>The server SHALL support the HTTP GET operation at the path <code>/</code>.</p>
+<p>The server SHALL support the HTTP GET operation at the path <code>/collections</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response"><a class="anchor" href="#_response"></a>7.8.2. Response</h4>
+<h4 id="_response_4"><a class="anchor" href="#_response_4"></a>7.11.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1951,7 +2194,7 @@ response are created.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-success<br></p>
 </div>
@@ -1968,41 +2211,18 @@ HTTP status code <code>200</code>.</p>
 <div class="listingblock">
 <div class="title"><a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml">Schema for the metadata about feature collections</a></div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="JSON"><span></span>type: object
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
 required:
+  - links
   - collections
 properties:
   links:
     type: array
     items:
-      $ref: link.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
   collections:
     type: array
     items:
-      type: object
-      required:
-        - name
-        - links
-      properties:
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        links:
-          type: array
-          items:
-            $ref: link.yaml
-        extent:
-          $ref: bbox.yaml
-        crs:
-          description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
-          type: array
-          items:
-            type: string
-          default:
-            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
       $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml</code></pre>
 </div>
 </div>
@@ -2013,12 +2233,12 @@ properties:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-links<br></p>
 </div>
 <div class="paragraph">
-<p>A "200"-response SHALL include the following links in the <code>links</code> property
+<p>A <code>200</code>-response SHALL include the following links in the <code>links</code> property
 of the response:</p>
 </div>
 <div class="ulist">
@@ -2032,11 +2252,7 @@ the server (relation: <code>alternate</code>),</p>
 </li>
 <li>
 <p>links to each feature collection resource in this distribution of the
-dataset for each supported encoding (relation: <code>item</code>), and</p>
-</li>
-<li>
-<p>links to the API definition document in each supported encoding
-(relation: <code>service</code>).</p>
+dataset for each supported encoding (relation: <code>item</code>).</p>
 </li>
 </ul>
 </div>
@@ -2059,7 +2275,7 @@ dataset for each supported encoding (relation: <code>item</code>), and</p>
 </div>
 <div class="paragraph">
 <p>If external schemas or descriptions for the dataset exist that provide
-information about the structure or semantics of the data, a "200"-response
+information about the structure or semantics of the data, a <code>200</code>-response
 SHOULD include links to each of those resources in the <code>links</code> property
 of the response (relation: <code>describedBy</code>).</p>
 </div>
@@ -2079,6 +2295,19 @@ RDF Schema, OWL, SHACL, a feature catalogue, etc.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/56">ISSUE 56</a><br>
+Lack of DescribeFeatureType request
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2100,7 +2329,7 @@ metadata (example in DCAT). Which link relation type?
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-items<br></p>
 </div>
@@ -2118,7 +2347,7 @@ be provided in the property <code>collections</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-links<br></p>
 </div>
@@ -2155,7 +2384,7 @@ in OpenAPI 3.0.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-md-extent<br></p>
 </div>
@@ -2170,10 +2399,10 @@ in OpenAPI 3.0.
 <div class="content">
 <pre class="pygments highlight"><code data-lang="YAML"><span></span>type: object
 required:
-  - collectionId
+  - name
   - links
 properties:
-  collectionId:
+  name:
     description: identifier of the collection used, for example, in URIs
     type: string
   title:
@@ -2210,7 +2439,7 @@ The <code>crs</code> property is not used by this conformance class, but reserve
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 3. Feature collection metadata response document</div>
+<div class="title">Example 4. Feature collection metadata response document</div>
 <div class="content">
 <div class="paragraph">
 <p>This feature collection metadata example response in JSON is for a dataset with
@@ -2232,35 +2461,28 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="JSON"><span></span>{
   &quot;links&quot;: [
-    { &quot;href&quot;: &quot;http://data.example.org/index.json&quot;,
+    { &quot;href&quot;: &quot;http://data.example.org/collections.json&quot;,
       &quot;rel&quot;: &quot;self&quot;, &quot;type&quot;: &quot;application/json&quot;, &quot;title&quot;: &quot;this document&quot; },
-    { &quot;href&quot;: &quot;http://data.example.org/index.html&quot;,
+    { &quot;href&quot;: &quot;http://data.example.org/collections.html&quot;,
       &quot;rel&quot;: &quot;alternate&quot;, &quot;type&quot;: &quot;text/html&quot;, &quot;title&quot;: &quot;this document as HTML&quot; },
-    { &quot;href&quot;: &quot;http://data.example.org/api.json&quot;,
-      &quot;rel&quot;: &quot;service&quot;, &quot;type&quot;: &quot;application/openapi+json;version=3.0&quot;, &quot;title&quot;: &quot;the OpenAPI definition as JSON&quot; },
-    { &quot;href&quot;: &quot;http://data.example.org/api.html&quot;,
-      &quot;rel&quot;: &quot;service&quot;, &quot;type&quot;: &quot;text/html&quot;, &quot;title&quot;: &quot;the OpenAPI definition as HTML&quot; },
-    { &quot;href&quot;: &quot;http://catalog.example.org/datasets/buildings#wfs&quot;,
-      &quot;rel&quot;: &quot;???&quot;, &quot;type&quot;: &quot;application/json+ld&quot; }
+    { &quot;href&quot;: &quot;http://schemas.example.org/1.0/foobar.xsd&quot;,
+      &quot;rel&quot;: &quot;describedBy&quot;, &quot;type&quot;: &quot;application/xml&quot;, &quot;title&quot;: &quot;XML schema for Acme Corporation data&quot; }
   ],
   &quot;collections&quot;: [
     {
-      &quot;collectionId&quot;: &quot;buildings&quot;,
+      &quot;name&quot;: &quot;buildings&quot;,
       &quot;title&quot;: &quot;Buildings&quot;,
       &quot;description&quot;: &quot;Buildings in the city of Bonn.&quot;,
       &quot;extent&quot;: {
         &quot;bbox&quot;: [ 7.01, 50.63, 7.22, 50.78 ]
       },
       &quot;links&quot;: [
-        { &quot;href&quot;: &quot;http://data.example.org/buildings.json&quot;,
-          &quot;rel&quot;: &quot;about&quot;, &quot;type&quot;: &quot;application/geo+json&quot;,
-          &quot;title&quot;: &quot;Buildings as GeoJSON&quot; },
-        { &quot;href&quot;: &quot;http://data.example.org/buildings.html&quot;,
-          &quot;rel&quot;: &quot;about&quot;, &quot;type&quot;: &quot;text/html&quot;,
-          &quot;title&quot;: &quot;Buildings as HTML&quot; },
+        { &quot;href&quot;: &quot;http://data.example.org/collections/buildings/items&quot;,
+          &quot;rel&quot;: &quot;item&quot;, &quot;type&quot;: &quot;application/geo+json&quot;,
+          &quot;title&quot;: &quot;Buildings&quot; }
         { &quot;href&quot;: &quot;http://example.org/concepts/building.html&quot;,
           &quot;rel&quot;: &quot;describedBy&quot;, &quot;type&quot;: &quot;text/html&quot;,
-          &quot;title&quot;: &quot;Feature catalogue for the buildings&quot; }
+          &quot;title&quot;: &quot;Feature catalogue for buildings&quot; }
       ]
     }
   ]
@@ -2272,9 +2494,9 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.9. Feature collections</h3>
+<h3 id="_feature_collection_metadata"><a class="anchor" href="#_feature_collection_metadata"></a>7.12. Feature collection metadata</h3>
 <div class="sect3">
-<h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>7.9.1. Operation</h4>
+<h4 id="_operation_5"><a class="anchor" href="#_operation_5"></a>7.12.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2282,17 +2504,68 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/sfc-md-op<br></p>
+</div>
+<div class="paragraph">
+<p>The server SHALL support the HTTP GET operation at the path <code>/collections/{name}</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>name</code> is the property of the same name in the feature collections metadata.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response_5"><a class="anchor" href="#_response_5"></a>7.12.2. Response</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/req/core/sfc-md-success<br></p>
+</div>
+<div class="paragraph">
+<p>A successful execution of the operation SHALL be reported as a response with a
+HTTP status code <code>200</code>.</p>
+</div>
+<div class="paragraph">
+<p>The content of that response SHALL be the same to the content for this feature
+collection in the <code>/collections</code> response.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collections"><a class="anchor" href="#_feature_collections"></a>7.13. Feature collections</h3>
+<div class="sect3">
+<h4 id="_operation_6"><a class="anchor" href="#_operation_6"></a>7.13.1. Operation</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-op<br>
 <br></p>
 </div>
 <div class="paragraph">
-<p>For every feature collection identified in the metadata about the feature collection (path "/"),
-the server SHALL support the HTTP GET operation at the path <code>/{collectionId}</code>.</p>
+<p>For every feature collection identified in the metadata about the feature collection (path <code>/</code>),
+the server SHALL support the HTTP GET operation at the path <code>/collections/{name}/items</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>collectionId</code> is the property of the same name in the feature collection metadata.</p>
+<p><code>name</code> is the property of the same name in the feature collections metadata.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2312,7 +2585,7 @@ Precision level filter responsibility?
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_count"><a class="anchor" href="#_parameter_count"></a>7.9.2. Parameter count</h4>
+<h4 id="_parameter_limit"><a class="anchor" href="#_parameter_limit"></a>7.13.2. Parameter limit</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2320,17 +2593,17 @@ Precision level filter responsibility?
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-count-definition<br></p>
+<p>/req/core/fc-limit-definition<br></p>
 </div>
 <div class="paragraph">
-<p>Each feature collection operation SHALL support a parameter <code>count</code>
+<p>Each feature collection operation SHALL support a parameter <code>limit</code>
 with the following characteristics (using an OpenAPI Specification 3.0 fragment):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: count
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: limit
 in: query
 required: false
 schema:
@@ -2354,10 +2627,10 @@ explode: false</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 1</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/per/core/fc-count-default-maximum<br></p>
+<p>/per/core/fc-limit-default-maximum<br></p>
 </div>
 <div class="paragraph">
-<p>The values for <code>maximum</code> and <code>default</code> in requirement <code>/req/core/fc-count-definition</code>
+<p>The values for <code>maximum</code> and <code>default</code> in requirement <code>/req/core/fc-limit-definition</code>
 are only examples and MAY be changed.</p>
 </div></div></td>
 </tr>
@@ -2370,14 +2643,14 @@ are only examples and MAY be changed.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-count-response-1<br></p>
+<p>/req/core/fc-limit-response-1<br></p>
 </div>
 <div class="paragraph">
 <p>The response SHALL not contain more features than specified by the
-optional <code>count</code> parameter. If the API definition specifies a maximum
-value for <code>count</code> parameter, the response SHALL not contain more
+optional <code>limit</code> parameter. If the API definition specifies a maximum
+value for <code>limit</code> parameter, the response SHALL not contain more
 features than this maximum value.</p>
 </div>
 <div class="paragraph">
@@ -2397,7 +2670,7 @@ SHALL not be counted.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 2</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/per/core/fc-count-response-2<br></p>
+<p>/per/core/fc-limit-response-2<br></p>
 </div>
 <div class="paragraph">
 <p>The server MAY return less features than requested (but not more).</p>
@@ -2408,11 +2681,11 @@ SHALL not be counted.</p>
 <div class="paragraph">
 <p>A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/count.yaml">count.yaml</a>.</p>
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/limit.yaml">limit.yaml</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.9.3. Parameter bbox</h4>
+<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.13.3. Parameter bbox</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2420,7 +2693,7 @@ OpenAPI 3.0 is available at
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-bbox-definition<br></p>
 </div>
@@ -2455,7 +2728,7 @@ explode: false</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-bbox-response<br></p>
 </div>
@@ -2492,7 +2765,7 @@ However, in cases where the box spans the antimeridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 4. The bounding box of the New Zealand Exclusive Economic Zone</div>
+<div class="title">Example 5. The bounding box of the New Zealand Exclusive Economic Zone</div>
 <div class="content">
 <div class="paragraph">
 <p>The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
@@ -2507,7 +2780,7 @@ OpenAPI 3.0 is available at
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.9.4. Parameters for filtering on feature properties</h4>
+<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.13.4. Parameters for filtering on feature properties</h4>
 <div class="admonitionblock caution">
 <table>
 <tr>
@@ -2556,7 +2829,7 @@ property in the response schema.</p>
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 5. An additional parameter to filter buildings based on their function</div>
+<div class="title">Example 6. An additional parameter to filter buildings based on their function</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -2580,9 +2853,35 @@ example: &#39;function=public+use&#39;</code></pre>
 </div>
 </div>
 </div>
+<div class="exampleblock">
+<div class="title">Example 7. An additional parameter to filter buildings based on their name</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: name
+in: query
+description: &gt;-
+  Only return buildings with a particular name. Use &#39;*&#39; as a wildcard.\
+
+  Default = return all buildings.
+required: false
+schema:
+  type: string
+style: form
+explode: false
+example: &#39;name=A*&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For string-valued properties, servers could support wildcard searches. The
+example included in the OpenAPI fragment would search for all buildings with
+a name that starts with "A".</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_response_2"><a class="anchor" href="#_response_2"></a>7.9.5. Response</h4>
+<h4 id="_response_6"><a class="anchor" href="#_response_6"></a>7.13.5. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2590,13 +2889,13 @@ example: &#39;function=public+use&#39;</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-response<br></p>
 </div>
 <div class="paragraph">
 <p>A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200".</p>
+HTTP status code <code>200</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2605,26 +2904,26 @@ HTTP status code "200".</p>
 <p>The response will only include features selected by the request.</p>
 </div>
 <div class="paragraph">
-<p>The number of features returned depends on the server and the parameter <code>count</code>:</p>
+<p>The number of features returned depends on the server and the parameter <code>limit</code>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The client can request a count it is interested in.</p>
+<p>The client can request a limit it is interested in.</p>
 </li>
 <li>
-<p>The server likely has a default value for the count, and a maximum limit.</p>
+<p>The server likely has a default value for the limit, and a maximum limit.</p>
 </li>
 <li>
 <p>If the server has any more results available than it returns (the
-number it returns is less than or equal to the requested/limited/default count)
+number it returns is less than or equal to the requested/default/maximum limit)
 then the server will include a link to the next set of results.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>So (using the default/maximum values of 10/10000 from the OpenAPI
-fragment in requirement <code>/req/core/fc-count-definition</code>):</p>
+fragment in requirement <code>/req/core/fc-limit-definition</code>):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2633,7 +2932,7 @@ fragment in requirement <code>/req/core/fc-count-definition</code>):</p>
 if there are more.</p>
 </li>
 <li>
-<p>If you don&#8217;t specify a count, you will get 0 to 10 (default) and a <code>next</code> link,
+<p>If you don&#8217;t specify a limit, you will get 0 to 10 (default) and a <code>next</code> link,
 if there are more.</p>
 </li>
 <li>
@@ -2653,12 +2952,12 @@ to 10000 additional features and a <code>next</code> link, if there are more.</p
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-links<br></p>
 </div>
 <div class="paragraph">
-<p>A "200"-response SHALL include the following links:</p>
+<p>A <code>200</code>-response SHALL include the following links:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2686,7 +2985,7 @@ by the service (relation: <code>alternate</code>).</p>
 <p>/rec/core/fc-next-1<br></p>
 </div>
 <div class="paragraph">
-<p>A "200"-response SHOULD include a link to the next "page" (relation: <code>next</code>),
+<p>A <code>200</code>-response SHOULD include a link to the next "page" (relation: <code>next</code>),
 if more features have been selected than returned in the response.</p>
 </div></div></td>
 </tr>
@@ -2741,7 +3040,8 @@ Clients should be prepared to receive a 404 response.</p>
 </div>
 <div class="paragraph">
 <p>Another implementation approach is to use an implementation-specific parameter
-like the <code>startIndex</code> parameter that was used in previous versions of WFS.</p>
+like the <code>startIndex</code> parameter that was used in previous versions of WFS (and
+which may be added again in an extension to this specification).</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -2772,7 +3072,7 @@ but depending on the implementation approach it may be complex to implement.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-rel-type<br></p>
 </div>
@@ -2796,19 +3096,19 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 6. Links</div>
+<div class="title">Example 8. Links</div>
 <div class="content">
 <div class="paragraph">
-<p>If the request is to return building features and "10" is the default <code>count</code>,
+<p>If the request is to return building features and "10" is the default <code>limit</code>,
 the links in the response could be (in this example represented as link headers
 and using an additional parameter <code>startIndex</code> to implement <code>next</code> links - and
 the optional <code>prev</code> links):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings.json&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.html&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json?startIndex=10&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=10&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2816,20 +3116,20 @@ Link: &lt;http://data.example.org/buildings.json?startIndex=10&gt;; rel="next"; 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings.json?startIndex=10&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.html?startIndex=10&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json?startIndex=0&gt;; rel="prev"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.json?startIndex=20&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=10&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html?startIndex=10&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=0&gt;; rel="prev"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.json?startIndex=20&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If an explicit <code>count</code> of "50" is used, the links in the response could be:</p>
+<p>If an explicit <code>limit</code> of "50" is used, the links in the response could be:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings.json?count=50&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.html?count=50&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=50&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html?limit=50&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;startIndex=50&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2837,10 +3137,10 @@ Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=50&gt;;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=50&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.html?count=50&amp;startIndex=50&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=0&gt;; rel="prev"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings.json?count=50&amp;startIndex=100&gt;; rel="next"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;startIndex=50&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.html?limit=50&amp;startIndex=50&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;startIndex=0&gt;; rel="prev"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;startIndex=100&gt;; rel="next"; type="application/geo+json"</code></pre>
 </div>
 </div>
 </div>
@@ -2897,9 +3197,9 @@ not seem to be needed given the 'Date' HTTP header. For <code>numberMatched</cod
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.10. Feature</h3>
+<h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.14. Feature</h3>
 <div class="sect3">
-<h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>7.10.1. Operation</h4>
+<h4 id="_operation_7"><a class="anchor" href="#_operation_7"></a>7.14.1. Operation</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2907,16 +3207,17 @@ not seem to be needed given the 'Date' HTTP header. For <code>numberMatched</cod
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-op<br></p>
 </div>
 <div class="paragraph">
-<p>For every feature in a feature collection (path "/{collectionId}"),
-the service SHALL support the HTTP GET operation at the path <code>/{collectionId}/{id}</code>.</p>
+<p>For every feature in a feature collection (path <code>/collections/{name}/items</code>),
+the service SHALL support the HTTP GET operation at the path
+<code>/collections/{name}/items/{id}</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>collectionId</code> is the property of the same name in the feature collection metadata.</p>
+<p><code>name</code> is the property of the same name in the feature collection metadata.</p>
 </div>
 <div class="paragraph">
 <p><code>id</code> is the unique identifier of the feature within the dataset.</p>
@@ -2953,7 +3254,7 @@ distinguish between them.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_3"><a class="anchor" href="#_response_3"></a>7.10.2. Response</h4>
+<h4 id="_response_7"><a class="anchor" href="#_response_7"></a>7.14.2. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2961,13 +3262,13 @@ distinguish between them.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-success<br></p>
 </div>
 <div class="paragraph">
 <p>A successful execution of the operation SHALL be reported as a response with a
-HTTP status code "200".</p>
+HTTP status code <code>200</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2979,12 +3280,12 @@ HTTP status code "200".</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-links<br></p>
 </div>
 <div class="paragraph">
-<p>A "200"-response SHALL include the following links in the response:</p>
+<p>A <code>200</code>-response SHALL include the following links in the response:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3019,16 +3320,16 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 7. Links</div>
+<div class="title">Example 9. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>The links in a feature could be (in this example represented as link headers):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/buildings/123.json&gt;; rel="self"; type="application/geo+json"
-Link: &lt;http://data.example.org/buildings/123.html&gt;; rel="alternate"; type="text/html"
-Link: &lt;http://data.example.org/buildings.json&gt;; rel="collection"; type="application/geo+json"</code></pre>
+<pre class="pygments highlight"><code>Link: &lt;http://data.example.org/collections/buildings/items/123.json&gt;; rel="self"; type="application/geo+json"
+Link: &lt;http://data.example.org/collections/buildings/items/123.html&gt;; rel="alternate"; type="text/html"
+Link: &lt;http://data.example.org/collections/buildings/items.json&gt;; rel="collection"; type="application/geo+json"</code></pre>
 </div>
 </div>
 </div>
@@ -3041,7 +3342,7 @@ Link: &lt;http://data.example.org/buildings.json&gt;; rel="collection"; type="ap
 <h2 id="_requirements_classes_for_encodings"><a class="anchor" href="#_requirements_classes_for_encodings"></a>8. Requirements classes for encodings</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>8.1. Overview</h3>
+<h3 id="_overview"><a class="anchor" href="#_overview"></a>8.1. Overview</h3>
 <div class="paragraph">
 <p>This clause specifies four pre-defined requirements classes for encodings to be
 used in a WFS. These encodings are commonly used encodings for spatial data on
@@ -3077,20 +3378,31 @@ encodings.</p>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_html"><a class="anchor" href="#_requirement_class_html"></a>8.2. Requirement Class "HTML"</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.<br>
-Link to <a href="#SDWBP">[SDWBP]</a> and summarize the key points discussed around in BP2.<br>
-Also link to <a href="#rec_html">[rec_html]</a>.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Geographic information that is only accessible in formats like GeoJSON or GML
+has two issues:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>it is not discoverable using the most common mechanism for discovering information,
+that is the search engines of the Web;</p>
+</li>
+<li>
+<p>it can not be viewed directly in a browser - additional tools are required to
+view the data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Therefore, sharing data on the Web should include publication in HTML. To be consistent
+with the Web, it should be done in a way that enables users and search engines to
+access all data.</p>
+</div>
+<div class="paragraph">
+<p>This is discussed in detail in
+<a href="https://www.w3.org/TR/sdw-bp/#indexable-by-search-engines">Best Practice 2: Make your spatial data indexable by search engines</a>
+<a href="#SDWBP">[SDWBP]</a>. This standard therefore <a href="#rec_html">recommends to support HTML as an encoding</a>.</p>
 </div>
 <table id="rc_html" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3129,12 +3441,12 @@ Also link to <a href="#rec_html">[rec_html]</a>.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/html/definition<br></p>
 </div>
 <div class="paragraph">
-<p>Every "200"-response of an operation of the server
+<p>Every <code>200</code>-response of an operation of the server
 SHALL support the media type <code>text/html</code>.</p>
 </div></div></td>
 </tr>
@@ -3147,12 +3459,12 @@ SHALL support the media type <code>text/html</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/html/content<br></p>
 </div>
 <div class="paragraph">
-<p>Every "200"-response of the server with the media type "text/html" SHALL be a
+<p>Every <code>200</code>-response of the server with the media type "text/html" SHALL be a
 <a href="https://www.w3.org/TR/html5/">HTML 5 document</a> that includes the following
 information in the HTML body:</p>
 </div>
@@ -3183,7 +3495,7 @@ in the HTML <code>&lt;body/&gt;</code>, and</p>
 <p>/rec/html/schema-org<br></p>
 </div>
 <div class="paragraph">
-<p>In a "200"-response with the media type <code>text/html</code>, include
+<p>In a <code>200</code>-response with the media type <code>text/html</code>, SHOULD include
 <a href="#schema.org">Schema.org</a> annotations.</p>
 </div></div></td>
 </tr>
@@ -3192,18 +3504,11 @@ in the HTML <code>&lt;body/&gt;</code>, and</p>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_geojson"><a class="anchor" href="#_requirement_class_geojson"></a>8.3. Requirement Class "GeoJSON"</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>GeoJSON is a commonly used format that is simple to understand and well
+supported by tools and software libraries. Since most Web developers are
+comfortable with using a JSON-based format, supporting GeoJSON is recommended,
+if the feature data can be represented in GeoJSON for the intended use.</p>
 </div>
 <table id="rc_geojson" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3238,20 +3543,20 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/geojson/definition<br></p>
 </div>
 <div class="paragraph">
-<p>"200"-responses of the server SHALL support the following media types:</p>
+<p><code>200</code>-responses of the server SHALL support the following media types:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>application/json</code> for feature collection metadata and the list of requirements classes, and</p>
+<p><code>application/geo+json</code> for feature collections and features, and</p>
 </li>
 <li>
-<p><code>application/geo+json</code> for feature collections and features.</p>
+<p><code>application/json</code> for all other resources.</p>
 </li>
 </ul>
 </div></div></td>
@@ -3265,12 +3570,12 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/geojson/content<br></p>
 </div>
 <div class="paragraph">
-<p>Every "200"-response with the media type <code>application/geo+json</code> SHALL be</p>
+<p>Every <code>200</code>-response with the media type <code>application/geo+json</code> SHALL be</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3298,21 +3603,111 @@ OpenAPI definitions are available at
 These are generic schemas that do not include any application schema information about
 specific feature types or their properties.</p>
 </div>
+<div class="exampleblock">
+<div class="title">Example 10. A GeoJSON FeatureCollection Object response</div>
+<div class="content">
+<div class="paragraph">
+<p>In the example below, only the first and tenth feature is shown. Coordinates are not shown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>{
+  &quot;type&quot; : &quot;FeatureCollection&quot;,
+  &quot;links&quot; : [ {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/?f=json&quot;,
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;type&quot; : &quot;application/geo+json&quot;,
+    &quot;title&quot; : &quot;this document&quot;
+  }, {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/?f=html&quot;,
+    &quot;rel&quot; : &quot;alternate&quot;,
+    &quot;type&quot; : &quot;text/html&quot;,
+    &quot;title&quot; : &quot;this document as HTML&quot;
+  }, {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/?f=json&amp;startIndex=10&amp;limit=10&quot;,
+    &quot;rel&quot; : &quot;next&quot;,
+    &quot;type&quot; : &quot;application/geo+json&quot;,
+    &quot;title&quot; : &quot;next page&quot;
+  } ],
+  &quot;features&quot; : [ {
+    &quot;type&quot; : &quot;Feature&quot;,
+    &quot;id&quot; : &quot;123&quot;,
+    &quot;geometry&quot; : {
+      &quot;type&quot; : &quot;Polygon&quot;,
+      &quot;coordinates&quot; : [ ... ]
+    },
+    &quot;properties&quot; : {
+      &quot;function&quot; : &quot;residential&quot;,
+      &quot;floors&quot; : &quot;2&quot;
+    }
+  }, { ...
+  }, {
+    &quot;type&quot; : &quot;Feature&quot;,
+    &quot;id&quot; : &quot;132&quot;,
+    &quot;geometry&quot; : {
+      &quot;type&quot; : &quot;Polygon&quot;,
+      &quot;coordinates&quot; : [ ... ]
+    },
+    &quot;properties&quot; : {
+      &quot;function&quot; : &quot;public use&quot;,
+      &quot;floors&quot; : &quot;10&quot;
+    }
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 11. A GeoJSON Feature Object response</div>
+<div class="content">
+<div class="paragraph">
+<p>In the example below, coordinates are not shown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="JSON"><span></span>{
+  &quot;type&quot; : &quot;Feature&quot;,
+  &quot;links&quot; : [ {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/123/?f=json&quot;,
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;type&quot; : &quot;application/geo+json&quot;,
+    &quot;title&quot; : &quot;this document&quot;
+  }, {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items/123/?f=html&quot;,
+    &quot;rel&quot; : &quot;alternate&quot;,
+    &quot;type&quot; : &quot;text/html&quot;,
+    &quot;title&quot; : &quot;this document as HTML&quot;
+  }, {
+    &quot;href&quot; : &quot;http://data.example.com/collections/buildings/items&quot;,
+    &quot;rel&quot; : &quot;collection&quot;,
+    &quot;type&quot; : &quot;application/geo+json&quot;,
+    &quot;title&quot; : &quot;the collection document&quot;
+  } ],
+  &quot;id&quot; : &quot;123&quot;,
+  &quot;geometry&quot; : {
+    &quot;type&quot; : &quot;Polygon&quot;,
+    &quot;coordinates&quot; : [ ... ]
+  },
+  &quot;properties&quot; : {
+    &quot;function&quot; : &quot;residential&quot;,
+    &quot;floors&quot; : &quot;2&quot;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_geography_markup_language_gml_simple_features_profile_level_0"><a class="anchor" href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_0"></a>8.4. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>In addition to HTML and GeoJSON, a significant amount of feature data is
+available in XML-based formats, notably GML. Therefore, this standard
+specifies requirement classes for GML. The Simple Features Profile, Level 0, is
+the simplest profile of GML and is typically supported by tools. It is restricted
+to data with 2D geometries supported by most tools. In addition, the profile
+is limited to features that can be stored in a tabular data structure.</p>
 </div>
 <table id="rc_gmlsf0" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3347,21 +3742,21 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf0/definition<br></p>
 </div>
 <div class="paragraph">
-<p>"200"-responses of the server
+<p><code>200</code>-responses of the server
 SHALL support the following media types:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>application/xml</code> for feature collection metadata and the list of requirements classes, and</p>
+<p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> for feature collections and features,</p>
 </li>
 <li>
-<p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> for feature collections and features.</p>
+<p><code>application/xml</code> for all other resources.</p>
 </li>
 </ul>
 </div></div></td>
@@ -3375,12 +3770,12 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf0/content<br></p>
 </div>
 <div class="paragraph">
-<p>Every "200"-response with the media type <code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> SHALL be</p>
+<p>Every <code>200</code>-response with the media type <code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> SHALL be</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3423,18 +3818,10 @@ specific feature types or their properties.</p>
 </div>
 <div class="sect2">
 <h3 id="_requirement_class_geography_markup_language_gml_simple_features_profile_level_2"><a class="anchor" href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_2"></a>8.5. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 2"</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO<br>
-Add intro text for the requirement class.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>The difference between this requirement class and the <a href="#rc_gmlsf0">Level 0</a>
+requirements class is that non-spatial feature properties are not restricted to
+atomic values (strings, numbers, etc.).</p>
 </div>
 <table id="rc_gmlsf2" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3469,21 +3856,21 @@ Add intro text for the requirement class.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf2/definition<br></p>
 </div>
 <div class="paragraph">
-<p>"200"-responses of the server
+<p><code>200</code>-responses of the server
 SHALL support the following media types:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>application/xml</code> for feature collection metadata and the list of requirements classes, and</p>
+<p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> for feature collections and features,</p>
 </li>
 <li>
-<p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> for feature collections and features.</p>
+<p><code>application/xml</code> for all other resources.</p>
 </li>
 </ul>
 </div></div></td>
@@ -3497,12 +3884,12 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf2/content<br></p>
 </div>
 <div class="paragraph">
-<p>Every "200"-response with the media type <code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> SHALL be</p>
+<p>Every <code>200</code>-response with the media type <code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> SHALL be</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3564,7 +3951,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/oas-definition-1<br></p>
 </div>
@@ -3582,7 +3969,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/oas-definition-2<br></p>
 </div>
@@ -3594,7 +3981,7 @@ SHALL support the following media types:</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>An example OpenAPI document is included in <a href="#oas30_example">Annex C</a>.</p>
+<p>An example OpenAPI document is included in <a href="#oas30_example">Annex B</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3603,7 +3990,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/oas30/oas-impl<br>
 <br></p>
 <p class="tableblock">The server SHALL implement all capabilities specified in the OpenAPI
@@ -3647,7 +4034,7 @@ OpenAPI Validation
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 39</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/completeness<br></p>
 </div>
@@ -3701,7 +4088,7 @@ layer outside of the server.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 40</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-codes<br></p>
 </div>
@@ -3732,13 +4119,13 @@ Listing of all applicable HTTP Status Codes
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 41</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-400<br></p>
 </div>
 <div class="paragraph">
 <p>For error situations that are the result of a bad request by the client,
-error code "400" SHALL be used.</p>
+error code <code>400</code> SHALL be used.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3764,13 +4151,13 @@ including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 42</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-500<br></p>
 </div>
 <div class="paragraph">
 <p>For error situations that are the result of an internal server error,
-error code "500" SHALL be used.</p>
+error code <code>500</code> SHALL be used.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3790,7 +4177,7 @@ including NoApplicableCode, OperationProcessingFailed.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 8. An exception response object definition</div>
+<div class="title">Example 12. An exception response object definition</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -3816,7 +4203,7 @@ content:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 43</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/security<br></p>
 </div>
@@ -3869,7 +4256,7 @@ How does a client determine which security protocols/standards/etc. a server sup
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 44</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/fc-md-op<br></p>
 </div>
@@ -4032,13 +4419,7 @@ info:
   title: A sample API conforming to the OGC Web Feature Service standard
   version: 0.0.1
   description: &gt;-
-    WARNING - THIS IS WORK IN PROGRESS\
-
-    TODO - Add a description of the sample service.\
-
-    TODO - Add security elements in a separate example.\
-
-    TODO - Connect to a live service.
+    This is a sample OpenAPI definition that conforms to the OGC Web Feature Service specification (conformance classes: &quot;Core&quot;, &quot;GeoJSON&quot;, &quot;HTML&quot; and &quot;OpenAPI 3.0&quot;).
   contact:
     name: Acme Corporation
     email: info@example.org
@@ -4054,32 +4435,30 @@ servers:
 paths:
   /:
     get:
-      summary: describe the feature collections in the dataset
-      operationId: describeCollections
+      summary: landing page of this API
+      description: &gt;-
+        The landing page provides links to the API definition,
+        the Conformance statements and the metadata about the
+        building data in this dataset.
+      operationId: getLandingPage
       tags:
         - Capabilities
       responses:
         &#39;200&#39;:
-          description: The feature collections shared by this API.
+          description: links to the API capabilities
           content:
             application/json:
               schema:
-                $ref: &#39;#/components/schemas/content&#39;
+                $ref: &#39;#/components/schemas/root&#39;
             text/html:
               schema:
                 type: string
-        default:
-          description: An error occured.
-          content:
-            application/json:
-              schema:
-                $ref: &#39;#/components/schemas/exception&#39;
-            text/html:
-              schema:
-                type: string
-  /api/conformance:
+  /conformance:
     get:
-      summary: list all requirements classes specified in a standard (e.g., WFS 3.0) that the server conforms to
+      summary: information about standards that this API conforms to
+      description: &gt;-
+        list all requirements classes specified in a standard
+        (e.g., WFS 3.0 Part 1: Core) that the server conforms to
       operationId: getRequirementsClasses
       tags:
         - Capabilities
@@ -4096,20 +4475,73 @@ paths:
             application/json:
               schema:
                 $ref: &#39;#/components/schemas/exception&#39;
-  /buildings:
+  /collections:
     get:
-      summary: retrieve building features; use conneg to request HTML or GeoJSON
+      summary: describe the feature collections in the dataset
+      operationId: describeCollections
+      tags:
+        - Capabilities
+      responses:
+        &#39;200&#39;:
+          description: Metdata about the feature collections shared by this API.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/content&#39;
+            text/html:
+              schema:
+                type: string
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            text/html:
+              schema:
+                type: string
+  /collections/buildings:
+    get:
+      summary: describe the building feature collection
+      operationId: describeCollectionBuildings
+      tags:
+        - Capabilities
+      responses:
+        &#39;200&#39;:
+          description: Metadata about the buildings shared by this API.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/collectionInfo&#39;
+            text/html:
+              schema:
+                type: string
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/exception&#39;
+            text/html:
+              schema:
+                type: string
+  /collections/buildings/items:
+    get:
+      summary: retrieve building features
       description: &gt;-
-        Every feature in a dataset belongs to one collection of features. A dataset may consist of multiple feature
-        collections. Typically, a feature collection is a collection of features of a similar type, based on a
-        common schema.
+        Every feature in a dataset belongs to a collection. A dataset may
+        consist of multiple feature collections. A feature collection is
+        often a collection of features of a similar type, based on a
+        common schema.\
 
-        This sample WFS has a single feature collection for buildings.
+        This sample WFS has a single feature collection for buildings.\
+
+        Use content negotiation to request HTML or GeoJSON.
       operationId: getBuildings
       tags:
         - Features
       parameters:
-        - $ref: &#39;#/components/parameters/count&#39;
+        - $ref: &#39;#/components/parameters/limit&#39;
         - $ref: &#39;#/components/parameters/bbox&#39;
         - $ref: &#39;#/components/parameters/function&#39;
       responses:
@@ -4132,20 +4564,21 @@ paths:
             text/html:
               schema:
                 type: string
-  /buildings.json:
+  /collections/buildings/items.json:
     get:
       summary: retrieve building features in GeoJSON
       description: &gt;-
-        Every feature in a dataset belongs to one collection of features. A dataset may consist of multiple feature
-        collections. Typically, a feature collection is a collection of features of a similar type, based on a
-        common schema.
+        Every feature in a dataset belongs to a collection. A dataset may
+        consist of multiple feature collections. A feature collection is
+        often a collection of features of a similar type, based on a
+        common schema.\
 
         This sample WFS has a single feature collection for buildings.
       operationId: getBuildingsJSON
       tags:
         - Features
       parameters:
-        - $ref: &#39;#/components/parameters/count&#39;
+        - $ref: &#39;#/components/parameters/limit&#39;
         - $ref: &#39;#/components/parameters/bbox&#39;
         - $ref: &#39;#/components/parameters/function&#39;
       responses:
@@ -4162,9 +4595,9 @@ paths:
             application/json:
               schema:
                 $ref: &#39;#/components/schemas/exception&#39;
-  /buildings/{fid}:
+  /collections/buildings/items/{fid}:
     get:
-      summary: retrieve a building; use conneg to request HTML or GeoJSON
+      summary: retrieve a building; use content negotiation to request HTML or GeoJSON
       operationId: getBuilding
       tags:
         - Features
@@ -4189,7 +4622,7 @@ paths:
             text/html:
               schema:
                 type: string
-  /buildings/{fid}.json:
+  /collections/buildings/items/{fid}.json:
     get:
       summary: retrieve a building in GeoJSON
       operationId: getBuildingJSON
@@ -4212,11 +4645,11 @@ paths:
                 $ref: &#39;#/components/schemas/exception&#39;
 components:
   parameters:
-    count:
-      name: count
+    limit:
+      name: limit
       in: query
       description: &gt;-
-        The optional count parameter limits the number of items that are presented in the response document.\
+        The optional limit parameter limits the number of items that are presented in the response document.\
 
         Only items are counted that are on the first level of the collection in the response document.
         Nested objects contained within the explicitly requested items shall not be counted.\
@@ -4294,6 +4727,15 @@ components:
           type: string
         description:
           type: string
+    root:
+      type: object
+      required:
+        - links
+      properties:
+        links:
+          type: array
+          items:
+            $ref: link.yaml
     req-classes:
       type: object
       required:
@@ -4369,7 +4811,13 @@ components:
         extent:
           $ref: &#39;#/components/schemas/bbox&#39;
         crs:
-          description: TODO - add description ... first crs is the default crs
+          description: &gt;-
+            The coordinate reference systems in which geometries
+            may be retrieved. Coordinate reference systems are identified
+            by a URI. The first coordinate reference system is the
+            coordinate reference system that is used by default. This
+            is always &quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;, i.e.
+            WGS84 longitude/latitude.
           type: array
           items:
             type: string
@@ -4500,59 +4948,66 @@ tags:
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-10-09</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">initial version</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-10-11</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.2</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">changes discussed in SWG/PT call on 2017-10-09</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-12-13</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.3</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues #2, #5, #6, #7, #8, #14, #15, #19</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/2">#2</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/5">#5</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/6">#6</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/7">#7</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/8">#8</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/14">#14</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/15">#15</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/19">#19</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-01-22</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.4</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add description of the UML diagram</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-01</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.5</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,3,5,7</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub; address issues #31, #32</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub; address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/31">#31</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/32">#32</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-11</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.6</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,6,7,8</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue #25</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue <a href="https://github.com/opengeospatial/WFS_FES/issues/25">#25</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-27</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues #3, #9, #12, #22, #23, #24, #44; add links to issues #41, #45, #46, #47</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/3">#3</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/9">#9</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/12">#12</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/22">#22</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/23">#23</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/24">#24</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/44">#44</a>; add links to issues <a href="https://github.com/opengeospatial/WFS_FES/issues/41">#41</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/45">#45</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/46">#46</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/47">#47</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-04</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.8</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">T. Schaub</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7,B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JSON schema fixes #54, #55</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JSON schema fixes <a href="https://github.com/opengeospatial/WFS_FES/issues/54">#54</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/55">#55</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-11</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Updates after the WFS 3.0 Hackathon <a href="https://github.com/opengeospatial/WFS_FES/issues/59">#59</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/61">#61</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/62">#62</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/63">#63</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/64">#64</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/69">#69</a>; resolve <a href="https://github.com/opengeospatial/WFS_FES/issues/4">#4</a>; editorial edits</p></td>
 </tr>
 </tbody>
 </table>
@@ -4571,6 +5026,9 @@ tags:
 <p><a id="DWBP"></a> W3C: Data on the Web Best Practices, W3C Recommendation 31 January 2017, <a href="https://www.w3.org/TR/dwbp/" class="bare">https://www.w3.org/TR/dwbp/</a></p>
 </li>
 <li>
+<p><a id="DCAT"></a> W3C: Data Catalog Vocabulary, W3C Recommendation 16 January 2014, <a href="https://www.w3.org/TR/vocab-dcat/" class="bare">https://www.w3.org/TR/vocab-dcat/</a></p>
+</li>
+<li>
 <p><a id="link-relations"></a> IANA: Link Relation Types, <a href="https://www.iana.org/assignments/link-relations/link-relations.xml" class="bare">https://www.iana.org/assignments/link-relations/link-relations.xml</a></p>
 </li>
 </ul>
@@ -4580,7 +5038,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-04 10:22:33 CET
+Last updated 2018-03-11 12:59:26 CET
 </div>
 </div>
 </body>

@@ -1,5 +1,4 @@
 == Conventions
-NOTE: This sections provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
 
 === Identifiers
 
@@ -13,33 +12,35 @@ UML diagrams are included in this standard to illustrate the conceptual model th
 
 Resources are modelled as UML interfaces.
 
-NOTE: The OpenAPI definition is not modelled explicitly.
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/36[ISSUE 36] +
-A draft UML for OpenAPI 3.0 is available and could be reused.
-
 === Link relations
 
 To express relationships between resources, <<rfc5988,RFC 5988 (Web Linking)>> and <<link-relations,registered link relation types>> are used.
 
 === Use of HTTPS
 
-For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.
+For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.
 
 === API definition
 
 ==== General remarks
 
-NOTE: TODO +
-Add general considerations. +
-Clarify that additional operations, parameters, etc. may be added, either to implement additional conformance classes or for vendor-specific extensions.
+Good documentation is essential for every API so that developers can learn how
+to use it. In the best case, documentation will be available in HTML and in
+a format that can be processed by software to connect to the API.
+
+This standard specifies requirements and recommendations for APIs that
+share feature data and that want to follow a standard way of doing so.
+In general, APIs will go beyond the requirements and recommendations
+stated in this standard - or other parts of the Web Feature Service
+standard series - and will support additional operations, parameters, etc.
+that are specific to the API or the software tool used to implement the API.
 
 ==== Role of OpenAPI
 
 This document uses OpenAPI 3.0 fragments as examples and to formally state
 requirements. However, using OpenAPI 3.0 is not required.
 
-The "Core" requirements class, therefore, only requires that a formal API
+The "Core" requirements class, therefore, only requires that an API
 definition is provided at /api.
 
 A separate requirements class is specified for API definitions that follow the
@@ -64,7 +65,7 @@ In this case, the following changes to the pre-defined OpenAPI component
 are permitted:
 
 * If the server supports an XML encoding, `xml` properties may be added to
-the relevant OpenAPI schema components. 
+the relevant OpenAPI schema components.
 * The range of values of a parameter or property may be extended (additional
 values) or constrained (if only a subset of all possible values are applicable
 to the service). An example for a constrained range of values is to explicitly

@@ -73,7 +73,7 @@ paths:
       tags:
         - Features
       parameters:
-        - $ref: '#/parameters/count'
+        - $ref: '#/parameters/limit'
         - $ref: '#/parameters/bbox'
         - $ref: '#/parameters/function'
       produces:
@@ -104,7 +104,7 @@ paths:
       tags:
         - Features
       parameters:
-        - $ref: '#/parameters/count'
+        - $ref: '#/parameters/limit'
         - $ref: '#/parameters/bbox'
         - $ref: '#/parameters/function'
       produces:
@@ -168,11 +168,11 @@ paths:
           schema:
             $ref: '#/definitions/exception'
 parameters:
-  count:
-    name: count
+  limit:
+    name: limit
     in: query
     description: >-
-      The optional count parameter limits the number of items that are presented
+      The optional limit parameter limits the number of items that are presented
       in the response document.\
 
       Only items are counted that are on the first level of the collection in

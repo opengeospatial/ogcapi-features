@@ -12,7 +12,7 @@ include::requirements/requirements_class_oas30.adoc[]
 
 include::requirements/requirement_oas-definition.adoc[]
 
-An example OpenAPI document is included in <<oas30_example,Annex C>>.
+An example OpenAPI document is included in <<oas30_example,Annex B>>.
 
 include::requirements/requirement_oas-impl.adoc[]
 
@@ -65,7 +65,7 @@ Listing of all applicable HTTP Status Codes
 |*Requirement {counter:req-id}* |/req/oas30/exceptions-400 +
 
 For error situations that are the result of a bad request by the client,
-error code "400" SHALL be used.
+error code `400` SHALL be used.
 |===
 
 NOTE: TODO +
@@ -77,7 +77,7 @@ including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
 |*Requirement {counter:req-id}* |/req/oas30/exceptions-500 +
 
 For error situations that are the result of an internal server error,
-error code "500" SHALL be used.
+error code `500` SHALL be used.
 |===
 
 NOTE: TODO +
