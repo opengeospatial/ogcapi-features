@@ -1,10 +1,10 @@
 [appendix]
-= Annex A: Abstract Test Suite (Normative)
+= Annex A: Abstract Test Suite (Normative) +
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/46[ISSUE 46] +
 OpenAPI Validation
 
-== A.1: Overview
+== A.1: Overview +
 WFS 3.0 is a highly modular standard.  One result of this is that almost everything is optional. +
  1) Are the advertised capabilities compliant with the WFS 3.0 standard? +
  2) Does the service implement those capabilities as advertised? +
@@ -19,7 +19,7 @@ Path templates are used throughout these test suites.  Path templating refers to
  - query: query parameters following the "?" character +
  - fragment: identifies an element within the resource. Preceded by the "\#" character +
 
-== A.2: Requirements Trace Matrix
+== A.2: Requirements Trace Matrix +
 ----
 Requirement 1: API Definition
 Description:
@@ -75,12 +75,12 @@ include::requirements/requirements_class_oas30.adoc[]
 Tests: A.1.n
 ----
 
-== A.3: Abstract Tests
+== A.3: Abstract Tests +
 WFS 3.0 is a highly modular standard.  One result of this is that almost everything is optional. +
  1) Are the advertised capabilities compliant with the WFS 3.0 standard? +
  2) Does the service implement those capabilities as advertised? +
  +
-=== A.3.1: Core Test:
+=== A.3.1: Core Test +
 Test Purpose: The core test which drives all other testing +
 Pre-conditions: Tester is is aware of the root path to the Service +
 References: +
@@ -93,7 +93,7 @@ Test Method: +
      a) For OpenAPI Version 3.x use test A.3.2 +
   3) Report results of the tests. +
  +
-=== A.3.2: OpenAPI Core Test:
+=== A.3.2: OpenAPI Core Test +
 Test Purpose: Validate WFS 3.0 compliance based on the OpenAPI description of the Service. +
 Pre-conditions: Tester has retrieved an API Description document. +
 References: +
@@ -116,7 +116,7 @@ Test Method: +
  7) Retrieve all Tag Objects from {API_Description}/tags and save for latter use. +
  8) Process each element in {API_Description}/paths using test A.3.3. +
  +
-=== A.3.3: OpenAPI Paths
+=== A.3.3: OpenAPI Paths +
 Test Purpose: Validate WFS 3.0 compliance based on the OpenAPI description of the service operations. +
 Pre-conditions: Tester has retrieved and processed the top level of an OpenAPI document. +
 References: +
@@ -134,8 +134,8 @@ Test Method: +
         ELSE ignore this path +
   5) Verify that all paths required by WFS 3.0 were included +
  +
-=== A.3.4: OpenAPI Path Items     
-* Test Purpose: Validate WFS 3.0 compliance for a single resource path based on the OpenAPI description of that path. +
+=== A.3.4: OpenAPI Path Items  +   
+Test Purpose: Validate WFS 3.0 compliance for a single resource path based on the OpenAPI description of that path. +
 Pre-conditions: Tester has extracted a Path Item Object from an OpenAPI document. +
 References: +
 Discussion: This test validates the metadata associated with a single resource path. +
@@ -167,21 +167,22 @@ Test Method: +
       "other"  +
           Ignore +
  +
-=== A.3.5 OpenAPI Description
-* Test Purpose: Validate that the service provides an API definition page on the required path
-* Pre-conditions: Tester is is aware of the root path to the Service
-* References:
-  Requirement R1
-* Discussion:
-    This operation is usually where the client and server initially authenticate their identities to each other.  Intermediate challenges and responses in support of authentication do not invalidate the results of this test.
-* Variables: 
-  {Root_URL} the root URL for the service
-* Test Method:
-  1) Issue a get request on {Root_URL}/api
-     i) Accept header is set to ?????
-  2) Receive an API definition document in response to the get request
-  3) Validates that the API definition document complies with OpenAPI [red]#should reference the OpenAPI test#
-----
+=== A.3.5 OpenAPI Description +
+Test Purpose: Validate that the service provides an API definition page on the required path +
+Pre-conditions: Tester is is aware of the root path to the Service +
+References: +
+  Requirement R1 +
+Discussion: +
+    This operation is usually where the client and server initially authenticate their identities to each other.  Intermediate challenges and responses in support of authentication do not invalidate the results of this test. +
+Variables: +
+  {Root_URL} the root URL for the service +
+Test Method: +
+  1) Issue a get request on {Root_URL}/api +
+     i) Accept header is set to ????? +
+  2) Receive an API definition document in response to the get request +
+  3) Validates that the API definition document complies with OpenAPI (should reference the OpenAPI test) +
+ +
+[%hardbreaks] 
 === A.3.6 Conformance Report
 * Test Purpose: Validate that the service provides a conformance report on the required path 
 * Pre-conditions: Tester is is aware of the root path to the Service
