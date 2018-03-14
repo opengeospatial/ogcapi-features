@@ -665,7 +665,7 @@ The server SHALL support the HTTP GET operation at the path `/collections/{name}
 A successful execution of the operation SHALL be reported as a response with a
 HTTP status code `200`.
 
-The content of that response SHALL be the same to the content for this feature
+The content of that response SHALL be the same as the content for this feature
 collection in the `/collections` response.
 |===
 
@@ -1078,8 +1078,14 @@ the service SHALL support the HTTP GET operation at the path
 `id` is the unique identifier of the feature within the dataset.
 |===
 
+NOTE: `id` unique to the dataset means unique across all features in all collections.
+
 NOTE: TODO +
 Add more about the feature identifiers.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/84[ISSUE 84] +
+It would be better to require feature identifiers to be unique to collection instead
+of entire dataset.
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/47[ISSUE 47] +
 There are two types of Feature Identifier and we need to make sure we
