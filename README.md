@@ -12,7 +12,9 @@ Join the [mailing list](https://lists.opengeospatial.org/mailman/listinfo/wfs-fe
 A draft for part 1 of WFS 3.0 is available. It is basically a complete draft:
 
 * [OGC Web Feature Service 3.0 - Part 1: Core, Editors' draft](https://rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html)
+* [First draft release, open issues](milestone/1)
 * [Implementations of the draft specification / demo services](implementations.md)
+* [Checklist for implementers](guide/conformance_checklist.md)
 
 In addition, a non-normative document, the "WFS 3.0 Users Guide", is planned.
 
