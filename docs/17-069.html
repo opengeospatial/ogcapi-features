@@ -2132,8 +2132,12 @@ all spatial geometries SHALL be in the coordinate reference system
 </tbody>
 </table>
 <div class="paragraph">
-<p>The Core does not specify a capability to request geometries in a different
-coordinate reference system. Such a capability will be specified in another part
+<p>The implementations compliant with the Core are not required to support
+publishing feature geometries in coordinate reference systems other than
+<a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84" class="bare">http://www.opengis.net/def/crs/OGC/1.3/CRS84</a>.
+The Core also does not specify a capability to request feature geometries in a different
+coordinate reference system than the native one of the published features.
+Such a capability will be specified in another part(s)
 of the WFS 3.0 series.</p>
 </div>
 </div>
@@ -2536,7 +2540,7 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 HTTP status code <code>200</code>.</p>
 </div>
 <div class="paragraph">
-<p>The content of that response SHALL be the same to the content for this feature
+<p>The content of that response SHALL be the same as the content for this feature
 collection in the <code>/collections</code> response.</p>
 </div></div></td>
 </tr>
@@ -2709,11 +2713,9 @@ required: false
 schema:
   type: array
   minItems: 4
-  maxItems: 4
+  maxItems: 6
   items:
     type: number
-    minimum: -180
-    maximum: 180
 style: form
 explode: false</code></pre>
 </div>
@@ -2737,7 +2739,8 @@ explode: false</code></pre>
 part of the result set, if the <code>bbox</code> parameter is provided.</p>
 </div>
 <div class="paragraph">
-<p>The bounding box is provided as four numbers:</p>
+<p>The bounding box is provided as four or six numbers, depending on whether the
+coordinate reference system includes a vertical axis (elevation or depth):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2748,18 +2751,34 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 <p>Lower left corner, coordinate axis 2</p>
 </li>
 <li>
+<p>Lower left corner, coordinate axis 3 (optional)</p>
+</li>
+<li>
 <p>Upper right corner, coordinate axis 1</p>
 </li>
 <li>
 <p>Upper right corner, coordinate axis 2</p>
 </li>
+<li>
+<p>Upper right corner, coordinate axis 3 (optional)</p>
+</li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The coordinate reference system of the values SHALL be interpreted as
+WGS84 longitude/latitude (<a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84" class="bare">http://www.opengis.net/def/crs/OGC/1.3/CRS84</a>)
+unless a different coordinate reference system is specified in a parameter
+<code>bbox-crs</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>For WGS84 longitude/latitude this is in most cases the sequence of
+<p>This specification does not specify the parameter <code>bbox-crs</code>. This parameter
+will be specified in an additional part of the WFS 3.0 series.</p>
+</div>
+<div class="paragraph">
+<p>For WGS84 longitude/latitude the bounding box is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the antimeridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).</p>
@@ -3232,8 +3251,34 @@ the service SHALL support the HTTP GET operation at the path
 <div class="title">Note</div>
 </td>
 <td class="content">
+<code>id</code> unique to the dataset means unique across all features in all collections.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
 TODO<br>
 Add more about the feature identifiers.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/84">ISSUE 84</a><br>
+It would be better to require feature identifiers to be unique to collection instead
+of entire dataset.
 </td>
 </tr>
 </table>
@@ -5007,7 +5052,21 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT for ISO NWIP</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Updates after the WFS 3.0 Hackathon <a href="https://github.com/opengeospatial/WFS_FES/issues/59">#59</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/61">#61</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/62">#62</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/63">#63</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/64">#64</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/69">#69</a>; resolve <a href="https://github.com/opengeospatial/WFS_FES/issues/4">#4</a>; editorial edits</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Updates after the WFS 3.0 Hackathon <a href="https://github.com/opengeospatial/WFS_FES/issues/59">#59</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/61">#61</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/62">#62</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/63">#63</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/64">#64</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/69">#69</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/72">#72</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/77">#77</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/78">#78</a>; resolve <a href="https://github.com/opengeospatial/WFS_FES/issues/4">#4</a>; editorial edits</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-15</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">J. Amara</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Uniqueness of feature id <a href="https://github.com/opengeospatial/WFS_FES/issues/83">#83</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-21</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">I. Rinne</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clarified the requirement /req/core/crs84 <a href="https://github.com/opengeospatial/WFS_FES/issues/92">#92</a></p></td>
 </tr>
 </tbody>
 </table>
