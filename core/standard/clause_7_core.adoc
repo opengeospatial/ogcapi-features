@@ -418,13 +418,14 @@ WGS84 longitude and latitude as the default coordinate reference system.
 |===
 |*Requirement {counter:req-id}* |/req/core/crs84 +
 
-For WFS 3.0 Core all geometries of both the provided features and the operation parameters provided by users 
-SHALL be in the coordinate reference system
+Unless the client explicitly requests a different coordinate reference system,
+all spatial geometries SHALL be in the coordinate reference system
 http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude).
 |===
 
-The Core does not allow publishing feature geometries in coordinate 
-reference systems other than http://www.opengis.net/def/crs/OGC/1.3/CRS84. 
+The implementations compliant with the Core are not required to support 
+publishing feature geometries in coordinate reference systems other than 
+http://www.opengis.net/def/crs/OGC/1.3/CRS84. 
 The Core also does not specify a capability to request feature geometries in a different
 coordinate reference system than the native one of the published features.
 Such a capability will be specified in another part(s)
