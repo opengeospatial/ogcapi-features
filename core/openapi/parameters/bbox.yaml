@@ -20,6 +20,10 @@ description: >-
   minimum longitude, minimum latitude, maximum longitude and maximum latitude.
   However, in cases where the box spans the antimeridian the first value
   (west-most box edge) is larger than the third value (east-most box edge).
+
+  If a feature has multiple spatial geometry properties, it is the decision of the
+  server whether only a single spatial geometry property is used to determine
+  the extent or all relevant geometries.
 required: false
 schema:
   type: array
