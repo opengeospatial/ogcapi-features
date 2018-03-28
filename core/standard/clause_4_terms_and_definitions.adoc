@@ -9,6 +9,10 @@ Add link to the informative WFS Guide, once it is available.
 === dataset
 collection of data, published or curated by a single agent, and available for access or download in one or more formats <<DCAT>>
 
+NOTE: The use of 'collection' in the definition from <<DCAT>> is broader than
+the use of the term collection in this specification. See the definition of
+<<_feature_collection,'Feature collection; collection'>>.
+
 === distribution
 represents an accessible form of a *dataset* <<DCAT>>
 
@@ -22,5 +26,10 @@ the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practice document>> may help,
 in particular the section on
 link:https://www.w3.org/TR/sdw-bp/#spatial-things-features-and-geometry[Spatial Things, Features and Geometry].
 
-=== feature collection
+[[_feature_collection]]
+=== feature collection; collection
 a set of *features* from a *dataset*
+
+NOTE: In this specification, 'collection' is used as a synonym for 'feature
+collection'. This is done to make, for example, URI path expressions shorter
+and easier to understand for those that are not geo-experts.
