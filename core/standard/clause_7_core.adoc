@@ -789,6 +789,11 @@ The bounding box is provided as four numbers:
 * Upper right corner, coordinate axis 2
 |===
 
+"Intersects" means that the rectangular area specified in the parameter
+`bbox` includes a coordinate that is part of the (spatial) geometry of the feature.
+This includes the boundaries of the geometries (e.g. for curves the start
+and end position and for surfaces the outer and inner rings).
+
 For WGS84 longitude/latitude this is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the antimeridian the first value
@@ -839,6 +844,11 @@ If a feature has multiple temporal properties, it is the decision of the
 server whether only a single temporal property is used to determine
 the extent or all relevant temporal properties.
 |===
+
+"Intersects" means that the time (instant or period) specified in the parameter
+`time` includes a timestamp that is part of the temporal geometry of the feature
+(again, a time instant or period). For time periods this includes the start
+and end time.
 
 .A date-time
 =================
