@@ -1178,18 +1178,17 @@ the service SHALL support the HTTP GET operation at the path
 `/collections/{name}/items/{id}`.
 
 `name` is the property of the same name in the feature collection metadata.
-
-`id` is the unique identifier of the feature within the dataset.
+`id` is a local identifier of the feature.
 |===
 
-NOTE: `id` unique to the dataset means unique across all features in all collections.
+[width="90%",cols="2,6a"]
+|===
+|Permission {counter:per-id} |/per/core/f-id +
 
-NOTE: TODO +
-Add more about the feature identifiers.
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/84[ISSUE 84] +
-It would be better to require feature identifiers to be unique to collection instead
-of entire dataset.
+The Core requirements class only requires that the feature URI is unique.
+Implementations MAY apply stricter rules and, for example, use unique `id`
+values per dataset or collection.
+|===
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/47[ISSUE 47] +
 There are two types of Feature Identifier and we need to make sure we
