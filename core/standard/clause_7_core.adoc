@@ -44,8 +44,8 @@ in the distribution along with metadata about each collection:
 the server, where the first one is the default coordinate reference system
 (in the Core, the default is always WGS 84 with axis order longitude/latitude);
 * an optional title and description for the collection;
-* an optional bounding box that can be used to provide an indication of the
-spatial extent of the collection - typically derived from the data.
+* an optional extent that can be used to provide an indication of the
+spatial and temporal extent of the collection - typically derived from the data.
 
 Each `Collection` (path `/collections/{collection-name}/items`) consists of the features in the collection where each
 feature in the distribution is part of exactly one collection.
@@ -60,8 +60,8 @@ Accessing a `Collection` using HTTP GET returns a `CollectionResponse`,
 which basically consists of features in the collection. The features included
 in the response are determined by the server based on parameters of the request.
 
-A `bbox` parameter may be used to select only a subset of the features in
-the collection (the features that are located in the bounding box).
+A `bbox` or `time` parameter may be used to select only a subset of the features in
+the collection (the features that are located in the bounding box or time period).
 
 The `limit` parameter may be used to request only a subset of the
 selected features and to indicate that the client wants to page through
@@ -564,7 +564,9 @@ Additional links MAY be added by a service in each of the `links` properties.
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-md-extent +
 
-For each feature collection, the `extent` property, if provided, SHALL be a bounding box that includes all feature geometries in this collection.
+For each feature collection, the `extent` property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection.
+
+If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries.
 |===
 
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
@@ -589,7 +591,7 @@ properties:
     items:
       $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
   extent:
-    $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/bbox.yaml
+    $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/extent.yaml
   crs:
     description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
     type: array
@@ -632,7 +634,8 @@ geometries only in the default system (WGS84 longitude/latitude).
       "title": "Buildings",
       "description": "Buildings in the city of Bonn.",
       "extent": {
-        "bbox": [ 7.01, 50.63, 7.22, 50.78 ]
+        "spatial": [ 7.01, 50.63, 7.22, 50.78 ],
+        "temporal": [ "2010-02-15T12:34:56Z", "2018-03-18T12:11:00Z" ]
       },
       "links": [
         { "href": "http://data.example.org/collections/buildings/items",
@@ -780,7 +783,7 @@ explode: false
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-bbox-response +
 
-Only features that have a geometry that intersects the bounding box SHALL be
+Only features that have a spatial geometry that intersects the bounding box SHALL be
 part of the result set, if the `bbox` parameter is provided.
 
 The bounding box is provided as four numbers:
@@ -791,6 +794,11 @@ The bounding box is provided as four numbers:
 * Upper right corner, coordinate axis 2
 |===
 
+"Intersects" means that the rectangular area specified in the parameter
+`bbox` includes a coordinate that is part of the (spatial) geometry of the feature.
+This includes the boundaries of the geometries (e.g. for curves the start
+and end position and for surfaces the outer and inner rings).
+
 For WGS84 longitude/latitude this is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the antimeridian the first value
@@ -799,12 +807,94 @@ However, in cases where the box spans the antimeridian the first value
 .The bounding box of the New Zealand Exclusive Economic Zone
 =================
 The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
-would be represented in JSON as `[ 160.6, -55.95, -170, -25.89 ]`.
+would be represented in JSON as `[ 160.6, -55.95, -170, -25.89 ]` and in a query as `bbox=160.6,-55.95,-170,-25.89`.
 =================
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
+
+==== Parameter time
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-time-definition +
+
+Each feature collection operation SHALL support a parameter `time`
+with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: time
+in: query
+required: false
+schema:
+  type: string
+style: form
+explode: false
+----
+|===
+
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-time-response +
+
+Only features that have a temporal geometry that intersects the timestamp or
+time period SHALL be part of the result set, if the `time` parameter is provided.
+
+The temporal information is either a date-time or a period string that
+adheres to RFC3339.
+
+If a feature has multiple temporal properties, it is the decision of the
+server whether only a single temporal property is used to determine
+the extent or all relevant temporal properties.
+|===
+
+"Intersects" means that the time (instant or period) specified in the parameter
+`time` includes a timestamp that is part of the temporal geometry of the feature
+(again, a time instant or period). For time periods this includes the start
+and end time.
+
+.A date-time
+=================
+February 12, 2018, 23:20:52 GMT:
+
+`time=2018-02-12T23%3A20%3A50Z`
+=================
+
+For features with a temporal property that is a timestamp (like `lastUpdate`
+in the building features), a date-time value would match all features where
+the temporal property is identical.
+
+For features with a temporal property that is a date or a time period,
+a date-time value would match all features where the timestamp is on that
+day or within the time period.
+
+.A period using start and end time
+=================
+February 12, 2018, 00:00:00 GMT to March 18, 2018, 12:31:12 GMT:
+
+`time=2018-02-12T00%3A00%3A00Z%2F2018-03-18T12%3A31%3A12Z`
+=================
+
+.A period using start time and a duration
+=================
+A duration of 1 month, 6 days, 12 hours, 31 minutes and 12 seconds from
+February 12, 2018, 00:00:00 GMT:
+
+`time=2018-02-12T00%3A00%3A00Z%2FP1M6DT12H31M12S`
+=================
+
+For features with a temporal property that is a timestamp (like `lastUpdate`
+in the building features), a time period would match all features where
+the temporal property is within the period.
+
+For features with a temporal property that is a date or a time period,
+a time period would match all features where the values overlap.
+
+A template for the definition of the parameter in YAML according to
+OpenAPI 3.0 is available at
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/time.yaml[time.yaml].
 
 ==== Parameters for filtering on feature properties
 

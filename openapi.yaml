@@ -127,6 +127,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/time'
         - $ref: '#/components/parameters/function'
       responses:
         '200':
@@ -164,6 +165,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/time'
         - $ref: '#/components/parameters/function'
       responses:
         '200':
@@ -277,6 +279,26 @@ components:
           maximum: 180
       style: form
       explode: false
+    time:
+      name: time
+      in: query
+      description: >-
+        Either a date-time or a period string that adheres to RFC 3339. Examples:
+
+        * A date-time: "2018-02-12T23:20:50Z"
+        * A period: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z" or "2018-02-12T00:00:00Z/P1M6DT12H31M12S"
+
+        Only features that have a temporal property that intersects the value of
+        `time` are selected.
+
+        If a feature has multiple temporal properties, it is the decision of the
+        server whether only a single temporal property is used to determine
+        the extent or all relevant temporal properties.
+      required: false
+      schema:
+        type: string
+      style: form
+      explode: false
     function:
       name: function
       in: query
@@ -319,7 +341,7 @@ components:
         links:
           type: array
           items:
-            $ref: link.yaml
+            $ref: '#/components/schemas/link'
     req-classes:
       type: object
       required:
@@ -334,18 +356,24 @@ components:
             - http://www.opengis.net/spec/wfs-1/3.0/req/oas30
             - http://www.opengis.net/spec/wfs-1/3.0/req/html
             - http://www.opengis.net/spec/wfs-1/3.0/req/geojson
-    bbox:
+    extent:
       type: object
-      required:
-        - bbox
       properties:
         crs:
+          description: >-
+            Coordinate reference system of the coordinates in the spatial extent (property `spatial`).
+            In the Core, only WGS84 longitude/latitude is supported. Extensions may support additional
+            coordinate reference systems.
           type: string
           enum:
             - http://www.opengis.net/def/crs/OGC/1.3/CRS84
           default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
-        bbox:
-          description: west, north, east, south edges of the bounding box
+        spatial:
+          description: >-
+            West, north, east, south edges of the spatial extent. The minimum and
+            maximum values apply to the coordinate reference system WGS84 longitude/latitude
+            that is supported in the Core. If, for example, a projected coordinate reference
+            system is used, the minimum and maximum values need to be adjusted.
           type: array
           minItems: 4
           maxItems: 4
@@ -358,6 +386,26 @@ components:
             - -90
             - 180
             - 90
+        trs:
+          description: >-
+            Temporal reference system of the coordinates in the temporal extent (property `temporal`).
+            In the Core, only the Gregorian calendar is supported. Extensions may support additional
+            temporal reference systems.
+          type: string
+          enum:
+            - http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
+          default: http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
+        temporal:
+          description: Begin and end times of the temporal extent.
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: string
+            format: dateTime
+          example:
+            - "2011-11-11T12:22:11Z"
+            - "2012-11-24T12:32:43Z"
     content:
       type: object
       required:
@@ -393,7 +441,7 @@ components:
               rel: describedBy
               type: text/html
         extent:
-          $ref: '#/components/schemas/bbox'
+          $ref: '#/components/schemas/extent'
         crs:
           description: >-
             The coordinate reference systems in which geometries
@@ -499,6 +547,9 @@ components:
             floors:
               type: integer
               minimum: 1
+            lastUpdate:
+              type: string
+              format: dateTime
 tags:
   - name: Capabilities
     description: Essential characteristics of this API including information about the data.
