@@ -423,9 +423,9 @@ all spatial geometries SHALL be in the coordinate reference system
 http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude).
 |===
 
-The implementations compliant with the Core are not required to support 
-publishing feature geometries in coordinate reference systems other than 
-http://www.opengis.net/def/crs/OGC/1.3/CRS84. 
+The implementations compliant with the Core are not required to support
+publishing feature geometries in coordinate reference systems other than
+http://www.opengis.net/def/crs/OGC/1.3/CRS84.
 The Core also does not specify a capability to request feature geometries in a different
 coordinate reference system than the native one of the published features.
 Such a capability will be specified in another part(s)
@@ -769,11 +769,9 @@ required: false
 schema:
   type: array
   minItems: 4
-  maxItems: 4
+  maxItems: 6
   items:
     type: number
-    minimum: -180
-    maximum: 180
 style: form
 explode: false
 ----
@@ -786,12 +784,20 @@ explode: false
 Only features that have a spatial geometry that intersects the bounding box SHALL be
 part of the result set, if the `bbox` parameter is provided.
 
-The bounding box is provided as four numbers:
+The bounding box is provided as four or six numbers, depending on whether the
+coordinate reference system includes a vertical axis (elevation or depth):
 
 * Lower left corner, coordinate axis 1
 * Lower left corner, coordinate axis 2
+* Lower left corner, coordinate axis 3 (optional)
 * Upper right corner, coordinate axis 1
 * Upper right corner, coordinate axis 2
+* Upper right corner, coordinate axis 3 (optional)
+
+The coordinate reference system of the values SHALL be interpreted as
+WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84)
+unless a different coordinate reference system is specified in a parameter
+`bbox-crs`.
 |===
 
 "Intersects" means that the rectangular area specified in the parameter
@@ -799,7 +805,10 @@ The bounding box is provided as four numbers:
 This includes the boundaries of the geometries (e.g. for curves the start
 and end position and for surfaces the outer and inner rings).
 
-For WGS84 longitude/latitude this is in most cases the sequence of
+This specification does not specify the parameter `bbox-crs`. This parameter
+will be specified in an additional part of the WFS 3.0 series.
+
+For WGS84 longitude/latitude the bounding box is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the antimeridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).

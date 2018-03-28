@@ -690,9 +690,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_operation_6">7.13.1. Operation</a></li>
 <li><a href="#_parameter_limit">7.13.2. Parameter limit</a></li>
 <li><a href="#_parameter_bbox">7.13.3. Parameter bbox</a></li>
-<li><a href="#_parameter_time">7.13.4. Parameter time</a></li>
-<li><a href="#_parameters_for_filtering_on_feature_properties">7.13.5. Parameters for filtering on feature properties</a></li>
-<li><a href="#_response_6">7.13.6. Response</a></li>
+<li><a href="#_parameters_for_filtering_on_feature_properties">7.13.4. Parameters for filtering on feature properties</a></li>
+<li><a href="#_response_6">7.13.5. Response</a></li>
 </ul>
 </li>
 <li><a href="#_feature_2">7.14. Feature</a>
@@ -1027,9 +1026,6 @@ OGC Compliance Testing web site.</p>
 <li>
 <p><a id="rfc2616"></a> Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L.,
 Leach, P., Berners-Lee, T.: IETF RFC 2616, HTTP/1.1, <a href="http://tools.ietf.org/rfc/rfc2616.txt" class="bare">http://tools.ietf.org/rfc/rfc2616.txt</a></p>
-</li>
-<li>
-<p><a id="rfc3339"></a> Klyne, G., Newman, C.: IETF RFC 3339, Web Linking, <a href="http://tools.ietf.org/rfc/rfc3339.txt" class="bare">http://tools.ietf.org/rfc/rfc3339.txt</a></p>
 </li>
 <li>
 <p><a id="rfc5988"></a> Nottingham, M.: IETF RFC 5988, Web Linking, <a href="http://tools.ietf.org/rfc/rfc5988.txt" class="bare">http://tools.ietf.org/rfc/rfc5988.txt</a></p>
@@ -1453,8 +1449,7 @@ feature collection ("buildings") and two encodings, GeoJSON and HTML.</p>
 <div class="paragraph">
 <p>The buildings have a few (optional) properties: the polygon geometry of the
 building footprint, a name, the function of the building (residential,
-commercial or public use), the floor count and the timestamp of the last
-update of the building feature in the dataset.</p>
+commercial or public use) and the floor count.</p>
 </div>
 </div>
 </div>
@@ -1483,10 +1478,6 @@ update of the building feature in the dataset.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc2616">RFC 2616 (HTTP/1.1)</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc3339">RFC 3339 (Date and Time on the Internet: Timestamps)</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
@@ -1554,8 +1545,8 @@ the server, where the first one is the default coordinate reference system
 <p>an optional title and description for the collection;</p>
 </li>
 <li>
-<p>an optional extent that can be used to provide an indication of the
-spatial and temporal extent of the collection - typically derived from the data.</p>
+<p>an optional bounding box that can be used to provide an indication of the
+spatial extent of the collection - typically derived from the data.</p>
 </li>
 </ul>
 </div>
@@ -1595,8 +1586,8 @@ which basically consists of features in the collection. The features included
 in the response are determined by the server based on parameters of the request.</p>
 </div>
 <div class="paragraph">
-<p>A <code>bbox</code> or <code>time</code> parameter may be used to select only a subset of the features in
-the collection (the features that are located in the bounding box or time period).</p>
+<p>A <code>bbox</code> parameter may be used to select only a subset of the features in
+the collection (the features that are located in the bounding box).</p>
 </div>
 <div class="paragraph">
 <p>The <code>limit</code> parameter may be used to request only a subset of the
@@ -2141,8 +2132,12 @@ all spatial geometries SHALL be in the coordinate reference system
 </tbody>
 </table>
 <div class="paragraph">
-<p>The Core does not specify a capability to request geometries in a different
-coordinate reference system. Such a capability will be specified in another part
+<p>The implementations compliant with the Core are not required to support
+publishing feature geometries in coordinate reference systems other than
+<a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84" class="bare">http://www.opengis.net/def/crs/OGC/1.3/CRS84</a>.
+The Core also does not specify a capability to request feature geometries in a different
+coordinate reference system than the native one of the published features.
+Such a capability will be specified in another part(s)
 of the WFS 3.0 series.</p>
 </div>
 </div>
@@ -2398,10 +2393,7 @@ in OpenAPI 3.0.
 <p>/req/core/fc-md-extent<br></p>
 </div>
 <div class="paragraph">
-<p>For each feature collection, the <code>extent</code> property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection.</p>
-</div>
-<div class="paragraph">
-<p>If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries.</p>
+<p>For each feature collection, the <code>extent</code> property, if provided, SHALL be a bounding box that includes all feature geometries in this collection.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2428,7 +2420,7 @@ properties:
     items:
       $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
   extent:
-    $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/extent.yaml
+    $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/bbox.yaml
   crs:
     description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
     type: array
@@ -2486,8 +2478,7 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
       &quot;title&quot;: &quot;Buildings&quot;,
       &quot;description&quot;: &quot;Buildings in the city of Bonn.&quot;,
       &quot;extent&quot;: {
-        &quot;spatial&quot;: [ 7.01, 50.63, 7.22, 50.78 ],
-        &quot;temporal&quot;: [ &quot;2010-02-15T12:34:56Z&quot;, &quot;2018-03-18T12:11:00Z&quot; ]
+        &quot;bbox&quot;: [ 7.01, 50.63, 7.22, 50.78 ]
       },
       &quot;links&quot;: [
         { &quot;href&quot;: &quot;http://data.example.org/collections/buildings/items&quot;,
@@ -2722,11 +2713,9 @@ required: false
 schema:
   type: array
   minItems: 4
-  maxItems: 4
+  maxItems: 6
   items:
     type: number
-    minimum: -180
-    maximum: 180
 style: form
 explode: false</code></pre>
 </div>
@@ -2746,11 +2735,12 @@ explode: false</code></pre>
 <p>/req/core/fc-bbox-response<br></p>
 </div>
 <div class="paragraph">
-<p>Only features that have a spatial geometry that intersects the bounding box SHALL be
+<p>Only features that have a geometry that intersects the bounding box SHALL be
 part of the result set, if the <code>bbox</code> parameter is provided.</p>
 </div>
 <div class="paragraph">
-<p>The bounding box is provided as four numbers:</p>
+<p>The bounding box is provided as four or six numbers, depending on whether the
+coordinate reference system includes a vertical axis (elevation or depth):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2761,18 +2751,34 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 <p>Lower left corner, coordinate axis 2</p>
 </li>
 <li>
+<p>Lower left corner, coordinate axis 3 (optional)</p>
+</li>
+<li>
 <p>Upper right corner, coordinate axis 1</p>
 </li>
 <li>
 <p>Upper right corner, coordinate axis 2</p>
 </li>
+<li>
+<p>Upper right corner, coordinate axis 3 (optional)</p>
+</li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The coordinate reference system of the values SHALL be interpreted as
+WGS84 longitude/latitude (<a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84" class="bare">http://www.opengis.net/def/crs/OGC/1.3/CRS84</a>)
+unless a different coordinate reference system is specified in a parameter
+<code>bbox-crs</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>For WGS84 longitude/latitude this is in most cases the sequence of
+<p>This specification does not specify the parameter <code>bbox-crs</code>. This parameter
+will be specified in an additional part of the WFS 3.0 series.</p>
+</div>
+<div class="paragraph">
+<p>For WGS84 longitude/latitude the bounding box is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the antimeridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).</p>
@@ -2782,7 +2788,7 @@ However, in cases where the box spans the antimeridian the first value
 <div class="content">
 <div class="paragraph">
 <p>The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
-would be represented in JSON as <code>[ 160.6, -55.95, -170, -25.89 ]</code> and in a query as <code>bbox=160.6,-55.95,-170,-25.89</code>.</p>
+would be represented in JSON as <code>[ 160.6, -55.95, -170, -25.89 ]</code>.</p>
 </div>
 </div>
 </div>
@@ -2793,124 +2799,7 @@ OpenAPI 3.0 is available at
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_time"><a class="anchor" href="#_parameter_time"></a>7.13.4. Parameter time</h4>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-time-definition<br></p>
-</div>
-<div class="paragraph">
-<p>Each feature collection operation SHALL support a parameter <code>time</code>
-with the following characteristics (using an OpenAPI Specification 3.0 fragment):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="YAML"><span></span>name: time
-in: query
-required: false
-schema:
-  type: string
-style: form
-explode: false</code></pre>
-</div>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-time-response<br></p>
-</div>
-<div class="paragraph">
-<p>Only features that have a temporal geometry that intersects the timestamp or
-time period SHALL be part of the result set, if the <code>time</code> parameter is provided.</p>
-</div>
-<div class="paragraph">
-<p>The temporal information is either a date-time or a period string that
-adheres to RFC3339.</p>
-</div>
-<div class="paragraph">
-<p>If a feature has multiple temporal properties, it is the decision of the
-server whether only a single temporal property is used to determine
-the extent or all relevant temporal properties.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="exampleblock">
-<div class="title">Example 6. A date-time</div>
-<div class="content">
-<div class="paragraph">
-<p>February 12, 2018, 23:20:52 GMT:</p>
-</div>
-<div class="paragraph">
-<p><code>time=2018-02-12T23%3A20%3A50Z</code></p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>For features with a temporal property that is a timestamp (like <code>lastUpdate</code>
-in the building features), a date-time value would match all features where
-the temporal property is identical.</p>
-</div>
-<div class="paragraph">
-<p>For features with a temporal property that is a date or a time period,
-a date-time value would match all features where the timestamp is on that
-day or within the time period.</p>
-</div>
-<div class="exampleblock">
-<div class="title">Example 7. A period using start and end time</div>
-<div class="content">
-<div class="paragraph">
-<p>February 12, 2018, 00:00:00 GMT to March 18, 2018, 12:31:12 GMT:</p>
-</div>
-<div class="paragraph">
-<p><code>time=2018-02-12T00%3A00%3A00Z%2F2018-03-18T12%3A31%3A12Z</code></p>
-</div>
-</div>
-</div>
-<div class="exampleblock">
-<div class="title">Example 8. A period using start time and a duration</div>
-<div class="content">
-<div class="paragraph">
-<p>A duration of 1 month, 6 days, 12 hours, 31 minutes and 12 seconds from
-February 12, 2018, 00:00:00 GMT:</p>
-</div>
-<div class="paragraph">
-<p><code>time=2018-02-12T00%3A00%3A00Z%2FP1M6DT12H31M12S</code></p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>For features with a temporal property that is a timestamp (like <code>lastUpdate</code>
-in the building features), a time period would match all features where
-the temporal property is within the period.</p>
-</div>
-<div class="paragraph">
-<p>For features with a temporal property that is a date or a time period,
-a time period would match all features where the values overlap.</p>
-</div>
-<div class="paragraph">
-<p>A template for the definition of the parameter in YAML according to
-OpenAPI 3.0 is available at
-<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/time.yaml">time.yaml</a>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.13.5. Parameters for filtering on feature properties</h4>
+<h4 id="_parameters_for_filtering_on_feature_properties"><a class="anchor" href="#_parameters_for_filtering_on_feature_properties"></a>7.13.4. Parameters for filtering on feature properties</h4>
 <div class="admonitionblock caution">
 <table>
 <tr>
@@ -2959,7 +2848,7 @@ property in the response schema.</p>
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 9. An additional parameter to filter buildings based on their function</div>
+<div class="title">Example 6. An additional parameter to filter buildings based on their function</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -2984,7 +2873,7 @@ example: &#39;function=public+use&#39;</code></pre>
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 10. An additional parameter to filter buildings based on their name</div>
+<div class="title">Example 7. An additional parameter to filter buildings based on their name</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -3011,7 +2900,7 @@ a name that starts with "A".</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_6"><a class="anchor" href="#_response_6"></a>7.13.6. Response</h4>
+<h4 id="_response_6"><a class="anchor" href="#_response_6"></a>7.13.5. Response</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -3019,7 +2908,7 @@ a name that starts with "A".</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-response<br></p>
 </div>
@@ -3082,7 +2971,7 @@ to 10000 additional features and a <code>next</code> link, if there are more.</p
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-links<br></p>
 </div>
@@ -3202,7 +3091,7 @@ but depending on the implementation approach it may be complex to implement.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/fc-rel-type<br></p>
 </div>
@@ -3226,7 +3115,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 11. Links</div>
+<div class="title">Example 8. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>If the request is to return building features and "10" is the default <code>limit</code>,
@@ -3337,7 +3226,7 @@ not seem to be needed given the 'Date' HTTP header. For <code>numberMatched</cod
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-op<br></p>
 </div>
@@ -3418,7 +3307,7 @@ distinguish between them.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-success<br></p>
 </div>
@@ -3436,7 +3325,7 @@ HTTP status code <code>200</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/core/f-links<br></p>
 </div>
@@ -3476,7 +3365,7 @@ of the feature collection.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 12. Links</div>
+<div class="title">Example 9. Links</div>
 <div class="content">
 <div class="paragraph">
 <p>The links in a feature could be (in this example represented as link headers):</p>
@@ -3597,7 +3486,7 @@ access all data.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/html/definition<br></p>
 </div>
@@ -3615,7 +3504,7 @@ SHALL support the media type <code>text/html</code>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/html/content<br></p>
 </div>
@@ -3699,7 +3588,7 @@ if the feature data can be represented in GeoJSON for the intended use.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/geojson/definition<br></p>
 </div>
@@ -3726,7 +3615,7 @@ if the feature data can be represented in GeoJSON for the intended use.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/geojson/content<br></p>
 </div>
@@ -3760,7 +3649,7 @@ These are generic schemas that do not include any application schema information
 specific feature types or their properties.</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 13. A GeoJSON FeatureCollection Object response</div>
+<div class="title">Example 10. A GeoJSON FeatureCollection Object response</div>
 <div class="content">
 <div class="paragraph">
 <p>In the example below, only the first and tenth feature is shown. Coordinates are not shown.</p>
@@ -3794,8 +3683,7 @@ specific feature types or their properties.</p>
     },
     &quot;properties&quot; : {
       &quot;function&quot; : &quot;residential&quot;,
-      &quot;floors&quot; : &quot;2&quot;,
-      &quot;lastUpdate&quot; : &quot;2015-08-01T12:34:56Z&quot;
+      &quot;floors&quot; : &quot;2&quot;
     }
   }, { ...
   }, {
@@ -3807,8 +3695,7 @@ specific feature types or their properties.</p>
     },
     &quot;properties&quot; : {
       &quot;function&quot; : &quot;public use&quot;,
-      &quot;floors&quot; : &quot;10&quot;,
-      &quot;lastUpdate&quot; : &quot;2013-12-03T10:15:37Z&quot;
+      &quot;floors&quot; : &quot;10&quot;
     }
   } ]
 }</code></pre>
@@ -3817,7 +3704,7 @@ specific feature types or their properties.</p>
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 14. A GeoJSON Feature Object response</div>
+<div class="title">Example 11. A GeoJSON Feature Object response</div>
 <div class="content">
 <div class="paragraph">
 <p>In the example below, coordinates are not shown.</p>
@@ -3849,8 +3736,7 @@ specific feature types or their properties.</p>
   },
   &quot;properties&quot; : {
     &quot;function&quot; : &quot;residential&quot;,
-    &quot;floors&quot; : &quot;2&quot;,
-    &quot;lastUpdate&quot; : &quot;2015-08-01T12:34:56Z&quot;
+    &quot;floors&quot; : &quot;2&quot;
   }
 }</code></pre>
 </div>
@@ -3901,7 +3787,7 @@ is limited to features that can be stored in a tabular data structure.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf0/definition<br></p>
 </div>
@@ -3929,7 +3815,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf0/content<br></p>
 </div>
@@ -4015,7 +3901,7 @@ atomic values (strings, numbers, etc.).</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf2/definition<br></p>
 </div>
@@ -4043,7 +3929,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/gmlsf2/content<br></p>
 </div>
@@ -4110,7 +3996,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/oas-definition-1<br></p>
 </div>
@@ -4128,7 +4014,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 39</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/oas-definition-2<br></p>
 </div>
@@ -4149,7 +4035,7 @@ SHALL support the following media types:</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 40</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/oas30/oas-impl<br>
 <br></p>
 <p class="tableblock">The server SHALL implement all capabilities specified in the OpenAPI
@@ -4193,7 +4079,7 @@ OpenAPI Validation
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 41</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 39</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/completeness<br></p>
 </div>
@@ -4247,7 +4133,7 @@ layer outside of the server.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 42</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 40</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-codes<br></p>
 </div>
@@ -4278,7 +4164,7 @@ Listing of all applicable HTTP Status Codes
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 43</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 41</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-400<br></p>
 </div>
@@ -4310,7 +4196,7 @@ including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 44</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 42</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/exceptions-500<br></p>
 </div>
@@ -4336,7 +4222,7 @@ including NoApplicableCode, OperationProcessingFailed.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 15. An exception response object definition</div>
+<div class="title">Example 12. An exception response object definition</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -4362,7 +4248,7 @@ content:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 45</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 43</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/security<br></p>
 </div>
@@ -4415,7 +4301,7 @@ How does a client determine which security protocols/standards/etc. a server sup
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 46</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 44</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/req/oas30/fc-md-op<br></p>
 </div>
@@ -5176,11 +5062,11 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Uniqueness of feature id <a href="https://github.com/opengeospatial/WFS_FES/issues/83">#83</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-18</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-21</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3,7</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Temporal support <a href="https://github.com/opengeospatial/WFS_FES/issues/57">#57</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">I. Rinne</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clarified the requirement /req/core/crs84 <a href="https://github.com/opengeospatial/WFS_FES/issues/92">#92</a></p></td>
 </tr>
 </tbody>
 </table>
