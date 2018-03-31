@@ -5,7 +5,13 @@ info:
   description: >-
     This is a sample OpenAPI definition that conforms to the OGC Web Feature
     Service specification (conformance classes: "Core", "GeoJSON", "HTML" and
-    "OpenAPI 3.0").
+    "OpenAPI 3.0").\
+
+    The API provides access to a single feature collection: buildings. The
+    buildings have a few (optional) properties: the polygon geometry of the
+    building footprint, a name, the function of the building (residential,
+    commercial or public use), the floor count and the timestamp of the
+    last update of the building feature in the dataset.
   contact:
     name: Acme Corporation
     email: info@example.org
@@ -85,17 +91,15 @@ paths:
             text/html:
               schema:
                 type: string
-  '/collections/{collectionId}':
+  '/collections/buildings':
     get:
-      summary: 'describe the {collectionId} feature collection'
+      summary: 'describe the buildings feature collection'
       operationId: describeCollection
       tags:
         - Capabilities
-      parameters:
-      - $ref: '#/components/parameters/collectionId'
       responses:
         '200':
-          description: 'Metadata about the {collectionId} collection shared by this API.'
+          description: 'Metadata about the buildings collection shared by this API.'
           content:
             application/json:
               schema:
@@ -112,9 +116,9 @@ paths:
             text/html:
               schema:
                 type: string
-  '/collections/{collectionId}/items':
+  '/collections/buildings/items':
     get:
-      summary: 'retrieve features of feature collection {collectionId}'
+      summary: 'retrieve features of buildings feature collection'
       description: >-
         Every feature in a dataset belongs to a collection. A dataset may
         consist of multiple feature collections. A feature collection is often a
@@ -125,10 +129,10 @@ paths:
       tags:
         - Features
       parameters:
-      - $ref: '#/components/parameters/collectionId'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/bbox'
       - $ref: '#/components/parameters/time'
+      - $ref: '#/components/parameters/function'
       responses:
         '200':
           description: >-
@@ -150,14 +154,45 @@ paths:
             text/html:
               schema:
                 type: string
-  '/collections/{collectionId}/items/{featureId}':
+  '/collections/buildings/items.json':
+    get:
+      summary: 'retrieve features of buildings feature collection in GeoJSON'
+      description: >-
+        Every feature in a dataset belongs to a collection. A dataset may
+        consist of multiple feature collections. A feature collection is often a
+        collection of features of a similar type, based on a common schema.\
+
+        This operation returns GeoJSON.
+      operationId: getFeaturesJSON
+      tags:
+        - Features
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/function'
+      responses:
+        '200':
+          description: >-
+            Information about the feature collection plus the first features
+            matching the selection parameters.
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/featureCollectionGeoJSON'
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+  '/collections/buildings/items/{featureId}':
     get:
       summary: retrieve a feature; use content negotiation to request HTML or GeoJSON
       operationId: getFeature
       tags:
         - Features
       parameters:
-      - $ref: '#/components/parameters/collectionId'
       - $ref: '#/components/parameters/featureId'
       responses:
         '200':
@@ -165,7 +200,7 @@ paths:
           content:
             application/geo+json:
               schema:
-                $ref: '#/components/schemas/featureGeoJSON'
+                $ref: '#/components/schemas/buildingGeoJSON'
             text/html:
               schema:
                 type: string
@@ -178,6 +213,27 @@ paths:
             text/html:
               schema:
                 type: string
+  '/collections/buildings/items/{featureId}.json':
+    get:
+      summary: retrieve a feature in GeoJSON
+      operationId: getFeatureJSON
+      tags:
+        - Features
+      parameters:
+      - $ref: '#/components/parameters/featureId'
+      responses:
+        '200':
+          description: A feature.
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/buildingGeoJSON'
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
 components:
   parameters:
     limit:
@@ -258,13 +314,23 @@ components:
         type: string
       style: form
       explode: false
-    collectionId:
-      name: collectionId
-      in: path
-      required: true
-      description: Identifier (name) of a specific collection
+    function:
+      name: function
+      in: query
+      description: >-
+        Only return buildings of a particular function.\
+
+        Default = return all buildings.
+      required: false
       schema:
         type: string
+        enum:
+          - residential
+          - commercial
+          - public use
+      style: form
+      explode: false
+      example: 'function=public+use'
     featureId:
       name: featureId
       in: path
@@ -503,6 +569,37 @@ components:
             - Polygon
             - MultiPolygon
             - GeometryCollection
+    buildingGeoJSON:
+      type: object
+      required:
+        - type
+        - geometry
+        - properties
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        geometry:
+          $ref: '#/components/schemas/geometryGeoJSON'
+        properties:
+          type: object
+          nullable: true
+          properties:
+            name:
+              type: string
+            function:
+              type: string
+              enum:
+                - residential
+                - commercial
+                - public use
+            floors:
+              type: integer
+              minimum: 1
+            lastUpdate:
+              type: string
+              format: dateTime
 tags:
   - name: Capabilities
     description: >-
