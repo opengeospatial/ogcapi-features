@@ -2295,11 +2295,7 @@ of the response:</p>
 </li>
 <li>
 <p>a link to the response document in every other media type supported by
-the server (relation: <code>alternate</code>),</p>
-</li>
-<li>
-<p>links to each feature collection resource in this distribution of the
-dataset for each supported encoding (relation: <code>item</code>).</p>
+the server (relation: <code>alternate</code>).</p>
 </li>
 </ul>
 </div>
@@ -2396,11 +2392,12 @@ be provided in the property <code>collections</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/core/fc-md-links<br></p>
+<p>/req/core/fc-md-items-links<br></p>
 </div>
 <div class="paragraph">
 <p>For each feature collection in this distribution of the dataset,
-the <code>links</code> property SHALL include an item for each supported encoding
+the <code>links</code> property of the collection SHALL include
+an item for each supported encoding
 with a link to the collection resource (relation: <code>item</code>).</p>
 </div>
 <div class="paragraph">
@@ -4634,7 +4631,7 @@ features (schema <code>buildingGeoJSON</code>) and a filter parameter for buildi
 <h3 id="openapi.yaml"><a class="anchor" href="#openapi.yaml"></a>B.2. Generic OpenAPI definition</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="YAML"><span></span>openapi: 3.0.0
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>openapi: 3.0.1
 info:
   title: A sample API conforming to the OGC Web Feature Service standard
   version: 0.0.1
@@ -5154,7 +5151,7 @@ tags:
 <h3 id="openapi-buildings.yaml"><a class="anchor" href="#openapi-buildings.yaml"></a>B.3. OpenAPI definition with details on the collection and its features</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="YAML"><span></span>openapi: 3.0.0
+<pre class="pygments highlight"><code data-lang="YAML"><span></span>openapi: 3.0.1
 info:
   title: A sample API conforming to the OGC Web Feature Service standard
   version: 0.0.1
@@ -5911,7 +5908,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-02 16:46:02 CEST
+Last updated 2018-04-02 17:05:54 CEST
 </div>
 </div>
 </body>
