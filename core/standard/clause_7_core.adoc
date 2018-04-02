@@ -491,9 +491,7 @@ of the response:
 
 * a link to this response document (relation: `self`),
 * a link to the response document in every other media type supported by
-the server (relation: `alternate`),
-* links to each feature collection resource in this distribution of the
-dataset for each supported encoding (relation: `item`).
+the server (relation: `alternate`).
 
 All links SHALL include the `rel` and `type` link parameters.
 |===
@@ -536,10 +534,11 @@ be provided in the property `collections`.
 
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-md-links +
+|*Requirement {counter:req-id}* |/req/core/fc-md-items-links +
 
 For each feature collection in this distribution of the dataset,
-the `links` property SHALL include an item for each supported encoding
+the `links` property of the collection SHALL include
+an item for each supported encoding
 with a link to the collection resource (relation: `item`).
 
 All links SHALL include the `rel` and `type` properties.
