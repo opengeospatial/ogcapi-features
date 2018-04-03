@@ -10,10 +10,10 @@
    <xsd:annotation>
       <xsd:documentation>This XML Schema Document includes and imports, 
       directly or indirectly, all the XML Schemas defined by the 
-      Web Feature Service (WFS) Implementation Specification.
+      Web Feature Service (WFS) 3.0 core.
 
       WFS is an OGC Standard.
-      Copyright (c) 2010 Open Geospatial Consortium.
+      Copyright (c) 2018 Open Geospatial Consortium.
       To obtain additional rights of use, visit
       http://www.opengeospatial.org/legal/ .     
       </xsd:documentation>
@@ -22,11 +22,11 @@
         Includes and Imports
         ============================================================== -->
    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
-               schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
    <xsd:import namespace="http://www.w3.org/1999/xlink"
-               schemaLocation="http://www.w3.org/1999/xlink.xsd"/>
+    schemaLocation="http://www.w3.org/1999/xlink.xsd"/>
    <xsd:import namespace="http://www.w3.org/2005/Atom"
-               schemaLocation="http://schemas.opengis.net/kml/2.3/atom-author-link.xsd"/>
+    schemaLocation="http://schemas.opengis.net/kml/2.3/atom-author-link.xsd"/>
 
    <!-- ================================================================== -->
    <!-- =   LandingPage element                                          = -->
@@ -140,14 +140,15 @@
    <!-- =   independent of the version of GML being used.                = -->
    <!-- =                                                                = -->
    <!-- =   For WFS 3.0 core, the WFS 2.X schema was modified to:        = -->
-   <!-- =   (1) Remove structures related to support joins and           = -->
-   <!-- =       additional objects which are not supported in            = -->
+   <!-- =   (1) Remove structures for supporting joins and               = -->
+   <!-- =       "additional objects" which are not supported in          = -->
    <!-- =       the core.                                                = -->
-   <!-- =   (2) The numberMatched and numberReturned field are           = -->
-   <!-- =       made optional as they are in the core.                   = -->
+   <!-- =   (2) The numberMatched and numberReturned fields are          = -->
+   <!-- =       made optional, as they are in the core.                  = -->
    <!-- =   (3) The WFS 2.X attributes 'prev' and 'next' are             = -->
-   <!-- =       removed since hypermdia controls can be used in          = -->
-   <!-- =       top level of the collection to provide those links.      = -->
+   <!-- =       removed since hypermdia controls can be used in the      = -->
+   <!-- =       top level of the FeatureCollection to provide those      = -->
+   <!-- =       links.                                                   = -->
    <!-- ================================================================== -->
    <xsd:element name="FeatureCollection" type="wfs:FeatureCollectionType"
                 substitutionGroup="wfs:SimpleFeatureCollection"/>
