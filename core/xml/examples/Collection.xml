@@ -10,12 +10,11 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://www.acme.com/namespaces/ns1
        http://www.acme.com/3.0/wfs/collections/aerofacp_1m/schema
-       http://www.opengis.net/wfs/3.0
-       http://www.pvretano.com/schemas/wfs/3.0/wfs.xsd
+       http://www.opengis.net/wfs/3.0 ../wfs.xsd
        http://www.w3.org/2005/Atom
-       http://www.pvretano.com/schemas/kml/2.3/atom-author-link.xsd
+       http://schemas.opengis.net/kml/2.3/atom-author-link.xsd
        http://www.opengis.net/gml/3.2
-       http://www.pvretano.com/schemas/gml/3.2/gml.xsd">
+       http://schemas.opengis.net/gml/3.2.1/gml.xsd">
    <wfs:boundedBy>
       <wfs:Spatial crs="http://www.opengis.net/def/crs/OGC/1.3/CRS84">
          <wfs:LowerCorner>-54.9311103820801 -179.878326416016</wfs:LowerCorner>
