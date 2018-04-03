@@ -1,5 +1,22 @@
 == Conventions
 
+=== Open issues
+
+This version is a draft. It is not complete and there are open issues that
+are under discussion. These cases are shown as "CAUTION" annotations with
+a link to the issue on GitHub and a brief summary of the issue.
+
+The current expectation is to have a stable version of the Core specification
+in 2019. Criteria to move the specification to the next stage in the
+process are:
+
+* Multiple implementations of each conformance class,
+* a conformance test suite for each conformance class,
+* multiple implementations of a generic WFS client,
+* multiple implementations of clients using the OpenAPI definition of a WFS,
+* multiple draft extensions to verify the extensibility, and
+* resolution of comments received on GitHub or in formal reviews in OGC and ISO/TC 211.
+
 === Identifiers
 
 The normative provisions in this specification are denoted by the URI `http://www.opengis.net/spec/wfs-1/3.0`.
@@ -41,7 +58,7 @@ This document uses OpenAPI 3.0 fragments as examples and to formally state
 requirements. However, using OpenAPI 3.0 is not required.
 
 The "Core" requirements class, therefore, only requires that an API
-definition is provided at /api.
+definition is provided at path `/api`.
 
 A separate requirements class is specified for API definitions that follow the
 <<rc_oas,OpenAPI specification 3.0>>, but this does not preclude that in the
@@ -73,9 +90,6 @@ specify the supported values of a string parameter or property using an enum.
 * Additional properties may be added to the schema definition of a Response Object.
 * Informative text may be changed or added, like comments or description properties.
 
-NOTE: TODO +
-Check, that we cover all cases.
-
 For API definitions that do not conform to the <<rc_oas30,OpenAPI Specification 3.0>>
 the normative statement should be interpreted in the context of the
 API definition language used.
@@ -83,6 +97,9 @@ API definition language used.
 ==== Paths in OpenAPI definitions
 
 All paths in an OpenAPI definition are relative to a base URL of the server.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/98[ISSUE 98] +
+Server Ambiguity in OpenAPI
 
 .URL of the OpenAPI definition
 ===========================================
@@ -106,7 +123,7 @@ URL `https://data.example.org/mypath` for the production server.
 Reusable components for OpenAPI definitions of a WFS are referenced from
 this document.
 
-NOTE: For now, these components use a base URL of
+CAUTION: During the development phase, these components use a base URL of
 "https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/",
-but eventually these will be available using the base URL
+but eventually they are expected to be available under the base URL
 "http://schemas.opengis.net/wfs/3.0/openapi/".

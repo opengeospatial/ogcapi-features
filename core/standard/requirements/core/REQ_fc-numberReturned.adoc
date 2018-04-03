@@ -1,0 +1,10 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-numberReturned +
+
+If a property `numberReturned` is included in the response, the value SHALL
+be identical to the number of features in the response.
+
+A server MAY omit this information in a response, if the information about the
+number of features in the response is not known or difficult to compute.
+|===

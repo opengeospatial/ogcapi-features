@@ -1,0 +1,22 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-bbox-definition +
+
+Each feature collection operation SHALL support a parameter `bbox`
+with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: bbox
+in: query
+required: false
+schema:
+  type: array
+  minItems: 4
+  maxItems: 6
+  items:
+    type: number
+style: form
+explode: false
+----
+|===

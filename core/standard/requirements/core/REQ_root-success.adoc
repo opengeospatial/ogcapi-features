@@ -1,0 +1,14 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/root-success +
+
+A successful execution of the operation SHALL be reported as a response with a
+HTTP status code `200`.
+
+The content of that response SHALL be based upon the OpenAPI 3.0 schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml[root.yaml]
+and include at least links to the following resources:
+
+* `/api` (relation type 'service')
+* `/conformance` (relation type 'conformance')
+* `/collections` (relation type 'data')
+|===

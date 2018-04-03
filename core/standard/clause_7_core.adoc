@@ -1,9 +1,5 @@
 == Requirement Class "Core"
 
-////
-for now, normative statements are often included inline. This will be re-factored later.
-////
-
 [[core-overview]]
 === Overview
 
@@ -78,39 +74,24 @@ is also a separate resource and may be requested individually using HTTP GET.
 .Resources in the Core requirements class
 image::figures/PT1_FIG01.png[align="center"]
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/90[ISSUE 90] +
+More flexible path structure under `/collections`?
+
 === API landing page
 
 ==== Operation
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/root-op +
-
-The server SHALL support the HTTP GET operation at the path `/`.
-|===
+include::requirements/core/REQ_root-op.adoc[]
 
 ==== Response
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/root-success +
+include::requirements/core/REQ_root-success.adoc[]
 
-A successful execution of the operation SHALL be reported as a response with a
-HTTP status code `200`.
-
-The content of that response SHALL be based upon the OpenAPI 3.0 schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml[root.yaml]
-and include at least links to the following resources:
-
-* `/api` (relation type 'service')
-* `/conformance` (relation type 'conformance')
-* `/collections` (relation type 'data')
-|===
-
-NOTE: TODO +
-Check, if we can reuse existing relation types instead of 'conformance' and 'data'?
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/101[ISSUE 101] +
+Landing page: Can we reuse existing relation types instead of 'conformance' and 'data'?
 
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml[Schema for the landing page]
-[source,JSON]
+[source,YAML]
 ----
 type: object
 required:
@@ -150,28 +131,13 @@ of the server and which can be used by developers to understand the API,
 by software clients to connect to the server or
 by development tools to support the implementation of servers and clients.
 
-include::requirements/requirement_api-definition.adoc[]
+include::requirements/core/REQ_api-definition-op.adoc[]
 
 ==== Response
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/api-definition-success +
+include::requirements/core/REQ_api-definition-success.adoc[]
 
-A successful execution of the operation SHALL be reported as a
-response with a HTTP status code `200`.
-
-The server SHALL return an API definition document.
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/api-definition-oas +
-
-If the API definition document uses the OpenAPI Specification 3.0,
-the document SHOULD conform to the
-<<rc_oas30,OpenAPI Specification 3.0 requirements class>>.
-|===
+include::requirements/core/REC_api-definition-oas.adoc[]
 
 If multiple API definition formats are supported by a server, use
 content negotiation to select the desired representation.
@@ -194,28 +160,14 @@ To support "generic" clients for accessing Web Feature Services in general - and
 not "just" a specific API / server, the server has to declare the
 requirements classes it implements and conforms to, too.
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/conformance-op +
-
-The server SHALL support the HTTP GET operation at the path `/conformance`.
-|===
+include::requirements/core/REQ_conformance-op.adoc[]
 
 ==== Response
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/conformance-success +
-
-A successful execution of the operation SHALL be reported as a response with a
-HTTP status code `200`.
-
-The content of that response SHALL be based upon the OpenAPI 3.0 schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml[req-classes.yaml] and
-list all WFS 3.0 requirements classes that the server conforms to.
-|===
+include::requirements/core/REQ_conformance-success.adoc[]
 
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml[Schema for the list of requirements classes]
-[source,JSON]
+[source,YAML]
 ----
 type: object
 required:
@@ -247,12 +199,7 @@ the API definition and HTML and GeoJSON as encodings for features.
 
 === HTTP 1.1
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/http +
-
-The server SHALL conform to <<rfc2616,HTTP 1.1>>.
-|===
+include::requirements/core/REQ_http.adoc[]
 
 This includes the correct use of status codes, headers, etc.
 
@@ -261,20 +208,11 @@ This includes the correct use of status codes, headers, etc.
 Entity tags are a mechanism for web cache validation and for supporting conditional
 requests to reduce network traffic. Entity tags are specified by <<rfc2616,HTTP/1.1 (RFC 2616)>>.
 
-[[rec_etag]]
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/etag +
-
-The service SHOULD support entity tags and the associated headers as
-specified by HTTP/1.1.
-|===
-
-NOTE: TODO +
-Add an example OpenAPI operation (headers, response codes). Here or in clause 9.
+include::requirements/core/REC_etag.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/38[ISSUE 38] +
-More detail / examples on caching
+More detail / examples on caching. Add an example OpenAPI operation (headers,
+response codes) - here or in clause 9.
 
 === Support for cross-origin requests
 
@@ -283,98 +221,21 @@ the webpage is by default prohibited for security reasons ("same-origin policy")
 A typical example is a web-application accessing feature data from
 multiple distributed datasets.
 
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/cross-origin +
-
-If the server is intended to be accessed from the browser, cross-origin
-requests SHOULD be supported. Note that support can also be added in a
-proxy layer on top of the server.
-|===
+include::requirements/core/REC_cross-origin.adoc[]
 
 Two common mechanisms to support cross-origin requests are:
 
 * link:https://en.wikipedia.org/wiki/Cross-origin_resource_sharing[Cross-origin resource sharing (CORS)]
 * link:https://en.wikipedia.org/wiki/JSONP[JSONP (JSON with padding)]
 
-////
-==== Support for JSONP
-
-JSONP  ("JSON with padding") is a convenient and popular method to overcome
-cross-domain restrictions. Cross-domain resources are loaded through script
-injection.
-
-[[rec_jsonp]]
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/jsonp +
-
-If a request includes the parameter `f` with the value `json` and a
-parameter `callback`, the response SHOULD be `{callbackValue}({originalJSONResponse});``
-where `{callbackValue}` is the value of the parameter `callback` in the request
-and `{originalJSONResponse}` the result of the request, if the callback parameter
-had been omitted. The HTTP status code of the response SHOULD be '200'.
-|===
-
-I.e., the client may make the request with a special callback parameter and the
-server responds with a JSON padded response that looks like:
-
-```
- {callbackValue}({original_json_response});
-```
-
-NOTE:	One of the inconveniences of using JSONP is that the server always needs
-to respond with an HTTP status of 200. Otherwise the browser’s network stack
-rejects the response from the server, and the client callbacks are never
-even called. To overcome this, the errors  should be wrapped inside the
-response for requests with the `callback` parameter.
-
-==== Support for CORS
-
-Cross-origin resource sharing (CORS) is a draft W3C specification that defines
-ways for a web server to allow its resources to be accessed by a web page from
-a different domain.
-
-[[rec_cors]]
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/cors +
-
-The service SHOULD meet all requirements of the CORS specification related
-to resource authors.
-|===
-
-For example, a conforming implementation should support the configuration of
-origins that are allowed to access resources of a GeoServices REST API service.
-If a client submits a request using a "Origin" header that is in the list of
-origin, the response will include a "Access-Control-Allow-Origin" header
-with the value of the Origin header. See the CORS specification for details.
-
-////
-
 === Encodings
 
 While WFS 3.0 does not include any mandatory encoding, it recommends the following
 encodings. See <<overview,Clause 6 (Overview)>> for a discussion.
 
-[[rec_html]]
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/html +
+include::requirements/core/REC_html.adoc[]
 
-To support browsing a WFS with a web browser and to enable search engines to crawl
-and index a dataset, implementations SHOULD consider to support an HTML encoding.
-|===
-
-[[rec_geojson]]
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/geojson +
-
-If the feature data can be represented for the intended use in GeoJSON,
-implementations SHOULD consider to support GeoJSON as an
-encoding for features and feature collections.
-|===
+include::requirements/core/REC_geojson.adoc[]
 
 <<_http_1_1,Requirement `/req/core/http`>> implies that the encoding of a server response
 is determined using content negotiation as specified by the HTTP specification.
@@ -414,14 +275,7 @@ to be clear about the coordinate reference system that coordinates are in.
 For the reasons discussed in the Best Practices, Web Feature Service 3.0 uses
 WGS84 longitude and latitude as the default coordinate reference system.
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/crs84 +
-
-Unless the client explicitly requests a different coordinate reference system,
-all spatial geometries SHALL be in the coordinate reference system
-http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude).
-|===
+include::requirements/core/REQ_crs84.adoc[]
 
 The implementations compliant with the Core are not required to support
 publishing feature geometries in coordinate reference systems other than
@@ -431,38 +285,19 @@ coordinate reference system than the native one of the published features.
 Such a capability will be specified in another part(s)
 of the WFS 3.0 series.
 
-
 === Link headers
 
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/link-header +
-
-Links included in payload of responses SHOULD also be included
-as `Link` headers in the HTTP response according to <<rfc5988,RFC 5988, Clause 5>>.
-
-This recommendation does not apply, if there are a large number of links
-included in a response or a link is not known when the HTTP headers of the
-response are created.
-|===
+include::requirements/core/REC_link-header.adoc[]
 
 === Feature collections metadata
 
 ==== Operation
 
-include::requirements/requirement_fc-md-op.adoc[]
+include::requirements/core/REQ_fc-md-op.adoc[]
 
 ==== Response
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-md-success +
-
-A successful execution of the operation SHALL be reported as a response with a
-HTTP status code `200`.
-
-The content of that response SHALL be based upon the OpenAPI 3.0 schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml[content.yaml].
-|===
+include::requirements/core/REQ_fc-md-success.adoc[]
 
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml[Schema for the metadata about feature collections]
 [source,YAML]
@@ -482,91 +317,27 @@ properties:
       $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml
 ----
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-md-links +
+include::requirements/core/REQ_fc-md-links.adoc[]
 
-A `200`-response SHALL include the following links in the `links` property
-of the response:
-
-* a link to this response document (relation: `self`),
-* a link to the response document in every other media type supported by
-the server (relation: `alternate`).
-
-All links SHALL include the `rel` and `type` link parameters.
-|===
-
-[[fc_md_descriptions]]
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/fc-md-descriptions +
-
-If external schemas or descriptions for the dataset exist that provide
-information about the structure or semantics of the data, a `200`-response
-SHOULD include links to each of those resources in the `links` property
-of the response (relation: `describedBy`).
-
-The `type` link parameter SHOULD be provided for each link.
-
-This applies to resources that describe to the whole dataset. For
-resources that describe the contents of a feature collection, the
-links SHOULD be set in the `links` property of the appropriate
-object in the `collections` resource.
-
-Examples for descriptions are: XML Schema, Schematron, JSON Schema,
-RDF Schema, OWL, SHACL, a feature catalogue, etc.
-|===
+include::requirements/core/REC_fc-md-descriptions.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/56[ISSUE 56] +
 Lack of DescribeFeatureType request
 
-NOTE: TODO +
-Add recommendation about a link to the distribution resource in the dataset
-metadata (example in DCAT). Which link relation type?
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/102[ISSUE 102] +
+Add a recommendation about a link to the dataset metadata (for example, in DCAT).
+Which link relation type?
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-md-items +
+include::requirements/core/REQ_fc-md-items.adoc[]
 
-For each feature collection in this distribution of the dataset, an item SHALL
-be provided in the property `collections`.
-|===
+include::requirements/core/REQ_fc-md-items-links.adoc[]
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-md-items-links +
-
-For each feature collection in this distribution of the dataset,
-the `links` property of the collection SHALL include
-an item for each supported encoding
-with a link to the collection resource (relation: `item`).
-
-All links SHALL include the `rel` and `type` properties.
-|===
-
-NOTE: TODO +
-Check, if we can/should make use of the new
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/103[ISSUE 103] +
+Can/should we make use of the new
 link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#linkObject[Link Object]
-in OpenAPI 3.0.
+in OpenAPI 3.0?
 
-////
-TODO - Delete or make it a general permission statement for all resources.
-[width="90%",cols="2,6a"]
-|===
-|Permission {counter:per-id} |/per/core/fc-md-additional-links +
-
-Additional links MAY be added by a service in each of the `links` properties.
-|===
-////
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-md-extent +
-
-For each feature collection, the `extent` property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection.
-
-If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries.
-|===
+include::requirements/core/REQ_fc-md-extent.adoc[]
 
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
 [source,YAML]
@@ -639,7 +410,7 @@ geometries only in the default system (WGS84 longitude/latitude).
       "links": [
         { "href": "http://data.example.org/collections/buildings/items",
           "rel": "item", "type": "application/geo+json",
-          "title": "Buildings" }
+          "title": "Buildings" },
         { "href": "http://example.org/concepts/building.html",
           "rel": "describedBy", "type": "text/html",
           "title": "Feature catalogue for buildings" }
@@ -654,98 +425,27 @@ geometries only in the default system (WGS84 longitude/latitude).
 
 ==== Operation
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/sfc-md-op +
-
-The server SHALL support the HTTP GET operation at the path `/collections/{name}`.
-
-`name` is the property of the same name in the feature collections metadata.
-|===
+include::requirements/core/REQ_sfc-md-op.adoc[]
 
 ==== Response
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/sfc-md-success +
-
-A successful execution of the operation SHALL be reported as a response with a
-HTTP status code `200`.
-
-The content of that response SHALL be the same as the content for this feature
-collection in the `/collections` response.
-|===
+include::requirements/core/REQ_sfc-md-success.adoc[]
 
 === Feature collections
 
 ==== Operation
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-op +
- +
-
-For every feature collection identified in the metadata about the feature collection (path `/`),
-the server SHALL support the HTTP GET operation at the path `/collections/{name}/items`.
-
-`name` is the property of the same name in the feature collections metadata.
-|===
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/17[ISSUE 17] +
-Precision level filter responsibility?
+include::requirements/core/REQ_fc-op.adoc[]
 
 ==== Parameter limit
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-limit-definition +
+include::requirements/core/REQ_fc-limit-definition.adoc[]
 
-Each feature collection operation SHALL support a parameter `limit`
-with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+include::requirements/core/PER_fc-limit-default-maximum.adoc[]
 
-[source,YAML]
-----
-name: limit
-in: query
-required: false
-schema:
-  type: integer
-  minimum: 1
-  maximum: 10000
-  default: 10
-style: form
-explode: false
-----
-|===
+include::requirements/core/REQ_fc-limit-response-1.adoc[]
 
-[width="90%",cols="2,6a"]
-|===
-|*Permission {counter:per-id}* |/per/core/fc-limit-default-maximum +
-
-The values for `maximum` and `default` in requirement `/req/core/fc-limit-definition`
-are only examples and MAY be changed.
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-limit-response-1 +
-
-The response SHALL not contain more features than specified by the
-optional `limit` parameter. If the API definition specifies a maximum
-value for `limit` parameter, the response SHALL not contain more
-features than this maximum value.
-
-Only items are counted that are on the first level of the collection.
-Any nested objects contained within the explicitly requested items
-SHALL not be counted.
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Permission {counter:per-id}* |/per/core/fc-limit-response-2 +
-
-The server MAY return less features than requested (but not more).
-|===
+include::requirements/core/PER_fc-limit-response-2.adoc[]
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
@@ -753,51 +453,9 @@ link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openap
 
 ==== Parameter bbox
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-bbox-definition +
+include::requirements/core/REQ_fc-bbox-definition.adoc[]
 
-Each feature collection operation SHALL support a parameter `bbox`
-with the following characteristics (using an OpenAPI Specification 3.0 fragment):
-
-[source,YAML]
-----
-name: bbox
-in: query
-required: false
-schema:
-  type: array
-  minItems: 4
-  maxItems: 6
-  items:
-    type: number
-style: form
-explode: false
-----
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-bbox-response +
-
-Only features that have a spatial geometry that intersects the bounding box SHALL be
-part of the result set, if the `bbox` parameter is provided.
-
-The bounding box is provided as four or six numbers, depending on whether the
-coordinate reference system includes a vertical axis (elevation or depth):
-
-* Lower left corner, coordinate axis 1
-* Lower left corner, coordinate axis 2
-* Lower left corner, coordinate axis 3 (optional)
-* Upper right corner, coordinate axis 1
-* Upper right corner, coordinate axis 2
-* Upper right corner, coordinate axis 3 (optional)
-
-The coordinate reference system of the values SHALL be interpreted as
-WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84)
-unless a different coordinate reference system is specified in a parameter
-`bbox-crs`.
-|===
+include::requirements/core/REQ_fc-bbox-response.adoc[]
 
 "Intersects" means that the rectangular area specified in the parameter
 `bbox` includes a coordinate that is part of the (spatial) geometry of the feature.
@@ -824,39 +482,9 @@ link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openap
 
 ==== Parameter time
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-time-definition +
+include::requirements/core/REQ_fc-time-definition.adoc[]
 
-Each feature collection operation SHALL support a parameter `time`
-with the following characteristics (using an OpenAPI Specification 3.0 fragment):
-
-[source,YAML]
-----
-name: time
-in: query
-required: false
-schema:
-  type: string
-style: form
-explode: false
-----
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-time-response +
-
-Only features that have a temporal geometry that intersects the timestamp or
-time period SHALL be part of the result set, if the `time` parameter is provided.
-
-The temporal information is either a date-time or a period string that
-adheres to RFC3339.
-
-If a feature has multiple temporal properties, it is the decision of the
-server whether only a single temporal property is used to determine
-the extent or all relevant temporal properties.
-|===
+include::requirements/core/REQ_fc-time-response.adoc[]
 
 "Intersects" means that the time (instant or period) specified in the parameter
 `time` includes a timestamp that is part of the temporal geometry of the feature
@@ -906,31 +534,7 @@ link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openap
 
 ==== Parameters for filtering on feature properties
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/20[ISSUE 20] +
-Query parameter collisions.
-
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/core/fc-filters +
-
-If features in the feature collection include a feature property that has a
-simple value (for example, a string or integer) that is expected to be useful
-for applications using the service to filter the features of the collection
-based on this property, you SHOULD support a parameter with the name of the
-feature property and with the following characteristics (using an
-OpenAPI Specification 3.0 fragment):
-
-[source,YAML]
-----
-in: query
-required: false
-style: form
-explode: false
-----
-
-The `schema` property SHALL be the same as the definition of the feature
-property in the response schema.
-|===
+include::requirements/core/REC_fc-filters.adoc[]
 
 .An additional parameter to filter buildings based on their function
 =================
@@ -978,17 +582,12 @@ example included in the OpenAPI fragment would search for all buildings with
 a name that starts with "A".
 =================
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/20[ISSUE 20] +
+Query parameter name collisions.
+
 ==== Response
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-response +
-
-A successful execution of the operation SHALL be reported as a response with a
-HTTP status code `200`.
-|===
-
-The response will only include features selected by the request.
+include::requirements/core/REQ_fc-response.adoc[]
 
 The number of features returned depends on the server and the parameter `limit`:
 
@@ -1010,42 +609,13 @@ link, if there are more.
 * If you follow the next link from the previous response, you might get up
 to 10000 additional features and a `next` link, if there are more.
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-links +
+include::requirements/core/REQ_fc-links.adoc[]
 
-A `200`-response SHALL include the following links:
+include::requirements/core/REC_fc-next-1.adoc[]
 
-* a link to this response document (relation: `self`),
-* a link to the response document in every other media type supported
-by the service (relation: `alternate`).
-|===
+include::requirements/core/REC_fc-next-2.adoc[]
 
-[width="90%",cols="2,6a"]
-|===
-|*Recommendation {counter:rec-id}* |/rec/core/fc-next-1 +
-
-A `200`-response SHOULD include a link to the next "page" (relation: `next`),
-if more features have been selected than returned in the response.
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Recommendation {counter:rec-id}* |/rec/core/fc-next-2 +
-
-Dereferencing a `next` link SHOULD return additional features from the
-set of selected features that have not yet been returned.
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Recommendation {counter:rec-id}* |/rec/core/fc-next-2 +
-
-The number of features in a response to a `next` link SHOULD follow the
-same rules as for the response to the original query and again include
-a `next` link, if there are more features in the selection that have
-not yet been returned.
-|===
+include::requirements/core/REC_fc-next-3.adoc[]
 
 This document does not mandate any specific implementation approach for
 the `next` links.
@@ -1058,26 +628,27 @@ Another implementation approach is to use an implementation-specific parameter
 like the `startIndex` parameter that was used in previous versions of WFS (and
 which may be added again in an extension to this specification).
 
-[width="90%",cols="2,6a"]
-|===
-|*Permission {counter:per-id}* |/per/core/fc-prev +
-
-A response to a `next` link MAY include a `prev` link to the resource that
-included the `next` link.
-|===
+include::requirements/core/PER_fc-prev.adoc[]
 
 Providing `prev` links supports navigating back and forth between pages,
 but depending on the implementation approach it may be complex to implement.
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-rel-type +
+include::requirements/core/REQ_fc-rel-type.adoc[]
 
-All links SHALL include the `rel` and `type` link parameters.
-|===
+include::requirements/core/REQ_fc-timestamp.adoc[]
 
-NOTE: The representation of the links in the payload will depend on the encoding
-of the feature collection.
+include::requirements/core/REQ_fc-numberMatched.adoc[]
+
+include::requirements/core/REQ_fc-numberReturned.adoc[]
+
+CAUTION: Related to link:https://github.com/opengeospatial/WFS_FES/issues/8[ISSUE 8] +
+Define these as headers or include them in the payload? `timeStamp`, for example, may
+not be needed given the 'Date' HTTP header. For `numberMatched` and
+`numberReturned` headers do not seem to be a good idea as, for example,
+`numberReturned` can only be included at the end, if streaming is used.
+
+NOTE: The representation of the links and the other properties in the payload
+depends on the encoding of the feature collection.
 
 .Links
 =================
@@ -1123,101 +694,26 @@ Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIn
 ----
 =================
 
-////
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/fc-timeStamp +
-
-A `200`-response SHALL include a property `timeStamp` based upon the schema
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/timeStamp.yaml[timeStamp.yaml].
-|===
-
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/timeStamp.yaml[Schema for the timeStamp property]
-[source,YAML]
-----
-timeStamp:
-  description: This property indicates the time and date when the response was generated.
-  type: string
-  format: dateTime
-  example: '2017-08-17T08:05:32Z'
-----
-////
-
-[NOTE]
-=====================================================================
-TODO +
-Add normative statements for the following information in the response:
-
-* timeStamp: Indicates the time and date when the response was generated.
-* numberMatched: The number of features of the feature type that match the
-selection parameters like `bbox` or additional filter parameters.
-* numberReturned: If the value is provided, the value shall be identical to the number
-of items in the "features" array. A server may omit this information in a response,
-if the information about the number of features is not known or difficult to compute.
-If the value of the resultType parameter is set to "hits",
-the value shall be set to "0", if provided.
-=====================================================================
-
-CAUTION: Related to link:https://github.com/opengeospatial/WFS_FES/issues/8[ISSUE 8] +
-Define these as headers or include them in the payload? `timeStamp`, for example, does
-not seem to be needed given the 'Date' HTTP header. For `numberMatched` and
-`numberReturned` headers do not seem to be a good idea as, for example,
-`numberReturned` can only be included at the end, if streaming is used.
-
 === Feature
 
 ==== Operation
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/f-op +
+include::requirements/core/REQ_f-op.adoc[]
 
-For every feature in a feature collection (path `/collections/{name}/items`),
-the service SHALL support the HTTP GET operation at the path
-`/collections/{name}/items/{id}`.
-
-`name` is the property of the same name in the feature collection metadata.
-`id` is a local identifier of the feature.
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|Permission {counter:per-id} |/per/core/f-id +
-
-The Core requirements class only requires that the feature URI is unique.
-Implementations MAY apply stricter rules and, for example, use unique `id`
-values per dataset or collection.
-|===
+include::requirements/core/PER_f-id.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/47[ISSUE 47] +
-There are two types of Feature Identifier and we need to make sure we
+There are two types of feature identifiers and we need to make sure we
 distinguish between them.
 
 ==== Response
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/f-success +
+include::requirements/core/REQ_f-success.adoc[]
 
-A successful execution of the operation SHALL be reported as a response with a
-HTTP status code `200`.
-|===
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/core/f-links +
-
-A `200`-response SHALL include the following links in the response:
-
-* a link to the response document (relation: `self`),
-* a link to the response document in every other media type supported by the service (relation: `alternate`), and
-* a link to the feature collection that contains this feature (relation: `collection`).
-
-All links SHALL include the `rel` and `type` link parameters.
-|===
+include::requirements/core/REQ_f-links.adoc[]
 
 NOTE: The representation of the links in the payload will depend on the encoding
-of the feature collection.
+of the feature.
 
 .Links
 =================
@@ -1230,15 +726,3 @@ Link: <http://data.example.org/collections/buildings/items/123.html>; rel="alter
 Link: <http://data.example.org/collections/buildings/items.json>; rel="collection"; type="application/geo+json"
 ----
 =================
-
-////
-Dictionary tables for requirements can be added as necessary. Modify the following example as needed.
-
-[width="90%",options="header"]
-|===
-|Names |Definition |Data types and values |Multiplicity and use
-|name 1 |definition of name 1 |float |One or more (mandatory)
-|name 2 |definition of name 2 |character string type, not empty |Zero or one (optional)
-|name 3 |definition of name 3 |GML:: Point PropertyType |One (mandatory)
-|===
-////

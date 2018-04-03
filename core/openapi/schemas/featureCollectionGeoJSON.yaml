@@ -15,3 +15,12 @@ properties:
     type: array
     items:
       $ref: link.yaml
+  timeStamp:
+    type: string
+    format: dateTime
+  numberMatched:
+    type: integer
+    minimum: 0
+  numberReturned:
+    type: integer
+    minimum: 0

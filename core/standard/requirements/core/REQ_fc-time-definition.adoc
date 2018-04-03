@@ -1,0 +1,18 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-time-definition +
+
+Each feature collection operation SHALL support a parameter `time`
+with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: time
+in: query
+required: false
+schema:
+  type: string
+style: form
+explode: false
+----
+|===

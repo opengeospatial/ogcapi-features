@@ -1,0 +1,9 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/sfc-md-op +
+
+The server SHALL support the HTTP GET operation at the path `/collections/{name}`.
+
+The parameter `name` is each property of the same name in the feature
+collections metadata (JSONPath: `$.collections[*].name`).
+|===
