@@ -21,46 +21,181 @@ Path templates are used throughout these test suites.  Path templating refers to
 
 == A.2: Requirements Trace Matrix +
 ----
-Requirement 1: API Definition
-Description:
-include::requirements/requirement_api-definition.adoc[]
+Requirement 1: API Landing Page Operation
+The server SHALL support the HTTP GET operation at the path /.
 Tests: A.1.n
 ----
 ----
-Requirement 2: Conformance Report
-Description:
-include::requirements/requirement_fc-md-op.adoc[]
+Requirement 2: API Landing Page Response
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
+The content of that response SHALL be based upon the OpenAPI 3.0 schema root.yaml and include at least links to the following resources:
+    /api (relation type 'service')
+    /conformance (relation type 'conformance')
+    /collections (relation type 'data')
 Tests: A.1.n
 ----
 ----
-Requirement 3: OpenAPI Definition
-Description:
-include::requirements/requirement_oas-definition.adoc[]
+Requirement n: API Definition Operation (derived)
+The server SHALL support the HTTP GET operation at the path /api.
 Tests: A.1.n
 ----
 ----
-Requirement 4: OpenAPI Implementation
-include::requirements/requirement_oas-impl.adoc[]
+Requirement 3: API Definition Response
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
+The server SHALL return an API definition document.
 Tests: A.1.n
 ----
 ----
-Requirement 5: WFS 3.0 Core
-include::requirements/requirements_class_core.adoc[]
+Requirement 4: Conformance Class Operation
+The server SHALL support the HTTP GET operation at the path /conformance.
 Tests: A.1.n
 ----
 ----
-Requirement 6: GeoJSON Extension
-include::requirements/requirements_class_geojson.adoc[]
+Requirement 5: Conformance Class Response
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
+The content of that response SHALL be based upon the OpenAPI 3.0 schema req-classes.yaml and list all WFS 3.0 requirements classes that the server conforms to.
 Tests: A.1.n
 ----
 ----
-Requirement 7: GML Simple Features Level 0 Extension
-include::requirements/requirements_class_gmlsf0.adoc[]
+Requirement 6: HTTP 1.1
+The server SHALL conform to HTTP 1.1.
 Tests: A.1.n
 ----
 ----
-Requirement 8: GML Simple Features Level 2 Extension
-include::requirements/requirements_class_gmlsf2.adoc[]
+Requirement 7: Coordinate Reference Systems
+Unless the client explicitly requests a different coordinate reference system, all spatial geometries SHALL be in the coordinate reference system http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude).l.adoc[]
+Tests: A.1.n
+----
+----
+Requirement n: Feature Collections Metadata Operation (derived)
+The server SHALL support the HTTP GET operation at the path /collections.
+Tests: A.1.n
+----
+----
+Requirement 8: Feature Collections Metadata Response
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
+The content of that response SHALL be based upon the OpenAPI 3.0 schema content.yaml.
+Tests: A.1.n
+----
+----
+Requirement 9: Feature Collections Metadata Links
+A 200-response SHALL include the following links in the links property of the response:
+    a link to this response document (relation: self),
+    a link to the response document in every other media type supported by the server (relation: alternate).
+All links SHALL include the rel and type link parameters.
+Tests: A.1.n
+----
+----
+Requirement 10: Feature Collections Metadata Items
+For each feature collection in this distribution of the dataset, an item SHALL be provided in the property collections.
+Tests: A.1.n
+----
+----
+Requirement 11: Feature Collections Metadata Items Links
+For each feature collection in this distribution of the dataset, the links property of the collection SHALL include an item for each supported encoding with a link to the collection resource (relation: item).
+All links SHALL include the rel and type properties.
+Tests: A.1.n
+----
+----
+Requirement 12: Feature Collections Metadata Extent
+For each feature collection, the extent property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection.
+If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries.
+Tests: A.1.n
+----
+----
+Requirement 13: Feature Collection Metadta Operation
+The server SHALL support the HTTP GET operation at the path /collections/{name}.
+name is the property of the same name in the feature collections metadata.
+Tests: A.1.n
+----
+----
+Requirement 14: Feature Collection Metadta Response
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
+The content of that response SHALL be the same as the content for this feature collection in the /collections response.
+Tests: A.1.n
+----
+----
+Requirement 15: Feature Collection Operation
+For every feature collection identified in the metadata about the feature collection (path /), the server SHALL support the HTTP GET operation at the path /collections/{name}/items.
+name is the property of the same name in the feature collections metadata.
+Tests: A.1.n
+----
+----
+Requirement 16: Feature Collection Operation Limit Parameter
+Each feature collection operation SHALL support a parameter limit with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+Tests: A.1.n
+----
+----
+Requirement 17: Feature Collection Operation Limit Parameter Response
+The response SHALL not contain more features than specified by the optional limit parameter. If the API definition specifies a maximum value for limit parameter, the response SHALL not contain more features than this maximum value.
+Only items are counted that are on the first level of the collection. Any nested objects contained within the explicitly requested items SHALL not be counted.
+Tests: A.1.n
+----
+----
+Requirement 18: Feature Collection Operation BoundingBox Parameter
+Each feature collection operation SHALL support a parameter bbox with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+Tests: A.1.n
+----
+----
+Requirement 19: Feature Collection Operation BoundingBox Parameter Response
+Only features that have a spatial geometry that intersects the bounding box SHALL be part of the result set, if the bbox parameter is provided.
+The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (elevation or depth):
+    Lower left corner, coordinate axis 1
+    Lower left corner, coordinate axis 2
+    Lower left corner, coordinate axis 3 (optional)
+    Upper right corner, coordinate axis 1
+    Upper right corner, coordinate axis 2
+    Upper right corner, coordinate axis 3 (optional)
+The coordinate reference system of the values SHALL be interpreted as WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter bbox-crs.
+Tests: A.1.n
+----
+----
+Requirement 20: Feature Collection Operation Time Parameter 
+Each feature collection operation SHALL support a parameter time with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+Tests: A.1.n
+----
+----
+Requirement 21: Feature Collection Operation Time Parameter Response
+Only features that have a temporal geometry that intersects the timestamp or time period SHALL be part of the result set, if the time parameter is provided.
+The temporal information is either a date-time or a period string that adheres to RFC3339.
+If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties.
+Tests: A.1.n
+----
+----
+Requirement 22: Feature Collection Response
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
+Tests: A.1.n
+----
+----
+Requirement 23: Feature Collection Response Links
+A 200-response SHALL include the following links:
+    a link to this response document (relation: self),
+    a link to the response document in every other media type supported by the service (relation: alternate).
+Tests: A.1.n
+----
+----
+Requirement 24: Feature Collection Response Links Parameters
+All links SHALL include the rel and type link parameters.
+Tests: A.1.n
+----
+----
+Requirement 25: Feature Operation
+For every feature in a feature collection (path /collections/{name}/items), the service SHALL support the HTTP GET operation at the path /collections/{name}/items/{id}.
+name is the property of the same name in the feature collection metadata. id is a local identifier of the feature.
+Tests: A.1.n
+----
+----
+Requirement 26: Feature Opearation Response
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
+Tests: A.1.n
+----
+----
+Requirement 27: Feature Operation Response Links
+A 200-response SHALL include the following links in the response:
+    a link to the response document (relation: self),
+    a link to the response document in every other media type supported by the service (relation: alternate), and
+    a link to the feature collection that contains this feature (relation: collection).
+All links SHALL include the rel and type link parameters.
 Tests: A.1.n
 ----
 ----
@@ -75,19 +210,49 @@ include::requirements/requirements_class_oas30.adoc[]
 Tests: A.1.n
 ----
 
+== Conformance Classes:
+Core - These are the requirements that all implementations must meet
+HTML
+GeoJSON
+Geography Markup Language (GML) Simple Features Profile, Level 0
+Geography Markup Language (GML) Simple Features Profile, Level 2
+OpenAPI specification 3.0
+
+== Paths
+/ - Landing Page
+/api - location of the API definition (GET only)
+/conformance - Conformance statements (GET only) - returns a list of the URIs for conformance classes
+/collections - Dataset distribution Metadata (GET only)
+/collections/{collection-name} - returns the metadata for the feature collection where the name property == collection-nqme.
+/collections/{collection-name}/items - the features in the collection (GET only)
+/collections/{collection-name}/items/{feature-id} - a specific feature (GET only)
+
+Parameters:
+bbox
+time
+limit
+Feature Properties filtering
+
 == A.3: Abstract Tests +
 WFS 3.0 is a highly modular standard.  One result of this is that almost everything is optional. +
- 1) Are the advertised capabilities compliant with the WFS 3.0 standard? +
- 2) Does the service implement those capabilities as advertised? +
+ 1) You are testing an API, not a service. +
+ 2) There may be a large number of servers exposed through the API. +
+ 3) Specific testable capabilities are defined in terms of a server URI and a path. +
+ 4) Every possible server URI / path combination must be evaluated. +
+
+The WFS 3.0 Compliance test is performed in three phases:
+ 1) Crawl the OpenAPI document to identify all testable capabilities. +
+ 2) Validate that the advertised capabilities are compliant with the WFS 3.0 standard. +
+ 3) Validate that the servers implement those capabilities as advertised. +
 
 === A.3.1: Core Test +
-Test Purpose: The core test which drives all other testing +
-Pre-conditions: Tester is is aware of the root path to the Service +
-References: +
-Discussion: +
-Variables: +
+*Test Purpose:* The core test which drives all other testing +
+*Pre-conditions:* Tester is is aware of the root path to the API +
+*References:* +
+*Discussion:* +
+*Variables:* +
   {Root_URL} the root URL for the service +
-Test Method: +
+*Test Method:* +
   1) Retrieve the API Description document from {Root_URL}/api +
   2) Process the API Description document based on the API standard used +
      a) For OpenAPI Version 3.x use test A.3.2 +
@@ -196,77 +361,77 @@ Test Method: +
   2) Receive an API Conformance Report document in response to the get request +
   3) Validates the Conformance Report document against the schema defined in the WFS 3.0 standard +
   4) Save the list of conformance classes from the conformsTo element for use latter. +
-
-=== A.3.7: OpenAPI Get Collections Test
-* Test Purpose: Validate that the service provides valid Feature Collections metadata on the required path 
-* Pre-conditions: Tester is is aware of the root path to the Service
-* References:
-  Requirement
-* Discussion:
-* Variables: 
-  {Root_URL} the root URL for the service
-* Test Method:
-  1) Issue a get request on {Root_URL}/collections
-     i) Accept header is set to ?????
-  2) Receive a Feature Collection Metadata document in response to the get request
-  3) Validate the Feature Collection Metadata document schema through test A.3.7.1
-  4) Validate the contents of the Feature Collection Metadata document through test A.3.7.2
-  5) Save a list of all of the Feature Collections for use latter.
-  6) Validate the resources described by the Feature Collection Metadata using Test A.3.8.
-
-==== A.3.7.1: Feature Collection Metadata Schema Validation
-* Test Purpose: Validate the structure of the Feature Collection metadata 
-* Pre-conditions: A Feature Collection Metadata resouce has been received
-* References:
-  Requirement
-* Discussion:
-* Variables: 
-  {Collection_Metadata} the Feature Collection Metadata resource
-* Test Method:
-  1) Validate the Feature Collection Metadata document against the schema defined in content.yaml
-
-==== A.3.7.2: Feature Collection Metadata Content Validation
-* Test Purpose: Validate that the Feature Collection Metadata content is correct and complete
-* Pre-conditions: A Feature Collection Metadata document has been received
-* References:
-  Requirement
-* Discussion:
-* Variables: 
-  {Collection_Metadata} the Feature Collection Metadata resource
-* Test Method:
-  1) Validate the links property of the Feature Collection Metadata through test A.3.7.2.1
-  2) Validate the collections property of the Feature Collection Metadata through test A.3.7.2.2
-
-===== A.3.7.2.1: Feature Collection Metadata Links Property Validation
-* Test Purpose: Validate that the Links property of the Feature Collection Metadata content is correct and complete
-* Pre-conditions: A Feature Collection Metadata document has been received
-* References:
-  Requirement
-* Discussion:
-* Variables: 
-  {Collection_Metadata} the Feature Collection Metadata resource
-* Test Method:
-  1) Validate the links property includes a valid link to the Feature Collection Metadata document on the server
-  2) Validate the links property includes valid links to Feature Collection Metadata documents in every media type offered by the server
-  3) For each Feature Collection and each media type offered by the server, validate that the links property includes a valid link to that resource.
-  4) Validate the links property includes valid links to API Definition documents in every media type offered by the server
-
-===== A.3.7.2.2 Feature Collection Metadata Collections Property Validation
-* Test Purpose: Validate that the Collections property of the Feature Collection Metadata content is correct and complete
-* Pre-conditions: A Feature Collection Metadata document has been received
-* References:
-  Requirement
-* Discussion:
-* Variables: 
-  {Collection_Metadata} the Feature Collection Metadata resource
-* Test Method:
-  1) Validate that there is a collections property for every Feature Collection hosted on the server. Use the list of Feature Collections saved in Test A.3.7.
-  2) Validate that each Collections property includes a links property
-  3) For each Collections property; validate that the links property includes entries for each encoding supported by the server. The list of encodings can be build from the list of conformance classes saved in Test A.3.6.
-  4) For each links property of each Collections property; validate that each entry in the links property resolves to the proper Feature Collection and encoding. (Validate by matching Feature names)
-  5) Validate that each collections property includes a valid extent property
-  6) For each Feature Collection, validate that all Features contained in that collection fall within the bounding box defined by the extent property.
-  
+ +
+=== A.3.7: OpenAPI Get Collections Test +
+Test Purpose: Validate that the service provides valid Feature Collections metadata on the required path +
+Pre-conditions: Tester is is aware of the root path to the Service +
+References: +
+  Requirement +
+Discussion: +
+Variables: +
+  {Root_URL} the root URL for the service +
+Test Method: +
+  1) Issue a get request on {Root_URL}/collections +
+     i) Accept header is set to ????? +
+  2) Receive a Feature Collection Metadata document in response to the get request +
+  3) Validate the Feature Collection Metadata document schema through test A.3.7.1 +
+  4) Validate the contents of the Feature Collection Metadata document through test A.3.7.2 +
+  5) Save a list of all of the Feature Collections for use latter. +
+  6) Validate the resources described by the Feature Collection Metadata using Test A.3.8. +
+ +
+==== A.3.7.1: Feature Collection Metadata Schema Validation +
+Test Purpose: Validate the structure of the Feature Collection metadata + 
+Pre-conditions: A Feature Collection Metadata resouce has been received +
+References: +
+  Requirement +
+Discussion: +
+Variables:  +
+  {Collection_Metadata} the Feature Collection Metadata resource +
+Test Method: +
+  1) Validate the Feature Collection Metadata document against the schema defined in content.yaml +
+ +
+==== A.3.7.2: Feature Collection Metadata Content Validation +
+Test Purpose: Validate that the Feature Collection Metadata content is correct and complete +
+Pre-conditions: A Feature Collection Metadata document has been received +
+References: +
+  Requirement +
+Discussion: +
+Variables: +
+  {Collection_Metadata} the Feature Collection Metadata resource +
+Test Method: +
+  1) Validate the links property of the Feature Collection Metadata through test A.3.7.2.1 +
+  2) Validate the collections property of the Feature Collection Metadata through test A.3.7.2.2 +
+ +
+===== A.3.7.2.1: Feature Collection Metadata Links Property Validation +
+Test Purpose: Validate that the Links property of the Feature Collection Metadata content is correct and complete +
+Pre-conditions: A Feature Collection Metadata document has been received +
+References: +
+  Requirement +
+Discussion: +
+Variables: +
+  {Collection_Metadata} the Feature Collection Metadata resource +
+Test Method: +
+  1) Validate the links property includes a valid link to the Feature Collection Metadata document on the server +
+  2) Validate the links property includes valid links to Feature Collection Metadata documents in every media type offered by the server +
+  3) For each Feature Collection and each media type offered by the server, validate that the links property includes a valid link to that resource. +
+  4) Validate the links property includes valid links to API Definition documents in every media type offered by the server. +
+ +
+===== A.3.7.2.2 Feature Collection Metadata Collections Property Validation +
+Test Purpose: Validate that the Collections property of the Feature Collection Metadata content is correct and complete +
+Pre-conditions: A Feature Collection Metadata document has been received +
+References: +
+  Requirement +
+Discussion: +
+Variables:  +
+  {Collection_Metadata} the Feature Collection Metadata resource +
+Test Method: +
+  1) Validate that there is a collections property for every Feature Collection hosted on the server. Use the list of Feature Collections saved in Test A.3.7. +
+  2) Validate that each Collections property includes a links property +
+  3) For each Collections property; validate that the links property includes entries for each encoding supported by the server. The list of encodings can be build from the list of conformance classes saved in Test A.3.6. +
+  4) For each links property of each Collections property; validate that each entry in the links property resolves to the proper Feature Collection and encoding. (Validate by matching Feature names) +
+  5) Validate that each collections property includes a valid extent property +
+  6) For each Feature Collection, validate that all Features contained in that collection fall within the bounding box defined by the extent property. +
+  + 
 === A.3.8 Feature Collections
 * Test Purpose: Validate that the service provides Feature Collections on the mandated paths
 * Pre-conditions: Tester possesses Feature Collection metadata which provides paths to each Feature Collection
