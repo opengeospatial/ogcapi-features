@@ -1,0 +1,11 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-op +
+ +
+
+For every feature collection identified in the metadata about the feature collection (path `/`),
+the server SHALL support the HTTP GET operation at the path `/collections/{name}/items`.
+
+The parameter `name` is each property of the same name in the feature
+collections metadata (JSONPath: `$.collections[*].name`).
+|===

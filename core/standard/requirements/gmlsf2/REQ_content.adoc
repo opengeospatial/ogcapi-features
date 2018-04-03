@@ -1,0 +1,17 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/gmlsf0/content +
+
+Every `200`-response with the media type `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` SHALL be
+
+* a link:http://schemas.opengis.net/wfs/3.0/wfs-core.xsd[WFS 3.0 Core FeatureCollection Object] for feature collections, and
+* a link:http://schemas.opengis.net/gml/3.2.1/feature.xsd[GML 3.2 Feature] for features.
+
+Every feature SHALL conform to the <<GMLSF,GML Simple Features Profile, Level 2>>.
+
+The schema of all responses with the media type `application/xml` SHALL
+conform with XML Schema ....
+
+The links specified in the requirements `/req/core/fc-links` and
+`/req/core/f-links` SHALL be added in ...
+|===

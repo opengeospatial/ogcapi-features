@@ -3,22 +3,32 @@ This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which 
 
 For the purposes of this document, the following additional terms and definitions apply.
 
+CAUTION: Add link to the informative WFS Guide, once it is available.
+
 === dataset
-collection of data, published or curated by a single agent, and available for access or download in one or more formats [DCAT]
+collection of data, published or curated by a single agent, and available for access or download in one or more formats <<DCAT>>
+
+NOTE: The use of 'collection' in the definition from <<DCAT>> is broader than
+the use of the term collection in this specification. See the definition of
+<<_feature_collection,'feature collection'>>.
 
 === distribution
-represents an accessible form of a *dataset* [DCAT]
+represents an accessible form of a *dataset* <<DCAT>>
 
 EXAMPLE: a downloadable file, an RSS feed or a web service that provides the data.
 
 === feature
-abstraction of real world phenomena [ISO 19101:2002, definition 4.11]
+abstraction of real world phenomena [ISO 19101-1:2014]
 
-=== feature collection
+NOTE: If you are unfamiliar with the term 'feature', the explanations in
+the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practice document>> may help,
+in particular the section on
+link:https://www.w3.org/TR/sdw-bp/#spatial-things-features-and-geometry[Spatial Things, Features and Geometry].
+
+[[_feature_collection]]
+=== feature collection; collection
 a set of *features* from a *dataset*
 
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/4[ISSUE 4] +
-We need to make the document understandable to the developers that have no
-geo/OGC background, too. What do we need to explain in this section and what
-terms should we use in general?
+NOTE: In this specification, 'collection' is used as a synonym for 'feature
+collection'. This is done to make, for example, URI path expressions shorter
+and easier to understand for those that are not geo-experts.

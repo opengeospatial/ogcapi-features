@@ -1,0 +1,10 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-links +
+
+A `200`-response SHALL include the following links:
+
+* a link to this response document (relation: `self`),
+* a link to the response document in every other media type supported
+by the service (relation: `alternate`).
+|===

@@ -1,4 +1,4 @@
-:Title: OGC Web Feature Service 3.0 - Part 1: Core
+:Title: OGC Web Feature Service 3.0: Part 1 - Core
 :titletext: OGC Web Feature Service 3.0 - Part 1: Core
 :doctype: book
 :encoding: utf-8
@@ -28,11 +28,11 @@
 |Submission Date: <yyyy-mm-dd>
 |Approval Date:   <yyyy-mm-dd>
 |Publication Date:   <yyyy-mm-dd>
-|External identifier of this OGC(R) document: http://www.opengis.net/doc/IS/wfs/3.0
+|External identifier of this OGC(R) document: http://www.opengis.net/doc/IS/wfs-1/3.0
 |Internal reference number of this OGC(R) document:    17-069
-|Version: 3.0_SNAPSHOT (2017-11-24)
+|Version: 3.0.0-SNAPSHOT (2018-04-03)
 |Category: OGC(R) Implementation Specification
-|Editor:   Panagiotis (Peter) A. Vretanos, Clemens Portele
+|Editor:   Clemens Portele, Panagiotis (Peter) A. Vretanos
 |===
 
 [cols = "^", frame = "none"]
@@ -43,7 +43,7 @@
 [cols = "^", frame = "none", grid = "none"]
 |===
 |*Copyright notice*
-|Copyright (C) 2017 Open Geospatial Consortium
+|Copyright (C) 2018 Open Geospatial Consortium
 |To obtain additional rights of use, visit http://www.opengeospatial.org/legal/
 |===
 
@@ -105,16 +105,15 @@ include::clause_7_core.adoc[]
 
 include::clause_8_encodings.adoc[]
 
-include::clause_9_media_types.adoc[]
+include::clause_9_oas.adoc[]
+
+include::clause_10_media_types.adoc[]
 
 <<<
-include::annex-a.adoc[]
+include::annex_ats.adoc[]
 
 <<<
-include::annex-b.adoc[]
-
-<<<
-include::annex-c.adoc[]
+include::annex_oas_example.adoc[]
 
 ////
 commented out for now
@@ -127,7 +126,7 @@ include::annex-n.adoc[]
 Revision History should be the last annex before the Bibliography
 Bibliography should be the last annex
 ////
-include::annex-history.adoc[]
+include::annex_history.adoc[]
 
 <<<
-include::annex-bibliography.adoc[]
+include::annex_bibliography.adoc[]

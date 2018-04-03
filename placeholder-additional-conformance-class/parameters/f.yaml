@@ -1,0 +1,17 @@
+name: f
+in: query
+description: >-
+  The format of the response. If no value is provided, the standard http
+  rules apply, i.e., the accept header shall be used to determine the
+  format.\
+
+  Pre-defined values are json" and "html". The response to other
+  values is determined by the server.
+required: false
+schema:
+  type: string
+  enum:
+    - json
+    - html
+style: form
+explode: false

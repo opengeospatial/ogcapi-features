@@ -1,0 +1,84 @@
+== Requirements class "OpenAPI 3.0"
+
+=== Basic requirements
+
+The API of servers conforming to this requirements class are defined by an link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument[OpenAPI Document].
+
+include::requirements/requirements_class_oas30.adoc[]
+
+include::requirements/oas30/REQ_oas-definition-1.adoc[]
+
+include::requirements/oas30/REQ_oas-definition-2.adoc[]
+
+CAUTION: Related to link:https://github.com/opengeospatial/WFS_FES/issues/90[ISSUE 90] +
+If we have a rigid path pattern there seems to be no need to add requirements for fixed operationId
+values. However, if the path pattern would be flexible, maybe we should require
+specific operationIds for selected resources?
+
+Two example OpenAPI documents are included in <<oas30_example,Annex B>>.
+
+include::requirements/oas30/REQ_oas-impl.adoc[]
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/46[ISSUE 46] +
+Currently, no tool is known to validate that a server implements the
+API specified in its OpenAPI definition.
+
+=== Complete definition
+
+include::requirements/oas30/REQ_completeness.adoc[]
+
+Note that servers that, for example, are access-controlled
+(see <<security,Security>>), that support web cache validation, CORS
+or that use HTTP redirection will make use of additional HTTP status codes
+beyond regular codes like `200` for successful GET requests
+and `400`, `404` or `500` for error situations.
+
+Clients have to be prepared to receive responses not documented in the
+OpenAPI definition. For example, additional errors may occur in the transport
+layer outside of the server.
+
+[[exceptions]]
+=== Exceptions
+
+include::requirements/oas30/REQ_exception-codes.adoc[]
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/45[ISSUE 45] +
+Listing of all applicable HTTP Status Codes
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/105[ISSUE 105] +
+WFS 2.0 defined exception codes and mapped them to HTTP status codes. Should WFS 3.0
+do this, too, or should we simply require that http status codes are used correctly?
+
+.An exception response object definition
+=================
+[source,YAML]
+----
+description: An error occurred.
+content:
+  application/json:
+    schema:
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/exception.yaml
+  text/html:
+    schema:
+      type: string
+----
+=================
+
+[[security]]
+=== Security
+
+include::requirements/oas30/REQ_security.adoc[]
+
+The OpenAPI specification currently supports the following link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object[security schemes]:
+
+* HTTP authentication,
+* an API key (either as a header or as a query parameter),
+* OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
+* OpenID Connect Discovery.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/41[ISSUE 41] +
+How does a client determine which security protocols/standards/etc. a server supports?
+
+=== Features
+
+include::requirements/oas30/REC_f-key-properties.adoc[]

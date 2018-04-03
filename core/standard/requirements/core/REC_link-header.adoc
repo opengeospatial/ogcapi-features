@@ -1,0 +1,11 @@
+[width="90%",cols="2,6a"]
+|===
+|Recommendation {counter:rec-id} |/rec/core/link-header +
+
+Links included in payload of responses SHOULD also be included
+as `Link` headers in the HTTP response according to <<rfc5988,RFC 5988, Clause 5>>.
+
+This recommendation does not apply, if there are a large number of links
+included in a response or a link is not known when the HTTP headers of the
+response are created.
+|===

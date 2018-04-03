@@ -1,0 +1,11 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-md-items-links +
+
+For each feature collection in this distribution of the dataset,
+the `links` property of the collection SHALL include
+an item for each supported encoding
+with a link to the collection resource (relation: `item`).
+
+All links SHALL include the `rel` and `type` properties.
+|===

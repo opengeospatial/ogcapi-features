@@ -1,0 +1,12 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/f-op +
+
+For every feature in a feature collection (path `/collections/{name}/items`),
+the service SHALL support the HTTP GET operation at the path
+`/collections/{name}/items/{id}`.
+
+The parameter `name` is each property of the same name in the feature
+collections metadata (JSONPath: `$.collections[*].name`). `id` is a
+local identifier of the feature.
+|===

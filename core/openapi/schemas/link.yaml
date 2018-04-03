@@ -4,21 +4,16 @@ required:
 properties:
   href:
     type: string
-    xml:
-      attribute: true
     example: http://data.example.com/buildings/123
   rel:
     type: string
-    xml:
-      attribute: true
-    example: prev
+    example: alternate
   type:
     type: string
-    xml:
-      attribute: true
-    example: application/gml+xml;version=3.2
+    example: application/geo+json
   hreflang:
     type: string
-    xml:
-      attribute: true
     example: en
+  title:
+    type: string
+    example: Trierer Strasse 70, 53115 Bonn

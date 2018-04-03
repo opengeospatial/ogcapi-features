@@ -1,0 +1,13 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/oas30/completeness +
+
+The OpenAPI definition SHALL specify for each operation all
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#httpCodes[HTTP Status Codes]
+and
+link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Objects]
+that the server uses in responses.
+
+This includes the successful execution of an operation as well as all error
+situations that originate from the server.
+|===

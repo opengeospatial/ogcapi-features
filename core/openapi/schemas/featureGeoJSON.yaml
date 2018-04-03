@@ -17,3 +17,8 @@ properties:
     oneOf:
       - type: string
       - type: integer
+  links:
+    type: array
+    items:
+      $ref: link.yaml
+      

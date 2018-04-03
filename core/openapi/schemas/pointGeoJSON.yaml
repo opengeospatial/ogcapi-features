@@ -1,6 +1,7 @@
 type: object
 required:
   - type
+  - coordinates
 properties:
   type:
     type: string
@@ -8,6 +9,6 @@ properties:
       - Point
   coordinates:
     type: array
+    minItems: 2
     items:
       type: number
-      minItems: 2

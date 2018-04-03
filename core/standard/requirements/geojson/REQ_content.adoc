@@ -1,0 +1,17 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/geojson/content +
+
+Every `200`-response with the media type `application/geo+json` SHALL be
+
+* a link:https://tools.ietf.org/html/rfc7946#section-3.3[GeoJSON FeatureCollection Object] for feature collections, and
+* a link:https://tools.ietf.org/html/rfc7946#section-3.2[GeoJSON Feature Object] for features.
+
+The links specified in the requirements `/req/core/fc-links` and
+`/req/core/f-links` SHALL be added in a extension property
+(foreign member) with the name `links`.
+
+The schema of all responses with the media type `application/json` SHALL
+conform with the JSON Schema specified for the resource in the requirements class
+<<rc_core,WFS 3.0 Core>>.
+|===

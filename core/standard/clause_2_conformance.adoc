@@ -1,5 +1,5 @@
 == Conformance
-This standard defines a five requirements and conformance classes.
+This standard defines six requirements / conformance classes.
 
 The standardization targets of all conformance classes are "web services".
 
@@ -10,8 +10,8 @@ The main requirements class is:
 It specifies requirements that all WFS have to meet.
 
 The "Core" does not mandate any encoding or format for representing features or
-feature collections. The other four requirements classes depend on the "Core"
-and specify representations for the WFS resources in commonly used encodings
+feature collections. Four requirements classes depend on the "Core"
+and specify representations for these resources in commonly used encodings
 for spatial data on the web:
 
 * <<rc_html,HTML>>,
@@ -19,12 +19,26 @@ for spatial data on the web:
 * <<rc_gmlsf0,Geography Markup Language (GML), Simple Features Profile, Level 0>>, and
 * <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>.
 
-None of these encodings is mandatory and an implementation of the "Core"
+None of these encodings are mandatory and an implementation of the "Core"
 requirements class may also decide to use none of them, but to use another encoding
 instead.
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/14[ISSUE 14] +
-Considering binary format output?
+That said, the <<rc_core,Core>> requirements class includes recommendations to support
+<<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings, where practical.
+<<overview,Clause 6 (Overview)>> includes a discussion about recommended
+encodings.
+
+The "Core" does not mandate any encoding or format for the formal definition of
+the API either. One option is the OpenAPI 3.0 specification and a requirements
+class has been defined for this, which depends on the "Core":
+
+* <<rc_oas30,OpenAPI specification 3.0>>.
+
+Like with the feature encodings, an implementation of the "Core" requirements
+class may also decide to use other representations of the API definition in
+addition or instead of an OpenAPI 3.0 definition. Examples for alternative
+API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI
+specification or an OWS Common 2.0 capabilities document.
 
 The "Core" is intended to be the minimal useful service interface for fine-grained
 access to a spatial dataset.
@@ -39,7 +53,3 @@ specified in Annex A (normative) of this document. The framework, concepts, and
 methodology for testing, and the criteria to be achieved to claim conformance
 are specified in the OGC Compliance Testing Policies and Procedures and the
 OGC Compliance Testing web site.
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/9[ISSUE 9] +
-Include a list of conformance classes met by the server somewhere? In the
-OpenAPI document or in the root resource?
