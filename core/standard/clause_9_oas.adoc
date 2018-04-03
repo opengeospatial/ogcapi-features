@@ -1,36 +1,31 @@
 == Requirements class "OpenAPI 3.0"
 
-////
-for now, normative statements are often included inline. This will be re-factored later.
-////
-
 === Basic requirements
 
 The API of servers conforming to this requirements class are defined by an link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument[OpenAPI Document].
 
 include::requirements/requirements_class_oas30.adoc[]
 
-include::requirements/requirement_oas-definition.adoc[]
+include::requirements/oas30/REQ_oas-definition-1.adoc[]
 
-An example OpenAPI document is included in <<oas30_example,Annex B>>.
+include::requirements/oas30/REQ_oas-definition-2.adoc[]
 
-include::requirements/requirement_oas-impl.adoc[]
+CAUTION: Related to link:https://github.com/opengeospatial/WFS_FES/issues/90[ISSUE 90] +
+If we have a rigid path pattern there seems to be no need to add requirements for fixed operationId
+values. However, if the path pattern would be flexible, maybe we should require
+specific operationIds for selected resources?
+
+Two example OpenAPI documents are included in <<oas30_example,Annex B>>.
+
+include::requirements/oas30/REQ_oas-impl.adoc[]
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/46[ISSUE 46] +
+Currently, no tool is known to validate that a server implements the
+API specified in its OpenAPI definition.
 
 === Complete definition
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/oas30/completeness +
-
-The OpenAPI definition SHALL specify for each operation all
-link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#httpCodes[HTTP Status Codes]
-and
-link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Objects]
-that the server uses in responses.
-
-This includes the successful execution of an operation as well as all error
-situations that originate from the server.
-|===
+include::requirements/oas30/REQ_completeness.adoc[]
 
 Note that servers that, for example, are access-controlled
 (see <<security,Security>>), that support web cache validation, CORS
@@ -38,51 +33,21 @@ or that use HTTP redirection will make use of additional HTTP status codes
 beyond regular codes like `200` for successful GET requests
 and `400`, `404` or `500` for error situations.
 
-NOTE: TODO +
-Check, if the approach is consistent with the security concepts
-identified in the upcoming "OGC Web Services Security" standard.
-
-Clients should be prepared to receive responses not documented in the
+Clients have to be prepared to receive responses not documented in the
 OpenAPI definition. For example, additional errors may occur in the transport
 layer outside of the server.
 
 [[exceptions]]
 === Exceptions
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/oas30/exceptions-codes +
-
-For error situations that originate from the server, the API definition
-SHALL cover all applicable HTTP Status Codes.
-|===
+include::requirements/oas30/REQ_exception-codes.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/45[ISSUE 45] +
 Listing of all applicable HTTP Status Codes
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/oas30/exceptions-400 +
-
-For error situations that are the result of a bad request by the client,
-error code `400` SHALL be used.
-|===
-
-NOTE: TODO +
-Add list of pre-defined WFS error codes for 400-responses,
-including MissingParameterValue, InvalidParameterValue, OperationParsingFailed.
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/oas30/exceptions-500 +
-
-For error situations that are the result of an internal server error,
-error code `500` SHALL be used.
-|===
-
-NOTE: TODO +
-Add list of pre-defined WFS error codes for 500-responses,
-including NoApplicableCode, OperationProcessingFailed.
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/105[ISSUE 105] +
+WFS 2.0 defined exception codes and mapped them to HTTP status codes. Should WFS 3.0
+do this, too, or should we simply require that http status codes are used correctly?
 
 .An exception response object definition
 =================
@@ -102,13 +67,7 @@ content:
 [[security]]
 === Security
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/oas30/security +
-
-For cases, where the operations of the server are access-controlled,
-the security scheme(s) SHALL be documented in the OpenAPI definition.
-|===
+include::requirements/oas30/REQ_security.adoc[]
 
 The OpenAPI specification currently supports the following link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object[security schemes]:
 
@@ -118,39 +77,8 @@ The OpenAPI specification currently supports the following link:https://github.c
 * OpenID Connect Discovery.
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/41[ISSUE 41] +
-How does a client determine which security protocols/standards/etc. a server supports
-
-=== Feature collection metadata
-
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/oas30/fc-md-op +
-
-The `operationId` of the HTTP GET operation for feature collection metadata
-SHALL be "describeCollections".
-|===
-
-=== Feature collections
-
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/oas30/fc-key-properties +
-
-The schema for the Response Objects of the HTTP GET operation for
-feature collections SHOULD include key feature properties
-of the features in the feature collection.
-
-This is in particular helpful, if filter parameters are defined for the
-collection (see recommendation `/rec/core/fc-filters`).
-|===
+How does a client determine which security protocols/standards/etc. a server supports?
 
 === Features
 
-[width="90%",cols="2,6a"]
-|===
-|Recommendation {counter:rec-id} |/rec/oas30/f-key-properties +
-
-The schema for the Response Objects of the HTTP GET operation for
-features SHOULD include key feature properties
-of the features.
-|===
+include::requirements/oas30/REC_f-key-properties.adoc[]

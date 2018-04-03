@@ -1,0 +1,14 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-time-response +
+
+Only features that have a temporal geometry that intersects the timestamp or
+time period SHALL be part of the result set, if the `time` parameter is provided.
+
+The temporal information is either a date-time or a period string that
+adheres to RFC 3339.
+
+If a feature has multiple temporal properties, it is the decision of the
+server whether only a single temporal property is used to determine
+the extent or all relevant temporal properties.
+|===

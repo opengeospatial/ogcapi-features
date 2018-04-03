@@ -1,0 +1,11 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-numberMatched +
+
+If a property `numberMatched` is included in the response, the value SHALL
+be identical to the number of features in the feature collections that match
+the selection parameters like `bbox`, `time` or additional filter parameters.
+
+A server MAY omit this information in a response, if the information about the
+number of matching features is not known or difficult to compute.
+|===
