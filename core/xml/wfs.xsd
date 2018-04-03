@@ -3,7 +3,6 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
    targetNamespace="http://www.opengis.net/wfs/3.0"
    xmlns:wfs="http://www.opengis.net/wfs/3.0"
-   xmlns:gml="http://www.opengis.net/gml/3.2"
    xmlns:atom="http://www.w3.org/2005/Atom"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:xml="http://www.w3.org/XML/1998/namespace"
@@ -28,8 +27,6 @@
                schemaLocation="http://www.w3.org/1999/xlink.xsd"/>
    <xsd:import namespace="http://www.w3.org/2005/Atom"
                schemaLocation="http://schemas.opengis.net/kml/2.3/atom-author-link.xsd"/>
-   <xsd:import namespace="http://www.opengis.net/gml/3.2"
-               schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
 
    <!-- ================================================================== -->
    <!-- =   LandingPage element                                          = -->
