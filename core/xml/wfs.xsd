@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   targetNamespace="http://www.opengis.net/wfs/3.0"
+   xmlns:wfs="http://www.opengis.net/wfs/3.0"
+   xmlns:gml="http://www.opengis.net/gml/3.2"
+   xmlns:atom="http://www.w3.org/2005/Atom"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+   elementFormDefault="qualified" version="3.0.0">
+   <xsd:annotation>
+      <xsd:documentation>This XML Schema Document includes and imports, 
+      directly or indirectly, all the XML Schemas defined by the 
+      Web Feature Service (WFS) Implementation Specification.
+
+      WFS is an OGC Standard.
+      Copyright (c) 2010 Open Geospatial Consortium.
+      To obtain additional rights of use, visit
+      http://www.opengeospatial.org/legal/ .     
+      </xsd:documentation>
+   </xsd:annotation>
+   <!-- ==============================================================
+        Includes and Imports
+        ============================================================== -->
+   <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
+               schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+   <xsd:import namespace="http://www.w3.org/1999/xlink"
+               schemaLocation="http://www.w3.org/1999/xlink.xsd"/>
+   <xsd:import namespace="http://www.w3.org/2005/Atom"
+               schemaLocation="../../kml/2.3/atom-author-link.xsd"/>
+   <xsd:import namespace="http://www.opengis.net/gml/3.2"
+               schemaLocation="../../gml/3.2/gml.xsd"/>
+
+   <!-- ================================================================== -->
+   <!-- =   LandingPage element                                          = -->
+   <!-- ================================================================== -->
+   <xsd:element name="LandingPage" type="wfs:LandingPageType"/>
+   <xsd:complexType name="LandingPageType">
+      <xsd:complexContent>
+         <xsd:extension base="wfs:BaseResponseType">
+            <xsd:sequence>
+               <xsd:element ref="atom:link"
+                            minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+
+   <!-- ================================================================== -->
+   <!-- =   ConformsTo element                                           = -->
+   <!-- ================================================================== -->
+   <xsd:element name="ConformsTo" type="wfs:ConformsToType"/>
+   <xsd:complexType name="ConformsToType">
+      <xsd:complexContent>
+         <xsd:extension base="wfs:BaseResponseType">
+            <xsd:sequence>
+               <xsd:element ref="atom:link"
+                            minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+
+   <!-- ================================================================== -->
+   <!-- =   Collections element                                          = -->
+   <!-- ================================================================== -->
+   <xsd:element name="Collections" type="wfs:CollectionsType"/>
+   <xsd:complexType name="CollectionsType">
+      <xsd:complexContent>
+         <xsd:extension base="wfs:BaseResponseType">
+            <xsd:sequence>
+               <xsd:element ref="atom:link"
+                            minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="Collection"
+                            type="wfs:CollectionType"
+                            maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="CollectionType">
+      <xsd:sequence>
+         <xsd:element name="Name" type="xsd:string"/>
+         <xsd:element name="Title" minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+               <xsd:simpleContent>
+                  <xsd:extension base="xsd:string">
+                     <xsd:attribute ref="xml:lang" default="en"/>
+                  </xsd:extension>
+               </xsd:simpleContent>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="Description" minOccurs="0">
+            <xsd:complexType>
+               <xsd:simpleContent>
+                  <xsd:extension base="xsd:string">
+                     <xsd:attribute ref="xml:lang" default="en"/>
+                  </xsd:extension>
+               </xsd:simpleContent>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ref="atom:link" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="wfs:Extent" minOccurs="0"/>
+         <xsd:element name="DefaultCRS" type="xsd:anyURI" minOccurs="0"/>
+         <xsd:element name="OtherCRS" type="xsd:anyURI"
+                      minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <!-- ================================================================== -->
+   <!-- =   Exception Report (copied from OWS common 2.0.2)              = -->
+   <!-- ================================================================== -->
+   <xsd:element name="ExceptionReport">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="wfs:Exception" maxOccurs="unbounded"/>
+         </xsd:sequence>
+         <xsd:attribute name="version" use="required">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:pattern value="\d+\.\d?\d\.\d?\d" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute ref="xml:lang"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="Exception" type="wfs:ExceptionType"/>
+   <xsd:complexType name="ExceptionType">
+      <xsd:sequence>
+         <xsd:element name="ExceptionText" type="xsd:string"
+                      minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="exceptionCode" type="xsd:string" use="required"/>
+      <xsd:attribute name="locator" type="xsd:string"/>
+   </xsd:complexType>
+
+   <!-- ================================================================== -->
+   <!-- =   Feature collection                                           = -->
+   <!-- =                                                                = -->
+   <!-- =   Based on the WFS 2.x feature collection definition which     = -->
+   <!-- =   already supports hypermedia, streaming, paging and is        = -->
+   <!-- =   independent of the version of GML being used.                = -->
+   <!-- =                                                                = -->
+   <!-- =   For WFS 3.0 core, the WFS 2.X schema was modified to:        = -->
+   <!-- =   (1) Remove structures related to support joins and           = -->
+   <!-- =       additional objects which are not supported in            = -->
+   <!-- =       the core.                                                = -->
+   <!-- =   (2) The numberMatched and numberReturned field are           = -->
+   <!-- =       made optional as they are in the core.                   = -->
+   <!-- =   (3) The WFS 2.X attributes 'prev' and 'next' are             = -->
+   <!-- =       removed since hypermdia controls can be used in          = -->
+   <!-- =       top level of the collection to provide those links.      = -->
+   <!-- ================================================================== -->
+   <xsd:element name="FeatureCollection" type="wfs:FeatureCollectionType"
+                substitutionGroup="wfs:SimpleFeatureCollection"/>
+   <xsd:complexType name="FeatureCollectionType">
+      <xsd:complexContent>
+         <xsd:extension base="wfs:SimpleFeatureCollectionType">
+            <xsd:sequence>
+               <xsd:element ref="wfs:truncatedResponse" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attributeGroup ref="wfs:StandardResponseParameters"/>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="SimpleFeatureCollection"
+                type="wfs:SimpleFeatureCollectionType"/>
+   <xsd:complexType name="SimpleFeatureCollectionType">
+      <xsd:sequence>
+         <xsd:element ref="wfs:boundedBy" minOccurs="0"/>
+         <xsd:element ref="atom:link" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="wfs:member" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="boundedBy" type="wfs:EnvelopePropertyType"/>
+   <xsd:complexType name="EnvelopePropertyType">
+      <xsd:sequence>
+         <xsd:any maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="member" type="wfs:MemberPropertyType"/>
+   <xsd:complexType name="MemberPropertyType" mixed="true">
+      <xsd:choice minOccurs="0">
+         <xsd:any processContents="lax"
+                  namespace="##other" maxOccurs="unbounded"/>
+         <xsd:element ref="wfs:SimpleFeatureCollection"/>
+      </xsd:choice>
+      <xsd:attributeGroup ref="xlink:simpleAttrs"/>
+   </xsd:complexType>
+   <xsd:attributeGroup name="StandardResponseParameters">
+      <xsd:attribute name="timeStamp" type="xsd:dateTime" use="required"/>
+      <xsd:attribute name="numberMatched" type="xsd:nonNegativeInteger"/>
+      <xsd:attribute name="numberReturned" type="xsd:nonNegativeInteger"/>
+   </xsd:attributeGroup>
+   <xsd:element name="truncatedResponse">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="wfs:ExceptionReport"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+
+   <!-- ========================================================== -->
+   <!-- = BASE RESPONSE TYPE                                     = -->
+   <!-- ========================================================== -->
+   <xsd:complexType name="BaseResponseType" abstract="true">
+      <xsd:attribute name="service"
+                     type="xsd:string" use="required" fixed="WFS"/>
+      <xsd:attribute name="version"
+                     type="wfs:VersionStringType" use="required"/>
+      <xsd:attribute name="updateSequence" type="xsd:string"/>
+   </xsd:complexType>
+   <xsd:simpleType name="VersionStringType">
+      <xsd:restriction base="xsd:string">
+         <xsd:pattern value="3\.0\.\d+"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <!-- ========================================================== -->
+   <!-- = EXTENT TYPE                                            = -->
+   <!-- ========================================================== -->
+   <xsd:element name="Extent" type="wfs:ExtentType"/>
+   <xsd:complexType name="ExtentType">
+      <xsd:sequence>
+         <xsd:element ref="wfs:SpatialExtent"
+                      minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="wfs:TemporalExtent"
+                      minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:element name="Spatial"
+                type="wfs:WGS84BoundingBoxType"
+                substitutionGroup="wfs:SpatialExtent"/>
+   <xsd:element name="Temporal"
+                type="wfs:GregorianPeriodType"
+                substitutionGroup="wfs:TemporalExtent"/>
+
+   <!-- ========================================================== -->
+   <!-- = SPATIAL EXTENT TYPES (based on OWS Common 2.0.2)       = -->
+   <!-- ========================================================== -->
+   <xsd:element name="SpatialExtent"
+                type="wfs:SpatialExtentType" abstract="true"/>
+   <xsd:complexType name="SpatialExtentType" abstract="true"/>
+   <xsd:complexType name="BoundingBoxType">
+      <xsd:complexContent>
+         <xsd:extension base="wfs:SpatialExtentType">
+            <xsd:sequence>
+               <xsd:element name="LowerCorner" type="wfs:PositionType"/>
+               <xsd:element name="UpperCorner" type="wfs:PositionType"/>
+            </xsd:sequence>
+            <xsd:attribute name="crs" type="xsd:anyURI"/>
+            <xsd:attribute name="dimensions" type="xsd:positiveInteger"/>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="WGS84BoundingBoxType">
+      <xsd:complexContent>
+         <xsd:restriction base="wfs:BoundingBoxType">
+            <xsd:sequence>
+               <xsd:element name="LowerCorner" type="wfs:PositionType2D"/>
+               <xsd:element name="UpperCorner" type="wfs:PositionType2D"/>
+            </xsd:sequence>
+            <xsd:attribute name="crs" type="xsd:anyURI"
+                 fixed="http://www.opengis.net/def/crs/OGC/1.3/CRS84"/>
+            <xsd:attribute name="dimensions" type="xsd:positiveInteger"
+                 fixed="2"/>
+         </xsd:restriction>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:simpleType name="PositionType">
+      <xsd:list itemType="xsd:double" />
+   </xsd:simpleType>
+   <xsd:simpleType name="PositionType2D">
+      <xsd:restriction base="wfs:PositionType">
+         <xsd:length value="2" />
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <!-- ========================================================== -->
+   <!-- = TEMPORAL EXTENT TYPES (copied & modified from CSW 3.0) = -->
+   <!-- ========================================================== -->
+   <xsd:element name="TemporalExtent"
+                type="wfs:TemporalExtentType" abstract="true"/>
+   <xsd:complexType name="TemporalExtentType" abstract="true"/>
+   <xsd:complexType name="TemporalPeriodType">
+      <xsd:complexContent>
+         <xsd:extension base="wfs:TemporalExtentType">
+            <xsd:sequence>
+               <xsd:element ref="wfs:begin" minOccurs="0"/>
+               <xsd:element ref="wfs:end" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="trs" type="xsd:anyURI"/>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="GregorianPeriodType">
+      <xsd:complexContent>
+         <xsd:restriction base="wfs:TemporalPeriodType">
+            <xsd:sequence>
+               <xsd:element ref="wfs:begin" minOccurs="0"/>
+               <xsd:element ref="wfs:end" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="trs" type="xsd:anyURI"
+                 fixed="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+         </xsd:restriction>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="begin">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:dateTime">
+               <xsd:attribute name="inclusive"
+                              type="xsd:boolean" default="true"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="end">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:dateTime">
+               <xsd:attribute name="inclusive"
+                              type="xsd:boolean" default="true"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+
+</xsd:schema>

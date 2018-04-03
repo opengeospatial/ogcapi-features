@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LandingPage
+   service="WFS"
+   version="3.0.0"
+   xmlns="http://www.opengis.net/wfs/3.0"
+   xmlns:atom="http://www.w3.org/2005/Atom"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.opengis.net/wfs/3.0 ../wfs.xsd">
+   <atom:link rel="self"
+              type="application/json"
+              title="This Document"
+              href="http://www.acme.com/3.0/wfs?f=application%2Fjson"/>
+   <atom:link rel="alternate"
+              type="text/xml"
+              title="This Document as XML"
+              href="http://www.acme.com/3.0/wfs?f=text%2Fxml"/>
+   <atom:link rel="alternate"
+              type="text/html"
+              title="This Document as HTML"
+              href="http://www.acme.com/3.0/wfs?f=text%2Fhtml"/>
+   <atom:link rel="service"
+              type="application/json"
+              title="API definition for this enpoint as JSON"
+              href="http://www.acme.com/3.0/wfs/api?f=application%2Fjson"/>
+   <atom:link rel="service"
+              type="application/vnd.ogc_wfs+xml"
+              title="API definition for this endpoint as XML"
+              href="http://www.acme.com/3.0/wfs/api?f=application%2Fvnd.ogc_wfs%2Bxml"/>
+   <atom:link rel="conformance"
+              type="application/json"
+              title="Conformance Declaration as JSON"
+              href="http://www.acme.com/3.0/wfs/conformance?f=application%2Fjson"/>
+   <atom:link rel="conformance"
+              type="text/xml"
+              title="Conformance Declaration as XML"
+              href="http://www.acme.com/3.0/wfs/conformance?f=text%2Fxml"/>
+   <atom:link rel="conformance"
+              type="text/html"
+              title="Conformance Declaration as HTML"
+              href="http://www.acme.com/3.0/wfs/conformance?f=text%2Fhtml"/>
+   <atom:link rel="collections"
+              type="application/json"
+              title="Collections Metadata as JSON"
+              href="http://www.acme.com/3.0/wfs/collections?f=application%2Fjson"/>
+   <atom:link rel="collections"
+              type="text/xml"
+              title="Collections Metadata as XML"
+              href="http://www.acme.com/3.0/wfs/collections?f=text%2Fxml"/>
+   <atom:link rel="collections"
+              type="text/html"
+              title="Collections Metadata as HTML"
+              href="http://www.acme.com/3.0/wfs/collections?f=text%2Fhtml"/>
+</LandingPage>
