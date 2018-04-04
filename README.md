@@ -1,7 +1,8 @@
 # The next version of the OGC Web Feature Service standard
 
 This GitHub repository is used by the OGC WFS/FES Standards Working Group and ISO/TC 211 to develop 
-the next major revision of the Web Feature Service and Filter Encoding standards.
+the next major revision of the Web Feature Service and Filter Encoding open standards 
+for querying geospatial information on the web.
 
 ## Communication
 
