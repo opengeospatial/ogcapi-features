@@ -39,7 +39,7 @@
       type="application/json"
       href="http://www.acme.com/3.0/wfs/collections/aerofacp_1m"/>
    <atom:link rel="describedBy" title="The schema for these feature"
-      type="text/xml"
+      type="application/xml"
       href="http://www.acme.com/3.0/wfs/collections/aerofacp_1m/schema"/>
 
    <!-- Features in the result set -->
@@ -54,7 +54,7 @@
          href="http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items/1?f=application%2Ftext%2Bhtml"/>
       <aerofacp_1m gml:id="F1">
          <geometry>
-            <gml:Point gml:id="geom1" srsName="urn:ogc:def:crs:EPSG::4269">
+            <gml:Point gml:id="geom1" srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84">
                <gml:pos>-43.81286239624023 -176.466049194336</gml:pos>
             </gml:Point>
          </geometry>
@@ -80,7 +80,7 @@
          href="http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items/2?f=application%2Ftext%2Bhtml"/>
       <aerofacp_1m gml:id="F2">
          <geometry>
-            <gml:Point gml:id="geom2" srsName="urn:ogc:def:crs:EPSG::4269">
+            <gml:Point gml:id="geom2" srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84">
                <gml:pos>-23.3629035949707 -149.5207672119141</gml:pos>
             </gml:Point>
          </geometry>

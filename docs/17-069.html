@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0.0-SNAPSHOT (2018-04-03)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0.0-SNAPSHOT (2018-04-04)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -731,8 +731,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#openapi-buildings.yaml">B.3. OpenAPI definition with details on the collection and its features</a></li>
 </ul>
 </li>
-<li><a href="#_revision_history">Annex C: Revision History</a></li>
-<li><a href="#Bibliography">Annex D: Bibliography</a></li>
+<li><a href="#xml_examples">Annex C: XML examples (Informative)</a>
+<ul class="sectlevel2">
+<li><a href="#_overview_3">C.1. Overview</a></li>
+<li><a href="#_a_landing_page">C.2. A Landing page</a></li>
+<li><a href="#_conformance_statements">C.3. Conformance statements</a></li>
+<li><a href="#_feature_collections_metadata_2">C.4. Feature collections metadata</a></li>
+<li><a href="#_a_feature_collection">C.5. A feature collection</a></li>
+</ul>
+</li>
+<li><a href="#_revision_history">Annex D: Revision History</a></li>
+<li><a href="#Bibliography">Annex E: Bibliography</a></li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
@@ -4028,7 +4037,7 @@ is limited to features that can be stored in a tabular data structure.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> for feature collections and features,</p>
+<p><code>application/gml+xml; version=3.2; profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> for feature collections and features,</p>
 </li>
 <li>
 <p><code>application/xml</code> for all other resources.</p>
@@ -4038,7 +4047,7 @@ is limited to features that can be stored in a tabular data structure.</p>
 </tr>
 </tbody>
 </table>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_gmlsf0_content" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -4050,42 +4059,111 @@ is limited to features that can be stored in a tabular data structure.</p>
 <p>/req/gmlsf0/content<br></p>
 </div>
 <div class="paragraph">
-<p>Every <code>200</code>-response with the media type <code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code> SHALL be</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>a <a href="http://schemas.opengis.net/wfs/3.0/wfs-core.xsd">WFS 3.0 Core FeatureCollection Object</a> for feature collections, and</p>
-</li>
-<li>
-<p>a <a href="http://schemas.opengis.net/gml/3.2.1/feature.xsd">GML 3.2 Feature</a> for features.</p>
-</li>
-</ul>
+<p><a href="#gml_content">Table 2</a> specifies the XML document root element
+that the server SHALL return in a <code>200</code>-response for each resource.</p>
 </div>
 <div class="paragraph">
-<p>Every feature SHALL conform to the <a href="#GMLSF">GML Simple Features Profile, Level 0</a>.</p>
+<p>Every feature in a feature collection or feature resource SHALL conform
+to the <a href="#GMLSF">GML Simple Features Profile, Level 0</a> and be substitutable
+for <code>gml:AbstractFeature</code>.</p>
 </div>
 <div class="paragraph">
-<p>The schema of all responses with the media type <code>application/xml</code> SHALL
-conform with XML Schema &#8230;&#8203;.</p>
-</div>
-<div class="paragraph">
-<p>The links specified in the requirements <code>/req/core/fc-links</code> and
-<code>/req/core/f-links</code> SHALL be added in &#8230;&#8203;</p>
+<p>The schema of all responses with a root element in the <code>wfs</code> namespace SHALL
+validate against the <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/wfs.xsd">WFS 3.0 Core XML Schema</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock caution">
+<table id="gml_content" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Media types and XML elements for each resource</caption>
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 35%;">
+<col style="width: 35%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Resource</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Path</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">XML root element</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Landing page</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>wfs:LandingPage</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conformance classes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/conformance</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>wfs:ConformsTo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collections metadata</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>wfs:Collections</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collection metadata</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>wfs:Collection</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collection</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}/items</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>wfs:FeatureCollection</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}/items/{fid}</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">substitutable for <code>gml:AbstractFeature</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The namespace prefixes used above and in the WFS 3.0 Core XML Schema are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>wfs</code>: <code><a href="http://www.opengis.net/wfs/3.0" class="bare">http://www.opengis.net/wfs/3.0</a></code></p>
+</li>
+<li>
+<p><code>gml</code>: <code><a href="http://www.opengis.net/gml/3.2" class="bare">http://www.opengis.net/gml/3.2</a></code></p>
+</li>
+<li>
+<p><code>atom</code>: <code><a href="http://www.w3.org/2005/Atom" class="bare">http://www.w3.org/2005/Atom</a></code></p>
+</li>
+<li>
+<p><code>xlink</code>: <code><a href="http://www.w3.org/1999/xlink" class="bare">http://www.w3.org/1999/xlink</a></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The API definition resource at path <code>/api</code> is not included in <a href="#gml_content">Table 2</a> and
+as this requirements class does not prescribe any API definition approach.</p>
+</div>
+<div class="paragraph">
+<p>The mapping of the content from the responses specified in the
+<a href="#rc_core">Core requirements class</a> to the XML is straightforward.
+All links are encoded using <code>atom:link</code> elements except in GML features
+where simple Xlinks are used.</p>
+</div>
+<div class="paragraph">
+<p><a href="#xml_examples">Annex C</a> has example responses in XML.</p>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Caution</div>
+<div class="title">Note</div>
 </td>
 <td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/58">ISSUE 58</a><br>
-Add and describe XML schema for XML/GML responses. Clarify the mapping of the
-resources from Core to the XML schema. Add examples.
+The <code>wfs:FeatureCollection</code> element deliberately goes beyond the permitted content
+specified in the <a href="#GMLSF">GML Simple Features Profile</a>, section 8.4.2. This is
+necessary to support the hypermedia controls and other relevant content for
+a Web Feature Service API.
 </td>
 </tr>
 </table>
@@ -4141,7 +4219,7 @@ atomic values (strings, numbers, etc.).</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> for feature collections and features,</p>
+<p><code>application/gml+xml; version=3.2; profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> for feature collections and features,</p>
 </li>
 <li>
 <p><code>application/xml</code> for all other resources.</p>
@@ -4160,49 +4238,26 @@ atomic values (strings, numbers, etc.).</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 40</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
-<p>/req/gmlsf0/content<br></p>
+<p>/req/gmlsf2/content<br></p>
 </div>
 <div class="paragraph">
-<p>Every <code>200</code>-response with the media type <code>application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code> SHALL be</p>
+<p>The <a href="#req_gmlsf0_content">requirement <code>/req/gmlsf0/content</code></a> applies, too,
+with the following changes:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>a <a href="http://schemas.opengis.net/wfs/3.0/wfs-core.xsd">WFS 3.0 Core FeatureCollection Object</a> for feature collections, and</p>
+<p>All references to media type <code>application/gml+xml; version=3.2; profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0</code>
+are replaced by <code>application/gml+xml; version=3.2; profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2</code>.</p>
 </li>
 <li>
-<p>a <a href="http://schemas.opengis.net/gml/3.2.1/feature.xsd">GML 3.2 Feature</a> for features.</p>
+<p>All references to "GML Simple Features Profile, Level 0" are replaced by "GML Simple Features Profile, Level 2".</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Every feature SHALL conform to the <a href="#GMLSF">GML Simple Features Profile, Level 2</a>.</p>
-</div>
-<div class="paragraph">
-<p>The schema of all responses with the media type <code>application/xml</code> SHALL
-conform with XML Schema &#8230;&#8203;.</p>
-</div>
-<div class="paragraph">
-<p>The links specified in the requirements <code>/req/core/fc-links</code> and
-<code>/req/core/f-links</code> SHALL be added in &#8230;&#8203;</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Caution</div>
-</td>
-<td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/58">ISSUE 58</a><br>
-See the same note in the "Geography Markup Language (GML), Simple Features Profile,
-Level 0" requirements class above.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 </div>
@@ -5796,7 +5851,285 @@ tags:
 </div>
 </div>
 <div class="sect1">
-<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex C: Revision History</h2>
+<h2 id="xml_examples"><a class="anchor" href="#xml_examples"></a>Annex C: XML examples (Informative)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>C.1. Overview</h3>
+<div class="paragraph">
+<p>This annex includes examples of XML/GML responses to illustrate how the
+OpenAPI fragments used to define the requirements for the
+<a href="#rc_core">Core requirements class</a> are expressed in XML using the
+<a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/wfs.xsd">WFS 3.0 Core XML Schema</a>.</p>
+</div>
+<div class="paragraph">
+<p>The service used in the examples has a single feature collection (airports).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_landing_page"><a class="anchor" href="#_a_landing_page"></a>C.2. A Landing page</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="XML"><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;LandingPage
+   service=&quot;WFS&quot;
+   version=&quot;3.0.0&quot;
+   xmlns=&quot;http://www.opengis.net/wfs/3.0&quot;
+   xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;
+   xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.opengis.net/wfs/3.0 ../wfs.xsd&quot;&gt;
+   &lt;atom:link rel=&quot;self&quot;
+              type=&quot;application/json&quot;
+              title=&quot;This Document&quot;
+              href=&quot;http://www.acme.com/3.0/wfs?f=application%2Fjson&quot;/&gt;
+   &lt;atom:link rel=&quot;alternate&quot;
+              type=&quot;text/xml&quot;
+              title=&quot;This Document as XML&quot;
+              href=&quot;http://www.acme.com/3.0/wfs?f=text%2Fxml&quot;/&gt;
+   &lt;atom:link rel=&quot;alternate&quot;
+              type=&quot;text/html&quot;
+              title=&quot;This Document as HTML&quot;
+              href=&quot;http://www.acme.com/3.0/wfs?f=text%2Fhtml&quot;/&gt;
+   &lt;atom:link rel=&quot;service&quot;
+              type=&quot;application/json&quot;
+              title=&quot;API definition for this enpoint as JSON&quot;
+              href=&quot;http://www.acme.com/3.0/wfs/api?f=application%2Fjson&quot;/&gt;
+   &lt;atom:link rel=&quot;service&quot;
+              type=&quot;application/vnd.ogc_wfs+xml&quot;
+              title=&quot;API definition for this endpoint as XML&quot;
+              href=&quot;http://www.acme.com/3.0/wfs/api?f=application%2Fvnd.ogc_wfs%2Bxml&quot;/&gt;
+   &lt;atom:link rel=&quot;conformance&quot;
+              type=&quot;application/json&quot;
+              title=&quot;Conformance Declaration as JSON&quot;
+              href=&quot;http://www.acme.com/3.0/wfs/conformance?f=application%2Fjson&quot;/&gt;
+   &lt;atom:link rel=&quot;conformance&quot;
+              type=&quot;text/xml&quot;
+              title=&quot;Conformance Declaration as XML&quot;
+              href=&quot;http://www.acme.com/3.0/wfs/conformance?f=text%2Fxml&quot;/&gt;
+   &lt;atom:link rel=&quot;conformance&quot;
+              type=&quot;text/html&quot;
+              title=&quot;Conformance Declaration as HTML&quot;
+              href=&quot;http://www.acme.com/3.0/wfs/conformance?f=text%2Fhtml&quot;/&gt;
+   &lt;atom:link rel=&quot;collections&quot;
+              type=&quot;application/json&quot;
+              title=&quot;Collections Metadata as JSON&quot;
+              href=&quot;http://www.acme.com/3.0/wfs/collections?f=application%2Fjson&quot;/&gt;
+   &lt;atom:link rel=&quot;collections&quot;
+              type=&quot;text/xml&quot;
+              title=&quot;Collections Metadata as XML&quot;
+              href=&quot;http://www.acme.com/3.0/wfs/collections?f=text%2Fxml&quot;/&gt;
+   &lt;atom:link rel=&quot;collections&quot;
+              type=&quot;text/html&quot;
+              title=&quot;Collections Metadata as HTML&quot;
+              href=&quot;http://www.acme.com/3.0/wfs/collections?f=text%2Fhtml&quot;/&gt;
+&lt;/LandingPage&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conformance_statements"><a class="anchor" href="#_conformance_statements"></a>C.3. Conformance statements</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="XML"><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;ConformsTo
+   service=&quot;WFS&quot;
+   version=&quot;3.0.0&quot;
+   xmlns=&quot;http://www.opengis.net/wfs/3.0&quot;
+   xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.opengis.net/wfs/3.0 ../wfs.xsd&quot;&gt;
+   &lt;atom:link href=&quot;http://www.opengis.net/spec/wfs-1/3.0/req/core&quot;/&gt;
+   &lt;atom:link href=&quot;http://www.opengis.net/spec/wfs-1/3.0/req/oas30&quot;/&gt;
+   &lt;atom:link href=&quot;http://www.opengis.net/spec/wfs-1/3.0/req/html&quot;/&gt;
+   &lt;atom:link href=&quot;http://www.opengis.net/spec/wfs-1/3.0/req/geojson&quot;/&gt;
+   &lt;atom:link href=&quot;http://www.opengis.net/spec/wfs-1/3.0/req/gmlsf0&quot;/&gt;
+&lt;/ConformsTo&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collections_metadata_2"><a class="anchor" href="#_feature_collections_metadata_2"></a>C.4. Feature collections metadata</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="XML"><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Collections
+   service=&quot;WFS&quot;
+   version=&quot;3.0.0&quot;
+   xmlns=&quot;http://www.opengis.net/wfs/3.0&quot;
+   xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;
+   xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
+   xmlns:cw=&quot;http://schemas.cubewerx.com/namespaces/null&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.opengis.net/wfs/3.0 ../wfs.xsd &quot;&gt;
+
+   &lt;atom:link rel=&quot;self&quot;
+         title=&quot;This document&quot;
+         type=&quot;application/json&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections?f=application%2Fjson&quot;/&gt;
+   &lt;atom:link rel=&quot;alternate&quot;
+         title=&quot;This document as XML&quot;
+         type=&quot;text/xml&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections?f=text%2Fxml&quot;/&gt;
+   &lt;atom:link rel=&quot;alternate&quot;
+         title=&quot;This document as HTML&quot;
+         type=&quot;text/html&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections?f=text%2Fhtml&quot;/&gt;
+   &lt;atom:link rel=&quot;describedBy&quot;
+         title=&quot;XML Schema for this dataset&quot;
+         type=&quot;text/xml&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections/schema&quot;/&gt;
+
+   &lt;Collection&gt;
+      &lt;Name&gt;aerofacp_1m&lt;/Name&gt;
+      &lt;Title&gt;Airport Facilities Points&lt;/Title&gt;
+
+      &lt;atom:link rel=&quot;item&quot;
+            title=&quot;Airport Facilities Points&quot;
+            type=&quot;application/geo+json&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?f=application%2Fvnd.geo%2Bjson&quot;/&gt;
+      &lt;atom:link rel=&quot;item&quot;
+            title=&quot;Airport Facilities Points&quot;
+            type=&quot;application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?f=application%2Fgml%2Bxml%3Bversion%3D3.2%3Bprofile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0&quot;/&gt;
+      &lt;atom:link rel=&quot;alternate&quot;
+            title=&quot;Airport Facilities Points&quot;
+            type=&quot;text/html&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?f=text%2Fhtml&quot;/&gt;
+      &lt;atom:link rel=&quot;describedBy&quot;
+            title=&quot;Schema for Airport Facilities Points&quot;
+            type=&quot;text/xml&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/schema&quot;/&gt;
+
+      &lt;Extent&gt;
+         &lt;Spatial crs=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
+            &lt;LowerCorner&gt;-179.878326416016 -54.9311103820801&lt;/LowerCorner&gt;
+            &lt;UpperCorner&gt;179.339859008789 79.52944183349609&lt;/UpperCorner&gt;
+         &lt;/Spatial&gt;
+         &lt;Temporal trs=&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;&gt;
+            &lt;begin&gt;2017-01-01T00:00:00Z&lt;/begin&gt;
+            &lt;end&gt;2017-12-31T23:59:59Z&lt;/end&gt;
+         &lt;/Temporal&gt;
+      &lt;/Extent&gt;
+      &lt;DefaultCRS&gt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&lt;/DefaultCRS&gt;
+   &lt;/Collection&gt;
+&lt;/Collections&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_feature_collection"><a class="anchor" href="#_a_feature_collection"></a>C.5. A feature collection</h3>
+<div class="paragraph">
+<p>This response contains 2 features of the collection and has a link to the next
+features.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="XML"><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;wfs:FeatureCollection
+   timeStamp=&quot;2018-04-02T15:14:20-04:00&quot;
+   numberReturned=&quot;2&quot;
+   numberMatched=&quot;9335&quot;
+   xmlns=&quot;http://www.acme.com/namespaces/ns1&quot;
+   xmlns:wfs=&quot;http://www.opengis.net/wfs/3.0&quot;
+   xmlns:gml=&quot;http://www.opengis.net/gml/3.2&quot;
+   xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.acme.com/namespaces/ns1
+       http://www.acme.com/3.0/wfs/collections/aerofacp_1m/schema
+       http://www.opengis.net/wfs/3.0 ../wfs.xsd
+       http://www.w3.org/2005/Atom
+       http://schemas.opengis.net/kml/2.3/atom-author-link.xsd
+       http://www.opengis.net/gml/3.2
+       http://schemas.opengis.net/gml/3.2.1/gml.xsd&quot;&gt;
+   &lt;wfs:boundedBy&gt;
+      &lt;wfs:Spatial crs=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
+         &lt;wfs:LowerCorner&gt;-54.9311103820801 -179.878326416016&lt;/wfs:LowerCorner&gt;
+         &lt;wfs:UpperCorner&gt;79.52944183349609 179.339859008789&lt;/wfs:UpperCorner&gt;
+      &lt;/wfs:Spatial&gt;
+      &lt;wfs:Temporal trs=&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;&gt;
+         &lt;wfs:begin&gt;2017-01-01T00:00:00Z&lt;/wfs:begin&gt;
+         &lt;wfs:end&gt;2017-12-31T23:59:59Z&lt;/wfs:end&gt;
+      &lt;/wfs:Temporal&gt;
+   &lt;/wfs:boundedBy&gt;
+
+   &lt;!-- Link to the next set of features in this result set. --&gt;
+   &lt;atom:link rel=&quot;next&quot; title=&quot;The next set of features in this result set&quot;
+      type=&quot;application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0&quot;
+      href=&quot;http://www.acme.com/3.0/wfs/qid8cff81438e943620dd813fd56c&quot;/&gt;
+
+   &lt;!-- Other hypermedia controls --&gt;
+   &lt;atom:link rel=&quot;service&quot; title=&quot;The service that offers these features&quot;
+      type=&quot;application/json&quot; href=&quot;http://www.acme.com/3.0/wfs&quot;/&gt;
+   &lt;atom:link rel=&quot;collection&quot;
+      title=&quot;The collection of which these feature are members&quot;
+      type=&quot;application/json&quot;
+      href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m&quot;/&gt;
+   &lt;atom:link rel=&quot;describedBy&quot; title=&quot;The schema for these feature&quot;
+      type=&quot;text/xml&quot;
+      href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/schema&quot;/&gt;
+
+   &lt;!-- Features in the result set --&gt;
+   &lt;wfs:member&gt;
+      &lt;atom:link rel=&quot;self&quot; title=&quot;This feature&quot;
+         type=&quot;application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items/1?f=application%2Fgml%2Bxml%3Bversion%3D3.2%3Bprofile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0&quot;/&gt;
+      &lt;atom:link rel=&quot;alternate&quot; title=&quot;This feature as GeoJSON&quot;
+         type=&quot;application/geo+json&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items/1?f=application%2Fgeo%2Bjson&quot;/&gt;
+      &lt;atom:link rel=&quot;alternate&quot; title=&quot;This feature as HTML&quot; type=&quot;text/html&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items/1?f=application%2Ftext%2Bhtml&quot;/&gt;
+      &lt;aerofacp_1m gml:id=&quot;F1&quot;&gt;
+         &lt;geometry&gt;
+            &lt;gml:Point gml:id=&quot;geom1&quot; srsName=&quot;urn:ogc:def:crs:EPSG::4269&quot;&gt;
+               &lt;gml:pos&gt;-43.81286239624023 -176.466049194336&lt;/gml:pos&gt;
+            &lt;/gml:Point&gt;
+         &lt;/geometry&gt;
+         &lt;id&gt;1455&lt;/id&gt;
+         &lt;f_code&gt;GB005&lt;/f_code&gt;
+         &lt;iko&gt;NZCI&lt;/iko&gt;
+         &lt;nam&gt;CHATHAM ISLANDS&lt;/nam&gt;
+         &lt;na3&gt;NZ58133&lt;/na3&gt;
+         &lt;use&gt;999&lt;/use&gt;
+         &lt;zv3&gt;13&lt;/zv3&gt;
+         &lt;tile_id&gt;434&lt;/tile_id&gt;
+         &lt;end_id&gt;1&lt;/end_id&gt;
+      &lt;/aerofacp_1m&gt;
+   &lt;/wfs:member&gt;
+   &lt;wfs:member&gt;
+      &lt;atom:link rel=&quot;self&quot; title=&quot;This feature&quot;
+         type=&quot;application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items/2?f=application%2Fgml%2Bxml%3Bversion%3D3.2%3Bprofile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0&quot;/&gt;
+      &lt;atom:link rel=&quot;alternate&quot; title=&quot;This feature as GeoJSON&quot;
+         type=&quot;application/geo+json&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items/2?f=application%2Fgeo%2Bjson&quot;/&gt;
+      &lt;atom:link rel=&quot;alternate&quot; title=&quot;This feature as HTML&quot; type=&quot;text/html&quot;
+         href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items/2?f=application%2Ftext%2Bhtml&quot;/&gt;
+      &lt;aerofacp_1m gml:id=&quot;F2&quot;&gt;
+         &lt;geometry&gt;
+            &lt;gml:Point gml:id=&quot;geom2&quot; srsName=&quot;urn:ogc:def:crs:EPSG::4269&quot;&gt;
+               &lt;gml:pos&gt;-23.3629035949707 -149.5207672119141&lt;/gml:pos&gt;
+            &lt;/gml:Point&gt;
+         &lt;/geometry&gt;
+         &lt;id&gt;4421&lt;/id&gt;
+         &lt;f_code&gt;GB005&lt;/f_code&gt;
+         &lt;iko&gt;NTAT&lt;/iko&gt;
+         &lt;nam&gt;TUBUAI&lt;/nam&gt;
+         &lt;na3&gt;FP67494&lt;/na3&gt;
+         &lt;use&gt;49&lt;/use&gt;
+         &lt;zv3&gt;3&lt;/zv3&gt;
+         &lt;tile_id&gt;397&lt;/tile_id&gt;
+         &lt;end_id&gt;1&lt;/end_id&gt;
+      &lt;/aerofacp_1m&gt;
+   &lt;/wfs:member&gt;
+&lt;/wfs:FeatureCollection&gt;</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex D: Revision History</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -5914,13 +6247,20 @@ tags:
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">4,5,6,7,8,9</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clean-up asciidoc <a href="https://github.com/opengeospatial/WFS_FES/issues/100">#100</a></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-04</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">P. Vretanos, C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">8.4,8.5,C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clarify XML encoding <a href="https://github.com/opengeospatial/WFS_FES/issues/58">#58</a></p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex D: Bibliography</h2>
+<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex E: Bibliography</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -5943,7 +6283,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-03 18:32:19 CEST
+Last updated 2018-04-04 12:22:13 CEST
 </div>
 </div>
 </body>

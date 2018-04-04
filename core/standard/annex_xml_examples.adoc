@@ -1,0 +1,44 @@
+[[xml_examples]]
+[appendix]
+:appendix-caption: Annex
+== XML examples (Informative)
+
+=== Overview
+
+This annex includes examples of XML/GML responses to illustrate how the
+OpenAPI fragments used to define the requirements for the
+<<rc_core,Core requirements class>> are expressed in XML using the
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/wfs.xsd[WFS 3.0 Core XML Schema].
+
+The service used in the examples has a single feature collection (airports).
+
+=== A Landing page
+
+[source,XML]
+----
+include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/LandingPage.xml[]
+----
+
+=== Conformance statements
+
+[source,XML]
+----
+include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/ConformsTo.xml[]
+----
+
+=== Feature collections metadata
+
+[source,XML]
+----
+include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/Collections.xml[]
+----
+
+=== A feature collection
+
+This response contains 2 features of the collection and has a link to the next
+features.
+
+[source,XML]
+----
+include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/Collection.xml[]
+----

@@ -176,9 +176,40 @@ include::requirements/gmlsf0/REQ_definition.adoc[]
 
 include::requirements/gmlsf0/REQ_content.adoc[]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/58[ISSUE 58] +
-Add and describe XML schema for XML/GML responses. Clarify the mapping of the
-resources from Core to the XML schema. Add examples.
+[#gml_content,reftext='{table-caption} {counter:table-num}']
+.Media types and XML elements for each resource
+[cols="30,35,35",options="header"]
+!===
+|Resource |Path |XML root element
+|Landing page |`/` |`wfs:LandingPage`
+|Conformance classes |`/conformance` |`wfs:ConformsTo`
+|Feature collections metadata |`/collections` |`wfs:Collections`
+|Feature collection metadata |`/collections/{name}` |`wfs:Collection`
+|Feature collection |`/collections/{name}/items` |`wfs:FeatureCollection`
+|Feature |`/collections/{name}/items/{fid}` |substitutable for `gml:AbstractFeature`
+!===
+
+The namespace prefixes used above and in the WFS 3.0 Core XML Schema are:
+
+* `wfs`: `http://www.opengis.net/wfs/3.0`
+* `gml`: `http://www.opengis.net/gml/3.2`
+* `atom`: `http://www.w3.org/2005/Atom`
+* `xlink`: `http://www.w3.org/1999/xlink`
+
+The API definition resource at path `/api` is not included in <<gml_content>> and
+as this requirements class does not prescribe any API definition approach.
+
+The mapping of the content from the responses specified in the
+<<rc_core,Core requirements class>> to the XML is straightforward.
+All links are encoded using `atom:link` elements except in GML features
+where simple Xlinks are used.
+
+<<xml_examples,Annex C>> has example responses in XML.
+
+NOTE: The `wfs:FeatureCollection` element deliberately goes beyond the permitted content
+specified in the <<GMLSF,GML Simple Features Profile>>, section 8.4.2. This is
+necessary to support the hypermedia controls and other relevant content for
+a Web Feature Service API.
 
 === Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 2"
 
@@ -191,7 +222,3 @@ include::requirements/requirements_class_gmlsf2.adoc[]
 include::requirements/gmlsf2/REQ_definition.adoc[]
 
 include::requirements/gmlsf2/REQ_content.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/58[ISSUE 58] +
-See the same note in the "Geography Markup Language (GML), Simple Features Profile,
-Level 0" requirements class above.
