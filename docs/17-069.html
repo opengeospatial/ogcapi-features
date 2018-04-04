@@ -737,7 +737,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_a_landing_page">C.2. A Landing page</a></li>
 <li><a href="#_conformance_statements">C.3. Conformance statements</a></li>
 <li><a href="#_feature_collections_metadata_2">C.4. Feature collections metadata</a></li>
-<li><a href="#_a_feature_collection">C.5. A feature collection</a></li>
+<li><a href="#_feature_collection_metadata_2">C.5. Feature collection metadata</a></li>
+<li><a href="#_a_feature_collection">C.6. A feature collection</a></li>
 </ul>
 </li>
 <li><a href="#_revision_history">Annex D: Revision History</a></li>
@@ -4107,7 +4108,7 @@ validate against the <a href="https://raw.githubusercontent.com/opengeospatial/W
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collection metadata</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{name}</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>wfs:Collection</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>wfs:Collections</code>, with just one entry for the collection <code>name</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Feature collection</p></td>
@@ -5861,9 +5862,6 @@ OpenAPI fragments used to define the requirements for the
 <a href="#rc_core">Core requirements class</a> are expressed in XML using the
 <a href="https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/wfs.xsd">WFS 3.0 Core XML Schema</a>.</p>
 </div>
-<div class="paragraph">
-<p>The service used in the examples has a single feature collection (airports).</p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_a_landing_page"><a class="anchor" href="#_a_landing_page"></a>C.2. A Landing page</h3>
@@ -5875,7 +5873,6 @@ OpenAPI fragments used to define the requirements for the
    version=&quot;3.0.0&quot;
    xmlns=&quot;http://www.opengis.net/wfs/3.0&quot;
    xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;
-   xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
    xsi:schemaLocation=&quot;http://www.opengis.net/wfs/3.0 ../wfs.xsd&quot;&gt;
    &lt;atom:link rel=&quot;self&quot;
@@ -5928,6 +5925,9 @@ OpenAPI fragments used to define the requirements for the
 </div>
 <div class="sect2">
 <h3 id="_conformance_statements"><a class="anchor" href="#_conformance_statements"></a>C.3. Conformance statements</h3>
+<div class="paragraph">
+<p>This server conforms to the recommended requirements classes, plus the GML Simple Features Profile, Level 0.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="XML"><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
@@ -5949,6 +5949,9 @@ OpenAPI fragments used to define the requirements for the
 </div>
 <div class="sect2">
 <h3 id="_feature_collections_metadata_2"><a class="anchor" href="#_feature_collections_metadata_2"></a>C.4. Feature collections metadata</h3>
+<div class="paragraph">
+<p>The service three feature collections (airport facilities, roads, inland water areas).</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="XML"><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
@@ -5957,11 +5960,8 @@ OpenAPI fragments used to define the requirements for the
    version=&quot;3.0.0&quot;
    xmlns=&quot;http://www.opengis.net/wfs/3.0&quot;
    xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;
-   xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
-   xmlns:cw=&quot;http://schemas.cubewerx.com/namespaces/null&quot;
    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
    xsi:schemaLocation=&quot;http://www.opengis.net/wfs/3.0 ../wfs.xsd &quot;&gt;
-
    &lt;atom:link rel=&quot;self&quot;
          title=&quot;This document&quot;
          type=&quot;application/json&quot;
@@ -5978,11 +5978,9 @@ OpenAPI fragments used to define the requirements for the
          title=&quot;XML Schema for this dataset&quot;
          type=&quot;text/xml&quot;
          href=&quot;http://www.acme.com/3.0/wfs/collections/schema&quot;/&gt;
-
    &lt;Collection&gt;
       &lt;Name&gt;aerofacp_1m&lt;/Name&gt;
       &lt;Title&gt;Airport Facilities Points&lt;/Title&gt;
-
       &lt;atom:link rel=&quot;item&quot;
             title=&quot;Airport Facilities Points&quot;
             type=&quot;application/geo+json&quot;
@@ -5999,11 +5997,72 @@ OpenAPI fragments used to define the requirements for the
             title=&quot;Schema for Airport Facilities Points&quot;
             type=&quot;text/xml&quot;
             href=&quot;http://www.acme.com/3.0/wfs/collections/aerofacp_1m/schema&quot;/&gt;
-
       &lt;Extent&gt;
          &lt;Spatial crs=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
             &lt;LowerCorner&gt;-179.878326416016 -54.9311103820801&lt;/LowerCorner&gt;
             &lt;UpperCorner&gt;179.339859008789 79.52944183349609&lt;/UpperCorner&gt;
+         &lt;/Spatial&gt;
+         &lt;Temporal trs=&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;&gt;
+            &lt;begin&gt;2017-01-01T00:00:00Z&lt;/begin&gt;
+            &lt;end&gt;2017-12-31T23:59:59Z&lt;/end&gt;
+         &lt;/Temporal&gt;
+      &lt;/Extent&gt;
+      &lt;DefaultCRS&gt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&lt;/DefaultCRS&gt;
+   &lt;/Collection&gt;
+   &lt;Collection&gt;
+      &lt;Name&gt;roadl_1m&lt;/Name&gt;
+      &lt;Title&gt;Roads&lt;/Title&gt;
+      &lt;atom:link rel=&quot;item&quot;
+            title=&quot;Roads&quot;
+            type=&quot;application/geo+json&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fvnd.geo%2Bjson&quot;/&gt;
+      &lt;atom:link rel=&quot;item&quot;
+            title=&quot;Roads&quot;
+            type=&quot;application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fgml%2Bxml%3Bversion%3D3.2%3Bprofile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0&quot;/&gt;
+      &lt;atom:link rel=&quot;alternate&quot;
+            title=&quot;Roads&quot;
+            type=&quot;text/html&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=text%2Fhtml&quot;/&gt;
+      &lt;atom:link rel=&quot;describedBy&quot;
+            title=&quot;Schema for Roads&quot;
+            type=&quot;text/xml&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/roadl_1m/schema&quot;/&gt;
+      &lt;Extent&gt;
+         &lt;Spatial crs=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
+           &lt;LowerCorner&gt;-179.999420166016 -54.88802337646479&lt;/LowerCorner&gt;
+           &lt;UpperCorner&gt;179.9999 74.740592956543&lt;/UpperCorner&gt;
+         &lt;/Spatial&gt;
+         &lt;Temporal trs=&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;&gt;
+            &lt;begin&gt;2017-01-01T00:00:00Z&lt;/begin&gt;
+            &lt;end&gt;2017-12-31T23:59:59Z&lt;/end&gt;
+         &lt;/Temporal&gt;
+      &lt;/Extent&gt;
+      &lt;DefaultCRS&gt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&lt;/DefaultCRS&gt;
+   &lt;/Collection&gt;
+   &lt;Collection&gt;
+      &lt;Name&gt;inwatera_1m&lt;/Name&gt;
+      &lt;Title&gt;Inland Water Areas&lt;/Title&gt;
+      &lt;atom:link rel=&quot;item&quot;
+            title=&quot;Inland Water Areas&quot;
+            type=&quot;application/geo+json&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/inwatera_1m/items?f=application%2Fvnd.geo%2Bjson&quot;/&gt;
+      &lt;atom:link rel=&quot;item&quot;
+            title=&quot;Inland Water Areas&quot;
+            type=&quot;application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/inwatera_1m/items?f=application%2Fgml%2Bxml%3Bversion%3D3.2%3Bprofile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0&quot;/&gt;
+      &lt;atom:link rel=&quot;alternate&quot;
+            title=&quot;Inland Water Areas&quot;
+            type=&quot;text/html&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/inwatera_1m/items?f=text%2Fhtml&quot;/&gt;
+      &lt;atom:link rel=&quot;describedBy&quot;
+            title=&quot;Schema for Inland Water Areas&quot;
+            type=&quot;text/xml&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/inwatera_1m/schema&quot;/&gt;
+      &lt;Extent&gt;
+         &lt;Spatial crs=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
+            &lt;LowerCorner&gt;-179.999420166016 -70.91725158691409&lt;/LowerCorner&gt;
+            &lt;UpperCorner&gt;179.9999 83.57595062255859&lt;/UpperCorner&gt;
          &lt;/Spatial&gt;
          &lt;Temporal trs=&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;&gt;
             &lt;begin&gt;2017-01-01T00:00:00Z&lt;/begin&gt;
@@ -6017,7 +6076,57 @@ OpenAPI fragments used to define the requirements for the
 </div>
 </div>
 <div class="sect2">
-<h3 id="_a_feature_collection"><a class="anchor" href="#_a_feature_collection"></a>C.5. A feature collection</h3>
+<h3 id="_feature_collection_metadata_2"><a class="anchor" href="#_feature_collection_metadata_2"></a>C.5. Feature collection metadata</h3>
+<div class="paragraph">
+<p>Only the information for the selected feature collection (airport facilities) is included in the response.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="XML"><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Collections
+   service=&quot;WFS&quot;
+   version=&quot;3.0.0&quot;
+   xmlns=&quot;http://www.opengis.net/wfs/3.0&quot;
+   xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.opengis.net/wfs/3.0 ../wfs.xsd &quot;&gt;
+   &lt;Collection&gt;
+      &lt;Name&gt;roadl_1m&lt;/Name&gt;
+      &lt;Title&gt;Roads&lt;/Title&gt;
+      &lt;atom:link rel=&quot;item&quot;
+            title=&quot;Roads&quot;
+            type=&quot;application/geo+json&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fvnd.geo%2Bjson&quot;/&gt;
+      &lt;atom:link rel=&quot;item&quot;
+            title=&quot;Roads&quot;
+            type=&quot;application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fgml%2Bxml%3Bversion%3D3.2%3Bprofile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0&quot;/&gt;
+      &lt;atom:link rel=&quot;alternate&quot;
+            title=&quot;Roads&quot;
+            type=&quot;text/html&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=text%2Fhtml&quot;/&gt;
+      &lt;atom:link rel=&quot;describedBy&quot;
+            title=&quot;Schema for Roads&quot;
+            type=&quot;text/xml&quot;
+            href=&quot;http://www.acme.com/3.0/wfs/collections/roadl_1m/schema&quot;/&gt;
+      &lt;Extent&gt;
+         &lt;Spatial crs=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
+           &lt;LowerCorner&gt;-179.999420166016 -54.88802337646479&lt;/LowerCorner&gt;
+           &lt;UpperCorner&gt;179.9999 74.740592956543&lt;/UpperCorner&gt;
+         &lt;/Spatial&gt;
+         &lt;Temporal trs=&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;&gt;
+            &lt;begin&gt;2017-01-01T00:00:00Z&lt;/begin&gt;
+            &lt;end&gt;2017-12-31T23:59:59Z&lt;/end&gt;
+         &lt;/Temporal&gt;
+      &lt;/Extent&gt;
+      &lt;DefaultCRS&gt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&lt;/DefaultCRS&gt;
+   &lt;/Collection&gt;
+&lt;/Collections&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_feature_collection"><a class="anchor" href="#_a_feature_collection"></a>C.6. A feature collection</h3>
 <div class="paragraph">
 <p>This response contains 2 features of the collection and has a link to the next
 features.</p>

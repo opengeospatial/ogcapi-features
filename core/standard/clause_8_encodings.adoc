@@ -184,7 +184,7 @@ include::requirements/gmlsf0/REQ_content.adoc[]
 |Landing page |`/` |`wfs:LandingPage`
 |Conformance classes |`/conformance` |`wfs:ConformsTo`
 |Feature collections metadata |`/collections` |`wfs:Collections`
-|Feature collection metadata |`/collections/{name}` |`wfs:Collection`
+|Feature collection metadata |`/collections/{name}` |`wfs:Collections`, with just one entry for the collection `name`
 |Feature collection |`/collections/{name}/items` |`wfs:FeatureCollection`
 |Feature |`/collections/{name}/items/{fid}` |substitutable for `gml:AbstractFeature`
 !===

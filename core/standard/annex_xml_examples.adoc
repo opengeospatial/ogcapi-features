@@ -10,8 +10,6 @@ OpenAPI fragments used to define the requirements for the
 <<rc_core,Core requirements class>> are expressed in XML using the
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/wfs.xsd[WFS 3.0 Core XML Schema].
 
-The service used in the examples has a single feature collection (airports).
-
 === A Landing page
 
 [source,XML]
@@ -21,6 +19,8 @@ include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xm
 
 === Conformance statements
 
+This server conforms to the recommended requirements classes, plus the GML Simple Features Profile, Level 0.
+
 [source,XML]
 ----
 include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/ConformsTo.xml[]
@@ -28,9 +28,20 @@ include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xm
 
 === Feature collections metadata
 
+The service three feature collections (airport facilities, roads, inland water areas).
+
 [source,XML]
 ----
 include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/Collections.xml[]
+----
+
+=== Feature collection metadata
+
+Only the information for the selected feature collection (airport facilities) is included in the response.
+
+[source,XML]
+----
+include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/Collection.xml[]
 ----
 
 === A feature collection
@@ -40,5 +51,5 @@ features.
 
 [source,XML]
 ----
-include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/Collection.xml[]
+include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/FeatureCollection.xml[]
 ----
