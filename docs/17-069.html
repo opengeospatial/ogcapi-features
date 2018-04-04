@@ -2003,6 +2003,22 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 <div class="paragraph">
 <p>This includes the correct use of status codes, headers, etc.</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/105">ISSUE 105</a><br>
+WFS 2.0 defined exception codes and mapped them to HTTP status codes. Should WFS 3.0
+provide guidance on which (common) error situations should return which
+HTTP status code per resource or should we simply require that http status codes
+are used correctly?
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.6. Web caching</h3>
@@ -5071,12 +5087,30 @@ components:
     featureCollectionGeoJSON:
       type: object
       required:
+        - type
         - features
       properties:
+        type:
+          type: string
+          enum:
+            - FeatureCollection
         features:
           type: array
           items:
             $ref: &#39;#/components/schemas/featureGeoJSON&#39;
+        links:
+          type: array
+          items:
+            $ref: &#39;#/components/schemas/link&#39;
+        timeStamp:
+          type: string
+          format: dateTime
+        numberMatched:
+          type: integer
+          minimum: 0
+        numberReturned:
+          type: integer
+          minimum: 0
     featureGeoJSON:
       type: object
       required:
@@ -5657,12 +5691,30 @@ components:
     featureCollectionGeoJSON:
       type: object
       required:
+        - type
         - features
       properties:
+        type:
+          type: string
+          enum:
+            - FeatureCollection
         features:
           type: array
           items:
             $ref: &#39;#/components/schemas/featureGeoJSON&#39;
+        links:
+          type: array
+          items:
+            $ref: &#39;#/components/schemas/link&#39;
+        timeStamp:
+          type: string
+          format: dateTime
+        numberMatched:
+          type: integer
+          minimum: 0
+        numberReturned:
+          type: integer
+          minimum: 0
     featureGeoJSON:
       type: object
       required:
@@ -5891,7 +5943,7 @@ tags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-03 18:12:32 CEST
+Last updated 2018-04-03 18:32:19 CEST
 </div>
 </div>
 </body>

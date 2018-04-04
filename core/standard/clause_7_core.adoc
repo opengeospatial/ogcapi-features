@@ -203,6 +203,12 @@ include::requirements/core/REQ_http.adoc[]
 
 This includes the correct use of status codes, headers, etc.
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/105[ISSUE 105] +
+WFS 2.0 defined exception codes and mapped them to HTTP status codes. Should WFS 3.0
+provide guidance on which (common) error situations should return which
+HTTP status code per resource or should we simply require that http status codes
+are used correctly?
+
 === Web caching
 
 Entity tags are a mechanism for web cache validation and for supporting conditional
