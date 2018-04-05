@@ -6,138 +6,95 @@ WFS 3.0 is not a Web Service in the traditional sense.  Rather, it defines the b
 of a set of RESTful micro-services exposed through an Application Programing
 Interface (API).  Compliance testing for WFS 3.0 and similar standards must answer three questions: 
 
-. 1) Are the capabilities advertised through the API Description compliant with the standard? 
+.  Are the capabilities advertised through the API Description compliant with the standard? 
 
-. 2) Do the micro-services implement those capabilities as advertised? 
+.  Do the micro-services implement those capabilities as advertised? 
 
-. 3) Do the resources returned by the micro-services meet the structure and content requirements of the standard? 
+.  Do the resources returned by the micro-services meet the structure and content requirements of the standard? 
 
 Further complicating the issue, an API may expose
 micro-services in addition to those defined by the standard.  A test engine must be able to traverse the
 API description document, identify test points, and ignore micro-services which
 are not to be tested.  The process for
-identifying test points is provided in Section A.4.1.  <o:p></o:p>
+identifying test points is provided in Section A.4.1.
 
-== A.2: Conventions +<o:p></o:p>
+== A.2: Conventions 
 
-The following conventions apply to this Abstract Test Suite<o:p></o:p>
+The following conventions apply to this Abstract Test Suite:
 
 === A.2.1: Path Templates
-+<o:p></o:p>
 
 Path templates are used throughout these test suites.  Path templating refers to the usage of curly
 braces “{}” to mark a section of a URL path that can be replaced using path
 parameters.  The terms used to describe
 portions of these templates are based on the URL syntax described in RFC 3986.
-+<o:p></o:p>
 
- - scheme: http | https +<o:p></o:p>
+*  scheme: http | https 
 
- - authority: DNS name of the server with optional port number +<o:p></o:p>
+*  authority: DNS name of the server with optional port number 
 
- - path: The slash delimited identifier for a resource on the server +<o:p></o:p>
+*  path: The slash delimited identifier for a resource on the server 
 
- - query: query parameters following the "?" character +<o:p></o:p>
+*  query: query parameters following the "?" character 
 
- - fragment: identifies an element within the resource. Preceded by the "\#" character +<o:p></o:p>
+*  fragment: identifies an element within the resource. Preceded by the "\#" character 
 
 === A.2.2: API
-Description Document +<o:p></o:p>
+Description Document 
 
-The WFS 3.0 standard does not mandate a standard format for
-the API Description Document.  However,
-some form of standard is needed if tests are to be accurately described and
-implemented.  Therefore, this Abstract
-Test Suite assumes that the API Description document is compliant with OpenAPI
-3.0.  This Test Suite will be updated if
-and when an alternative is commonly adopted. <o:p></o:p>
+The WFS 3.0 standard does not mandate a standard format for the API Description Document.  However,
+some form of standard is needed if tests are to be accurately described and implemented.  Therefore, this Abstract Test Suite assumes that the API Description document is compliant with OpenAPI 3.0.  This Test Suite will be updated if and when an alternative is commonly adopted.
 
 === A.2.3: Processing
-Security Objects +<o:p></o:p>
+Security Objects 
 
-OpenAPI does not provide a standard way to associate a
-security requirement with a single server URI. 
-Therefore, WFS 3.0 compliance tests will have to make that association
-through the runtime challenge-response transaction.  At this time the role of the Security Objects
-should be considered advisory.<o:p></o:p>
+OpenAPI does not provide a standard way to associate a security requirement with a single server URI.  Therefore, WFS 3.0 compliance tests will have to make that association through the runtime challenge-response transaction.  At this time the role of the Security Objects should be considered advisory.
 
-Security Requirements can be defined at both the OpanAPI
-root level and at the Operation Object level. 
-The following rules should be followed to understand the scope of a
-Security Requirement: <o:p></o:p>
+Security Requirements can be defined at both the OpanAPI root level and at the Operation Object level. The following rules should be followed to understand the scope of a Security Requirement: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->The Security Requirements defined at the root level are the default requirements for all operations and servers.    <o:p></o:p>
+* The Security Requirements defined at the root level are the default requirements for all operations and servers.   
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->If Security Requirements are defined at the Operation level, then those Requirements, and not the ones defined at the OpenAPI level, shall be used with that operation.<o:p></o:p>
+* If Security Requirements are defined at the Operation level, then those Requirements, and not the ones defined at the OpenAPI level, shall be used with that operation.
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->An empty set of Security Requirements at the Operation level indicates that there are no security requirements for that operation.<o:p></o:p>
+* An empty set of Security Requirements at the Operation level indicates that there are no security requirements for that operation.
 
-Note: this allows operations to opt-out of security requirements defined at the OpenAPI level.<o:p></o:p>
+Note: this allows operations to opt-out of security requirements defined at the OpenAPI level.
 
-=== A.2.4: Parameters<o:p></o:p>
+=== A.2.4: Parameters
 
-The following observations apply for WFS 3.0 parameters:<o:p></o:p>
+The following observations apply for WFS 3.0 parameters:
 
-<!--[if !supportLists]-->1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->WFS 3.0 does not use cookies.<o:p></o:p>
+. WFS 3.0 does not use cookies.
 
-<!--[if !supportLists]-->2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Query parameters follow common Web practice<o:p></o:p>
+. Query parameters follow common Web practice
 
-<!--[if !supportLists]-->3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Header parameters are restricted to custom
-headers<o:p></o:p>
+. Header parameters are restricted to custom headers
 
-<!--[if !supportLists]-->4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->For path parameters, the name of the parameter
-must match the name of the variable in the path template in the path object<o:p></o:p>
+. For path parameters, the name of the parameter must match the name of the variable in the path template in the path object
 
-Parameters are defined at the Path Item and Operation
-level.  Parameters defined at the Path
-Item level must apply to all operations under that Path item. These parameters
-may be modified at the Operation level but they may not be removed.     <o:p></o:p>
+Parameters are defined at the Path Item and Operation level.  Parameters defined at the Path Item level must apply to all operations under that Path item. These parameters may be modified at the Operation level but they may not be removed.
 
-=== A.2.5: Testable Paths<o:p></o:p>
+=== A.2.5: Testable Paths
 
-A testable path is a path which corresponds to one of the paths
-defined in the WFS 3.0 specification. 
-There are three alternatives for making this determination:<o:p></o:p>
+A testable path is a path which corresponds to one of the paths defined in the WFS 3.0 specification. There are three alternatives for making this determination:
 
-<!--[if !supportLists]-->1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->The path URI matches – this is the simplest
-approach but may be subject to error<o:p></o:p>
+. The path URI matches – this is the simplest approach but may be subject to error
 
-<!--[if !supportLists]-->2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Use mandatory tags in the tags field of the
-Operation Object<o:p></o:p>
+. Use mandatory tags in the tags field of the Operation Object
 
-<!--[if !supportLists]-->3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Use standardized operation ids for the
-operationId field of the Operation Object<o:p></o:p>
+. Use standardized operation ids for the operationId field of the Operation Object
 
-A testable path is validated against the rules for that
-path.  At a minimum that includes:<o:p></o:p>
+A testable path is validated against the rules for that path.  At a minimum that includes:
 
-<!--[if !supportLists]-->1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Building a list of all parameters which are
-defined in the standard<o:p></o:p>
+. Building a list of all parameters which are defined in the standard
 
-<!--[if !supportLists]-->2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that the mandatory parameters are
-present and required<o:p></o:p>
+. Validate that the mandatory parameters are present and required
 
-<!--[if !supportLists]-->3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate type, format, etc. for each parameter
-in the list.<o:p></o:p>
+. Validate type, format, etc. for each parameter in the list.
 
-<!--[if !supportLists]-->4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that there are no mandatory parameters
-which are not on the list.<o:p></o:p>
+. Validate that there are no mandatory parameters which are not on the list.
 
-== A.3: Requirements Trace Matrix +<o:p></o:p>
+== A.3: Requirements Trace Matrix
 
 |====
 ----
@@ -1158,7 +1115,8 @@ URI<o:p></o:p>
 
 d) References: Requirement 27<o:p></o:p>
 
-==== A.4.4.15 Validate the Get Feature Operation Response<o:p></o:p>
+==== A.4.4.15 Validate the
+Get Feature Operation Response<o:p></o:p>
 
  a) Test Purpose:
 Validate the Get Feature Operation Response. <o:p></o:p>
