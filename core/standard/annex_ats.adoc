@@ -1,48 +1,55 @@
-= Annex A: Abstract Test Suite (Normative) 
+[appendix]
+:appendix-caption: Annex
+== Abstract Test Suite (Normative)
 
-== A.1: Overview 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/112[ISSUE 112] +
+The Abstract Test Suite is work-in-progress. Currently, only a draft for the
+Core conformance class is available. The other five conformance classes (HTML,
+GeoJSON, GML-SF0, GML-SF2, OpenAPI 3.0) are not yet covered.
 
-WFS 3.0 is not a Web Service in the traditional sense.  Rather, it defines the behavior and content of a set of RESTful micro-services exposed through an Application Programing Interface (API).  Compliance testing for WFS 3.0 and similar standards must answer three questions: 
+=== Overview
 
-.  Are the capabilities advertised through the API Description compliant with the standard? 
+WFS 3.0 is not a Web Service in the traditional sense.  Rather, it defines the behavior and content of a set of RESTful micro-services exposed through an Application Programing Interface (API).  Compliance testing for WFS 3.0 and similar standards must answer three questions:
 
-.  Do the micro-services implement those capabilities as advertised? 
+.  Are the capabilities advertised through the API Description compliant with the standard?
 
-.  Do the resources returned by the micro-services meet the structure and content requirements of the standard? 
+.  Do the micro-services implement those capabilities as advertised?
+
+.  Do the resources returned by the micro-services meet the structure and content requirements of the standard?
 
 Further complicating the issue, an API may expose micro-services in addition to those defined by the standard.  A test engine must be able to traverse the API description document, identify test points, and ignore micro-services which are not to be tested.  The process for identifying test points is provided in Section A.4.3.
 
-== A.2: Conventions 
+=== Conventions
 
 The following conventions apply to this Abstract Test Suite:
 
-=== A.2.1: Path Templates
+==== Path Templates
 
 Path templates are used throughout these test suites.  Path templating refers to the usage of curly braces “{}” to mark a section of a URL path that can be replaced using path parameters.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986.
 
-*  scheme: http | https 
+*  scheme: http | https
 
-*  authority: DNS name of the server with optional port number 
+*  authority: DNS name of the server with optional port number
 
-*  path: The slash delimited identifier for a resource on the server 
+*  path: The slash delimited identifier for a resource on the server
 
-*  query: query parameters following the "?" character 
+*  query: query parameters following the "?" character
 
-*  fragment: identifies an element within the resource. Preceded by the "#" character 
+*  fragment: identifies an element within the resource. Preceded by the "#" character
 
-=== A.2.2: API
-Description Document 
+==== API
+Description Document
 
 The WFS 3.0 standard does not mandate a standard format for the API Description Document.  However, some form of standard is needed if tests are to be accurately described and implemented.  Therefore, this Abstract Test Suite assumes that the API Description document is compliant with OpenAPI 3.0.  This Test Suite will be updated if and when an alternative is commonly adopted.
 
-=== A.2.3: Processing
-Security Objects 
+==== Processing
+Security Objects
 
 OpenAPI does not provide a standard way to associate a security requirement with a single server URI.  Therefore, WFS 3.0 compliance tests will have to make that association through the runtime challenge-response transaction.  At this time the role of the Security Objects should be considered advisory.
 
-Security Requirements can be defined at both the OpanAPI root level and at the Operation Object level. The following rules should be followed to understand the scope of a Security Requirement: 
+Security Requirements can be defined at both the OpanAPI root level and at the Operation Object level. The following rules should be followed to understand the scope of a Security Requirement:
 
-* The Security Requirements defined at the root level are the default requirements for all operations and servers.   
+* The Security Requirements defined at the root level are the default requirements for all operations and servers.
 
 * If Security Requirements are defined at the Operation level, then those Requirements, and not the ones defined at the OpenAPI level, shall be used with that operation.
 
@@ -50,7 +57,7 @@ Security Requirements can be defined at both the OpanAPI root level and at the O
 
 Note: this allows operations to opt-out of security requirements defined at the OpenAPI level.
 
-=== A.2.4: Parameters
+==== Parameters
 
 The following observations apply for WFS 3.0 parameters:
 
@@ -64,7 +71,7 @@ The following observations apply for WFS 3.0 parameters:
 
 Parameters are defined at the Path Item and Operation level.  Parameters defined at the Path Item level must apply to all operations under that Path item. These parameters may be modified at the Operation level but they may not be removed.
 
-=== A.2.5: Testable Paths
+==== Testable Paths
 
 A testable path is a path which corresponds to one of the paths defined in the WFS 3.0 specification. There are three alternatives for making this determination:
 
@@ -84,7 +91,7 @@ A testable path is validated against the rules for that path.  At a minimum that
 
 . Validate that there are no mandatory parameters which are not on the list.
 
-== A.3: Requirements Trace Matrix
+=== Requirements Trace Matrix
 
 [width="100%"]
 |====================
@@ -187,13 +194,24 @@ Tests: A.4.4.10 +
 | *Requirement 26:* Feature Collection Response Links Parameters +
 All links SHALL include the rel and type link parameters. +
 Tests: A.4.4.10 +
-| *Requirement 27:* Feature Operation +
+| *Requirement 27:* Feature Collection Response timeStamp +
+If a property timeStamp is included in the response, the value SHALL be set to the time stamp when the response was generated. +
+Tests: A.4.4.10 +
+| *Requirement 28:* Feature Collection Response numberMatched +
+If a property numberMatched is included in the response, the value SHALL be identical to the number of features in the feature collections that match the selection parameters like bbox, time or additional filter parameters. +
+A server MAY omit this information in a response, if the information about the number of matching features is not known or difficult to compute. +
+Tests: A.4.4.10 +
+| *Requirement 29:* Feature Collection Response numberReturned +
+If a property numberReturned is included in the response, the value SHALL be identical to the number of features in the response. +
+A server MAY omit this information in a response, if the information about the number of features in the response is not known or difficult to compute. +
+Tests: A.4.4.10 +
+| *Requirement 30:* Feature Operation +
 For every feature in a feature collection (path /collections/{name}/items), the service SHALL support the HTTP GET operation at the path /collections/{name}/items/{id} where {name} is the property of the same name in the feature collection metadata and {id} is a local identifier of the feature. +
 Tests: A.4.4.14 +
-| *Requirement 28:* Feature Opearation Response +
+| *Requirement 31:* Feature Opearation Response +
 A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. +
 Tests: A.4.4.15 +
-| *Requirement 29:* Feature Operation Response Links +
+| *Requirement 32:* Feature Operation Response Links +
 A 200-response SHALL include the following links in the response: +
  - a link to the response document (relation: self), +
  - a link to the response document in every other media type supported by the service (relation: alternate), and +
@@ -202,593 +220,599 @@ All links SHALL include the rel and type link parameters. +
 Tests: A.4.4.15 +
 |====================
 
-== A.4: Abstract Test 
+=== Abstract Test
 
-The Test Approach used in the WFS 3.0 Abstract Test Suite includes four steps: 
+The Test Approach used in the WFS 3.0 Abstract Test Suite includes four steps:
 
-. Identify the test points 
+. Identify the test points
 
-. Verify that API descriptions of the test points comply with the WFS 3.0 standard 
+. Verify that API descriptions of the test points comply with the WFS 3.0 standard
 
-. Verify that the micro-services at each test point behave in accordance with the WFS 3.0 standard. 
+. Verify that the micro-services at each test point behave in accordance with the WFS 3.0 standard.
 
-. Verify that the resources returned at each test point are in accordance with the WFS 3.0 standard and any referenced content standard. 
+. Verify that the resources returned at each test point are in accordance with the WFS 3.0 standard and any referenced content standard.
 
 Identification of test points is a new requirement with WFS 3.0.  Since an API is not a Web Service, there may be RESTful endpoints advertised which are not intended to be targets of the compliance testing.  Section A.4.2 describes the process for crawling the API Description document and extracting those URLs which should be tested as well as the path(s) they should be tested with.  The concatenation of a Server URL with a path forms a test point.
 
 Section A.4.3 describes how the test points are exercised to determine compliance with the WFS 3.0 standard.
 
-=== A.4.1: General Tests 
+==== General Tests
 
-==== A.4.1.1 HTTP 1.1  
+===== HTTP 1.1
 
-===== a) Test Purpose: 
-Validate that the WFS services advertised through the API conform with HTTP 1.1.  
+====== a) Test Purpose:
+Validate that the WFS services advertised through the API conform with HTTP 1.1.
 
-===== b) Pre-conditions: 
-none 
+====== b) Pre-conditions:
+none
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Build all requests using the HTTP 1.1 protocol. 
+. Build all requests using the HTTP 1.1 protocol.
 
-. Validate that all responses comply with the HTTP 1.1 protocol 
+. Validate that all responses comply with the HTTP 1.1 protocol
 
-===== d) References: 
-Requirement 7 
+====== d) References:
+Requirement 7
 
-==== A.4.1.2 Coordinate Reference Systems  
+===== Coordinate Reference Systems
 
-===== a) Test Purpose: 
-Validate that all spatial geometries provided through a WFS service are in the CRS84 spatial reference system unless otherwise requested by the client.  
+====== a) Test Purpose:
+Validate that all spatial geometries provided through a WFS service are in the CRS84 spatial reference system unless otherwise requested by the client.
 
-===== b) Pre-conditions: 
-none 
+====== b) Pre-conditions:
+none
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Do not specify a coordinate reference system in any request.  All spatial data should be in the CRS84 reference system. 
+. Do not specify a coordinate reference system in any request.  All spatial data should be in the CRS84 reference system.
 
-. Validate retrieved spatial data using the CRS84 reference system.  
+. Validate retrieved spatial data using the CRS84 reference system.
 
-===== d) References: 
-Requirement 8 
+====== d) References:
+Requirement 8
 
-=== A.4.2: Retrieve the API Description 
+==== Retrieve the API Description
 
-==== A.4.2.1 Landing Page Retrieval  
+===== Landing Page Retrieval
 
-===== a) Test Purpose: 
-Validate that a landing page can be retrieved from the expected location.  
+====== a) Test Purpose:
+Validate that a landing page can be retrieved from the expected location.
 
-===== b) Pre-conditions:  
+====== b) Pre-conditions:
 
-* A URL to the server hosting the landing page is known. 
+* A URL to the server hosting the landing page is known.
 
-* The test client can authenticate to the server. 
+* The test client can authenticate to the server.
 
-* The test client has sufficient privileges to access the landing page. 
+* The test client has sufficient privileges to access the landing page.
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Issue an HTTP GET request to the URL {root}/ 
+. Issue an HTTP GET request to the URL {root}/
 
-. Validate that a document was returned with a status code 200 
+. Validate that a document was returned with a status code 200
 
-. Validate the contents of the returned document using test A.4.2.2 
+. Validate the contents of the returned document using test A.4.2.2
 
-===== d) References: 
-Requirement 1 
+====== d) References:
+Requirement 1
 
-==== A.4.2.2 Landing Page Validation  
+===== Landing Page Validation
 
-===== a) Test Purpose: 
-Validate that the landing page complies with the require structure and contents.  
+====== a) Test Purpose:
+Validate that the landing page complies with the require structure and contents.
 
-===== b) Pre-conditions: 
+====== b) Pre-conditions:
 
-* The landing page has been retrieved from the server 
+* The landing page has been retrieved from the server
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Validate the landing page against the root.yaml schema 
+. Validate the landing page against the root.yaml schema
 
-. Validate that the landing page includes a “service” link to API Definition 
+. Validate that the landing page includes a “service” link to API Definition
 
-. Validate that the landing page includes a “conformance” link to the conformance class document 
+. Validate that the landing page includes a “conformance” link to the conformance class document
 
-. Validate that the landing page includes a “data” link to the WFS contents.  
+. Validate that the landing page includes a “data” link to the WFS contents.
 
-===== d) References: 
-Requirement 2 
+====== d) References:
+Requirement 2
 
-==== A.4.2.3 OpenAPI Document Retrieval  
+===== OpenAPI Document Retrieval
 
-Note: The URI for the API definition is provided through the landing page.  However, that does not mean that the API definition resides on the same server as the landing page.  Test clients should be prepared for a WFS 3.0 implementation which is distributed across multiple servers.  
+Note: The URI for the API definition is provided through the landing page.  However, that does not mean that the API definition resides on the same server as the landing page.  Test clients should be prepared for a WFS 3.0 implementation which is distributed across multiple servers.
 
-===== a) Test Purpose: 
-Validate that the API Definition document can be retrieved from the expected location.  
+====== a) Test Purpose:
+Validate that the API Definition document can be retrieved from the expected location.
 
-===== b) Pre-conditions:  
+====== b) Pre-conditions:
 
-* A URL to the server hosting the API Definition document is known. 
+* A URL to the server hosting the API Definition document is known.
 
-* The test client can authenticate to the server. 
+* The test client can authenticate to the server.
 
-* The test client has sufficient privileges to assess the API Definition document. 
+* The test client has sufficient privileges to assess the API Definition document.
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Issue an HTTP GET request to the URL {server}/api 
+. Issue an HTTP GET request to the URL {server}/api
 
-. Validate that a document was returned with a status code 200 
+. Validate that a document was returned with a status code 200
 
-. Validate the contents of the returned document using test A.4.2.4 
+. Validate the contents of the returned document using test A.4.2.4
 
-===== d) References: 
-Requirements 3 and 4 
+====== d) References:
+Requirements 3 and 4
 
-==== A.4.2.4 API Definition Validation  
+===== API Definition Validation
 
-===== a) Test Purpose: 
-Validate that the API Definition page complies with the require structure and contents.  
+====== a) Test Purpose:
+Validate that the API Definition page complies with the require structure and contents.
 
-===== b) Pre-conditions: 
+====== b) Pre-conditions:
 
-* The API Definition document has been retrieved from the server 
+* The API Definition document has been retrieved from the server
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Validate the API Definition document against the OpenAPI 3.0 schema 
+. Validate the API Definition document against the OpenAPI 3.0 schema
 
-. Identify the Test Points as described in test A.4.3 
+. Identify the Test Points as described in test A.4.3
 
-. Process the API Definition document as described in test A.4.4  
+. Process the API Definition document as described in test A.4.4
 
-===== d) References:
-Requirement 4 
+====== d) References:
+Requirement 4
 
-=== A.4.3: Identify the Test Points 
+==== Identify the Test Points
 
-Identification of the test points is a pre-condition to performing a compliance test.  Thisprocess starts with A.4.3.1. 
+Identification of the test points is a pre-condition to performing a compliance test.  Thisprocess starts with A.4.3.1.
 
-==== A.4.3.1: Identify Test Points: 
+===== Identify Test Points:
 
-===== a) Purpose: 
-To identify the test points associated with each Path in the OpenAPI document 
+====== a) Purpose:
+To identify the test points associated with each Path in the OpenAPI document
 
-===== b) Pre-conditions: 
+====== b) Pre-conditions:
 
-*   An OpenAPI document has been obtained  
-*   A list of URLs for the servers to be included in the compliance test has been provided 
-*   A list of the paths specified in the WFS 3.0 specification 
+*   An OpenAPI document has been obtained
+*   A list of URLs for the servers to be included in the compliance test has been provided
+*   A list of the paths specified in the WFS 3.0 specification
 
-===== c) Method: 
+====== c) Method:
 
-FOR EACH paths property in the OpenAPI document 
-    If the path name is one of those specified in the WFS 3.0 specification 
-        Retrieve the Server URIs using A.4.3.2. 
-        FOR EACH Server URI 
-            Concatenate the Server URI with the path name to form a test point. 
-            Add that test point to the list. 
+FOR EACH paths property in the OpenAPI document
+    If the path name is one of those specified in the WFS 3.0 specification
+        Retrieve the Server URIs using A.4.3.2.
+        FOR EACH Server URI
+            Concatenate the Server URI with the path name to form a test point.
+            Add that test point to the list.
 
-===== d) References: 
-None 
+====== d) References:
+None
 
-==== A.4.3.2: Identify Server URIs: 
+===== Identify Server URIs:
 
-===== a) Purpose: 
-To identify all server URIs applicable to an OpenAPI Operation Object  
+====== a) Purpose:
+To identify all server URIs applicable to an OpenAPI Operation Object
 
-===== b) Pre-conditions: 
+====== b) Pre-conditions:
 
-*   Server Objects from the root level of the OpenAPI document have been obtained  
-*   A Path Item Object has been retrieved 
-*   An Operation Object has been retrieved  
-*   The Operation Object is associated with the Path Item Object 
-*   A list of URLs for the servers to be included in the compliance test has been provided 
+*   Server Objects from the root level of the OpenAPI document have been obtained
+*   A Path Item Object has been retrieved
+*   An Operation Object has been retrieved
+*   The Operation Object is associated with the Path Item Object
+*   A list of URLs for the servers to be included in the compliance test has been provided
 
-===== c) Method: 
+====== c) Method:
 
-1) Identify the Server Objects which are in-scope for this operation 
+1) Identify the Server Objects which are in-scope for this operation
 
- - IF Server Objects are defined at the Operation level, then those and only those Server Objects apply to that Operation. 
- 
- - IF Server Objects are defined at the Path Item level, then those and only those Server Objects apply to that Path Item. 
- 
- - IF Server Objects are not defined at the Operation level, then the Server Objects defined for the parent Path Item apply to that Operation. 
- 
- - IF Server Objects are not defined at the Path Item level, then the Server Objects defined for the root level apply to that Path. 
- 
- - IF no Server Objects are defined at the root level, then the default server object is assumed as described in the OpenAPI specification. 
+ - IF Server Objects are defined at the Operation level, then those and only those Server Objects apply to that Operation.
 
-2) Process each Server Object using A.4.3.3. 
+ - IF Server Objects are defined at the Path Item level, then those and only those Server Objects apply to that Path Item.
 
-3) Delete any Server URI which does not reference a server on the list of servers to test. 
+ - IF Server Objects are not defined at the Operation level, then the Server Objects defined for the parent Path Item apply to that Operation.
 
-===== d) References: 
-None 
+ - IF Server Objects are not defined at the Path Item level, then the Server Objects defined for the root level apply to that Path.
 
-==== A.4.3.3: Process Server Object: 
+ - IF no Server Objects are defined at the root level, then the default server object is assumed as described in the OpenAPI specification.
 
-===== a) Purpose: 
-To expand the contents of a Server Object into a set of absolute URIs.  
+2) Process each Server Object using A.4.3.3.
 
-===== b) Pre-conditions: 
+3) Delete any Server URI which does not reference a server on the list of servers to test.
 
-*   A Server Object has been retrieved 
+====== d) References:
+None
 
-===== c) Method: 
+===== Process Server Object:
 
-Processing the Server Object results in a set of absolute URIs.  This set contains all of the URIs that can be created given the URI template and variables defined in that Server Object.  
+====== a) Purpose:
+To expand the contents of a Server Object into a set of absolute URIs.
 
-. If there are no variables in the URI template, then add the URI to the return set. 
+====== b) Pre-conditions:
 
-. For each variable in the URI template which does not have an enumerated set of valid values: 
-    - generate a URI using the default value, 
-    - add this URI to the return set,  
-    - flag this URI as non-exhaustive 
-. For each variable in the URI template which has an enumerated set of valid values: 
-    - generate a URI for each value in the enumerated set, 
-    - add each generated URI to the return set. 
-. Perform this processing in an iterative manner so that there is a unique URI for all possible combinations of enumerated and default values. 
+*   A Server Object has been retrieved
 
-. Convert all relative URIs to absolute URIs by rooting them on the URI to the server hosting the OpenAPI document.  
+====== c) Method:
 
-===== d) References: 
-None 
+Processing the Server Object results in a set of absolute URIs.  This set contains all of the URIs that can be created given the URI template and variables defined in that Server Object.
 
-=== A.4.4 Processing the OpenAPI Document 
+. If there are no variables in the URI template, then add the URI to the return set.
 
-==== A.4.4.1 Validate /api path  
+. For each variable in the URI template which does not have an enumerated set of valid values:
+    - generate a URI using the default value,
+    - add this URI to the return set,
+    - flag this URI as non-exhaustive
+. For each variable in the URI template which has an enumerated set of valid values:
+    - generate a URI for each value in the enumerated set,
+    - add each generated URI to the return set.
+. Perform this processing in an iterative manner so that there is a unique URI for all possible combinations of enumerated and default values.
 
-===== a) Test Purpose: 
-Validate the /api path  
+. Convert all relative URIs to absolute URIs by rooting them on the URI to the server hosting the OpenAPI document.
 
-===== b) Pre-conditions: 
-* Path = /api 
+====== d) References:
+None
 
-* An API Definition document has been retrieved from the server 
+==== Processing the OpenAPI Document
+
+===== Validate /api path
+
+====== a) Test Purpose:
+Validate the /api path
+
+====== b) Pre-conditions:
+* Path = /api
+
+* An API Definition document has been retrieved from the server
 
 * A /api path in the OpenAPI document advertises an additional OpenAPI document which may contain additional information about the API.
 
-===== c) Test Method: 
+====== c) Test Method:
 
-An OpenAPI document may contain a /api path for a number of reasons including: 
+An OpenAPI document may contain a /api path for a number of reasons including:
 
- - The path points back to this document 
+ - The path points back to this document
 
- - The path indicates an alternate encoding of the API Description 
+ - The path indicates an alternate encoding of the API Description
 
- - The path indicates an access point controlled by another authentication scheme. 
+ - The path indicates an access point controlled by another authentication scheme.
 
-At this point, none of those cases are addressed through this test suite. 
+At this point, none of those cases are addressed through this test suite.
 
-===== d) References: 
-none 
+====== d) References:
+none
 
-==== A.4.4.2 Validate Conformance Operation  
+===== Validate Conformance Operation
 
-===== a) Test Purpose:
-Validate that Conformance Operation behaves as required.  
+====== a) Test Purpose:
+Validate that Conformance Operation behaves as required.
 
-===== b) Pre-conditions: 
+====== b) Pre-conditions:
 
-* Path = /conformance  
+* Path = /conformance
 
-===== c) Test Method: 
+====== c) Test Method:
 
-DO FOR each /conformance test point 
+DO FOR each /conformance test point
 
- - Issue an HTTP GET request using the test point URI 
- 
- - Go to test A.4.4.3.  
+ - Issue an HTTP GET request using the test point URI
 
-===== d) References:
-Requirement 5 
+ - Go to test A.4.4.3.
 
-==== A.4.4.3 Validate Conformance Operation Response  
+====== d) References:
+Requirement 5
 
-===== a) Test Purpose:
-Validate the Response to the Conformance Operation.  
+===== Validate Conformance Operation Response
 
-===== b) Pre-conditions: 
+====== a) Test Purpose:
+Validate the Response to the Conformance Operation.
 
-* Path = /conformance  
+====== b) Pre-conditions:
 
-* A Conformance document has been retrieved 
+* Path = /conformance
 
-===== c) Test Method: 
+* A Conformance document has been retrieved
 
-. Validate the retrieved document against the classes.yaml schema. 
+====== c) Test Method:
 
-. Record all reported compliance classes and associate that list with the test point. This information will be used in latter tests. 
+. Validate the retrieved document against the classes.yaml schema.
 
-===== d) References: 
-Requirement 6 
+. Record all reported compliance classes and associate that list with the test point. This information will be used in latter tests.
 
-==== A.4.4.4 Validate the Feature Collections Metadata Operation 
+====== d) References:
+Requirement 6
 
-===== a) Test Purpose: 
-Validate that the Feature Collections Metadata Operation behaves as required  
+===== Validate the Feature Collections Metadata Operation
 
-===== b) Pre-conditions: 
+====== a) Test Purpose:
+Validate that the Feature Collections Metadata Operation behaves as required
 
-* Path = /collections 
+====== b) Pre-conditions:
 
-===== c) Test Method: 
+* Path = /collections
 
-DO FOR each /collections test point 
+====== c) Test Method:
+
+DO FOR each /collections test point
 
  - Issue an HTTP GET request using the test point
-URI 
+URI
 
- - Go to test A.4.4.5  
+ - Go to test A.4.4.5
 
-===== d) References: 
-Requirement 9 
+====== d) References:
+Requirement 9
 
-==== A.4.4.5 Validate the Feature Collections Metadata Operation Response 
+===== Validate the Feature Collections Metadata Operation Response
 
-===== a) Test Purpose:
-Validate that response to the Feature Collection Metadata Operation.  
+====== a) Test Purpose:
+Validate that response to the Feature Collection Metadata Operation.
 
-===== b) Pre-conditions: 
-
-* A Feature Collection Metadata document has been
-retrieved 
-
-===== c) Test Method: 
-
-. Validate the retrieved document against the content.yaml schema. 
-
-. Validate that the retrieved document includes links for: 
-
- - Itself 
-
- - Alternate encodings of this document in every other media type as identified by the compliance classes for this server. 
-
-. Validate that each link includes a rel and type parameter 
-
-. Validate that the returned document includes a collections property for each collection in the dataset. 
-
-. For each collections property, validate the metadata for that collection using test A.4.4.6 
-
-===== d) References: 
-Requirements 10, 11, and 12 
-
-==== A.4.4.6 Validate a Collections Metadata document 
-
-===== a) Test Purpose:
-Validate a Collections Metadata document.  
-
-===== b) Pre-conditions: 
-
-* A Collection metadata document has been retrieved. 
-
-===== c) Test Method: 
-
-. Validate the collection metadata against the collectionInfo.yaml schema 
-
-. Validate that the collection metadata document includes links for: 
-
- - Itself 
-
- - Alternate encodings of this document in every other media type as identified by the compliance classes for this server. 
-
-. Validate that each link includes a rel and type parameter 
-
-. Validate the extent property if it is provided 
-
-. Retrieve the collection using the name property and test A.4.4.7.  
-
-===== d) References: 
-Requirement 12, 13, 14 
-
-==== A.4.4.7 Validate the Feature Collection Metadata Operation 
-
-===== a) Test Purpose:
-Validate that the Feature Collection Metadata Operation behaves as required  
-
-===== b) Pre-conditions: 
-
-* A feature collection name is provided by test A.4.4.6 
-
-* Path = /collections/{name} 
-
-===== c) Test Method: 
-
-DO FOR each /collections{name} test point 
-
- - Issue an HTTP GET request using the test point URI 
-
- - Go to test A.4.4.8  
-
-===== d) References: 
-Requirement 15 
-
-==== A.4.4.8 Validate the Feature Collection Metadata Operation Response 
-
-===== a) Test Purpose:
-Validate that response to the Feature Collection Metadata Operation.  
-
-===== b) Pre-conditions: 
+====== b) Pre-conditions:
 
 * A Feature Collection Metadata document has been
-retrieved 
+retrieved
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Validate the retrieved document against the collectionInfo.yaml schema. 
+. Validate the retrieved document against the content.yaml schema.
 
-. Validate that this is the same document as that processed in Test A.4.4.6 
+. Validate that the retrieved document includes links for:
 
-===== d) References: 
-Requirement 16 
+ - Itself
 
-==== A.4.4.9 Validate the Get Features Operation 
+ - Alternate encodings of this document in every other media type as identified by the compliance classes for this server.
 
-===== a) Test Purpose:
-Validate that the Get Features Operation behaves as required.  
+. Validate that each link includes a rel and type parameter
 
-===== b) Pre-conditions: 
+. Validate that the returned document includes a collections property for each collection in the dataset.
 
-* A feature collection name is provided by test A.4.4.6 
+. For each collections property, validate the metadata for that collection using test A.4.4.6
 
-* Path = /collections/{name}/items 
+====== d) References:
+Requirements 10, 11, and 12
 
-===== c) Test Method: 
+===== Validate a Collections Metadata document
 
-DO FOR each /collections{name}/items test point 
+====== a) Test Purpose:
+Validate a Collections Metadata document.
 
- - Issue an HTTP GET request using the test point URI 
+====== b) Pre-conditions:
 
- - Go to test A.4.4.10  
+* A Collection metadata document has been retrieved.
 
-===== d) References: 
-Requirement 17 
+====== c) Test Method:
 
-==== A.4.4.10 Validate the Get Features Operation Response 
+. Validate the collection metadata against the collectionInfo.yaml schema
 
-===== a) Test Purpose:
-Validate the Get Feature Operation Response.  
+. Validate that the collection metadata document includes links for:
 
-===== b) Pre-conditions: 
+ - Itself
 
-* A collection of Features has been retrieved 
+ - Alternate encodings of this document in every other media type as identified by the compliance classes for this server.
 
-===== c) Test Method: 
+. Validate that each link includes a rel and type parameter
+
+. Validate the extent property if it is provided
+
+. Retrieve the collection using the name property and test A.4.4.7.
+
+====== d) References:
+Requirement 12, 13, 14
+
+===== Validate the Feature Collection Metadata Operation
+
+====== a) Test Purpose:
+Validate that the Feature Collection Metadata Operation behaves as required
+
+====== b) Pre-conditions:
+
+* A feature collection name is provided by test A.4.4.6
+
+* Path = /collections/{name}
+
+====== c) Test Method:
+
+DO FOR each /collections{name} test point
+
+ - Issue an HTTP GET request using the test point URI
+
+ - Go to test A.4.4.8
+
+====== d) References:
+Requirement 15
+
+===== Validate the Feature Collection Metadata Operation Response
+
+====== a) Test Purpose:
+Validate that response to the Feature Collection Metadata Operation.
+
+====== b) Pre-conditions:
+
+* A Feature Collection Metadata document has been
+retrieved
+
+====== c) Test Method:
+
+. Validate the retrieved document against the collectionInfo.yaml schema.
+
+. Validate that this is the same document as that processed in Test A.4.4.6
+
+====== d) References:
+Requirement 16
+
+===== Validate the Get Features Operation
+
+====== a) Test Purpose:
+Validate that the Get Features Operation behaves as required.
+
+====== b) Pre-conditions:
+
+* A feature collection name is provided by test A.4.4.6
+
+* Path = /collections/{name}/items
+
+====== c) Test Method:
+
+DO FOR each /collections{name}/items test point
+
+ - Issue an HTTP GET request using the test point URI
+
+ - Go to test A.4.4.10
+
+====== d) References:
+Requirement 17
+
+===== Validate the Get Features Operation Response
+
+====== a) Test Purpose:
+Validate the Get Feature Operation Response.
+
+====== b) Pre-conditions:
+
+* A collection of Features has been retrieved
+
+====== c) Test Method:
 
 . Validate the structure of the response as follows:
 
     - For HTML use TBD
-    
+
     - For GeoJSON use featureCollectionGeoJSON.yaml
-    
+
     - For GML use featureCollectionGML.yaml
-    
-. Validate that the following links are included in the response document: 
+
+. Validate that the following links are included in the response document:
 
     - To itself
 
-    - Alternate encodings of this document in every other media type as identified by the compliance classes for this server. 
+    - Alternate encodings of this document in every other media type as identified by the compliance classes for this server.
 
-. Validate that each link includes a rel and type parameter. 
+. Validate that each link includes a rel and type parameter.
 
-===== d) References: 
-Requirements 24, 25, and 26 
+. If a property timeStamp is included in the response, validate that it is close to the current time.
 
-==== A.4.4.11 Limit Parameter 
+. If a property numberReturned is included in the response, validate that the number is equal to the number of features in the response.
 
-===== a) Test Purpose: 
-Validate the proper handling of the limit parameter.  
+. If a property numberMatched is included in the response, iteratively follow the next links until no next link is included and count the aggregated number of features returned in all responses during the iteration. Validate that the value is identical to the numberReturned stated in the initial response.
 
-===== b) Pre-conditions: 
+====== d) References:
+Requirements 24, 25, 26, 27, 28 and 29
 
-* Tests A.4.4.9 and A.4.4.10 have completed successfully. 
+===== Limit Parameter
 
-===== c) Test Method: 
+====== a) Test Purpose:
+Validate the proper handling of the limit parameter.
 
-. Verify that the OpenAPI document correctly describes the limit parameter for the Get Features operation. 
+====== b) Pre-conditions:
 
-. Repeat Test A.4.4.9 using different values for the limit parameter. 
+* Tests A.4.4.9 and A.4.4.10 have completed successfully.
 
-. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results. 
+====== c) Test Method:
 
-===== d) References: 
-Requirements 18 and 19 
+. Verify that the OpenAPI document correctly describes the limit parameter for the Get Features operation.
 
-==== A.4.4.12 Bounding Box Parameter 
+. Repeat Test A.4.4.9 using different values for the limit parameter.
 
-===== a) Test Purpose: 
-Validate the proper handling of the bbox parameter.  
+. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.
 
-===== b) Pre-conditions: 
+====== d) References:
+Requirements 18 and 19
 
-* Tests A.4.4.9 and A.4.4.10 have completed successfully. 
+===== Bounding Box Parameter
 
-===== c) Test Method: 
+====== a) Test Purpose:
+Validate the proper handling of the bbox parameter.
 
-. Verify that the OpenAPI document correctly describes the bbox parameter for the Get Features operation. 
+====== b) Pre-conditions:
 
-. Repeat Test A.4.4.9 using different values for the bbox parameter.  These should include test cases which cross the meridian, equator, 180^O^ longitude, and polar regions. 
+* Tests A.4.4.9 and A.4.4.10 have completed successfully.
 
-. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results. 
+====== c) Test Method:
 
-===== d) References: 
-Requirements 20 and 21 
+. Verify that the OpenAPI document correctly describes the bbox parameter for the Get Features operation.
 
-==== A.4.4.13 Time Parameter 
+. Repeat Test A.4.4.9 using different values for the bbox parameter.  These should include test cases which cross the meridian, equator, 180^O^ longitude, and polar regions.
 
-===== a) Test Purpose: 
-Validate the proper handling of the time parameter.  
+. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.
 
-===== b) Pre-conditions: 
+====== d) References:
+Requirements 20 and 21
+
+===== Time Parameter
+
+====== a) Test Purpose:
+Validate the proper handling of the time parameter.
+
+====== b) Pre-conditions:
 
 * Tests A.4.4.9 and A.4.4.10 have completed
-successfully. 
+successfully.
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Verify that the OpenAPI document correctly describes the time parameter for the Get Features operation. 
+. Verify that the OpenAPI document correctly describes the time parameter for the Get Features operation.
 
-. Repeat Test A.4.4.9 using different values for the time parameter.   
+. Repeat Test A.4.4.9 using different values for the time parameter.
 
-. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results. 
+. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.
 
-===== d) References: 
-Requirements 22 and 23 
+====== d) References:
+Requirements 22 and 23
 
-==== A.4.4.14 Get Feature Operation  
+===== Get Feature Operation
 
-===== a) Test Purpose: 
-Validate that the Get Feature Operation behaves as required.  
+====== a) Test Purpose:
+Validate that the Get Feature Operation behaves as required.
 
-===== b) Pre-conditions: 
+====== b) Pre-conditions:
 
-* A feature collection name is provided by test A.4.4.6 
+* A feature collection name is provided by test A.4.4.6
 
-* A feature identifier is provided by test A.4.4.10 
+* A feature identifier is provided by test A.4.4.10
 
-* Path = /collections/{name}/items/(id} where {id} = the feature identifier 
+* Path = /collections/{name}/items/(id} where {id} = the feature identifier
 
-===== c) Test Method: 
+====== c) Test Method:
 
-DO FOR each /collections{name}/items/{id} test point 
+DO FOR each /collections{name}/items/{id} test point
 
-    - Issue an HTTP GET request using the test point URI 
+    - Issue an HTTP GET request using the test point URI
 
-    - Go to test A.4.4.15  
+    - Go to test A.4.4.15
 
-===== d) References: 
-Requirement 27 
+====== d) References:
+Requirement 30
 
-==== A.4.4.15 Validate the Get Feature Operation Response 
+===== Validate the Get Feature Operation Response
 
-===== a) Test Purpose:
-Validate the Get Feature Operation Response.  
+====== a) Test Purpose:
+Validate the Get Feature Operation Response.
 
-===== b) Pre-conditions: 
+====== b) Pre-conditions:
 
-*   The Feature has been retrieved from the server. 
+*   The Feature has been retrieved from the server.
 
-===== c) Test Method: 
+====== c) Test Method:
 
-. Validate the structure of the response as follows: 
+. Validate the structure of the response as follows:
 
     - For HTML use TBD
 
-    - For GeoJSON use featureGeoJSON.yaml 
+    - For GeoJSON use featureGeoJSON.yaml
 
-    - For GML use featureGML.yaml 
+    - For GML use featureGML.yaml
 
-. Validate that the following links are included in the response document: 
+. Validate that the following links are included in the response document:
 
     - To itself
-    
+
     - To the Feature Collection which contains this Feature
 
-    - Alternate encodings of this document in every other media type as identified by the compliance classes for this server. 
+    - Alternate encodings of this document in every other media type as identified by the compliance classes for this server.
 
-===== d) References: 
-Requirements 28 and 29 
+====== d) References:
+Requirements 31 and 32
