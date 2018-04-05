@@ -28,7 +28,7 @@ include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xm
 
 === Feature collections metadata
 
-The service three feature collections (airport facilities, roads, inland water areas).
+This service offers three feature collections (airport facilities, roads, inland water areas).
 
 [source,XML]
 ----
@@ -37,7 +37,7 @@ include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xm
 
 === Feature collection metadata
 
-Only the information for the selected feature collection (airport facilities) is included in the response.
+Only the information for the selected feature collection (roads) is included in the response.
 
 [source,XML]
 ----
@@ -46,8 +46,7 @@ include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xm
 
 === A feature collection
 
-This response contains 2 features of the collection and has a link to the next
-features.
+This response contains 2 features of the airport facilities collection and has a link to the next features.
 
 [source,XML]
 ----
