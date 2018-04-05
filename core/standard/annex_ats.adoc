@@ -1,19 +1,16 @@
-= Annex A: Abstract Test Suite (Normative) +<o:p></o:p>
+= Annex A: Abstract Test Suite (Normative) 
 
-== A.1: Overview +<o:p></o:p>
+== A.1: Overview 
 
 WFS 3.0 is not a Web Service in the traditional sense.  Rather, it defines the behavior and content
 of a set of RESTful micro-services exposed through an Application Programing
-Interface (API).  Compliance testing for WFS 3.0 and similar standards must answer three questions: +<o:p></o:p>
+Interface (API).  Compliance testing for WFS 3.0 and similar standards must answer three questions: 
 
-<!--[if !supportLists]-->1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Are the capabilities advertised through the API Description compliant with the standard? +<o:p></o:p>
+. 1) Are the capabilities advertised through the API Description compliant with the standard? 
 
-<!--[if !supportLists]-->2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Do the micro-services implement those capabilities as advertised? +<o:p></o:p>
+. 2) Do the micro-services implement those capabilities as advertised? 
 
-<!--[if !supportLists]-->3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Do the resources returned by the micro-services meet the structure and content requirements of the standard? +<o:p></o:p>
+. 3) Do the resources returned by the micro-services meet the structure and content requirements of the standard? 
 
 Further complicating the issue, an API may expose
 micro-services in addition to those defined by the standard.  A test engine must be able to traverse the
