@@ -1,8 +1,8 @@
 # The next version of the OGC Web Feature Service standard
 
-This GitHub repository is used by the OGC WFS/FES Standards Working Group and ISO/TC 211 to develop 
-the next major revision of the Web Feature Service and Filter Encoding open standards 
-for querying geospatial information on the web.
+This GitHub repository is used by the OGC WFS/FES Standards Working Group and ISO/TC 211 to develop
+the next major revision of the Web Feature Service and Filter Encoding standards (open standards
+for querying geospatial information on the web).
 
 ## Communication
 
@@ -19,15 +19,15 @@ A draft for part 1 of WFS 3.0 is available. It is basically a complete draft:
 
 In addition, a non-normative document, the "WFS 3.0 Users Guide", is planned.
 
-In addition to feedback from the initial implementations as well as discussions on GitHub and in the OGC/ISO working group, 
+In addition to feedback from the initial implementations as well as discussions on GitHub and in the OGC/ISO working group,
 the current draft of the Core specification has been tested in a [WFS 3.0 Hackathon](https://github.com/opengeospatial/wfs3hackathon).
-The release of a first draft version is planned for April and will be used as input for the [OGC Testbed-14](http://www.opengeospatial.org/projects/initiatives/testbed14) 
+The release of a first draft version is planned for April and will be used as input for the [OGC Testbed-14](http://www.opengeospatial.org/projects/initiatives/testbed14)
 and for the next steps in the standardization process in OGC and ISO/TC 211. The open issues that we plan to address in this version
 can be seen in the [milestone information](https://github.com/opengeospatial/WFS_FES/milestone/1).
 
-The current expectation is to have a stable version of the Core specification in early 2019. We want to wait for sufficient 
-implementation feedback, mature implementations including a test suite, the results of OGC Testbed-14 and experience with 
-draft extensions first. 
+The current expectation is to have a stable version of the Core specification in early 2019. We want to wait for sufficient
+implementation feedback, mature implementations including a test suite, the results of OGC Testbed-14 and experience with
+draft extensions first.
 
 ## More Information
 
@@ -36,7 +36,7 @@ draft extensions first.
 
 ## Contributing
 
-The contributor understands that any contributions, if accepted by the OGC Membership and ISO/TC 211, shall be incorporated into 
+The contributor understands that any contributions, if accepted by the OGC Membership and ISO/TC 211, shall be incorporated into
 OGC and ISO/TC 211 Web Feature Service standards documents and that all copyright and intellectual property shall be vested to the OGC.
 
 The WFS/FES Standards Working Group (SWG) is the group at OGC responsible for the stewardship of the standard, but is
