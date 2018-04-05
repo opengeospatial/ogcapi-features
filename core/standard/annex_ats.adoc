@@ -2,9 +2,7 @@
 
 == A.1: Overview 
 
-WFS 3.0 is not a Web Service in the traditional sense.  Rather, it defines the behavior and content
-of a set of RESTful micro-services exposed through an Application Programing
-Interface (API).  Compliance testing for WFS 3.0 and similar standards must answer three questions: 
+WFS 3.0 is not a Web Service in the traditional sense.  Rather, it defines the behavior and content of a set of RESTful micro-services exposed through an Application Programing Interface (API).  Compliance testing for WFS 3.0 and similar standards must answer three questions: 
 
 .  Are the capabilities advertised through the API Description compliant with the standard? 
 
@@ -12,11 +10,7 @@ Interface (API).  Compliance testing for WFS 3.0 and similar standards must answ
 
 .  Do the resources returned by the micro-services meet the structure and content requirements of the standard? 
 
-Further complicating the issue, an API may expose
-micro-services in addition to those defined by the standard.  A test engine must be able to traverse the
-API description document, identify test points, and ignore micro-services which
-are not to be tested.  The process for
-identifying test points is provided in Section A.4.1.
+Further complicating the issue, an API may expose micro-services in addition to those defined by the standard.  A test engine must be able to traverse the API description document, identify test points, and ignore micro-services which are not to be tested.  The process for identifying test points is provided in Section A.4.3.
 
 == A.2: Conventions 
 
@@ -24,10 +18,7 @@ The following conventions apply to this Abstract Test Suite:
 
 === A.2.1: Path Templates
 
-Path templates are used throughout these test suites.  Path templating refers to the usage of curly
-braces “{}” to mark a section of a URL path that can be replaced using path
-parameters.  The terms used to describe
-portions of these templates are based on the URL syntax described in RFC 3986.
+Path templates are used throughout these test suites.  Path templating refers to the usage of curly braces “{}” to mark a section of a URL path that can be replaced using path parameters.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986.
 
 *  scheme: http | https 
 
@@ -37,13 +28,12 @@ portions of these templates are based on the URL syntax described in RFC 3986.
 
 *  query: query parameters following the "?" character 
 
-*  fragment: identifies an element within the resource. Preceded by the "\#" character 
+*  fragment: identifies an element within the resource. Preceded by the "#" character 
 
 === A.2.2: API
 Description Document 
 
-The WFS 3.0 standard does not mandate a standard format for the API Description Document.  However,
-some form of standard is needed if tests are to be accurately described and implemented.  Therefore, this Abstract Test Suite assumes that the API Description document is compliant with OpenAPI 3.0.  This Test Suite will be updated if and when an alternative is commonly adopted.
+The WFS 3.0 standard does not mandate a standard format for the API Description Document.  However, some form of standard is needed if tests are to be accurately described and implemented.  Therefore, this Abstract Test Suite assumes that the API Description document is compliant with OpenAPI 3.0.  This Test Suite will be updated if and when an alternative is commonly adopted.
 
 === A.2.3: Processing
 Security Objects 
@@ -96,1052 +86,709 @@ A testable path is validated against the rules for that path.  At a minimum that
 
 == A.3: Requirements Trace Matrix
 
-|====
-----
-Requirement 1: API Landing Page Operation
-The server SHALL support the HTTP GET operation at the path /.
-Tests: A.1.n
-----
-----
-Requirement 2: API Landing Page Response
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
-The content of that response SHALL be based upon the OpenAPI 3.0 schema root.yaml and include at least links to the following resources:
-    /api (relation type 'service')
-    /conformance (relation type 'conformance')
-    /collections (relation type 'data')
-Tests: A.1.n
-----
-----
-Requirement n: API Definition Operation (derived)
-The server SHALL support the HTTP GET operation at the path /api.
-Tests: A.1.n
-----
-----
-Requirement 3: API Definition Response
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
-The server SHALL return an API definition document.
-Tests: A.1.n
-----
-----
-Requirement 4: Conformance Class Operation
-The server SHALL support the HTTP GET operation at the path /conformance.
-Tests: A.1.n
-----
-----
-Requirement 5: Conformance Class Response
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
-The content of that response SHALL be based upon the OpenAPI 3.0 schema req-classes.yaml and list all WFS 3.0 requirements classes that the server conforms to.
-Tests: A.1.n
-----
-----
-Requirement 6: HTTP 1.1
-The server SHALL conform to HTTP 1.1.
-Tests: A.1.n
-----
-----
-Requirement 7: Coordinate Reference Systems
-Unless the client explicitly requests a different coordinate reference system, all spatial geometries SHALL be in the coordinate reference system http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude).l.adoc[]
-Tests: A.1.n
-----
-----
-Requirement n: Feature Collections Metadata Operation (derived)
-The server SHALL support the HTTP GET operation at the path /collections.
-Tests: A.1.n
-----
-----
-Requirement 8: Feature Collections Metadata Response
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
-The content of that response SHALL be based upon the OpenAPI 3.0 schema content.yaml.
-Tests: A.1.n
-----
-----
-Requirement 9: Feature Collections Metadata Links
-A 200-response SHALL include the following links in the links property of the response:
-    a link to this response document (relation: self),
-    a link to the response document in every other media type supported by the server (relation: alternate).
-All links SHALL include the rel and type link parameters.
-Tests: A.1.n
-----
-----
-Requirement 10: Feature Collections Metadata Items
-For each feature collection in this distribution of the dataset, an item SHALL be provided in the property collections.
-Tests: A.1.n
-----
-----
-Requirement 11: Feature Collections Metadata Items Links
-For each feature collection in this distribution of the dataset, the links property of the collection SHALL include an item for each supported encoding with a link to the collection resource (relation: item).
-All links SHALL include the rel and type properties.
-Tests: A.1.n
-----
-----
-Requirement 12: Feature Collections Metadata Extent
-For each feature collection, the extent property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection.
-If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries.
-Tests: A.1.n
-----
-----
-Requirement 13: Feature Collection Metadta Operation
-The server SHALL support the HTTP GET operation at the path /collections/{name}.
-name is the property of the same name in the feature collections metadata.
-Tests: A.1.n
-----
-----
-Requirement 14: Feature Collection Metadta Response
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
-The content of that response SHALL be the same as the content for this feature collection in the /collections response.
-Tests: A.1.n
-----
-----
-Requirement 15: Feature Collection Operation
-For every feature collection identified in the metadata about the feature collection (path /), the server SHALL support the HTTP GET operation at the path /collections/{name}/items.
-name is the property of the same name in the feature collections metadata.
-Tests: A.1.n
-----
-----
-Requirement 16: Feature Collection Operation Limit Parameter
-Each feature collection operation SHALL support a parameter limit with the following characteristics (using an OpenAPI Specification 3.0 fragment):
-Tests: A.1.n
-----
-----
-Requirement 17: Feature Collection Operation Limit Parameter Response
-The response SHALL not contain more features than specified by the optional limit parameter. If the API definition specifies a maximum value for limit parameter, the response SHALL not contain more features than this maximum value.
-Only items are counted that are on the first level of the collection. Any nested objects contained within the explicitly requested items SHALL not be counted.
-Tests: A.1.n
-----
-----
-Requirement 18: Feature Collection Operation BoundingBox Parameter
-Each feature collection operation SHALL support a parameter bbox with the following characteristics (using an OpenAPI Specification 3.0 fragment):
-Tests: A.1.n
-----
-----
-Requirement 19: Feature Collection Operation BoundingBox Parameter Response
-Only features that have a spatial geometry that intersects the bounding box SHALL be part of the result set, if the bbox parameter is provided.
-The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (elevation or depth):
-    Lower left corner, coordinate axis 1
-    Lower left corner, coordinate axis 2
-    Lower left corner, coordinate axis 3 (optional)
-    Upper right corner, coordinate axis 1
-    Upper right corner, coordinate axis 2
-    Upper right corner, coordinate axis 3 (optional)
-The coordinate reference system of the values SHALL be interpreted as WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter bbox-crs.
-Tests: A.1.n
-----
-----
-Requirement 20: Feature Collection Operation Time Parameter 
-Each feature collection operation SHALL support a parameter time with the following characteristics (using an OpenAPI Specification 3.0 fragment):
-Tests: A.1.n
-----
-----
-Requirement 21: Feature Collection Operation Time Parameter Response
-Only features that have a temporal geometry that intersects the timestamp or time period SHALL be part of the result set, if the time parameter is provided.
-The temporal information is either a date-time or a period string that adheres to RFC3339.
-If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties.
-Tests: A.1.n
-----
-----
-Requirement 22: Feature Collection Response
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
-Tests: A.1.n
-----
-----
-Requirement 23: Feature Collection Response Links
-A 200-response SHALL include the following links:
-    a link to this response document (relation: self),
-    a link to the response document in every other media type supported by the service (relation: alternate).
-Tests: A.1.n
-----
-----
-Requirement 24: Feature Collection Response Links Parameters
-All links SHALL include the rel and type link parameters.
-Tests: A.1.n
-----
-----
-Requirement 25: Feature Operation
-For every feature in a feature collection (path /collections/{name}/items), the service SHALL support the HTTP GET operation at the path /collections/{name}/items/{id}.
-name is the property of the same name in the feature collection metadata. id is a local identifier of the feature.
-Tests: A.1.n
-----
-----
-Requirement 26: Feature Opearation Response
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.
-Tests: A.1.n
-----
-----
-Requirement 27: Feature Operation Response Links
-A 200-response SHALL include the following links in the response:
-    a link to the response document (relation: self),
-    a link to the response document in every other media type supported by the service (relation: alternate), and
-    a link to the feature collection that contains this feature (relation: collection).
-All links SHALL include the rel and type link parameters.
-Tests: A.1.n
-----
-----
-Requirement 9: HTML Extension
-include::requirements/requirements_class_html.adoc[]
-Tests: A.1.n
-----
-----
-Requirement 10: OpenAPI 3.0
-Description:
-include::requirements/requirements_class_oas30.adoc[]
-Tests: A.1.n
-----
-
-== A.4: Abstract Test +<o:p></o:p>
-
-The Test Approach used in the WFS 3.0 Abstract Test Suite
-includes four steps: +<o:p></o:p>
-
-<!--[if !supportLists]-->1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Identify the test points +<o:p></o:p>
-
-<!--[if !supportLists]-->2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Verify that API descriptions of the test points
-comply with the WFS 3.0 standard +<o:p></o:p>
-
-<!--[if !supportLists]-->3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Verify that the micro-services at each test
-point behave in accordance with the WFS 3.0 standard. +<o:p></o:p>
-
-<!--[if !supportLists]-->4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Verify that the resources returned at each test
-point are in accordance with the WFS 3.0 standard and any referenced content
-standard. +<o:p></o:p>
-
-Identification of test points is a new requirement with WFS
-3.0.  Since an API is not a Web Service,
-there may be RESTful endpoints advertised which are not intended to be targets
-of the compliance testing.  Section A.4.2
-describes the process for crawling the API Description document and extracting
-those URLs which should be tested as well as the path(s) they should be tested
-with.  The concatenation of a Server URL
-with a path forms a test point.  +<o:p></o:p>
-
-Section A.4.3 describes how the test points are exercised to
-determine compliance with the WFS 3.0 standard. +<o:p></o:p>
-
-=== A.4.1: General Tests<o:p></o:p>
-
-==== A.4.1.1 HTTP 1.1 <o:p></o:p>
-
- a) Test Purpose:
-Validate that the WFS services advertised through the API conform with HTTP
-1.1. <o:p></o:p>
-
- b) Pre-conditions: none<o:p></o:p>
-
- c) Test Method:<o:p></o:p>
-
-<!--[if !supportLists]-->1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Built all requests using the HTTP 1.1 protocol.<o:p></o:p>
-
-<!--[if !supportLists]-->2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that all responses comply with the HTTP
-1.1 protocol<o:p></o:p>
-
- d) References: Requirement
-7<o:p></o:p>
-
-==== A.4.1.2 Coordinate
-Reference Systems <o:p></o:p>
-
- a) Test Purpose:
-Validate that all spatial geometries provided through a WFS service are in the
-CRS84 spatial reference system unless otherwise requested by the client. <o:p></o:p>
-
- b) Pre-conditions:
-none<o:p></o:p>
-
- c) Test Method:<o:p></o:p>
-
-<!--[if !supportLists]-->1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Do not specify a coordinate reference system in
-any request.  All spatial data should be
-in the CRS84 reference system.<o:p></o:p>
-
-<!--[if !supportLists]-->2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate retrieved spatial data using the CRS84
-reference system. <o:p></o:p>
-
- d) References:
-Requirement 8<o:p></o:p>
-
-=== A.4.2: Retrieve the
-API Description<o:p></o:p>
-
-==== A.4.2.1 Landing Page
-Retrieval <o:p></o:p>
-
- a) Test Purpose:
-Validate that a landing page can be retrieved from the expected location. <o:p></o:p>
-
- b) Pre-conditions: <o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A URL to the server hosting the landing page is
-known.<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->The test client can authenticate to the server.<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->The test client has sufficient privileges to
-access the landing page.<o:p></o:p>
-
- c) Test Method:<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Issue an HTTP GET request to the URL {root}/<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that a document was returned with a
-status code 200<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the contents of the returned document
-using test A.4.2.2<o:p></o:p>
-
- d) References:
-Requirement 1<o:p></o:p>
-
-==== A.4.2.2 Landing Page
-Validation <o:p></o:p>
-
- a) Test Purpose:
-Validate that the landing page complies with the require structure and
-contents. <o:p></o:p>
-
- b) Pre-conditions:<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->The landing page has been retrieved from the
-server<o:p></o:p>
-
- c) Test Method:<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the landing page against the root.yaml
-schema<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that the landing page includes a “service”
-link to API Definition<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that the landing page includes a
-“conformance” link to the conformance class document<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that the landing page includes a “data”
-link to the WFS contents. <o:p></o:p>
-
- d) References:
-Requirement 2<o:p></o:p>
-
-==== A.4.2.3 OpenAPI
-Document Retrieval <o:p></o:p>
-
-Note: The URI for the API definition is provided through the
-landing page.  However, that does not
-mean that the API definition resides on the same server as the landing
-page.  Test clients should be prepared
-for a WFS 3.0 implementation which is distributed across multiple servers.   <o:p></o:p>
-
- a) Test Purpose:
-Validate that the API Definition document can be retrieved from the expected
-location. <o:p></o:p>
-
- b) Pre-conditions: <o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A URL to the server hosting the API Definition
-document is known.<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->The test client can authenticate to the server.<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->The test client has sufficient privileges to
-assess the API Definition document.<o:p></o:p>
-
- c) Test Method:<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Issue an HTTP GET request to the URL
-{server}/api<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that a document was returned with a
-status code 200<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the contents of the returned document
-using test A.4.2.4<o:p></o:p>
-
- d) References:
-Requirements 3 and 4<o:p></o:p>
-
-==== A.4.2.4 API
-Definition Validation <o:p></o:p>
-
- a) Test Purpose:
-Validate that the API Definition page complies with the require structure and
-contents. <o:p></o:p>
-
- b) Pre-conditions:<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->The API Definition document has been retrieved
-from the server<o:p></o:p>
-
- c) Test Method:<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the API Definition document against the
-OpenAPI 3.0 schema<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Identify the Test Points as described in test
-A.4.3<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Process the API Definition document as described
-in test A.4.4 <o:p></o:p>
-
- d) References:
-Requirement 4<o:p></o:p>
-
-=== A.4.3: Identify the
-Test Points<o:p></o:p>
-
-Identification of the test points is a pre-condition to
-performing a compliance test.  This
-process starts with A.4.3.1.<o:p></o:p>
-
-==== A.4.3.1: Identify
-Test Points:<o:p></o:p>
-
-a) Purpose: To identify the test points associated with each
-Path in the OpenAPI document<o:p></o:p>
-
- b) Pre-conditions:<o:p></o:p>
-
-*   An OpenAPI document has
-     been obtained <o:p></o:p>
-*   A list of URLs for the
-     servers to be included in the compliance test has been provided<o:p></o:p>
-*   A list of the paths
-     specified in the WFS 3.0 specification<o:p></o:p>
-
- c) Method:<o:p></o:p>
-
-FOR EACH paths
-property in the OpenAPI document<o:p></o:p>
-
-    If the path name
-is one of those specified in the WFS 3.0 specification<o:p></o:p>
-
-        Retrieve the
-Server URIs using A.4.3.2.<o:p></o:p>
-
-        FOR EACH
-Server URI<o:p></o:p>
-
-Concatenate the Server URI with the path name to form a test point.<o:p></o:p>
-
-            Add that
-test point to the list.<o:p></o:p>
-
-d) References: None<o:p></o:p>
-
-==== A.4.3.2: Identify
-Server URIs:<o:p></o:p>
-
-a) Purpose: To identify all server URIs applicable to an
-OpenAPI Operation Object <o:p></o:p>
-
- b) Pre-conditions:<o:p></o:p>
-
-*   Server Objects from the
-     root level of the OpenAPI document have been obtained <o:p></o:p>
-*   A Path Item Object has
-     been retrieved<o:p></o:p>
-*   An Operation Object has
-     been retrieved <o:p></o:p>
-*   The Operation Object is
-     associated with the Path Item Object<o:p></o:p>
-*   A list of URLs for the
-     servers to be included in the compliance test has been provided<o:p></o:p>
-
- c) Method:<o:p></o:p>
-
-1) Identify the Server Objects
-which are in-scope for this operation<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->IF Server Objects are defined at the Operation
-level, then those and only those Server Objects apply to that Operation.<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->IF Server Objects are defined at the Path Item
-level, then those and only those Server Objects apply to that Path Item.<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->IF Server Objects are not defined at the
-Operation level, then the Server Objects defined for the parent Path Item apply
-to that Operation.<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->IF Server Objects are not defined at the Path
-Item level, then the Server Objects defined for the root level apply to that
-Path.<o:p></o:p>
-
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->IF no Server Objects are defined at the root
-level, then the default server object is assumed as described in the OpenAPI
-specification.<o:p></o:p>
-
-2) Process each Server Object
-using A.4.3.3.<o:p></o:p>
-
-3) Delete any Server URI which
-does not reference a server on the list of servers to test.<o:p></o:p>
-
-d) References: None<o:p></o:p>
-
-==== A.4.3.3: Process
-Server Object:<o:p></o:p>
-
-a) Purpose: To expand the contents of a Server Object into a
-set of absolute URIs. <o:p></o:p>
-
- b) Pre-conditions:<o:p></o:p>
-
-*   A Server Object has been
-     retrieved<o:p></o:p>
-
- c) Method:<o:p></o:p>
-
-Processing Server Object results in a set of absolute
-URIs.  This set contains all of the URIs
-that can be created given the URI template and variables defined in that Server
-Object. <o:p></o:p>
-
-<!--[if !supportLists]-->1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->If there are no variables in the URI template,
-then add the URI to the return set.<o:p></o:p>
-
-<!--[if !supportLists]-->2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->For each variable in the URI template which does
-not have an enumerated set of valid values:<o:p></o:p>
-
-<!--[if !supportLists]-->a.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->generate a URI using the default value,<o:p></o:p>
-
-<!--[if !supportLists]-->b.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->add this URI to the return set, <o:p></o:p>
-
-<!--[if !supportLists]-->c.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->flag this URI as non-exhaustive<o:p></o:p>
-
-<!--[if !supportLists]-->3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->For each variable in the URI template which has
-an enumerated set of valid values:<o:p></o:p>
+[width="100%"]
+|====================
+| *Requirement 1:* API Landing Page Operation +
+  The server SHALL support the HTTP GET operation at the path /. +
+  Tests: A.4.2.1
+| *Requirement 2:* API Landing Page Response +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be based upon the OpenAPI 3.0 schema root.yaml and include at least links to the following resources: +
+ - /api (relation type 'service') +
+ - /conformance (relation type 'conformance') +
+ - /collections (relation type 'data') +
+Tests: A.4.2.2 +
+| *Requirement 3:* API Definition Operation +
+The server SHALL support the HTTP GET operation at the path /api. +
+Tests: A.4.2.3 +
+| *Requirement 4:* API Definition Response +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The server SHALL return an API definition document. +
+Tests: A.4.2.3, A.4.2.4 +
+| *Requirement 5:* Conformance Class Operation +
+The server SHALL support the HTTP GET operation at the path /conformance. +
+Tests: A.4.4.2 +
+| *Requirement 6:* Conformance Class Response +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be based upon the OpenAPI 3.0 schema req-classes.yaml and list all WFS 3.0 requirements classes that the server conforms to. +
+Tests: A.4.4.3 +
+| *Requirement 7:* HTTP 1.1 +
+The server SHALL conform to HTTP 1.1. +
+Tests: A.4.1.1 +
+| *Requirement 8:* Coordinate Reference Systems +
+Unless the client explicitly requests a different coordinate reference system, all spatial geometries SHALL be in the coordinate reference system http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude) +
+Tests: A.4.1.2 +
+| *Requirement 9:* Feature Collections Metadata Operation +
+The server SHALL support the HTTP GET operation at the path /collections. +
+Tests: A.4.4.4 +
+| *Requirement 10:* Feature Collections Metadata Response +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.  The content of that response SHALL be based upon the OpenAPI 3.0 schema content.yaml. +
+Tests: A.4.4.5 +
+| *Requirement 11:* Feature Collections Metadata Links +
+A 200-response SHALL include the following links in the links property of the response: +
+ - a link to this response document (relation: self), +
+ - a link to the response document in every other media type supported by the server (relation: alternate). +
+All links SHALL include the rel and type link parameters. +
+Tests: A.4.4.5 +
+| *Requirement 12:* Feature Collections Metadata Items +
+For each feature collection in this distribution of the dataset, an item SHALL be provided in the property collections. +
+Tests: A.4.4.5, A.4.4.6 +
+| *Requirement 13:* Feature Collections Metadata Items Links +
+For each feature collection in this distribution of the dataset, the links property of the collection SHALL include an item for each supported encoding with a link to the collection resource (relation: item). +
+All links SHALL include the rel and type properties. +
+Tests: A.4.4.6 +
+| *Requirement 14:* Feature Collections Metadata Extent +
+For each feature collection, the extent property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection. +
+If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries. +
+Tests: A.4.4.6 +
+| *Requirement 15:* Feature Collection Metadta Operation +
+The server SHALL support the HTTP GET operation at the path /collections/{name}. name is the property of the same name in the feature collections metadata. +
+Tests: A.4.4.7 +
+| *Requirement 16:* Feature Collection Metadta Response +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be the same as the content for this feature collection in the /collections response. +
+Tests: A.4.4.8 +
+| *Requirement 17:* Feature Collection Operation +
+For every feature collection identified in the metadata about the feature collection (path /), the server SHALL support the HTTP GET operation at the path /collections/{name}/items where {name} is the property of the same name in the feature collections metadata. +
+Tests: A.4.4.9 +
+| *Requirement 18:* Feature Collection Operation Limit Parameter +
+Each feature collection operation SHALL support a parameter limit with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
+Tests: A.4.4.11 +
+| *Requirement 19:* Feature Collection Operation Limit Parameter Response +
+The response SHALL not contain more features than specified by the optional limit parameter. If the API definition specifies a maximum value for limit parameter, the response SHALL not contain more features than this maximum value. +
+Only items are counted that are on the first level of the collection. Any nested objects contained within the explicitly requested items SHALL not be counted. +
+Tests: A.4.4.11 +
+| *Requirement 20:* Feature Collection Operation BoundingBox Parameter +
+Each feature collection operation SHALL support a parameter bbox with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
+Tests: A.4.4.12 +
+| *Requirement 21:* Feature Collection Operation BoundingBox Parameter Response +
+Only features that have a spatial geometry that intersects the bounding box SHALL be part of the result set, if the bbox parameter is provided. +
+The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (elevation or depth): +
+ - Lower left corner, coordinate axis 1 +
+ - Lower left corner, coordinate axis 2 +
+ - Lower left corner, coordinate axis 3 (optional) +
+ - Upper right corner, coordinate axis 1 +
+ - Upper right corner, coordinate axis 2 +
+ - Upper right corner, coordinate axis 3 (optional) +
+The coordinate reference system of the values SHALL be interpreted as WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter bbox-crs. +
+Tests: A.4.4.12 +
+| *Requirement 22:* Feature Collection Operation Time Parameter +
+Each feature collection operation SHALL support a parameter time with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
+Tests: A.4.4.13 +
+| *Requirement 23:* Feature Collection Operation Time Parameter Response +
+Only features that have a temporal geometry that intersects the timestamp or time period SHALL be part of the result set, if the time parameter is provided. +
+The temporal information is either a date-time or a period string that adheres to RFC3339. +
+If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties. +
+Tests: A.4.4.13 +
+| *Requirement 24:* Feature Collection Response +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. +
+Tests: A.4.4.10 +
+| *Requirement 25:* Feature Collection Response Links +
+A 200-response SHALL include the following links: +
+ - a link to this response document (relation: self), +
+ - a link to the response document in every other media type supported by the service (relation: alternate). +
+Tests: A.4.4.10 +
+| *Requirement 26:* Feature Collection Response Links Parameters +
+All links SHALL include the rel and type link parameters. +
+Tests: A.4.4.10 +
+| *Requirement 27:* Feature Operation +
+For every feature in a feature collection (path /collections/{name}/items), the service SHALL support the HTTP GET operation at the path /collections/{name}/items/{id} where {name} is the property of the same name in the feature collection metadata and {id} is a local identifier of the feature. +
+Tests: A.4.4.14 +
+| *Requirement 28:* Feature Opearation Response +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. +
+Tests: A.4.4.15 +
+| *Requirement 29:* Feature Operation Response Links +
+A 200-response SHALL include the following links in the response: +
+ - a link to the response document (relation: self), +
+ - a link to the response document in every other media type supported by the service (relation: alternate), and +
+ - a link to the feature collection that contains this feature (relation: collection). +
+All links SHALL include the rel and type link parameters. +
+Tests: A.4.4.15 +
+|====================
 
-<!--[if !supportLists]-->a.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->generate a URI for each value in the enumerated
-set,<o:p></o:p>
+== A.4: Abstract Test 
 
-<!--[if !supportLists]-->b.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->add each generated URI to the return set.<o:p></o:p>
+The Test Approach used in the WFS 3.0 Abstract Test Suite includes four steps: 
 
-<!--[if !supportLists]-->4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Perform this processing in an iterative manner
-so that there is a unique URI for all possible combinations of enumerated and
-default values.<o:p></o:p>
+. Identify the test points 
 
-<!--[if !supportLists]-->5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Convert all relative URIs to absolute URIs by
-rooting them on the URI to the server hosting the OpenAPI document. <o:p></o:p>
+. Verify that API descriptions of the test points comply with the WFS 3.0 standard 
 
-d) References: None<o:p></o:p>
+. Verify that the micro-services at each test point behave in accordance with the WFS 3.0 standard. 
 
-=== A.4.4 Processing the OpenAPI
-Document<o:p></o:p>
+. Verify that the resources returned at each test point are in accordance with the WFS 3.0 standard and any referenced content standard. 
 
-==== A.4.4.1 Validate /api
-path <o:p></o:p>
+Identification of test points is a new requirement with WFS 3.0.  Since an API is not a Web Service, there may be RESTful endpoints advertised which are not intended to be targets of the compliance testing.  Section A.4.2 describes the process for crawling the API Description document and extracting those URLs which should be tested as well as the path(s) they should be tested with.  The concatenation of a Server URL with a path forms a test point.
 
- a) Test Purpose: Validate
-the /api path <o:p></o:p>
+Section A.4.3 describes how the test points are exercised to determine compliance with the WFS 3.0 standard.
 
- b) Pre-conditions:<o:p></o:p>
+=== A.4.1: General Tests 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Path = /api<o:p></o:p>
+==== A.4.1.1 HTTP 1.1  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->An API Definition document has been retrieved
-from the server<o:p></o:p>
+===== a) Test Purpose: 
+Validate that the WFS services advertised through the API conform with HTTP 1.1.  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A /api path in the OpenAPI document advertises
-an additional OpenAPI document which may contain additional information about
-the API.<o:p></o:p>
+===== b) Pre-conditions: 
+none 
 
- c) Test Method:<o:p></o:p>
+===== c) Test Method: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->An OpenAPI document may contain a /api path for
-a number of reasons including:<o:p></o:p>
+. Build all requests using the HTTP 1.1 protocol. 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->The path points back to this document<o:p></o:p>
+. Validate that all responses comply with the HTTP 1.1 protocol 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->The path indicates an alternate encoding of the
-API Description<o:p></o:p>
+===== d) References: 
+Requirement 7 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->The path indicates an access point controlled by
-another authentication scheme.<o:p></o:p>
+==== A.4.1.2 Coordinate Reference Systems  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->At this point, none of those cases are addressed
-through this test suite.<o:p></o:p>
+===== a) Test Purpose: 
+Validate that all spatial geometries provided through a WFS service are in the CRS84 spatial reference system unless otherwise requested by the client.  
 
-d) References: none<o:p></o:p>
+===== b) Pre-conditions: 
+none 
 
-==== A.4.4.2 Validate
-Conformance Operation <o:p></o:p>
+===== c) Test Method: 
 
- a) Test Purpose:
-Validate that Conformance Operation behaves as required. <o:p></o:p>
+. Do not specify a coordinate reference system in any request.  All spatial data should be in the CRS84 reference system. 
 
- b) Pre-conditions:<o:p></o:p>
+. Validate retrieved spatial data using the CRS84 reference system.  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Path = /conformance <o:p></o:p>
+===== d) References: 
+Requirement 8 
 
-c) Test Method:<o:p></o:p>
+=== A.4.2: Retrieve the API Description 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->DO FOR each /conformance test point<o:p></o:p>
+==== A.4.2.1 Landing Page Retrieval  
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Issue an HTTP GET request using the test point
-URI<o:p></o:p>
+===== a) Test Purpose: 
+Validate that a landing page can be retrieved from the expected location.  
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Go to test A.4.4.3. <o:p></o:p>
+===== b) Pre-conditions:  
 
- d) References: Requirement
-5<o:p></o:p>
+* A URL to the server hosting the landing page is known. 
 
-==== A.4.4.3 Validate
-Conformance Operation Response <o:p></o:p>
+* The test client can authenticate to the server. 
 
- a) Test Purpose:
-Validate the Response to the Conformance Operation. <o:p></o:p>
+* The test client has sufficient privileges to access the landing page. 
 
- b) Pre-conditions:<o:p></o:p>
+===== c) Test Method: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Path = /conformance <o:p></o:p>
+. Issue an HTTP GET request to the URL {root}/ 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A Conformance document has been retrieved<o:p></o:p>
+. Validate that a document was returned with a status code 200 
 
- c) Test Method:<o:p></o:p>
+. Validate the contents of the returned document using test A.4.2.2 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the retrieved document against the
-classes.yaml schema.<o:p></o:p>
+===== d) References: 
+Requirement 1 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Record all reported compliance classes and
-associate that list with the test point. 
-This information will be used in latter tests.<o:p></o:p>
+==== A.4.2.2 Landing Page Validation  
 
-d) References: Requirement 6<o:p></o:p>
+===== a) Test Purpose: 
+Validate that the landing page complies with the require structure and contents.  
 
-==== A.4.4.4 Validate the Feature
-Collections Metadata Operation<o:p></o:p>
+===== b) Pre-conditions: 
 
- a) Test Purpose: Validate
-that the Feature Collections Metadata Operation behaves as required <o:p></o:p>
+* The landing page has been retrieved from the server 
 
- b) Pre-conditions:<o:p></o:p>
+===== c) Test Method: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Path = /collections<o:p></o:p>
+. Validate the landing page against the root.yaml schema 
 
- c) Test Method:<o:p></o:p>
+. Validate that the landing page includes a “service” link to API Definition 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->DO FOR each /collections test point<o:p></o:p>
+. Validate that the landing page includes a “conformance” link to the conformance class document 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Issue an HTTP GET request using the test point
-URI<o:p></o:p>
+. Validate that the landing page includes a “data” link to the WFS contents.  
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Go to test A.4.4.5 <o:p></o:p>
+===== d) References: 
+Requirement 2 
 
- d) References: Requirement
-9<o:p></o:p>
+==== A.4.2.3 OpenAPI Document Retrieval  
 
-==== A.4.4.5 Validate the Feature
-Collections Metadata Operation Response<o:p></o:p>
+Note: The URI for the API definition is provided through the landing page.  However, that does not mean that the API definition resides on the same server as the landing page.  Test clients should be prepared for a WFS 3.0 implementation which is distributed across multiple servers.  
 
- a) Test Purpose:
-Validate that response to the Feature Collection Metadata Operation. <o:p></o:p>
+===== a) Test Purpose: 
+Validate that the API Definition document can be retrieved from the expected location.  
 
- b) Pre-conditions:<o:p></o:p>
+===== b) Pre-conditions:  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A Feature Collection Metadata document has been
-retrieved<o:p></o:p>
+* A URL to the server hosting the API Definition document is known. 
 
- c) Test Method:<o:p></o:p>
+* The test client can authenticate to the server. 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the retrieved document against the
-content.yaml schema.<o:p></o:p>
+* The test client has sufficient privileges to assess the API Definition document. 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that the retrieved document includes
-links for:<o:p></o:p>
+===== c) Test Method: 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Itself<o:p></o:p>
+. Issue an HTTP GET request to the URL {server}/api 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Alternate encodings of this document in every
-other media type as identified by the compliance classes for this server.<o:p></o:p>
+. Validate that a document was returned with a status code 200 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that each link includes a rel and type
-parameter<o:p></o:p>
+. Validate the contents of the returned document using test A.4.2.4 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that the returned document includes a
-collections property for each collection in the dataset.<o:p></o:p>
+===== d) References: 
+Requirements 3 and 4 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->For each collections property, validate the metadata
-for that collection using test A.4.4.6<o:p></o:p>
+==== A.4.2.4 API Definition Validation  
 
- d) References: Requirement
-10, 11, and 12<o:p></o:p>
+===== a) Test Purpose: 
+Validate that the API Definition page complies with the require structure and contents.  
 
-==== A.4.4.6 Validate a
-Collections Metadata document<o:p></o:p>
+===== b) Pre-conditions: 
 
- a) Test Purpose:
-Validate a Collections Metadata document. <o:p></o:p>
+* The API Definition document has been retrieved from the server 
 
- b) Pre-conditions:<o:p></o:p>
+===== c) Test Method: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Collection metadata document has been retrieved.<o:p></o:p>
+. Validate the API Definition document against the OpenAPI 3.0 schema 
 
- c) Test Method:<o:p></o:p>
+. Identify the Test Points as described in test A.4.3 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the collection metadata against the
-collectionInfo.yaml schema<o:p></o:p>
+. Process the API Definition document as described in test A.4.4  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that the collection metadata document
-includes links for:<o:p></o:p>
+===== d) References:
+Requirement 4 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Itself<o:p></o:p>
+=== A.4.3: Identify the Test Points 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Alternate encodings of this document in every
-other media type as identified by the compliance classes for this server.<o:p></o:p>
+Identification of the test points is a pre-condition to performing a compliance test.  Thisprocess starts with A.4.3.1. 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that each link includes a rel and type
-parameter<o:p></o:p>
+==== A.4.3.1: Identify Test Points: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the extent property if it is provided<o:p></o:p>
+===== a) Purpose: 
+To identify the test points associated with each Path in the OpenAPI document 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Retrieve the collection using the name property
-and test A.4.4.7. <o:p></o:p>
+===== b) Pre-conditions: 
 
- d) References: Requirement
-12, 13, 14<o:p></o:p>
+*   An OpenAPI document has been obtained  
+*   A list of URLs for the servers to be included in the compliance test has been provided 
+*   A list of the paths specified in the WFS 3.0 specification 
 
-==== A.4.4.7 Validate the Feature
-Collection Metadata Operation<o:p></o:p>
+===== c) Method: 
 
- a) Test Purpose:
-Validate that the Feature Collection Metadata Operation behaves as required <o:p></o:p>
+FOR EACH paths property in the OpenAPI document 
+    If the path name is one of those specified in the WFS 3.0 specification 
+        Retrieve the Server URIs using A.4.3.2. 
+        FOR EACH Server URI 
+            Concatenate the Server URI with the path name to form a test point. 
+            Add that test point to the list. 
 
- b) Pre-conditions:<o:p></o:p>
+===== d) References: 
+None 
 
-==== <!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A feature collection name is provided by test
-A.4.4.6<o:p></o:p>
+==== A.4.3.2: Identify Server URIs: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Path = /collections/{name}<o:p></o:p>
+===== a) Purpose: 
+To identify all server URIs applicable to an OpenAPI Operation Object  
 
- c) Test Method:<o:p></o:p>
+===== b) Pre-conditions: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->DO FOR each /collections{name} test point<o:p></o:p>
+*   Server Objects from the root level of the OpenAPI document have been obtained  
+*   A Path Item Object has been retrieved 
+*   An Operation Object has been retrieved  
+*   The Operation Object is associated with the Path Item Object 
+*   A list of URLs for the servers to be included in the compliance test has been provided 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Issue an HTTP GET request using the test point
-URI<o:p></o:p>
+===== c) Method: 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Go to test A.4.4.8 <o:p></o:p>
+1) Identify the Server Objects which are in-scope for this operation 
 
- d) References: Requirement
-15<o:p></o:p>
+ - IF Server Objects are defined at the Operation level, then those and only those Server Objects apply to that Operation. 
+ 
+ - IF Server Objects are defined at the Path Item level, then those and only those Server Objects apply to that Path Item. 
+ 
+ - IF Server Objects are not defined at the Operation level, then the Server Objects defined for the parent Path Item apply to that Operation. 
+ 
+ - IF Server Objects are not defined at the Path Item level, then the Server Objects defined for the root level apply to that Path. 
+ 
+ - IF no Server Objects are defined at the root level, then the default server object is assumed as described in the OpenAPI specification. 
 
-==== A.4.4.8 Validate the
-Feature Collection Metadata Operation Response<o:p></o:p>
+2) Process each Server Object using A.4.3.3. 
 
- a) Test Purpose:
-Validate that response to the Feature Collection Metadata Operation. <o:p></o:p>
+3) Delete any Server URI which does not reference a server on the list of servers to test. 
 
- b) Pre-conditions:<o:p></o:p>
+===== d) References: 
+None 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A Feature Collection Metadata document has been
-retrieved<o:p></o:p>
+==== A.4.3.3: Process Server Object: 
 
- c) Test Method:<o:p></o:p>
+===== a) Purpose: 
+To expand the contents of a Server Object into a set of absolute URIs.  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate the retrieved document against the
-collectionInfo.yaml schema.<o:p></o:p>
+===== b) Pre-conditions: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Validate that this is the same document as that
-processed in Test A.4.4.6<o:p></o:p>
+*   A Server Object has been retrieved 
 
- d) References: Requirement
-16<o:p></o:p>
+===== c) Method: 
 
-==== A.4.4.9 Validate the
-Get Features Operation<o:p></o:p>
+Processing the Server Object results in a set of absolute URIs.  This set contains all of the URIs that can be created given the URI template and variables defined in that Server Object.  
 
- a) Test Purpose:
-Validate that the Get Features Operation behaves as required. <o:p></o:p>
+. If there are no variables in the URI template, then add the URI to the return set. 
 
- b) Pre-conditions:<o:p></o:p>
+. For each variable in the URI template which does not have an enumerated set of valid values: 
+    - generate a URI using the default value, 
+    - add this URI to the return set,  
+    - flag this URI as non-exhaustive 
+. For each variable in the URI template which has an enumerated set of valid values: 
+    - generate a URI for each value in the enumerated set, 
+    - add each generated URI to the return set. 
+. Perform this processing in an iterative manner so that there is a unique URI for all possible combinations of enumerated and default values. 
 
-==== <!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A feature collection name is provided by test
-A.4.4.6<o:p></o:p>
+. Convert all relative URIs to absolute URIs by rooting them on the URI to the server hosting the OpenAPI document.  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Path = /collections/{name}/items<o:p></o:p>
+===== d) References: 
+None 
 
-c) Test Method:<o:p></o:p>
+=== A.4.4 Processing the OpenAPI Document 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->DO FOR each /collections{name}/items test point<o:p></o:p>
+==== A.4.4.1 Validate /api path  
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Issue an HTTP GET request using the test point
-URI<o:p></o:p>
+===== a) Test Purpose: 
+Validate the /api path  
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Go to test A.4.4.10 <o:p></o:p>
+===== b) Pre-conditions: 
+* Path = /api 
 
- d) References: Requirement
-17<o:p></o:p>
+* An API Definition document has been retrieved from the server 
 
-==== A.4.4.10 Validate the
-Get Features Operation Response<o:p></o:p>
+* A /api path in the OpenAPI document advertises an additional OpenAPI document which may contain additional information about the API.
 
- a) Test Purpose:
-Validate the Get Feature Operation Response. <o:p></o:p>
+===== c) Test Method: 
 
- b) Pre-conditions:<o:p></o:p>
+An OpenAPI document may contain a /api path for a number of reasons including: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A collection of Features has been retrieved<o:p></o:p>
+ - The path points back to this document 
 
- c) Test Method:<o:p></o:p>
+ - The path indicates an alternate encoding of the API Description 
 
-*   Validate the structure of
-     the response as follows:<o:p></o:p>
+ - The path indicates an access point controlled by another authentication scheme. 
 
-*   For HTML use TBD<o:p></o:p>
-*   For GeoJSON use
-      featureCollectionGeoJSON.yaml<o:p></o:p>
-*   For GML use
-      featureCollectionGML.yaml<o:p></o:p>*   Validate that the following
-     links are included in the response document:<o:p></o:p>
+At this point, none of those cases are addressed through this test suite. 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Alternate encodings of this document in every
-other media type as identified by the compliance classes for this server.<o:p></o:p>
+===== d) References: 
+none 
 
-*   Validate that each link
-     includes a rel and type parameter.<o:p></o:p>
+==== A.4.4.2 Validate Conformance Operation  
 
- d) References: Requirements
-24, 25, and 26<o:p></o:p>
+===== a) Test Purpose:
+Validate that Conformance Operation behaves as required.  
 
-==== A.4.4.11 Limit
-Parameter<o:p></o:p>
+===== b) Pre-conditions: 
 
-a) Test Purpose: Validate the proper handling of the limit
-parameter. <o:p></o:p>
+* Path = /conformance  
 
- b) Pre-conditions:<o:p></o:p>
+===== c) Test Method: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Tests A.4.4.9 and A.4.4.10 have completed
-successfully.<o:p></o:p>
+DO FOR each /conformance test point 
 
-c) Test Method:<o:p></o:p>
+ - Issue an HTTP GET request using the test point URI 
+ 
+ - Go to test A.4.4.3.  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Verify that the OpenAPI document correctly
-describes the limit parameter for the Get Features operation.<o:p></o:p>
+===== d) References:
+Requirement 5 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Repeat Test A.4.4.9 using different values for
-the limit parameter.<o:p></o:p>
+==== A.4.4.3 Validate Conformance Operation Response  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->For each execution of Test A.4.4.9, repeat Test
-A.4.4.10 to validate the results.<o:p></o:p>
+===== a) Test Purpose:
+Validate the Response to the Conformance Operation.  
 
-d) References: Requirements 18 and 19<o:p></o:p>
+===== b) Pre-conditions: 
 
-==== A.4.4.12 Bounding Box
-Parameter<o:p></o:p>
+* Path = /conformance  
 
-a) Test Purpose: Validate the proper handling of the bbox
-parameter. <o:p></o:p>
+* A Conformance document has been retrieved 
 
- b) Pre-conditions:<o:p></o:p>
+===== c) Test Method: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Tests A.4.4.9 and A.4.4.10 have completed
-successfully.<o:p></o:p>
+. Validate the retrieved document against the classes.yaml schema. 
 
-c) Test Method:<o:p></o:p>
+. Record all reported compliance classes and associate that list with the test point. This information will be used in latter tests. 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Verify that the OpenAPI document correctly
-describes the bbox parameter for the Get Features operation.<o:p></o:p>
+===== d) References: 
+Requirement 6 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Repeat Test A.4.4.9 using different values for
-the bbox parameter.  These should include
-test cases which cross the meridian, equator, 180^O^ longitude, and
-polar regions.<o:p></o:p>
+==== A.4.4.4 Validate the Feature Collections Metadata Operation 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->For each execution of Test A.4.4.9, repeat Test
-A.4.4.10 to validate the results.<o:p></o:p>
+===== a) Test Purpose: 
+Validate that the Feature Collections Metadata Operation behaves as required  
 
-d) References: Requirements 20 and 21<o:p></o:p>
+===== b) Pre-conditions: 
 
-==== A.4.4.13 Time
-Parameter<o:p></o:p>
+* Path = /collections 
 
-a) Test Purpose: Validate the proper handling of the time
-parameter. <o:p></o:p>
+===== c) Test Method: 
 
- b) Pre-conditions:<o:p></o:p>
+DO FOR each /collections test point 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Tests A.4.4.9 and A.4.4.10 have completed
-successfully.<o:p></o:p>
+ - Issue an HTTP GET request using the test point
+URI 
 
-c) Test Method:<o:p></o:p>
+ - Go to test A.4.4.5  
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Verify that the OpenAPI document correctly
-describes the time parameter for the Get Features operation.<o:p></o:p>
+===== d) References: 
+Requirement 9 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Repeat Test A.4.4.9 using different values for
-the time parameter.  <o:p></o:p>
+==== A.4.4.5 Validate the Feature Collections Metadata Operation Response 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->For each execution of Test A.4.4.9, repeat Test
-A.4.4.10 to validate the results.<o:p></o:p>
+===== a) Test Purpose:
+Validate that response to the Feature Collection Metadata Operation.  
 
-d) References: Requirements 22 and 23<o:p></o:p>
+===== b) Pre-conditions: 
 
-==== A.4.4.14 Get Feature
-Operation <o:p></o:p>
+* A Feature Collection Metadata document has been
+retrieved 
 
-a) Test Purpose: Validate that the Get Feature Operation behaves
-as required. <o:p></o:p>
+===== c) Test Method: 
 
- b) Pre-conditions:<o:p></o:p>
+. Validate the retrieved document against the content.yaml schema. 
 
-==== <!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A feature collection name is provided by test
-A.4.4.6<o:p></o:p>
+. Validate that the retrieved document includes links for: 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->A feature identifier is provided by test A.4.4.10<o:p></o:p>
+ - Itself 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->Path = /collections/{name}/items/(id} where {id}
-= the feature identifier<o:p></o:p>
+ - Alternate encodings of this document in every other media type as identified by the compliance classes for this server. 
 
-c) Test Method:<o:p></o:p>
+. Validate that each link includes a rel and type parameter 
 
-<!--[if !supportLists]-->·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--[endif]-->DO FOR each /collections{name}/items/{id} test
-point<o:p></o:p>
+. Validate that the returned document includes a collections property for each collection in the dataset. 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Issue an HTTP GET request using the test point
-URI<o:p></o:p>
+. For each collections property, validate the metadata for that collection using test A.4.4.6 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Go to test A.4.4.15 <o:p></o:p>
+===== d) References: 
+Requirements 10, 11, and 12 
 
-d) References: Requirement 27<o:p></o:p>
+==== A.4.4.6 Validate a Collections Metadata document 
 
-==== A.4.4.15 Validate the
-Get Feature Operation Response<o:p></o:p>
+===== a) Test Purpose:
+Validate a Collections Metadata document.  
 
- a) Test Purpose:
-Validate the Get Feature Operation Response. <o:p></o:p>
+===== b) Pre-conditions: 
 
-b) Pre-conditions:<o:p></o:p>
+* A Collection metadata document has been retrieved. 
 
-*   The Feature has been retrieved
-     from the server.<o:p></o:p>
+===== c) Test Method: 
 
-c) Test Method:<o:p></o:p>
+. Validate the collection metadata against the collectionInfo.yaml schema 
 
-*   Validate the structure of
-     the response as follows:<o:p></o:p>
+. Validate that the collection metadata document includes links for: 
 
-*   For HTML use TBD<o:p></o:p>
-*   For GeoJSON use
-      featureGeoJSON.yaml<o:p></o:p>
-*   For GML use
-      featureGML.yaml<o:p></o:p>*   Validate that the
-     following links are included in the response document:<o:p></o:p>
+ - Itself 
 
-<!--[if !supportLists]-->o&nbsp;&nbsp;
-<!--[endif]-->Alternate encodings of this document in every
-other media type as identified by the compliance classes for this server.<o:p></o:p>
+ - Alternate encodings of this document in every other media type as identified by the compliance classes for this server. 
 
-d) References: Requirements 28 and 29<o:p></o:p>
+. Validate that each link includes a rel and type parameter 
 
-<o:p>&nbsp;</o:p>
+. Validate the extent property if it is provided 
+
+. Retrieve the collection using the name property and test A.4.4.7.  
+
+===== d) References: 
+Requirement 12, 13, 14 
+
+==== A.4.4.7 Validate the Feature Collection Metadata Operation 
+
+===== a) Test Purpose:
+Validate that the Feature Collection Metadata Operation behaves as required  
+
+===== b) Pre-conditions: 
+
+* A feature collection name is provided by test A.4.4.6 
+
+* Path = /collections/{name} 
+
+===== c) Test Method: 
+
+DO FOR each /collections{name} test point 
+
+ - Issue an HTTP GET request using the test point URI 
+
+ - Go to test A.4.4.8  
+
+===== d) References: 
+Requirement 15 
+
+==== A.4.4.8 Validate the Feature Collection Metadata Operation Response 
+
+===== a) Test Purpose:
+Validate that response to the Feature Collection Metadata Operation.  
+
+===== b) Pre-conditions: 
+
+* A Feature Collection Metadata document has been
+retrieved 
+
+===== c) Test Method: 
+
+. Validate the retrieved document against the collectionInfo.yaml schema. 
+
+. Validate that this is the same document as that processed in Test A.4.4.6 
+
+===== d) References: 
+Requirement 16 
+
+==== A.4.4.9 Validate the Get Features Operation 
+
+===== a) Test Purpose:
+Validate that the Get Features Operation behaves as required.  
+
+===== b) Pre-conditions: 
+
+* A feature collection name is provided by test A.4.4.6 
+
+* Path = /collections/{name}/items 
+
+===== c) Test Method: 
+
+DO FOR each /collections{name}/items test point 
+
+ - Issue an HTTP GET request using the test point URI 
+
+ - Go to test A.4.4.10  
+
+===== d) References: 
+Requirement 17 
+
+==== A.4.4.10 Validate the Get Features Operation Response 
+
+===== a) Test Purpose:
+Validate the Get Feature Operation Response.  
+
+===== b) Pre-conditions: 
+
+* A collection of Features has been retrieved 
+
+===== c) Test Method: 
+
+. Validate the structure of the response as follows:
+
+    - For HTML use TBD
+    
+    - For GeoJSON use featureCollectionGeoJSON.yaml
+    
+    - For GML use featureCollectionGML.yaml
+    
+. Validate that the following links are included in the response document: 
+
+    - To itself
+
+    - Alternate encodings of this document in every other media type as identified by the compliance classes for this server. 
+
+. Validate that each link includes a rel and type parameter. 
+
+===== d) References: 
+Requirements 24, 25, and 26 
+
+==== A.4.4.11 Limit Parameter 
+
+===== a) Test Purpose: 
+Validate the proper handling of the limit parameter.  
+
+===== b) Pre-conditions: 
+
+* Tests A.4.4.9 and A.4.4.10 have completed successfully. 
+
+===== c) Test Method: 
+
+. Verify that the OpenAPI document correctly describes the limit parameter for the Get Features operation. 
+
+. Repeat Test A.4.4.9 using different values for the limit parameter. 
+
+. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results. 
+
+===== d) References: 
+Requirements 18 and 19 
+
+==== A.4.4.12 Bounding Box Parameter 
+
+===== a) Test Purpose: 
+Validate the proper handling of the bbox parameter.  
+
+===== b) Pre-conditions: 
+
+* Tests A.4.4.9 and A.4.4.10 have completed successfully. 
+
+===== c) Test Method: 
+
+. Verify that the OpenAPI document correctly describes the bbox parameter for the Get Features operation. 
+
+. Repeat Test A.4.4.9 using different values for the bbox parameter.  These should include test cases which cross the meridian, equator, 180^O^ longitude, and polar regions. 
+
+. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results. 
+
+===== d) References: 
+Requirements 20 and 21 
+
+==== A.4.4.13 Time Parameter 
+
+===== a) Test Purpose: 
+Validate the proper handling of the time parameter.  
+
+===== b) Pre-conditions: 
+
+* Tests A.4.4.9 and A.4.4.10 have completed
+successfully. 
+
+===== c) Test Method: 
+
+. Verify that the OpenAPI document correctly describes the time parameter for the Get Features operation. 
+
+. Repeat Test A.4.4.9 using different values for the time parameter.   
+
+. For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results. 
+
+===== d) References: 
+Requirements 22 and 23 
+
+==== A.4.4.14 Get Feature Operation  
+
+===== a) Test Purpose: 
+Validate that the Get Feature Operation behaves as required.  
+
+===== b) Pre-conditions: 
+
+* A feature collection name is provided by test A.4.4.6 
+
+* A feature identifier is provided by test A.4.4.10 
+
+* Path = /collections/{name}/items/(id} where {id} = the feature identifier 
+
+===== c) Test Method: 
+
+DO FOR each /collections{name}/items/{id} test point 
+
+    - Issue an HTTP GET request using the test point URI 
+
+    - Go to test A.4.4.15  
+
+===== d) References: 
+Requirement 27 
+
+==== A.4.4.15 Validate the Get Feature Operation Response 
+
+===== a) Test Purpose:
+Validate the Get Feature Operation Response.  
+
+===== b) Pre-conditions: 
+
+*   The Feature has been retrieved from the server. 
+
+===== c) Test Method: 
+
+. Validate the structure of the response as follows: 
+
+    - For HTML use TBD
+
+    - For GeoJSON use featureGeoJSON.yaml 
+
+    - For GML use featureGML.yaml 
+
+. Validate that the following links are included in the response document: 
+
+    - To itself
+    
+    - To the Feature Collection which contains this Feature
+
+    - Alternate encodings of this document in every other media type as identified by the compliance classes for this server. 
+
+===== d) References: 
+Requirements 28 and 29 
