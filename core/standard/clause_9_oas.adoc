@@ -8,6 +8,10 @@ include::requirements/requirements_class_oas30.adoc[]
 
 include::requirements/oas30/REQ_oas-definition-1.adoc[]
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/117[ISSUE 117] +
+The OpenAPI media type has not been registered yet with IANA and will likely
+change. We need to update the media type after registration.
+
 include::requirements/oas30/REQ_oas-definition-2.adoc[]
 
 CAUTION: Related to link:https://github.com/opengeospatial/WFS_FES/issues/90[ISSUE 90] +
@@ -31,7 +35,7 @@ Note that servers that, for example, are access-controlled
 (see <<security,Security>>), support web cache validation, CORS
 or that use HTTP redirection will make use of additional HTTP status codes
 beyond regular codes such as `200` for successful GET requests
-and `400`, `404` or `500` for error situations.
+and `400`, `404` or `500` for error situations. See <<http_status_codes>>.
 
 Clients have to be prepared to receive responses not documented in the
 OpenAPI definition. For example, additional errors may occur in the transport
@@ -44,10 +48,6 @@ include::requirements/oas30/REQ_exception-codes.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/45[ISSUE 45] +
 Listing of all applicable HTTP Status Codes
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/105[ISSUE 105] +
-WFS 2.0 defined exception codes and mapped them to HTTP status codes. Should WFS 3.0
-do this, too, or should we simply require that http status codes are used correctly?
 
 .An exception response object definition
 =================
