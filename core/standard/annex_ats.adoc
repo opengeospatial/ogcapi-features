@@ -118,6 +118,7 @@ A successful execution of the operation SHALL be reported as a response with a H
 Tests: A.4.4.3 +
 | *Requirement 7:* HTTP 1.1 +
 The server SHALL conform to HTTP 1.1. +
+If the server supports HTTPS, the server SHALL also conform to HTTP over TLS. +
 Tests: A.4.1.1 +
 | *Requirement 8:* Coordinate Reference Systems +
 Unless the client explicitly requests a different coordinate reference system, all spatial geometries SHALL be in the coordinate reference system http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude) +
@@ -166,7 +167,7 @@ Each feature collection operation SHALL support a parameter bbox with the follow
 Tests: A.4.4.12 +
 | *Requirement 21:* Feature Collection Operation BoundingBox Parameter Response +
 Only features that have a spatial geometry that intersects the bounding box SHALL be part of the result set, if the bbox parameter is provided. +
-The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (elevation or depth): +
+The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (height or depth): +
  - Lower left corner, coordinate axis 1 +
  - Lower left corner, coordinate axis 2 +
  - Lower left corner, coordinate axis 3 (optional) +
