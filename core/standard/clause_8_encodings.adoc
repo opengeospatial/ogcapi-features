@@ -3,7 +3,7 @@
 === Overview
 
 This clause specifies four pre-defined requirements classes for encodings to be
-used in a WFS. These encodings are commonly used encodings for spatial data on
+used by a WFS implementation. These encodings are commonly used encodings for spatial data on
 the web:
 
 * <<rc_html,HTML>>
@@ -11,8 +11,8 @@ the web:
 * <<rc_gmlsf0,Geography Markup Language (GML), Simple Features Profile, Level 0>>
 * <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>
 
-None of these encodings is mandatory and an implementation of the <<rc_core,Core>>
-requirements class may also decide to use none of them, but to use another encoding
+None of these encodings are mandatory and an implementation of the <<rc_core,Core>>
+requirements class may also implement none of them but implement another encoding
 instead.
 
 The <<rc_core,Core>> requirements class includes recommendations to support
@@ -25,9 +25,9 @@ encodings.
 Geographic information that is only accessible in formats like GeoJSON or GML
 has two issues:
 
-* it is not discoverable using the most common mechanism for discovering information,
+* The data is not discoverable using the most common mechanism for discovering information,
 that is the search engines of the Web;
-* it can not be viewed directly in a browser - additional tools are required to
+* The data can not be viewed directly in a browser - additional tools are required to
 view the data.
 
 Therefore, sharing data on the Web should include publication in HTML. To be consistent
@@ -36,7 +36,7 @@ access all data.
 
 This is discussed in detail in
 link:https://www.w3.org/TR/sdw-bp/#indexable-by-search-engines[Best Practice 2: Make your spatial data indexable by search engines]
-<<SDWBP>>. This standard therefore <<rec_html,recommends to support HTML as an encoding>>.
+<<SDWBP>>. This standard therefore <<rec_html,recommends supporting HTML as an encoding>>.
 
 include::requirements/requirements_class_html.adoc[]
 
@@ -50,7 +50,7 @@ include::requirements/html/REC_schema-org.adoc[]
 
 GeoJSON is a commonly used format that is simple to understand and well
 supported by tools and software libraries. Since most Web developers are
-comfortable with using a JSON-based format, supporting GeoJSON is recommended,
+comfortable with using a JSON-based format supporting GeoJSON is recommended,
 if the feature data can be represented in GeoJSON for the intended use.
 
 include::requirements/requirements_class_geojson.adoc[]
@@ -163,12 +163,13 @@ In the example below, coordinates are not shown.
 
 === Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"
 
-In addition to HTML and GeoJSON, a significant amount of feature data is
+In addition to HTML and GeoJSON, a significant volume of feature data is
 available in XML-based formats, notably GML. Therefore, this standard
 specifies requirement classes for GML. The Simple Features Profile, Level 0, is
-the simplest profile of GML and is typically supported by tools. It is restricted
-to data with 2D geometries supported by most tools. In addition, the profile
-is limited to features that can be stored in a tabular data structure.
+the simplest profile of GML and is typically supported by tools. The GML Simple
+Features Profile is restricted to data with 2D geometries supported by most tools.
+In addition, the Level 0 profile is limited to features that can be stored in
+a tabular data structure.
 
 include::requirements/requirements_class_gmlsf0.adoc[]
 
@@ -196,8 +197,8 @@ The namespace prefixes used above and in the WFS 3.0 Core XML Schema are:
 * `atom`: `http://www.w3.org/2005/Atom`
 * `xlink`: `http://www.w3.org/1999/xlink`
 
-The API definition resource at path `/api` is not included in <<gml_content>> and
-as this requirements class does not prescribe any API definition approach.
+The API definition resource at path `/api` is not included in <<gml_content>>.
+This requirements class does not prescribe any API definition approach.
 
 The mapping of the content from the responses specified in the
 <<rc_core,Core requirements class>> to the XML is straightforward.

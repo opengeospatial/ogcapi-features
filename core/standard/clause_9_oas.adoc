@@ -2,7 +2,7 @@
 
 === Basic requirements
 
-The API of servers conforming to this requirements class are defined by an link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument[OpenAPI Document].
+Servers conforming to this requirements class define their API by an link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument[OpenAPI Document].
 
 include::requirements/requirements_class_oas30.adoc[]
 
@@ -32,9 +32,9 @@ API specified in its OpenAPI definition.
 include::requirements/oas30/REQ_completeness.adoc[]
 
 Note that servers that, for example, are access-controlled
-(see <<security,Security>>), that support web cache validation, CORS
+(see <<security,Security>>), support web cache validation, CORS
 or that use HTTP redirection will make use of additional HTTP status codes
-beyond regular codes like `200` for successful GET requests
+beyond regular codes such as `200` for successful GET requests
 and `400`, `404` or `500` for error situations. See <<http_status_codes>>.
 
 Clients have to be prepared to receive responses not documented in the

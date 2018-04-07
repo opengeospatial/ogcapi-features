@@ -3,20 +3,25 @@
 
 === Evolution from previous versions of WFS
 
-The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads as it was state-of-the-art in the late 1990s and early 2000s, when WFS was originally designed. This version specifies a modernized service, that follows the current Web architecture and in particular the <<SDWBP,W3C/OGC best practices for sharing Spatial Data on the Web>> as well as the <<DWBP,W3C best practices for sharing Data on the Web>>.
+The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads.
+When the WFS standard was originally designed in the late 1990s and early 2000s this was the state-of-the-art. The WFS 3.0 version specifies a modernized service, that follows the current Web architecture and in particular the <<SDWBP,W3C/OGC best practices for sharing Spatial Data on the Web>> as well as the <<DWBP,W3C best practices for sharing Data on the Web>>.
 
-Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal is modularization. This has a few facets:
+Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal for this version of the WFS standard is modularization. This goal has several facets:
 
-* Clear separation between core requirements that almost everyone has who wants to share or use spatial data on a fine-grained level (this document) and more advanced capabilities that communities are using today (extensions specified in additional parts of WFS 3.0).
+* Clear separation between core requirements and more advanced capabilities. This
+document specifies the core requirements that are relevant for almost everyone
+who wants to share or use spatial data on a fine-grained level. Additional capabilities
+that several communities are using today will be specified as extensions in additional
+parts of WFS 3.0.
 * Technologies that change more frequently are decoupled and specified in separate modules ("requirements classes" in OGC terminology). This enables, for example, the use/re-use of new encodings for spatial data or API descriptions.
 * Modularization is not just about WFS modules, but about providing building blocks for fine-grained access to spatial data that can be used in data APIs in general. In other words, a server supporting WFS 3.0 should not be seen as a standalone WFS service. A corollary of this is that it should be possible to implement a data API that at the same time conforms to conformance classes from WFS 3.0 and from other OGC Web Service standards following a similar approach.
 
 This approach intends to support two types of client developers:
 
-* those that have never heard about WFS - it should be possible to create a client using the API definition without the need to read the WFS standard (they may need to learn a little bit about geometry, etc.);
-* those that want to write a "generic" client that can access WFSs, i.e. are not specific for a particular API/server.
+* Those that have never heard about WFS. Developers should be able to create a client using the API definition without the need to read the WFS standard (they may need to learn a little bit about geometry, etc.);
+* Those that want to write a "generic" client that can access WFSs, i.e. are not specific for a particular API/server.
 
-As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to a WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.
+As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, a design goal was to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to a WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.
 
 The modernization is discussed in more detail link:https://github.com/opengeospatial/WFS_FES/blob/master/overview.md[here].
 
@@ -29,56 +34,57 @@ feature collections. In addition to HTML as the standard encoding for Web conten
 rules for commonly used encodings for spatial data on the web are provided
 (GeoJSON, GML).
 
-None of these encodings is mandatory and an implementation of the "Core"
-requirements class may also decide to use none of them, but to use another encoding
+None of these encodings is mandatory and an implementation of the _Core_
+requirements class may implement none of them but implement another encoding
 instead.
 
 <<rec_html,Support for HTML is recommended>> as HTML is the core language of the World Wide Web.
 A server that supports HTML will support browsing the data with a web browser
-and it will enable search engines to crawl and index the dataset.
+and will enable search engines to crawl and index the dataset.
 
 GeoJSON is a commonly used format that is simple to understand and well
 supported by tools and software libraries. Since most Web developers are
 comfortable with using a JSON-based format, this version of the Web Feature
-Service standard <<rec_geojson,recommends to support GeoJSON for encoding feature data>>,
+Service standard <<rec_geojson,recommends supporting GeoJSON for encoding feature data>>,
 if the feature data can be represented in GeoJSON for the intended use.
 
 Some examples for cases that are out-of-scope of GeoJSON are:
 
-* solids are used a geometries (e.g. in a 3D city model),
-* geometries include non-linear curve interpolations
+* When solids are used a geometries (e.g. in a 3D city model),
+* Geometries that include non-linear curve interpolations
 that cannot be simplified (e.g., use of arcs in authoritative geometries),
-* geometries have to be represented in a coordinate reference system that
+* Geometries have to be represented in a coordinate reference system that
 is not based on WGS 84 longitude/latitude (e.g. an authoritative national
 reference system),
-* features have more than one geometric property, etc.
+* Features have more than one geometric property.
 
-In addition to HTML and GeoJSON, a significant amount of feature data is
+In addition to HTML and GeoJSON, a significant volume of feature data is
 available in XML-based formats, notably GML. GML supports more complex requirements
 than GeoJSON and does not have any of the limitations mentioned in the
-previous paragraph, but as a result GML also more complex to handle for both servers
+above bullets, but as a result GML also more complex to handle for both servers
 and clients. Conformance classes for GML are, therefore, included in this
-standard, but it is expected that these will typically be supported by servers
+standard. We expect that these will typically be supported by servers
 where users are known to expect feature data in XML/GML.
 
-The recommendations for HTML and GeoJSON reflect the importance of HTML and
+The recommendations for using HTML and GeoJSON reflect the importance of HTML and
 the current popularity of JSON-based data formats. As the practices
-in the Web community evolve, the recommendations will likely be updated, too,
-in future versions of this standard to provide guidance.
+in the Web community evolve, the recommendations will likely be updated
+in future versions of this standard to provide guidance on using other
+encodings.
 
-This part of WFS 3.0 does not provide any guidance on other encodings. The
+This part of the WFS 3.0 standard does not provide any guidance on other encodings. The
 supported encodings, or more precisely the media types of the supported encodings,
 can be determined from the API definition. The desired encoding is selected
 using HTTP content negotiation.
 
 For example, if the server supports
-link:https://tools.ietf.org/html/rfc8142[GeoJSON Text Sequences],
+link:https://tools.ietf.org/html/rfc8142[GeoJSON Text Sequences]
 an encoding that is based on JSON text sequences and GeoJSON to support streaming
-by making the the data incrementally parseable, the media type `application/geo+json-seq`
+by making the data incrementally parseable, the media type `application/geo+json-seq`
 would be used.
 
-In addition, HTTP supports compression and the standard HTTP mechanisms can be
-used to reduce the size of the messages between the server and the client.
+In addition, HTTP supports compression and therefore the standard HTTP mechanisms
+can be used to reduce the size of the messages between the server and the client.
 
 === Examples
 

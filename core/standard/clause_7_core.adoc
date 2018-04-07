@@ -5,42 +5,42 @@
 
 include::requirements/requirements_class_core.adoc[]
 
-Figure 1 illustrates the resources supported by the Core requirements class using
+Figure 1 illustrates the resources supported by the _Core_ requirements class using
 UML. Each resource type available through the server is an «interface».
 
 A server that implements the WFS API provides access to the features in a dataset.
 In other words, the API is a distribution of that dataset. A file download, for example,
 would be another distribution.
 
-That is, each WFS has a single `LandingPage` (path `/`) that provides links to
+More specifically, each WFS has a single `LandingPage` (path `/`) that provides links to
 
 * the `APIDefinition` (path `/api`),
 * the `Conformance` statements (path `/conformance`),
 * the `DatasetDistribution` metadata (path `/collections`).
 
-The `APIDefinition` describes the capabilities of the server and which can be used by
+The `APIDefinition` describes the capabilities of the server that can be used by
 clients to connect to the server or by development tools to support the
 implementation of servers and clients. Accessing the `APIDefinition` using
 HTTP GET returns a description of the API.
 
 Accessing the `Conformance` using HTTP GET returns a list of URIs of
-requirements classes implemented by the server.
+requirements classes implemented by the WFS server.
 
-The distribution consists of a set of feature collections. This specification does not
-include any requirements how the features in the dataset have to be aggregated
-into collections. A typical approach is to aggregate by feature type, but any other approach
-that fits the dataset or the applications using this distribution may be used, too.
+The distribution consists of a set of feature collections. This standard does not
+include any requirements about how the features in the dataset have to be aggregated
+into collections. A typical approach is to aggregate by feature type but any other approach
+that fits the dataset or the applications using this distribution may also be used.
 
 Accessing the `DatasetDistribution` using HTTP GET returns a
-`DatasetDistributionResponse`, which includes a link to each `Collection`
-in the distribution along with metadata about each collection:
+`DatasetDistributionResponse`. This response includes a link to each `Collection`
+in the distribution along with metadata about each collection including:
 
-* a local identifier for the collection that is unique within the WFS;
-* a list of coordinate reference systems in which geometries may be returned by
-the server, where the first one is the default coordinate reference system
-(in the Core, the default is always WGS 84 with axis order longitude/latitude);
-* an optional title and description for the collection;
-* an optional extent that can be used to provide an indication of the
+* A local identifier for the collection that is unique for the server;
+* A list of coordinate reference systems (CRS) in which geometries may be returned by
+the server. The first CRS is the default coordinate reference system
+(in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
+* An optional title and description for the collection;
+* An optional extent that can be used to provide an indication of the
 spatial and temporal extent of the collection - typically derived from the data.
 
 Each `Collection` (path `/collections/{collection-name}/items`) consists of the features in the collection where each
@@ -52,8 +52,8 @@ Allow also features that do not belong to any collection?
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/66[ISSUE 66] +
 Support features that do belong to multiple collections?
 
-Accessing a `Collection` using HTTP GET returns a `CollectionResponse`,
-which basically consists of features in the collection. The features included
+Accessing a `Collection` using HTTP GET returns a `CollectionResponse`. This
+response basically consists of features in the collection. The features included
 in the response are determined by the server based on parameters of the request.
 
 A `bbox` or `time` parameter may be used to select only a subset of the features in
@@ -132,7 +132,7 @@ See <<http_status_codes>> for general guidance.
 
 Every WFS provides an API definition that describes the capabilities
 of the server and which can be used by developers to understand the API,
-by software clients to connect to the server or
+by software clients to connect to the server, or
 by development tools to support the implementation of servers and clients.
 
 include::requirements/core/REQ_api-definition-op.adoc[]
@@ -146,15 +146,15 @@ include::requirements/core/REC_api-definition-oas.adoc[]
 If multiple API definition formats are supported by a server, use
 content negotiation to select the desired representation.
 
-The API definition document describes the API. I.e.,
+The API definition document describes the API. In other words,
 there is no need to include the `/api` operation in the API definition itself.
 
 The idea is that any WFS can be used by developers that are familiar with
 the API definition language(s) supported by the server. For example, if
 an OpenAPI definition is used, it should be possible to create a working
 client using the OpenAPI definition. The developer may need to learn a little
-bit about geometry, etc., but it should not be required to read this standard
-to access the data via the API.
+bit about geometry data types, etc., but it should not be required to read
+this standard to access the data via the API.
 
 ==== Error situations
 
@@ -166,7 +166,7 @@ See <<http_status_codes>> for general guidance.
 
 To support "generic" clients for accessing Web Feature Services in general - and
 not "just" a specific API / server, the server has to declare the
-requirements classes it implements and conforms to, too.
+requirements classes it implements and conforms to.
 
 include::requirements/core/REQ_conformance-op.adoc[]
 
@@ -266,8 +266,8 @@ response codes) - here or in clause 9.
 [[cross_origin]]
 === Support for cross-origin requests
 
-To access data from a HTML page where the data is on another host than
-the webpage is by default prohibited for security reasons ("same-origin policy").
+Access to data from a HTML page is by default prohibited for security reasons,
+if the data is located on another host than the webpage ("same-origin policy").
 A typical example is a web-application accessing feature data from
 multiple distributed datasets.
 
@@ -280,15 +280,15 @@ Two common mechanisms to support cross-origin requests are:
 
 === Encodings
 
-While WFS 3.0 does not include any mandatory encoding, it recommends the following
-encodings. See <<overview,Clause 6 (Overview)>> for a discussion.
+While the WFS 3.0 standard does not specify any mandatory encoding, we recommend
+the following encodings. See <<overview,Clause 6 (Overview)>> for a discussion.
 
 include::requirements/core/REC_html.adoc[]
 
 include::requirements/core/REC_geojson.adoc[]
 
 <<_http_1_1,Requirement `/req/core/http`>> implies that the encoding of a server response
-is determined using content negotiation as specified by the HTTP specification.
+is determined using content negotiation as specified by the HTTP RFC.
 
 The section <<mediatypes,Media Types>> includes guidance on media types for
 <<encodings,encodings>> that are specified in this document.
@@ -317,7 +317,7 @@ the Accept header of the HTTP request.
 
 === Coordinate reference systems
 
-As discussed in Chapter 9 of the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices>>,
+As discussed in Chapter 9 of the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>,
 how to express and share the location of features in a consistent way is one
 of the most fundamental aspects of publishing geographic data and it is important
 to be clear about the coordinate reference system that coordinates are in.
@@ -432,7 +432,7 @@ are supported by the service (link:https://www.iana.org/assignments/link-relatio
 Representations of the metadata resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
 
 Additional links to a GML application schema for the building data and to
-a web page that has additional information about buildings are provided, too, using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
+a web page that has additional information about buildings are provided using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
 
 Coordinate reference system information is not provided as the service provides
 geometries only in the default system (WGS84 longitude/latitude).
@@ -523,12 +523,12 @@ include::requirements/core/REQ_fc-bbox-response.adoc[]
 This includes the boundaries of the geometries (e.g. for curves the start
 and end position and for surfaces the outer and inner rings).
 
-This specification does not specify the parameter `bbox-crs`. This parameter
-will be specified in an additional part of the WFS 3.0 series.
+This standard does not specify requirements for the parameter `bbox-crs`. Those
+requirements will be specified in an additional part of the WFS 3.0 series.
 
 For WGS84 longitude/latitude the bounding box is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
-However, in cases where the box spans the antimeridian the first value
+However, in cases where the box spans the anti-meridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).
 
 .The bounding box of the New Zealand Exclusive Economic Zone
@@ -567,7 +567,7 @@ For features with a temporal property that is a date or a time period,
 a date-time value would match all features where the timestamp is on that
 day or within the time period.
 
-.A period using start and end time
+.A period using a start and end time
 =================
 February 12, 2018, 00:00:00 GMT to March 18, 2018, 12:31:12 GMT:
 
@@ -661,14 +661,10 @@ then the server will include a link to the next set of results.
 So (using the default/maximum values of 10/10000 from the OpenAPI
 fragment in requirement `/req/core/fc-limit-definition`):
 
-* If you ask for 10, you will get 0 to 10 (as requested) and a `next` link,
-if there are more.
-* If you don't specify a limit, you will get 0 to 10 (default) and a `next` link,
-if there are more.
-* If you ask for 50000, you might get up to 10000 (server-limited) and a `next`
-link, if there are more.
-* If you follow the next link from the previous response, you might get up
-to 10000 additional features and a `next` link, if there are more.
+* If you ask for 10, you will get 0 to 10 (as requested) and if there are more a `next` link;
+* If you don't specify a limit, you will get 0 to 10 (default) and if there are more a `next` link;
+* If you ask for 50000, you might get up to 10000 (server-limited) and if there are more a `next` link;
+* If you follow the next link from the previous response, you might get up to 10000 additional features and if there are more a `next` link.
 
 include::requirements/core/REQ_fc-links.adoc[]
 
@@ -692,7 +688,7 @@ which may be added again in an extension to this specification).
 include::requirements/core/PER_fc-prev.adoc[]
 
 Providing `prev` links supports navigating back and forth between pages,
-but depending on the implementation approach it may be complex to implement.
+but depending on the implementation approach it may be too complex to implement.
 
 include::requirements/core/REQ_fc-rel-type.adoc[]
 
