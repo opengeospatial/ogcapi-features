@@ -2,6 +2,8 @@ __WFS3 Core Conformance Checklist__
 
 Derived from the [WFS3 spec](https://rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html#_requirement_class_core) as of 2018-03-15.
 
+**CAUTION: This needs to be updated in a few places to the first draft release.**
+
 - (recommended) checkboxes aren't strictly necessary for conformance
 - (optional) checkboxes have value but may be ignored without problem
 
