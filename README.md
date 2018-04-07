@@ -14,7 +14,7 @@ A Web Feature Service is a standard API that represents collections of geospatia
 GET /collections
 ```
 
-Lists the collections of data on the server that can be queried ([7.11](https://rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html#_feature_collections_metadata)),
+Lists the collections of data on the server that can be queried ([7.11](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections_metadata)),
 and each describes basic information about the geospatial data collection, like its name and description, as well as the
 spatial and temporal extents of all the data contained
 
@@ -30,7 +30,7 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
 addition to the `bbox` filter above, with extensions providing more advanced options.
-([7.13](https://rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html#_feature_collections))
+([7.13](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections))
 
 ```
 GET /collections/{name}/items/{id}
@@ -44,7 +44,7 @@ This provides a stable, canonical URL to link to the 'thing'.
 
 A draft of WFS 3.0 is available:
 
-* [OGC Web Feature Service 3.0 - Part 1: Core](https://rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html)
+* [OGC Web Feature Service 3.0 - Part 1: Core, First Draft Release](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html)
 
 Those who want to just see the endpoints and responses can explore the generic
 OpenAPI definition on SwaggerHub:
@@ -80,6 +80,7 @@ draft extensions first.
 
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
+* [OGC Web Feature Service 3.0 - Part 1: Core, Editor's Draft](https://rawgit.com/opengeospatial/WFS_FES/master/docs/17-069.html)
 
 ## Contributing
 
