@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-069</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0.0-SNAPSHOT (2018-04-04)</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 3.0.0-draft.1 (2018-04-07)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -654,23 +654,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_operation">7.2.1. Operation</a></li>
 <li><a href="#_response">7.2.2. Response</a></li>
+<li><a href="#_error_situations">7.2.3. Error situations</a></li>
 </ul>
 </li>
 <li><a href="#_api_definition_2">7.3. API definition</a>
 <ul class="sectlevel3">
 <li><a href="#_operation_2">7.3.1. Operation</a></li>
 <li><a href="#_response_2">7.3.2. Response</a></li>
+<li><a href="#_error_situations_2">7.3.3. Error situations</a></li>
 </ul>
 </li>
 <li><a href="#_declaration_of_conformance_classes">7.4. Declaration of conformance classes</a>
 <ul class="sectlevel3">
 <li><a href="#_operation_3">7.4.1. Operation</a></li>
 <li><a href="#_response_3">7.4.2. Response</a></li>
+<li><a href="#_error_situations_3">7.4.3. Error situations</a></li>
 </ul>
 </li>
-<li><a href="#_http_1_1">7.5. HTTP 1.1</a></li>
-<li><a href="#_web_caching">7.6. Web caching</a></li>
-<li><a href="#_support_for_cross_origin_requests">7.7. Support for cross-origin requests</a></li>
+<li><a href="#_http_1_1">7.5. HTTP 1.1</a>
+<ul class="sectlevel3">
+<li><a href="#http_status_codes">7.5.1. HTTP status codes</a></li>
+</ul>
+</li>
+<li><a href="#web_caching">7.6. Web caching</a></li>
+<li><a href="#cross_origin">7.7. Support for cross-origin requests</a></li>
 <li><a href="#_encodings_2">7.8. Encodings</a></li>
 <li><a href="#_coordinate_reference_systems">7.9. Coordinate reference systems</a></li>
 <li><a href="#_link_headers">7.10. Link headers</a></li>
@@ -678,12 +685,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_operation_4">7.11.1. Operation</a></li>
 <li><a href="#_response_4">7.11.2. Response</a></li>
+<li><a href="#_error_situations_4">7.11.3. Error situations</a></li>
 </ul>
 </li>
 <li><a href="#_feature_collection_metadata">7.12. Feature collection metadata</a>
 <ul class="sectlevel3">
 <li><a href="#_operation_5">7.12.1. Operation</a></li>
 <li><a href="#_response_5">7.12.2. Response</a></li>
+<li><a href="#_error_situations_5">7.12.3. Error situations</a></li>
 </ul>
 </li>
 <li><a href="#_feature_collections">7.13. Feature collections</a>
@@ -694,12 +703,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_parameter_time">7.13.4. Parameter time</a></li>
 <li><a href="#_parameters_for_filtering_on_feature_properties">7.13.5. Parameters for filtering on feature properties</a></li>
 <li><a href="#_response_6">7.13.6. Response</a></li>
+<li><a href="#_error_situations_6">7.13.7. Error situations</a></li>
 </ul>
 </li>
 <li><a href="#_feature_2">7.14. Feature</a>
 <ul class="sectlevel3">
 <li><a href="#_operation_7">7.14.1. Operation</a></li>
 <li><a href="#_response_7">7.14.2. Response</a></li>
+<li><a href="#_error_situations_7">7.14.3. Error situations</a></li>
 </ul>
 </li>
 </ul>
@@ -723,17 +734,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#mediatypes">10. Media Types</a></li>
-<li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a></li>
+<li><a href="#_abstract_test_suite_normative">Annex A: Abstract Test Suite (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_overview_2">A.1. Overview</a></li>
+<li><a href="#_conventions_2">A.2. Conventions</a>
+<ul class="sectlevel3">
+<li><a href="#_path_templates">A.2.1. Path Templates</a></li>
+<li><a href="#_api">A.2.2. API</a></li>
+<li><a href="#_processing">A.2.3. Processing</a></li>
+<li><a href="#_parameters">A.2.4. Parameters</a></li>
+<li><a href="#_testable_paths">A.2.5. Testable Paths</a></li>
+</ul>
+</li>
+<li><a href="#_requirements_trace_matrix">A.3. Requirements Trace Matrix</a></li>
+<li><a href="#_abstract_test">A.4. Abstract Test</a>
+<ul class="sectlevel3">
+<li><a href="#_general_tests">A.4.1. General Tests</a></li>
+<li><a href="#_retrieve_the_api_description">A.4.2. Retrieve the API Description</a></li>
+<li><a href="#_identify_the_test_points">A.4.3. Identify the Test Points</a></li>
+<li><a href="#_processing_the_openapi_document">A.4.4. Processing the OpenAPI Document</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#oas30_example">Annex B: OpenAPI definition example (Informative)</a>
 <ul class="sectlevel2">
-<li><a href="#_overview_2">B.1. Overview</a></li>
+<li><a href="#_overview_3">B.1. Overview</a></li>
 <li><a href="#openapi.yaml">B.2. Generic OpenAPI definition</a></li>
 <li><a href="#openapi-buildings.yaml">B.3. OpenAPI definition with details on the collection and its features</a></li>
 </ul>
 </li>
 <li><a href="#xml_examples">Annex C: XML examples (Informative)</a>
 <ul class="sectlevel2">
-<li><a href="#_overview_3">C.1. Overview</a></li>
+<li><a href="#_overview_4">C.1. Overview</a></li>
 <li><a href="#_a_landing_page">C.2. A Landing page</a></li>
 <li><a href="#_conformance_statements">C.3. Conformance statements</a></li>
 <li><a href="#_feature_collections_metadata_2">C.4. Feature collections metadata</a></li>
@@ -750,13 +783,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong class="big">i.     Abstract</strong></p>
 </div>
 <div class="paragraph">
-<p>A Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. WFS is a multi-part standard. This part specifies the core capabilities that every WFS supports and is restricted to read-access to data. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for creating and modifying data, more complex data models, richer queries, additional coordinate reference systems.</p>
+<p>A Web Feature Service (WFS) offers the capability to create, modify and query spatial data on the Web. The WFS standard is a multi-part document. This part specifies the core capabilities that every WFS has to support and is restricted to read-access to spatial data. Additional capabilities that address specific needs will be specified in additional parts. Examples include support for creating and modifying data, more complex data models, richer queries, and additional coordinate reference systems.</p>
 </div>
 <div class="paragraph">
-<p>By default, every WFS provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.</p>
+<p>By default, every WFS instance provides access to a single dataset. Rather than sharing the data as a complete dataset, WFS offers direct, fine-grained access to the data at the feature (object) level.</p>
 </div>
 <div class="paragraph">
-<p>Consistent with the architecture of the Web, this version of WFS uses a resource architecture and specifies a RESTful service interface consistent with the HTTP/HTTPS standards.</p>
+<p>Consistent with the architecture of the Web, this version of the WFS standard uses a resource architecture and specifies a RESTful service interface consistent with the IETF HTTP/HTTPS RFCs.</p>
 </div>
 <div class="paragraph">
 <p>This standard specifies discovery and query operations that are implemented using the HTTP GET method. Support for additional methods (in particular POST, PUT, DELETE, PATCH) will be specified in additional parts.</p>
@@ -879,10 +912,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>CubeWerx Inc.</p>
 </li>
 <li>
+<p>Hexagon</p>
+</li>
+<li>
 <p>interactive instruments GmbH</p>
 </li>
 <li>
-<p>&#8230;&#8203;</p>
+<p>Planet Labs</p>
 </li>
 </ul>
 </div>
@@ -890,7 +926,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong class="big">v.     Submitters</strong></p>
 </div>
 <div class="paragraph">
-<p>All questions regarding this submission should be directed to the editor or the submitters:</p>
+<p>All questions regarding this submission should be directed to the editors or the submitters:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -905,26 +941,42 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clemens Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Chris Holmes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Planet Labs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clemens Portele <em>(editor)</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">interactive instruments GmbH</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Panagiotis (Peter) A. Vretanos</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">CubeWerx Inc.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Frédéric Houbie</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Hexagon</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Panagiotis (Peter) A. Vretanos <em>(editor)</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">CubeWerx Inc.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+A list of contributors will be added later.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_scope"><a class="anchor" href="#_scope"></a>1. Scope</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This International Standard specifies the behaviour of a server that provides access to features in a dataset in a manner independent of the underlying data store. It specifies discovery and query operations.</p>
+<p>This International Standard specifies the behaviour of a server that provides access to features in a dataset in a manner independent of the underlying data store. This standard specifies discovery and query operations.</p>
 </div>
 <div class="paragraph">
 <p>Discovery operations allow the server to be interrogated to determine its capabilities and retrieve information (metadata) about this distribution of the dataset. This includes the API definition of the server as well as metadata about the feature collections provided by the server.</p>
@@ -954,11 +1006,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>It specifies requirements that all WFS have to meet.</p>
+<p>The <em>Core</em> specifies requirements that all WFS have to implement.</p>
 </div>
 <div class="paragraph">
-<p>The "Core" does not mandate any encoding or format for representing features or
-feature collections. Four requirements classes depend on the "Core"
+<p>The <em>Core</em> does not mandate a specific encoding or format for representing features or
+feature collections. Four requirements classes depend on the <em>Core</em>
 and specify representations for these resources in commonly used encodings
 for spatial data on the web:</p>
 </div>
@@ -979,20 +1031,19 @@ for spatial data on the web:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>None of these encodings are mandatory and an implementation of the "Core"
-requirements class may also decide to use none of them, but to use another encoding
-instead.</p>
+<p>None of these encodings are mandatory and an implementation of the <em>Core</em>
+may also decide to implement none of them, but to implement another encoding instead.</p>
 </div>
 <div class="paragraph">
-<p>That said, the <a href="#rc_core">Core</a> requirements class includes recommendations to support
-<a href="#rec_html">HTML</a> and <a href="#rec_geojson">GeoJSON</a> as encodings, where practical.
-<a href="#overview">Clause 6 (Overview)</a> includes a discussion about recommended
+<p>That said, the <em>Core</em> requirements class includes recommendations to support
+where practical <a href="#rec_html">HTML</a> and <a href="#rec_geojson">GeoJSON</a> as encodings.
+<a href="#overview">Clause 6 (Overview)</a> includes a discussion about the recommended
 encodings.</p>
 </div>
 <div class="paragraph">
-<p>The "Core" does not mandate any encoding or format for the formal definition of
+<p>The <em>Core</em> does not mandate any encoding or format for the formal definition of
 the API either. One option is the OpenAPI 3.0 specification and a requirements
-class has been defined for this, which depends on the "Core":</p>
+class has been specified for OpenAPI 3.0, which depends on the <em>Core</em>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1002,18 +1053,18 @@ class has been defined for this, which depends on the "Core":</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Like with the feature encodings, an implementation of the "Core" requirements
-class may also decide to use other representations of the API definition in
+<p>Like with the feature encodings, an implementation of the <em>Core</em> requirements
+class may also decide to use other API definition representations in
 addition or instead of an OpenAPI 3.0 definition. Examples for alternative
 API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI
-specification or an OWS Common 2.0 capabilities document.</p>
+specification, an OWS Common 2.0 capabilities document or WSDL.</p>
 </div>
 <div class="paragraph">
-<p>The "Core" is intended to be the minimal useful service interface for fine-grained
+<p>The <em>Core</em> is intended to be the minimal useful service interface for fine-grained
 access to a spatial dataset.</p>
 </div>
 <div class="paragraph">
-<p>Additional capabilities, for example, support for transactions, complex data
+<p>Additional capabilities such as support for transactions, complex data
 structures, rich queries, other coordinate reference systems,
 subscription/notification, returning aggregated results, etc., may be
 specified in future parts of WFS or as vendor-specific extensions.</p>
@@ -1036,32 +1087,35 @@ OGC Compliance Testing web site.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a id="OpenAPI"></a> Open API Initiative: OpenAPI Specification 3.0.1,
+<p><a id="OpenAPI"></a> Open API Initiative: <strong>OpenAPI Specification 3.0.1</strong>,
 <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md" class="bare">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md</a></p>
 </li>
 <li>
 <p><a id="rfc2616"></a> Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L.,
-Leach, P., Berners-Lee, T.: IETF RFC 2616, HTTP/1.1, <a href="http://tools.ietf.org/rfc/rfc2616.txt" class="bare">http://tools.ietf.org/rfc/rfc2616.txt</a></p>
+Leach, P., Berners-Lee, T.: IETF RFC 2616, <strong>HTTP/1.1</strong>, <a href="http://tools.ietf.org/rfc/rfc2616.txt" class="bare">http://tools.ietf.org/rfc/rfc2616.txt</a></p>
 </li>
 <li>
-<p><a id="rfc3339"></a> Klyne, G., Newman, C.: IETF RFC 3339, Web Linking, <a href="http://tools.ietf.org/rfc/rfc3339.txt" class="bare">http://tools.ietf.org/rfc/rfc3339.txt</a></p>
+<p><a id="rfc2818"></a>  Rescorla, E.: IETF RFC 2818, <strong>HTTP Over TLS</strong>, <a href="http://tools.ietf.org/rfc/rfc2818.txt" class="bare">http://tools.ietf.org/rfc/rfc2818.txt</a></p>
 </li>
 <li>
-<p><a id="rfc5988"></a> Nottingham, M.: IETF RFC 5988, Web Linking, <a href="http://tools.ietf.org/rfc/rfc5988.txt" class="bare">http://tools.ietf.org/rfc/rfc5988.txt</a></p>
+<p><a id="rfc3339"></a> Klyne, G., Newman, C.: IETF RFC 3339, <strong>Date and Time on the Internet: Timestamps</strong>, <a href="http://tools.ietf.org/rfc/rfc3339.txt" class="bare">http://tools.ietf.org/rfc/rfc3339.txt</a></p>
+</li>
+<li>
+<p><a id="rfc5988"></a> Nottingham, M.: IETF RFC 5988, <strong>Web Linking</strong>, <a href="http://tools.ietf.org/rfc/rfc5988.txt" class="bare">http://tools.ietf.org/rfc/rfc5988.txt</a></p>
 </li>
 <li>
 <p><a id="GMLSF"></a> van den Brink, L., Portele, C., Vretanos, P.: OGC 10-100r3,
-Geography Markup Language (GML) Simple Features Profile, <a href="http://portal.opengeospatial.org/files/?artifact_id=42729" class="bare">http://portal.opengeospatial.org/files/?artifact_id=42729</a></p>
+<strong>Geography Markup Language (GML) Simple Features Profile</strong>, <a href="http://portal.opengeospatial.org/files/?artifact_id=42729" class="bare">http://portal.opengeospatial.org/files/?artifact_id=42729</a></p>
 </li>
 <li>
 <p><a id="GeoJSON"></a> Butler, H., Daly, M., Doyle, A., Gillies, S., Hagen, S., Schaub, T.:
-IETF RFC 7946, The GeoJSON Format, <a href="https://tools.ietf.org/rfc/rfc7946.txt" class="bare">https://tools.ietf.org/rfc/rfc7946.txt</a></p>
+IETF RFC 7946, <strong>The GeoJSON Format</strong>, <a href="https://tools.ietf.org/rfc/rfc7946.txt" class="bare">https://tools.ietf.org/rfc/rfc7946.txt</a></p>
 </li>
 <li>
-<p><a id="HTML5"></a> W3C: HTML5, W3C Recommendation, <a href="http://www.w3.org/TR/html5/" class="bare">http://www.w3.org/TR/html5/</a></p>
+<p><a id="HTML5"></a> W3C: <strong>HTML5</strong>, W3C Recommendation, <a href="http://www.w3.org/TR/html5/" class="bare">http://www.w3.org/TR/html5/</a></p>
 </li>
 <li>
-<p><a id="schema.org"></a> Schema.org: <a href="http://schema.org/docs/schemas.html" class="bare">http://schema.org/docs/schemas.html</a></p>
+<p><a id="schema.org"></a> <strong>Schema.org</strong>: <a href="http://schema.org/docs/schemas.html" class="bare">http://schema.org/docs/schemas.html</a></p>
 </li>
 </ul>
 </div>
@@ -1166,14 +1220,14 @@ and easier to understand for those that are not geo-experts.
 <div class="sect2">
 <h3 id="_open_issues"><a class="anchor" href="#_open_issues"></a>5.1. Open issues</h3>
 <div class="paragraph">
-<p>This version is a draft. It is not complete and there are open issues that
-are under discussion. These cases are shown as "CAUTION" annotations with
+<p>This is a DRAFT version of WFS 3.0, Part 1. This draft is not complete and there are open issues that
+are still under discussion. These discussion topics are identified as "CAUTION" annotations with
 a link to the issue on GitHub and a brief summary of the issue.</p>
 </div>
 <div class="paragraph">
-<p>The current expectation is to have a stable version of the Core specification
-in 2019. Criteria to move the specification to the next stage in the
-process are:</p>
+<p>The current expectation is to have a stable version of the candidate WFS 3.0,
+Part 1, standard in 2019. Criteria to move the candidate standard to the next
+stage in the process are:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1181,19 +1235,19 @@ process are:</p>
 <p>Multiple implementations of each conformance class,</p>
 </li>
 <li>
-<p>a conformance test suite for each conformance class,</p>
+<p>A conformance test suite for each conformance class,</p>
 </li>
 <li>
-<p>multiple implementations of a generic WFS client,</p>
+<p>Multiple implementations of a generic WFS client,</p>
 </li>
 <li>
-<p>multiple implementations of clients using the OpenAPI definition of a WFS,</p>
+<p>Multiple implementations of clients using the OpenAPI definition of a WFS,</p>
 </li>
 <li>
-<p>multiple draft extensions to verify the extensibility, and</p>
+<p>Multiple draft extensions to verify the extensibility, and</p>
 </li>
 <li>
-<p>resolution of comments received on GitHub or in formal reviews in OGC and ISO/TC 211.</p>
+<p>Resolution of comments received on GitHub or in formal reviews in OGC and ISO/TC 211.</p>
 </li>
 </ul>
 </div>
@@ -1201,7 +1255,7 @@ process are:</p>
 <div class="sect2">
 <h3 id="_identifiers"><a class="anchor" href="#_identifiers"></a>5.2. Identifiers</h3>
 <div class="paragraph">
-<p>The normative provisions in this specification are denoted by the URI <code><a href="http://www.opengis.net/spec/wfs-1/3.0" class="bare">http://www.opengis.net/spec/wfs-1/3.0</a></code>.</p>
+<p>The normative provisions in this draft standard are denoted by the URI <code><a href="http://www.opengis.net/spec/wfs-1/3.0" class="bare">http://www.opengis.net/spec/wfs-1/3.0</a></code>.</p>
 </div>
 <div class="paragraph">
 <p>All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.</p>
@@ -1225,7 +1279,7 @@ process are:</p>
 <div class="sect2">
 <h3 id="_use_of_https"><a class="anchor" href="#_use_of_https"></a>5.5. Use of HTTPS</h3>
 <div class="paragraph">
-<p>For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS". In fact, most WFS are expected to use HTTPS, not HTTP.</p>
+<p>For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS". In fact, most servers are expected to use <a href="#rfc2818">HTTPS</a>, not <a href="#rc2616">HTTP</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1233,9 +1287,9 @@ process are:</p>
 <div class="sect3">
 <h4 id="_general_remarks"><a class="anchor" href="#_general_remarks"></a>5.6.1. General remarks</h4>
 <div class="paragraph">
-<p>Good documentation is essential for every API so that developers can learn how
-to use it. In the best case, documentation will be available in HTML and in
-a format that can be processed by software to connect to the API.</p>
+<p>Good documentation is essential for every API so that developers can more easily
+learn how to use the API. In the best case, documentation will be available in
+HTML and in a format that can be processed by software to connect to the API.</p>
 </div>
 <div class="paragraph">
 <p>This standard specifies requirements and recommendations for APIs that
@@ -1250,15 +1304,16 @@ that are specific to the API or the software tool used to implement the API.</p>
 <h4 id="_role_of_openapi"><a class="anchor" href="#_role_of_openapi"></a>5.6.2. Role of OpenAPI</h4>
 <div class="paragraph">
 <p>This document uses OpenAPI 3.0 fragments as examples and to formally state
-requirements. However, using OpenAPI 3.0 is not required.</p>
+requirements. However, using OpenAPI 3.0 is not required for implementing a
+WFS 3.0 server.</p>
 </div>
 <div class="paragraph">
-<p>The "Core" requirements class, therefore, only requires that an API
+<p>Therefore, the <em>Core</em> requirements class only requires that an API
 definition is provided at path <code>/api</code>.</p>
 </div>
 <div class="paragraph">
 <p>A separate requirements class is specified for API definitions that follow the
-<a href="#rc_oas">OpenAPI specification 3.0</a>, but this does not preclude that in the
+<a href="#rc_oas">OpenAPI specification 3.0</a>. This does not preclude that in the
 future or in parallel other versions of OpenAPI or other descriptions are
 provided by a server.</p>
 </div>
@@ -1270,7 +1325,7 @@ provided by a server.</p>
 </td>
 <td class="content">
 This approach is used to avoid lock-in to a specific approach to
-defining an API as it is expected that the landscape will continue to
+defining an API as it is expected that the API landscape will continue to
 evolve.
 </td>
 </tr>
@@ -1300,8 +1355,8 @@ the relevant OpenAPI schema components.</p>
 </li>
 <li>
 <p>The range of values of a parameter or property may be extended (additional
-values) or constrained (if only a subset of all possible values are applicable
-to the service). An example for a constrained range of values is to explicitly
+values) or constrained (if a subset of all possible values are applicable
+to the server). An example for a constrained range of values is to explicitly
 specify the supported values of a string parameter or property using an enum.</p>
 </li>
 <li>
@@ -1340,7 +1395,7 @@ Server Ambiguity in OpenAPI
 <div class="title">Example 1. URL of the OpenAPI definition</div>
 <div class="content">
 <div class="paragraph">
-<p>If the OpenAPI Server Object would look like this:</p>
+<p>If the OpenAPI Server Object looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1361,8 +1416,8 @@ URL <code><a href="https://data.example.org/mypath" class="bare">https://data.ex
 <div class="sect3">
 <h4 id="_reusable_openapi_components"><a class="anchor" href="#_reusable_openapi_components"></a>5.6.5. Reusable OpenAPI components</h4>
 <div class="paragraph">
-<p>Reusable components for OpenAPI definitions of a WFS are referenced from
-this document.</p>
+<p>Reusable components for OpenAPI definitions for a WFS 3.0 server are
+referenced from this document.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -1389,15 +1444,20 @@ but eventually they are expected to be available under the base URL
 <div class="sect2">
 <h3 id="_evolution_from_previous_versions_of_wfs"><a class="anchor" href="#_evolution_from_previous_versions_of_wfs"></a>6.1. Evolution from previous versions of WFS</h3>
 <div class="paragraph">
-<p>The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads as it was state-of-the-art in the late 1990s and early 2000s, when WFS was originally designed. This version specifies a modernized service, that follows the current Web architecture and in particular the <a href="#SDWBP">W3C/OGC best practices for sharing Spatial Data on the Web</a> as well as the <a href="#DWBP">W3C best practices for sharing Data on the Web</a>.</p>
+<p>The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads.
+When the WFS standard was originally designed in the late 1990s and early 2000s this was the state-of-the-art. The WFS 3.0 version specifies a modernized service, that follows the current Web architecture and in particular the <a href="#SDWBP">W3C/OGC best practices for sharing Spatial Data on the Web</a> as well as the <a href="#DWBP">W3C best practices for sharing Data on the Web</a>.</p>
 </div>
 <div class="paragraph">
-<p>Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal is modularization. This has a few facets:</p>
+<p>Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal for this version of the WFS standard is modularization. This goal has several facets:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Clear separation between core requirements that almost everyone has who wants to share or use spatial data on a fine-grained level (this document) and more advanced capabilities that communities are using today (extensions specified in additional parts of WFS 3.0).</p>
+<p>Clear separation between core requirements and more advanced capabilities. This
+document specifies the core requirements that are relevant for almost everyone
+who wants to share or use spatial data on a fine-grained level. Additional capabilities
+that several communities are using today will be specified as extensions in additional
+parts of WFS 3.0.</p>
 </li>
 <li>
 <p>Technologies that change more frequently are decoupled and specified in separate modules ("requirements classes" in OGC terminology). This enables, for example, the use/re-use of new encodings for spatial data or API descriptions.</p>
@@ -1413,15 +1473,15 @@ but eventually they are expected to be available under the base URL
 <div class="ulist">
 <ul>
 <li>
-<p>those that have never heard about WFS - it should be possible to create a client using the API definition without the need to read the WFS standard (they may need to learn a little bit about geometry, etc.);</p>
+<p>Those that have never heard about WFS. Developers should be able to create a client using the API definition without the need to read the WFS standard (they may need to learn a little bit about geometry, etc.);</p>
 </li>
 <li>
-<p>those that want to write a "generic" client that can access WFSs, i.e. are not specific for a particular API/server.</p>
+<p>Those that want to write a "generic" client that can access WFSs, i.e. are not specific for a particular API/server.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, it has been a design goal to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to a WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.</p>
+<p>As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, a design goal was to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to a WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.</p>
 </div>
 <div class="paragraph">
 <p>The modernization is discussed in more detail <a href="https://github.com/opengeospatial/WFS_FES/blob/master/overview.md">here</a>.</p>
@@ -1448,20 +1508,20 @@ rules for commonly used encodings for spatial data on the web are provided
 (GeoJSON, GML).</p>
 </div>
 <div class="paragraph">
-<p>None of these encodings is mandatory and an implementation of the "Core"
-requirements class may also decide to use none of them, but to use another encoding
+<p>None of these encodings is mandatory and an implementation of the <em>Core</em>
+requirements class may implement none of them but implement another encoding
 instead.</p>
 </div>
 <div class="paragraph">
 <p><a href="#rec_html">Support for HTML is recommended</a> as HTML is the core language of the World Wide Web.
 A server that supports HTML will support browsing the data with a web browser
-and it will enable search engines to crawl and index the dataset.</p>
+and will enable search engines to crawl and index the dataset.</p>
 </div>
 <div class="paragraph">
 <p>GeoJSON is a commonly used format that is simple to understand and well
 supported by tools and software libraries. Since most Web developers are
 comfortable with using a JSON-based format, this version of the Web Feature
-Service standard <a href="#rec_geojson">recommends to support GeoJSON for encoding feature data</a>,
+Service standard <a href="#rec_geojson">recommends supporting GeoJSON for encoding feature data</a>,
 if the feature data can be represented in GeoJSON for the intended use.</p>
 </div>
 <div class="paragraph">
@@ -1470,53 +1530,54 @@ if the feature data can be represented in GeoJSON for the intended use.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>solids are used a geometries (e.g. in a 3D city model),</p>
+<p>When solids are used a geometries (e.g. in a 3D city model),</p>
 </li>
 <li>
-<p>geometries include non-linear curve interpolations
+<p>Geometries that include non-linear curve interpolations
 that cannot be simplified (e.g., use of arcs in authoritative geometries),</p>
 </li>
 <li>
-<p>geometries have to be represented in a coordinate reference system that
+<p>Geometries have to be represented in a coordinate reference system that
 is not based on WGS 84 longitude/latitude (e.g. an authoritative national
 reference system),</p>
 </li>
 <li>
-<p>features have more than one geometric property, etc.</p>
+<p>Features have more than one geometric property.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>In addition to HTML and GeoJSON, a significant amount of feature data is
+<p>In addition to HTML and GeoJSON, a significant volume of feature data is
 available in XML-based formats, notably GML. GML supports more complex requirements
 than GeoJSON and does not have any of the limitations mentioned in the
-previous paragraph, but as a result GML also more complex to handle for both servers
+above bullets, but as a result GML also more complex to handle for both servers
 and clients. Conformance classes for GML are, therefore, included in this
-standard, but it is expected that these will typically be supported by servers
+standard. We expect that these will typically be supported by servers
 where users are known to expect feature data in XML/GML.</p>
 </div>
 <div class="paragraph">
-<p>The recommendations for HTML and GeoJSON reflect the importance of HTML and
+<p>The recommendations for using HTML and GeoJSON reflect the importance of HTML and
 the current popularity of JSON-based data formats. As the practices
-in the Web community evolve, the recommendations will likely be updated, too,
-in future versions of this standard to provide guidance.</p>
+in the Web community evolve, the recommendations will likely be updated
+in future versions of this standard to provide guidance on using other
+encodings.</p>
 </div>
 <div class="paragraph">
-<p>This part of WFS 3.0 does not provide any guidance on other encodings. The
+<p>This part of the WFS 3.0 standard does not provide any guidance on other encodings. The
 supported encodings, or more precisely the media types of the supported encodings,
 can be determined from the API definition. The desired encoding is selected
 using HTTP content negotiation.</p>
 </div>
 <div class="paragraph">
 <p>For example, if the server supports
-<a href="https://tools.ietf.org/html/rfc8142">GeoJSON Text Sequences</a>,
+<a href="https://tools.ietf.org/html/rfc8142">GeoJSON Text Sequences</a>
 an encoding that is based on JSON text sequences and GeoJSON to support streaming
-by making the the data incrementally parseable, the media type <code>application/geo+json-seq</code>
+by making the data incrementally parseable, the media type <code>application/geo+json-seq</code>
 would be used.</p>
 </div>
 <div class="paragraph">
-<p>In addition, HTTP supports compression and the standard HTTP mechanisms can be
-used to reduce the size of the messages between the server and the client.</p>
+<p>In addition, HTTP supports compression and therefore the standard HTTP mechanisms
+can be used to reduce the size of the messages between the server and the client.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1562,6 +1623,10 @@ update of the building feature in the dataset.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc2818">RFC 2818 (HTTP over TLS)</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc3339">RFC 3339 (Date and Time on the Internet: Timestamps)</a></p></td>
 </tr>
 <tr>
@@ -1571,7 +1636,7 @@ update of the building feature in the dataset.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Figure 1 illustrates the resources supported by the Core requirements class using
+<p>Figure 1 illustrates the resources supported by the <em>Core</em> requirements class using
 UML. Each resource type available through the server is an «interface».</p>
 </div>
 <div class="paragraph">
@@ -1580,7 +1645,7 @@ In other words, the API is a distribution of that dataset. A file download, for 
 would be another distribution.</p>
 </div>
 <div class="paragraph">
-<p>That is, each WFS has a single <code>LandingPage</code> (path <code>/</code>) that provides links to</p>
+<p>More specifically, each WFS has a single <code>LandingPage</code> (path <code>/</code>) that provides links to</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1596,41 +1661,41 @@ would be another distribution.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>APIDefinition</code> describes the capabilities of the server and which can be used by
+<p>The <code>APIDefinition</code> describes the capabilities of the server that can be used by
 clients to connect to the server or by development tools to support the
 implementation of servers and clients. Accessing the <code>APIDefinition</code> using
 HTTP GET returns a description of the API.</p>
 </div>
 <div class="paragraph">
 <p>Accessing the <code>Conformance</code> using HTTP GET returns a list of URIs of
-requirements classes implemented by the server.</p>
+requirements classes implemented by the WFS server.</p>
 </div>
 <div class="paragraph">
-<p>The distribution consists of a set of feature collections. This specification does not
-include any requirements how the features in the dataset have to be aggregated
-into collections. A typical approach is to aggregate by feature type, but any other approach
-that fits the dataset or the applications using this distribution may be used, too.</p>
+<p>The distribution consists of a set of feature collections. This standard does not
+include any requirements about how the features in the dataset have to be aggregated
+into collections. A typical approach is to aggregate by feature type but any other approach
+that fits the dataset or the applications using this distribution may also be used.</p>
 </div>
 <div class="paragraph">
 <p>Accessing the <code>DatasetDistribution</code> using HTTP GET returns a
-<code>DatasetDistributionResponse</code>, which includes a link to each <code>Collection</code>
-in the distribution along with metadata about each collection:</p>
+<code>DatasetDistributionResponse</code>. This response includes a link to each <code>Collection</code>
+in the distribution along with metadata about each collection including:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>a local identifier for the collection that is unique within the WFS;</p>
+<p>A local identifier for the collection that is unique for the server;</p>
 </li>
 <li>
-<p>a list of coordinate reference systems in which geometries may be returned by
-the server, where the first one is the default coordinate reference system
-(in the Core, the default is always WGS 84 with axis order longitude/latitude);</p>
+<p>A list of coordinate reference systems (CRS) in which geometries may be returned by
+the server. The first CRS is the default coordinate reference system
+(in the <em>Core</em>, the default is always WGS 84 with axis order longitude/latitude);</p>
 </li>
 <li>
-<p>an optional title and description for the collection;</p>
+<p>An optional title and description for the collection;</p>
 </li>
 <li>
-<p>an optional extent that can be used to provide an indication of the
+<p>An optional extent that can be used to provide an indication of the
 spatial and temporal extent of the collection - typically derived from the data.</p>
 </li>
 </ul>
@@ -1666,8 +1731,8 @@ Support features that do belong to multiple collections?
 </table>
 </div>
 <div class="paragraph">
-<p>Accessing a <code>Collection</code> using HTTP GET returns a <code>CollectionResponse</code>,
-which basically consists of features in the collection. The features included
+<p>Accessing a <code>Collection</code> using HTTP GET returns a <code>CollectionResponse</code>. This
+response basically consists of features in the collection. The features included
 in the response are determined by the server based on parameters of the request.</p>
 </div>
 <div class="paragraph">
@@ -1815,6 +1880,12 @@ properties:
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_error_situations"><a class="anchor" href="#_error_situations"></a>7.2.3. Error situations</h4>
+<div class="paragraph">
+<p>See <a href="#http_status_codes">HTTP status codes</a> for general guidance.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_api_definition_2"><a class="anchor" href="#_api_definition_2"></a>7.3. API definition</h3>
@@ -1823,7 +1894,7 @@ properties:
 <div class="paragraph">
 <p>Every WFS provides an API definition that describes the capabilities
 of the server and which can be used by developers to understand the API,
-by software clients to connect to the server or
+by software clients to connect to the server, or
 by development tools to support the implementation of servers and clients.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1891,7 +1962,7 @@ the document SHOULD conform to the
 content negotiation to select the desired representation.</p>
 </div>
 <div class="paragraph">
-<p>The API definition document describes the API. I.e.,
+<p>The API definition document describes the API. In other words,
 there is no need to include the <code>/api</code> operation in the API definition itself.</p>
 </div>
 <div class="paragraph">
@@ -1899,8 +1970,14 @@ there is no need to include the <code>/api</code> operation in the API definitio
 the API definition language(s) supported by the server. For example, if
 an OpenAPI definition is used, it should be possible to create a working
 client using the OpenAPI definition. The developer may need to learn a little
-bit about geometry, etc., but it should not be required to read this standard
-to access the data via the API.</p>
+bit about geometry data types, etc., but it should not be required to read
+this standard to access the data via the API.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_error_situations_2"><a class="anchor" href="#_error_situations_2"></a>7.3.3. Error situations</h4>
+<div class="paragraph">
+<p>See <a href="#http_status_codes">HTTP status codes</a> for general guidance.</p>
 </div>
 </div>
 </div>
@@ -1911,7 +1988,7 @@ to access the data via the API.</p>
 <div class="paragraph">
 <p>To support "generic" clients for accessing Web Feature Services in general - and
 not "just" a specific API / server, the server has to declare the
-requirements classes it implements and conforms to, too.</p>
+requirements classes it implements and conforms to.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1990,6 +2067,12 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_error_situations_3"><a class="anchor" href="#_error_situations_3"></a>7.4.3. Error situations</h4>
+<div class="paragraph">
+<p>See <a href="#http_status_codes">HTTP status codes</a> for general guidance.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_http_1_1"><a class="anchor" href="#_http_1_1"></a>7.5. HTTP 1.1</h3>
@@ -2006,6 +2089,10 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 </div>
 <div class="paragraph">
 <p>The server SHALL conform to <a href="#rfc2616">HTTP 1.1</a>.</p>
+</div>
+<div class="paragraph">
+<p>If the server supports HTTPS, the server SHALL also conform to
+<a href="#rfc2818">HTTP over TLS</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2020,18 +2107,103 @@ the API definition and HTML and GeoJSON as encodings for features.</p>
 <div class="title">Caution</div>
 </td>
 <td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/105">ISSUE 105</a><br>
-WFS 2.0 defined exception codes and mapped them to HTTP status codes. Should WFS 3.0
-provide guidance on which (common) error situations should return which
-HTTP status code per resource or should we simply require that http status codes
-are used correctly?
+<a href="https://github.com/opengeospatial/WFS_FES/issues/115">ISSUE 115</a><br>
+Currently, the Core only requires support for the GET method. Support for
+HEAD and OPTIONS for all resources should be considered, too.
 </td>
 </tr>
 </table>
 </div>
+<div class="sect3">
+<h4 id="http_status_codes"><a class="anchor" href="#http_status_codes"></a>7.5.1. HTTP status codes</h4>
+<div class="paragraph">
+<p><a href="#status_codes">Table 2</a> lists the main HTTP status codes that clients should be
+prepared to receive.</p>
+</div>
+<div class="paragraph">
+<p>This includes, for example, support for specific security schemes or URI
+redirection.</p>
+</div>
+<div class="paragraph">
+<p>In addition, other error situations may occur in the transport layer
+outside of the server.</p>
+</div>
+<table id="status_codes" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Typical HTTP status codes</caption>
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 85%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Status code</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>200</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A successful request.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>304</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">An <a href="#web_caching">entity tag was provided in the request</a> and the resource has not been changed since the previous request.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>400</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The server cannot or will not process the request due to an apparent client error. For example, a query parameter had an incorrect value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>401</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The request requires user authentication. The response includes a <code>WWW-Authenticate</code> header field containing a challenge applicable to the requested resource.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>403</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The server understood the request, but is refusing to fulfill it. While status code <code>401</code> indicates missing or bad authentication, status code <code>403</code> indicates that authentication is not the issue, but the client is not authorised to perform the requested operation on the resource.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>404</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The requested resource does not exist on the server. For example, a path parameter had an incorrect value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>405</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The request method is not supported. For example, a POST request was submitted, but the resource only supports GET requests.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>406</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The <code>Accept</code> header submitted in the request did not support any of the media types supported by the server for the requested resource.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>500</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">An internal error occurred in the server.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>More specific guidance is provided for each resource, where applicable.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
+<p>/per/core/additional-status-codes<br></p>
+</div>
+<div class="paragraph">
+<p>Servers MAY support other capabilities of the HTTP protocol and, therefore,
+MAY return other status codes than those listed in <a href="#status_codes">Table 2</a>, too.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_web_caching"><a class="anchor" href="#_web_caching"></a>7.6. Web caching</h3>
+<h3 id="web_caching"><a class="anchor" href="#web_caching"></a>7.6. Web caching</h3>
 <div class="paragraph">
 <p>Entity tags are a mechanism for web cache validation and for supporting conditional
 requests to reduce network traffic. Entity tags are specified by <a href="#rfc2616">HTTP/1.1 (RFC 2616)</a>.</p>
@@ -2070,10 +2242,10 @@ response codes) - here or in clause 9.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_support_for_cross_origin_requests"><a class="anchor" href="#_support_for_cross_origin_requests"></a>7.7. Support for cross-origin requests</h3>
+<h3 id="cross_origin"><a class="anchor" href="#cross_origin"></a>7.7. Support for cross-origin requests</h3>
 <div class="paragraph">
-<p>To access data from a HTML page where the data is on another host than
-the webpage is by default prohibited for security reasons ("same-origin policy").
+<p>Access to data from a HTML page is by default prohibited for security reasons,
+if the data is located on another host than the webpage ("same-origin policy").
 A typical example is a web-application accessing feature data from
 multiple distributed datasets.</p>
 </div>
@@ -2113,8 +2285,8 @@ proxy layer on top of the server.</p>
 <div class="sect2">
 <h3 id="_encodings_2"><a class="anchor" href="#_encodings_2"></a>7.8. Encodings</h3>
 <div class="paragraph">
-<p>While WFS 3.0 does not include any mandatory encoding, it recommends the following
-encodings. See <a href="#overview">Clause 6 (Overview)</a> for a discussion.</p>
+<p>While the WFS 3.0 standard does not specify any mandatory encoding, we recommend
+the following encodings. See <a href="#overview">Clause 6 (Overview)</a> for a discussion.</p>
 </div>
 <table id="rec_html" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -2155,7 +2327,7 @@ encoding for features and feature collections.</p>
 </table>
 <div class="paragraph">
 <p><a href="#_http_1_1">Requirement <code>/req/core/http</code></a> implies that the encoding of a server response
-is determined using content negotiation as specified by the HTTP specification.</p>
+is determined using content negotiation as specified by the HTTP RFC.</p>
 </div>
 <div class="paragraph">
 <p>The section <a href="#mediatypes">Media Types</a> includes guidance on media types for
@@ -2205,7 +2377,7 @@ the Accept header of the HTTP request.</p>
 <div class="sect2">
 <h3 id="_coordinate_reference_systems"><a class="anchor" href="#_coordinate_reference_systems"></a>7.9. Coordinate reference systems</h3>
 <div class="paragraph">
-<p>As discussed in Chapter 9 of the <a href="#SDWBP">W3C/OGC Spatial Data on the Web Best Practices</a>,
+<p>As discussed in Chapter 9 of the <a href="#SDWBP">W3C/OGC Spatial Data on the Web Best Practices document</a>,
 how to express and share the location of features in a consistent way is one
 of the most fundamental aspects of publishing geographic data and it is important
 to be clear about the coordinate reference system that coordinates are in.</p>
@@ -2557,7 +2729,7 @@ are supported by the service (<a href="https://www.iana.org/assignments/link-rel
 </div>
 <div class="paragraph">
 <p>Additional links to a GML application schema for the building data and to
-a web page that has additional information about buildings are provided, too, using <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml">link relation type</a> "describedBy".</p>
+a web page that has additional information about buildings are provided using <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml">link relation type</a> "describedBy".</p>
 </div>
 <div class="paragraph">
 <p>Coordinate reference system information is not provided as the service provides
@@ -2597,6 +2769,12 @@ geometries only in the default system (WGS84 longitude/latitude).</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_error_situations_4"><a class="anchor" href="#_error_situations_4"></a>7.11.3. Error situations</h4>
+<div class="paragraph">
+<p>See <a href="#http_status_codes">HTTP status codes</a> for general guidance.</p>
 </div>
 </div>
 </div>
@@ -2650,6 +2828,16 @@ collection in the <code>/collections</code> response.</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="_error_situations_5"><a class="anchor" href="#_error_situations_5"></a>7.12.3. Error situations</h4>
+<div class="paragraph">
+<p>See <a href="#http_status_codes">HTTP status codes</a> for general guidance.</p>
+</div>
+<div class="paragraph">
+<p>If the parameter <code>name</code> does not exist on the server, the status code of the
+response will be <code>404</code> (see <a href="#status_codes">Table 2</a>).</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2721,7 +2909,7 @@ explode: false</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 2</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/per/core/fc-limit-default-maximum<br></p>
 </div>
@@ -2764,7 +2952,7 @@ SHALL not be counted.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 2</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 3</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/per/core/fc-limit-response-2<br></p>
 </div>
@@ -2832,7 +3020,7 @@ part of the result set, if the <code>bbox</code> parameter is provided.</p>
 </div>
 <div class="paragraph">
 <p>The bounding box is provided as four or six numbers, depending on whether the
-coordinate reference system includes a vertical axis (elevation or depth):</p>
+coordinate reference system includes a vertical axis (height or depth):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2872,13 +3060,13 @@ This includes the boundaries of the geometries (e.g. for curves the start
 and end position and for surfaces the outer and inner rings).</p>
 </div>
 <div class="paragraph">
-<p>This specification does not specify the parameter <code>bbox-crs</code>. This parameter
-will be specified in an additional part of the WFS 3.0 series.</p>
+<p>This standard does not specify requirements for the parameter <code>bbox-crs</code>. Those
+requirements will be specified in an additional part of the WFS 3.0 series.</p>
 </div>
 <div class="paragraph">
 <p>For WGS84 longitude/latitude the bounding box is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
-However, in cases where the box spans the antimeridian the first value
+However, in cases where the box spans the anti-meridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).</p>
 </div>
 <div class="exampleblock">
@@ -2982,7 +3170,7 @@ a date-time value would match all features where the timestamp is on that
 day or within the time period.</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 7. A period using start and end time</div>
+<div class="title">Example 7. A period using a start and end time</div>
 <div class="content">
 <div class="paragraph">
 <p>February 12, 2018, 00:00:00 GMT to March 18, 2018, 12:31:12 GMT:</p>
@@ -3168,20 +3356,16 @@ fragment in requirement <code>/req/core/fc-limit-definition</code>):</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If you ask for 10, you will get 0 to 10 (as requested) and a <code>next</code> link,
-if there are more.</p>
+<p>If you ask for 10, you will get 0 to 10 (as requested) and if there are more a <code>next</code> link;</p>
 </li>
 <li>
-<p>If you don&#8217;t specify a limit, you will get 0 to 10 (default) and a <code>next</code> link,
-if there are more.</p>
+<p>If you don&#8217;t specify a limit, you will get 0 to 10 (default) and if there are more a <code>next</code> link;</p>
 </li>
 <li>
-<p>If you ask for 50000, you might get up to 10000 (server-limited) and a <code>next</code>
-link, if there are more.</p>
+<p>If you ask for 50000, you might get up to 10000 (server-limited) and if there are more a <code>next</code> link;</p>
 </li>
 <li>
-<p>If you follow the next link from the previous response, you might get up
-to 10000 additional features and a <code>next</code> link, if there are more.</p>
+<p>If you follow the next link from the previous response, you might get up to 10000 additional features and if there are more a <code>next</code> link.</p>
 </li>
 </ul>
 </div>
@@ -3290,7 +3474,7 @@ which may be added again in an extension to this specification).</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 3</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 4</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/per/core/fc-prev<br></p>
 </div>
@@ -3303,7 +3487,7 @@ included the <code>next</code> link.</p>
 </table>
 <div class="paragraph">
 <p>Providing <code>prev</code> links supports navigating back and forth between pages,
-but depending on the implementation approach it may be complex to implement.</p>
+but depending on the implementation approach it may be too complex to implement.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3465,6 +3649,33 @@ Link: &lt;http://data.example.org/collections/buildings/items.json?limit=50&amp;
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_error_situations_6"><a class="anchor" href="#_error_situations_6"></a>7.13.7. Error situations</h4>
+<div class="paragraph">
+<p>See <a href="#http_status_codes">HTTP status codes</a> for general guidance.</p>
+</div>
+<div class="paragraph">
+<p>If the path parameter <code>name</code> does not exist on the server, the status code of the
+response will be <code>404</code>.</p>
+</div>
+<div class="paragraph">
+<p>A <code>400</code> will be returned in the following situations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If query parameter <code>limit</code> is not an integer or not between minimum and maximum;</p>
+</li>
+<li>
+<p>if query parameter <code>bbox</code> does not have 4 (or 6) numbers or they do not form
+a bounding box;</p>
+</li>
+<li>
+<p>if parameter <code>time</code> is not a valid time stamp or time period.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_feature_2"><a class="anchor" href="#_feature_2"></a>7.14. Feature</h3>
@@ -3501,7 +3712,7 @@ local identifier of the feature.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 4</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Permission 5</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div><div class="paragraph">
 <p>/per/core/f-id<br></p>
 </div>
@@ -3610,6 +3821,16 @@ Link: &lt;http://data.example.org/collections/buildings/items.json&gt;; rel="col
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_error_situations_7"><a class="anchor" href="#_error_situations_7"></a>7.14.3. Error situations</h4>
+<div class="paragraph">
+<p>See <a href="#http_status_codes">HTTP status codes</a> for general guidance.</p>
+</div>
+<div class="paragraph">
+<p>If the path parameter <code>name</code> or the path parameter <code>id</code> does not exist on
+the server, the status code of the response will be <code>404</code>.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3620,7 +3841,7 @@ Link: &lt;http://data.example.org/collections/buildings/items.json&gt;; rel="col
 <h3 id="_overview"><a class="anchor" href="#_overview"></a>8.1. Overview</h3>
 <div class="paragraph">
 <p>This clause specifies four pre-defined requirements classes for encodings to be
-used in a WFS. These encodings are commonly used encodings for spatial data on
+used by a WFS implementation. These encodings are commonly used encodings for spatial data on
 the web:</p>
 </div>
 <div class="ulist">
@@ -3640,8 +3861,8 @@ the web:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>None of these encodings is mandatory and an implementation of the <a href="#rc_core">Core</a>
-requirements class may also decide to use none of them, but to use another encoding
+<p>None of these encodings are mandatory and an implementation of the <a href="#rc_core">Core</a>
+requirements class may also implement none of them but implement another encoding
 instead.</p>
 </div>
 <div class="paragraph">
@@ -3660,11 +3881,11 @@ has two issues:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>it is not discoverable using the most common mechanism for discovering information,
+<p>The data is not discoverable using the most common mechanism for discovering information,
 that is the search engines of the Web;</p>
 </li>
 <li>
-<p>it can not be viewed directly in a browser - additional tools are required to
+<p>The data can not be viewed directly in a browser - additional tools are required to
 view the data.</p>
 </li>
 </ul>
@@ -3677,7 +3898,7 @@ access all data.</p>
 <div class="paragraph">
 <p>This is discussed in detail in
 <a href="https://www.w3.org/TR/sdw-bp/#indexable-by-search-engines">Best Practice 2: Make your spatial data indexable by search engines</a>
-<a href="#SDWBP">[SDWBP]</a>. This standard therefore <a href="#rec_html">recommends to support HTML as an encoding</a>.</p>
+<a href="#SDWBP">[SDWBP]</a>. This standard therefore <a href="#rec_html">recommends supporting HTML as an encoding</a>.</p>
 </div>
 <table id="rc_html" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3782,7 +4003,7 @@ in the HTML <code>&lt;body/&gt;</code>, and</p>
 <div class="paragraph">
 <p>GeoJSON is a commonly used format that is simple to understand and well
 supported by tools and software libraries. Since most Web developers are
-comfortable with using a JSON-based format, supporting GeoJSON is recommended,
+comfortable with using a JSON-based format supporting GeoJSON is recommended,
 if the feature data can be represented in GeoJSON for the intended use.</p>
 </div>
 <table id="rc_geojson" class="tableblock frame-all grid-all" style="width: 90%;">
@@ -3988,12 +4209,13 @@ specific feature types or their properties.</p>
 <div class="sect2">
 <h3 id="_requirement_class_geography_markup_language_gml_simple_features_profile_level_0"><a class="anchor" href="#_requirement_class_geography_markup_language_gml_simple_features_profile_level_0"></a>8.4. Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"</h3>
 <div class="paragraph">
-<p>In addition to HTML and GeoJSON, a significant amount of feature data is
+<p>In addition to HTML and GeoJSON, a significant volume of feature data is
 available in XML-based formats, notably GML. Therefore, this standard
 specifies requirement classes for GML. The Simple Features Profile, Level 0, is
-the simplest profile of GML and is typically supported by tools. It is restricted
-to data with 2D geometries supported by most tools. In addition, the profile
-is limited to features that can be stored in a tabular data structure.</p>
+the simplest profile of GML and is typically supported by tools. The GML Simple
+Features Profile is restricted to data with 2D geometries supported by most tools.
+In addition, the Level 0 profile is limited to features that can be stored in
+a tabular data structure.</p>
 </div>
 <table id="rc_gmlsf0" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4060,7 +4282,7 @@ is limited to features that can be stored in a tabular data structure.</p>
 <p>/req/gmlsf0/content<br></p>
 </div>
 <div class="paragraph">
-<p><a href="#gml_content">Table 2</a> specifies the XML document root element
+<p><a href="#gml_content">Table 3</a> specifies the XML document root element
 that the server SHALL return in a <code>200</code>-response for each resource.</p>
 </div>
 <div class="paragraph">
@@ -4076,7 +4298,7 @@ validate against the <a href="https://raw.githubusercontent.com/opengeospatial/W
 </tbody>
 </table>
 <table id="gml_content" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Media types and XML elements for each resource</caption>
+<caption class="title">Table 3. Media types and XML elements for each resource</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 35%;">
@@ -4142,8 +4364,8 @@ validate against the <a href="https://raw.githubusercontent.com/opengeospatial/W
 </ul>
 </div>
 <div class="paragraph">
-<p>The API definition resource at path <code>/api</code> is not included in <a href="#gml_content">Table 2</a> and
-as this requirements class does not prescribe any API definition approach.</p>
+<p>The API definition resource at path <code>/api</code> is not included in <a href="#gml_content">Table 3</a>.
+This requirements class does not prescribe any API definition approach.</p>
 </div>
 <div class="paragraph">
 <p>The mapping of the content from the responses specified in the
@@ -4268,7 +4490,7 @@ are replaced by <code>application/gml+xml; version=3.2; profile=http://www.openg
 <div class="sect2">
 <h3 id="_basic_requirements"><a class="anchor" href="#_basic_requirements"></a>9.1. Basic requirements</h3>
 <div class="paragraph">
-<p>The API of servers conforming to this requirements class are defined by an <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument">OpenAPI Document</a>.</p>
+<p>Servers conforming to this requirements class define their API by an <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasDocument">OpenAPI Document</a>.</p>
 </div>
 <table id="rc_oas30" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4314,6 +4536,20 @@ are replaced by <code>application/gml+xml; version=3.2; profile=http://www.openg
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/117">ISSUE 117</a><br>
+The OpenAPI media type has not been registered yet with IANA and will likely
+change. We need to update the media type after registration.
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -4408,10 +4644,10 @@ situations that originate from the server.</p>
 </table>
 <div class="paragraph">
 <p>Note that servers that, for example, are access-controlled
-(see <a href="#security">Security</a>), that support web cache validation, CORS
+(see <a href="#security">Security</a>), support web cache validation, CORS
 or that use HTTP redirection will make use of additional HTTP status codes
-beyond regular codes like <code>200</code> for successful GET requests
-and <code>400</code>, <code>404</code> or <code>500</code> for error situations.</p>
+beyond regular codes such as <code>200</code> for successful GET requests
+and <code>400</code>, <code>404</code> or <code>500</code> for error situations. See <a href="#http_status_codes">HTTP status codes</a>.</p>
 </div>
 <div class="paragraph">
 <p>Clients have to be prepared to receive responses not documented in the
@@ -4448,20 +4684,6 @@ SHALL cover all applicable HTTP Status Codes.</p>
 <td class="content">
 <a href="https://github.com/opengeospatial/WFS_FES/issues/45">ISSUE 45</a><br>
 Listing of all applicable HTTP Status Codes
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Caution</div>
-</td>
-<td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/105">ISSUE 105</a><br>
-WFS 2.0 defined exception codes and mapped them to HTTP status codes. Should WFS 3.0
-do this, too, or should we simply require that http status codes are used correctly?
 </td>
 </tr>
 </table>
@@ -4606,37 +4828,6 @@ collection (see recommendation <code>/rec/core/fc-filters</code>).</p>
 <div class="paragraph">
 <p>The media type for an OpenAPI definition in JSON is <code>application/openapi+json;version=3.0</code>.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-The media type for the OpenAPI definition has not yet been registered
-with IANA. See <a href="https://github.com/OAI/OpenAPI-Specification/issues/110" class="bare">https://github.com/OAI/OpenAPI-Specification/issues/110</a>.
-</td>
-</tr>
-</table>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_conformance_class_abstract_test_suite_normative"><a class="anchor" href="#_conformance_class_abstract_test_suite_normative"></a>Annex A: Conformance Class Abstract Test Suite (Normative)</h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-TODO
-</td>
-</tr>
-</table>
-</div>
 <div class="admonitionblock caution">
 <table>
 <tr>
@@ -4644,8 +4835,9 @@ TODO
 <div class="title">Caution</div>
 </td>
 <td class="content">
-<a href="https://github.com/opengeospatial/WFS_FES/issues/46">ISSUE 46</a><br>
-OpenAPI Validation
+<a href="https://github.com/opengeospatial/WFS_FES/issues/117">ISSUE 117</a><br>
+The OpenAPI media type has not been registered yet with IANA and will likely
+change. We need to update the media type after registration.
 </td>
 </tr>
 </table>
@@ -4654,10 +4846,1585 @@ OpenAPI Validation
 </div>
 </div>
 <div class="sect1">
+<h2 id="_abstract_test_suite_normative"><a class="anchor" href="#_abstract_test_suite_normative"></a>Annex A: Abstract Test Suite (Normative)</h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<a href="https://github.com/opengeospatial/WFS_FES/issues/112">ISSUE 112</a><br>
+The Abstract Test Suite is work-in-progress. Currently, only a draft for the
+Core conformance class is available. The other five conformance classes (HTML,
+GeoJSON, GML-SF0, GML-SF2, OpenAPI 3.0) are not yet covered.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>A.1. Overview</h3>
+<div class="paragraph">
+<p>WFS 3.0 is not a Web Service in the traditional sense.  Rather, it defines the behavior and content of a set of RESTful micro-services exposed through an Application Programing Interface (API).  Compliance testing for WFS 3.0 and similar standards must answer three questions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Are the capabilities advertised through the API Description compliant with the standard?</p>
+</li>
+<li>
+<p>Do the micro-services implement those capabilities as advertised?</p>
+</li>
+<li>
+<p>Do the resources returned by the micro-services meet the structure and content requirements of the standard?</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Further complicating the issue, an API may expose micro-services in addition to those defined by the standard.  A test engine must be able to traverse the API description document, identify test points, and ignore micro-services which are not to be tested.  The process for identifying test points is provided in Section A.4.3.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conventions_2"><a class="anchor" href="#_conventions_2"></a>A.2. Conventions</h3>
+<div class="paragraph">
+<p>The following conventions apply to this Abstract Test Suite:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_templates"><a class="anchor" href="#_path_templates"></a>A.2.1. Path Templates</h4>
+<div class="paragraph">
+<p>Path templates are used throughout these test suites.  Path templating refers to the usage of curly braces “{}” to mark a section of a URL path that can be replaced using path parameters.  The terms used to describe portions of these templates are based on the URL syntax described in RFC 3986.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>scheme: http | https</p>
+</li>
+<li>
+<p>authority: DNS name of the server with optional port number</p>
+</li>
+<li>
+<p>path: The slash delimited identifier for a resource on the server</p>
+</li>
+<li>
+<p>query: query parameters following the "?" character</p>
+</li>
+<li>
+<p>fragment: identifies an element within the resource. Preceded by the "#" character</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_api"><a class="anchor" href="#_api"></a>A.2.2. API</h4>
+<div class="paragraph">
+<p>Description Document</p>
+</div>
+<div class="paragraph">
+<p>The WFS 3.0 standard does not mandate a standard format for the API Description Document.  However, some form of standard is needed if tests are to be accurately described and implemented.  Therefore, this Abstract Test Suite assumes that the API Description document is compliant with OpenAPI 3.0.  This Test Suite will be updated if and when an alternative is commonly adopted.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_processing"><a class="anchor" href="#_processing"></a>A.2.3. Processing</h4>
+<div class="paragraph">
+<p>Security Objects</p>
+</div>
+<div class="paragraph">
+<p>OpenAPI does not provide a standard way to associate a security requirement with a single server URI.  Therefore, WFS 3.0 compliance tests will have to make that association through the runtime challenge-response transaction.  At this time the role of the Security Objects should be considered advisory.</p>
+</div>
+<div class="paragraph">
+<p>Security Requirements can be defined at both the OpanAPI root level and at the Operation Object level. The following rules should be followed to understand the scope of a Security Requirement:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Security Requirements defined at the root level are the default requirements for all operations and servers.</p>
+</li>
+<li>
+<p>If Security Requirements are defined at the Operation level, then those Requirements, and not the ones defined at the OpenAPI level, shall be used with that operation.</p>
+</li>
+<li>
+<p>An empty set of Security Requirements at the Operation level indicates that there are no security requirements for that operation.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note: this allows operations to opt-out of security requirements defined at the OpenAPI level.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parameters"><a class="anchor" href="#_parameters"></a>A.2.4. Parameters</h4>
+<div class="paragraph">
+<p>The following observations apply for WFS 3.0 parameters:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>WFS 3.0 does not use cookies.</p>
+</li>
+<li>
+<p>Query parameters follow common Web practice</p>
+</li>
+<li>
+<p>Header parameters are restricted to custom headers</p>
+</li>
+<li>
+<p>For path parameters, the name of the parameter must match the name of the variable in the path template in the path object</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Parameters are defined at the Path Item and Operation level.  Parameters defined at the Path Item level must apply to all operations under that Path item. These parameters may be modified at the Operation level but they may not be removed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_testable_paths"><a class="anchor" href="#_testable_paths"></a>A.2.5. Testable Paths</h4>
+<div class="paragraph">
+<p>A testable path is a path which corresponds to one of the paths defined in the WFS 3.0 specification. There are three alternatives for making this determination:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The path URI matches – this is the simplest approach but may be subject to error</p>
+</li>
+<li>
+<p>Use mandatory tags in the tags field of the Operation Object</p>
+</li>
+<li>
+<p>Use standardized operation ids for the operationId field of the Operation Object</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>A testable path is validated against the rules for that path.  At a minimum that includes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Building a list of all parameters which are defined in the standard</p>
+</li>
+<li>
+<p>Validate that the mandatory parameters are present and required</p>
+</li>
+<li>
+<p>Validate type, format, etc. for each parameter in the list.</p>
+</li>
+<li>
+<p>Validate that there are no mandatory parameters which are not on the list.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_requirements_trace_matrix"><a class="anchor" href="#_requirements_trace_matrix"></a>A.3. Requirements Trace Matrix</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 1:</strong> API Landing Page Operation<br>
+  The server SHALL support the HTTP GET operation at the path /.<br>
+  Tests: A.4.2.1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2:</strong> API Landing Page Response<br>
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be based upon the OpenAPI 3.0 schema root.yaml and include at least links to the following resources:<br>
+ - /api (relation type 'service')<br>
+ - /conformance (relation type 'conformance')<br>
+ - /collections (relation type 'data')<br>
+Tests: A.4.2.2<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3:</strong> API Definition Operation<br>
+The server SHALL support the HTTP GET operation at the path /api.<br>
+Tests: A.4.2.3<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4:</strong> API Definition Response<br>
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The server SHALL return an API definition document.<br>
+Tests: A.4.2.3, A.4.2.4<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5:</strong> Conformance Class Operation<br>
+The server SHALL support the HTTP GET operation at the path /conformance.<br>
+Tests: A.4.4.2<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6:</strong> Conformance Class Response<br>
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be based upon the OpenAPI 3.0 schema req-classes.yaml and list all WFS 3.0 requirements classes that the server conforms to.<br>
+Tests: A.4.4.3<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7:</strong> HTTP 1.1<br>
+The server SHALL conform to HTTP 1.1.<br>
+If the server supports HTTPS, the server SHALL also conform to HTTP over TLS.<br>
+Tests: A.4.1.1<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8:</strong> Coordinate Reference Systems<br>
+Unless the client explicitly requests a different coordinate reference system, all spatial geometries SHALL be in the coordinate reference system <a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84" class="bare">http://www.opengis.net/def/crs/OGC/1.3/CRS84</a> (WGS84 longitude/latitude)<br>
+Tests: A.4.1.2<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9:</strong> Feature Collections Metadata Operation<br>
+The server SHALL support the HTTP GET operation at the path /collections.<br>
+Tests: A.4.4.4<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10:</strong> Feature Collections Metadata Response<br>
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.  The content of that response SHALL be based upon the OpenAPI 3.0 schema content.yaml.<br>
+Tests: A.4.4.5<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11:</strong> Feature Collections Metadata Links<br>
+A 200-response SHALL include the following links in the links property of the response:<br>
+ - a link to this response document (relation: self),<br>
+ - a link to the response document in every other media type supported by the server (relation: alternate).<br>
+All links SHALL include the rel and type link parameters.<br>
+Tests: A.4.4.5<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12:</strong> Feature Collections Metadata Items<br>
+For each feature collection in this distribution of the dataset, an item SHALL be provided in the property collections.<br>
+Tests: A.4.4.5, A.4.4.6<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13:</strong> Feature Collections Metadata Items Links<br>
+For each feature collection in this distribution of the dataset, the links property of the collection SHALL include an item for each supported encoding with a link to the collection resource (relation: item).<br>
+All links SHALL include the rel and type properties.<br>
+Tests: A.4.4.6<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14:</strong> Feature Collections Metadata Extent<br>
+For each feature collection, the extent property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection.<br>
+If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries.<br>
+Tests: A.4.4.6<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15:</strong> Feature Collection Metadta Operation<br>
+The server SHALL support the HTTP GET operation at the path /collections/{name}. name is the property of the same name in the feature collections metadata.<br>
+Tests: A.4.4.7<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16:</strong> Feature Collection Metadta Response<br>
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be the same as the content for this feature collection in the /collections response.<br>
+Tests: A.4.4.8<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17:</strong> Feature Collection Operation<br>
+For every feature collection identified in the metadata about the feature collection (path /), the server SHALL support the HTTP GET operation at the path /collections/{name}/items where {name} is the property of the same name in the feature collections metadata.<br>
+Tests: A.4.4.9<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18:</strong> Feature Collection Operation Limit Parameter<br>
+Each feature collection operation SHALL support a parameter limit with the following characteristics (using an OpenAPI Specification 3.0 fragment):<br>
+Tests: A.4.4.11<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19:</strong> Feature Collection Operation Limit Parameter Response<br>
+The response SHALL not contain more features than specified by the optional limit parameter. If the API definition specifies a maximum value for limit parameter, the response SHALL not contain more features than this maximum value.<br>
+Only items are counted that are on the first level of the collection. Any nested objects contained within the explicitly requested items SHALL not be counted.<br>
+Tests: A.4.4.11<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20:</strong> Feature Collection Operation BoundingBox Parameter<br>
+Each feature collection operation SHALL support a parameter bbox with the following characteristics (using an OpenAPI Specification 3.0 fragment):<br>
+Tests: A.4.4.12<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21:</strong> Feature Collection Operation BoundingBox Parameter Response<br>
+Only features that have a spatial geometry that intersects the bounding box SHALL be part of the result set, if the bbox parameter is provided.<br>
+The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (height or depth):<br>
+ - Lower left corner, coordinate axis 1<br>
+ - Lower left corner, coordinate axis 2<br>
+ - Lower left corner, coordinate axis 3 (optional)<br>
+ - Upper right corner, coordinate axis 1<br>
+ - Upper right corner, coordinate axis 2<br>
+ - Upper right corner, coordinate axis 3 (optional)<br>
+The coordinate reference system of the values SHALL be interpreted as WGS84 longitude/latitude (<a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84" class="bare">http://www.opengis.net/def/crs/OGC/1.3/CRS84</a>) unless a different coordinate reference system is specified in a parameter bbox-crs.<br>
+Tests: A.4.4.12<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22:</strong> Feature Collection Operation Time Parameter<br>
+Each feature collection operation SHALL support a parameter time with the following characteristics (using an OpenAPI Specification 3.0 fragment):<br>
+Tests: A.4.4.13<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23:</strong> Feature Collection Operation Time Parameter Response<br>
+Only features that have a temporal geometry that intersects the timestamp or time period SHALL be part of the result set, if the time parameter is provided.<br>
+The temporal information is either a date-time or a period string that adheres to RFC3339.<br>
+If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties.<br>
+Tests: A.4.4.13<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24:</strong> Feature Collection Response<br>
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.<br>
+Tests: A.4.4.10<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25:</strong> Feature Collection Response Links<br>
+A 200-response SHALL include the following links:<br>
+ - a link to this response document (relation: self),<br>
+ - a link to the response document in every other media type supported by the service (relation: alternate).<br>
+Tests: A.4.4.10<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26:</strong> Feature Collection Response Links Parameters<br>
+All links SHALL include the rel and type link parameters.<br>
+Tests: A.4.4.10<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27:</strong> Feature Collection Response timeStamp<br>
+If a property timeStamp is included in the response, the value SHALL be set to the time stamp when the response was generated.<br>
+Tests: A.4.4.10<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28:</strong> Feature Collection Response numberMatched<br>
+If a property numberMatched is included in the response, the value SHALL be identical to the number of features in the feature collections that match the selection parameters like bbox, time or additional filter parameters.<br>
+A server MAY omit this information in a response, if the information about the number of matching features is not known or difficult to compute.<br>
+Tests: A.4.4.10<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29:</strong> Feature Collection Response numberReturned<br>
+If a property numberReturned is included in the response, the value SHALL be identical to the number of features in the response.<br>
+A server MAY omit this information in a response, if the information about the number of features in the response is not known or difficult to compute.<br>
+Tests: A.4.4.10<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30:</strong> Feature Operation<br>
+For every feature in a feature collection (path /collections/{name}/items), the service SHALL support the HTTP GET operation at the path /collections/{name}/items/{id} where {name} is the property of the same name in the feature collection metadata and {id} is a local identifier of the feature.<br>
+Tests: A.4.4.14<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31:</strong> Feature Opearation Response<br>
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.<br>
+Tests: A.4.4.15<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32:</strong> Feature Operation Response Links<br>
+A 200-response SHALL include the following links in the response:<br>
+ - a link to the response document (relation: self),<br>
+ - a link to the response document in every other media type supported by the service (relation: alternate), and<br>
+ - a link to the feature collection that contains this feature (relation: collection).<br>
+All links SHALL include the rel and type link parameters.<br>
+Tests: A.4.4.15<br></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_abstract_test"><a class="anchor" href="#_abstract_test"></a>A.4. Abstract Test</h3>
+<div class="paragraph">
+<p>The Test Approach used in the WFS 3.0 Abstract Test Suite includes four steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Identify the test points</p>
+</li>
+<li>
+<p>Verify that API descriptions of the test points comply with the WFS 3.0 standard</p>
+</li>
+<li>
+<p>Verify that the micro-services at each test point behave in accordance with the WFS 3.0 standard.</p>
+</li>
+<li>
+<p>Verify that the resources returned at each test point are in accordance with the WFS 3.0 standard and any referenced content standard.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Identification of test points is a new requirement with WFS 3.0.  Since an API is not a Web Service, there may be RESTful endpoints advertised which are not intended to be targets of the compliance testing.  Section A.4.2 describes the process for crawling the API Description document and extracting those URLs which should be tested as well as the path(s) they should be tested with.  The concatenation of a Server URL with a path forms a test point.</p>
+</div>
+<div class="paragraph">
+<p>Section A.4.3 describes how the test points are exercised to determine compliance with the WFS 3.0 standard.</p>
+</div>
+<div class="sect3">
+<h4 id="_general_tests"><a class="anchor" href="#_general_tests"></a>A.4.1. General Tests</h4>
+<div class="sect4">
+<h5 id="_http_1_1_2"><a class="anchor" href="#_http_1_1_2"></a>A.4.1.1. HTTP 1.1</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose"><a class="anchor" href="#_a_test_purpose"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that the WFS services advertised through the API conform with HTTP 1.1.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions"><a class="anchor" href="#_b_pre_conditions"></a>b) Pre-conditions:</h6>
+<div class="paragraph">
+<p>none</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method"><a class="anchor" href="#_c_test_method"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Build all requests using the HTTP 1.1 protocol.</p>
+</li>
+<li>
+<p>Validate that all responses comply with the HTTP 1.1 protocol</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references"><a class="anchor" href="#_d_references"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 7</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_coordinate_reference_systems_2"><a class="anchor" href="#_coordinate_reference_systems_2"></a>A.4.1.2. Coordinate Reference Systems</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_2"><a class="anchor" href="#_a_test_purpose_2"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that all spatial geometries provided through a WFS service are in the CRS84 spatial reference system unless otherwise requested by the client.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_2"><a class="anchor" href="#_b_pre_conditions_2"></a>b) Pre-conditions:</h6>
+<div class="paragraph">
+<p>none</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_2"><a class="anchor" href="#_c_test_method_2"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Do not specify a coordinate reference system in any request.  All spatial data should be in the CRS84 reference system.</p>
+</li>
+<li>
+<p>Validate retrieved spatial data using the CRS84 reference system.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_2"><a class="anchor" href="#_d_references_2"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 8</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_retrieve_the_api_description"><a class="anchor" href="#_retrieve_the_api_description"></a>A.4.2. Retrieve the API Description</h4>
+<div class="sect4">
+<h5 id="_landing_page_retrieval"><a class="anchor" href="#_landing_page_retrieval"></a>A.4.2.1. Landing Page Retrieval</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_3"><a class="anchor" href="#_a_test_purpose_3"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that a landing page can be retrieved from the expected location.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_3"><a class="anchor" href="#_b_pre_conditions_3"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A URL to the server hosting the landing page is known.</p>
+</li>
+<li>
+<p>The test client can authenticate to the server.</p>
+</li>
+<li>
+<p>The test client has sufficient privileges to access the landing page.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_3"><a class="anchor" href="#_c_test_method_3"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Issue an HTTP GET request to the URL {root}/</p>
+</li>
+<li>
+<p>Validate that a document was returned with a status code 200</p>
+</li>
+<li>
+<p>Validate the contents of the returned document using test A.4.2.2</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_3"><a class="anchor" href="#_d_references_3"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 1</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_landing_page_validation"><a class="anchor" href="#_landing_page_validation"></a>A.4.2.2. Landing Page Validation</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_4"><a class="anchor" href="#_a_test_purpose_4"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that the landing page complies with the require structure and contents.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_4"><a class="anchor" href="#_b_pre_conditions_4"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>The landing page has been retrieved from the server</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_4"><a class="anchor" href="#_c_test_method_4"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Validate the landing page against the root.yaml schema</p>
+</li>
+<li>
+<p>Validate that the landing page includes a “service” link to API Definition</p>
+</li>
+<li>
+<p>Validate that the landing page includes a “conformance” link to the conformance class document</p>
+</li>
+<li>
+<p>Validate that the landing page includes a “data” link to the WFS contents.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_4"><a class="anchor" href="#_d_references_4"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 2</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_openapi_document_retrieval"><a class="anchor" href="#_openapi_document_retrieval"></a>A.4.2.3. OpenAPI Document Retrieval</h5>
+<div class="paragraph">
+<p>Note: The URI for the API definition is provided through the landing page.  However, that does not mean that the API definition resides on the same server as the landing page.  Test clients should be prepared for a WFS 3.0 implementation which is distributed across multiple servers.</p>
+</div>
+<div class="sect5">
+<h6 id="_a_test_purpose_5"><a class="anchor" href="#_a_test_purpose_5"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that the API Definition document can be retrieved from the expected location.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_5"><a class="anchor" href="#_b_pre_conditions_5"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A URL to the server hosting the API Definition document is known.</p>
+</li>
+<li>
+<p>The test client can authenticate to the server.</p>
+</li>
+<li>
+<p>The test client has sufficient privileges to assess the API Definition document.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_5"><a class="anchor" href="#_c_test_method_5"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Issue an HTTP GET request to the URL {server}/api</p>
+</li>
+<li>
+<p>Validate that a document was returned with a status code 200</p>
+</li>
+<li>
+<p>Validate the contents of the returned document using test A.4.2.4</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_5"><a class="anchor" href="#_d_references_5"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirements 3 and 4</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_api_definition_validation"><a class="anchor" href="#_api_definition_validation"></a>A.4.2.4. API Definition Validation</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_6"><a class="anchor" href="#_a_test_purpose_6"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that the API Definition page complies with the require structure and contents.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_6"><a class="anchor" href="#_b_pre_conditions_6"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>The API Definition document has been retrieved from the server</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_6"><a class="anchor" href="#_c_test_method_6"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Validate the API Definition document against the OpenAPI 3.0 schema</p>
+</li>
+<li>
+<p>Identify the Test Points as described in test A.4.3</p>
+</li>
+<li>
+<p>Process the API Definition document as described in test A.4.4</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_6"><a class="anchor" href="#_d_references_6"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 4</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_identify_the_test_points"><a class="anchor" href="#_identify_the_test_points"></a>A.4.3. Identify the Test Points</h4>
+<div class="paragraph">
+<p>Identification of the test points is a pre-condition to performing a compliance test.  Thisprocess starts with A.4.3.1.</p>
+</div>
+<div class="sect4">
+<h5 id="_identify_test_points"><a class="anchor" href="#_identify_test_points"></a>A.4.3.1. Identify Test Points:</h5>
+<div class="sect5">
+<h6 id="_a_purpose"><a class="anchor" href="#_a_purpose"></a>a) Purpose:</h6>
+<div class="paragraph">
+<p>To identify the test points associated with each Path in the OpenAPI document</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_7"><a class="anchor" href="#_b_pre_conditions_7"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>An OpenAPI document has been obtained</p>
+</li>
+<li>
+<p>A list of URLs for the servers to be included in the compliance test has been provided</p>
+</li>
+<li>
+<p>A list of the paths specified in the WFS 3.0 specification</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_method"><a class="anchor" href="#_c_method"></a>c) Method:</h6>
+<div class="paragraph">
+<p>FOR EACH paths property in the OpenAPI document
+    If the path name is one of those specified in the WFS 3.0 specification
+        Retrieve the Server URIs using A.4.3.2.
+        FOR EACH Server URI
+            Concatenate the Server URI with the path name to form a test point.
+            Add that test point to the list.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_7"><a class="anchor" href="#_d_references_7"></a>d) References:</h6>
+<div class="paragraph">
+<p>None</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_identify_server_uris"><a class="anchor" href="#_identify_server_uris"></a>A.4.3.2. Identify Server URIs:</h5>
+<div class="sect5">
+<h6 id="_a_purpose_2"><a class="anchor" href="#_a_purpose_2"></a>a) Purpose:</h6>
+<div class="paragraph">
+<p>To identify all server URIs applicable to an OpenAPI Operation Object</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_8"><a class="anchor" href="#_b_pre_conditions_8"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Server Objects from the root level of the OpenAPI document have been obtained</p>
+</li>
+<li>
+<p>A Path Item Object has been retrieved</p>
+</li>
+<li>
+<p>An Operation Object has been retrieved</p>
+</li>
+<li>
+<p>The Operation Object is associated with the Path Item Object</p>
+</li>
+<li>
+<p>A list of URLs for the servers to be included in the compliance test has been provided</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_method_2"><a class="anchor" href="#_c_method_2"></a>c) Method:</h6>
+<div class="paragraph">
+<p>1) Identify the Server Objects which are in-scope for this operation</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>IF Server Objects are defined at the Operation level, then those and only those Server Objects apply to that Operation.</p>
+</li>
+<li>
+<p>IF Server Objects are defined at the Path Item level, then those and only those Server Objects apply to that Path Item.</p>
+</li>
+<li>
+<p>IF Server Objects are not defined at the Operation level, then the Server Objects defined for the parent Path Item apply to that Operation.</p>
+</li>
+<li>
+<p>IF Server Objects are not defined at the Path Item level, then the Server Objects defined for the root level apply to that Path.</p>
+</li>
+<li>
+<p>IF no Server Objects are defined at the root level, then the default server object is assumed as described in the OpenAPI specification.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>2) Process each Server Object using A.4.3.3.</p>
+</div>
+<div class="paragraph">
+<p>3) Delete any Server URI which does not reference a server on the list of servers to test.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_8"><a class="anchor" href="#_d_references_8"></a>d) References:</h6>
+<div class="paragraph">
+<p>None</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_process_server_object"><a class="anchor" href="#_process_server_object"></a>A.4.3.3. Process Server Object:</h5>
+<div class="sect5">
+<h6 id="_a_purpose_3"><a class="anchor" href="#_a_purpose_3"></a>a) Purpose:</h6>
+<div class="paragraph">
+<p>To expand the contents of a Server Object into a set of absolute URIs.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_9"><a class="anchor" href="#_b_pre_conditions_9"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A Server Object has been retrieved</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_method_3"><a class="anchor" href="#_c_method_3"></a>c) Method:</h6>
+<div class="paragraph">
+<p>Processing the Server Object results in a set of absolute URIs.  This set contains all of the URIs that can be created given the URI template and variables defined in that Server Object.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If there are no variables in the URI template, then add the URI to the return set.</p>
+</li>
+<li>
+<p>For each variable in the URI template which does not have an enumerated set of valid values:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>generate a URI using the default value,</p>
+</li>
+<li>
+<p>add this URI to the return set,</p>
+</li>
+<li>
+<p>flag this URI as non-exhaustive</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>For each variable in the URI template which has an enumerated set of valid values:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>generate a URI for each value in the enumerated set,</p>
+</li>
+<li>
+<p>add each generated URI to the return set.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Perform this processing in an iterative manner so that there is a unique URI for all possible combinations of enumerated and default values.</p>
+</li>
+<li>
+<p>Convert all relative URIs to absolute URIs by rooting them on the URI to the server hosting the OpenAPI document.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_9"><a class="anchor" href="#_d_references_9"></a>d) References:</h6>
+<div class="paragraph">
+<p>None</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_processing_the_openapi_document"><a class="anchor" href="#_processing_the_openapi_document"></a>A.4.4. Processing the OpenAPI Document</h4>
+<div class="sect4">
+<h5 id="_validate_api_path"><a class="anchor" href="#_validate_api_path"></a>A.4.4.1. Validate /api path</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_7"><a class="anchor" href="#_a_test_purpose_7"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate the /api path</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_10"><a class="anchor" href="#_b_pre_conditions_10"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Path = /api</p>
+</li>
+<li>
+<p>An API Definition document has been retrieved from the server</p>
+</li>
+<li>
+<p>A /api path in the OpenAPI document advertises an additional OpenAPI document which may contain additional information about the API.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_7"><a class="anchor" href="#_c_test_method_7"></a>c) Test Method:</h6>
+<div class="paragraph">
+<p>An OpenAPI document may contain a /api path for a number of reasons including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The path points back to this document</p>
+</li>
+<li>
+<p>The path indicates an alternate encoding of the API Description</p>
+</li>
+<li>
+<p>The path indicates an access point controlled by another authentication scheme.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>At this point, none of those cases are addressed through this test suite.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_10"><a class="anchor" href="#_d_references_10"></a>d) References:</h6>
+<div class="paragraph">
+<p>none</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_conformance_operation"><a class="anchor" href="#_validate_conformance_operation"></a>A.4.4.2. Validate Conformance Operation</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_8"><a class="anchor" href="#_a_test_purpose_8"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that Conformance Operation behaves as required.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_11"><a class="anchor" href="#_b_pre_conditions_11"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Path = /conformance</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_8"><a class="anchor" href="#_c_test_method_8"></a>c) Test Method:</h6>
+<div class="paragraph">
+<p>DO FOR each /conformance test point</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Issue an HTTP GET request using the test point URI</p>
+</li>
+<li>
+<p>Go to test A.4.4.3.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_11"><a class="anchor" href="#_d_references_11"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 5</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_conformance_operation_response"><a class="anchor" href="#_validate_conformance_operation_response"></a>A.4.4.3. Validate Conformance Operation Response</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_9"><a class="anchor" href="#_a_test_purpose_9"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate the Response to the Conformance Operation.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_12"><a class="anchor" href="#_b_pre_conditions_12"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Path = /conformance</p>
+</li>
+<li>
+<p>A Conformance document has been retrieved</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_9"><a class="anchor" href="#_c_test_method_9"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Validate the retrieved document against the classes.yaml schema.</p>
+</li>
+<li>
+<p>Record all reported compliance classes and associate that list with the test point. This information will be used in latter tests.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_12"><a class="anchor" href="#_d_references_12"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 6</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_the_feature_collections_metadata_operation"><a class="anchor" href="#_validate_the_feature_collections_metadata_operation"></a>A.4.4.4. Validate the Feature Collections Metadata Operation</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_10"><a class="anchor" href="#_a_test_purpose_10"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that the Feature Collections Metadata Operation behaves as required</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_13"><a class="anchor" href="#_b_pre_conditions_13"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Path = /collections</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_10"><a class="anchor" href="#_c_test_method_10"></a>c) Test Method:</h6>
+<div class="paragraph">
+<p>DO FOR each /collections test point</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Issue an HTTP GET request using the test point
+URI</p>
+</li>
+<li>
+<p>Go to test A.4.4.5</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_13"><a class="anchor" href="#_d_references_13"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 9</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_the_feature_collections_metadata_operation_response"><a class="anchor" href="#_validate_the_feature_collections_metadata_operation_response"></a>A.4.4.5. Validate the Feature Collections Metadata Operation Response</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_11"><a class="anchor" href="#_a_test_purpose_11"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that response to the Feature Collection Metadata Operation.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_14"><a class="anchor" href="#_b_pre_conditions_14"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A Feature Collection Metadata document has been
+retrieved</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_11"><a class="anchor" href="#_c_test_method_11"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Validate the retrieved document against the content.yaml schema.</p>
+</li>
+<li>
+<p>Validate that the retrieved document includes links for:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Itself</p>
+</li>
+<li>
+<p>Alternate encodings of this document in every other media type as identified by the compliance classes for this server.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Validate that each link includes a rel and type parameter</p>
+</li>
+<li>
+<p>Validate that the returned document includes a collections property for each collection in the dataset.</p>
+</li>
+<li>
+<p>For each collections property, validate the metadata for that collection using test A.4.4.6</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_14"><a class="anchor" href="#_d_references_14"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirements 10, 11, and 12</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_a_collections_metadata_document"><a class="anchor" href="#_validate_a_collections_metadata_document"></a>A.4.4.6. Validate a Collections Metadata document</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_12"><a class="anchor" href="#_a_test_purpose_12"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate a Collections Metadata document.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_15"><a class="anchor" href="#_b_pre_conditions_15"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A Collection metadata document has been retrieved.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_12"><a class="anchor" href="#_c_test_method_12"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Validate the collection metadata against the collectionInfo.yaml schema</p>
+</li>
+<li>
+<p>Validate that the collection metadata document includes links for:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Itself</p>
+</li>
+<li>
+<p>Alternate encodings of this document in every other media type as identified by the compliance classes for this server.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Validate that each link includes a rel and type parameter</p>
+</li>
+<li>
+<p>Validate the extent property if it is provided</p>
+</li>
+<li>
+<p>Retrieve the collection using the name property and test A.4.4.7.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_15"><a class="anchor" href="#_d_references_15"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 12, 13, 14</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_the_feature_collection_metadata_operation"><a class="anchor" href="#_validate_the_feature_collection_metadata_operation"></a>A.4.4.7. Validate the Feature Collection Metadata Operation</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_13"><a class="anchor" href="#_a_test_purpose_13"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that the Feature Collection Metadata Operation behaves as required</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_16"><a class="anchor" href="#_b_pre_conditions_16"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A feature collection name is provided by test A.4.4.6</p>
+</li>
+<li>
+<p>Path = /collections/{name}</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_13"><a class="anchor" href="#_c_test_method_13"></a>c) Test Method:</h6>
+<div class="paragraph">
+<p>DO FOR each /collections{name} test point</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Issue an HTTP GET request using the test point URI</p>
+</li>
+<li>
+<p>Go to test A.4.4.8</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_16"><a class="anchor" href="#_d_references_16"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 15</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_the_feature_collection_metadata_operation_response"><a class="anchor" href="#_validate_the_feature_collection_metadata_operation_response"></a>A.4.4.8. Validate the Feature Collection Metadata Operation Response</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_14"><a class="anchor" href="#_a_test_purpose_14"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that response to the Feature Collection Metadata Operation.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_17"><a class="anchor" href="#_b_pre_conditions_17"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A Feature Collection Metadata document has been
+retrieved</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_14"><a class="anchor" href="#_c_test_method_14"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Validate the retrieved document against the collectionInfo.yaml schema.</p>
+</li>
+<li>
+<p>Validate that this is the same document as that processed in Test A.4.4.6</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_17"><a class="anchor" href="#_d_references_17"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 16</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_the_get_features_operation"><a class="anchor" href="#_validate_the_get_features_operation"></a>A.4.4.9. Validate the Get Features Operation</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_15"><a class="anchor" href="#_a_test_purpose_15"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that the Get Features Operation behaves as required.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_18"><a class="anchor" href="#_b_pre_conditions_18"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A feature collection name is provided by test A.4.4.6</p>
+</li>
+<li>
+<p>Path = /collections/{name}/items</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_15"><a class="anchor" href="#_c_test_method_15"></a>c) Test Method:</h6>
+<div class="paragraph">
+<p>DO FOR each /collections{name}/items test point</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Issue an HTTP GET request using the test point URI</p>
+</li>
+<li>
+<p>Go to test A.4.4.10</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_18"><a class="anchor" href="#_d_references_18"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 17</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_the_get_features_operation_response"><a class="anchor" href="#_validate_the_get_features_operation_response"></a>A.4.4.10. Validate the Get Features Operation Response</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_16"><a class="anchor" href="#_a_test_purpose_16"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate the Get Feature Operation Response.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_19"><a class="anchor" href="#_b_pre_conditions_19"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A collection of Features has been retrieved</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_16"><a class="anchor" href="#_c_test_method_16"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Validate the structure of the response as follows:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For HTML use TBD</p>
+</li>
+<li>
+<p>For GeoJSON use featureCollectionGeoJSON.yaml</p>
+</li>
+<li>
+<p>For GML use featureCollectionGML.yaml</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Validate that the following links are included in the response document:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>To itself</p>
+</li>
+<li>
+<p>Alternate encodings of this document in every other media type as identified by the compliance classes for this server.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Validate that each link includes a rel and type parameter.</p>
+</li>
+<li>
+<p>If a property timeStamp is included in the response, validate that it is close to the current time.</p>
+</li>
+<li>
+<p>If a property numberReturned is included in the response, validate that the number is equal to the number of features in the response.</p>
+</li>
+<li>
+<p>If a property numberMatched is included in the response, iteratively follow the next links until no next link is included and count the aggregated number of features returned in all responses during the iteration. Validate that the value is identical to the numberReturned stated in the initial response.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_19"><a class="anchor" href="#_d_references_19"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirements 24, 25, 26, 27, 28 and 29</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_limit_parameter"><a class="anchor" href="#_limit_parameter"></a>A.4.4.11. Limit Parameter</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_17"><a class="anchor" href="#_a_test_purpose_17"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate the proper handling of the limit parameter.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_20"><a class="anchor" href="#_b_pre_conditions_20"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Tests A.4.4.9 and A.4.4.10 have completed successfully.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_17"><a class="anchor" href="#_c_test_method_17"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Verify that the OpenAPI document correctly describes the limit parameter for the Get Features operation.</p>
+</li>
+<li>
+<p>Repeat Test A.4.4.9 using different values for the limit parameter.</p>
+</li>
+<li>
+<p>For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_20"><a class="anchor" href="#_d_references_20"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirements 18 and 19</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_bounding_box_parameter"><a class="anchor" href="#_bounding_box_parameter"></a>A.4.4.12. Bounding Box Parameter</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_18"><a class="anchor" href="#_a_test_purpose_18"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate the proper handling of the bbox parameter.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_21"><a class="anchor" href="#_b_pre_conditions_21"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Tests A.4.4.9 and A.4.4.10 have completed successfully.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_18"><a class="anchor" href="#_c_test_method_18"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Verify that the OpenAPI document correctly describes the bbox parameter for the Get Features operation.</p>
+</li>
+<li>
+<p>Repeat Test A.4.4.9 using different values for the bbox parameter.  These should include test cases which cross the meridian, equator, 180<sup>O</sup> longitude, and polar regions.</p>
+</li>
+<li>
+<p>For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_21"><a class="anchor" href="#_d_references_21"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirements 20 and 21</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_time_parameter"><a class="anchor" href="#_time_parameter"></a>A.4.4.13. Time Parameter</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_19"><a class="anchor" href="#_a_test_purpose_19"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate the proper handling of the time parameter.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_22"><a class="anchor" href="#_b_pre_conditions_22"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Tests A.4.4.9 and A.4.4.10 have completed
+successfully.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_19"><a class="anchor" href="#_c_test_method_19"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Verify that the OpenAPI document correctly describes the time parameter for the Get Features operation.</p>
+</li>
+<li>
+<p>Repeat Test A.4.4.9 using different values for the time parameter.</p>
+</li>
+<li>
+<p>For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_22"><a class="anchor" href="#_d_references_22"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirements 22 and 23</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_get_feature_operation"><a class="anchor" href="#_get_feature_operation"></a>A.4.4.14. Get Feature Operation</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_20"><a class="anchor" href="#_a_test_purpose_20"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate that the Get Feature Operation behaves as required.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_23"><a class="anchor" href="#_b_pre_conditions_23"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>A feature collection name is provided by test A.4.4.6</p>
+</li>
+<li>
+<p>A feature identifier is provided by test A.4.4.10</p>
+</li>
+<li>
+<p>Path = /collections/{name}/items/(id} where {id} = the feature identifier</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_20"><a class="anchor" href="#_c_test_method_20"></a>c) Test Method:</h6>
+<div class="paragraph">
+<p>DO FOR each /collections{name}/items/{id} test point</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Issue an HTTP GET request using the test point URI</p>
+</li>
+<li>
+<p>Go to test A.4.4.15</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_23"><a class="anchor" href="#_d_references_23"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirement 30</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_validate_the_get_feature_operation_response"><a class="anchor" href="#_validate_the_get_feature_operation_response"></a>A.4.4.15. Validate the Get Feature Operation Response</h5>
+<div class="sect5">
+<h6 id="_a_test_purpose_21"><a class="anchor" href="#_a_test_purpose_21"></a>a) Test Purpose:</h6>
+<div class="paragraph">
+<p>Validate the Get Feature Operation Response.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_b_pre_conditions_24"><a class="anchor" href="#_b_pre_conditions_24"></a>b) Pre-conditions:</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>The Feature has been retrieved from the server.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_c_test_method_21"><a class="anchor" href="#_c_test_method_21"></a>c) Test Method:</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Validate the structure of the response as follows:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For HTML use TBD</p>
+</li>
+<li>
+<p>For GeoJSON use featureGeoJSON.yaml</p>
+</li>
+<li>
+<p>For GML use featureGML.yaml</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Validate that the following links are included in the response document:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>To itself</p>
+</li>
+<li>
+<p>To the Feature Collection which contains this Feature</p>
+</li>
+<li>
+<p>Alternate encodings of this document in every other media type as identified by the compliance classes for this server.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_d_references_24"><a class="anchor" href="#_d_references_24"></a>d) References:</h6>
+<div class="paragraph">
+<p>Requirements 31 and 32</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="oas30_example"><a class="anchor" href="#oas30_example"></a>Annex B: OpenAPI definition example (Informative)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overview_2"><a class="anchor" href="#_overview_2"></a>B.1. Overview</h3>
+<h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>B.1. Overview</h3>
 <div class="paragraph">
 <p>This annex includes two complete examples of an OpenAPI definition for a WFS.</p>
 </div>
@@ -5855,7 +7622,7 @@ tags:
 <h2 id="xml_examples"><a class="anchor" href="#xml_examples"></a>Annex C: XML examples (Informative)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>C.1. Overview</h3>
+<h3 id="_overview_4"><a class="anchor" href="#_overview_4"></a>C.1. Overview</h3>
 <div class="paragraph">
 <p>This annex includes examples of XML/GML responses to illustrate how the
 OpenAPI fragments used to define the requirements for the
@@ -5950,7 +7717,7 @@ OpenAPI fragments used to define the requirements for the
 <div class="sect2">
 <h3 id="_feature_collections_metadata_2"><a class="anchor" href="#_feature_collections_metadata_2"></a>C.4. Feature collections metadata</h3>
 <div class="paragraph">
-<p>The service three feature collections (airport facilities, roads, inland water areas).</p>
+<p>This service offers three feature collections (airport facilities, roads, inland water areas).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6078,7 +7845,7 @@ OpenAPI fragments used to define the requirements for the
 <div class="sect2">
 <h3 id="_feature_collection_metadata_2"><a class="anchor" href="#_feature_collection_metadata_2"></a>C.5. Feature collection metadata</h3>
 <div class="paragraph">
-<p>Only the information for the selected feature collection (airport facilities) is included in the response.</p>
+<p>Only the information for the selected feature collection (roads) is included in the response.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6128,8 +7895,7 @@ OpenAPI fragments used to define the requirements for the
 <div class="sect2">
 <h3 id="_a_feature_collection"><a class="anchor" href="#_a_feature_collection"></a>C.6. A feature collection</h3>
 <div class="paragraph">
-<p>This response contains 2 features of the collection and has a link to the next
-features.</p>
+<p>This response contains 2 features of the airport facilities collection and has a link to the next features.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6152,8 +7918,8 @@ features.</p>
        http://schemas.opengis.net/gml/3.2.1/gml.xsd&quot;&gt;
    &lt;wfs:boundedBy&gt;
       &lt;wfs:Spatial crs=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
-         &lt;wfs:LowerCorner&gt;-54.9311103820801 -179.878326416016&lt;/wfs:LowerCorner&gt;
-         &lt;wfs:UpperCorner&gt;79.52944183349609 179.339859008789&lt;/wfs:UpperCorner&gt;
+         &lt;wfs:LowerCorner&gt;-179.878326416016 -54.9311103820801&lt;/wfs:LowerCorner&gt;
+         &lt;wfs:UpperCorner&gt;179.339859008789 79.52944183349609&lt;/wfs:UpperCorner&gt;
       &lt;/wfs:Spatial&gt;
       &lt;wfs:Temporal trs=&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;&gt;
          &lt;wfs:begin&gt;2017-01-01T00:00:00Z&lt;/wfs:begin&gt;
@@ -6190,7 +7956,7 @@ features.</p>
       &lt;aerofacp_1m gml:id=&quot;F1&quot;&gt;
          &lt;geometry&gt;
             &lt;gml:Point gml:id=&quot;geom1&quot; srsName=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
-               &lt;gml:pos&gt;-43.81286239624023 -176.466049194336&lt;/gml:pos&gt;
+               &lt;gml:pos&gt;-176.466049194336 -43.81286239624023&lt;/gml:pos&gt;
             &lt;/gml:Point&gt;
          &lt;/geometry&gt;
          &lt;id&gt;1455&lt;/id&gt;
@@ -6216,7 +7982,7 @@ features.</p>
       &lt;aerofacp_1m gml:id=&quot;F2&quot;&gt;
          &lt;geometry&gt;
             &lt;gml:Point gml:id=&quot;geom2&quot; srsName=&quot;http://www.opengis.net/def/crs/OGC/1.3/CRS84&quot;&gt;
-               &lt;gml:pos&gt;-23.3629035949707 -149.5207672119141&lt;/gml:pos&gt;
+               &lt;gml:pos&gt;-149.5207672119141 -23.3629035949707&lt;/gml:pos&gt;
             &lt;/gml:Point&gt;
          &lt;/geometry&gt;
          &lt;id&gt;4421&lt;/id&gt;
@@ -6240,13 +8006,13 @@ features.</p>
 <div class="sect1">
 <h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex D: Revision History</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all" style="width: 90%;">
+<table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 12%;">
+<col style="width: 18%;">
+<col style="width: 12%;">
+<col style="width: 12%;">
+<col style="width: 46%;">
 </colgroup>
 <thead>
 <tr>
@@ -6260,108 +8026,143 @@ features.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-10-09</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">initial version</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-10-11</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">changes discussed in SWG/PT call on 2017-10-09</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-12-13</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/2">#2</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/5">#5</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/6">#6</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/7">#7</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/8">#8</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/14">#14</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/15">#15</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/19">#19</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-01-22</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add description of the UML diagram</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-01</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,3,5,7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2, 3, 5, 7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">add links to recent issues on GitHub; address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/31">#31</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/32">#32</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-11</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2,6,7,8</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2, 6, 7, 8</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issue <a href="https://github.com/opengeospatial/WFS_FES/issues/25">#25</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-27</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">address issues <a href="https://github.com/opengeospatial/WFS_FES/issues/3">#3</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/9">#9</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/12">#12</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/22">#22</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/23">#23</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/24">#24</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/44">#44</a>; add links to issues <a href="https://github.com/opengeospatial/WFS_FES/issues/41">#41</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/45">#45</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/46">#46</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/47">#47</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-04</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">T. Schaub</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7,B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7, B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JSON schema fixes <a href="https://github.com/opengeospatial/WFS_FES/issues/54">#54</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/55">#55</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-12</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT for ISO NWIP</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT (for ISO NWIP)</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Updates after the WFS 3.0 Hackathon <a href="https://github.com/opengeospatial/WFS_FES/issues/59">#59</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/61">#61</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/62">#62</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/63">#63</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/64">#64</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/69">#69</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/72">#72</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/77">#77</a>, <a href="https://github.com/opengeospatial/WFS_FES/issues/78">#78</a>; resolve <a href="https://github.com/opengeospatial/WFS_FES/issues/4">#4</a>; editorial edits</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-15</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">J. Amara</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Uniqueness of feature id <a href="https://github.com/opengeospatial/WFS_FES/issues/83">#83</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-21</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">I. Rinne</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clarified the requirement /req/core/crs84 <a href="https://github.com/opengeospatial/WFS_FES/issues/92">#92</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-03-28</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3,4,7</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3, 4, 7</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Temporal support <a href="https://github.com/opengeospatial/WFS_FES/issues/57">#57</a>, bbox no longer restricted to CRS84 <a href="https://github.com/opengeospatial/WFS_FES/issues/60">#60</a>, clarify 'collection' <a href="https://github.com/opengeospatial/WFS_FES/issues/86">#86</a>, clarify feature id constraints <a href="https://github.com/opengeospatial/WFS_FES/issues/84">#84</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-02</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7,B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7, B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clarify 'item' links <a href="https://github.com/opengeospatial/WFS_FES/issues/81">#81</a>, clean up OpenAPI example in Annex B</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-03</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">4,5,6,7,8,9</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">4 to 9</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clean-up asciidoc <a href="https://github.com/opengeospatial/WFS_FES/issues/100">#100</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-04</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">P. Vretanos, C. Portele</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">8.4,8.5,C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">8.4, 8.5, C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Clarify XML encoding <a href="https://github.com/opengeospatial/WFS_FES/issues/58">#58</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-05</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Heazel</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Initial version of the Abstract Test Suite <a href="https://github.com/opengeospatial/WFS_FES/issues/112">#112</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-05</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Fix axis order in example <a href="https://github.com/opengeospatial/WFS_FES/issues/113">#113</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-07</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">7, 9, 10</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Add HTTP status code guidance <a href="https://github.com/opengeospatial/WFS_FES/issues/105">#105</a>, add warning about OpenAPI media type <a href="https://github.com/opengeospatial/WFS_FES/issues/117">#117</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-07</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">3.0.0-SNAPSHOT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Reed, C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Edits after review <a href="https://github.com/opengeospatial/WFS_FES/issues/119">#119</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-04-07</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>3.0.0-draft.1</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Portele</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">iv, v</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">First draft release</p></td>
 </tr>
 </tbody>
 </table>
@@ -6392,7 +8193,7 @@ features.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-04 14:46:22 CEST
+Last updated 2018-04-07 13:55:08 CEST
 </div>
 </div>
 </body>
