@@ -58,6 +58,9 @@ in the response are determined by the server based on parameters of the request.
 
 A `bbox` or `time` parameter may be used to select only a subset of the features in
 the collection (the features that are located in the bounding box or time period).
+If the collection does not contain bbox data it SHALL be considered to match all
+valid `bbox` parameters.  If the collection does not contain time data it SHALL be considered to
+match all valid `time` parameters.
 
 The `limit` parameter may be used to request only a subset of the
 selected features and to indicate that the client wants to page through
@@ -521,7 +524,10 @@ include::requirements/core/REQ_fc-bbox-response.adoc[]
 "Intersects" means that the rectangular area specified in the parameter
 `bbox` includes a coordinate that is part of the (spatial) geometry of the feature.
 This includes the boundaries of the geometries (e.g. for curves the start
-and end position and for surfaces the outer and inner rings).
+and end position and for surfaces the outer and inner rings).  Features that
+don't have geometry data SHALL be considered to match all valid `bbox` parameter
+values.
+
 
 This standard does not specify requirements for the parameter `bbox-crs`. Those
 requirements will be specified in an additional part of the WFS 3.0 series.
@@ -551,6 +557,9 @@ include::requirements/core/REQ_fc-time-response.adoc[]
 `time` includes a timestamp that is part of the temporal geometry of the feature
 (again, a time instant or period). For time periods this includes the start
 and end time.
+
+Features without temporal data SHALL be considered to intersect all valid `time`
+parameter values.
 
 .A date-time
 =================
