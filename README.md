@@ -90,4 +90,4 @@ The WFS/FES Standards Working Group (SWG) is the group at OGC responsible for th
 
 * [Open issues](https://github.com/opengeospatial/WFS_FES/issues)
 * [Proposing changes](https://github.com/opengeospatial/WFS_FES/wiki/Propose-a-change-to-a-draft-of-a-WFS-specification-document)
-* [Copy of License Language](https://github.com/opengeospatial/WFS_FES/blob/master/LICENSE)
+* [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/LICENSE)
