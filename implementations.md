@@ -13,6 +13,7 @@ Servers:
 * [interactive instruments](#interactive-instruments)
 * [CubeWerx Inc.](#cubeWerx)
 * [GeoServer](#geoserver)
+* [pygeoapi](#pygeoapi)
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
@@ -127,3 +128,17 @@ nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundati
 
 An incomplete implementation of the WFS3 specification is available at http://cloudsdi.geo-solutions.it/geoserver/wfs3/ 
 It is a community module developed from scratch during the WFS 3 hackaton. At the time of writing, still misses HTML outputs, conformance call, paging links (supports random paging with startIndex), single feature outputs and attribute filtering.
+
+## pygeoapi
+
+[pygeoapi](https://github.com/geopython/pygeoapi) implements the majority of the current draft.  pygeoapi is implemented in Python, and supports JSON and HTML responses.
+
+### Example requests:
+* OpenAPI 3 document: http://geo.kralidis.ca/pygeoapi/api
+* All feature collections: http://geo.kralidis.ca/pygeoapi/collections ([HTML](http://geo.kralidis.ca/pygeoapi/collections?f=html))
+* Single feature collection: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple ([HTML](http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple?f=html))
+* Feature collection items: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items ([HTML](http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?f=html))
+* Feature collection single item: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items/2661552 ([HTML](http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items/2661552?f=html))
+* Feature collection: populated places in Canada: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?adm0name=Canada
+* Feature collection: bbox query: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?bbox=-152,42,-52,84
+
