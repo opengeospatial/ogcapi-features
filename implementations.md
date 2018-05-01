@@ -14,6 +14,7 @@ Servers:
 * [CubeWerx Inc.](#cubeWerx)
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
+* [go-wfs](#go-wfs)
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
@@ -142,3 +143,14 @@ It is a community module developed from scratch during the WFS 3 hackaton. At th
 * Feature collection: populated places in Canada: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?adm0name=Canada
 * Feature collection: bbox query: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?bbox=-152,42,-52,84
 
+## go-wfs
+
+[go-wfs](https://github.com/go-spatial/go-wfs) implements the majority of the current draft.  pygeoapi is implemented in Go, and supports JSON and HTML responses.
+
+### Example requests:
+* OpenAPI 3 document: http://features.gospatial.org/api
+* All feature collections: http://features.gospatial.org/collections ([HTML](http://features.gospatial.org/collections?f=text/html))
+* Single feature collection: http://features.gospatial.org/collections/amenities_points ([HTML](http://features.gospatial.org/collections/amenities_points?f=text/html))
+* Feature collection items: http://features.gospatial.org/collections/amenities_points/items ([HTML](http://features.gospatial.org/collections/amenities_points/items?f=text/html))
+* Feature collection single item: http://features.gospatial.org/collections/amenities_points/items/2 ([HTML](http://features.gospatial.org/collections/amenities_points/items/2?f=text/html))
+* Feature collection: populated places in Canada: http://features.gospatial.org/collections/amenities_points/items?amenity=fast_food
