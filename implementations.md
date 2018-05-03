@@ -145,7 +145,7 @@ It is a community module developed from scratch during the WFS 3 hackaton. At th
 
 ## go-wfs
 
-[go-wfs](https://github.com/go-spatial/go-wfs) implements the majority of the current draft.  pygeoapi is implemented in Go, and supports JSON and HTML responses.
+[go-wfs](https://github.com/go-spatial/go-wfs) implements the majority of the current draft.  go-wfs is implemented in Go, and supports JSON and HTML responses.
 
 ### Example requests:
 * OpenAPI 3 document: http://features.gospatial.org/api
