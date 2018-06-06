@@ -1,9 +1,6 @@
-[[changes]]
-[appendix]
-:appendix-caption: Annex
-== Changes to the previous versions of WFS (Informative)
+== Section 7: WFS 2.0 vs. WFS 3.0 
 
-CAUTION: This was formerly Annex B of the Core.
+== Changes from previous versions of WFS
 
 === Overview
 
@@ -32,12 +29,18 @@ The next sub-clauses in this Annex describe the following aspects:
 
 This version of WFS uses the REST architectural style that is that basis of many current Web APIs. Key characteristics include:
 
-1. *URIs*:  Every URI designates exactly one resource.
-2. *Addressability*:  All the interesting aspects of a service (e.g. features) are exposed as resources.
-3. *Statelessness*:  Every HTTP request includes all necessary information for the server to fulfil the request without relying on previous requests.
-4. *Representation*:  Each resource offered by the service has a representation that encodes useful information about the state of a resource.  For example, typical representations for feature resources, as defined in this standard, are GML, GeoJSON or HTML.
-5. *Connectedness* : Resources will link to each other and alternate representations.
-6. *Uniform interface*:  The server offers a uniform interface, using the HTTP verbs, for accessing and manipulating resources.
+1. *URIs*: 
+Every URI designates exactly one resource.
+2. *Addressability*: 
+All the interesting aspects of a service (e.g. features) are exposed as resources.
+3. *Statelessness*: 
+Every HTTP request includes all necessary information for the server to fulfil the request without relying on previous requests.
+4. *Representation*: 
+Each resource offered by the service has a representation that encodes useful information about the state of a resource.  For example, typical representations for feature resources, as defined in this standard, are GML, GeoJSON or HTML.
+5. *Connectedness*
+: Resources will link to each other and alternate representations.
+6. *Uniform interface*: 
+The server offers a uniform interface, using the HTTP verbs, for accessing and manipulating resources.
 ** *GET* to retrieve resources
 ** *POST* to create resources
 ** *PUT* to modify existing resources
@@ -47,7 +50,8 @@ This version of WFS uses the REST architectural style that is that basis of many
 +
 NOTE: This part of WFS only specifies operations using GET.
 
-7. *Safety and idempotence*:  HTTP methods are characterized as safe and/or idempotent and servers should be mindful when processing HTTP requests to not violate the safety and/or idempotence of the requested method.  Safe methods are methods that do not modify the representation of a resource and so their results can be safely cached.  Idempotent methods are methods that can be repeatedly processed but their effect will always be the same.  For example, whether a resource is deleted once or a dozen times the effect is still the same – the resource remains removed from the system.  The following table provides an overview of the safety and /or idempotence of each HTTP method used in the REST binding:
+7. *Safety and idempotence*: 
+HTTP methods are characterized as safe and/or idempotent and servers should be mindful when processing HTTP requests to not violate the safety and/or idempotence of the requested method.  Safe methods are methods that do not modify the representation of a resource and so their results can be safely cached.  Idempotent methods are methods that can be repeatedly processed but their effect will always be the same.  For example, whether a resource is deleted once or a dozen times the effect is still the same – the resource remains removed from the system.  The following table provides an overview of the safety and /or idempotence of each HTTP method used in the REST binding:
 
 +
 .Safety and Idempotence of HTTP methods
@@ -68,10 +72,3 @@ NOTE: This part of WFS only specifies operations using GET.
 An unsafe implementation of the GET method would be to use the GET method to delete resource from the server using a URL such as " GET /buildings/1013/delete".
 =====================================================================
 
-=== Mapping between OGC Capabilities and OpenAPI
-
-NOTE: TODO
-
-=== Mapping between WFS 2.0 operations and WFS 3.0
-
-NOTE: TODO
