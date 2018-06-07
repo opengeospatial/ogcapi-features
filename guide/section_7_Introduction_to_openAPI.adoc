@@ -20,12 +20,35 @@ The OpenAPI specification currently supports the following link:https://github.c
 * OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
 * OpenID Connect Discovery.
 
-=== Building the URLs.
+=== Building the URLs
 
-* Server Objects (URL template and variables to populate it)
-* Paths Object (URL template)
-* Path Item Objects (including parameters)
-* Operation Objects (including parameters and security)
+An OpenAPI document can describe a large number of URLs.  Extracting all of the URLs is a non-trivial task.  The OpenAPI objects used to construct URLs are:   
+
+* Server Objects (URL template for the root and variables to populate it)
+* Paths Objects (URL template for the path and parameters)
+* Operation Objects (including parameters)
+
+They are organized as follows:
+
+{Server Object}/{Path Object}/?{Parameters}
+
+. IF Server Objects are supplied then save them for latter
+. ELSE create a Server Object for the host of the OpenAPI document
+. For Each Path
+. If Server Objects are supplied, Use them instead of those previously identified
+. If Parameter Objects are supplied, save them for latter
+. For Each Operation
+. IF Server Objects are supplied, use them instead of those previously identified
+. IF Parameter Objects are supplied THEN
+. IF this paraameter was previously defined, then replace the previous definition
+. ELSE add this parameter to the set.
+. For Each Server Object
+. Extract all URL roots 
+. For each URL root
+. Concatinate the URL root and Path to create a working URL
+. Concatinate the working URL with the Parameters
+. Continue.
+. 
 
 
 ==== Server Objects
