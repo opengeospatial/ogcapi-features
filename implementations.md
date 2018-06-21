@@ -14,7 +14,7 @@ Servers:
 * [CubeWerx Inc.](#cubeWerx)
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
-* [go-wfs](#go-wfs)
+* [jivan](#jivan)
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
@@ -143,9 +143,9 @@ It is a community module developed from scratch during the WFS 3 hackaton. At th
 * Feature collection: populated places in Canada: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?adm0name=Canada
 * Feature collection: bbox query: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?bbox=-152,42,-52,84
 
-## go-wfs
+## jivan
 
-[go-wfs](https://github.com/go-spatial/go-wfs) implements the majority of the current draft.  go-wfs is implemented in Go, and supports JSON and HTML responses.
+[jivan](https://github.com/go-spatial/jivan) implements the majority of the current draft.  jivan is implemented in Go, and supports JSON and HTML responses.
 
 ### Example requests:
 * OpenAPI 3 document: http://features.gospatial.org/api
