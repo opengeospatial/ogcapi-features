@@ -1,0 +1,121 @@
+== Conventions
+
+=== Open issues
+
+This is a DRAFT version of WFS 3.0, Part 2. This draft is not complete and
+there are open issues that are still under discussion. These discussion topics
+are identified as "CAUTION" annotations with a link to the issue on GitHub and
+a brief summary of the issue.
+
+The current expectation is to have a stable version of the candidate WFS 3.0,
+Part 2, standard in 2019. Criteria to move the candidate standard to the next
+stage in the process are:
+
+* Multiple implementations of each conformance class,
+* A conformance test suite for each conformance class,
+* Multiple implementations of a generic WFS client,
+* Multiple implementations of clients using the OpenAPI definition of a WFS,
+* Multiple draft extensions to verify the extensibility, and
+* Resolution of comments received on GitHub or in formal reviews in OGC and ISO/TC 211.
+
+=== Identifiers
+
+The normative provisions in this draft standard are denoted by the URI `http://www.opengis.net/spec/wfs-2/3.0`.
+
+All requirements and conformance tests that appear in this document are
+denoted by partial URIs which are relative to this base.
+
+=== UML model
+
+UML diagrams are included in this standard to illustrate the conceptual model that underpins Web Feature Service implementations. The UML model is not normative. The UML profile used is specified in ISO 19103:2015.
+
+Resources are modelled as UML interfaces.
+
+=== Link relations
+
+To express relationships between resources, <<rfc5988,RFC 5988 (Web Linking)>> and <<link-relations,registered link relation types>> are used.
+
+=== Use of HTTPS
+
+For simplicity, this document in general only refers to the HTTP protocol.
+This is not meant to exclude the use of HTTPS and simply is a shorthand
+notation for "HTTP or HTTPS". In fact, most servers are expected to use
+<<rfc2818,HTTPS>>, not <<rc2616,HTTP>>.
+
+=== API definition
+
+==== General remarks
+
+Good documentation is essential for every API so that developers can more
+easily learn how to use the API. In the best case, documentation will be
+available in HTML and in a format that can be processed by software to connect
+to the API.
+
+This standard specifies requirements and recommendations for APIs that
+share feature data and that want to follow a standard way of doing so.
+In general, APIs will go beyond the requirements and recommendations
+stated in this standard - or other parts of the Web Feature Service
+standard series - and will support additional operations, parameters, etc.
+that are specific to the API or the software tool used to implement the API.
+
+==== Role of OpenAPI
+
+This document uses OpenAPI 3.0 fragments as examples and to formally state
+requirements. However, using OpenAPI 3.0 is not required for implementing 
+this part of a WFS  3.0 server.
+
+==== References to OpenAPI components in normative statements
+
+Some normative statements (requirements, recommendations and permissions) use
+a phrase that a component in the API definition of the server must be
+"based upon" a schema or parameter component in the OGC schema repository.
+
+In this case, the following changes to the pre-defined OpenAPI component
+are permitted:
+
+* If the server supports an XML encoding, `xml` properties may be added to
+the relevant OpenAPI schema components.
+* The range of values of a parameter or property may be extended (additional
+values) or constrained (if a subset of all possible values are applicable
+to the server). An example for a constrained range of values is to explicitly
+specify the supported values of a string parameter or property using an enum.
+* Additional properties may be added to the schema definition of a Response Object.
+* Informative text may be changed or added, like comments or description properties.
+
+For API definitions that do not conform to the <<rc_oas30,OpenAPI Specification 3.0>>
+the normative statement should be interpreted in the context of the
+API definition language used.
+
+==== Paths in OpenAPI definitions
+
+All paths in an OpenAPI definition are relative to a base URL of the server.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/98[ISSUE 98] +
+Server Ambiguity in OpenAPI
+
+.URL of the OpenAPI definition
+===========================================
+If the OpenAPI Server Object looks like this:
+
+[source,YAML]
+----
+servers:
+  - url: https://dev.example.org/
+    description: Development server
+  - url: https://data.example.org/
+    description: Production server
+----
+
+The path "/mypath" in the OpenAPI definition of a WFS would be the
+URL `https://data.example.org/mypath` for the production server.
+===========================================
+
+==== Reusable OpenAPI components
+
+Reusable components for OpenAPI definitions for a WFS 3.0 server are
+referenced from this document.
+
+CAUTION: During the development phase, these components use a base URL of
+"https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/",
+but eventually they are expected to be available under the base URL
+"http://schemas.opengis.net/wfs/3.0/openapi/".

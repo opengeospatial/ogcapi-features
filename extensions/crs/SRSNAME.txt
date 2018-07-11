@@ -1,0 +1,49 @@
+
+8.6.5.5 srsName parameter
+
+The srsName (see OGC 07-036/ISO 19136:2007, 10.1.3.1) parameter may also be used to assert the CRS of an individual geometry and supersedes any previous CRS assertions.
+
+If specified, the value of the srsName parameter shall be equivalent to the default CRS value specified using the wfs:DefaultCRS element in the capabilities document (see 8.3) or any of the wfs:OtherCRS values (see Table 13) for the relevant feature type. 
+
+If the specified CRS is not supported for the specified feature type, the WFS shall raise an InvalidParameterValue exception (see Table 3). 
+
+If the srsName parameter is not specified, the WFS shall interpret this to mean that geometries are encoded in the default CRS as specified using the wfs:DefaultCRS element in the capabilities document (see 8.3.3).
+
+
+
+The optional srsName attribute may be used to assert a specific WFS-supported CRS transformation to be applied to the compatible (see 7.9.2.4.4.2) geometries of the features returned in a response document. 
+
+The value of the srsName parameter may be the wfs:DefaultCRS or any of the wfs:OtherCRS values listed for the feature type in a server's capabilities document (see 8.3.3). If no srsName value is supplied, then the compatible feature geometries shall be encoded in the response document using the advertised wfs:DefaultCRS value.
+
+This attribute has no meaning for feature types with no spatial properties and shall be ignored.
+
+Servers that advertise more than one wfs:OtherCRS value in their capabilities document (see 8.3.3) shall be able to transform between the CRS used to store geometries and any compatible CRS requested using the srsName attribute.
+
+Servers that implement this document shall be able to process srsName attribute values using the following format model:
+
+http://www.opengis.net/def/crs/[epsg|ogc]/0/{code} 
+In this format model, the token “{code}” is a placeholder for the actual crs code value as defined by the authority “epsg” or “ogc”.
+EXAMPLE	srsName="http://www.opengis.net/def/crs/epsg/0/26986”.
+The format model from the previous version of this document:
+urn:ogc:def:objectType:authority:version:<EPSG code> (see OGC 07-092r2) 
+where objectType shall have the value “crs”, authority shall have the value “EPSG” and the value <EPSG Code> is a placeholder for the actual EPSG code is still allowed but is deprecated.
+
+8.9.2.4.4.2 Compatibility of coordinate reference systems
+Coordinate reference systems that differ in dimensionality or that have no defined datum transformation between them may be incompatible for the purposes of geometry coordinate conversion. Where the request srsName references a CRS that is incompatible with the storage CRS of a geometry property, the service shall encode that geometry property using some other CRS identified with an srsName attribute on that property; there is no requirement that this srsName attribute be wfs:DefaultCRS or one of those listed in wfs:OtherCRS.
+If a filter predicate compares two geometries with incompatible CRS, the server shall generate an InvalidParameterException.
+EXAMPLE: A feature with both 2D and 3D geometry properties is requested with srsName set to a 2D CRS; the 2D property is encoded in the requested CRS, and the 3D property is encoded with some 3D CRS identified in the srsName of the geometry.
+EXAMPLE: A 1D geometry property whose coordinate is the path length along a LineString (itself defined in 3D with some CRS) with gml:id="geom.123" in the same response is encoded with srsName="#geom.123".
+EXAMPLE: A 1D geometry property whose coordinate is defined in an external resource is encoded with srsName set to an HTTP URI for that external resource.
+
+
+8.9.2.5.3.4 Coordinate reference system handling
+When comparing two geometries having different srsName values in a predicate, the server shall either convert one of the geometries to the CRS of the other geometry or the server shall convert both geometries to a third common CRS before performing the comparison.
+In the event that either or both geometries in a predicate do not have a CRS associated with them, the server shall assume that the geometry is in the default CRS asserted for its feature type in the server's capabilities document. Comparisons of the two geometries can then proceed as described in the previous sentence.
+
+
+DefaultCRS
+The wfs:DefaultCRS element indicates which coordinate reference system shall be used by a WFS to express the state of compatible spatial properties  if not otherwise explicitly identified within a query or transaction request. For example, if a GetFeature request specifies no CRS value for the wfs:Query srsName attribute, any compatible spatial properties of feature data satisfying the request shall be expressed using the wfs:DefaultCRS value. The CRS shall be encoded using the format defined in Clause 7.9.2.4.4.1. The wfs:DefaultCRS shall not necessarily be the internal storage CRS used for the feature data, and therefore should not be interpreted as such. If the wfs:DefaultCRS is different from but compatible with the internal storage CRS, then the WFS shall support a transformation between the wfs:DefaultCRS and the internal storage CRS. The effects of such a transformation shall be considered when determining and declaring the guaranteed data accuracy.
+OtherCRS
+The wfs:OtherCRS element shall be used to indicate other supported CRSs within transaction and query requests. A 'supported  CRS' means that the WFS supports the transformation of compatible spatial properties between the wfs:OtherCRS and the internal storage CRS. The effects of such a transformation shall be considered when determining and declaring the guaranteed data accuracy.
+NoCRS
+The wfs:NoCRS element shall be used for feature types that have no spatial properties, and therefore no  CRS whatsoever. It is not a requirement for Features and FeatureCollections to have spatial properties. The wfs:NoCRS element shall never imply, and therefore cannot be used for, semantics of "Unknown  CRS". This element is used as an identifying label only, and therefore has no element or attribute content.

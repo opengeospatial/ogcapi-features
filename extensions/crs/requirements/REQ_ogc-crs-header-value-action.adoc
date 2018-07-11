@@ -1,0 +1,13 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/crs/ogc-crs-header-a-action +
+
+The order of coordinates of a geometry in the response document, that is not
+otherwise tagged according to the requirements of the request output format,
+shall be in the order specified by the value of the `axisOrder` parameter.
+
+|===
+
+If the `axisOrder` parameter is not specified the the order of coordinates
+of a geometry in the response document shall be in the order defined by
+the requested output format.

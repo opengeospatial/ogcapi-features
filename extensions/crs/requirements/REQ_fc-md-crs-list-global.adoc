@@ -1,0 +1,33 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/rec/crs/fc-md-crs-list-global +
+
+All coordinate reference systems in the global list shall be valid for all
+spatial feature collections offered by the service.
+
+The schema of the feature collections metadata from the core is thus extended
+as specified in the following OpenAPI 3.0 schema fragment:
+
+[source,YAML]
+----
+type: object
+required:
+  - links
+  - collections
+properties:
+  links:
+    type: array
+    items:
+      $ref: link.yaml
+  crs:
+    description: the list of coordinate reference systems that are supported by the service; the coordinate reference systems in this list shall be valid for all spatial feature collections offered by the service
+    type: array
+    items:
+      type: string
+      format: uri
+  collections:
+    type: array
+    items:
+      $ref: collectionInfo.yaml
+----
+|===

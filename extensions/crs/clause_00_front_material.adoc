@@ -1,0 +1,70 @@
+[big]*i.     Abstract*
+
+The OGC Web Feature Service 3.0, Part 1 - Core standard defines the behaviour 
+of a server that can present geometry valued feature properties in a single
+coordinate reference system, WGS84 (longitude, latitude).  Part 1 includes
+extension points for supporting multiple coordinate reference systems but does
+not describe the behaviour of a server for this case.
+
+This part of the WFS standard defines the behaviour of a server that supports
+multiple coordinate reference systems.  It describes mechanisms for:
+
+* discovering the list of supported coorindate reference systems
+* requesting that geometry valued feature properties be presented in one
+  of these supported coordinate reference systems
+* explicitly declaring the coordinates reference system begin used, and
+  optionally the coordinate axis order, in a response document
+
+It should be clarified that this standard only deals with single coordinate
+reference system references that can be specified using an identifier (e.g.
+a URL). Compound coordinate reference system references or explicitly specified
+coordinate reference systems (i.e. those specified explicitly in a request
+using some notation like WKT or GML) are not covered in this standard.
+
+[big]*ii.    Keywords*
+
+The following are keywords to be used by search engines and document catalogues.
+
+ogcdoc, OGC document, web feature service, wfs, feature, property, geographic information, spatial data, spatial things, dataset, distribution, API, openapi, geojson, gml, html
+
+[big]*iii.   Preface*
+
+*OGC Declaration*
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.
+
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
+
+*ISO Declaration*
+
+ISO (the International Organization for Standardization) is a worldwide federation of national standards bodies (ISO member bodies). The work of preparing International Standards is normally carried out through ISO technical committees. Each member body interested in a subject for which a technical committee has been established has the right to be represented on that committee. International organizations, governmental and non-governmental, in liaison with ISO, also take part in the work. ISO collaborates closely with the International Electrotechnical Commission (IEC) on all matters of electrotechnical standardization.
+
+International Standards are drafted in accordance with the rules given in the ISO/IEC Directives, Part 2.
+
+The main task of technical committees is to prepare International Standards. Draft International Standards adopted by the technical committees are circulated to the member bodies for voting. Publication as an International Standard requires approval by at least 75 % of the member bodies casting a vote.
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. ISO shall not be held responsible for identifying any or all such patent rights.
+
+[big]*iv.    Submitting organizations*
+
+The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
+
+* CubeWerx Inc.
+* Hexagon
+* interactive instruments GmbH
+* Planet Labs
+
+[big]*v.     Submitters*
+
+All questions regarding this submission should be directed to the editors or the submitters:
+
+|===
+|*Name* |*Affiliation*
+
+|Chris Holmes |Planet Labs
+|Clemens Portele _(editor)_ |interactive instruments GmbH
+|Frédéric Houbie |Hexagon
+|Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
+|===
+
+CAUTION: A list of contributors will be added later.

@@ -1,0 +1,10 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-crs-action +
+
+If the `crs` parameter is specified then the coordinates of all geometry-valued
+properties in the response document shall be presented in the requested CRS
+subject to any limitations placed on the response based on the requested output
+representation (e.g. the requested representation mandates a fixed CRS).
+
+|===

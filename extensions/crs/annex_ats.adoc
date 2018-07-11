@@ -1,0 +1,68 @@
+[appendix]
+:appendix-caption: Annex
+== Abstract Test Suite (Normative)
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/112[ISSUE 112] +
+The Abstract Test Suite is work-in-progress. Currently, only a draft for the
+Core conformance class is available. The other five conformance classes (HTML,
+GeoJSON, GML-SF0, GML-SF2, OpenAPI 3.0) are not yet covered.
+
+=== Overview
+
+=== Conventions
+
+==== Path Templates
+
+==== API
+
+==== Processing
+
+==== Parameters
+
+The following observations apply for WFS 3.0 parameters:
+
+. WFS 3.0 does not use cookies.
+
+. Query parameters follow common Web practice
+
+. Header parameters are restricted to custom headers
+
+. For path parameters, the name of the parameter must match the name of the variable in the path template in the path object
+
+Parameters are defined at the Path Item and Operation level.  Parameters defined at the Path Item level must apply to all operations under that Path item. These parameters may be modified at the Operation level but they may not be removed.
+
+=== Abstract Test
+
+The Test Approach used in the WFS 3.0 Abstract Test Suite includes four steps:
+
+. Identify the test points
+
+. Verify that API descriptions of the test points comply with the WFS 3.0 standard
+
+. Verify that the micro-services at each test point behave in accordance with the WFS 3.0 standard.
+
+. Verify that the resources returned at each test point are in accordance with the WFS 3.0 standard and any referenced content standard.
+
+Identification of test points is a new requirement with WFS 3.0.  Since an API is not a Web Service, there may be RESTful endpoints advertised which are not intended to be targets of the compliance testing.  Section A.4.2 describes the process for crawling the API Description document and extracting those URLs which should be tested as well as the path(s) they should be tested with.  The concatenation of a Server URL with a path forms a test point.
+
+Section A.4.3 describes how the test points are exercised to determine compliance with the WFS 3.0 standard.
+
+==== General Tests
+
+===== Coordinate Reference Systems
+
+====== a) Test Purpose:
+Validate that all spatial geometries provided through a WFS service are in the CRS84 spatial reference system unless otherwise requested by the client.
+
+====== b) Pre-conditions:
+none
+
+====== c) Test Method:
+
+. Do not specify a coordinate reference system in any request.  All spatial data should be in the CRS84 reference system.
+
+. Validate retrieved spatial data using the CRS84 reference system.
+
+====== d) References:
+Requirement 8
+
