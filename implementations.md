@@ -31,18 +31,14 @@ administrative areas in North-Rhine Westphalia (Germany).
 The second endpoint for topographic data in that region.
 
 OpenAPI documents:
-* https://www.ldproxy.nrw.de/kataster/api/
-* https://www.ldproxy.nrw.de/topographie/api/
+* https://www.ldproxy.nrw.de/rest/services/kataster/api/
+* https://www.ldproxy.nrw.de/rest/services/topographie/api/
+* https://www.ldproxy.nrw.de/rest/services/dvg/api/
 
 HTML landing pages:
-* https://www.ldproxy.nrw.de/kataster/
-* https://www.ldproxy.nrw.de/topographie/
-
-Since the code generation tools do not yet support OpenAPI 3.0 well, we
-have created OpenAPI/Swagger 2.0 definitions for the APIs and published
-them on Swagger Hub, too:
-* https://app.swaggerhub.com/apis/cportele/lika-nrw/0.0.1
-* https://app.swaggerhub.com/apis/cportele/topo-nrw/0.0.1
+* https://www.ldproxy.nrw.de/rest/services/kataster/
+* https://www.ldproxy.nrw.de/rest/services/topographie/
+* https://www.ldproxy.nrw.de/rest/services/dvg/
 
 The implementations are proxy services that sit on top of WFS 2.0 instances.
 
@@ -50,45 +46,45 @@ Here are some example requests for features using GeoJSON output (for HTML outpu
 simply change `f=json` to `f=html`, for GML to `f=xml`):
 
 * Municipalities close to Bonn (attribute and spatial filter):  
-[https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?  
+[https://www.ldproxy.nrw.de/rest/services/kataster/collections/verwaltungseinheit/items?  
 f=json&  
 art=Gemeinde&  
 bbox=7.0,50.6,7.2,50.8&  
-count=20](https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?f=json&art=Gemeinde&bbox=7.0%2C50.6%2C7.2%2C50.8&count=20)  
+count=20](https://www.ldproxy.nrw.de/rest/services/kataster/collections/verwaltungseinheit/items?f=json&art=Gemeinde&bbox=7.0%2C50.6%2C7.2%2C50.8&count=20)  
 
 * Same filter, just to determine the number of selected municipalities (13):  
-[https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?  
+[https://www.ldproxy.nrw.de/rest/services/kataster/collections/verwaltungseinheit/items?  
 f=json&  
 art=Gemeinde&  
 bbox=7.0,50.6,7.2,50.8&  
-resultType=hits](https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?f=json&art=Gemeinde&bbox=7.0%2C50.6%2C7.2%2C50.8&resultType=hits)  
+resultType=hits](https://www.ldproxy.nrw.de/rest/services/kataster/collections/verwaltungseinheit/items?f=json&art=Gemeinde&bbox=7.0%2C50.6%2C7.2%2C50.8&resultType=hits)  
 
 * All municipalities that start with "Dü":  
-[https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?  
+[https://www.ldproxy.nrw.de/rest/services/kataster/collections/verwaltungseinheit/items?  
 f=json&  
 art=Gemeinde&  
-name=Dü\*](https://www.ldproxy.nrw.de/kataster/VerwaltungsEinheit?f=json&art=Gemeinde&name=Dü*)  
+name=Dü\*](https://www.ldproxy.nrw.de/rest/services/kataster/collections/verwaltungseinheit/items?f=json&art=Gemeinde&name=Dü*)  
 
 * Cadastral parcels at Schadowplatz in Düsseldorf:  
-[https://www.ldproxy.nrw.de/kataster/Flurstueck?  
+[https://www.ldproxy.nrw.de/rest/services/kataster/collections/flurstueck/items?  
 f=json&  
 lagebeztxt=Schadowplatz\*&  
-bbox=6.7,51.2,6.9,51.4](https://www.ldproxy.nrw.de/kataster/Flurstueck?f=json&lagebeztxt=Schadowplatz*&bbox=6.7%2C51.2%2C6.9%2C51.4)
+bbox=6.7,51.2,6.9,51.4](https://www.ldproxy.nrw.de/rest/services/kataster/collections/flurstueck/items?f=json&lagebeztxt=Schadowplatz*&bbox=6.7%2C51.2%2C6.9%2C51.4)
 
 * Cadastral Parcel for Schadowplatz 14 in Düsseldorf:  
-[https://www.ldproxy.nrw.de/kataster/Flurstueck/DENW20AL0000qTfzFL?  
-f=json](https://www.ldproxy.nrw.de/kataster/Flurstueck/DENW20AL0000qTfzFL?f=json)
+[https://www.ldproxy.nrw.de/rest/services/kataster/collections/flurstueck/items/DENW20AL0000qTfzFL?  
+f=json](https://www.ldproxy.nrw.de/rest/services/kataster/collections/flurstueck/items/DENW20AL0000qTfzFL?f=json)
 
 * Railway stations, bus/tram stops, etc. near Düsseldorf:  
-[https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?  
+[https://www.ldproxy.nrw.de/rest/services/topographie/collections/ax_bahnverkehrsanlage/items?  
 f=json&  
-bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bbox=6.70%2C51.18%2C6.87%2C51.27)
+bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/rest/services/topographie/collections/ax_bahnverkehrsanlage/items?f=json&bbox=6.70%2C51.18%2C6.87%2C51.27)
 
 * Railway stations near Düsseldorf:  
-[https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?  
+[https://www.ldproxy.nrw.de/rest/services/topographie/collections/ax_bahnverkehrsanlage/items?  
 f=json&  
 bahnhofskategorie=1010&  
-bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/AX_Bahnverkehrsanlage?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
+bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/rest/services/topographie/collections/ax_bahnverkehrsanlage/items?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
 
 ## CubeWerx Inc.
 
