@@ -1,28 +1,31 @@
-== Section 10: Information Assurance
+= Section 10: Information Assurance
 
-[[security]]
-=== Security
+== OpenAPI
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/oas30/security +
+OpenAPI provides two constructs to describe security controls; Security Scheme Objects, and Security Requirements. 
 
-For cases, where the operations of the server are access-controlled, the security scheme(s) SHALL be documented in the OpenAPI definition.
-|===
+=== Security Schemes
 
-OpenAPI uses two constructs to describe security controls; Security Schemes, and Security Requirements.  
-
-A Security Scheme object describes a specific security control. These objects reside in the OAS document root with the Components Object. Currently the specification supports the following link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object[security schemes]:
+A Security Scheme Object provides a detailed description of a [underline]#type# of security control. They do not identify where in the API the control should be applied. Currently the OpenAPI specification supports the following Security Schemes:
 
 * HTTP authentication,
-* an API key (either as a header or as a query parameter),
+* API key (either as a header or as a query parameter),
 * OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
 * OpenID Connect Discovery.
 
-Security Requirements objects are used to identify the Security Schemes which apply to a portion of the API.  They can be specified at two levels: 
+Support for client-side PKI certificates is planned for version 3.1.
+
+Security Scheme Objects reside within the Components Object in the OAS document root. Each Security Scheme Object has an associated key. These keys allow a Security Scheme Object to be referenced from elsewhere in the OAS document. The keys also allow for multiple flavors of a scheme type.  For example, the keys "Bobs_API" and "Marys_API" could reference two Schemes of type API Key that have different implementations (ex. header vs. query).
+
+=== Security Requirements
+
+Security Requirements Objects are used to identify where in the API a Security Scheme (or schemes) should be applied. These objects consist of a set of key-value pairs. Each key should correspond to a key for a Security Scheme Object. The Security Requirement is satisfied when all of the Security Schemes (identified by the keys) are satisfied. The associated values provide additional information specific to this Security Requirement. Currently values are only defined for oauth2 and openIDConnect schemes. 
+
+Security Requirements can be specified at two levels: 
 
 * Root: These Security Requirements apply to the whole document unless over-ridden.
-* Operations: Security Requirements that apply to a single operation.  These requirements override any requirements specified at the root level.  
+
+* Operations: These Security Requirements apply to a single operation.  These requirements override any requirements specified at the root level.  
 
 Rules for Applicability:
 
@@ -32,7 +35,7 @@ Rules for Applicability:
 
 . An empty Security Requirement object is valid.  This indicates that there are no security controls.
 
-Issues:
+=== OpenAPI Security Issues:
 
 The following issues have been taken to the OpenAPI Technical Steering Committee for resolution.
 

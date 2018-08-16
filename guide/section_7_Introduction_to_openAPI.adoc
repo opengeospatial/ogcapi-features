@@ -1,6 +1,6 @@
-== Section 7: Introduction to OpenAPI
+= Section 7: Introduction to OpenAPI
 
-=== Section
+== Introduction
 
 The OpenAPI Specification is a community-driven open specification within the OpenAPI Initiative, a Linux Foundation Collaborative Project.
 
@@ -12,15 +12,47 @@ The OpenAPI Specification does not require rewriting existing APIs. It does not 
 
 This GitHub project is the starting point for OpenAPI. Here you will find the information you need about the OpenAPI Specification, simple examples of what it looks like, and some general information regarding the project.
 
+The OpenAPI GitHub project is https://github.com/OAI/OpenAPI-Specification[here].
 
-The OpenAPI specification currently supports the following link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object[security schemes]:
+== Basic Structure
 
-* HTTP authentication,
-* an API key (either as a header or as a query parameter),
-* OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
-* OpenID Connect Discovery.
+The following is an abreviated overview of the OpenAPI document structure. The authoritative source is the OpenAPI 3.0 standard available https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#oasObject[here].
 
-=== Building the URLs
+=== OpenAPI Document (root)
+
+The OpenAPI document contains descriptive information about the API and serves as the root for the other parts of the document.
+
+=== Servers
+
+An API is not restricted to a single server. The Servers field provides a description of the servers which contribute to this API. This field is a collection of Server Objects. Each Server Object describes one or more of the contributing servers. More detailed descriptions of the Server Objects and how they are used to build resource URLs is provided below.
+
+=== Paths
+
+All API resources are accessed through a path. The Paths field defines all of the paths available through this API. The Paths field is collection of Paths Objects. Each Paths Object includes the URL or URL template for this path, any Server Objects specific to this Path, Parameters which are applicable to this Path, and an Operation Object for each of the HTTP Verbs applicable to this Path.
+
+Operation Objects provide the details needed to create an HTTP request and response. Specifically, they provide definitions of the request message (including parameters) and all possible responses. In addition, they define any operation specific Server Objects or Security Requirements.
+
+=== Components
+
+In order to keep OpenAPI documents manageable, many parts can be defined once then referenced wherever they are needed. The Components field is where these re-usable components are defined. The following OpenAPI components can be reused:
+
+* Schema Objects
+* Response Objects
+* Parameter Objects
+* Example Objects
+* Request Body Objects
+* Header Objects
+* Security Scheme Objects
+* Link Objects
+* Callback Objects
+
+Each of these objects has an associated key. The key is then used to reference that object from anywhere in the OpenAPI document.
+
+=== Security
+
+The Security field identifies Security Requirements which are applicable to the API as a whole. This field is a collection of Security Requirement Objects. A description of Secrity Requirement Objects, Security Scheme Objects, and how they work together to describe the security controls of the API is provided in Section 10.
+
+== Building the URLs
 
 An OpenAPI document can describe a large number of URLs.  Extracting all of the URLs is a non-trivial task.  The OpenAPI objects used to construct URLs are:   
 
@@ -59,7 +91,7 @@ They are organized as follows:
  DONE
 
 
-==== Server Objects
+== Server Objects
 
 Server Objects may be found at the OpenAPI document, Path Object, and Operation Object level.  Given this potentially large number of servers, how do you create the valid paths?
 
@@ -73,7 +105,7 @@ The first scope where a Server Object is found dictates the behavior completely.
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/41[ISSUE 41] +
 How does a client determine which security protocols/standards/etc. a server supports
 
-=== Extensions to OAS
+== Extensions to OAS
 The OpenAPI Technnical Steering Committee (TSC) has added support for _draft_ features to the OAS development process.  These features will be introduced as OAI approved extensions. By introducing new features this way, new features can be designed, documented and then implemented by tools that are interested in the feature, without putting the burden of implementation on all tooling. If the feature is successfully implemented and there is demonstrable value added by the feature, it will become a candidate for inclusion in a future release of the specification, at which point all tools will be expected to support the feature.
 
 Draft feature extensions are identified by the x-oas-draft- prefix and can only be used where existing extensions are permitted. This ensures no existing tooling will affected by the introduction of the draft feature. If the feature is deemed appropriate for inclusion in the OAS, the x-oas-draft- prefix will be removed. Tooling that supports draft features should plan for the future removal of the prefix. When tooling adds support for a later version of OAS that includes the final implementation of the feature, it MUST not support the use of the draft prefix for that feature. Draft features will only be promoted into minor or major releases of the specification and therefore will be transparent to OpenAPI description writers and tooling providers who choose not to use the feature while in its draft state.
