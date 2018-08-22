@@ -1,4 +1,4 @@
-= Section 8: WFS 2.0 vs. WFS 3.0 
+﻿= Section 8: WFS 2.0 vs. WFS 3.0 
 
 This section describes how WFS 3.0 differs from previous versions of WFS.
 
@@ -6,7 +6,7 @@ This section describes how WFS 3.0 differs from previous versions of WFS.
 
 Version 2.0 of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style with XML encoding of the payloads. This was state-of-the-art in the late 1990s and early 2000s, when WFS was originally designed.
 
-This version 3.0 specifies a modernized service, that is better aligned with the current architecture of the Web. Key changes are:
+This version 3.0 specifies a modernized service that is better aligned with the current architecture of the Web. Key changes are:
 
 * *Architecture*: WFS now supports and is consistent with HTTP and HTTPS. In previous versions, HTTP has been used mainly as a tunnel for WFS messages. In addition, the resources provided by the service include hypermedia controls in their representations to guide the user of a WFS.
 * *Encodings*: Previous versions were strongly tied to XML (Capabilities documents, XML schemas, Filter Encoding expressions, GML encoding). This version has been written with HTML, JSON and XML as encodings in mind, because these are common encodings today. No encoding is mandatory and other encodings may be used as well.
@@ -42,17 +42,17 @@ HTTP methods are characterized as safe and/or idempotent.
 
 Resources exposed by a WFS 3.0 include Features, Feature Collections, and Metadata. Each resource is uniquely identified and accessible via a URI. 
 
-Features and Feature Collections use the same logical data model regardless of whether they are hosted on a WFS 2.0 or WFS 3.0. That includes support for the gml:id attribute or an enquivalent. Implementors should pay particular attention to this property when designing their systems.  
+Features and Feature Collections use the same logical data model regardless of whether they are hosted on a WFS 2.0 or WFS 3.0. That includes support for the gml:id attribute or an equivalent. Implementers should pay particular attention to this property when designing their systems.  
 
-Geospatial data tends to wander. It is common practice to widely distribute this data, sending copies wherever they are most convienent for the users. In addition, Features and Feature Collections are often encorporated into derivative products. The same resource can appear in many different data sets. Finally, there are often legal and historical requirements to identify a specific geospatial resource decades or even centuries after it was first published. The identifier property allows us to track geospatial Features as they migrate through space and time.
+Geospatial data tends to wander. It is common practice to widely distribute this data, sending copies wherever they are most convenient for the users. In addition, Features and Feature Collections are often incorporated into derivative products. The same resource can appear in many different data sets. Finally, there are often legal and historical requirements to identify a specific geospatial resource decades or even centuries after it was first published. The identifier property allows us to track geospatial Features as they migrate through space and time.
 
 Recommended Practice: The identifier (gml:id) property of Features and Feature Collections should be populated with a value which will be globally unique regardless of when, where, or how that resource is stored.
 
 == Addressability
 
-WFS 2.0 uses a query-response model to access its' data. The hosted Features and Feature Collections are not individually addressable. WFS 3.0 provides a path heirarchy to access its' data. Individual Features and Feature Collections are individually accessible as long as you know the path and the id of the resource.
+WFS 2.0 uses a query-response model to access its' data. The hosted Features and Feature Collections are not individually addressable. WFS 3.0 provides a path hierarchy to access its' data. Individual Features and Feature Collections are individually accessible as long as you know the path and the id of the resource.
 
-Note that WFS 2.0 does support a GetFeatureById operation.  Conceptually this is equivalent to the WFS 3.0 Path. However, it is implemented as a stored query. As such, the existence and properties of a Feature may change from one query to the next. 
+Note that WFS 2.0 does support a GetFeatureById operation. Conceptually this is equivalent to the WFS 3.0 Path. However, it is implemented as a stored query. As such, the existence and properties of a Feature may change from one query to the next. 
 
 == Statelessness
 
@@ -60,15 +60,15 @@ As a RESTful service, WFS 3.0 should be stateless. However, paging support simil
 
 The simplest way to implement WFS paging is to generate a result set in response to the initial request, then return portions of that result set in response to "next" requests. If we consider the result set to be a resource (or a collection of page resources), then we can argue that we have not violated the statelessness requirement.
 
-This approach can work if the data holdings are stable and static. In a more dynamic environment, the contents of the result set may change between the initial and subsequent requests. The implementor has a choice, either return invalid data or re-execute the initial request. 
+This approach can work if the data holdings are stable and static. In a more dynamic environment, the contents of the result set may change between the initial and subsequent requests. The implementer has a choice, either return invalid data or re-execute the initial request. 
 
 It is a good practice to always return current valid data. However, that would require re-executing the original request against the updated data holdings. And that requires that the request is cached on the server. Which means that the server maintains state.
 
-The WFS 3.0 Standard takes no position on this issue. It is a decision of the implementor based on the nature of their data and requirements of prospective users.
+The WFS 3.0 Standard takes no position on this issue. It is a decision of the implementer based on the nature of their data and requirements of prospective users.
 
 == Representation
 
-WFS 3.0 does not mandate any representation of the resources it exposes.  Rather, it defines each representation as an extension to the core.  Knowledge of the extensions supported by a WFS (though the /conformance path) informs a client of what representations are supported.
+WFS 3.0 does not mandate any representation of the resources it exposes. Rather, it defines each representation as an extension to the core. Knowledge of the extensions supported by a WFS (though the /conformance path) informs a client of what representations are supported.
 
 Planned Representations are:
 
@@ -93,7 +93,7 @@ For example, metadata describing a Feature would include hyperlinks to all of th
 
 == Uniform Interface
 
-WFS 2.0 implements the Remore Procedure Call (RPC) pattern of defining an operation for each function supported by a service. WFS 3.0 does not support service-unique operations. Rather, it follows the REST pattern of implementing all functions through the HTTP verbs. All WFS 3.0 "operations" are the result of applying an HTTP verb to a resource.
+WFS 2.0 implements the Remote Procedure Call (RPC) pattern of defining an operation for each function supported by a service. WFS 3.0 does not support service-unique operations. Rather, it follows the REST pattern of implementing all functions through the HTTP verbs. All WFS 3.0 "operations" are the result of applying an HTTP verb to a resource.
 
 .HTTP Verbs
 [width="90%", options="header"]
@@ -106,11 +106,11 @@ WFS 2.0 implements the Remore Procedure Call (RPC) pattern of defining an operat
 |OPTIONS|to get available options for a resource (e.g. which HTTP methods can be used)
 |===
 
-*Recomended Practice:* OpenAPI allows you to assign a name to each operation. By assiging the appropriate WFS 2.0 operation name to each WFS 3.0 operation, the relationship between the two standards will be clearer to client developers.
+*Recommended Practice:* OpenAPI allows you to assign a name to each operation. By assigning the appropriate WFS 2.0 operation name to each WFS 3.0 operation, the relationship between the two standards will be clearer to client developers.
 
 == Safety and Idempotence
 
-HTTP methods are characterized as safe and/or idempotent and servers should be mindful when processing HTTP requests to not violate the safety and/or idempotence of the requested method.  Safe methods are methods that do not modify the representation of a resource and so their results can be safely cached.  Idempotent methods are methods that can be repeatedly processed but their effect will always be the same.  For example, whether a resource is deleted once or a dozen times the effect is still the same – the resource remains removed from the system.  The following table provides an overview of the safety and /or idempotence of each HTTP method used in the REST binding:
+HTTP methods are characterized as safe and/or idempotent and servers should be mindful when processing HTTP requests to not violate the safety and/or idempotence of the requested method.  Safe methods are methods that do not modify the representation of a resource and so their results can be safely cached. Idempotent methods are methods that can be repeatedly processed but their effect will always be the same. For example, whether a resource is deleted once or a dozen times the effect is still the same – the resource remains removed from the system. The following table provides an overview of the safety and /or idempotence of each HTTP method used in the REST binding:
 
 .Safety and Idempotence of HTTP methods
 [width="90%", options="header"]

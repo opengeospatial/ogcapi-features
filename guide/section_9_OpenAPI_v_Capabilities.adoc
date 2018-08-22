@@ -4,7 +4,7 @@
 
 Both the Capabilities document and an OpenAPI document can be used to describe the operations and resources provided by a Service or API. In most cases they fill the same role in the Publish-Find-Bind pattern. However, OpenAPI documents have uses which go beyond descriptive metadata.
 
-One of the precepts of API development is that you first design and document your API. OpenAPI is one of the ways an API design can be documented. This has lead to a suite of tools which use the OpenAPI document as a design specification. These tools attempt to automate the generation of source code based on the design documented in the OpenAPI document. Some of them actually work.
+One of the precepts of API development is that you first design and document your API. OpenAPI is one of the ways an API design can be documented. This has led to a suite of tools which use the OpenAPI document as a design specification. These tools attempt to automate the generation of source code based on the design documented in the OpenAPI document. Some of them actually work.
 
 So we have to look at OpenAPI as a form of Interface Description Language (IDL). As with older IDLs (DCE, DCOM, CORBA, etc.) client developers can be expected to harvest the OpenAPI document and auto-generate client code from it. API developers must take care that the OpenAPI documents they publish are complete and comprehensive enough that an auto-generated client will work.
 
@@ -93,13 +93,13 @@ Contact information is one area where the Capabilities document outshines OAS. T
 
 === Operations Metadata
 
-WFS 2.0 relies on the standard to define the request response pairs. OpenAPi does not assume a governing standard. Therefore, all of the information you need to generate a request or process a response is included in the OAS document.
+WFS 2.0 relies on the standard to define the request response pairs. OpenAPI does not assume a governing standard. Therefore, all of the information you need to generate a request or process a response is included in the OAS document.
 
-Capabilities documents provide two levels of metadata.  Operations Metadata provides information which is applicable to all operations. Operation (singlular) Metadata describes a single operation.
+Capabilities documents provide two levels of metadata. Operations Metadata provides information which is applicable to all operations. Operation (singular) Metadata describes a single operation.
 
 OpenAPI is resource oriented. So it starts with the path to the resource to be manipulated. The Path Item Objects provide information that applies to all operations against this resource. In particular, servers where the resource may be hosted, and parameters which can be used to manipulate the resource.
 
-Path Item Objects also include Operation Objects corresponding to one or more of the HTTP verbs. Opertion Objects provide the detailed information required to build an HTTP request and to process the expected returns.
+Path Item Objects also include Operation Objects corresponding to one or more of the HTTP verbs. Operation Objects provide the detailed information required to build an HTTP request and to process the expected returns.
 
 Operations metadata are mapped against OpenAPI in Table 5. Operation metadata is mapped in Table 6.
 
@@ -133,7 +133,7 @@ Operations metadata are mapped against OpenAPI in Table 5. Operation metadata is
 
 WFS 2.0 advertises the types of features exposed by that service. An API specifies resource types by Path and Operation. So a WFS 3.0 may expose many Feature Types, each on its' own set of Paths. Furthermore, resources exposed by an API are not required to be of a standard format. Therefore, it is not enough for an OpenAPI document to identify the output format, it needs to be able to describe the output format.
 
-This is arguably the one area where WFS 2.0 and 3.0 are radicaly different as evidenced in Table 7.
+This is arguably the one area where WFS 2.0 and 3.0 are radically different as evidenced in Table 7.
 
 .Feature Type Mapping
 [width="100%",options="header,footer"]
