@@ -1,0 +1,20 @@
+= Section 12: Media Types
+
+JSON media types that would typically be used in a WFS that supports JSON are
+
+* `application/json` for feature collection metadata, and
+* `application/geo+json` for feature collections and features.
+
+XML media types that would typically occur in a WFS that supports XML are
+
+* `application/xml` for feature collection metadata,
+* `application/gml+xml;version=3.2` for any GML 3.2 feature collections and features,
+* `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0` for GML 3.2 feature collections and features conforming to the GML Simple Feature Level 0 profile, and
+* `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` for GML 3.2 feature collections and features conforming to the GML Simple Feature Level 2 profile.
+
+The typical HTML media type for all "web pages" in a WFS would be `text/html`.
+
+The media type for an OpenAPI definition in JSON is `application/openapi+json;version=3.0`.
+
+NOTE: The media type for the OpenAPI definition has not yet been registered
+with IANA. See https://github.com/OAI/OpenAPI-Specification/issues/110.
