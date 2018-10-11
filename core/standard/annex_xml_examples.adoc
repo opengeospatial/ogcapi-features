@@ -14,7 +14,7 @@ link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/wf
 
 [source,XML]
 ----
-include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/LandingPage.xml[]
+include::../xml/examples/LandingPage.xml[]
 ----
 
 === Conformance statements
@@ -23,7 +23,7 @@ This server conforms to the recommended requirements classes, plus the GML Simpl
 
 [source,XML]
 ----
-include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/ConformsTo.xml[]
+include::../xml/examples/ConformsTo.xml[]
 ----
 
 === Feature collections metadata
@@ -32,7 +32,7 @@ This service offers three feature collections (airport facilities, roads, inland
 
 [source,XML]
 ----
-include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/Collections.xml[]
+include::../xml/examples/Collections.xml[]
 ----
 
 === Feature collection metadata
@@ -41,7 +41,7 @@ Only the information for the selected feature collection (roads) is included in 
 
 [source,XML]
 ----
-include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/Collection.xml[]
+include::../xml/examples/Collection.xml[]
 ----
 
 === A feature collection
@@ -50,5 +50,5 @@ This response contains 2 features of the airport facilities collection and has a
 
 [source,XML]
 ----
-include::https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/examples/FeatureCollection.xml[]
+include::../xml/examples/FeatureCollection.xml[]
 ----
