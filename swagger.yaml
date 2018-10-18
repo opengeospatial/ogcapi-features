@@ -37,7 +37,7 @@ paths:
           schema:
             $ref: '#/definitions/content'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
   /api/conformance:
@@ -56,7 +56,7 @@ paths:
           schema:
             $ref: '#/definitions/req-classes'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
   /buildings:
@@ -87,7 +87,7 @@ paths:
           schema:
             $ref: '#/definitions/featureCollection'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
   /buildings.json:
@@ -117,7 +117,7 @@ paths:
           schema:
             $ref: '#/definitions/featureCollection'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
   '/buildings/{id}':
@@ -141,7 +141,7 @@ paths:
           schema:
             $ref: '#/definitions/exception'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
   '/buildings/{id}.json':
@@ -164,7 +164,7 @@ paths:
           schema:
             $ref: '#/definitions/exception'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
 parameters:
