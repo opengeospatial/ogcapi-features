@@ -1,0 +1,46 @@
+{
+        "0":  {
+                "OGC_doc_number": "18-000",
+                "urn":"http://www.opengis.net/doc/DP/wfs/3.0",
+                "title":"OGC Web Feature Service 3.0 - Users Guide",
+                "path":"guide/user_guide.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "1":  { "OGC_doc_number": "18-058",
+                "urn":"http://www.opengis.net/doc/IS/wfs-2/3.0",
+                "title":"OGC Web Feature Service 3.0: Part 2 - Extension for Coordinate Reference Systems (by reference)",
+                "path":"extensions/crs/18-058.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "2":  {
+                "OGC_doc_number": "17-069",
+                "urn":"http://www.opengis.net/doc/IS/wfs-1/3.0",
+                "title":"OGC Web Feature Service 3.0: Part 1 - Core",
+                "path":"core/standard/17-069.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        }
+}
