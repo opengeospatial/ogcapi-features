@@ -1,4 +1,4 @@
-﻿= Section 11: Conformance Checklists
+== Conformance Checklists
 
 __WFS 3.0 Core Conformance Checklist__
 
@@ -58,17 +58,17 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
   * [ ] rel "alternate" for each additional encoding available
   * [ ] (recommended) For each external link defining structure or semantics of data contained in collections, include a link w/ rel "describedBy"
 * [ ] Response "collections" property includes an entry for each feature collection.
-  * [ ] For each supported encoding include a link w/ rel "item" to the feature collection
+  * [ ] For each supported encoding include a link w/ rel "items" to the feature collection
   * [ ] If response provides an "extent" property it is formatted as a bounding box of the form [SWlong, SWlat, NElong, NElat] for the spatial and [begin, end] for the temporal extent
 * [ ] All links include "rel"
 * [ ] All links include "type" specifying content type
 
 **7.12** [Feature collection metadata](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collection_metadata)
-* [ ] GET request at **/collections/{name}** served
+* [ ] GET request at **/collections/{collectionId}** served
 * [ ] Response is metadata for the collection indicated using the same schema as in 7.11.
 
 **7.13** [Feature collections](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections)
-* [ ] GET request at **/collections/{name}/items** served
+* [ ] GET request at **/collections/{collectionId}/items** served
   * [ ] "limit" query parameter indicating max number of features to provide at once.
     * [ ] "limit" parameter includes "minimum" with value 1
     * [ ] "limit" parameter includes (changeable) "default"
@@ -84,15 +84,14 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
   * [ ] (optional) rel "prev" to mirror functionality of "next"
   * [ ] all links include "ref" & "type"
 * [ ] Response includes metadata, if it not too complex to compute:
-  * [ ] timeStamp as the time stamp of the response
-  * [ ] numberMatched set to the number of features matching the query
-  * [ ] numberReturned set to the number of features in this response (page)
+  * [ ] timeStamp as the time stamp of the response
+  * [ ] numberMatched set to the number of features matching the query
+  * [ ] numberReturned set to the number of features in this response (page)
 
 **7.14** [Feature](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_2)
-* [ ] GET request at **/collections/{name}/items/{id}** served
+* [ ] GET request at **/collections/{collectionId}/items/{featureId}** served
 * [ ] Response payload contains the feature identified.
 * [ ] Response includes links:
   * [ ] rel "self"
   * [ ] rel "alternate" for other content types supported.
   * [ ] rel "collection"
-
