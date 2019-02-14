@@ -147,13 +147,13 @@ For each feature collection, the extent property, if provided, SHALL be a boundi
 If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries. +
 Tests: A.4.4.6 +
 | *Requirement 15:* Feature Collection Metadta Operation +
-The server SHALL support the HTTP GET operation at the path /collections/{name}. name is the property of the same name in the feature collections metadata. +
+The server SHALL support the HTTP GET operation at the path /collections/{collectionId}. collectionId is the `id` property in the feature collections metadata. +
 Tests: A.4.4.7 +
 | *Requirement 16:* Feature Collection Metadta Response +
 A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be the same as the content for this feature collection in the /collections response. +
 Tests: A.4.4.8 +
 | *Requirement 17:* Feature Collection Operation +
-For every feature collection identified in the metadata about the feature collection (path /), the server SHALL support the HTTP GET operation at the path /collections/{name}/items where {name} is the property of the same name in the feature collections metadata. +
+For every feature collection identified in the metadata about the feature collection (path /), the server SHALL support the HTTP GET operation at the path /collections/{collectionId}/items where {collectionId} is the `id` property in the feature collections metadata. +
 Tests: A.4.4.9 +
 | *Requirement 18:* Feature Collection Operation Limit Parameter +
 Each feature collection operation SHALL support a parameter limit with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
@@ -207,7 +207,7 @@ If a property numberReturned is included in the response, the value SHALL be ide
 A server MAY omit this information in a response, if the information about the number of features in the response is not known or difficult to compute. +
 Tests: A.4.4.10 +
 | *Requirement 30:* Feature Operation +
-For every feature in a feature collection (path /collections/{name}/items), the service SHALL support the HTTP GET operation at the path /collections/{name}/items/{id} where {name} is the property of the same name in the feature collection metadata and {id} is a local identifier of the feature. +
+For every feature in a feature collection (path /collections/{collectionId}/items), the service SHALL support the HTTP GET operation at the path /collections/{collectionId}/items/{featureId} where {collectionId} is the `id` property in the feature collection metadata and {featureId} is a local identifier of the feature. +
 Tests: A.4.4.14 +
 | *Requirement 31:* Feature Opearation Response +
 A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. +
@@ -599,7 +599,7 @@ Validate a Collections Metadata document.
 
 . Validate the extent property if it is provided
 
-. Retrieve the collection using the name property and test A.4.4.7.
+. Retrieve the collection using the id property and test A.4.4.7.
 
 ====== d) References:
 Requirement 12, 13, 14
@@ -613,11 +613,11 @@ Validate that the Feature Collection Metadata Operation behaves as required
 
 * A feature collection name is provided by test A.4.4.6
 
-* Path = /collections/{name}
+* Path = /collections/{collectionId}
 
 ====== c) Test Method:
 
-DO FOR each /collections{name} test point
+DO FOR each /collections{collectionId} test point
 
  - Issue an HTTP GET request using the test point URI
 
@@ -654,11 +654,11 @@ Validate that the Get Features Operation behaves as required.
 
 * A feature collection name is provided by test A.4.4.6
 
-* Path = /collections/{name}/items
+* Path = /collections/{collectionId}/items
 
 ====== c) Test Method:
 
-DO FOR each /collections{name}/items test point
+DO FOR each /collections{collectionId}/items test point
 
  - Issue an HTTP GET request using the test point URI
 
@@ -775,11 +775,11 @@ Validate that the Get Feature Operation behaves as required.
 
 * A feature identifier is provided by test A.4.4.10
 
-* Path = /collections/{name}/items/(id} where {id} = the feature identifier
+* Path = /collections/{collectionId}/items/(featureId} where {featureId} = the feature identifier
 
 ====== c) Test Method:
 
-DO FOR each /collections{name}/items/{id} test point
+DO FOR each /collections{collectionId}/items/{featureId} test point
 
     - Issue an HTTP GET request using the test point URI
 

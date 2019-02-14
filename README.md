@@ -15,11 +15,11 @@ GET /collections
 ```
 
 Lists the collections of data on the server that can be queried ([7.11](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections_metadata)),
-and each describes basic information about the geospatial data collection, like its name and description, as well as the
+and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained
 
 ```
-GET /collections/{name}/items?bbox=160.6,-55.95,-170,-25.89
+GET /collections/{collectionId}/items?bbox=160.6,-55.95,-170,-25.89
 ```
 
 Requests all the data in the collection that is in the New Zealand economic zone.
@@ -33,7 +33,7 @@ addition to the `bbox` filter above, with extensions providing more advanced opt
 ([7.13](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections))
 
 ```
-GET /collections/{name}/items/{id}
+GET /collections/{collectionId}/items/{featureId}
 ```
 
 Returns a single geographic 'feature' - something in the real-world (a building,
@@ -60,7 +60,7 @@ still getting up to compliance with the first draft release:
 
 Join the [mailing list](https://lists.opengeospatial.org/mailman/listinfo/wfs-fes.swg) or [![chat at https://gitter.im/opengeospatial/WFS_FES](https://badges.gitter.im/opengeospatial/WFS_FES.svg)](https://gitter.im/opengeospatial/WFS_FES?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Most all work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/WFS_FES/issues), 
+Most all work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/WFS_FES/issues),
 so browse there to get a good idea of what is happening, as well as past decisions.
 
 ## Additional Information
@@ -73,11 +73,11 @@ In addition to feedback from the initial implementations as well as discussions 
 the current draft standard has been tested in a [WFS 3.0 Hackathon](http://www.opengeospatial.org/blog/2764).
 The first draft release is used as input for the [OGC Testbed-14](http://www.opengeospatial.org/projects/initiatives/testbed14), the [OGC Vector Tiles Pilot](https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) and other activities.
 
-Feedback for the Core is collected and discussed in the 
-[GitHub issues for Part 1, Core](https://github.com/opengeospatial/WFS_FES/issues?q=is%3Aissue+is%3Aopen+label%3A%22Document%3A+Part+1+-+Core%22). 
+Feedback for the Core is collected and discussed in the
+[GitHub issues for Part 1, Core](https://github.com/opengeospatial/WFS_FES/issues?q=is%3Aissue+is%3Aopen+label%3A%22Document%3A+Part+1+-+Core%22).
 The goal is to agree on resolutions for the open issues starting in 2019. We want to wait for sufficient
 implementation feedback, mature implementations including a test suite, the results of OGC Testbed-14 and experience with
-draft extensions first. 
+draft extensions first.
 
 The current expectation is to have a stable version of the Core specification around mid-2019. This version would
 then be the input for the next steps in the standardization process in OGC and ISO/TC 211.
