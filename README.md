@@ -15,11 +15,11 @@ GET /collections
 ```
 
 Lists the collections of data on the server that can be queried ([7.11](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections_metadata)),
-and each describes basic information about the geospatial data collection, like its name and description, as well as the
+and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained
 
 ```
-GET /collections/{name}/items?bbox=160.6,-55.95,-170,-25.89
+GET /collections/{collectionId}/items?bbox=160.6,-55.95,-170,-25.89
 ```
 
 Requests all the data in the collection that is in the New Zealand economic zone.
@@ -33,7 +33,7 @@ addition to the `bbox` filter above, with extensions providing more advanced opt
 ([7.13](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections))
 
 ```
-GET /collections/{name}/items/{id}
+GET /collections/{collectionId}/items/{featureId}
 ```
 
 Returns a single geographic 'feature' - something in the real-world (a building,

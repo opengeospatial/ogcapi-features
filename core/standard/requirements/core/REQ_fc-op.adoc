@@ -4,8 +4,8 @@
  +
 
 For every feature collection identified in the metadata about the feature collection (path `/`),
-the server SHALL support the HTTP GET operation at the path `/collections/{name}/items`.
+the server SHALL support the HTTP GET operation at the path `/collections/{collectionId}/items`.
 
-The parameter `name` is each property of the same name in the feature
-collections metadata (JSONPath: `$.collections[*].name`).
+The parameter `collectionId` is each `id` property in the feature
+collections metadata (JSONPath: `$.collections[*].id`).
 |===

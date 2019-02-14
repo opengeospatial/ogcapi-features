@@ -64,11 +64,11 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
 * [ ] All links include "type" specifying content type
 
 **7.12** [Feature collection metadata](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collection_metadata)
-* [ ] GET request at **/collections/{name}** served
+* [ ] GET request at **/collections/{collectionId}** served
 * [ ] Response is metadata for the collection indicated using the same schema as in 7.11.
 
 **7.13** [Feature collections](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections)
-* [ ] GET request at **/collections/{name}/items** served
+* [ ] GET request at **/collections/{collectionId}/items** served
   * [ ] "limit" query parameter indicating max number of features to provide at once.
     * [ ] "limit" parameter includes "minimum" with value 1
     * [ ] "limit" parameter includes (changeable) "default"
@@ -89,7 +89,7 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
   * [ ] numberReturned set to the number of features in this response (page)
 
 **7.14** [Feature](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_2)
-* [ ] GET request at **/collections/{name}/items/{id}** served
+* [ ] GET request at **/collections/{collectionId}/items/{featureId}** served
 * [ ] Response payload contains the feature identified.
 * [ ] Response includes links:
   * [ ] rel "self"

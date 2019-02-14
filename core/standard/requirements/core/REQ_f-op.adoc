@@ -2,11 +2,11 @@
 |===
 |*Requirement {counter:req-id}* |/req/core/f-op +
 
-For every feature in a feature collection (path `/collections/{name}/items`),
+For every feature in a feature collection (path `/collections/{collectionId}/items`),
 the service SHALL support the HTTP GET operation at the path
-`/collections/{name}/items/{id}`.
+`/collections/{collectionId}/items/{featureId}`.
 
-The parameter `name` is each property of the same name in the feature
-collections metadata (JSONPath: `$.collections[*].name`). `id` is a
+The parameter `collectionId` is each `id` property in the feature
+collections metadata (JSONPath: `$.collections[*].id`). `featureId` is a
 local identifier of the feature.
 |===

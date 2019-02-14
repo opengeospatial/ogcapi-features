@@ -43,7 +43,7 @@ the server. The first CRS is the default coordinate reference system
 * An optional extent that can be used to provide an indication of the
 spatial and temporal extent of the collection - typically derived from the data.
 
-Each `Collection` (path `/collections/{collection-name}/items`) consists of the features in the collection where each
+Each `Collection` (path `/collections/{collectionId}/items`) consists of the features in the collection where each
 feature in the distribution is part of exactly one collection.
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/30[ISSUE 30] +
@@ -67,7 +67,7 @@ The `CollectionResponse` may include metadata about the number of selected and r
 features (`numberMatched` and `numberReturned`) as well as links to simplify
 paging (`next` and `prev`).
 
-Each `Feature` (path `/collections/{collection-name}/items/{feature-id}`)
+Each `Feature` (path `/collections/{collectionId}/items/{featureId}`)
 is also a separate resource and may be requested individually using HTTP GET.
 
 [#img_core,reftext='{figure-caption} {counter:figure-num}']
@@ -394,10 +394,10 @@ include::requirements/core/REQ_fc-md-extent.adoc[]
 ----
 type: object
 required:
-  - name
+  - id
   - links
 properties:
-  name:
+  id:
     description: identifier of the collection used, for example, in URIs
     type: string
   title:
@@ -450,7 +450,7 @@ geometries only in the default system (WGS84 longitude/latitude).
   ],
   "collections": [
     {
-      "name": "buildings",
+      "id": "buildings",
       "title": "Buildings",
       "description": "Buildings in the city of Bonn.",
       "extent": {
@@ -489,7 +489,7 @@ include::requirements/core/REQ_sfc-md-success.adoc[]
 
 See <<http_status_codes>> for general guidance.
 
-If the parameter `name` does not exist on the server, the status code of the
+If the parameter `collectionId` does not exist on the server, the status code of the
 response will be `404` (see <<status_codes>>).
 
 === Feature collections
@@ -755,7 +755,7 @@ Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIn
 
 See <<http_status_codes>> for general guidance.
 
-If the path parameter `name` does not exist on the server, the status code of the
+If the path parameter `collectionId` does not exist on the server, the status code of the
 response will be `404`.
 
 A `400` will be returned in the following situations:
@@ -803,5 +803,5 @@ Link: <http://data.example.org/collections/buildings/items.json>; rel="collectio
 
 See <<http_status_codes>> for general guidance.
 
-If the path parameter `name` or the path parameter `id` does not exist on
+If the path parameter `collectionId` or the path parameter `featureId` does not exist on
 the server, the status code of the response will be `404`.
