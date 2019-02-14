@@ -35,12 +35,12 @@ This examples illustrates a list of supported coordinate reference systems.
 ----
   "collections": [
     {
-      "name": "buildings",
+      "id": "buildings",
       "title": "Buildings",
       "description": "Buildings in the city of Bonn.",
       "links": [
         { "href": "http://data.example.org/collections/buildings/items",
-          "rel": "item", "type": "application/geo+json",
+          "rel": "items", "type": "application/geo+json",
           "title": "Buildings" },
         { "href": "http://example.org/concepts/building.html",
           "rel": "describedBy", "type": "text/html",
@@ -146,7 +146,7 @@ NOTE: Need to do more work on HTML!
 
 HTML only supports WGS84 based on schema.org dependency; not sure if this is
 an issue but schema.org annotations seem to require WGS84 (lat,lon) yet WFS
-core requires lon,lat by default. 
+core requires lon,lat by default.
 
 ==== Compatibility of coordinate reference systems (TBD)
 

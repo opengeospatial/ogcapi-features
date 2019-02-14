@@ -61,7 +61,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/req-classes'
         default:
-          description: An error occured.
+          description: An error occurred.
           content:
             application/json:
               schema:
@@ -83,7 +83,7 @@ paths:
               schema:
                 type: string
         default:
-          description: An error occured.
+          description: An error occurred.
           content:
             application/json:
               schema:
@@ -108,7 +108,7 @@ paths:
               schema:
                 type: string
         default:
-          description: An error occured.
+          description: An error occurred.
           content:
             application/json:
               schema:
@@ -146,7 +146,7 @@ paths:
               schema:
                 type: string
         default:
-          description: An error occured.
+          description: An error occurred.
           content:
             application/json:
               schema:
@@ -181,7 +181,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/featureCollectionGeoJSON'
         default:
-          description: An error occured.
+          description: An error occurred.
           content:
             application/json:
               schema:
@@ -205,7 +205,7 @@ paths:
               schema:
                 type: string
         default:
-          description: An error occured.
+          description: An error occurred.
           content:
             application/json:
               schema:
@@ -229,7 +229,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/buildingGeoJSON'
         default:
-          description: An error occured.
+          description: An error occurred.
           content:
             application/json:
               schema:
@@ -491,7 +491,7 @@ components:
           default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
         spatial:
           description: >-
-            West, north, east, south edges of the spatial extent. The minimum and
+            West, south, east, north edges of the spatial extent. The minimum and
             maximum values apply to the coordinate reference system WGS84 longitude/latitude
             that is supported in the Core. If, for example, a projected coordinate reference
             system is used, the minimum and maximum values need to be adjusted.

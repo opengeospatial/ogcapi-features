@@ -37,7 +37,7 @@ paths:
           schema:
             $ref: '#/definitions/content'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
   /api/conformance:
@@ -56,7 +56,7 @@ paths:
           schema:
             $ref: '#/definitions/req-classes'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
   /buildings:
@@ -87,7 +87,7 @@ paths:
           schema:
             $ref: '#/definitions/featureCollection'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
   /buildings.json:
@@ -117,10 +117,10 @@ paths:
           schema:
             $ref: '#/definitions/featureCollection'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
-  '/buildings/{id}':
+  '/buildings/{featureId}':
     get:
       summary: retrieve a building; use conneg to request HTML or GeoJSON
       operationId: getBuilding
@@ -137,14 +137,14 @@ paths:
           schema:
             $ref: '#/definitions/building'
         '404':
-          description: 'The feature with id {id} does not exist.'
+          description: 'The feature with id {featureId} does not exist.'
           schema:
             $ref: '#/definitions/exception'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
-  '/buildings/{id}.json':
+  '/buildings/{featureId}.json':
     get:
       summary: retrieve a building in GeoJSON
       operationId: getBuildingJSON
@@ -160,11 +160,11 @@ paths:
           schema:
             $ref: '#/definitions/building'
         '404':
-          description: 'The feature with id {id} does not exist.'
+          description: 'The feature with id {featureId} does not exist.'
           schema:
             $ref: '#/definitions/exception'
         default:
-          description: An error occured.
+          description: An error occurred.
           schema:
             $ref: '#/definitions/exception'
 parameters:
@@ -265,7 +265,7 @@ definitions:
           - 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
         default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
       bbox:
-        description: west, north, east, south edges of the bounding box
+        description: west, south, east, north edges of the bounding box
         type: array
         minItems: 4
         maxItems: 4
@@ -290,10 +290,10 @@ definitions:
   collectionInfo:
     type: object
     required:
-      - name
+      - id
       - links
     properties:
-      name:
+      id:
         type: string
         example: address
       title:

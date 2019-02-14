@@ -185,9 +185,9 @@ include::requirements/gmlsf0/REQ_content.adoc[]
 |Landing page |`/` |`wfs:LandingPage`
 |Conformance classes |`/conformance` |`wfs:ConformsTo`
 |Feature collections metadata |`/collections` |`wfs:Collections`
-|Feature collection metadata |`/collections/{name}` |`wfs:Collections`, with just one entry for the collection `name`
-|Feature collection |`/collections/{name}/items` |`wfs:FeatureCollection`
-|Feature |`/collections/{name}/items/{fid}` |substitutable for `gml:AbstractFeature`
+|Feature collection metadata |`/collections/{collectionId}` |`wfs:Collections`, with just one entry for the collection `collectionId`
+|Feature collection |`/collections/{collectionId}/items` |`wfs:FeatureCollection`
+|Feature |`/collections/{collectionId}/items/{featureId}` |substitutable for `gml:AbstractFeature`
 !===
 
 The namespace prefixes used above and in the WFS 3.0 Core XML Schema are:
