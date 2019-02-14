@@ -1,6 +1,6 @@
-= Section 9: OpenAPI and Capabilities
+== OpenAPI and Capabilities
 
-== Usage
+=== Usage
 
 Both the Capabilities document and an OpenAPI document can be used to describe the operations and resources provided by a Service or API. In most cases they fill the same role in the Publish-Find-Bind pattern. However, OpenAPI documents have uses which go beyond descriptive metadata.
 
@@ -10,19 +10,19 @@ So we have to look at OpenAPI as a form of Interface Description Language (IDL).
 
 If we view OpenAPI as an IDL, then the capabilities (OpenAPI) document is no longer an afterthought to be thrown together once everything else is done. Rather, it becomes a statement of the design itself.
 
-== Information Mapping
+=== Information Mapping
 
 The WFS 2.0 Capabilities document has five major sections:
 
-* Service Identification, 
-* Service Provider, 
-* Operations Metadata, 
-* Feature Types, and 
+* Service Identification,
+* Service Provider,
+* Operations Metadata,
+* Feature Types, and
 * Filter Capabilities.
 
 Most of this information is also available from an OpenAPI (OAS) document. This Section will describe how the information from each of the sections of the WFS 2.0 Capability document could be supported through an OAS document.
 
-=== Root
+==== Root
 
 Both the Capabilities and OAS document provide basic data to assist clients in understanding the scope of the document. A mapping of that information is provided in Table 1.
 
@@ -35,7 +35,7 @@ Both the Capabilities and OAS document provide basic data to assist clients in u
 |WFS_Capabilities/@updateSequence|OAS/info/version|Indicates the version of this Capabilities/OAS document.
 |====================
 
-=== Service Identification
+==== Service Identification
 
 A Capabilities document describes a service while an OpenAPI document describes an API. This is a crucial distinction. APIs resist organization into a taxonomy. As a result, the service-oriented fields in the SerivceIdentification element cannot be populated in a meaningful way. So we find that the ServiceType, ServiceTypeVersion, and Profile elements do not have OpenAPI equivalents. The Service Identification mappings are provided in Table 2.
 
@@ -56,7 +56,7 @@ A Capabilities document describes a service while an OpenAPI document describes 
 
 *Access Constraints* is one area where OpenAPI comes out ahead. The Capabilities document provides an XML string element with little guidance on how to use it.  In an OAS document, applicable licenses are identified by name and made available to the client though a URL. OAS is also capable of providing detailed information about the Authentication and Access Controls which govern the API. OpenAPI security support is discussed in detail in section 10 Information Assurance.
 
-=== Service Provider
+==== Service Provider
 
 Both the Capabilities document and OpenAPI provide information about the Points of Contact for this service/API as well as information on how to contact them. Of the two, the Capabilities document is the more complete. However, the relevant OAS objects are extensible which allows additional information to be provided if needed.
 
@@ -70,17 +70,17 @@ The Service Provider information mapping is provided in Table 3.
 |  ./ServiceProvider|OAS/info/contact |See discussion below
 |  ./ServiceProvider/ProviderName|NA |
 |  ./ServiceProvider/ProviderSite|OAS/servers/url |WFS assumes a single server while an API can expose many.  There may be more than one OAS Server Object.  In addition, the url may be a URL template describing multiple servers.
-|  ./ServiceProvider/ServiceContact|  |  
+|  ./ServiceProvider/ServiceContact|  |
 |====================
 
-Contact information is one area where the Capabilities document outshines OAS. Table 4 contains the Contact Information mapping. Many of the elements in the Capabilities document can only be supported by an OAS document extension. 
+Contact information is one area where the Capabilities document outshines OAS. Table 4 contains the Contact Information mapping. Many of the elements in the Capabilities document can only be supported by an OAS document extension.
 
 .Contact Information Mapping
 [width="100%",options="header,footer"]
 |====================
 |Capabilities Path|Contact Object Field|Comments
 |WFS_Capabilities/ServiceProvider/ServiceContact|NA|root for contact information
-|  ./ServiceContact/individualName|name| 
+|  ./ServiceContact/individualName|name|
 |  ./ServiceContact/positionName|name|
 |  ./ServiceContact/role|name|
 |  ./ServiceContact/contactInfo/Phone|extension|
@@ -91,7 +91,7 @@ Contact information is one area where the Capabilities document outshines OAS. T
 |  ./ServiceContact/contactInfo/ContactInstructions|extension|
 |====================
 
-=== Operations Metadata
+==== Operations Metadata
 
 WFS 2.0 relies on the standard to define the request response pairs. OpenAPI does not assume a governing standard. Therefore, all of the information you need to generate a request or process a response is included in the OAS document.
 
@@ -110,7 +110,7 @@ Operations metadata are mapped against OpenAPI in Table 5. Operation metadata is
 |WFS_Capabilities/OperationsMetadata|Path |Root
 |  ./OperationsMetadata/Operation|Path/\{verb\}|Where \{verb\} = Get or Post
 |  ./OperationsMetadata/Parameter|Path/parameters |
-|  ./OperationsMetadata/Constraint|None |If populated, this information should be merged with the Operation-level Constraints. 
+|  ./OperationsMetadata/Constraint|None |If populated, this information should be merged with the Operation-level Constraints.
 |====================
 
 .Operation Metadata Mapping
@@ -129,7 +129,7 @@ Operations metadata are mapped against OpenAPI in Table 5. Operation metadata is
 |  ./Operation/DCP/HTTP/Post/constraint|Path/post/security |For WFS compliant with OWS Security.
 |====================
 
-=== Feature Types
+==== Feature Types
 
 WFS 2.0 advertises the types of features exposed by that service. An API specifies resource types by Path and Operation. So a WFS 3.0 may expose many Feature Types, each on its' own set of Paths. Furthermore, resources exposed by an API are not required to be of a standard format. Therefore, it is not enough for an OpenAPI document to identify the output format, it needs to be able to describe the output format.
 
@@ -152,13 +152,12 @@ This is arguably the one area where WFS 2.0 and 3.0 are radically different as e
 
 The Mediatype Object is responsible for providing a complete description of the response. It has two fields for this purpose, the schema field and the encoding field.
 
-The Schema field and associated Schema Object describe the logical structure of the response. OpenAPI uses a modified version of JSON Schema in the Schema Object. However, this has been extended to also support "Alternative Schema". Alternative Schema allow one or more external definitions of the schema to be used instead of the OAS schema. For example, a GML response can be described by referencing the XML Schema and Schematron rules as alternative schema for that response. 
+The Schema field and associated Schema Object describe the logical structure of the response. OpenAPI uses a modified version of JSON Schema in the Schema Object. However, this has been extended to also support "Alternative Schema". Alternative Schema allow one or more external definitions of the schema to be used instead of the OAS schema. For example, a GML response can be described by referencing the XML Schema and Schematron rules as alternative schema for that response.
 
 The Encoding field and associated Encoding Object describes how the response is encoded. The most important field in the Encoding Object is the ContentType field. This is a text field which should be populated with IANA media type for the encoding used.
 
 By specifying both the logical structure (schema) and the encoding of the response, OpenAPI can fully describe a response even if this particular resource has never existed before.
 
-=== Filter Capabilities
+==== Filter Capabilities
 
 The WFS 3.0 Core does not address Filter capabilities. Therefore we cannot map them into an OAS representation. This task will be addressed once the complex feature handling extensions are complete.
-

@@ -1,10 +1,10 @@
-= Section 10: Information Assurance
+== Information Assurance
 
-== 10.1 OpenAPI
+=== OpenAPI
 
-OpenAPI provides two constructs to describe security controls; Security Scheme Objects, and Security Requirements. 
+OpenAPI provides two constructs to describe security controls; Security Scheme Objects, and Security Requirements.
 
-=== 10.1.1 Security Schemes
+==== Security Schemes
 
 A Security Scheme Object provides a detailed description of a [underline]#type# of security control. They do not identify where in the API the control should be applied. Currently the OpenAPI specification supports the following Security Schemes:
 
@@ -17,15 +17,15 @@ Support for client-side PKI certificates is planned for version 3.1.
 
 Security Scheme Objects reside within the Components Object in the OAS document root. Each Security Scheme Object has an associated key. These keys allow a Security Scheme Object to be referenced from elsewhere in the OAS document. The keys also allow for multiple flavors of a scheme type. For example, the keys "Bobs_API" and "Marys_API" could reference two Schemes of type API Key that have different implementations (ex. header vs. query).
 
-=== 10.1.2 Security Requirements
+==== Security Requirements
 
-Security Requirements Objects are used to identify where in the API a Security Scheme (or schemes) should be applied. These objects consist of a set of key-value pairs. Each key should correspond to a key for a Security Scheme Object. The Security Requirement is satisfied when all of the Security Schemes (identified by the keys) are satisfied. The associated values provide additional information specific to this Security Requirement. Currently values are only defined for oauth2 and openIDConnect schemes. 
+Security Requirements Objects are used to identify where in the API a Security Scheme (or schemes) should be applied. These objects consist of a set of key-value pairs. Each key should correspond to a key for a Security Scheme Object. The Security Requirement is satisfied when all of the Security Schemes (identified by the keys) are satisfied. The associated values provide additional information specific to this Security Requirement. Currently values are only defined for oauth2 and openIDConnect schemes.
 
-Security Requirements can be specified at two levels: 
+Security Requirements can be specified at two levels:
 
 * Root: These Security Requirements apply to the whole document unless over-ridden.
 
-* Operations: These Security Requirements apply to a single operation. These requirements override any requirements specified at the root level.  
+* Operations: These Security Requirements apply to a single operation. These requirements override any requirements specified at the root level.
 
 Rules for Applicability:
 
@@ -35,7 +35,7 @@ Rules for Applicability:
 
 . An empty Security Requirement object is valid.  This indicates that there are no security controls.
 
-=== 10.1.3 OpenAPI Security Issues:
+==== OpenAPI Security Issues:
 
 The following issues have been taken to the OpenAPI Technical Steering Committee for resolution.
 
@@ -51,28 +51,28 @@ Our recommended way forward is to be aware of security constraints when designin
 
 . Use the appropriate HTTP status codes and messages. If the client cannot authenticate, let them know what is missing.
 
-== 10.2 Access Control
+=== Access Control
 
 The OpenAPI document provides clients with the information they need to identify themselves to the API and to prove (authenticate) that identity. But why would the API need this information? One reason is to make sure that the resources managed by the API are only provided to clients who are authorized to receive them. Access Controls are the Security Controls which assure that only authorized parties can access each API resource.
 
 Access Controls are an implementation detail which is usually not exposed to the user. However, they do have an impact on the behavior of the API. The following sections discuss some of the ways which the choice of access control can affect the client.
 
-=== 10.2.1 Bootstrap
+==== Bootstrap
 
-Many users will come to an API with no a-priori knowledge of it’s' configuration or client requirements. The OpenAPI document provides them with the information they need to use the API. But what if some of the information in the OpenAPI document is restricted? Clients need the information from the OAS document in order to access the OAS document. This is known as a Catch 22.
+Many users will come to an API with no a-priori knowledge of its' configuration or client requirements. The OpenAPI document provides them with the information they need to use the API. But what if some of the information in the OpenAPI document is restricted? Clients need the information from the OAS document in order to access the OAS document. This is known as a Catch 22.
 
-The OpenAPI specification does not restrict an API to just one OAS document. So one approach open is to construct an open OAS document with only the information necessary to access the restricted OAS document. 
+The OpenAPI specification does not restrict an API to just one OAS document. So one approach open is to construct an open OAS document with only the information necessary to access the restricted OAS document.
 
 An OAS document is required to have the following content:
 
 .Required OpenAPI Fields
 [width="100%",options="header,footer"]
 |====================
-|Field  |Description  
-|openapi |The version of OpenAPI used in this document  
-|info/title  |The title of this API  
-|info/version  |The version of this OAS document  
-|paths/  |An empty paths value is valid  
+|Field  |Description
+|openapi |The version of OpenAPI used in this document
+|info/title  |The title of this API
+|info/version  |The version of this OAS document
+|paths/  |An empty paths value is valid
 |====================
 
 So the following is a valid OAS document:
@@ -89,7 +89,7 @@ A bootstrap OAS document would add a bit more such as:
 . The Security requirements to access the restricted OAS document
 . The Server where the restricted OAS document resides
 
-The following example "bootstrap" OAS document tells the client that the full OpenAPI document can be retrieved from https://secure.example.org/api and that it is protected by OAuth. 
+The following example "bootstrap" OAS document tells the client that the full OpenAPI document can be retrieved from https://secure.example.org/api and that it is protected by OAuth.
 
   openapi: 3.0.1
   servers:
@@ -121,15 +121,15 @@ The following example "bootstrap" OAS document tells the client that the full Op
             scopes:
               read: allows reading resources
 
-=== 10.2.2 Discrete Resources
+==== Discrete Resources
 
-The most common means of access control is to restrict access to a discrete resource. The UNIX file system, for example, can restrict a user’s ability to read, write, execute, or delete a file. Similar file system based discretionary access controls are supported by most platforms. It's a simple matter for an API to control access to its resources through this platform capability. For example, a user issues a PUT request on a resource. If the file system indicates that resource is read-only, then the user will receive a 403 (forbidden) response.
+The most common means of access control is to restrict access to a discrete resource. The UNIX file system, for example, can restrict a user's ability to read, write, execute, or delete a file. Similar file system based discretionary access controls are supported by most platforms. It's a simple matter for an API to control access to its resources through this platform capability. For example, a user issues a PUT request on a resource. If the file system indicates that resource is read-only, then the user will receive a 403 (forbidden) response.
 
 Complications arise when a request involves more than one resource. For example, a GET request against a collection (such as a file system directory) could return all of the resources within that collection. Assuming that the user has read access to all of the resources. If some, but not all, of the resources are not readable, then the API designer must decide to throw a 403 or return just those resources which are readable. Once decided, this behavior should be consistent across the API.
 
 An more challenging case is when a user has access to only a part of a resource. In the bootstrap discussion above, the unauthenticated user only has access to a small portion of the OpenAPI document. Since each resource is discrete, there is no way to return just part of a resource. Therefore, we need two (or more) copies of each resource with protected content.
 
-An API developer has to decide how they are going to handle multiple copies of the same resource. Three approaches that can be used are: 
+An API developer has to decide how they are going to handle multiple copies of the same resource. Three approaches that can be used are:
 
 . Use different Servers based on security restrictions.
 . Use different resource names based on the security restrictions on the resource.
@@ -143,15 +143,8 @@ Different Resource Names is another simple approach. Like Different Servers, thi
 
 Different Paths is a more generalized version of the Different Resources approach. Its' major advantage is that it supports user-specific access controls. For example, the path /collections/{uid}/buildings/items would return the "buildings" features which user {uid} can access.
 
-=== 10.2.3 Dynamic Resources
+==== Dynamic Resources
 
 Consider a relational database (RDMS) with row-based access control. Now package that database behind an API. The resources exposed through the API are generated at run time. Upon receiving a request, the API will select those rows which the user is authorized to access, build the response, and return it to the user. This approach takes the API design completely out of the picture. Servers, paths, and resource names are the same for the highly privileged and the unprivileged users. All that changes is the content of the resource returned.
 
 There is an important property to this approach which must be considered. Different users, using the same URL, will get different results. So a URL cannot be used as a unique identifier for the resource.
-
-
-
-
-
-
-

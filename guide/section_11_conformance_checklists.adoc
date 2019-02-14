@@ -1,4 +1,4 @@
-﻿= Section 11: Conformance Checklists
+== Conformance Checklists
 
 __WFS 3.0 Core Conformance Checklist__
 
@@ -84,9 +84,9 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
   * [ ] (optional) rel "prev" to mirror functionality of "next"
   * [ ] all links include "ref" & "type"
 * [ ] Response includes metadata, if it not too complex to compute:
-  * [ ] timeStamp as the time stamp of the response
-  * [ ] numberMatched set to the number of features matching the query
-  * [ ] numberReturned set to the number of features in this response (page)
+  * [ ] timeStamp as the time stamp of the response
+  * [ ] numberMatched set to the number of features matching the query
+  * [ ] numberReturned set to the number of features in this response (page)
 
 **7.14** [Feature](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_2)
 * [ ] GET request at **/collections/{collectionId}/items/{featureId}** served
