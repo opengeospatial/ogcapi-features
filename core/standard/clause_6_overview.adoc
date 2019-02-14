@@ -53,15 +53,15 @@ Some examples for cases that are out-of-scope of GeoJSON are:
 * When solids are used for geometries (e.g. in a 3D city model),
 * Geometries that include non-linear curve interpolations
 that cannot be simplified (e.g., use of arcs in authoritative geometries),
-* Geometries have to be represented in a coordinate reference system that
+* Geometries that have to be represented in a coordinate reference system that
 is not based on WGS 84 longitude/latitude (e.g. an authoritative national
 reference system),
-* Features have more than one geometric property.
+* Features that have more than one geometric property.
 
 In addition to HTML and GeoJSON, a significant volume of feature data is
 available in XML-based formats, notably GML. GML supports more complex requirements
 than GeoJSON and does not have any of the limitations mentioned in the
-above bullets, but as a result GML also more complex to handle for both servers
+above bullets, but as a result GML is more complex to handle for both servers
 and clients. Conformance classes for GML are, therefore, included in this
 standard. We expect that these will typically be supported by servers
 where users are known to expect feature data in XML/GML.
