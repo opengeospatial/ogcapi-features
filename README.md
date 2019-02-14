@@ -46,7 +46,7 @@ A draft of WFS 3.0 is available:
 
 * [OGC Web Feature Service 3.0 - Part 1: Core, First Draft Release](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html)
 
-A [PDF version](https://portal.opengeospatial.org/files/?artifact_id=79027&version=1) is avaiable, too.
+A [PDF version](https://portal.opengeospatial.org/files/?artifact_id=79027&version=1) is available, too.
 
 Those who want to just see the endpoints and responses can explore the generic
 OpenAPI definition on SwaggerHub:
@@ -72,7 +72,7 @@ so browse there to get a good idea of what is happening, as well as past decisio
 Also a non-normative document, the "WFS 3.0 Users Guide", is being developed.
 
 In addition to feedback from the initial implementations as well as discussions on GitHub and in the OGC/ISO working group,
-the current draft standard has been tested in a [WFS 3.0 Hackathon](http://www.opengeospatial.org/blog/2764) the [OGC Testbed-14](http://www.opengeospatial.org/projects/initiatives/testbed14), the [OGC Vector Tiles Pilot](https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) and other activities.
+the current draft standard has been tested in a [WFS 3.0 Hackathon](http://www.opengeospatial.org/blog/2764), the [OGC Testbed-14](http://www.opengeospatial.org/projects/initiatives/testbed14), the [OGC Vector Tiles Pilot](https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) and other activities.
 
 Feedback for the Core is collected and discussed in the
 [GitHub issues for Part 1, Core](https://github.com/opengeospatial/WFS_FES/issues?q=is%3Aissue+is%3Aopen+label%3A%22Document%3A+Part+1+-+Core%22). The current expectation is to have a stable version of the Core specification around mid-2019. This version would
