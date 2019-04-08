@@ -6,6 +6,10 @@ rewrite of previous versions, focusing on a simple RESTful core specified
 as reusable [OpenAPI](http://openapis.org) components with responses
 in JSON and HTML.
 
+Alternate rederings of this standard can be found at:
+[HTML](http://docs.opengeospatial.org/DRAFTS/17-069.html)
+[PDF](http://docs.opengeospatial.org/DRAFTS/17-069.pdf)
+
 ## Overview
 
 A Web Feature Service is a standard API that represents collections of geospatial data.
