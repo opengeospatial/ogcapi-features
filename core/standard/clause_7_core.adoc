@@ -682,8 +682,16 @@ It is up to the server to determine how long these links can be de-referenced.
 Clients should be prepared to receive a 404 response.
 
 Another implementation approach is to use an implementation-specific parameter
-like the `startIndex` parameter that was used in previous versions of WFS (and
-which may be added again in an extension to this specification).
+that specifies the index within the result set from which the server begins
+presenting results in the response.
+
+Clients should not assume that paging is safe against changes to dataset
+while a client iterates through `next` links. If a server provides opaque links
+these could be safe and maintain the dataset state during the original request.
+Using a parameter for the start index, however, will not be safe.
+
+NOTE: Additional conformance classes for safe paging or an index parameter
+may be added in extensions to this specification.
 
 include::requirements/core/PER_fc-prev.adoc[]
 
