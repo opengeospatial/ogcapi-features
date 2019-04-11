@@ -455,7 +455,7 @@ components:
           maxItems: 2
           items:
             type: string
-            format: dateTime
+            format: date-time
           example:
             - '2011-11-11T12:22:11Z'
             - '2012-11-24T12:32:43Z'
@@ -479,7 +479,7 @@ components:
             $ref: '#/components/schemas/link'
         timeStamp:
           type: string
-          format: dateTime
+          format: date-time
         numberMatched:
           type: integer
           minimum: 0
