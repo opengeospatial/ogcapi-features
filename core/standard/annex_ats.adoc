@@ -180,8 +180,10 @@ Tests: A.4.4.12 +
 Each feature collection operation SHALL support a parameter datetime with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
 Tests: A.4.4.13 +
 | *Requirement 23:* Feature Collection Operation Time Parameter Response +
-Only features that have a temporal geometry that intersects the timestamp or time period SHALL be part of the result set, if the datetime parameter is provided. +
-The temporal information is either a date-time or a period string. Date and time expressions adhere to RFC 3339. +
+Only features that have a temporal geometry that intersects the timestamp or time interval SHALL be part of the result set, if the datetime parameter is provided. +
+The temporal information is either a date-time or an interval. +
+The syntax of date-time is specified by RFC 3339, 5.6. +
+Open ranges in time intervals at the start or end are supported using a double-dot (`..`). +
 If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties. +
 Tests: A.4.4.13 +
 | *Requirement 24:* Feature Collection Response +
