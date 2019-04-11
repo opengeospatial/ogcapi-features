@@ -56,7 +56,7 @@ Accessing a `Collection` using HTTP GET returns a `CollectionResponse`. This
 response basically consists of features in the collection. The features included
 in the response are determined by the server based on parameters of the request.
 
-A `bbox` or `time` parameter may be used to select only a subset of the features in
+A `bbox` or `datetime` parameter may be used to select only a subset of the features in
 the collection (the features that are located in the bounding box or time period).
 
 The `limit` parameter may be used to request only a subset of the
@@ -541,14 +541,14 @@ A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
 
-==== Parameter time
+==== Parameter datetime
 
 include::requirements/core/REQ_fc-time-definition.adoc[]
 
 include::requirements/core/REQ_fc-time-response.adoc[]
 
 "Intersects" means that the time (instant or period) specified in the parameter
-`time` includes a timestamp that is part of the temporal geometry of the feature
+`datetime` includes a timestamp that is part of the temporal geometry of the feature
 (again, a time instant or period). For time periods this includes the start
 and end time.
 
@@ -591,7 +591,7 @@ a time period would match all features where the values overlap.
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/time.yaml[time.yaml].
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/datetime.yaml[datetime.yaml].
 
 ==== Parameters for filtering on feature properties
 
@@ -763,7 +763,7 @@ A `400` will be returned in the following situations:
 * If query parameter `limit` is not an integer or not between minimum and maximum;
 * if query parameter `bbox` does not have 4 (or 6) numbers or they do not form
 a bounding box;
-* if parameter `time` is not a valid time stamp or time period.
+* if parameter `datetime` is not a valid time stamp or time period.
 
 
 === Feature
