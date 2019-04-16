@@ -462,9 +462,10 @@ components:
             The temporal extent of the features in the collection.
           type: object
           properties:
-            bbox:
+            interval:
               description: >-
                 One or more time intervals that describe the temporal extent of the dataset.
+                The value `null` is supported and indicates an open time intervall.
                 In the Core only a single time interval is supported. Extensions may support
                 multiple intervals. If multiple intervals are provided, the union of the
                 intervals describes the temporal extent.
@@ -481,9 +482,10 @@ components:
                 items:
                   type: string
                   format: date-time
+                  nullable: true
                 example:
                   - '2011-11-11T12:22:11Z'
-                  - '2012-11-24T12:32:43Z'
+                  - null
             trs:
               description: >-
                 Coordinate reference system of the coordinates in the temporal extent
