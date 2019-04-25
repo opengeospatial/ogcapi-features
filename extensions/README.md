@@ -1,1 +1,1 @@
-This folder contains extensions of  the WFS 3.0 standard - 
+This folder contains additional parts of the OGC API Features series. 

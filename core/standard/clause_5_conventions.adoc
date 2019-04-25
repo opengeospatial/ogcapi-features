@@ -1,33 +1,16 @@
 == Conventions
 
-=== Open issues
-
-This is a DRAFT version of WFS 3.0, Part 1. This draft is not complete and there are open issues that
-are still under discussion. These discussion topics are identified as "CAUTION" annotations with
-a link to the issue on GitHub and a brief summary of the issue.
-
-The current expectation is to have a stable version of the candidate WFS 3.0,
-Part 1, standard in 2019. Criteria to move the candidate standard to the next
-stage in the process are:
-
-* Multiple implementations of each conformance class,
-* A conformance test suite for each conformance class,
-* Multiple implementations of a generic WFS client,
-* Multiple implementations of clients using the OpenAPI definition of a WFS,
-* Multiple draft extensions to verify the extensibility, and
-* Resolution of comments received on GitHub or in formal reviews in OGC and ISO/TC 211.
-
 === Identifiers
 
-The normative provisions in this draft standard are denoted by the URI `http://www.opengis.net/spec/wfs-1/3.0`.
+The normative provisions in this standard are denoted by the URI `http://www.opengis.net/doc/IS/ogcapi-features-1/1.0`.
 
 All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
 
 === UML model
 
-UML diagrams are included in this standard to illustrate the conceptual model that underpins Web Feature Service implementations. The UML model is not normative. The UML profile used is specified in ISO 19103:2015.
+UML diagrams are included in this standard to illustrate the conceptual model that underpins implementations of OGC API Features. The UML model is not normative. The UML profile used is specified in ISO 19103:2015.
 
-Resources are modelled as UML interfaces.
+Resources are modeled as UML interfaces.
 
 === Link relations
 
@@ -56,22 +39,21 @@ that are specific to the API or the software tool used to implement the API.
 
 This document uses OpenAPI 3.0 fragments as examples and to formally state
 requirements. However, using OpenAPI 3.0 is not required for implementing a
-WFS 3.0 server.
+server.
 
 Therefore, the _Core_ requirements class only requires that an API
 definition is provided at path `/api`.
 
 A separate requirements class is specified for API definitions that follow the
 <<rc_oas,OpenAPI specification 3.0>>. This does not preclude that in the
-future or in parallel other versions of OpenAPI or other descriptions are
+future or in parallel other versions of OpenAPI or other API descriptions are
 provided by a server.
 
 NOTE: This approach is used to avoid lock-in to a specific approach to
 defining an API as it is expected that the API landscape will continue to
 evolve.
 
-In this document, fragments of OpenAPI definitions are shown in YAML since
-YAML is easier to read than JSON and is typically used in OpenAPI editors.
+In this document, fragments of OpenAPI definitions are shown in <<YAML,YAML (YAML Ain't Markup Language)>> since YAML is easier to read than JSON and is typically used in OpenAPI editors. YAML is described by its authors as a human friendly data serialization standard for all programming languages.
 
 ==== References to OpenAPI components in normative statements
 
@@ -99,9 +81,6 @@ API definition language used.
 
 All paths in an OpenAPI definition are relative to a base URL of the server.
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/98[ISSUE 98] +
-Server Ambiguity in OpenAPI
-
 .URL of the OpenAPI definition
 ===========================================
 If the OpenAPI Server Object looks like this:
@@ -115,16 +94,16 @@ servers:
     description: Production server
 ----
 
-The path "/mypath" in the OpenAPI definition of a WFS would be the
+The path "/mypath" in the OpenAPI definition of a Web API would be the
 URL `https://data.example.org/mypath` for the production server.
 ===========================================
 
 ==== Reusable OpenAPI components
 
-Reusable components for OpenAPI definitions for a WFS 3.0 server are
-referenced from this document.
+Reusable components for OpenAPI definitions for implementations of OGC API Features
+are referenced from this document.
 
 CAUTION: During the development phase, these components use a base URL of
 "https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/",
-but eventually they are expected to be available under the base URL
-"http://schemas.opengis.net/wfs/3.0/openapi/".
+but during publication they will move to a base URL of
+"http://schemas.opengis.net/ogcapi/features/part1/1.0/".

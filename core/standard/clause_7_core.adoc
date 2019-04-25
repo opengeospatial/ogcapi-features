@@ -8,34 +8,42 @@ include::requirements/requirements_class_core.adoc[]
 Figure 1 illustrates the resources supported by the _Core_ requirements class using
 UML. Each resource type available through the server is an «interface».
 
-A server that implements the WFS API provides access to the features in a dataset.
+A server that implements this conformance class provides access to the features in a dataset.
 In other words, the API is a distribution of that dataset. A file download, for example,
 would be another distribution.
 
-More specifically, each WFS has a single `LandingPage` (path `/`) that provides links to
+More specifically, each dataset has a single `LandingPage` (path `/`).
+
+NOTE: All paths (e.g., `/`) are relative to the base URL of the distribution of the
+dataset. If the API covers other resources beyond those specified in this document,
+the landing page may be a sub-resource of the base URL of the API.
+
+The landing page provides links to
 
 * the `APIDefinition` (path `/api`),
 * the `Conformance` statements (path `/conformance`),
-* the `DatasetDistribution` metadata (path `/collections`).
+* metadata about the `Collections` metadata (path `/collections`).
 
-The `APIDefinition` describes the capabilities of the server that can be used by
+The `APIDefinition` resource describes the capabilities of the server that can be used by
 clients to connect to the server or by development tools to support the
 implementation of servers and clients. Accessing the `APIDefinition` using
 HTTP GET returns a description of the API.
 
-Accessing the `Conformance` using HTTP GET returns a list of URIs of
-requirements classes implemented by the WFS server.
+Accessing the `Conformance` resource using HTTP GET returns a list of URIs of
+requirements classes implemented by the server.
 
-The distribution consists of a set of feature collections. This standard does not
+The distribution consists of a set of `Collections`, feature collections in the
+case of the OGC API Features where the dataset consists of features. This standard does not
 include any requirements about how the features in the dataset have to be aggregated
 into collections. A typical approach is to aggregate by feature type but any other approach
 that fits the dataset or the applications using this distribution may also be used.
 
-Accessing the `DatasetDistribution` using HTTP GET returns a
-`DatasetDistributionResponse`. This response includes a link to each `Collection`
-in the distribution along with metadata about each collection including:
+Accessing the `Collections` resource using HTTP GET returns a
+response that consists of `CollectionMetadata` about each `Collection`
+(also available at path `/collections/{collectionId}`) and a link
+to the `Collection` itself. The metadata includes:
 
-* A local identifier for the collection that is unique for the server;
+* A local identifier for the collection that is unique for the dataset;
 * A list of coordinate reference systems (CRS) in which geometries may be returned by
 the server. The first CRS is the default coordinate reference system
 (in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
@@ -43,8 +51,8 @@ the server. The first CRS is the default coordinate reference system
 * An optional extent that can be used to provide an indication of the
 spatial and temporal extent of the collection - typically derived from the data.
 
-Each `Collection` (path `/collections/{collectionId}/items`) consists of the features in the collection where each
-feature in the distribution is part of exactly one collection.
+Each `Collection` (path `/collections/{collectionId}/items`) consists of the features
+in the collection where each feature in the dataset is part of exactly one collection.
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/30[ISSUE 30] +
 Allow also features that do not belong to any collection?
@@ -52,30 +60,39 @@ Allow also features that do not belong to any collection?
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/66[ISSUE 66] +
 Support features that do belong to multiple collections?
 
-Accessing a `Collection` using HTTP GET returns a `CollectionResponse`. This
+Accessing a `Collection` using HTTP GET returns a `Page`. This
 response basically consists of features in the collection. The features included
 in the response are determined by the server based on parameters of the request.
-
-A `bbox` or `time` parameter may be used to select only a subset of the features in
-the collection (the features that are located in the bounding box or time period).
-
-The `limit` parameter may be used to request only a subset of the
-selected features and to indicate that the client wants to page through
+The name "page" indicates that the server supports paged access through
 the selected features of the collection.
 
-The `CollectionResponse` may include metadata about the number of selected and returned
-features (`numberMatched` and `numberReturned`) as well as links to simplify
+A `bbox` or `datetime` parameter may be used to select only a subset of the features in
+the collection (the features that are located in the bounding box or time period).
+
+The `limit` parameter may be used to control the subset of the
+selected features that should be returned in the response.
+
+The `Page` may include metadata about the number of selected and returned
+features (`numberMatched` and `numberReturned`) as well as links to support
 paging (`next` and `prev`).
 
 Each `Feature` (path `/collections/{collectionId}/items/{featureId}`)
 is also a separate resource and may be requested individually using HTTP GET.
 
+NOTE: In the description the term "collection" was used where "feature collection"
+would have been more precise as this document only discusses datasets of features.
+To support also future use of the `Collections` and `Collection` resources for
+other collections of other resource types "feature" has not been added in either
+the names of the resource types or their paths.
+
 [#img_core,reftext='{figure-caption} {counter:figure-num}']
 .Resources in the Core requirements class
 image::figures/PT1_FIG01.png[align="center"]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/90[ISSUE 90] +
-More flexible path structure under `/collections`?
+In addition to the simple path structures described above, where all features
+in a dataset are organized in a one-level collection hierarchy, additional parts
+of the OGC API Feature series are expected to provide alternate access to the
+features in the dataset via additional, deeper collection hierarchies.
 
 === API landing page
 
@@ -114,7 +131,7 @@ properties:
     { "href": "http://data.example.org/api",
       "rel": "service", "type": "application/openapi+json;version=3.0", "title": "the API definition" },
     { "href": "http://data.example.org/conformance",
-      "rel": "conformance", "type": "application/json", "title": "WFS 3.0 conformance classes implemented by this server" },
+      "rel": "conformance", "type": "application/json", "title": "OGC API conformance classes implemented by this server" },
     { "href": "http://data.example.org/collections",
       "rel": "data", "type": "application/json", "title": "Metadata about the feature collections" }
   ]
@@ -130,7 +147,7 @@ See <<http_status_codes>> for general guidance.
 
 ==== Operation
 
-Every WFS provides an API definition that describes the capabilities
+Every API is expected to provide a definition that describes the capabilities
 of the server and which can be used by developers to understand the API,
 by software clients to connect to the server, or
 by development tools to support the implementation of servers and clients.
@@ -149,12 +166,12 @@ content negotiation to select the desired representation.
 The API definition document describes the API. In other words,
 there is no need to include the `/api` operation in the API definition itself.
 
-The idea is that any WFS can be used by developers that are familiar with
-the API definition language(s) supported by the server. For example, if
-an OpenAPI definition is used, it should be possible to create a working
-client using the OpenAPI definition. The developer may need to learn a little
-bit about geometry data types, etc., but it should not be required to read
-this standard to access the data via the API.
+The idea is that any OGC API Features implementation can be used by developers
+that are familiar with the API definition language(s) supported by the server.
+For example, if an OpenAPI definition is used, it should be possible to create
+a working client using the OpenAPI definition. The developer may need to learn
+a little bit about geometry data types, etc., but it should not be required to
+read this standard to access the data via the API.
 
 ==== Error situations
 
@@ -164,9 +181,9 @@ See <<http_status_codes>> for general guidance.
 
 ==== Operation
 
-To support "generic" clients for accessing Web Feature Services in general - and
-not "just" a specific API / server, the server has to declare the
-requirements classes it implements and conforms to.
+To support "generic" clients that want to access multiple OGC API Features
+implementations - and not "just" a specific API / server, the server has to
+declare the requirements classes it implements and conforms to.
 
 include::requirements/core/REQ_conformance-op.adoc[]
 
@@ -196,10 +213,10 @@ the API definition and HTML and GeoJSON as encodings for features.
 ----
 {
   "conformsTo": [
-    "http://www.opengis.net/spec/wfs-1/3.0/req/core",
-    "http://www.opengis.net/spec/wfs-1/3.0/req/oas30",
-    "http://www.opengis.net/spec/wfs-1/3.0/req/html",
-    "http://www.opengis.net/spec/wfs-1/3.0/req/geojson"
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/req/oas30",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/req/html",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/req/geojson"
   ]
 }
 ----
@@ -215,9 +232,12 @@ include::requirements/core/REQ_http.adoc[]
 
 This includes the correct use of status codes, headers, etc.
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/115[ISSUE 115] +
-Currently, the Core only requires support for the GET method. Support for
-HEAD and OPTIONS for all resources should be considered, too.
+include::requirements/core/REC_head.adoc[]
+
+Supporting the method HEAD in addition to GET can be useful for clients and
+is simple to implement.
+
+Servers implementing <<cross_origin,CORS>> will implement the method OPTIONS, too.
 
 [[http_status_codes]]
 ==== HTTP status codes
@@ -259,10 +279,6 @@ requests to reduce network traffic. Entity tags are specified by <<rfc2616,HTTP/
 
 include::requirements/core/REC_etag.adoc[]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/38[ISSUE 38] +
-More detail / examples on caching. Add an example OpenAPI operation (headers,
-response codes) - here or in clause 9.
-
 [[cross_origin]]
 === Support for cross-origin requests
 
@@ -280,8 +296,9 @@ Two common mechanisms to support cross-origin requests are:
 
 === Encodings
 
-While the WFS 3.0 standard does not specify any mandatory encoding, we recommend
-the following encodings. See <<overview,Clause 6 (Overview)>> for a discussion.
+While OGC API Features does not specify any mandatory encoding, support for
+the following encodings is recommended. See <<overview,Clause 6 (Overview)>>
+for a discussion.
 
 include::requirements/core/REC_html.adoc[]
 
@@ -322,7 +339,7 @@ how to express and share the location of features in a consistent way is one
 of the most fundamental aspects of publishing geographic data and it is important
 to be clear about the coordinate reference system that coordinates are in.
 
-For the reasons discussed in the Best Practices, Web Feature Service 3.0 uses
+For the reasons discussed in the Best Practices, OGC API Features uses
 WGS84 longitude and latitude as the default coordinate reference system.
 
 include::requirements/core/REQ_crs84.adoc[]
@@ -333,13 +350,13 @@ http://www.opengis.net/def/crs/OGC/1.3/CRS84.
 The Core also does not specify a capability to request feature geometries in a different
 coordinate reference system than the native one of the published features.
 Such a capability will be specified in another part(s)
-of the WFS 3.0 series.
+of the OGC API Features series.
 
 === Link headers
 
 include::requirements/core/REC_link-header.adoc[]
 
-=== Feature collections metadata
+=== Feature collections
 
 ==== Operation
 
@@ -382,11 +399,6 @@ include::requirements/core/REQ_fc-md-items.adoc[]
 
 include::requirements/core/REQ_fc-md-items-links.adoc[]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/103[ISSUE 103] +
-Can/should we make use of the new
-link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#linkObject[Link Object]
-in OpenAPI 3.0?
-
 include::requirements/core/REQ_fc-md-extent.adoc[]
 
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
@@ -423,9 +435,9 @@ properties:
 
 NOTE: The `crs` property is not used by this conformance class, but reserved for future use.
 
-.Feature collection metadata response document
+.Feature collections response document
 =================
-This feature collection metadata example response in JSON is for a dataset with
+This feature collections example response in JSON is for a dataset with
 a single collection "buildings". It includes links to the collection resource in all formats that
 are supported by the service (link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type]: "items").
 
@@ -492,7 +504,7 @@ See <<http_status_codes>> for general guidance.
 If the parameter `collectionId` does not exist on the server, the status code of the
 response will be `404` (see <<status_codes>>).
 
-=== Feature collections
+=== Feature collection
 
 ==== Operation
 
@@ -524,7 +536,7 @@ This includes the boundaries of the geometries (e.g. for curves the start
 and end position and for surfaces the outer and inner rings).
 
 This standard does not specify requirements for the parameter `bbox-crs`. Those
-requirements will be specified in an additional part of the WFS 3.0 series.
+requirements will be specified in an additional part of the OGC API Features series.
 
 For WGS84 longitude/latitude the bounding box is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
@@ -682,8 +694,8 @@ It is up to the server to determine how long these links can be de-referenced.
 Clients should be prepared to receive a 404 response.
 
 Another implementation approach is to use an implementation-specific parameter
-like the `startIndex` parameter that was used in previous versions of WFS (and
-which may be added again in an extension to this specification).
+like the `startIndex` parameter that was used in <<WFS20,WFS 2.0>> (and
+which may be added again in additional parts of the OGC API Features series.
 
 include::requirements/core/PER_fc-prev.adoc[]
 
@@ -697,12 +709,6 @@ include::requirements/core/REQ_fc-timeStamp.adoc[]
 include::requirements/core/REQ_fc-numberMatched.adoc[]
 
 include::requirements/core/REQ_fc-numberReturned.adoc[]
-
-CAUTION: Related to link:https://github.com/opengeospatial/WFS_FES/issues/8[ISSUE 8] +
-Define these as headers or include them in the payload? `timeStamp`, for example, may
-not be needed given the 'Date' HTTP header. For `numberMatched` and
-`numberReturned` headers do not seem to be a good idea as, for example,
-`numberReturned` can only be included at the end, if streaming is used.
 
 NOTE: The representation of the links and the other properties in the payload
 depends on the encoding of the feature collection.
@@ -803,5 +809,5 @@ Link: <http://data.example.org/collections/buildings/items.json>; rel="collectio
 
 See <<http_status_codes>> for general guidance.
 
-If the path parameter `collectionId` or the path parameter `featureId` does not exist on
+If the path parameter `collectionId` or the path parameter `featureId` do not exist on
 the server, the status code of the response will be `404`.

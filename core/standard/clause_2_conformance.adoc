@@ -1,13 +1,13 @@
 == Conformance
 This standard defines six requirements / conformance classes.
 
-The standardization targets of all conformance classes are "web services".
+The standardization targets of all conformance classes are "Web APIs".
 
 The main requirements class is:
 
 * <<rc_core,Core>>.
 
-The _Core_ specifies requirements that all WFS have to implement.
+The _Core_ specifies requirements that all Web APIs have to implement.
 
 The _Core_ does not mandate a specific encoding or format for representing features or
 feature collections. Four requirements classes depend on the _Core_
@@ -39,13 +39,14 @@ addition or instead of an OpenAPI 3.0 definition. Examples for alternative
 API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI
 specification, an OWS Common 2.0 capabilities document or WSDL.
 
-The _Core_ is intended to be the minimal useful service interface for fine-grained
+The _Core_ is intended to be a minimal useful API for fine-grained
 access to a spatial dataset.
 
 Additional capabilities such as support for transactions, complex data
 structures, rich queries, other coordinate reference systems,
 subscription/notification, returning aggregated results, etc., may be
-specified in future parts of WFS or as vendor-specific extensions.
+specified in future parts of the OGC API Features series or as
+vendor-specific extensions.
 
 Conformance with this standard shall be checked using all the relevant tests
 specified in Annex A (normative) of this document. The framework, concepts, and

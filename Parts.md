@@ -1,10 +1,11 @@
-# WFS
+# OGC API - Features
 
-## Part 1 - Core
+## Current parts under development
 
-* see draft
+* Part 1: Core
+* Part 2: Extension for Coordinate Reference Systems (by reference)
 
-## Capabilities to be supported in additional WFS parts
+## Capabilities to be supported in additional parts
 
 * Transactions
 * Locking
@@ -23,6 +24,6 @@
 * Units of measure
 * ...
 
-## FES
+## Informative documents under development
 
-* to be discussed
+* Users Guide
