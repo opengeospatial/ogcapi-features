@@ -15,6 +15,7 @@ Servers:
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
 * [jivan](#jivan)
+* [sofp](#sofp)
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
@@ -151,3 +152,25 @@ It is a community module developed from scratch during the WFS 3 hackaton. At th
 * Feature collection items: http://features.gospatial.org/collections/amenities_points/items ([HTML](http://features.gospatial.org/collections/amenities_points/items?f=text/html))
 * Feature collection single item: http://features.gospatial.org/collections/amenities_points/items/2 ([HTML](http://features.gospatial.org/collections/amenities_points/items/2?f=text/html))
 * Feature collection: populated places in Canada: http://features.gospatial.org/collections/amenities_points/items?amenity=fast_food
+
+
+## sofp
+
+SOFP is an acronym for Simple Observertion Features Project. The server carrying the same name is being developed as a part of a joint venture between Vaisala, Finnish Meteorological Institute and Spatineo. The goal is to test WFS 3.0 and a simple feature encoding for observations and measurements (https://github.com/opengeospatial/omsf-profile).
+
+The server is implemented in TypeScript and runs in NodeJS. The architecture allows plugging in any backend or backends, also written in TypeScript. This makes it possible to integrate into existing infrastructure. The open source server includes only an example backend that serves features from a local GeoJSON file. The core server and the example backend are available on dockerhub: https://hub.docker.com/u/sofp
+
+SOFP focuses also on usability and browseability. Using content-negotiation, the server is easy to browse using a typical browser. The server also produces map previews of data returned by the server when data is retrieved as HTML.
+
+Code is available on GitHub:
+* SOFP Core (the server itself): https://github.com/vaisala-oss/sofp-core
+* SOFP Library (shared code between backends and the core): https://github.com/vaisala-oss/sofp-lib
+* SOFP Example Backend: https://github.com/vaisala-oss/sofp-example-backend
+
+Finnish Meteorological Institute hosts a demo server at http://beta.fmi.fi/data/3/wfs/sofp
+
+### Example requests:
+* OpenAPI 3 document: http://beta.fmi.fi/data/3/wfs/sofp/api.json
+* OpenAPI 3 as HTML: http://beta.fmi.fi/data/3/wfs/sofp/api.html
+* All feature collections: http://beta.fmi.fi/data/3/wfs/sofp/collections
+* Weather observations: http://beta.fmi.fi/data/3/wfs/sofp/collections/opendata_1h/items?observedPropertyName=Temperature,WindSpeedMS,WindDirection&bbox=24.5,60,25.5,60.5&limit=100
