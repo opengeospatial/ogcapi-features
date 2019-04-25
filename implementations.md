@@ -86,8 +86,8 @@ f=json&
 bahnhofskategorie=1010&  
 bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/collections/ax_bahnverkehrsanlage/items?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
 
-Another server is from the [OGC Vector Tiles Pilot]() and it includes extensions for 
-vector tiles and styles:
+Another server is from the [OGC Vector Tiles Pilot](http://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) 
+and it includes extensions for vector tile and style resources:
 
 * OpenAPI definition: https://services.interactive-instruments.de/vtp/daraa/api
 * Landing page: https://services.interactive-instruments.de/vtp/daraa
