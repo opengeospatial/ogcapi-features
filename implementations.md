@@ -134,7 +134,7 @@ It is a community module developed from scratch during the WFS 3 hackaton. At th
 
 ## pygeoapi
 
-[pygeoapi](https://github.com/geopython/pygeoapi) implements the majority of the current draft.  pygeoapi is implemented in Python, and supports JSON and HTML responses.
+[pygeoapi](https://geopython.github.io/pygeoapi) implements the majority of the current draft.  pygeoapi is implemented in Python, and supports JSON and HTML responses.
 
 ### Example requests:
 * OpenAPI 3 document: http://geo.kralidis.ca/pygeoapi/api
@@ -144,6 +144,8 @@ It is a community module developed from scratch during the WFS 3 hackaton. At th
 * Feature collection single item: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items/2661552 ([HTML](http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items/2661552?f=html))
 * Feature collection: populated places in Canada: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?adm0name=Canada
 * Feature collection: bbox query: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?bbox=-152,42,-52,84
+
+The Meteorological Service of Canada uses pygeoapi in production at https://geo.weather.gc.ca/geomet/features
 
 ## jivan
 
