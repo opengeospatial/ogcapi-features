@@ -24,7 +24,7 @@ A Web Feature Service is a standard API that represents collections of geospatia
 GET /collections
 ```
 
-Lists the collections of data on the server that can be queried ([7.11](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections_metadata)),
+Lists the collections of data on the server that can be queried ([7.11](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections)),
 and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained
 
@@ -40,7 +40,7 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
 addition to the `bbox` filter above, with extensions providing more advanced options.
-([7.13](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections))
+([7.13](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collection))
 
 ```
 GET /collections/{collectionId}/items/{featureId}

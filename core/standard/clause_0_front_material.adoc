@@ -28,9 +28,9 @@ This standard defines the resources listed in Table 1. For an overview of the re
 |Landing page |`/` |GET |<<_api_landing_page,7.2 API landing page>>
 |API definition |`/api` |GET |<<_api_definition_2,7.3 API definition>>
 |Conformance classes |`/conformance` |GET |<<_declaration_of_conformance_classes,7.4 Declaration of conformance classes>>
-|Feature collections metadata |`/collections` |GET |<<_feature_collections_metadata,7.11 Feature collections metadata>>
+|Feature collections |`/collections` |GET |<<_feature_collections,7.11 Feature collections>>
 |Feature collection metadata |`/collections/{collectionId}` |GET |<<_feature_collection_metadata, 7.12 Feature collection metadata>>
-|Feature collection |`/collections/{collectionId}/items` |GET |<<_feature_collections,7.13 Feature collections>>
+|Feature collection |`/collections/{collectionId}/items` |GET |<<_feature_collection,7.13 Feature collection>>
 |Feature |`/collections/{collectionId}/items/{featureId}` |GET |<<_feature_2,7.14 Feature>>
 !===
 
@@ -40,7 +40,7 @@ In the first approach, clients are implemented with knowledge about this standar
 
 The other approach targets developers that are not familiar with the OGC API standards, but want to interact with spatial data provided by an API that happens to implement OGC API Features. In this case the developer will study and use the API definition - typically an OpenAPI document - to understand the API and implement the code to interact with the API. This assumes familiarity with the API definition language and the related tooling, but it should not be necessary to study the OGC API standards.
 
-CAUTION: This is a DRAFT version of the first part of the OGC API - Features standards. This draft is not complete and there are open issues that are still under discussion. These discussion topics are identified as annotations like this one with a link to the issue on GitHub and a brief summary of the issue. The current expectation is to have a release candidate by August 2019 after resolving all open issues in GitHub for this part. 
+CAUTION: This is a DRAFT version of the first part of the OGC API - Features standards. This draft is not complete and there are open issues that are still under discussion. These discussion topics are identified as annotations like this one with a link to the issue on GitHub and a brief summary of the issue. The current expectation is to have a release candidate by August 2019 after resolving all open issues in GitHub for this part.
 
 [big]*ii.    Keywords*
 
