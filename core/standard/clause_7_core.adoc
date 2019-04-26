@@ -79,11 +79,11 @@ paging (`next` and `prev`).
 Each `Feature` (path `/collections/{collectionId}/items/{featureId}`)
 is also a separate resource and may be requested individually using HTTP GET.
 
-NOTE: In the description the term "collection" was used where "feature collection"
+NOTE: In the description the term "collection" is used where "feature collection"
 would have been more precise as this document only discusses datasets of features.
-To support also future use of the `Collections` and `Collection` resources for
-other collections of other resource types "feature" has not been added in either
-the names of the resource types or their paths.
+To support the future use of the `Collections` and `Collection` resources for
+collections of other resource types "feature" has not been added in the names
+of the resource types or their paths.
 
 [#img_core,reftext='{figure-caption} {counter:figure-num}']
 .Resources in the Core requirements class
@@ -92,7 +92,7 @@ image::figures/PT1_FIG01.png[align="center"]
 In addition to the simple path structures described above, where all features
 in a dataset are organized in a one-level collection hierarchy, additional parts
 of the OGC API Feature series are expected to provide alternate access to the
-features in the dataset via additional, deeper collection hierarchies.
+features served by the API via additional, deeper collection hierarchies.
 
 === API landing page
 
@@ -396,6 +396,10 @@ Add a recommendation about a link to the dataset metadata (for example, in DCAT)
 Which link relation type?
 
 include::requirements/core/REQ_fc-md-items.adoc[]
+
+include::requirements/core/PER_fc-md-items.adoc[]
+
+This document does not specify mechanisms how clients may access all collections from servers with many collections. Such mechanisms may be specified in additional parts of OGC API Features. Options include support for paging and/or filtering.
 
 include::requirements/core/REQ_fc-md-items-links.adoc[]
 
