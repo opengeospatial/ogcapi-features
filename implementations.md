@@ -162,7 +162,7 @@ The Meteorological Service of Canada uses pygeoapi in production at https://geo.
 
 ## sofp
 
-SOFP is an acronym for Simple Observertion Features Project. The server carrying the same name is being developed as a part of a joint venture between Vaisala, Finnish Meteorological Institute and Spatineo. The goal is to test WFS 3.0 and a simple feature encoding for observations and measurements (https://github.com/opengeospatial/omsf-profile).
+SOFP is an acronym for Simple Observation Features Project. The server carrying the same name is being developed as a part of a joint venture between Vaisala, Finnish Meteorological Institute and Spatineo. The goal is to test WFS 3.0 and a simple feature encoding for observations and measurements (https://github.com/opengeospatial/omsf-profile).
 
 The server is implemented in TypeScript and runs in NodeJS. The architecture allows plugging in any backend or backends, also written in TypeScript. This makes it possible to integrate into existing infrastructure. The open source server includes only an example backend that serves features from a local GeoJSON file. The core server and the example backend are available on dockerhub: https://hub.docker.com/u/sofp
 
@@ -172,6 +172,7 @@ Code is available on GitHub:
 * SOFP Core (the server itself): https://github.com/vaisala-oss/sofp-core
 * SOFP Library (shared code between backends and the core): https://github.com/vaisala-oss/sofp-lib
 * SOFP Example Backend: https://github.com/vaisala-oss/sofp-example-backend
+* FMI SmartMet Backend: https://github.com/fmidev/smartmet-sofp-backend
 
 Finnish Meteorological Institute hosts a demo server at http://beta.fmi.fi/data/3/wfs/sofp
 
