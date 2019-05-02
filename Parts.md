@@ -12,7 +12,7 @@
 * 2D geometries not included in Simple Features
 * 3D geometries
 * GML application schemas
-* other CRS than geodetic WGS84 may be used as the default CRS
+* other CRS than geodetic WGS 84 may be used as the default CRS
 * return other CRS than the default CRS
 * support for resolve=local
 * Queries (dependency to FES)

@@ -340,7 +340,7 @@ of the most fundamental aspects of publishing geographic data and it is importan
 to be clear about the coordinate reference system that coordinates are in.
 
 For the reasons discussed in the Best Practices, OGC API Features uses
-WGS84 longitude and latitude as the default coordinate reference system.
+WGS 84 longitude and latitude as the default coordinate reference system.
 
 include::requirements/core/REQ_crs84.adoc[]
 
@@ -472,7 +472,7 @@ properties:
               description: >-
                 West, south, east, north edges of the bounding box. The coordinates
                 are in the coordinate reference system specified in `crs`. By default
-                this is WGS84 longitude/latitude.
+                this is WGS 84 longitude/latitude.
               type: array
               minItems: 4
               maxItems: 6
@@ -486,7 +486,7 @@ properties:
           crs:
             description: >-
               Coordinate reference system of the coordinates in the spatial extent
-              (property `bbox`). The default reference system is WGS84 longitude/latitude.
+              (property `bbox`). The default reference system is WGS 84 longitude/latitude.
               In the Core this is the only supported coordinate reference system.
               Extensions may support additional coordinate reference systems and add
               additional enum values.
@@ -557,7 +557,7 @@ Additional links to a GML application schema for the building data and to
 a web page that has additional information about buildings are provided using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
 
 Reference system information is not provided as the service provides geometries
-only in the default systems (spatial: WGS84 longitude/latitude; temporal:
+only in the default systems (spatial: WGS 84 longitude/latitude; temporal:
 Gregorian calendar).
 
 [source,JSON]
@@ -653,14 +653,14 @@ and end position and for surfaces the outer and inner rings).
 This standard does not specify requirements for the parameter `bbox-crs`. Those
 requirements will be specified in an additional part of the OGC API Features series.
 
-For WGS84 longitude/latitude the bounding box is in most cases the sequence of
+For WGS 84 longitude/latitude the bounding box is in most cases the sequence of
 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the anti-meridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).
 
 .The bounding box of the New Zealand Exclusive Economic Zone
 =================
-The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
+The bounding box of the New Zealand Exclusive Economic Zone in WGS 84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
 would be represented in JSON as `[ 160.6, -55.95, -170, -25.89 ]` and in a query as `bbox=160.6,-55.95,-170,-25.89`.
 =================
 

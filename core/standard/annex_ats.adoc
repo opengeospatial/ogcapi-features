@@ -121,7 +121,7 @@ The server SHALL conform to HTTP 1.1. +
 If the server supports HTTPS, the server SHALL also conform to HTTP over TLS. +
 Tests: A.4.1.1 +
 | *Requirement 8:* Coordinate Reference Systems +
-Unless the client explicitly requests a different coordinate reference system, all spatial geometries SHALL be in the coordinate reference system http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS84 longitude/latitude) +
+Unless the client explicitly requests a different coordinate reference system, all spatial geometries SHALL be in the coordinate reference system http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS 84 longitude/latitude) +
 Tests: A.4.1.2 +
 | *Requirement 9:* Feature Collections Metadata Operation +
 The server SHALL support the HTTP GET operation at the path /collections. +
@@ -174,7 +174,7 @@ The bounding box is provided as four or six numbers, depending on whether the co
  - Upper right corner, coordinate axis 1 +
  - Upper right corner, coordinate axis 2 +
  - Upper right corner, coordinate axis 3 (optional) +
-The coordinate reference system of the values SHALL be interpreted as WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter bbox-crs. +
+The coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter bbox-crs. +
 Tests: A.4.4.12 +
 | *Requirement 22:* Feature Collection Operation Time Parameter +
 Each feature collection operation SHALL support a parameter datetime with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
