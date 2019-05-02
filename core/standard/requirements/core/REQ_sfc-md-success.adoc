@@ -6,5 +6,6 @@ A successful execution of the operation SHALL be reported as a response with a
 HTTP status code `200`.
 
 The content of that response SHALL be consistent with the content for this feature
-collection in the `/collections` response.
+collection in the `/collections` response. That is, the values for `id`, `title`,
+`description` and `extent` SHALL be identical.
 |===
