@@ -40,7 +40,8 @@ API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI
 specification, an OWS Common 2.0 capabilities document or WSDL.
 
 The _Core_ is intended to be a minimal useful API for fine-grained
-access to a spatial dataset.
+read-access to a spatial dataset where geometries are represented in the
+coordinate reference system WGS 84 with axis order longitude/latitude.
 
 Additional capabilities such as support for transactions, complex data
 structures, rich queries, other coordinate reference systems,
