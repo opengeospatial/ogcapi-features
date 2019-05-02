@@ -41,7 +41,7 @@ The WFS 3.0 standard does not mandate a standard format for the API Description 
 
 ==== A.2.3 Resource Encodings
 
-The WFS 3.0 standard does not mandate a standard encoding for resources returned by the API. Yet a compliance test requires some minimal level of expected behavior. Therefore, this Abstract Test Suite asserts that the API returns resources encoded in HTML and GeoJSON. Since no compliance test suite exists for these encodings at this time, the resources shall be presented to the test operator for human inspection.  
+The WFS 3.0 standard does not mandate a standard encoding for resources returned by the API. Yet a compliance test requires some minimal level of expected behavior. Therefore, this Abstract Test Suite asserts that the API returns resources encoded in HTML and GeoJSON. Since no compliance test suite exists for these encodings at this time, the resources shall be presented to the test operator for human inspection.
 
 ==== A.2.4 Processing Security Objects
 
@@ -143,7 +143,7 @@ For each feature collection in this distribution of the dataset, the links prope
 All links SHALL include the rel and type properties. +
 Tests: A.4.4.6 +
 | *Requirement 14:* Feature Collections Metadata Extent +
-For each feature collection, the extent property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection. +
+For each feature collection, the extent property, if provided, SHALL provide bounding boxes that include all spatial geometries and time intervals that include all temporal geometries in this collection. +
 If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries. +
 Tests: A.4.4.6 +
 | *Requirement 15:* Feature Collection Metadta Operation +
@@ -250,7 +250,7 @@ none
 
 ====== c) Test Method:
 
-. All compliance tests shall be configured to use the HTTP 1.1 protocol exclusively.  
+. All compliance tests shall be configured to use the HTTP 1.1 protocol exclusively.
 
 ====== d) References:
 Requirement 7
@@ -462,7 +462,7 @@ None
 ===== A.4.4.1 Validate /api path
 
 ====== a) Test Purpose:
-Validate API definition provided through the /api path it the athoritative definition of this API.  Validate that this resource exists at the expected location and that it complies with the appropirate schema. 
+Validate API definition provided through the /api path it the athoritative definition of this API.  Validate that this resource exists at the expected location and that it complies with the appropirate schema.
 
 ====== b) Pre-conditions:
 * A URL to the server hosting the API definition document is known
@@ -470,9 +470,9 @@ Validate API definition provided through the /api path it the athoritative defin
 ====== c) Test Method:
 
 . Issue an HTTP GET request to the URL {server}/api
- 
+
 . Validate that a document was returned with a status code of 200
- 
+
 . Validate the returned document against the OpenAPI 3.0 schema
 
 ====== d) References:
@@ -802,7 +802,7 @@ Validate the Get Feature Operation Response.
     - To the Feature Collection which contains this Feature
 
     - Alternate encodings of this document in every other media type as identified by the compliance classes for this server.
-    
+
 . Validate that all links include the rel and type link parameters.
 
 ====== d) References:
