@@ -2,7 +2,7 @@
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-md-extent +
 
-For each feature collection, the `extent` property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection.
+For each feature collection, the `extent` property, if provided, SHALL provide bounding boxes that include all spatial geometries and time intervals that include all temporal geometries in this collection. The temporal extent may use `null` values to indicate an open time interval.
 
 If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries.
 |===

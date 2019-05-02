@@ -143,7 +143,7 @@ For each feature collection in this distribution of the dataset, the links prope
 All links SHALL include the rel and type properties. +
 Tests: A.4.4.6 +
 | *Requirement 14:* Feature Collections Metadata Extent +
-For each feature collection, the extent property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection. +
+For each feature collection, the extent property, if provided, SHALL provide bounding boxes that include all spatial geometries and time intervals that include all temporal geometries in this collection. +
 If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries. +
 Tests: A.4.4.6 +
 | *Requirement 15:* Feature Collection Metadta Operation +
