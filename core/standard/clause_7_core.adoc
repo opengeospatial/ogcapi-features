@@ -72,7 +72,7 @@ the collection (the features that are located in the bounding box or time interv
 The `limit` parameter may be used to control the subset of the
 selected features that should be returned in the response.
 
-The `Page` may include metadata about the number of selected and returned
+The `Page` may include the number of selected and returned
 features (`numberMatched` and `numberReturned`) as well as links to support
 paging (`next` and `prev`).
 
@@ -810,8 +810,8 @@ Clients should be prepared to receive a 404 response.
 
 Another implementation approach is to use an implementation-specific parameter
 that specifies the index within the result set from which the server begins
-presenting results in the response, like the `startIndex` parameter that was 
-used in <<WFS20,WFS 2.0>> (and which may be added again in additional parts 
+presenting results in the response, like the `startIndex` parameter that was
+used in <<WFS20,WFS 2.0>> (and which may be added again in additional parts
 of the OGC API Features series).
 
 Clients should not assume that paging is safe against changes to dataset

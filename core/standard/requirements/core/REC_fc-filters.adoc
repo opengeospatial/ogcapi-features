@@ -5,9 +5,9 @@
 If features in the feature collection include a feature property that has a
 simple value (for example, a string or integer) that is expected to be useful
 for applications using the service to filter the features of the collection
-based on this property, you SHOULD support a parameter with the name of the
+based on this property, a parameter with the name of the
 feature property and with the following characteristics (using an
-OpenAPI Specification 3.0 fragment):
+OpenAPI Specification 3.0 fragment) SHOULD be supported:
 
 [source,YAML]
 ----
