@@ -131,7 +131,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/bbox'
-      - $ref: '#/components/parameters/time'
+      - $ref: '#/components/parameters/datetime'
       - $ref: '#/components/parameters/function'
       responses:
         '200':
@@ -169,7 +169,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/bbox'
-        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/datetime'
         - $ref: '#/components/parameters/function'
       responses:
         '200':
@@ -294,17 +294,21 @@ components:
           type: number
       style: form
       explode: false
-    time:
-      name: time
+    datetime:
+      name: datetime
       in: query
       description: >-
-        Either a date-time or a period string that adheres to RFC 3339. Examples:
+        Either a date-time or an interval, open or closed. Date and time expressions
+        adhere to RFC 3339. Open intervals are expressed using double-dots.
+
+        Examples:
 
         * A date-time: "2018-02-12T23:20:50Z"
-        * A period: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z" or "2018-02-12T00:00:00Z/P1M6DT12H31M12S"
+        * A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+        * Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
 
         Only features that have a temporal property that intersects the value of
-        `time` are selected.
+        `datetime` are selected.
 
         If a feature has multiple temporal properties, it is the decision of the
         server whether only a single temporal property is used to determine
@@ -583,7 +587,7 @@ components:
             $ref: '#/components/schemas/link'
         timeStamp:
           type: string
-          format: dateTime
+          format: date-time
         numberMatched:
           type: integer
           minimum: 0
@@ -655,7 +659,7 @@ components:
               minimum: 1
             lastUpdate:
               type: string
-              format: dateTime
+              format: date-time
 tags:
   - name: Capabilities
     description: >-

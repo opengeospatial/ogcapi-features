@@ -56,8 +56,8 @@ Accessing a `Collection` using HTTP GET returns a `CollectionResponse`. This
 response basically consists of features in the collection. The features included
 in the response are determined by the server based on parameters of the request.
 
-A `bbox` or `time` parameter may be used to select only a subset of the features in
-the collection (the features that are located in the bounding box or time period).
+A `bbox` or `datetime` parameter may be used to select only a subset of the features in
+the collection (the features that are located in the bounding box or time interval).
 
 The `limit` parameter may be used to request only a subset of the
 selected features and to indicate that the client wants to page through
@@ -652,57 +652,57 @@ A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
 
-==== Parameter time
+==== Parameter datetime
 
 include::requirements/core/REQ_fc-time-definition.adoc[]
 
 include::requirements/core/REQ_fc-time-response.adoc[]
 
-"Intersects" means that the time (instant or period) specified in the parameter
-`time` includes a timestamp that is part of the temporal geometry of the feature
-(again, a time instant or period). For time periods this includes the start
+"Intersects" means that the time (instant or interval) specified in the parameter
+`datetime` includes a timestamp that is part of the temporal geometry of the feature
+(again, a time instant or interval). For time intervals this includes the start
 and end time.
 
 .A date-time
 =================
-February 12, 2018, 23:20:52 GMT:
+February 12, 2018, 23:20:52 UTC:
 
-`time=2018-02-12T23%3A20%3A52Z`
+`datetime=2018-02-12T23%3A20%3A52Z`
 =================
 
 For features with a temporal property that is a timestamp (like `lastUpdate`
 in the building features), a date-time value would match all features where
 the temporal property is identical.
 
-For features with a temporal property that is a date or a time period,
+For features with a temporal property that is a date or a time interval,
 a date-time value would match all features where the timestamp is on that
-day or within the time period.
+day or within the time interval.
 
-.A period using a start and end time
+.Intervals
 =================
-February 12, 2018, 00:00:00 GMT to March 18, 2018, 12:31:12 GMT:
+February 12, 2018, 00:00:00 UTC to March 18, 2018, 12:31:12 UTC:
 
-`time=2018-02-12T00%3A00%3A00Z%2F2018-03-18T12%3A31%3A12Z`
-=================
+`datetime=2018-02-12T00%3A00%3A00Z%2F2018-03-18T12%3A31%3A12Z`
 
-.A period using start time and a duration
-=================
-A duration of 1 month, 6 days, 12 hours, 31 minutes and 12 seconds from
-February 12, 2018, 00:00:00 GMT:
+February 12, 2018, 00:00:00 UTC or later:
 
-`time=2018-02-12T00%3A00%3A00Z%2FP1M6DT12H31M12S`
+`datetime=2018-02-12T00%3A00%3A00Z%2F..`
+
+March 18, 2018, 12:31:12 UTC or earlier:
+
+`datetime=..%2F2018-03-18T12%3A31%3A12Z`
 =================
 
 For features with a temporal property that is a timestamp (like `lastUpdate`
-in the building features), a time period would match all features where
-the temporal property is within the period.
+in the building features), a time interval would match all features where
+the temporal property is within the interval.
 
-For features with a temporal property that is a date or a time period,
-a time period would match all features where the values overlap.
+For features with a temporal property that is a date or a time interval,
+a time interval would match all features where the values overlap.
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/time.yaml[time.yaml].
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/datetime.yaml[datetime.yaml].
 
 ==== Parameters for filtering on feature properties
 
@@ -882,7 +882,7 @@ A `400` will be returned in the following situations:
 * If query parameter `limit` is not an integer or not between minimum and maximum;
 * if query parameter `bbox` does not have 4 (or 6) numbers or they do not form
 a bounding box;
-* if parameter `time` is not a valid time stamp or time period.
+* if parameter `datetime` is not a valid time stamp or time interval.
 
 
 === Feature

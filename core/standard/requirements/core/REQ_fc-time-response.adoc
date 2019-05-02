@@ -2,11 +2,27 @@
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-time-response +
 
-Only features that have a temporal geometry that intersects the timestamp or
-time period SHALL be part of the result set, if the `time` parameter is provided.
+Only features that have a temporal geometry that intersects the temporal
+information in the `datetime` parameter SHALL be part of the result set,
+if the parameter is provided.
 
-The temporal information is either a date-time or a period string that
-adheres to RFC 3339.
+The temporal information is either a date-time or an interval.
+The parameter value SHALL conform to the following syntax (using
+link:https://tools.ietf.org/html/rfc2234[ABNF]):
+
+```
+interval-closed     = date-time "/" date-time
+interval-open-start = "../" date-time
+interval-open-end   = date-time "/.."
+interval            = interval-closed / interval-open-start / interval-open-end
+datetime            = date-time / interval
+```
+
+The syntax of `date-time` is specified by
+link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6].
+
+Open ranges in time intervals at the start or end are supported using a
+double-dot (`..`).
 
 If a feature has multiple temporal properties, it is the decision of the
 server whether only a single temporal property is used to determine

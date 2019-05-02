@@ -177,11 +177,13 @@ The bounding box is provided as four or six numbers, depending on whether the co
 The coordinate reference system of the values SHALL be interpreted as WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter bbox-crs. +
 Tests: A.4.4.12 +
 | *Requirement 22:* Feature Collection Operation Time Parameter +
-Each feature collection operation SHALL support a parameter time with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
+Each feature collection operation SHALL support a parameter datetime with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
 Tests: A.4.4.13 +
 | *Requirement 23:* Feature Collection Operation Time Parameter Response +
-Only features that have a temporal geometry that intersects the timestamp or time period SHALL be part of the result set, if the time parameter is provided. +
-The temporal information is either a date-time or a period string that adheres to RFC3339. +
+Only features that have a temporal geometry that intersects the timestamp or time interval SHALL be part of the result set, if the datetime parameter is provided. +
+The temporal information is either a date-time or an interval. +
+The syntax of date-time is specified by RFC 3339, 5.6. +
+Open ranges in time intervals at the start or end are supported using a double-dot (`..`). +
 If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties. +
 Tests: A.4.4.13 +
 | *Requirement 24:* Feature Collection Response +
@@ -200,7 +202,7 @@ Tests: A.4.4.10 +
 If a property timeStamp is included in the response, the value SHALL be set to the time stamp when the response was generated. +
 Tests: A.4.4.10 +
 | *Requirement 28:* Feature Collection Response numberMatched +
-If a property numberMatched is included in the response, the value SHALL be identical to the number of features in the feature collections that match the selection parameters like bbox, time or additional filter parameters. +
+If a property numberMatched is included in the response, the value SHALL be identical to the number of features in the feature collections that match the selection parameters like bbox, datetime or additional filter parameters. +
 A server MAY omit this information in a response, if the information about the number of matching features is not known or difficult to compute. +
 Tests: A.4.4.10 +
 | *Requirement 29:* Feature Collection Response numberReturned +
@@ -731,10 +733,10 @@ Validate the proper handling of the bbox parameter.
 ====== d) References:
 Requirements 20 and 21
 
-===== A.4.4.13 Time Parameter
+===== A.4.4.13 Date-Time Parameter
 
 ====== a) Test Purpose:
-Validate the proper handling of the time parameter.
+Validate the proper handling of the datetime parameter.
 
 ====== b) Pre-conditions:
 
@@ -743,11 +745,13 @@ successfully.
 
 ====== c) Test Method:
 
-. Verify that the OpenAPI document correctly describes the time parameter for the Get Features operation.
+. Verify that the OpenAPI document correctly describes the datetime parameter for the Get Features operation.
 
-. Repeat Test A.4.4.9 using different values for the time parameter.
+. Repeat Test A.4.4.9 using different values for the datetime parameter.
 
 . For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.
+
+. Use time intervals in the tests to verify the correct behavior for time intervals. In particular check that the start and end date-time are part of the interval (i.e. everything that is `>=` than the start and `<=` the end date-time is selected). Use also fractions of seconds in the tests.
 
 ====== d) References:
 Requirements 22 and 23
