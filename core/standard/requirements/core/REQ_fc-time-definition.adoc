@@ -2,12 +2,12 @@
 |===
 |*Requirement {counter:req-id}* |/req/core/fc-time-definition +
 
-Each feature collection operation SHALL support a parameter `time`
+Each feature collection operation SHALL support a parameter `datetime`
 with the following characteristics (using an OpenAPI Specification 3.0 fragment):
 
 [source,YAML]
 ----
-name: time
+name: datetime
 in: query
 required: false
 schema:

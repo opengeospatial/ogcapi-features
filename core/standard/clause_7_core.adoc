@@ -67,7 +67,7 @@ The name "page" indicates that the server supports paged access through
 the selected features of the collection.
 
 A `bbox` or `datetime` parameter may be used to select only a subset of the features in
-the collection (the features that are located in the bounding box or time period).
+the collection (the features that are located in the bounding box or time interval).
 
 The `limit` parameter may be used to control the subset of the
 selected features that should be returned in the response.
@@ -405,6 +405,10 @@ include::requirements/core/REQ_fc-md-items-links.adoc[]
 
 include::requirements/core/REQ_fc-md-extent.adoc[]
 
+include::requirements/core/REC_fc-md-extent-single.adoc[]
+
+include::requirements/core/PER_fc-md-extent-extensions.adoc[]
+
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
 [source,YAML]
 ----
@@ -425,9 +429,111 @@ properties:
   links:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
+      type: object
+      required:
+        - href
+      properties:
+        href:
+          type: string
+          example: http://data.example.com/buildings/123
+        rel:
+          type: string
+          example: alternate
+        type:
+          type: string
+          example: application/geo+json
+        hreflang:
+          type: string
+          example: en
+        title:
+          type: string
+          example: Trierer Strasse 70, 53115 Bonn
   extent:
-    $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/extent.yaml
+    description: >-
+      The extent of the features in the collection. In the Core only spatial and temporal
+      extents are specified. Extensions may add additional members to represent other
+      extents, for example, thermal or pressure ranges.
+    type: object
+    properties:
+      spatial:
+        description: >-
+          The spatial extent of the features in the collection.
+        type: object
+        properties:
+          bbox:
+            description: >-
+              One or more bounding boxes that describe the spatial extent of the dataset.
+              In the Core only a single bounding box is supported. Extensions may support
+              additional areas. If multiple areas are provided, the union of the bounding
+              boxes describes the spatial extent.
+            type: array
+            minItems: 1
+            items:
+              description: >-
+                West, south, east, north edges of the bounding box. The coordinates
+                are in the coordinate reference system specified in `crs`. By default
+                this is WGS84 longitude/latitude.
+              type: array
+              minItems: 4
+              maxItems: 6
+              items:
+                type: number
+              example:
+                - -180
+                - -90
+                - 180
+                - 90
+          crs:
+            description: >-
+              Coordinate reference system of the coordinates in the spatial extent
+              (property `bbox`). The default reference system is WGS84 longitude/latitude.
+              In the Core this is the only supported coordinate reference system.
+              Extensions may support additional coordinate reference systems and add
+              additional enum values.
+            type: string
+            enum:
+              - 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
+            default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
+      temporal:
+        description: >-
+          The temporal extent of the features in the collection.
+        type: object
+        properties:
+          interval:
+            description: >-
+              One or more time intervals that describe the temporal extent of the dataset.
+              The value `null` is supported and indicates an open time intervall.
+              In the Core only a single time interval is supported. Extensions may support
+              multiple intervals. If multiple intervals are provided, the union of the
+              intervals describes the temporal extent.
+            type: array
+            minItems: 1
+            items:
+              description: >-
+                Begin and end times of the time interval. The timestamps
+                are in the coordinate reference system specified in `trs`. By default
+                this is the Gregorian calendar.
+              type: array
+              minItems: 2
+              maxItems: 2
+              items:
+                type: string
+                format: date-time
+                nullable: true
+              example:
+                - '2011-11-11T12:22:11Z'
+                - null
+          trs:
+            description: >-
+              Coordinate reference system of the coordinates in the temporal extent
+              (property `interval`). The default reference system is the Gregorian calendar.
+              In the Core this is the only supported temporal reference system.
+              Extensions may support additional temporal reference systems and add
+              additional enum values.
+            type: string
+            enum:
+              - 'http://www.opengis.net/def/uom/ISO-8601/0/Gregorian'
+            default: 'http://www.opengis.net/def/uom/ISO-8601/0/Gregorian'
   crs:
     description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
     type: array
@@ -437,7 +543,7 @@ properties:
       - http://www.opengis.net/def/crs/OGC/1.3/CRS84
 ----
 
-NOTE: The `crs` property is not used by this conformance class, but reserved for future use.
+NOTE: The `crs` property of the `collectionInfo` object is not used by this conformance class, but reserved for future use.
 
 .Feature collections response document
 =================
@@ -450,8 +556,9 @@ Representations of the metadata resource in other formats are referenced using l
 Additional links to a GML application schema for the building data and to
 a web page that has additional information about buildings are provided using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
 
-Coordinate reference system information is not provided as the service provides
-geometries only in the default system (WGS84 longitude/latitude).
+Reference system information is not provided as the service provides geometries
+only in the default systems (spatial: WGS84 longitude/latitude; temporal:
+Gregorian calendar).
 
 [source,JSON]
 ----
@@ -470,8 +577,12 @@ geometries only in the default system (WGS84 longitude/latitude).
       "title": "Buildings",
       "description": "Buildings in the city of Bonn.",
       "extent": {
-        "spatial": [ 7.01, 50.63, 7.22, 50.78 ],
-        "temporal": [ "2010-02-15T12:34:56Z", "2018-03-18T12:11:00Z" ]
+        "spatial": {
+          "bbox": [ [ 7.01, 50.63, 7.22, 50.78 ] ]
+        },
+        "temporal": {
+          "interval": [ [ "2010-02-15T12:34:56Z", null ] ]
+        }
       },
       "links": [
         { "href": "http://data.example.org/collections/buildings/items",
@@ -557,57 +668,57 @@ A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
 
-==== Parameter time
+==== Parameter datetime
 
 include::requirements/core/REQ_fc-time-definition.adoc[]
 
 include::requirements/core/REQ_fc-time-response.adoc[]
 
-"Intersects" means that the time (instant or period) specified in the parameter
-`time` includes a timestamp that is part of the temporal geometry of the feature
-(again, a time instant or period). For time periods this includes the start
+"Intersects" means that the time (instant or interval) specified in the parameter
+`datetime` includes a timestamp that is part of the temporal geometry of the feature
+(again, a time instant or interval). For time intervals this includes the start
 and end time.
 
 .A date-time
 =================
-February 12, 2018, 23:20:52 GMT:
+February 12, 2018, 23:20:52 UTC:
 
-`time=2018-02-12T23%3A20%3A52Z`
+`datetime=2018-02-12T23%3A20%3A52Z`
 =================
 
 For features with a temporal property that is a timestamp (like `lastUpdate`
 in the building features), a date-time value would match all features where
 the temporal property is identical.
 
-For features with a temporal property that is a date or a time period,
+For features with a temporal property that is a date or a time interval,
 a date-time value would match all features where the timestamp is on that
-day or within the time period.
+day or within the time interval.
 
-.A period using a start and end time
+.Intervals
 =================
-February 12, 2018, 00:00:00 GMT to March 18, 2018, 12:31:12 GMT:
+February 12, 2018, 00:00:00 UTC to March 18, 2018, 12:31:12 UTC:
 
-`time=2018-02-12T00%3A00%3A00Z%2F2018-03-18T12%3A31%3A12Z`
-=================
+`datetime=2018-02-12T00%3A00%3A00Z%2F2018-03-18T12%3A31%3A12Z`
 
-.A period using start time and a duration
-=================
-A duration of 1 month, 6 days, 12 hours, 31 minutes and 12 seconds from
-February 12, 2018, 00:00:00 GMT:
+February 12, 2018, 00:00:00 UTC or later:
 
-`time=2018-02-12T00%3A00%3A00Z%2FP1M6DT12H31M12S`
+`datetime=2018-02-12T00%3A00%3A00Z%2F..`
+
+March 18, 2018, 12:31:12 UTC or earlier:
+
+`datetime=..%2F2018-03-18T12%3A31%3A12Z`
 =================
 
 For features with a temporal property that is a timestamp (like `lastUpdate`
-in the building features), a time period would match all features where
-the temporal property is within the period.
+in the building features), a time interval would match all features where
+the temporal property is within the interval.
 
-For features with a temporal property that is a date or a time period,
-a time period would match all features where the values overlap.
+For features with a temporal property that is a date or a time interval,
+a time interval would match all features where the values overlap.
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/time.yaml[time.yaml].
+link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/datetime.yaml[datetime.yaml].
 
 ==== Parameters for filtering on feature properties
 
@@ -698,8 +809,18 @@ It is up to the server to determine how long these links can be de-referenced.
 Clients should be prepared to receive a 404 response.
 
 Another implementation approach is to use an implementation-specific parameter
-like the `startIndex` parameter that was used in <<WFS20,WFS 2.0>> (and
-which may be added again in additional parts of the OGC API Features series.
+that specifies the index within the result set from which the server begins
+presenting results in the response, like the `startIndex` parameter that was 
+used in <<WFS20,WFS 2.0>> (and which may be added again in additional parts 
+of the OGC API Features series).
+
+Clients should not assume that paging is safe against changes to dataset
+while a client iterates through `next` links. If a server provides opaque links
+these could be safe and maintain the dataset state during the original request.
+Using a parameter for the start index, however, will not be safe.
+
+NOTE: Additional conformance classes for safe paging or an index parameter
+may be added in extensions to this specification.
 
 include::requirements/core/PER_fc-prev.adoc[]
 
@@ -773,7 +894,7 @@ A `400` will be returned in the following situations:
 * If query parameter `limit` is not an integer or not between minimum and maximum;
 * if query parameter `bbox` does not have 4 (or 6) numbers or they do not form
 a bounding box;
-* if parameter `time` is not a valid time stamp or time period.
+* if parameter `datetime` is not a valid time stamp or time interval.
 
 
 === Feature

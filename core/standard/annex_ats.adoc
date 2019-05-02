@@ -41,7 +41,7 @@ The WFS 3.0 standard does not mandate a standard format for the API Description 
 
 ==== A.2.3 Resource Encodings
 
-The WFS 3.0 standard does not mandate a standard encoding for resources returned by the API. Yet a compliance test requires some minimal level of expected behavior. Therefore, this Abstract Test Suite asserts that the API returns resources encoded in HTML and GeoJSON. Since no compliance test suite exists for these encodings at this time, the resources shall be presented to the test operator for human inspection.  
+The WFS 3.0 standard does not mandate a standard encoding for resources returned by the API. Yet a compliance test requires some minimal level of expected behavior. Therefore, this Abstract Test Suite asserts that the API returns resources encoded in HTML and GeoJSON. Since no compliance test suite exists for these encodings at this time, the resources shall be presented to the test operator for human inspection.
 
 ==== A.2.4 Processing Security Objects
 
@@ -143,7 +143,7 @@ For each feature collection in this distribution of the dataset, the links prope
 All links SHALL include the rel and type properties. +
 Tests: A.4.4.6 +
 | *Requirement 14:* Feature Collections Metadata Extent +
-For each feature collection, the extent property, if provided, SHALL be a bounding box that includes all spatial and temporal geometries in this collection. +
+For each feature collection, the extent property, if provided, SHALL provide bounding boxes that include all spatial geometries and time intervals that include all temporal geometries in this collection. +
 If a feature has multiple properties with spatial or temporal information, it is the decision of the server whether only a single spatial or temporal geometry property is used to determine the extent or all relevant geometries. +
 Tests: A.4.4.6 +
 | *Requirement 15:* Feature Collection Metadta Operation +
@@ -177,11 +177,13 @@ The bounding box is provided as four or six numbers, depending on whether the co
 The coordinate reference system of the values SHALL be interpreted as WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter bbox-crs. +
 Tests: A.4.4.12 +
 | *Requirement 22:* Feature Collection Operation Time Parameter +
-Each feature collection operation SHALL support a parameter time with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
+Each feature collection operation SHALL support a parameter datetime with the following characteristics (using an OpenAPI Specification 3.0 fragment): +
 Tests: A.4.4.13 +
 | *Requirement 23:* Feature Collection Operation Time Parameter Response +
-Only features that have a temporal geometry that intersects the timestamp or time period SHALL be part of the result set, if the time parameter is provided. +
-The temporal information is either a date-time or a period string that adheres to RFC3339. +
+Only features that have a temporal geometry that intersects the timestamp or time interval SHALL be part of the result set, if the datetime parameter is provided. +
+The temporal information is either a date-time or an interval. +
+The syntax of date-time is specified by RFC 3339, 5.6. +
+Open ranges in time intervals at the start or end are supported using a double-dot (`..`). +
 If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties. +
 Tests: A.4.4.13 +
 | *Requirement 24:* Feature Collection Response +
@@ -200,7 +202,7 @@ Tests: A.4.4.10 +
 If a property timeStamp is included in the response, the value SHALL be set to the time stamp when the response was generated. +
 Tests: A.4.4.10 +
 | *Requirement 28:* Feature Collection Response numberMatched +
-If a property numberMatched is included in the response, the value SHALL be identical to the number of features in the feature collections that match the selection parameters like bbox, time or additional filter parameters. +
+If a property numberMatched is included in the response, the value SHALL be identical to the number of features in the feature collections that match the selection parameters like bbox, datetime or additional filter parameters. +
 A server MAY omit this information in a response, if the information about the number of matching features is not known or difficult to compute. +
 Tests: A.4.4.10 +
 | *Requirement 29:* Feature Collection Response numberReturned +
@@ -250,7 +252,7 @@ none
 
 ====== c) Test Method:
 
-. All compliance tests shall be configured to use the HTTP 1.1 protocol exclusively.  
+. All compliance tests shall be configured to use the HTTP 1.1 protocol exclusively.
 
 ====== d) References:
 Requirement 7
@@ -462,7 +464,7 @@ None
 ===== A.4.4.1 Validate /api path
 
 ====== a) Test Purpose:
-Validate API definition provided through the /api path it the athoritative definition of this API.  Validate that this resource exists at the expected location and that it complies with the appropirate schema. 
+Validate API definition provided through the /api path it the athoritative definition of this API.  Validate that this resource exists at the expected location and that it complies with the appropirate schema.
 
 ====== b) Pre-conditions:
 * A URL to the server hosting the API definition document is known
@@ -470,9 +472,9 @@ Validate API definition provided through the /api path it the athoritative defin
 ====== c) Test Method:
 
 . Issue an HTTP GET request to the URL {server}/api
- 
+
 . Validate that a document was returned with a status code of 200
- 
+
 . Validate the returned document against the OpenAPI 3.0 schema
 
 ====== d) References:
@@ -731,10 +733,10 @@ Validate the proper handling of the bbox parameter.
 ====== d) References:
 Requirements 20 and 21
 
-===== A.4.4.13 Time Parameter
+===== A.4.4.13 Date-Time Parameter
 
 ====== a) Test Purpose:
-Validate the proper handling of the time parameter.
+Validate the proper handling of the datetime parameter.
 
 ====== b) Pre-conditions:
 
@@ -743,11 +745,13 @@ successfully.
 
 ====== c) Test Method:
 
-. Verify that the OpenAPI document correctly describes the time parameter for the Get Features operation.
+. Verify that the OpenAPI document correctly describes the datetime parameter for the Get Features operation.
 
-. Repeat Test A.4.4.9 using different values for the time parameter.
+. Repeat Test A.4.4.9 using different values for the datetime parameter.
 
 . For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.
+
+. Use time intervals in the tests to verify the correct behavior for time intervals. In particular check that the start and end date-time are part of the interval (i.e. everything that is `>=` than the start and `<=` the end date-time is selected). Use also fractions of seconds in the tests.
 
 ====== d) References:
 Requirements 22 and 23
@@ -802,7 +806,7 @@ Validate the Get Feature Operation Response.
     - To the Feature Collection which contains this Feature
 
     - Alternate encodings of this document in every other media type as identified by the compliance classes for this server.
-    
+
 . Validate that all links include the rel and type link parameters.
 
 ====== d) References:
