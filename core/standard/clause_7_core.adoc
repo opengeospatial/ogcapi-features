@@ -68,7 +68,7 @@ the selected features of the collection.
 
 A `bbox` or `datetime` parameter may be used to select only a subset of the features in
 the collection (the features that are located in the bounding box or time interval).
-The `bbox` parameter matches all features in the collection that are 
+The `bbox` parameter matches all features in the collection that are
 not associated with a location, too. The `datetime` parameter matches all
 features in the collection that are not associated with a time stamp or
 interval, too.
@@ -274,6 +274,50 @@ outside of the server.
 More specific guidance is provided for each resource, where applicable.
 
 include::requirements/core/PER_additional-status-codes.adoc[]
+
+[[query_parameters]]
+=== Unknown or invalid query parameters
+
+include::requirements/core/REQ_query-param-unknown.adoc[]
+
+If a server wants to support vendor specific parameters, these have to
+be explicitly declared in the API definition.
+
+If OpenAPI is used to represent the API definition, a capability exists
+to allow additional parameters without explicitly declaring them. That is,
+parameters that have not been explicitly specified in the API definition
+for the operation will be ignored.
+
+.OpenAPI schema for additional "free-form" query parameters
+[source,YAML]
+----
+in: query
+name: vendorSpecificParameters
+schema:
+  type: object
+  additionalProperties: true
+style: form
+----
+
+Note that the name of the parameter does not matter as the actual query
+parameters are the names of the object properties. For example, assume that the value
+of `vendorSpecificParameters` is this object:
+
+[source,JSON]
+----
+{
+  "my_first_parameter": "some value",
+  "my_other_parameter": 42
+}
+----
+
+In the request URI this would be expressed as `&my_first_parameter=some%20value&my_other_parameter=42`.
+
+include::requirements/core/REQ_query-param-invalid.adoc[]
+
+This is a general rule that applies to all parameters, whether they are specified
+in this document or in additional parts. A value is invalid, if it violates the
+API definition or any other constraint for that parameter stated in a requirement.
 
 [[web_caching]]
 === Web caching
@@ -667,6 +711,10 @@ However, in cases where the box spans the anti-meridian the first value
 The bounding box of the New Zealand Exclusive Economic Zone in WGS 84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
 would be represented in JSON as `[ 160.6, -55.95, -170, -25.89 ]` and in a query as `bbox=160.6,-55.95,-170,-25.89`.
 =================
+
+Note that according to the requirement to <<query-param-invalid,return an error
+for an invalid parameter value>>, the server will return an error, if a latitude
+value of `160.0` is used.
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
