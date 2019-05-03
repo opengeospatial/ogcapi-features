@@ -5,6 +5,13 @@
 Only features that have a spatial geometry that intersects the bounding box SHALL be
 part of the result set, if the `bbox` parameter is provided.
 
+If a feature has multiple spatial geometry properties, it is the decision of
+the server whether only a single spatial geometry property is used to determine
+the extent or all relevant geometries.
+
+The `bbox` parameter SHALL match all features in the collection that are
+not associated with a spatial geometry, too.
+
 The bounding box is provided as four or six numbers, depending on whether the
 coordinate reference system includes a vertical axis (height or depth):
 

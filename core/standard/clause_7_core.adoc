@@ -68,6 +68,10 @@ the selected features of the collection.
 
 A `bbox` or `datetime` parameter may be used to select only a subset of the features in
 the collection (the features that are located in the bounding box or time interval).
+The `bbox` parameter matches all features in the collection that are 
+not associated with a location, too. The `datetime` parameter matches all
+features in the collection that are not associated with a time stamp or
+interval, too.
 
 The `limit` parameter may be used to control the subset of the
 selected features that should be returned in the response.
