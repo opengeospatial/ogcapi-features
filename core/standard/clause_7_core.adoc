@@ -601,8 +601,7 @@ are supported by the service (link:https://www.iana.org/assignments/link-relatio
 
 Representations of the metadata resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
 
-Additional links to a GML application schema for the building data and to
-a web page that has additional information about buildings are provided using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
+An additional link is to a GML application schema for the dataset - using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
 
 Reference system information is not provided as the service provides geometries
 only in the default systems (spatial: WGS 84 longitude/latitude; temporal:
@@ -616,8 +615,8 @@ Gregorian calendar).
       "rel": "self", "type": "application/json", "title": "this document" },
     { "href": "http://data.example.org/collections.html",
       "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
-    { "href": "http://schemas.example.org/1.0/foobar.xsd",
-      "rel": "describedBy", "type": "application/xml", "title": "XML schema for Acme Corporation data" }
+    { "href": "http://schemas.example.org/1.0/buildings.xsd",
+      "rel": "describedBy", "type": "application/xml", "title": "GML application schema for Acme Corporation building data" }
   ],
   "collections": [
     {
@@ -635,10 +634,7 @@ Gregorian calendar).
       "links": [
         { "href": "http://data.example.org/collections/buildings/items",
           "rel": "items", "type": "application/geo+json",
-          "title": "Buildings" },
-        { "href": "http://example.org/concepts/building.html",
-          "rel": "describedBy", "type": "text/html",
-          "title": "Feature catalogue for buildings" }
+          "title": "Buildings" }
       ]
     }
   ]
