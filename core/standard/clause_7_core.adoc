@@ -436,6 +436,8 @@ include::requirements/core/REQ_fc-md-links.adoc[]
 
 include::requirements/core/REC_fc-md-descriptions.adoc[]
 
+include::requirements/core/REC_fc-md-license.adoc[]
+
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/56[ISSUE 56] +
 Lack of DescribeFeatureType request
 
@@ -603,6 +605,8 @@ Representations of the metadata resource in other formats are referenced using l
 
 An additional link is to a GML application schema for the dataset - using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
 
+Finally there are also links to the license information for the building data (using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "license").
+
 Reference system information is not provided as the service provides geometries
 only in the default systems (spatial: WGS 84 longitude/latitude; temporal:
 Gregorian calendar).
@@ -634,7 +638,13 @@ Gregorian calendar).
       "links": [
         { "href": "http://data.example.org/collections/buildings/items",
           "rel": "items", "type": "application/geo+json",
-          "title": "Buildings" }
+          "title": "Buildings" },
+        { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "rel": "license", "type": "text/html",
+          "title": "CC0-1.0" },
+        { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
+          "rel": "license", "type": "application/rdf+xml",
+          "title": "CC0-1.0" }
       ]
     }
   ]
