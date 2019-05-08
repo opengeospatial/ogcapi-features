@@ -342,6 +342,7 @@ Two common mechanisms to support cross-origin requests are:
 * link:https://en.wikipedia.org/wiki/Cross-origin_resource_sharing[Cross-origin resource sharing (CORS)]
 * link:https://en.wikipedia.org/wiki/JSONP[JSONP (JSON with padding)]
 
+[[encodings]]
 === Encodings
 
 While OGC API Features does not specify any mandatory encoding, support for
@@ -379,6 +380,31 @@ for example, using format specific suffixes like ".html");
 * an additional query parameter (for example, "accept" or "f") that overrides
 the Accept header of the HTTP request.
 =====================================================================
+
+[[string_i18n]]
+=== String internationalization
+
+If the server supports representing resources in multiple languages, the usual
+HTTP content negotiation mechanisms apply. The client states its language
+preferences in the `Accept-Language` header of a request and the server
+responds with responses that have linguistic text in the language that
+best matches the requested languages and the capabilities of the server.
+
+include::requirements/core/REC_string-i18n.adoc[]
+
+For example, if JSON-LD is used as an encoding, the built-in capabilities to
+link:https://www.w3.org/TR/json-ld/#string-internationalization[annotate a string with its language]
+should be used.
+
+The link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml[link object]
+based on <<rfc8228,RFC 8288 (Web Linking)>> includes a `hreflang` attribute
+that can be used to state the language of the referenced resource. This can
+be used to include links to the same data in, for example, English or French.
+Just like with <<encodings,multiple encodings>> a server that wants to use
+language-specific links will have to support a mechanism to mint language-specific
+URIs for resources in order to express links to, for example, the same resource in
+another language. Again, this document does not mandate any particular approach
+how such a capability is supported by the server.
 
 === Coordinate reference systems
 
