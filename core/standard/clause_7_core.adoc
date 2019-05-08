@@ -177,6 +177,14 @@ a working client using the OpenAPI definition. The developer may need to learn
 a little bit about geometry data types, etc., but it should not be required to
 read this standard to access the data via the API.
 
+Two example OpenAPI documents are included in <<oas30_example,Annex B>>. The
+documents differ in their representation of the feature collections. The
+first example uses a path parameter `collectionId` and the API definition
+only has a single path entry for all feature collections.
+The second example explicitly defines each feature collection in a separate
+path and without a path parameter - this allows to specify filter parameters
+or explicit feature schemas per feature collection. Both variants are valid.
+
 ==== Error situations
 
 See <<http_status_codes>> for general guidance.
