@@ -6,7 +6,7 @@ rewrite of previous versions, focusing on a simple RESTful core specified
 as reusable [OpenAPI](http://openapis.org) components with responses
 in JSON and HTML.
 
-Alternate rederings of this standard are available for [HTML](http://docs.opengeospatial.org/DRAFTS/17-069.html) and [PDF](http://docs.opengeospatial.org/DRAFTS/17-069.pdf)
+Alternate renderings of this standard are available for [HTML](http://docs.opengeospatial.org/DRAFTS/17-069.html) and [PDF](http://docs.opengeospatial.org/DRAFTS/17-069.pdf)
 
 ## Overview
 
