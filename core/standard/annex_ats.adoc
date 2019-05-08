@@ -751,7 +751,7 @@ successfully.
 
 . For each execution of Test A.4.4.9, repeat Test A.4.4.10 to validate the results.
 
-. Use time intervals in the tests to verify the correct behavior for time intervals. In particular check that the start and end date-time are part of the interval (i.e. everything that is `>=` than the start and `<=` the end date-time is selected). Use also fractions of seconds in the tests.
+. Use time intervals in the tests to verify the correct behavior for time intervals. In particular check that the start and end date-time are part of the interval (i.e. everything that is `>=` than the start and `<=` the end date-time is selected). Use also fractions of seconds in the tests. If fractions of seconds are not provided, then the result has to include all values from that second (e.g., `../2019-04-11T12:34:56Z` means 'before 12:34:57 on 11/04/2019', but `../2019-04-11T12:34:56.7Z` means 'before or at 12:34:56.700 on 11/04/2019').
 
 ====== d) References:
 Requirements 22 and 23
