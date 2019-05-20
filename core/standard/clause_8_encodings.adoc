@@ -3,7 +3,7 @@
 === Overview
 
 This clause specifies four pre-defined requirements classes for encodings to be
-used by a WFS implementation. These encodings are commonly used encodings for spatial data on
+used by a OGC API Features implementation. These encodings are commonly used encodings for spatial data on
 the web:
 
 * <<rc_html,HTML>>
@@ -182,17 +182,17 @@ include::requirements/gmlsf0/REQ_content.adoc[]
 [cols="30,35,35",options="header"]
 !===
 |Resource |Path |XML root element
-|Landing page |`/` |`wfs:LandingPage`
-|Conformance classes |`/conformance` |`wfs:ConformsTo`
-|Feature collections metadata |`/collections` |`wfs:Collections`
-|Feature collection metadata |`/collections/{collectionId}` |`wfs:Collections`, with just one entry for the collection `collectionId`
-|Feature collection |`/collections/{collectionId}/items` |`wfs:FeatureCollection`
+|Landing page |`/` |`core:LandingPage`
+|Conformance classes |`/conformance` |`core:ConformsTo`
+|Feature collections metadata |`/collections` |`core:Collections`
+|Feature collection metadata |`/collections/{collectionId}` |`core:Collections`, with just one entry for the collection `collectionId`
+|Feature collection |`/collections/{collectionId}/items` |`core:FeatureCollection`
 |Feature |`/collections/{collectionId}/items/{featureId}` |substitutable for `gml:AbstractFeature`
 !===
 
-The namespace prefixes used above and in the WFS 3.0 Core XML Schema are:
+The namespace prefixes used above and in the OGC API Features Core XML Schema are:
 
-* `wfs`: `http://www.opengis.net/wfs/3.0`
+* `core`: `http://www.opengis.net/ogcapi-features-core/1.0`
 * `gml`: `http://www.opengis.net/gml/3.2`
 * `atom`: `http://www.w3.org/2005/Atom`
 * `xlink`: `http://www.w3.org/1999/xlink`
@@ -207,7 +207,7 @@ where simple Xlinks are used.
 
 <<xml_examples,Annex C>> has example responses in XML.
 
-NOTE: The `wfs:FeatureCollection` element deliberately goes beyond the permitted content
+NOTE: The `core:FeatureCollection` element deliberately goes beyond the permitted content
 specified in the <<GMLSF,GML Simple Features Profile>>, section 8.4.2. This is
 necessary to support the hypermedia controls and other relevant content for
 a Web Feature Service API.

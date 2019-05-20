@@ -1,17 +1,18 @@
-# WFS
+# OGC API - Features
 
-## Part 1 - Core
+## Current parts under development
 
-* see draft
+* Part 1: Core
+* Part 2: Extension for Coordinate Reference Systems (by reference)
 
-## Capabilities to be supported in additional WFS parts
+## Capabilities to be supported in additional parts
 
 * Transactions
 * Locking
 * 2D geometries not included in Simple Features
 * 3D geometries
 * GML application schemas
-* other CRS than geodetic WGS84 may be used as the default CRS
+* other CRS than geodetic WGS 84 may be used as the default CRS
 * return other CRS than the default CRS
 * support for resolve=local
 * Queries (dependency to FES)
@@ -23,6 +24,6 @@
 * Units of measure
 * ...
 
-## FES
+## Informative documents under development
 
-* to be discussed
+* Users Guide

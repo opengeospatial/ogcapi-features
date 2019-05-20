@@ -1,6 +1,6 @@
 # Standard template
 
-This folder contains the content for the WFS Part 1 (Core) standard.
+This folder contains the content for the OGC API - Features - Part 1: Core standard.
 
 The repo is organized as follows:
 

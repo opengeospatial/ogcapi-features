@@ -5,5 +5,5 @@
 The server SHALL support the HTTP GET operation at the path `/collections/{collectionId}`.
 
 The parameter `collectionId` is each `id` property in the feature
-collections metadata (JSONPath: `$.collections[*].id`).
+collections response (JSONPath: `$.collections[*].id`).
 |===

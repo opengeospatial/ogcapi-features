@@ -3,9 +3,9 @@
 |*Requirement {counter:req-id}* |/req/core/fc-op +
  +
 
-For every feature collection identified in the metadata about the feature collection (path `/`),
+For every feature collection identified in the feature collections response (path `/collections`),
 the server SHALL support the HTTP GET operation at the path `/collections/{collectionId}/items`.
 
 The parameter `collectionId` is each `id` property in the feature
-collections metadata (JSONPath: `$.collections[*].id`).
+collections response (JSONPath: `$.collections[*].id`).
 |===

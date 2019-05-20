@@ -9,15 +9,9 @@ include::requirements/requirements_class_oas30.adoc[]
 include::requirements/oas30/REQ_oas-definition-1.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/117[ISSUE 117] +
-The OpenAPI media type has not been registered yet with IANA and will likely
-change. We need to update the media type after registration.
+The OpenAPI media type has not been registered yet with IANA and may change.
 
 include::requirements/oas30/REQ_oas-definition-2.adoc[]
-
-CAUTION: Related to link:https://github.com/opengeospatial/WFS_FES/issues/90[ISSUE 90] +
-If we have a rigid path pattern there seems to be no need to add requirements for fixed operationId
-values. However, if the path pattern would be flexible, maybe we should require
-specific operationIds for selected resources?
 
 Two example OpenAPI documents are included in <<oas30_example,Annex B>>.
 
@@ -75,9 +69,6 @@ The OpenAPI specification currently supports the following link:https://github.c
 * an API key (either as a header or as a query parameter),
 * OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
 * OpenID Connect Discovery.
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/41[ISSUE 41] +
-How does a client determine which security protocols/standards/etc. a server supports?
 
 === Features
 

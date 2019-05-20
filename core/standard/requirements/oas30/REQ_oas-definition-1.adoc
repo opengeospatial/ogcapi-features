@@ -2,6 +2,7 @@
 |===
 |*Requirement {counter:req-id}* |/req/oas30/oas-definition-1 +
 
-The service SHALL provide an OpenAPI definition in JSON and HTML at the path
-`/api` using the media type `application/openapi+json;version=3.0`.
+The server SHALL provide an OpenAPI definition in JSON at the path
+`/api` using the media type `application/vnd.oai.openapi+json;version=3.0`
+and a HTML version of the API definition using the media type `text/html`.
 |===

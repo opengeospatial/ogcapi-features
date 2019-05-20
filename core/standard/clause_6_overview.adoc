@@ -1,31 +1,23 @@
 [[overview]]
 == Overview
 
-=== Evolution from previous versions of WFS
+=== Design considerations
 
-The previous versions of the WFS standard used a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads.
-When the WFS standard was originally designed in the late 1990s and early 2000s this was the state-of-the-art. The WFS 3.0 version specifies a modernized service, that follows the current Web architecture and in particular the <<SDWBP,W3C/OGC best practices for sharing Spatial Data on the Web>> as well as the <<DWBP,W3C best practices for sharing Data on the Web>>.
+While this is the first version of the OGC API Features series, the fine-grained access to features over the Web has been supported by the <<WFS20,OGC Web Feature Service (WFS)>> standard (in ISO: <<ISO19142,ISO 19142>>) and many implementations of that standard for many years. WFS uses a Remote-Procedure-Call-over-HTTP architectural style using XML for any payloads. When the WFS standard was originally designed in the late 1990s and early 2000s this was the state-of-the-art.
 
-Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal for this version of the WFS standard is modularization. This goal has several facets:
+OGC API Features supports similar capabilities, but using a modernized approach that follows the current Web architecture and in particular the <<SDWBP,W3C/OGC best practices for sharing Spatial Data on the Web>> as well as the <<DWBP,W3C best practices for sharing Data on the Web>>.
 
-* Clear separation between core requirements and more advanced capabilities. This
-document specifies the core requirements that are relevant for almost everyone
-who wants to share or use spatial data on a fine-grained level. Additional capabilities
-that several communities are using today will be specified as extensions in additional
-parts of WFS 3.0.
+Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal for OGC API Features is modularization. This goal has several facets:
+
+* Clear separation between core requirements and more advanced capabilities. This document specifies the core requirements that are relevant for almost everyone who wants to share or use feature data on a fine-grained level. Additional capabilities that several communities are using today will be specified as extensions in additional parts of the OGC API Features series.
 * Technologies that change more frequently are decoupled and specified in separate modules ("requirements classes" in OGC terminology). This enables, for example, the use/re-use of new encodings for spatial data or API descriptions.
-* Modularization is not just about WFS modules, but about providing building blocks for fine-grained access to spatial data that can be used in data APIs in general. In other words, a server supporting WFS 3.0 should not be seen as a standalone WFS service. A corollary of this is that it should be possible to implement a data API that at the same time conforms to conformance classes from WFS 3.0 and from other OGC Web Service standards following a similar approach.
+* Modularization is not just about features are resources, but about providing building blocks for fine-grained access to spatial data that can be used in Web APIs in general. In other words, a server supporting OGC API Features is not intended to implement just a standalone Features API. A corollary of this is that the same Web API may also implement other standards of the OGC API family that support additional resource types; for example, tile resources could provide access to the same features, but organized in a spatial partitioning system; or map resources could process the features and render them as as map images.
 
-This approach intends to support two types of client developers:
+Implementations of OGC API Features are intended to support two different approaches how clients can use the API.
 
-* Those that have never heard about WFS. Developers should be able to create a client using the API definition without the need to read the WFS standard (they may need to learn a little bit about geometry, etc.);
-* Those that want to write a "generic" client that can access WFSs, i.e. are not specific for a particular API/server.
+In the first approach, clients are implemented with knowledge about this standard and its resource types. The clients navigate the resources based on this knowledge and based on the responses provided by the API. The API definition may be used to determine details, e.g., on filter parameters, but this may not be necessary depending on the needs of the client. These are clients that are in general able to use multiple APIs as long as they implement OGC API Features.
 
-As a result of this modernization, WFS 3.0 implementations are not backwards compatible with WFS 2.0 implementations per se. However, a design goal was to define WFS 3.0 in a way so that the WFS 3.0 interface can be mapped to a WFS 2.0 implementation. WFS 3.0 is intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.
-
-The modernization is discussed in more detail link:https://github.com/opengeospatial/WFS_FES/blob/master/overview.md[here].
-
-CAUTION: Change this link and point to the WFS 3.0 Guide once a draft is available. The Guide will include a mapping between OGC Capabilities and OpenAPI as well as a mapping between WFS 2.0 operations and WFS 3.0.
+The other approach targets developers that are not familiar with the OGC API standards, but want to interact with spatial data provided by an API that happens to implement OGC API Features. In this case the developer will study and use the API definition - typically an OpenAPI document - to understand the API and implement the code to interact with the API. This assumes familiarity with the API definition language and the related tooling, but it should not be necessary to study the OGC API standards.
 
 === Encodings
 
@@ -50,7 +42,7 @@ if the feature data can be represented in GeoJSON for the intended use.
 
 Some examples for cases that are out-of-scope of GeoJSON are:
 
-* When solids are used for geometries (e.g. in a 3D city model),
+* When solids are used for geometries (e.g., in a 3D city model),
 * Geometries that include non-linear curve interpolations
 that cannot be simplified (e.g., use of arcs in authoritative geometries),
 * Geometries that have to be represented in a coordinate reference system that
@@ -72,7 +64,7 @@ in the Web community evolve, the recommendations will likely be updated
 in future versions of this standard to provide guidance on using other
 encodings.
 
-This part of the WFS 3.0 standard does not provide any guidance on other encodings. The
+This part of the OGC API Features standards does not provide any guidance on other encodings. The
 supported encodings, or more precisely the media types of the supported encodings,
 can be determined from the API definition. The desired encoding is selected
 using HTTP content negotiation.

@@ -1,16 +1,16 @@
 type: object
 xml:
   name: FeatureCollection
-  namespace: 'http://www.opengis.net/wfs/3.0'
-  prefix: wfs
+  namespace: 'http://www.opengis.net/ogcapi-features-core/1.0'
+  prefix: core
 properties:
   features:
     type: array
     items:
       xml:
         name: featureMember
-        namespace: 'http://www.opengis.net/wfs/3.0'
-        prefix: wfs
+        namespace: 'http://www.opengis.net/ogcapi-features-core/1.0'
+        prefix: core
       oneOf:
         - $ref: 'referenceXlink.yaml'
         - $ref: 'featureGML.yaml'

@@ -2,9 +2,8 @@
 
 ## Overview
 
-This page points to servers implementing WFS 3.0 drafts.
-For now this is limited to implementations of the current
-draft of part 1.
+This page points to servers implementing drafts of the OGC API Features series.
+For now this is limited to implementations of the current draft of Part 1. Core.
 
 ## Implementations:
 
@@ -48,7 +47,7 @@ HTML landing pages:
 
 The implementations are proxy services that sit on top of WFS 2.0 instances.
 
-Here are some example requests for features using GeoJSON output (for HTML output 
+Here are some example requests for features using GeoJSON output (for HTML output
 simply change `f=json` to `f=html`, for GML to `f=xml`):
 
 * Municipalities close to Bonn (attribute and spatial filter):  
@@ -104,7 +103,7 @@ Like the interactive instruments server, this 3.0 alpha implementation is a
 facade sitting on top of our previous WFS 2.X implementation.
 
 HTML landing page:
-* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation 
+* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundation
 
 NOTE: The landing page still uses the classic OGC request forms and has not yet been updated to 3.0.
 
@@ -129,7 +128,7 @@ nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/2.5.0/foundati
 
 ## GeoServer
 
-An incomplete implementation of the WFS3 specification is available at http://cloudsdi.geo-solutions.it/geoserver/wfs3/ 
+An incomplete implementation of the WFS3 specification is available at http://cloudsdi.geo-solutions.it/geoserver/wfs3/
 It is a community module developed from scratch during the WFS 3 hackaton. At the time of writing, still misses HTML outputs, conformance call, paging links (supports random paging with startIndex), single feature outputs and attribute filtering.
 
 ## pygeoapi
