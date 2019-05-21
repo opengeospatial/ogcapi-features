@@ -108,9 +108,6 @@ include::requirements/core/REQ_root-op.adoc[]
 
 include::requirements/core/REQ_root-success.adoc[]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/101[ISSUE 101] +
-Landing page: Can we reuse existing relation types instead of 'conformance' and 'data'?
-
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml[Schema for the landing page]
 [source,YAML]
 ----
@@ -440,10 +437,6 @@ include::requirements/core/REC_fc-md-license.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/56[ISSUE 56] +
 Lack of DescribeFeatureType request
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/102[ISSUE 102] +
-Add a recommendation about a link to the dataset metadata (for example, in DCAT).
-Which link relation type?
 
 include::requirements/core/REQ_fc-md-items.adoc[]
 
@@ -828,9 +821,6 @@ example included in the OpenAPI fragment would search for all buildings with
 a name that starts with "A".
 =================
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/20[ISSUE 20] +
-Query parameter name collisions.
-
 ==== Response
 
 include::requirements/core/REQ_fc-response.adoc[]
@@ -962,10 +952,6 @@ a bounding box;
 include::requirements/core/REQ_f-op.adoc[]
 
 include::requirements/core/PER_f-id.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/47[ISSUE 47] +
-There are two types of feature identifiers and we need to make sure we
-distinguish between them.
 
 ==== Response
 
