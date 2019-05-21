@@ -39,8 +39,8 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
-addition to the `bbox` filter above, with extensions providing more advanced options.
-([7.14](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_collection))
+addition to the `bbox` filter above, with extensions providing more advanced options
+([7.14](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_collection_2)).
 
 ```
 GET /collections/{collectionId}/items/{featureId}
@@ -48,7 +48,8 @@ GET /collections/{collectionId}/items/{featureId}
 
 Returns a single 'feature' - something in the real-world (a building,
 a stream, a county, etc.) that typically is described by a geometry plus other properties.
-This provides a stable, canonical URL to link to the 'thing'.
+This provides a stable, canonical URL to link to the 'thing'
+([7.15](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_2)).
 
 ## Using the standard
 
