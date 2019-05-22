@@ -54,8 +54,8 @@ This provides a stable, canonical URL to link to the 'thing'
 ## Using the standard
 
 A stable draft is available (from April 2018). Note that the draft uses the title "Web Feature Service" or "WFS",
-version 3.0. This was the original title and newer editor's drafts (see below) already use the new title
-"OGC API - Features".
+version 3.0. This was the original title and newer [editor's drafts](http://docs.opengeospatial.org/DRAFTS/17-069r1.html)
+already use the new title "OGC API - Features".
 
 * [OGC API - Features - Part 1: Core, First Draft Release (draft.1)](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html)
 
@@ -79,28 +79,30 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 ## Additional Information
 
-* [Checklist for implementers (for draft.1 from April 2018)](guide/conformance_checklist.md)
-
-Also a non-normative document, the "Users Guide", is being developed.
-
 In addition to feedback from the initial implementations as well as discussions on GitHub and in the OGC/ISO working group,
 the current draft standard has been tested in a [WFS 3.0 Hackathon](http://www.opengeospatial.org/blog/2764), the [OGC Testbed-14](http://www.opengeospatial.org/projects/initiatives/testbed14), the [OGC Vector Tiles Pilot](https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) and other activities.
 
 Feedback for the Core is collected and discussed in the
-[GitHub issues for Part 1, Core](https://github.com/opengeospatial/WFS_FES/issues?q=is%3Aissue+is%3Aopen+label%3A%22Document%3A+Part+1+-+Core%22). The current expectation is to have a stable version of the Core specification by August 2019. This version would
-then be the input for the next steps in the standardization process in OGC and ISO/TC 211.
+[GitHub issues for Part 1 (Core)](https://github.com/opengeospatial/WFS_FES/projects/1).
+The current expectation is to have a stable version of the Core specification by August 2019.
+This version would then be the input for the next steps in the standardization process
+in OGC and ISO/TC 211.
+
+The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r1.html), also available as
+[PDF](http://docs.opengeospatial.org/DRAFTS/17-069r1.pdf).
+
+Also a non-normative document, the "Users Guide", and Part 2, support for Coordinate Reference Systems, are being developed.
 
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
-* [OGC API - Features - Part 1: Core, Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r1.html), also available as
-[PDF](http://docs.opengeospatial.org/DRAFTS/17-069r1.pdf)
+* [Checklist for implementers (for draft.1 from April 2018)](guide/conformance_checklist.md)
 
-## Contributing
+## [Contributing](Contributing.md)
 
-The contributor understands that any contributions, if accepted by the OGC Membership and ISO/TC 211, shall be incorporated into OGC and ISO/TC 211 Web Feature Service standards documents and that all copyright and intellectual property shall be vested to the OGC.
+The contributor understands that any contributions, if accepted by the OGC Membership and ISO/TC 211, shall be incorporated into OGC and ISO/TC 211 OGC API standards documents and that all copyright and intellectual property shall be vested to the OGC.
 
 The WFS/FES Standards Working Group (SWG) is the group at OGC responsible for the stewardship of the standard, but is working to do as much work in public as possible.
 
 * [Open issues](https://github.com/opengeospatial/WFS_FES/issues)
-* [Proposing changes](https://github.com/opengeospatial/WFS_FES/wiki/Propose-a-change-to-a-draft-of-a-WFS-specification-document)
+* [Proposing changes](https://github.com/opengeospatial/WFS_FES/wiki/Propose-a-change-to-a-draft-of-a-specification-document)
 * [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/LICENSE)
