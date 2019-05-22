@@ -18,13 +18,13 @@ in the W3C/OGC Spatial Data on the Web Best Practice document provide more detai
 
 ## Overview
 
-A Web Feature Service is a standard API that represents collections of geospatial data.
+OGC API Features provides access to collections of geospatial data.
 
 ```
 GET /collections
 ```
 
-Lists the collections of data on the server that can be queried ([7.11](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections)),
+Lists the collections of data on the server that can be queried ([7.12](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_collections)),
 and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained
 
@@ -39,8 +39,8 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
-addition to the `bbox` filter above, with extensions providing more advanced options.
-([7.13](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collection))
+addition to the `bbox` filter above, with extensions providing more advanced options
+([7.14](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_collection_2)).
 
 ```
 GET /collections/{collectionId}/items/{featureId}
@@ -48,22 +48,23 @@ GET /collections/{collectionId}/items/{featureId}
 
 Returns a single 'feature' - something in the real-world (a building,
 a stream, a county, etc.) that typically is described by a geometry plus other properties.
-This provides a stable, canonical URL to link to the 'thing'.
+This provides a stable, canonical URL to link to the 'thing'
+([7.15](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_2)).
 
 ## Using the standard
 
-A stable draft is available. Note that the draft uses the title "Web Feature Service" or "WFS",
-version 3.0. This was the original title and newer editor's drafts already use the title
+A stable draft is available (from April 2018). Note that the draft uses the title "Web Feature Service" or "WFS",
+version 3.0. This was the original title and newer editor's drafts (see below) already use the new title
 "OGC API - Features".
 
-* [OGC API - Features - Part 1: Core, First Draft Release](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html)
+* [OGC API - Features - Part 1: Core, First Draft Release (draft.1)](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html)
 
 A [PDF version](https://portal.opengeospatial.org/files/?artifact_id=79027&version=1) is available, too.
 
 Those who want to just see the endpoints and responses can explore the generic
 OpenAPI definition on SwaggerHub:
 
-* [OGC API Features 1.0.0-draft.1 openapi.yaml](https://app.swaggerhub.com/apis/cholmesgeo/WFS3/M1)
+* [draft.1 openapi.yaml](https://app.swaggerhub.com/apis/cholmesgeo/WFS3/M1)
 
 Several implementations of the draft standard exist:
 
@@ -78,7 +79,7 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 ## Additional Information
 
-* [Checklist for implementers](guide/conformance_checklist.md)
+* [Checklist for implementers (for draft.1 from April 2018)](guide/conformance_checklist.md)
 
 Also a non-normative document, the "Users Guide", is being developed.
 
@@ -91,8 +92,8 @@ then be the input for the next steps in the standardization process in OGC and I
 
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
-* [OGC API - Features - Part 1: Core, Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069.html), also available as
-[PDF](http://docs.opengeospatial.org/DRAFTS/17-069.pdf)
+* [OGC API - Features - Part 1: Core, Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r1.html), also available as
+[PDF](http://docs.opengeospatial.org/DRAFTS/17-069r1.pdf)
 
 ## Contributing
 

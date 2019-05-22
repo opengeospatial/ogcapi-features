@@ -108,9 +108,6 @@ include::requirements/core/REQ_root-op.adoc[]
 
 include::requirements/core/REQ_root-success.adoc[]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/101[ISSUE 101] +
-Landing page: Can we reuse existing relation types instead of 'conformance' and 'data'?
-
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml[Schema for the landing page]
 [source,YAML]
 ----
@@ -176,6 +173,14 @@ For example, if an OpenAPI definition is used, it should be possible to create
 a working client using the OpenAPI definition. The developer may need to learn
 a little bit about geometry data types, etc., but it should not be required to
 read this standard to access the data via the API.
+
+Two example OpenAPI documents are included in <<oas30_example,Annex B>>. The
+documents differ in their representation of the feature collections. The
+first example uses a path parameter `collectionId` and the API definition
+only has a single path entry for all feature collections.
+The second example explicitly defines each feature collection in a separate
+path and without a path parameter - this allows to specify filter parameters
+or explicit feature schemas per feature collection. Both variants are valid.
 
 ==== Error situations
 
@@ -342,6 +347,7 @@ Two common mechanisms to support cross-origin requests are:
 * link:https://en.wikipedia.org/wiki/Cross-origin_resource_sharing[Cross-origin resource sharing (CORS)]
 * link:https://en.wikipedia.org/wiki/JSONP[JSONP (JSON with padding)]
 
+[[encodings]]
 === Encodings
 
 While OGC API Features does not specify any mandatory encoding, support for
@@ -379,6 +385,31 @@ for example, using format specific suffixes like ".html");
 * an additional query parameter (for example, "accept" or "f") that overrides
 the Accept header of the HTTP request.
 =====================================================================
+
+[[string_i18n]]
+=== String internationalization
+
+If the server supports representing resources in multiple languages, the usual
+HTTP content negotiation mechanisms apply. The client states its language
+preferences in the `Accept-Language` header of a request and the server
+responds with responses that have linguistic text in the language that
+best matches the requested languages and the capabilities of the server.
+
+include::requirements/core/REC_string-i18n.adoc[]
+
+For example, if JSON-LD is used as an encoding, the built-in capabilities to
+link:https://www.w3.org/TR/json-ld/#string-internationalization[annotate a string with its language]
+should be used.
+
+The link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml[link object]
+based on <<rfc8228,RFC 8288 (Web Linking)>> includes a `hreflang` attribute
+that can be used to state the language of the referenced resource. This can
+be used to include links to the same data in, for example, English or French.
+Just like with <<encodings,multiple encodings>> a server that wants to use
+language-specific links will have to support a mechanism to mint language-specific
+URIs for resources in order to express links to, for example, the same resource in
+another language. Again, this document does not mandate any particular approach
+how such a capability is supported by the server.
 
 === Coordinate reference systems
 
@@ -440,10 +471,6 @@ include::requirements/core/REC_fc-md-license.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/56[ISSUE 56] +
 Lack of DescribeFeatureType request
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/102[ISSUE 102] +
-Add a recommendation about a link to the dataset metadata (for example, in DCAT).
-Which link relation type?
 
 include::requirements/core/REQ_fc-md-items.adoc[]
 
@@ -828,9 +855,6 @@ example included in the OpenAPI fragment would search for all buildings with
 a name that starts with "A".
 =================
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/20[ISSUE 20] +
-Query parameter name collisions.
-
 ==== Combinations of filter parameters
 
 Any combination of `bbox`, `datetime` and parameters for filtering on
@@ -969,10 +993,6 @@ a bounding box;
 include::requirements/core/REQ_f-op.adoc[]
 
 include::requirements/core/PER_f-id.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/47[ISSUE 47] +
-There are two types of feature identifiers and we need to make sure we
-distinguish between them.
 
 ==== Response
 

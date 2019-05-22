@@ -14,12 +14,14 @@ The OpenAPI media type has not been registered yet with IANA and may change.
 include::requirements/oas30/REQ_oas-definition-2.adoc[]
 
 Two example OpenAPI documents are included in <<oas30_example,Annex B>>.
+The documents differ in their representation of the feature collections. The
+first example uses a path parameter `collectionId` and the API definition
+only has a single path entry for all feature collections.
+The second example explicitly defines each feature collection in a separate
+path and without a path parameter - this allows to specify filter parameters
+or explicit feature schemas per feature collection. Both variants are valid.
 
 include::requirements/oas30/REQ_oas-impl.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/46[ISSUE 46] +
-Currently, no tool is known to validate that a server implements the
-API specified in its OpenAPI definition.
 
 === Complete definition
 
