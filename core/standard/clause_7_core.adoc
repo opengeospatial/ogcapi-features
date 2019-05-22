@@ -855,6 +855,13 @@ example included in the OpenAPI fragment would search for all buildings with
 a name that starts with "A".
 =================
 
+==== Combinations of filter parameters
+
+Any combination of `bbox`, `datetime` and parameters for filtering on
+feature properties is allowed. Note that the requirements on these parameters
+imply that only features matching all the predicates are in the result set.
+I.e., the logical operator between the predicates is 'AND'.
+
 ==== Response
 
 include::requirements/core/REQ_fc-response.adoc[]
