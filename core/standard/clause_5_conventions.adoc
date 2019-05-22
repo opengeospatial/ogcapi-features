@@ -14,7 +14,28 @@ Resources are modeled as UML interfaces.
 
 === Link relations
 
-To express relationships between resources, <<rfc8288,RFC 8288 (Web Linking)>> and <<link-relations,registered link relation types>> are used.
+To express relationships between resources, <<rfc8288,RFC 8288 (Web Linking)>> is used.
+
+The following <<link-relations,registered link relation types>> are used in this document:
+
+* **alternate**: Refers to a substitute for this context.
+* **collection**: The target IRI points to a resource which represents the collection resource for the context IRI.
+* **describedBy**: Refers to a resource providing information about the link's context.
+* **item**: The target IRI points to a resource that is a member of the collection represented by the context IRI.
+* **next**: Indicates that the link's context is a part of a series, and that the next in the series is the link target.
+* **license**: Refers to a license associated with this context.
+* **prev**: Indicates that the link's context is a part of a series, and that the previous in the series is the link target.
+** This relation is only used in examples.
+* **self**: Conveys an identifier for the link's context.
+* **service**: Indicates a URI that can be used to retrieve a service document.
+** API definitions are considered "service documents".
+
+In addition the following link relation types are used for which no applicable
+registered link relation type could be identified:
+
+* **items**: Refers to a resource that is comprised of members of the collection represented by the link's context.
+* **conformance**: Refers to a resource that lists the specifications that the link's context conforms to.
+* **data**: Indicates that the link's context is a distribution of a dataset that is an API and refers to a root resource of the dataset in the API.
 
 === Use of HTTPS
 
