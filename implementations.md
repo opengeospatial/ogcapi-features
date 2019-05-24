@@ -136,13 +136,12 @@ It is a community module developed from scratch during the WFS 3 hackaton. At th
 [pygeoapi](https://geopython.github.io/pygeoapi) implements the majority of the current draft.  pygeoapi is implemented in Python, and supports JSON and HTML responses.
 
 ### Example requests:
-* OpenAPI 3 document: http://geo.kralidis.ca/pygeoapi/api
-* All feature collections: http://geo.kralidis.ca/pygeoapi/collections ([HTML](http://geo.kralidis.ca/pygeoapi/collections?f=html))
-* Single feature collection: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple ([HTML](http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple?f=html))
-* Feature collection items: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items ([HTML](http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?f=html))
-* Feature collection single item: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items/2661552 ([HTML](http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items/2661552?f=html))
-* Feature collection: populated places in Canada: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?adm0name=Canada
-* Feature collection: bbox query: http://geo.kralidis.ca/pygeoapi/collections/ne_110m_populated_places_simple/items?bbox=-152,42,-52,84
+* OpenAPI 3 document: ([JSON](https://demo.pygeoapi.io/master/api?f=json)) ([HTML](https://demo.pygeoapi.io/master/api))
+* All feature collections: ([JSON](https://demo.pygeoapi.io/master/collections?f=json)) ([HTML](https://demo.pygeoapi.io/master/collections?f=html))
+* Single feature collection: ([JSON](https://demo.pygeoapi.io/master/collections/utah_city_locations?f=json)) ([HTML](https://demo.pygeoapi.io/master/collections/utah_city_locations?f=html))
+* Feature collection items: ([JSON](https://demo.pygeoapi.io/master/collections/utah_city_locations/items?f=json)) ([HTML](https://demo.pygeoapi.io/master/collections/utah_city_locations/items?f=html))
+* Feature collection single item: ([JSON](https://demo.pygeoapi.io/master/collections/utah_city_locations/items/Fairfield?f=json) ([HTML](https://demo.pygeoapi.io/master/collections/utah_city_locations/items/Fairfield?f=html))
+* Feature collection: bbox query: ([JSON](https://demo.pygeoapi.io/master/collections/lakes/items?bbox=-152,42,-52,84&f=json)) ([HTML](https://demo.pygeoapi.io/master/collections/lakes/items?bbox=-152,42,-52,84&f=html))
 
 The Meteorological Service of Canada uses pygeoapi in production at https://geo.weather.gc.ca/geomet/features
 
