@@ -5,43 +5,61 @@
 
 include::requirements/requirements_class_core.adoc[]
 
-Figure 1 illustrates the resources supported by the _Core_ requirements class using
-UML. Each resource type available through the server is an «interface».
+A server that implements this conformance class provides access to the features in a
+link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset]. In other words, the
+API is a link:https://www.w3.org/TR/vocab-dcat/#class-distribution[distribution]
+of that dataset. A file download, for example, would be another distribution.
 
-A server that implements this conformance class provides access to the features in a dataset.
-In other words, the API is a distribution of that dataset. A file download, for example,
-would be another distribution.
+NOTE: Other parts of this standard may define API extensions that support
+multiple datasets. The statement that the features are from "a dataset" is
+not meant to preclude such extensions. It just reflects that this document
+does not specify how the API publishes features or other spatial data from
+multiple datasets.
 
-More specifically, each dataset has a single `LandingPage` (path `/`).
+The entry point is a `Landing page` (path `/`).
 
 NOTE: All paths (e.g., `/`) are relative to the base URL of the distribution of the
 dataset. If the API covers other resources beyond those specified in this document,
-the landing page may be a sub-resource of the base URL of the API.
+the landing page may also be, for example, a sub-resource of the base URL of the API.
 
-The landing page provides links to
+The `Landing page` provides links to
 
-* the `APIDefinition` (path `/api`),
-* the `Conformance` statements (path `/conformance`),
-* metadata about the `Collections` metadata (path `/collections`).
+* the `API definition` (path `/api`, link relation `service`),
+* the `Conformance declaration` (path `/conformance`, link relation `conformance`), and
+* the `Collections` (path `/collections`, link relation `data`).
 
-The `APIDefinition` resource describes the capabilities of the server that can be used by
+The `API definition` describes the capabilities of the server that can be used by
 clients to connect to the server or by development tools to support the
-implementation of servers and clients. Accessing the `APIDefinition` using
+implementation of servers and clients. Accessing the `API definition` using
 HTTP GET returns a description of the API.
 
-Accessing the `Conformance` resource using HTTP GET returns a list of URIs of
+The `Conformance declaration` states the requirements classes from standards
+or community specifications, identified by a URI, that the API conforms to.
+Clients can but are not required to use this information. Accessing the
+`Conformance declaration` using HTTP GET returns the list of URIs of
 requirements classes implemented by the server.
 
-The distribution consists of a set of `Collections`, feature collections in the
-case of the OGC API Features where the dataset consists of features. This standard does not
+The data is organized into one or more collections. `Collections` provides
+information about and access to the collections.
+
+This document specifies
+requirements only for collections consisting of features. That is, each
+collection considered by this document is a feature collection.
+Other OGC API standards may add requirements for other types of collections.
+
+NOTE: To support the future use of datasets with items that are not feature,
+the term "feature" has not been added in the names of the resource types or
+their paths.
+
+This standard does not
 include any requirements about how the features in the dataset have to be aggregated
 into collections. A typical approach is to aggregate by feature type but any other approach
 that fits the dataset or the applications using this distribution may also be used.
 
-Accessing the `Collections` resource using HTTP GET returns a
-response that consists of `CollectionMetadata` about each `Collection`
-(also available at path `/collections/{collectionId}`) and a link
-to the `Collection` itself. The metadata includes:
+Accessing `Collections` using HTTP GET returns a response that contains
+at least a link to the items in each `Collection` (path `/collections/{collectionId}/items`,
+link relation `items`) as well as key metadata about each collection
+(`Collection metadata`). The metadata includes:
 
 * A local identifier for the collection that is unique for the dataset;
 * A list of coordinate reference systems (CRS) in which geometries may be returned by
@@ -49,10 +67,19 @@ the server. The first CRS is the default coordinate reference system
 (in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
 * An optional title and description for the collection;
 * An optional extent that can be used to provide an indication of the
-spatial and temporal extent of the collection - typically derived from the data.
+spatial and temporal extent of the collection - typically derived from the data;
+* An optional indicator about the type of the items in the collection (the
+default value, if the indicator is not provided, is 'feature').
 
-Each `Collection` (path `/collections/{collectionId}/items`) consists of the features
-in the collection where each feature in the dataset is part of exactly one collection.
+The `Collection metadata` for each  `Collection` is available at path
+`/collections/{collectionId}`, too, often with more details than included in
+the `Collections` response.
+
+Each `Collection` that is a feature collection consists of features
+as items in the collection. This document only discusses the behavior of feature
+collections.
+
+Each feature in a dataset is part of exactly one collection.
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/30[ISSUE 30] +
 Allow also features that do not belong to any collection?
@@ -60,41 +87,32 @@ Allow also features that do not belong to any collection?
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/66[ISSUE 66] +
 Support features that do belong to multiple collections?
 
-Accessing a `Collection` using HTTP GET returns a `Page`. This
-response basically consists of features in the collection. The features included
-in the response are determined by the server based on parameters of the request.
-The name "page" indicates that the server supports paged access through
-the selected features of the collection.
+Accessing a `Collection` using HTTP GET returns a document consisting of
+features in the collection. The features included in the response are determined
+by the server based on the query parameters of the request. To support access to
+larger collections without overloading the client, the API supports
+paged access with links to the next page, if more features are selected
+that the page size.
 
 A `bbox` or `datetime` parameter may be used to select only a subset of the features in
-the collection (the features that are located in the bounding box or time interval).
+the collection (the features that are in the bounding box or time interval).
 The `bbox` parameter matches all features in the collection that are
 not associated with a location, too. The `datetime` parameter matches all
 features in the collection that are not associated with a time stamp or
 interval, too.
 
 The `limit` parameter may be used to control the subset of the
-selected features that should be returned in the response.
+selected features that should be returned in the response, the page size.
 
-The `Page` may include the number of selected and returned
+Each page may include information about the number of selected and returned
 features (`numberMatched` and `numberReturned`) as well as links to support
-paging (`next` and `prev`).
+paging (link relation `next`).
 
 Each `Feature` (path `/collections/{collectionId}/items/{featureId}`)
 is also a separate resource and may be requested individually using HTTP GET.
 
-NOTE: In the description the term "collection" is used where "feature collection"
-would have been more precise as this document only discusses datasets of features.
-To support the future use of the `Collections` and `Collection` resources for
-collections of other resource types "feature" has not been added in the names
-of the resource types or their paths.
-
-[#img_core,reftext='{figure-caption} {counter:figure-num}']
-.Resources in the Core requirements class
-image::figures/PT1_FIG01.png[align="center"]
-
 In addition to the simple path structures described above, where all features
-in a dataset are organized in a one-level collection hierarchy, additional parts
+are organized in a one-level collection hierarchy, additional parts
 of the OGC API Feature series are expected to provide alternate access to the
 features served by the API via additional, deeper collection hierarchies.
 
@@ -611,6 +629,10 @@ properties:
             enum:
               - 'http://www.opengis.net/def/uom/ISO-8601/0/Gregorian'
             default: 'http://www.opengis.net/def/uom/ISO-8601/0/Gregorian'
+  itemType:
+    description: indicator about the type of the items in the collection (the default value is 'feature').
+    type: string
+    default: feature
   crs:
     description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
     type: array
