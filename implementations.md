@@ -15,11 +15,13 @@ Servers:
 * [pygeoapi](#pygeoapi)
 * [jivan](#jivan)
 * [sofp](#sofp)
+* [STAC](#STAC)
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
 * [ogr/gdal WFS 3.0 client driver](http://gdal.org/drv_wfs3.html)
 * [OWSLib WFS 3.0 client](https://geopython.github.io/OWSLib)
+* [STAC](#STAC)
 
 ## interactive instruments
 
@@ -179,3 +181,13 @@ Finnish Meteorological Institute hosts a demo server at http://beta.fmi.fi/data/
 * OpenAPI 3 as HTML: http://beta.fmi.fi/data/3/wfs/sofp/api.html
 * All feature collections: http://beta.fmi.fi/data/3/wfs/sofp/collections
 * Weather observations: http://beta.fmi.fi/data/3/wfs/sofp/collections/opendata_1h/items?observedPropertyName=Temperature,WindSpeedMS,WindDirection&bbox=24.5,60,25.5,60.5&limit=100
+
+## STAC
+
+The [SpatioTemporal Asset Catalog (STAC) specification](https://github.com/radiantearth/stac-spec), more precisely the [STAC API specification](https://github.com/radiantearth/stac-spec/tree/master/api-spec), is based on WFS 3 API. Thus STAC API is a superset of the core WFS3 API, in that WFS 3 defines many of the endpoints that STAC uses. A STAC API should be compatible and usable with WFS3 clients and a STAC server should also be a valid WFS3 server. However, WFS 3 is still under development and while STAC tries to stay in sync with WFS3 developments, there may be discrepencies prior to final versions of both specifications.
+
+### Implementations
+* Client: [STAC Browser](https://github.com/radiantearth/stac-browser/)
+* Server: [sat-api](https://github.com/sat-utils/sat-api)
+
+See the [STAC implementations page](https://github.com/radiantearth/stac-spec/blob/master/implementations.md#api-active-catalog-examples) for more implementations.
