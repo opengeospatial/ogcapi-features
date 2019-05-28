@@ -10,14 +10,14 @@ OpenAPI fragments used to define the requirements for the
 <<rc_core,Core requirements class>> are expressed in XML using the
 link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/core.xsd[OGC API Features Core XML Schema].
 
-=== A Landing page
+=== A landing page
 
 [source,XML]
 ----
 include::../xml/examples/LandingPage.xml[]
 ----
 
-=== Conformance statements
+=== Conformance declaration
 
 This server conforms to the recommended requirements classes, plus the GML Simple Features Profile, Level 0.
 
@@ -26,7 +26,7 @@ This server conforms to the recommended requirements classes, plus the GML Simpl
 include::../xml/examples/ConformsTo.xml[]
 ----
 
-=== Feature collections metadata
+=== Feature collections
 
 This service offers three feature collections (airport facilities, roads, inland water areas).
 
@@ -35,7 +35,7 @@ This service offers three feature collections (airport facilities, roads, inland
 include::../xml/examples/Collections.xml[]
 ----
 
-=== Feature collection metadata
+=== Feature collection
 
 Only the information for the selected feature collection (roads) is included in the response.
 
@@ -44,7 +44,7 @@ Only the information for the selected feature collection (roads) is included in 
 include::../xml/examples/Collection.xml[]
 ----
 
-=== A feature collection
+=== Features
 
 This response contains 2 features of the airport facilities collection and has a link to the next features.
 

@@ -47,7 +47,7 @@ requirements only for collections consisting of features. That is, each
 collection considered by this document is a feature collection.
 Other OGC API standards may add requirements for other types of collections.
 
-NOTE: To support the future use of datasets with items that are not feature,
+NOTE: To support the future use of datasets with items that are not features,
 the term "feature" has not been added in the names of the resource types or
 their paths.
 
@@ -57,9 +57,10 @@ into collections. A typical approach is to aggregate by feature type but any oth
 that fits the dataset or the applications using this distribution may also be used.
 
 Accessing `Collections` using HTTP GET returns a response that contains
-at least a link to the items in each `Collection` (path `/collections/{collectionId}/items`,
-link relation `items`) as well as key metadata about each collection
-(`Collection metadata`). The metadata includes:
+at least the list of collections. For each `Collection`, a link to the items in
+the collection (`Features`, path `/collections/{collectionId}/items`,
+link relation `items`) as well as key information about the collection.
+This information includes:
 
 * A local identifier for the collection that is unique for the dataset;
 * A list of coordinate reference systems (CRS) in which geometries may be returned by
@@ -71,13 +72,12 @@ spatial and temporal extent of the collection - typically derived from the data;
 * An optional indicator about the type of the items in the collection (the
 default value, if the indicator is not provided, is 'feature').
 
-The `Collection metadata` for each  `Collection` is available at path
+The `Collection` resource is available at path
 `/collections/{collectionId}`, too, often with more details than included in
 the `Collections` response.
 
-Each `Collection` that is a feature collection consists of features
-as items in the collection. This document only discusses the behavior of feature
-collections.
+Each `Collection` that is a feature collection consists of features.
+This document only discusses the behavior of feature collections.
 
 Each feature in a dataset is part of exactly one collection.
 
@@ -87,7 +87,7 @@ Allow also features that do not belong to any collection?
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/66[ISSUE 66] +
 Support features that do belong to multiple collections?
 
-Accessing a `Collection` using HTTP GET returns a document consisting of
+Accessing the `Features` using HTTP GET returns a document consisting of
 features in the collection. The features included in the response are determined
 by the server based on the query parameters of the request. To support access to
 larger collections without overloading the client, the API supports
@@ -126,7 +126,7 @@ include::requirements/core/REQ_root-op.adoc[]
 
 include::requirements/core/REQ_root-success.adoc[]
 
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml[Schema for the landing page]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/landingPage.yaml[Schema for the landing page]
 [source,YAML]
 ----
 type: object
@@ -453,6 +453,7 @@ of the OGC API Features series.
 
 include::requirements/core/REC_link-header.adoc[]
 
+[[_collections_]]
 === Feature collections
 
 ==== Operation
@@ -463,7 +464,7 @@ include::requirements/core/REQ_fc-md-op.adoc[]
 
 include::requirements/core/REQ_fc-md-success.adoc[]
 
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml[Schema for the metadata about feature collections]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collections.yaml[Schema for the metadata about feature collections]
 [source,YAML]
 ----
 type: object
@@ -478,7 +479,7 @@ properties:
   collections:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collection.yaml
 ----
 
 include::requirements/core/REQ_fc-md-links.adoc[]
@@ -504,7 +505,7 @@ include::requirements/core/REC_fc-md-extent-single.adoc[]
 
 include::requirements/core/PER_fc-md-extent-extensions.adoc[]
 
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collection.yaml[Schema for a feature collection]
 [source,YAML]
 ----
 type: object
@@ -647,10 +648,10 @@ NOTE: The `crs` property of the `collectionInfo` object is not used by this conf
 .Feature collections response document
 =================
 This feature collections example response in JSON is for a dataset with
-a single collection "buildings". It includes links to the collection resource in all formats that
+a single collection "buildings". It includes links to the features resource in all formats that
 are supported by the service (link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type]: "items").
 
-Representations of the metadata resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
+Representations of the resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
 
 An additional link is to a GML application schema for the dataset - using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
 
@@ -685,9 +686,12 @@ Gregorian calendar).
         }
       },
       "links": [
-        { "href": "http://data.example.org/collections/buildings/items",
+        { "href": "http://data.example.org/collections/buildings/items.json",
           "rel": "items", "type": "application/geo+json",
           "title": "Buildings" },
+          { "href": "http://data.example.org/collections/buildings/items.html",
+            "rel": "items", "type": "text/html",
+            "title": "Buildings as HTML" },
         { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
           "rel": "license", "type": "text/html",
           "title": "CC0-1.0" },
@@ -705,7 +709,8 @@ Gregorian calendar).
 
 See <<http_status_codes>> for general guidance.
 
-=== Feature collection metadata
+[[_collection_]]
+=== Feature collection
 
 ==== Operation
 
@@ -722,7 +727,8 @@ See <<http_status_codes>> for general guidance.
 If the parameter `collectionId` does not exist on the server, the status code of the
 response will be `404` (see <<status_codes>>).
 
-=== Feature collection
+[[_items_]]
+=== Features
 
 ==== Operation
 
@@ -1007,7 +1013,7 @@ A `400` will be returned in the following situations:
 a bounding box;
 * if parameter `datetime` is not a valid time stamp or time interval.
 
-
+[[_feature_]]
 === Feature
 
 ==== Operation
