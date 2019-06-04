@@ -128,7 +128,7 @@ f=application/gml%2Bxml;%20version=3.2&
 bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
 
 * All municipalities that start with "Wash":  
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/items/builtupa_1m?  
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?  
 f=application/gml%2Bxml;%20version=3.2&  
 nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?&f=application/gml%2Bxml;%20version=3.2&nam=Wash*)
 
