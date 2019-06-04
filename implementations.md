@@ -106,27 +106,31 @@ facade sitting on top of our previous WFS 2.X implementation.
 
 HTML landing page:
 * http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation
+* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/usbuildingfootprints
 
 NOTE: The landing page still uses the classic OGC request forms and has not yet been updated to 3.0.
 
 Here are some example requests for features using GML v3.2 output.
 
 * Built up areas around Washington DC:
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/builtupa_1m?  
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?  
 count=20&  
 f=application/gml%2Bxml;%20version=3.2&  
-bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/builtupa_1m?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+
+* ... and the corresponding building footprints
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/usbuildingfootprints/collections/US_Building_Footprints?count=20&f=application/geo%2Bjson&bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/usbuildingfootprints/collections/US_Building_Footprints?count=20&f=application/geo%2Bjson&bbox=36.8207,-79.5854,39.7519,-74.4218)
 
 * Same filter, just to determine the number of built up areas:  
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/builtupa_1m?  
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?  
 resultType=hits&  
 f=application/gml%2Bxml;%20version=3.2&  
-bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/builtupa_1m?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
 
 * All municipalities that start with "Wash":  
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/builtupa_1m?  
+[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/items/builtupa_1m?  
 f=application/gml%2Bxml;%20version=3.2&  
-nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/builtupa_1m?&f=application/gml%2Bxml;%20version=3.2&nam=Wash*)
+nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?&f=application/gml%2Bxml;%20version=3.2&nam=Wash*)
 
 ## GeoServer
 
