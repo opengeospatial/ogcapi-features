@@ -18,6 +18,14 @@ Discovery operations enable clients to interrogate the API to determine its capa
 
 Query operations enable clients to retrieve features from the underlying data store based upon simple selection criteria, defined by the client.
 
+A subset of the OGC API family of standards is expected to be published by ISO. For example, this document is in the process to be published by ISO as ISO 19168-1. To reflect that only a subset of the OGC API standards will be published by ISO and to avoid using organisation names in the titles of ISO standards, standards from the "OGC API" series are published by ISO as "Geospatial API". That is, the title of this document in OGC is "OGC API - Features - Part 1:Core" and the title in ISO is "Geographic Information - Geospatial API for Features - Part 1: Core".
+
+For simplicity, this document consistently uses
+
+* "OGC API" to refer to the family of standards for geospatial Web APIs that in ISO is published as "Geospatial API";
+* "OGC API - Features" to refer to the multipart standard for features that in ISO is published as ISO 19168 / "Geographic Information - Geospatial API for Features";
+* "OGC API - Features - Part 1: Core" to refer to this document that in ISO is published as ISO 19168-1 / "Geographic Information - Geospatial API for Features - Part 1: Core".
+
 This standard defines the resources listed in Table 1. For an overview of the resources, see section <<core-overview,7.1 Overview>>.
 
 [#tldnr,reftext='{table-caption} {counter:table-num}']
@@ -46,7 +54,7 @@ CAUTION: This is a DRAFT version of the first part of the OGC API - Features sta
 
 The following are keywords to be used by search engines and document catalogues.
 
-ogcdoc, OGC document, OGC API, Web Feature Service, WFS, feature, features, property, geographic information, spatial data, spatial things, dataset, distribution, API, OpenAPI, GeoJSON, GML, HTML, schema.org
+ogcdoc, OGC document, OGC API, ISO, ISO/TC 211, geographic information, Geospatial API, Web Feature Service, WFS, feature, features, property, geographic information, spatial data, spatial things, dataset, distribution, API, OpenAPI, GeoJSON, GML, HTML, schema.org
 
 [big]*iii.   Preface*
 
