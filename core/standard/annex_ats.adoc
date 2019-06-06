@@ -47,7 +47,7 @@ The WFS 3.0 standard does not mandate a standard encoding for resources returned
 
 OpenAPI does not provide a standard way to associate a security requirement with a single server URI.  Therefore, WFS 3.0 compliance tests will have to make that association through the runtime challenge-response transaction.  At this time the role of the Security Objects should be considered advisory.
 
-Security Requirements can be defined at both the OpanAPI root level and at the Operation Object level. The following rules should be followed to understand the scope of a Security Requirement:
+Security Requirements can be defined at both the OpenAPI root level and at the Operation Object level. The following rules should be followed to understand the scope of a Security Requirement:
 
 * The Security Requirements defined at the root level are the default requirements for all operations and servers.
 
