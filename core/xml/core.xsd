@@ -98,9 +98,6 @@
          </xsd:element>
          <xsd:element ref="atom:link" minOccurs="0" maxOccurs="unbounded"/>
          <xsd:element ref="core:Extent" minOccurs="0"/>
-         <xsd:element name="DefaultCRS" type="xsd:anyURI" minOccurs="0"/>
-         <xsd:element name="OtherCRS" type="xsd:anyURI"
-                      minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence>
    </xsd:complexType>
 
