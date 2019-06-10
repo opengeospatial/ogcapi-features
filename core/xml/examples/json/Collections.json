@@ -1,0 +1,170 @@
+{
+   "links": [
+      {
+         "rel": "self",
+         "title": "This document",
+         "type": "application/json",
+         "href": "http://www.acme.com/3.0/wfs/collections?f=application%2Fjson"
+      },
+      {
+         "rel": "alternate",
+         "title": "This document as XML",
+         "type": "text/xml",
+         "href": "http://www.acme.com/3.0/wfs/collections?f=text%2Fxml"
+      },
+      {
+         "rel": "alternate",
+         "title": "This document as HTML",
+         "type": "text/html",
+         "href": "http://www.acme.com/3.0/wfs/collections?f=text%2Fhtml"
+      },
+      {
+         "rel": "describedBy",
+         "title": "XML Schema for this dataset",
+         "type": "application/xml",
+         "href": "http://www.acme.com/3.0/wfs/collections/schema"
+      }
+   ],
+   "collections": [
+      {
+         "id": "aerofacp_1m",
+         "title": "Airport Facilities Points",
+         "extent": 
+         {
+            "spatial":  {
+               "bbox": [
+                  [-179.878326416016,-54.9311103820801,
+                    179.339859008789, 79.52944183349609]
+               ],
+               "crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+            },
+            "temporal": {
+               "interval": [
+                  ["2017-01-01T00:00:00Z","2017-12-31T23:59:59Z"]
+               ],
+               "trs": "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"
+            }
+         },
+         "links":
+         [
+            {
+               "rel": "items",
+               "title": "Airport Facilities Points",
+               "type": "application/geo+json",
+               "href": "http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?f=application%2Fgeo%2Bjson"
+            },
+            {
+               "rel": "items",
+               "title": "Airport Facilities Points",
+               "type": "application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0",
+               "href": "http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?f=application%2Fgml%2Bxml%3B%20version%3D3.2%3B%20profile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0"
+            },
+            {
+               "rel": "alternate",
+               "title": "Airport Facilities Points",
+               "type": "text/html",
+               "href": "http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?f=text%2Fhtml"
+            },
+            {
+               "rel": "describedBy",
+               "title": "Schema for Airport Facilities Points",
+               "type": "application/xml",
+               "href": "http://www.acme.com/3.0/wfs/collections/aerofacp_1m/schema"
+            }
+         ]
+      },
+      {
+         "id": "roadl_1m",
+         "title": "Roads",
+         "extent": 
+         {
+            "spatial":  {
+               "bbox": [
+                  [-179.999420166016,-54.88802337646479,
+                    179.9999,74.740592956543]
+               ],
+               "crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+            },
+            "temporal": {
+               "interval": [
+                  ["2017-01-01T00:00:00Z","2017-12-31T23:59:59Z"]
+               ],
+               "trs": "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"
+            }
+         },
+         "links": [
+            {
+               "rel": "items",
+               "title": "Roads",
+               "type": "application/geo+json",
+               "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fgeo%2Bjson"
+            },
+            {
+               "rel": "items",
+               "title": "Roads",
+               "type": "application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0",
+               "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fgml%2Bxml%3B%20version%3D3.2%3B%20profile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0"
+            },
+            {
+               "rel": "alternate",
+               "title": "Roads",
+               "type": "text/html",
+               "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=text%2Fhtml"
+            },
+            {
+               "rel": "describedBy",
+               "title": "Schema for Roads",
+               "type": "application/xml",
+               "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/schema"
+            }
+         ]
+      },
+      {
+         "id": "inwatera_1m",
+         "title": "Inland Water Areas",
+         "extent":
+         {
+            "spatial":  {
+               "bbox": [
+                  [-179.999420166016, -70.91725158691409,
+                    179.9999, 83.57595062255859]
+               ],
+               "crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+            },
+            "temporal": {
+               "interval": [
+                  ["2017-01-01T00:00:00Z","2017-12-31T23:59:59Z"]
+               ],
+               "trs": "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"
+            }
+         },
+         "links": [
+            {
+               "rel": "items",
+               "title": "Inland Water Areas",
+               "type": "application/geo+json",
+               "href": "http://www.acme.com/3.0/wfs/collections/inwatera_1m/items?f=application%2Fgeo%2Bjson"
+            },
+            {
+               "rel": "items",
+               "title": "Inland Water Areas",
+               "type": "application/gml+xml; version=3.2; profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0",
+               "href": "http://www.acme.com/3.0/wfs/collections/inwatera_1m/items?f=application%2Fgml%2Bxml%2B%20version%2D3.2%2B%20profile%2Dhttp:%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0"
+            },
+            {
+               "rel": "alternate",
+               "title": "Inland Water Areas",
+               "type": "text/html",
+               "href": "http://www.acme.com/3.0/wfs/collections/inwatera_1m/items?f=text%2Fhtml"
+            },
+            {
+               "rel": "describedBy",
+               "title": "Schema for Inland Water Areas",
+               "type": "application/xml",
+               "href": "http://www.acme.com/3.0/wfs/collections/inwatera_1m/schema"
+            }
+         ]
+      }
+   ]
+}
+   

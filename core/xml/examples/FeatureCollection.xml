@@ -41,6 +41,19 @@
    <atom:link rel="describedBy" title="The schema for these feature"
       type="application/xml"
       href="http://www.acme.com/3.0/wfs/collections/aerofacp_1m/schema"/>
+   
+   <!-- Link to this document -->
+   <atom:link rel="self" title="This Document"
+      type="application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0"
+      href="http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?limit=10000"/>
+
+   <!-- Link to alternate representations -->
+   <atom:link rel="alternate" title="This Document as JSON"
+      type="application/geo+json"
+      href="http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?f%3Djson&amp;limit%3D10000"/>
+   <atom:link rel="alternate" title="This Document as HTML"
+      type="text/html"
+      href="http://www.acme.com/3.0/wfs/collections/aerofacp_1m/items?f%3Dhtml&amp;limit%3D10000"/>
 
    <!-- Features in the result set -->
    <core:member>
