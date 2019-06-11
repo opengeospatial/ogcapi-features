@@ -115,6 +115,10 @@ type: object
 required:
   - links
 properties:
+  title:
+    type: string
+  description:
+    type: string
   links:
     type: array
     items:
@@ -126,6 +130,8 @@ properties:
 [source,JSON]
 ----
 {
+  "title": "Buildings in Bonn",
+  "description": "Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.",
   "links": [
     { "href": "http://data.example.org/",
       "rel": "self", "type": "application/json", "title": "this document" },
