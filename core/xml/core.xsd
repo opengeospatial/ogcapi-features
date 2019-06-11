@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
    targetNamespace="http://www.opengis.net/ogcapi-features-core/1.0"
    xmlns:core="http://www.opengis.net/ogcapi-features-core/1.0"
@@ -12,7 +11,6 @@
       directly or indirectly, all the XML Schemas defined by the
       OGC API - Features - Part 1: Core.
 
-      OGC API - Features - Part 1: Core is a DRAFT OGC Standard.
       Copyright (c) 2019 Open Geospatial Consortium.
       To obtain additional rights of use, visit
       http://www.opengeospatial.org/legal/ .
@@ -36,6 +34,8 @@
       <xsd:complexContent>
          <xsd:extension base="core:BaseResponseType">
             <xsd:sequence>
+               <xsd:element ref="core:Title" minOccurs="0"/>
+               <xsd:element ref="core:Description"  minOccurs="0"/>
                <xsd:element ref="atom:link"
                             minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
@@ -78,24 +78,8 @@
    <xsd:complexType name="CollectionType">
       <xsd:sequence>
          <xsd:element name="Id" type="xsd:string"/>
-         <xsd:element name="Title" minOccurs="0" maxOccurs="unbounded">
-            <xsd:complexType>
-               <xsd:simpleContent>
-                  <xsd:extension base="xsd:string">
-                     <xsd:attribute ref="xml:lang" default="en"/>
-                  </xsd:extension>
-               </xsd:simpleContent>
-            </xsd:complexType>
-         </xsd:element>
-         <xsd:element name="Description" minOccurs="0">
-            <xsd:complexType>
-               <xsd:simpleContent>
-                  <xsd:extension base="xsd:string">
-                     <xsd:attribute ref="xml:lang" default="en"/>
-                  </xsd:extension>
-               </xsd:simpleContent>
-            </xsd:complexType>
-         </xsd:element>
+         <xsd:element ref="core:Title" minOccurs="0"/>
+         <xsd:element ref="core:Description" minOccurs="0"/>
          <xsd:element ref="atom:link" minOccurs="0" maxOccurs="unbounded"/>
          <xsd:element ref="core:Extent" minOccurs="0"/>
       </xsd:sequence>
@@ -323,4 +307,20 @@
       </xsd:complexType>
    </xsd:element>
 
+   <!-- ========================================================== -->
+   <!-- = TITLE, DESCRIPTION & LANGUAGE STRING TYPES             = -->
+   <!-- ========================================================== -->
+   <xsd:element name="Title" type="ows:LanguageStringType"/>
+   <xsd:element name="Description" type="ows:LanguageStringType"/>
+   <xsd:complexType name="LanguageStringType">
+      <xsd:simpleContent>
+         <xsd:extension base="string">
+            <xsd:attribute ref="xml:lang" use="optional">
+               <xsd:annotation>
+                  <xsd:documentation>If this attribute is not specified then the language used for the string can be determined using the usual HTTP language negotiation mechanisms.</xsd:documentation>
+               </xsd:annotation>
+            </xsd:attribute>
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
 </xsd:schema>
