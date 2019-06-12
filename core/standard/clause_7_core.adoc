@@ -165,7 +165,7 @@ include::requirements/core/REQ_api-definition-op.adoc[]
 
 include::requirements/core/REQ_api-definition-success.adoc[]
 
-include::requirements/core/REC_api-definition-oas.adoc[]
+include::recomendations/core/REC_api-definition-oas.adoc[]
 
 If multiple API definition formats are supported by a server, use
 content negotiation to select the desired representation.
@@ -247,7 +247,7 @@ include::requirements/core/REQ_http.adoc[]
 
 This includes the correct use of status codes, headers, etc.
 
-include::requirements/core/REC_head.adoc[]
+include::recomendations/core/REC_head.adoc[]
 
 Supporting the method HEAD in addition to GET can be useful for clients and
 is simple to implement.
@@ -284,7 +284,7 @@ outside of the server.
 
 More specific guidance is provided for each resource, where applicable.
 
-include::requirements/core/PER_additional-status-codes.adoc[]
+include::recomendations/core/PER_additional-status-codes.adoc[]
 
 [[query_parameters]]
 === Unknown or invalid query parameters
@@ -336,7 +336,7 @@ API definition or any other constraint for that parameter stated in a requiremen
 Entity tags are a mechanism for web cache validation and for supporting conditional
 requests to reduce network traffic. Entity tags are specified by <<rfc2616,HTTP/1.1 (RFC 2616)>>.
 
-include::requirements/core/REC_etag.adoc[]
+include::recomendations/core/REC_etag.adoc[]
 
 [[cross_origin]]
 === Support for cross-origin requests
@@ -346,7 +346,7 @@ if the data is located on another host than the webpage ("same-origin policy").
 A typical example is a web-application accessing feature data from
 multiple distributed datasets.
 
-include::requirements/core/REC_cross-origin.adoc[]
+include::recomendations/core/REC_cross-origin.adoc[]
 
 Two common mechanisms to support cross-origin requests are:
 
@@ -360,9 +360,9 @@ While OGC API Features does not specify any mandatory encoding, support for
 the following encodings is recommended. See <<overview,Clause 6 (Overview)>>
 for a discussion.
 
-include::requirements/core/REC_html.adoc[]
+include::recomendations/core/REC_html.adoc[]
 
-include::requirements/core/REC_geojson.adoc[]
+include::recomendations/core/REC_geojson.adoc[]
 
 <<_http_1_1,Requirement `/req/core/http`>> implies that the encoding of a server response
 is determined using content negotiation as specified by the HTTP RFC.
@@ -401,7 +401,7 @@ preferences in the `Accept-Language` header of a request and the server
 responds with responses that have linguistic text in the language that
 best matches the requested languages and the capabilities of the server.
 
-include::requirements/core/REC_string_i18n.adoc[]
+include::recomendations/core/REC_string_i18n.adoc[]
 
 For example, if JSON-LD is used as an encoding, the built-in capabilities to
 link:https://www.w3.org/TR/json-ld/#string-internationalization[annotate a string with its language]
@@ -439,7 +439,7 @@ of the OGC API Features series.
 
 === Link headers
 
-include::requirements/core/REC_link-header.adoc[]
+include::recomendations/core/REC_link-header.adoc[]
 
 === Feature collections
 
@@ -471,16 +471,16 @@ properties:
 
 include::requirements/core/REQ_fc-md-links.adoc[]
 
-include::requirements/core/REC_fc-md-descriptions.adoc[]
+include::recomendations/core/REC_fc-md-descriptions.adoc[]
 
-include::requirements/core/REC_fc-md-license.adoc[]
+include::recomendations/core/REC_fc-md-license.adoc[]
 
 CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/56[ISSUE 56] +
 Lack of DescribeFeatureType request
 
 include::requirements/core/REQ_fc-md-items.adoc[]
 
-include::requirements/core/PER_fc-md-items.adoc[]
+include::recomendations/core/PER_fc-md-items.adoc[]
 
 This document does not specify mechanisms how clients may access all collections from servers with many collections. Such mechanisms may be specified in additional parts of OGC API Features. Options include support for paging and/or filtering.
 
@@ -488,9 +488,9 @@ include::requirements/core/REQ_fc-md-items-links.adoc[]
 
 include::requirements/core/REQ_fc-md-extent.adoc[]
 
-include::requirements/core/REC_fc-md-extent-single.adoc[]
+include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
-include::requirements/core/PER_fc-md-extent-extensions.adoc[]
+include::recomendations/core/PER_fc-md-extent-extensions.adoc[]
 
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collectionInfo.yaml[Schema for the metadata about a feature collection]
 [source,YAML]
@@ -716,11 +716,11 @@ include::requirements/core/REQ_fc-op.adoc[]
 
 include::requirements/core/REQ_fc-limit-definition.adoc[]
 
-include::requirements/core/PER_fc-limit-default-maximum.adoc[]
+include::recomendations/core/PER_fc-limit-default-maximum.adoc[]
 
 include::requirements/core/REQ_fc-limit-response-1.adoc[]
 
-include::requirements/core/PER_fc-limit-response-2.adoc[]
+include::recomendations/core/PER_fc-limit-response-2.adoc[]
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
@@ -813,7 +813,7 @@ link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openap
 
 ==== Parameters for filtering on feature properties
 
-include::requirements/core/REC_fc-filters.adoc[]
+include::recomendations/core/REC_fc-filters.adoc[]
 
 .An additional parameter to filter buildings based on their function
 =================
@@ -890,11 +890,11 @@ fragment in requirement `/req/core/fc-limit-definition`):
 
 include::requirements/core/REQ_fc-links.adoc[]
 
-include::requirements/core/REC_fc-next-1.adoc[]
+include::recomendations/core/REC_fc-next-1.adoc[]
 
-include::requirements/core/REC_fc-next-2.adoc[]
+include::recomendations/core/REC_fc-next-2.adoc[]
 
-include::requirements/core/REC_fc-next-3.adoc[]
+include::recomendations/core/REC_fc-next-3.adoc[]
 
 This document does not mandate any specific implementation approach for
 the `next` links.
@@ -917,7 +917,7 @@ Using a parameter for the start index, however, will not be safe.
 NOTE: Additional conformance classes for safe paging or an index parameter
 may be added in extensions to this specification.
 
-include::requirements/core/PER_fc-prev.adoc[]
+include::recomendations/core/PER_fc-prev.adoc[]
 
 Providing `prev` links supports navigating back and forth between pages,
 but depending on the implementation approach it may be too complex to implement.
@@ -998,7 +998,7 @@ a bounding box;
 
 include::requirements/core/REQ_f-op.adoc[]
 
-include::requirements/core/PER_f-id.adoc[]
+include::recomendations/core/PER_f-id.adoc[]
 
 ==== Response
 
