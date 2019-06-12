@@ -1,59 +1,51 @@
 == Section 11: Security Considerations
 
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |/req/oas30/security +
+A Web API is a powerful tool for sharing information and analysis resources. It also provides many avenues for unscrupulous users to attack those resources. Designers and developers of Web APIs should be familiar with the potential vulnerabilities and how to address them.
 
-For cases, where the operations of the server are access-controlled, the security scheme(s) SHALL be documented in the OpenAPI definition.
-|===
+A valuable resource is the Common Weakness Enumeration (CWE) registry at http://cwe.mitre.org/data/index.html[http://cwe.mitre.org/data/index.html]. The CWE is organized around three views; Research, Architectural, and Development:
 
-OpenAPI provides two constructs to describe security controls; Security Scheme Objects, and Security Requirements. 
+* *Research:* facilitates research into weaknesses and can be leveraged to systematically identify theoretical gaps within CWE.
+* *Architectural:* organizes weaknesses according to common architectural security tactics. It is intended to assist architects in identifying potential mistakes that can be made when designing software.
+* *Development:* organizes weaknesses around concepts that are frequently used or encountered in software development.
 
-=== Security Schemes
+API developers should focus on the Development view. These vulnerabilities primarily deal with the details of software design and implementation.
 
-A Security Scheme Object provides a detailed description of a [underline]#type# of security control. They do not identify where in the API the control should be applied. Currently the OpenAPI specification supports the following Security Schemes:
+API designers should focus primarily on the Architectural view. However, there are critical vulnerabilities described in the Development view which are also relevant to API design. Vulnerabilities described under the following categories are particularly important:
 
-* HTTP authentication,
-* API key (either as a header or as a query parameter),
-* OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
-* OpenID Connect Discovery.
+* Pathname Traversal and Equivalence Errors
+* Channel and Path Errors
+* Web Problems
 
-Support for client-side PKI certificates is planned for version 3.1.
+Many of the vulnerabilities described in the CWE are introduced through the HTTP protocol. API designers and developers should be familiar with how the HTTP 1.1 addresses these vulnerabilities.  This information can be found in section 15 of https://tools.ietf.org/html/rfc2616[IETF RFC 2616].
 
-Security Scheme Objects reside within the Components Object in the OAS document root. Each Security Scheme Object has an associated key. These keys allow a Security Scheme Object to be referenced from elsewhere in the OAS document. The keys also allow for multiple flavors of a scheme type.  For example, the keys "Bobs_API" and "Marys_API" could reference two Schemes of type API Key that have different implementations (ex. header vs. query).
+The following sections describe some of the most serious vulnerabilities which can be mitigated by the API designer and developer. These are high-level generalizations of the more detailed vulnerabilities described in the CWE.
 
-=== Security Requirements
+=== Multiple Access Routes:
 
-Security Requirements Objects are used to identify where in the API a Security Scheme (or schemes) should be applied. These objects consist of a set of key-value pairs. Each key should correspond to a key for a Security Scheme Object. The Security Requirement is satisfied when all of the Security Schemes (identified by the keys) are satisfied. The associated values provide additional information specific to this Security Requirement. Currently values are only defined for oauth2 and openIDConnect schemes. 
+APIs deliver a representation of a resource.  OGC APIs can deliver multiple representations (formats) of the same resource. An
+attacker may find that information which is prohibited in one representation can be accessed through another. API designers must take care that the access controls on their resources are implemented consistently across all representations. That does not mean that they have to be the same.  For example:
 
-Security Requirements can be specified at two levels: 
+* HTML vs. GeoTIFF – The HTML representation may consist of a text description of the resource accompanied by a thumbnail image. This has less information than the GeoTIFF representation and may be subject to more liberal access policies.
+* Data Centric Security – techniques to embed access controls into the representation itself. A GeoTIFF with Data Centric Security would have more liberal access policies than a GeoTIFF without.
 
-* Root: These Security Requirements apply to the whole document unless over-ridden.
+Bottom Line: the information content of the resources exposed by an API must be protected to the same level across all access routes.
 
-* Operations: These Security Requirements apply to a single operation.  These requirements override any requirements specified at the root level.  
+=== Multiple Servers:
 
-Rules for Applicability:
+The implementation of an API may span a number of servers. Each server is an entry point into the API. Without careful management, information which is not accessible though one server may be accessible through another.
 
-. When more than one Security Requirement is provided, only one has to be satisfied.
+Bottom Line: Understand the information flows through your API and verify that information is properly protected along all access paths.
 
-. A Security Requirement may map to more than one Security Scheme. In that case, all of the Schemes must be satisfied.
+=== Path Manipulation on GET:
 
-. An empty Security Requirement object is valid.  This indicates that there are no security controls.
+RFC-2626 section 15.2 states “If an HTTP server translates HTTP URIs directly into file system calls, the server MUST take special care not to serve files that were not intended to be delivered to HTTP clients.” The threat is that an attacker could use the HTTP path to access sensitive data, such as password files, which could be used to further subvert the server.
 
-=== OpenAPI Security Issues:
+Bottom Line: Validate all GET URLs to make sure they are not trying to access resources they should not have access to.
 
-The following issues have been taken to the OpenAPI Technical Steering Committee for resolution.
+=== Path Manipulation on PUT and POST:
 
-. There is no way to directly associate a Security Requriement with a Server Object. This can lead to problems. Consider the case where an operation contains two Server Objects. These two servers each implement a different form of access control. There are Security Requirement objects for each form of access control. How does the client know which control goes with which server?  The answer at this time is that they don't.
+A transaction operation adds new or updates existing resources on the API. This capability provides a whole new set of tools to an attacker.
 
-. The scope of a Security Requirement is ambiguous in regards to resources. If the result of an operation is a document which contains links to other documents, does the Security Requirement apply to the links as well? Under the current version of OpenAPI we cannot tell for sure.
+Many of the resources exposed though an OGC API include hyperlinks to other resources. API clients follow these hyperlinks to access new resources or alternate representations of a resource. Once a client authenticates to an API, they tend to trust the data returned by that API. However, a resource posted by an attacker could contain hyperlinks which contain an attack. For example, the link to an alternate representation could require the client to re-authenticate prior to passing them on to the original destination. The client sees the representation they asked for and the attacker collects the clients’ authentication credentials.
 
-Our recomended way forward is to be aware of security constraints when designing your API.
-
-. If two servers have different access controls, then put them on different paths.
-
-. Organize your resources so that if a user has access to one resource, then they can access all linked resources as well.
-
-. Use the appropriate HTTP status codes and messages. If the client does not have access, let them know what is missing.
-```
-
+Bottom Line:  APIs which support transaction operations should validate that an update does not contain any malignant content prior to exposing it through the API.
