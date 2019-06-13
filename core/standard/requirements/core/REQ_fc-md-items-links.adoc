@@ -1,11 +1,7 @@
+[[req_core_fc-md-items-links]]
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-md-items-links +
-
-For each feature collection included in the response,
-the `links` property of the collection SHALL include
-an item for each supported encoding
-with a link to the collection resource (relation: `items`).
-
-All links SHALL include the `rel` and `type` properties.
+^|*Requirement {counter:req-id}* |*/req/core/fc-md-items-links* 
+^|A |For each feature collection included in the response, the `links` property of the collection SHALL include an item for each supported encoding with a link to the collection resource (relation: `items`).
+^|B |All links SHALL include the `rel` and `type` properties.
 |===

@@ -1,15 +1,8 @@
-[[req_gmlsf0_content]]
+[[req_gmlsf0_content]] 
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/gmlsf0/content +
-
-<<gml_content>> specifies the XML document root element
-that the server SHALL return in a `200`-response for each resource.
-
-Every feature in a feature collection or feature resource SHALL conform
-to the <<GMLSF,GML Simple Features Profile, Level 0>> and be substitutable
-for `gml:AbstractFeature`.
-
-The schema of all responses with a root element in the `core` namespace SHALL
-validate against the link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/core.xsd[OGC API Features Core XML Schema].
+^|*Requirement {counter:req-id}* |*/req/gmlsf0/content* 
+^|A |<<gml_content>> specifies the XML document root element that the server SHALL return in a `200`-response for each resource.
+^|B |Every feature in a feature collection or feature resource SHALL conform to the <<GMLSF,GML Simple Features Profile, Level 0>> and be substitutable for `gml:AbstractFeature`.
+^|C |The schema of all responses with a root element in the `core` namespace SHALL validate against the link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/core.xsd[OGC API Features Core XML Schema].
 |===

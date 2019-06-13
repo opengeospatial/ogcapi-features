@@ -1,12 +1,12 @@
+[[req_core_f-links]]
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/f-links +
-
-A `200`-response SHALL include the following links in the response:
+^|*Requirement {counter:req-id}* |*/req/core/f-links* 
+^|A |A `200`-response SHALL include the following links in the response:
 
 * a link to the response document (relation: `self`),
 * a link to the response document in every other media type supported by the service (relation: `alternate`), and
 * a link to the feature collection that contains this feature (relation: `collection`).
 
-All links SHALL include the `rel` and `type` link parameters.
+^|B |All links SHALL include the `rel` and `type` link parameters.
 |===

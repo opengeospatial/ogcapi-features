@@ -1,11 +1,7 @@
+[[req_core_fc-op]]
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-op +
- +
-
-For every feature collection identified in the feature collections response (path `/collections`),
-the server SHALL support the HTTP GET operation at the path `/collections/{collectionId}/items`.
-
-The parameter `collectionId` is each `id` property in the feature
-collections response (JSONPath: `$.collections[*].id`).
+^|*Requirement {counter:req-id}* |*/req/core/fc-op* 
+^|A |For every feature collection identified in the feature collections response (path `/collections`), the server SHALL support the HTTP GET operation at the path `/collections/{collectionId}/items`.
+^|B |The parameter `collectionId` is each `id` property in the feature collections response (JSONPath: `$.collections[*].id`).
 |===
