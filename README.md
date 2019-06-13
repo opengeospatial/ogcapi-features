@@ -96,6 +96,7 @@ Also a non-normative document, the "Users Guide", and Part 2, support for Coordi
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
 * [Checklist for implementers (for draft.1 from April 2018)](guide/conformance_checklist.md)
+* [UML for Part 1: Core](uml/README.md)
 
 ## [Contributing](Contributing.md)
 
