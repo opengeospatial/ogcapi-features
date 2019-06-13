@@ -7,7 +7,7 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
 
 **7.2** [API landing page](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_api_landing_page)
 * [ ] GET request at **/** served
-* [ ] Response content is based on [root.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/root.yaml) and minimally includes links to:
+* [ ] Response content is based on [landingPage.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/landingPage.yaml) and minimally includes links to:
     * [ ] **/api**
     * [ ] **/conformance**
     * [ ] **/collections**
@@ -50,7 +50,7 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
 
 **7.11** [Feature collection**s** metadata](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_feature_collections_metadata)
 * [ ] GET request at **/collections** served
-* [ ] Response content based on [content.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/content.yaml)
+* [ ] Response content based on [collections.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collections.yaml)
 * [ ] Response "links" property includes:
   * [ ] rel "self"
   * [ ] rel "alternate" for each additional encoding available

@@ -183,10 +183,10 @@ include::requirements/gmlsf0/REQ_content.adoc[]
 !===
 |Resource |Path |XML root element
 |Landing page |`/` |`core:LandingPage`
-|Conformance classes |`/conformance` |`core:ConformsTo`
-|Feature collections metadata |`/collections` |`core:Collections`
-|Feature collection metadata |`/collections/{collectionId}` |`core:Collections`, with just one entry for the collection `collectionId`
-|Feature collection |`/collections/{collectionId}/items` |`core:FeatureCollection`
+|Conformance declaration |`/conformance` |`core:ConformsTo`
+|Feature collections |`/collections` |`core:Collections`
+|Feature collection |`/collections/{collectionId}` |`core:Collections`, with just one entry for the collection `collectionId`
+|Features |`/collections/{collectionId}/items` |`core:FeatureCollection`
 |Feature |`/collections/{collectionId}/items/{featureId}` |substitutable for `gml:AbstractFeature`
 !===
 
