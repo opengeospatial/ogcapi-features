@@ -1,12 +1,6 @@
-[[fc_md_extent_single]]
+[[rec_core_fc-md-extent-single]]
 [width="90%",cols="2,6a"]
 |===
-|Recommendation {counter:rec-id} |/rec/core/fc-md-extent-single +
-
-While the spatial and temporal extents support multiple bounding boxes
-(`bbox` array) and time intervals (`interval` array) for advanced use cases,
-implementations SHOULD provide only a single bounding box or time interval
-unless the use of multiple values is important for the use of the dataset
-and agents using the API are known to be support multiple bounding boxes
-or time intervals.
+^|*Recommendation {counter:rec-id}* |*/rec/core/fc-md-extent-single* 
+^|A |While the spatial and temporal extents support multiple bounding boxes (`bbox` array) and time intervals (`interval` array) for advanced use cases, implementations SHOULD provide only a single bounding box or time interval unless the use of multiple values is important for the use of the dataset and agents using the API are known to be support multiple bounding boxes or time intervals.
 |===

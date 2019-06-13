@@ -1,14 +1,8 @@
+[[per_core_fc-md-extent-extensions]]
 [width="90%",cols="2,6a"]
 |===
-|Permission {counter:per-id} |/per/core/fc-md-extent-extensions +
-
-The Core only specifies requirements for spatial and temporal extents.
-However, the `extent` object MAY be extended with additional members
-to represent other extents, for example, thermal or pressure ranges.
-
-The Core only supports spatial extents in WGS 84 longitude/latitude and
-temporal extents in the Gregorian calendar (these are the only enum values in
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/[extent.yaml]).
-Extension to the Core MAY add additional reference systems to the
-`extent` object.
+^|*Permission {counter:per-id}* |*/per/core/fc-md-extent-extensions* 
+^|A |The Core only specifies requirements for spatial and temporal extents. However, the `extent` object MAY be extended with additional members to represent other extents, for example, thermal or pressure ranges.
+^|B |The Core only supports spatial extents in WGS 84 longitude/latitude and temporal extents in the Gregorian calendar (these are the only enum values in link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/[extent.yaml]).
+^|C |Extension to the Core MAY add additional reference systems to the `extent` object.
 |===
