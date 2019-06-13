@@ -99,7 +99,7 @@ A testable path is validated against the rules for that path.  At a minimum that
   The server SHALL support the HTTP GET operation at the path /. +
   Tests: A.4.2.1
 | *Requirement 2:* API Landing Page Response +
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be based upon the OpenAPI 3.0 schema root.yaml and include at least links to the following resources: +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200. The content of that response SHALL be based upon the OpenAPI 3.0 schema landingPage.yaml and include at least links to the following resources: +
  - /api (relation type 'service') +
  - /conformance (relation type 'conformance') +
  - /collections (relation type 'data') +
@@ -127,7 +127,7 @@ Tests: A.4.1.2 +
 The server SHALL support the HTTP GET operation at the path /collections. +
 Tests: A.4.4.4 +
 | *Requirement 10:* Feature Collections Metadata Response +
-A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.  The content of that response SHALL be based upon the OpenAPI 3.0 schema content.yaml. +
+A successful execution of the operation SHALL be reported as a response with a HTTP status code 200.  The content of that response SHALL be based upon the OpenAPI 3.0 schema collections.yaml. +
 Tests: A.4.4.5 +
 | *Requirement 11:* Feature Collections Metadata Links +
 A 200-response SHALL include the following links in the links property of the response: +
@@ -311,7 +311,7 @@ Validate that the landing page complies with the require structure and contents.
 
 ====== c) Test Method:
 
-. Validate the landing page against the root.yaml schema
+. Validate the landing page against the landingPage.yaml schema
 
 . Validate that the landing page includes a “service” link to API Definition
 
@@ -553,7 +553,7 @@ retrieved
 
 ====== c) Test Method:
 
-. Validate the retrieved document against the content.yaml schema.
+. Validate the retrieved document against the collections.yaml schema.
 
 . Validate that the retrieved document includes links for:
 
@@ -581,7 +581,7 @@ Validate a Collections Metadata document.
 
 ====== c) Test Method:
 
-. Validate the collection metadata against the collectionInfo.yaml schema
+. Validate the collection metadata against the collection.yaml schema
 
 . Validate that the collection metadata document includes links to the collection for each supported media type as identified by the compliance classes for this server.
 
@@ -628,7 +628,7 @@ retrieved
 
 ====== c) Test Method:
 
-. Validate the retrieved document against the collectionInfo.yaml schema.
+. Validate the retrieved document against the collection.yaml schema.
 
 . Validate that this is the same document as that processed in Test A.4.4.6
 
