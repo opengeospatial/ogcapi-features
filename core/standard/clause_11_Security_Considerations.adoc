@@ -20,7 +20,7 @@ Many of the vulnerabilities described in the CWE are introduced through the HTTP
 
 The following sections describe some of the most serious vulnerabilities which can be mitigated by the API designer and developer. These are high-level generalizations of the more detailed vulnerabilities described in the CWE.
 
-=== Multiple Access Routes:
+=== Multiple Access Routes
 
 APIs deliver a representation of a resource.  OGC APIs can deliver multiple representations (formats) of the same resource. An
 attacker may find that information which is prohibited in one representation can be accessed through another. API designers must take care that the access controls on their resources are implemented consistently across all representations. That does not mean that they have to be the same.  For example:
@@ -30,19 +30,19 @@ attacker may find that information which is prohibited in one representation can
 
 Bottom Line: the information content of the resources exposed by an API must be protected to the same level across all access routes.
 
-=== Multiple Servers:
+=== Multiple Servers
 
 The implementation of an API may span a number of servers. Each server is an entry point into the API. Without careful management, information which is not accessible though one server may be accessible through another.
 
 Bottom Line: Understand the information flows through your API and verify that information is properly protected along all access paths.
 
-=== Path Manipulation on GET:
+=== Path Manipulation on GET
 
 RFC-2626 section 15.2 states “If an HTTP server translates HTTP URIs directly into file system calls, the server MUST take special care not to serve files that were not intended to be delivered to HTTP clients.” The threat is that an attacker could use the HTTP path to access sensitive data, such as password files, which could be used to further subvert the server.
 
 Bottom Line: Validate all GET URLs to make sure they are not trying to access resources they should not have access to.
 
-=== Path Manipulation on PUT and POST:
+=== Path Manipulation on PUT and POST
 
 A transaction operation adds new or updates existing resources on the API. This capability provides a whole new set of tools to an attacker.
 
