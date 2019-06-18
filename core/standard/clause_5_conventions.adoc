@@ -37,6 +37,11 @@ registered link relation type could be identified:
 * **conformance**: Refers to a resource that lists the specifications that the link's context conforms to.
 * **data**: Indicates that the link's context is a distribution of a dataset that is an API and refers to a root resource of the dataset in the API.
 
+Each resource representation includes an array of links. Implementations are
+free to add additional links for all resources provided by the API. For
+example, an **enclosure** link could reference a bulk download of a collection.
+Or a **related** link on a feature could reference a related feature.
+
 === Use of HTTPS
 
 For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS". In fact, most servers are expected to use <<rfc2818,HTTPS>>, not <<rc2616,HTTP>>.
@@ -95,7 +100,8 @@ the relevant OpenAPI schema components.
 values) or constrained (if a subset of all possible values are applicable
 to the server). An example for a constrained range of values is to explicitly
 specify the supported values of a string parameter or property using an enum.
-* The default value of a parameter may be changed or added.
+* The default value of a parameter may be changed or added unless a requirement
+explicitly prohibits this.
 * Additional properties may be added to the schema definition of a Response Object.
 * Informative text may be changed or added, like comments or description properties.
 
