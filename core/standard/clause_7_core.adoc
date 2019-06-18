@@ -81,9 +81,6 @@ This document only discusses the behavior of feature collections.
 
 Each feature in a dataset is part of exactly one collection.
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/66[ISSUE 66] +
-Support features that do belong to multiple collections?
-
 Accessing the `Features` using HTTP GET returns a document consisting of
 features in the collection. The features included in the response are determined
 by the server based on the query parameters of the request. To support access to
