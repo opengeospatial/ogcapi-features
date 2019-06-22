@@ -42,6 +42,9 @@ This standard defines the resources listed in Table 1. For an overview of the re
 |Feature |`/collections/{collectionId}/items/{featureId}` |GET |<<_feature_,7.15 Feature>>
 !===
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
+Remove `/api` row, if the API definition may be located at any URI.
+
 Implementations of OGC API Features are intended to support two different approaches how clients can use the API.
 
 In the first approach, clients are implemented with knowledge about this standard and its resource types. The clients navigate the resources based on this knowledge and based on the responses provided by the API. The API definition may be used to determine details, e.g., on filter parameters, but this may not be necessary depending on the needs of the client. These are clients that are in general able to use multiple APIs as long as they implement OGC API Features.
