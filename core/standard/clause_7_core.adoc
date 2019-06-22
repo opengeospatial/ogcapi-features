@@ -28,6 +28,10 @@ The `Landing page` provides links to
 * the `Conformance declaration` (path `/conformance`, link relation `conformance`), and
 * the `Collections` (path `/collections`, link relation `data`).
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
+Change wording, if the API definition may be located at any URI and/or if
+`service-desc` and `service-doc` are used as link relations.
+
 The `API definition` describes the capabilities of the server that can be used by
 clients to connect to the server or by development tools to support the
 implementation of servers and clients. Accessing the `API definition` using
@@ -120,6 +124,10 @@ include::requirements/core/REQ_root-op.adoc[]
 
 include::requirements/core/REQ_root-success.adoc[]
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
+Change wording, if the API definition may be located at any URI.
+
+[[schema_landingPage]]
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/landingPage.yaml[Schema for the landing page]
 [source,YAML]
 ----
@@ -137,6 +145,7 @@ properties:
       $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
 ----
 
+[[example_2]]
 .Landing page response document
 =================
 [source,JSON]
@@ -148,7 +157,7 @@ properties:
     { "href": "http://data.example.org/",
       "rel": "self", "type": "application/json", "title": "this document" },
     { "href": "http://data.example.org/api",
-      "rel": "service", "type": "application/openapi+json;version=3.0", "title": "the API definition" },
+      "rel": "service", "type": "application/vnd.oai.openapi+json;version=3.0", "title": "the API definition" },
     { "href": "http://data.example.org/conformance",
       "rel": "conformance", "type": "application/json", "title": "OGC API conformance classes implemented by this server" },
     { "href": "http://data.example.org/collections",
@@ -173,6 +182,9 @@ by development tools to support the implementation of servers and clients.
 
 include::requirements/core/REQ_api-definition-op.adoc[]
 
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
+Change wording, if the API definition may be located at any URI.
+
 ==== Response
 
 include::requirements/core/REQ_api-definition-success.adoc[]
@@ -184,6 +196,9 @@ content negotiation to select the desired representation.
 
 The API definition document describes the API. In other words,
 there is no need to include the `/api` operation in the API definition itself.
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
+Change wording, if the API definition may be located at any URI.
 
 The idea is that any OGC API Features implementation can be used by developers
 that are familiar with the API definition language(s) supported by the server.
@@ -218,6 +233,7 @@ include::requirements/core/REQ_conformance-op.adoc[]
 
 include::requirements/core/REQ_conformance-success.adoc[]
 
+[[schema_req-classes]]
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml[Schema for the list of requirements classes]
 [source,YAML]
 ----
@@ -231,6 +247,7 @@ properties:
       type: string
 ----
 
+[[example_3]]
 .Requirements class response document
 =================
 This example response in JSON is for a server that supports OpenAPI 3.0 for
@@ -273,6 +290,7 @@ This API standard does not impose any restictions on which features of the HTTP 
 
 The *Status Codes* listed in <<status_codes>> are of particular relevance to implementors of this standard. Status codes 200, 400, and 404 are called out in API requirements. Therefore, support for these status codes is mandatory for all compliant implementations. The remainder of the status codes in <<status_codes>> are not mandatory, but are important for the implementation of a well functioning API. Support for these status codes is strongly encouraged for both client and server implementations.
 
+[[table_2]]
 [#status_codes,reftext='{table-caption} {counter:table-num}']
 .Typical HTTP status codes
 [cols="15,85",options="header"]
@@ -308,6 +326,7 @@ to allow additional parameters without explicitly declaring them. That is,
 parameters that have not been explicitly specified in the API definition
 for the operation will be ignored.
 
+[[schema_free-form]]
 .OpenAPI schema for additional "free-form" query parameters
 [source,YAML]
 ----
@@ -461,7 +480,8 @@ include::requirements/core/REQ_fc-md-op.adoc[]
 
 include::requirements/core/REQ_fc-md-success.adoc[]
 
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collections.yaml[Schema for the metadata about feature collections]
+[[schema_collections]]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collections.yaml[Schema for the collections resource]
 [source,YAML]
 ----
 type: object
@@ -502,6 +522,7 @@ include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
 include::recomendations/core/PER_fc-md-extent-extensions.adoc[]
 
+[[schema_collection]]
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collection.yaml[Schema for a feature collection]
 [source,YAML]
 ----
@@ -642,6 +663,7 @@ properties:
 
 NOTE: The `crs` property of the `collection` object is not used by this conformance class, but reserved for future use.
 
+[[example_4]]
 .Feature collections response document
 =================
 This feature collections example response in JSON is for a dataset with
@@ -761,6 +783,7 @@ minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the anti-meridian the first value
 (west-most box edge) is larger than the third value (east-most box edge).
 
+[[example_5]]
 .The bounding box of the New Zealand Exclusive Economic Zone
 =================
 The bounding box of the New Zealand Exclusive Economic Zone in WGS 84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S)
@@ -786,6 +809,7 @@ include::requirements/core/REQ_fc-time-response.adoc[]
 (again, a time instant or interval). For time intervals this includes the start
 and end time.
 
+[[example_6]]
 .A date-time
 =================
 February 12, 2018, 23:20:52 UTC:
@@ -801,6 +825,7 @@ For features with a temporal property that is a date or a time interval,
 a date-time value would match all features where the timestamp is on that
 day or within the time interval.
 
+[[example_7]]
 .Intervals
 =================
 February 12, 2018, 00:00:00 UTC to March 18, 2018, 12:31:12 UTC:
@@ -831,6 +856,7 @@ link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openap
 
 include::recomendations/core/REC_fc-filters.adoc[]
 
+[[example_8]]
 .An additional parameter to filter buildings based on their function
 =================
 [source,YAML]
@@ -854,6 +880,7 @@ example: 'function=public+use'
 ----
 =================
 
+[[example_9]]
 .An additional parameter to filter buildings based on their name
 =================
 [source,YAML]
@@ -949,6 +976,7 @@ include::requirements/core/REQ_fc-numberReturned.adoc[]
 NOTE: The representation of the links and the other properties in the payload
 depends on the encoding of the feature collection.
 
+[[example_10]]
 .Links
 =================
 If the request is to return building features and "10" is the default `limit`,
@@ -1025,6 +1053,7 @@ include::requirements/core/REQ_f-links.adoc[]
 NOTE: The representation of the links in the payload will depend on the encoding
 of the feature.
 
+[[example_11]]
 .Links
 =================
 The links in a feature could be (in this example represented as link headers):

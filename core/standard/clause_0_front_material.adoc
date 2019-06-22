@@ -28,7 +28,9 @@ For simplicity, this document consistently uses
 
 This standard defines the resources listed in Table 1. For an overview of the resources, see section <<core-overview,7.1 Overview>>.
 
-[#tldnr,reftext='{table-caption} {counter:table-num}']
+[[table_1]]
+[[tldnr]]
+[#tldr,reftext='{table-caption} {counter:table-num}']
 .Overview of resources, applicable HTTP methods and links to the document sections
 [cols="32,25,10,33",options="header"]
 !===
@@ -41,6 +43,9 @@ This standard defines the resources listed in Table 1. For an overview of the re
 |Features |`/collections/{collectionId}/items` |GET |<<_items_,7.14 Features>>
 |Feature |`/collections/{collectionId}/items/{featureId}` |GET |<<_feature_,7.15 Feature>>
 !===
+
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
+Remove `/api` row, if the API definition may be located at any URI.
 
 Implementations of OGC API Features are intended to support two different approaches how clients can use the API.
 
@@ -96,4 +101,5 @@ All questions regarding this submission should be directed to the editors or the
 |Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
 |===
 
-CAUTION: A list of contributors will be added later.
+CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/224[ISSUE 224] +
+Update submitters before publication.
