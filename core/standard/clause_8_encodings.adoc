@@ -200,18 +200,12 @@ The namespace prefixes used above and in the OGC API Features Core XML Schema ar
 * `atom`: `http://www.w3.org/2005/Atom`
 * `xlink`: `http://www.w3.org/1999/xlink`
 
-The API definition resource at path `/api` is not included in <<gml_content>>.
-This requirements class does not prescribe any API definition approach.
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
-Remove paragraph, if the API definition may be located at any URI.
-
 The mapping of the content from the responses specified in the
 <<rc_core,Core requirements class>> to the XML is straightforward.
 All links are encoded using `atom:link` elements except in GML features
 where simple Xlinks are used.
 
-<<xml_examples,Annex C>> has example responses in XML.
+See <<examples,sub-clause 6.3>> for links to example responses in XML.
 
 NOTE: The `core:FeatureCollection` element deliberately goes beyond the permitted content
 specified in the <<GMLSF,GML Simple Features Profile>>, section 8.4.2. This is
