@@ -24,18 +24,15 @@ the landing page may also be, for example, a sub-resource of the base URL of the
 
 The `Landing page` provides links to
 
-* the `API definition` (path `/api`, link relation `service`),
+* the `API definition` (link relations `service-desc` and `service-doc`),
 * the `Conformance declaration` (path `/conformance`, link relation `conformance`), and
 * the `Collections` (path `/collections`, link relation `data`).
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
-Change wording, if the API definition may be located at any URI and/or if
-`service-desc` and `service-doc` are used as link relations.
 
 The `API definition` describes the capabilities of the server that can be used by
 clients to connect to the server or by development tools to support the
 implementation of servers and clients. Accessing the `API definition` using
-HTTP GET returns a description of the API.
+HTTP GET returns a description of the API. The API definition can be hosted
+on the API server(s) or a separate server.
 
 The `Conformance declaration` states the requirements classes from standards
 or community specifications, identified by a URI, that the API conforms to.
@@ -124,9 +121,6 @@ include::requirements/core/REQ_root-op.adoc[]
 
 include::requirements/core/REQ_root-success.adoc[]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
-Change wording, if the API definition may be located at any URI.
-
 [[schema_landingPage]]
 .link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/landingPage.yaml[Schema for the landing page]
 [source,YAML]
@@ -157,7 +151,9 @@ properties:
     { "href": "http://data.example.org/",
       "rel": "self", "type": "application/json", "title": "this document" },
     { "href": "http://data.example.org/api",
-      "rel": "service", "type": "application/vnd.oai.openapi+json;version=3.0", "title": "the API definition" },
+      "rel": "service-desc", "type": "application/vnd.oai.openapi+json;version=3.0", "title": "the API definition" },
+    { "href": "http://data.example.org/api.html",
+      "rel": "service-doc", "type": "text/html", "title": "the API documentation" },
     { "href": "http://data.example.org/conformance",
       "rel": "conformance", "type": "application/json", "title": "OGC API conformance classes implemented by this server" },
     { "href": "http://data.example.org/collections",
@@ -182,8 +178,12 @@ by development tools to support the implementation of servers and clients.
 
 include::requirements/core/REQ_api-definition-op.adoc[]
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
-Change wording, if the API definition may be located at any URI.
+The API definition is metadata about the API and strictly not part of the API
+itself, but it can be hosted as a sub-resource to the base path of the API,
+for example, at path `/api`. Note that in that case there is no need to include
+the path of the API definition in the API definition itself.
+
+Note that multiple API definition formats can be supported.
 
 ==== Response
 
@@ -191,14 +191,9 @@ include::requirements/core/REQ_api-definition-success.adoc[]
 
 include::recomendations/core/REC_api-definition-oas.adoc[]
 
-If multiple API definition formats are supported by a server, use
-content negotiation to select the desired representation.
-
-The API definition document describes the API. In other words,
-there is no need to include the `/api` operation in the API definition itself.
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
-Change wording, if the API definition may be located at any URI.
+If the server hosts the API definition under the base path of the API
+(for example, at path `/api`, see above), there is no need to include the
+path of the API definition in the API definition itself.
 
 The idea is that any OGC API Features implementation can be used by developers
 that are familiar with the API definition language(s) supported by the server.
@@ -207,13 +202,8 @@ a working client using the OpenAPI definition. The developer may need to learn
 a little bit about geometry data types, etc., but it should not be required to
 read this standard to access the data via the API.
 
-Two example OpenAPI documents are included in <<oas30_example,Annex B>>. The
-documents differ in their representation of the feature collections. The
-first example uses a path parameter `collectionId` and the API definition
-only has a single path entry for all feature collections.
-The second example explicitly defines each feature collection in a separate
-path and without a path parameter - this allows to specify filter parameters
-or explicit feature schemas per feature collection. Both variants are valid.
+In case the API definition is based on OpenAPI 3.0, consider the
+<<two_appraoches_oas,two approaches>> discussed in OpenAPI requirements class.
 
 ==== Error situations
 
@@ -457,9 +447,15 @@ WGS 84 longitude and latitude as the default coordinate reference system.
 
 include::requirements/core/REQ_crs84.adoc[]
 
+NOTE: http://www.opengis.net/def/crs/OGC/0/tbd is a placeholder until the
+CRS has been registered by the OGC Naming Authority.
+
 Implementations compliant with the Core are not required to support
 publishing feature geometries in coordinate reference systems other than
-http://www.opengis.net/def/crs/OGC/1.3/CRS84.
+http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height)
+or http://www.opengis.net/def/crs/OGC/0/tbd (for coordinates with
+height). I.e., the (optional) third coordinate number is always the height.
+
 The Core also does not specify a capability to request feature geometries
 in a different coordinate reference system.
 Such a capability will be specified in another part
@@ -504,9 +500,6 @@ include::requirements/core/REQ_fc-md-links.adoc[]
 include::recomendations/core/REC_fc-md-descriptions.adoc[]
 
 include::recomendations/core/REC_fc-md-license.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/56[ISSUE 56] +
-Lack of DescribeFeatureType request
 
 include::requirements/core/REQ_fc-md-items.adoc[]
 
@@ -562,6 +555,8 @@ properties:
         title:
           type: string
           example: Trierer Strasse 70, 53115 Bonn
+        length:
+          type: integer
   extent:
     description: >-
       The extent of the features in the collection. In the Core only spatial and temporal
@@ -689,7 +684,9 @@ Gregorian calendar).
     { "href": "http://data.example.org/collections.html",
       "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
     { "href": "http://schemas.example.org/1.0/buildings.xsd",
-      "rel": "describedBy", "type": "application/xml", "title": "GML application schema for Acme Corporation building data" }
+      "rel": "describedBy", "type": "application/xml", "title": "GML application schema for Acme Corporation building data" },
+    { "href": "http://download.example.org/buildings.gpkg",
+      "rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Bulk download (GeoPackage)", "length": 472546 }
   ],
   "collections": [
     {

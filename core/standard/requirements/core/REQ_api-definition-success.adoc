@@ -1,7 +1,6 @@
 [[req_core_api-definition-success]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/core/api-definition-success* 
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The server SHALL return an API definition document.
+^|*Requirement {counter:req-id}* |*/req/core/api-definition-success*
+^|A |A GET request to the URI of an API definition linked from the landing page (link relations `service-desc` or `service-doc`) with an `Accept` header with the value of the link property `type` SHALL return a document consistent with the requested media type.
 |===
