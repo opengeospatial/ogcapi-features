@@ -1,0 +1,28 @@
+[[ats_core_fc-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/fc-response* 
+^|Test Purpose |Validate that the Feature Collections complies with the require structure and contents.
+^|Requirement |/req/core/fc-response
+^|Test Method |. Validate that the `type` property is present and has a value of `FeatureCollection`
+. Validate the `features` property is pressent and that it is populated with an array of `feature` items.
+. Validate that only Features which match the selection criteria are included in the Feature Collection.
+. If the `links` property is present, validate that all entries comply with <<ats_core_fc-links>>
+. If the `timeStamp` property is present, validate that it complies with <<ats_core_fc-timeStamp>>
+. If the `numberMatched` property is present, validate that it complies with <<ats_core_fc-numberMatched>>
+. If the `numberReturned` property is present, validate that it complies with <<ats_core_fc-numberReturned>>
+. Validate the collections metadata for all supported media types using the resources and tests identified in <<feature-collections-schema>>
+|===
+
+The collections metadata may be retrieved in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the against that schema. All supported formats should be exercised.
+
+[[feature-collections-schema]]
+.Schema and Tests for Feature Collections
+[width="90%",cols="3",options="header"]
+|===
+|Format |Schema Document |Test ID
+|HTML |featureCollectionGeoJSON.yaml |Manual Inspection
+|GeoJSON |featureCollectionGeoJSON.yaml |<<ats_geojson_content>>
+|GMLSF0 |featureCollectionSF0.xsd |<<ats_gmlsf0_content>>
+|GMLSF2 |featureCollectionSF2.xsd |<<ats_gmlsf2_content>>
+|===

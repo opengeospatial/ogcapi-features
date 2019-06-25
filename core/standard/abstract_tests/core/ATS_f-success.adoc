@@ -1,0 +1,23 @@
+[[ats_core_f-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/f-success* 
+^|Test Purpose |Validate that the Feature complies with the required structure and contents.
+^|Requirement |/req/core/f-success
+^|Test Method |. Validate that the Feature includes all required link properties using <<ats_core_f-links>>
+. Validate the Feature for all supported media types using the resources and tests identified in
+<<feature-schema>>
+|===
+
+The Features may be retrieved in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the against that schema. All supported formats should be exercised.
+
+[[feature-schema]]
+.Schema and Tests for Features
+[width="90%",cols="3",options="header"]
+|===
+|Format |Schema Document |Test ID
+|HTML |featureGeoJSON.yaml |Manual Inspection
+|GeoJSON |featureGeoJSON.yaml |<<ats_geojson_content>>
+|GMLSF0 |featureGML.xsd |<<ats_gmlsf0_content>>
+|GMLSF2 |featureGML.xsd |<<ats_gmlsf2_content>>
+|===

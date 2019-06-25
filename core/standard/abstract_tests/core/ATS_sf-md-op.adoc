@@ -1,0 +1,12 @@
+[[ats_core_sf-md-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/sf-md-op* 
+^|Test Purpose |Validate that Collection Metadata can be retrieved from the expected location.
+^|Requirement |/req/core/sf-md-op
+^|Test Method |For every feature collection described in the Collections metadata, issue an HTTP GET request to the URL `/collections/{collectionId}` where `{collectionId}` is the `id` property for the collection.
+. Validate that a Collection Metadatat was returned with a status code 200
+. Validate the contents of the returned metadata using test <<ats_core_sf-md-success>>.
+|===
+
+

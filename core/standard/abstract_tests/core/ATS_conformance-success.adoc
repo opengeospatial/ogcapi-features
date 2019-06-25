@@ -4,6 +4,6 @@
 ^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/conformance-success* 
 ^|Test Purpose |Validate that the Conformance response complies with the required structure and contents.
 ^|Requirement |/req/core/conformance-success
-^|Test Method |. Validate the retrieved document against the classes.yaml schema.
-. Record all reported compliance classes and associate that list with the test point. This information will be used in latter tests.
+^|Test Method |. Validate the API Definition document against OpenAPI 3.0 schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml[req-classes.yaml] 
+. Validate that the document list all OGC API requirements classes that the server conforms to.
 |===

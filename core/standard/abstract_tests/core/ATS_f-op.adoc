@@ -1,0 +1,12 @@
+[[ats_core_f-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/f-op* 
+^|Test Purpose |Validate that a feature can be retrieved from the expected location.
+^|Requirement |/req/core/f-op
+^|Test Method |For every feature in a feature collection (path `/collections/{collectionId}`), issue an HTTP GET request to the URL `/collections/{collectionId}/items/{featureId}` where `{collectionId}` is the `id` property for the collection and `{featureId}` is the `id` property of the feature.
+. Validate that a feature was returned with a status code 200
+. Validate the contents of the returned feature using test <<ats_core_f-success>>.
+|===
+
+

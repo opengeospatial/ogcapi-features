@@ -12,25 +12,34 @@ OGC API-Features is not a Web Service in the traditional sense. Rather, it defin
 
 .  Do the resources returned by the micro-services meet the structure and content requirements of the standard?
 
-Further complicating the issue, an API may expose resources in addition to those defined by the standard. A test engine must be able to traverse the API description document, identify test points, and ignore resource paths which are not to be tested. The process for identifying test points is provided in Section A.4.3.
+Further complicating the issue, an API may expose resources in addition to those defined by the standard. A test engine must be able to traverse the API description document, identify test points, and ignore resource paths which are not to be tested. 
 
 === Approach to Testing
 
 The Test Approach used in the API-Features Abstract Test Suite includes four steps:
 
-. Identify the test points
-
-. Verify that API descriptions of the test points comply with the OGC API-Features standard
-
-. Verify that the micro-services at each test point behave in accordance with the OGC API-Features standard.
-
-. Verify that the resources returned at each test point are in accordance with the OGC API-Features standard and any referenced content standard.
-
-Identification of test points is a new requirement with API-FEatures. Since an API is not a Web Service, there may be RESTful endpoints advertised which are not intended to be targets of the compliance testing. Section A.4.2 describes the process for crawling the API Description document and extracting those URLs which should be tested as well as the path(s) they should be tested with. The concatenation of a Server URL with a path forms a test point.
-
-Section A.4.3 describes how the test points are exercised to determine compliance with theis standard.
+TBD
 
 === Conformance Class Core
 
 include::abstract_tests/ATS_class_core.adoc[]
 
+=== Conformance Class GeoJSON
+
+include::abstract_tests/ATS_class_geojson.adoc[]
+
+=== Conformance Class GML Simple Features Level 0
+
+include::abstract_tests/ATS_class_gmlsf0.adoc[]
+
+=== Conformance Class GML Simple Features Level 2
+
+include::abstract_tests/ATS_class_gmlsf2.adoc[]
+
+=== Conformance Class HTML
+
+include::abstract_tests/ATS_class_html.adoc[]
+
+=== Conformance Class OpenAPI 3.0
+
+include::abstract_tests/ATS_class_oas30.adoc[]

@@ -4,11 +4,26 @@
 ^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/root-success* 
 ^|Test Purpose |Validate that the landing page complies with the require structure and contents.
 ^|Requirement |/req/core/root-success
-^|Test Method |. Validate the landing page against the landingPage.yaml schema
+^|Test Method |. Validate the landing page for all supported media types using the resources and tests identified in <<landing-page-schema>>
 
-. Validate that the landing page includes a “service” link to API Definition
+For formats that require manual inspection, perform the following:
 
-. Validate that the landing page includes a “conformance” link to the conformance class document
+.. Validate that the landing page includes a “service” link to API Definition
 
-. Validate that the landing page includes a “data” link to the WFS contents.
+.. Validate that the landing page includes a “conformance” link to the conformance class document
+
+.. Validate that the landing page includes a “data” link to the Feature contents.
+|===
+
+The landing page may be retrieved in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the landing page against that schema. All supported formats should be exercised.
+
+[[landing-page-schema]]
+.Schema and Tests for Landing Pages
+[width="90%",cols="3",options="header"]
+|===
+|Format |Schema Document |Test ID
+|HTML |Manual inspection |none
+|GeoJSON |landingPage.yaml |<<ats_geojson_content>>
+|GMLSF0 |landingPage_SF0.xsd |<<ats_gmlsf0_content>>
+|GMLSF2 |landingPage_SF2.xsd |<<ats_gmlsf2_content>>
 |===

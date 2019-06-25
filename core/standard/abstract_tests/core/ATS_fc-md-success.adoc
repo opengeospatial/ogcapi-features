@@ -1,0 +1,23 @@
+[[ats_core_fc-md-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/fc-md-success* 
+^|Test Purpose |Validate that the collections metadata complies with the require structure and contents.
+^|Requirement |/req/core/fc-md-success
+^|Test Method |. Validate that all response documents comply with <<ats_core_fc-md-links>>
+. Validate that all response documents comply with <<ats_core_fc-md-items>> 
+. Validate the collections metadata for all supported media types using the resources and tests identified in <<collections-metadata-schema>>
+|===
+
+The collections metadata may be retrieved in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the against that schema. All supported formats should be exercised.
+
+[[collections-metadata-schema]]
+.Schema and Tests for Collections Metadata
+[width="90%",cols="3",options="header"]
+|===
+|Format |Schema Document |Test ID
+|HTML |collections.yaml |Manual Inspection
+|GeoJSON |collections.yaml |<<ats_geojson_content>>
+|GMLSF0 |collections_SF0.xsd |<<ats_gmlsf0_content>>
+|GMLSF2 |collections_SF2.xsd |<<ats_gmlsf2_content>>
+|===

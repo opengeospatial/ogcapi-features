@@ -1,0 +1,10 @@
+[[ats_core_fc-time-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/fc-time-response* 
+^|Test Purpose |Validate that the dataTime query parameters are processed correctly.
+^|Requirement |/req/core/fc-time-response
+^|Test Method |. Verify that only features that have a temporal geometry that intersects the temporal information in the `datetime` parameter were included in the result set
+. Verify that all features in the collection that are not associated with a temporal geometry are included in the result set.
+. Validate that the dataTime parameter complies with the syntax described in /req/core/fc-time-response
+|===

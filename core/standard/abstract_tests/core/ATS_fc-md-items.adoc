@@ -1,0 +1,25 @@
+[[ats_core_fc-md-items]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/fc-md-items* 
+^|Test Purpose |Validate that each collection provided by the server is described in the Collections Metadata.
+^|Requirement |/req/core/fc-md-items
+^|Test Method |. Verify that there is an entry in the `collections` array of the Collections Metadata for each feature collection provided by the API.
+. Verify that each collection entry includes an identifier.
+. Verify that each collection entry includes links in accordance with <<ATS_fc-md-items-links>>.
+. Verify that if the collection entry includes an extent property, that that property complies with <<ATS_fc-md-extent>>
+. Validate each collection entry for all supported media types using the resources and tests identified in <<collection-entry-schema>>
+|===
+
+The collection entries may be encoded in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the against that schema. All supported formats should be exercised.
+
+[[collection-entry-schema]]
+.Schema and Tests for Collection Entries
+[width="90%",cols="3",options="header"]
+|===
+|Format |Schema Document |Test ID
+|HTML |collection.yaml |Manual Inspection
+|GeoJSON |collection.yaml |<<ats_geojson_content>>
+|GMLSF0 |collection_SF0.xsd |<<ats_gmlsf0_content>>
+|GMLSF2 |collection_SF2.xsd |<<ats_gmlsf2_content>>
+|===

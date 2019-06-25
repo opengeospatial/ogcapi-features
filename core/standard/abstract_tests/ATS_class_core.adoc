@@ -6,7 +6,7 @@
 |Target type |Web API
 |===
 
-==== HTTP
+==== General Tests
 
 include::core/ATS_http.adoc[]
 
@@ -14,25 +14,47 @@ include::core/ATS_http.adoc[]
 
 include::core/ATS_crs84.adoc[]
 
-==== Landing Page
+==== Landing Page {root}/
 
 include::core/ATS_root-op.adoc[]
 
 include::core/ATS_root-success.adoc[]
 
-==== Conformance Path
+==== Conformance Path {root}/conformance
 
 include::core/ATS_conformance-op.adoc[]
 
 include::core/ATS_conformance-success.adoc[]
 
-==== API Definition Path
+==== API Definition Path {root}/api (link)
 
 include::core/ATS_api-definition-op.adoc[]
 
 include::core/ATS_api-definition-success.adoc[]
 
-==== Define the Test Points
+==== Collections Metadata {root}/collections
+
+include::core/ATS_fc-md-op.adoc[]
+
+include::core/ATS_fc-md-success.adoc[]
+
+==== Simple Features Collection {root}/collections/{collectionId}
+
+include::core/ATS_sfc-md-op.adoc[]
+
+include::core/ATS_sfc-md-success.adoc[]
+
+==== Collection (singular) Metadata {root}/collections/{collectionId}/items
+
+include::core/ATS_fc-op.adoc[]
+
+include::core/ATS_fc-success.adoc[]
+
+==== Feature
+
+include::core/ATS_f-op.adoc[]
+
+include::core/ATS_f-success.adoc[]
 
 
 
