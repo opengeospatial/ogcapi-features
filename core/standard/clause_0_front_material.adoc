@@ -36,7 +36,6 @@ This standard defines the resources listed in Table 1. For an overview of the re
 !===
 |Resource |Path |HTTP method |Document reference
 |Landing page |`/` |GET |<<_api_landing_page,7.2 API landing page>>
-|API definition |`/api` |GET |<<_api_definition_2,7.3 API definition>>
 |Conformance declaration |`/conformance` |GET |<<_declaration_of_conformance_classes,7.4 Declaration of conformance classes>>
 |Feature collections |`/collections` |GET |<<_collections_,7.12 Feature collections>>
 |Feature collection |`/collections/{collectionId}` |GET |<<_collection_, 7.13 Feature collection>>
@@ -44,16 +43,11 @@ This standard defines the resources listed in Table 1. For an overview of the re
 |Feature |`/collections/{collectionId}/items/{featureId}` |GET |<<_feature_,7.15 Feature>>
 !===
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/236[ISSUE 236] +
-Remove `/api` row, if the API definition may be located at any URI.
-
 Implementations of OGC API Features are intended to support two different approaches how clients can use the API.
 
 In the first approach, clients are implemented with knowledge about this standard and its resource types. The clients navigate the resources based on this knowledge and based on the responses provided by the API. The API definition may be used to determine details, e.g., on filter parameters, but this may not be necessary depending on the needs of the client. These are clients that are in general able to use multiple APIs as long as they implement OGC API Features.
 
 The other approach targets developers that are not familiar with the OGC API standards, but want to interact with spatial data provided by an API that happens to implement OGC API Features. In this case the developer will study and use the API definition - typically an OpenAPI document - to understand the API and implement the code to interact with the API. This assumes familiarity with the API definition language and the related tooling, but it should not be necessary to study the OGC API standards.
-
-CAUTION: This is a DRAFT version of the first part of the OGC API - Features standards. This draft is not complete and there are open issues that are still under discussion. These discussion topics are identified as annotations like this one with a link to the issue on GitHub and a brief summary of the issue. The current expectation is to have a release candidate by August 2019 after resolving all open issues in GitHub for this part.
 
 [big]*ii.    Keywords*
 
@@ -101,5 +95,4 @@ All questions regarding this submission should be directed to the editors or the
 |Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
 |===
 
-CAUTION: link:https://github.com/opengeospatial/WFS_FES/issues/224[ISSUE 224] +
-Update submitters before publication.
+CAUTION: Update submitters before publication.
