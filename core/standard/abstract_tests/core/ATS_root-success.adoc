@@ -1,0 +1,14 @@
+[[ats_core_root-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/root-success* 
+^|Test Purpose |Validate that the landing page complies with the require structure and contents.
+^|Requirement |/req/core/root-success
+^|Test Method |. Validate the landing page against the landingPage.yaml schema
+
+. Validate that the landing page includes a “service” link to API Definition
+
+. Validate that the landing page includes a “conformance” link to the conformance class document
+
+. Validate that the landing page includes a “data” link to the WFS contents.
+|===

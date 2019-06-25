@@ -1,0 +1,11 @@
+[[ats_core_http]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/http* 
+^|Test Purpose |Validate that the resource paths advertised through the API conform with HTTP 1.1.
+^|Requirement |/req/core/http/A
+^|Test Method |All compliance tests shall be configured to use the HTTP 1.1 protocol exclusively.
+^|Requirement |/req/core/http/B
+^|Pre-Condition |The API supports HTTPS
+^|Test Method |All compliance tests shall be configured to use <<rfc2818,HTTP over TLS>> (RFC 2818) with their HTTP 1.1 protocol.
+|===
