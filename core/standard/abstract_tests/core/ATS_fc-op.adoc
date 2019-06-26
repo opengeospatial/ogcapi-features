@@ -1,14 +1,14 @@
 [[ats_core_fc-op]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/fc-op* 
+^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/fc-op*
 ^|Test Purpose |Validate that a feature collection can be retrieved from the expected location.
 ^|Requirement |/req/core/fc-op
 ^|Test Method |For every feature collection identified in the collections metadata, issue an HTTP GET request to the URL `/collections/{collectionId}/items` where `{collectionId}` is the `id` property for a collection described in the collections metadata.
 . Validate that a document was returned with a status code 200
 . Validate the contents of the returned document using test <<ats_core_fc-success>>.
 
-Repeat these tests using the following parameter tests: 
+Repeat these tests using the following parameter tests:
 
 *Bounding Box:*
 
@@ -32,21 +32,18 @@ Repeat these tests using the following parameter tests:
 
 |===
 
-include::core/ATS_fc-bbox-definition.adoc[]
+include::ATS_fc-bbox-definition.adoc[]
 
-include::core/ATS_fc-bbox-response.adoc[]
+include::ATS_fc-bbox-response.adoc[]
 
-include::core/ATS_fc-limit-definition.adoc[]
+include::ATS_fc-limit-definition.adoc[]
 
-include::core/ATS_fc-limit-response.adoc[]
+include::ATS_fc-limit-response.adoc[]
 
-include::core/ATS_fc-time-definition.adoc[]
+include::ATS_fc-time-definition.adoc[]
 
-include::core/ATS_fc-time-response.adoc[]
+include::ATS_fc-time-response.adoc[]
 
-include::core/ATS_query-param-invalid.adoc[]
+include::ATS_query-param-invalid.adoc[]
 
-include::core/ATS_query-param-unknown.adoc[]
-
-
-
+include::ATS_query-param-unknown.adoc[]
