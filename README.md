@@ -24,7 +24,7 @@ OGC API Features provides access to collections of geospatial data.
 GET /collections
 ```
 
-Lists the collections of data on the server that can be queried ([7.12](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_collections)),
+Lists the collections of data on the server that can be queried ([7.12](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_collections_)),
 and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained
 
@@ -40,7 +40,7 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
 addition to the `bbox` filter above, with extensions providing more advanced options
-([7.14](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_collection_2)).
+([7.15](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_items_)).
 
 ```
 GET /collections/{collectionId}/items/{featureId}
@@ -49,22 +49,21 @@ GET /collections/{collectionId}/items/{featureId}
 Returns a single 'feature' - something in the real-world (a building,
 a stream, a county, etc.) that typically is described by a geometry plus other properties.
 This provides a stable, canonical URL to link to the 'thing'
-([7.15](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_2)).
+([7.16](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_)).
 
 ## Using the standard
 
-A stable draft is available (from April 2018). Note that the draft uses the title "Web Feature Service" or "WFS",
-version 3.0. This was the original title and newer [editor's drafts](http://docs.opengeospatial.org/DRAFTS/17-069r1.html)
-already use the new title "OGC API - Features".
+Most existing implementation have currently implemented the first draft release from April 2018. Note that the draft uses the title "Web Feature Service" or "WFS",
+version 3.0:
 
-* [OGC API - Features - Part 1: Core, First Draft Release (draft.1)](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html)
+* [OGC API - Features - Part 1: Core, First Draft Release](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html)
 
 A [PDF version](https://portal.opengeospatial.org/files/?artifact_id=79027&version=1) is available, too.
 
-Those who want to just see the endpoints and responses can explore the generic
-OpenAPI definition on SwaggerHub:
+Since then, the name has been changed to "OGC API - Features". The latest draft is the [editor's draft](http://docs.opengeospatial.org/DRAFTS/17-069r1.html).
 
-* [draft.1 openapi.yaml](https://app.swaggerhub.com/apis/cholmesgeo/WFS3/M1)
+Those who want to just see the endpoints and responses can explore [examples of
+OpenAPI definitions](https://github.com/opengeospatial/WFS_FES/tree/master/core/examples/openapi).
 
 Several implementations of the draft standard exist:
 
