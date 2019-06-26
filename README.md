@@ -24,7 +24,7 @@ OGC API Features provides access to collections of geospatial data.
 GET /collections
 ```
 
-Lists the collections of data on the server that can be queried ([7.12](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_collections_)),
+Lists the collections of data on the server that can be queried ([7.13](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_collections_)),
 and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained
 
