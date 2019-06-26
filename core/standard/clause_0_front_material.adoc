@@ -37,10 +37,10 @@ This standard defines the resources listed in Table 1. For an overview of the re
 |Resource |Path |HTTP method |Document reference
 |Landing page |`/` |GET |<<_api_landing_page,7.2 API landing page>>
 |Conformance declaration |`/conformance` |GET |<<_declaration_of_conformance_classes,7.4 Declaration of conformance classes>>
-|Feature collections |`/collections` |GET |<<_collections_,7.12 Feature collections>>
-|Feature collection |`/collections/{collectionId}` |GET |<<_collection_, 7.13 Feature collection>>
-|Features |`/collections/{collectionId}/items` |GET |<<_items_,7.14 Features>>
-|Feature |`/collections/{collectionId}/items/{featureId}` |GET |<<_feature_,7.15 Feature>>
+|Feature collections |`/collections` |GET |<<_collections_,7.13 Feature collections>>
+|Feature collection |`/collections/{collectionId}` |GET |<<_collection_, 7.14 Feature collection>>
+|Features |`/collections/{collectionId}/items` |GET |<<_items_,7.15 Features>>
+|Feature |`/collections/{collectionId}/items/{featureId}` |GET |<<_feature_,7.16 Feature>>
 !===
 
 Implementations of OGC API Features are intended to support two different approaches how clients can use the API.
