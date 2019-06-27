@@ -1,8 +1,8 @@
 [[ats_gmlsf0_definition]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test Suite {counter:ats-id}* |*/ats/gmlsf0/definition* 
-^|Test Purpose |TBD
+^|*Abstract Test {counter:ats-id}* |*/ats/gmlsf0/definition* 
+^|Test Purpose |Verify support for GML Simple Features level 0
 ^|Requirement |/req/gmlsf0/definition
-^|Test Method |<<ats_gmlsf0_content>>
+^|Test Method |Verify that every `200`-response of an operation of the API where GML Simple Features 0 was requested is of media type `application/gml+xml`
 |===

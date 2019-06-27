@@ -4,21 +4,7 @@
 
 === Introduction
 
-OGC API Features is not a Web Service in the traditional sense. Rather, it defines the behavior and content of a set of Resources exposed through a Web Application Programing Interface (Web API). Compliance testing for OGC API Features and similar standards must answer three questions:
-
-.  Are the capabilities advertised through the API definition compliant with the standard?
-
-.  Does the API implement those capabilities as advertised?
-
-.  Do the resources returned by the micro-services meet the structure and content requirements of the standard?
-
-Further complicating the issue, an API may expose resources in addition to those defined by the standard. A test engine must be able to traverse the API description document, identify test points, and ignore resource paths which are not to be tested.
-
-=== Approach to Testing
-
-The Test Approach used in the API-Features Abstract Test Suite includes four steps:
-
-TBD
+OGC API Features is not a Web Service in the traditional sense. Rather, it defines the behavior and content of a set of Resources exposed through a Web Application Programing Interface (Web API). Therefore, an API may expose resources in addition to those defined by the standard. A test engine must be able to traverse the API, identify and validate test points, and ignore resource paths which are not to be tested.
 
 === Conformance Class Core
 

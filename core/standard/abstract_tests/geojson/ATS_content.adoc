@@ -1,15 +1,9 @@
 [[ats_geojson_content]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test Suite {counter:ats-id}* |*/ats/geojson/content* 
-^|Test Purpose |TBD
+^|*Abstract Test {counter:ats-id}* |*/ats/geojson/content* 
+^|Test Purpose |Verify the content of a GeoJSON document given an input document and schema.
 ^|Requirement |/req/geojson/content
-^|Test Method |
-^|A |Every `200`-response with the media type `application/geo+json` SHALL be
-
-* a link:https://tools.ietf.org/html/rfc7946#section-3.3[GeoJSON FeatureCollection Object] for features, and
-* a link:https://tools.ietf.org/html/rfc7946#section-3.2[GeoJSON Feature Object] for a single feature.
-
-^|B |The links specified in the requirements `/req/core/fc-links` and `/req/core/f-links` SHALL be added in a extension property (foreign member) with the name `links`.
-^|C |The schema of all responses with the media type `application/json` SHALL conform with the JSON Schema specified for the resource in the <<rc_core,Core>> requirements class.
+^|Test Method |. Validate that the document is a GeoJSON document.
+. Validate the document against the schema using an JSON Schema validator.
 |===

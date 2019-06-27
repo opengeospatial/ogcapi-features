@@ -1,8 +1,8 @@
 [[ats_gmlsf2_definition]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test Suite {counter:ats-id}* |*/ats/gmlsf2/definition* 
-^|Test Purpose |TBD
+^|*Abstract Test {counter:ats-id}* |*/ats/gmlsf2/definition* 
+^|Test Purpose |Verify support for GML Simple Features level 2
 ^|Requirement |/req/gmlsf2/definition
-^|Test Method |<<ats_gmlsf2_content>>
+^|Test Method |Verify that every `200`-response of an operation of the API where GML Simple Features 2 was requested is of media type `application/gml+xml`
 |===
