@@ -1,7 +1,7 @@
 [[ats_core_fc-response]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/fc-response* 
+^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-response* 
 ^|Test Purpose |Validate that the Feature Collections complies with the require structure and contents.
 ^|Requirement |/req/core/fc-response
 ^|Test Method |. Validate that the `type` property is present and has a value of `FeatureCollection`
@@ -26,3 +26,15 @@ The collections metadata may be retrieved in a number of different formats. The 
 |GMLSF0 |featureCollectionSF0.xsd |<<ats_gmlsf0_content>>
 |GMLSF2 |featureCollectionSF2.xsd |<<ats_gmlsf2_content>>
 |===
+
+*Supporting Tests:*
+
+include::ATS_fc-links.adoc[]
+
+include::ATS_fc-timeStamp.adoc[]
+
+include::ATS_fc-numberMatched.adoc[]
+
+include::ATS_fc-numberReturned.adoc[]
+
+

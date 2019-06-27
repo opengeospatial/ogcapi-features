@@ -1,7 +1,7 @@
 [[ats_core_crs84]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/crs84* 
+^|*Abstract Test {counter:ats-id}* |*/ats/core/crs84* 
 ^|Test Purpose |Validate that all spatial geometries provided through a WFS service are in the CRS84 spatial reference system unless otherwise requested by the client.
 ^|Requirement |/req/core/crs84
 ^|Test Method |. Do not specify a coordinate reference system in any request. All spatial data should be in the CRS84 reference system.

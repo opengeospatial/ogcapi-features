@@ -1,9 +1,9 @@
 [[ats_core_fc-links]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/fc-links* 
+^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-links* 
 ^|Test Purpose |Validate that the required links are included in the Collections Metadata document.
-^|Requirement |/req/core/fc-links
+^|Requirement |/req/core/fc-links, /req/core/fc-rel-type
 ^|Test Method |Verify that the response document includes:
 
 . a link to this response document (relation: `self`),

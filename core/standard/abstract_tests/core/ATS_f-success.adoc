@@ -1,7 +1,7 @@
 [[ats_core_f-success]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test Suite {counter:ats-id}* |*/ats/core/f-success* 
+^|*Abstract Test {counter:ats-id}* |*/ats/core/f-success* 
 ^|Test Purpose |Validate that the Feature complies with the required structure and contents.
 ^|Requirement |/req/core/f-success
 ^|Test Method |. Validate that the Feature includes all required link properties using <<ats_core_f-links>>
@@ -21,3 +21,7 @@ The Features may be retrieved in a number of different formats. The following ta
 |GMLSF0 |featureGML.xsd |<<ats_gmlsf0_content>>
 |GMLSF2 |featureGML.xsd |<<ats_gmlsf2_content>>
 |===
+
+*Supporting Tests:*
+
+include::ATS_f-links.adoc[]

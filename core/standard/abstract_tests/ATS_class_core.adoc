@@ -8,9 +8,11 @@
 
 ==== General Tests
 
+===== HTTP
+
 include::core/ATS_http.adoc[]
 
-==== CRS 84
+===== CRS 84
 
 include::core/ATS_crs84.adoc[]
 
@@ -20,38 +22,36 @@ include::core/ATS_root-op.adoc[]
 
 include::core/ATS_root-success.adoc[]
 
-==== Conformance Path {root}/conformance
-
-include::core/ATS_conformance-op.adoc[]
-
-include::core/ATS_conformance-success.adoc[]
-
 ==== API Definition Path {root}/api (link)
 
 include::core/ATS_api-definition-op.adoc[]
 
 include::core/ATS_api-definition-success.adoc[]
 
-==== Collections Metadata {root}/collections
+==== Conformance Path {root}/conformance
+
+include::core/ATS_conformance-op.adoc[]
+
+include::core/ATS_conformance-success.adoc[]
+
+
+==== Feature Collections Metadata {root}/collections
 
 include::core/ATS_fc-md-op.adoc[]
 
 include::core/ATS_fc-md-success.adoc[]
 
-==== Simple Features Collection {root}/collections/{collectionId}
+==== Feature Collection {root}/collections/{collectionId}
 
-include::core/ATS_sf-md-op.adoc[]
+include::core/ATS_sfc-md-op.adoc[]
 
-include::core/ATS_sf-md-success.adoc[]
+include::core/ATS_sfc-md-success.adoc[]
 
-==== Collection (singular) Metadata {root}/collections/{collectionId}/items
+==== Features {root}/collections/{collectionId}/items
 
 include::core/ATS_fc-op.adoc[]
 
-////
-//// referenced does file not exist (yet)
-//// include::core/ATS_fc-success.adoc[]
-////
+include::core/ATS_fc-response.adoc[]
 
 ==== Feature
 
