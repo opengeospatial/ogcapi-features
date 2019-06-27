@@ -24,7 +24,7 @@ OGC API Features provides access to collections of geospatial data.
 GET /collections
 ```
 
-Lists the collections of data on the server that can be queried ([7.13](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_collections_)),
+Lists the collections of data on the server that can be queried ([7.13](http://docs.opengeospatial.org/DRAFTS/17-069r2.html#_collections_)),
 and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained
 
@@ -40,7 +40,7 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
 addition to the `bbox` filter above, with extensions providing more advanced options
-([7.15](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_items_)).
+([7.15](http://docs.opengeospatial.org/DRAFTS/17-069r2.html#_items_)).
 
 ```
 GET /collections/{collectionId}/items/{featureId}
@@ -49,7 +49,7 @@ GET /collections/{collectionId}/items/{featureId}
 Returns a single 'feature' - something in the real-world (a building,
 a stream, a county, etc.) that typically is described by a geometry plus other properties.
 This provides a stable, canonical URL to link to the 'thing'
-([7.16](http://docs.opengeospatial.org/DRAFTS/17-069r1.html#_feature_)).
+([7.16](http://docs.opengeospatial.org/DRAFTS/17-069r2.html#_feature_)).
 
 ## Using the standard
 
@@ -60,7 +60,7 @@ version 3.0:
 
 A [PDF version](https://portal.opengeospatial.org/files/?artifact_id=79027&version=1) is available, too.
 
-Since then, the name has been changed to "OGC API - Features". The latest draft is the [editor's draft](http://docs.opengeospatial.org/DRAFTS/17-069r1.html).
+Since then, the name has been changed to "OGC API - Features". The latest draft is the [editor's draft](http://docs.opengeospatial.org/DRAFTS/17-069r2.html).
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/WFS_FES/tree/master/core/examples/openapi).
@@ -87,8 +87,8 @@ The current expectation is to have a stable version of the Core specification by
 This version would then be the input for the next steps in the standardization process
 in OGC and ISO/TC 211.
 
-The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r1.html), also available as
-[PDF](http://docs.opengeospatial.org/DRAFTS/17-069r1.pdf).
+The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r2.html), also available as
+[PDF](http://docs.opengeospatial.org/DRAFTS/17-069r2.pdf).
 
 Also a non-normative document, the "Users Guide", and Part 2, support for Coordinate Reference Systems, are being developed.
 
