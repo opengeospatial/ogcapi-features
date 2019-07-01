@@ -3,7 +3,7 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-md-items* 
 ^|Test Purpose |Validate that each collection provided by the server is described in the Collections Metadata.
-^|Requirement |/req/core/fc-md-items
+^|Requirement |<<req_core_fc-md-items,/req/core/fc-md-items>>
 ^|Test Method |. Verify that there is an entry in the `collections` array of the Collections Metadata for each feature collection provided by the API.
 . Verify that each collection entry includes an identifier.
 . Verify that each collection entry includes links in accordance with <<ATS_fc-md-items-links>>.

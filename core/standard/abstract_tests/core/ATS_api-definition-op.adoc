@@ -1,12 +1,12 @@
 [[ats_core_api_definition-op]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/api-definition-op* 
-^|Test Purpose |Validate that the API definition document can be retrieved from the expected location.
-^|Requirement |/req/core/api-definition-op
+^|*Abstract Test {counter:ats-id}* |*/ats/core/api-definition-op*
 ^|Test Purpose |Validate that the API Definition document can be retrieved from the expected location.
-^|Test Method |. Construct a path for each each API Definition link on the landing page
-. Issue a  HTTP GET request on each path
+^|Requirement |<<req_core_api-definition-op,/req/core/api-definition-op>>
+^|Test Purpose |Validate that the API Definition document can be retrieved from the expected location.
+^|Test Method |. Construct a path for each API Definition link on the landing page
+. Issue a HTTP GET request on each path
 . Validate that a document was returned with a status code 200
 . Validate the contents of the returned document using test <<ats_core_api-definition-success>>.
 |===
