@@ -83,9 +83,14 @@ the current draft standard has been tested in a [WFS 3.0 Hackathon](http://www.o
 
 Feedback for the Core is collected and discussed in the
 [GitHub issues for Part 1 (Core)](https://github.com/opengeospatial/WFS_FES/projects/1).
-The current expectation is to have a stable version of the Core specification by August 2019.
-This version would then be the input for the next steps in the standardization process
-in OGC and ISO/TC 211.
+After resolving most of the open issues, the work on this first part of
+OGC API Features is entering the final straight. On June 27, 2019,
+the OGC Technical Committee passed a motion to start an electronic
+vote to approve release as an OGC Adopted Standard (pending
+final edits to the document). The release candidate that is the
+basis for the vote will be available in July 2019.
+In parallel that version will also be submitted to ISO/TC 211
+for the DIS ballot.
 
 The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r2.html), also available as
 [PDF](http://docs.opengeospatial.org/DRAFTS/17-069r2.pdf).
@@ -95,7 +100,8 @@ Also a non-normative document, the "Users Guide", and Part 2, support for Coordi
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
 * [Checklist for implementers (for draft.1 from April 2018)](guide/conformance_checklist.md)
-* [UML for Part 1: Core](uml/README.md)
+* [UML for Part 1, Core](uml/README.md)
+* [Status of Part 1, Core, in ISO](https://www.iso.org/standard/32586.html)
 
 ## [Contributing](Contributing.md)
 
