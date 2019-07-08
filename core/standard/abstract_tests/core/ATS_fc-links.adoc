@@ -3,7 +3,7 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-links*
 ^|Test Purpose |Validate that the required links are included in the Collections document.
-^|Requirement |<<req_core_fc-links,/req/core/fc-links>>, /req/core/fc-rel-type
+^|Requirement |<<req_core_fc-links,/req/core/fc-links>>, <<req_core_fc-rel-type,/req/core/fc-rel-type>>
 ^|Test Method |Verify that the response document includes:
 
 . a link to this response document (relation: `self`),
