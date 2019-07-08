@@ -1,18 +1,18 @@
 [[ats_core_root-success]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/root-success* 
+^|*Abstract Test {counter:ats-id}* |*/ats/core/root-success*
 ^|Test Purpose |Validate that the landing page complies with the require structure and contents.
-^|Requirement |/req/core/root-success
+^|Requirement |<<req_core_root-success,/req/core/root-success>>
 ^|Test Method |Validate the landing page for all supported media types using the resources and tests identified in <<landing-page-schema>>
 
 For formats that require manual inspection, perform the following:
 
-.. Validate that the landing page includes a “service” link to API Definition
+.. Validate that the landing page includes a "service-desc" and/or "service-doc" link to an API Definition
 
-.. Validate that the landing page includes a “conformance” link to the conformance class document
+.. Validate that the landing page includes a "conformance" link to the conformance class declaration
 
-.. Validate that the landing page includes a “data” link to the Feature contents.
+.. Validate that the landing page includes a "data" link to the Feature contents.
 |===
 
 The landing page may be retrieved in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the landing page against that schema. All supported formats should be exercised.

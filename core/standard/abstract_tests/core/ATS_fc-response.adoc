@@ -3,7 +3,7 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-response* 
 ^|Test Purpose |Validate that the Feature Collections complies with the require structure and contents.
-^|Requirement |/req/core/fc-response
+^|Requirement |<<req_core_fc-response,/req/core/fc-response>>
 ^|Test Method |. Validate that the `type` property is present and has a value of `FeatureCollection`
 . Validate the `features` property is pressent and that it is populated with an array of `feature` items.
 . Validate that only Features which match the selection criteria are included in the Feature Collection.

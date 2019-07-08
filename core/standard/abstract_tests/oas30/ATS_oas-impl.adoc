@@ -3,7 +3,7 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/ats/oas30/oas-impl* 
 ^|Test Purpose |Verify that all capabilities specified in the OpenAPI definition are implemented by the API. 
-^|Requirement |/req/oas30/oas-impl
+^|Requirement |<<req_oas30_oas-impl,/req/oas30/oas-impl>>
 ^|Test Method |. Construct a path from each URL template including all server URL options and all enumerated path parameters.
 . For each path defined in the OpenAPI document, validate that the path performs in accordance with the API definition and the API-Features standard.
 |===

@@ -1,18 +1,19 @@
 [[ats_core_fc-md-success]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-md-success* 
-^|Test Purpose |Validate that the collections metadata complies with the require structure and contents.
-^|Requirement |/req/core/fc-md-success
+^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-md-success*
+^|Test Purpose |Validate that the Collections content complies with the required structure and contents.
+^|Requirement |<<req_core_fc-md-success,/req/core/fc-md-success>>, <<req_core_crs84,/req/core/crs84>>
 ^|Test Method |. Validate that all response documents comply with <<ats_core_fc-md-links>>
-. Validate that all response documents comply with <<ats_core_fc-md-items>> 
-. Validate the collections metadata for all supported media types using the resources and tests identified in <<collections-metadata-schema>>
+. Validate that all response documents comply with <<ats_core_fc-md-items>>
+. In case the response includes a "crs" property, validate that the first value is either "http://www.opengis.net/def/crs/OGC/1.3/CRS84" or "http://www.opengis.net/def/crs/OGC/0/CRS84h"
+. Validate the collections content for all supported media types using the resources and tests identified in <<collections-metadata-schema>>
 |===
 
-The collections metadata may be retrieved in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the against that schema. All supported formats should be exercised.
+The Collections content may be retrieved in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the against that schema. All supported formats should be exercised.
 
 [[collections-metadata-schema]]
-.Schema and Tests for Collections Metadata
+.Schema and Tests for Collections content
 [width="90%",cols="3",options="header"]
 |===
 |Format |Schema Document |Test ID

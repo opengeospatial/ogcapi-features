@@ -2,10 +2,10 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-op*
-^|Test Purpose |Validate that features can be identified and extracted from a Feature Collection using query parameters.
-^|Requirement |/req/core/fc-op
-^|Test Method |For every feature collection identified in the collections metadata, issue an HTTP GET request to the URL `/collections/{collectionId}/items` where `{collectionId}` is the `id` property for a collection described in the collections metadata.
-. Validate that a document was returned with a status code 200
+^|Test Purpose |Validate that features can be identified and extracted from a Collection using query parameters.
+^|Requirement |<<req_core_fc-op,/req/core/fc-op>>
+^|Test Method |. For every feature collection identified in Collections, issue an HTTP GET request to the URL `/collections/{collectionId}/items` where `{collectionId}` is the `id` property for a Collection described in the Collections content.
+. Validate that a document was returned with a status code 200.
 . Validate the contents of the returned document using test <<ats_core_fc-response>>.
 
 Repeat these tests using the following parameter tests:
@@ -30,6 +30,8 @@ Repeat these tests using the following parameter tests:
 * Query Invalid <<ats_core_query-param-invalid>>
 * Query Unknown <<ats_core_query-param-unknown>>
 
+Execute requests with combinations of the "bbox" and "datetime" query parameters
+and verify that only features are returned that match both selection criteria.
 |===
 
 include::ATS_fc-bbox-definition.adoc[]
