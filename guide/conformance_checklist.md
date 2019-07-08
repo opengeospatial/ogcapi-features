@@ -20,12 +20,12 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
 
 **7.4** [Declaration of conformance classes](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_declaration_of_conformance_classes)
 * [ ] GET request at **/conformance** served
-* [ ] Resonse content is based on OpenAPI schema [req-classes.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml).
+* [ ] Resonse content is based on OpenAPI schema [conf-classes.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/conf-classes.yaml).
   * [ ] conformsTo in response contains
-    * [ ] http://www.opengis.net/spec/wfs-1/3.0/req/core
-    * [ ] (recommended) http://www.opengis.net/spec/wfs-1/3.0/req/html
-    * [ ] (recommended) http://www.opengis.net/spec/wfs-1/3.0/req/geojson
-    * [ ] (recommended) http://www.opengis.net/spec/wfs-1/3.0/req/oas30
+    * [ ] http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
+    * [ ] (recommended) http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html
+    * [ ] (recommended) http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson
+    * [ ] (recommended) http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
 
 **7.5** [HTTP 1.1](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_http_1_1)
 * [ ] Conforms to [HTTP 1.1](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#rfc2616), including correct use of [status codes](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#http_status_codes), headers, etc.
