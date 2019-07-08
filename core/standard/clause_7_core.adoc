@@ -1,4 +1,4 @@
-== Requirement Class "Core"
+== Requirements Class "Core"
 
 [[core-overview]]
 === Overview
@@ -34,11 +34,11 @@ implementation of servers and clients. Accessing the `API definition` using
 HTTP GET returns a description of the API. The API definition can be hosted
 on the API server(s) or a separate server.
 
-The `Conformance declaration` states the requirements classes from standards
+The `Conformance declaration` states the conformance classes from standards
 or community specifications, identified by a URI, that the API conforms to.
 Clients can but are not required to use this information. Accessing the
 `Conformance declaration` using HTTP GET returns the list of URIs of
-requirements classes implemented by the server.
+conformance classes implemented by the server.
 
 The data is organized into one or more collections. `Collections` provides
 information about and access to the collections.
@@ -215,7 +215,7 @@ See <<http_status_codes>> for general guidance.
 
 To support "generic" clients that want to access multiple OGC API Features
 implementations - and not "just" a specific API / server, the server has to
-declare the requirements classes it implements and conforms to.
+declare the conformance classes it implements and conforms to.
 
 include::requirements/core/REQ_conformance-op.adoc[]
 
@@ -223,8 +223,8 @@ include::requirements/core/REQ_conformance-op.adoc[]
 
 include::requirements/core/REQ_conformance-success.adoc[]
 
-[[schema_req-classes]]
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml[Schema for the list of requirements classes]
+[[schema_conf-classes]]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/conf-classes.yaml[Schema for the list of conformance classes]
 [source,YAML]
 ----
 type: object
@@ -238,7 +238,7 @@ properties:
 ----
 
 [[example_3]]
-.Requirements class response document
+.Conformance declaration response document
 =================
 This example response in JSON is for a server that supports OpenAPI 3.0 for
 the API definition and HTML and GeoJSON as encodings for features.
@@ -247,10 +247,10 @@ the API definition and HTML and GeoJSON as encodings for features.
 ----
 {
   "conformsTo": [
-    "http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core",
-    "http://www.opengis.net/spec/ogcapi-features-1/1.0/req/oas30",
-    "http://www.opengis.net/spec/ogcapi-features-1/1.0/req/html",
-    "http://www.opengis.net/spec/ogcapi-features-1/1.0/req/geojson"
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
   ]
 }
 ----
