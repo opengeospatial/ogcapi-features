@@ -536,27 +536,7 @@ properties:
   links:
     type: array
     items:
-      type: object
-      required:
-        - href
-      properties:
-        href:
-          type: string
-          example: http://data.example.com/buildings/123
-        rel:
-          type: string
-          example: alternate
-        type:
-          type: string
-          example: application/geo+json
-        hreflang:
-          type: string
-          example: en
-        title:
-          type: string
-          example: Trierer Strasse 70, 53115 Bonn
-        length:
-          type: integer
+      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
   extent:
     description: >-
       The extent of the features in the collection. In the Core only spatial and temporal
@@ -648,7 +628,7 @@ properties:
     type: string
     default: feature
   crs:
-    description: the list of coordinate reference systems supported by the service; the first item is the default coordinate reference system
+    description: the list of coordinate reference systems supported by the service
     type: array
     items:
       type: string
