@@ -7,10 +7,10 @@
 ^|Test Method |. Validate that the `type` property is present and has a value of `FeatureCollection`
 . Validate the `features` property is pressent and that it is populated with an array of `feature` items.
 . Validate that only Features which match the selection criteria are included in the Feature Collection.
-. If the `links` property is present, validate that all entries comply with <<ats_core_fc-links>>
-. If the `timeStamp` property is present, validate that it complies with <<ats_core_fc-timeStamp>>
-. If the `numberMatched` property is present, validate that it complies with <<ats_core_fc-numberMatched>>
-. If the `numberReturned` property is present, validate that it complies with <<ats_core_fc-numberReturned>>
+. If the `links` property is present, validate that all entries comply with <<ats_core_fc-links,/ats/core/fc-links>>
+. If the `timeStamp` property is present, validate that it complies with <<ats_core_fc-timeStamp,/ats/core/fc-timeStamp>>
+. If the `numberMatched` property is present, validate that it complies with <<ats_core_fc-numberMatched,/ats/core/fc-numberMatched>>
+. If the `numberReturned` property is present, validate that it complies with <<ats_core_fc-numberReturned,/ats/core/fc-numberReturned>>
 . Validate the collections metadata for all supported media types using the resources and tests identified in <<feature-collections-schema>>
 |===
 
@@ -21,10 +21,10 @@ The collections metadata may be retrieved in a number of different formats. The 
 [width="90%",cols="3",options="header"]
 |===
 |Format |Schema Document |Test ID
-|HTML |featureCollectionGeoJSON.yaml |<<ats_html_content>>
-|GeoJSON |featureCollectionGeoJSON.yaml |<<ats_geojson_content>>
-|GMLSF0 |featureCollectionSF0.xsd |<<ats_gmlsf0_content>>
-|GMLSF2 |featureCollectionSF2.xsd |<<ats_gmlsf2_content>>
+|HTML |featureCollectionGeoJSON.yaml |<<ats_html_content,/ats/html/content>>
+|GeoJSON |featureCollectionGeoJSON.yaml |<<ats_geojson_content,/ats/geojson/content>>
+|GMLSF0 |featureCollectionSF0.xsd |<<ats_gmlsf0_content,/ats/gmlsf0/content>>
+|GMLSF2 |featureCollectionSF2.xsd |<<ats_gmlsf2_content,/ats/gmlsf2/content>>
 |===
 
 *Supporting Tests:*
