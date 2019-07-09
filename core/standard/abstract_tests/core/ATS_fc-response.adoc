@@ -1,17 +1,17 @@
 [[ats_core_fc-response]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-response* 
+^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-response*
 ^|Test Purpose |Validate that the Feature Collections complies with the require structure and contents.
 ^|Requirement |<<req_core_fc-response,/req/core/fc-response>>
 ^|Test Method |. Validate that the `type` property is present and has a value of `FeatureCollection`
-. Validate the `features` property is pressent and that it is populated with an array of `feature` items.
+. Validate the `features` property is present and that it is populated with an array of `feature` items.
 . Validate that only Features which match the selection criteria are included in the Feature Collection.
 . If the `links` property is present, validate that all entries comply with <<ats_core_fc-links,/ats/core/fc-links>>
 . If the `timeStamp` property is present, validate that it complies with <<ats_core_fc-timeStamp,/ats/core/fc-timeStamp>>
 . If the `numberMatched` property is present, validate that it complies with <<ats_core_fc-numberMatched,/ats/core/fc-numberMatched>>
 . If the `numberReturned` property is present, validate that it complies with <<ats_core_fc-numberReturned,/ats/core/fc-numberReturned>>
-. Validate the collections metadata for all supported media types using the resources and tests identified in <<feature-collections-schema>>
+. Validate the collections content for all supported media types using the resources and tests identified in <<feature-collections-schema>>
 |===
 
 The collections metadata may be retrieved in a number of different formats. The following table identifies the applicable schema document for each format and the test to be used to validate the against that schema. All supported formats should be exercised.
@@ -21,10 +21,10 @@ The collections metadata may be retrieved in a number of different formats. The 
 [width="90%",cols="3",options="header"]
 |===
 |Format |Schema Document |Test ID
-|HTML |featureCollectionGeoJSON.yaml |<<ats_html_content,/ats/html/content>>
-|GeoJSON |featureCollectionGeoJSON.yaml |<<ats_geojson_content,/ats/geojson/content>>
-|GMLSF0 |featureCollectionSF0.xsd |<<ats_gmlsf0_content,/ats/gmlsf0/content>>
-|GMLSF2 |featureCollectionSF2.xsd |<<ats_gmlsf2_content,/ats/gmlsf2/content>>
+|HTML |link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureCollectionGeoJSON.yaml[featureCollectionGeoJSON.yaml] |<<ats_html_content,/ats/html/content>>
+|GeoJSON |link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureCollectionGeoJSON.yaml[featureCollectionGeoJSON.yaml] |<<ats_geojson_content,/ats/geojson/content>>
+|GMLSF0 |link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/core.xsd[core.xsd] |<<ats_gmlsf0_content,/ats/gmlsf0/content>>
+|GMLSF2 |link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/core.xsd[core.xsd] |<<ats_gmlsf2_content,/ats/gmlsf2/content>>
 |===
 
 *Supporting Tests:*
@@ -36,5 +36,3 @@ include::ATS_fc-timeStamp.adoc[]
 include::ATS_fc-numberMatched.adoc[]
 
 include::ATS_fc-numberReturned.adoc[]
-
-
