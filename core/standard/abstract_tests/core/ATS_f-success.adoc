@@ -1,10 +1,10 @@
 [[ats_core_f-success]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/f-success* 
+^|*Abstract Test {counter:ats-id}* |*/ats/core/f-success*
 ^|Test Purpose |Validate that the Feature complies with the required structure and contents.
-^|Requirement |/req/core/f-success
-^|Test Method |. Validate that the Feature includes all required link properties using <<ats_core_f-links>>
+^|Requirement |<<req_core_f-success,/req/core/f-success>>
+^|Test Method |. Validate that the Feature includes all required link properties using <<ats_core_f-links,/ats/core/f-links>>
 . Validate the Feature for all supported media types using the resources and tests identified in
 <<feature-schema>>
 |===
@@ -16,10 +16,10 @@ The Features may be retrieved in a number of different formats. The following ta
 [width="90%",cols="3",options="header"]
 |===
 |Format |Schema Document |Test ID
-|HTML |featureGeoJSON.yaml |<<ats_html_content>>
-|GeoJSON |featureGeoJSON.yaml |<<ats_geojson_content>>
-|GMLSF0 |featureGML.xsd |<<ats_gmlsf0_content>>
-|GMLSF2 |featureGML.xsd |<<ats_gmlsf2_content>>
+|HTML |link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureGeoJSON.yaml[featureGeoJSON.yaml] |<<ats_html_content,/ats/html/content>>
+|GeoJSON |link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureGeoJSON.yaml[featureGeoJSON.yaml] |<<ats_geojson_content,/ats/geojson/content>>
+|GMLSF0 |link:http://schemas.opengis.net/gml/3.2.1/gml.xsd[gml.xsd]|<<ats_gmlsf0_content,/ats/gmlsf0/content>>
+|GMLSF2 |link:http://schemas.opengis.net/gml/3.2.1/gml.xsd[gml.xsd] |<<ats_gmlsf2_content,/ats/gmlsf2/content>>
 |===
 
 *Supporting Tests:*

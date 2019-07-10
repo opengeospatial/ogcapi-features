@@ -3,7 +3,7 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/ats/core/query-param-unknown* 
 ^|Test Purpose |Validate that the API correctly deals with unknown query parameters.
-^|Requirement |/req/core/query-param-unknown
+^|Requirement |<<req_core_query-param-unknown,/req/core/query-param-unknown>>
 ^|Test Method |. Enter an HTTP request with an query parameter that is not specified in the API definition.
 . Verify that the API returns the status code `400`.
 |===

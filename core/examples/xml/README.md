@@ -13,7 +13,7 @@ Core requirements class are expressed in XML using the
 
 ## Responses to path `/conformance`
 
-* A [conformance declaration](ConformsTo.xml). This server conforms to the recommended requirements classes, plus the GML Simple Features Profile, Level 0.
+* A [conformance declaration](ConformsTo.xml). This server conforms to the recommended conformance classes, plus the GML Simple Features Profile, Level 0.
 
 ## Responses to path `/collections`
 

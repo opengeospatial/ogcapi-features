@@ -1,9 +1,10 @@
 [[ats_core_conformance-success]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/conformance-success* 
-^|Test Purpose |Validate that the Conformance response complies with the required structure and contents.
-^|Requirement |/req/core/conformance-success
-^|Test Method |. Validate the API Definition document against OpenAPI 3.0 schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/req-classes.yaml[req-classes.yaml] 
-. Validate that the document list all OGC API requirements classes that the API implements.
+^|*Abstract Test {counter:ats-id}* |*/ats/core/conformance-success*
+^|Test Purpose |Validate that the Conformance Declaration response complies with the required structure and contents.
+^|Requirement |<<req_core_conformance-success,/req/core/conformance-success>>
+^|Test Method |. Validate the response document against OpenAPI 3.0 schema link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/conf-classes.yaml[conf-classes.yaml]
+. Validate that the document includes the conformance class "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core"
+. Validate that the document list all OGC API conformance classes that the API implements.
 |===

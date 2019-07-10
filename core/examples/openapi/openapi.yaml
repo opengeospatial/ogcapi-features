@@ -42,18 +42,18 @@ paths:
     get:
       summary: information about standards that this API conforms to
       description: >-
-        list all requirements classes specified in a standard (e.g.,
+        list all conformance classes specified in a standard (e.g.,
         OGC API - Features - Part 1: Core) that the server conforms to
       operationId: getRequirementsClasses
       tags:
         - Capabilities
       responses:
         '200':
-          description: the URIs of all requirements classes supported by the server
+          description: the URIs of all conformance classes supported by the server
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/req-classes'
+                $ref: '#/components/schemas/conf-classes'
         default:
           description: An error occurred.
           content:
@@ -312,7 +312,7 @@ components:
               rel: data
               type: application/json
               title: Metadata about the feature collections
-    req-classes:
+    conf-classes:
       type: object
       required:
         - conformsTo

@@ -1,14 +1,14 @@
 [[ats_core_f-links]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/f-links* 
+^|*Abstract Test {counter:ats-id}* |*/ats/core/f-links*
 ^|Test Purpose |Validate that the required links are included in a Feature.
-^|Requirement |/req/core/f-links
+^|Requirement |<<req_core_f-links,/req/core/f-links>>
 ^|Test Method |Verify that the returned Feature includes:
 
 . a link to this response document (relation: `self`),
 . a link to the response document in every other media type supported by the server (relation: `alternate`).
-* a link to the feature collection that contains this feature (relation: `collection`).
+. a link to the feature collection that contains this feature (relation: `collection`).
 
 Verify that all links include the `rel` and `type` link parameters.
 |===

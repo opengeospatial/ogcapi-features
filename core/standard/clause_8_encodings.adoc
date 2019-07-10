@@ -20,7 +20,7 @@ The <<rc_core,Core>> requirements class includes recommendations to support
 <<overview,Clause 6 (Overview)>> includes a discussion about recommended
 encodings.
 
-=== Requirement Class "HTML"
+=== Requirements Class "HTML"
 
 Geographic information that is only accessible in formats like GeoJSON or GML
 has two issues:
@@ -46,7 +46,7 @@ include::requirements/html/REQ_content.adoc[]
 
 include::recomendations/html/REC_schema-org.adoc[]
 
-=== Requirement Class "GeoJSON"
+=== Requirements Class "GeoJSON"
 
 GeoJSON is a commonly used format that is simple to understand and well
 supported by tools and software libraries. Since most Web developers are
@@ -163,11 +163,11 @@ In the example below, coordinates are not shown.
 ----
 =================
 
-=== Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 0"
+=== Requirements Class "Geography Markup Language (GML), Simple Features Profile, Level 0"
 
 In addition to HTML and GeoJSON, a significant volume of feature data is
 available in XML-based formats, notably GML. Therefore, this standard
-specifies requirement classes for GML. The Simple Features Profile, Level 0, is
+specifies requirements classes for GML. The Simple Features Profile, Level 0, is
 the simplest profile of GML and is typically supported by tools. The GML Simple
 Features Profile is restricted to data with 2D geometries supported by most tools.
 In addition, the Level 0 profile is limited to features that can be stored in
@@ -207,9 +207,9 @@ All links are encoded using `atom:link` elements.
 
 See <<examples,sub-clause 6.3>> for links to example responses in XML.
 
-=== Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 2"
+=== Requirements Class "Geography Markup Language (GML), Simple Features Profile, Level 2"
 
-The difference between this requirement class and the <<rc_gmlsf0,Level 0>>
+The difference between this requirements class and the <<rc_gmlsf0,Level 0>>
 requirements class is that non-spatial feature properties are not restricted to
 atomic values (strings, numbers, etc.).
 
