@@ -5,9 +5,10 @@
   xmlns="http://www.opengis.net/ogcapi-features-core/1.0"
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.opengis.net/ogcapi-features-core/1.0 ../core.xsd">
+  xsi:schemaLocation="http://www.opengis.net/ogcapi-features-core/1.0
+                      ../../xml/core.xsd">
    <Collection>
-      <Name>roadl_1m</Name>
+      <Id>roadl_1m</Id>
       <Title>Roads</Title>
       <atom:link rel="items"
             title="Roads"
@@ -35,6 +36,5 @@
             <end>2017-12-31T23:59:59Z</end>
          </Temporal>
       </Extent>
-      <DefaultCRS>http://www.opengis.net/def/crs/OGC/1.3/CRS84</DefaultCRS>
    </Collection>
 </Collections>

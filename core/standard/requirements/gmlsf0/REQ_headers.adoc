@@ -1,0 +1,8 @@
+[[req_gmlsf0_headers]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/gmlsf0/headers* 
+^|A |If a property `timeStamp` is included in the response, its value SHALL be reported using the HTTP header named `Date` (see https://tools.ietf.org/html/rfc2616#section-4.5).
+^|B |If a property `numberMatched` is included in the response, its value SHALL be reported using an HTTP header named `OGC-NumberMatched`.
+^|C |If a property `numberReturned` is included in the response, its value SHALL be reported using an HTTP header named `OGC-NumberReturned`.
+|===

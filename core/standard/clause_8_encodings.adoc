@@ -179,6 +179,7 @@ include::requirements/gmlsf0/REQ_definition.adoc[]
 
 include::requirements/gmlsf0/REQ_content.adoc[]
 
+include::requirements/gmlsf0/REQ_headers.adoc[]
 
 [#gml_content,reftext='{table-caption} {counter:table-num}']
 .Media types and XML elements for each resource[[table_3]]
@@ -202,15 +203,9 @@ The namespace prefixes used above and in the OGC API Features Core XML Schema ar
 
 The mapping of the content from the responses specified in the
 <<rc_core,Core requirements class>> to the XML is straightforward.
-All links are encoded using `atom:link` elements except in GML features
-where simple Xlinks are used.
+All links are encoded using `atom:link` elements.
 
 See <<examples,sub-clause 6.3>> for links to example responses in XML.
-
-NOTE: The `core:FeatureCollection` element deliberately goes beyond the permitted content
-specified in the <<GMLSF,GML Simple Features Profile>>, section 8.4.2. This is
-necessary to support the hypermedia controls and other relevant content for
-a Web Feature Service API.
 
 === Requirement Class "Geography Markup Language (GML), Simple Features Profile, Level 2"
 
@@ -223,3 +218,6 @@ include::requirements/requirements_class_gmlsf2.adoc[]
 include::requirements/gmlsf2/REQ_definition.adoc[]
 
 include::requirements/gmlsf2/REQ_content.adoc[]
+
+include::requirements/gmlsf2/REQ_headers.adoc[]
+

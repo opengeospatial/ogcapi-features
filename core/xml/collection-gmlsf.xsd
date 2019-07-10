@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+   targetNamespace="http://www.opengis.org/cipi1.2/level0/core"
+   xmlns:core="http://www.opengis.net/ogcapi-features-core/1.0"
+   xmlns:gml="http://www.opengis.net/gml/3.2"
+   xmlns:gmlsf="http://www.opengis.net/gmlsf/2.0"
+   xmlns="http://www.w3.org/2001/XMLSchema"
+   elementFormDefault="qualified"
+   version="3.0.0">
+
+   <annotation>
+      <appinfo
+         source="http://schemas.opengis.net/gmlsfProfile/2.0/gmlsfLevels.xsd">
+         <gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+      </appinfo>
+   </annotation>
+
+   <!-- ============================================================= -->
+   <!-- = Includes and imports                                      = -->
+   <!-- ============================================================= -->
+   <import namespace="http://www.opengis.net/gml/3.2"
+      schemaLocation="http://schemas.opengis.net/gml/3.2.1/base/gml.xsd"/>
+   <import namespace="http://www.opengis.net/gmlsf/2.0"
+      schemaLocation="http://schemas.opengis.net/gmlsfProfile/2.0/gmlsfLevels.xsd"/>
+
+   <!-- ================================================================== -->
+   <!-- =   Feature collection                                           = -->
+   <!-- =                                                                = -->
+   <!-- =   A GMLSF-compliant container for a response collection.       = -->
+   <!-- =   See:                                                         = -->
+   <!-- =                                                                = -->
+   <!-- =   NOTES:                                                       = -->
+   <!-- =   (1) The Date HTTP header shall be used to timestamp the      = -->
+   <!-- =       response document.                                       = -->
+   <!-- =   (2) The OGC-NumberMatched HTTP header may be used to report  = -->
+   <!-- =       the number of features that match the specified query    = -->
+   <!-- =       parameters.                                              = -->
+   <!-- =   (3) The OGC-NumberReturned HTTP header may be used to        = -->
+   <!-- =       report the number of features presented in the response  = -->
+   <!-- =       document.                                                = -->
+   <!-- =   (4) Zero or more HTTP Link headers may be used to include    = -->
+   <!-- =       hypermedia controls, such as prev and next links, in     = -->
+   <!-- =       the response.                                            = -->
+   <!-- ================================================================== -->
+   <element name="FeatureCollection"
+            type="core:FeatureCollectionType"
+            substitutionGroup="gml:AbstractGML"/>
+   <complexType name="FeatureCollectionType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence minOccurs="1" maxOccurs="unbounded">
+               <element name="featureMember">
+                  <complexType>
+                     <complexContent>
+                        <extension base="gml:AbstractFeatureMemberType">
+                           <sequence>
+                              <element ref="gml:AbstractFeature"/>
+                           </sequence>
+                        </extension>
+                     </complexContent>
+                  </complexType>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+
+</schema>
