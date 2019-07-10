@@ -18,9 +18,14 @@ The Features may be retrieved in a number of different formats. The following ta
 |Format |Schema Document |Test ID
 |HTML |link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureGeoJSON.yaml[featureGeoJSON.yaml] |<<ats_html_content,/ats/html/content>>
 |GeoJSON |link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/featureGeoJSON.yaml[featureGeoJSON.yaml] |<<ats_geojson_content,/ats/geojson/content>>
-|GMLSF0 |link:http://schemas.opengis.net/gml/3.2.1/gml.xsd[gml.xsd]|<<ats_gmlsf0_content,/ats/gmlsf0/content>>
-|GMLSF2 |link:http://schemas.opengis.net/gml/3.2.1/gml.xsd[gml.xsd] |<<ats_gmlsf2_content,/ats/gmlsf2/content>>
+|GMLSF0 |link:http://schemas.opengis.net/gml/3.2.1/gml.xsd[gml.xsd], element substituable for `gml:AbstractFeature` |<<ats_gmlsf0_content,/ats/gmlsf0/content>>
+|GMLSF2 |link:http://schemas.opengis.net/gml/3.2.1/gml.xsd[gml.xsd], element substituable for `gml:AbstractFeature` |<<ats_gmlsf2_content,/ats/gmlsf2/content>>
 |===
+
+Note that in the case of GMLSF0/GMLSF2 it is not sufficient to validate against
+link:http://schemas.opengis.net/gml/3.2.1/gml.xsd[gml.xsd] as the feature will
+be defined in a GML application schema. Determine the XML Schema Document for
+the namespace of the feature to validate the XML document.
 
 *Supporting Tests:*
 

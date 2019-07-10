@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema
-   targetNamespace="http://www.opengis.org/cipi1.2/level0/core"
-   xmlns:core="http://www.opengis.net/ogcapi-features-core/1.0"
+   targetNamespace="http://www.opengis.net/ogcapi-features-1/1.0/sf"
+   xmlns:sf="http://www.opengis.net/ogcapi-features-1/1.0/sf"
    xmlns:gml="http://www.opengis.net/gml/3.2"
    xmlns:gmlsf="http://www.opengis.net/gmlsf/2.0"
    xmlns="http://www.w3.org/2001/XMLSchema"
    elementFormDefault="qualified"
-   version="3.0.0">
+   version="1.0.0">
 
-   <annotation>
-      <appinfo
-         source="http://schemas.opengis.net/gmlsfProfile/2.0/gmlsfLevels.xsd">
-         <gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
-      </appinfo>
+  <annotation>
+    <documentation>This XML Schema Document specifies a
+      FeatureCollection element that conforms to the
+      GML Simple Feature standard for use in the
+      GML conformance classes of the standard
+      OGC API - Features - Part 1: Core.
+
+      Copyright (c) 2019 Open Geospatial Consortium.
+      To obtain additional rights of use, visit
+      http://www.opengeospatial.org/legal/ .
+    </documentation>
+    <appinfo
+       source="http://schemas.opengis.net/gmlsfProfile/2.0/gmlsfLevels.xsd">
+       <gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+    </appinfo>
    </annotation>
 
    <!-- ============================================================= -->
    <!-- = Includes and imports                                      = -->
    <!-- ============================================================= -->
    <import namespace="http://www.opengis.net/gml/3.2"
-      schemaLocation="http://schemas.opengis.net/gml/3.2.1/base/gml.xsd"/>
+      schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <import namespace="http://www.opengis.net/gmlsf/2.0"
       schemaLocation="http://schemas.opengis.net/gmlsfProfile/2.0/gmlsfLevels.xsd"/>
 
@@ -43,12 +53,12 @@
    <!-- =       the response.                                            = -->
    <!-- ================================================================== -->
    <element name="FeatureCollection"
-            type="core:FeatureCollectionType"
+            type="sf:FeatureCollectionType"
             substitutionGroup="gml:AbstractGML"/>
    <complexType name="FeatureCollectionType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
-            <sequence minOccurs="1" maxOccurs="unbounded">
+            <sequence minOccurs="0" maxOccurs="unbounded">
                <element name="featureMember">
                   <complexType>
                      <complexContent>

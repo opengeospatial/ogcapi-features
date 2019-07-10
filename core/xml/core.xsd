@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-   targetNamespace="http://www.opengis.net/ogcapi-features-core/1.0"
-   xmlns:core="http://www.opengis.net/ogcapi-features-core/1.0"
+   targetNamespace="http://www.opengis.net/ogcapi-features-1/1.0"
+   xmlns:core="http://www.opengis.net/ogcapi-features-1/1.0"
    xmlns:atom="http://www.w3.org/2005/Atom"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:xml="http://www.w3.org/XML/1998/namespace"
-   elementFormDefault="qualified" version="3.0.0">
+   elementFormDefault="qualified" version="1.0.0">
    <xsd:annotation>
       <xsd:documentation>This XML Schema Document includes and imports,
-      directly or indirectly, all the XML Schemas defined by the
-      OGC API - Features - Part 1: Core.
+      directly or indirectly, all the XML schemas defined by
+      OGC API - Features - Part 1: Core, with the exception of
+      the XML schema for the GML-Simple-Feature-conformant feature
+      collection element, which has to be defined in a separate
+      XML namespace to conform with the requirements of the GML
+      Simple Feature standard.
 
       Copyright (c) 2019 Open Geospatial Consortium.
       To obtain additional rights of use, visit

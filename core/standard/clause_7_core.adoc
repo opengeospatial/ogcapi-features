@@ -178,10 +178,7 @@ by development tools to support the implementation of servers and clients.
 
 include::requirements/core/REQ_api-definition-op.adoc[]
 
-The API definition is metadata about the API and strictly not part of the API
-itself, but it can be hosted as a sub-resource to the base path of the API,
-for example, at path `/api`. Note that in that case there is no need to include
-the path of the API definition in the API definition itself.
+include::recommendations/core/PER_api-definition-uri.adoc[]
 
 Note that multiple API definition formats can be supported.
 
@@ -958,24 +955,24 @@ depends on the encoding of the feature collection.
 =================
 If the request is to return building features and "10" is the default `limit`,
 the links in the response could be (in this example represented as link headers
-and using an additional parameter `startIndex` to implement `next` links - and
+and using an additional parameter `offset` to implement `next` links - and
 the optional `prev` links):
 
 [source]
 ----
 Link: <http://data.example.org/collections/buildings/items.json>; rel="self"; type="application/geo+json"
 Link: <http://data.example.org/collections/buildings/items.html>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/collections/buildings/items.json?startIndex=10>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?offset=10>; rel="next"; type="application/geo+json"
 ----
 
 Following the `next` link could return:
 
 [source]
 ----
-Link: <http://data.example.org/collections/buildings/items.json?startIndex=10>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/collections/buildings/items.html?startIndex=10>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/collections/buildings/items.json?startIndex=0>; rel="prev"; type="application/geo+json"
-Link: <http://data.example.org/collections/buildings/items.json?startIndex=20>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?offset=10>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.html?offset=10>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json?offset=0>; rel="prev"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?offset=20>; rel="next"; type="application/geo+json"
 ----
 
 If an explicit `limit` of "50" is used, the links in the response could be:
@@ -984,17 +981,17 @@ If an explicit `limit` of "50" is used, the links in the response could be:
 ----
 Link: <http://data.example.org/collections/buildings/items.json?limit=50>; rel="self"; type="application/geo+json"
 Link: <http://data.example.org/collections/buildings/items.html?limit=50>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=50>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&offset=50>; rel="next"; type="application/geo+json"
 ----
 
 Following the `next` link could return:
 
 [source]
 ----
-Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=50>; rel="self"; type="application/geo+json"
-Link: <http://data.example.org/collections/buildings/items.html?limit=50&startIndex=50>; rel="alternate"; type="text/html"
-Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=0>; rel="prev"; type="application/geo+json"
-Link: <http://data.example.org/collections/buildings/items.json?limit=50&startIndex=100>; rel="next"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&offset=50>; rel="self"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.html?limit=50&offset=50>; rel="alternate"; type="text/html"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&offset=0>; rel="prev"; type="application/geo+json"
+Link: <http://data.example.org/collections/buildings/items.json?limit=50&offset=100>; rel="next"; type="application/geo+json"
 ----
 =================
 

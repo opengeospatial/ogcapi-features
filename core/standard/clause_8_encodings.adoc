@@ -86,7 +86,7 @@ In the example below, only the first and tenth feature is shown. Coordinates are
     "type" : "text/html",
     "title" : "this document as HTML"
   }, {
-    "href" : "http://data.example.com/collections/buildings/items/?f=json&startIndex=10&limit=10",
+    "href" : "http://data.example.com/collections/buildings/items/?f=json&offset=10&limit=10",
     "rel" : "next",
     "type" : "application/geo+json",
     "title" : "next page"
@@ -168,8 +168,10 @@ In the example below, coordinates are not shown.
 In addition to HTML and GeoJSON, a significant volume of feature data is
 available in XML-based formats, notably GML. Therefore, this standard
 specifies requirements classes for GML. The Simple Features Profile, Level 0, is
-the simplest profile of GML and is typically supported by tools. The GML Simple
-Features Profile is restricted to data with 2D geometries supported by most tools.
+the simplest profile of GML and is typically supported by tools.
+
+The GML Simple Features Profile is restricted to data with 2D geometries
+with linear/planar interpolation (points, line strings, polygons).
 In addition, the Level 0 profile is limited to features that can be stored in
 a tabular data structure.
 
@@ -190,20 +192,21 @@ include::requirements/gmlsf0/REQ_headers.adoc[]
 |Conformance declaration |`/conformance` |`core:ConformsTo`
 |Feature collections |`/collections` |`core:Collections`
 |Feature collection |`/collections/{collectionId}` |`core:Collections`, with just one entry for the collection `collectionId`
-|Features |`/collections/{collectionId}/items` |`core:FeatureCollection`
+|Features |`/collections/{collectionId}/items` |`sf:FeatureCollection`
 |Feature |`/collections/{collectionId}/items/{featureId}` |substitutable for `gml:AbstractFeature`
 !===
 
-The namespace prefixes used above and in the OGC API Features Core XML Schema are:
+The namespace prefixes used above and in the OGC API Features Core XML schemas are:
 
-* `core`: `http://www.opengis.net/ogcapi-features-core/1.0`
+* `core`: `http://www.opengis.net/ogcapi-features-1/1.0`
+* `sf`: `http://www.opengis.net/ogcapi-features-1/1.0/sf`
 * `gml`: `http://www.opengis.net/gml/3.2`
 * `atom`: `http://www.w3.org/2005/Atom`
 * `xlink`: `http://www.w3.org/1999/xlink`
 
 The mapping of the content from the responses specified in the
 <<rc_core,Core requirements class>> to the XML is straightforward.
-All links are encoded using `atom:link` elements.
+All links have to be encoded as HTTP header `Link`.
 
 See <<examples,sub-clause 6.3>> for links to example responses in XML.
 
@@ -220,4 +223,3 @@ include::requirements/gmlsf2/REQ_definition.adoc[]
 include::requirements/gmlsf2/REQ_content.adoc[]
 
 include::requirements/gmlsf2/REQ_headers.adoc[]
-

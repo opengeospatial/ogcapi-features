@@ -29,8 +29,8 @@ In addition the following link relation types are used for which no applicable
 registered link relation type could be identified:
 
 * **items**: Refers to a resource that is comprised of members of the collection represented by the link's context.
-* **conformance**: Refers to a resource that lists the specifications that the link's context conforms to.
-* **data**: Indicates that the link's context is a distribution of a dataset that is an API and refers to a root resource of the dataset in the API.
+* **conformance**: Refers to a resource that identifies the specifications that the link's context conforms to.
+* **data**: Indicates that the link's context is a distribution of a dataset that is an API and refers to the root resource of the dataset in the API.
 
 Each resource representation includes an array of links. Implementations are
 free to add additional links for all resources provided by the API. For
@@ -137,4 +137,4 @@ are referenced from this document.
 CAUTION: During the development phase, these components use a base URL of
 "https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/",
 but during publication they will move to a base URL of
-"http://schemas.opengis.net/ogcapi/features/part1/1.0/".
+"http://schemas.opengis.net/ogcapi/features/part1/1.0/" (or a similar URL).

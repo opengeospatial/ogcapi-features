@@ -1,0 +1,9 @@
+[[per_core_api-definition-uri]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/core/api-definition-uri*
+^|A |The API definition is metadata about the API and strictly not part of the API
+itself, but it MAY be hosted as a sub-resource to the base path of the API,
+for example, at path `/api`. There is no need to include
+the path of the API definition in the API definition itself.
+|===

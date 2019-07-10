@@ -25,4 +25,4 @@ Core requirements class are expressed in XML using the
 
 ## Responses to path `/collections/{collectionId}/items`
 
-* A [features resource](FeatureCollection.xml). This response contains 2 features of the airport facilities collection and has a link to the next features.
+* A [features resource](FeatureCollection.xml). This response contains 2 features of the airport facilities collection. Note that due to constraints set by the GML Simple Features standard, all links and the additional information (`timeStamp`, `numberReturned`, and `numberMatched`) have to be returned in HTTP headers.
