@@ -87,8 +87,9 @@ After resolving most of the open issues, the work on this first part of
 OGC API Features is entering the final straight. On June 27, 2019,
 the OGC Technical Committee passed a motion to start an electronic
 vote to approve release as an OGC Adopted Standard (pending
-final edits to the document). The release candidate that is the
-basis for the vote will be available in July 2019.
+final edits to the document). The release candidate has been submitted
+to the OGC Technical Committee as the basis for the adoption vote
+on July 11, 2019.
 In parallel that version will also be submitted to ISO/TC 211
 for the DIS ballot.
 
