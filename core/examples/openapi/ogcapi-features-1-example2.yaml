@@ -97,6 +97,7 @@ paths:
         - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/limit'
         - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/bbox'
         - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/datetime'
+        - $ref: '#/components/parameters/function'
       responses:
         '200':
           description: |-
@@ -181,7 +182,6 @@ paths:
       operationId: getFeature
       parameters:
         - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/featureId'
-        - $ref: '#/components/parameters/function'
       responses:
         '200':
           description: |-
