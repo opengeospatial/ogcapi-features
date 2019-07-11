@@ -1,0 +1,312 @@
+openapi: 3.0.1
+info:
+  title: "A sample API conforming to the draft standard OGC API - Features - Part 1: Core"
+  version: '1.0.0-draft.2'
+  description: |-
+    This is a sample OpenAPI definition that conforms to the conformance 
+    classes "Core", "GeoJSON", "HTML" and "OpenAPI 3.0" of the draft
+    standard "OGC API - Features - Part 1: Core".
+    
+    This example differs from the [other example](ogcapi-features-1-example1.yaml)
+    in that each feature collections is specified explicitly in its own path, not using a path
+    parameter. This API definiton is more verbose, but provides information about the feature 
+    collection 'buildings' (paths `/collections/buildings`), the schema of the building features 
+    (schema `buildingGeoJSON`) and a filter parameter for building features (parameter `function`).
+  contact:
+    name: Acme Corporation
+    email: info@example.org
+    url: 'http://example.org/'
+  license:
+    name: CC-BY 4.0 license
+    url: 'https://creativecommons.org/licenses/by/4.0/'
+servers:
+  - url: 'https://data.example.org/'
+    description: Production server
+  - url: 'https://dev.example.org/'
+    description: Development server
+tags:
+  - name: Capabilities
+    description: |-
+      essential characteristics of this API
+  - name: Data
+    description: |-
+      access to data (features)
+paths:
+  '/':
+    get:
+      tags:
+        - Capabilities
+      summary: landing page
+      description: |-
+        The landing page provides links to the API definition, the conformance
+        statements and to the feature collections in this dataset.
+      operationId: getLandingPage
+      responses:
+        '200':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/LandingPage'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+  '/conformance':
+    get:
+      tags:
+        - Capabilities
+      summary: information about specifications that this API conforms to
+      description: |-
+        A list of all conformance classes specified in a standard that the 
+        server conforms to.
+      operationId: getConformanceDeclaration
+      responses:
+        '200':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ConformanceDeclaration'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+  '/collections':
+    get:
+      tags:
+        - Capabilities
+      summary: the feature collections in the dataset
+      operationId: getCollections
+      responses:
+        '200':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/Collections'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+  '/collections/buildings':
+    get:
+      tags:
+        - Capabilities
+      summary: |-
+        information about the buildings
+      operationId: describeCollection
+      responses:
+        '200':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/Collection'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+  '/collections/buildings/items':
+    get:
+      tags:
+        - Data
+      summary: fetch buildings
+      description: |-
+        Fetch buildings.
+        
+        Use content negotiation to request HTML or GeoJSON.
+      operationId: getFeatures
+      parameters:
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/limit'
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/bbox'
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/datetime'
+      responses:
+        '200':
+          description: |-
+            The response is a document consisting of building features. 
+            The buildings included in the response are determined by the server 
+            based on the query parameters of the request. To support access to 
+            larger collections without overloading the client, the API supports 
+            paged access with links to the next page, if more features are selected 
+            that the page size.
+            
+            The `bbox` and `datetime` parameter can be used to select only a 
+            subset of the features in the collection (the features that are in the 
+            bounding box or time interval). The `bbox` parameter matches all features 
+            in the collection that are not associated with a location, too. The 
+            `datetime` parameter matches all features in the collection that are 
+            not associated with a time stamp or interval, too.
+            
+            The `limit` parameter may be used to control the subset of the 
+            selected features that should be returned in the response, the page size.
+            Each page may include information about the number of selected and 
+            returned features (`numberMatched` and `numberReturned`) as well as 
+            links to support paging (link relation `next`).
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/buildingCollectionGeoJSON'
+              example:
+                type: FeatureCollection
+                links:
+                  - href: 'http://data.example.com/collections/buildings/items.json'
+                    rel: self
+                    type: application/geo+json
+                    title: this document
+                  - href: 'http://data.example.com/collections/buildings/items.html'
+                    rel: alternate
+                    type: text/html
+                    title: this document as HTML
+                  - href: 'http://data.example.com/collections/buildings/items.json&offset=10&limit=2'
+                    rel: next
+                    type: application/geo+json
+                    title: next page
+                timeStamp: '2018-04-03T14:52:23Z'
+                numberMatched: 123
+                numberReturned: 2
+                features:
+                  - type: Feature
+                    id: '123'
+                    geometry:
+                      type: Polygon
+                      coordinates:
+                        - ...
+                    properties:
+                      function: residential
+                      floors: '2'
+                      lastUpdate: '2015-08-01T12:34:56Z'
+                  - type: Feature
+                    id: '132'
+                    geometry:
+                      type: Polygon
+                      coordinates:
+                        - ...
+                    properties:
+                      function: public use
+                      floors: '10'
+                      lastUpdate: '2013-12-03T10:15:37Z'
+            text/html:
+              schema:
+                type: string
+        '400':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/InvalidParameter'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+  '/collections/buildings/items/{featureId}':
+    get:
+      tags:
+        - Data
+      summary: fetch a single building  
+      description: |-
+        Fetch the building with id `featureId`.
+
+        Use content negotiation to request HTML or GeoJSON.
+      operationId: getFeature
+      parameters:
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/featureId'
+        - $ref: '#/components/parameters/function'
+      responses:
+        '200':
+          description: |-
+            fetch the building with id `featureId`
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/buildingGeoJSON'
+              example:
+                type: Feature
+                links:
+                  - href: 'http://data.example.com/id/building/123'
+                    rel: canonical
+                    title: canonical URI of the building
+                  - href: 'http://data.example.com/collections/buildings/items/123.json'
+                    rel: self
+                    type: application/geo+json
+                    title: this document
+                  - href: 'http://data.example.com/collections/buildings/items/123.html'
+                    rel: alternate
+                    type: text/html
+                    title: this document as HTML
+                  - href: 'http://data.example.com/collections/buildings'
+                    rel: collection
+                    type: application/geo+json
+                    title: the collection document
+                id: '123'
+                geometry:
+                  type: Polygon
+                  coordinates:
+                    - ...
+                properties:
+                  function: residential
+                  floors: '2'
+                  lastUpdate: '2015-08-01T12:34:56Z'
+            text/html:
+              schema:
+                type: string
+        '404':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+components:
+  parameters:
+    function:
+      name: function
+      in: query
+      description: |-
+        Only return buildings of a particular function.
+
+        Default = return all buildings.
+      required: false
+      schema:
+        type: string
+        enum:
+          - residential
+          - commercial
+          - public use
+      style: form
+      explode: false
+      example: 'function=public+use'
+  schemas:
+    buildingCollectionGeoJSON:
+      type: object
+      required:
+        - type
+        - features
+      properties:
+        type:
+          type: string
+          enum:
+            - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: "#/components/schemas/buildingGeoJSON"
+        links:
+          type: array
+          items:
+            $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'
+        timeStamp:
+          type: string
+          format: date-time
+        numberMatched:
+          type: integer
+          minimum: 0
+        numberReturned:
+          type: integer
+          minimum: 0
+    buildingGeoJSON:
+      type: object
+      required:
+        - type
+        - geometry
+        - properties
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        geometry:
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/geometryGeoJSON'
+        properties:
+          type: object
+          nullable: true
+          properties:
+            name:
+              type: string
+            function:
+              type: string
+              enum:
+                - residential
+                - commercial
+                - public use
+            floors:
+              type: integer
+              minimum: 1
+            lastUpdate:
+              type: string
+              format: date-time
+        id:
+          oneOf:
+            - type: string
+            - type: integer
+        links:
+          type: array
+          items:
+            $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'

@@ -76,17 +76,17 @@ In the example below, only the first and tenth feature is shown. Coordinates are
 {
   "type" : "FeatureCollection",
   "links" : [ {
-    "href" : "http://data.example.com/collections/buildings/items/?f=json",
+    "href" : "http://data.example.com/collections/buildings/items?f=json",
     "rel" : "self",
     "type" : "application/geo+json",
     "title" : "this document"
   }, {
-    "href" : "http://data.example.com/collections/buildings/items/?f=html",
+    "href" : "http://data.example.com/collections/buildings/items?f=html",
     "rel" : "alternate",
     "type" : "text/html",
     "title" : "this document as HTML"
   }, {
-    "href" : "http://data.example.com/collections/buildings/items/?f=json&offset=10&limit=10",
+    "href" : "http://data.example.com/collections/buildings/items?f=json&offset=10&limit=10",
     "rel" : "next",
     "type" : "application/geo+json",
     "title" : "next page"
@@ -134,17 +134,17 @@ In the example below, coordinates are not shown.
 {
   "type" : "Feature",
   "links" : [ {
-    "href" : "http://data.example.com/collections/buildings/items/123/?f=json",
+    "href" : "http://data.example.com/collections/buildings/items/123?f=json",
     "rel" : "self",
     "type" : "application/geo+json",
     "title" : "this document"
   }, {
-    "href" : "http://data.example.com/collections/buildings/items/123/?f=html",
+    "href" : "http://data.example.com/collections/buildings/items/123?f=html",
     "rel" : "alternate",
     "type" : "text/html",
     "title" : "this document as HTML"
   }, {
-    "href" : "http://data.example.com/collections/buildings/items",
+    "href" : "http://data.example.com/collections/buildings",
     "rel" : "collection",
     "type" : "application/geo+json",
     "title" : "the collection document"

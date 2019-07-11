@@ -157,7 +157,7 @@ properties:
     { "href": "http://data.example.org/conformance",
       "rel": "conformance", "type": "application/json", "title": "OGC API conformance classes implemented by this server" },
     { "href": "http://data.example.org/collections",
-      "rel": "data", "type": "application/json", "title": "Metadata about the feature collections" }
+      "rel": "data", "type": "application/json", "title": "Information about the feature collections" }
   ]
 }
 ----
@@ -220,8 +220,8 @@ include::requirements/core/REQ_conformance-op.adoc[]
 
 include::requirements/core/REQ_conformance-success.adoc[]
 
-[[schema_conf-classes]]
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/conf-classes.yaml[Schema for the list of conformance classes]
+[[schema_confClasses]]
+.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/confClasses.yaml[Schema for the list of conformance classes]
 [source,YAML]
 ----
 type: object

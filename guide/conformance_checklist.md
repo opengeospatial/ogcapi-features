@@ -20,7 +20,7 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
 
 **7.4** [Declaration of conformance classes](https://cdn.rawgit.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html#_declaration_of_conformance_classes)
 * [ ] GET request at **/conformance** served
-* [ ] Resonse content is based on OpenAPI schema [conf-classes.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/conf-classes.yaml).
+* [ ] Resonse content is based on OpenAPI schema [confClasses.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/confClasses.yaml).
   * [ ] conformsTo in response contains
     * [ ] http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
     * [ ] (recommended) http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html
