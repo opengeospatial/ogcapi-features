@@ -20,6 +20,6 @@ With similar developments to modernize other OGC web service standards, the OGC 
 
 OGC API standards define modular API building blocks to spatially enable Web APIs in a consistent way. The OpenAPI specification is used to define the API building blocks.
 
-The OGC API family of standards is organized by resource type. What was formerly known as "WFS 3.0 Part 1: Core" is now "OGC API - Features - part 1:Core 1.0".
+The OGC API family of standards is organized by resource type. What was formerly known as "WFS 3.0 - Part 1: Core" is now "OGC API - Features - Part 1: Core" (version 1.0).
 
-See [here](overview.md) for an overview of the differences between "OGC API - Features - part 1:Core 1.0" and the WFS standard.
+See [here](overview.md) for an overview of the differences between "OGC API - Features - Part 1: Core" and the WFS standard.

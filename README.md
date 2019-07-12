@@ -53,14 +53,11 @@ This provides a stable, canonical URL to link to the 'thing'
 
 ## Using the standard
 
-Most existing implementation have currently implemented the first draft release from April 2018. Note that the draft uses the title "Web Feature Service" or "WFS",
-version 3.0:
+The release candidate of the standard is available:
 
-* [OGC API - Features - Part 1: Core, First Draft Release](https://rawcdn.githack.com/opengeospatial/WFS_FES/3.0.0-draft.1/docs/17-069.html)
+* [OGC API - Features - Part 1: Core, Release Candidate](http://docs.opengeospatial.org/DRAFTS/17-069r2.html)
 
-A [PDF version](https://portal.opengeospatial.org/files/?artifact_id=79027&version=1) is available, too.
-
-Since then, the name has been changed to "OGC API - Features". The latest draft is the [editor's draft](http://docs.opengeospatial.org/DRAFTS/17-069r2.html).
+A [PDF version](http://docs.opengeospatial.org/DRAFTS/17-069r2.pdf) is available, too.
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/WFS_FES/tree/master/core/examples/openapi).
@@ -78,20 +75,16 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 ## Additional Information
 
-In addition to feedback from the initial implementations as well as discussions on GitHub and in the OGC/ISO working group,
-the current draft standard has been tested in a [WFS 3.0 Hackathon](http://www.opengeospatial.org/blog/2764), the [OGC Testbed-14](http://www.opengeospatial.org/projects/initiatives/testbed14), the [OGC Vector Tiles Pilot](https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) and other activities.
+The work on this first part of OGC API Features is entering the final straight.
+The [release candidate](https://github.com/opengeospatial/WFS_FES/releases/tag/1.0.0-draft.2)
+has been submitted to the OGC Technical Committee for the approval vote.
+In parallel it will also be submitted to ISO/TC 211 for the DIS ballot.
 
-Feedback for the Core is collected and discussed in the
+At this time, changes to the candidate standard are a decision of the OGC
+Technical Committee and ISO/TC 211.
+
+The open issues for the candidate standard are documented in the
 [GitHub issues for Part 1 (Core)](https://github.com/opengeospatial/WFS_FES/projects/1).
-After resolving most of the open issues, the work on this first part of
-OGC API Features is entering the final straight. On June 27, 2019,
-the OGC Technical Committee passed a motion to start an electronic
-vote to approve release as an OGC Adopted Standard (pending
-final edits to the document). The release candidate has been submitted
-to the OGC Technical Committee as the basis for the adoption vote
-on July 11, 2019.
-In parallel that version will also be submitted to ISO/TC 211
-for the DIS ballot.
 
 The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r2.html), also available as
 [PDF](http://docs.opengeospatial.org/DRAFTS/17-069r2.pdf).
