@@ -26,7 +26,7 @@ GET /collections
 
 Lists the collections of data on the server that can be queried ([7.13](http://docs.opengeospatial.org/DRAFTS/17-069r2.html#_collections_)),
 and each describes basic information about the geospatial data collection, like its id and description, as well as the
-spatial and temporal extents of all the data contained
+spatial and temporal extents of all the data contained.
 
 ```
 GET /collections/buildings/items?bbox=160.6,-55.95,-170,-25.89
