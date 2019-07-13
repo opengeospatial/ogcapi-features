@@ -86,8 +86,8 @@ Technical Committee and ISO/TC 211.
 The open issues for the candidate standard are documented in the
 [GitHub issues for Part 1 (Core)](https://github.com/opengeospatial/WFS_FES/projects/1).
 
-The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r2.html), also available as
-[PDF](http://docs.opengeospatial.org/DRAFTS/17-069r2.pdf).
+The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r3.html), also available as
+[PDF](http://docs.opengeospatial.org/DRAFTS/17-069r3.pdf).
 
 Also a non-normative document, the "Users Guide", and Part 2, support for Coordinate Reference Systems, are being developed.
 
