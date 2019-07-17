@@ -134,7 +134,7 @@ paths:
         - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/featureId'
       responses:
         '200':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/Features'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/Feature'
         '404':
           $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/NotFound'
         '500':
