@@ -87,7 +87,7 @@ features in the collection. The features included in the response are determined
 by the server based on the query parameters of the request. To support access to
 larger collections without overloading the client, the API supports
 paged access with links to the next page, if more features are selected
-that the page size.
+than the page size.
 
 A `bbox` or `datetime` parameter may be used to select only a subset of the features in
 the collection (the features that are in the bounding box or time interval).
