@@ -263,14 +263,11 @@ components:
           items:
             $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'
         timeStamp:
-          type: string
-          format: date-time
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/timeStamp'
         numberMatched:
-          type: integer
-          minimum: 0
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/numberMatched'
         numberReturned:
-          type: integer
-          minimum: 0
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/numberReturned'
     buildingGeoJSON:
       type: object
       required:

@@ -290,14 +290,11 @@ components:
           items:
             $ref: "#/components/schemas/link"
         timeStamp:
-          type: string
-          format: date-time
+          $ref: "#/components/schemas/timeStamp"
         numberMatched:
-          type: integer
-          minimum: 0
+          $ref: "#/components/schemas/numberMatched"
         numberReturned:
-          type: integer
-          minimum: 0
+          $ref: "#/components/schemas/numberReturned"
     featureGeoJSON:
       type: object
       required:
