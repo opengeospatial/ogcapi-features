@@ -443,10 +443,6 @@ WGS 84 longitude and latitude as the default coordinate reference system.
 
 include::requirements/core/REQ_crs84.adoc[]
 
-NOTE: The registration of http://www.opengis.net/def/crs/OGC/0/CRS84h is in process.
-This note will be removed once the CRS has been registered by the OGC Naming Authority
-and the URI resolves to the CRS definition.
-
 Implementations compliant with the Core are not required to support
 publishing feature geometries in coordinate reference systems other than
 http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height)
