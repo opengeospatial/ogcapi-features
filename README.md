@@ -97,7 +97,7 @@ Also a non-normative document, the "Users Guide", and Part 2, support for Coordi
 * [UML for Part 1, Core](uml/README.md)
 * [Status of Part 1, Core, in ISO](https://www.iso.org/standard/32586.html)
 
-## [Contributing](Contributing.md)
+## [Contributing](CONTRIBUTING.md)
 
 The contributor understands that any contributions, if accepted by the OGC Membership and ISO/TC 211, shall be incorporated into OGC and ISO/TC 211 OGC API standards documents and that all copyright and intellectual property shall be vested to the OGC.
 
