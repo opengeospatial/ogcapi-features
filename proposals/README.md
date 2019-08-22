@@ -1,8 +1,8 @@
-= Proposed Extensions
+# Proposed Extensions
 
 OGC APIs are designed to be modular. We expect new requirements will emerge with use and new features will be proposed to address those requirements. Development and validation of these new features is a community effort. Supporting that effort are two tools; a process for tracking the maturity of a proposed addition, and a means to publish the current baseline of a proposed new feature. 
 
-== Draft Features
+## Draft Features
 
 New features will be introduced as draft extensions. By introducing new features this way we enable them to be  designed, documented and then implemented by tools that are interested in the feature, without putting the burden of implementation on all tooling. If the feature is successfully implemented and it has demonstrable value, it will become a candidate for inclusion in a future release of the specification.
 
@@ -18,7 +18,7 @@ Draft-features that are considered suitably specified and have had successful pi
 
 Not all future new features will be introduced in this way. Some new features impact the specification in ways that cannot be encapsulated in an extension. However, where a new feature can be introduced in this way, it should be.
 
-== Publishing Draft Features
+## Publishing Draft Features
 
 Draft Features are matured and validated through community efforts. This requires that there is a authoritative published description of the current version of each draft feature. The following procedures govern the creation and maintenance of those descriptions.
 
