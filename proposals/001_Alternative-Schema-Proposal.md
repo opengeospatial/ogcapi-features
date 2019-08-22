@@ -9,7 +9,7 @@
 |Review Manager |TBD |
 |Status |**Pilot** |
 |Implementations |[Click Here](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/Alternative%20Schema/implementations.md)
-|Issues |[1532](https://github.com/opengeospatial/WFS_FES/issues/1532)|
+|Issues |[129](https://github.com/opengeospatial/WFS_FES/issues/129), [56](https://github.com/opengeospatial/WFS_FES/issues/56)|
 |Previous Revisions |none |
  
 .Change Log

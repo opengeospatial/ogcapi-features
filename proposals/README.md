@@ -22,10 +22,11 @@ Not all future new features will be introduced in this way. Some new features im
 
 Draft Features are matured and validated through community efforts. This requires that there is a authoritative published description of the current version of each draft feature. The following procedures govern the creation and maintenance of those descriptions.
 
-. Draft features shall be documented on the appropriate GitHub site under the /Proposals directory.
-. Each draft feature will be described in a description document using the template provided by the 000_OGC-Proposal-template.md file.
-. The draft feature description document will reside in the /Proposals directory
-. A subdirectory to /Proposals shall be created to hold the detailed definition of the proposed feature.
+. The definitions of a draft feature shall be avalable under the ``proposals`` directory on the GitHub site for the applicable OGC standard.
+. The definition of each draft feature shall reside in a subdirectory of ``proposals``. That subdirectory shall have a name indicative of the nature of the draft feature.
+. This definition shall provide an exact description of the changes to the contents of the OGC specification required to support the new feature. That description should include a extract of each section of the specification which is impacted by the proposal with all proposed modifications applied. 
+. Each draft feature shall be described in a description document using the template provided by the 000_OGC-Proposal-template.md file.
+. The draft feature description documents shall reside in the ``Proposals`` directory
 
 A proposed extension to OpenAPI to support alternative schema has been included both as an example and for consideration by the OGC community.
 
