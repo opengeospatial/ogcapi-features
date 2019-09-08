@@ -1,0 +1,208 @@
+
+= Features API Standards Working Group Charter, OGC 19-043r2
+
+* *Author Name(s):* Clemens Portele, Panagiotis (Peter) A. Vretanos, Charles (Chuck) Heazel
+* *Email:* portele@interactive-instruments.de, pvretano@cubewerx.com, cheazel@heazeltech.com
+* *DATE:* 23-AUG-2019
+* *CATEGORY:* SWG Charter
+
+To:  OGC members & interested parties
+
+A new OGC Standards Working Group (SWG) is being formed. The OGC members listed below have proposed the OGC Features API SWG.  The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures.
+
+The SWG name, statement of purpose, scope, list of deliverables, audience, and language specified in the proposal will constitute the SWG's official charter. Technical discussions may occur no sooner than the SWG's first meeting.
+
+This SWG will operate under the OGC IPR Policy. The eligibility requirements for becoming a participant in the SWG at the first meeting (see details below) are that:
+
+* You must be an employee of an OGC member organization or an individual
+member of OGC;
+
+* The OGC member must have signed the OGC Membership agreement;
+
+* You must notify the SWG chair of your intent to participate to the first meeting. Members may do so by logging onto the OGC Portal and navigating to the Observer page and clicking on the link for the SWG they wish to join and;
+
+* You must attend meetings of the SWG. The first meeting of this SWG is at the time and date fixed below. Attendance may be by teleconference.
+
+Of course, participants also may join the SWG at any time. The OGC and the SWG welcomes all interested parties.
+
+Non-OGC members who wish to participate may contact us about joining the OGC. In addition, the public may access some of the resources maintained for each SWG: the SWG public description, the SWG Charter, Change Requests, and public comments, which will be linked from the SWG’s page.
+
+Please feel free to forward this announcement to any other appropriate lists. The OGC is an open standards organization; we encourage your feedback.
+
+:toc:
+
+== Purpose of the Standards Working Group
+
+The purpose of the Features API Standards Working Group is to:
+
+*	develop new and maintain existing parts of the OGC API Features multipart standard;
+*	develop corrigenda for the WFS 2.0 and FES 2.0 standards;
+*	review draft Engineering Reports from the OGC Innovation Program related to OGC API Features.
+
+== Business Value Proposition
+
+Spatial information is of high value and importance for many web- or cloud-based processes and applications. In many datasets, real-world things are represented as features – or “Spatial Things” as the W3C/OGC Spatial Data on the Web Best Practices calls them.
+
+For the last 20 years, the primary OGC standard for sharing feature data on the web has been the Web Feature Service standard (WFS) as part of the OGC Web Services family of standards (OWS). Many deployments of this standard are in use globally. The queries to these feature services are expressed as filter expressions according to the Filter Encoding standard (FES). WFS 2.0 and FES 2.0 are also published by ISO (ISO 19142:2010 and ISO 19143:2010).
+
+A new generation of OGC standards for the web is being developed since 2017 with part 1 of OGC API Features as the first standard in the emerging OGC API family of standards. The key differences to OWS and WFS are:
+
+* Architecture: OGC API Features supports and is consistent with HTTP and HTTPS. In addition, the resources provided by the server include hypermedia controls in their representations to guide the user of the API. In WFS, HTTP is mainly used as a tunnel for WFS messages.
+* Encodings: WFS is tied to XML (Capabilities documents, XML schemas, Filter Encoding expressions, GML encoding). OGC API Features has been written with HTML, JSON and XML as encodings in mind, because these are common encodings today, but no encoding is mandatory and other encodings may be used as well. HTTP is designed to support the use of multiple formats and defines rules how servers can return the encoding that the client can handle best (“content negotiation”).
+* Reuse: The use of OGC-specific resources or components is minimized in the OGC API and, where available, existing industry-standards that are commonly used by developers are used instead. The most important example for this is the use of OpenAPI definitions instead of OGC-specific "Capabilities" documents.
+* Modularization: The WFS 2.0 standard, together with the Filter Encoding 2.0 standard, specifies a powerful, but complex service interface. In order to better support implementations that only need a relatively simple service or client, the OGC API Features is modularized into multiple parts. The first part (the "core") specifies a simple interface to access spatial data that is sufficient for cases that do not require support for transactions, complex data structures, rich queries, custom coordinate reference systems, etc. Additional parts specify extensions to the core to meet the needs of use cases that require such capabilities.
+* Schemas: WFS required XML schemas for all feature types and valid XML documents. While the capability to support application schemas is maintained in OGC API Features, it is no longer required that rigid schemas are provided and used for validation of feature data.
+* Security: WFS 2.0 does not specify how services may be secured and some requirements are incompatible with secured services that still conform to the standard. The use of OpenAPI addresses this issue, too. Web APIs may be secured using security schemes that are commonly used on the Web today (e.g., OAuth2, JWT) and that developers are familiar with.
+
+Implementations of OGC API Features are intended to support two different approaches how clients can use the API.
+
+In the first approach, clients are implemented with knowledge about the standard and its resource types. The clients navigate the resources based on this knowledge and based on the responses provided by the API. The API definition may be used to determine details, e.g., on filter parameters, but this may not be necessary depending on the needs of the client. These are clients that are in general able to use multiple APIs as long as they implement OGC API Features.
+
+The other approach targets developers that are not familiar with the OGC API standards, but want to interact with spatial data provided by an API that happens to implement OGC API Features. In this case the developer will study and use the API definition - typically an OpenAPI document - to understand the API and implement the code to interact with the API. This assumes familiarity with the API definition language and the related tooling, but it should not be necessary to study the OGC API standards.
+
+Due to the complexity of the WFS/FES standards they mainly address the first of the two approaches.
+
+OGC API Features is intended to be simpler and more modern, but still an evolution from WFS. This enables, for example, existing implementations of OGC API Features that are facades on top of WFS 2.0 deployments.
+
+Both sets of standards for sharing feature data have to be supported. Because both support more-or-less the same business needs, a single Standards Working Group should be responsible for them.
+
+== Scope of Work
+
+The following activities are in scope of the working group.
+
+* Maintain existing parts of the OGC API Features multipart standard
++
+At the time of this writing, the first part of OGC API Features (Core) is in the TC approval vote. If the candidate standard is approved and published, the SWG will process Change Requests to the standard.
++
+Once additional parts of OGC API Features have been approved and published, the SWG will also process Change Requests for these standards. +
+If the SWG recommends that a Change Requests results in a new version of a standard (with the exception of corrigenda), the “SWG Task approval process” will be used.
+
+* Develop new parts of the OGC API Features multipart standard
++
+Due to the modular approach described above, the first part of OGC API Features has a restricted scope:
++
+> This part, the “Core” specifies the core capabilities and is restricted to fetching features where geometries are represented in the coordinate reference system WGS 84 with axis order longitude/latitude. Additional capabilities that address more advanced needs will be specified in additional parts. Examples include support for creating and modifying features, more complex data models, richer queries, additional coordinate reference systems, multiple datasets and collection hierarchies.
++
+A number of extensions to the Core have already been developed and tested in the OGC Innovation Program and other activities.
++
+The SWG is responsible for developing candidate standards for additional parts of OGC API Features.
++
+Part 2, “Extension for Coordinate Reference Systems (by reference)”, is already under development and has several implementations. The planned schedule is: Public Review in 2019, Submission for Approval Vote by June 2020.
++
+Any additional part will follow the “SWG Task approval process”.
+
+*	Develop informative material
++
+In addition to standards, the SWG may develop additional, informative material about OGC API Features. Currently a draft of a document called the “Users Guide” is in development.
+
+*	Develop corrigenda for the WFS 2.0 and FES 2.0 standards
++
+The SWG will process Change Requests for the WFS 2.0 and FES 2.0 standards.
++
+The current expectation is that these standards are in “maintenance mode” and that only corrigenda are expected as new versions of these standards.
+
+*	Review draft Engineering Reports
++
+The SWG will also review draft Engineering Reports from the OGC Innovation Program as long as OGC API Features or WFS/FES plays a significant role in their scope.
+
+=== Statement of relationship of planned work to the current OGC standards baseline
+
+As stated in the “Scope of Work” above.
+
+=== What is Out of Scope?
+
+Compatibility between versions of a standard is important. Revisions of parts of OGC API Features should avoid breaking existing implementations. Any Change Request that would result in a major revision of OGC API – Features – Part 1: Core is out-of-scope unless a 75% majority of the SWG members support the change.
+
+Standards are important for interoperability. At the same time, it is important that standards only state requirements that are important for a significantly large group of users. Proposals for new parts of OGC API Features or change requests to existing parts must identify the user group that will benefit from the proposal and include the commitment for three independent implementations for each proposed conformance class; otherwise the proposal will be considered out-of-scope.
+
+OGC API Features is a modular, multi-part standard. Developing profiles of OGC API Features should not be necessary and is, therefore, out-of-scope for the SWG. If a community has a need to develop a profile, the profile should be specified and governed by that community.
+
+[[existing_work]]
+=== Specific Existing Work Used as Starting Point
+
+* OGC API – Features – Part 1: Core Draft Standard (http://docs.opengeospatial.org/DRAFTS/17-069r2.html), same as ISO/DIS 19168-1:2019
+* W3C/OGC Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp)
+* W3C Data on the Web Best Practices (https://www.w3.org/TR/dwbp)
+* OpenAPI Specification (https://github.com/OAI/OpenAPI-Specification/tree/master/versions)
+* OGC Geospatial API White Paper (http://docs.opengeospatial.org/wp/16-019r4/16-019r4.html)
+* OGC API Common – work in progress (https://github.com/opengeospatial/oapi_common)
+* OGC Testbed-14: Next Generation APIs: Complex Feature Handling Engineering Report (http://docs.opengeospatial.org/per/18-021.html)
+* OGC Testbed-14: Next Generation Web APIs - WFS 3.0 Engineering Report (http://docs.opengeospatial.org/per/18-045.html)
+* OGC Web Feature Service 2.0 (http://docs.opengeospatial.org/is/09-025r2/09-025r2.html)
+* OGC Filter Encoding 2.0 (http://docs.opengeospatial.org/is/09-026r2/09-026r2.html)
+* Internal draft of OGC Web Feature Service 2.x, developed by the WFS/FES SWG
+* Internal draft of OGC Filter Encoding 2.x, developed by the WFS/FES SWG
+
+=== Is This a Persistent SWG
+
+YES
+
+=== When can the SWG be Inactivated
+
+The SWG can be inactivated once the final multipart standard has been developed and change requests become minimal or not applicable for consideration. The SWG can be re-activated at any time.
+
+== Description of deliverables
+
+Deliverables are:
+
+* New parts and revisions of existing parts of OGC API Features
+* Additional informative material like the OGC API Features Users Guide
+* Corrigenda for WFS 2.0 and FES 2.0
+
+== IPR Policy for this SWG
+
+RAND-Royalty Free
+
+== Anticipated Audience / Participants
+
+Since the main “users” of the standards are developers of servers and clients wishing to implement the (draft) standards, developers are in particular encouraged to participate in the technical discussions. Existing or potential users of software implementing the OGC API Features and WFS standards are invited to contribute with their experiences and user needs.
+
+This is not meant as a limiting statement but instead is intended to provide guidance to interested potential participants as to whether they wish to participate in this SWG.
+
+== Other informative information about the work of this SWG
+
+=== Collaboration
+
+All work in the Standards Working Group will be public and the SWG solicits contributions and feedback from OGC members and non-OGC members to the extent that is supported by the OGC Technical Committee Policies and Procedures.
+
+The SWG intends to use the following GitHub repository for the development and maintenance of all documents: https://github.com/opengeospatial/ogcapi-features. Additional collaboration resources include periodic web-meetings, a mailing list and a gitter channel. All resources are open to OGC members and non-OGC members.
+
+NOTE: The current name of the repository is “WFS_FES”, but it is planned to rename the repository to “ogcapi-features” once the SWG has been rebranded from “WFS/FES SWG” to “Features API SWG”.
+
+=== Similar or Applicable Standards Work (OGC and Elsewhere)
+
+See section <<existing_work>>.
+
+This SWG is a continuation of the WFS/FES SWG under a new name (“Features API SWG”) and under an updated charter to reflect the activities related to OGC API Features (formerly known as WFS 3.0) since 2017. The chairs of WFS/FES SWG will maintain the voting status of the current voting members after the re-chartering.
+
+The SWG intends to monitor the work of or collaborate with the following organizations:
+
+* OGC SWGs working on OGC API Common and related OGC API standards;
+* ISO/TC 211, ISO 19168 project teams and the Joint Advisory Group of ISO/TC 211 and OGC;
+* the OpenAPI Initiative;
+* the joint OGC/W3C Spatial Data on the Web Interest Group;
+* relevant W3C working groups.
+
+=== Details of first meeting
+
+The first meeting of the SWG under this revised charter will be held as a combined face-to-face and web-meeting at 14:45 Calgary Time on 9 September 2019. Call-in information will be provided to the SWG's e-mail list and on the portal calendar in advance of the meeting.
+
+=== Projected on-going meeting schedule
+
+The work of the SWG will be carried out primarily on GitHub supported by email and web-meetings, possibly every two weeks, typically with face-to-face meetings at of the OGC TC meetings.
+
+=== Supporters of this Charter
+
+The following people support this proposal and are committed to the Charter and projected meeting schedule. These members are known as SWG Founding or Charter members. The charter members agree to the SoW and IPR terms as defined in this charter. The charter members have voting rights beginning the day the SWG is officially formed. Charter Members are shown on the public SWG page.
+
+|===
+|Name |Organization
+
+|Clemens Portele |interactive instruments
+|Panagiotis (Peter) A. Vretanos |CubeWerx Inc.
+|Charles (Chuck) Heazel |HeazelTech LLC
+|===
+
+=== Conveners
+
+Clemens Portele, Panagiotis (Peter) A. Vretanos
