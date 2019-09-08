@@ -9,6 +9,6 @@ The [second example (ogcapi-features-1-example2.yaml)](ogcapi-features-1-example
 NOTE: If you want to compile an OpenAPI definition example with all definitions in a single file, follow these steps:
 
 * Open the example file (example 1 or example 2).
-* Open the file with all building blocks ([ogcapi-features-1.yaml](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml)) and delete the top level members "openapi", "info", "servers", and "tags". Add the remaining content, i.e. the "components" member, at the end of the example file.
-* Replace all occurances of "https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml" with "" (empty string).
+* Open the file with all building blocks ([ogcapi-features-1.yaml](https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml)) and delete the top level members "openapi", "info", "servers", and "tags". Add the remaining content, i.e. the "components" member, at the end of the example file.
+* Replace all occurances of "https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml" with "" (empty string).
 * Save the OpenAPI definition.

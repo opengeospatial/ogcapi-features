@@ -122,7 +122,7 @@ include::requirements/core/REQ_root-op.adoc[]
 include::requirements/core/REQ_root-success.adoc[]
 
 [[schema_landingPage]]
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/landingPage.yaml[Schema for the landing page]
+.link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/landingPage.yaml[Schema for the landing page]
 [source,YAML]
 ----
 type: object
@@ -136,7 +136,7 @@ properties:
   links:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/link.yaml
 ----
 
 [[example_2]]
@@ -221,7 +221,7 @@ include::requirements/core/REQ_conformance-op.adoc[]
 include::requirements/core/REQ_conformance-success.adoc[]
 
 [[schema_confClasses]]
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/confClasses.yaml[Schema for the list of conformance classes]
+.link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/confClasses.yaml[Schema for the list of conformance classes]
 [source,YAML]
 ----
 type: object
@@ -421,7 +421,7 @@ For example, if JSON-LD is used as an encoding, the built-in capabilities to
 link:https://www.w3.org/TR/json-ld/#string-internationalization[annotate a string with its language]
 should be used.
 
-The link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml[link object]
+The link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/link.yaml[link object]
 based on <<rfc8228,RFC 8288 (Web Linking)>> includes a `hreflang` attribute
 that can be used to state the language of the referenced resource. This can
 be used to include links to the same data in, for example, English or French.
@@ -470,7 +470,7 @@ include::requirements/core/REQ_fc-md-op.adoc[]
 include::requirements/core/REQ_fc-md-success.adoc[]
 
 [[schema_collections]]
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collections.yaml[Schema for the collections resource]
+.link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/collections.yaml[Schema for the collections resource]
 [source,YAML]
 ----
 type: object
@@ -481,11 +481,11 @@ properties:
   links:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/link.yaml
   collections:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collection.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/collection.yaml
 ----
 
 include::requirements/core/REQ_fc-md-links.adoc[]
@@ -509,7 +509,7 @@ include::recomendations/core/REC_fc-md-extent-single.adoc[]
 include::recomendations/core/PER_fc-md-extent-extensions.adoc[]
 
 [[schema_collection]]
-.link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/collection.yaml[Schema for a feature collection]
+.link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/collection.yaml[Schema for a feature collection]
 [source,YAML]
 ----
 type: object
@@ -529,7 +529,7 @@ properties:
   links:
     type: array
     items:
-      $ref: https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/schemas/link.yaml
+      $ref: https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/link.yaml
   extent:
     description: >-
       The extent of the features in the collection. In the Core only spatial and temporal
@@ -732,7 +732,7 @@ include::recomendations/core/PER_fc-limit-response-2.adoc[]
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/limit.yaml[limit.yaml].
+link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/parameters/limit.yaml[limit.yaml].
 
 ==== Parameter bbox
 
@@ -766,7 +766,7 @@ value of `160.0` is used.
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
+link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/parameters/bbox.yaml[bbox.yaml].
 
 ==== Parameter datetime
 
@@ -820,7 +820,7 @@ a time interval would match all features where the values overlap.
 
 A template for the definition of the parameter in YAML according to
 OpenAPI 3.0 is available at
-link:https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/parameters/datetime.yaml[datetime.yaml].
+link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/parameters/datetime.yaml[datetime.yaml].
 
 ==== Parameters for filtering on feature properties
 

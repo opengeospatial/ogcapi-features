@@ -60,7 +60,7 @@ The release candidate of the standard is available:
 A [PDF version](http://docs.opengeospatial.org/DRAFTS/17-069r2.pdf) is available, too.
 
 Those who want to just see the endpoints and responses can explore [examples of
-OpenAPI definitions](https://github.com/opengeospatial/WFS_FES/tree/master/core/examples/openapi).
+OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
 
 Several implementations of the draft standard exist:
 
@@ -70,26 +70,27 @@ Several implementations of the draft standard exist:
 
 Join the [mailing list](https://lists.opengeospatial.org/mailman/listinfo/wfs-fes.swg) or [![chat at https://gitter.im/opengeospatial/WFS_FES](https://badges.gitter.im/opengeospatial/WFS_FES.svg)](https://gitter.im/opengeospatial/WFS_FES?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Most all work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/WFS_FES/issues),
+Most all work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/ogcapi-features/issues),
 so browse there to get a good idea of what is happening, as well as past decisions.
 
 ## Additional Information
 
 The work on this first part of OGC API Features is entering the final straight.
-The [release candidate](https://github.com/opengeospatial/WFS_FES/releases/tag/1.0.0-draft.2)
+The [release candidate](https://github.com/opengeospatial/ogcapi-features/releases/tag/1.0.0-draft.2)
 has been submitted to the OGC Technical Committee for the approval vote.
-In parallel it will also be submitted to ISO/TC 211 for the DIS ballot.
+In parallel it has also be submitted to ISO/TC 211 for the [DIS ballot](https://www.iso.org/standard/32586.html).
 
 At this time, changes to the candidate standard are a decision of the OGC
 Technical Committee and ISO/TC 211.
 
 The open issues for the candidate standard are documented in the
-[GitHub issues for Part 1 (Core)](https://github.com/opengeospatial/WFS_FES/projects/1).
+[GitHub issues for Part 1 (Core)](https://github.com/opengeospatial/ogcapi-features/projects/1).
 
 The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r3.html), also available as
 [PDF](http://docs.opengeospatial.org/DRAFTS/17-069r3.pdf).
 
-Also a non-normative document, the "Users Guide", and Part 2, support for Coordinate Reference Systems, are being developed.
+Also a non-normative document, the "Users Guide", and Part 2, support for Coordinate Reference Systems, are being developed. In addition,
+a joint sprint with STAC and the OGC API Catalogues SWG to advance richer query/filter capabilities is planned for early November 2019.
 
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
@@ -104,6 +105,6 @@ The contributor understands that any contributions, if accepted by the OGC Membe
 The Features API Standards Working Group (SWG) is the group at OGC responsible for the stewardship of the standard, but is working to do as much work in public as possible.
 
 * [Features API Standards Working Group Charter](CHARTER.adoc)
-* [Open issues](https://github.com/opengeospatial/WFS_FES/issues)
-* [Proposing changes](https://github.com/opengeospatial/WFS_FES/wiki/Propose-a-change-to-a-draft-of-a-specification-document)
-* [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/LICENSE)
+* [Open issues](https://github.com/opengeospatial/ogcapi-features/issues)
+* [Proposing changes](https://github.com/opengeospatial/ogcapi-features/wiki/Propose-a-change-to-a-draft-of-a-specification-document)
+* [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/LICENSE)

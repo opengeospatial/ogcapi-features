@@ -5,7 +5,7 @@
 This folder includes examples of XML/GML responses to illustrate how the
 OpenAPI fragments used to define the requirements for the
 Core requirements class are expressed in XML using the
-[OGC API Features Core XML Schema](https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/xml/core.xsd).
+[OGC API Features Core XML Schema](https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/xml/core.xsd).
 
 ## Responses to path `/`
 

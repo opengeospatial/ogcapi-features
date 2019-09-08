@@ -5,13 +5,13 @@
 
 |Tag |Value |
 |---- | ---------------- |
-|Proposal |[NNNN](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/{directory_or_file_name})|
+|Proposal |[NNNN](https://github.com/opengeospatial/ogcapi-features/tree/master/proposals/{directory_or_file_name})|
 |Authors|[Author 1](https://github.com/{author1}), [Author 2](https://github.com/{author2})|
 |Review Manager |TBD |
 |Status |Draft, Pilot, Graduated, or Abandoned|
-|Implementations |[Click Here](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/{NNNN}/implementations.md)|
-|Issues |[{issueid}](https://github.com/opengeospatial/WFS_FES/issues/{Issueid})|
-|Previous Revisions |[{revid}](https://github.com/opengeospatial/WFS_FES/pull/{revid}) |
+|Implementations |[Click Here](https://github.com/opengeospatial/ogcapi-features/tree/master/proposals/{NNNN}/implementations.md)|
+|Issues |[{issueid}](https://github.com/opengeospatial/ogcapi-features/issues/{Issueid})|
+|Previous Revisions |[{revid}](https://github.com/opengeospatial/ogcapi-features/pull/{revid}) |
 
 .Change Log
 
@@ -41,4 +41,3 @@ Proposals should be structure so that they can be handled by existing OGC compli
 ## Alternatives considered
 
 Describe alternative approaches to addressing the same problem, and why you chose this approach instead.
-

@@ -2,7 +2,7 @@
 
 As part of the work on the Core standard, an informative UML model
 for the resources specified in the specification has been developed
-(see [#217](https://github.com/opengeospatial/WFS_FES/issues/217)
+(see [#217](https://github.com/opengeospatial/ogcapi-features/issues/217)
 for details).
 
 It uses a simple UML profile with two stereotypes/keywords:

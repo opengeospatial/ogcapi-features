@@ -4,12 +4,12 @@
 
 |Tag |Value |
 |---- | ---------------- |
-|Proposal |[Alternative Schema](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/Alternative%20Schema)|
+|Proposal |[Alternative Schema](https://github.com/opengeospatial/ogcapi-features/tree/master/proposals/Alternative%20Schema)|
 |Authors|[Chuck Heazel](https://github.com/cmheazel)|
 |Review Manager |TBD |
 |Status |**Pilot** |
-|Implementations |[Click Here](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/Alternative%20Schema/implementations.md)
-|Issues |[129](https://github.com/opengeospatial/WFS_FES/issues/129), [56](https://github.com/opengeospatial/WFS_FES/issues/56)|
+|Implementations |[Click Here](https://github.com/opengeospatial/ogcapi-features/tree/master/proposals/Alternative%20Schema/implementations.md)
+|Issues |[129](https://github.com/opengeospatial/ogcapi-features/issues/129), [56](https://github.com/opengeospatial/ogcapi-features/issues/56)|
 |Previous Revisions |none |
  
 .Change Log
@@ -41,14 +41,14 @@ This proposal defines an extension to the OpenAPI document used by OGC APIs. It 
 
 ###  Extend the Schema Object 
 
-The OpenAPI Schema Object is extended by the addition of the x-oas-draft-alternativeSchema field. The proposed changes to the OpenAPI specification are provided in [schema_object.md](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/Alternative%20Schema/schema_object.md)
+The OpenAPI Schema Object is extended by the addition of the x-oas-draft-alternativeSchema field. The proposed changes to the OpenAPI specification are provided in [schema_object.md](https://github.com/opengeospatial/ogcapi-features/tree/master/proposals/Alternative%20Schema/schema_object.md)
 
 ###  Add the Alternative Schema Object 
 
-The new object, the Alternative Schema Object is added to the OpenAPI specification. The proposed changes to the OpenAPI specification are provided in [alternative_schema_object.md](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/Alternative%20Schema/alternative_schema_object.md)
+The new object, the Alternative Schema Object is added to the OpenAPI specification. The proposed changes to the OpenAPI specification are provided in [alternative_schema_object.md](https://github.com/opengeospatial/ogcapi-features/tree/master/proposals/Alternative%20Schema/alternative_schema_object.md)
 
 ### Provide Alternative Schema Examples
-Examples of the use of the Alternative Schema capability is added to the OpenAPI specification. The proposed changes to the OpenAPI specification are provided in [alternative_schema_examples.md](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/Alternative%20Schema/alternative_schema_examples.md)
+Examples of the use of the Alternative Schema capability is added to the OpenAPI specification. The proposed changes to the OpenAPI specification are provided in [alternative_schema_examples.md](https://github.com/opengeospatial/ogcapi-features/tree/master/proposals/Alternative%20Schema/alternative_schema_examples.md)
 
 ### Alternative Schema Registry
 

@@ -43,9 +43,9 @@ paths:
       operationId: getLandingPage
       responses:
         '200':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/LandingPage'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/LandingPage'
         '500':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
   '/conformance':
     get:
       tags:
@@ -57,9 +57,9 @@ paths:
       operationId: getConformanceDeclaration
       responses:
         '200':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ConformanceDeclaration'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ConformanceDeclaration'
         '500':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
   '/collections':
     get:
       tags:
@@ -68,9 +68,9 @@ paths:
       operationId: getCollections
       responses:
         '200':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/Collections'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/Collections'
         '500':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
   '/collections/buildings':
     get:
       tags:
@@ -80,9 +80,9 @@ paths:
       operationId: describeCollection
       responses:
         '200':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/Collection'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/Collection'
         '500':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
   '/collections/buildings/items':
     get:
       tags:
@@ -94,9 +94,9 @@ paths:
         Use content negotiation to request HTML or GeoJSON.
       operationId: getFeatures
       parameters:
-        - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/limit'
-        - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/bbox'
-        - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/datetime'
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/limit'
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/bbox'
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/datetime'
         - $ref: '#/components/parameters/function'
       responses:
         '200':
@@ -167,9 +167,9 @@ paths:
               schema:
                 type: string
         '400':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/InvalidParameter'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/InvalidParameter'
         '500':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
   '/collections/buildings/items/{featureId}':
     get:
       tags:
@@ -181,7 +181,7 @@ paths:
         Use content negotiation to request HTML or GeoJSON.
       operationId: getFeature
       parameters:
-        - $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/featureId'
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/parameters/featureId'
       responses:
         '200':
           description: |-
@@ -221,9 +221,9 @@ paths:
               schema:
                 type: string
         '404':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/NotFound'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/NotFound'
         '500':
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/responses/ServerError'
 components:
   parameters:
     function:
@@ -261,13 +261,13 @@ components:
         links:
           type: array
           items:
-            $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'
+            $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'
         timeStamp:
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/timeStamp'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/timeStamp'
         numberMatched:
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/numberMatched'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/numberMatched'
         numberReturned:
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/numberReturned'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/numberReturned'
     buildingGeoJSON:
       type: object
       required:
@@ -280,7 +280,7 @@ components:
           enum:
             - Feature
         geometry:
-          $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/geometryGeoJSON'
+          $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/geometryGeoJSON'
         properties:
           type: object
           nullable: true
@@ -306,4 +306,4 @@ components:
         links:
           type: array
           items:
-            $ref: 'https://raw.githubusercontent.com/opengeospatial/WFS_FES/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'
+            $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'
