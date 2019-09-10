@@ -99,6 +99,8 @@ as the highest priority:
 
 A [joint sprint with STAC and the OGC API Catalogues SWG to advance richer query/filter capabilities is planned for November 5-7, 2019, in Arlington, VA](https://medium.com/radiant-earth-insights/join-stac-sprint-5-ogc-api-hackathon-november-5-7-48178137f778).
 
+Additional links:
+
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
 * [Checklist for implementers (for draft.1 from April 2018)](guide/conformance_checklist.md)
