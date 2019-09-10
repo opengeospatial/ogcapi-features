@@ -77,7 +77,8 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 The work on this first part of OGC API Features is entering the final straight.
 The [release candidate](https://github.com/opengeospatial/ogcapi-features/releases/tag/1.0.0-draft.2)
-has been submitted to the OGC Technical Committee for the approval vote.
+has been approved by the OGC membership and will be published in the coming weeks.
+
 In parallel it has also be submitted to ISO/TC 211 for the [DIS ballot](https://www.iso.org/standard/32586.html).
 
 At this time, changes to the candidate standard are a decision of the OGC
@@ -89,8 +90,14 @@ The open issues for the candidate standard are documented in the
 The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r3.html), also available as
 [PDF](http://docs.opengeospatial.org/DRAFTS/17-069r3.pdf).
 
-Also a non-normative document, the "Users Guide", and Part 2, support for Coordinate Reference Systems, are being developed. In addition,
-a joint sprint with STAC and the OGC API Catalogues SWG to advance richer query/filter capabilities is planned for early November 2019.
+The OGC Features API SWG has identified the following extensions to Part 1 (Core)
+as the highest priority:
+
+* support for Coordinate Reference Systems (Part 2);
+* filter/query capabilities;
+* simple transactions.
+
+A [joint sprint with STAC and the OGC API Catalogues SWG to advance richer query/filter capabilities is planned for November 5-7, 2019, in Arlington, VA](https://medium.com/radiant-earth-insights/join-stac-sprint-5-ogc-api-hackathon-november-5-7-48178137f778).
 
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
