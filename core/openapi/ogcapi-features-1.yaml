@@ -2,10 +2,10 @@ openapi: 3.0.1
 info:
   title: "Building Blocks specified in OGC API - Features - Part 1: Core"
   description: |-
-    Common components used in the 
-    [OGC draft standard "OGC API - Features - Part 1: Core"](http://docs.opengeospatial.org/DRAFTS/17-069r2.html). 
-    
-    This document is also available on 
+    Common components used in the
+    [OGC draft standard "OGC API - Features - Part 1: Core"](http://docs.opengeospatial.org/DRAFTS/17-069r2.html).
+
+    This document is also available on
     [GitHub](https://github.com/opengeospatial/ogcapi-features/blob/master/core/openapi/bbox/ogcapi-features-1.yaml).
   version: '1.0.0-draft.2'
   contact:
@@ -22,14 +22,14 @@ components:
       description: |-
         Only features that have a geometry that intersects the bounding box are selected.
         The bounding box is provided as four or six numbers, depending on whether the
-        coordinate reference system includes a vertical axis (elevation or depth):
+        coordinate reference system includes a vertical axis (height or depth):
 
         * Lower left corner, coordinate axis 1
         * Lower left corner, coordinate axis 2
-        * Lower left corner, coordinate axis 3 (optional)
+        * Smallest value, coordinate axis 3 (optional)
         * Upper right corner, coordinate axis 1
         * Upper right corner, coordinate axis 2
-        * Upper right corner, coordinate axis 3 (optional)
+        * Highest value, coordinate axis 3 (optional)
 
         The coordinate reference system of the values is WGS 84 longitude/latitude
         (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
@@ -39,6 +39,9 @@ components:
         minimum longitude, minimum latitude, maximum longitude and maximum latitude.
         However, in cases where the box spans the antimeridian the first value
         (west-most box edge) is larger than the third value (east-most box edge).
+
+        If the vertical axis is included, the third and the sixth number are
+        the bottom and the top of the 3-dimensional bounding box.
 
         If a feature has multiple spatial geometry properties, it is the decision of the
         server whether only a single spatial geometry property is used to determine
@@ -83,7 +86,7 @@ components:
         type: string
       style: form
       explode: false
-    featureId:  
+    featureId:
       name: featureId
       in: path
       description: local identifier of a feature
@@ -209,9 +212,32 @@ components:
               minItems: 1
               items:
                 description: |-
-                  West, south, east, north edges of the bounding box. The coordinates
-                  are in the coordinate reference system specified in `crs`. By default
-                  this is WGS 84 longitude/latitude.
+                  Each bounding box is provided as four or six numbers, depending on
+                  whether the coordinate reference system includes a vertical axis
+                  (height or depth):
+
+                  * Lower left corner, coordinate axis 1
+                  * Lower left corner, coordinate axis 2
+                  * Smallest value, coordinate axis 3 (optional)
+                  * Upper right corner, coordinate axis 1
+                  * Upper right corner, coordinate axis 2
+                  * Highest value, coordinate axis 3 (optional)
+
+                  The coordinate reference system of the values is WGS 84 longitude/latitude
+                  (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
+                  reference system is specified in `crs`.
+
+                  For WGS 84 longitude/latitude the values are in most cases the sequence of
+                  minimum longitude, minimum latitude, maximum longitude and maximum latitude.
+                  However, in cases where the box spans the antimeridian the first value
+                  (west-most box edge) is larger than the third value (east-most box edge).
+
+                  If the vertical axis is included, the third and the sixth number are
+                  the bottom and the top of the 3-dimensional bounding box.
+
+                  If a feature has multiple spatial geometry properties, it is the decision of the
+                  server whether only a single spatial geometry property is used to determine
+                  the extent or all relevant geometries.
                 type: array
                 minItems: 4
                 maxItems: 6
@@ -457,7 +483,7 @@ components:
                 type: array
                 minItems: 2
                 items:
-                  type: number            
+                  type: number
     numberMatched:
       description: |-
         The number of features of the feature type that match the selection
@@ -512,7 +538,7 @@ components:
               minItems: 2
               items:
                 type: number
-    timeStamp:  
+    timeStamp:
       description: This property indicates the time and date when the response was generated.
       type: string
       format: date-time
@@ -520,11 +546,11 @@ components:
   responses:
     LandingPage:
       description: |-
-        The landing page provides links to the API definition 
-        (link relations `service-desc` and `service-doc`), 
-        the Conformance declaration (path `/conformance`, 
-        link relation `conformance`), and the Feature 
-        Collections (path `/collections`, link relation 
+        The landing page provides links to the API definition
+        (link relations `service-desc` and `service-doc`),
+        the Conformance declaration (path `/conformance`,
+        link relation `conformance`), and the Feature
+        Collections (path `/collections`, link relation
         `data`).
       content:
         application/json:
@@ -560,10 +586,10 @@ components:
     ConformanceDeclaration:
       description: |-
         The URIs of all conformance classes supported by the server.
-        
-        To support "generic" clients that want to access multiple 
-        OGC API Features implementations - and not "just" a specific 
-        API / server, the server declares the conformance 
+
+        To support "generic" clients that want to access multiple
+        OGC API Features implementations - and not "just" a specific
+        API / server, the server declares the conformance
         classes it implements and conforms to.
       content:
         application/json:
@@ -581,15 +607,15 @@ components:
     Collections:
       description: |-
         The feature collections shared by this API.
-        
-        The dataset is organized as one or more feature collections. This resource 
-        provides information about and access to the collections. 
-        
-        The response contains the list of collections. For each collection, a link 
-        to the items in the collection (path `/collections/{collectionId}/items`, 
-        link relation `items`) as well as key information about the collection. 
+
+        The dataset is organized as one or more feature collections. This resource
+        provides information about and access to the collections.
+
+        The response contains the list of collections. For each collection, a link
+        to the items in the collection (path `/collections/{collectionId}/items`,
+        link relation `items`) as well as key information about the collection.
         This information includes:
-        
+
         * A local identifier for the collection that is unique for the dataset;
         * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
         * An optional title and description for the collection;
@@ -656,12 +682,12 @@ components:
     Collection:
       description: |-
         Information about the feature collection with id `collectionId`.
-        
-        The response contains a linkto the items in the collection 
-        (path `/collections/{collectionId}/items`,link relation `items`) 
-        as well as key information about the collection. This information 
+
+        The response contains a linkto the items in the collection
+        (path `/collections/{collectionId}/items`,link relation `items`)
+        as well as key information about the collection. This information
         includes:
-        
+
         * A local identifier for the collection that is unique for the dataset;
         * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
         * An optional title and description for the collection;
@@ -708,24 +734,24 @@ components:
             type: string
     Features:
       description: |-
-        The response is a document consisting of features in the collection. 
-        The features included in the response are determined by the server 
-        based on the query parameters of the request. To support access to 
-        larger collections without overloading the client, the API supports 
-        paged access with links to the next page, if more features are selected 
+        The response is a document consisting of features in the collection.
+        The features included in the response are determined by the server
+        based on the query parameters of the request. To support access to
+        larger collections without overloading the client, the API supports
+        paged access with links to the next page, if more features are selected
         that the page size.
-        
-        The `bbox` and `datetime` parameter can be used to select only a 
-        subset of the features in the collection (the features that are in the 
-        bounding box or time interval). The `bbox` parameter matches all features 
-        in the collection that are not associated with a location, too. The 
-        `datetime` parameter matches all features in the collection that are 
+
+        The `bbox` and `datetime` parameter can be used to select only a
+        subset of the features in the collection (the features that are in the
+        bounding box or time interval). The `bbox` parameter matches all features
+        in the collection that are not associated with a location, too. The
+        `datetime` parameter matches all features in the collection that are
         not associated with a time stamp or interval, too.
-        
-        The `limit` parameter may be used to control the subset of the 
+
+        The `limit` parameter may be used to control the subset of the
         selected features that should be returned in the response, the page size.
-        Each page may include information about the number of selected and 
-        returned features (`numberMatched` and `numberReturned`) as well as 
+        Each page may include information about the number of selected and
+        returned features (`numberMatched` and `numberReturned`) as well as
         links to support paging (link relation `next`).
       content:
         application/geo+json:
