@@ -779,6 +779,10 @@ include::requirements/core/REQ_fc-time-response.adoc[]
 (again, a time instant or interval). For time intervals this includes the start
 and end time.
 
+NOTE: ISO 8601-2 distinguishes open start/end timestamps (double-dot) and
+unknown start/end timestamps (empty string). For queries, an unknown start/end
+has the same effect as an open start/end.
+
 [[example_6]]
 .A date-time
 =================
@@ -804,11 +808,11 @@ February 12, 2018, 00:00:00 UTC to March 18, 2018, 12:31:12 UTC:
 
 February 12, 2018, 00:00:00 UTC or later:
 
-`datetime=2018-02-12T00%3A00%3A00Z%2F..`
+`datetime=2018-02-12T00%3A00%3A00Z%2F..` or `datetime=2018-02-12T00%3A00%3A00Z%2F`
 
 March 18, 2018, 12:31:12 UTC or earlier:
 
-`datetime=..%2F2018-03-18T12%3A31%3A12Z`
+`datetime=..%2F2018-03-18T12%3A31%3A12Z` or `datetime=%2F2018-03-18T12%3A31%3A12Z`
 =================
 
 For features with a temporal property that is a timestamp (like `lastUpdate`

@@ -1,7 +1,7 @@
 [[req_core_fc-time-response]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/core/fc-time-response* 
+^|*Requirement {counter:req-id}* |*/req/core/fc-time-response*
 ^|A |Only features that have a temporal geometry that intersects the temporal information in the `datetime` parameter SHALL be part of the result set, if the parameter is provided.
 ^|B |If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties.
 ^|C |The `datetime` parameter SHALL match all features in the collection that are not associated with a temporal geometry, too.
@@ -9,11 +9,11 @@
 
 ```
 interval-closed     = date-time "/" date-time
-interval-open-start = "../" date-time
-interval-open-end   = date-time "/.."
+interval-open-start = [".."] "/" date-time
+interval-open-end   = date-time "/" [".."]
 interval            = interval-closed / interval-open-start / interval-open-end
 datetime            = date-time / interval
 ```
 ^|E |The syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6].
-^|F |Open ranges in time intervals at the start or end are supported using a double-dot (`..`).
+^|F |Open ranges in time intervals at the start or end are supported using a double-dot (`..`) or an empty string for the start/end.
 |===
