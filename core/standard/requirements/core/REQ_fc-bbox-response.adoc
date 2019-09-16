@@ -9,10 +9,10 @@
 
 * Lower left corner, coordinate axis 1
 * Lower left corner, coordinate axis 2
-* Smallest value, coordinate axis 3 (optional)
+* Minimum value, coordinate axis 3 (optional)
 * Upper right corner, coordinate axis 1
 * Upper right corner, coordinate axis 2
-* Highest value, coordinate axis 3 (optional)
+* Maximum value, coordinate axis 3 (optional)
 
 ^|E |The bounding box SHALL consist of four numbers and the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
 ^|F |The coordinate values SHALL be within the extent specified for the coordinate reference system.
