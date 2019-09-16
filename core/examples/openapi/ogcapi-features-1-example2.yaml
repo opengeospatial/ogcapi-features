@@ -1,16 +1,16 @@
-openapi: 3.0.1
+openapi: 3.0.2
 info:
   title: "A sample API conforming to the draft standard OGC API - Features - Part 1: Core"
-  version: '1.0.0-draft.2'
+  version: '1.0.0'
   description: |-
-    This is a sample OpenAPI definition that conforms to the conformance 
+    This is a sample OpenAPI definition that conforms to the conformance
     classes "Core", "GeoJSON", "HTML" and "OpenAPI 3.0" of the draft
     standard "OGC API - Features - Part 1: Core".
-    
+
     This example differs from the [other example](ogcapi-features-1-example1.yaml)
     in that each feature collections is specified explicitly in its own path, not using a path
-    parameter. This API definiton is more verbose, but provides information about the feature 
-    collection 'buildings' (paths `/collections/buildings`), the schema of the building features 
+    parameter. This API definiton is more verbose, but provides information about the feature
+    collection 'buildings' (paths `/collections/buildings`), the schema of the building features
     (schema `buildingGeoJSON`) and a filter parameter for building features (parameter `function`).
   contact:
     name: Acme Corporation
@@ -52,7 +52,7 @@ paths:
         - Capabilities
       summary: information about specifications that this API conforms to
       description: |-
-        A list of all conformance classes specified in a standard that the 
+        A list of all conformance classes specified in a standard that the
         server conforms to.
       operationId: getConformanceDeclaration
       responses:
@@ -90,7 +90,7 @@ paths:
       summary: fetch buildings
       description: |-
         Fetch buildings.
-        
+
         Use content negotiation to request HTML or GeoJSON.
       operationId: getFeatures
       parameters:
@@ -101,24 +101,24 @@ paths:
       responses:
         '200':
           description: |-
-            The response is a document consisting of building features. 
-            The buildings included in the response are determined by the server 
-            based on the query parameters of the request. To support access to 
-            larger collections without overloading the client, the API supports 
-            paged access with links to the next page, if more features are selected 
+            The response is a document consisting of building features.
+            The buildings included in the response are determined by the server
+            based on the query parameters of the request. To support access to
+            larger collections without overloading the client, the API supports
+            paged access with links to the next page, if more features are selected
             that the page size.
-            
-            The `bbox` and `datetime` parameter can be used to select only a 
-            subset of the features in the collection (the features that are in the 
-            bounding box or time interval). The `bbox` parameter matches all features 
-            in the collection that are not associated with a location, too. The 
-            `datetime` parameter matches all features in the collection that are 
+
+            The `bbox` and `datetime` parameter can be used to select only a
+            subset of the features in the collection (the features that are in the
+            bounding box or time interval). The `bbox` parameter matches all features
+            in the collection that are not associated with a location, too. The
+            `datetime` parameter matches all features in the collection that are
             not associated with a time stamp or interval, too.
-            
-            The `limit` parameter may be used to control the subset of the 
+
+            The `limit` parameter may be used to control the subset of the
             selected features that should be returned in the response, the page size.
-            Each page may include information about the number of selected and 
-            returned features (`numberMatched` and `numberReturned`) as well as 
+            Each page may include information about the number of selected and
+            returned features (`numberMatched` and `numberReturned`) as well as
             links to support paging (link relation `next`).
           content:
             application/geo+json:
@@ -174,7 +174,7 @@ paths:
     get:
       tags:
         - Data
-      summary: fetch a single building  
+      summary: fetch a single building
       description: |-
         Fetch the building with id `featureId`.
 
