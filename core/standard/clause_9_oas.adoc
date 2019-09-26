@@ -8,21 +8,12 @@ include::requirements/requirements_class_oas30.adoc[]
 
 include::requirements/oas30/REQ_oas-definition-1.adoc[]
 
-The requirements <<req_core_root-success,/req/core/root-success>> and
-<<req_core_api-definition-success,/req/core/api-definition-success>> in
-_Core_ require that the API definition documents are referenced from
-the landing page.
+The requirements <<req_core_root-success,/req/core/root-success>> and <<req_core_api-definition-success,/req/core/api-definition-success>> in _Core_ require that the API definition documents are referenced from the landing page.
 
 include::requirements/oas30/REQ_oas-definition-2.adoc[]
 
 [[two_appraoches_oas]]
-OpenAPI definitions can be created using different approaches. A typical
-example is the representation of the feature collections. One approach
-is to use a path parameter `collectionId`, i.e., the API definition
-has only a single path entry for all feature collections.
-Another approach is to explicitly define each feature collection in a separate
-path and without a path parameter, which allows to specify filter parameters
-or explicit feature schemas per feature collection. Both approaches are valid.
+OpenAPI definitions can be created using different approaches. A typical example is the representation of the feature collections. One approach is to use a path parameter `collectionId,` i.e., the API definition has only a single path entry for all feature collections. Another approach is to explicitly define each feature collection in a separate path and without a path parameter, which allows to specify filter parameters or explicit feature schemas per feature collection. Both approaches are valid.
 
 include::requirements/oas30/REQ_oas-impl.adoc[]
 
@@ -30,14 +21,9 @@ include::requirements/oas30/REQ_oas-impl.adoc[]
 
 include::requirements/oas30/REQ_completeness.adoc[]
 
-Note that servers that, for example, are access-controlled
-(see <<security,Security>>), support web cache validation, CORS
-or that use HTTP redirection will make use of additional HTTP status codes
-beyond regular codes such as `200` for successful GET requests
-and `400`, `404` or `500` for error situations. See <<http_status_codes>>.
+Note that servers that, for example, are access-controlled (see <<security,Security>>), support web cache validation, CORS or that use HTTP redirection will make use of additional HTTP status codes beyond regular codes such as `200` for successful GET requests and `400`, `404` or `500` for error situations. See <<http_status_codes>>.
 
-Clients have to be prepared to receive responses not documented in the
-OpenAPI definition. For example, additional errors may occur in the transport layer outside of the server.
+Clients have to be prepared to receive responses not documented in the OpenAPI definition. For example, additional errors may occur in the transport layer outside of the server.
 
 [[exceptions]]
 === Exceptions
@@ -68,8 +54,11 @@ include::requirements/oas30/REQ_security.adoc[]
 The OpenAPI specification currently supports the following link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object[security schemes]:
 
 * HTTP authentication,
+
 * an API key (either as a header or as a query parameter),
+
 * OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and
+
 * OpenID Connect Discovery.
 
 === Features

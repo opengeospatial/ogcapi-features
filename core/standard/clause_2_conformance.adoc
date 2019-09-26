@@ -1,7 +1,7 @@
 == Conformance
 This standard defines six requirements / conformance classes.
 
-The standardization targets of all conformance classes are "Web APIs".
+The standardization targets of all conformance classes are "Web APIs."
 
 The main requirements class is:
 
@@ -9,48 +9,28 @@ The main requirements class is:
 
 The _Core_ specifies requirements that all Web APIs have to implement.
 
-The _Core_ does not mandate a specific encoding or format for representing features or
-feature collections. Four requirements classes depend on the _Core_
-and specify representations for these resources in commonly used encodings
-for spatial data on the web:
+The _Core_ does not mandate a specific encoding or format for representing features or feature collections. Four requirements classes depend on the _Core_ and specify representations for these resources in commonly used encodings for spatial data on the web:
 
 * <<rc_html,HTML>>,
+
 * <<rc_geojson,GeoJSON>>,
+
 * <<rc_gmlsf0,Geography Markup Language (GML), Simple Features Profile, Level 0>>, and
+
 * <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>.
 
-None of these encodings are mandatory and an implementation of the _Core_
-may also decide to implement none of them, but to implement another encoding instead.
+None of these encodings are mandatory and an implementation of the _Core_ may also decide to implement none of them, but to implement another encoding instead.
 
-That said, the _Core_ requirements class includes recommendations to support
-where practical <<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings.
-<<overview,Clause 6 (Overview)>> includes a discussion about the recommended
-encodings.
+That said, the _Core_ requirements class includes recommendations to support, where practical, <<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings. <<overview,Clause 6 (Overview)>> includes a discussion about the recommended encodings.
 
-The _Core_ does not mandate any encoding or format for the formal definition of
-the API either. One option is the OpenAPI 3.0 specification and a requirements
-class has been specified for OpenAPI 3.0, which depends on the _Core_:
+The _Core_ does not mandate any encoding or format for the formal definition of the API either. One option is the OpenAPI 3.0 specification and a requirements class has been specified for OpenAPI 3.0, which depends on the _Core_:
 
 * <<rc_oas30,OpenAPI specification 3.0>>.
 
-Like with the feature encodings, an implementation of the _Core_ requirements
-class may also decide to use other API definition representations in
-addition or instead of an OpenAPI 3.0 definition. Examples for alternative
-API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI
-specification, an OWS Common 2.0 capabilities document or WSDL.
+Like with the feature encodings, an implementation of the _Core_ requirements class may also decide to use other API definition representations in addition or instead of an OpenAPI 3.0 definition. Examples for alternative API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI specification, an OWS Common 2.0 capabilities document or WSDL.
 
-The _Core_ is intended to be a minimal useful API for fine-grained
-read-access to a spatial dataset where geometries are represented in the
-coordinate reference system WGS 84 with axis order longitude/latitude.
+The _Core_ is intended to be a minimal useful API for fine-grained read-access to a spatial dataset where geometries are represented in the coordinate reference system WGS 84 with axis order longitude/latitude.
 
-Additional capabilities such as support for transactions, complex data
-structures, rich queries, other coordinate reference systems,
-subscription/notification, returning aggregated results, etc., may be
-specified in future parts of the OGC API Features series or as
-vendor-specific extensions.
+Additional capabilities such as support for transactions, complex data structures, rich queries, other coordinate reference systems, subscription/notification, returning aggregated results, etc., may be specified in future parts of the OGC API Features series or as vendor-specific extensions.
 
-Conformance with this standard shall be checked using all the relevant tests
-specified in Annex A (normative) of this document. The framework, concepts, and
-methodology for testing, and the criteria to be achieved to claim conformance
-are specified in the OGC Compliance Testing Policies and Procedures and the
-OGC Compliance Testing web site.
+Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.

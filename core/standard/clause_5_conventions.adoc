@@ -10,36 +10,45 @@ All requirements and conformance tests that appear in this document are denoted 
 
 To express relationships between resources, <<rfc8288,RFC 8288 (Web Linking)>> is used.
 
-The following <<link-relations,registered link relation types>> are used in this document:
+The following <<link-relations,registered link relation types>> are used in this document.
 
 * **alternate**: Refers to a substitute for this context.
+
 * **collection**: The target IRI points to a resource which represents the collection resource for the context IRI.
+
 * **describedBy**: Refers to a resource providing information about the link's context.
+
 * **item**: The target IRI points to a resource that is a member of the collection represented by the context IRI.
+
 * **next**: Indicates that the link's context is a part of a series, and that the next in the series is the link target.
+
 * **license**: Refers to a license associated with this context.
+
 * **prev**: Indicates that the link's context is a part of a series, and that the previous in the series is the link target.
+
 ** This relation is only used in examples.
+
 * **self**: Conveys an identifier for the link's context.
+
 * **service-desc**: Identifies service description for the context that is primarily intended for consumption by machines.
+
 ** API definitions are considered service descriptions.
+
 * **service-doc**: Identifies service documentation for the context that is primarily intended for human consumption.
 
-In addition the following link relation types are used for which no applicable
-registered link relation type could be identified:
+In addition the following link relation types are used for which no applicable registered link relation type could be identified.
 
 * **items**: Refers to a resource that is comprised of members of the collection represented by the link's context.
+
 * **conformance**: Refers to a resource that identifies the specifications that the link's context conforms to.
+
 * **data**: Indicates that the link's context is a distribution of a dataset that is an API and refers to the root resource of the dataset in the API.
 
-Each resource representation includes an array of links. Implementations are
-free to add additional links for all resources provided by the API. For
-example, an **enclosure** link could reference a bulk download of a collection.
-Or a **related** link on a feature could reference a related feature.
+Each resource representation includes an array of links. Implementations are free to add additional links for all resources provided by the API. For example, an **enclosure** link could reference a bulk download of a collection. Or a **related** link on a feature could reference a related feature.
 
 === Use of HTTPS
 
-For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS". In fact, most servers are expected to use <<rfc2818,HTTPS>>, not <<rc2616,HTTP>>.
+For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS." In fact, most servers are expected to use <<rfc2818,HTTPS>>, not <<rc2616,HTTP>>.
 
 === HTTP URIs
 
@@ -49,63 +58,39 @@ This document does not restrict the lexical space of URIs used in the API beyond
 
 ==== General remarks
 
-Good documentation is essential for every API so that developers can more easily
-learn how to use the API. In the best case, documentation will be available in
-HTML and in a format that can be processed by software to connect to the API.
+Good documentation is essential for every API so that developers can more easily learn how to use the API. In the best case, documentation will be available in HTML and in a format that can be processed by software to connect to the API.
 
-This standard specifies requirements and recommendations for APIs that
-share feature data and that want to follow a standard way of doing so.
-In general, APIs will go beyond the requirements and recommendations
-stated in this standard - or other parts of the OGC API family of
-standards - and will support additional operations, parameters, etc.
-that are specific to the API or the software tool used to implement the API.
+This standard specifies requirements and recommendations for APIs that share feature data and that want to follow a standard way of doing so. In general, APIs will go beyond the requirements and recommendations stated in this standard - or other parts of the OGC API family of standards - and will support additional operations, parameters, etc. that are specific to the API or the software tool used to implement the API.
 
 ==== Role of OpenAPI
 
-This document uses OpenAPI 3.0 fragments as examples and to formally state
-requirements. However, using OpenAPI 3.0 is not required for implementing a
-server.
+This document uses OpenAPI 3.0 fragments as examples and to formally state requirements. However, using OpenAPI 3.0 is not required for implementing a server.
 
-Therefore, the _Core_ requirements class only requires that an API
-definition is provided and linked from the landing page.
+Therefore, the _Core_ requirements class only requires that an API definition is provided and linked from the landing page.
 
-A separate requirements class is specified for API definitions that follow the
-<<rc_oas,OpenAPI specification 3.0>>. This does not preclude that in the
-future or in parallel other versions of OpenAPI or other API descriptions are
-provided by a server.
+A separate requirements class is specified for API definitions that follow the <<rc_oas,OpenAPI specification 3.0>>. This does not preclude that in the future or in parallel other versions of OpenAPI or other API descriptions are provided by a server.
 
-NOTE: This approach is used to avoid lock-in to a specific approach to
-defining an API as it is expected that the API landscape will continue to
-evolve.
+NOTE: This approach is used to avoid lock-in to a specific approach to defining an API as it is expected that the API landscape will continue to evolve.
 
-In this document, fragments of OpenAPI definitions are shown in <<YAML,YAML (YAML Ain't Markup Language)>>
-since YAML is easier to read than JSON and is typically used in OpenAPI editors.
-YAML is described by its authors as a human friendly data serialization standard
-for all programming languages.
+In this document, fragments of OpenAPI definitions are shown in <<YAML,YAML (YAML Ain't Markup Language)>> since YAML is easier to read than JSON and is typically used in OpenAPI editors. YAML is described by its authors as a human friendly data serialization standard for all programming languages.
 
 ==== References to OpenAPI components in normative statements
 
-Some normative statements (requirements, recommendations and permissions) use
-a phrase that a component in the API definition of the server must be
-"based upon" a schema or parameter component in the OGC schema repository.
+Some normative statements (requirements, recommendations and permissions) use a phrase that a component in the API definition of the server must be "based upon" a schema or parameter component in the OGC schema repository.
 
-In this case, the following changes to the pre-defined OpenAPI component
-are permitted:
+In the case above, the following changes to the pre-defined OpenAPI component are permitted.
 
-* If the server supports an XML encoding, `xml` properties may be added to
-the relevant OpenAPI schema components.
-* The range of values of a parameter or property may be extended (additional
-values) or constrained (if a subset of all possible values are applicable
-to the server). An example for a constrained range of values is to explicitly
-specify the supported values of a string parameter or property using an enum.
-* The default value of a parameter may be changed or added unless a requirement
-explicitly prohibits this.
+* If the server supports an XML encoding, `xml` properties may be added to the relevant OpenAPI schema components.
+
+* The range of values of a parameter or property may be extended (additional values) or constrained (if a subset of all possible values are applicable to the server). An example for a constrained range of values is to explicitly specify the supported values of a string parameter or property using an enum.
+
+* The default value of a parameter may be changed or added unless a requirement explicitly prohibits this.
+
 * Additional properties may be added to the schema definition of a Response Object.
+
 * Informative text may be changed or added, like comments or description properties.
 
-For API definitions that do not conform to the <<rc_oas30,OpenAPI Specification 3.0>>
-the normative statement should be interpreted in the context of the
-API definition language used.
+For API definitions that do not conform to the <<rc_oas30,OpenAPI Specification 3.0>>, the normative statement should be interpreted in the context of the API definition language used.
 
 ==== Paths in OpenAPI definitions
 
@@ -131,10 +116,6 @@ URL `https://data.example.org/mypath` for the production server.
 
 ==== Reusable OpenAPI components
 
-Reusable components for OpenAPI definitions for implementations of OGC API Features
-are referenced from this document.
+Reusable components for OpenAPI definitions for implementations of OGC API Features are referenced from this document.
 
-CAUTION: During the development phase, these components use a base URL of
-"https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/",
-but during publication they will move to a base URL of
-"http://schemas.opengis.net/ogcapi/features/part1/1.0/" (or a similar URL).
+CAUTION: During the development phase, these components use a base URL of "https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/", but upon publication of this standard, the components will move to a base URL of "http://schemas.opengis.net/ogcapi/features/part1/1.0/."

@@ -1,22 +1,24 @@
 [[mediatypes]]
 == Media Types
 
-JSON media types that would typically be used in a server that supports JSON are
+JSON media types that would typically be used in a server that supports JSON are:
 
 * `application/geo+json` for feature collections and features, and
+
 * `application/json` for all other resources.
 
-XML media types that would typically occur in a server that supports XML are
+XML media types that would typically occur in a server that supports XML are:
 
 * `application/gml+xml;version=3.2` for any GML 3.2 feature collections and features,
+
 * `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0` for GML 3.2 feature collections and features conforming to the GML Simple Feature Level 0 profile,
+
 * `application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` for GML 3.2 feature collections and features conforming to the GML Simple Feature Level 2 profile, and
+
 * `application/xml` for all other resources.
 
 The typical HTML media type for all "web pages" in a server would be `text/html`.
 
-The media type for an OpenAPI 3.0 definition is `vnd.oai.openapi+json;version=3.0` (JSON) or .
-`application/vnd.oai.openapi;version=3.0` (YAML).
+The media type for an OpenAPI 3.0 definition is `vnd.oai.openapi+json;version=3.0` (JSON) or . `application/vnd.oai.openapi;version=3.0` (YAML).
 
-NOTE: The OpenAPI media types have not been registered yet with IANA
-and may change in the future.
+NOTE: The OpenAPI media types have not been registered yet with IANA and may change in the future.

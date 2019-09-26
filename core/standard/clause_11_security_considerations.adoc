@@ -2,19 +2,23 @@
 
 A Web API is a powerful tool for sharing information and analysis resources. It also provides many avenues for unscrupulous users to attack those resources. Designers and developers of Web APIs should be familiar with the potential vulnerabilities and how to address them.
 
-A valuable resource is the Common Weakness Enumeration (CWE) registry at http://cwe.mitre.org/data/index.html[http://cwe.mitre.org/data/index.html]. The CWE is organized around three views; Research, Architectural, and Development:
+A valuable resource is the Common Weakness Enumeration (CWE) registry at http://cwe.mitre.org/data/index.html[http://cwe.mitre.org/data/index.html]. The CWE is organized around three views; Research, Architectural, and Development.
 
 * *Research:* facilitates research into weaknesses and can be leveraged to systematically identify theoretical gaps within CWE.
+
 * *Architectural:* organizes weaknesses according to common architectural security tactics. It is intended to assist architects in identifying potential mistakes that can be made when designing software.
+
 * *Development:* organizes weaknesses around concepts that are frequently used or encountered in software development.
 
 API developers should focus on the Development view. These vulnerabilities primarily deal with the details of software design and implementation.
 
 API designers should focus primarily on the Architectural view. However, there are critical vulnerabilities described in the Development view which are also relevant to API design. Vulnerabilities described under the following categories are particularly important:
 
-* Pathname Traversal and Equivalence Errors
-* Channel and Path Errors
-* Web Problems
+* Pathname Traversal and Equivalence Errors,
+
+* Channel and Path Errors, and
+
+* Web Problems.
 
 Many of the vulnerabilities described in the CWE are introduced through the HTTP protocol. API designers and developers should be familiar with how the HTTP 1.1 addresses these vulnerabilities.  This information can be found in section 15 of https://tools.ietf.org/html/rfc2616[IETF RFC 2616].
 
@@ -22,10 +26,10 @@ The following sections describe some of the most serious vulnerabilities which c
 
 === Multiple Access Routes
 
-APIs deliver a representation of a resource.  OGC APIs can deliver multiple representations (formats) of the same resource. An
-attacker may find that information which is prohibited in one representation can be accessed through another. API designers must take care that the access controls on their resources are implemented consistently across all representations. That does not mean that they have to be the same.  For example:
+APIs deliver a representation of a resource.  OGC APIs can deliver multiple representations (formats) of the same resource. An attacker may find that information which is prohibited in one representation can be accessed through another. API designers must take care that the access controls on their resources are implemented consistently across all representations. That does not mean that they have to be the same.  For example, consider the following.
 
 * HTML vs. GeoTIFF – The HTML representation may consist of a text description of the resource accompanied by a thumbnail image. This has less information than the GeoTIFF representation and may be subject to more liberal access policies.
+
 * Data Centric Security – techniques to embed access controls into the representation itself. A GeoTIFF with Data Centric Security would have more liberal access policies than a GeoTIFF without.
 
 Bottom Line: the information content of the resources exposed by an API must be protected to the same level across all access routes.

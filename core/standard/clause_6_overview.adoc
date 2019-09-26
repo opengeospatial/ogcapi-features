@@ -7,10 +7,12 @@ While this is the first version of the OGC API Features series, the fine-grained
 
 OGC API Features supports similar capabilities, but using a modernized approach that follows the current Web architecture and in particular the <<SDWBP,W3C/OGC best practices for sharing Spatial Data on the Web>> as well as the <<DWBP,W3C best practices for sharing Data on the Web>>.
 
-Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal for OGC API Features is modularization. This goal has several facets:
+Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal for OGC API Features is modularization. This goal has several facets, as described below.
 
 * Clear separation between core requirements and more advanced capabilities. This document specifies the core requirements that are relevant for almost everyone who wants to share or use feature data on a fine-grained level. Additional capabilities that several communities are using today will be specified as extensions in additional parts of the OGC API Features series.
+
 * Technologies that change more frequently are decoupled and specified in separate modules ("requirements classes" in OGC terminology). This enables, for example, the use/re-use of new encodings for spatial data or API descriptions.
+
 * Modularization is not just about features are resources, but about providing building blocks for fine-grained access to spatial data that can be used in Web APIs in general. In other words, a server supporting OGC API Features is not intended to implement just a standalone Features API. A corollary of this is that the same Web API may also implement other standards of the OGC API family that support additional resource types; for example, tile resources could provide access to the same features, but organized in a spatial partitioning system; or map resources could process the features and render them as as map images.
 
 Implementations of OGC API Features are intended to support two different approaches how clients can use the API.
@@ -21,78 +23,38 @@ The other approach targets developers that are not familiar with the OGC API sta
 
 === Encodings
 
-This standard does not mandate any encoding or format for representing features or
-feature collections. In addition to HTML as the standard encoding for Web content,
-rules for commonly used encodings for spatial data on the web are provided
-(GeoJSON, GML).
+This standard does not mandate any encoding or format for representing features or feature collections. In addition to HTML as the standard encoding for Web content, rules for commonly used encodings for spatial data on the web are provided (GeoJSON, GML).
 
-None of these encodings is mandatory and an implementation of the _Core_
-requirements class may implement none of them but implement another encoding
-instead.
+None of these encodings is mandatory and an implementation of the _Core_ requirements class may implement none of them but implement another encoding instead.
 
-<<rec_html,Support for HTML is recommended>> as HTML is the core language of the World Wide Web.
-A server that supports HTML will support browsing the data with a web browser
-and will enable search engines to crawl and index the dataset.
+<<rec_html,Support for HTML is recommended>> as HTML is the core language of the World Wide Web. A server that supports HTML will support browsing the data with a web browser and will enable search engines to crawl and index the dataset.
 
-GeoJSON is a commonly used format that is simple to understand and well
-supported by tools and software libraries. Since most Web developers are
-comfortable with using a JSON-based format, this version of OGC API
-Features <<rec_geojson,recommends supporting GeoJSON for encoding feature data>>,
-if the feature data can be represented in GeoJSON for the intended use.
+GeoJSON is a commonly used format that is simple to understand and well supported by tools and software libraries. Since most Web developers are comfortable with using a JSON-based format, this version of OGC API Features <<rec_geojson,recommends supporting GeoJSON for encoding feature data>>, if the feature data can be represented in GeoJSON for the intended use.
 
 Some examples for cases that are out-of-scope of GeoJSON are:
 
 * When solids are used for geometries (e.g., in a 3D city model),
-* Geometries that include non-linear curve interpolations
-that cannot be simplified (e.g., use of arcs in authoritative geometries),
-* Geometries that have to be represented in a coordinate reference system that
-is not based on WGS 84 longitude/latitude (e.g. an authoritative national
-reference system),
+
+* Geometries that include non-linear curve interpolations that cannot be simplified (e.g., use of arcs in authoritative geometries),
+
+* Geometries that have to be represented in a coordinate reference system that is not based on WGS 84 longitude/latitude (e.g., an authoritative national reference system), or
+
 * Features that have more than one geometric property.
 
-In addition to HTML and GeoJSON, a significant volume of feature data is
-available in XML-based formats, notably GML. GML supports more complex requirements
-than GeoJSON and does not have any of the limitations mentioned in the
-above bullets, but as a result GML is more complex to handle for both servers
-and clients. Conformance classes for GML are, therefore, included in this
-standard. We expect that these will typically be supported by servers
-where users are known to expect feature data in XML/GML.
+In addition to HTML and GeoJSON, a significant volume of feature data is available in XML-based formats, notably GML. GML supports more complex requirements than GeoJSON and does not have any of the limitations mentioned in the above bullets, but as a result GML is more complex to handle for both servers and clients. Conformance classes for GML are, therefore, included in this standard. It is expected that these conformance classes will typically be supported by servers where users are known to expect feature data in XML/GML.
 
-The recommendations for using HTML and GeoJSON reflect the importance of HTML and
-the current popularity of JSON-based data formats. As the practices
-in the Web community evolve, the recommendations will likely be updated
-in future versions of this standard to provide guidance on using other
-encodings.
+The recommendations for using HTML and GeoJSON reflect the importance of HTML and the current popularity of JSON-based data formats. As the practices in the Web community evolve, the recommendations will likely be updated in future versions of this standard to provide guidance on using other encodings.
 
-This part of the OGC API Features standards does not provide any guidance on other encodings. The
-supported encodings, or more precisely the media types of the supported encodings,
-can be determined from the API definition. The desired encoding is selected
-using HTTP content negotiation.
+This part of the OGC API Features standards does not provide any guidance on other encodings. The supported encodings, or more precisely the media types of the supported encodings, can be determined from the API definition. The desired encoding is selected using HTTP content negotiation.
 
-For example, if the server supports
-link:https://tools.ietf.org/html/rfc8142[GeoJSON Text Sequences]
-an encoding that is based on JSON text sequences and GeoJSON to support streaming
-by making the data incrementally parseable, the media type `application/geo+json-seq`
-would be used.
+For example, if the server supports link:https://tools.ietf.org/html/rfc8142[GeoJSON Text Sequences], an encoding that is based on JSON text sequences and GeoJSON to support streaming by making the data incrementally parseable, the media type `application/geo+json-seq` would be used.
 
-In addition, HTTP supports compression and therefore the standard HTTP mechanisms
-can be used to reduce the size of the messages between the server and the client.
+In addition, HTTP supports compression and therefore the standard HTTP mechanisms can be used to reduce the size of the messages between the server and the client.
 
 === Examples
 
-This document uses a simple example throughout the document: The dataset
-contains buildings and the server provides access to them through a single
-feature collection ("buildings") and two encodings, GeoJSON and HTML.
+This document uses a simple example throughout the document: The dataset contains buildings and the server provides access to them through a single feature collection ("buildings") and two encodings, GeoJSON and HTML.
 
-The buildings have a few (optional) properties: the polygon geometry of the
-building footprint, a name, the function of the building (residential,
-commercial or public use), the floor count and the timestamp of the last
-update of the building feature in the dataset.
+The buildings have a few (optional) properties: the polygon geometry of the building footprint, a name, the function of the building (residential, commercial or public use), the floor count and the timestamp of the last update of the building feature in the dataset.
 
-In addition to the examples included in the document, additional and more
-comprehensive examples are available at
-https://github.com/opengeospatial/ogcapi-features/blob/master/core/examples.
-
-NOTE: The link will be updated before publication to a URI in an OGC domain.
-The URI is expected to redirect to the location where the examples are managed
-which for now will be the public GitHub repository.
+In addition to the examples included in the document, additional and more comprehensive examples are available at http://schemas.opengis.net/ogcapi/features/part1/1.0/examples.

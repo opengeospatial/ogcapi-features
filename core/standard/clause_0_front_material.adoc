@@ -5,9 +5,9 @@ OGC API standards define modular API building blocks to spatially enable Web API
 
 The OGC API family of standards is organized by resource type. This standard specifies the fundamental API building blocks for interacting with features. The spatial data community uses the term 'feature' for things in the real world that are of interest.
 
-If you are unfamiliar with the term 'feature', the explanations on link:https://www.w3.org/TR/sdw-bp/#spatial-things-features-and-geometry[Spatial Things, Features and Geometry] in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practice document>> provide more detail.
+For those not familiar with the term 'feature,' the explanations on link:https://www.w3.org/TR/sdw-bp/#spatial-things-features-and-geometry[Spatial Things, Features and Geometry] in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practice document>> provide more detail.
 
-OGC API Features provides API building blocks to create, modify and query features on the Web. OGC API Features is comprised of multiple parts, each of them is a separate standard. This part, the "Core", specifies the core capabilities and is restricted to fetching features where geometries are represented in the coordinate reference system WGS 84 with axis order longitude/latitude. Additional capabilities that address more advanced needs will be specified in additional parts. Examples include support for creating and modifying features, more complex data models, richer queries, additional coordinate reference systems, multiple datasets and collection hierarchies.
+OGC API Features provides API building blocks to create, modify and query features on the Web. OGC API Features is comprised of multiple parts, each of them is a separate standard. This part, the "Core," specifies the core capabilities and is restricted to fetching features where geometries are represented in the coordinate reference system WGS 84 with axis order longitude/latitude. Additional capabilities that address more advanced needs will be specified in additional parts. Examples include support for creating and modifying features, more complex data models, richer queries, additional coordinate reference systems, multiple datasets and collection hierarchies.
 
 By default, every API implementing this standard will provide access to a single dataset. Rather than sharing the data as a complete dataset, the OGC API Features standards offer direct, fine-grained access to the data at the feature (object) level.
 
@@ -19,13 +19,15 @@ Discovery operations enable clients to interrogate the API to determine its capa
 
 Query operations enable clients to retrieve features from the underlying data store based upon simple selection criteria, defined by the client.
 
-A subset of the OGC API family of standards is expected to be published by ISO. For example, this document is in the process to be published by ISO as ISO 19168-1. To reflect that only a subset of the OGC API standards will be published by ISO and to avoid using organization names in the titles of ISO standards, standards from the "OGC API" series are published by ISO as "Geospatial API". That is, the title of this document in OGC is "OGC API - Features - Part 1:Core" and the title in ISO is "Geographic Information - Geospatial API for Features - Part 1: Core".
+A subset of the OGC API family of standards is expected to be published by ISO. For example, this document is in the process to be published by ISO as ISO 19168-1. To reflect that only a subset of the OGC API standards will be published by ISO and to avoid using organization names in the titles of ISO standards, standards from the "OGC API" series are published by ISO as "Geospatial API." That is, the title of this document in OGC is "OGC API - Features - Part 1:Core" and the title in ISO is "Geographic Information - Geospatial API for Features - Part 1: Core."
 
-For simplicity, this document consistently uses
+For simplicity, this document consistently uses:
 
-* "OGC API" to refer to the family of standards for geospatial Web APIs that in ISO is published as "Geospatial API";
-* "OGC API - Features" to refer to the multipart standard for features that in ISO is published as ISO 19168 / "Geographic Information - Geospatial API for Features";
-* "OGC API - Features - Part 1: Core" to refer to this document that in ISO is published as ISO 19168-1 / "Geographic Information - Geospatial API for Features - Part 1: Core".
+* "OGC API" to refer to the family of standards for geospatial Web APIs that in ISO is published as "Geospatial API;"
+
+* "OGC API - Features" to refer to the multipart standard for features that in ISO is published as ISO 19168 / "Geographic Information - Geospatial API for Features;" and
+
+* "OGC API - Features - Part 1: Core" to refer to this document that in ISO is published as ISO 19168-1 / "Geographic Information - Geospatial API for Features - Part 1: Core."
 
 This standard defines the resources listed in Table 1. For an overview of the resources, see section <<core-overview,7.1 Overview>>.
 
@@ -80,11 +82,17 @@ Attention is drawn to the possibility that some of the elements of this document
 The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
 
 * CubeWerx Inc.
+
 * Heazeltech LLC
+
 * Hexagon
+
 * interactive instruments GmbH
+
 * Ordnance Survey
+
 * Planet Labs
+
 * US Army Geospatial Center (AGC)
 
 [[submitters]]

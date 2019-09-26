@@ -2,41 +2,31 @@
 
 === Overview
 
-This clause specifies four pre-defined requirements classes for encodings to be
-used by a OGC API Features implementation. These encodings are commonly used encodings for spatial data on
-the web:
+This clause specifies four pre-defined requirements classes for encodings to be used by a OGC API Features implementation. These encodings are commonly used encodings for spatial data on the web:
 
 * <<rc_html,HTML>>
+
 * <<rc_geojson,GeoJSON>>
+
 * <<rc_gmlsf0,Geography Markup Language (GML), Simple Features Profile, Level 0>>
+
 * <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>
 
-None of these encodings are mandatory and an implementation of the <<rc_core,Core>>
-requirements class may also implement none of them but implement another encoding
-instead.
+None of these encodings are mandatory and an implementation of the <<rc_core,Core>> requirements class may also implement none of them but implement another encoding instead.
 
-The <<rc_core,Core>> requirements class includes recommendations to support
-<<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings, where practical.
-<<overview,Clause 6 (Overview)>> includes a discussion about recommended
-encodings.
+The <<rc_core,Core>> requirements class includes recommendations to support <<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings, where practical. <<overview,Clause 6 (Overview)>> includes a discussion about recommended encodings.
 
 === Requirements Class "HTML"
 
-Geographic information that is only accessible in formats like GeoJSON or GML
-has two issues:
+Geographic information that is only accessible in formats like GeoJSON or GML has two issues:
 
-* The data is not discoverable using the most common mechanism for discovering information,
-that is the search engines of the Web;
-* The data can not be viewed directly in a browser - additional tools are required to
-view the data.
+* The data is not discoverable using the most common mechanism for discovering information, that is the search engines of the Web;
 
-Therefore, sharing data on the Web should include publication in HTML. To be consistent
-with the Web, it should be done in a way that enables users and search engines to
-access all data.
+* The data can not be viewed directly in a browser - additional tools are required to view the data.
 
-This is discussed in detail in
-link:https://www.w3.org/TR/sdw-bp/#indexable-by-search-engines[Best Practice 2: Make your spatial data indexable by search engines]
-<<SDWBP>>. This standard therefore <<rec_html,recommends supporting HTML as an encoding>>.
+Therefore, sharing data on the Web should include publication in HTML. To be consistent with the Web, it should be done in a way that enables users and search engines to access all data.
+
+This is discussed in detail in link:https://www.w3.org/TR/sdw-bp/#indexable-by-search-engines[Best Practice 2: Make your spatial data indexable by search engines] <<SDWBP>>. This standard therefore <<rec_html,recommends supporting HTML as an encoding>>.
 
 include::requirements/requirements_class_html.adoc[]
 
@@ -48,10 +38,7 @@ include::recomendations/html/REC_schema-org.adoc[]
 
 === Requirements Class "GeoJSON"
 
-GeoJSON is a commonly used format that is simple to understand and well
-supported by tools and software libraries. Since most Web developers are
-comfortable with using a JSON-based format supporting GeoJSON is recommended,
-if the feature data can be represented in GeoJSON for the intended use.
+GeoJSON is a commonly used format that is simple to understand and well supported by tools and software libraries. Since most Web developers are comfortable with using a JSON-based format supporting GeoJSON is recommended, if the feature data can be represented in GeoJSON for the intended use.
 
 include::requirements/requirements_class_geojson.adoc[]
 
@@ -59,12 +46,7 @@ include::requirements/geojson/REQ_definition.adoc[]
 
 include::requirements/geojson/REQ_content.adoc[]
 
-Templates for the definition of the schemas for the GeoJSON responses in
-OpenAPI definitions are available at
-link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/featureCollectionGeoJSON.yaml[featureCollectionGeoJSON.yaml] and
-link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/featureGeoJSON.yaml[featureGeoJSON.yaml].
-These are generic schemas that do not include any application schema information about
-specific feature types or their properties.
+Templates for the definition of the schemas for the GeoJSON responses in OpenAPI definitions are available at link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/featureCollectionGeoJSON.yaml[featureCollectionGeoJSON.yaml] and link:https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/featureGeoJSON.yaml[featureGeoJSON.yaml]. These are generic schemas that do not include any application schema information about specific feature types or their properties.
 
 .A GeoJSON FeatureCollection Object response
 =================
@@ -165,15 +147,9 @@ In the example below, coordinates are not shown.
 
 === Requirements Class "Geography Markup Language (GML), Simple Features Profile, Level 0"
 
-In addition to HTML and GeoJSON, a significant volume of feature data is
-available in XML-based formats, notably GML. Therefore, this standard
-specifies requirements classes for GML. The Simple Features Profile, Level 0, is
-the simplest profile of GML and is typically supported by tools.
+In addition to HTML and GeoJSON, a significant volume of feature data is available in XML-based formats, notably GML. Therefore, this standard specifies requirements classes for GML. The Simple Features Profile, Level 0, is the simplest profile of GML and is typically supported by tools.
 
-The GML Simple Features Profile is restricted to data with 2D geometries
-with linear/planar interpolation (points, line strings, polygons).
-In addition, the Level 0 profile is limited to features that can be stored in
-a tabular data structure.
+The GML Simple Features Profile is restricted to data with 2D geometries with linear/planar interpolation (points, line strings, polygons). In addition, the Level 0 profile is limited to features that can be stored in a tabular data structure.
 
 include::requirements/requirements_class_gmlsf0.adoc[]
 
@@ -199,22 +175,22 @@ include::requirements/gmlsf0/REQ_headers.adoc[]
 The namespace prefixes used above and in the OGC API Features Core XML schemas are:
 
 * `core`: `http://www.opengis.net/ogcapi-features-1/1.0`
+
 * `sf`: `http://www.opengis.net/ogcapi-features-1/1.0/sf`
+
 * `gml`: `http://www.opengis.net/gml/3.2`
+
 * `atom`: `http://www.w3.org/2005/Atom`
+
 * `xlink`: `http://www.w3.org/1999/xlink`
 
-The mapping of the content from the responses specified in the
-<<rc_core,Core requirements class>> to the XML is straightforward.
-All links have to be encoded as HTTP header `Link`.
+The mapping of the content from the responses specified in the <<rc_core,Core requirements class>> to the XML is straightforward. All links have to be encoded as HTTP header `Link.`
 
 See <<examples,sub-clause 6.3>> for links to example responses in XML.
 
 === Requirements Class "Geography Markup Language (GML), Simple Features Profile, Level 2"
 
-The difference between this requirements class and the <<rc_gmlsf0,Level 0>>
-requirements class is that non-spatial feature properties are not restricted to
-atomic values (strings, numbers, etc.).
+The difference between this requirements class and the <<rc_gmlsf0,Level 0>> requirements class is that non-spatial feature properties are not restricted to atomic values (strings, numbers, etc.).
 
 include::requirements/requirements_class_gmlsf2.adoc[]
 
