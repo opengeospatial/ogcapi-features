@@ -20,7 +20,7 @@ properties:
     items:
       $ref: link.yaml
   crs:
-    description: the list of CRS identifiers that are supported by the service; the CRS identifiers in this list shall be valid for all spatial feature collections offered by the service
+    description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
     type: array
     items:
       type: string
