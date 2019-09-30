@@ -3,9 +3,10 @@
 |*Requirement {counter:req-id}* |/req/crs/fc-md-crs-list-defaultCrs +
 
 The default CRS -- that is the CRS used unless something else is explicitly
-requested -- shall be as defined in OGC API - Features - Part 1: Core:
+requested -- shall be as defined in <<OAFeat-1,OGC API - Features - Part 1:
+Core>>.  That is:
 
 * http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height)
-* http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinate with height)
+* http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with height)
 
 |===
