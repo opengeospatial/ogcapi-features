@@ -1,0 +1,10 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-bbox-crs-action +
+
+If the `bbox-crs` parameter is specified then the values of the bbox parameter
+shall be assumed to be in the specified CRS and the server shall perform the
+necessary internal transformations to properly fetch data from within the
+specified bounding box.
+
+|===

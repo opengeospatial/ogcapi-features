@@ -1,0 +1,34 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/rec/crs/fc-md-crs-list-global +
+
+If referenced in the collection metadata, then all CRS identifiers in the
+global list shall be valid for the referencing collection.
+
+The following schema fragment extends the collections metadata from OAPIF core
+to add the `crs` property which is the global list of CRS identifiers.
+
+[source,YAML]
+----
+type: object
+required:
+  - links
+  - collections
+properties:
+  links:
+    type: array
+    items:
+      $ref: link.yaml
+  crs:
+    description: the list of CRS identifiers that are supported by the service; the CRS identifiers in this list shall be valid for all spatial feature collections offered by the service
+    type: array
+    items:
+      type: string
+      format: uri
+  collections:
+    type: array
+    items:
+      $ref: collection.yaml
+----
+
+|===
