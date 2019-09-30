@@ -1,12 +1,10 @@
+[[req_crs-bbox-crs-valid-defaultValue]]
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |/req/core/fc-bbox-crs-valid-defaultValue +
-
-If the `bbox-crs` parameter is not specified then the coordinate values of
+|*Requirement {counter:req-id}* |*/req/crs/fc-bbox-crs-valid-defaultValue* +
+2+|If the `bbox-crs` parameter is not specified then the coordinate values of
 the `bbox` parameter shall be assumed to be in the default CRS specified in
-<<OAFeat-1,OGC API - Feature - Part 1: Core>>.  This is:
-
-* http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height)
-* http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with height)
-
+<<OAFeat-1,OGC API - Feature - Part 1: Core>>; that is 
+http://www.opengis.net/def/crs/OGC/1.3/CRS84 for coordinates without height and
+http://www.opengis.net/def/crs/OGC/0/CRS84h for coordinates with height.
 |===
