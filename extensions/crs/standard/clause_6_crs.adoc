@@ -28,13 +28,13 @@ include::requirements/crs/REQ_fc-md-crs-list-defaultCrs.adoc[]
 The list of supported CRS identifiers in the collection metadata may include
 these defaults but this is not a requirement.
 
-==== Storage CRS 
+==== Storage CRS
 
 The storage CRS for a feature collection is the CRS identifier that may be
 used to retrieve features from the server without the need to apply a CRS
 transformation.
 
-include::requirements/crs/REQ_fc-md-storageCrs.adoc
+include::requirements/crs/REQ_fc-md-storageCrs.adoc[]
 
 ==== Global list of CRS identifiers
 
@@ -43,7 +43,7 @@ the collections metadata, a global list of supported CRS identifiers may be
 provided as part of the feature collections metadata.
 
 This global list of CRS identifiers is not automatically inherited by each
-collection offered by the service.  Rather the global list of CRS 
+collection offered by the service.  Rather the global list of CRS
 identifiers must be referenced in the collection metadata using a JSON
 link.
 
@@ -180,7 +180,7 @@ The following example illustrates the used of a global list of CRS identifiers.
 The `bonn_buildings` collection is offered in all the coordinate reference
 systems specified in the global list plus five other coordinate reference
 systems.
-The `tor_buildings` collection is offered in the coordinate reference systems 
+The `tor_buildings` collection is offered in the coordinate reference systems
 specified in the global list.
 The `dc_buildings` collection, not having a crs property, is only offered in
 the default CRS (i.e. WGS84 longitude, latitude).
