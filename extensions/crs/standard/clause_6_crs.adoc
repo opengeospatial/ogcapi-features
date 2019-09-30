@@ -42,8 +42,10 @@ To prevent unnecessary duplication of lists of supported CRS identifiers in
 the collections metadata, a global list of supported CRS identifiers may be
 provided as part of the feature collections metadata.
 
-This global list of CRS identifiers may be referenced in the collection
-metadate using a JSON link.
+This global list of CRS identifiers is not automatically inherited by each
+collection offered by the service.  Rather the global list of CRS 
+identifiers must be referenced in the collection metadata using a JSON
+link.
 
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
@@ -87,8 +89,8 @@ The following example illustrates the used of a global list of CRS identifiers.
   ],
   "collections": [
      {
-       "id": "buildings",
-       "title": "Buildings",
+       "id": "bonn_buildings",
+       "title": "Bonn Buildings",
        "description": "Buildings in the city of Bonn.",
        "extent": {
          "spatial": {
@@ -99,9 +101,9 @@ The following example illustrates the used of a global list of CRS identifiers.
          }
        },
        "links": [
-         { "href": "http://data.example.org/collections/buildings/items",
+         { "href": "http://data.example.org/collections/bonn_buildings/items",
            "rel": "items", "type": "application/geo+json",
-           "title": "Buildings" },
+           "title": "Bonn Buildings" },
          { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
            "rel": "license", "type": "text/html",
            "title": "CC0-1.0" },
@@ -117,11 +119,71 @@ The following example illustrates the used of a global list of CRS identifiers.
           "http://www.opengis.net/def/crs/CUBEWERX/0/42105",
           "http://www.opengis.net/def/crs/ESRI/0/102002",
        ]
+     },
+     {
+       "id": "tor_buildings",
+       "title": "Toronto Buildings",
+       "description": "Buildings in the city of Toronto.",
+       "extent": {
+         "spatial": {
+           "bbox": [ [ -79.62, 43.58, -79.12, 43.87 ] ]
+         },
+         "temporal": {
+           "interval": [ [ "2010-02-15T12:34:56Z", null ] ]
+         }
+       },
+       "links": [
+         { "href": "http://data.example.org/collections/tor_buildings/items",
+           "rel": "items", "type": "application/geo+json",
+           "title": "Toronto Buildings" },
+         { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+           "rel": "license", "type": "text/html",
+           "title": "CC0-1.0" },
+         { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
+           "rel": "license", "type": "application/rdf+xml",
+           "title": "CC0-1.0" }
+       ],
+       "crs": [
+          #/crs
+       ]
+     },
+     {
+       "id": "dc_buildings",
+       "title": "Washington DC Buildings",
+       "description": "Buildings in the city of Washington DC.",
+       "extent": {
+         "spatial": {
+           "bbox": [ [ -77.12, 38.80, -76.89, 39.01 ] ]
+
+         },
+         "temporal": {
+           "interval": [ [ "2010-02-15T12:34:56Z", null ] ]
+         }
+       },
+       "links": [
+         { "href": "http://data.example.org/collections/dc_buildings/items",
+           "rel": "items", "type": "application/geo+json",
+           "title": "DC Buildings" },
+         { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+           "rel": "license", "type": "text/html",
+           "title": "CC0-1.0" },
+         { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
+           "rel": "license", "type": "application/rdf+xml",
+           "title": "CC0-1.0" }
+       ]
      }
   ]
 }
 ----
 =================
+
+The `bonn_buildings` collection is offered in all the coordinate reference
+systems specified in the global list plus five other coordinate reference
+systems.
+The `tor_buildings` collection is offered in the coordinate reference systems 
+specified in the global list.
+The `dc_buildings` collection, not having a crs property, is only offered in
+the default CRS (i.e. WGS84 longitude, latitude).
 
 ==== CRS identifier format
 
