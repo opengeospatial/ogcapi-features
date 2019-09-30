@@ -16,6 +16,8 @@ coordinate reference systems.
 
 include::requirements/crs/REQ_crs-uri.adoc[]
 
+include::recommendations/crs/REC_crs-format-model.adoc[]
+
 [[crs-discovery]]
 === Discovery
 
@@ -270,13 +272,6 @@ The `tor_buildings` collection is offered in the coordinate reference systems
 specified in the global list.
 The `dc_buildings` collection, not having a crs property, is only offered in
 the default CRS (i.e. WGS84 longitude, latitude).
-
-==== CRS identifier format
-
-include::requirements/crs/REQ_crs-format-model.adoc[]
-
-Other formats may be supported as well but they are not described in this
-standard.
 
 [[crs-query]]
 === Query
