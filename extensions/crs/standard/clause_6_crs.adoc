@@ -35,7 +35,6 @@ may be used to retrieve features from that collection without the need to apply
 a CRS transformation.
 
 include::requirements/crs/REQ_fc-md-storageCrs.adoc[]
-<<<<<<< HEAD
 
 include::requirements/crs/REQ_fc-md-storageCrs-valid-value.adoc[]
 
@@ -92,7 +91,6 @@ properties:
      type: string
      format: uri
 ----
-=======
 
 ==== Global list of CRS identifiers
 
@@ -105,6 +103,32 @@ collection offered by the service.  Rather the global list of CRS identifiers
 must be explicitly referenced in the collection metadata using a JSON link.
 
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
+
+The following schema fragment extends the collections metadata to add the `crs`
+property which contains the global list of CRS identifiers.
+
+[source,YAML]
+----
+type: object
+required:
+  - links
+  - collections
+properties:
+  links:
+    type: array
+    items:
+      $ref: link.yaml
+  crs:
+    description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
+    type: array
+    items:
+      type: string
+      format: uri
+  collections:
+    type: array
+    items:
+      $ref: collection.yaml
+----
 
 The following example illustrates the used of a global list of CRS identifiers.
 
