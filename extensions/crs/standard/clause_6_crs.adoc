@@ -93,7 +93,6 @@ properties:
      format: uri
 ----
 =======
->>>>>>> 4a21ca8565ef590d97bdf349daa6c123be812401
 
 ==== Global list of CRS identifiers
 
@@ -102,14 +101,8 @@ the collection metadata, a global list of supported CRS identifiers may be
 provided as part of the collections metadata.
 
 This global list of CRS identifiers is not automatically inherited by each
-<<<<<<< HEAD
-collection offered by the service.  Rather the global list of CRS 
-identifiers may be referenced in the collection metadata using a JSON
-=======
-collection offered by the service.  Rather the global list of CRS
-identifiers must be referenced in the collection metadata using a JSON
->>>>>>> 4a21ca8565ef590d97bdf349daa6c123be812401
-link.
+collection offered by the service.  Rather the global list of CRS identifiers
+must be explicitly referenced in the collection metadata using a JSON link.
 
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
