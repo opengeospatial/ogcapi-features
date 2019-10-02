@@ -55,9 +55,9 @@ This provides a stable, canonical URL to link to the 'thing'
 
 The release candidate of the standard is available:
 
-* [OGC API - Features - Part 1: Core, Release Candidate](http://docs.opengeospatial.org/DRAFTS/17-069r2.html)
+* [OGC API - Features - Part 1: Core, Release Candidate](http://docs.opengeospatial.org/DRAFTS/17-069r3.html)
 
-A [PDF version](http://docs.opengeospatial.org/DRAFTS/17-069r2.pdf) is available, too.
+A [PDF version](http://docs.opengeospatial.org/DRAFTS/17-069r3.pdf) is available, too.
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
@@ -73,31 +73,26 @@ Join the [mailing list](https://lists.opengeospatial.org/mailman/listinfo/wfs-fe
 Most all work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/ogcapi-features/issues),
 so browse there to get a good idea of what is happening, as well as past decisions.
 
-## Additional Information
-
-The work on this first part of OGC API Features is entering the final straight.
-The [release candidate](https://github.com/opengeospatial/ogcapi-features/releases/tag/1.0.0-draft.2)
-has been approved by the OGC membership and will be published in the coming weeks.
-
-In parallel it has also be submitted to ISO/TC 211 for the [DIS ballot](https://www.iso.org/standard/32586.html).
-
-At this time, changes to the candidate standard are a decision of the OGC
-Technical Committee and ISO/TC 211.
-
-The open issues for the candidate standard are documented in the
-[GitHub issues for Part 1 (Core)](https://github.com/opengeospatial/ogcapi-features/projects/1).
-
-The latest draft for Part 1 (Core) is the [Editor's Draft](http://docs.opengeospatial.org/DRAFTS/17-069r3.html), also available as
-[PDF](http://docs.opengeospatial.org/DRAFTS/17-069r3.pdf).
+## Additional parts of OGC API - Features
 
 The OGC Features API SWG has identified the following extensions to Part 1 (Core)
 as the highest priority:
 
-* support for Coordinate Reference Systems (Part 2);
+* Part 2: Coordinate Reference Systems by Reference [(draft)](http://docs.opengeospatial.org/DRAFTS/18-058.html);
 * filter/query capabilities;
 * simple transactions.
 
-A [joint sprint with STAC and the OGC API Catalogues SWG to advance richer query/filter capabilities is planned for November 5-7, 2019, in Arlington, VA](https://medium.com/radiant-earth-insights/join-stac-sprint-5-ogc-api-hackathon-november-5-7-48178137f778).
+A joint sprint with [STAC](https://github.com/radiantearth/stac-spec) and the [OGC API Catalogues SWG](https://github.com/opengeospatial/CAT4.0) to advance richer query/filter capabilities is planned for [November 5-7, 2019, in Arlington, VA](https://www.opengeospatial.org/pressroom/pressreleases/3074).
+
+## Additional information
+
+The work on this first part of OGC API Features is entering the final straight.
+The release candidate has been approved by the OGC membership and will be
+published in the coming weeks.
+
+The open issues for Part 1 (Core) are documented in a [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/1).
+
+In parallel, Part 1 (Core) has also be submitted to ISO/TC 211 and is in the [Draft International Standard (DIS) ballot](https://www.iso.org/standard/32586.html).
 
 Additional links:
 
