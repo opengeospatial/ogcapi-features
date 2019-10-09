@@ -24,7 +24,7 @@ OGC API Features provides access to collections of geospatial data.
 GET /collections
 ```
 
-Lists the collections of data on the server that can be queried ([7.13](http://docs.opengeospatial.org/DRAFTS/17-069r2.html#_collections_)),
+Lists the collections of data on the server that can be queried ([section 7.13](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)),
 and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained.
 
@@ -40,7 +40,7 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
 addition to the `bbox` filter above, with extensions providing more advanced options
-([7.15](http://docs.opengeospatial.org/DRAFTS/17-069r2.html#_items_)).
+([section 7.15](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_)).
 
 ```
 GET /collections/{collectionId}/items/{featureId}
@@ -49,15 +49,15 @@ GET /collections/{collectionId}/items/{featureId}
 Returns a single 'feature' - something in the real-world (a building,
 a stream, a county, etc.) that typically is described by a geometry plus other properties.
 This provides a stable, canonical URL to link to the 'thing'
-([7.16](http://docs.opengeospatial.org/DRAFTS/17-069r2.html#_feature_)).
+([section 7.16](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_)).
 
 ## Using the standard
 
-The release candidate of the standard is available:
+The standard is on the OGC website:
 
-* [OGC API - Features - Part 1: Core, Release Candidate](http://docs.opengeospatial.org/DRAFTS/17-069r3.html)
+* [OGC API - Features - Part 1: Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)
 
-A [PDF version](http://docs.opengeospatial.org/DRAFTS/17-069r3.pdf) is available, too.
+A [PDF version](http://docs.opengeospatial.org/is/17-069r3/17-069r3.pdf) is available, too.
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
@@ -78,7 +78,7 @@ so browse there to get a good idea of what is happening, as well as past decisio
 The OGC Features API SWG has identified the following extensions to Part 1 (Core)
 as the highest priority:
 
-* Part 2: Coordinate Reference Systems by Reference [(draft)](http://docs.opengeospatial.org/DRAFTS/18-058.html);
+* [OGC API - Features - Part 2: Coordinate Reference Systems by Reference (draft)](http://docs.opengeospatial.org/DRAFTS/18-058.html);
 * filter/query capabilities;
 * simple transactions.
 
@@ -86,21 +86,19 @@ A joint sprint with [STAC](https://github.com/radiantearth/stac-spec) and the [O
 
 ## Additional information
 
-The work on this first part of OGC API Features is entering the final straight.
-The release candidate has been approved by the OGC membership and will be
-published in the coming weeks.
-
-The open issues for Part 1 (Core) are documented in a [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/1).
+Open issues for Part 1 (Core) are documented in a [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/1).
 
 In parallel, Part 1 (Core) has also be submitted to ISO/TC 211 and is in the [Draft International Standard (DIS) ballot](https://www.iso.org/standard/32586.html).
+
+Open issues for Part 2 (CRS) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/2).
 
 Additional links:
 
 * [Background of this activity](background.md)
 * [The next version of WFS - an overview](overview.md)
-* [Checklist for implementers (for draft.1 from April 2018)](guide/conformance_checklist.md)
 * [UML for Part 1, Core](uml/README.md)
 * [Status of Part 1, Core, in ISO](https://www.iso.org/standard/32586.html)
+* [Home of the standard on the OGC website](https://www.opengeospatial.org/standards/ogcapi-features-1)
 
 ## [Contributing](CONTRIBUTING.md)
 
