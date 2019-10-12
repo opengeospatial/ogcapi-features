@@ -1,4 +1,4 @@
-# Standard template
+# OGC API - Features - Part 1: Core
 
 This folder contains the content for the OGC API - Features - Part 1: Core standard.
 

@@ -62,6 +62,9 @@ A [PDF version](http://docs.opengeospatial.org/is/17-069r3/17-069r3.pdf) is avai
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
 
+The reference version of the OpenAPI components and XML schemas are published
+in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
+
 Several implementations of the draft standard exist:
 
 * [Implementations of the draft specification / demo services](implementations.md)
@@ -98,7 +101,7 @@ Additional links:
 * [The next version of WFS - an overview](overview.md)
 * [UML for Part 1, Core](uml/README.md)
 * [Status of Part 1, Core, in ISO](https://www.iso.org/standard/32586.html)
-* [Home of the standard on the OGC website](https://www.opengeospatial.org/standards/ogcapi-features-1)
+* [Home of the standard on the OGC website](https://www.opengeospatial.org/standards/ogcapi-features)
 
 ## [Contributing](CONTRIBUTING.md)
 
