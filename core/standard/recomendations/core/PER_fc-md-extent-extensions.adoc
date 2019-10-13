@@ -3,6 +3,6 @@
 |===
 ^|*Permission {counter:per-id}* |*/per/core/fc-md-extent-extensions*
 ^|A |The Core only specifies requirements for spatial and temporal extents. However, the `extent` object MAY be extended with additional members to represent other extents, for example, thermal or pressure ranges.
-^|B |The Core only supports spatial extents in WGS 84 longitude/latitude and temporal extents in the Gregorian calendar (these are the only enum values in link:http://schemas.opengis.net/ogcapi/features/part1/1.0/schemas/extent.yaml[extent.yaml]).
+^|B |The Core only supports spatial extents in WGS 84 longitude/latitude and temporal extents in the Gregorian calendar (these are the only enum values in link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/extent.yaml[extent.yaml]).
 ^|C |Extension to the Core MAY add additional reference systems to the `extent` object.
 |===
