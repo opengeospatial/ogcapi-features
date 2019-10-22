@@ -5,11 +5,11 @@
 
 |Tag |Value |
 |---- | ---------------- |
-|Proposal |[002](https://github.com/opengeospatial/WFS_FES/tree/Proposals/proposals/002_OpenAPI_Specification_31.md)|
+|Proposal |[002](https://github.com/opengeospatial/ogcapi-features/blob/Proposals/proposals/002_OpenAPI_Specification_31.md)|
 |Authors|[Clemens Portele](https://github.com/cportele)|
 |Review Manager |TBD |
 |Status |Draft |
-|Implementations |[Click Here](https://github.com/opengeospatial/WFS_FES/tree/master/proposals/002_OAS_31/implementations.md)|
+|Implementations |[Click Here](https://github.com/opengeospatial/ogcapi-features/blob/Proposals/proposals/002_OAS_31/implementations.md)|
 |Issues |n/a |
 |Previous Revisions |n/a |
 
