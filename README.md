@@ -1,7 +1,8 @@
 # OGC API - Features
 
 This GitHub repository contains [OGC](http://opengeospatial.org)'s
-standard for querying geospatial information on the web, "OGC API - Features".
+standard for querying geospatial information on the web, "OGC API - Features". The 
+latest version of the specification can be found at [docs.opengeospatial.org/is/17-069r3/17-069r3.html](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html).
 
 OGC API standards define modular API building blocks to spatially enable Web APIs
 in a consistent way. [OpenAPI](http://openapis.org) is used to define the reusable
