@@ -27,7 +27,7 @@ at it.  Some outstanding issues include:
 * add more comments
 * need to add BNF for a URI 
 * need to add BNF for regular expressions for the LIKE operator
-* need to a CIRCLES/ELLIPSE/ARC
+* need to add (or at least consider adding) CIRCLES/ELLIPSE/ARC
 * compare the spatial and temporal predicate sytax to SQLMM
 * consider property existence operators; since OAPIF is schema-less it might
   be nice to be able to have predicates like "<propertyName> EXISTS AND 
