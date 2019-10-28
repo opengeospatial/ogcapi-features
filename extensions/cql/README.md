@@ -21,6 +21,10 @@ The BNF seems to validate using the following BNF parsers:
 
 NOTES:
 
+The file 'resources/catCql.bnf' contains the BNF text exactly as it exists
+in the OGC Catalogue specification (http://docs.opengeospatial.org/is/12-168r6/12-168r6.html#54).
+It is included here for convenience but is, as I have mentioned, pretty rough!
+
 This is a very rough first draft put up here so that more eyes can take a look
 at it.  Some outstanding issues include:
 
