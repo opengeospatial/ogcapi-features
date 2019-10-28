@@ -22,7 +22,7 @@ comparisonPredicate = binaryComparisonPredicate
 
 binaryComparisonPredicate = scalarExpression comparisonOperator scalarExpression;
 
-propertyIsLikePredicate =  scalarExpression "LIKE" scalarExpression;
+propertyIsLikePredicate =  scalarExpression "LIKE" regularExpression;
 
 propertyIsBetweenPredicate = scalarExpression "BETWEEN" 
                              scalarExpression "AND" scalarExpression;
@@ -35,6 +35,11 @@ scalarExpression = propertyName
                  | characterLiteral
                  | numericLiteral
                  | function;
+
+# This is just a place holder for a regular expression
+# We want to be able to say stuff like "<prop> LIKE 'Toronto%'" where
+# the '%' character means "match zero or more characters".
+regularExpression = characterLiteral;
 
 comparisonOperator = eq | neq | lt | gt | lteq | gteq;
 
