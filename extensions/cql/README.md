@@ -25,10 +25,19 @@ This is a very rough first draft put up here so that more eyes can take a look
 at it.  Some outstanding issues include:
 
 * add more comments
-* need to add BNF for a URI 
 * need to add BNF for regular expressions for the LIKE operator
 * need to add (or at least consider adding) CIRCLES/ELLIPSE/ARC
 * compare the spatial and temporal predicate sytax to SQLMM
 * consider property existence operators; since OAPIF is schema-less it might
   be nice to be able to have predicates like "<propertyName> EXISTS AND 
   <propertyName> = 'some string'".
+* CQL support function invocation but how do we advertise which functions
+  an implementation supports (... in the OpenAPI document I suppose)
+* lexical space for propertyName; right now I just use a very simple production
+  for property names but it needs to be extended to handle international
+  characters too 
+* internationalization for string literals (related to last point)
+* right now the CQL handle timezones which means that clients will need
+  to handle time zone conversion; do we really want that?
+* is there an "official" BNF for the WKT representation of geometry?  If 
+  so, we should reference that instead

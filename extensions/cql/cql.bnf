@@ -12,13 +12,13 @@ booleanPrimary = predicate
 
 predicate = comparisonPredicate
           | spatialPredicate 
-          | temporalPredicate;
+          | temporalPredicate
+          | existencePredicate;
 
 comparisonPredicate = binaryComparisonPredicate
                     | propertyIsLikePredicate
                     | propertyIsBetweenPredicate
-                    | propertyIsNullPredicate
-                    | propertyIsNillPredicate;
+                    | propertyIsNullPredicate;
 
 binaryComparisonPredicate = scalarExpression comparisonOperator scalarExpression;
 
@@ -28,8 +28,6 @@ propertyIsBetweenPredicate = scalarExpression "BETWEEN"
                              scalarExpression "AND" scalarExpression;
 
 propertyIsNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
-
-propertyIsNillPredicate = scalarExpression "IS" ["NOT"] "NILL";
 
 scalarExpression = propertyName
                  | characterLiteral
@@ -49,33 +47,17 @@ gteq = gt eq;
 
 lteq = lt eq;
 
-spatialPredicate = bboxExpression
-                 | spatialExpression
-                 | bufferExpression;
-
-bboxExpression = "BBOX" envelopeText;
-
-spatialExpression = geomExpression spatialOperator geomExpression;
-
-bufferExpression = geomExpression bufferOperator signedNumericLiteral
-                   uomSymbol | uomUri "OF" geomExpression;
-
-# These are just temporary; I need to replace them with BNF for a URL and
-# some BNF for what a uomSymbol is supposed to look like!
-uomSymbol = simpleLatinLetter;
-
-uomUri = simpleLatinLetter;
+spatialPredicate =  spatialOperator leftParen geomExpression comma geomExpression rightParen;
 
 spatialOperator = "EQUALS" | "DISJOINT" | "TOUCHES" | "WITHIN" | "OVERLAPS"
                 | "CROSSES" | "INTERSECTS" | "CONTAINS";
-
-bufferOperator = "DWITHIN" | "BEYOND";
 
 geomExpression = propertyName
                | geomLiteral
                | function;
 
-temporalPredicate = temporalExpression temporalOperator temporalExpression;
+temporalPredicate = temporalExpression temporalOperator
+                    temporalExpression [temporalExpression];
 
 temporalExpression = propertyName
                    | temporalLiteral
@@ -86,7 +68,10 @@ temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "CONTAINS"
                  | "METBY" | "OVERLAPS" | "OVERLAPPEDBY" | "ANYINTERACTS"
                  | "INTERSECTS";
 
-
+# Tests whether the specified propert name exists in
+# the current context.
+existencePredicate = propertyName "EXISTS"
+                   | propertyName "DOES" "NOT" "EXIST";
 
 numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
 
@@ -148,7 +133,7 @@ quoteSymbol = quote quote;
 
 nonQuoteCharacter =  {simpleLatinLetter | nonQuoteSpecialCharacter};
 
-separator = { space | newLine };
+separator = { newLine };
 
 bitStringLiteral = "B" quote [ {bit} ] quote [ { {separator} quote [ {bit} ] quote } ];
 
@@ -163,8 +148,7 @@ simpleLatinLowerCaseLetter = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i"
 
 digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 
-nonQuoteSpecialCharacter = space
-                         | doubleQuote
+nonQuoteSpecialCharacter =  doubleQuote
                          | percent
                          | ampersand
                          | quote
@@ -184,8 +168,6 @@ nonQuoteSpecialCharacter = space
                          | questionMark
                          | underscore
                          | verticalBar;
-
-space = " ";
 
 doubleQuote = "\"";
 
@@ -282,7 +264,7 @@ geometryCollectionTaggedText = "GEOMETRYCOLLECTION" geometryCollectionText;
   
 pointText = leftParen point rightParen;
 
-point = xCoord space yCoord [space zCoord];
+point = xCoord yCoord [zCoord];
 
 xCoord = signedNumericLiteral;
 
