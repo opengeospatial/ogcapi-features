@@ -4,20 +4,20 @@ This folder contains the content for the OGC API - Features - Part n: CQL extens
 
 The file, cql.bnf, contains the BNF for a simple query language for OAPIF that
 is roughly equivalent in capability to OGC filter.  This query language can
-be used a query parameter in a OAPIF URI.  For example:
+be used as a query parameter in an OAPIF URI.  For example:
 
 http://www.someserver.com/wfs/collection/MyCollection/items?cql="..."&...
 
-This BNF is roughly equivalent to the BNF in the catalogue (which is a complete
-mess) but does differ in some aspects.  For example the catalogue BNF uses
-functions to implement the spatial operators (e.g.
+This BNF is roughly equivalent to the BNF in the OGC catalogue (which is a
+complete mess) but does differ in some aspects.  For example the catalogue
+BNF uses functions to implement the spatial operators (e.g.
 "OVERLAPS(propertyName,geometry)" ) while this BNF uses a more SQL-like syntax
 (e.g. "propertyName OVERLAPS geometry").
 
 The BNF seems to validate using the following BNF parsers:
 
-https://www.icosaedro.it/bnf_chk/bnf_chk-on-line.html
-https://www.nongnu.org/bnf/
+* https://www.icosaedro.it/bnf_chk/bnf_chk-on-line.html
+* https://www.nongnu.org/bnf/
 
 NOTES:
 
