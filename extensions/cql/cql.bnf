@@ -1,0 +1,314 @@
+
+cqlFilter = booleanValueExpression;
+
+booleanValueExpression = booleanTerm | booleanValueExpression "OR" booleanTerm;
+
+booleanTerm = booleanFactor | booleanTerm "AND" booleanFactor;
+
+booleanFactor = ["NOT"] booleanPrimary;
+
+booleanPrimary = predicate 
+               | leftParen cqlFilter rightParen;
+
+predicate = comparisonPredicate
+          | spatialPredicate 
+          | temporalPredicate;
+
+comparisonPredicate = binaryComparisonPredicate
+                    | propertyIsLikePredicate
+                    | propertyIsBetweenPredicate
+                    | propertyIsNullPredicate
+                    | propertyIsNillPredicate;
+
+binaryComparisonPredicate = scalarExpression comparisonOperator scalarExpression;
+
+propertyIsLikePredicate =  scalarExpression "LIKE" scalarExpression;
+
+propertyIsBetweenPredicate = scalarExpression "BETWEEN" 
+                             scalarExpression "AND" scalarExpression;
+
+propertyIsNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
+
+propertyIsNillPredicate = scalarExpression "IS" ["NOT"] "NILL";
+
+scalarExpression = propertyName
+                 | characterLiteral
+                 | numericLiteral
+                 | function;
+
+comparisonOperator = eq | neq | lt | gt | lteq | gteq;
+
+neq = lt gt;
+
+gteq = gt eq;
+
+lteq = lt eq;
+
+spatialPredicate = bboxExpression
+                 | spatialExpression
+                 | bufferExpression;
+
+bboxExpression = "BBOX" envelopeText;
+
+spatialExpression = geomExpression spatialOperator geomExpression;
+
+bufferExpression = geomExpression bufferOperator signedNumericLiteral
+                   uomSymbol | uomUri "OF" geomExpression;
+
+# These are just temporary; I need to replace them with BNF for a URL and
+# some BNF for what a uomSymbol is supposed to look like!
+uomSymbol = simpleLatinLetter;
+
+uomUri = simpleLatinLetter;
+
+spatialOperator = "EQUALS" | "DISJOINT" | "TOUCHES" | "WITHIN" | "OVERLAPS"
+                | "CROSSES" | "INTERSECTS" | "CONTAINS";
+
+bufferOperator = "DWITHIN" | "BEYOND";
+
+geomExpression = propertyName
+               | geomLiteral
+               | function;
+
+temporalPredicate = temporalExpression temporalOperator temporalExpression;
+
+temporalExpression = propertyName
+                   | temporalLiteral
+                   | function;
+
+temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "CONTAINS"
+                 | "DURING" | "ENDEDBY" | "ENDS" | "EQUALS" | "MEETS"
+                 | "METBY" | "OVERLAPS" | "OVERLAPPEDBY" | "ANYINTERACTS"
+                 | "INTERSECTS";
+
+
+
+numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
+
+unsignedNumericLiteral = exactNumericLiteral | approximateNumericLiteral;
+
+signedNumericLiteral = [sign] exactNumericLiteral | approximateNumericLiteral;
+
+exactNumericLiteral = unsignedInteger [ period [ unsignedInteger ] ]
+                      | period unsignedInteger;
+
+approximateNumericLiteral = mantissa "E" exponent;
+
+mantissa = exactNumericLiteral;
+
+exponent = signedInteger;
+
+signedInteger = [ sign ] unsignedInteger;
+
+unsignedInteger = {digit};
+
+sign = plusSign | minusSign;
+
+
+
+function = functionName {argumentList};
+
+functionName = functionNameStart [{underscore | functionNamePart}];
+
+functionNameStart = simpleLatinLetter;
+
+functionNamePart = simpleLatinLetter | digit;
+
+argumentList = leftParen [positionalArgument]  rightParen;
+
+positionalArgument = argument [ { comma argument } ];
+
+argument = characterLiteral | numericLiteral | geomLiteral | propertyName;
+
+
+
+propertyName = propertyNameStart [{underscore | propertyNamePart}];
+
+propertyNameStart = simpleLatinLetter;
+
+propertyNamePart = simpleLatinLetter | digit;
+
+
+
+characterLiteral = characterStringLiteral
+                 | bitStringLiteral
+                 | hexStringLiteral;
+
+characterStringLiteral = quote [ {characterRepresentation} ] quote
+         [ { {separator} quote [ {characterRepresentation} ] quote } ];
+
+characterRepresentation = nonQuoteCharacter | quoteSymbol;
+
+quoteSymbol = quote quote;
+
+nonQuoteCharacter =  {simpleLatinLetter | nonQuoteSpecialCharacter};
+
+separator = { space | newLine };
+
+bitStringLiteral = "B" quote [ {bit} ] quote [ { {separator} quote [ {bit} ] quote } ];
+
+hexStringLiteral = "X" quote [ {hexit} ] quote [ { {separator} quote [ {hexit} ] quote } ];
+
+
+simpleLatinLetter = simpleLatinUpperCaseLetter | simpleLatinLowerCaseLetter;
+
+simpleLatinUpperCaseLetter = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
+
+simpleLatinLowerCaseLetter = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+
+nonQuoteSpecialCharacter = space
+                         | doubleQuote
+                         | percent
+                         | ampersand
+                         | quote
+                         | leftParen
+                         | rightParen
+                         | asterisk
+                         | plusSign
+                         | comma
+                         | minusSign
+                         | period
+                         | solidus
+                         | colon
+                         | semicolon
+                         | lt
+                         | gt
+                         | eq
+                         | questionMark
+                         | underscore
+                         | verticalBar;
+
+space = " ";
+
+doubleQuote = "\"";
+
+percent = "%";
+
+ampersand = "&";
+
+quote = "'";
+
+leftParen = "(";
+
+rightParen = ")";
+
+asterisk = "*";
+
+plusSign = "+";
+
+comma = ",";
+
+minusSign = "-";
+
+period = ".";
+
+solidus = "/";
+
+colon = ":";
+
+semicolon = ";";
+
+lt = "<";
+
+eq = "=";
+
+gt = ">";
+
+questionMark = "?";
+
+underscore = "_";
+
+verticalBar = "|";
+
+newLine = "\n";
+
+bit = "0" | "1";
+
+hexit = digit | "A" | "B" | "C" | "D" | "E" | "F" | "a" | "b" | "c" | "d" | "e" | "f";
+
+
+
+temporalLiteral = fullDate | fullDate "T" utcTime;
+
+fullDate   = dateYear "-" dateMonth "-" dateDay;
+
+dateYear   = digit digit digit digit;
+
+dateMonth  = digit digit;
+
+dateDay    = digit digit;
+
+utcTime  = timeHour ":" timeMinute ":" timeSecond [timeZoneOffset];
+
+timeZoneOffset = "Z" | sign timeHour;
+
+timeHour   = digit digit;
+
+timeMinute = digit digit;
+
+timeSecond = digit digit [period digit {digit}];
+
+
+
+geomLiteral = pointTaggedText
+            | linestringTaggedText
+            | polygonTaggedText
+            | multipointTaggedText
+            | multilinestringTaggedText
+            | multipolygonTaggedText
+            | geometryCollectionTaggedText
+            | envelopeTaggedText;
+ 
+pointTaggedText = "POINT" pointText;
+
+linestringTaggedText = "LINESTRING" lineStringText;
+
+polygonTaggedText = "POLYGON" polygonText;
+
+multipointTaggedText = "MULTIPOINT" multiPointText;
+
+multilinestringTaggedText = "MULTILINESTRING" multiLineStringText;
+
+multipolygonTaggedText = "MULTIPOLYGON" multiPolygonText;
+
+geometryCollectionTaggedText = "GEOMETRYCOLLECTION" geometryCollectionText;
+  
+pointText = leftParen point rightParen;
+
+point = xCoord space yCoord [space zCoord];
+
+xCoord = signedNumericLiteral;
+
+yCoord = signedNumericLiteral;
+
+zCoord = signedNumericLiteral;
+
+lineStringText = leftParen point {comma point} rightParen;
+                     
+polygonText =  leftParen lineStringText {comma lineStringText} rightParen;
+
+multiPointText = leftParen pointText {comma pointText} rightParen;
+
+multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen;
+                          
+multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
+
+geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
+
+envelopeTaggedText = "ENVELOPE" envelopeText;
+
+envelopeText = leftParen westBoundLon comma eastBoundLon comma northBoundLat comma southBoundLat [comma minElev comma maxElev] rightParen; 
+
+westBoundLon = signedNumericLiteral;
+
+eastBoundLon = signedNumericLiteral;
+
+northBoundLat = signedNumericLiteral;
+
+southBoundLat = signedNumericLiteral;
+
+minElev = signedNumericLiteral;
+
+maxElev = signedNumericLiteral;
