@@ -3,16 +3,19 @@
 This folder contains the content for the OGC API - Features - Part n: CQL extension.
 
 The file, cql.bnf, contains the BNF for a simple query language for OAPIF that
-is roughly equivalent in capability to OGC filter.  This query language can
-be used as a query parameter in an OAPIF URI.  For example:
+is roughly equivalent in capability to OGC filter.  It is based on the CQL
+syntax defined in "OGC® Catalogue Services 3.0 - General Model" (OGC 12-168r6).
 
-http://www.someserver.com/wfs/collection/MyCollection/items?cql="..."&...
+This query language can be used as a query parameter in an OAPIF URI.
+For example:
 
-This BNF is roughly equivalent to the BNF in the OGC catalogue (which is a
-complete mess) but does differ in some aspects.  For example the catalogue
-BNF uses functions to implement the spatial operators (e.g.
-"OVERLAPS(propertyName,geometry)" ) while this BNF uses a more SQL-like syntax
-(e.g. "propertyName OVERLAPS geometry").
+   http://.../collection/MyCollection/items?filter="..."&filterLanguage=CQL&...
+
+NOTE: The ideal here is that two URL query parameters are defined; one whose
+      value is the CQL expression (i.e. "filter" in this example) and another
+      (i.e. "filterLanguage") to indicate that the query language in use 
+      (i.e. CQL in this example).
+      This allows for other filter language expressions to be supported as well.
 
 The BNF seems to validate using the following BNF parsers:
 
