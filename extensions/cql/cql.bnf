@@ -1,4 +1,15 @@
+#
+# MODULE:  cql.bnf
+# PURPOSE: A BNF grammar for the Common Query Language (CQL).
+# HISTORY:
+# DATE         EMAIL                     DESCRIPTION
+# 13-SEP-2019  pvretano[at]cubewerx.com  Initial creation
+# 28-OCT-2019  pvretano[at]cubewerx.com  Initial checkin into github.
+#
 
+#=============================================================================#
+# A CQL filter is a logically connected expression of one or more predicates.
+#=============================================================================#
 cqlFilter = booleanValueExpression;
 
 booleanValueExpression = booleanTerm | booleanValueExpression "OR" booleanTerm;
@@ -10,11 +21,20 @@ booleanFactor = ["NOT"] booleanPrimary;
 booleanPrimary = predicate 
                | leftParen cqlFilter rightParen;
 
+#=============================================================================#
+#  CQL supports scalar, spatial, temporal and existence predicates.
+#=============================================================================#
 predicate = comparisonPredicate
           | spatialPredicate 
           | temporalPredicate
           | existencePredicate;
 
+#=============================================================================#
+# A comparison predicate evaluates if two scalar expression statisfy the
+# specified comparison operator.  The comparion operators include an operator
+# to evaluate regular expressions (LIKE), a range evaluation operator and
+# an operator to test if a scalar expression is NULL or not.
+#=============================================================================#
 comparisonPredicate = binaryComparisonPredicate
                     | propertyIsLikePredicate
                     | propertyIsBetweenPredicate
@@ -29,14 +49,18 @@ propertyIsBetweenPredicate = scalarExpression "BETWEEN"
 
 propertyIsNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
 
+#
+# A scalar expression is the property name, a chracter literal, a numeric
+# literal or a function/method invocation that returns a scalar value.
+#
 scalarExpression = propertyName
                  | characterLiteral
                  | numericLiteral
                  | function;
 
-# This is just a place holder for a regular expression
-# We want to be able to say stuff like "<prop> LIKE 'Toronto%'" where
-# the '%' character means "match zero or more characters".
+# NOTE: This is just a place holder for a regular expression
+#       We want to be able to say stuff like "<prop> LIKE 'Toronto%'" where
+#       the '%' character means "match zero or more characters".
 regularExpression = characterLiteral;
 
 comparisonOperator = eq | neq | lt | gt | lteq | gteq;
@@ -47,15 +71,31 @@ gteq = gt eq;
 
 lteq = lt eq;
 
+#=============================================================================#
+# A spatial predicate evaluates if two spatial expressions satisfy the 
+# specified spatial operator.
+#=============================================================================#
 spatialPredicate =  spatialOperator leftParen geomExpression comma geomExpression rightParen;
 
+# NOTE: The buffer operators (DWITHIN and BEYOND) are not included because
+#       these are outside the scope of a "simple" core for CQL.  These
+#       can be added as extensions.
+#
 spatialOperator = "EQUALS" | "DISJOINT" | "TOUCHES" | "WITHIN" | "OVERLAPS"
                 | "CROSSES" | "INTERSECTS" | "CONTAINS";
 
+# A geometric expression is a property name of a geometry-valued property,
+# a geometric literal (expressed as WKT) or a function that returns a 
+# geometric value.
+#
 geomExpression = propertyName
                | geomLiteral
                | function;
 
+#=============================================================================#
+# A temporal predicate evaluates if two temporal expressions satisfy the 
+# specified temporal operator.
+#=============================================================================#
 temporalPredicate = temporalExpression temporalOperator
                     temporalExpression [temporalExpression];
 
@@ -68,11 +108,31 @@ temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "CONTAINS"
                  | "METBY" | "OVERLAPS" | "OVERLAPPEDBY" | "ANYINTERACTS"
                  | "INTERSECTS";
 
-# Tests whether the specified propert name exists in
-# the current context.
+#=============================================================================#
+# The existence predicate evalues whether the specified property exists
+# in the current context. This predicate was added to accomodate the fact
+# that OAPIF feature collections (and likely other specification) are
+# heterogeneous with respect to schema.
+#=============================================================================#
 existencePredicate = propertyName "EXISTS"
                    | propertyName "DOES" "NOT" "EXIST";
 
+#=============================================================================#
+# Definition of a FUNCTION
+# NOTE: How do we advertise which functions an implementation offer?
+#       In the OpenAPI document I suppose!
+#=============================================================================#
+function = identifier {argumentList};
+
+argumentList = leftParen [positionalArgument]  rightParen;
+
+positionalArgument = argument [ { comma argument } ];
+
+argument = characterLiteral | numericLiteral | geomLiteral | propertyName;
+
+#=============================================================================#
+# Definition of NUMERIC literals 
+#=============================================================================#
 numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
 
 unsignedNumericLiteral = exactNumericLiteral | approximateNumericLiteral;
@@ -94,80 +154,58 @@ unsignedInteger = {digit};
 
 sign = plusSign | minusSign;
 
-
-
-function = functionName {argumentList};
-
-functionName = functionNameStart [{underscore | functionNamePart}];
-
-functionNameStart = simpleLatinLetter;
-
-functionNamePart = simpleLatinLetter | digit;
-
-argumentList = leftParen [positionalArgument]  rightParen;
-
-positionalArgument = argument [ { comma argument } ];
-
-argument = characterLiteral | numericLiteral | geomLiteral | propertyName;
-
-
-
-propertyName = propertyNameStart [{underscore | propertyNamePart}];
-
-propertyNameStart = simpleLatinLetter;
-
-propertyNamePart = simpleLatinLetter | digit;
-
-
-
+#=============================================================================#
+# Definition of CHARACTER literals 
+#=============================================================================#
 characterLiteral = characterStringLiteral
                  | bitStringLiteral
                  | hexStringLiteral;
 
-characterStringLiteral = quote [ {characterRepresentation} ] quote
-         [ { {separator} quote [ {characterRepresentation} ] quote } ];
+characterStringLiteral = quote [ {character} ] quote;
 
-characterRepresentation = nonQuoteCharacter | quoteSymbol;
+bitStringLiteral = "B" quote [ {bit} ] quote; 
 
-quoteSymbol = quote quote;
+hexStringLiteral = "X" quote [ {hexit} ] quote;
 
-nonQuoteCharacter =  {simpleLatinLetter | nonQuoteSpecialCharacter};
+propertyName = identifier;
 
-separator = { newLine };
+identifier = identifierStart [ {identifierPart} ];
 
-bitStringLiteral = "B" quote [ {bit} ] quote [ { {separator} quote [ {bit} ] quote } ];
+identifierStart = alpha [{octothorp|dollar|underscore|alpha|digit}];
 
-hexStringLiteral = "X" quote [ {hexit} ] quote [ { {separator} quote [ {hexit} ] quote } ];
+identifierPart = alpha | digit;
 
+character = alpha | digit | specialCharacter | quoteQuote;
 
-simpleLatinLetter = simpleLatinUpperCaseLetter | simpleLatinLowerCaseLetter;
+quoteQuote = quote quote;
 
-simpleLatinUpperCaseLetter = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
-
-simpleLatinLowerCaseLetter = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
+# NOTE: This production is supposed to be any alphabetic character from
+#       the character set.
+# 
+#       I use the A-Z, a-z range here as placeholders because:
+#       (a) I have no idea how to indicate that alpha can be
+#           any alphabetic UTF-8 character
+#       (b) the validators I am using can only handle ASCII chars
+#
+alpha = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" |
+        "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" |
+        "W" | "X" | "Y" | "Z" |
+        "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" |
+        "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" |
+        "w" | "x" | "y" | "z";
 
 digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 
-nonQuoteSpecialCharacter =  doubleQuote
-                         | percent
-                         | ampersand
-                         | quote
-                         | leftParen
-                         | rightParen
-                         | asterisk
-                         | plusSign
-                         | comma
-                         | minusSign
-                         | period
-                         | solidus
-                         | colon
-                         | semicolon
-                         | lt
-                         | gt
-                         | eq
-                         | questionMark
-                         | underscore
-                         | verticalBar;
+specialCharacter = percent | ampersand | leftParen | rightParen | asterisk
+                 | plusSign | comma | minusSign | period | solidus | colon
+                 | semicolon | lt | gt | eq | questionMark | underscore
+                 | verticalBar | doubleQuote ;
+
+octothorp = "#";
+
+dollar = "$";
+
+underscore = "_";
 
 doubleQuote = "\"";
 
@@ -205,18 +243,18 @@ gt = ">";
 
 questionMark = "?";
 
-underscore = "_";
-
 verticalBar = "|";
-
-newLine = "\n";
 
 bit = "0" | "1";
 
 hexit = digit | "A" | "B" | "C" | "D" | "E" | "F" | "a" | "b" | "c" | "d" | "e" | "f";
 
-
-
+#=============================================================================#
+# Definition of TEMPORAL literals 
+#
+# NOTE: Is the fact the time zones are supported too complicated for a
+#       simple CQL?  Perhaps the "core" of CQL should just support UTC.
+#=============================================================================#
 temporalLiteral = fullDate | fullDate "T" utcTime;
 
 fullDate   = dateYear "-" dateMonth "-" dateDay;
@@ -237,8 +275,12 @@ timeMinute = digit digit;
 
 timeSecond = digit digit [period digit {digit}];
 
-
-
+#=============================================================================#
+# Definition of GEOMETRIC literals 
+#
+# NOTE: This is basically BNF that define WKT encoding; it would be nice
+#       to instead reference some normative BNF for WKT.
+#=============================================================================#
 geomLiteral = pointTaggedText
             | linestringTaggedText
             | polygonTaggedText
