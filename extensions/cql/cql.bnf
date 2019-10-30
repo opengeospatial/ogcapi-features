@@ -27,7 +27,8 @@ booleanPrimary = predicate
 predicate = comparisonPredicate
           | spatialPredicate 
           | temporalPredicate
-          | existencePredicate;
+          | existencePredicate
+          | inPredicate;
 
 #=============================================================================#
 # A comparison predicate evaluates if two scalar expression statisfy the
@@ -116,6 +117,15 @@ temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "CONTAINS"
 #=============================================================================#
 existencePredicate = propertyName "EXISTS"
                    | propertyName "DOES" "NOT" "EXIST";
+
+#=============================================================================#
+# The IN predicate 
+#=============================================================================#
+inPredicate = propertyName "IN" leftParen { characterLiteral | 
+                                            numericLiteral |
+                                            geomLiteral |
+                                            temporalLiteral |
+                                            function } rightParen;
 
 #=============================================================================#
 # Definition of a FUNCTION
