@@ -104,9 +104,9 @@ temporalExpression = propertyName
                    | temporalLiteral
                    | function;
 
-temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "CONTAINS"
-                 | "DURING" | "ENDEDBY" | "ENDS" | "EQUALS" | "MEETS"
-                 | "METBY" | "OVERLAPS" | "OVERLAPPEDBY" | "ANYINTERACTS"
+temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "TCONTAINS"
+                 | "DURING" | "ENDEDBY" | "ENDS" | "TEQUALS" | "MEETS"
+                 | "METBY" | "TOVERLAPS" | "OVERLAPPEDBY" | "ANYINTERACTS"
                  | "INTERSECTS";
 
 #=============================================================================#
