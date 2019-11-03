@@ -1,282 +1,321 @@
 
-0. beamMode is ScanSAR Narrow AND swathDurection is ascending AND
+0. beamMode is ScanSAR Narrow AND swathDirection is ascending AND
    polarization is "HH+VV+HV+VH" and intersects geom(Washington DC)
-{
-   "and": [
-      {"eq": {"property": "beamMode", "value": "ScanSAR Narrow"}},
-      {"eq":{"property": "swathDirection", "value": "ascending"}},
-      {"eq": {"property": "polarization", "value": "HH+VV+HV+VH"}},
-      {"intersects": {"property": "footprint",
-                      "value": {"type": "Polygon",
-                              "coordinates": [[
-                                 [-77.117938,38.936860],
-                                 [-77.040604,39.995648],
-                                 [-76.910536,38.892912],
-                                 [-77.039359,38.791753],
-                                 [-77.047906,38.841462],
-                                 [-77.034183,38.840655],
-                                 [-77.033142,38.857490]
-                              ]]}}}
-   ]
-}
+
+CQL: beamMode='ScanSAR Narrow' AND
+     swathDirection='ascending' AND 
+     polarization='HH+VV+HV+VH' AND
+     intersects(geometry,POLYGON((-77.117938 38.936860,-77.040604 39.995648,-76.910536 38.892912,-77.039359 38.791753,-77.047906 38.841462,-77.034183 38.840655,-77.033142 38.857490)))
+
+CQL JSON: {
+             "and": [
+                {"eq": {"property": "beamMode", "value": "ScanSAR Narrow"}},
+                {"eq":{"property": "swathDirection", "value": "ascending"}},
+                {"eq": {"property": "polarization", "value": "HH+VV+HV+VH"}},
+                {"intersects": {"property": "footprint",
+                                "value": {"type": "Polygon",
+                                        "coordinates": [[
+                                           [-77.117938,38.936860],
+                                           [-77.040604,39.995648],
+                                           [-76.910536,38.892912],
+                                           [-77.039359,38.791753],
+                                           [-77.047906,38.841462],
+                                           [-77.034183,38.840655],
+                                           [-77.033142,38.857490]
+                                        ]]}}}
+             ]
+          }
 
 1. Floors greater than 5
 
-{
-   "eq": {
-      "property": "floor",
-      "value": 5
-   }
-} 
+CQL: floors>5
+
+CQL JSON: {
+             "eq": {
+                "property": "floor",
+                "value": 5
+             }
+          } 
 
 2. Taxes less than or equal to 500
 
-{
-   "lte": {
-      "property": "taxes",
-      "value": 500
-   }
-}
+CQL: taxes <= 500
 
+CQL JSON: {
+             "lte": {
+                "property": "taxes",
+                "value": 500
+             }
+          }
 
 3. Owner name contains 'Jones'
 
-{
-   "contains": {
-      "property": "owner_name",
-      "value": ["Jones"]
-   }
-}
+CQL: owner LIKE '% Jones %'
+
+CQL JSON: {
+             "like": {
+                "property": "owner_name",
+                "value": "% Jones %"
+             }
+          }
 
 4. Owner name starts with 'Mike'
 
-{
-   "like": {
-      "wildCards": "%",
-      "property": "owner_name",
-      "value": "Mike%"
-   }
-}
+CQL: owner_name LIKE 'Mike%'
+
+CQL JSON: {
+             "like": {
+                "wildCards": "%",
+                "property": "owner_name",
+                "value": "Mike%"
+             }
+          }
 
 
 
 5. Owner name does not contain 'Mike'
 
-{
-   "not": {
-      "contains": {
-         "property": "owner_name",
-         "value": [ "Mike" ]
-      }
-   }
-}
+CQL: owner_name NOT LIKE '% Mike %'
+
+CQL JSON: {
+             "not": {
+                "contains": {
+                   "property": "owner_name",
+                   "value": "% Mike %"
+                }
+             }
+          }
 
 6. A swimming pool
 
-{
-   "eq": {
-      "property": "swimming_pool"
-      "value": true
-   }
-}
+CQL: swimming_pool=true
+
+CQL JSON: {
+             "eq": {
+                "property": "swimming_pool"
+                "value": true
+             }
+          }
 
 7. More than 5 floors and a swimming pool
 
-{
-   "and": [
-      {
-         "gt": {
-            "property": "floor",
-            "value": 5
-         }
-      },
-      {
-         "eq": {
-            "property": "swimming_pool",
-            "value": true
-         }
-      }
-   ]
-}
+CQL: floors>5 AND swimming_pool=true
+
+CQL JSON: {
+             "and": [
+                {
+                   "gt": {
+                      "property": "floor",
+                      "value": 5
+                   }
+                },
+                {
+                   "eq": {
+                      "property": "swimming_pool",
+                      "value": true
+                   }
+                }
+             ]
+          }
 
 8. A swimming pool and (more than five floors or material is brick)
 
-{
-   "and": [
-      {
-         "eq": {
-            "property": "swimming_pool",
-            "value": true
-         }
-      },
-      {
-         "or": [
-            {
-               "gt": {
-                  "property": "floor",
-                  "value": 5
-               }
-            },
-            {
-               "like": {
-                  "property": "material",
-                  "value": "brick%"
-               }
-            },
-            {
-               "like": {
-                  "property": "material",
-                  "value": "%brick"
-               }
-            } 
-         ]
-      }
-   ]
-}
+CQL: swimming_pool=true AND (floors>5 OR material='brick')
+
+CQL JSON: {
+             "and": [
+                {
+                   "eq": {
+                      "property": "swimming_pool",
+                      "value": true
+                   }
+                },
+                {
+                   "or": [
+                      {
+                         "gt": {
+                            "property": "floor",
+                            "value": 5
+                         }
+                      },
+                      {
+                         "like": {
+                            "property": "material",
+                            "value": "brick%"
+                         }
+                      },
+                      {
+                         "like": {
+                            "property": "material",
+                            "value": "%brick"
+                         }
+                      } 
+                   ]
+                }
+             ]
+          }
 
 9. (More than five floors and material is brick) or swimming pool is true
 
-{
-   "or": [
-      {
-         "and": [
-            {
-               "gt": {
-                  "property": "floors",
-                  "value": 5
-               }
-            },
-            {
-               "eq": {
-                  "property": "material",
-                  "value": "brick"
-               }
-            }
-         ]
-      },
-      {
-         "eq": {
-            "property": "swimming_pool",
-            "value": true
-         }
-      }
-   ]
-}
+CQL: (floors>5 AND metrial='brick') OR swimming_pool=true
 
+CQL JSON: {
+             "or": [
+                {
+                   "and": [
+                      {
+                         "gt": {
+                            "property": "floors",
+                            "value": 5
+                         }
+                      },
+                      {
+                         "eq": {
+                            "property": "material",
+                            "value": "brick"
+                         }
+                      }
+                   ]
+                },
+                {
+                   "eq": {
+                      "property": "swimming_pool",
+                      "value": true
+                   }
+                }
+             ]
+          }
 
 10. Not under 5 floors or a swimming pool
 
-{
-   "or": [
-      {
-         "not": [
-            "lt": {
-               "property": "floors",
-               "value": 5
-            }
-         ]
-      },
-      {
-         "eq": {
-             "property": "swimming_pool",
-             "value": true
-         }
-      }
-   ]
-}
+CQL: NOT (floors<5) OR swimming_pool=true
+
+CQL JSON: {
+             "or": [
+                {
+                   "not": [
+                      "lt": {
+                         "property": "floors",
+                         "value": 5
+                      }
+                   ]
+                },
+                {
+                   "eq": {
+                       "property": "swimming_pool",
+                       "value": true
+                   }
+                }
+             ]
+          }
 
 11. Owner name starts with 'mike' or 'Mike' and is less than 4 floors
  
-{
-   "and": [
-      {
-         "or": [
-            {
-               "like": {
-                  "property": "owner_name",
-                  "value": "mike%"
-               }
-            },
-            {
-               "like": {
-                  "property": "owner_name",
-                  "value": "Mike%"
-               }
-            }
-         ]
-      },
-      {
-         "lt": {
-            "property": "floors",
-            "value": 4
-         }
-      }
-   ]
-}
+CQL: (owner_name LIKE 'mike%' OR owner_name like 'Mike%') AND floors<4
+
+CQL JSON: {
+             "and": [
+                {
+                   "or": [
+                      {
+                         "like": {
+                            "property": "owner_name",
+                            "value": "mike%"
+                         }
+                      },
+                      {
+                         "like": {
+                            "property": "owner_name",
+                            "value": "Mike%"
+                         }
+                      }
+                   ]
+                },
+                {
+                   "lt": {
+                      "property": "floors",
+                      "value": 4
+                   }
+                }
+             ]
+          }
 
 12. Built before 2015
 
-{
-   "before": {
-      "property": "built",
-      "value": "2015"
-   }
-}
+CQL: built BEFORE '2015-01-01'
+
+CQL JSON: {
+             "before": {
+                "property": "built",
+                "value": "2015-01-01"
+             }
+          }
 
 13. Built after June 5, 2012
 
-{
-   "after": {
-      "property": "built",
-      "value": "2012-06-05"
-   }
-}
+CQL: built AFTER '2012-06-05'
+
+CQL JSON: {
+             "after": {
+                "property": "built",
+                "value": "2012-06-05"
+             }
+          }
 
 14. Updated between 7:30am June 10, 2017 and 10:30am June 11, 2017
 
-{
-   "during": {
-      "property": "updated",
-      "value": ["2017-06-10T07:30:00","2017-06-11T10:30:00"]
-   }
-}
+CQL: updated DURING '2017-06-10T07:30:00' '2017-06-11T10:30:00'
+
+CQL JSON: {
+             "during": {
+                "property": "updated",
+                "value": ["2017-06-10T07:30:00","2017-06-11T10:30:00"]
+             }
+          }
 
 15. Location in the box between -118,33.8 and -117.9,34 in lat/long (geometry 1)
 
-{
-  "within" {
-     "property": "location",
-     "value": { "bbox": [33.8,-118,34,-117.9] }
-   }
-}
+CQL: WITHIN(location,ENVELOPE(-118,33.8,-117.9,34)
+
+CQL JSON: {
+             "within" {
+                "property": "location",
+                "value": { "bbox": [33.8,-118,34,-117.9] }
+              }
+           }
 
 16. Geometry that intersects with geometry 2 (below)
 
-{
-   "intersects": {
-      "property": "location",
-      "value": {
-         "type": "Polygon",
-         "coordinates": [[[-10.0, -10.0],[10.0, -10.0],[10.0, 10.0],[-10.0, -10.0]]]
-      }
-   }
-}
+CQL: INTERSECTS(geometry,POLYGON((-10.0 -10.0,10.0 -10.0,10.0 10.0,-10.0 -10.0)))
+
+CQL JSON: {
+             "intersects": {
+                "property": "location",
+                "value": {
+                   "type": "Polygon",
+                   "coordinates": [[[-10.0, -10.0],[10.0, -10.0],[10.0, 10.0],[-10.0, -10.0]]]
+                }
+             }
+          }
 
 17. More than 5 floors and is within geometry 1 (below)
 
-{
-   "and": [
-      {
-         "gt": {
-            "property": "floors",
-            "value": 5
-         }
-      },
-      {
-         "within": {
-            "property": "geometry",
-            "value": { "bbox": [33.8,-118,34,-117.9] }
-         }
-      }
-   ]
-}
+CQL: floors>5 AND WITHIN(geometry,ENVELOPE(33.8,-118,34,-117.9))
+
+CQL JSON: {
+             "and": [
+                {
+                   "gt": {
+                      "property": "floors",
+                      "value": 5
+                   }
+                },
+                {
+                   "within": {
+                      "property": "geometry",
+                      "value": { "bbox": [33.8,-118,34,-117.9] }
+                   }
+                }
+             ]
+          }
+
