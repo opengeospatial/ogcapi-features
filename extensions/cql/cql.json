@@ -12,6 +12,8 @@
       "lte": {"$ref": "#/definitions/lte"},
       "gte": {"$ref": "#/definitions/gte"},
 
+      "between": {"$ref": "#/definitions/between"},
+
       "like": { "$ref": "#/definitions/like" },
       "in": { "$ref": "#/definitions/in" },
 
@@ -55,9 +57,10 @@
          "type": "object",
          "properties": {
             "property": { "type": "string" },
-            "lower": { "$ref": "#/definitions/scalarOperands" },
-            "upper": { "$ref": "#/definitions/scalarOperands" }
-         }
+            "lower": { "$ref": "#/definitions/scalarLiteral" },
+            "upper": { "$ref": "#/definitions/scalarLiteral" }
+         },
+         "required" : [ "property", "lower", "upper" ]
       },
 
       "like": {
@@ -123,7 +126,9 @@
                 "gt": {"$ref": "#/definitions/gt"},
                 "lte": {"$ref": "#/definitions/lte"},
                 "gte": {"$ref": "#/definitions/gte"},
-                 
+
+                "between": {"$ref": "#/definitions/between"},
+
                 "like": { "$ref": "#/definitions/like" },
                 "in": { "$ref": "#/definitions/in" },
 
