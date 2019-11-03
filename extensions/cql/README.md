@@ -22,6 +22,13 @@ The BNF seems to validate using the following BNF parsers:
 * https://www.icosaedro.it/bnf_chk/bnf_chk-on-line.html
 * https://www.nongnu.org/bnf/
 
+The file, cql.json, is a JSON Schema file that defines a JSON encoding for CQL.
+The JSON schema seems to validate using the following validator:
+
+https://json-schema-validator.herokuapp.com/index.jsp
+
+The file, examples.txt, contains example of both CQL and CQL-JSON.
+
 NOTES:
 
 The file 'resources/catCql.bnf' contains the BNF text exactly as it exists
