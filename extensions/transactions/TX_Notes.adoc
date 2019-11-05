@@ -1,0 +1,863 @@
+== Transactions for OGC API - Features
+
+=== Introduction
+
+Transactions for WFS 3.0 can be classified as _simple_ transactions and _complex_ transactions.
+
+Simple transactions are modifications that affect a single feature in a single collection.
+
+Complex transactions are modification that affect multiple features perhaps across multiple collections and they can have batch or atomic semantics.
+
+This page briefly outlines:
+   * how simple transactions work using the standard POST, PUT, PATCH and DELETE methods
+   * how complex transactions work
+
+In the discussion that follows, I will be using the hypothetical collection named BUILDINGS for illustration purposes.
+
+=== Simple Transactions
+
+   * simple transactions use the HTTP methods POST, PUT, PATCH and DELETE to create, replace, modify and remove features from a collection
+   * the relevant WFS 3.0 resource paths are:
+
+----
+/collections/{collectionId}/items
+/collections/{collectionId}/items/{featureId}
+----
+
+==== Creating a new feature
+
+The following sequence diagaram illustrates how to add a new feature to a collection:
+
+----
+CLIENT                                                     SERVER 
+     |                                                           |
+     |   POST /collections/BUILDINGS/items  HTTP/1.1             |
+     |   Host: www.someserver.com                                |
+     |   Content-Type: application/geo+json                      |
+     |                                                           |
+     |   {"type": "Feature",                                     |
+     |    "geometry": {                                          |
+     |       "type": "Polygon",                                  |
+     |       "coordinates": [                                    |
+     |          [                                                |
+     |             [-118.53138,32.94585],                        |
+     |             [-118.532107,32.945926],                      |
+     |             [-118.532123,32.945819],                      |
+     |             [-118.532058,32.945812],                      | 
+     |             [-118.532092,32.945587],                      | 
+     |             [-118.531954,32.945573],                      | 
+     |             [-118.531922,32.945791],                      | 
+     |             [-118.531825,32.945781],                      | 
+     |             [-118.531838,32.945692],                      | 
+     |             [-118.531706,32.945678],                      | 
+     |             [-118.531694,32.945762],                      | 
+     |             [-118.531601,32.945753],                      | 
+     |             [-118.53161,32.945693],                       | 
+     |             [-118.531477,32.945679],                      | 
+     |             [-118.531469,32.945731],                      | 
+     |             [-118.531399,32.945724],                      | 
+     |             [-118.53138,32.94585]                         | 
+     |          ]                                                | 
+     |       ]},                                                 | 
+     |       "properties": {                                     | 
+     |          "name": "Peter's Building",                      | 
+     |          "stories": 10,                                   | 
+     |          "address": {                                     | 
+     |             "number": "1729",                             | 
+     |             "street": "Ramanujan Lane",                   | 
+     |             "city": "Toronto",                            | 
+     |             "postalCode": "B1G B8A",                      | 
+     |             "country": "Canada"                           | 
+     |          }                                                | 
+     |       }                                                   | 
+     |   }                                                       | 
+     |---------------------------------------------------------->| 
+     |                                                           | 
+     |   HTTP/1.1 201 Created                                    | 
+     |   Location: /collections/BUILDINGS/items/1310             | 
+     |<----------------------------------------------------------|
+----
+
+   * The body of the request contains a representation of the feature to be created (in this example the representation is GeoJSON)
+   * The Content-Type header contains the MIME type of the body of the request (GeoJSON in this case)
+   * The server responds with a "201" HTTP code indicating that the new feature was created
+   * The server's response also includes a "Location" header to let the client know the URL of the newly created feature
+
+==== Replacing an existing feature
+
+The following sequence diagram illustrates how an existing feature may be replaced with an updated feature. In this case the foot print of the building has been changed.
+
+----
+CLIENT                                                     SERVER 
+     |                                                           | 
+     |   PUT /collections/BUILDINGS/items/1310  HTTP/1.1         | 
+     |   Host: www.someserver.com                                | 
+     |   Content-Type: application/geo+json                      |
+     |                                                           | 
+     |   {                                                       | 
+     |      "type": "Feature",                                   | 
+     |      "geometry": {                                        | 
+     |         "type": "Polygon",                                | 
+     |         "coordinates": [                                  | 
+     |            [                                              | 
+     |               [-118.541296,32.9395],                      | 
+     |               [-118.541369,32.939566],                    | 
+     |               [-118.541436,32.939513],                    | 
+     |               [-118.541409,32.939489],                    | 
+     |               [-118.541385,32.939508],                    | 
+     |               [-118.541338,32.939467],                    | 
+     |               [-118.541296,32.9395]                       | 
+     |            ]                                              | 
+     |         ]                                                 | 
+     |      },                                                   | 
+     |      "properties": {                                      | 
+     |         "name": "Peter's Building",                       | 
+     |         "stories": 10,                                    | 
+     |         "address": {                                      | 
+     |            "number": "1729",                              | 
+     |            "street": "Ramanujan Lane",                    | 
+     |            "city": "Toronto",                             | 
+     |            "postalCode": "B1G B8A",                       | 
+     |            "country": "Canada"                            | 
+     |         }                                                 | 
+     |      }                                                    | 
+     |   }                                                       | 
+     |---------------------------------------------------------->| 
+     |                                                           | 
+     |   HTTP/1.1 200 OK                                         | 
+     |<----------------------------------------------------------|
+----
+
+   * The PUT method is applied to the URL of the feature to be replaced
+   * The body of the request contains a representation of the new or updated feature. In this case the representation is GeoJSON.
+   * The server's response is 200 OK.
+
+==== Partially updating an existing feature
+
+The following sequence diagram illustrates how to partially update an existing feature without having to replace the entire feature. </span>
+
+----
+CLIENT                                                     SERVER 
+     |                                                           | 
+     |   PATCH /collections/BUILDINGS/items/1310  HTTP/1.1       | 
+     |   Host: www.someserver.com                                | 
+     |   Content-Type: application/????+json                     | 
+     |   Accept: application/geo+json                            |
+     |                                                           | 
+     |   {                                                       | 
+     |      "add": [                                             | 
+     |         {                                                 | 
+     |            "name": "status",                              | 
+     |            "value": "Under renovation"                    | 
+     |         }                                                 | 
+     |      ],                                                   | 
+     |      "modify": [                                          | 
+     |         {                                                 | 
+     |            "name": "stories",                             | 
+     |            "value" 73                                     | 
+     |         }                                                 | 
+     |      ]                                                    | 
+     |   }                                                       | 
+     +---------------------------------------------------------->| 
+     |                                                           | 
+     |   HTTP/1.1 200 OK                                         | 
+     |   Content-Type: application/geo+json                      | 
+     |   Location: /collections/BUILDINGS/items/1310             | 
+     |                                                           | 
+     |   {                                                       | 
+     |      "type": "Feature",                                   | 
+     |      "geometry": {                                        | 
+     |         "type": "Polygon",                                | 
+     |         "coordinates": [                                  | 
+     |            [                                              | 
+     |               [-118.541296,32.9395],                      | 
+     |               [-118.541369,32.939566],                    | 
+     |               [-118.541436,32.939513],                    | 
+     |               [-118.541409,32.939489],                    | 
+     |               [-118.541385,32.939508],                    | 
+     |               [-118.541338,32.939467],                    | 
+     |               [-118.541296,32.9395]                       | 
+     |            ]                                              | 
+     |         ]                                                 | 
+     |      },                                                   | 
+     |      "properties": {                                      | 
+     |         "name": "Peter's Building",                       | 
+     |         "stories": 73,                                    | 
+     |         "status": "Under renovation"                      | 
+     |         "address": {                                      | 
+     |            "number": "1729",                              | 
+     |            "street": "Ramanujan Lane",                    | 
+     |            "city": "Toronto",                             | 
+     |            "postalCode": "B1G B8A",                       | 
+     |            "country": "Canada"                            | 
+     |         }                                                 | 
+     |      }                                                    | 
+     |   }                                                       | 
+     |<----------------------------------------------------------|
+----
+
+   * The PATCH method is applied to the URL of the feature
+   * The body of the request contains a JSON document that contains instructions about how the feature should be modified.
+   ** the instructions indicate that the "status" property should be added to the feature
+   ** the instructions indicate that the value of the "stories" property should be changed from its existing value (i.e. 10) to 73.
+   * The server's response is 200 OK
+   * The response body contains the new state of the feature in some re[resentation based on the value of the Accept header (GeoJSON in this case).
+   ** If the accept header is not specified then exception (???) or return a some default representation (e.g. GeoJSON)(???)
+   * The following schema fragment defined the body of the PATCH request:
+
+----
+"properties": { 
+   "type": "object", 
+   "properties": { 
+      "add": { 
+         "type": "array", 
+         "items": { 
+            "$ref": "#/components/schemas/nameValuePair" 
+         } 
+      }, 
+      "modify": { 
+         "type": "array", 
+         "items": { 
+            "$ref": "#/components/schemas/nameValuePair" 
+         } 
+      }, 
+      "remove": { 
+         "type": "array", 
+         "items": { 
+            "type": "string"   // the name of the property/key to remove
+         } 
+      } 
+   } 
+},
+"nameValuePair": { 
+      "type": "object", 
+      "properties": { 
+         "name": { 
+            "type": "string" 
+         }, 
+         "value": { 
+            "oneOf": [ 
+               { "type": "string" }, 
+               { "type": "object" }, 
+               { "$ref": "#/components/schemas/link" } 
+            ] 
+         } 
+      } 
+   }
+----
+
+*NOTE*: Not sure about the _add_ and _remove_ actions for the PATCH since in some cases (such as a system backed by an RDBMS) such actions result in schema changes which may or may not be a trivial thing to implement.
+
+==== Delete a feature
+
+The following sequence diagram illustrates how a feature may be deleted or removed from a collection.
+
+----
+   CLIENT                                                     SERVER 
+     |                                                           | 
+     |   DELETE /collections/BUILDINGS/items/1310  HTTP/1.1      | 
+     |   Host: www.someserver.com                                |
+     +---------------------------------------------------------->| 
+     |                                                           | 
+     |   HTTP/1.1 200 OK                                         | 
+     +<----------------------------------------------------------|
+----
+
+   * The DELETE method is applied to the URL of the feature
+   * The server's response is 200 OK
+
+=== Complex Transactions
+
+==== Introduction
+
+   * Complex transactions may, in a single operation, act on multiple features possibly across multiple collections.
+   * Complex transactions may have atomic or batch semantics.
+      * Typically atomic transactions are required if you need to make a set of changes to a number of features (possibly across multiple collections) and those changes have to all succeed or the entire operation fails and everything is rolled back (so as not to leave the server's datastore in an inconsistent state)
+      * Typically batch transactions are required when you need to perform a large number of actions such as a batch insert of thousand's of features
+   * Two approaches for supporting complex transactions have been investigated and are described:
+      * the *document* apporach
+      * the *shopping cart* approach.
+*NOTE:* I AM NOT PROPOSING 2 APPROACHES. I AM PRESENTING 2 APPROACHES AND WE NEED TO PICK ONE (document or shopping cart).
+
+==== Transaction end point
+
+   * servers that support complex transaction must advertise a transaction end point
+   * the end point is obtained from the landing page using the link with *rel="edit"* relation
+   * the following example illustrate the discovery of the transactions endpoint
+
+----
+   CLIENT                                                     SERVER 
+     |                                                           | 
+     |   GET /   HTTP/1.1                                        | 
+     |   Host: www.someserver.com                                | 
+     |   Accept: application/json, text/xml, text/html           |             
+     |                                                           | 
+     |---------------------------------------------------------->| 
+     |                                                           |
+     |                                                           |
+     |   HTTP/1.1 200 OK                                         | 
+     |                                                           | 
+     |   {                                                       | 
+     |     "links": [                                            |           
+     |       .                                                   | 
+     |       .                                                   | 
+     |       .                                                   | 
+     |       { "href": "http://www.someserver.com/transactions", | 
+     |         "rel": "edit",                                    | 
+     |         "title": "complex transaction endpoint" },        | 
+     |       .                                                   |      
+     |       .                                                   | 
+     |       .                                                   | 
+     |     ]                                                     |   
+     |   }                                                       | 
+     |<----------------------------------------------------------|
+----
+<
+   * In this example, the URL for the transaction end point is "http://www.someserver.com/transactions"; that is the link with "rel=edit"
+   * servers that support complex transactions would also need to indicate this in their conformance document (i.e. /conformance resource)
+
+==== Document Approach
+
+===== Introduction
+
+The document approach is similar with what is already done with WFS 2.X.
+   * a transaction endpoint is defined by the server
+   * as described above, this endpoint can be discovered from the server's landing page
+   ** B.T.W. & F.Y.I. in WFS 2.X this endpoint was discovered from the server's capabilities document
+   * a document describing the transaction is composed in some representations and is POST'ed to this endpoint
+   * the document contains a complete description of the transaction
+   ** the transaction document is composed of the series of insert, update, replace or delete actions
+   ** features from one or more collections may be affected by the actions in a transaction
+   * the transaction may have ATOMIC or BATCH semantics
+   ** ATOMIC semantics means that all actions in the transaction succeed or the entire transaction is rolled back
+   ** BATCH semantics means that each action in the transaction is independed of any other action in the Tx
+   * this is more-or-less a JSON representation of the XML transaction schema from WFS 2.X
+
+===== JSON-Schema
+
+The following JSON-Schema fragment defines the schema for a transaction document.
+
+----
+"transaction": { 
+      "type": "object", 
+      "required": ["transaction"], 
+      "properties": { 
+         "semantic": { 
+            "type": "string", 
+            "enum": ["atomic","batch"], 
+            "default": "atomic" 
+         }, 
+         "transaction": { 
+            "$ref": "#/components/schema/transaction-prop" 
+         } 
+      } 
+   }, 
+   "transaction-prop": { 
+      "type": "array", 
+      "items": { 
+         "type": "object", 
+         "properties": { 
+            "oneOf": [ 
+               { "$ref": "#/components/schemas/insert-action" }, 
+               { "$ref": "#/components/schemas/replace-action" }, 
+               { "$ref": "#/components/schemas/update-action" }, 
+               { "$ref": "#/components/schemas/delete-action" } 
+            ] 
+         } 
+      } 
+   }, 
+   "insert-action": { 
+      "type": "object", 
+      "required": ["action","collection","item"], 
+      "properties": { 
+         "action": { 
+            "type": "string", 
+            "const": "insert" 
+         }, 
+         "collection": { 
+            "type": "string" 
+         }, 
+         "directives": { 
+            "$ref": "#/components/schemas/directives-prop" 
+         }, 
+         "item": { 
+            "oneOf": [ 
+               {"type": "object"}, 
+               {"$ref": #/components/schemas/link} 
+            ] 
+         } 
+      } 
+   },
+   "replace-action": { 
+      "type": "object", 
+      "required": [ "action", "collection", "item" ], 
+      "properties": { 
+         "action": { 
+            "type": "string", 
+            "const": "replace" 
+         }, 
+         "collection": { 
+            "type": "string" 
+         }, 
+         "directives": { 
+            "$ref": "#/components/schemas/directives-prop" 
+         }, 
+         "item": { 
+            "oneOf": [ 
+               {"type": "object"}, 
+               {"$ref": #/components/schemas/link} 
+            ] 
+         }, 
+         "filter": { 
+            "type": "object", 
+            "properties": { 
+               "ids": { 
+                  "type": "array", 
+                  "items": { 
+                     "type": "string" 
+                  } 
+               } 
+            } 
+         } 
+      } 
+   }, 
+   "update-action": { 
+      "type": "object", 
+      "required": [ "action", "collection", "properties" ], 
+      "properties": { 
+         "action": { 
+            "type": "string", 
+            "const": "update", 
+         }, 
+         "collection": { 
+            "type": "string" 
+         },
+         "directives": { 
+            "$ref": "#/components/schemas/directives-prop" 
+         }, 
+         "properties": {
+            "type": "object",
+            "properties": {
+               "add": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/nameValuePair"
+                  }
+               },
+               "modify": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/nameValuePair"
+                  }
+               },
+               "delete": {
+                  "type": "array",
+                  "items": {  
+                     "type": "string"
+                  }
+               }
+            }
+         },
+         "filter": { 
+            "$ref": "#/components/schemas/filter" 
+         } 
+      } 
+   },
+    "delete-action": { 
+      "type": "object", 
+      "required": [ "action", "collection" ], 
+      "properties": { 
+         "action": { 
+            "type": "string", 
+            "enum": ["delete"] 
+         }, 
+         "collection": { 
+            "type": "string" 
+         }, 
+         "directives": {
+            "$ref": "#/components/schemas/directives-prop" 
+         }, 
+         "filter": { 
+            "$ref": "#/components/schemas/filter" 
+         } 
+      } 
+   },
+   "filter": {
+      "type": "object",
+      "properties": {
+         "ids": {
+            "type": "array",
+            "items": {
+               "type": "string"
+            }
+         }
+      }
+   },
+   "nameValuePair": {
+      "type": "object",
+      "properties": {
+         "name": {
+            "type": "string"
+         },
+         "value": {
+            "oneOf": [
+               { "type": "string" },
+               { "type": "object" },
+               { "$ref": "#/components/schemas/link" }
+            ]
+         }         
+      }
+   },
+   "directives-prop": { 
+      "type": "object", 
+      "properties": {
+         "id": {
+            "type": "string",
+            "description": "an optional identifier that may be used, for example, to identify the action in an exception report" 
+         "comment": { 
+            "type": "string",
+            "description": "an optional human-readable comment about the actions"
+         }
+      }, 
+      "additionalProperties": true 
+   },
+   "transactionResponse": {
+      "type": "object",
+      "properties": {
+         "semantic": {
+            "type": "string",
+            "enum": [ "atomic", "batch" ],
+         },
+         "summary": {
+            "type": "object",
+            "properties": {
+               "totalInserted": {
+                  "type": "integer"
+               },
+               "totalUpdated": {
+                  "type": "integer"
+               },
+               "totalReplaced": {
+                  "type": "integer"
+               },
+               "totalDeleted": {
+                  "type": "integer"
+               }
+            }
+         },
+         "exceptions": {
+            "description": "an optional array of OGC exception reports; mostly meant for use with BATCH transactions"
+            "type": "array",
+            "items": {
+               "$ref": "#/components/schemas/exceptionReport"
+            }
+         },
+         "insertResults": {
+            "type": "array",
+            "items": {
+               "type": "string",
+               "format": "uri"
+            }
+         },
+         "updateResults": {
+            "type": "array",
+            "items": {
+               "type": "string",
+               "format": "uri"
+            }
+         },
+         "replaceResults": {
+            "type": "array",
+            "items": {
+               "type": "string",
+               "format": "uri"
+            }
+         },
+         "deleteResults": {
+            "type": "array",
+            "items": {
+               "type": "string",
+               "format": "uri"
+            }
+         }
+      }
+   }
+----
+
+   * a transaction is composed of an array of insert, replace, update and/or delete actions
+   * the semantic key is used to indicate whether this transaction should be executed using atomic or patch sematics
+   * the directives section is used to include additional metadata or directions for executing the transaction
+   ** the id directive is used to assign a local identifier to the action for the purpose of error reporting
+   *** e.g. if id="INSERT1" then a more meaningful error message such as "Action INSERT1 failed" in an exception report
+   ** the comment key may be used to assign a human-readable comment about the action
+   ** this section is extensible (i.e. other keys may be added as required but their meaning is not described in this document)
+   * the response body contains a summary of the transaction
+   ** it indicates the number of insert, replace, update and/or delete actions were performed
+   ** an set of arrays containing the identifiers of each feature affected by the transaction
+   ** in the case of batch semantics, the response may also contain and array of exception reports for each action that failed
+   *** it is recommended that each action include an identifier (via the directives object) so that each exception can be correlated to the action that failed
+
+*Example*: The following example shows a new cable segment being inserted into a communication system and an existing pole being moved to connect to the new segment. Naturally, this transaction must be atomic lest we are left with an isolated pole not connecting to any cables.
+
+----
+   CLIENT                                                     SERVER 
+      |                                                           | 
+      |   POST /transactions   HTTP/1.1                           | 
+      |   Host: www.someserver.com                                | 
+      |   Content-Type: application/ogc-tx+json                   | 
+      |   Accept: application/json                                | 
+      |                                                           | 
+      |   {                                                       | 
+      |      "semantic": "atomic",                                | 
+      |      "transaction": [                                     | 
+      |         {                                                 | 
+      |            "action": "insert",                            | 
+      |            "collection": "/collections/CABLE_SEGMENTS",   | 
+      |            "directives": {                                |
+      |               "comment": "add a new fibre segment",       | 
+      |            },                                             | 
+      |            "item": {                                      | 
+      |               "type": "Feature",                          | 
+      |               "geometry": {                               | 
+      |                  "type": "LineString",                    | 
+      |                  "coordinates":                           | 
+      |                     [                                     | 
+      |                        [43.735915,-79.298053],            | 
+      |                        [43.735839,-79.298026]             | 
+      |                     ]                                     | 
+      |               },                                          | 
+      |               "properties": {                             | 
+      |                  "segmentId": "SEG237",                   | 
+      |                  "manufacturer": "Corning",               | 
+      |                  "all-dielectric": "yes",                 | 
+      |                  "armored": "yes",                        | 
+      |                  "fibre_count": 12                        | 
+      |                  "fibre_type": "OM3 LAZER-OPTIMIZED 50μ", | 
+      |                  "rodent_protected: "yes",                | 
+      |                  "USDPSC_code": 26126170                  | 
+      |               }                                           | 
+      |            }                                              | 
+      |         },                                                | 
+      |         {                                                 |
+      |            "action": "update",                            |
+      |            "collection": "/collections/"POLES",           |
+      |            "directives": {                                |
+      |               "comment": "move pole",                     |
+      |            },                                             |
+      |            "properties": {                                |
+      |               "modify" [                                  |
+      |                  {                                        |
+      |                     "name": "geometry",                   |
+      |                     "value": {                            |
+      |                        "type": "Point",                   |  
+      |                        "coordinates":                     |
+      |                           [[43.735915,-79.298053]]        |
+      |                     }                                     |
+      |                  },                                       |
+      |                  {                                        |
+      |                     "name": "updated",                    |
+      |                     "value": "2019-05-28"                 |
+      |                  }                                        |
+      |               ]                                           |   
+      |            },                                             |
+      |            "filter": {                                    |
+      |               "ids": [ "/collection/POLES/items/347901" ] |
+      |            }                                              |
+      |         }                                                 | 
+      |      ]                                                    | 
+      |   }                                                       | 
+      |---------------------------------------------------------->|
+      |                                                           |
+      |                                                           |
+      |   HTTP/1.1 200 OK                                         |
+      |   Content-Type: application/json                          |
+      |                                                           |
+      |   {                                                       |
+      |      "semantic": "atomic",                                |
+      |      "summary": {                                         |
+      |         "totalInserted": 1,                               |
+      |         "totalUpdated": 1                                 |
+      |      },                                                   |
+      |      "insertResults": [                                   |
+      |         "/collections/CABLE_SEGMENTS/items/47341"         |
+      |      ],                                                   |
+      |      "updateResults": [                                   |
+      |         "/collections/POLES/items/347901"                 |
+      |      ]                                                    |
+      |   }                                                       |
+      |<----------------------------------------------------------|
+----
+
+==== Shopping cart approach (for atomic transactions)
+
+===== Introduction
+
+   * The shopping cart approach is similar to the shoping carts found at online stores
+   ** this approach is more suited to atomic transactions rather than batch transactions
+   * The approach creates a transaction enpoint (the shopping cart) that represents an isolated view of the server.
+   ** using this transaction endpoint, features can be inserted, updated, replaced or deleted using the standard POST, PUT, PATCH and DELETE HTTP methods
+   ** this is analogous to adding, modifying, replacing and removing items from an online store's shopping cart
+   * All operations that are perfomed at this endpoint are considered to be in a pending state and are only "committed" to the server once a special token ("commit") is POST'ed to the transaction endpoint.
+
+===== Example
+
+The following example is the same cable and poll example used to presented in the document case above.
+
+*STEP 1*: Create a transaction endpoint (i.e shopping cart)
+
+----
+   CLIENT                                                     SERVER
+     |                                                           |
+     |   POST /transactions   HTTP/1.1                           |
+     |   Host: www.someserver.com                                |
+     |---------------------------------------------------------->|
+     |                                                           |
+     |                                                           |
+     |   HTTP/1.1 201 Created                                    |
+     |   Location: /transactions/803                             |
+     |   Content-Type: application/json                          |
+     |                                                           |
+     |   {                                                       |
+     |      "links": [                                           |
+     |         {                                                 |
+     |            "href": "/transactions/803/collections/CABLE_SEGMENTS/items",
+     |            "rel": "edit",                                 |
+     |            "title": "Edit endpoint for CABLE_SEGMENTS collection"
+     |         },                                                |
+     |         {                                                 |
+     |            "href": "/transactions/803/collections/POLES/items",
+     |            "rel": "edit",                                 |
+     |            "title": "Edit endpoint for POLES collection"  |
+     |         },                                                |
+     |         .                                                 |
+     |         .                                                 |
+     |         .                                                 |
+     |   }                                                       |
+     |<----------------------------------------------------------|
+----
+
+   * an empty POST is sent to the transaction endpoint discovered from the server's landing page
+   * the server's response contains the URL of the new transactions resource (i.e. the shopping cart)
+   * the body of the response contains, for each collection that the server offers, the "rel="edit" endpoint
+   ** these end points are used to insert, replace, update and/or delete features from the corresponding collection
+   * the edit endpoint will have a prefix based on the transaction endpoint the server advertised in its landing page
+   ** but, the trailing path elements of this edit endpoint must match those defined in WFS 3.0
+   *** i.e. /collections/{collectionId}[/items[/{featureId}]]
+   *** this allows clients to use the standard adressing defined in WFS 3.0 to access features
+
+*STEP 2* Add the new cable segment
+
+----
+   CLIENT                                                     SERVER
+     |                                                           |
+     |   POST /transactions/803/collections/CABLE_SEGMENTS/items   HTTP/1.1
+     |   Host: www.someserver.com                                |
+     |   Content-Type: application/geo+json                      |
+     |   OGC-Update-Priority: high                               |
+     |                                                           |
+     |   {                                                       |
+     |      "type": "Feature",                                   |
+     |      "geometry": {                                        |
+     |         "type": "LineString",                             |
+     |         "coordinates":                                    |
+     |            [                                              |
+     |               [43.735915,-79.298053],                     |
+     |               [43.735839,-79.298026]                      |
+     |            ]                                              |
+     |      },                                                   |
+     |      "properties": {                                      |
+     |         "segmentId": "SEG237",                            |
+     |         "manufacturer": "Corning",                        |
+     |         "all-dielectric": "yes",                          |
+     |         "armored": "yes",                                 |
+     |         "fibre_count": 12                                 |
+     |         "fibre_type": "OM3 LAZER-OPTIMIZED 50μ",          |
+     |         "rodent_protected: "yes",                         |
+     |         "USDPSC_code": 26126170                           |
+     |      }                                                    |
+     |   }                                                       |
+     |---------------------------------------------------------->|
+     |                                                           |
+     |                                                           |
+     |   HTTP/1.1 201 Created                                    |
+     |   Location: /transactions/803/collections/CABLE_SEGMENTS/items/47341
+     |<----------------------------------------------------------|
+----
+
+   * once the transaction resource has been created, inserting, updating, replacing and/or deleting feature proceeds as it does for the simple transaction case
+   ** i.e. the POST, PUT, PATCH and/or DELETE methods are using with the rel="edit" endpoint of the collections
+   * in this case, the POST method is used on the edit endpoint for the CABLE_SEGMENT collcetions to add a new segment
+
+*STEP 3* Move the pole to its new location to connect with the new segment
+
+----
+  CLIENT                                                     SERVER
+     |                                                           |
+     |   PATCH /transactions/803/collections/POLES/items/347901   HTTP/1.1
+     |   Host: www.someserver.com                                |
+     |   Content-Type: application/geo+json                      |
+     |   OGC-Update-Priority: high                               |
+     |                                                           |
+     |   {                                                       |
+     |      "modify" [                                           |
+     |         {                                                 |
+     |            "name": "geometry",                            |
+     |            "value": {                                     |
+     |               "type": "Point",                            |  
+     |               "coordinates":                              |
+     |                  [[43.735915,-79.298053]]                 |
+     |            }                                              |
+     |         },                                                |
+     |         {                                                 |
+     |            "name": "updated",                             |
+     |            "value": "2019-05-28"                          |
+     |         }                                                 |
+     |      ]                                                    |   
+     |   }                                                       |
+     |---------------------------------------------------------->|
+     |                                                           |
+     |                                                           |
+     |   HTTP/1.1 200 OK                                         |
+     |   Location: /transactions/803/collections/POLES/items/347901
+     |<----------------------------------------------------------|
+----
+
+   * remember, creating a transaction resource creates a virtual view of the server's collections
+   ** this means that the tail end of the transaction resource is the familiar /collections/{collectionId}[/items[/{featureId}]] path defined by WFS 3.0
+   ** this means that all features that were available at the time the transaction resource was created are available to be edited
+   * in this case, the edit endpoint for the POLES collection is used to move poll with "id" 347901
+
+*STEP 4*: Commit the transaction and get the transaction response.
+
+----
+   CLIENT                                                     SERVER
+     |                                                           |
+     |   POST /transactions/803   HTTP/1.1                       |
+     |   Host: www.someserver.com                                |
+     |   Content-Type: text/plain                                |
+     |   Accept: application/json                                |
+     |   OGC-Update-Priority: high                               |
+     |                                                           |
+     |   commit                                                  |
+     |---------------------------------------------------------->|
+     |                                                           |  
+     |                                                           |
+     |   HTTP/1.1 200 OK                                         |
+     |   Content-Type: application/json                          |
+     |                                                           |
+     |   {                                                       |
+     |      "semantic": "atomic",                                |
+     |      "summary": {                                         |
+     |         "totalInserted": 1,                               |
+     |         "totalUpdated": 1                                 |
+     |      },                                                   |
+     |      "insertResults": [                                   |
+     |         "/collections/CABLE_SEGMENTS/items/47341"         |
+     |      ],                                                   |
+     |      "updateResults": [                                   |
+     |         "/collections/POLES/items/347901"                 |
+     |      ]                                                    |
+     |   }                                                       |
+     |<----------------------------------------------------------|
+----
+
