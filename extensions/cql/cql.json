@@ -1,51 +1,88 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-   "type": "object",
-   "properties": {
-      "and": {"$ref": "#/definitions/and" },
-      "or": {"$ref": "#/definitions/or" },
-      "not": {"$ref": "#/definitions/or" },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$ref": "#/definitions/logicalOperator",
 
-      "eq": {"$ref": "#/definitions/eq"},
-      "lt": {"$ref": "#/definitions/lt"},
-      "gt": {"$ref": "#/definitions/gt"},
-      "lte": {"$ref": "#/definitions/lte"},
-      "gte": {"$ref": "#/definitions/gte"},
+    "definitions": {
 
-      "between": {"$ref": "#/definitions/between"},
+      "logicalOperator": {
+        "type": "object",
+        "allOf": [
+            { "$ref": "#/definitions/booleanOperator" },
+            { "$ref": "#/definitions/comparisonOperator" },
+            { "$ref": "#/definitions/spatialOperator" },
+            { "$ref": "#/definitions/temporalOperator" }
+        ]
+      },
 
-      "like": { "$ref": "#/definitions/like" },
-      "in": { "$ref": "#/definitions/in" },
+      "booleanOperator" : {
+        "type": "object",
+        "properties": {
+            "and": {"$ref": "#/definitions/and" },
+            "or": {"$ref": "#/definitions/or" },
+            "not": {"$ref": "#/definitions/not" }
+        },
+        "minProperties": 1,
+        "maxProperties": 1
+      },
 
-      "equals": {"$ref": "#/definitions/equals"},
-      "disjoint": {"$ref": "#/definitions/disjoint"},
-      "touches": {"$ref": "#/definitions/touches"},
-      "within": {"$ref": "#/definitions/within"},
-      "overlaps": {"$ref": "#/definitions/overlaps"},
-      "crosses": {"$ref": "#/definitions/crosses"},
-      "intersects": {"$ref": "#/definitions/intersects"},
-      "contains": {"$ref": "#/definitions/contains"},
+      "comparisonOperator" : {
+        "type": "object",
+        "properties": {
+            "eq": {"$ref": "#/definitions/eq"},
+            "lt": {"$ref": "#/definitions/lt"},
+            "gt": {"$ref": "#/definitions/gt"},
+            "lte": {"$ref": "#/definitions/lte"},
+            "gte": {"$ref": "#/definitions/gte"},
 
-      "after": {"$ref": "#/definitions/after"},
-      "before": {"$ref": "#/definitions/before"},
-      "begins": {"$ref": "#/definitions/begins"},
-      "begunby": {"$ref": "#/definitions/begunby"},
-      "tcontains": {"$ref": "#/definitions/tcontains"},
-      "during": {"$ref": "#/definitions/during"},
-      "endedby": {"$ref": "#/definitions/endedby"},
-      "ends": {"$ref": "#/definitions/ends"},
-      "tequals": {"$ref": "#/definitions/tequals"},
-      "meets": {"$ref": "#/definitions/meets"},
-      "metby": {"$ref": "#/definitions/metby"},
-      "toverlaps": {"$ref": "#/definitions/toverlaps"},
-      "overlappedby": {"$ref": "#/definitions/overlappedby"}
-   },
-   "minProperties": 1,
-   "maxProperties": 1,
-   "definitions": {
-      "and": { "$ref": "#/definitions/logicalOperands" },
-      "or":  { "$ref": "#/definitions/logicalOperands" },
-      "not": { "$ref": "#/definitions/logicalOperands" },
+            "between": {"$ref": "#/definitions/between"},
+
+            "like": { "$ref": "#/definitions/like" },
+            "in": { "$ref": "#/definitions/in" }
+        },
+        "minProperties": 1,
+        "maxProperties": 1
+      },
+
+      "spatialOperator" : {
+        "type": "object",
+        "properties": {
+            "equals": {"$ref": "#/definitions/equals"},
+            "disjoint": {"$ref": "#/definitions/disjoint"},
+            "touches": {"$ref": "#/definitions/touches"},
+            "within": {"$ref": "#/definitions/within"},
+            "overlaps": {"$ref": "#/definitions/overlaps"},
+            "crosses": {"$ref": "#/definitions/crosses"},
+            "intersects": {"$ref": "#/definitions/intersects"},
+            "contains": {"$ref": "#/definitions/contains"}
+        },
+        "minProperties": 1,
+        "maxProperties": 1
+      },
+
+      "temporalOperator" : {
+        "type": "object",
+        "properties": {
+            "after": {"$ref": "#/definitions/after"},
+            "before": {"$ref": "#/definitions/before"},
+            "begins": {"$ref": "#/definitions/begins"},
+            "begunby": {"$ref": "#/definitions/begunby"},
+            "tcontains": {"$ref": "#/definitions/tcontains"},
+            "during": {"$ref": "#/definitions/during"},
+            "endedby": {"$ref": "#/definitions/endedby"},
+            "ends": {"$ref": "#/definitions/ends"},
+            "tequals": {"$ref": "#/definitions/tequals"},
+            "meets": {"$ref": "#/definitions/meets"},
+            "metby": {"$ref": "#/definitions/metby"},
+            "toverlaps": {"$ref": "#/definitions/toverlaps"},
+            "overlappedby": {"$ref": "#/definitions/overlappedby"}
+        },
+        "minProperties": 1,
+        "maxProperties": 1
+      },
+
+      "and": { "$ref": "#/definitions/binaryOperands" },
+      "or":  { "$ref": "#/definitions/binaryOperands" },
+      "not": { "$ref": "#/definitions/logicalOperator" },
 
       "eq":  { "$ref": "#/definitions/scalarOperands" },
       "lt":  { "$ref": "#/definitions/scalarOperands" },
@@ -112,49 +149,10 @@
       "anyinteracts": { "$ref": "#/definitions/temporalOperands" },
       "tintersects":  { "$ref": "#/definitions/temporalOperands" },
 
-      "logicalOperands": {
+      "binaryOperands": {
          "type": "array",
          "items": {
-             "type": "object",
-             "properties": {
-                "and": {"$ref": "#/definitions/and" },
-                "or": {"$ref": "#/definitions/or" },
-                "not": {"$ref": "#/definitions/not" },
-
-                "eq": {"$ref": "#/definitions/eq"},
-                "lt": {"$ref": "#/definitions/lt"},
-                "gt": {"$ref": "#/definitions/gt"},
-                "lte": {"$ref": "#/definitions/lte"},
-                "gte": {"$ref": "#/definitions/gte"},
-
-                "between": {"$ref": "#/definitions/between"},
-
-                "like": { "$ref": "#/definitions/like" },
-                "in": { "$ref": "#/definitions/in" },
-
-                "equals": {"$ref": "#/definitions/equals"},
-                "disjoint": {"$ref": "#/definitions/disjoint"},
-                "touches": {"$ref": "#/definitions/touches"},
-                "within": {"$ref": "#/definitions/within"},
-                "overlaps": {"$ref": "#/definitions/overlaps"},
-                "crosses": {"$ref": "#/definitions/crosses"},
-                "intersects": {"$ref": "#/definitions/intersects"},
-                "contains": {"$ref": "#/definitions/contains"},
-
-                "after": {"$ref": "#/definitions/after"},
-                "before": {"$ref": "#/definitions/before"},
-                "begins": {"$ref": "#/definitions/begins"},
-                "begunby": {"$ref": "#/definitions/begunby"},
-                "tcontains": {"$ref": "#/definitions/tcontains"},
-                "during": {"$ref": "#/definitions/during"},
-                "endedby": {"$ref": "#/definitions/endedby"},
-                "ends": {"$ref": "#/definitions/ends"},
-                "tequals": {"$ref": "#/definitions/tequals"},
-                "meets": {"$ref": "#/definitions/meets"},
-                "metby": {"$ref": "#/definitions/metby"},
-                "toverlaps": {"$ref": "#/definitions/toverlaps"},
-                "overlappedby": {"$ref": "#/definitions/overlappedby"}
-             },
+             "$ref": "#/definitions/logicalOperator",
              "minItems": 2
          }
       },
@@ -166,6 +164,7 @@
             "function": { "$ref": "#/definitions/function" },
             "value": { "$ref": "#/definitions/scalarLiteral" }
          },
+         "required" : [ "value" ],
          "minProperties": 2,
          "maxProperties": 2
       },
@@ -177,6 +176,7 @@
             "function": { "$ref": "#/definitions/function" },
             "value": {  "$ref": "#/definitions/geometryLiteral" }
          },
+         "required" : [ "value" ],
          "minProperties": 2,
          "maxProperties": 2
       },
@@ -188,6 +188,7 @@
             "function": { "$ref": "#/definitions/function" },
             "value": { "$ref": "#/definitions/temporalLiteral" }
          },
+         "required" : [ "value" ],
          "minProperties": 2,
          "maxProperties": 2
       },
