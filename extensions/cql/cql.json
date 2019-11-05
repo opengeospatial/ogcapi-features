@@ -204,21 +204,21 @@
                      { "type": "string" },
                      { "type": "number" },
                      { "type": "boolean" },
-                     { "$ref": "#/definitions/property" },
-                     { "$ref": "#/definitions/function" },
-                     { "$ref": "#/definitions/geometryLiteral" },
-                     { "$ref": "#/definitions/envelopeLiteral" },
-                     { "$ref": "#/definitions/temporalLiteral" }
+                     { "$ref": "#/definitions/functionObjectArgument" }
                   ]
                }
             }
          }
       },
 
-      "property": {
+      "functionObjectArgument": {
          "type": "object",
          "properties": {
-            "property": { "type": "string" }
+            "property": { "type": "string" },
+            "function": { "$ref": "#/definitions/function" },
+            "geometry": { "$ref": "#/definitions/geometryLiteral" },
+            "bbox": { "$ref": "#/definitions/bbox" },
+            "temporalValue": { "$ref": "#/definitions/temporalLiteral" }
          }
       },
 
@@ -234,17 +234,19 @@
          "type": "object"
       },
 
+      "bbox": {
+        "type": "array",
+        "items": {
+            "type": "number",
+            "minItems": 4,
+            "maxItems": 6
+        }
+      },
+
       "envelopeLiteral": {
          "type": "object",
          "properties": {
-            "bbox": {
-               "type": "array",
-               "items": {
-                  "type": "number",
-                  "minItems": 4,
-                  "maxItems": 6
-               }
-            }
+            "bbox": { "$ref": "#/definitions/bbox" }
          }
       },
 
