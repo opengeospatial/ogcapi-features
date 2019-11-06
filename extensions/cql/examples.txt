@@ -31,8 +31,8 @@ CQL JSON: {
 CQL: floors>5
 
 CQL JSON: {
-             "eq": {
-                "property": "floor",
+             "gt": {
+                "property": "floors",
                 "value": 5
              }
           } 
@@ -54,19 +54,19 @@ CQL: owner LIKE '% Jones %'
 
 CQL JSON: {
              "like": {
-                "property": "owner_name",
+                "property": "owner",
                 "value": "% Jones %"
              }
           }
 
 4. Owner name starts with 'Mike'
 
-CQL: owner_name LIKE 'Mike%'
+CQL: owner LIKE 'Mike%'
 
 CQL JSON: {
              "like": {
                 "wildCards": "%",
-                "property": "owner_name",
+                "property": "owner",
                 "value": "Mike%"
              }
           }
@@ -75,12 +75,12 @@ CQL JSON: {
 
 5. Owner name does not contain 'Mike'
 
-CQL: owner_name NOT LIKE '% Mike %'
+CQL: owner NOT LIKE '% Mike %'
 
 CQL JSON: {
              "not": {
-                "contains": {
-                   "property": "owner_name",
+                "like": {
+                   "property": "owner",
                    "value": "% Mike %"
                 }
              }
@@ -120,7 +120,7 @@ CQL JSON: {
 
 8. A swimming pool and (more than five floors or material is brick)
 
-CQL: swimming_pool=true AND (floors>5 OR material='brick')
+CQL: swimming_pool=true AND (floors>5 OR material LIKE 'brick%' OR material LIKE '%brick')
 
 CQL JSON: {
              "and": [
@@ -211,7 +211,7 @@ CQL JSON: {
 
 11. Owner name starts with 'mike' or 'Mike' and is less than 4 floors
  
-CQL: (owner_name LIKE 'mike%' OR owner_name like 'Mike%') AND floors<4
+CQL: (owner LIKE 'mike%' OR owner like 'Mike%') AND floors<4
 
 CQL JSON: {
              "and": [
@@ -219,13 +219,13 @@ CQL JSON: {
                    "or": [
                       {
                          "like": {
-                            "property": "owner_name",
+                            "property": "owner",
                             "value": "mike%"
                          }
                       },
                       {
                          "like": {
-                            "property": "owner_name",
+                            "property": "owner",
                             "value": "Mike%"
                          }
                       }
