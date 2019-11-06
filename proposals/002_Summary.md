@@ -54,9 +54,9 @@ Here is an example of what this summary resource might look like for a "building
           "unsortable": true
         }
       },
-      "taxID": {
+      "taxId": {
         "schema": {
-          "href": "http://example.com/collections/foo/schema#/definitions/age"
+          "href": "http://example.com/collections/foo/schema#/definitions/taxId"
         },
         "editing": {
           "readonly": true
