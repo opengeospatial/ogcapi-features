@@ -48,10 +48,10 @@ Here is an example of what this summary resource might look like for a "building
           "href": "http://example.com/collections/foo/schema#/definitions/age"
         },
         "filter": {
-          "disallowed": true
+          "allowed": false
         },
         "search": {
-          "unsortable": true
+          "sortable": false
         }
       },
       "taxId": {
@@ -59,7 +59,7 @@ Here is an example of what this summary resource might look like for a "building
           "href": "http://example.com/collections/foo/schema#/definitions/taxId"
         },
         "editing": {
-          "readonly": true
+          "writeable": false
         }
       }
     }
@@ -75,8 +75,6 @@ Notes on the above example:
 
  * Individual extensions could add their own members to each of the properties object.  For example, the "filter" expression could define a `filter` object.
  
- * I like the idea that defaults are `false` - so the absence of a property implies the default property.  This means that by default, a property would be sortable for example.  If a service wanted to disallow sorting on a particular property, they would add `"unsortable": true` to change the default behavior.
-
 ## Detailed design
 
 TODO
