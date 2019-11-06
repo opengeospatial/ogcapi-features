@@ -79,7 +79,7 @@ CQL: owner_name NOT LIKE '% Mike %'
 CQL JSON: [
               "not",
               [
-                  "contains",
+                  "like",
                   ["property", "owner_name"],
                   "% Mike %"
               ]
