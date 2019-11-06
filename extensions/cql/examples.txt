@@ -120,7 +120,7 @@ CQL JSON: {
 
 8. A swimming pool and (more than five floors or material is brick)
 
-CQL: swimming_pool=true AND (floors>5 OR material='brick')
+CQL: swimming_pool=true AND (floors>5 OR material LIKE 'brick%' OR material LIKE '%brick')
 
 CQL JSON: {
              "and": [
