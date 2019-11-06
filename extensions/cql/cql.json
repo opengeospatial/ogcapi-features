@@ -1,20 +1,21 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$ref": "#/definitions/logicalOperator",
+    "$ref": "#/definitions/logicalExpression",
 
     "definitions": {
 
-      "logicalOperator": {
+      "predicates": {
         "type": "object",
         "allOf": [
-            { "$ref": "#/definitions/booleanOperator" },
-            { "$ref": "#/definitions/comparisonOperator" },
-            { "$ref": "#/definitions/spatialOperator" },
-            { "$ref": "#/definitions/temporalOperator" }
+            { "$ref": "#/definitions/logicalExpression" },
+            { "$ref": "#/definitions/arithmeticExpression" },
+            { "$ref": "#/definitions/comparisonExpressions" },
+            { "$ref": "#/definitions/spatialExpressions" },
+            { "$ref": "#/definitions/temporalExpressions" }
         ]
       },
 
-      "booleanOperator" : {
+      "logicalExpression" : {
         "type": "object",
         "properties": {
             "and": {"$ref": "#/definitions/and" },
@@ -25,7 +26,7 @@
         "maxProperties": 1
       },
 
-      "comparisonOperator" : {
+      "comparisonExpressions" : {
         "type": "object",
         "properties": {
             "eq": {"$ref": "#/definitions/eq"},
@@ -43,7 +44,19 @@
         "maxProperties": 1
       },
 
-      "spatialOperator" : {
+      "arithmeticExpressions": {
+        "type": "object",
+        "properties": {
+            "+": {"$ref": "#/definitions/add"},
+            "-": {"$ref": "#/definitions/sub"},
+            "*": {"$ref": "#/definitions/mul"},
+            "/": {"$ref": "#/definitions/div"}
+        },
+        "minProperties": 1,
+        "maxProperties": 1
+      },
+
+      "spatialExpressions" : {
         "type": "object",
         "properties": {
             "equals": {"$ref": "#/definitions/equals"},
@@ -59,7 +72,7 @@
         "maxProperties": 1
       },
 
-      "temporalOperator" : {
+      "temporalExpressions" : {
         "type": "object",
         "properties": {
             "after": {"$ref": "#/definitions/after"},
@@ -80,9 +93,14 @@
         "maxProperties": 1
       },
 
-      "and": { "$ref": "#/definitions/binaryOperands" },
-      "or":  { "$ref": "#/definitions/binaryOperands" },
-      "not": { "$ref": "#/definitions/logicalOperator" },
+      "and": { "$ref": "#/definitions/booleanOperands" },
+      "or":  { "$ref": "#/definitions/booleanOperands" },
+      "not": { "$ref": "#/definitions/logicalExpression" },
+
+      "add": { "$ref": "#/definitions/arithmeticOperands" },
+      "sub": { "$ref": "#/definitions/arithmeticOperands" },
+      "mul": { "$ref": "#/definitions/arithmeticOperands" },
+      "div": { "$ref": "#/definitions/arithmeticOperands" },
 
       "eq":  { "$ref": "#/definitions/scalarOperands" },
       "lt":  { "$ref": "#/definitions/scalarOperands" },
@@ -149,10 +167,10 @@
       "anyinteracts": { "$ref": "#/definitions/temporalOperands" },
       "tintersects":  { "$ref": "#/definitions/temporalOperands" },
 
-      "binaryOperands": {
+      "booleanOperands": {
          "type": "array",
          "items": {
-             "$ref": "#/definitions/logicalOperator",
+             "$ref": "#/definitions/logicalExpression",
              "minItems": 2
          }
       },
@@ -164,7 +182,17 @@
             "function": { "$ref": "#/definitions/function" },
             "value": { "$ref": "#/definitions/scalarLiteral" }
          },
-         "required" : [ "value" ],
+         "minProperties": 2,
+         "maxProperties": 2
+      },
+
+      "arithmeticOperand": {
+         "type": "object",
+         "properties": {
+            "property": { "type": "string" },
+            "function": { "$ref": "#/definitions/function" },
+            "value": { "type": "number" }
+         },
          "minProperties": 2,
          "maxProperties": 2
       },
@@ -176,7 +204,6 @@
             "function": { "$ref": "#/definitions/function" },
             "value": {  "$ref": "#/definitions/geometryLiteral" }
          },
-         "required" : [ "value" ],
          "minProperties": 2,
          "maxProperties": 2
       },
@@ -188,7 +215,6 @@
             "function": { "$ref": "#/definitions/function" },
             "value": { "$ref": "#/definitions/temporalLiteral" }
          },
-         "required" : [ "value" ],
          "minProperties": 2,
          "maxProperties": 2
       },
