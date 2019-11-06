@@ -8,7 +8,6 @@
         "type": "object",
         "allOf": [
             { "$ref": "#/definitions/logicalExpression" },
-            { "$ref": "#/definitions/arithmeticExpression" },
             { "$ref": "#/definitions/comparisonExpressions" },
             { "$ref": "#/definitions/spatialExpressions" },
             { "$ref": "#/definitions/temporalExpressions" }
@@ -39,18 +38,6 @@
 
             "like": { "$ref": "#/definitions/like" },
             "in": { "$ref": "#/definitions/in" }
-        },
-        "minProperties": 1,
-        "maxProperties": 1
-      },
-
-      "arithmeticExpressions": {
-        "type": "object",
-        "properties": {
-            "+": {"$ref": "#/definitions/add"},
-            "-": {"$ref": "#/definitions/sub"},
-            "*": {"$ref": "#/definitions/mul"},
-            "/": {"$ref": "#/definitions/div"}
         },
         "minProperties": 1,
         "maxProperties": 1
@@ -174,24 +161,32 @@
              "minItems": 2
          }
       },
+     
+      "arithmeticOperands": {
+         "type": "object",
+         "properties": {
+            "property": { "type": "string" },
+            "function": { "$ref": "#/definitions/function" },
+            "value": { "type": "number" },
+            "+": {"$ref": "#/definitions/add"},
+            "-": {"$ref": "#/definitions/sub"},
+            "*": {"$ref": "#/definitions/mul"},
+            "/": {"$ref": "#/definitions/div"}
+         },
+         "minProperties": 2,
+         "maxProperties": 2
+      },
 
       "scalarOperands": {
          "type": "object",
          "properties": {
             "property": { "type": "string" },
             "function": { "$ref": "#/definitions/function" },
-            "value": { "$ref": "#/definitions/scalarLiteral" }
-         },
-         "minProperties": 2,
-         "maxProperties": 2
-      },
-
-      "arithmeticOperand": {
-         "type": "object",
-         "properties": {
-            "property": { "type": "string" },
-            "function": { "$ref": "#/definitions/function" },
-            "value": { "type": "number" }
+            "value": { "$ref": "#/definitions/scalarLiteral" },
+            "+": {"$ref": "#/definitions/add"},
+            "-": {"$ref": "#/definitions/sub"},
+            "*": {"$ref": "#/definitions/mul"},
+            "/": {"$ref": "#/definitions/div"}
          },
          "minProperties": 2,
          "maxProperties": 2
@@ -244,7 +239,11 @@
             "function": { "$ref": "#/definitions/function" },
             "geometry": { "$ref": "#/definitions/geometryLiteral" },
             "bbox": { "$ref": "#/definitions/bbox" },
-            "temporalValue": { "$ref": "#/definitions/temporalLiteral" }
+            "temporalValue": { "$ref": "#/definitions/temporalLiteral" },
+            "+": {"$ref": "#/definitions/add"},
+            "-": {"$ref": "#/definitions/sub"},
+            "*": {"$ref": "#/definitions/mul"},
+            "/": {"$ref": "#/definitions/div"}
          }
       },
 
