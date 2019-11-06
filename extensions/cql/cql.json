@@ -84,11 +84,6 @@
       "or":  { "$ref": "#/definitions/booleanOperands" },
       "not": { "$ref": "#/definitions/logicalExpression" },
 
-      "add": { "$ref": "#/definitions/arithmeticOperands" },
-      "sub": { "$ref": "#/definitions/arithmeticOperands" },
-      "mul": { "$ref": "#/definitions/arithmeticOperands" },
-      "div": { "$ref": "#/definitions/arithmeticOperands" },
-
       "eq":  { "$ref": "#/definitions/scalarOperands" },
       "lt":  { "$ref": "#/definitions/scalarOperands" },
       "gt":  { "$ref": "#/definitions/scalarOperands" },
@@ -176,6 +171,11 @@
          "minProperties": 2,
          "maxProperties": 2
       },
+
+      "add": { "$ref": "#/definitions/arithmeticOperands" },
+      "sub": { "$ref": "#/definitions/arithmeticOperands" },
+      "mul": { "$ref": "#/definitions/arithmeticOperands" },
+      "div": { "$ref": "#/definitions/arithmeticOperands" },
 
       "scalarOperands": {
          "type": "object",
