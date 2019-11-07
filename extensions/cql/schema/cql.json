@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$ref": "#/definitions/logicalExpression",
+    "$ref": "#/definitions/predicates",
 
     "definitions": {
 
@@ -11,7 +11,9 @@
             { "$ref": "#/definitions/comparisonExpressions" },
             { "$ref": "#/definitions/spatialExpressions" },
             { "$ref": "#/definitions/temporalExpressions" }
-        ]
+        ],
+        "minProperties": 1,
+        "maxProperties": 1
       },
 
       "logicalExpression" : {
@@ -82,7 +84,7 @@
 
       "and": { "$ref": "#/definitions/booleanOperands" },
       "or":  { "$ref": "#/definitions/booleanOperands" },
-      "not": { "$ref": "#/definitions/logicalExpression" },
+      "not": { "$ref": "#/definitions/predicates" },
 
       "eq":  { "$ref": "#/definitions/scalarOperands" },
       "lt":  { "$ref": "#/definitions/scalarOperands" },
@@ -152,11 +154,11 @@
       "booleanOperands": {
          "type": "array",
          "items": {
-             "$ref": "#/definitions/logicalExpression",
+             "$ref": "#/definitions/predicates",
              "minItems": 2
          }
       },
-     
+
       "arithmeticOperands": {
          "type": "object",
          "properties": {
