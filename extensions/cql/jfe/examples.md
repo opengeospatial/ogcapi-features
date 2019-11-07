@@ -7,18 +7,18 @@ CQL
 beamMode='ScanSAR Narrow' AND
 swathDirection='ascending' AND 
 polarization='HH+VV+HV+VH' AND
-intersects(geometry,POLYGON((-77.117938 38.936860,-77.040604 39.995648,-76.910536 38.892912,-77.039359 38.791753,-77.047906 38.841462,-77.034183 38.840655,-77.033142 38.857490)))
+intersects(geometry,POLYGON((-77.117938 38.936860,-77.040604 39.995648,-76.910536 38.892912,-77.039359 38.791753,-77.047906 38.841462,-77.034183 38.840655,-77.033142 38.857490, -77.117938 38.936860)))
 ```
 
 CQL JSON
 ```json
 [
-  "and",
-  ["eq", ["property", "beamMode"], "ScanSAR Narrow"],
-  ["eq", ["property", "swathDirection"], "ascending"],
-  ["eq", ["property", "polarization"], "HH+VV+HV+VH"],
+  "all",
+  ["==", ["get", "beamMode"], "ScanSAR Narrow"],
+  ["==", ["get", "swathDirection"], "ascending"],
+  ["==", ["get", "polarization"], "HH+VV+HV+VH"],
   ["intersects",
-    ["property", "footprint"],
+    ["geometry"],
     {
       "type": "Polygon",
       "coordinates": [[
@@ -28,7 +28,8 @@ CQL JSON
         [-77.039359,38.791753],
         [-77.047906,38.841462],
         [-77.034183,38.840655],
-        [-77.033142,38.857490]
+        [-77.033142,38.857490],
+        [-77.117938,38.936860]
       ]]
     }
   ]
@@ -39,15 +40,13 @@ CQL JSON
 
 CQL
 ```
-floors>5
+floors > 5
 ```
 
 CQL JSON
 ```json
 [
-  "gt",
-  ["property", "floor"],
-  5
+  ">", ["get", "floors"], 5
 ]
 ```
 
@@ -61,9 +60,7 @@ taxes <= 500
 CQL JSON
 ```json
 [
-  "lte",
-  ["property", "taxes"],
-  500
+  "<=", ["get", "taxes"], 500
 ]
 ```
 
@@ -77,9 +74,7 @@ owner LIKE '% Jones %'
 CQL JSON
 ```json
 [
-  "like",
-  ["property", "owner_name"],
-  "% Jones %"
+  "like", ["get", "owner"], "% Jones %"
 ]
 ```
 
@@ -87,16 +82,13 @@ CQL JSON
 
 CQL
 ```
-owner_name LIKE 'Mike%'
+owner LIKE 'Mike%'
 ```
 
 CQL JSON
 ```json
 [
-  "like",
-  ["property", "owner_name"],
-  "Mike%",
-  {"wildCards": "%"}
+  "like", ["get", "owner"], "Mike%", {"wildCard": "%"}
 ]
 ```
 
@@ -105,17 +97,15 @@ CQL JSON
 
 CQL
 ```
-owner_name NOT LIKE '% Mike %'
+owner NOT LIKE '% Mike %'
 ```
 
 CQL JSON
 ```json
 [
-  "not",
+  "!",
   [
-    "like",
-    ["property", "owner_name"],
-    "% Mike %"
+    "like", ["get", "owner"], "% Mike %"
   ]
 ]
 ```
@@ -130,9 +120,7 @@ swimming_pool=true
 CQL JSON
 ```json
 [
-  "eq",
-  ["property", "swimming_pool"],
-  true
+  "==", ["get", "swimming_pool"], true
 ]
 ```
 
@@ -146,17 +134,9 @@ floors>5 AND swimming_pool=true
 CQL JSON
 ```json
 [
-  "and",
-  [
-    "gt",
-    ["property", "floor"],
-    5
-  ],
-  [
-    "eq",
-    ["property", "swimming_pool"],
-    true
-  ]
+  "all",
+  [">", ["get", "floor"], 5],
+  ["==", ["get", "swimming_pool"], true]
 ]
 ```
 
@@ -170,24 +150,12 @@ swimming_pool=true AND (floors>5 OR material LIKE '%brick')
 CQL JSON
 ```json
 [
-  "and",
+  "all",
+  ["==", ["get", "swimming_pool"], true],
   [
-    "eq",
-    ["property", "swimming_pool"],
-    true
-  ],
-  [
-    "or",
-    [
-      "gt",
-      ["property", "floor"],
-      5
-    ],
-    [
-      "like",
-      ["property", "material"],
-      "%brick"
-    ]
+    "any",
+    [">", ["get", "floor"], 5],
+    ["like", ["get", "material"], "%brick"]
   ]
 ]
 ```
@@ -202,25 +170,13 @@ CQL
 CQL JSON
 ```json
 [
-  "or",
+  "any",
   [
-    "and",
-    [
-      "gt",
-      ["property", "floors"],
-      5
-    ],
-    [
-      "eq",
-      ["property", "material"],
-      "brick"
-    ]
+    "all",
+    [">", ["get", "floors"], 5],
+    ["==", ["get", "material"], "brick"]
   ],
-  [
-    "eq",
-    ["property", "swimming_pool"],
-    true
-  ]
+  ["==", ["get", "swimming_pool"], true]
 ]
 ```
 
@@ -234,20 +190,12 @@ NOT (floors<5) OR swimming_pool=true
 CQL JSON
 ```json
 [
-  "or",
+  "any",
   [
-    "not",
-    [
-      "lt",
-      ["property", "floors"],
-      5
-    ]
+    "!",
+    ["<", ["get", "floors"], 5]
   ],
-  [
-    "eq",
-    ["property", "swimming_pool"],
-    true
-  ]
+  ["==", ["get", "swimming_pool"], true]
 ]
 ```
 
@@ -255,31 +203,19 @@ CQL JSON
  
 CQL
 ```
-(owner_name LIKE 'mike%' OR owner_name like 'Mike%') AND floors<4
+(owner LIKE 'mike%' OR owner like 'Mike%') AND floors<4
 ```
 
 CQL JSON
 ```json
 [
-  "and",
+  "all",
   [
-    "or",
-    [
-      "like",
-      ["property", "owner_name"],
-      "mike%"
-    ],
-    [
-      "like",
-      ["property", "owner_name"],
-      "Mike%"
-    ]
+    "any",
+    ["like", ["get", "owner"], "mike%"],
+    ["like", ["get", "owner"], "Mike%"]
   ],
-  [
-    "lt",
-    ["property", "floors"],
-    4
-  ]
+  ["<", ["get", "floors"], 4]
 ]
 ```
 
@@ -287,31 +223,27 @@ CQL JSON
 
 CQL
 ```json
-built BEFORE '2015-01-01'
+built BEFORE '2015-01-01T00:00:00Z'
 ```
 
 CQL JSON
 ```json
 [
-  "before",
-  ["property", "built"],
-  "2015-01-01"
+  "before", ["get", "built"], "2015-01-01T00:00:00Z"
 ]
 ```
 
-13. Built after June 5, 2012
+13. Built after June 10, 2017
 
 CQL
 ```
-built AFTER '2012-06-05'
+built AFTER '2017-06-10T00:00:00Z'
 ```
 
 CQL JSON
 ```json
 [
-  "after",
-  ["property", "built"],
-  "2012-06-05"
+  "after", ["get", "built"], "2017-06-10T00:00:00Z"
 ]
 ```
 
@@ -325,10 +257,7 @@ updated DURING '2017-06-10T07:30:00' '2017-06-11T10:30:00'
 CQL JSON
 ```json
 [
-  "during",
-  ["property", "updated"],
-  "2017-06-10T07:30:00",
-  "2017-06-11T10:30:00"
+  "during", ["get", "updated"], "2017-06-10T07:30:00Z", "2017-06-11T10:30:00Z"
 ]
 ```
 
@@ -342,9 +271,7 @@ WITHIN(location,ENVELOPE(-118,33.8,-117.9,34)
 CQL JSON
 ```json
 [
-  "within",
-  ["property", "location"],
-  ["bbox", 33.8, -118, 34, -117.9]
+  "within", ["get", "location"], ["bbox", 33.8, -118, 34, -117.9]
 ]
 ```
 
@@ -359,7 +286,7 @@ CQL JSON
 ```json
 [
   "intersects",
-  ["property", "location"],
+  ["geometry"],
   {
     "type": "Polygon",
     "coordinates": [[[-10.0, -10.0], [10.0, -10.0], [10.0, 10.0], [-10.0, -10.0]]]
@@ -377,16 +304,8 @@ floors>5 AND WITHIN(geometry,ENVELOPE(33.8,-118,34,-117.9))
 CQL JSON
 ```json
 [
-  "and",
-  [
-    "gt",
-    ["property", "floors"],
-    5
-  ],
-  [
-    "within",
-    ["property", "geometry"],
-    ["bbox", 33.8, -118, 34, -117.9]
-  ]
+  "all",
+  [">", ["get", "floors"], 5],
+  ["within", ["geometry"], ["bbox", 33.8, -118, 34, -117.9]]
 ]
 ```
