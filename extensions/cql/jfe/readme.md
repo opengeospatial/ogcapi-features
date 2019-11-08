@@ -310,6 +310,16 @@ The [`fixtures`](./fixtures) directory includes valid and invalid test fixtures.
 python test.py
 ```
 
+## Implementations
+
+ * National Land Survey of Finland OGC API – Features implementation at https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/features/v1/ with experimental support for `filter-lang=json-filter-expr`.  E.g. `https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/features/v1/collections/tieviiva/items?limit=100&filter-lang=json-filter-expr&filter=["==",["get","kohdeluokka"],12316]`
+
+ * Experimental support in GDAL (using `filter-lang=json-filter-expr`) - https://github.com/OSGeo/gdal/pull/1999
+
+ * Generic Golang parser for JSON (Filter) Expressions - https://godoc.org/github.com/tschaub/jiffy
+
+ * Support for JSON Filter Expression parsing in pygeofilter - https://github.com/geopython/pygeofilter
+
 ## Prior Art
 
  * [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language))
