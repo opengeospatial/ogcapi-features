@@ -133,8 +133,8 @@ nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation
 
 ## GeoServer
 
-An incomplete implementation of the WFS3 specification is available at http://cloudsdi.geo-solutions.it/geoserver/wfs3/
-It is a community module developed from scratch during the WFS 3 hackaton. At the time of writing, still misses HTML outputs, conformance call, paging links (supports random paging with startIndex), single feature outputs and attribute filtering.
+An ccomplete implementation of the Features API specification is available at http://ows.geo-solutions.it/geoserver/ogc/features
+At the time of writing, it supports core, HTML, GML and GeoJSON (as well as other output formats), queriables and CQL extensions.
 
 ## pygeoapi
 
