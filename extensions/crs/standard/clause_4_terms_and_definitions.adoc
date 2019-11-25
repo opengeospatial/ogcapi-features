@@ -5,13 +5,15 @@ For the purposes of this document, the following additional terms and definition
 in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 
 === coordinate
-one of a sequence of n numbers designating the position of a point in n-dimensional space [ISO 19111:2007, definition 4.5]
+one of a sequence of numbers designating the position of a point [ISO 19111:2019, definition 3.1.5]
+
+NOTE: In a spatial coordinate reference system, the coordinate numbers are qualified by units.
 
 === coordinate reference system (CRS)
-coordinate system (4.5) that is related to an object by a datum [ISO 19111:2007, definition 4.8]
+coordinate system that is related to an object by a datum [ISO 19111:2019, definition 3.1.9]
 
 === coordinate system
-set of mathematical rules for specifying how coordinates are to be assigned to points [ISO 19111:2007, definition 4.10]
+set of mathematical rules for specifying how coordinates are to be assigned to points [ISO 19111:2019, definition 3.1.11]
 
 === feature
 abstraction of real world phenomena [ISO 19101-1:2014]
