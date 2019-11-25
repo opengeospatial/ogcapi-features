@@ -50,7 +50,9 @@ a CRS transformation.
 
 CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/264[Open issue 264] +
 To align with the new version of ISO 19111 / OGC Abstract Specification Topic 2,
-it should also be possible to state the coordinate epoch of the data (if known),
+it should also be possible to state the
+link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html#68[coordinate epoch]
+of the data (if known),
 if the storage CRS is a dynamic CRS. In this case, it should also be recommended
 to use a specific realization, not a CRS using a datum ensemble.
 
