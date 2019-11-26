@@ -14,6 +14,13 @@ for only two coordinate reference systems:
 This extensions defines the behaviour of a server that supports additional
 coordinate reference systems.
 
+CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/295[Open issue 295] +
+This draft is specific to Features and extends the resources
+'feature collection', 'features' and 'feature'. However, in general
+the approach specified in this draft should also be applicable to
+other resource types and feedback would be welcome how such reuse
+could be improved.
+
 include::requirements/crs/REQ_crs-uri.adoc[]
 
 include::recommendations/crs/REC_crs-format-model.adoc[]
@@ -41,11 +48,19 @@ The storage CRS for a spatial feature collection is the CRS identifier that
 may be used to retrieve features from that collection without the need to apply
 a CRS transformation.
 
+CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/264[Open issue 264] +
+To align with the new version of ISO 19111 / OGC Abstract Specification Topic 2,
+it should also be possible to state the
+link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html#68[coordinate epoch]
+of the data (if known),
+if the storage CRS is a dynamic CRS. In this case, it should also be recommended
+to use a specific realization, not a CRS using a datum ensemble.
+
 include::requirements/crs/REQ_fc-md-storageCrs.adoc[]
 
 include::requirements/crs/REQ_fc-md-storageCrs-valid-value.adoc[]
 
-The following schema fragment extends the collection metadata to add the 
+The following schema fragment extends the collection metadata to add the
 `storageCRS` property.
 
 [source,YAML]
@@ -94,7 +109,7 @@ properties:
       - http://www.opengis.net/def/crs/OGC/1.3/CRS84
       - http://www.opengis.net/def/crs/EPSG/0/4326
   storageCrs:
-     description: the CRS identifier, from the list of supported CRS identifiers, that may be used to retrieve features from a collection without the need to apply a CRS transformation 
+     description: the CRS identifier, from the list of supported CRS identifiers, that may be used to retrieve features from a collection without the need to apply a CRS transformation
      type: string
      format: uri
 ----
@@ -107,7 +122,13 @@ provided as part of the collections metadata.
 
 This global list of CRS identifiers is not automatically inherited by each
 collection offered by the service.  Rather the global list of CRS identifiers
-must be explicitly referenced in the collection metadata using a JSON link.
+must be explicitly referenced in the collection metadata using a
+JSON Pointer (RFC 6901).
+
+CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/274[Open issue 274] +
+We are looking for feedback what option would be best to encode a reference to
+the global list (a JSON Pointer, a JSON Reference, or something else). What works
+best for clients parsing the response?
 
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
@@ -200,7 +221,7 @@ The following example illustrates the used of a global list of CRS identifiers.
            "title": "CC0-1.0" }
        ],
        "crs": [
-          #/crs,
+          "#/crs",
           "http://www.opengis.net/def/crs/OGC/1.3/CRS41001",
           "http://www.opengis.net/def/crs/OGC/0/2246",
           "http://www.opengis.net/def/crs/OGC/0/3130",
@@ -232,7 +253,7 @@ The following example illustrates the used of a global list of CRS identifiers.
            "title": "CC0-1.0" }
        ],
        "crs": [
-          #/crs
+          "#/crs"
        ]
      },
      {
@@ -285,6 +306,9 @@ include::requirements/crs/REQ_fc-bbox-crs-definition.adoc[]
 
 include::requirements/crs/REQ_fc-bbox-crs-valid-values.adoc[]
 
+CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/294[Open issue 294] +
+The wording of the requirement may be unclear.
+
 include::requirements/crs/REQ_fc-bbox-crs-default-value.adoc[]
 
 include::requirements/crs/REQ_fc-bbox-crs-action.adoc[]
@@ -308,6 +332,9 @@ include::requirements/crs/REQ_fc-crs-definition.adoc[]
 
 include::requirements/crs/REQ_fc-crs-valid-value.adoc[]
 
+CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/294[Open issue 294] +
+The wording of the requirement may be unclear.
+
 include::requirements/crs/REQ_fc-crs-default-value.adoc[]
 
 include::requirements/crs/REQ_fc-crs-action.adoc[]
@@ -327,14 +354,19 @@ The following fragment illustrated the use of the `crs` parameter:
 ----
 =================
 
+CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/153[Open issue 153] +
+There is ongoing work to add negotiation of the CRS to the content negotiation
+process. However, this is still draft and not widely supported. For this reason,
+such a capability is considered right now only for a future revision.
+
 ==== Output format considerations
 
 OGC API - Features - Part 1: Core defines three conformance classes related
 to the output formats:
 
-   - GML
-   - GeoJSON
-   - HTML
+- GML
+- GeoJSON
+- HTML
 
 GML has full CRS support and no further requirements are imposed by this
 standard.
@@ -367,6 +399,13 @@ include::requirements/crs/REQ_ogc-crs-header-axis-order-value.adoc[]
 include::requirements/crs/REQ_ogc-crs-header-axis-names.adoc[]
 
 include::requirements/crs/REQ_ogc-crs-header-axis-order-action.adoc[]
+
+CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/153[Open issue 153] +
+The draft content negotiation by CRS specifies a `Content-Crs` header that
+could be used instead of a custom `OGC-CRS` header. The `Content-Crs` header
+just states the CRS, but has no option to state the axis order. +
+It is a related general question, if a capability to state the axis order
+would be helpful or not.
 
 The following example illustrates the use of the `OGC-CRS` header.
 
