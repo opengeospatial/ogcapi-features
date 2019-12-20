@@ -130,6 +130,10 @@ We are looking for feedback what option would be best to encode a reference to
 the global list (a JSON Pointer, a JSON Reference, or something else). What works
 best for clients parsing the response?
 
+CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/315[Open issue 315] +
+For large lists of supported CRS, the global CRS list could be placed in its
+own resource.
+
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
 The following schema fragment extends the collections metadata to add the `crs`
