@@ -9,7 +9,7 @@ For now this is limited to implementations of the current draft of Part 1. Core.
 
 Servers:
 
-* [interactive instruments](#interactive-instruments)
+* [ldproxy](#ldproxy)
 * [CubeWerx Inc.](#cubeWerx)
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
@@ -17,6 +17,7 @@ Servers:
 * [sofp](#sofp)
 * [STAC](#STAC)
 * [nls-fi](#nls-fi)
+* [SDI Rhineland-Palatinate - mapbender2](#sdi-rhineland-palatinate---mapbender2)
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
@@ -24,15 +25,24 @@ Clients:
 * [OWSLib WFS 3.0 client](https://geopython.github.io/OWSLib)
 * [STAC](#STAC)
 
-## interactive instruments
+## ldproxy
 
-The following are two servers implementing most of the current draft
-of part 1. They are using German data and therefore the language
+The following server has been set up in OGC Testbeds and Pilots. It includes extensions for other resources like vector tiles and styles:
+
+* OpenAPI definition: https://services.interactive-instruments.de/t15/daraa/api
+* Landing page: https://services.interactive-instruments.de/t15/daraa
+
+The server has been [certified as compliant by the OGC CITE tests](https://www.opengeospatial.org/resource/products/details/?pid=1598).
+
+Another server is implementing an older draft
+of part 1 (the server will be updated to version 1.0.0 soon). 
+The APIs provide German data and therefore the language
 in general is German, including in the HTML.
 
 The first endpoint is for cadastral parcels, buildings and
 administrative areas in North-Rhine Westphalia (Germany).
-The second endpoint for topographic data in that region.
+The second endpoint for topographic data in that region, 
+the third provides administrative units.
 
 For more details about the implementation and a discussion about
 how this implements the Spatial Data on the Web Best Practies see
@@ -87,12 +97,6 @@ bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/collections/a
 f=json&  
 bahnhofskategorie=1010&  
 bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/collections/ax_bahnverkehrsanlage/items?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
-
-Another server is from the [OGC Vector Tiles Pilot](http://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) 
-and it includes extensions for vector tile and style resources:
-
-* OpenAPI definition: https://services.interactive-instruments.de/vtp/daraa/api
-* Landing page: https://services.interactive-instruments.de/vtp/daraa
 
 ## CubeWerx Inc.
 
