@@ -203,3 +203,31 @@ Topographical database of National Land Survey of Finland as an OGC API - Featur
 * First 10 roadlinks: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/tieviiva/items?limit=10
 * Roadlink with id 11: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/tieviiva/items/11
 * First 1000 buildings inside 380000,6670000,390000,6680000,EPSG:3067: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/rakennus/items?bbox=380000,6670000,390000,6680000&bbox-crs=http://www.opengis.net/def/crs/EPSG/0/3067&crs=http://www.opengis.net/def/crs/EPSG/0/3067&limit=1000
+
+## SDI Rhineland-Palatinate - mapbender2
+The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saarland use the mapbender2 ows registry as backend 
+for their geoportal solutions. In the SDIs there are registered many OpenData classified WFS 2.0 resources and it was straightforward to develop a proxy solution, that implements the OGC API - Features interface at one central location. 
+Most of the core functions are implemented. The WFS behind the proxy are either based on mapserver or geoserver. The proxy does also create service metadata in form of iso19139 records. One extension is the usage of json-schema to define human readable attribute titles and descriptions at WFS level. The next extension will be the usage of json-ld to give semantical information for the attributes and allow the dynamical creation of rdf-a and other formats.
+The code of the current productional solution is available on the [OSGEO GIT](https://git.osgeo.org/gitea/armin11/GeoPortal.rlp)
+and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
+
+### Productive list of available Interfaces
+* List of all registrated OpenData WFS: https://www.geoportal.rlp.de/mapbender/php/mod_linkedDataProxy.php (some of them wont work, cause the database tables don't have primary keys exposed and therefor paging is not possible).
+
+### Example requests:
+
+#### Transport network (classified roads)
+* Start page: https://www.geoportal.rlp.de/spatial-objects/513
+* API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/513/api
+* HTML representation for the collection of highway objects: https://www.geoportal.rlp.de/spatial-objects/513/collections/ms:Autobahnen/items?&f=html
+* HTML represenation of single highway 'A3': https://www.geoportal.rlp.de/spatial-objects/513/collections/ms:Autobahnen/items/Autobahnen.A3?f=html
+
+#### UNESCO world heritage of the city of Trier (point objects)
+* Start page: https://www.geoportal.rlp.de/spatial-objects/486
+* API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/486/api
+* HTML representation objects: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items?&f=html
+* HTML representation of the description of the amphitheater: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items/unesco_welterbe.3730?f=html
+
+
+
+
