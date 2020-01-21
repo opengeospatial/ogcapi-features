@@ -5,7 +5,7 @@
 
 include::requirements/requirements_class_core.adoc[]
 
-A server that implements this conformance class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset]. In other words, the API is a link:https://www.w3.org/TR/vocab-dcat/#class-distribution[distribution] of that dataset. A file download, for example, would be another distribution.
+A server that implements this requirements class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset]. In other words, the API is a link:https://www.w3.org/TR/vocab-dcat/#class-distribution[distribution] of that dataset. A file download, for example, would be another distribution.
 
 NOTE: Other parts of this standard may define API extensions that support multiple datasets. The statement that the features are from "a dataset" is not meant to preclude such extensions. It just reflects that this document does not specify how the API publishes features or other spatial data from multiple datasets.
 
@@ -542,7 +542,7 @@ properties:
       - http://www.opengis.net/def/crs/OGC/1.3/CRS84
 ----
 
-NOTE: The `crs` property of the `collection` object is not used by this conformance class, but reserved for future use.
+NOTE: The `crs` property of the `collection` object is not used by this requirements class, but reserved for future use.
 
 [[example_4]]
 .Feature collections response document
@@ -800,7 +800,7 @@ Another implementation approach is to use an implementation-specific parameter t
 
 Clients should not assume that paging is safe against changes to dataset while a client iterates through `next` links. If a server provides opaque links these could be safe and maintain the dataset state during the original request. Using a parameter for the start index, however, will not be safe.
 
-NOTE: Additional conformance classes for safe paging or an index parameter
+NOTE: Additional requirements classes for safe paging or an index parameter
 may be added in extensions to this specification.
 
 include::recomendations/core/PER_fc-prev.adoc[]
