@@ -1,7 +1,7 @@
 # OGC API - Features
 
 This GitHub repository contains [OGC](http://opengeospatial.org)'s
-standard for querying geospatial information on the web, "OGC API - Features". The 
+standard for querying geospatial information on the web, "OGC API - Features". The
 latest version of the specification can be found at [docs.opengeospatial.org/is/17-069r3/17-069r3.html](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html).
 
 OGC API standards define modular API building blocks to spatially enable Web APIs
@@ -92,7 +92,7 @@ A joint sprint with [STAC](https://github.com/radiantearth/stac-spec) and the [O
 
 Open issues for Part 1 (Core) are documented in a [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/1).
 
-In parallel, Part 1 (Core) has also be submitted to ISO/TC 211 and is in the [Draft International Standard (DIS) ballot](https://www.iso.org/standard/32586.html).
+In parallel, Part 1 (Core) has been submitted to ISO/TC 211, too. The results of the [Draft International Standard (DIS) ballot](https://www.iso.org/standard/32586.html) are being processed together with other clarifications and editorial updates. The result will be a [version 1.0.1](https://github.com/opengeospatial/ogcapi-features/milestone/4).
 
 Open issues for Part 2 (CRS) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/2).
 
