@@ -90,9 +90,9 @@ A joint sprint with [STAC](https://github.com/radiantearth/stac-spec) and the [O
 
 ## Additional information
 
-Open issues for Part 1 (Core) are documented in a [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/1).
+In parallel, Part 1 (Core) has been [submitted to ISO/TC 211](https://www.iso.org/standard/32586.html), too.
 
-In parallel, Part 1 (Core) has been submitted to ISO/TC 211, too. The results of the [Draft International Standard (DIS) ballot](https://www.iso.org/standard/32586.html) are being processed together with other clarifications and editorial updates. The result will be a [version 1.0.1](https://github.com/opengeospatial/ogcapi-features/milestone/4).
+Open issues for Part 1 (Core) are documented in a [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/1). Comments from the ISO process are being processed together with other clarifications and editorial updates. The result will be [version 1.0.1](https://github.com/opengeospatial/ogcapi-features/milestone/4). There is an [Editor's draft](http://docs.opengeospatial.org/DRAFTS/17-069r4.html) that includes edits for all resolved issues.
 
 Open issues for Part 2 (CRS) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/2).
 
