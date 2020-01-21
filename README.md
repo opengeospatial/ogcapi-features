@@ -86,7 +86,7 @@ as the highest priority:
 * filter/query capabilities;
 * simple transactions.
 
-A joint sprint with [STAC](https://github.com/radiantearth/stac-spec) and the [OGC API Catalogues SWG](https://github.com/opengeospatial/CAT4.0) to advance richer query/filter capabilities took place on [November 5-7, 2019, in Arlington, VA](https://www.opengeospatial.org/pressroom/pressreleases/3074).
+A joint sprint with [STAC](https://github.com/radiantearth/stac-spec) and the [OGC API Records SWG](https://github.com/opengeospatial/ogcapi-records) to advance richer query/filter capabilities took place on [November 5-7, 2019, in Arlington, VA](https://www.opengeospatial.org/pressroom/pressreleases/3074).
 
 ## Additional information
 
