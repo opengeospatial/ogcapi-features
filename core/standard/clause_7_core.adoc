@@ -549,9 +549,11 @@ NOTE: The `crs` property of the `collection` object is not used by this requirem
 =================
 This feature collections example response in JSON is for a dataset with a single collection "buildings". It includes links to the features resource in all formats that are supported by the service (link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type]: "items").
 
-Representations of the resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
+There is a link to the feature collections response itself (link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type]: "self"). Representations of this resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
 
 An additional link is to a GML application schema for the dataset - using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
+
+A bulk download of all the features in the dataset is referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "enclosure".
 
 Finally there are also links to the license information for the building data (using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "license").
 
