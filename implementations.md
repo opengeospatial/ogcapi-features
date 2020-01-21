@@ -9,7 +9,7 @@ For now this is limited to implementations of the current draft of Part 1. Core.
 
 Servers:
 
-* [interactive instruments](#interactive-instruments)
+* [ldproxy](#ldproxy)
 * [CubeWerx Inc.](#cubeWerx)
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
@@ -18,6 +18,7 @@ Servers:
 * [STAC](#STAC)
 * [nls-fi](#nls-fi)
 * [QGIS](#QGIS)
+* [SDI Rhineland-Palatinate - mapbender2](#sdi-rhineland-palatinate---mapbender2)
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
@@ -26,15 +27,24 @@ Clients:
 * [STAC](#STAC)
 * [QGIS](#QGIS)
 
-## interactive instruments
+## ldproxy
 
-The following are two servers implementing most of the current draft
-of part 1. They are using German data and therefore the language
+The following server has been set up in OGC Testbeds and Pilots. It includes extensions for other resources like vector tiles and styles:
+
+* OpenAPI definition: https://services.interactive-instruments.de/t15/daraa/api
+* Landing page: https://services.interactive-instruments.de/t15/daraa
+
+The server has been [certified as compliant by the OGC CITE tests](https://www.opengeospatial.org/resource/products/details/?pid=1598).
+
+Another server is implementing an older draft
+of part 1 (the server will be updated to version 1.0.0 soon). 
+The APIs provide German data and therefore the language
 in general is German, including in the HTML.
 
 The first endpoint is for cadastral parcels, buildings and
 administrative areas in North-Rhine Westphalia (Germany).
-The second endpoint for topographic data in that region.
+The second endpoint for topographic data in that region, 
+the third provides administrative units.
 
 For more details about the implementation and a discussion about
 how this implements the Spatial Data on the Web Best Practies see
@@ -89,12 +99,6 @@ bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/collections/a
 f=json&  
 bahnhofskategorie=1010&  
 bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/collections/ax_bahnverkehrsanlage/items?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
-
-Another server is from the [OGC Vector Tiles Pilot](http://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) 
-and it includes extensions for vector tile and style resources:
-
-* OpenAPI definition: https://services.interactive-instruments.de/vtp/daraa/api
-* Landing page: https://services.interactive-instruments.de/vtp/daraa
 
 ## CubeWerx Inc.
 
@@ -207,6 +211,30 @@ Topographical database of National Land Survey of Finland as an OGC API - Featur
 * First 1000 buildings inside 380000,6670000,390000,6680000,EPSG:3067: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/rakennus/items?bbox=380000,6670000,390000,6680000&bbox-crs=http://www.opengis.net/def/crs/EPSG/0/3067&crs=http://www.opengis.net/def/crs/EPSG/0/3067&limit=1000
 
 ## QGIS
+* [QGIS](https://github.com/qgis/QGIS/) implements both a server and a client
+* [Server documentation](https://docs.qgis.org/testing/en/docs/user_manual/working_with_ogc/server/services.html#wfs3-ogc-api-features)
+* [Demo server](http://138.201.120.72:8084/qgisserver_demo_wfs3/wfs3/)
 
-* Client and Server: [QGIS](https://github.com/qgis/QGIS/)
+## SDI Rhineland-Palatinate - mapbender2
+The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saarland use the mapbender2 ows registry as backend 
+for their geoportal solutions. In the SDIs there are registered many OpenData classified WFS 2.0 resources and it was straightforward to develop a proxy solution, that implements the OGC API - Features interface at one central location. 
+Most of the core functions are implemented. The WFS behind the proxy are either based on mapserver or geoserver. The proxy does also create service metadata in form of iso19139 records. One extension is the usage of json-schema to define human readable attribute titles and descriptions at WFS level. The next extension will be the usage of json-ld to give semantical information for the attributes and allow the dynamical creation of rdf-a and other formats.
+The code of the current productional solution is available on the [OSGEO GIT](https://git.osgeo.org/gitea/armin11/GeoPortal.rlp)
+and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
 
+### Productive list of available Interfaces
+* List of all registrated OpenData WFS: https://www.geoportal.rlp.de/mapbender/php/mod_linkedDataProxy.php (some of them wont work, cause the database tables don't have primary keys exposed and therefor paging is not possible).
+
+### Example requests:
+
+#### Transport network (classified roads)
+* Start page: https://www.geoportal.rlp.de/spatial-objects/513
+* API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/513/api
+* HTML representation for the collection of highway objects: https://www.geoportal.rlp.de/spatial-objects/513/collections/ms:Autobahnen/items?&f=html
+* HTML represenation of single highway 'A3': https://www.geoportal.rlp.de/spatial-objects/513/collections/ms:Autobahnen/items/Autobahnen.A3?f=html
+
+#### UNESCO world heritage of the city of Trier (point objects)
+* Start page: https://www.geoportal.rlp.de/spatial-objects/486
+* API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/486/api
+* HTML representation objects: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items?&f=html
+* HTML representation of the description of the amphitheater: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items/unesco_welterbe.3730?f=html
