@@ -17,6 +17,7 @@ Servers:
 * [sofp](#sofp)
 * [STAC](#STAC)
 * [nls-fi](#nls-fi)
+* [QGIS](#QGIS)
 * [SDI Rhineland-Palatinate - mapbender2](#sdi-rhineland-palatinate---mapbender2)
 
 Clients:
@@ -24,6 +25,7 @@ Clients:
 * [GDAL/OGR OGC API - Features driver](https://gdal.org/drivers/vector/oapif.html)
 * [OWSLib WFS 3.0 client](https://geopython.github.io/OWSLib)
 * [STAC](#STAC)
+* [QGIS](#QGIS)
 
 ## ldproxy
 
@@ -208,6 +210,11 @@ Topographical database of National Land Survey of Finland as an OGC API - Featur
 * Roadlink with id 11: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/tieviiva/items/11
 * First 1000 buildings inside 380000,6670000,390000,6680000,EPSG:3067: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/rakennus/items?bbox=380000,6670000,390000,6680000&bbox-crs=http://www.opengis.net/def/crs/EPSG/0/3067&crs=http://www.opengis.net/def/crs/EPSG/0/3067&limit=1000
 
+## QGIS
+* [QGIS](https://github.com/qgis/QGIS/) implements both a server and a client
+* [Server documentation](https://docs.qgis.org/testing/en/docs/user_manual/working_with_ogc/server/services.html#wfs3-ogc-api-features)
+* [Demo server](http://138.201.120.72:8084/qgisserver_demo_wfs3/wfs3/)
+
 ## SDI Rhineland-Palatinate - mapbender2
 The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saarland use the mapbender2 ows registry as backend 
 for their geoportal solutions. In the SDIs there are registered many OpenData classified WFS 2.0 resources and it was straightforward to develop a proxy solution, that implements the OGC API - Features interface at one central location. 
@@ -231,7 +238,3 @@ and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
 * API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/486/api
 * HTML representation objects: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items?&f=html
 * HTML representation of the description of the amphitheater: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items/unesco_welterbe.3730?f=html
-
-
-
-
