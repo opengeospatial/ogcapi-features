@@ -114,3 +114,15 @@ The Features API Standards Working Group (SWG) is the group at OGC responsible f
 * [Open issues](https://github.com/opengeospatial/ogcapi-features/issues)
 * [Proposing changes](https://github.com/opengeospatial/ogcapi-features/wiki/Propose-a-change-to-a-draft-of-a-specification-document)
 * [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/LICENSE)
+
+## Building
+
+To generate the html version of the standard from this repo, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
+[Asciidoctor](https://asciidoctor.org/) set up and [installed](https://asciidoctor.org/docs/#get-started-with-asciidoctor).
+Then run:
+
+```
+asciidoctor core/standard/17-069.adoc
+```
+
+All configuration needed is contained in the asciidoctor.json file. The resulting html file will be built to `core/standard/17-069.html`
