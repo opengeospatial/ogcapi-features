@@ -104,6 +104,26 @@ Additional links:
 * [Status of Part 1, Core, in ISO](https://www.iso.org/standard/32586.html)
 * [Home of the standard on the OGC website](https://www.opengeospatial.org/standards/ogcapi-features)
 
+## Building
+
+The latest drafts of each standard in this repository are build daily:
+
+* [Part 1: Core](http://docs.opengeospatial.org/DRAFTS/17-069r4.html)
+* [Part 2: Coordinate Reference Systems by Reference](http://docs.opengeospatial.org/DRAFTS/18-058.html)
+
+To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
+[Asciidoctor](https://asciidoctor.org/) set up and [installed](https://asciidoctor.org/docs/#get-started-with-asciidoctor).
+Then run:
+
+```
+# Part 1: Core
+asciidoctor core/standard/17-069.adoc
+# Part 2: Coordinate Reference Systems by Reference
+asciidoctor extensions/crs/standard/18-058.adoc
+```
+
+All configuration needed is contained in the [asciidoctor.json](https://github.com/opengeospatial/ogcapi-features/blob/master/asciidoctor.json) file. The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.
+
 ## [Contributing](CONTRIBUTING.md)
 
 The contributor understands that any contributions, if accepted by the OGC Membership and ISO/TC 211, shall be incorporated into OGC and ISO/TC 211 OGC API standards documents and that all copyright and intellectual property shall be vested to the OGC.
