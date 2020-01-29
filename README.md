@@ -106,7 +106,7 @@ Additional links:
 
 ## Building
 
-The latest drafts of each standard in this repository are build daily:
+The latest drafts of each standard in this repository are build daily (based on the configuration contained in the [asciidoctor.json](https://github.com/opengeospatial/ogcapi-features/blob/master/asciidoctor.json) file):
 
 * [Part 1: Core](http://docs.opengeospatial.org/DRAFTS/17-069r4.html)
 * [Part 2: Coordinate Reference Systems by Reference](http://docs.opengeospatial.org/DRAFTS/18-058.html)
@@ -122,7 +122,7 @@ asciidoctor core/standard/17-069.adoc
 asciidoctor extensions/crs/standard/18-058.adoc
 ```
 
-All configuration needed is contained in the [asciidoctor.json](https://github.com/opengeospatial/ogcapi-features/blob/master/asciidoctor.json) file. The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.
+The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.
 
 ## [Contributing](CONTRIBUTING.md)
 
