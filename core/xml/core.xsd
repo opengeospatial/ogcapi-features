@@ -5,7 +5,7 @@
    xmlns:atom="http://www.w3.org/2005/Atom"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:xml="http://www.w3.org/XML/1998/namespace"
-   elementFormDefault="qualified" version="1.0.0">
+   elementFormDefault="qualified" version="1.0.1">
    <xsd:annotation>
       <xsd:documentation>This XML Schema Document includes and imports,
       directly or indirectly, all the XML schemas defined by
@@ -82,10 +82,14 @@
    <xsd:complexType name="CollectionType">
       <xsd:sequence>
          <xsd:element name="Id" type="xsd:string"/>
+         <xsd:element name="ItemType" type="xsd:string"/>
          <xsd:element ref="core:Title" minOccurs="0"/>
          <xsd:element ref="core:Description" minOccurs="0"/>
          <xsd:element ref="atom:link" minOccurs="0" maxOccurs="unbounded"/>
          <xsd:element ref="core:Extent" minOccurs="0"/>
+         <xsd:element name="Crs" type="xsd:anyURI"
+                      minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="StorageCrs" type="xsd:anyURI" minOccurs="0"/>
       </xsd:sequence>
    </xsd:complexType>
 
@@ -97,7 +101,7 @@
          <xsd:sequence>
             <xsd:element ref="core:Exception" maxOccurs="unbounded"/>
          </xsd:sequence>
-         <xsd:attribute name="version" use="required">
+         <xsd:attribute name="version">
             <xsd:simpleType>
                <xsd:restriction base="xsd:string">
                   <xsd:pattern value="\d+\.\d?\d\.\d?\d" />
@@ -121,10 +125,8 @@
    <!-- = BASE RESPONSE TYPE                                     = -->
    <!-- ========================================================== -->
    <xsd:complexType name="BaseResponseType" abstract="true">
-      <xsd:attribute name="service"
-                     type="xsd:string" use="required" fixed="OGCAPI-Features"/>
-      <xsd:attribute name="version"
-                     type="core:VersionStringType" use="required"/>
+      <xsd:attribute name="service" type="xsd:string" />
+      <xsd:attribute name="version" type="core:VersionStringType"/>
       <xsd:attribute name="updateSequence" type="xsd:string"/>
    </xsd:complexType>
    <xsd:simpleType name="VersionStringType">
