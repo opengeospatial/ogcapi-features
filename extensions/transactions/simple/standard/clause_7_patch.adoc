@@ -1,0 +1,63 @@
+== Requirements Class "PATCH Update"
+
+[[patch-update-overview]]
+=== Overview
+
+include::requirements/requirements_class_patch-update.adoc[]
+
+A server that implements this conformance class provides the ability to use
+the HTTP PATCH method to modify parts of an existing feature without the need
+to transmit a complete replacement feature.
+
+Modifying parts of a feature requires that a document describing the changes
+to be applied be provided by the client.  This standard does not mandate that
+a specific encoding for this document be supported by a server.  However,
+this extension provides requirements for <<rfc7396 (JSON Merge Patch)>>
+for features encoded using JSON (e.g. GeoJSON) and <<rfc5261 (An Extensible
+Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)>> for features encoded using XML (e.g. GML).
+
+[[patch-update]]
+=== Modifying and existing feature (UPDATE)
+
+==== Sequence diagram
+
+The following diagram illustrates the sequence diagram for modifying part
+of an existing feature by only specifying the specific parts that should be
+updated.
+
+   Client                                                              Server
+     |                                                                   |
+     |   PATCH /collections/{collectionId}/items/{featureId}  HTTP/1.1   |
+     |   Content-Type: <MIME type body>                                  |
+     |                                                                   |
+     |   ... Body contains a document describing the changes to make ... |
+     |       to parts of the specfied feature ...                        |
+     |------------------------------------------------------------------>|
+     |                                                                   |
+     |   HTTP/1.1 200 OK                                                 | 
+     |<------------------------------------------------------------------|
+
+==== Operation
+
+include::requirements/patch-update/update/patch/REQ_patch-op.adoc[]
+
+==== Request body
+
+include::requirements/patch-update/update/patch/REQ_body.adoc[]
+
+include::recommendations/patch-update/update/patch/REC_body-json-merge-patch.adoc[]
+
+include::recommendations/patch-update/update/patch/REC_body-xml-patch.adoc[]
+
+==== Response
+
+include::requirements/patch-update/update/patch/REQ_response.adoc[]
+
+==== Exceptions
+
+See <<http_status_codes,HTTP status codes>>.
+
+=== Coordinate Reference Systems
+
+See <<simpletx-crs,Coordinate Reference Systems>>.
+

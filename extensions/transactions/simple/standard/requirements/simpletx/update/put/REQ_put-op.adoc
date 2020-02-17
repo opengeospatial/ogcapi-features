@@ -1,0 +1,9 @@
+[[req_simpletx_update_put_put-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/simpletx/update/put/put-op*
+^|A |For every feature in a collection (path '/collections/{collectionId}/items/{featureId}', the server shall support the HTTP PUT operation.
+^|B |The parameter 'collectionId' is each 'id' property in the feature collection response (JSONPath: '$.collections[*].id').
+^|C |The parameter 'featureId' is the 'id' property of a target feature (JSONPath: '$.features[*].id') obtained by previously having queried the collection (path '/collections/{collectionId}/items').
+|===
+

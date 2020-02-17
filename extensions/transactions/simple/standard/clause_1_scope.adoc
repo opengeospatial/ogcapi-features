@@ -1,0 +1,20 @@
+== Scope
+
+This document specifies an extension to the <<OAFeat-1,OGC API - Features -
+Part 1: Core>> standard that defines the behaviour of a server that supports
+simple transactions.
+
+Simple transactions are transactions that add, replace, modify or delete
+individual features from a single feature collection.
+
+Additional parts to <<OAFeat-1,OGC API - Features - Part 1: Core>> will
+subsequently be specified to handle complex transactions; that is transactions
+that require batch or atomic semantics.
+
+Specifically, this document specifies:
+
+* How to add a new feature instance to a feature collection.
+
+* How to modify an existing feature from a collection; this includes entirely replacing the existing feature or simply modifying a part of a feature.
+
+* How to remove an existing feature from a collection.
