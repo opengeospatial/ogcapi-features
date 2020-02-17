@@ -42,5 +42,20 @@
                 "r":[
                         "asciidoctor-diagram"
                 ]
+        },
+        "3":  {
+                "OGC_doc_number": "20-002",
+                "urn":"http://www.opengis.net/doc/IS/ogcapi-features-3/1.0",
+                "title":"OGC API - Features - Part 1: Simple Transactions",
+                "path":"extensions/transactions/simple/standard/20-002.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
         }
 }
