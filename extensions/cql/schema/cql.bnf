@@ -99,7 +99,7 @@ geomExpression = propertyName
 # specified temporal operator.
 #=============================================================================#
 temporalPredicate = temporalExpression temporalOperator
-                    temporalExpression [temporalExpression];
+                    temporalExpression;
 
 temporalExpression = propertyName
                    | temporalLiteral
@@ -283,7 +283,13 @@ hexit = digit | "A" | "B" | "C" | "D" | "E" | "F" | "a" | "b" | "c" | "d" | "e" 
 # NOTE: Is the fact the time zones are supported too complicated for a
 #       simple CQL?  Perhaps the "core" of CQL should just support UTC.
 #=============================================================================#
-temporalLiteral = fullDate | fullDate "T" utcTime;
+temporalLiteral = instant | interval;
+
+instant = fullDate | fullDate "T" utcTime;
+
+interval = instantInInterval "/" instantInInterval;
+
+instantInInterval = ".." | "" | instant;
 
 fullDate   = dateYear "-" dateMonth "-" dateDay;
 
