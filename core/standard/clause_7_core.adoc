@@ -5,13 +5,13 @@
 
 include::requirements/requirements_class_core.adoc[]
 
-A server that implements this requirements class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset]. In other words, the API is a link:https://www.w3.org/TR/vocab-dcat/#class-distribution[distribution] of that dataset. A file download, for example, would be another distribution.
+A server that implements this requirements class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset].
 
 NOTE: Other parts of this standard may define API extensions that support multiple datasets. The statement that the features are from "a dataset" is not meant to preclude such extensions. It just reflects that this document does not specify how the API publishes features or other spatial data from multiple datasets.
 
 The entry point is a `Landing page` (path `/`).
 
-NOTE: All paths (e.g., `/`) are relative to the base URL of the distribution of the dataset. If the API covers other resources beyond those specified in this document, the landing page may also be, for example, a sub-resource of the base URL of the API.
+NOTE: All paths (e.g., `/`) are relative. If the API covers other resources beyond those specified in this document, the landing page may also be, for example, a sub-resource of the base URL of the API.
 
 The `Landing page` provides links to:
 

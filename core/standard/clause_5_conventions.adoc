@@ -42,7 +42,7 @@ In addition the following link relation types are used for which no applicable r
 
 * **conformance**: Refers to a resource that identifies the specifications that the link's context conforms to.
 
-* **data**: Indicates that the link's context is a distribution of a dataset that is an API and refers to the root resource of the dataset in the API.
+* **data**: Refers to the root resource of a dataset in an API.
 
 Each resource representation includes an array of links. Implementations are free to add additional links for all resources provided by the API. For example, an **enclosure** link could reference a bulk download of a collection. Or a **related** link on a feature could reference a related feature.
 
@@ -117,4 +117,3 @@ URL `https://data.example.org/mypath` for the production server.
 ==== Reusable OpenAPI components
 
 Reusable components for OpenAPI definitions for implementations of OGC API Features are referenced from this document.
-
