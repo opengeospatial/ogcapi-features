@@ -652,6 +652,8 @@ include::requirements/core/REQ_fc-bbox-response.adoc[]
 
 "Intersects" means that the rectangular area specified in the parameter `bbox` includes a coordinate that is part of the (spatial) geometry of the feature. This includes the boundaries of the geometries (e.g., for curves the start and end position and for surfaces the outer and inner rings).
 
+In case of a degenerated bounding box, the resulting geometry is used. For example, if the lower left corner is the same as the upper right corner, all features match where the geometry intersects with this point.
+
 This standard does not specify requirements for the parameter `bbox-crs.` Those requirements will be specified in an additional part of the OGC API Features series.
 
 For WGS 84 longitude/latitude the bounding box is in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the anti-meridian the first value (west-most box edge) is larger than the third value (east-most box edge).
