@@ -54,7 +54,7 @@ Derived from the [WFS 3.0, Part 1, version 3.0.0-draft.1](https://cdn.rawgit.com
 * [ ] Response "links" property includes:
   * [ ] rel "self"
   * [ ] rel "alternate" for each additional encoding available
-  * [ ] (recommended) For each external link defining structure or semantics of data contained in collections, include a link w/ rel "describedBy"
+  * [ ] (recommended) For each external link defining structure or semantics of data contained in collections, include a link w/ rel "describedby"
 * [ ] Response "collections" property includes an entry for each feature collection.
   * [ ] For each supported encoding include a link w/ rel "items" to the feature collection
   * [ ] If response provides an "extent" property it is formatted as a bounding box of the form [SWlong, SWlat, NElong, NElat] for the spatial and [begin, end] for the temporal extent
