@@ -1,7 +1,7 @@
 [[ats_gmlsf0_definition]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/gmlsf0/definition*
+^|*Abstract Test {counter:ats-id}* |*/conf/gmlsf0/definition*
 ^|Test Purpose |Verify support for GML Simple Features level 0
 ^|Requirement |<<req_gmlsf0_definition,/req/gmlsf0/definition>>
 ^|Test Method |Verify that every `200`-response of an operation of the API where XML was requested is of media type `application/gml+xml; profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0` (resources: Features and Feature) or `application/xml` (all other resources)
