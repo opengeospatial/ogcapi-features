@@ -394,6 +394,8 @@ include::requirements/core/REQ_fc-md-items-links.adoc[]
 
 include::requirements/core/REQ_fc-md-extent.adoc[]
 
+NOTE: The member `spatial` only needs to be provided in the `extent` object, if features in the feature collection have spatial properties. The same applies to `temporal` and features with temporal properties. For example, a feature collection where features have a spatial, but no temporal property will only provide the `spatial` member.
+
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
 include::recomendations/core/PER_fc-md-extent-extensions.adoc[]
