@@ -4,5 +4,5 @@
 ^|*Abstract Test {counter:ats-id}* |*/ats/gmlsf2/definition*
 ^|Test Purpose |Verify support for GML Simple Features level 2
 ^|Requirement |<<req_gmlsf2_definition,/req/gmlsf2/definition>>
-^|Test Method |Verify that every `200`-response of an operation of the API where XML was requested is of media type `application/gml+xml;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` (resources: Features and Feature) or `application/xml` (all other resources)
+^|Test Method |Verify that every `200`-response of an operation of the API where XML was requested is of media type `application/gml+xml; profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf2` (resources: Features and Feature) or `application/xml` (all other resources)
 |===

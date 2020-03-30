@@ -1,7 +1,7 @@
 [[abstract]]
 [big]*i.     Abstract*
 
-OGC API standards define modular API building blocks to spatially enable Web APIs in a consistent way. The <<OpenAPI,OpenAPI specification>> is used to define the API building blocks.
+<<OGCAPI,OGC API standards>> define modular API building blocks to spatially enable Web APIs in a consistent way. The <<OpenAPI,OpenAPI specification>> is used to define the API building blocks.
 
 The OGC API family of standards is organized by resource type. This standard specifies the fundamental API building blocks for interacting with features. The spatial data community uses the term 'feature' for things in the real world that are of interest.
 
@@ -15,7 +15,7 @@ The API building blocks specified in this standard are consistent with the archi
 
 This standard specifies discovery and query operations that are implemented using the HTTP GET method. Support for additional methods (in particular POST, PUT, DELETE, PATCH) will be specified in additional parts.
 
-Discovery operations enable clients to interrogate the API to determine its capabilities and retrieve information about this distribution of the dataset, including the API definition and metadata about the feature collections provided by the API.
+Discovery operations enable clients to interrogate the API, including the API definition and metadata about the feature collections provided by the API, to determine the capabilities of the API and retrieve information about available distributions of the dataset.
 
 Query operations enable clients to retrieve features from the underlying data store based upon simple selection criteria, defined by the client.
 

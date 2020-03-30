@@ -1,4 +1,6 @@
-== Terms and Definitions
+== Terms, definitions and abbreviated terms
+
+=== Terms and Definitions
 This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
 
 For the purposes of this document, the following additional terms and definitions apply.
@@ -10,24 +12,41 @@ NOTE: Published or curated by a single agent, and available for access or downlo
 
 NOTE: The use of 'collection' in the definition is broader than the use of the term collection in this specification. See the definition of <<_feature_collection,'feature collection'>>.
 
-=== distribution
-represents an accessible form of a *dataset* <<DCAT>>
+==== distribution
+accessible form of a *dataset* <<DCAT>>
 
 EXAMPLE: a downloadable file, an RSS feed or an API.
 
-=== feature
+==== feature
 abstraction of real world phenomena [ISO 19101-1:2014]
 
-NOTE: For those unfamiliar with the term 'feature', the explanations on link:https://www.w3.org/TR/sdw-bp/#spatial-things-features-and-geometry[Spatial Things, Features and Geometry] in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practice document>> provide more detail.
+NOTE: More details about the term 'feature' may be found in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practice>> in the section link:https://www.w3.org/TR/sdw-bp/#spatial-things-features-and-geometry['Spatial Things, Features and Geometry'].
 
 [[_feature_collection]]
-=== feature collection; collection
+==== feature collection; collection
 a set of *features* from a *dataset*
 
-NOTE: In this specification, 'collection' is used as a synonym for 'feature collection'. This is done to make, for example, URI path expressions shorter and easier to understand for those that are not geo-experts.
-
 [[webapi]]
-=== Web API
+==== Web API
 API using an architectural style that is founded on the technologies of the Web <<DWBP>>
 
 NOTE: link:https://www.w3.org/TR/dwbp/#APIHttpVerbs[Best Practice 24: Use Web Standards as the foundation of APIs] in the <<DWBP,W3C Data on the Web Best Practices>> provides more detail.
+
+=== Abbreviated terms
+
+API::
+  Application Programming Interface
+CRS::
+  Coordinate Reference Systems
+HTTP::
+  Hypertext Transfer Protocol
+HTTPS::
+  Hypertext Transfer Protocol Secure
+IANA::
+  Internet Assigned Numbers Authority
+OGC::
+  Open Geospatial Consortium
+URI::
+  Uniform Resource Identifier
+YAML::
+  YAML Ain't Markup Language
