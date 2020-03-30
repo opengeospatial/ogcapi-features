@@ -5,13 +5,13 @@
 
 include::requirements/requirements_class_core.adoc[]
 
-A server that implements this requirements class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset]. In other words, the API is a link:https://www.w3.org/TR/vocab-dcat/#class-distribution[distribution] of that dataset. A file download, for example, would be another distribution.
+A server that implements this requirements class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset].
 
 NOTE: Other parts of this standard may define API extensions that support multiple datasets. The statement that the features are from "a dataset" is not meant to preclude such extensions. It just reflects that this document does not specify how the API publishes features or other spatial data from multiple datasets.
 
 The entry point is a `Landing page` (path `/`).
 
-NOTE: All paths (e.g., `/`) are relative to the base URL of the distribution of the dataset. If the API covers other resources beyond those specified in this document, the landing page may also be, for example, a sub-resource of the base URL of the API.
+NOTE: All paths (e.g., `/`) are relative. If the API covers other resources beyond those specified in this document, the landing page may also be, for example, a sub-resource of the base URL of the API.
 
 The `Landing page` provides links to:
 
@@ -394,6 +394,8 @@ include::requirements/core/REQ_fc-md-items-links.adoc[]
 
 include::requirements/core/REQ_fc-md-extent.adoc[]
 
+NOTE: The member `spatial` only needs to be provided in the `extent` object, if features in the feature collection have spatial properties. The same applies to `temporal` and features with temporal properties. For example, a feature collection where features have a spatial, but no temporal property will only provide the `spatial` member.
+
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
 include::recomendations/core/PER_fc-md-extent-extensions.adoc[]
@@ -497,7 +499,7 @@ properties:
           interval:
             description: >-
               One or more time intervals that describe the temporal extent of the dataset.
-              The value `null` is supported and indicates an open time intervall.
+              The value `null` is supported and indicates an open time interval.
               In the Core only a single time interval is supported. Extensions may support
               multiple intervals. If multiple intervals are provided, the union of the
               intervals describes the temporal extent.
@@ -551,7 +553,7 @@ This feature collections example response in JSON is for a dataset with a single
 
 There is a link to the feature collections response itself (link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type]: "self"). Representations of this resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
 
-An additional link is to a GML application schema for the dataset - using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
+An additional link is to a GML application schema for the dataset - using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedby".
 
 A bulk download of all the features in the dataset is referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "enclosure".
 
@@ -568,7 +570,7 @@ Reference system information is not provided as the service provides geometries 
     { "href": "http://data.example.org/collections.html",
       "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
     { "href": "http://schemas.example.org/1.0/buildings.xsd",
-      "rel": "describedBy", "type": "application/xml", "title": "GML application schema for Acme Corporation building data" },
+      "rel": "describedby", "type": "application/xml", "title": "GML application schema for Acme Corporation building data" },
     { "href": "http://download.example.org/buildings.gpkg",
       "rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Bulk download (GeoPackage)", "length": 472546 }
   ],
@@ -649,6 +651,8 @@ include::requirements/core/REQ_fc-bbox-definition.adoc[]
 include::requirements/core/REQ_fc-bbox-response.adoc[]
 
 "Intersects" means that the rectangular area specified in the parameter `bbox` includes a coordinate that is part of the (spatial) geometry of the feature. This includes the boundaries of the geometries (e.g., for curves the start and end position and for surfaces the outer and inner rings).
+
+In case of a degenerated bounding box, the resulting geometry is used. For example, if the lower left corner is the same as the upper right corner, all features match where the geometry intersects with this point.
 
 This standard does not specify requirements for the parameter `bbox-crs.` Those requirements will be specified in an additional part of the OGC API Features series.
 
