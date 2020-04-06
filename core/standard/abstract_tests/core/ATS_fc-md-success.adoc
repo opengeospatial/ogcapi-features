@@ -1,11 +1,11 @@
 [[ats_core_fc-md-success]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-md-success*
+^|*Abstract Test {counter:ats-id}* |*/conf/core/fc-md-success*
 ^|Test Purpose |Validate that the Collections content complies with the required structure and contents.
 ^|Requirement |<<req_core_fc-md-success,/req/core/fc-md-success>>, <<req_core_crs84,/req/core/crs84>>
-^|Test Method |. Validate that all response documents comply with <<ats_core_fc-md-links,/ats/core/fc-md-links>>
-. Validate that all response documents comply with <<ats_core_fc-md-items,/ats/core/fc-md-items>>
+^|Test Method |. Validate that all response documents comply with <<ats_core_fc-md-links,/conf/core/fc-md-links>>
+. Validate that all response documents comply with <<ats_core_fc-md-items,/conf/core/fc-md-items>>
 . In case the response includes a "crs" property, validate that the first value is either "http://www.opengis.net/def/crs/OGC/1.3/CRS84" or "http://www.opengis.net/def/crs/OGC/0/CRS84h"
 . Validate the collections content for all supported media types using the resources and tests identified in <<collections-metadata-schema>>
 |===
@@ -17,8 +17,8 @@ The Collections content may be retrieved in a number of different formats. The f
 [width="90%",cols="3",options="header"]
 |===
 |Format |Schema Document |Test ID
-|HTML |link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml[collections.yaml] |<<ats_html_content,/ats/html/content>>
-|GeoJSON |link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml[collections.yaml] |<<ats_geojson_content,/ats/geojson/content>>
-|GMLSF0 |link:http://schemas.opengis.net/ogcapi/features/part1/1.0/xml/core.xsd[core.xsd], element `core:Collections` |<<ats_gmlsf0_content,/ats/gmlsf0/content>>
-|GMLSF2 |link:http://schemas.opengis.net/ogcapi/features/part1/1.0/xml/core.xsd[core.xsd], element `core:Collections` |<<ats_gmlsf2_content,/ats/gmlsf2/content>>
+|HTML |link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml[collections.yaml] |<<ats_html_content,/conf/html/content>>
+|GeoJSON |link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml[collections.yaml] |<<ats_geojson_content,/conf/geojson/content>>
+|GMLSF0 |link:http://schemas.opengis.net/ogcapi/features/part1/1.0/xml/core.xsd[core.xsd], element `core:Collections` |<<ats_gmlsf0_content,/conf/gmlsf0/content>>
+|GMLSF2 |link:http://schemas.opengis.net/ogcapi/features/part1/1.0/xml/core.xsd[core.xsd], element `core:Collections` |<<ats_gmlsf2_content,/conf/gmlsf2/content>>
 |===

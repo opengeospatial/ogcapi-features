@@ -1,9 +1,11 @@
-[[ats_oas3]]
+[[ats_oas30]]
 [cols="1,4",width="90%"]
 |===
 2+|*Conformance Class*
-2+|http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas3
+2+|http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
 |Target type |Web API
+|Requirements class |<<rc_oas30,Requirements Class "OpenAPI Specification 3.0">>
+|Dependency |<<ats_core,Conformance Class 'Core'>>
 |===
 
 include::oas30/ATS_completeness.adoc[]
@@ -17,4 +19,3 @@ include::oas30/ATS_definition-2.adoc[]
 include::oas30/ATS_oas-impl.adoc[]
 
 include::oas30/ATS_security.adoc[]
-

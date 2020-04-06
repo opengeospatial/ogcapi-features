@@ -10,13 +10,13 @@ All requirements and conformance tests that appear in this document are denoted 
 
 To express relationships between resources, <<rfc8288,RFC 8288 (Web Linking)>> is used.
 
-The following <<link-relations,registered link relation types>> are used in this document.
+The following <<link-relations,registered link relation types [IANA]>> are used in this document.
 
 * **alternate**: Refers to a substitute for this context.
 
 * **collection**: The target IRI points to a resource which represents the collection resource for the context IRI.
 
-* **describedBy**: Refers to a resource providing information about the link's context.
+* **describedby**: Refers to a resource providing information about the link's context.
 
 * **item**: The target IRI points to a resource that is a member of the collection represented by the context IRI.
 
@@ -42,7 +42,7 @@ In addition the following link relation types are used for which no applicable r
 
 * **conformance**: Refers to a resource that identifies the specifications that the link's context conforms to.
 
-* **data**: Indicates that the link's context is a distribution of a dataset that is an API and refers to the root resource of the dataset in the API.
+* **data**: Refers to the root resource of a dataset in an API.
 
 Each resource representation includes an array of links. Implementations are free to add additional links for all resources provided by the API. For example, an **enclosure** link could reference a bulk download of a collection. Or a **related** link on a feature could reference a related feature.
 
@@ -117,4 +117,3 @@ URL `https://data.example.org/mypath` for the production server.
 ==== Reusable OpenAPI components
 
 Reusable components for OpenAPI definitions for implementations of OGC API Features are referenced from this document.
-

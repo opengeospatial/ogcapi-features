@@ -1,16 +1,11 @@
 [[ats_geojson_definition]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/geojson/definition* 
+^|*Abstract Test {counter:ats-id}* |*/conf/geojson/definition* 
 ^|Test Purpose |Verify support for JSON and GeoJSON
 ^|Requirement |<<req_geojson_definition,/req/geojson/definition>>
-^|Test Method |
-2+|
- 1) A resource is requested with response media type of `application/geo+json`
-
- 2) All `200`-responses SHALL support the following media types:
-
-   - `application/geo+json` for resources that include feature content, and
- 
-   - `application/json` for all other resources.
+^|Test Method |. A resource is requested with response media type of `application/geo+json`
+. All `200`-responses SHALL support the following media types:
+** `application/geo+json` for resources that include feature content, and
+** `application/json` for all other resources.
 |===

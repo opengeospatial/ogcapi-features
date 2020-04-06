@@ -1,7 +1,7 @@
 [[ats_oas30_completeness]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/oas30/completeness* 
+^|*Abstract Test {counter:ats-id}* |*/conf/oas30/completeness* 
 ^|Test Purpose |Verify the completeness of an OpenAPI document. 
 ^|Requirement |<<req_oas30_completeness,/req/oas30/completeness>>
 ^|Test Method |Verify that for each operation, the OpenAPI document describes all link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#httpCodes[HTTP Status Codes] and link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject[Response Objects] that the API uses in responses.
