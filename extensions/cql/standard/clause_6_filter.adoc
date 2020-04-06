@@ -91,6 +91,16 @@ defines the `filter-lang` parameter.
 
 include::requirements/filter/REQ_filter-lang-param.adoc[]
 
+The enumerated value `cql-text` is used to indicate that the value of the 
+<<filter-param,`filter`>> parameter is the <<simple-cql-text,text encoding of CQL>>.  
+
+The enumerated value `cql-json` is used to indicate that the value of the
+<<filter-param,`filter`>> parameter is the <<simple-cql-JSON,JSON encoding of CQL>>.  
+
+Servers that support other filtering languages can extend this list of values
+as necessary although the meaning of any additional values are not described
+in this standard.
+
 [[filter-filter-crs]]
 === Parameter filter-crs
 
