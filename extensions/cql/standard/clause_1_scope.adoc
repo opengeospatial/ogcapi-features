@@ -1,5 +1,18 @@
 == Scope
 
-This document specifies the behavior of Web APIs that provide access to features ...
+This document specifies an extension to the <<OAFeat-1,OGC API - Features -
+Part 1: Core>> standard that defines the behaviour of a server that supports
+enhanced filtering capabilities expressed using a common query language (CQL).
 
-(( add scope statement ))
+Enhanced filtering capabilities in this case means that the server supports
+the ability to define selection clauses using predicates beyond those supported
+by the OGC API Common specification (i.e. bbox and datetime).
+
+This document defines a text encoding for a CQL filter suitable for use as a 
+query parameter in a URL.
+
+This document defines a JSON encoding for a CQL filter suitable for use in a 
+HTTP POST body.
+
+This document defines the schema for a JSON document that exposes the set of 
+properties or keys that may be used to construct CQL expressions.

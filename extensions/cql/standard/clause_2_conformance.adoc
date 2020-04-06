@@ -1,7 +1,120 @@
 == Conformance
 
-This standard defines one requirements / conformance class <<rc_cc,CC>>.
-The standardization target is "Web APIs".
+This standard defines the following conformance classes:
+
+* <<rc_filter,Filter>>
+* <<rc_simple-cql,Simple CQL>>
+* <<rc_simple-cql-text,Simple CQL Text encoding>>
+* <<rc_simple-cql-json,Simple CQL JSON encoding>>
+* <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
+* <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>
+* <<rc_functions,Functions>>
+* <<rc_arithmetic,Arithmetic expressions>>
+
+The <<rc_filter,Filter>> conformance class defines a set of HTTP query
+parameters that may be used to specify complex filter expressions on
+HTTP requests.  The specific set of parameters defined in this conformance
+class are:
+
+* filter
+* filter-lang
+* filter-crs
+
+This conformance class also defined the resources `/queryables` and
+`/collections/{collectionId}/queryables` that can be used to determine
+the list of property names and types that may be used to construct filter
+expressions.
+
+The <<rc_simple-cql,Simple CQL>> conformance class defines the Simple Common
+Query Language (CQL). Simple CQL is intended to be a minimal useful set of
+predicates that support enhanced fine-grained read-access to collections of
+resources.  In this case `enhanced` means filtering capabilities beyond those
+supported by the core OGC API Common specification (i.e. bbox and datetime).
+The specific set of predicates defined in this conformance class are:
+
+* Logical operators:
+** and
+** or
+** not
+* Comparison operators:
+** equal to
+** less than
+** less than or equal to
+** greater than
+** greater than or equal to
+** like
+** is null
+** between
+** in
+* Spatial operators:
+** intersects.
+* Temporal operators:
+** anyinteracts
+* Schema interogation operators:
+** exists
+
+An encoding of CQL may be used as the value of the filter parameters defined
+in the <<rc_filter,Filter>> conformance class.
+
+The <<rc_simple-cql-text,Simple CQL Text encoding>> conformance class defines
+a text encoding for CQL.  Such an encoding is suitable for use with HTTP query
+parameters such as the `filter` parameter defined by the <<rc_filter,Filter>>
+conformance class.
+
+The <<rc_simple-cql-json,Simple CQL JSON encoding>> conformance class defines
+a JSON encoding for CQL.  Such as encoding is suitable for use with as the 
+body of an HTTP POST request. 
+
+The <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>> conformance
+class specifies requirements for servers that support spatial operators in
+addition to the `intersects` operator that is defined in the
+<<rc_simple-cql,Simple CQL>> conformance class. The list of additional spatial
+operators that must be supported is:
+
+* equals
+* disjoint
+* touches
+* within
+* overlaps
+* crosses
+* contains
+
+NOTE: Do we need to add DWITHIN and BEYOND?  I think no.
+
+Both text and JSON encodings are defined for the enhanced spatial operators.
+
+The <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> conformance
+class specifies requirements for servers that support temporal operators in
+addition to the `anyinteracts` operator defined in the
+<<rc_simple-cql,Simple CQL>> conformance class. The list of additional temporal
+operators that must be supported is:
+
+* after
+* before
+* begins
+* begunby
+* tcontains
+* during
+* endedby
+* ends
+* tequals
+* meets
+* metby
+* toverlaps
+* overlappedby
+* intersects
+
+Both text and JSON encodings are defined for the enhanced temporal operators.
+
+The <<rc_functions,Functions>> conformance class specifies requirements for
+supporting function calls (e.g. min, max, etc.) in a CQL expression.  Function
+calls are the primary means of extending the language.  This conformance class
+also defined a resource `/functions` that may be used to discover the list of
+available functions.
+
+The <<rc_arithmetic,Arithmetic operators>> conformance class specifies
+requirements for  supporting the standard set of arithmetic operators,
+latexmath:[+, -, *, /] in a CQL expression.
 
 Conformance with this standard shall be checked using all the relevant tests
 specified in <<ats,Annex A>> of this document. The framework, concepts, and
