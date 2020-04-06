@@ -1,0 +1,154 @@
+[[cql-enhancements]]
+== Common Query Language enhancements
+
+=== Overview
+
+This clause specifies requirements for enhancements to <<cql-core,Simple CQL>>.
+Specifically, this clause defined requirements for:
+
+* additional spatial operators
+* additional temporal operators
+* support for functions in CQL
+* support for arithmetic expression in CQL
+
+In each case, the clause also ammends and extends CQL's BNF and the text and
+JSON encodings of CQL to introduce the enhanced capabilities.
+
+[[enhanced-spatial-operators]]
+=== Requirements Class "Enhanced Spatial Operators"
+
+include::requirements/requirements_class_enhanced-spatial-operators.adoc[]
+
+The <<rc_simple_cql,Simple CQL>> clause specifies the use of the `INTERSECTS`
+spatial operator.  This requirement adds the remaining Eignehoffer operators
+to the list of spatial operators that an implementation of this extension
+might offer.
+
+include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators.adoc[]
+
+include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators-text.adoc[]
+
+include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators-json.adoc[]
+
+[[enhanced-temporal-operators]]
+=== Requirements Class "Enhanced Temporal Operators"
+
+include::requirements/requirements_class_enhanced-temporal-operators.adoc[]
+
+The <<rc_simple_cql,Simple CQL>> clause specifies the use of the `ANYINTERACTS`
+temporal operator.  This requirements class adds the remaining ISO temporal
+operators to the list of temporal operators that an implementations of this
+extension might offer.
+
+include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators.adoc[]
+
+include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators-text.adoc[]
+
+include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators-json.adoc[]
+
+[[functions]]
+=== Requirements Class "Functions"
+
+include::requirements/requirements_class_functions.adoc[]
+
+This clause specifies requirements for supporting functions in CQL. Functions
+allow implementations to extend the language.
+
+A resource, `/functions` is also defined that allows clients to discover the
+list of function that an implementation offers.
+
+include::requirements/functions/REQ_functions.adoc[]
+
+include::requirements/functions/REQ_functions-text.adoc[]
+
+include::requirements/functions/REQ_functions-json.adoc[]
+
+include::requirements/functions/REQ_get-functions-operation.adoc[]
+
+include::requirements/functions/REQ_get-functions-response-json.adoc[]
+
+include::requirements/functions/REQ_get-functions-response-xml.adoc[]
+
+[[example_2]]
+.Get functions JSON response example
+====
+[source,JSON]
+----
+   {
+      "functions": [
+         {
+            "name": "min",
+            "arguments": [
+               {
+                  "position": 1,
+                  "type": ["string","number","datetime"]
+               },
+               {
+                  "position": 2,
+                  "type": ["string","number","datetime"]
+               },
+            ],
+            "retuns": ["string","number","datetime"]
+         },
+         {
+            "name": "max",
+            "arguments": [
+               {
+                  "position": 1,
+                  "type": ["string","number","datetime"]
+               },
+               {
+                  "position": 2,
+                  "type": ["string","number","datetime"]
+               },
+            ],
+            "retuns": ["string","number","datetime"]
+         },
+         {
+            "name": "geometryType",
+            "arguments": [
+               {
+                  "position": 1,
+                  "type": ["geometry"]
+               }
+            ],
+            "returns": ["string"]
+         }
+      ]
+   }
+----
+====
+
+[[example_3]]
+.Get functions XML response example
+====
+[source,XML]
+----
+
+----
+====
+
+[[arithmetic]]
+=== Requirements Class "Arithmetic Expressions"
+
+include::requirements/requirements_class_arithmetic.adoc[]
+
+This clause specifies requirements for supporting arithmetic expressions in CQL.
+An arithemtic expression is an expression composed of an arithmetic operand
+(a property name, a number or a function that returns a number), an arithmetic
+operator (i.e. one of +,-,*,/) and another arithmetic operand.
+
+include::requirements/arithmetic/REQ_arithmetic.adoc[]
+
+include::requirements/arithmetic/REQ_arithmetic-text.adoc[]
+
+include::requirements/arithmetic/REQ_arithmetic-json.adoc[]
+
+[[example_4]]
+.Arithmetic expression example in JSON
+====
+[source,JSON]
+----
+
+----
+====

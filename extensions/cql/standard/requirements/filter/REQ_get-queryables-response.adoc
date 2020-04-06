@@ -1,0 +1,45 @@
+[[req_filter_get-queryables-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/get-queryables-response*
+^|A |A successful execution of the operation SHALL be reported as a response wit
+h a HTTP status code `200`.
+^|B |The content of the response shall have the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+type: object
+required:
+  - queryables
+properties:
+  queryables:
+    type: array
+    items:
+      type: object
+      required:
+      - queryable
+      - type
+      properties:
+         queryable:
+            description: the token that may be used in a CQL predicate
+            type: string
+         title:
+            description: a human readble title for the queryable
+            type: string
+         description:
+         description: a human-readable narrative describing the queryable
+            type: string
+         language:
+            description: the language used for the title and description
+            type: string
+            default:
+               - en
+         type:
+            description: the data type of the queryable
+            type: string
+         type-ref:
+            description: a reference to the formal definition of the type
+            type: string
+            format: url
+----
+|===

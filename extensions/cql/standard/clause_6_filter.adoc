@@ -1,0 +1,119 @@
+== Requirements Class "Filter"
+
+[[filter-overview]]
+=== Overview
+
+include::requirements/requirements_class_filter.adoc[]
+
+The <<OACommon-1,OGC API - Common>> standard defines two filtering operators:
+bbox and datetime.  <<OAFeat-1,OGC API - Features - Part 1: Core>> also adds
+support, beyond <<OACommon-1,OGC API - Common>> for simple equality predicates
+logically joined using the AND operator.  This capabilities offer simple 
+resource filtering for HTTP requests.
+
+This conformance class defines additional query parameters that allow more 
+complex filtering expressions to be specified when querying server resources.
+
+Specifically, this clause defines the parameters, `filter`, `filter-lang` and
+`filter-crs`.
+
+This conformance class also defines resources for discovering the list of 
+resource properties (and their types) that may be used to construct filter
+expressions.
+
+[[filter-queryables]]
+=== Queryables
+
+This extension does not assume that the schema (internal or external) of a 
+resource being queried is available for inspection and thus a means needs
+to exist to interrogate an endpoint to determine the names and types of the
+properties or keys that may be used to construct a filter expression.
+
+include::requirements/filter/REQ_get-queryables-op-global.adoc[]
+
+include::requirements/filter/REQ_get-queryables-op-local.adoc[]
+
+include::requirements/filter/REQ_get-queryables-response.adoc[]
+
+[[example_1]]
+.Queryables example
+====
+[source,JSON]
+----
+{
+   "queryables": [
+      {
+         "queryable": "elevation",
+         "title": "Elevation",
+         "description": "The average distance of the road segment above sea level.",
+         "type": "double"
+      },
+      {
+         "queryable": "nlanes",
+         "title": "Temperature",
+         "description": "The total number of lanes in all directions.",
+         "type": "integer"
+      },
+      {
+         "queryable": "geom",
+         "title": "Segment Geometry",
+         "description": "The geometry of the road segment",
+         "type": "linestring"
+      },
+      {
+         "queryable": "name",
+         "title": "Segment Name",
+         "description": "The common name of the road segment.",
+         "type": "string"
+      }
+   ]
+}
+----
+====
+
+[[filter-param]]
+=== Parameter filter
+
+This extensions defines a general parameter, `filter`, whose value is a filter
+expression to be applied when retrieving resources in order to determine which
+resources should be include in a result set.
+
+include::requirements/filter/REQ_filter-param.adoc[]
+
+
+[[filter-lang-param]]
+=== Parameter filter-lang
+
+Any predicate language that can be suitably expressed as the value of an 
+HTTP query parameter may be specified as the value of the `filter` parameter.
+In order to specify that specific language that is being used, this clause
+defines the `filter-lang` parameter.
+
+include::requirements/filter/REQ_filter-lang-param.adoc[]
+
+[[filter-filter-crs]]
+=== Parameter filter-crs
+
+include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
+
+include::requirements/filter/REQ_filter-crs.param.adoc[]
+
+=== Interaction with existing predicates
+
+include::requirements/filter/REQ_mixing-expressions.adoc[]
+
+=== Filter expression language
+
+This extension does not mandate that a specific filter expression language be
+used as the value of the <<filter-param,filter parameter>>.  However, this 
+extension defines a filter expression language called the `Common Query
+Language` (CQL).  A <<cql-core,simple CQL core>> is defined along with a 
+number of <<cql-enhancements,enhancements>> that add additional, more advanced
+capabilities to the language.  Two encodings, a <<simple-cql-text,text
+encoding>> and a <<simple-cql-json,JSON>> encoding are also defined and
+recommended if they are suitable for their intended use.
+
+[[filter-response]]
+=== Response
+
+include::requirements/filter/REQ_response.adoc[]

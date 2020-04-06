@@ -1,0 +1,72 @@
+[[req_functions-json]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/functions/functions-json* 
+^|A |A server that implements the <<rc_functions,Functions>> requirement class and also implements this requirement shall be able to parse a function encoded as JSON according to the following JSON Schema fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> JSON Schema:
+
+----
+   "function": {
+      "type": "object",
+      "properties": {
+         "name": { "type": "string" },
+         "arguments": {
+            "type": "array",
+            "items": {
+               "oneOf": [
+                  { "type": "string" },
+                  { "type": "number" },
+                  { "type": "boolean" },
+                  { "$ref": "#/definitions/functionObjectArgument" }
+               ]
+            }
+         }
+      }
+   },
+
+   "functionObjectArgument": {
+      "type": "object",
+      "properties": {
+         "property": { "type": "string" },
+         "function": { "$ref": "#/definitions/function" },
+         "geometry": { "$ref": "#/definitions/geometryLiteral" },
+         "bbox": { "$ref": "#/definitions/bbox" },
+         "temporalValue": { "$ref": "#/definitions/temporalLiteral" }
+      }
+   },
+
+   "scalarOperands": {
+      "type": "object",
+      "properties": {
+         "property": { "type": "string" },
+         "function": { "$ref": "#/definitions/function" },
+         "value": { "$ref": "#/definitions/scalarLiteral" }
+      },
+      "minProperties": 2,
+      "maxProperties": 2
+   },
+
+   "spatialOperands": {
+      "type": "object",
+      "properties": {
+         "property": { "type": "string" },
+         "function": { "$ref": "#/definitions/function" },
+         "value": {  "$ref": "#/definitions/geometryLiteral" }
+      },
+      "minProperties": 2,
+      "maxProperties": 2
+   },
+
+   "temporalOperands": {
+      "type": "object",
+      "properties": {
+         "property": { "type": "string" },
+         "function": { "$ref": "#/definitions/function" },
+         "value": { "$ref": "#/definitions/temporalLiteral" }
+      },
+      "minProperties": 2,
+      "maxProperties": 2
+   },
+----
+
+^|B |The list of valid function names can be discovered via the `functions` resource (i.e. path `/functions`).
+|===

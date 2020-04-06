@@ -1,0 +1,14 @@
+[[req_simple-cql_in-predicate]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/simple-cql/in-predicate* 
+^|A |A server that implements this conformance class shall support an in-list
+predicate as defined by the following BNF fragment:
+
+----
+inPredicate = propertyName "IN" leftParen { characterLiteral \|
+                                            numericLiteral \|
+                                            geomLiteral \|
+                                            temporalLiteral } rightParen;
+----
+|===

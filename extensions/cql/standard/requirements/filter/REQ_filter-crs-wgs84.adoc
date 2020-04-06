@@ -1,0 +1,6 @@
+[[req_filter_filter-crs-wgs84]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/filter-crs-wgs84*
+^|A |If a server does not implement the http://fix.me[Coords Reference Systems by Reference] extension, then all geometry values in a filter expression specified as the value of the `filter` parameter shall be expressed using CRS84 as per http://docs.opengeospatial.org/is/17-069r3/17-069r3.html[OGC API - Features - Part 1: Core].
+|===

@@ -1,0 +1,8 @@
+[[req_filter_response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/response*
+^|A |A CQL filter expression shall be evaluated for each item of a collection.  
+^|B |If the CQL filter experssion evalutes to `TRUE` then the item shall be included in the result set.
+^|C |If the CQL filter expression evaluates to `FALSE` then the item shall be excluded from the result set.
+|===

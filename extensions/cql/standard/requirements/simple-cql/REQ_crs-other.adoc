@@ -1,0 +1,9 @@
+[[req_simplex-cql_crs-other]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/simple-cql/crs/storage-other*
+^|A |If a server implementing this conformance class also supports the
+http://fix.me[Coordinate Reference Systems by Reference] extension, then
+all geometry coordinate values encoded in a CQL expression shall be expressed
+using the crs specified by the `filter-crs` parameter as specified in <<filter-filter-crs,Parameter filter-crs>>.
+|===

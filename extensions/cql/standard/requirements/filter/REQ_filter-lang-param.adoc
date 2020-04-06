@@ -1,0 +1,20 @@
+[[req_filter_filter-lang-param]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/filter-lang-param*
+^|A |The HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items`) shall support a parameter `filter-lang` with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: filter-lang
+in: query
+required: false
+schema:
+  type: string
+  enum:
+     - 'cql-text'
+     - 'cql-json'
+  default: "cql-text"
+style: form
+----
+|===

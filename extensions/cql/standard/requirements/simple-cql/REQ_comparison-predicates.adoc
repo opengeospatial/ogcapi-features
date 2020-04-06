@@ -1,0 +1,32 @@
+[[req_simple-cql_comparison-predicates]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/simple-cql/comparison-predicates* 
+^|A |A server that implements this conformance class shall support the comparison operators defined by the following BNF fragment:
+
+----
+comparisonPredicate = binaryComparisonPredicate
+                    \| propertyIsLikePredicate
+                    \| propertyIsBetweenPredicate
+                    \| propertyIsNullPredicate;
+
+binaryComparisonPredicate = scalarExpression comparisonOperator scalarExpression;
+
+propertyIsLikePredicate =  scalarExpression "LIKE" regularExpression;
+
+propertyIsBetweenPredicate = scalarExpression "BETWEEN"
+                             scalarExpression "AND" scalarExpression;
+
+propertyIsNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
+
+regularExpression = characterLiteral;
+
+comparisonOperator = eq \| neq \| lt \| gt \| lteq \| gteq;
+
+neq = lt gt;
+
+gteq = gt eq;
+
+lteq = lt eq;
+----
+|===

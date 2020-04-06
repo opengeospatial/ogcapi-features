@@ -1,0 +1,8 @@
+[[req_filter_get-queryables-op-global]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/get-queryables-op-global*
+^|A |A server that implements this conformance class shall support the HTTP GET operation at the '/queryables' path.
+^|B |The queryables accessed at this path shall be valid for all collections identified in the collections response (path `/collections`).
+|===
+

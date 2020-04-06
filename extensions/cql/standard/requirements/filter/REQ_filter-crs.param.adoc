@@ -1,0 +1,19 @@
+[[req_filter_filter-crs-param]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/filter-crs-param*
+^|A |If the server implementing this extension also supports the http://fix.me[Coords Reference Systems by Reference] extension, then the HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items') shall support a parameter `filter-crs` that asserts the crs being used to encode geomerty value in a filter expression specified as the value of the `filter` parameter.
+^|B |The following YAML fragment defines the `filter-crs` parameter:
+
+[source,YAML]
+----
+name: filter-crs
+in: query
+required: false
+schema:
+  type: string
+  format: uri
+style: form
+explode: false
+----
+|===

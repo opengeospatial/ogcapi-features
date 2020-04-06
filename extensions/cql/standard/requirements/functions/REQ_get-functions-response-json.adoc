@@ -1,0 +1,88 @@
+[[req_functions_get-functions-response-json]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/functions/get-functions-response-json*
+^|A |A successful execution of the operation SHALL be reported as a response wit
+h a HTTP status code `200`.
+^|B |The JSON content of the response shall validate against the following JSON schema:
+
+[source,JSON]
+----
+   {
+     "$id": "https://example.com/person.schema.json",
+     "$schema": "http://json-schema.org/draft-07/schema#",
+     "type": "object",
+     "required": [
+       "functions"
+     ],
+     "properties": {
+       "functions": {
+         "type": "array",
+         "items": {
+           "type": "object",
+           "required": [
+             "name",
+             "returns"
+           ],
+           "properties": {
+             "name": {
+               "type": "string"
+             },
+             "description": {
+               "type": "string"
+             },
+             "metadataURL": {
+               "type": "string",
+               "format": "url"
+             },
+             "arguments": {
+               "type": "array",
+               "items": {
+                 "type": "object",
+                 "required": [
+                   "position",
+                   "type"
+                 ],
+                 "properties": {
+                   "description": {
+                     "type": "string"
+                   },
+                   "position": {
+                     "type": "integer"
+                   },
+                   "type": {
+                     "type": "array",
+                     "items": {
+                       "type": "string",
+                       "enum": [
+                         "string",
+                         "number",
+                         "datetime",
+                         "geometry",
+                         "boolean"
+                       ]
+                     }
+                   }
+                 }
+               }
+             },
+             "returns": {
+               "type": "array",
+               "items": {
+                 "type": "string",
+                 "enum": [
+                   "string",
+                   "number",
+                   "datetime",
+                   "geomtry",
+                   "boolean"
+                 ]
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+----
+|===

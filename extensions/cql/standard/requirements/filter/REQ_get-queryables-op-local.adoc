@@ -1,0 +1,8 @@
+[[req_filter_get-queryables-op-local]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/get-queryables-op-local* 
+^|A |For every collection identified in the collections response (path
+ `/collections`), the server SHALL support the HTTP GET operation at the path `/collections/{collectionId}/queryables`.
+^|B |The parameter `collectionId` is each `id` property in the collections response (JSONPath: `$.collections[*].id`).
+|===

@@ -1,0 +1,13 @@
+[[req_enhanced-temporal-operators]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/enhanced-temporal-operators* 
+^|A |A server that implements this requirements class shall, in addition to `ANYINTERACTS`, support the additional temporal operators defined by the following BNF fragment which extends the list of temporal operators specified for the <<req_simple-cql_temporal-predicates,Simple CQL Temporal Predicates>> requirements class:
+
+----
+   temporalOperator = "AFTER" \| "BEFORE" \| "BEGINS" \| "BEGUNBY"
+                   \| "TCONTAINS" \| "DURING" \| "ENDEDBY" \| "ENDS"
+                   \| "TEQUALS" \| "MEETS" \| "METBY" \| "TOVERLAPS"
+                   \| "OVERLAPPEDBY" \| "ANYINTERACTS" \| "INTERSECTS";
+----
+|===
