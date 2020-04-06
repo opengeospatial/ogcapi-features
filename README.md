@@ -82,9 +82,9 @@ so browse there to get a good idea of what is happening, as well as past decisio
 The OGC Features API SWG has identified the following extensions to Part 1 (Core)
 as the highest priority:
 
-* [OGC API - Features - Part 2: Coordinate Reference Systems by Reference (draft)](http://docs.opengeospatial.org/DRAFTS/18-058.html);
-* [OGC API - Features - Part 3: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html);
-* filter capabilities based on a subset of CQL.
+* [OGC API - Features - Part 2: Coordinate Reference Systems by Reference (draft)](http://docs.opengeospatial.org/DRAFTS/18-058.html)
+* [OGC API - Features - Part 3: Common Query Language](http://docs.opengeospatial.org/DRAFTS/19-079.html)
+* [OGC API - Features - Part 4: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
 
 A joint sprint with [STAC](https://github.com/radiantearth/stac-spec) and the [OGC API Records SWG](https://github.com/opengeospatial/ogcapi-records) to advance richer query/filter capabilities took place on [November 5-7, 2019, in Arlington, VA](https://www.opengeospatial.org/pressroom/pressreleases/3074).
 
@@ -96,7 +96,9 @@ Open issues for Part 1 (Core) are documented in a [GitHub project](https://githu
 
 Open issues for Part 2 (CRS) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/2).
 
-Open issues for Part 3 (Simple Transactions) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/3).
+Open issues for Part 3 (Common Query Language) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/4).
+
+Open issues for Part 4 (Simple Transactions) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/3).
 
 Additional links:
 
@@ -112,7 +114,8 @@ The latest drafts of each standard in this repository are build daily (based on 
 
 * [Part 1: Core](http://docs.opengeospatial.org/DRAFTS/17-069r4.html)
 * [Part 2: Coordinate Reference Systems by Reference](http://docs.opengeospatial.org/DRAFTS/18-058.html)
-* [Part 3: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
+* [Part 3: Common Query Language](http://docs.opengeospatial.org/DRAFTS/19-079.html)
+* [Part 4: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
 [Asciidoctor](https://asciidoctor.org/) set up and [installed](https://asciidoctor.org/docs/#get-started-with-asciidoctor).
@@ -123,7 +126,9 @@ Then run:
 asciidoctor core/standard/17-069.adoc
 # Part 2: Coordinate Reference Systems by Reference
 asciidoctor extensions/crs/standard/18-058.adoc
-# Part 3: Simple Transactions
+# Part 3: Common Query Language
+asciidoctor extensions/cql/standard/19-079.adoc
+# Part 4: Simple Transactions
 asciidoctor extensions/transactions/simple/standard/20-002.adoc
 ```
 
