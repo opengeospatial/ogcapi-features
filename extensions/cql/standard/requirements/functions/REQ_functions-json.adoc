@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/functions/functions-json* 
-^|A |A server that implements the <<rc_functions,Functions>> requirement class and also implements this requirement shall be able to parse a function encoded as JSON according to the following JSON Schema fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> JSON Schema:
+^|A |A server that implements the <<rc_functions,Functions>> requirement class and also implements this requirement shall be able to parse a function call expression encoded as JSON according to the following JSON Schema fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> JSON Schema:
 
 ----
    "function": {
