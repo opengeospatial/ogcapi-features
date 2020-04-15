@@ -26,10 +26,6 @@ might offer.
 
 include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators.adoc[]
 
-include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators-text.adoc[]
-
-include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators-json.adoc[]
-
 [[enhanced-temporal-operators]]
 === Requirements Class "Enhanced Temporal Operators"
 
@@ -41,10 +37,6 @@ operators to the list of temporal operators that an implementations of this
 extension might offer.
 
 include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators.adoc[]
-
-include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators-text.adoc[]
-
-include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators-json.adoc[]
 
 [[functions]]
 === Requirements Class "Functions"
@@ -58,10 +50,6 @@ A resource, `/functions` is also defined that allows clients to discover the
 list of function that an implementation offers.
 
 include::requirements/functions/REQ_functions.adoc[]
-
-include::requirements/functions/REQ_functions-text.adoc[]
-
-include::requirements/functions/REQ_functions-json.adoc[]
 
 include::requirements/functions/REQ_get-functions-operation.adoc[]
 
@@ -80,11 +68,9 @@ include::requirements/functions/REQ_get-functions-response-xml.adoc[]
             "name": "min",
             "arguments": [
                {
-                  "position": 1,
                   "type": ["string","number","datetime"]
                },
                {
-                  "position": 2,
                   "type": ["string","number","datetime"]
                },
             ],
@@ -94,11 +80,9 @@ include::requirements/functions/REQ_get-functions-response-xml.adoc[]
             "name": "max",
             "arguments": [
                {
-                  "position": 1,
                   "type": ["string","number","datetime"]
                },
                {
-                  "position": 2,
                   "type": ["string","number","datetime"]
                },
             ],
@@ -108,7 +92,6 @@ include::requirements/functions/REQ_get-functions-response-xml.adoc[]
             "name": "geometryType",
             "arguments": [
                {
-                  "position": 1,
                   "type": ["geometry"]
                }
             ],
@@ -139,10 +122,6 @@ An arithemtic expression is an expression composed of an arithmetic operand
 operator (i.e. one of +,-,*,/) and another arithmetic operand.
 
 include::requirements/arithmetic/REQ_arithmetic.adoc[]
-
-include::requirements/arithmetic/REQ_arithmetic-text.adoc[]
-
-include::requirements/arithmetic/REQ_arithmetic-json.adoc[]
 
 [[example_4]]
 .Arithmetic expression example in JSON

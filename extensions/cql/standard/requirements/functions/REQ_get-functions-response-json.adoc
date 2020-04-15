@@ -40,15 +40,14 @@ h a HTTP status code `200`.
                "items": {
                  "type": "object",
                  "required": [
-                   "position",
                    "type"
                  ],
                  "properties": {
+                   "title": {
+                      "type": "string"
+                   },
                    "description": {
                      "type": "string"
-                   },
-                   "position": {
-                     "type": "integer"
                    },
                    "type": {
                      "type": "array",

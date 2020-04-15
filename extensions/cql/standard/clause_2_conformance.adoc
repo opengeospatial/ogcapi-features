@@ -3,13 +3,14 @@
 This standard defines the following conformance classes:
 
 * <<rc_filter,Filter>>
+* <<rc_features-filter,Features Filter>>
 * <<rc_simple-cql,Simple CQL>>
-* <<rc_simple-cql-text,Simple CQL Text encoding>>
-* <<rc_simple-cql-json,Simple CQL JSON encoding>>
 * <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
 * <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>
 * <<rc_functions,Functions>>
 * <<rc_arithmetic,Arithmetic expressions>>
+* <<rc_cql-text,CQL Text encoding>>
+* <<rc_cql-json,CQL JSON encoding>>
 
 The <<rc_filter,Filter>> conformance class defines a set of HTTP query
 parameters that may be used to specify complex filter expressions on
@@ -25,12 +26,16 @@ This conformance class also defined the resources `/queryables` and
 the list of property names and types that may be used to construct filter
 expressions.
 
+The <<rc_features-filter,Features Filter>> conformance class defines the
+binding between this the <<rc_filter,Filter>> conformance class the 
+<<OAFeat-1,OGC API - Features - Part 1: Core>> standard.
+
 The <<rc_simple-cql,Simple CQL>> conformance class defines the Simple Common
 Query Language (CQL). Simple CQL is intended to be a minimal useful set of
 predicates that support enhanced fine-grained read-access to collections of
 resources.  In this case `enhanced` means filtering capabilities beyond those
 supported by the core OGC API Common specification (i.e. bbox and datetime).
-The specific set of predicates defined in this conformance class are:
+The specific set of operators defined in this conformance class are:
 
 * Logical operators:
 ** and
@@ -56,20 +61,11 @@ The specific set of predicates defined in this conformance class are:
 An encoding of CQL may be used as the value of the filter parameters defined
 in the <<rc_filter,Filter>> conformance class.
 
-The <<rc_simple-cql-text,Simple CQL Text encoding>> conformance class defines
-a text encoding for CQL.  Such an encoding is suitable for use with HTTP query
-parameters such as the `filter` parameter defined by the <<rc_filter,Filter>>
-conformance class.
-
-The <<rc_simple-cql-json,Simple CQL JSON encoding>> conformance class defines
-a JSON encoding for CQL.  Such as encoding is suitable for use with as the 
-body of an HTTP POST request. 
-
 The <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>> conformance
 class specifies requirements for servers that support spatial operators in
 addition to the `intersects` operator that is defined in the
-<<rc_simple-cql,Simple CQL>> conformance class. The list of additional spatial
-operators that must be supported is:
+<<simple-cql_spatial-predicates,Simple CQL>> conformance class. The list of
+additional spatial operators that must be supported is:
 
 * equals
 * disjoint
@@ -81,13 +77,11 @@ operators that must be supported is:
 
 NOTE: Do we need to add DWITHIN and BEYOND?  I think no.
 
-Both text and JSON encodings are defined for the enhanced spatial operators.
-
 The <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> conformance
 class specifies requirements for servers that support temporal operators in
 addition to the `anyinteracts` operator defined in the
-<<rc_simple-cql,Simple CQL>> conformance class. The list of additional temporal
-operators that must be supported is:
+<<simple-cql_temporal-predicates,Simple CQL>> conformance class. The list of
+additional temporal operators that must be supported is:
 
 * after
 * before
@@ -104,8 +98,6 @@ operators that must be supported is:
 * overlappedby
 * intersects
 
-Both text and JSON encodings are defined for the enhanced temporal operators.
-
 The <<rc_functions,Functions>> conformance class specifies requirements for
 supporting function calls (e.g. min, max, etc.) in a CQL expression.  Function
 calls are the primary means of extending the language.  This conformance class
@@ -115,6 +107,15 @@ available functions.
 The <<rc_arithmetic,Arithmetic operators>> conformance class specifies
 requirements for  supporting the standard set of arithmetic operators,
 latexmath:[+, -, *, /] in a CQL expression.
+
+The <<rc_cql-text,CQL Text encoding>> conformance class defines
+a text encoding for CQL.  Such an encoding is suitable for use with HTTP query
+parameters such as the `filter` parameter defined by the <<rc_filter,Filter>>
+conformance class.
+
+The <<rc_cql-json,CQL JSON encoding>> conformance class defines
+a JSON encoding for CQL.  Such as encoding is suitable for use with as the 
+body of an HTTP POST request. 
 
 Conformance with this standard shall be checked using all the relevant tests
 specified in <<ats,Annex A>> of this document. The framework, concepts, and
