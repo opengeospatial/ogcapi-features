@@ -1,0 +1,32 @@
+== Requirements Class "Features Filter"
+
+[[features-filter-overview]]
+=== Overview
+
+include::requirements/requirements_class_features-filter.adoc[]
+
+This clause defines the binding between the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard and the <<rc_filter,filtering parameters>> defined in this standard.
+
+=== Features
+
+==== Operation
+
+As per the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard, features are accessed using the HTTP GET method via the `/collections/{collectionId}/items` path (see http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items[Features]).  The following additional requirements bind the parameters <<filter-param,filter>>, <<filter-lang-param,filter-lang>> and <<filter-filter-crs,filter-crs>> to the GET operation on this path.
+
+include::requirements/features-filter/REQ_filter-param.adoc[]
+
+include::requirements/features-filter/REQ_filter-lang-param.adoc[]
+
+include::recommendations/features-filter/REC_text-encoding.adoc[]
+
+include::requirements/features-filter/REQ_cql-text.adoc[]
+
+include::recommendations/features-filter/REC_json-encoding.adoc[]
+
+include::requirements/features-filter/REQ_cql-json.adoc[]
+
+include::requirements/features-filter/REQ_filter-crs-param.adoc[]
+
+==== Response
+
+include::requirements/features-filter/REQ_response.adoc[]

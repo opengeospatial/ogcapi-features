@@ -1,0 +1,6 @@
+[[req_features-filter_filter-crs-param]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features-filter/filter-crs-param*
+^|A |If the server implementing this extension also supports the http://fix.me[OGC API - Features - Part 2: Coordinate Reference Systems by Reference] extension, then the HTTP GET operation on the `/collections/{collectionId}/items` path shall support the `filter-crs` parameter as defined in the <<filter-filter-crs,Parameter filter-crs>> clause.
+|===

@@ -1,0 +1,113 @@
+[[cql-core]]
+== Requirements Class "Simple CQL"
+
+[[simple-cql-overview]]
+=== Overview
+
+include::requirements/requirements_class_simple-cql.adoc[]
+
+This clause defines the core of a query language called `Common Query Language`
+(CQL) that may be used to construct filter expressions.  Subsequent clauses
+define several optional encodings of CQL as well additional filtering 
+capabilities.
+
+[[simple-cql_filter-expression]]
+=== CQL filter expression
+
+A CQL filter expression is an expression that defines a logically connected
+set of predicates that are evaluated for each item of a collection.  A CQL 
+filter expression produces a Boolean value of `TRUE` is the collection item
+satisfies all the requirements of the expression; otherwise the CQL filter 
+expression evaluates to `FALSE'.
+
+A CQL filter expression can be constructed by logically connecting zero or more
+of the following classes of predicates:
+
+* comparison predicates
+* spatial predicates
+* temporal predicates
+* existence predicates
+* list predicates
+
+include::requirements/simple-cql/REQ_filter-expression.adoc[]
+
+[[simple-cql_scalar-expressions]]
+=== Scalar expressions
+
+A scalar expression is one of a property name, a character literal or a numeric
+literal.
+
+include::requirements/simple-cql/REQ_scalar-expressions.adoc[]
+
+NOTE: The `alpha` production is just an examples that allows the BNF validators that I used to work.  In reality this should really be the list of valid UTF-8 characters.
+
+[[simple-cql_comparison-predicates]]
+=== Comparison predicates
+
+A comparison predicate evaluates two scalar expressions to determine if the
+expressions satisfy the specified comparison operator.  If the requirements
+of the operator are satisfied, then the prediate evaluates to the Boolean
+value `TRUE`; otherwise the predicate evaluates to the Boolean value `FALSE`;
+
+include::requirements/simple-cql/REQ_comparison-predicates.adoc[]
+
+[[simple-cql_spatial-predicates]]
+=== Spatial predicates
+
+A spatial predicate evaluates two geometry-valued expressions to determine if
+the expressions satsify the requirements of the specified spatial operator.  
+If the requirements of the operator are satisfied, then the predicate evaluates
+to the Boolean value `TRUE`; otherwise the predicate evaluates to the Boolean 
+value `FALSE`.
+
+include::requirements/simple-cql/REQ_spatial-predicates.adoc[]
+
+=== CRS considerations
+
+include::requirements/simple-cql/REQ_crs_crs84.adoc[]
+
+include::requirements/simple-cql/REQ_crs-other.adoc[]
+
+[[simple-cql_temporal-predicates]]
+=== Temporal predicates
+
+A temporal predicate evaluates two time-valued expressions to determine if
+the expressions satsify the requirements of the specified temporal operator.  
+If the requirements of the operator are satisfied, then the predicate evaluates
+to the Boolean value `TRUE`; otherwise the predicate evaluates to the Boolean
+value `FALSE`;
+
+include::requirements/simple-cql/REQ_temporal-predicates.adoc[]
+
+[[simple-cql_exists-predicate]]
+=== Schema interogation
+
+A schema interogation predicate asks the server to determine if the named
+property is (i.e. `EXISTS`) or is not (i.e. `DOES NOT EXIST`) a property of the
+resource being evaluated by the CQL filter expression.  If the named property
+satsifies the requirements of the operator (i.e. `EXISTS` or `DOES NOT EXIST`)
+then the existence predicate evaluates to the Boolean value `TRUE`; otherwise
+the  existence predicate evaluates to the Boolean value `FALSE`;
+
+include::requirements/simple-cql/REQ_exists-predicate.adoc[]
+
+[[simple-cql_in-predicate]]
+=== List predicate
+
+A list predicate tests, for equality, the value of a scalar expression against
+a list of literal values of the same type.  If the value of the named property
+is equal to one or more of the values in the list of literals, the list
+predicate evaluates to the Boolean value `TRUE`; otherwise the list predicate
+evaluates to the Boolean value `FALSE`.
+
+include::requirements/simple-cql/REQ_in-predicate.adoc[]
+
+=== Simple CQL Encodings
+
+This standard defines a <<simple-cql-text,text>> encoding and a 
+<<simple-cql-json,JSON>> encoding of CQL and makes the following 
+recommendations:
+
+include::recommendations/simple-cql/REC_simple-cql-text.adoc[]
+
+include::recommendations/simple-cql/REC_simple-cql-json.adoc[]

@@ -1,0 +1,46 @@
+[[req_cql-json_enhanced-temporal-operators]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql-json/enhanced-temporal-operators* 
+^|A |A server that implements the <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> requirement class and also implements this requirement shall be able to parse a temporal operator encoded as JSON that validates against the following JSON Schema fragment:
+
+[source,JSON]
+----
+   "temporalExpressions" : {
+     "type": "object",
+     "properties": {
+         "after": {"$ref": "#/definitions/after"},
+         "before": {"$ref": "#/definitions/before"},
+         "begins": {"$ref": "#/definitions/begins"},
+         "begunby": {"$ref": "#/definitions/begunby"},
+         "tcontains": {"$ref": "#/definitions/tcontains"},
+         "during": {"$ref": "#/definitions/during"},
+         "endedby": {"$ref": "#/definitions/endedby"},
+         "ends": {"$ref": "#/definitions/ends"},
+         "tequals": {"$ref": "#/definitions/tequals"},
+         "meets": {"$ref": "#/definitions/meets"},
+         "metby": {"$ref": "#/definitions/metby"},
+         "toverlaps": {"$ref": "#/definitions/toverlaps"},
+         "overlappedby": {"$ref": "#/definitions/overlappedby"}
+     },
+     "minProperties": 1,
+     "maxProperties": 1
+   },
+
+   "after":        { "$ref": "#/definitions/temporalOperands" },
+   "before":       { "$ref": "#/definitions/temporalOperands" },
+   "begins":       { "$ref": "#/definitions/temporalOperands" },
+   "begunby":      { "$ref": "#/definitions/temporalOperands" },
+   "tcontains":    { "$ref": "#/definitions/temporalOperands" },
+   "during":       { "$ref": "#/definitions/temporalOperands" },
+   "endedby":      { "$ref": "#/definitions/temporalOperands" },
+   "ends":         { "$ref": "#/definitions/temporalOperands" },
+   "tequals":      { "$ref": "#/definitions/temporalOperands" },
+   "meets":        { "$ref": "#/definitions/temporalOperands" },
+   "metby":        { "$ref": "#/definitions/temporalOperands" },
+   "toverlaps":    { "$ref": "#/definitions/temporalOperands" },
+   "overlappedby": { "$ref": "#/definitions/temporalOperands" },
+   "anyinteracts": { "$ref": "#/definitions/temporalOperands" },
+   "tintersects":  { "$ref": "#/definitions/temporalOperands" },
+----
+|===
