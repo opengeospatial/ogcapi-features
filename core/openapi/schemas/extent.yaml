@@ -83,7 +83,7 @@ properties:
         items:
           description: |-
             Begin and end times of the time interval. The timestamps
-            are in the coordinate reference system specified in `trs`. By default
+            are in the temporal reference system specified in `trs`. By default
             this is the Gregorian calendar.
           type: array
           minItems: 2
@@ -97,9 +97,9 @@ properties:
             - null
       trs:
         description: |-
-          Coordinate reference system of the coordinates in the temporal extent
-          (property `interval`). The default reference system is the Gregorian calendar.
-          In the Core this is the only supported temporal reference system.
+          Temporal reference system of the timestamps in the temporal extent
+          (property `interval`). The default TRS is the Gregorian calendar.
+          In the Core this is the only supported TRS.
           Extensions may support additional temporal reference systems and add
           additional enum values.
         type: string
