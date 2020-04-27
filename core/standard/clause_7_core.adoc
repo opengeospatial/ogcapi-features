@@ -37,7 +37,7 @@ Accessing `Collections` using HTTP GET returns a response that contains at least
 
 * A local identifier for the collection that is unique for the dataset;
 
-* A list of coordinate reference systems (CRS) in which geometries may be returned by the server: the first CRS is the default coordinate reference system (in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
+* A list of coordinate reference systems in which geometries may be returned by the server: the first CRS is the default CRS (in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
 
 * An optional title and description for the collection;
 
@@ -507,8 +507,8 @@ properties:
             minItems: 1
             items:
               description: >-
-                Begin and end times of the time interval. The timestamps
-                are in the coordinate reference system specified in `trs`. By default
+                Begin and end times of the time interval. The timestamps are in the
+                temporal coordinate reference system specified in `trs`. By default
                 this is the Gregorian calendar.
               type: array
               minItems: 2
@@ -524,8 +524,8 @@ properties:
             description: >-
               Coordinate reference system of the coordinates in the temporal extent
               (property `interval`). The default reference system is the Gregorian calendar.
-              In the Core this is the only supported temporal reference system.
-              Extensions may support additional temporal reference systems and add
+              In the Core this is the only supported temporal coordinate reference system.
+              Extensions may support additional temporal coordinate reference systems and add
               additional enum values.
             type: string
             enum:

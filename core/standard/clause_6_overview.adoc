@@ -37,7 +37,7 @@ Some examples for cases that are out-of-scope of GeoJSON are:
 
 * Geometries that include non-linear curve interpolations that cannot be simplified (e.g., use of arcs in authoritative geometries),
 
-* Geometries that have to be represented in a coordinate reference system that is not based on WGS 84 longitude/latitude (e.g., an authoritative national reference system), or
+* Geometries that have to be represented in a coordinate reference system (CRS) that is not based on WGS 84 longitude/latitude (e.g., an authoritative national CRS), or
 
 * Features that have more than one geometric property.
 
