@@ -336,13 +336,17 @@ The link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/li
 
 As discussed in Chapter 9 of the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>, how to express and share the location of features in a consistent way is one of the most fundamental aspects of publishing geographic data and it is important to be clear about the coordinate reference system that coordinates are in.
 
-For the reasons discussed in the Best Practices, OGC API Features uses WGS 84 longitude and latitude as the default coordinate reference system.
+For the reasons discussed in the Best Practices, OGC API Features uses WGS 84 longitude and latitude as the default coordinate reference system for spatial geometries.
 
 include::requirements/core/REQ_crs84.adoc[]
 
 Implementations compliant with the Core are not required to support publishing feature geometries in coordinate reference systems other than http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height) or http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with height); i.e., the (optional) third coordinate number is always the height.
 
 The Core also does not specify a capability to request feature geometries in a different coordinate reference system. Such a capability will be specified in another part of the OGC API Features series.
+
+The same principles apply for temporal geometries, which are measured relative to a temporal coordinate reference system. OGC API Features uses the Gregorian calendar and all dates or timestamps discussed in this document are in the Gregorian calendar and conform to <<rfc3339,RFC 3339>>.
+
+include::recomendations/core/REC_rfc3339.adoc[]
 
 === Link headers
 
