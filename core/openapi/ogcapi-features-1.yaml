@@ -853,7 +853,10 @@ components:
             type: string
     NotFound:
       description: |-
-        The requested URI was not found.
+        The requested resource does not exist on the server. For example, a path parameter had an incorrect value.
+    NotAcceptable:
+      description: |-
+        Content negotiation failed. For example, the `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
     ServerError:
       description: |-
         A server error occurred.
