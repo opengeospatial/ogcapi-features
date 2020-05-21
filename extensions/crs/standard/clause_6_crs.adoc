@@ -32,15 +32,10 @@ include::recommendations/crs/REC_crs-format-model.adoc[]
 
 include::requirements/crs/REQ_fc-md-crs-list.adoc[]
 
-The default CRS -- that is the CRS used unless something else is explicitly
-requested -- is defined in <<OAFeat-1,OGC API - Features - Part 1:
-Core>> as:
+The list has to include the default CRS -- that is the CRS used unless something else is explicitly requested -- is defined in <<OAFeat-1,OGC API - Features - Part 1: Core>> as:
 
 * http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height)
 * http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with height)
-
-The list of supported CRS identifiers in the collection metadata may include
-these defaults but this is not a requirement.
 
 ==== Storage CRS
 
