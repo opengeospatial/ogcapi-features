@@ -368,23 +368,70 @@ such a capability is considered right now only for a future revision.
 OGC API - Features - Part 1: Core defines three conformance classes related
 to the output formats:
 
-- GML
-- GeoJSON
+- GML/XML
+- GeoJSON/JSON
 - HTML
 
-GML has full CRS support and no further requirements are imposed by this
+===== Collections and Collection resources
+
+This document specifies extensions to the Collections resource (the global list of
+coordinate reference systems) and the Collection resource (the storage CRS including
+the associated coordinate epoch).
+
+How these extensions are reflected in each
+encoding is not fully specified by this standard, except for JSON-based or
+YAML-based encodings where the extensions are fully specified by the OpenAPI
+schema components.
+
+For HTML, the requirement http://www.opengis.net/spec/ogcapi-features-1/1.0/req/html/content
+applies and the additional information has to included in the body of the
+HTML document.
+
+For XML, the content model of the `core:Collections` element needs to be
+extended with additional elements.
+
+NOTE: What do we do? Should we update the schema with Part 1 version 1.0.1
+to allow arbitrary additional elements at the end of the complex types
+`core:CollectionsType` and `core:CollectionType`. Then we could specify
+here the additional elements. Or do we leave this open?
+
+===== Features and Feature resources
+
+GML has full CRS support and no further conventions are imposed by this
 standard.
 
-GeoJSON normatively supports WGS84 (lon,lat) but the "prior arrangement"
-provision allows other coordinate systems to be used.
+HTML does not have any provisions for spatial geometries and coordinate
+reference systems. However, note that schema.org that is embedded in
+HTML only supports WGS84 in the axis order latitude/longitude, so any
+coordinates in schema.org markup will have to be in that coordinate reference
+system, independent of the requested coordinate reference system.
+
+GeoJSON normatively supports WGS84 (without height: http://www.opengis.net/def/crs/OGC/1.3/CRS84[CRS84]; with height: http://www.opengis.net/def/crs/OGC/0/CRS84h[CRS84h]), but the "prior arrangement" provision allows other coordinate
+systems to be used.
 
 include::requirements/crs/REQ_geojson.adoc[]
 
-NOTE: Need to do more work on HTML!
+An explicit request be a client with a query parameter
+`crs` establishes a prior arrangement. It is the responsibility of the
+client that submits the request to handle the coordinates in the response
+correctly. In particular, clients should not make the GeoJSON document available
+to others unless they are aware of the prior arrangement.
 
-HTML only supports WGS84 based on schema.org dependency; not sure if this is
-an issue but schema.org annotations seem to require WGS84 (lat,lon) yet WFS
-core requires lon,lat by default.
+This standard does not specify any standardized approach to encoding
+coordinate reference system information in a GeoJSON document.
+
+The first paragraph of section 4 in GeoJSON also states:
+
+> An OPTIONAL third-position element SHALL
+be the height in meters above or below the WGS 84 reference
+ellipsoid. In the absence of elevation values, applications
+sensitive to height or depth SHOULD interpret positions as being at
+local ground or sea level.
+
+If the requested coordinate reference system includes the vertical axis,
+the third-position element has to be interpreted according to that coordinate
+reference system, not as if it would be relative to the WGS 84 reference
+ellipsoid.
 
 ==== Coordinate system and axis order
 
