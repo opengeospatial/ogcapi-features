@@ -358,11 +358,6 @@ The following fragment illustrated the use of the `crs` parameter:
 ----
 =================
 
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/153[Open issue 153] +
-There is ongoing work to add negotiation of the CRS to the content negotiation
-process. However, this is still draft and not widely supported. For this reason,
-such a capability is considered right now only for a future revision.
-
 ==== Output format considerations
 
 OGC API - Features - Part 1: Core defines three conformance classes related
@@ -391,33 +386,33 @@ core requires lon,lat by default.
 Because of the inconsistent provision of coordinate reference system metadata
 in geospatial encodings and the continued confusion caused by the axis order
 of coordinates, this standard defines a mechanism for a server to clearly and
-unambiguously assert the coordinate reference system and axis order being used
+unambiguously assert the coordinate reference system being used
 in a response document independent of the requested output format.
 
 include::requirements/crs/REQ_ogc-crs-header.adoc[]
 
 include::requirements/crs/REQ_ogc-crs-header-value.adoc[]
 
-include::requirements/crs/REQ_ogc-crs-header-axis-order-value.adoc[]
-
-include::requirements/crs/REQ_ogc-crs-header-axis-names.adoc[]
-
-include::requirements/crs/REQ_ogc-crs-header-axis-order-action.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/153[Open issue 153] +
-The draft content negotiation by CRS specifies a `Content-Crs` header that
-could be used instead of a custom `OGC-CRS` header. The `Content-Crs` header
-just states the CRS, but has no option to state the axis order. +
-It is a related general question, if a capability to state the axis order
-would be helpful or not.
-
-The following example illustrates the use of the `OGC-CRS` header.
+The following example illustrates the use of the `Content-Crs` header.
 
 [[example_4]]
 .HTTP header declaring the CRS and axis order used in the body of the response
 =================
 [source]
 ----
-   OGC-CRS: http://www.opengis.net/def/crs/OGC/0/4326; axisOrder=lon,lat
+   $ curl -i "https://example.com/api/v1/collections/poi/items/1?crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3395"
+
+   HTTP/1.1 200 OK
+   Date: Sun, 24 May 2020 15:30:56 GMT
+   Content-Type: application/geo+json
+   Content-Language: en
+   Content-Crs: <http://www.opengis.net/def/crs/EPSG/0/3395>
+   Link: <https://example.com/api/v1/collections/poi/items/1?crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3395&f=json>; rel="self"; title="This document"; type="application/geo+json"
+   Link: <https://example.com/api/v1/collections/poi/items/1?crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3395&f=html>; rel="alternate"; title="This document as HTML"; type="text/html"
+   Link: <https://example.com/api/v1/collections/poi>; rel="collection"; title="The collection the feature belongs to"
+   Vary: Accept-Language,Accept-Encoding
+   Content-Length: 1064
+
+   ...
 ----
 =================
