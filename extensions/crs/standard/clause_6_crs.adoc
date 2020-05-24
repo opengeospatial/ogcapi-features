@@ -319,14 +319,15 @@ include::requirements/crs/REQ_fc-bbox-crs-action.adoc[]
 
 include::requirements/crs/REQ_bbox-crs-exception.adoc[]
 
-The following fragment illustrates the use of the `bbox-crs` parameter:
+The following fragment illustrates the use of the `bbox-crs` parameter (reserved
+characters have to be encoded):
 
 [[example_2]]
 .Specifying a bounding box in one of the supported coordinate reference systems
 =================
 [source]
 ----
-   ...&bbox=160.6,-155.95,-170,-25.89&bbox-crs=http://www.opengis.net/...
+   ...&bbox=32507317%2C5224265%2C33427450%2C5603836&bbox-crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F25832
 ----
 =================
 
@@ -354,7 +355,7 @@ The following fragment illustrated the use of the `crs` parameter:
 =================
 [source]
 ----
-.../collections/buildings/items?crs=http://www.opengis.net/def/crs/epsg/0/26703&...
+.../collections/buildings/items?crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F26703&...
 ----
 =================
 
