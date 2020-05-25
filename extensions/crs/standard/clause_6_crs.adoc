@@ -8,8 +8,8 @@ include::requirements/requirements_class_crs.adoc[]
 The <<OAFeat-1,OGC API - Features - Part 1: Core>> standard defines support
 for only two coordinate reference systems:
 
-* WGS 84 longitude/latitude
-* WGS 84 longitude/latitude plus ellipsoidal height
+* WGS 84 longitude, latitude
+* WGS 84 longitude, latitude, ellipsoidal height
 
 This extensions defines the behaviour of a server that supports additional
 coordinate reference systems.
@@ -24,6 +24,11 @@ could be improved.
 include::requirements/crs/REQ_crs-uri.adoc[]
 
 include::recommendations/crs/REC_crs-format-model.adoc[]
+
+For more information, see https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names[section 6.2 in OGC Name Type Specification, Part 1].
+
+Note that while the EPSG register itself is versioned, the registered items
+are not versioned and the "version" is always "0" in URIs of the authority "EPSG".
 
 [[crs-discovery]]
 === Discovery
@@ -381,11 +386,10 @@ HTML only supports WGS84 based on schema.org dependency; not sure if this is
 an issue but schema.org annotations seem to require WGS84 (lat,lon) yet WFS
 core requires lon,lat by default.
 
-==== Coordinate system and axis order
+==== Coordinate reference system information independent of the feature encoding
 
 Because of the inconsistent provision of coordinate reference system metadata
-in geospatial encodings and the continued confusion caused by the axis order
-of coordinates, this standard defines a mechanism for a server to clearly and
+in geospatial encodings, this standard defines a mechanism for a server to clearly and
 unambiguously assert the coordinate reference system being used
 in a response document independent of the requested output format.
 
@@ -393,7 +397,10 @@ include::requirements/crs/REQ_ogc-crs-header.adoc[]
 
 include::requirements/crs/REQ_ogc-crs-header-value.adoc[]
 
-The following example illustrates the use of the `Content-Crs` header.
+NOTE: The header is consistent with the
+https://github.com/opengeospatial/conneg-by-crs[draft "content negotiation by coordinate reference system" specification].
+
+The following example illustrates the `Content-Crs` header in a response.
 
 [[example_4]]
 .HTTP header declaring the CRS and axis order used in the body of the response
