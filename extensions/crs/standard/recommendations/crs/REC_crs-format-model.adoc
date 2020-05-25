@@ -6,12 +6,12 @@
 
 http://www.opengis.net/def/crs/{authority}/{version}/{code}
 
-In this format model, the token {authority} is a placeholder for a code the
-designates to authority responsible for the definition of this CRS.  Typical
+In this format model, the token {authority} is a placeholder for a value that
+designates the authority responsible for the definition of this CRS.  Typical
 values include "EPSG" and "OGC".
 
-The token {version} is a placeholder for the specific version of the coordinate
-reference system definition or `0` for the latest version or if the version
+The token {version} is a placeholder for the specific version of the CRS
+definition or `0` for the latest version or if the version
 is unknown.
 
 The token {code} is a placeholder for the authority's code for the CRS.

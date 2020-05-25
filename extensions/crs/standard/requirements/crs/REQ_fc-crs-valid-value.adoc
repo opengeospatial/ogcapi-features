@@ -2,7 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |*/req/crs/fc-crs-valid-value* +
-2+| The value of the `crs` parameter shall be one of the CRS identifiers
-from the list of supported coordinate reference systems listed in the 
-spatial collection metadata using the `crs` property.
+2+| The value of the `crs` parameter shall be one of the CRS identifiers from the list of supported CRS identifier found in the <<crs-discovery,collection object>> using the `crs` property.
 |===

@@ -11,13 +11,13 @@ for only two coordinate reference systems:
 * WGS 84 longitude/latitude
 * WGS 84 longitude/latitude plus ellipsoidal height
 
-This extensions defines the behaviour of a server that supports additional
+This extension defines the behaviour of a server that supports additional
 coordinate reference systems.
 
 CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/295[Open issue 295] +
 This draft is specific to Features and extends the resources
 'feature collection', 'features' and 'feature'. However, in general
-the approach specified in this draft should also be applicable to
+the approach specified in this draft standard should also be applicable to
 other resource types and feedback would be welcome how such reuse
 could be improved.
 
@@ -39,7 +39,7 @@ Core>> as:
 * http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height)
 * http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with height)
 
-The list of supported CRS identifiers in the collection metadata may include
+The list of supported CRS identifiers in the collection object may include
 these defaults but this is not a requirement.
 
 ==== Storage CRS
@@ -60,7 +60,7 @@ include::requirements/crs/REQ_fc-md-storageCrs.adoc[]
 
 include::requirements/crs/REQ_fc-md-storageCrs-valid-value.adoc[]
 
-The following schema fragment extends the collection metadata to add the
+The following schema fragment extends the collection object to add the
 `storageCRS` property.
 
 [source,YAML]
@@ -117,12 +117,12 @@ properties:
 ==== Global list of CRS identifiers
 
 To prevent unnecessary duplication of lists of supported CRS identifiers in
-the collection metadata, a global list of supported CRS identifiers may be
-provided as part of the collections metadata.
+the <<crs-discovery,collection object>>, a global list of supported CRS
+identifiers may be provided as part of the collections object.
 
 This global list of CRS identifiers is not automatically inherited by each
 collection offered by the service.  Rather the global list of CRS identifiers
-must be explicitly referenced in the collection metadata using a
+must be explicitly referenced in the collection object using a
 JSON Pointer (RFC 6901).
 
 CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/274[Open issue 274] +
@@ -136,7 +136,7 @@ own resource.
 
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
-The following schema fragment extends the collections metadata to add the `crs`
+The following schema fragment extends the collections object to add the `crs`
 property which contains the global list of CRS identifiers.
 
 [source,YAML]
@@ -165,7 +165,7 @@ properties:
 The following example illustrates the used of a global list of CRS identifiers.
 
 [[example_1]]
-.Collections metadata containing a global list of CRS identifiers
+.Collections object containing a global list of CRS identifiers
 =================
 [source,JSON]
 ----
@@ -290,12 +290,10 @@ The following example illustrates the used of a global list of CRS identifiers.
 ----
 =================
 
-The `bonn_buildings` collection is offered in all the coordinate reference
-systems specified in the global list plus five other coordinate reference
-systems.
-The `tor_buildings` collection is offered in the coordinate reference systems
-specified in the global list.
-The `dc_buildings` collection, not having a crs property, is only offered in
+In the above example, the `bonn_buildings` collection is offered in all the
+CRSs specified in the global list plus five other CRSs. The `tor_buildings`
+collection is offered in the CRSs  specified in the global list.  The
+`dc_buildings` collection, not having a `crs` property, is only offered in
 the default CRS (i.e. WGS84 longitude, latitude).
 
 [[crs-query]]
@@ -347,10 +345,10 @@ include::requirements/crs/REQ_fc-crs-action-exception.adoc[]
 
 include::requirements/crs/REQ_crs-exception.adoc[]
 
-The following fragment illustrated the use of the `crs` parameter:
+The following fragment illustrates the use of the `crs` parameter:
 
 [[example_3]]
-.Retrieving features from a collection in one of the supported coordinate reference systems
+.Retrieving features from a collection in one of the supported CRSs 
 =================
 [source]
 ----
@@ -361,7 +359,7 @@ The following fragment illustrated the use of the `crs` parameter:
 CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/153[Open issue 153] +
 There is ongoing work to add negotiation of the CRS to the content negotiation
 process. However, this is still draft and not widely supported. For this reason,
-such a capability is considered right now only for a future revision.
+such a capability is considered only for a future version of this standard.
 
 ==== Output format considerations
 
@@ -380,19 +378,15 @@ provision allows other coordinate systems to be used.
 
 include::requirements/crs/REQ_geojson.adoc[]
 
-NOTE: Need to do more work on HTML!
-
-HTML only supports WGS84 based on schema.org dependency; not sure if this is
-an issue but schema.org annotations seem to require WGS84 (lat,lon) yet WFS
-core requires lon,lat by default.
+NOTE: HTML only supports WGS84 based on the schema.org dependency. The OGC is not sure if this is an issue but schema.org annotations seem to require WGS84 (lat,lon) yet <<OAFeat-1,OGC API - Features - Part 1: Core>> requires lon,lat.
 
 ==== Coordinate system and axis order
 
-Because of the inconsistent provision of coordinate reference system metadata
-in geospatial encodings and the continued confusion caused by the axis order
-of coordinates, this standard defines a mechanism for a server to clearly and
-unambiguously assert the coordinate reference system and axis order being used
-in a response document independent of the requested output format.
+Because of the inconsistent provision of CRS metadata in geospatial encodings
+and the continued confusion caused by the axis order of coordinates, this
+standard defines a mechanism for a server to clearly and unambiguously assert
+the CRS and axis order being used in a response document independent of the
+requested output format.
 
 include::requirements/crs/REQ_ogc-crs-header.adoc[]
 
@@ -408,7 +402,7 @@ CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/153[Open 
 The draft content negotiation by CRS specifies a `Content-Crs` header that
 could be used instead of a custom `OGC-CRS` header. The `Content-Crs` header
 just states the CRS, but has no option to state the axis order. +
-It is a related general question, if a capability to state the axis order
+A related general question, is whether that capability to state the axis order
 would be helpful or not.
 
 The following example illustrates the use of the `OGC-CRS` header.
