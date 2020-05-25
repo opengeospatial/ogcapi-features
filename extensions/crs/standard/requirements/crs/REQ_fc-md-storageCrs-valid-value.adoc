@@ -2,7 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |*/req/crs/fc-md-storageCrs-valid-value* +
-2+|The value of the `storageCrs` property shall be one of the CRS identifiers
-from the list of supported coordinate reference systems listed in the
-the `crs` property of the spatial feature collection.
+2+|The value of the `storageCrs` property shall be one of the CRS identifiers from the list of supported CRS identifiers found in the <<crs-discovery,collection object>> using the `crs` property.
 |===

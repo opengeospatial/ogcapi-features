@@ -7,12 +7,11 @@ generate CRS identifiers with the following format model:
 
 `http://www.opengis.net/def/crs/{authority}/{version}/{code}`
 
-In this format model, the token `{authority}` is a placeholder for a code the
+In this format model, the token `{authority}` is a placeholder for a value that
 designates to authority responsible for the definition of this CRS.  Typical
 values include "EPSG" and "OGC".
 
-The token `{version}` is a placeholder for the specific version of the coordinate
-reference system definition or `0` for un-versioned CRS definitions.
+The token `{version}` is a placeholder for the specific version of the CRS definition or `0` for un-versioned CRS definitions.
 
 The token `{code}` is a placeholder for the authority's code for the CRS.
 |===

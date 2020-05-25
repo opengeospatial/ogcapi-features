@@ -11,13 +11,13 @@ for only two coordinate reference systems:
 * WGS 84 longitude, latitude
 * WGS 84 longitude, latitude, ellipsoidal height
 
-This extensions defines the behaviour of a server that supports additional
+This extension defines the behaviour of a server that supports additional
 coordinate reference systems.
 
 CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/295[Open issue 295] +
 This draft is specific to Features and extends the resources
 'feature collection', 'features' and 'feature'. However, in general
-the approach specified in this draft should also be applicable to
+the approach specified in this draft standard should also be applicable to
 other resource types and feedback would be welcome how such reuse
 could be improved.
 
@@ -63,7 +63,7 @@ include::recommendations/crs/REC_fc-md-coordinateEpoch.adoc[]
 
 include::requirements/crs/REQ_fc-md-storageCrs-valid-value.adoc[]
 
-The following schema fragment extends the collection metadata to add the
+The following schema fragment extends the collection object to add the
 `storageCrs` and `storageCrsCoordinateEpoch` properties.
 
 [source,YAML]
@@ -124,7 +124,7 @@ properties:
 ==== Global list of CRS identifiers
 
 To prevent unnecessary duplication of lists of supported CRS identifiers in
-the collection object, a global list of supported CRS identifiers may be
+the <<crs-discovery,collection object>>, a global list of supported CRS identifiers may be
 provided as part of the collections object.
 
 This global list of CRS identifiers is not automatically inherited by each
@@ -140,7 +140,7 @@ include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
 Note that only a local JSON Pointer within the same document is supported.
 
-The following schema fragment extends the core collections object to add the `crs`
+The following schema fragment extends the collections object to add the `crs`
 property which contains the global list of CRS identifiers.
 
 [source,YAML]
@@ -271,12 +271,10 @@ The following example illustrates the used of a global list of CRS identifiers.
 ----
 =================
 
-The `bonn_buildings` collection is offered in all the coordinate reference
-systems specified in the global list plus three other coordinate reference
-systems.
+In the above example, the `bonn_buildings` collection is offered in all the
+CRSs specified in the global list plus three other CRSs.
 
-The `tor_buildings` collection is offered in the coordinate reference systems
-specified in the global list.
+The `tor_buildings` collection is offered in the CRSs specified in the global list.
 
 The `dc_buildings` collection is only offered in the default CRS (i.e. WGS84
 longitude, latitude).
@@ -331,10 +329,10 @@ include::requirements/crs/REQ_fc-crs-action-exception.adoc[]
 
 include::requirements/crs/REQ_crs-exception.adoc[]
 
-The following fragment illustrated the use of the `crs` parameter:
+The following fragment illustrates the use of the `crs` parameter:
 
 [[example_3]]
-.Retrieving features from a collection in one of the supported coordinate reference systems
+.Retrieving features from a collection in one of the supported CRSs
 =================
 [source]
 ----
@@ -387,7 +385,7 @@ systems to be used.
 
 include::requirements/crs/REQ_geojson.adoc[]
 
-An explicit request be a client with a query parameter
+An explicit request by a client with a query parameter
 `crs` establishes a prior arrangement. It is the responsibility of the
 client that submits the request to handle the coordinates in the response
 correctly. In particular, clients should not make the GeoJSON document available
@@ -411,10 +409,11 @@ ellipsoid.
 
 ==== Coordinate reference system information independent of the feature encoding
 
-Because of the inconsistent provision of coordinate reference system metadata
-in geospatial encodings, this standard defines a mechanism for a server to clearly and
-unambiguously assert the coordinate reference system being used
-in a response document independent of the requested output format.
+Because of the inconsistent provision of CRS metadata in geospatial encodings
+and the continued confusion caused by the axis order of coordinates, this
+standard defines a mechanism for a server to clearly and unambiguously assert
+the CRS and axis order being used in a response document independent of the
+requested output format.
 
 include::requirements/crs/REQ_ogc-crs-header.adoc[]
 

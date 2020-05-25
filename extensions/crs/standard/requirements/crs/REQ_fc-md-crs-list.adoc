@@ -2,5 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |*/req/crs/fc-md-crs-list* +
-2+| The `crs` property in the http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collection.yaml[collection object] of a spatial feature collection SHALL contain the list of CRS identifiers supported by the service for this collection.
+^|A |The `crs` property in the <<crs-discovery,collection object>> of a spatial feature collection SHALL contain the identifiers for the list of CRSs supported by the server for that collection.
+^|B |This list SHALL include the default(s) defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 |===
