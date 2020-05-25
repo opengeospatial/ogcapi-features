@@ -48,20 +48,23 @@ The storage CRS for a spatial feature collection is the CRS identifier that
 may be used to retrieve features from that collection without the need to apply
 a CRS transformation.
 
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/264[Open issue 264] +
-To align with the new version of ISO 19111 / OGC Abstract Specification Topic 2,
-it should also be possible to state the
-link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html#68[coordinate epoch]
-of the data (if known),
-if the storage CRS is a dynamic CRS. In this case, it should also be recommended
-to use a specific realization, not a CRS using a datum ensemble.
+Note that coordinates referenced to a dynamic coordinate reference system are
+ambiguous, if the coordinate epoch is unknown. It is therefore recommended
+to also provide the coordinate epoch when the storage CRS is dynamic,
+such as an ITRF realization or WGS 84. For more information on dynamic
+coordinate reference systems and coordinate epoch, please see
+link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html[OGC Abstract Specification Topic 2: Referencing by coordinates].
 
 include::requirements/crs/REQ_fc-md-storageCrs.adoc[]
+
+include::recommendations/crs/REC_fc-md-storageCrs-avoid-ensemble.adoc[]
+
+include::recommendations/crs/REC_fc-md-coordinateEpoch.adoc[]
 
 include::requirements/crs/REQ_fc-md-storageCrs-valid-value.adoc[]
 
 The following schema fragment extends the collection metadata to add the
-`storageCRS` property.
+`storageCrs` and `storageCrsCoordinateEpoch` properties.
 
 [source,YAML]
 ----
@@ -112,6 +115,10 @@ properties:
      description: the CRS identifier, from the list of supported CRS identifiers, that may be used to retrieve features from a collection without the need to apply a CRS transformation
      type: string
      format: uri
+  storageCrsCoordinateEpoch:
+     description: date at which coordinates in the spatial feature collection are referenced to the dynamic coordinate reference system in `storageCrs`, expressed as a decimal year in the Gregorian calendar
+     type: number
+     example: '2017-03-25 in the Gregorian calendar is epoch 2017.23'
 ----
 
 ==== Global list of CRS identifiers

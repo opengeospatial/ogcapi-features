@@ -1,0 +1,8 @@
+[[rec_crs_fc-md-storageCrs-avoid-ensemble]]
+[width="90%",cols="2,6a"]
+|===
+|*Recommendation {counter:rec-id}* |*/rec/crs/fc-md-storageCrs-avoid-ensemble* +
+2+| If the storage CRS of the spatial feature collection is a dynamic
+coordinate reference system, the `storageCrs` property SHOULD identify
+a specific realization, not a CRS using a datum ensemble.
+|===
