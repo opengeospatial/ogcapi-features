@@ -226,11 +226,8 @@ The following example illustrates the used of a global list of CRS identifiers.
        ],
        "crs": [
           "#/crs",
-          "http://www.opengis.net/def/crs/OGC/1.3/CRS41001",
-          "http://www.opengis.net/def/crs/OGC/0/2246",
-          "http://www.opengis.net/def/crs/OGC/0/3130",
-          "http://www.opengis.net/def/crs/OGC/0/3634",
-          "http://www.opengis.net/def/crs/OGC/0/6702",
+          "http://www.opengis.net/def/crs/EPSG/0/32632",
+          "http://www.opengis.net/def/crs/EPSG/0/32633"
        ]
      },
      {
@@ -291,7 +288,7 @@ The following example illustrates the used of a global list of CRS identifiers.
 =================
 
 The `bonn_buildings` collection is offered in all the coordinate reference
-systems specified in the global list plus five other coordinate reference
+systems specified in the global list plus two other coordinate reference
 systems.
 The `tor_buildings` collection is offered in the coordinate reference systems
 specified in the global list.
@@ -418,6 +415,6 @@ The following example illustrates the use of the `OGC-CRS` header.
 =================
 [source]
 ----
-   OGC-CRS: http://www.opengis.net/def/crs/OGC/0/4326; axisOrder=lon,lat
+   OGC-CRS: http://www.opengis.net/def/crs/EPSG/0/4326; axisOrder=lon,lat
 ----
 =================
