@@ -8,8 +8,8 @@ include::requirements/requirements_class_crs.adoc[]
 The <<OAFeat-1,OGC API - Features - Part 1: Core>> standard defines support
 for only two coordinate reference systems:
 
-* WGS 84 longitude/latitude
-* WGS 84 longitude/latitude plus ellipsoidal height
+* WGS 84 longitude, latitude
+* WGS 84 longitude, latitude, ellipsoidal height
 
 This extension defines the behaviour of a server that supports additional
 coordinate reference systems.
@@ -24,6 +24,11 @@ could be improved.
 include::requirements/crs/REQ_crs-uri.adoc[]
 
 include::recommendations/crs/REC_crs-format-model.adoc[]
+
+For more information, see https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names[section 6.2 in OGC Name Type Specification, Part 1].
+
+Note that while the EPSG register itself is versioned, the registered items
+are not versioned and the "version" is always "0" in URIs of the authority "EPSG".
 
 [[crs-discovery]]
 === Discovery
@@ -356,11 +361,6 @@ The following fragment illustrates the use of the `crs` parameter:
 ----
 =================
 
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/153[Open issue 153] +
-There is ongoing work to add negotiation of the CRS to the content negotiation
-process. However, this is still draft and not widely supported. For this reason,
-such a capability is considered only for a future version of this standard.
-
 ==== Output format considerations
 
 OGC API - Features - Part 1: Core defines three conformance classes related
@@ -380,7 +380,7 @@ include::requirements/crs/REQ_geojson.adoc[]
 
 NOTE: HTML only supports WGS84 based on the schema.org dependency. The OGC is not sure if this is an issue but schema.org annotations seem to require WGS84 (lat,lon) yet <<OAFeat-1,OGC API - Features - Part 1: Core>> requires lon,lat.
 
-==== Coordinate system and axis order
+==== Coordinate reference system information independent of the feature encoding
 
 Because of the inconsistent provision of CRS metadata in geospatial encodings
 and the continued confusion caused by the axis order of coordinates, this
@@ -392,26 +392,29 @@ include::requirements/crs/REQ_ogc-crs-header.adoc[]
 
 include::requirements/crs/REQ_ogc-crs-header-value.adoc[]
 
-include::requirements/crs/REQ_ogc-crs-header-axis-order-value.adoc[]
+NOTE: The header is consistent with the
+https://github.com/opengeospatial/conneg-by-crs[draft "content negotiation by coordinate reference system" specification].
 
-include::requirements/crs/REQ_ogc-crs-header-axis-names.adoc[]
-
-include::requirements/crs/REQ_ogc-crs-header-axis-order-action.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/153[Open issue 153] +
-The draft content negotiation by CRS specifies a `Content-Crs` header that
-could be used instead of a custom `OGC-CRS` header. The `Content-Crs` header
-just states the CRS, but has no option to state the axis order. +
-A related general question, is whether that capability to state the axis order
-would be helpful or not.
-
-The following example illustrates the use of the `OGC-CRS` header.
+The following example illustrates the `Content-Crs` header in a response.
 
 [[example_4]]
 .HTTP header declaring the CRS and axis order used in the body of the response
 =================
 [source]
 ----
-   OGC-CRS: http://www.opengis.net/def/crs/OGC/0/4326; axisOrder=lon,lat
+   $ curl -i "https://example.com/api/v1/collections/poi/items/1?crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3395"
+
+   HTTP/1.1 200 OK
+   Date: Sun, 24 May 2020 15:30:56 GMT
+   Content-Type: application/geo+json
+   Content-Language: en
+   Content-Crs: <http://www.opengis.net/def/crs/EPSG/0/3395>
+   Link: <https://example.com/api/v1/collections/poi/items/1?crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3395&f=json>; rel="self"; title="This document"; type="application/geo+json"
+   Link: <https://example.com/api/v1/collections/poi/items/1?crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3395&f=html>; rel="alternate"; title="This document as HTML"; type="text/html"
+   Link: <https://example.com/api/v1/collections/poi>; rel="collection"; title="The collection the feature belongs to"
+   Vary: Accept-Language,Accept-Encoding
+   Content-Length: 1064
+
+   ...
 ----
 =================
