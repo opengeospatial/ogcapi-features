@@ -2,17 +2,17 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/crs/crs-format-model* +
-2+|Servers that implement this extension should be able to recognize and generate CRS identifiers with the following format model:
+2+|Servers that implement this extension SHOULD be able to recognize and
+generate CRS identifiers with the following format model:
 
-http://www.opengis.net/def/crs/{authority}/{version}/{code}
+`http://www.opengis.net/def/crs/{authority}/{version}/{code}`
 
-In this format model, the token {authority} is a placeholder for a code the
+In this format model, the token `{authority}` is a placeholder for a code the
 designates to authority responsible for the definition of this CRS.  Typical
 values include "EPSG" and "OGC".
 
-The token {version} is a placeholder for the specific version of the coordinate
-reference system definition or `0` for the latest version or if the version
-is unknown.
+The token `{version}` is a placeholder for the specific version of the coordinate
+reference system definition or `0` for un-versioned CRS definitions.
 
-The token {code} is a placeholder for the authority's code for the CRS.
+The token `{code}` is a placeholder for the authority's code for the CRS.
 |===
