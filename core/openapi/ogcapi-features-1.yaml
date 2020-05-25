@@ -279,8 +279,8 @@ components:
               minItems: 1
               items:
                 description: |-
-                  Begin and end times of the time interval. The timestamps
-                  are in the coordinate reference system specified in `trs`. By default
+                  Begin and end times of the time interval. The timestamps are in the
+                  temporal coordinate reference system specified in `trs`. By default
                   this is the Gregorian calendar.
                 type: array
                 minItems: 2
@@ -296,8 +296,8 @@ components:
               description: |-
                 Coordinate reference system of the coordinates in the temporal extent
                 (property `interval`). The default reference system is the Gregorian calendar.
-                In the Core this is the only supported temporal reference system.
-                Extensions may support additional temporal reference systems and add
+                In the Core this is the only supported temporal coordinate reference system.
+                Extensions may support additional temporal coordinate reference systems and add
                 additional enum values.
               type: string
               enum:
@@ -853,7 +853,10 @@ components:
             type: string
     NotFound:
       description: |-
-        The requested URI was not found.
+        The requested resource does not exist on the server. For example, a path parameter had an incorrect value.
+    NotAcceptable:
+      description: |-
+        Content negotiation failed. For example, the `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
     ServerError:
       description: |-
         A server error occurred.
