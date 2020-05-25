@@ -37,15 +37,10 @@ are not versioned and the "version" is always "0" in URIs of the authority "EPSG
 
 include::requirements/crs/REQ_fc-md-crs-list.adoc[]
 
-The default CRS -- that is the CRS used unless something else is explicitly
-requested -- is defined in <<OAFeat-1,OGC API - Features - Part 1:
-Core>> as:
+The list has to include the default CRS -- that is the CRS used unless something else is explicitly requested -- is defined in <<OAFeat-1,OGC API - Features - Part 1: Core>> as:
 
 * http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height)
 * http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with height)
-
-The list of supported CRS identifiers in the collection metadata may include
-these defaults but this is not a requirement.
 
 ==== Storage CRS
 
@@ -53,20 +48,23 @@ The storage CRS for a spatial feature collection is the CRS identifier that
 may be used to retrieve features from that collection without the need to apply
 a CRS transformation.
 
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/264[Open issue 264] +
-To align with the new version of ISO 19111 / OGC Abstract Specification Topic 2,
-it should also be possible to state the
-link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html#68[coordinate epoch]
-of the data (if known),
-if the storage CRS is a dynamic CRS. In this case, it should also be recommended
-to use a specific realization, not a CRS using a datum ensemble.
+Note that coordinates referenced to a dynamic coordinate reference system are
+ambiguous, if the coordinate epoch is unknown. It is therefore recommended
+to also provide the coordinate epoch when the storage CRS is dynamic,
+such as an ITRF realization or WGS 84. For more information on dynamic
+coordinate reference systems and coordinate epoch, please see
+link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html[OGC Abstract Specification Topic 2: Referencing by coordinates].
 
 include::requirements/crs/REQ_fc-md-storageCrs.adoc[]
+
+include::recommendations/crs/REC_fc-md-storageCrs-avoid-ensemble.adoc[]
+
+include::recommendations/crs/REC_fc-md-coordinateEpoch.adoc[]
 
 include::requirements/crs/REQ_fc-md-storageCrs-valid-value.adoc[]
 
 The following schema fragment extends the collection metadata to add the
-`storageCRS` property.
+`storageCrs` and `storageCrsCoordinateEpoch` properties.
 
 [source,YAML]
 ----
@@ -117,23 +115,22 @@ properties:
      description: the CRS identifier, from the list of supported CRS identifiers, that may be used to retrieve features from a collection without the need to apply a CRS transformation
      type: string
      format: uri
+  storageCrsCoordinateEpoch:
+     description: date at which coordinates in the spatial feature collection are referenced to the dynamic coordinate reference system in `storageCrs`, expressed as a decimal year in the Gregorian calendar
+     type: number
+     example: '2017-03-25 in the Gregorian calendar is epoch 2017.23'
 ----
 
 ==== Global list of CRS identifiers
 
 To prevent unnecessary duplication of lists of supported CRS identifiers in
-the collection metadata, a global list of supported CRS identifiers may be
-provided as part of the collections metadata.
+the collection object, a global list of supported CRS identifiers may be
+provided as part of the collections object.
 
 This global list of CRS identifiers is not automatically inherited by each
 collection offered by the service.  Rather the global list of CRS identifiers
-must be explicitly referenced in the collection metadata using a
-JSON Pointer (RFC 6901).
-
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/274[Open issue 274] +
-We are looking for feedback what option would be best to encode a reference to
-the global list (a JSON Pointer, a JSON Reference, or something else). What works
-best for clients parsing the response?
+must be explicitly referenced in the `crs` property of the collection object
+using a link:https://tools.ietf.org/rfc/rfc6901.txt[JSON Pointer (RFC 6901)].
 
 CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/315[Open issue 315] +
 For large lists of supported CRS, the global CRS list could be placed in its
@@ -141,36 +138,29 @@ own resource.
 
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
-The following schema fragment extends the collections metadata to add the `crs`
+Note that only a local JSON Pointer within the same document is supported.
+
+The following schema fragment extends the core collections object to add the `crs`
 property which contains the global list of CRS identifiers.
 
 [source,YAML]
 ----
-type: object
-required:
-  - links
-  - collections
-properties:
-  links:
-    type: array
-    items:
-      $ref: link.yaml
-  crs:
-    description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
-    type: array
-    items:
-      type: string
-      format: uri
-  collections:
-    type: array
-    items:
-      $ref: collection.yaml
+allOf:
+- $ref: 'http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml'
+- type: object
+  properties:
+    crs:
+      description: a global list of CRS identifiers that are supported by spatial feature collections offered by the service
+      type: array
+      items:
+        type: string
+        format: uri
 ----
 
 The following example illustrates the used of a global list of CRS identifiers.
 
 [[example_1]]
-.Collections metadata containing a global list of CRS identifiers
+.Collections object containing a global list of CRS identifiers
 =================
 [source,JSON]
 ----
@@ -186,24 +176,10 @@ The following example illustrates the used of a global list of CRS identifiers.
       "rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Bulk download (GeoPackage)", "length": 472546 }
   ],
   "crs": [
+     "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
      "http://www.opengis.net/def/crs/EPSG/0/4326",
      "http://www.opengis.net/def/crs/EPSG/0/3857",
-     "http://www.opengis.net/def/crs/EPSG/0/3395",
-     "http://www.opengis.net/def/crs/EPSG/0/4267",
-     "http://www.opengis.net/def/crs/EPSG/0/4269",
-     "http://www.opengis.net/def/crs/EPSG/0/26716",
-     "http://www.opengis.net/def/crs/EPSG/0/26717",
-     "http://www.opengis.net/def/crs/EPSG/0/26718",
-     "http://www.opengis.net/def/crs/EPSG/0/26719",
-     "http://www.opengis.net/def/crs/EPSG/0/26916",
-     "http://www.opengis.net/def/crs/EPSG/0/26917",
-     "http://www.opengis.net/def/crs/EPSG/0/26918",
-     "http://www.opengis.net/def/crs/EPSG/0/26919",
-     "http://www.opengis.net/def/crs/EPSG/0/32616",
-     "http://www.opengis.net/def/crs/EPSG/0/32617",
-     "http://www.opengis.net/def/crs/EPSG/0/32618",
-     "http://www.opengis.net/def/crs/EPSG/0/32619",
-     "http://www.opengis.net/def/crs/EPSG/0/32188"
+     "http://www.opengis.net/def/crs/EPSG/0/3395"
   ],
   "collections": [
      {
@@ -231,8 +207,9 @@ The following example illustrates the used of a global list of CRS identifiers.
        ],
        "crs": [
           "#/crs",
-          "http://www.opengis.net/def/crs/EPSG/0/32632",
-          "http://www.opengis.net/def/crs/EPSG/0/32633"
+          "http://www.opengis.net/def/crs/EPSG/0/4258",
+          "http://www.opengis.net/def/crs/EPSG/0/25831",
+          "http://www.opengis.net/def/crs/EPSG/0/25832"
        ]
      },
      {
@@ -269,7 +246,6 @@ The following example illustrates the used of a global list of CRS identifiers.
        "extent": {
          "spatial": {
            "bbox": [ [ -77.12, 38.80, -76.89, 39.01 ] ]
-
          },
          "temporal": {
            "interval": [ [ "2010-02-15T12:34:56Z", null ] ]
@@ -285,6 +261,9 @@ The following example illustrates the used of a global list of CRS identifiers.
          { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
            "rel": "license", "type": "application/rdf+xml",
            "title": "CC0-1.0" }
+         ],
+         "crs": [
+           "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
        ]
      }
   ]
@@ -293,12 +272,14 @@ The following example illustrates the used of a global list of CRS identifiers.
 =================
 
 The `bonn_buildings` collection is offered in all the coordinate reference
-systems specified in the global list plus two other coordinate reference
+systems specified in the global list plus three other coordinate reference
 systems.
+
 The `tor_buildings` collection is offered in the coordinate reference systems
 specified in the global list.
-The `dc_buildings` collection, not having a crs property, is only offered in
-the default CRS (i.e. WGS84 longitude, latitude).
+
+The `dc_buildings` collection is only offered in the default CRS (i.e. WGS84
+longitude, latitude).
 
 [[crs-query]]
 === Query
@@ -321,14 +302,15 @@ include::requirements/crs/REQ_fc-bbox-crs-action.adoc[]
 
 include::requirements/crs/REQ_bbox-crs-exception.adoc[]
 
-The following fragment illustrates the use of the `bbox-crs` parameter:
+The following fragment illustrates the use of the `bbox-crs` parameter (reserved
+characters have to be encoded):
 
 [[example_2]]
 .Specifying a bounding box in one of the supported coordinate reference systems
 =================
 [source]
 ----
-   ...&bbox=160.6,-155.95,-170,-25.89&bbox-crs=http://www.opengis.net/...
+   ...&bbox=32507317%2C5224265%2C33427450%2C5603836&bbox-crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F25832
 ----
 =================
 
@@ -356,7 +338,7 @@ The following fragment illustrated the use of the `crs` parameter:
 =================
 [source]
 ----
-.../collections/buildings/items?crs=http://www.opengis.net/def/crs/epsg/0/26703&...
+.../collections/buildings/items?crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F26703&...
 ----
 =================
 
@@ -365,23 +347,67 @@ The following fragment illustrated the use of the `crs` parameter:
 OGC API - Features - Part 1: Core defines three conformance classes related
 to the output formats:
 
-- GML
-- GeoJSON
+- GML/XML
+- GeoJSON/JSON
 - HTML
 
-GML has full CRS support and no further requirements are imposed by this
+===== Collections and Collection resources
+
+This document specifies extensions to the Collections resource (the global list of
+coordinate reference systems) and the Collection resource (the storage CRS including
+the associated coordinate epoch).
+
+How these extensions are reflected in each
+encoding is not fully specified by this standard, except for JSON-based or
+YAML-based encodings where the extensions are fully specified by the OpenAPI
+schema components.
+
+For HTML, the requirement http://www.opengis.net/spec/ogcapi-features-1/1.0/req/html/content
+applies and the additional information has to included in the body of the
+HTML document.
+
+For XML, the content model of the of the complex types
+`core:CollectionsType` and `core:CollectionType` would have to be
+extended with additional information. This document does not specify the details
+for such extensions due to a lack of demand.
+
+===== Features and Feature resources
+
+GML has full CRS support and no further conventions are imposed by this
 standard.
 
-GeoJSON normatively supports WGS84 (lon,lat) but the "prior arrangement"
-provision allows other coordinate systems to be used.
+HTML does not have any provisions for spatial geometries and coordinate
+reference systems. However, note that schema.org that is embedded in
+HTML only supports WGS84 in the axis order latitude/longitude, so any
+coordinates in schema.org markup will have to be in that coordinate reference
+system, independent of the requested coordinate reference system.
+
+GeoJSON normatively supports WGS84 (without height: http://www.opengis.net/def/crs/OGC/1.3/CRS84[CRS84]; with height: http://www.opengis.net/def/crs/OGC/0/CRS84h[CRS84h]), but the "prior arrangement" provision allows other coordinate
+systems to be used.
 
 include::requirements/crs/REQ_geojson.adoc[]
 
-NOTE: Need to do more work on HTML!
+An explicit request be a client with a query parameter
+`crs` establishes a prior arrangement. It is the responsibility of the
+client that submits the request to handle the coordinates in the response
+correctly. In particular, clients should not make the GeoJSON document available
+to others unless they are aware of the prior arrangement.
 
-HTML only supports WGS84 based on schema.org dependency; not sure if this is
-an issue but schema.org annotations seem to require WGS84 (lat,lon) yet WFS
-core requires lon,lat by default.
+This standard does not specify any standardized approach to encoding
+coordinate reference system information in a GeoJSON document.
+
+The first paragraph of section 4 in GeoJSON also states:
+
+> An OPTIONAL third-position element SHALL
+be the height in meters above or below the WGS 84 reference
+ellipsoid. In the absence of elevation values, applications
+sensitive to height or depth SHOULD interpret positions as being at
+local ground or sea level.
+
+If the requested coordinate reference system includes the vertical axis,
+the third-position element has to be interpreted according to that coordinate
+reference system, not as if it would be relative to the WGS 84 reference
+ellipsoid.
 
 ==== Coordinate reference system information independent of the feature encoding
 
