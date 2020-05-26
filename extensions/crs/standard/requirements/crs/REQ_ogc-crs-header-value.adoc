@@ -6,10 +6,7 @@
 coordinate reference system used in the response document according
 to the following grammar for `CRS-header`.
 
-[source]
-----
-CRS-header = "Content-Crs" ":" CRS-value
+`CRS-header = "Content-Crs" ":" CRS-value`
 
-CRS-value = "<" URI-reference ">"
-----
+`CRS-value = "<" URI-reference ">"`
 |===
