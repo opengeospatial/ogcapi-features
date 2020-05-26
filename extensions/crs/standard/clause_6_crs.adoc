@@ -14,13 +14,6 @@ for only two coordinate reference systems:
 This extension defines the behaviour of a server that supports additional
 coordinate reference systems.
 
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/295[Open issue 295] +
-This draft is specific to Features and extends the resources
-'feature collection', 'features' and 'feature'. However, in general
-the approach specified in this draft standard should also be applicable to
-other resource types and feedback would be welcome how such reuse
-could be improved.
-
 include::requirements/crs/REQ_crs-uri.adoc[]
 
 include::recommendations/crs/REC_crs-format-model.adoc[]
@@ -131,10 +124,6 @@ This global list of CRS identifiers is not automatically inherited by each
 collection offered by the service.  Rather the global list of CRS identifiers
 must be explicitly referenced in the `crs` property of the collection object
 using a link:https://tools.ietf.org/rfc/rfc6901.txt[JSON Pointer (RFC 6901)].
-
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/315[Open issue 315] +
-For large lists of supported CRS, the global CRS list could be placed in its
-own resource.
 
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
@@ -276,7 +265,7 @@ CRSs specified in the global list plus three other CRSs.
 
 The `tor_buildings` collection is offered in the CRSs specified in the global list.
 
-The `dc_buildings` collection is only offered in the default CRS (i.e. WGS84
+The `dc_buildings` collection is only offered in the default CRS (i.e. WGS 84
 longitude, latitude).
 
 [[crs-query]]
@@ -290,9 +279,6 @@ values of the `bbox` parameter.
 include::requirements/crs/REQ_fc-bbox-crs-definition.adoc[]
 
 include::requirements/crs/REQ_fc-bbox-crs-valid-values.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/294[Open issue 294] +
-The wording of the requirement may be unclear.
 
 include::requirements/crs/REQ_fc-bbox-crs-default-value.adoc[]
 
@@ -317,9 +303,6 @@ characters have to be encoded):
 include::requirements/crs/REQ_fc-crs-definition.adoc[]
 
 include::requirements/crs/REQ_fc-crs-valid-value.adoc[]
-
-CAUTION: link:https://github.com/opengeospatial/ogcapi-features/issues/294[Open issue 294] +
-The wording of the requirement may be unclear.
 
 include::requirements/crs/REQ_fc-crs-default-value.adoc[]
 
@@ -376,11 +359,11 @@ standard.
 
 HTML does not have any provisions for spatial geometries and coordinate
 reference systems. However, note that schema.org that is embedded in
-HTML only supports WGS84 in the axis order latitude/longitude, so any
+HTML only supports WGS 84 in the axis order latitude/longitude, so any
 coordinates in schema.org markup will have to be in that coordinate reference
 system, independent of the requested coordinate reference system.
 
-GeoJSON normatively supports WGS84 (without height: http://www.opengis.net/def/crs/OGC/1.3/CRS84[CRS84]; with height: http://www.opengis.net/def/crs/OGC/0/CRS84h[CRS84h]), but the "prior arrangement" provision allows other coordinate
+GeoJSON normatively supports WGS 84 (without height: http://www.opengis.net/def/crs/OGC/1.3/CRS84[CRS84]; with height: http://www.opengis.net/def/crs/OGC/0/CRS84h[CRS84h]), but the "prior arrangement" provision allows other coordinate
 systems to be used.
 
 include::requirements/crs/REQ_geojson.adoc[]

@@ -2,6 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |*/req/crs/fc-crs-valid-value* +
-^|A |If the value of the `crs` parameter is not one of the CRS identifiers from the list of supported CRS identifiers, then the server shall respond with the HTTP status code 400.
+^|A |If the value of the `crs` parameter is not one of the CRS identifiers from the list of supported CRS identifiers, then the server SHALL respond with the HTTP status code 400.
 ^|B |The list of supported CRS identifiers is found in the <<crs-discovery,collection object>> using the `crs` property.
 |===

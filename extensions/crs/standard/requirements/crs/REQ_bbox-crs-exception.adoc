@@ -2,6 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |*/req/crs/bbox-crs-exception* +
-^|A |In all cases, if the server encounters an invalid or unrecognized CRS identifier value it shall respond with a HTTP 400 status code.
-^|B |The body of the exception response shall contain an appropriate message.
+^|A |In all cases, if the server encounters an invalid or unrecognized CRS identifier value it SHALL respond with a HTTP 400 status code.
+^|B |The body of the exception response SHALL contain an appropriate message.
 |===
