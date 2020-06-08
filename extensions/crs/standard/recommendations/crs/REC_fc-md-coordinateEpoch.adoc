@@ -3,7 +3,7 @@
 |===
 |*Recommendation {counter:rec-id}* |*/rec/crs/fc-md-coordinateEpoch* +
 2+| If the storage CRS of the spatial feature collection is a dynamic
-coordinate reference system, the coordinate epoch of the coordinates
-in the spatial feature collection SHOULD be provided in the property
-`storageCrsCoordinateEpoch`.
+coordinate reference system, the property `storageCrsCoordinateEpoch`
+in the collection object of the spatial feature collection SHOULD
+provide the coordinate epoch of the coordinates.
 |===

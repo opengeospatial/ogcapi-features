@@ -50,9 +50,14 @@ link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html[OGC Abstract Speci
 
 include::requirements/crs/REQ_fc-md-storageCrs.adoc[]
 
-include::recommendations/crs/REC_fc-md-storageCrs-avoid-ensemble.adoc[]
-
 include::recommendations/crs/REC_fc-md-coordinateEpoch.adoc[]
+
+This document does not provide a mechanism to associate different coordinate
+epochs with feature geometries in a collection. If data with different
+coordinate epochs is merged in a collection, one option is to perform
+point motion operations (PMO) to convert all geometries to the same
+coordinate epoch. See link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html[OGC Abstract Specification Topic 2]
+for more information.
 
 include::requirements/crs/REQ_fc-md-storageCrs-valid-value.adoc[]
 
@@ -109,7 +114,7 @@ properties:
      type: string
      format: uri
   storageCrsCoordinateEpoch:
-     description: date at which coordinates in the spatial feature collection are referenced to the dynamic coordinate reference system in `storageCrs`, expressed as a decimal year in the Gregorian calendar
+     description: point in time at which coordinates in the spatial feature collection are referenced to the dynamic coordinate reference system in `storageCrs`, that may be used to retrieve features from a collection without the need to apply a change of coordinate epoch. It is expressed as a decimal year in the Gregorian calendar
      type: number
      example: '2017-03-25 in the Gregorian calendar is epoch 2017.23'
 ----
@@ -356,6 +361,12 @@ for such extensions due to a lack of demand.
 
 GML has full CRS support and no further conventions are imposed by this
 standard.
+
+NOTE: The CRS model in GML is based on ISO 19111:2007, but GML geometries
+reference CRSs by their URI identifier in the `srsName` attribute. These can
+resolve to a CRS that is defined based on the CRS model specified by ISO 19111:2019
+(same as link:http://docs.opengeospatial.org/as/18-005r4/18-005r4.html[OGC Abstract Specification Topic 2: Referencing by coordinates]),
+or a future edition.
 
 HTML does not have any provisions for spatial geometries and coordinate
 reference systems. However, note that schema.org that is embedded in
