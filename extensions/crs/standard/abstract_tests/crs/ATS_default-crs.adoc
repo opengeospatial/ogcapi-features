@@ -1,0 +1,8 @@
+[[ats_crs_default-crs]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/default-crs*
+^|Test Purpose |Verify that the list of supported CRSs includes the default CRS.
+^|Requirement |<<req_crs_fc-md-crs-list,/req/crs/fc-md-crs-list B>>
+^|Test Method |. For each string value in a `crs` property in a collection object (for each path `/collections` and `/collections/{collectionId}`) validate that either `http://www.opengis.net/def/crs/OGC/1.3/CRS84` or `http://www.opengis.net/def/crs/OGC/1.3/CRS84h` is included in the array, if the collection has a spatial extent, i.e., is a spatial feature collection.
+|===

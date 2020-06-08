@@ -1,0 +1,11 @@
+[[ats_crs_crs-transform]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/crs-transform*
+^|Test Purpose |Verify that the geometries are transformed
+^|Requirement |<<req_crs_crs-action,/req/crs/crs-action>>
+^|Test Method |For every CRS identifier advertized by the Web API that is known to the test engine and for which the test engine can convert geometries between the CRS and the default CRS of the Web API ("known CRS") execute the following test. Skip the test for unknown CRSs.
+
+. For each spatial feature collection `collectionId`, send a request with the parameter `crs` to `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{featureId}` (with a valid `featureId` for the collection) for every known CRS listed. In addition, send the same request, but without the `crs` parameter.
+. Convert the response for the known CRS to the default CRS and verify that the responses match. Due to the use of different coordinate conversions in the test engine and by the API, there will not be an exact match and the test engine will have to allow for reasonable differences when assessing whether the geometries match.
+|===
