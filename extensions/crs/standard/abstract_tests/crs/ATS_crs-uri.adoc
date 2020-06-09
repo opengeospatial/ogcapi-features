@@ -3,8 +3,9 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/conf/crs/crs-uri*
 ^|Test Purpose |Verify that each CRS identifier is a valid value
-^|Requirement |<<req_crs_crs-uri,/req/crs/crs-uri>>, <<req_crs_fc-md-crs-list,/req/crs/fc-md-crs-list A>>, <<req_crs_fc-md-storageCrs,/req/crs/fc-md-storageCrs>>, <<req_crs_fc-md-crs-list-global,/req/crs/fc-md-crs-list-global>>
-^|Test Method |. For each string value in a `crs` or `storageCrs` property in the collections and collection objects in the paths `/collections` and `/collections/{collectionId}`, validate that the string conforms to the generic URI syntax as specified by https://tools.ietf.org/html/rfc3986#section-3[RFC 3986, section 3]. In addition, accept a single value of `#/crs` in each collection object at path `/collections`, if the collections object has a `crs` property.
+^|Requirement |<<req_crs_crs-uri,/req/crs/crs-uri>>, <<req_crs_fc-md-crs-list,/req/crs/fc-md-crs-list>> A, <<req_crs_fc-md-storageCrs,/req/crs/fc-md-storageCrs>>, <<req_crs_fc-md-crs-list-global,/req/crs/fc-md-crs-list-global>>
+^|Test Method |For each string value in a `crs` or `storageCrs` property in the collections and collection objects in the paths `/collections` and `/collections/{collectionId}`, validate that the string conforms to the generic URI syntax as specified by https://tools.ietf.org/html/rfc3986#section-3[RFC 3986, section 3]. In addition, accept a single value of `#/crs` in each collection object at path `/collections`, if the collections object has a `crs` property.
+
 . For http-URIs (starting with `http:`) validate that the string conforms to the syntax specified by https://tools.ietf.org/html/rfc7230#section-2.7.1[RFC 7230, section 2.7.1].
 . For https-URIs (starting with `https:`) validate that the string conforms to the syntax specified by https://tools.ietf.org/html/rfc7230#section-2.7.2[RFC 7230, section 2.7.2].
 . For URNs (starting with `urn:`) validate that the string conforms to the syntax specified by https://tools.ietf.org/html/rfc8141#section-2[RFC 8141, section 2].
