@@ -285,11 +285,11 @@ include::requirements/crs/REQ_fc-bbox-crs-definition.adoc[]
 
 include::requirements/crs/REQ_fc-bbox-crs-valid-values.adoc[]
 
+As usual, it is good practice to include a message about the reason for the error in the response.
+
 include::requirements/crs/REQ_fc-bbox-crs-default-value.adoc[]
 
 include::requirements/crs/REQ_fc-bbox-crs-action.adoc[]
-
-include::requirements/crs/REQ_bbox-crs-exception.adoc[]
 
 The following fragment illustrates the use of the `bbox-crs` parameter (reserved
 characters have to be encoded):
@@ -309,13 +309,15 @@ include::requirements/crs/REQ_fc-crs-definition.adoc[]
 
 include::requirements/crs/REQ_fc-crs-valid-value.adoc[]
 
+As usual, it is good practice to include a message about the reason for the error in the response.
+
 include::requirements/crs/REQ_fc-crs-default-value.adoc[]
 
 include::requirements/crs/REQ_fc-crs-action.adoc[]
 
-include::requirements/crs/REQ_fc-crs-action-exception.adoc[]
+include::recommendations/crs/PER_fc-crs-action.adoc[]
 
-include::requirements/crs/REQ_crs-exception.adoc[]
+For example, OGC KML only supports the default CRS (WGS84 longitude and latitude, optionally with ellipsoidal height).
 
 The following fragment illustrates the use of the `crs` parameter:
 
