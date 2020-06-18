@@ -26,6 +26,7 @@ Clients:
 * [OWSLib WFS 3.0 client](https://geopython.github.io/OWSLib)
 * [STAC](#STAC)
 * [QGIS](#QGIS)
+* [ogcapi-js](#ogcapi-js)
 
 ## ldproxy
 
@@ -238,3 +239,7 @@ and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
 * API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/486/api
 * HTML representation objects: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items?&f=html
 * HTML representation of the description of the amphitheater: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items/unesco_welterbe.3730?f=html
+
+### ogcapi-js
+
+[ogcapi-js](https://github.com/haoliangyu/ogcapi-js) is a lightweight and modular JavaScript/Tyescript library for OGC APIs. It provides a developer-friendly way to interact with Features API and useful features like query parameter validation and error handling. Developers can use this library to build both client-side (browser) or server-side applications.
