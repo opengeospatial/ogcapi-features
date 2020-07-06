@@ -4,6 +4,6 @@
 ^|*Requirement {counter:req-id}* |*/req/html/content*
 ^|A |Every `200`-response of the server with the media type `text/html` SHALL be a link:https://www.w3.org/TR/html5/[HTML 5 document] that includes the following information in the HTML body:
 
-* all information identified in the schemas of the link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#responseObject[Response Object] in the HTML `<body>`, and
+* all information identified in the schemas of the link:http://spec.openapis.org/oas/v3.0.3#responseObject[Response Object] in the HTML `<body>`, and
 * all links in HTML `<a>` elements in the HTML `<body>`.
 |===
