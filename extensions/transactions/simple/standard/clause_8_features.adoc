@@ -1,0 +1,51 @@
+[[features]]
+== Features
+
+=== Overview
+
+include::requirements/requirements_class_features.adoc[]
+
+This clause defines requirements for the case when the resource type is a
+feature.
+
+[[feature-collection-items-end-point]]
+=== Collection items end point
+
+include::requirements/features/REC_collection-items-end-point.adoc[]
+
+[[feature-end-point]]
+=== Resource end point
+
+include::requirements/features/REC_resource-end-point.adoc[]
+
+[[feature-represenations]]
+=== Representation of features
+
+Adding or replacing a feature requires that a representation of that feature
+be provided by the client.  As is the case in the core, this standard does not
+mandate that a specific feature encoding be supported by a server.  However,
+in order to promote interoperability, this standard provides recommendations
+for features encoded using GeoJSON or GML.
+
+include::recommendations/features/REC_body-geojson.adoc[]
+
+include::recommendations/features/REC_body-gmlsf0.adoc[]
+
+include::recommendations/features/REC_body-gmlsf0.adoc[]
+
+[[feature-crs]]
+=== Coordinate reference systems
+
+include::requirements/features/crs/REQ_crs84.adoc[]
+
+include::requirements/features/crs/REQ_storage-crs.adoc[]
+
+GML has full CRS support and no further requirements are imposed by this
+standard.
+
+GeoJSON normatively supports WGS84 (lon,lat) but the "prior arrangement"
+provision allows other coordinate reference systems to be used.
+
+include::requirements/features/crs/REQ_geojson.adoc[]
+
+The use of HTML as a feature encoding format is not specified by this standard.

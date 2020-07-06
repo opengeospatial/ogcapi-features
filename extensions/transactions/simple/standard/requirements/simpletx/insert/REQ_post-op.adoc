@@ -2,7 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/simpletx/insert/post-op*
-^|A |For every feature collection identified in the feature collection response (path '/collections'), the server shall support the HTTP POST operation at the path '/collections/{collectionId}/items'.
-^|B |The parameter 'collectionId' is each 'id' property in the feature collection response (JSONPath: '$.collections[*].id').
+^|A |The server shall support the HTTP POST operation at the collection items end point.
 |===
-
