@@ -2,7 +2,7 @@
 
 This GitHub repository contains [OGC](http://opengeospatial.org)'s
 multi-part standard for querying geospatial information on the web, "OGC API - Features".
-All versions of the specification can be found [here](https://www.opengeospatial.org/standards/ogcapi-features).
+All approved versions of the specification can be found [here](https://www.opengeospatial.org/standards/ogcapi-features).
 
 [OGC API standards](https://ogcapi.ogc.org/) define modular API building blocks to spatially enable Web APIs
 in a consistent way. [OpenAPI](http://openapis.org) is used to define the reusable
@@ -41,7 +41,7 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
 addition to the `bbox` filter above, with extensions providing more advanced options
-([section 7.15](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_collections_#_items_)).
+([section 7.15](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_items_)).
 
 ```
 GET /collections/{collectionId}/items/{featureId}
@@ -50,7 +50,7 @@ GET /collections/{collectionId}/items/{featureId}
 Returns a single 'feature' - something in the real-world (a building,
 a stream, a county, etc.) that typically is described by a geometry plus other properties.
 This provides a stable, canonical URL to link to the 'thing'
-([section 7.16](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_collections_#_feature_)).
+([section 7.16](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_feature_)).
 
 ## Using the standard
 
