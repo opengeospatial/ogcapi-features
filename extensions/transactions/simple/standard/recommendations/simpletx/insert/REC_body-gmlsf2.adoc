@@ -1,7 +1,0 @@
-[[rec_simpletx_insert_body-gmlsf2]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:req-id}* |*/rec/simpletx/insert/body-gmlsf2*
-^|A |If a feature can be represented for the intended use as a GML feature that conforms to the <<GMLSF,GML Simple Feature Profile, Level 2>> and is substitutable for 'gml:AbstractFeature', implementation should consider supporting GMLSF L2 as the encoding for the feature.
-^|B |The media type 'application/gml+xml; version=3.2; profile="http://www.opengis.net/def/profile/ogc/2.0/gml-sf2"' shall be used to indicate that request body contains a GMLSF L2 representation of the feature.
-|===
