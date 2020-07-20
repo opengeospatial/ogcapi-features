@@ -394,6 +394,10 @@ include::recomendations/core/PER_fc-md-items.adoc[]
 
 This document does not specify mechanisms how clients may access all collections from servers with many collections. Such mechanisms may be specified in additional parts of OGC API Features. Options include support for paging and/or filtering.
 
+include::recomendations/core/REC_fc-md-self-links.adoc[]
+
+NOTE: Including the `self` link in each collection is strongly recommended. It is an oversight that no requirement has been included in the original release of the standard. To avoid a breaking change, this statement is only a recommendation in this document version. Note that the URI can be inferred by clients using the member `id` of the feature collection, if it is missing, but this should not be necessary.
+
 include::requirements/core/REQ_fc-md-items-links.adoc[]
 
 include::requirements/core/REQ_fc-md-extent.adoc[]
@@ -595,6 +599,8 @@ Reference system information is not provided as the service provides geometries 
         }
       },
       "links": [
+        { "href": "http://data.example.org/collections/buildings",
+          "rel": "self", "title": "This collection" },
         { "href": "http://data.example.org/collections/buildings/items",
           "rel": "items", "type": "application/geo+json",
           "title": "Buildings" },
@@ -625,6 +631,10 @@ include::requirements/core/REQ_sfc-md-op.adoc[]
 ==== Response
 
 include::requirements/core/REQ_sfc-md-success.adoc[]
+
+include::recomendations/core/REC_sfc-md-links.adoc[]
+
+NOTE: Including the `self` and `alternates` links in each collection is strongly recommended. It is an oversight that no requirement has been included in the original release of the standard. To avoid a breaking change, this statement is only a recommendation in this document version.
 
 ==== Error situations
 
