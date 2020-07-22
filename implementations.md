@@ -140,8 +140,8 @@ nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation
 
 ## GeoServer
 
-An ccomplete implementation of the Features API specification is available at http://ows.geo-solutions.it/geoserver/ogc/features
-At the time of writing, it supports core, HTML, GML and GeoJSON (as well as other output formats), queriables and CQL extensions.
+An ccomplete implementation of the Features API specification is available at https://vtp2.geo-solutions.it/geoserver/web/
+At the time of writing, it supports core, HTML, GML and GeoJSON (as well as other output formats), queriables, CQL extensions, tiles.
 
 ## pygeoapi
 
