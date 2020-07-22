@@ -4,12 +4,14 @@
 
 This page points to servers implementing the OGC API - Features - Part 1: Core specification and extensions (e.g. Part 2, Part 3, etc.) thereof.  If you feel so inclined, feel free to indicate whether your server is listed in the compliance database (see Issue #416).
 
+We may start managing this page a little more actively from now on (22-JUL-2020) so please include a contact email with your listing so that we can get in touch with you should we test your server and find out that it is unreachable.
+
 ## Implementations:
 
 Servers:
 
 * [ldproxy](#ldproxy)
-* [CubeWerx Inc.](#cubeWerx)
+* [CubeWerx Inc.](#cubeWerx), pvretano [at] cubewerx.com
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
 * [jivan](#jivan)
