@@ -2,8 +2,7 @@
 
 ## Overview
 
-This page points to servers implementing drafts of the OGC API Features series.
-For now this is limited to implementations of the current draft of Part 1. Core.
+This page points to servers implementing the OGC API - Features - Part 1: Core specification and extensions (e.g. Part 2, Part 3, etc.) thereof.  If you feel so inclined, feel free to indicate whether your server is listed in the compliance database (see Issue #416).
 
 ## Implementations:
 
