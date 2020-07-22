@@ -10,7 +10,7 @@ We may start managing this page a little more actively from now on (22-JUL-2020)
 
 Servers:
 
-* [ldproxy](#ldproxy)
+* [ldproxy](#ldproxy), portele [at] interactive-instruments.de
 * [CubeWerx Inc.](#cubeWerx), pvretano [at] cubewerx.com
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
@@ -39,13 +39,13 @@ The following server has been set up in OGC Testbeds and Pilots. It includes ext
 The server has been [certified as compliant by the OGC CITE tests](https://www.opengeospatial.org/resource/products/details/?pid=1598).
 
 Another server is implementing an older draft
-of part 1 (the server will be updated to version 1.0.0 soon). 
+of part 1 (the server will be updated to version 1.0.0 soon).
 The APIs provide German data and therefore the language
 in general is German, including in the HTML.
 
 The first endpoint is for cadastral parcels, buildings and
 administrative areas in North-Rhine Westphalia (Germany).
-The second endpoint for topographic data in that region, 
+The second endpoint for topographic data in that region,
 the third provides administrative units.
 
 For more details about the implementation and a discussion about
@@ -218,8 +218,8 @@ Topographical database of National Land Survey of Finland as an OGC API - Featur
 * [Demo server](http://138.201.120.72:8084/qgisserver_demo_wfs3/wfs3/)
 
 ## SDI Rhineland-Palatinate - mapbender2
-The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saarland use the mapbender2 ows registry as backend 
-for their geoportal solutions. In the SDIs there are registered many OpenData classified WFS 2.0 resources and it was straightforward to develop a proxy solution, that implements the OGC API - Features interface at one central location. 
+The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saarland use the mapbender2 ows registry as backend
+for their geoportal solutions. In the SDIs there are registered many OpenData classified WFS 2.0 resources and it was straightforward to develop a proxy solution, that implements the OGC API - Features interface at one central location.
 Most of the core functions are implemented. The WFS behind the proxy are either based on mapserver or geoserver. The proxy does also create service metadata in form of iso19139 records. One extension is the usage of json-schema to define human readable attribute titles and descriptions at WFS level. The next extension will be the usage of json-ld to give semantical information for the attributes and allow the dynamical creation of rdf-a and other formats.
 The code of the current productional solution is available on the [OSGEO GIT](https://git.osgeo.org/gitea/armin11/GeoPortal.rlp)
 and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
