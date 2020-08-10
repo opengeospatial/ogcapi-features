@@ -148,3 +148,5 @@ The Features API Standards Working Group (SWG) is the group at OGC responsible f
 * [Open issues](https://github.com/opengeospatial/ogcapi-features/issues)
 * [Proposing changes](https://github.com/opengeospatial/ogcapi-features/wiki/Propose-a-change-to-a-draft-of-a-specification-document)
 * [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/LICENSE)
+
+Pull Requests from contributors are welcomed. However, please note that by sending a Pull Request or Commit to this GitHub repository, you are agreeing to the terms in the Observer Agreement https://portal.ogc.org/files/?artifact_id=92169
