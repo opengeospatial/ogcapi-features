@@ -159,6 +159,8 @@ include::requirements/gmlsf0/REQ_content.adoc[]
 
 include::requirements/gmlsf0/REQ_headers.adoc[]
 
+Note that the requirement `/req/gmlsf0/headers` exists for GML-SF0 (and `/req/gmlsf2/headers` for GML-SF2), but not for GeoJSON, because the rules for feature collections in the GML Simple Features Profile does not allow to include this information in the payload. The information, therefore, has to be provided in the HTTP headers. An implementation of course can also provide these headers for other encodings, too.
+
 [#gml_content,reftext='{table-caption} {counter:table-num}']
 .Media types and XML elements for each resource[[table_3]]
 [cols="30,35,35",options="header"]
