@@ -28,12 +28,11 @@ booleanPrimary = predicate
                | leftParen cqlFilter rightParen;
 
 #=============================================================================#
-#  CQL supports scalar, spatial, temporal and existence predicates.
+#  CQL supports scalar, spatial and temporal predicates.
 #=============================================================================#
 predicate = comparisonPredicate
           | spatialPredicate 
           | temporalPredicate
-          | existencePredicate
           | inPredicate;
 
 #=============================================================================#
@@ -115,15 +114,6 @@ temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "TCONTAINS"
                  | "DURING" | "ENDEDBY" | "ENDS" | "TEQUALS" | "MEETS"
                  | "METBY" | "TOVERLAPS" | "OVERLAPPEDBY" | "ANYINTERACTS"
                  | "INTERSECTS";
-
-#=============================================================================#
-# The existence predicate evalues whether the specified property exists
-# in the current context. This predicate was added to accomodate the fact
-# that OAPIF feature collections (and likely other specification) are
-# heterogeneous with respect to schema.
-#=============================================================================#
-existencePredicate = propertyName "EXISTS"
-                   | propertyName "DOES" "NOT" "EXIST";
 
 #=============================================================================#
 # The IN predicate 
