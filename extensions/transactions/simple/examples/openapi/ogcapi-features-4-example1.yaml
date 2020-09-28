@@ -1,11 +1,13 @@
 openapi: 3.0.2
 info:
-  title: "A sample API conforming to the draft standard OGC API - Features - Part 1: Core"
+  title: "A sample API conforming to the draft standard OGC API - Features - Part 1: Core & OGC API - Features - Part 4: Simple Transactions"
   version: '1.0.0'
   description: |-
     This is a sample OpenAPI definition that conforms to the conformance
     classes "Core", "GeoJSON", "HTML" and "OpenAPI 3.0" of the draft
-    standard "OGC API - Features - Part 1: Core".
+    standard "OGC API - Features - Part 1: Core" and to he conformance 
+    classes "Simple Transactions" and "Features" of the draft standard
+    "OGC API - Features - Part 4: Simple Transactions".
 
     This example is a generic OGC API Features definition that uses path
     parameters to describe all feature collections and all features.
@@ -13,7 +15,7 @@ info:
     collections or the feature content. This information is only available
     from accessing the feature collection resources.
 
-    There is [another example](ogcapi-features-1-example2.yaml)
+    There is [another example](ogcapi-features-4-example2.yaml)
     that specifies each collection explicitly.
   contact:
     name: Acme Corporation
