@@ -5,6 +5,6 @@
 ^|Test Purpose |Validate that a .
 ^|Requirement |<<req_simpletx_insert-post-op,/req/simpletx/insert/post-op>>,
 ^|Dependencies |<<ats_simplextx_insert_body,/conf/simpletx/insert/body>>, <<ats_simplextx_insert_response,/conf/simpletx/insert/response>>
-^|Test Method |. For every resource collection identified in the Collections, issue an HTTP POST request to the URL `/collections/{collectionId}/items` with a suitable request body (see <<ats_simplextx_insert_body,/conf/simpletx/insert/body>>.
+^|Test Method |. For every resource collection identified in the Collections, issue an HTTP POST request to the URL `/collections/{collectionId}/items` with a suitable request body (see <<ats_simplextx_insert_body,/conf/simpletx/insert/body>>).
 . Verify that the server responds as per <<ats_simplextx_insert_response,/conf/simpletx/insert/response>>.
 |===
