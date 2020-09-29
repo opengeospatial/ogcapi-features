@@ -647,7 +647,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#oas">9. OpenAPI 3.0</a></li>
 <li><a href="#mediatypes">10. Media Types</a></li>
 <li><a href="#_security_considerations">11. Security Considerations</a></li>
-<li><a href="#ats">Annex A: Abstract Test Suite (Normative)</a></li>
+<li><a href="#ats">Annex A: Abstract Test Suite (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_introduction">A.1. Introduction</a></li>
+<li><a href="#_conformance_class_simple_transactions">A.2. Conformance Class Simple Transactions</a></li>
+<li><a href="#_conformance_class_patch_updates">A.3. Conformance Class PATCH Updates</a></li>
+<li><a href="#_conformance_class_features">A.4. Conformance Class Features</a></li>
+</ul>
+</li>
 <li><a href="#_revision_history">Annex B: Revision History</a></li>
 <li><a href="#Bibliography">Annex C: Bibliography</a></li>
 </ul>
@@ -2032,13 +2039,108 @@ provision allows other coordinate reference systems to be used.</p>
 <div class="sect1">
 <h2 id="ats"><a class="anchor" href="#ats"></a>Annex A: Abstract Test Suite (Normative)</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>add test cases</p>
+<div class="sect2">
+<h3 id="_introduction"><a class="anchor" href="#_introduction"></a>A.1. Introduction</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+This needs to be updated.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>include::abstract_tests/cc/TEST001.adoc[]</p>
+<p>OGC API Features is not a Web Service in the traditional sense. Rather, it defines the behavior and content of a set of Resources exposed through a Web Application Programing Interface (Web API). Therefore, an API may expose resources in addition to those defined by the standard. A test engine must be able to traverse the API, identify and validate test points, and ignore resource paths which are not to be tested.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_conformance_class_simple_transactions"><a class="anchor" href="#_conformance_class_simple_transactions"></a>A.2. Conformance Class Simple Transactions</h3>
+<table id="ats_simpletx" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simpletx" class="bare">http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simpletx</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Web API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc2616">RFC 2616 (HTTP/1.1)</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_conformance_class_patch_updates"><a class="anchor" href="#_conformance_class_patch_updates"></a>A.3. Conformance Class PATCH Updates</h3>
+<table id="ats_patch-update" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-2/1.0/req/simpletx/patch-update" class="bare">http://www.opengis.net/spec/ogcapi-features-2/1.0/req/simpletx/patch-update</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Web API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc2616">RFC 2616 (HTTP/1.1)</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc7396">RFC 7396 (JSON Merge Patch)</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc5261">RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_conformance_class_features"><a class="anchor" href="#_conformance_class_features"></a>A.4. Conformance Class Features</h3>
+<table id="ats_features" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-4/1.0/req/features" class="bare">http://www.opengis.net/spec/ogcapi-features-4/1.0/req/features</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Web API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#OAFeat-1">OGC API - Features - Part 1: Core</a></p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
