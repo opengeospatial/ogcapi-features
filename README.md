@@ -83,7 +83,7 @@ The OGC Features API SWG has identified the following extensions to Part 1 (Core
 as the highest priority:
 
 * [OGC API - Features - Part 2: Coordinate Reference Systems by Reference (draft)](http://docs.opengeospatial.org/DRAFTS/18-058.html)
-  * Release candidate that is now entering the OGC approval process.
+  * Release candidate that is the OGC approval process.
 * [OGC API - Features - Part 3: Common Query Language](http://docs.opengeospatial.org/DRAFTS/19-079.html)
   * Draft with multiple implementations. The grammar of the query language should be fairly stable, but the organisation into conformance classes and the JSON encoding need more review and discussion before the next phases (OGC Architecture Board Review, Public Review).
 * [OGC API - Features - Part 4: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
@@ -93,7 +93,7 @@ as the highest priority:
 
 ## Additional information
 
-In parallel, Part 1 (Core) has been [submitted to ISO/TC 211](https://www.iso.org/standard/32586.html), too.
+Part 1 (Core) has been published by ISO as [ISO 19168-1:2020](https://www.iso.org/standard/32586.html), too.
 
 Open issues for Part 1 (Core) are documented in a [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/1). Comments from the ISO process are being processed together with other clarifications and editorial updates. The result will be [version 1.0.1](https://github.com/opengeospatial/ogcapi-features/milestone/4). There is an [Editor's draft](http://docs.opengeospatial.org/DRAFTS/17-069r4.html) that includes edits for all resolved issues.
 
