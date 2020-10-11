@@ -1,8 +1,8 @@
 # OGC API - Features - Part 1: Core
 
-This folder contains the content for the OGC API - Features - Part 1: Core standard.
+This folder contains the content for the standard OGC API - Features - Part 1: Core.
 
-The repo is organized as follows:
+The folder is organized as follows:
 
 * standard - the main standard document content
   - organized in multiple sections and directories
