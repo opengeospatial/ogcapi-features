@@ -36,16 +36,33 @@ include::recommendations/features/REC_body-gmlsf2.adoc[]
 [[feature-crs]]
 === Coordinate reference systems
 
+[[request-body-crs]]
+==== Request body CRS
+
 include::requirements/features/crs/REQ_crs84.adoc[]
 
-include::requirements/features/crs/REQ_storage-crs.adoc[]
+include::requirements/features/crs/REQ_other-crs.adoc[]
+
+NOTE: When interacting with a server that supports http://fix.me[OGC API - Features - Part2: Coordinate Reference System by Reference] and also supports this extension, this requirement allows a client that only supports CRS84(h) to negotiate to CRS84(h) while a more capable client can negotiate to some other mutually agreeable CRS.
+
+include::recommendations/features/REC_storage-crs.adoc[]
+
+==== Insert response
+
+include::requirements/features/crs/REQ_insert_response-crs.adoc[]
+
+==== GML request body 
 
 GML has full CRS support and no further requirements are imposed by this
 standard.
+
+==== GeoJSON request body
 
 GeoJSON normatively supports WGS84 (lon,lat) but the "prior arrangement"
 provision allows other coordinate reference systems to be used.
 
 include::requirements/features/crs/REQ_geojson.adoc[]
+
+==== HTML request body
 
 The use of HTML as a feature encoding format is not specified by this standard.
