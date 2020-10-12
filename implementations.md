@@ -2,15 +2,16 @@
 
 ## Overview
 
-This page points to servers implementing drafts of the OGC API Features series.
-For now this is limited to implementations of the current draft of Part 1. Core.
+This page points to servers implementing the OGC API - Features - Part 1: Core specification and extensions (e.g. Part 2, Part 3, etc.) thereof.  If you feel so inclined, feel free to indicate whether your server is listed in the compliance database (see Issue #416).
+
+We may start managing this page a little more actively from now on (22-JUL-2020) so please include a contact email with your listing so that we can get in touch with you should we test your server and find out that it is unreachable.
 
 ## Implementations:
 
 Servers:
 
-* [ldproxy](#ldproxy)
-* [CubeWerx Inc.](#cubeWerx)
+* [ldproxy](#ldproxy), portele [at] interactive-instruments.de
+* [CubeWerx Inc.](#cubeWerx), pvretano [at] cubewerx.com
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
 * [jivan](#jivan)
@@ -26,6 +27,7 @@ Clients:
 * [OWSLib WFS 3.0 client](https://geopython.github.io/OWSLib)
 * [STAC](#STAC)
 * [QGIS](#QGIS)
+* [ogcapi-js](#ogcapi-js)
 
 ## ldproxy
 
@@ -37,13 +39,13 @@ The following server has been set up in OGC Testbeds and Pilots. It includes ext
 The server has been [certified as compliant by the OGC CITE tests](https://www.opengeospatial.org/resource/products/details/?pid=1598).
 
 Another server is implementing an older draft
-of part 1 (the server will be updated to version 1.0.0 soon). 
+of part 1 (the server will be updated to version 1.0.0 soon).
 The APIs provide German data and therefore the language
 in general is German, including in the HTML.
 
 The first endpoint is for cadastral parcels, buildings and
 administrative areas in North-Rhine Westphalia (Germany).
-The second endpoint for topographic data in that region, 
+The second endpoint for topographic data in that region,
 the third provides administrative units.
 
 For more details about the implementation and a discussion about
@@ -139,8 +141,8 @@ nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation
 
 ## GeoServer
 
-An ccomplete implementation of the Features API specification is available at http://ows.geo-solutions.it/geoserver/ogc/features
-At the time of writing, it supports core, HTML, GML and GeoJSON (as well as other output formats), queriables and CQL extensions.
+An ccomplete implementation of the Features API specification is available at https://vtp2.geo-solutions.it/geoserver/web/
+At the time of writing, it supports core, HTML, GML and GeoJSON (as well as other output formats), queriables, CQL extensions, tiles.
 
 ## pygeoapi
 
@@ -216,8 +218,8 @@ Topographical database of National Land Survey of Finland as an OGC API - Featur
 * [Demo server](http://138.201.120.72:8084/qgisserver_demo_wfs3/wfs3/)
 
 ## SDI Rhineland-Palatinate - mapbender2
-The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saarland use the mapbender2 ows registry as backend 
-for their geoportal solutions. In the SDIs there are registered many OpenData classified WFS 2.0 resources and it was straightforward to develop a proxy solution, that implements the OGC API - Features interface at one central location. 
+The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saarland use the mapbender2 ows registry as backend
+for their geoportal solutions. In the SDIs there are registered many OpenData classified WFS 2.0 resources and it was straightforward to develop a proxy solution, that implements the OGC API - Features interface at one central location.
 Most of the core functions are implemented. The WFS behind the proxy are either based on mapserver or geoserver. The proxy does also create service metadata in form of iso19139 records. One extension is the usage of json-schema to define human readable attribute titles and descriptions at WFS level. The next extension will be the usage of json-ld to give semantical information for the attributes and allow the dynamical creation of rdf-a and other formats.
 The code of the current productional solution is available on the [OSGEO GIT](https://git.osgeo.org/gitea/armin11/GeoPortal.rlp)
 and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
@@ -238,3 +240,7 @@ and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
 * API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/486/api
 * HTML representation objects: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items?&f=html
 * HTML representation of the description of the amphitheater: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items/unesco_welterbe.3730?f=html
+
+## ogcapi-js
+
+[ogcapi-js](https://github.com/haoliangyu/ogcapi-js) is a lightweight and modular JavaScript/Tyescript library for OGC APIs. It provides a developer-friendly way to interact with Features API and useful features like query parameter validation and error handling. Developers can use this library to build both client-side (browser) or server-side applications.

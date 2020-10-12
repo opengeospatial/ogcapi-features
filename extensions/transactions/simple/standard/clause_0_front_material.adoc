@@ -2,17 +2,18 @@
 
 OGC API standards define modular API building blocks to spatially enable Web APIs in a consistent way. The <<OpenAPI,OpenAPI specification>> is used to define the API building blocks.
 
-OGC API Features provides API building blocks to create, modify and query features on the Web. OGC API Features is comprised of multiple parts, each of them is a separate standard.
+This extensions defines the behaviour of an API that allows resource instances 
+to be added, replaced, modified and/or removed for a single collection.
 
-This part extends the core capabilities specified in <<OAFeat-1,Part 1: Core>> with the ability to add, replace, modify and/or delete individual feature instances from a single feature collection.
+NOTE: This specification is being developed in the OGC API - Features SWG but is being written as a generic extension that is applicable to a variety of resource types including features.  The feature-specific portions of this extension are issolated to the clause titled <<features,Features>>.  It is anticipated that the bulk of this extension will eventually be moved into 'OGC API - Common' and only the feature-specific content will remain to be managed by the 'OGC API - Features' SWG.
 
-CAUTION: This is a DRAFT version of the nth part of the OGC API - Features standards. This draft is not complete and there are open issues that are still under discussion.
+CAUTION: This is a DRAFT version of the 4th part of the OGC API - Features standards. This draft is not complete and there are open issues that are still under discussion.
 
 [big]*ii.    Keywords*
 
 The following are keywords to be used by search engines and document catalogues.
 
-feature collection instance spatial data openapi transactions insert update delete add modify remove REST PUT POST DELETE PATCH
+resource feature collection instance spatial data openapi transactions insert update delete add modify remove REST PUT POST DELETE PATCH
 
 [big]*iii.   Preface*
 

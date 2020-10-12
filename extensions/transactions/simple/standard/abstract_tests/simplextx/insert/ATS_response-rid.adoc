@@ -1,0 +1,11 @@
+[[ats_simplextx_insert-response-rid]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/simpletx/insert/response-rid*
+^|Test Purpose |Verify that the server has assigned an identifier for a newly added resource and that, that identifier may be used to get back the resource
+^|Requirement |<<req_simpletx_insert_response-rid,/req/simpletx/insert/response-rid>>
+^|Dependencies |<<req_simpletx_insert-post-op,/req/simpletx/insert/post-op>>
+^|Test Method |. Add a new resource to a collection.
+. Retrieve the newly added resource using the URL specified by the `Location` header.
+. Verify that the retrieved resource, matches the one that was originally added.
+|===

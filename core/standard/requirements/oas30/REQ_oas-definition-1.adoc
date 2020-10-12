@@ -2,5 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* | */req/oas30/oas-definition-1*
-^|A |An OpenAPI definition in JSON using the media type `application/vnd.oai.openapi+json;version=3.0` and a HTML version of the API definition using the media type `text/html` SHALL be available.
+^|A |The content of the response of the HTTP GET operation at the landing page SHALL include the following links to the API definition:
+
+* relation type `service-desc` and content type `application/vnd.oai.openapi+json;version=3.0`,
+* relation type `service-doc` and content type `text/html`.
 |===

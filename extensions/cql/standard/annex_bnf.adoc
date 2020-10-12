@@ -28,12 +28,11 @@ booleanPrimary = predicate
                | leftParen cqlFilter rightParen;
 
 #=============================================================================#
-#  CQL supports scalar, spatial, temporal and existence predicates.
+#  CQL supports scalar, spatial and temporal predicates.
 #=============================================================================#
 predicate = comparisonPredicate
           | spatialPredicate 
           | temporalPredicate
-          | existencePredicate
           | inPredicate;
 
 #=============================================================================#
@@ -117,22 +116,17 @@ temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "TCONTAINS"
                  | "INTERSECTS";
 
 #=============================================================================#
-# The existence predicate evalues whether the specified property exists
-# in the current context. This predicate was added to accomodate the fact
-# that OAPIF feature collections (and likely other specification) are
-# heterogeneous with respect to schema.
-#=============================================================================#
-existencePredicate = propertyName "EXISTS"
-                   | propertyName "DOES" "NOT" "EXIST";
-
-#=============================================================================#
 # The IN predicate 
 #=============================================================================#
-inPredicate = propertyName "IN" leftParen { characterLiteral | 
-                                            numericLiteral |
-                                            geomLiteral |
-                                            temporalLiteral |
-                                            function } rightParen;
+inPredicate = propertyName "IN" leftParen inList rightParen;
+
+inList = listItem [ {comma listItem} ];
+
+listItem = characterLiteral | 
+           numericLiteral |
+           geomLiteral |
+           temporalLiteral |
+           function;
 
 #=============================================================================#
 # Definition of a FUNCTION
@@ -233,7 +227,7 @@ digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 specialCharacter = percent | ampersand | leftParen | rightParen | asterisk
                  | plusSign | comma | minusSign | period | solidus | colon
                  | semicolon | lt | gt | eq | questionMark | underscore
-                 | verticalBar | doubleQuote ;
+                 | verticalBar | doubleQuote | dotdot;
 
 octothorp = "#";
 
@@ -262,6 +256,8 @@ comma = ",";
 minusSign = "-";
 
 period = ".";
+
+dotdot = "..";
 
 solidus = "/";
 
@@ -293,9 +289,14 @@ temporalLiteral = instant | interval;
 
 instant = fullDate | fullDate "T" utcTime;
 
-interval = instantInInterval "/" instantInInterval;
-
-instantInInterval = ".." | "" | instant;
+interval = solidus |
+           solidus dotdot |
+           dotdot solidus |
+           instant solidus |
+           solidus instant |
+           instant solidus dotdot |
+           dotdot solidus instant |
+           instant solidus instant;
 
 fullDate   = dateYear "-" dateMonth "-" dateDay;
 

@@ -1,0 +1,8 @@
+[[ats_crs_bbox-crs-parameter-default]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/bbox-crs-parameter-default*
+^|Test Purpose |Verify that the parameter `bbox-crs` has been implemented correctly
+^|Requirement |<<req_crs_fc-bbox-crs-default-value,/req/crs/fc-bbox-crs-default-value>>
+^|Test Method |For each spatial feature collection `collectionId` and every GML or GeoJSON feature representation supported by the Web API, send a request with the parameters `bbox` and `bbox-crs` to `/collections/{collectionId}/items` for the default CRS of the collection. Use a `bbox` value in the spatial extent of the collection. Send the same request, but with no `bbox-crs` parameter. Do not include a `crs` parameter in the requests. Verify that the responses include the same features.
+|===

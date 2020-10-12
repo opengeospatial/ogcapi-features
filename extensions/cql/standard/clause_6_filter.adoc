@@ -5,11 +5,7 @@
 
 include::requirements/requirements_class_filter.adoc[]
 
-The <<OACommon-1,OGC API - Common>> standard defines two filtering operators:
-bbox and datetime.  <<OAFeat-1,OGC API - Features - Part 1: Core>> also adds
-support, beyond <<OACommon-1,OGC API - Common>> for simple equality predicates
-logically joined using the AND operator.  This capabilities offer simple 
-resource filtering for HTTP requests.
+The <<OACommon-1,OGC API - Common>> standard defines two filtering operators at the `/items` endpoint: bbox and datetime.  <<OAFeat-1,OGC API - Features - Part 1: Core>> also adds support, beyond <<OACommon-1,OGC API - Common>> for simple equality predicates logically joined using the AND operator.  This capabilities offer simple  resource filtering for HTTP requests.
 
 This conformance class defines additional query parameters that allow more 
 complex filtering expressions to be specified when querying server resources.
@@ -76,10 +72,35 @@ include::requirements/filter/REQ_get-queryables-response.adoc[]
 
 This extensions defines a general parameter, `filter`, whose value is a filter
 expression to be applied when retrieving resources in order to determine which
-resources should be include in a result set.
+resources should be included in a result set.
 
 include::requirements/filter/REQ_filter-param.adoc[]
 
+[[filter-param-multiple-collections]]
+=== Cross-collection queries
+
+The only query path defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>
+is the `/items` endpoint which operates on a single collection.  However other,
+higher level, endpoints are also being defined (e.g. /search or /tiles) that
+potentially operate on multiple collections.  The simplest approach for handling
+such cross-collection queries is one that is consistent with one-collection
+queries.  Specifically, any specified `filter` parameter should apply to all
+referenced collections.  This, of course, implies that all properties referenced
+in the filter expression are valid for all referenced collections and should be 
+taken from  the <<filter-queryables,global queryables list>>.
+
+include::requirements/filter/REQ_filter-param-multiple-collections.adoc[]
+
+The following example illustrates a notional query on a `/tiles` endpoint
+that uses a CQL filter and references multiple collections:
+
+[[example_2]]
+.Multi-collection filter example
+====
+http://www.someserver.com/ogcapi/tiles?collection=collection1,collection3&filter-lang=cql-text&filter='prop1=10 and prop2>45'&...
+====
+
+NOTE: Arrays of filter expressions that operate on each collection specified in a query (or subsets thereof) are out of scope for this extension and  would be the subject of a different part of the `OGC API - Features` suite of specifications.
 
 [[filter-lang-param]]
 === Parameter filter-lang
@@ -127,3 +148,5 @@ recommended if they are suitable for their intended use.
 === Response
 
 include::requirements/filter/REQ_response.adoc[]
+
+
