@@ -1,0 +1,19 @@
+[[ats_crs_crs-parameter-invalid]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/crs-parameter-invalid*
+^|Test Purpose |Verify that invalid values in the parameter `crs` are reported
+^|Requirement |<<req_crs_fc-crs-valid-value,/req/crs/fc-crs-valid-value>>
+^|Test Method |For
+
+* each spatial feature collection `collectionId`
+
+send a request with an unsupported CRS identifier in the parameter `crs` to
+
+* `/collections/{collectionId}/items` and
+* `/collections/{collectionId}/items/{featureId}` (with a valid `featureId` for the collection).
+
+Verify that the response has status code `400`.
+
+Unsupported CRS identifiers are all strings not included in the `crs` property of the collection and also not included in the global CRS list, if `#/crs` is included in the `crs` property.
+|===

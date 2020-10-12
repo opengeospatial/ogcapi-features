@@ -1,0 +1,8 @@
+[[ats_crs_crs-parameter-default]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/crs-parameter-default*
+^|Test Purpose |Verify that the default value for parameter `crs` has been implemented correctly
+^|Requirement |<<req_crs_fc-crs-default-value,/req/crs/fc-crs-default-value>>, <<req_crs_ogc-crs-header,/req/crs/ogc-crs-header>>, <<req_crs_ogc-crs-header-value,/req/crs/ogc-crs-header-value>>
+^|Test Method |For each spatial feature collection, send a request without the crs parameter and verify that the response includes a `Content-Crs` http header with the value of the default CRS identifier of the collection.
+|===

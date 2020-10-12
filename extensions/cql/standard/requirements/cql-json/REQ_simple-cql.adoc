@@ -1,7 +1,7 @@
 [[req_sql-json_simple-cql]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/cql-json/simple-cql* 
+^|*Requirement {counter:req-id}* |*/req/cql-json/simple-cql*
 ^|A |A server that implements the <<rc_simple-cql,Simple CQL>> requirements class and also implements this requirement shall be able to parse a filter expression encoded as JSON that validates against the following JSON Schema fragment:
 
 [source,JSON]
@@ -172,8 +172,10 @@
         "type": "array",
         "items": {
             "type": "number",
-            "minItems": 4,
-            "maxItems": 6
+            "oneOf": [
+              { "minItems": 4, "maxItems": 4},
+              { "minItems": 6, "maxItems": 6}
+            ]
         }
       },
 
@@ -208,5 +210,3 @@
 }
 ----
 |===
-
-

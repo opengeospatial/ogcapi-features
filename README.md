@@ -1,10 +1,10 @@
 # OGC API - Features
 
 This GitHub repository contains [OGC](http://opengeospatial.org)'s
-standard for querying geospatial information on the web, "OGC API - Features". The
-latest version of the specification can be found at [docs.opengeospatial.org/is/17-069r3/17-069r3.html](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html).
+multi-part standard for querying geospatial information on the web, "OGC API - Features".
+All approved versions of the specification can be found [here](https://www.opengeospatial.org/standards/ogcapi-features).
 
-OGC API standards define modular API building blocks to spatially enable Web APIs
+[OGC API standards](https://ogcapi.ogc.org/) define modular API building blocks to spatially enable Web APIs
 in a consistent way. [OpenAPI](http://openapis.org) is used to define the reusable
 API building blocks with responses in JSON and HTML.
 
@@ -25,7 +25,7 @@ OGC API Features provides access to collections of geospatial data.
 GET /collections
 ```
 
-Lists the collections of data on the server that can be queried ([section 7.13](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)),
+Lists the collections of data on the server that can be queried ([section 7.13](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_collections_)),
 and each describes basic information about the geospatial data collection, like its id and description, as well as the
 spatial and temporal extents of all the data contained.
 
@@ -41,7 +41,7 @@ collection, but GML is supported, too, and extensions can easily supply others) 
 Data is returned in pageable chunks, with each response containing a `next` link
 as many collections are quite large. The core specification supports a few basic filters, in
 addition to the `bbox` filter above, with extensions providing more advanced options
-([section 7.15](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_)).
+([section 7.15](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_items_)).
 
 ```
 GET /collections/{collectionId}/items/{featureId}
@@ -50,7 +50,7 @@ GET /collections/{collectionId}/items/{featureId}
 Returns a single 'feature' - something in the real-world (a building,
 a stream, a county, etc.) that typically is described by a geometry plus other properties.
 This provides a stable, canonical URL to link to the 'thing'
-([section 7.16](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_)).
+([section 7.16](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_feature_)).
 
 ## Using the standard
 
@@ -83,22 +83,26 @@ The OGC Features API SWG has identified the following extensions to Part 1 (Core
 as the highest priority:
 
 * [OGC API - Features - Part 2: Coordinate Reference Systems by Reference (draft)](http://docs.opengeospatial.org/DRAFTS/18-058.html)
+  * Release candidate that is in the OGC approval process. See [here](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/crs) for an overview.
 * [OGC API - Features - Part 3: Common Query Language](http://docs.opengeospatial.org/DRAFTS/19-079.html)
+  * Draft with multiple implementations. The grammar of the query language should be fairly stable, but the organisation into conformance classes and the JSON encoding need more review and discussion before the next phases (OGC Architecture Board Review, Public Review).
 * [OGC API - Features - Part 4: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
-
-A joint sprint with [STAC](https://github.com/radiantearth/stac-spec) and the [OGC API Records SWG](https://github.com/opengeospatial/ogcapi-records) to advance richer query/filter capabilities took place on [November 5-7, 2019, in Arlington, VA](https://www.opengeospatial.org/pressroom/pressreleases/3074).
+  * The draft needs more implementations, testing and review to move forward.
+* OGC API - Features - Part 5: OpenAPI 3.1
+  * Waiting for the release of OpenAPI Specification version 3.1.0.
 
 ## Additional information
 
-In parallel, Part 1 (Core) has been [submitted to ISO/TC 211](https://www.iso.org/standard/32586.html), too.
+Part 1 (Core) has also been published by ISO as [ISO 19168-1:2020](https://www.iso.org/standard/32586.html).
 
 Open issues for Part 1 (Core) are documented in a [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/1). Comments from the ISO process are being processed together with other clarifications and editorial updates. The result will be [version 1.0.1](https://github.com/opengeospatial/ogcapi-features/milestone/4). There is an [Editor's draft](http://docs.opengeospatial.org/DRAFTS/17-069r4.html) that includes edits for all resolved issues.
 
-Open issues for Part 2 (CRS) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/2).
+Open issues for the other parts are documented in GitHub project boards, too:
 
-Open issues for Part 3 (Common Query Language) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/4).
-
-Open issues for Part 4 (Simple Transactions) are documented in another [GitHub project](https://github.com/opengeospatial/ogcapi-features/projects/3).
+* [Part 2 (CRS by Reference)](https://github.com/opengeospatial/ogcapi-features/projects/2)
+* [Part 3 (Common Query Language)](https://github.com/opengeospatial/ogcapi-features/projects/4)
+* [Part 4 (Simple Transactions)](https://github.com/opengeospatial/ogcapi-features/projects/3)
+* [Part 5 (OpenAPI 3.1)](https://github.com/opengeospatial/ogcapi-features/projects/7)
 
 Additional links:
 
@@ -144,3 +148,5 @@ The Features API Standards Working Group (SWG) is the group at OGC responsible f
 * [Open issues](https://github.com/opengeospatial/ogcapi-features/issues)
 * [Proposing changes](https://github.com/opengeospatial/ogcapi-features/wiki/Propose-a-change-to-a-draft-of-a-specification-document)
 * [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/LICENSE)
+
+Pull Requests from contributors are welcomed. However, please note that by sending a Pull Request or Commit to this GitHub repository, you are agreeing to the terms in the Observer Agreement https://portal.ogc.org/files/?artifact_id=92169

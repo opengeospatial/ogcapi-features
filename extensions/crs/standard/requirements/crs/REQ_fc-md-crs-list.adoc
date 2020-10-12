@@ -2,9 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |*/req/crs/fc-md-crs-list* +
-2+| For each spatial feature collection offered by a server in coordinate
-reference systems other than the defaults defined in <<OAFeat-1,OGC API -
-Features - Part 1: Core>>, the `crs` property in the collection metadata
-shall contain the list of additional CRS identifiers supported by the service
-for this collection.
+^|A |The `crs` property in the <<crs-discovery,collection object>> of a spatial feature collection SHALL contain the identifiers for the list of CRSs supported by the server for that collection.
+^|B |This list SHALL include the default(s) defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 |===

@@ -55,8 +55,6 @@ The specific set of operators defined in this conformance class are:
 ** intersects.
 * Temporal operators:
 ** anyinteracts
-* Schema interogation operators:
-** exists
 
 An encoding of CQL may be used as the value of the filter parameters defined
 in the <<rc_filter,Filter>> conformance class.
@@ -122,3 +120,23 @@ specified in <<ats,Annex A>> of this document. The framework, concepts, and
 methodology for testing, and the criteria to be achieved to claim conformance
 are specified in the OGC Compliance Testing Policies and Procedures and the
 OGC Compliance Testing web site.
+
+== Roadmap
+
+The content of the clause is informative.  
+
+Because CQL is not exclusively useful for features, it is anticipated that the
+following conformance classes:
+
+* <<rc_filter,Filter>>
+* <<rc_simple-cql,Simple CQL>>
+* <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
+* <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>
+* <<rc_functions,Functions>>
+* <<rc_arithmetic,Arithmetic expressions>>
+* <<rc_cql-text,CQL Text encoding>>
+* <<rc_cql-json,CQL JSON encoding>>
+
+will eventually become parts of the `OGC API - Common` suite for standards thus
+leaving the <<rc_features-filter,Features Filter>> conformance class as part
+3 of the `OGC API - Features` specifications.

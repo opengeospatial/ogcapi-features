@@ -394,6 +394,10 @@ include::recomendations/core/PER_fc-md-items.adoc[]
 
 This document does not specify mechanisms how clients may access all collections from servers with many collections. Such mechanisms may be specified in additional parts of OGC API Features. Options include support for paging and/or filtering.
 
+include::recomendations/core/REC_fc-md-self-links.adoc[]
+
+NOTE: Including the `self` link in each collection is strongly recommended. It is an oversight that no requirement has been included in the original release of the standard. To avoid a breaking change, this statement is only a recommendation in this document version. Note that the URI can be inferred by clients using the member `id` of the feature collection, if it is missing, but this should not be necessary.
+
 include::requirements/core/REQ_fc-md-items-links.adoc[]
 
 include::requirements/core/REQ_fc-md-extent.adoc[]
@@ -475,8 +479,11 @@ properties:
                 server whether only a single spatial geometry property is used to determine
                 the extent or all relevant geometries.
               type: array
-              minItems: 4
-              maxItems: 6
+              oneOf:
+              - minItems: 4
+                maxItems: 4
+              - minItems: 6
+                maxItems: 6
               items:
                 type: number
               example:
@@ -592,6 +599,8 @@ Reference system information is not provided as the service provides geometries 
         }
       },
       "links": [
+        { "href": "http://data.example.org/collections/buildings",
+          "rel": "self", "title": "This collection" },
         { "href": "http://data.example.org/collections/buildings/items",
           "rel": "items", "type": "application/geo+json",
           "title": "Buildings" },
@@ -622,6 +631,10 @@ include::requirements/core/REQ_sfc-md-op.adoc[]
 ==== Response
 
 include::requirements/core/REQ_sfc-md-success.adoc[]
+
+include::recomendations/core/REC_sfc-md-links.adoc[]
+
+NOTE: Including the `self` and `alternates` links in each collection is strongly recommended. It is an oversight that no requirement has been included in the original release of the standard. To avoid a breaking change, this statement is only a recommendation in this document version.
 
 ==== Error situations
 
@@ -807,6 +820,8 @@ This document does not mandate any specific implementation approach for the `nex
 An implementation could use opaque links that are managed by the server. It is up to the server to determine how long these links can be de-referenced. Clients should be prepared to receive a 404 response.
 
 Another implementation approach is to use an implementation-specific parameter that specifies the index within the result set from which the server begins presenting results in the response, like the `startIndex` parameter that was used in <<WFS20,WFS 2.0>> (and which may be added again in additional parts of the OGC API Features series).
+
+The API will return no `next` link, if it has returned all selected features, and the server knows that. However, the server may not be aware that it has already returned all selected features. For example, if the request states `limit=10` and the query to the backend datastore returns 10 features, the server may not know, if there are more features or not (in most cases there will be more features), unless the total number of matches is also computed, which may be too costly. The server will then add the next link, and if there are no more features, dereferencing the next link will return am empty feature collection and no next link. This behavior is consistent with the statements above.
 
 Clients should not assume that paging is safe against changes to dataset while a client iterates through `next` links. If a server provides opaque links these could be safe and maintain the dataset state during the original request. Using a parameter for the start index, however, will not be safe.
 

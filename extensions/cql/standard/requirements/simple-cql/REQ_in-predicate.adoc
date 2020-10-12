@@ -6,9 +6,15 @@
 predicate as defined by the following BNF fragment:
 
 ----
-inPredicate = propertyName "IN" leftParen { characterLiteral \|
-                                            numericLiteral \|
-                                            geomLiteral \|
-                                            temporalLiteral } rightParen;
+inPredicate = propertyName "IN" leftParen inList rightParen;
+
+inList = listItem [ {comma listItem} ];
+
+listItem = characterLiteral | 
+           numericLiteral |
+           geomLiteral |
+           temporalLiteral |
+           function;
 ----
+
 |===

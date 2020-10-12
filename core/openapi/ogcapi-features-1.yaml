@@ -53,8 +53,11 @@ components:
       required: false
       schema:
         type: array
-        minItems: 4
-        maxItems: 6
+        oneOf:
+        - minItems: 4
+          maxItems: 4
+        - minItems: 6
+          maxItems: 6
         items:
           type: number
       style: form
@@ -243,8 +246,11 @@ components:
                   server whether only a single spatial geometry property is used to determine
                   the extent or all relevant geometries.
                 type: array
-                minItems: 4
-                maxItems: 6
+                oneOf:
+                - minItems: 4
+                  maxItems: 4
+                - minItems: 6
+                  maxItems: 6
                 items:
                   type: number
                 example:
@@ -271,7 +277,7 @@ components:
             interval:
               description: |-
                 One or more time intervals that describe the temporal extent of the dataset.
-                The value `null` is supported and indicates an open time intervall.
+                The value `null` is supported and indicates an open time interval.
                 In the Core only a single time interval is supported. Extensions may support
                 multiple intervals. If multiple intervals are provided, the union of the
                 intervals describes the temporal extent.

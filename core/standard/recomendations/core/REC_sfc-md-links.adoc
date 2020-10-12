@@ -1,0 +1,11 @@
+[[rec_core_sfc-md-links]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/sfc-md-links*
+^|A |A `200`-response SHOULD include the following links in the `links` property of the response:
+
+* a link to this response document (relation: `self`),
+* a link to the response document in every other media type supported by the server (relation: `alternate`).
+
+^|B |All links SHOULD include the `rel` and `type` link parameters.
+|===
