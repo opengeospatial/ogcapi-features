@@ -73,6 +73,10 @@ include::requirements/core/REQ_root-op.adoc[]
 
 include::requirements/core/REQ_root-success.adoc[]
 
+include::recomendations/core/REC_root-links.adoc[]
+
+NOTE: Version 1.0.0 of this specification did not include `self` and `alternate` links for the landing page while the links are required in other resources. The recommendation above has been added to encourage implementations to add these links on the landing page, too.
+
 [[schema_landingPage]]
 .link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/landingPage.yaml[Schema for the landing page]
 [source,YAML]
@@ -102,6 +106,8 @@ properties:
   "links": [
     { "href": "http://data.example.org/",
       "rel": "self", "type": "application/json", "title": "this document" },
+    { "href": "http://data.example.org/?f=html",
+      "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
     { "href": "http://data.example.org/api",
       "rel": "service-desc", "type": "application/vnd.oai.openapi+json;version=3.0", "title": "the API definition" },
     { "href": "http://data.example.org/api.html",
