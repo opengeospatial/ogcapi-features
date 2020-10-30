@@ -156,7 +156,7 @@ At the time of writing, it supports core, HTML, GML and GeoJSON (as well as othe
 * Feature collection single item: ([JSON](https://demo.pygeoapi.io/master/collections/utah_city_locations/items/Fairfield?f=json) ([HTML](https://demo.pygeoapi.io/master/collections/utah_city_locations/items/Fairfield?f=html))
 * Feature collection: bbox query: ([JSON](https://demo.pygeoapi.io/master/collections/lakes/items?bbox=-152,42,-52,84&f=json)) ([HTML](https://demo.pygeoapi.io/master/collections/lakes/items?bbox=-152,42,-52,84&f=html))
 
-The [British Geological Survey](https://www.bgs.ac.uk/) has a demo deployment running on Kubenetes at https://osgeodev.bgs.ac.uk/pygeoapi/
+The [British Geological Survey](https://www.bgs.ac.uk/) has a demo deployment running on Kubenetes at https://osgeodev.bgs.ac.uk/pygeoapi/. Code available @ https://github.com/BritishGeologicalSurvey/bgs-pygeoapi
 
 The Meteorological Service of Canada uses pygeoapi in production at https://geo.weather.gc.ca/geomet/features
 
