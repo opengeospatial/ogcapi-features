@@ -52,13 +52,17 @@ a stream, a county, etc.) that typically is described by a geometry plus other p
 This provides a stable, canonical URL to link to the 'thing'
 ([section 7.16](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_feature_)).
 
+See [here](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/crs) for
+an overview of the extensions to support additional coordinate reference systems beyond WGS 84.
+
 ## Using the standard
 
 The standard is on the OGC website:
 
 * [OGC API - Features - Part 1: Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)
+* [OGC API - Features - Part 2: Coordinate Reference Systems by Reference](http://docs.opengeospatial.org/is/18-058/18-058.html)
 
-A [PDF version](http://docs.opengeospatial.org/is/17-069r3/17-069r3.pdf) is available, too.
+PDF versions are available, too: [Part 1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.pdf) and [Part 2](http://docs.opengeospatial.org/is/18-058/18-058.pdf).
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
@@ -79,11 +83,8 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 ## Additional parts of OGC API - Features
 
-The OGC Features API SWG has identified the following extensions to Part 1 (Core)
-as the highest priority:
+The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 2: Coordinate Reference Systems by Reference (draft)](http://docs.opengeospatial.org/DRAFTS/18-058.html)
-  * Release candidate that is in the OGC approval process. See [here](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/crs) for an overview.
 * [OGC API - Features - Part 3: Common Query Language](http://docs.opengeospatial.org/DRAFTS/19-079.html)
   * Draft with multiple implementations. The grammar of the query language should be fairly stable, but the organisation into conformance classes and the JSON encoding need more review and discussion before the next phases (OGC Architecture Board Review, Public Review).
 * [OGC API - Features - Part 4: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
