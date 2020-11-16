@@ -77,6 +77,29 @@ extension might offer.
 
 include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators.adoc[]
 
+The following table maps the CQL temporal operator names with the temporal
+operator names defined in <<OGC16-071r3,Time Ontology in OWL>>.
+
+[#tldr,reftext='{table-caption} {counter:table-num}']
+[width=80%,cols="30,70",options="header"]
+|===
+|CQL Name |Time Ontology in OWL Name
+| AFTER |After
+| BEFORE |Before
+| BEGINS |Starts
+| BEGUNBY |StartedBy
+| TCONTAINS |Contains
+| DURING |During
+| ENDEDBY |FinishedBy
+| ENDS |Finishes
+| TEQUALS |Equals
+| MEETS |Meets
+| METBY |MetBy
+| TOVERLAPS |Overlaps
+| OVERLAPPEDBY |OverlappedBy
+| ANYINTERACTS | N/A
+|===
+
 The following diagram illustrates the meaning of the temporal operators.
 
 [#figure5]
