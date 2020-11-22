@@ -1,0 +1,21 @@
+[[rec_filter_queryables-schema]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/filter/queryables-schema*
+^|A |Each property SHOULD have a human readable title (`title`) and where
+necessary a description (`description`).
+^|B |Each property SHOULD have a single type (`type`).
+^|C |For string properties `minLength`, `maxLength`, `enum` and/or `pattern`
+SHOULD be provided, where applicable.
+^|D |For numeric properties `multipleOf`, `minimum`, `exclusiveMinimum`,
+`maximum`, `exclusiveMaximum` SHOULD be provided, where applicable.
+^|E |For integer properties that represent enumerated values, `enum` SHOULD
+be provided.
+^|F |For temporal properties that are a `string` literal, the appropriate
+format `date-time`, `date`, `time`, or `duration` SHOULD be provided.
+^|G |For spatial properties, the property SHOULD reference a well-known
+JSON schema of the geometry object. For geometry types according to the
+Simple Features standard the JSON Schema of the GeoJSON geometry object
+SHOULD be referenced; for example, `https://geojson.org/schema/Point.json`
+for a point geometry.
+|===

@@ -2,44 +2,13 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/filter/get-queryables-response*
-^|A |A successful execution of the operation SHALL be reported as a response wit
-h a HTTP status code `200`.
-^|B |The content of the response shall have the following characteristics (using an OpenAPI Specification 3.0 fragment):
+^|A |A successful execution of the operation SHALL be reported as a response
+with a HTTP status code `200`.
+^|B |For responses that use `application/schema+json` as the `Content-Type` of
+the response, the response SHALL have the following characteristics:
 
-[source,YAML]
-----
-type: object
-required:
-  - queryables
-properties:
-  queryables:
-    type: array
-    items:
-      type: object
-      required:
-      - queryable
-      - type
-      properties:
-         queryable:
-            description: the token that may be used in a CQL predicate
-            type: string
-         title:
-            description: a human readble title for the queryable
-            type: string
-         description:
-         description: a human-readable narrative describing the queryable
-            type: string
-         language:
-            description: the language used for the title and description
-            type: string
-            default:
-               - en
-         type:
-            description: the data type of the queryable
-            type: string
-         type-ref:
-            description: a reference to the formal definition of the type
-            type: string
-            format: url
-----
+* The property `$schema` is `http://json-schema.org/draft-07/schema#` or
+`https://json-schema.org/draft/2019-09/schema`.
+* The property `$id` is the URI of the resource without query parameters.
+* The `type` is `object` and each property is a queryable.
 |===
