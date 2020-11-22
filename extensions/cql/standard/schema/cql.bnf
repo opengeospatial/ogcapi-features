@@ -2,10 +2,11 @@
 # MODULE:  cql.bnf
 # PURPOSE: A BNF grammar for the Common Query Language (CQL).
 # HISTORY:
-# DATE         EMAIL                     DESCRIPTION
-# 13-SEP-2019  pvretano[at]cubewerx.com  Initial creation
-# 28-OCT-2019  pvretano[at]cubewerx.com  Initial checkin into github.
-#
+# DATE         EMAIL                                  DESCRIPTION
+# 13-SEP-2019  pvretano[at]cubewerx.com               Initial creation
+# 28-OCT-2019  pvretano[at]cubewerx.com               Initial checkin into github
+# 22-NOV-2020  pvretano[at]cubewerx.com               Updates based on issues
+# 22-NOV-2020  portele[at]interactive-instruments.de  Document restructuring
 
 #=============================================================================#
 # A CQL filter is a logically connected expression of one or more predicates.
@@ -18,16 +19,15 @@ booleanTerm = booleanFactor | booleanTerm "AND" booleanFactor;
 
 booleanFactor = ["NOT"] booleanPrimary;
 
-booleanPrimary = predicate 
+booleanPrimary = predicate
                | leftParen cqlFilter rightParen;
 
 #=============================================================================#
-#  CQL supports scalar, spatial, temporal and existence predicates.
+#  CQL supports scalar, spatial and temporal predicates.
 #=============================================================================#
 predicate = comparisonPredicate
-          | spatialPredicate 
+          | spatialPredicate
           | temporalPredicate
-          | existencePredicate
           | inPredicate;
 
 #=============================================================================#
@@ -45,7 +45,7 @@ binaryComparisonPredicate = scalarExpression comparisonOperator scalarExpression
 
 propertyIsLikePredicate =  scalarExpression "LIKE" regularExpression;
 
-propertyIsBetweenPredicate = scalarExpression "BETWEEN" 
+propertyIsBetweenPredicate = scalarExpression "BETWEEN"
                              scalarExpression "AND" scalarExpression;
 
 propertyIsNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
@@ -74,7 +74,7 @@ gteq = gt eq;
 lteq = lt eq;
 
 #=============================================================================#
-# A spatial predicate evaluates if two spatial expressions satisfy the 
+# A spatial predicate evaluates if two spatial expressions satisfy the
 # specified spatial operator.
 #=============================================================================#
 spatialPredicate =  spatialOperator leftParen geomExpression comma geomExpression rightParen;
@@ -87,7 +87,7 @@ spatialOperator = "EQUALS" | "DISJOINT" | "TOUCHES" | "WITHIN" | "OVERLAPS"
                 | "CROSSES" | "INTERSECTS" | "CONTAINS";
 
 # A geometric expression is a property name of a geometry-valued property,
-# a geometric literal (expressed as WKT) or a function that returns a 
+# a geometric literal (expressed as WKT) or a function that returns a
 # geometric value.
 #
 geomExpression = propertyName
@@ -95,7 +95,7 @@ geomExpression = propertyName
                | function;
 
 #=============================================================================#
-# A temporal predicate evaluates if two temporal expressions satisfy the 
+# A temporal predicate evaluates if two temporal expressions satisfy the
 # specified temporal operator.
 #=============================================================================#
 temporalPredicate = temporalExpression temporalOperator
@@ -111,22 +111,17 @@ temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "TCONTAINS"
                  | "INTERSECTS";
 
 #=============================================================================#
-# The existence predicate evalues whether the specified property exists
-# in the current context. This predicate was added to accomodate the fact
-# that OAPIF feature collections (and likely other specification) are
-# heterogeneous with respect to schema.
+# The IN predicate
 #=============================================================================#
-existencePredicate = propertyName "EXISTS"
-                   | propertyName "DOES" "NOT" "EXIST";
+inPredicate = propertyName "IN" leftParen inList rightParen;
 
-#=============================================================================#
-# The IN predicate 
-#=============================================================================#
-inPredicate = propertyName "IN" leftParen { characterLiteral | 
-                                            numericLiteral |
-                                            geomLiteral |
-                                            temporalLiteral |
-                                            function } rightParen;
+inList = listItem [ {comma listItem} ];
+
+listItem = characterLiteral |
+           numericLiteral |
+           geomLiteral |
+           temporalLiteral |
+           function;
 
 #=============================================================================#
 # Definition of a FUNCTION
@@ -159,7 +154,7 @@ arithmeticOperand = propertyName
                    | function;
 
 #=============================================================================#
-# Definition of NUMERIC literals 
+# Definition of NUMERIC literals
 #=============================================================================#
 numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
 
@@ -183,7 +178,7 @@ unsignedInteger = {digit};
 sign = plusSign | minusSign;
 
 #=============================================================================#
-# Definition of CHARACTER literals 
+# Definition of CHARACTER literals
 #=============================================================================#
 characterLiteral = characterStringLiteral
                  | bitStringLiteral
@@ -191,7 +186,7 @@ characterLiteral = characterStringLiteral
 
 characterStringLiteral = quote [ {character} ] quote;
 
-bitStringLiteral = "B" quote [ {bit} ] quote; 
+bitStringLiteral = "B" quote [ {bit} ] quote;
 
 hexStringLiteral = "X" quote [ {hexit} ] quote;
 
@@ -209,7 +204,7 @@ quoteQuote = quote quote;
 
 # NOTE: This production is supposed to be any alphabetic character from
 #       the character set.
-# 
+#
 #       I use the A-Z, a-z range here as placeholders because:
 #       (a) I have no idea how to indicate that alpha can be
 #           any alphabetic UTF-8 character
@@ -227,7 +222,7 @@ digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 specialCharacter = percent | ampersand | leftParen | rightParen | asterisk
                  | plusSign | comma | minusSign | period | solidus | colon
                  | semicolon | lt | gt | eq | questionMark | underscore
-                 | verticalBar | doubleQuote ;
+                 | verticalBar | doubleQuote | dotdot;
 
 octothorp = "#";
 
@@ -257,6 +252,8 @@ minusSign = "-";
 
 period = ".";
 
+dotdot = "..";
+
 solidus = "/";
 
 colon = ":";
@@ -278,7 +275,7 @@ bit = "0" | "1";
 hexit = digit | "A" | "B" | "C" | "D" | "E" | "F" | "a" | "b" | "c" | "d" | "e" | "f";
 
 #=============================================================================#
-# Definition of TEMPORAL literals 
+# Definition of TEMPORAL literals
 #
 # NOTE: Is the fact the time zones are supported too complicated for a
 #       simple CQL?  Perhaps the "core" of CQL should just support UTC.
@@ -287,9 +284,14 @@ temporalLiteral = instant | interval;
 
 instant = fullDate | fullDate "T" utcTime;
 
-interval = instantInInterval "/" instantInInterval;
-
-instantInInterval = ".." | "" | instant;
+interval = solidus |
+           solidus dotdot |
+           dotdot solidus |
+           instant solidus |
+           solidus instant |
+           instant solidus dotdot |
+           dotdot solidus instant |
+           instant solidus instant;
 
 fullDate   = dateYear "-" dateMonth "-" dateDay;
 
@@ -310,7 +312,7 @@ timeMinute = digit digit;
 timeSecond = digit digit [period digit {digit}];
 
 #=============================================================================#
-# Definition of GEOMETRIC literals 
+# Definition of GEOMETRIC literals
 #
 # NOTE: This is basically BNF that define WKT encoding; it would be nice
 #       to instead reference some normative BNF for WKT.
@@ -323,7 +325,7 @@ geomLiteral = pointTaggedText
             | multipolygonTaggedText
             | geometryCollectionTaggedText
             | envelopeTaggedText;
- 
+
 pointTaggedText = "POINT" pointText;
 
 linestringTaggedText = "LINESTRING" lineStringText;
@@ -337,7 +339,7 @@ multilinestringTaggedText = "MULTILINESTRING" multiLineStringText;
 multipolygonTaggedText = "MULTIPOLYGON" multiPolygonText;
 
 geometryCollectionTaggedText = "GEOMETRYCOLLECTION" geometryCollectionText;
-  
+
 pointText = leftParen point rightParen;
 
 point = xCoord yCoord [zCoord];
@@ -349,20 +351,20 @@ yCoord = signedNumericLiteral;
 zCoord = signedNumericLiteral;
 
 lineStringText = leftParen point {comma point} rightParen;
-                     
+
 polygonText =  leftParen lineStringText {comma lineStringText} rightParen;
 
 multiPointText = leftParen pointText {comma pointText} rightParen;
 
 multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen;
-                          
+
 multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
 
 geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
 
 envelopeTaggedText = "ENVELOPE" envelopeText;
 
-envelopeText = leftParen westBoundLon comma eastBoundLon comma northBoundLat comma southBoundLat [comma minElev comma maxElev] rightParen; 
+envelopeText = leftParen westBoundLon comma eastBoundLon comma northBoundLat comma southBoundLat [comma minElev comma maxElev] rightParen;
 
 westBoundLon = signedNumericLiteral;
 

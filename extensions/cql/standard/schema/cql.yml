@@ -1,0 +1,350 @@
+---
+openapi: 3.0.3
+info:
+  title: Schema of Common Query Language (CQL)
+  description: 'For use in OpenAPI 3.0 documents'
+  version: '1.0.0-SNAPSHOT'
+paths: {}
+components:
+  schemas:
+    predicates:
+      type: object
+      allOf:
+      - "$ref": "#/components/schemas/logicalExpression"
+      - "$ref": "#/components/schemas/comparisonExpressions"
+      - "$ref": "#/components/schemas/spatialExpressions"
+      - "$ref": "#/components/schemas/temporalExpressions"
+      minProperties: 1
+      maxProperties: 1
+    logicalExpression:
+      type: object
+      properties:
+        and:
+          "$ref": "#/components/schemas/and"
+        or:
+          "$ref": "#/components/schemas/or"
+        not:
+          "$ref": "#/components/schemas/not"
+      minProperties: 1
+      maxProperties: 1
+    comparisonExpressions:
+      type: object
+      properties:
+        eq:
+          "$ref": "#/components/schemas/eq"
+        lt:
+          "$ref": "#/components/schemas/lt"
+        gt:
+          "$ref": "#/components/schemas/gt"
+        lte:
+          "$ref": "#/components/schemas/lte"
+        gte:
+          "$ref": "#/components/schemas/gte"
+        between:
+          "$ref": "#/components/schemas/between"
+        like:
+          "$ref": "#/components/schemas/like"
+        in:
+          "$ref": "#/components/schemas/in"
+      minProperties: 1
+      maxProperties: 1
+    spatialExpressions:
+      type: object
+      properties:
+        equals:
+          "$ref": "#/components/schemas/equals"
+        disjoint:
+          "$ref": "#/components/schemas/disjoint"
+        touches:
+          "$ref": "#/components/schemas/touches"
+        within:
+          "$ref": "#/components/schemas/within"
+        overlaps:
+          "$ref": "#/components/schemas/overlaps"
+        crosses:
+          "$ref": "#/components/schemas/crosses"
+        intersects:
+          "$ref": "#/components/schemas/intersects"
+        contains:
+          "$ref": "#/components/schemas/contains"
+      minProperties: 1
+      maxProperties: 1
+    temporalExpressions:
+      type: object
+      properties:
+        after:
+          "$ref": "#/components/schemas/after"
+        before:
+          "$ref": "#/components/schemas/before"
+        begins:
+          "$ref": "#/components/schemas/begins"
+        begunby:
+          "$ref": "#/components/schemas/begunby"
+        tcontains:
+          "$ref": "#/components/schemas/tcontains"
+        during:
+          "$ref": "#/components/schemas/during"
+        endedby:
+          "$ref": "#/components/schemas/endedby"
+        ends:
+          "$ref": "#/components/schemas/ends"
+        tequals:
+          "$ref": "#/components/schemas/tequals"
+        meets:
+          "$ref": "#/components/schemas/meets"
+        metby:
+          "$ref": "#/components/schemas/metby"
+        toverlaps:
+          "$ref": "#/components/schemas/toverlaps"
+        overlappedby:
+          "$ref": "#/components/schemas/overlappedby"
+      minProperties: 1
+      maxProperties: 1
+    and:
+      "$ref": "#/components/schemas/booleanOperands"
+    or:
+      "$ref": "#/components/schemas/booleanOperands"
+    not:
+      "$ref": "#/components/schemas/predicates"
+    eq:
+      "$ref": "#/components/schemas/scalarOperands"
+    lt:
+      "$ref": "#/components/schemas/scalarOperands"
+    gt:
+      "$ref": "#/components/schemas/scalarOperands"
+    lte:
+      "$ref": "#/components/schemas/scalarOperands"
+    gte:
+      "$ref": "#/components/schemas/scalarOperands"
+    between:
+      type: object
+      properties:
+        property:
+          type: string
+        lower:
+          "$ref": "#/components/schemas/scalarLiteral"
+        upper:
+          "$ref": "#/components/schemas/scalarLiteral"
+      required:
+      - property
+      - lower
+      - upper
+    like:
+      type: object
+      properties:
+        wildcard:
+          type: string
+          default: "%"
+        singleChar:
+          type: string
+          default: _
+        escape:
+          type: string
+          default: "\\"
+        nocase:
+          type: boolean
+          default: true
+        property:
+          type: string
+        value:
+          "$ref": "#/components/schemas/scalarLiteral"
+    in:
+      type: object
+      properties:
+        nocase:
+          type: boolean
+          default: true
+        property:
+          type: string
+        values:
+          type: array
+          items:
+            "$ref": "#/components/schemas/scalarLiteral"
+    equals:
+      "$ref": "#/components/schemas/spatialOperands"
+    disjoint:
+      "$ref": "#/components/schemas/spatialOperands"
+    touches:
+      "$ref": "#/components/schemas/spatialOperands"
+    within:
+      "$ref": "#/components/schemas/spatialOperands"
+    overlaps:
+      "$ref": "#/components/schemas/spatialOperands"
+    crosses:
+      "$ref": "#/components/schemas/spatialOperands"
+    intersects:
+      "$ref": "#/components/schemas/spatialOperands"
+    contains:
+      "$ref": "#/components/schemas/spatialOperands"
+    after:
+      "$ref": "#/components/schemas/temporalOperands"
+    before:
+      "$ref": "#/components/schemas/temporalOperands"
+    begins:
+      "$ref": "#/components/schemas/temporalOperands"
+    begunby:
+      "$ref": "#/components/schemas/temporalOperands"
+    tcontains:
+      "$ref": "#/components/schemas/temporalOperands"
+    during:
+      "$ref": "#/components/schemas/temporalOperands"
+    endedby:
+      "$ref": "#/components/schemas/temporalOperands"
+    ends:
+      "$ref": "#/components/schemas/temporalOperands"
+    tequals:
+      "$ref": "#/components/schemas/temporalOperands"
+    meets:
+      "$ref": "#/components/schemas/temporalOperands"
+    metby:
+      "$ref": "#/components/schemas/temporalOperands"
+    toverlaps:
+      "$ref": "#/components/schemas/temporalOperands"
+    overlappedby:
+      "$ref": "#/components/schemas/temporalOperands"
+    anyinteracts:
+      "$ref": "#/components/schemas/temporalOperands"
+    tintersects:
+      "$ref": "#/components/schemas/temporalOperands"
+    booleanOperands:
+      type: array
+      items:
+        "$ref": "#/components/schemas/predicates"
+        minItems: 2
+    arithmeticOperands:
+      type: object
+      properties:
+        property:
+          type: string
+        function:
+          "$ref": "#/components/schemas/function"
+        value:
+          type: number
+        "+":
+          "$ref": "#/components/schemas/add"
+        "-":
+          "$ref": "#/components/schemas/sub"
+        "*":
+          "$ref": "#/components/schemas/mul"
+        "/":
+          "$ref": "#/components/schemas/div"
+      minProperties: 2
+      maxProperties: 2
+    add:
+      "$ref": "#/components/schemas/arithmeticOperands"
+    sub:
+      "$ref": "#/components/schemas/arithmeticOperands"
+    mul:
+      "$ref": "#/components/schemas/arithmeticOperands"
+    div:
+      "$ref": "#/components/schemas/arithmeticOperands"
+    scalarOperands:
+      type: object
+      properties:
+        property:
+          type: string
+        function:
+          "$ref": "#/components/schemas/function"
+        value:
+          "$ref": "#/components/schemas/scalarLiteral"
+        "+":
+          "$ref": "#/components/schemas/add"
+        "-":
+          "$ref": "#/components/schemas/sub"
+        "*":
+          "$ref": "#/components/schemas/mul"
+        "/":
+          "$ref": "#/components/schemas/div"
+      minProperties: 2
+      maxProperties: 2
+    spatialOperands:
+      type: object
+      properties:
+        property:
+          type: string
+        function:
+          "$ref": "#/components/schemas/function"
+        value:
+          "$ref": "#/components/schemas/geometryLiteral"
+      minProperties: 2
+      maxProperties: 2
+    temporalOperands:
+      type: object
+      properties:
+        property:
+          type: string
+        function:
+          "$ref": "#/components/schemas/function"
+        value:
+          "$ref": "#/components/schemas/temporalLiteral"
+      minProperties: 2
+      maxProperties: 2
+    function:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: array
+          items:
+            oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+            - "$ref": "#/components/schemas/functionObjectArgument"
+    functionObjectArgument:
+      type: object
+      properties:
+        property:
+          type: string
+        function:
+          "$ref": "#/components/schemas/function"
+        geometry:
+          "$ref": "#/components/schemas/geometryLiteral"
+        bbox:
+          "$ref": "#/components/schemas/bbox"
+        temporalValue:
+          "$ref": "#/components/schemas/temporalLiteral"
+        "+":
+          "$ref": "#/components/schemas/add"
+        "-":
+          "$ref": "#/components/schemas/sub"
+        "*":
+          "$ref": "#/components/schemas/mul"
+        "/":
+          "$ref": "#/components/schemas/div"
+    scalarLiteral:
+      oneOf:
+      - type: string
+      - type: number
+      - type: boolean
+    geometryLiteral:
+      type: object
+    bbox:
+      type: array
+      items:
+        type: number
+        oneOf:
+        - minItems: 4
+          maxItems: 4
+        - minItems: 6
+          maxItems: 6
+    envelopeLiteral:
+      type: object
+      properties:
+        bbox:
+          "$ref": "#/components/schemas/bbox"
+    temporalLiteral:
+      oneOf:
+      - "$ref": "#/components/schemas/timeLiteral"
+      - "$ref": "#/components/schemas/periodLiteral"
+    timeLiteral:
+      type: string
+      pattern: "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9](T[0-2][0-9]:[0-5][0-9]:[0-5][0-9](.[0-9]*)?)?"
+    periodLiteral:
+      type: array
+      items:
+        type: string
+        pattern: "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9](T[0-2][0-9]:[0-5][0-9]:[0-5][0-9](.[0-9]*)?)?"
+        minItems: 2
+        maxItems: 2
