@@ -24,11 +24,20 @@ style: form
 explode: false
 ----
 
-Use a bounding box with four numbers in all requests:
+Use a bounding box with four numbers in all requests, if the collection has spatial geometries in 2D:
 
 * Lower left corner, WGS 84 longitude
 * Lower left corner, WGS 84 latitude
 * Upper right corner, WGS 84 longitude
 * Upper right corner, WGS 84 latitude
+
+Use a bounding box with six numbers in all requests, if the collection has spatial geometries in 3D:
+
+* Lower left corner, WGS 84 longitude
+* Lower left corner, WGS 84 latitude
+* Minimum value, WGS 84 ellipsoidal height
+* Upper right corner, WGS 84 longitude
+* Upper right corner, WGS 84 latitude
+* Maximum value, WGS 84 ellipsoidal height
 
 |===

@@ -1,6 +1,6 @@
 # OGC API - Features - Part 2: Coordinate Reference Systems by Reference
 
-This folder contains the content for the standard OGC API - Features - Part 2: Coordinate Reference Systems by Reference.
+This folder contains the content for the standard [OGC API - Features - Part 2: Coordinate Reference Systems by Reference](http://docs.opengeospatial.org/is/18-058/18-058.html).
 
 # Overview
 

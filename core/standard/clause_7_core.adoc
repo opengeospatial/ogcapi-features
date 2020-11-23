@@ -73,6 +73,10 @@ include::requirements/core/REQ_root-op.adoc[]
 
 include::requirements/core/REQ_root-success.adoc[]
 
+include::recomendations/core/REC_root-links.adoc[]
+
+NOTE: Version 1.0.0 of this specification did not include `self` and `alternate` links for the landing page while the links are required in other resources. The recommendation above has been added to encourage implementations to add these links on the landing page, too.
+
 [[schema_landingPage]]
 .link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/landingPage.yaml[Schema for the landing page]
 [source,YAML]
@@ -102,6 +106,8 @@ properties:
   "links": [
     { "href": "http://data.example.org/",
       "rel": "self", "type": "application/json", "title": "this document" },
+    { "href": "http://data.example.org/?f=html",
+      "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
     { "href": "http://data.example.org/api",
       "rel": "service-desc", "type": "application/vnd.oai.openapi+json;version=3.0", "title": "the API definition" },
     { "href": "http://data.example.org/api.html",
@@ -463,9 +469,13 @@ properties:
                 * Upper right corner, coordinate axis 2
                 * Maximum value, coordinate axis 3 (optional)
 
-                The coordinate reference system of the values is WGS 84 longitude/latitude
-                (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
-                reference system is specified in `crs`.
+                If the value consists of four numbers, the coordinate reference system is
+                WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84)
+                unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+
+                If the value consists of six numbers, the coordinate reference system is
+                WGS 84 longitude/latitude/height (http://www.opengis.net/def/crs/OGC/0/CRS84h)
+                unless a different coordinate reference system is specified in a parameter `bbox-crs`.
 
                 For WGS 84 longitude/latitude the values are in most cases the sequence of
                 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
@@ -495,12 +505,14 @@ properties:
             description: >-
               Coordinate reference system of the coordinates in the spatial extent
               (property `bbox`). The default reference system is WGS 84 longitude/latitude.
-              In the Core this is the only supported coordinate reference system.
+              In the Core the only other supported coordinate reference system is
+              WGS 84 longitude/latitude/height for coordinates with height.
               Extensions may support additional coordinate reference systems and add
               additional enum values.
             type: string
             enum:
               - 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
+              - 'http://www.opengis.net/def/crs/OGC/0/CRS84h'
             default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
       temporal:
         description: >-
