@@ -364,7 +364,7 @@ geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
 
 envelopeTaggedText = "ENVELOPE" envelopeText;
 
-envelopeText = leftParen westBoundLon comma eastBoundLon comma northBoundLat comma southBoundLat [comma minElev comma maxElev] rightParen;
+envelopeText = leftParen westBoundLon comma southBoundLat comma [minElev comma] eastBoundLon comma northBoundLat [comma maxElev] rightParen; 
 
 westBoundLon = signedNumericLiteral;
 
