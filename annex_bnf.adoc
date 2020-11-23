@@ -1,0 +1,384 @@
+[appendix]
+:appendix-caption: Annex
+
+== CQL BNF (Normative)
+
+----
+#
+# MODULE:  cql.bnf
+# PURPOSE: A BNF grammar for the Common Query Language (CQL).
+# HISTORY:
+# DATE         EMAIL                     DESCRIPTION
+# 13-SEP-2019  pvretano[at]cubewerx.com  Initial creation
+# 28-OCT-2019  pvretano[at]cubewerx.com  Initial checkin into github.
+#
+
+#=============================================================================#
+# A CQL filter is a logically connected expression of one or more predicates.
+#=============================================================================#
+cqlFilter = booleanValueExpression;
+
+booleanValueExpression = booleanTerm | booleanValueExpression "OR" booleanTerm;
+
+booleanTerm = booleanFactor | booleanTerm "AND" booleanFactor;
+
+booleanFactor = ["NOT"] booleanPrimary;
+
+booleanPrimary = predicate 
+               | leftParen cqlFilter rightParen;
+
+#=============================================================================#
+#  CQL supports scalar, spatial, temporal and existence predicates.
+#=============================================================================#
+predicate = comparisonPredicate
+          | spatialPredicate 
+          | temporalPredicate
+          | existencePredicate
+          | inPredicate;
+
+#=============================================================================#
+# A comparison predicate evaluates if two scalar expression statisfy the
+# specified comparison operator.  The comparion operators include an operator
+# to evaluate regular expressions (LIKE), a range evaluation operator and
+# an operator to test if a scalar expression is NULL or not.
+#=============================================================================#
+comparisonPredicate = binaryComparisonPredicate
+                    | propertyIsLikePredicate
+                    | propertyIsBetweenPredicate
+                    | propertyIsNullPredicate;
+
+binaryComparisonPredicate = scalarExpression comparisonOperator scalarExpression;
+
+propertyIsLikePredicate =  scalarExpression "LIKE" regularExpression;
+
+propertyIsBetweenPredicate = scalarExpression "BETWEEN" 
+                             scalarExpression "AND" scalarExpression;
+
+propertyIsNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
+
+#
+# A scalar expression is the property name, a chracter literal, a numeric
+# literal or a function/method invocation that returns a scalar value.
+#
+scalarExpression = propertyName
+                 | characterLiteral
+                 | numericLiteral
+                 | function
+                 | arithmeticExpression;
+
+# NOTE: This is just a place holder for a regular expression
+#       We want to be able to say stuff like "<prop> LIKE 'Toronto%'" where
+#       the '%' character means "match zero or more characters".
+regularExpression = characterLiteral;
+
+comparisonOperator = eq | neq | lt | gt | lteq | gteq;
+
+neq = lt gt;
+
+gteq = gt eq;
+
+lteq = lt eq;
+
+#=============================================================================#
+# A spatial predicate evaluates if two spatial expressions satisfy the 
+# specified spatial operator.
+#=============================================================================#
+spatialPredicate =  spatialOperator leftParen geomExpression comma geomExpression rightParen;
+
+# NOTE: The buffer operators (DWITHIN and BEYOND) are not included because
+#       these are outside the scope of a "simple" core for CQL.  These
+#       can be added as extensions.
+#
+spatialOperator = "EQUALS" | "DISJOINT" | "TOUCHES" | "WITHIN" | "OVERLAPS"
+                | "CROSSES" | "INTERSECTS" | "CONTAINS";
+
+# A geometric expression is a property name of a geometry-valued property,
+# a geometric literal (expressed as WKT) or a function that returns a 
+# geometric value.
+#
+geomExpression = propertyName
+               | geomLiteral
+               | function;
+
+#=============================================================================#
+# A temporal predicate evaluates if two temporal expressions satisfy the 
+# specified temporal operator.
+#=============================================================================#
+temporalPredicate = temporalExpression temporalOperator
+                    temporalExpression;
+
+temporalExpression = propertyName
+                   | temporalLiteral
+                   | function;
+
+temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "TCONTAINS"
+                 | "DURING" | "ENDEDBY" | "ENDS" | "TEQUALS" | "MEETS"
+                 | "METBY" | "TOVERLAPS" | "OVERLAPPEDBY" | "ANYINTERACTS"
+                 | "INTERSECTS";
+
+#=============================================================================#
+# The existence predicate evalues whether the specified property exists
+# in the current context. This predicate was added to accomodate the fact
+# that OAPIF feature collections (and likely other specification) are
+# heterogeneous with respect to schema.
+#=============================================================================#
+existencePredicate = propertyName "EXISTS"
+                   | propertyName "DOES" "NOT" "EXIST";
+
+#=============================================================================#
+# The IN predicate 
+#=============================================================================#
+inPredicate = propertyName "IN" leftParen { characterLiteral | 
+                                            numericLiteral |
+                                            geomLiteral |
+                                            temporalLiteral |
+                                            function } rightParen;
+
+#=============================================================================#
+# Definition of a FUNCTION
+# NOTE: How do we advertise which functions an implementation offer?
+#       In the OpenAPI document I suppose!
+#=============================================================================#
+function = identifier {argumentList};
+
+argumentList = leftParen [positionalArgument]  rightParen;
+
+positionalArgument = argument [ { comma argument } ];
+
+argument = characterLiteral
+         | numericLiteral
+         | geomLiteral
+         | propertyName
+         | arithmeticExpression;
+
+#=============================================================================#
+# An arithemtic expression is an expression composed of an arithmetic
+# operand (a property name, a number or a function that returns a number),
+# an arithmetic operators (+,-,*,/) and another arithmetic operand.
+#=============================================================================#
+arithmeticExpression = arithmeticOperand arithmeticOperator arithmeticOperand;
+
+arithmeticOperator = plusSign | minusSign | asterisk | solidus;
+
+arithmeticOperand = propertyName
+                   | numericLiteral
+                   | function;
+
+#=============================================================================#
+# Definition of NUMERIC literals 
+#=============================================================================#
+numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
+
+unsignedNumericLiteral = exactNumericLiteral | approximateNumericLiteral;
+
+signedNumericLiteral = [sign] exactNumericLiteral | approximateNumericLiteral;
+
+exactNumericLiteral = unsignedInteger [ period [ unsignedInteger ] ]
+                      | period unsignedInteger;
+
+approximateNumericLiteral = mantissa "E" exponent;
+
+mantissa = exactNumericLiteral;
+
+exponent = signedInteger;
+
+signedInteger = [ sign ] unsignedInteger;
+
+unsignedInteger = {digit};
+
+sign = plusSign | minusSign;
+
+#=============================================================================#
+# Definition of CHARACTER literals 
+#=============================================================================#
+characterLiteral = characterStringLiteral
+                 | bitStringLiteral
+                 | hexStringLiteral;
+
+characterStringLiteral = quote [ {character} ] quote;
+
+bitStringLiteral = "B" quote [ {bit} ] quote; 
+
+hexStringLiteral = "X" quote [ {hexit} ] quote;
+
+propertyName = identifier;
+
+identifier = identifierStart [ {identifierPart} ];
+
+identifierStart = alpha [{octothorp|dollar|underscore|alpha|digit}];
+
+identifierPart = alpha | digit;
+
+character = alpha | digit | specialCharacter | quoteQuote;
+
+quoteQuote = quote quote;
+
+# NOTE: This production is supposed to be any alphabetic character from
+#       the character set.
+# 
+#       I use the A-Z, a-z range here as placeholders because:
+#       (a) I have no idea how to indicate that alpha can be
+#           any alphabetic UTF-8 character
+#       (b) the validators I am using can only handle ASCII chars
+#
+alpha = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" |
+        "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" |
+        "W" | "X" | "Y" | "Z" |
+        "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" |
+        "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" |
+        "w" | "x" | "y" | "z";
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+
+specialCharacter = percent | ampersand | leftParen | rightParen | asterisk
+                 | plusSign | comma | minusSign | period | solidus | colon
+                 | semicolon | lt | gt | eq | questionMark | underscore
+                 | verticalBar | doubleQuote ;
+
+octothorp = "#";
+
+dollar = "$";
+
+underscore = "_";
+
+doubleQuote = "\"";
+
+percent = "%";
+
+ampersand = "&";
+
+quote = "'";
+
+leftParen = "(";
+
+rightParen = ")";
+
+asterisk = "*";
+
+plusSign = "+";
+
+comma = ",";
+
+minusSign = "-";
+
+period = ".";
+
+solidus = "/";
+
+colon = ":";
+
+semicolon = ";";
+
+lt = "<";
+
+eq = "=";
+
+gt = ">";
+
+questionMark = "?";
+
+verticalBar = "|";
+
+bit = "0" | "1";
+
+hexit = digit | "A" | "B" | "C" | "D" | "E" | "F" | "a" | "b" | "c" | "d" | "e" | "f";
+
+#=============================================================================#
+# Definition of TEMPORAL literals 
+#
+# NOTE: Is the fact the time zones are supported too complicated for a
+#       simple CQL?  Perhaps the "core" of CQL should just support UTC.
+#=============================================================================#
+temporalLiteral = instant | interval;
+
+instant = fullDate | fullDate "T" utcTime;
+
+interval = instantInInterval "/" instantInInterval;
+
+instantInInterval = ".." | "" | instant;
+
+fullDate   = dateYear "-" dateMonth "-" dateDay;
+
+dateYear   = digit digit digit digit;
+
+dateMonth  = digit digit;
+
+dateDay    = digit digit;
+
+utcTime  = timeHour ":" timeMinute ":" timeSecond [timeZoneOffset];
+
+timeZoneOffset = "Z" | sign timeHour;
+
+timeHour   = digit digit;
+
+timeMinute = digit digit;
+
+timeSecond = digit digit [period digit {digit}];
+
+#=============================================================================#
+# Definition of GEOMETRIC literals 
+#
+# NOTE: This is basically BNF that define WKT encoding; it would be nice
+#       to instead reference some normative BNF for WKT.
+#=============================================================================#
+geomLiteral = pointTaggedText
+            | linestringTaggedText
+            | polygonTaggedText
+            | multipointTaggedText
+            | multilinestringTaggedText
+            | multipolygonTaggedText
+            | geometryCollectionTaggedText
+            | envelopeTaggedText;
+ 
+pointTaggedText = "POINT" pointText;
+
+linestringTaggedText = "LINESTRING" lineStringText;
+
+polygonTaggedText = "POLYGON" polygonText;
+
+multipointTaggedText = "MULTIPOINT" multiPointText;
+
+multilinestringTaggedText = "MULTILINESTRING" multiLineStringText;
+
+multipolygonTaggedText = "MULTIPOLYGON" multiPolygonText;
+
+geometryCollectionTaggedText = "GEOMETRYCOLLECTION" geometryCollectionText;
+  
+pointText = leftParen point rightParen;
+
+point = xCoord yCoord [zCoord];
+
+xCoord = signedNumericLiteral;
+
+yCoord = signedNumericLiteral;
+
+zCoord = signedNumericLiteral;
+
+lineStringText = leftParen point {comma point} rightParen;
+                     
+polygonText =  leftParen lineStringText {comma lineStringText} rightParen;
+
+multiPointText = leftParen pointText {comma pointText} rightParen;
+
+multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen;
+                          
+multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
+
+geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
+
+envelopeTaggedText = "ENVELOPE" envelopeText;
+
+envelopeText = leftParen westBoundLon comma southBoundLat comma [minElev comma] eastBoundLon comma northBoundLat [comma maxElev] rightParen; 
+
+westBoundLon = signedNumericLiteral;
+
+eastBoundLon = signedNumericLiteral;
+
+northBoundLat = signedNumericLiteral;
+
+southBoundLat = signedNumericLiteral;
+
+minElev = signedNumericLiteral;
+
+maxElev = signedNumericLiteral;
+----
