@@ -1,303 +1,793 @@
 {
    "$schema": "https://json-schema.org/draft/2019-09/schema",
    "$ref": "#/$defs/predicates",
-
    "$defs": {
+      "$comment": "=======================================================",
+      "$comment": "=  PREDICATES                                         =",
+      "$comment": "=======================================================",
+      "predicates": {
+         "type": "object",
+         "oneOf": [
+            { "$ref": "#/$defs/logicalExpression" },
+            { "$ref": "#/$defs/comparisonExpression" },
+            { "$ref": "#/$defs/spatialExpression" },
+            { "$ref": "#/$defs/temporalExpression" }
+         ]
+      },
 
-     "predicates": {
-       "type": "object",
-       "allOf": [
-           { "$ref": "#/$defs/logicalExpression" },
-           { "$ref": "#/$defs/comparisonExpressions" },
-           { "$ref": "#/$defs/spatialExpressions" },
-           { "$ref": "#/$defs/temporalExpressions" }
-       ],
-       "minProperties": 1,
-       "maxProperties": 1
-     },
+      "$comment": "=======================================================",
+      "$comment": "=  LOGICAL EXPRESSIONS                                =",
+      "$comment": "=======================================================",
 
-     "logicalExpression" : {
-       "type": "object",
-       "properties": {
-           "and": {"$ref": "#/$defs/and" },
-           "or": {"$ref": "#/$defs/or" },
-           "not": {"$ref": "#/$defs/not" }
-       },
-       "minProperties": 1,
-       "maxProperties": 1
-     },
+      "logicalExpression": {
+         "oneOf": [
+            { "$ref": "#/$defs/andExpression" },
+            { "$ref": "#/$defs/orExpression" },
+            { "$ref": "#/$defs/notExpression" }
+         ]
+      },
 
-     "comparisonExpressions" : {
-       "type": "object",
-       "properties": {
-           "eq": {"$ref": "#/$defs/eq"},
-           "lt": {"$ref": "#/$defs/lt"},
-           "gt": {"$ref": "#/$defs/gt"},
-           "lte": {"$ref": "#/$defs/lte"},
-           "gte": {"$ref": "#/$defs/gte"},
+      "andExpression": {
+         "type": "object",
+         "required": ["and"],
+         "properties": {
+            "and": {"$ref": "#/$defs/and" }
+         }
+      },
 
-           "between": {"$ref": "#/$defs/between"},
+      "orExpression": {
+         "type": "object",
+         "required": ["or"],
+         "properties": {
+            "or": {"$ref": "#/$defs/or" }
+         }
+      },
 
-           "like": { "$ref": "#/$defs/like" },
-           "in": { "$ref": "#/$defs/in" }
-       },
-       "minProperties": 1,
-       "maxProperties": 1
-     },
+      "notExpression": {
+         "type": "object",
+         "required": ["not"],
+         "properties": {
+            "not": {"$ref": "#/$defs/not" }
+         }
+      },
 
-     "spatialExpressions" : {
-       "type": "object",
-       "properties": {
-           "equals": {"$ref": "#/$defs/equals"},
-           "disjoint": {"$ref": "#/$defs/disjoint"},
-           "touches": {"$ref": "#/$defs/touches"},
-           "within": {"$ref": "#/$defs/within"},
-           "overlaps": {"$ref": "#/$defs/overlaps"},
-           "crosses": {"$ref": "#/$defs/crosses"},
-           "intersects": {"$ref": "#/$defs/intersects"},
-           "contains": {"$ref": "#/$defs/contains"}
-       },
-       "minProperties": 1,
-       "maxProperties": 1
-     },
+      "and": { "$ref": "#/$defs/booleanOperands" },
+      "or":  { "$ref": "#/$defs/booleanOperands" },
+      "not": { "$ref": "#/$defs/predicates" },
 
-     "temporalExpressions" : {
-       "type": "object",
-       "properties": {
-           "after": {"$ref": "#/$defs/after"},
-           "before": {"$ref": "#/$defs/before"},
-           "begins": {"$ref": "#/$defs/begins"},
-           "begunby": {"$ref": "#/$defs/begunby"},
-           "tcontains": {"$ref": "#/$defs/tcontains"},
-           "during": {"$ref": "#/$defs/during"},
-           "endedby": {"$ref": "#/$defs/endedby"},
-           "ends": {"$ref": "#/$defs/ends"},
-           "tequals": {"$ref": "#/$defs/tequals"},
-           "meets": {"$ref": "#/$defs/meets"},
-           "metby": {"$ref": "#/$defs/metby"},
-           "toverlaps": {"$ref": "#/$defs/toverlaps"},
-           "overlappedby": {"$ref": "#/$defs/overlappedby"}
-       },
-       "minProperties": 1,
-       "maxProperties": 1
-     },
-
-     "and": { "$ref": "#/$defs/booleanOperands" },
-     "or":  { "$ref": "#/$defs/booleanOperands" },
-     "not": { "$ref": "#/$defs/predicates" },
-
-     "eq":  { "$ref": "#/$defs/scalarOperands" },
-     "lt":  { "$ref": "#/$defs/scalarOperands" },
-     "gt":  { "$ref": "#/$defs/scalarOperands" },
-     "lte": { "$ref": "#/$defs/scalarOperands" },
-     "gte": { "$ref": "#/$defs/scalarOperands" },
-
-     "between": {
-        "type": "object",
-        "properties": {
-           "property": { "type": "string" },
-           "lower": { "$ref": "#/$defs/scalarLiteral" },
-           "upper": { "$ref": "#/$defs/scalarLiteral" }
-        },
-        "required" : [ "property", "lower", "upper" ]
-     },
-
-     "like": {
-        "type": "object",
-        "properties": {
-           "wildcard": { "type": "string", "default": "%" },
-           "singleChar": { "type": "string", "default": "_" },
-           "escape": { "type": "string", "default": "\\" },
-           "nocase": { "type": "boolean", "default": true },
-           "property": { "type": "string" },
-           "value": { "$ref": "#/$defs/scalarLiteral" }
-        }
-     },
-
-     "in": {
-        "type": "object",
-        "properties": {
-           "nocase": { "type": "boolean", "default": true },
-           "property": { "type": "string" },
-           "values": {
-              "type": "array",
-              "items": { "$ref": "#/$defs/scalarLiteral" }
-           }
-        }
-     },
-
-     "equals":     { "$ref": "#/$defs/spatialOperands" },
-     "disjoint":   { "$ref": "#/$defs/spatialOperands" },
-     "touches":    { "$ref": "#/$defs/spatialOperands" },
-     "within":     { "$ref": "#/$defs/spatialOperands" },
-     "overlaps":   { "$ref": "#/$defs/spatialOperands" },
-     "crosses":    { "$ref": "#/$defs/spatialOperands" },
-     "intersects": { "$ref": "#/$defs/spatialOperands" },
-     "contains":   { "$ref": "#/$defs/spatialOperands" },
-
-     "after":        { "$ref": "#/$defs/temporalOperands" },
-     "before":       { "$ref": "#/$defs/temporalOperands" },
-     "begins":       { "$ref": "#/$defs/temporalOperands" },
-     "begunby":      { "$ref": "#/$defs/temporalOperands" },
-     "tcontains":    { "$ref": "#/$defs/temporalOperands" },
-     "during":       { "$ref": "#/$defs/temporalOperands" },
-     "endedby":      { "$ref": "#/$defs/temporalOperands" },
-     "ends":         { "$ref": "#/$defs/temporalOperands" },
-     "tequals":      { "$ref": "#/$defs/temporalOperands" },
-     "meets":        { "$ref": "#/$defs/temporalOperands" },
-     "metby":        { "$ref": "#/$defs/temporalOperands" },
-     "toverlaps":    { "$ref": "#/$defs/temporalOperands" },
-     "overlappedby": { "$ref": "#/$defs/temporalOperands" },
-     "anyinteracts": { "$ref": "#/$defs/temporalOperands" },
-     "tintersects":  { "$ref": "#/$defs/temporalOperands" },
-
-     "booleanOperands": {
-        "type": "array",
-        "items": {
+      "booleanOperands": {
+         "type": "array",
+         "items": {
             "$ref": "#/$defs/predicates",
-            "minItems": 2
-        }
-     },
+            "minItems": 2,
+            "maxItems": 2
+         }
+      },
 
-     "arithmeticOperands": {
-        "type": "object",
-        "properties": {
-           "property": { "type": "string" },
-           "function": { "$ref": "#/$defs/function" },
-           "value": { "type": "number" },
-           "+": {"$ref": "#/$defs/add"},
-           "-": {"$ref": "#/$defs/sub"},
-           "*": {"$ref": "#/$defs/mul"},
-           "/": {"$ref": "#/$defs/div"}
-        },
-        "minProperties": 2,
-        "maxProperties": 2
-     },
+      "$comment": "=======================================================",
+      "$comment": "=  COMPARISON EXPRESSIONS                             =",
+      "$comment": "=======================================================",
 
-     "add": { "$ref": "#/$defs/arithmeticOperands" },
-     "sub": { "$ref": "#/$defs/arithmeticOperands" },
-     "mul": { "$ref": "#/$defs/arithmeticOperands" },
-     "div": { "$ref": "#/$defs/arithmeticOperands" },
+      "comparisonExpression" : {
+         "oneOf": [
+            {"$ref": "#/$defs/eqExpression"},
+            {"$ref": "#/$defs/ltExpression"},
+            {"$ref": "#/$defs/gtExpression"},
+            {"$ref": "#/$defs/lteExpression"},
+            {"$ref": "#/$defs/gteExpression"},
+            {"$ref": "#/$defs/betweenExpression"},
+            {"$ref": "#/$defs/likeExpression" },
+            {"$ref": "#/$defs/inExpression" }
+         ]
+      },
 
-     "scalarOperands": {
-        "type": "object",
-        "properties": {
-           "property": { "type": "string" },
-           "function": { "$ref": "#/$defs/function" },
-           "value": { "$ref": "#/$defs/scalarLiteral" },
-           "+": {"$ref": "#/$defs/add"},
-           "-": {"$ref": "#/$defs/sub"},
-           "*": {"$ref": "#/$defs/mul"},
-           "/": {"$ref": "#/$defs/div"}
-        },
-        "minProperties": 2,
-        "maxProperties": 2
-     },
+      "eqExpression": {
+         "type": "object",
+         "required": ["eq"],
+         "properties": {
+            "eq": { "$ref": "#/$defs/scalarOperands" }
+         }
+      },
 
-     "spatialOperands": {
-        "type": "object",
-        "properties": {
-           "property": { "type": "string" },
-           "function": { "$ref": "#/$defs/function" },
-           "value": {  "$ref": "#/$defs/geometryLiteral" }
-        },
-        "minProperties": 2,
-        "maxProperties": 2
-     },
+      "ltExpression": {
+         "type": "object",
+           "required": ["lt"],
+           "properties": {
+              "lt": { "$ref": "#/$defs/scalarOperands" }
+         }
+      },
 
-     "temporalOperands": {
-        "type": "object",
-        "properties": {
-           "property": { "type": "string" },
-           "function": { "$ref": "#/$defs/function" },
-           "value": { "$ref": "#/$defs/temporalLiteral" }
-        },
-        "minProperties": 2,
-        "maxProperties": 2
-     },
+      "gtExpression": {
+         "type": "object",
+         "required": ["gt"],
+         "properties": {
+            "gt": { "$ref": "#/$defs/scalarOperands" }
+         }
+      },
 
-     "function": {
-        "type": "object",
-        "properties": {
-           "name": { "type": "string" },
-           "arguments": {
-              "type": "array",
-              "items": {
-                 "oneOf": [
-                    { "type": "string" },
-                    { "type": "number" },
-                    { "type": "boolean" },
-                    { "$ref": "#/$defs/functionObjectArgument" }
-                 ]
-              }
-           }
-        }
-     },
+      "lteExpression": {
+         "type": "object",
+         "required": ["lte"],
+         "properties": {
+            "lte": { "$ref": "#/$defs/scalarOperands" }
+         }
+      },
 
-     "functionObjectArgument": {
-        "type": "object",
-        "properties": {
-           "property": { "type": "string" },
-           "function": { "$ref": "#/$defs/function" },
-           "geometry": { "$ref": "#/$defs/geometryLiteral" },
-           "bbox": { "$ref": "#/$defs/bbox" },
-           "temporalValue": { "$ref": "#/$defs/temporalLiteral" },
-           "+": {"$ref": "#/$defs/add"},
-           "-": {"$ref": "#/$defs/sub"},
-           "*": {"$ref": "#/$defs/mul"},
-           "/": {"$ref": "#/$defs/div"}
-        }
-     },
+      "gteExpression": {
+         "type": "object",
+         "required": ["gte"],
+         "properties": {
+            "gte": { "$ref": "#/$defs/scalarOperands" }
+         }
+      },
 
-     "scalarLiteral": {
-        "oneOf": [
-           { "type": "string" },
-           { "type": "number" },
-           { "type": "boolean"}
-        ]
-     },
+      "betweenExpression": {
+         "type": "object",
+         "required": ["between"],
+         "properties": {
+            "between": {
+               "type": "object",
+               "required" : [ "property", "lower", "upper" ],
+               "properties": {
+                  "property": { "type": "string" },
+                  "lower": { "$ref": "#/$defs/scalarLiteral" },
+                  "upper": { "$ref": "#/$defs/scalarLiteral" }
+               }
+            }
+         }
+      },
 
-     "geometryLiteral": {
-        "type": "object"
-     },
+      "likeExpression": {
+         "type": "object",
+         "required": ["like"],
+         "properties": {
+            "like": {
+               "type": "object",
+               "required": ["property","value"],
+               "properties": {
+                  "wildcard": { "type": "string", "default": "%" },
+                  "singleChar": { "type": "string", "default": "_" },
+                  "escape": { "type": "string", "default": "\\" },
+                  "nocase": { "type": "boolean", "default": true },
+                  "property": { "type": "string" },
+                  "value": { "$ref": "#/$defs/scalarLiteral" }
+               }
+            }
+         }
+      },
 
-     "bbox": {
-       "type": "array",
-       "items": {
-           "type": "number",
-           "oneOf": [
-             { "minItems": 4, "maxItems": 4},
-             { "minItems": 6, "maxItems": 6}
-           ]
-       }
-     },
+      "inExpression": {
+         "type": "object",
+         "required": ["in"],
+         "properties": {
+            "in": {
+               "type": "object",
+               "required": ["property","values"],
+               "properties": {
+                  "nocase": { "type": "boolean", "default": true },
+                  "property": { "type": "string" },
+                  "values": {
+                     "type": "array",
+                     "items": { "$ref": "#/$defs/scalarLiteral" }
+                  }
+               }
+            }
+         }
+      },
 
-     "envelopeLiteral": {
-        "type": "object",
-        "properties": {
-           "bbox": { "$ref": "#/$defs/bbox" }
-        }
-     },
+      "scalarOperands": {
+         "type": "array",
+         "items": {
+            "oneOf": [
+               {"$ref": "#/$defs/scalarLiteral"},
+               {"$ref": "#/$defs/propertyRef"},
+               {"$ref": "#/$defs/functionRef"},
+               {"$ref": "#/$defs/arithmeticExpression"}
+            ],
+            "minItems": 2,
+            "maxItems": 2
+         }
+      },
 
-     "temporalLiteral": {
-        "oneOf": [
-           { "$ref": "#/$defs/timeLiteral" },
-           { "$ref": "#/$defs/periodLiteral" }
-        ]
-     },
+      "$comment": "=======================================================",
+      "$comment": "=  SPATIAL EXPRESSIONS                                =",
+      "$comment": "=======================================================",
 
-     "timeLiteral": {
-        "type": "string",
-        "pattern": "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9](T[0-2][0-9]:[0-5][0-9]:[0-5][0-9](.[0-9]*)?)?"
-     },
+      "spatialExpression" : {
+         "oneOf": [
+           {"$ref": "#/$defs/equalsExpression"},
+           {"$ref": "#/$defs/disjointExpression"},
+           {"$ref": "#/$defs/touchesExpression"},
+           {"$ref": "#/$defs/withinExpression"},
+           {"$ref": "#/$defs/overlapsExpression"},
+           {"$ref": "#/$defs/crossesExpression"},
+           {"$ref": "#/$defs/intersectsExpression"},
+           {"$ref": "#/$defs/containsExpression"}
+         ]
+      },
 
-     "periodLiteral": {
-        "type": "array",
-        "items": {
-           "$ref": "#/$defs/timeLiteral",
-           "minItems": 2,
-           "maxItems": 2
-       }
-    }
-  }
+      "equalsExpression": {
+         "type": "object",
+         "required": ["equals"],
+         "properties": {
+            "equals": { "$ref": "#/$defs/spatialOperands" }
+         }
+      },
+
+      "disjointExpression": {
+         "type": "object",
+         "required": ["disjoint"],
+         "properties": {
+            "disjoint": { "$ref": "#/$defs/spatialOperands" }
+         }
+      },
+
+      "touchesExpression": {
+         "type": "object",
+         "required": ["touches"],
+         "properties": {
+            "touches": { "$ref": "#/$defs/spatialOperands" }
+         }
+      },
+
+      "withinExpression": {
+         "type": "object",
+         "required": ["within"],
+         "properties": {
+            "within": { "$ref": "#/$defs/spatialOperands" }
+         }
+      },
+
+      "overlapsExpression": {
+         "type": "object",
+         "required": ["overlaps"],
+         "properties": {
+            "overlaps": { "$ref": "#/$defs/spatialOperands" }
+         }
+      },
+
+      "crossesExpression": {
+         "type": "object",
+         "required": ["crosses"],
+         "properties": {
+            "crosses": { "$ref": "#/$defs/spatialOperands" }
+         }
+      },
+
+      "intersectsExpression": {
+         "type": "object",
+         "required": ["intersects"],
+         "properties": {
+            "intersects": { "$ref": "#/$defs/spatialOperands" }
+         }
+      },
+
+      "containsExpression": {
+         "type": "object",
+         "required": ["contains"],
+         "properties": {
+            "contains": { "$ref": "#/$defs/spatialOperands" }
+         }
+      },
+
+      "spatialOperands": {
+         "type": "array",
+         "items": {
+            "oneOf": [
+               {"$ref": "#/$defs/spatialLiteral"},
+               {"$ref": "#/$defs/propertyRef"},
+               {"$ref": "#/$defs/functionRef"}
+            ],
+            "minItems": 2,
+            "maxItems": 2
+         }
+      },
+
+      "$comment": "=======================================================",
+      "$comment": "=  TEMPORAL EXPRESSIONS                               =",
+      "$comment": "=======================================================",
+
+      "temporalExpression" : {
+         "oneOf": [
+           {"$ref": "#/$defs/afterExpression"},
+           {"$ref": "#/$defs/beforeExpression"},
+           {"$ref": "#/$defs/beginsExpression"},
+           {"$ref": "#/$defs/begunbyExpression"},
+           {"$ref": "#/$defs/tcontainsExpression"},
+           {"$ref": "#/$defs/duringExpression"},
+           {"$ref": "#/$defs/endedbyExpression"},
+           {"$ref": "#/$defs/endsExpression"},
+           {"$ref": "#/$defs/tequalsExpression"},
+           {"$ref": "#/$defs/meetsExpression"},
+           {"$ref": "#/$defs/metbyExpression"},
+           {"$ref": "#/$defs/toverlapsExpression"},
+           {"$ref": "#/$defs/overlappedbyExpression"}
+         ]
+      },
+
+      "afterExpression": {
+         "type": "object",
+         "required": ["after"],
+         "properties": {
+            "after": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "beforeExpression": {
+         "type": "object",
+         "required": ["before"],
+         "properties": {
+            "before": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "beginsExpression": {
+         "type": "object",
+         "required": ["begins"],
+         "properties": {
+            "begins": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "begunbyExpression": {
+         "type": "object",
+         "required": ["begunby"],
+         "properties": {
+            "begunby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "tcontainsExpression": {
+         "type": "object",
+         "required": ["tcontains"],
+         "properties": {
+            "tcontains": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "duringExpression": {
+         "type": "object",
+         "required": ["during"],
+         "properties": {
+            "during": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "endedbyExpression": {
+         "type": "object",
+         "required": ["endedby"],
+         "properties": {
+            "endedby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "endsExpression": {
+         "type": "object",
+         "required": ["ends"],
+         "properties": {
+            "ends": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "tequalsExpression": {
+         "type": "object",
+         "required": ["tequals"],
+         "properties": {
+            "tequals": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "meetsExpression": {
+         "type": "object",
+         "required": ["meets"],
+         "properties": {
+            "meets": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "metbyExpression": {
+         "type": "object",
+         "required": ["metby"],
+         "properties": {
+            "metby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "toverlapsExpression": {
+         "type": "object",
+         "required": ["toverlaps"],
+         "properties": {
+            "toverlaps": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+   
+      "overlappedbyExpression": {
+         "type": "object",
+         "required": ["overlappedby"],
+         "properties": {
+            "overlappedby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "temporalOperands": {
+         "type": "array",
+         "items": {
+            "oneOf": [
+               {"$ref": "#/$defs/temporalLiteral"},
+               {"$ref": "#/$defs/propertyRef"},
+               {"$ref": "#/$defs/functionRef"}
+            ],
+            "minimumItems": 2,
+            "maximumItems": 2
+         }
+      },
+
+      "$comment": "=======================================================",
+      "$comment": "=  ARITHMETIC EXPRESSIONS                             =",
+      "$comment": "=======================================================",
+
+      "arithmeticExpression": {
+         "oneOf": [
+            {"$ref": "#/$defs/addExpression" },
+            {"$ref": "#/$defs/subExpression" },
+            {"$ref": "#/$defs/mulExpression" },
+            {"$ref": "#/$defs/divExpression" }
+         ]
+      },
+
+      "addExpression": {
+         "type": "object",
+         "required": ["+"],
+         "properties": {
+            "+": { "$ref": "#/$defs/arithmeticOperands" }
+         }
+      },
+
+      "subExpression": {
+         "type": "object",
+         "required": ["-"],
+         "properties": {
+            "-": { "$ref": "#/$defs/arithmeticOperands" }
+         }
+      },
+
+      "mulExpression": {
+         "type": "object",
+         "required": ["*"],
+         "properties": {
+            "*": { "$ref": "#/$defs/arithmeticOperands" }
+         }
+      },
+
+      "divExpression": {
+         "type": "object",
+         "required": ["*"],
+         "properties": {
+            "/": { "$ref": "#/$defs/arithmeticOperands" }
+         }
+      },
+
+      "arithmeticOperands": {
+         "type": "array",
+         "items": {
+            "oneOf": [
+               {"type": "number" },
+               {"$ref": "#/$defs/propertyRef"},
+               {"$ref": "#/$defs/functionRef"},
+               {"$ref": "#/$defs/arithmeticExpression"}
+            ],
+            "minItems": 2,
+            "maxItems": 2
+         }
+      },
+
+      "$comment": "=======================================================",
+      "$comment": "=  PROPERTY REFERENCE                                 =",
+      "$comment": "=======================================================",
+      "propertyRef": {
+         "type": "object",
+         "required": ["property"],
+         "properties": {
+            "property": { "type": "string" }
+         }
+      },
+
+      "$comment": "=======================================================",
+      "$comment": "=  FUNCTIONS                                          =",
+      "$comment": "=======================================================",
+
+      "functionRef": {
+         "type": "object",
+         "required": ["function"],
+         "properties": {
+            "function": { "$ref": "#/$defs/function" }
+         }
+      },
+
+      "function": {
+         "type": "object",
+         "required": [ "name" ],
+         "properties": {
+            "name": { "type": "string" },
+            "arguments": {
+               "type": "array",
+               "items": {
+                  "oneOf": [
+                     { "$ref": "#/$defs/scalarLiteral" },
+                     { "$ref": "#/$defs/spatialLiteral" },
+                     { "$ref": "#/$defs/temporalLiteral" },
+                     { "$ref": "#/$defs/propertyRef" },
+                     { "$ref": "#/$defs/functionRef" },
+                     { "$ref": "#/$defs/arithmeticExpression" }
+                  ]
+               }
+            }
+         }
+      },
+
+      "$comment": "=======================================================",
+      "$comment": "=  LITERALS                                           =",
+      "$comment": "=======================================================",
+
+      "scalarLiteral": {
+         "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "boolean"}
+         ]
+      },
+
+      "spatialLiteral": {
+         "oneOf": [
+            { "$ref": "#/$defs/geometryLiteral" },
+            { "$ref": "#/$defs/envelopeLiteral" }
+         ]
+      },
+
+      "geometryLiteral": {
+         "type": "object",
+         "required": [ "geometry" ],
+         "properties": {
+            "geometry": { "$ref": "#/$defs/geometry" }
+         }
+      },
+
+      "geometry": {
+         "oneOf": [
+            { "$ref": "#/$defs/point" },
+            { "$ref": "#/$defs/linestring" },
+            { "$ref": "#/$defs/polygon" },
+            { "$ref": "#/$defs/multipoint" },
+            { "$ref": "#/$defs/multilinestring" },
+            { "$ref": "#/$defs/multipolygon" }
+         ]
+      },
+
+      "point": {
+         "title": "GeoJSON Point",
+         "type": "object",
+         "required": ["type","coordinates"],
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": ["Point"]
+            },
+            "coordinates": {
+               "type": "array",
+               "minItems": 2,
+               "items": {
+                  "type": "number"
+               }
+            },
+            "bbox": {
+               "type": "array",
+               "minItems": 4,
+               "items": {
+                  "type": "number"
+               }
+            }
+         }
+      },
+
+      "linestring": {
+         "title": "GeoJSON LineString",
+         "type": "object",
+         "required": ["type","coordinates"],
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": ["LineString"]
+            },
+            "coordinates": {
+               "type": "array",
+               "minItems": 2,
+               "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                     "type": "number"
+                  }
+               }
+            },
+            "bbox": {
+               "type": "array",
+               "minItems": 4,
+               "items": {
+                  "type": "number"
+               }
+            }
+         }
+      },
+
+      "polygon": {
+         "title": "GeoJSON Polygon",
+         "type": "object",
+         "required": ["type","coordinates"],
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": ["Polygon"]
+            },
+            "coordinates": {
+               "type": "array",
+               "items": {
+                  "type": "array",
+                  "minItems": 4,
+                  "items": {
+                     "type": "array",
+                     "minItems": 2,
+                     "items": {
+                        "type": "number"
+                     }
+                  }
+               }
+            },
+            "bbox": {
+               "type": "array",
+               "minItems": 4,
+               "items": {
+                  "type": "number"
+               }
+            }
+         }
+      },
+
+      "multipoint": {
+         "title": "GeoJSON MultiPoint",
+         "type": "object",
+         "required": ["type","coordinates"],
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": ["MultiPoint"]
+            },
+            "coordinates": {
+               "type": "array",
+               "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                     "type": "number"
+                  }
+               }
+            },
+            "bbox": {
+               "type": "array",
+               "minItems": 4,
+               "items": {
+                  "type": "number"
+               }
+            }
+         }
+      },
+
+      "multilinestring": {
+         "title": "GeoJSON MultiLineString",
+         "type": "object",
+         "required": ["type","coordinates"],
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": ["MultiLineString"]
+            },
+            "coordinates": {
+               "type": "array",
+               "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                     "type": "array",
+                     "minItems": 2,
+                     "items": {
+                        "type": "number"
+                     }
+                  }
+               }
+            },
+            "bbox": {
+               "type": "array",
+               "minItems": 4,
+               "items": {
+                  "type": "number"
+               }
+            }
+         }
+      },
+
+      "multipolygon": {
+         "title": "GeoJSON MultiPolygon",
+         "type": "object",
+         "required": ["type","coordinates"],
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": ["MultiPolygon"]
+            },
+            "coordinates": {
+               "type": "array",
+               "items": {
+                  "type": "array",
+                  "items": {
+                     "type": "array",
+                     "minItems": 4,
+                     "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                           "type": "number"
+                        }
+                     }
+                  }
+               }
+            },
+            "bbox": {
+               "type": "array",
+               "minItems": 4,
+               "items": {
+                  "type": "number"
+               }
+            }
+         }
+      },
+
+      "envelopeLiteral": {
+         "type": "object",
+         "required": [ "bbox" ],
+         "properties": {
+            "bbox": { "$ref": "#/$defs/bbox" }
+         }
+      },
+
+      "bbox": {
+         "type": "array",
+         "items": {
+            "type": "number",
+            "oneOf": [
+               { "minItems": 4, "maxItems": 4},
+               { "minItems": 6, "maxItems": 6}
+            ]
+         }
+      },
+
+      "temporalLiteral": {
+         "oneOf": [
+            { "$ref": "#/$defs/timeLiteral" },
+            { "$ref": "#/$defs/periodLiteral" }
+         ]
+      },
+
+      "timeLiteral": {
+         "type": "string",
+         "pattern": "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9](T[0-2][0-9]:[0-5][0-9]:[0-5][0-9](.[0-9]*)?)?"
+      },
+
+      "periodLiteral": {
+         "type": "array",
+         "items": {
+            "$ref": "#/$defs/timeLiteral",
+            "minItems": 2,
+            "maxItems": 2
+         }
+      }
+   }
 }

@@ -1,42 +1,17 @@
-[[req_simple-cql_temporal-predicates]]
+[[req_simple-cql_temporal-predicate]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/simple-cql/temporal-predicates* 
-^|A |A server that implements this conformance class shall support the temporal operators defined by the following BNF fragment:
+^|*Requirement {counter:req-id}* |*/req/simple-cql/temporal-predicate* 
+^|A |A server that implements this conformance class shall support the temporal predicates defined by the following BNF fragment:
 
 ----
 temporalPredicate = temporalExpression temporalOperator temporalExpression;
 
-temporalExpression = propertyName
-                   \| temporalLiteral;
+temporalOperator = "ANYINTERACTS";
 
-temporalOperator =  "ANYINTERACTS";
-
-temporalLiteral = instant \| interval;
-
-instant = fullDate \| fullDate "T" utcTime;
-
-interval = instantInInterval solidus instantInInterval;
-
-instantInInterval = period period \| "" \| instant;
-
-fullDate   = dateYear minusSign dateMonth minusSign dateDay;
-
-dateYear   = digit digit digit digit;
-
-dateMonth  = digit digit;
-
-dateDay    = digit digit;
-
-utcTime  = timeHour colon timeMinute colon timeSecond [timeZoneOffset];
-
-timeZoneOffset = "Z" \| sign timeHour;
-
-timeHour   = digit digit;
-
-timeMinute = digit digit;
-
-timeSecond = digit digit [period digit {digit}];
+temporalExpression = temporalLiteral
+                  \| propertyName
+                  \| function;
 ----
+^|B |If the server implements the <<rc_functions>> conformance class then the `temporalExpression` production shall be extended to include function calls.
 |===
-

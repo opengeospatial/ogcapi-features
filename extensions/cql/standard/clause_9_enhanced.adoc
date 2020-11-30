@@ -29,7 +29,7 @@ include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators.
 The following table lists the mathematical definitions of each spatial operators
 as described in <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 
-[#tldr,reftext='{table-caption} {counter:table-num}']
+[reftext='{table-caption} {counter:table-num}']
 .Mathematical definitions of spatial operators
 [width=80%,cols="30,70",options="header"]
 |===
@@ -80,7 +80,7 @@ include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operator
 The following table maps the CQL temporal operator names with the temporal
 operator names defined in <<OGC16-071r3,Time Ontology in OWL>>.
 
-[#tldr,reftext='{table-caption} {counter:table-num}']
+[reftext='{table-caption} {counter:table-num}']
 [width=80%,cols="30,70",options="header"]
 |===
 |CQL Name |Time Ontology in OWL Name
@@ -123,9 +123,7 @@ include::requirements/functions/REQ_get-functions-operation.adoc[]
 
 include::requirements/functions/REQ_get-functions-response-json.adoc[]
 
-include::requirements/functions/REQ_get-functions-response-xml.adoc[]
-
-[[example_2]]
+[[example_4]]
 .Get functions JSON response example
 ====
 [source,JSON]
@@ -170,7 +168,7 @@ include::requirements/functions/REQ_get-functions-response-xml.adoc[]
 ----
 ====
 
-[[example_3]]
+[[example_5]]
 .Get functions XML response example
 ====
 [source,XML]
@@ -191,7 +189,7 @@ operator (i.e. one of +,-,*,/) and another arithmetic operand.
 
 include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
-[[example_4]]
+[[example_6]]
 .Arithmetic expression example in JSON
 ====
 [source,JSON]

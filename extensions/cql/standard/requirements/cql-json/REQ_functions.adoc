@@ -6,68 +6,80 @@
 
 [source,JSON]
 ----
+   "$comment": "=======================================================",
+   "$comment": "=  FUNCTIONS                                          =",
+   "$comment": "=======================================================",
+
+   "functionRef": {
+      "type": "object",
+      "required": ["function"],
+      "properties": {
+         "function": { "$ref": "#/$defs/function" }
+      }
+   },
+
    "function": {
       "type": "object",
+      "required": [ "name" ],
       "properties": {
          "name": { "type": "string" },
          "arguments": {
             "type": "array",
             "items": {
                "oneOf": [
-                  { "type": "string" },
-                  { "type": "number" },
-                  { "type": "boolean" },
-                  { "$ref": "#/definitions/functionObjectArgument" }
+                  { "$ref": "#/$defs/scalarLiteral" },
+                  { "$ref": "#/$defs/spatialLiteral" },
+                  { "$ref": "#/$defs/temporalLiteral" },
+                  { "$ref": "#/$defs/propertyRef" },
+                  { "$ref": "#/$defs/functionRef" },
+                  { "$ref": "#/$defs/arithmeticExpression" }
                ]
             }
          }
       }
    },
 
-   "functionObjectArgument": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "geometry": { "$ref": "#/definitions/geometryLiteral" },
-         "bbox": { "$ref": "#/definitions/bbox" },
-         "temporalValue": { "$ref": "#/definitions/temporalLiteral" }
+   "scalarOperands": {
+      "type": "array",
+      "items": {
+         "oneOf": [
+            {"$ref": "#/$defs/scalarLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"},
+            {"$ref": "#/$defs/arithmeticExpression"}
+         ],
+         "minItems": 2,
+         "maxItems": 2
       }
    },
 
-   "scalarOperands": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "value": { "$ref": "#/definitions/scalarLiteral" }
-      },
-      "minProperties": 2,
-      "maxProperties": 2
-   },
-
    "spatialOperands": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "value": {  "$ref": "#/definitions/geometryLiteral" }
-      },
-      "minProperties": 2,
-      "maxProperties": 2
+      "type": "array",
+      "items": {
+         "oneOf": [
+            {"$ref": "#/$defs/spatialLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"}
+         ],
+         "minItems": 2,
+         "maxItems": 2
+      }
    },
 
    "temporalOperands": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "value": { "$ref": "#/definitions/temporalLiteral" }
-      },
-      "minProperties": 2,
-      "maxProperties": 2
+      "type": "array",
+      "items": {
+         "oneOf": [
+            {"$ref": "#/$defs/temporalLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"}
+         ],
+         "minimumItems": 2,
+         "maximumItems": 2
+      }
    },
 ----
 
 ^|B |The list of valid function names can be discovered via the `functions` resource (i.e. path `/functions`).
+^|C |If the server implements the <<rc_arithmetic>> conformance class then the `arguments` and `scalarOperands` objects shall be extended to include a reference to an arithmetic expression (i.e. #/$defs/arithmeticExpression).
 |===

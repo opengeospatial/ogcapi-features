@@ -5,26 +5,14 @@
 ^|A |A server that implements this requirement shall support arithmetic expressions as defined by the following BNF fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> requirements class BNF:
 
 ----
-   arithmeticExpression = arithmeticOperand
-                          arithmeticOperator
-                          arithmeticOperand;
+arithmeticExpression = arithmeticOperand arithmeticOperator arithmeticOperand 
+                    \| leftParen arithmeticExpression rightParen;
 
-   arithmeticOperator = plusSign \| minusSign \| asterisk \| solidus;
+arithmeticOperator = plusSign \| minusSign \| asterisk \| solidus;
 
-   arithmeticOperand = propertyName
-                    \| numericLiteral
-                    \| function;
-
-   argument = characterLiteral
-            \| numericLiteral
-            \| geomLiteral
-            \| propertyName
-            \| arithmeticExpression;
-
-   scalarExpression = propertyName
-                    \| characterLiteral
-                    \| numericLiteral
-                    \| function
-                    \| arithmeticExpression;
+arithmeticOperand = numericLiteral
+                 \| propertyName
+                 \| function;
 ----
+^|B |If the server implements the <<rc_functions>> conformance class then the `arithmeticOperand` production shall be extended to include function calls.
 |===

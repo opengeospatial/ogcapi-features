@@ -26,19 +26,25 @@ of the following classes of predicates:
 * comparison predicates
 * spatial predicates
 * temporal predicates
-* list predicates
 
-include::requirements/simple-cql/REQ_filter-expression.adoc[]
+include::requirements/simple-cql/REQ_cqlfilter.adoc[]
 
-[[simple-cql_scalar-expressions]]
-=== Scalar expressions
+[[simple-cql_literals]]
+=== Literal values
 
-A scalar expression is one of a property name, a character literal or a numeric
-literal.
+A literal value is any part of an CQL filter expression that is be used
+exactly as it is specified in the expression.  Literal values include
+character string, numeric, boolean, geometric or temporal values.
 
-include::requirements/simple-cql/REQ_scalar-expressions.adoc[]
+include::requirements/simple-cql/REQ_literals.adoc[]
 
-NOTE: The `alpha` production is just an examples that allows the BNF validators that I used to work.  In reality this should really be the list of valid UTF-8 characters.
+[[simple-cql_property]]
+=== Property reference
+
+Properties in an object being evaluated in the CQL filter expression can be
+referenced by their name.
+
+include::requirements/simple-cql/REQ_property.adoc[]
 
 [[simple-cql_comparison-predicates]]
 === Comparison predicates
@@ -50,7 +56,30 @@ value `TRUE`; otherwise the predicate evaluates to the Boolean value `FALSE`;
 
 include::requirements/simple-cql/REQ_comparison-predicates.adoc[]
 
-[[simple-cql_spatial-predicates]]
+The like predicate tests whether the value of a scalar expression matches
+the specified pattern.  If the value matches the pattern then the predicate
+evaluates to the Boolean value `TRUE`; otherwise the like predicate evaluates
+to the Boolean value `FALSE`. 
+
+The between predicate tests whether the value of a scalar expression lies within
+the specified range.  The BETWEEN operator is inclusive.  If the value lies
+within the specified range then the predicate evaluates to the Boolean value
+`TRUE`; otherwise the between predicate evalues to the Boolean value `FALSE`.
+
+A list predicate tests, for equality, the value of a scalar expression against
+a list of literal values of the same type.  If the value of the named property
+is equal to one or more of the values in the list of literals, the list
+predicate evaluates to the Boolean value `TRUE`; otherwise the list predicate
+evaluates to the Boolean value `FALSE`.
+
+include::requirements/simple-cql/REQ_in-predicate-items.adoc[]
+
+The null predicate tests whether the value of a scalar expression is null.  If
+the value of the scalar expression is null, the null predicate evaluates to the
+Boolean value `TRUE`; otherwise the null predicate evaluates to the Boolean
+value `FALSE`.
+
+[[simple-cql_spatial]]
 === Spatial predicates
 
 A spatial predicate evaluates two geometry-valued expressions to determine if
@@ -67,7 +96,7 @@ include::requirements/simple-cql/REQ_crs_crs84.adoc[]
 
 include::requirements/simple-cql/REQ_crs-other.adoc[]
 
-[[simple-cql_temporal-predicates]]
+[[simple-cql_temporal]]
 === Temporal predicates
 
 A temporal predicate evaluates two time-valued expressions to determine if
@@ -77,19 +106,6 @@ to the Boolean value `TRUE`; otherwise the predicate evaluates to the Boolean
 value `FALSE`;
 
 include::requirements/simple-cql/REQ_temporal-predicates.adoc[]
-
-[[simple-cql_in-predicate]]
-=== List predicate
-
-A list predicate tests, for equality, the value of a scalar expression against
-a list of literal values of the same type.  If the value of the named property
-is equal to one or more of the values in the list of literals, the list
-predicate evaluates to the Boolean value `TRUE`; otherwise the list predicate
-evaluates to the Boolean value `FALSE`.
-
-include::requirements/simple-cql/REQ_in-predicate.adoc[]
-
-include::requirements/simple-cql/REQ_in-predicate-items.adoc[]
 
 === Simple CQL Encodings
 

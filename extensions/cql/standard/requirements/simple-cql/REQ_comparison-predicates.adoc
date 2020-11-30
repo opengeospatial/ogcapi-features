@@ -1,32 +1,63 @@
-[[req_simple-cql_comparison-predicates]] 
+[[req_simple-cql_comparison-predicate]] 
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/simple-cql/comparison-predicates* 
+^|*Requirement {counter:req-id}* |*/req/simple-cql/comparison-predicate* 
 ^|A |A server that implements this conformance class shall support the comparison operators defined by the following BNF fragment:
 
 ----
-comparisonPredicate = binaryComparisonPredicate
-                    \| propertyIsLikePredicate
-                    \| propertyIsBetweenPredicate
-                    \| propertyIsNullPredicate;
+   comparisonPredicate = binaryComparisonPredicate
+                      \| isLikePredicate
+                      \| isBetweenPredicate
+                      \| isInListPredicate
+                      \| isNullPredicate;
 
-binaryComparisonPredicate = scalarExpression comparisonOperator scalarExpression;
+   binaryComparisonPredicate = scalarExpression
+                               comparisonOperator
+                               scalarExpression;
 
-propertyIsLikePredicate =  scalarExpression "LIKE" regularExpression;
+   scalarExpression = characterLiteral 
+                   \| numericLiteral
+                   \| propertyName
+                   \| function
+                   \| arithmeticExpression;
 
-propertyIsBetweenPredicate = scalarExpression "BETWEEN"
-                             scalarExpression "AND" scalarExpression;
+   comparisonOperator = eq \| neq \| lt \| gt \| lteq \| gteq;
 
-propertyIsNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
+   neq = lt gt;
 
-regularExpression = characterLiteral;
+   gteq = gt eq;
 
-comparisonOperator = eq \| neq \| lt \| gt \| lteq \| gteq;
+   lteq = lt eq;
 
-neq = lt gt;
+   isLikePredicate =  scalarExpression "LIKE" regularExpression
+                     \["WILDCARD" specialCharacter\]
+                     \["SINGLECHAR" specialCharacter\]
+                     \["ESCAPE" specialCharacter\]
+                     \["NOCASE" booleanLiteral\];
 
-gteq = gt eq;
+   regularExpression = characterLiteral;
 
-lteq = lt eq;
+   isBetweenPredicate = scalarExpression "BETWEEN"
+                        scalarExpression "AND" scalarExpression;
+
+   isInListPredicate = inListOperand "IN" leftParen inList rightParen;
+
+   inList = listItem \[ {comma listItem} \];
+
+   listItem = characterLiteral
+            \| numericLiteral
+            \| temporalLiteral
+            \| geomLiteral
+            \| function
+            \| arithmeticExpression;
+
+   inListOperand = listItem
+                 \| propertyName
+                 \| arithmeticExpression;
+
+   isNullPredicate = scalarExpression "IS" \["NOT"\] "NULL";
 ----
+
+^|B |A server the implements the <<rc_functions>> conformance class shall include function calls in the `scalarExpression` and `listItem` productions.
+^|C |A server the implements the <<rc_arithmetic>> conformance class shall include arithmetic expression in the `scalarExpression`, `listItem` and `inListOperand` productions.
 |===

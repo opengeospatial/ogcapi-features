@@ -5,36 +5,16 @@
 ^|A |A server that implements this requirement shall support functions as defined by the following BNF fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> requirements class BNF:
 
 ----
-   function = identifier {argumentList};
+function = identifier leftParen {argumentList} rightParen;
 
-   argumentList = leftParen [positionalArgument]  rightParen;
+argumentList = argument \[ { comma argument } \];
 
-   positionalArgument = argument [ { comma argument } ];
-
-   argument = characterLiteral
-           \| numericLiteral
-           \| geomLiteral
-           \| propertyName
-
-   scalarExpression = propertyName
-                    \| characterLiteral
-                    \| numericLiteral
-                    \| function
-
-   geomExpression = propertyName
-                  \| geomLiteral
-                  \| function;
-
-   temporalExpression = propertyName
-                      \| temporalLiteral
-                      \| function;
-
-   inPredicate = propertyName "IN" leftParen { characterLiteral \| 
-                                               numericLiteral \|
-                                               geomLiteral \|
-                                               temporalLiteral \|
-                                               function } rightParen;
+argument = characterLiteral
+        \| numericLiteral
+        \| geomLiteral
+        \| propertyName
+        \| function
+        \| arithmeticExpression;
 ----
-
-^|B |The list of valid function names can be discovered via the `functions` resource (i.e. path `/functions`).
+^|B |If the server implements the <<rc_arithmetic>> conformance class then the `argument` production shall be extended to include arithmetic expressions.
 |===

@@ -1,0 +1,27 @@
+[[req_simple-cql_cqlfilter]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/simple-cql/cqlfilter* 
+^|A |A server that implements this conformance class shall support a CQL filter expression composed of a logically connected series of one or more predicates as described by the following BNF fragment:
+
+----
+   cqlFilter = booleanValueExpression;
+
+   booleanValueExpression = booleanTerm
+                         \| booleanValueExpression "OR" booleanTerm;
+
+   booleanTerm = booleanFactor
+              \| booleanTerm "AND" booleanFactor;
+
+   booleanFactor = \["NOT"\] booleanPrimary;
+
+   booleanPrimary = predicate
+                 \| leftParen cqlFilter rightParen;
+
+   predicate = comparisonPredicate
+            \| spatialPredicate
+            \| temporalPredicate;
+----
+
+|===
+
