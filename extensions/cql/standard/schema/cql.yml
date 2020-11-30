@@ -13,6 +13,7 @@ components:
       - "$ref": "#/components/schemas/comparisonExpression"
       - "$ref": "#/components/schemas/spatialExpression"
       - "$ref": "#/components/schemas/temporalExpression"
+      - "$ref": "#/components/schemas/arrayExpression"
     logicalExpression:
       type: object
       oneOf:
@@ -362,6 +363,54 @@ components:
              - "$ref": "#/components/schemas/functionRef"
           minItems: 2
           maxItems: 2
+    arrayExpression:
+       oneOf:
+          - "$ref": "#/components/schemas/aequalsExpression"
+          - "$ref": "#/components/schemas/acontainsExpression"
+          - "$ref": "#/components/schemas/acontainedByExpression"
+          - "$ref": "#/components/schemas/aoverlapsExpression"
+    aequalsExpression:
+       type: object
+       required:
+          - aequals
+       properties:
+          aequals:
+             "$ref": "#/components/schemas/arrayOperands"
+    acontainsExpression:
+       type: object
+       required:
+          - acontains
+       properties:
+          acontains:
+             "$ref": "#/components/schemas/arrayOperands"
+    acontainedByExpression:
+       type: object
+       required:
+          - acontainedBy
+       properties:
+          acontainedBy:
+             "$ref": "#/components/schemas/arrayOperands"
+    aoverlapsExpression:
+       type: object
+       required:
+          - aoverlaps
+       properties:
+          aoverlaps:
+             "$ref": "#/components/schemas/arrayOperands"
+    arrayOperands:
+       type: array
+       items:
+          type: array
+          items:
+             oneOf:
+                - "$ref": "#/components/schemas/scalarLiteral"
+                - "$ref": "#/components/schemas/spatialLiteral"
+                - "$ref": "#/components/schemas/temporalLiteral"
+                - "$ref": "#/components/schemas/functionRef"
+                - "$ref": "#/components/schemas/arithmeticExpression"
+                - "$ref": "#/components/schemas/arrayOperands"
+           minItems: 2
+           maxItems: 2
     arithmeticExpression:
        oneOf:
           - "$ref": "#/components/schemas/addExpression"

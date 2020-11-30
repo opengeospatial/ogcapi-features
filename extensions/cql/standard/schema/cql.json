@@ -11,7 +11,8 @@
             { "$ref": "#/$defs/logicalExpression" },
             { "$ref": "#/$defs/comparisonExpression" },
             { "$ref": "#/$defs/spatialExpression" },
-            { "$ref": "#/$defs/temporalExpression" }
+            { "$ref": "#/$defs/temporalExpression" },
+            { "$ref": "#/$defs/arrayExpression" }
          ]
       },
 
@@ -423,6 +424,70 @@
       },
 
       "$comment": "=======================================================",
+      "$comment": "=  ARRAY EXPRESSIONS                                  =",
+      "$comment": "=======================================================",
+
+      "arrayExpression" : {
+         "oneOf": [
+            {"$ref": "#/$defs/aequalsExpression"},
+            {"$ref": "#/$defs/acontainsExpression"},
+            {"$ref": "#/$defs/acontainedByExpression"},
+            {"$ref": "#/$defs/aoverlapsExpression"}
+         ]
+      },
+
+      "aequalsExpression": {
+         "type": "object",
+         "required": ["aequals"],
+         "properties": {
+            "equals": { "$ref": "#/$defs/arrayOperands" }
+         }
+      },
+
+      "acontainsExpression": {
+         "type": "object",
+         "required": ["acontains"],
+         "properties": {
+            "acontains": { "$ref": "#/$defs/arrayOperands" }
+         }
+      },
+
+      "acontainedByExpression": {
+         "type": "object",
+         "required": ["acontainedBy"],
+         "properties": {
+            "acontainedBy": { "$ref": "#/$defs/arrayOperands" }
+         }
+      },
+
+      "aoverlapsExpression": {
+         "type": "object",
+         "required": ["aoverlaps"],
+         "properties": {
+            "aoverlaps": { "$ref": "#/$defs/arrayOperands" }
+         }
+      },
+ 
+      "arrayOperands": {
+         "type": "array",
+         "items": {
+            "type": "array",
+            "items": {
+               "oneOf": [
+                  {"$ref": "literal.json#/$defs/scalarLiteral"},
+                  {"$ref": "spatial.json#/$defs/spatialLiteral"},
+                  {"$ref": "temporal.json#/$defs/temporalLiteral"},
+                  {"$ref": "function.json#/$defs/functionRef"},
+                  {"$ref": "arithmetic.json#/$defs/arithmeticExpression"},
+                  {"$ref": "#/$defs/arrayOperands"}
+               ]
+            }
+         },
+         "minItems": 2,
+         "maxItems": 2
+      },
+
+      "$comment": "=======================================================",
       "$comment": "=  ARITHMETIC EXPRESSIONS                             =",
       "$comment": "=======================================================",
 
@@ -518,7 +583,8 @@
                      { "$ref": "#/$defs/temporalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
-                     { "$ref": "#/$defs/arithmeticExpression" }
+                     { "$ref": "#/$defs/arithmeticExpression" },
+                     { "$ref": "#/$defs/arrayExpression" }
                   ]
                }
             }

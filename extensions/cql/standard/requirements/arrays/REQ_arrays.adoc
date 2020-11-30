@@ -1,0 +1,50 @@
+[[req_arrays]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/arrays/array-predicate*
+^|A |A server that implements this requirement shall support arrays as defined by the following BNF fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> requirements class BNF:
+
+----
+   predicate = comparisonPredicate
+            \| spatialPredicate
+            \| temporalPredicate;
+            \| arrayPredicate;
+
+   arrayPredicate = arrayExpression arrayOperator arrayExpression;
+
+   arrayExpression = propertyName \| function \| arrayLiteral;
+
+   arrayLiteral = leftBracket rightBracket
+       \| leftBracket arrayElement \[ { comma arrayElement } \] rightBracket;
+
+   arrayElement = characterLiteral
+               \| numericLiteral
+               \| geomLiteral
+               \| temporalLiteral
+               \| propertyName
+               \| function
+               \| arithmeticExpression
+               \| arrayLiteral;
+
+   arrayOperator = "AEQUALS"
+                \| "ACONTAINS"
+                \| "CONTAINED BY"
+                \| "AOVERLAPS";
+
+   argument = characterLiteral
+           \| numericLiteral
+           \| geomLiteral
+           \| temporalLiteral
+           \| propertyName
+           \| function
+           \| arithmeticExpression
+           \| arrayExpression;
+----
+
+^|B |No inherent order shall be implied in a array of values.
+^|C |See <<req_simple-cql_scalar-expressions>> for the definition of characterLiteral, numericLiteral, propertyName.
+^|D |See <<req_simple-cql_spatial-predicates>> for the definition of a geomLiteral.
+^|E |See <<req_simple-cql_temporal-predicates>> for the definition of temporalLiteral.
+^|F |If the server implements the <<functions,Requirements Class "Functions">>, see the <<req_functions>> for the definition of function.
+^|G |If the server implements the <<arithemetic,Requirements Class "Arithmetic Expressions">>, see <<req_arithmetic>> for the definition of arithmeticExpression.
+|===
