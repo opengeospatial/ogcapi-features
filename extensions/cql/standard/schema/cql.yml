@@ -172,7 +172,7 @@ components:
              - "$ref": "#/components/schemas/arithmeticExpression"
           minItems: 2
           maxItems: 2
-    spatialExpression:
+    spatialExpressions:
        oneOf:
           - "$ref": "#/components/schemas/equalsExpression"
           - "$ref": "#/components/schemas/disjoinExpression"
@@ -247,7 +247,7 @@ components:
              - "$ref": "#/components/schemas/functionRef"
           minItems: 2
           maxItems: 2
-    temporalExpression:
+    temporalExpressions:
        oneOf:
           - "$ref": "#/components/schemas/afterExpression"
           - "$ref": "#/components/schemas/beforeExpression"
@@ -357,9 +357,9 @@ components:
        type: array
        items:
           oneOf:
-             - "#ref": "#/components/schemas/temporalLiteral"
-             - "#ref": "#/components/schemas/propertyRef"
-             - "#ref": "#/components/schemas/functionRef"
+             - "$ref": "#/components/schemas/temporalLiteral"
+             - "$ref": "#/components/schemas/propertyRef"
+             - "$ref": "#/components/schemas/functionRef"
           minItems: 2
           maxItems: 2
     arithmeticExpression:
