@@ -10,9 +10,9 @@ components:
     predicates:
       oneOf:
       - "$ref": "#/components/schemas/logicalExpression"
-      - "$ref": "#/components/schemas/comparisonExpressions"
-      - "$ref": "#/components/schemas/spatialExpressions"
-      - "$ref": "#/components/schemas/temporalExpressions"
+      - "$ref": "#/components/schemas/comparisonExpression"
+      - "$ref": "#/components/schemas/spatialExpression"
+      - "$ref": "#/components/schemas/temporalExpression"
     logicalExpression:
       type: object
       oneOf:
@@ -52,7 +52,7 @@ components:
           "$ref": "#/components/schemas/predicates"
           minItems: 2
           maxItems: 2
-    comparisonExpressions:
+    comparisonExpression:
        oneOf:
        - "$ref": "#/components/schemas/eqExpression"
        - "$ref": "#/components/schemas/ltExpression"
@@ -172,7 +172,7 @@ components:
              - "$ref": "#/components/schemas/arithmeticExpression"
           minItems: 2
           maxItems: 2
-    spatialExpressions:
+    spatialExpression:
        oneOf:
           - "$ref": "#/components/schemas/equalsExpression"
           - "$ref": "#/components/schemas/disjoinExpression"
@@ -247,7 +247,7 @@ components:
              - "$ref": "#/components/schemas/functionRef"
           minItems: 2
           maxItems: 2
-    temporalExpressions:
+    temporalExpression:
        oneOf:
           - "$ref": "#/components/schemas/afterExpression"
           - "$ref": "#/components/schemas/beforeExpression"
