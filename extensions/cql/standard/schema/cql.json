@@ -11,7 +11,8 @@
             { "$ref": "#/$defs/booleanValueExpression" },
             { "$ref": "#/$defs/comparisonPredicate" },
             { "$ref": "#/$defs/spatialPredicate" },
-            { "$ref": "#/$defs/temporalPredicate" }
+            { "$ref": "#/$defs/temporalPredicate" },
+            { "$ref": "#/$defs/arrayPredicate" }
          ]
       },
 
@@ -484,6 +485,79 @@
       },
 
       "$comment": "=======================================================",
+      "$comment": "=  ARRAY PREDICATE                                    =",
+      "$comment": "=======================================================",
+
+      "arrayPredicate" : {
+         "oneOf": [
+            {"$ref": "#/$defs/aequalsExpression"},
+            {"$ref": "#/$defs/acontainsExpression"},
+            {"$ref": "#/$defs/acontainedByExpression"},
+            {"$ref": "#/$defs/aoverlapsExpression"}
+         ]
+      },
+
+      "aequalsExpression": {
+         "type": "object",
+         "required": ["aequals"],
+         "properties": {
+            "equals": { "$ref": "#/$defs/arrayOperands" }
+         }
+      },
+
+      "acontainsExpression": {
+         "type": "object",
+         "required": ["acontains"],
+         "properties": {
+            "acontains": { "$ref": "#/$defs/arrayOperands" }
+         }
+      },
+
+      "acontainedByExpression": {
+         "type": "object",
+         "required": ["acontainedBy"],
+         "properties": {
+            "acontainedBy": { "$ref": "#/$defs/arrayOperands" }
+         }
+      },
+
+      "aoverlapsExpression": {
+         "type": "object",
+         "required": ["aoverlaps"],
+         "properties": {
+            "aoverlaps": { "$ref": "#/$defs/arrayOperands" }
+         }
+      },
+ 
+      "arrayOperands": {
+         "type": "array",
+         "items": {
+            "type": "array",
+            "items": {
+               "oneOf": [
+                  {"$ref": "#/$defs/functionRef"},
+                  {"$ref": "#/$defs/propertyRef"},
+                  {"$ref": "#/$defs/arrayLiteral"}
+               ]
+            }
+         },
+         "minItems": 2,
+         "maxItems": 2
+      },
+
+      "arrayLiteral": {
+         "oneOf": [
+            {"$ref": "#/$defs/scalarLiteral"},
+            {"$ref": "#/$defs/geomLiteral"},
+            {"$ref": "#/$defs/temporalLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"},
+            {"$ref": "#/$defs/arithmeticExpression"},
+            {"$ref": "#/$defs/arrayLiteral"}
+         ]
+      },
+
+      "$comment": "=======================================================",
       "$comment": "=  ARITHMETIC EXPRESSIONS                             =",
       "$comment": "=======================================================",
 
@@ -579,7 +653,8 @@
                      { "$ref": "#/$defs/temporalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
-                     { "$ref": "#/$defs/arithmeticExpression" }
+                     { "$ref": "#/$defs/arithmeticExpression" },
+                     { "$ref": "#/$defs/arrayLiteral" }
                   ]
                }
             }

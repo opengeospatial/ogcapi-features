@@ -32,6 +32,7 @@ booleanPrimary = predicate
 predicate = comparisonPredicate
           | spatialPredicate
           | temporalPredicate;
+          | arrayPredicate;
 
 #=============================================================================#
 # A comparison predicate evaluates if two scalar expression statisfy the
@@ -92,6 +93,7 @@ inList = listItem [ {comma listItem} ];
 
 listItem = characterLiteral
          | numericLiteral
+         | booleanLiteral
          | temporalLiteral
          | spatialLiteral
          | function
@@ -159,6 +161,39 @@ temporalOperator = "ANYINTERACTS"
                  | "TEQUALS";
 
 #=============================================================================#
+# An array predicate evaluates if two array expressions statisfy the
+# specified comparison operator.  The comparion operators include equality,
+# not equal, less than, greater than, less than or equal, greater than or equal,
+# superset, subset and overlap operators.
+#=============================================================================#
+arrayPredicate = arrayExpression arrayOperator arrayExpression;
+
+# An array expression is a bracket-delimited, comma-separated list of array
+# elements.  An array element is either a character literal, a numeric literal,
+# a geometric literal, a temporal literal, a property name, a function, an
+# arithmetic expression or an array.
+#
+arrayExpression = propertyName | function | arrayLiteral;
+
+arrayLiteral = leftBracket rightBracket
+             | leftBracket arrayElement [ { comma arrayElement } ] rightBracket;
+
+arrayElement = characterLiteral
+             | numericLiteral
+             | booleanLiteral
+             | geomLiteral
+             | temporalLiteral
+             | propertyName
+             | function
+             | arithmeticExpression
+             | arrayLiteral;
+
+arrayOperator = "AEQUALS"
+              | "ACONTAINS"
+              | "CONTAINED BY"
+              | "AOVERLAPS";
+
+#=============================================================================#
 # An arithemtic expression is an expression composed of an arithmetic
 # operand (a property name, a number or a function that returns a number),
 # an arithmetic operators (+,-,*,/) and another arithmetic operand.
@@ -199,7 +234,8 @@ argument = characterLiteral
          | temporalLiteral
          | propertyName
          | function
-         | arithmeticExpression;
+         | arithmeticExpression
+         | arrayExpression;
 
 #=============================================================================#
 # Definition of CHARACTER literals

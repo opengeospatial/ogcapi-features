@@ -197,3 +197,14 @@ include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
 ----
 ====
+
+[[arrays]]
+=== Requirements class "Arrays"
+
+include::requirements/requirements_class_arrays.adoc[]
+
+This clause specified requirements for support array expression is CQL.  Array
+expressions can be tested in a predicate for equality, if one array is a subset of another, it one array is a superset of another or is two arrays overlap or share elements.
+
+include::requirements/arrays/REQ_arrays.adoc[]
+

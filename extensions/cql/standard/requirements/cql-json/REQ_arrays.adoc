@@ -1,0 +1,123 @@
+[[req_cql-json_arrays]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql-json/arrays* 
+^|A |An array shall be encoded in JSON according to the following JSON-schema fragment:
+
+[source,JSON]
+----
+   "arrayPredicate" : {
+      "oneOf": [
+         {"$ref": "#/$defs/aequalsExpression"},
+         {"$ref": "#/$defs/acontainsExpression"},
+         {"$ref": "#/$defs/acontainedByExpression"},
+         {"$ref": "#/$defs/aoverlapsExpression"}
+      ]
+   },
+
+   "aequalsExpression": {
+      "type": "object",
+      "required": ["aequals"],
+      "properties": {
+         "equals": { "$ref": "#/$defs/arrayOperands" }
+      }
+   },
+
+   "acontainsExpression": {
+      "type": "object",
+      "required": ["acontains"],
+      "properties": {
+         "acontains": { "$ref": "#/$defs/arrayOperands" }
+      }
+   },
+
+   "acontainedByExpression": {
+      "type": "object",
+      "required": ["acontainedBy"],
+      "properties": {
+         "acontainedBy": { "$ref": "#/$defs/arrayOperands" }
+      }
+   },
+
+   "aoverlapsExpression": {
+      "type": "object",
+      "required": ["aoverlaps"],
+      "properties": {
+         "aoverlaps": { "$ref": "#/$defs/arrayOperands" }
+      }
+   },
+
+   "arrayOperands": {
+      "type": "array",
+      "items": {
+         "type": "array",
+         "items": {
+            "oneOf": [
+               {"$ref": "#/$defs/functionRef"},
+               {"$ref": "#/$defs/propertyRef"},
+               {"$ref": "#/$defs/arrayLiteral"}
+            ]
+         }
+      },
+      "minItems": 2,
+      "maxItems": 2
+   },
+
+   "arrayLiteral": {
+      "oneOf": [
+         {"$ref": "#/$defs/scalarLiteral"},
+         {"$ref": "#/$defs/geomLiteral"},
+         {"$ref": "#/$defs/temporalLiteral"},
+         {"$ref": "#/$defs/propertyRef"},
+         {"$ref": "#/$defs/functionRef"},
+         {"$ref": "#/$defs/arithmeticExpression"},
+         {"$ref": "#/$defs/arrayLiteral"}
+      ]
+   },
+----
+
+^|B |The `cqlFilter` object shall be extended to add array expressions:
+
+----
+   "cqlFilter": {
+      "type": "object",
+      "oneOf": [
+         { "$ref": "#/$defs/booleanValueExpression" },
+         { "$ref": "#/$defs/comparisonPredicate" },
+         { "$ref": "#/$defs/spatialPredicate" },
+         { "$ref": "#/$defs/temporalPredicate" },
+         { "$ref": "#/$defs/arrayPredicate" }
+      ]
+   },
+----
+
+^|C |If the server implements the <<rc_functions>> conformance class, the function object shall be extended to allow array literal arguments:
+
+----
+   "function": {
+      "type": "object",
+      "required": [ "name" ],
+      "properties": {
+         "name": { "type": "string" },
+         "arguments": {
+            "type": "array",
+            "items": {
+               "oneOf": [
+                  { "$ref": "#/$defs/scalarLiteral" },
+                  { "$ref": "#/$defs/spatialLiteral" },
+                  { "$ref": "#/$defs/temporalLiteral" },
+                  { "$ref": "#/$defs/propertyRef" },
+                  { "$ref": "#/$defs/functionRef" },
+                  { "$ref": "#/$defs/arithmeticExpression" },
+                  { "$ref": "#/$defs/arrayLiteral" }
+               ]
+            }
+         }
+      }
+   },
+----
+
+^|D |See <<req_sql-json_simple-cql>> for the definition of scalarLiteral, spatialLiteral, and temporalLiteral.
+^|E |See <<req_cql-json_functions>> for the definition of functionRef.
+^|F |See <<req_cql-json_arithmetic>> for the definition of arithmeticExpression.
+|===

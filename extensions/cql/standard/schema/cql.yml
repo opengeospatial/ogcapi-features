@@ -13,6 +13,7 @@ components:
       - "$ref": "#/components/schemas/comparisonPredicate"
       - "$ref": "#/components/schemas/spatialPredicate"
       - "$ref": "#/components/schemas/temporalPredicate"
+      - "$ref": "#/components/schemas/arrayExpression"
     booleanValueExpression:
        oneOf:
           - "$ref": "#/components/booleanTerm"
@@ -389,6 +390,56 @@ components:
           - "$ref": "#/components/schemas/temporalLiteral"
           - "$ref": "#/components/schemas/propertyRef"
           - "$ref": "#/components/schemas/functionRef"
+    arrayExpression:
+       oneOf:
+          - "$ref": "#/components/schemas/aequalsExpression"
+          - "$ref": "#/components/schemas/acontainsExpression"
+          - "$ref": "#/components/schemas/acontainedByExpression"
+          - "$ref": "#/components/schemas/aoverlapsExpression"
+    aequalsExpression:
+       type: object
+       required:
+          - aequals
+       properties:
+          aequals:
+             "$ref": "#/components/schemas/arrayOperands"
+    acontainsExpression:
+       type: object
+       required:
+          - acontains
+       properties:
+          acontains:
+             "$ref": "#/components/schemas/arrayOperands"
+    acontainedByExpression:
+       type: object
+       required:
+          - acontainedBy
+       properties:
+          acontainedBy:
+             "$ref": "#/components/schemas/arrayOperands"
+    aoverlapsExpression:
+       type: object
+       required:
+          - aoverlaps
+       properties:
+          aoverlaps:
+             "$ref": "#/components/schemas/arrayOperands"
+    arrayOperands:
+       type: array
+       items:
+          type: array
+          items:
+             "$ref": "#/components/schemas/arrayElement"
+       minItems: 2
+       maxItems: 2
+    arrayElement:
+       oneOf:
+          - "$ref": "#/components/schemas/scalarLiteral"
+          - "$ref": "#/components/schemas/spatialLiteral"
+          - "$ref": "#/components/schemas/temporalLiteral"
+          - "$ref": "#/components/schemas/functionRef"
+          - "$ref": "#/components/schemas/arithmeticExpression"
+          - "$ref": "#/components/schemas/arrayElement"
     arithmeticExpression:
        oneOf:
           - "$ref": "#/components/schemas/addExpression"
