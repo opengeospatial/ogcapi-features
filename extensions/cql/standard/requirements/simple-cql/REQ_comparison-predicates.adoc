@@ -6,58 +6,59 @@
 
 ----
    comparisonPredicate = binaryComparisonPredicate
-                      \| isLikePredicate
-                      \| isBetweenPredicate
-                      \| isInListPredicate
-                      \| isNullPredicate;
+                       | isLikePredicate
+                       | isBetweenPredicate
+                       | isInListPredicate
+                       | isNullPredicate;
 
    binaryComparisonPredicate = scalarExpression
                                comparisonOperator
                                scalarExpression;
 
-   scalarExpression = characterLiteral 
-                   \| numericLiteral
-                   \| propertyName
-                   \| function
-                   \| arithmeticExpression;
-
-   comparisonOperator = eq \| neq \| lt \| gt \| lteq \| gteq;
-
+   scalarExpression = characterLiteral
+                    | numericLiteral
+                    | booleanLiteral
+                    | propertyName
+                    | function
+                    | arithmeticExpression;
+   
+   comparisonOperator = eq | neq | lt | gt | lteq | gteq;
+   
    neq = lt gt;
-
+   
    gteq = gt eq;
-
+   
    lteq = lt eq;
-
-   isLikePredicate =  scalarExpression "LIKE" regularExpression
-                     \["WILDCARD" specialCharacter\]
-                     \["SINGLECHAR" specialCharacter\]
-                     \["ESCAPE" specialCharacter\]
-                     \["NOCASE" booleanLiteral\];
-
-   regularExpression = characterLiteral;
-
+   
+   isLikePredicate =  scalarExpression "LIKE" patternExpression
+                      ["WILDCARD" specialCharacter]
+                      ["SINGLECHAR" specialCharacter]
+                      ["ESCAPE" specialCharacter]
+                      ["NOCASE" booleanLiteral];
+   
+   patternExpression = characterLiteral;
+   
    isBetweenPredicate = scalarExpression "BETWEEN"
                         scalarExpression "AND" scalarExpression;
-
+   
    isInListPredicate = inListOperand "IN" leftParen inList rightParen;
-
-   inList = listItem \[ {comma listItem} \];
-
+   
+   inList = listItem [ {comma listItem} ];
+   
    listItem = characterLiteral
-            \| numericLiteral
-            \| temporalLiteral
-            \| geomLiteral
-            \| function
-            \| arithmeticExpression;
+            | numericLiteral
+            | temporalLiteral
+            | geomLiteral
+            | function
+            | arithmeticExpression;
 
    inListOperand = listItem
-                 \| propertyName
-                 \| arithmeticExpression;
+                 | propertyName
+                 | arithmeticExpression;
 
-   isNullPredicate = scalarExpression "IS" \["NOT"\] "NULL";
+   isNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
 ----
 
-^|B |A server the implements the <<rc_functions>> conformance class shall include function calls in the `scalarExpression` and `listItem` productions.
-^|C |A server the implements the <<rc_arithmetic>> conformance class shall include arithmetic expression in the `scalarExpression`, `listItem` and `inListOperand` productions.
+^|B |A server that implements the <<rc_functions>> conformance class shall include function calls in the `scalarExpression` and `listItem` productions.
+^|C |A server that implements the <<rc_arithmetic>> conformance class shall include arithmetic expression in the `scalarExpression`, `listItem` and `inListOperand` productions.
 |===

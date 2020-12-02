@@ -5,12 +5,12 @@
 ^|A |A server that implements this conformance class shall support property references as defined by the following BNF fragment:
 
 ----
-propertyName = identifier;
+   propertyName = identifier;
 
-identifier = identifierStart \[ {identifierPart} \];
+   identifier = identifierStart \[ {identifierPart} \];
 
-identifierStart = alpha \[{octothorp\|dollar\|underscore\|alpha\|digit}\];
+   identifierStart = alpha \[{octothorp\|dollar\|underscore\|alpha\|digit}\];
 
-identifierPart = alpha \| digit;
+   identifierPart = alpha \| digit;
 ----
 |===

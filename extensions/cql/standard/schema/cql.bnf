@@ -15,9 +15,11 @@
 #=============================================================================#
 cqlFilter = booleanValueExpression;
 
-booleanValueExpression = booleanTerm | booleanValueExpression "OR" booleanTerm;
+booleanValueExpression = booleanTerm
+                       | booleanValueExpression "OR" booleanTerm;
 
-booleanTerm = booleanFactor | booleanTerm "AND" booleanFactor;
+booleanTerm = booleanFactor
+            | booleanTerm "AND" booleanFactor;
 
 booleanFactor = ["NOT"] booleanPrimary;
 
@@ -52,6 +54,7 @@ binaryComparisonPredicate = scalarExpression
 
 scalarExpression = characterLiteral 
                  | numericLiteral
+                 | booleanLiteral
                  | propertyName
                  | function
                  | arithmeticExpression;
@@ -90,6 +93,7 @@ inList = listItem [ {comma listItem} ];
 
 listItem = characterLiteral
          | numericLiteral
+         | booleanLiteral
          | temporalLiteral
          | geomLiteral
          | function
@@ -114,13 +118,13 @@ spatialPredicate =  spatialOperator
 #       these are outside the scope of a "simple" core for CQL.  These
 #       can be added as extensions.
 #
-spatialOperator = "EQUALS"
+spatialOperator = "INTERSECTS"
+                | "EQUALS"
                 | "DISJOINT"
                 | "TOUCHES"
                 | "WITHIN"
                 | "OVERLAPS"
                 | "CROSSES"
-                | "INTERSECTS"
                 | "CONTAINS";
 
 # A geometric expression is a property name of a geometry-valued property,
@@ -141,21 +145,20 @@ temporalExpression = temporalLiteral
                    | propertyName
                    | function;
 
-temporalOperator = "AFTER"
-                 | "BEFORE"
-                 | "BEGINS"
-                 | "BEGUNBY"
-                 | "TCONTAINS"
-                 | "DURING"
-                 | "ENDEDBY"
-                 | "ENDS"
-                 | "TEQUALS"
+temporalOperator = "ANYINTERACTS"
+                 | "BEFORE" 
+                 | "AFTER"
                  | "MEETS"
                  | "METBY"
                  | "TOVERLAPS"
                  | "OVERLAPPEDBY"
-                 | "ANYINTERACTS"
-                 | "INTERSECTS";
+                 | "BEGINS"
+                 | "BEGUNBY"
+                 | "DURING"
+                 | "TCONTAINS"
+                 | "ENDS"
+                 | "ENDEDBY"
+                 | "TEQUALS";
 
 #=============================================================================#
 # An array predicate evaluates if two array expressions statisfy the
@@ -177,6 +180,7 @@ arrayLiteral = leftBracket rightBracket
 
 arrayElement = characterLiteral
              | numericLiteral
+             | booleanLiteral
              | geomLiteral
              | temporalLiteral
              | propertyName
@@ -225,6 +229,7 @@ argumentList = argument [ { comma argument } ];
 
 argument = characterLiteral
          | numericLiteral
+         | booleanLiteral
          | geomLiteral
          | temporalLiteral
          | propertyName
