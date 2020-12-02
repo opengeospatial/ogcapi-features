@@ -24,7 +24,7 @@
                "items": {
                   "oneOf": [
                      { "$ref": "#/$defs/scalarLiteral" },
-                     { "$ref": "#/$defs/geomLiteral" },
+                     { "$ref": "#/$defs/spatialLiteral" },
                      { "$ref": "#/$defs/temporalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
@@ -46,7 +46,7 @@
 
       "geomExpression": {
          "oneOf": [
-            {"$ref": "#/$defs/geomLiteral"},
+            {"$ref": "#/$defs/spatialLiteral"},
             {"$ref": "#/$defs/propertyRef"},
             {"$ref": "#/$defs/functionRef"}
          ]

@@ -95,7 +95,7 @@ listItem = characterLiteral
          | numericLiteral
          | booleanLiteral
          | temporalLiteral
-         | geomLiteral
+         | spatialLiteral
          | function
          | arithmeticExpression;
 
@@ -131,7 +131,7 @@ spatialOperator = "INTERSECTS"
 # a geometric literal (expressed as WKT) or a function that returns a
 # geometric value.
 #
-geomExpression = geomLiteral
+geomExpression = spatialLiteral
                | propertyName
                | function;
 
@@ -230,7 +230,7 @@ argumentList = argument [ { comma argument } ];
 argument = characterLiteral
          | numericLiteral
          | booleanLiteral
-         | geomLiteral
+         | spatialLiteral
          | temporalLiteral
          | propertyName
          | function
@@ -363,14 +363,14 @@ booleanLiteral = "TRUE" | "true" | "FALSE" | "false" |
 # NOTE: This is basically BNF that define WKT encoding; it would be nice
 #       to instead reference some normative BNF for WKT.
 #=============================================================================#
-geomLiteral = pointTaggedText
-            | linestringTaggedText
-            | polygonTaggedText
-            | multipointTaggedText
-            | multilinestringTaggedText
-            | multipolygonTaggedText
-            | geometryCollectionTaggedText
-            | envelopeTaggedText;
+spatialLiteral = pointTaggedText
+               | linestringTaggedText
+               | polygonTaggedText
+               | multipointTaggedText
+               | multilinestringTaggedText
+               | multipolygonTaggedText
+               | geometryCollectionTaggedText
+               | envelopeTaggedText;
 
 pointTaggedText = "POINT" pointText;
 
@@ -406,7 +406,8 @@ multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen
 
 multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
 
-geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
+geometryCollectionText = leftParen
+                         spatialLiteral {comma spatialLiteral} rightParen;
 
 envelopeTaggedText = "ENVELOPE" envelopeText;
 

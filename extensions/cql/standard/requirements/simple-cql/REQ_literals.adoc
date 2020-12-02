@@ -136,14 +136,14 @@
    # NOTE: This is basically BNF that define WKT encoding; it would be nice
    #       to instead reference some normative BNF for WKT.
    #==========================================================================#
-   geomLiteral = pointTaggedText
-              \| linestringTaggedText
-              \| polygonTaggedText
-              \| multipointTaggedText
-              \| multilinestringTaggedText
-              \| multipolygonTaggedText
-              \| geometryCollectionTaggedText
-              \| envelopeTaggedText;
+   spatialLiteral = pointTaggedText
+                 \| linestringTaggedText
+                 \| polygonTaggedText
+                 \| multipointTaggedText
+                 \| multilinestringTaggedText
+                 \| multipolygonTaggedText
+                 \| geometryCollectionTaggedText
+                 \| envelopeTaggedText;
    
    pointTaggedText = "POINT" pointText;
    
@@ -179,7 +179,8 @@
    
    multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
    
-   geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
+   geometryCollectionText = leftParen
+                            spatialLiteral {comma spatialLiteral} rightParen;
    
    envelopeTaggedText = "ENVELOPE" envelopeText;
    
