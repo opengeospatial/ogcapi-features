@@ -6,25 +6,70 @@
 
 [source,JSON]
 ----
-   "arithmeticOperands": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "value": { "type": "number" },
-         "+": {"$ref": "#/definitions/add"},
-         "-": {"$ref": "#/definitions/sub"},
-         "*": {"$ref": "#/definitions/mul"},
-         "/": {"$ref": "#/definitions/div"}
+      "arithmeticExpression": {
+         "oneOf": [
+            {"$ref": "#/$defs/addExpression" },
+            {"$ref": "#/$defs/subExpression" },
+            {"$ref": "#/$defs/mulExpression" },
+            {"$ref": "#/$defs/divExpression" }
+         ]
       },
-      "minProperties": 2,
-      "maxProperties": 2
-   },
 
-   "add": { "$ref": "#/definitions/arithmeticOperands" },
-   "sub": { "$ref": "#/definitions/arithmeticOperands" },
-   "mul": { "$ref": "#/definitions/arithmeticOperands" },
-   "div": { "$ref": "#/definitions/arithmeticOperands" },
+      "addExpression": {
+         "type": "object",
+         "required": ["+"],
+         "properties": {
+            "+": { "$ref": "#/$defs/arithmeticOperands" }
+         }
+      },
+
+      "subExpression": {
+         "type": "object",
+         "required": ["-"],
+         "properties": {
+            "-": { "$ref": "#/$defs/arithmeticOperands" }
+         }
+      },
+
+      "mulExpression": {
+         "type": "object",
+         "required": ["*"],
+         "properties": {
+            "*": { "$ref": "#/$defs/arithmeticOperands" }
+         }
+      },
+
+      "divExpression": {
+         "type": "object",
+         "required": ["*"],
+         "properties": {
+            "/": { "$ref": "#/$defs/arithmeticOperands" }
+         }
+      },
+
+      "arithmeticOperands": {
+         "type": "array",
+         "items": {
+            "oneOf": [
+               {"$ref": "#/$defs/arithmeticExpression"},
+               {"$ref": "#/$defs/propertyRef"},
+               {"$ref": "#/$defs/functionRef"},
+               {"type": "number" }
+            ],
+            "minItems": 2,
+            "maxItems": 2
+         }
+      },
+
+      "scalarExpression": {
+         "oneOf": [
+            {"$ref": "#/$defs/scalarLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"},
+            {"$ref": "#/$defs/arithmeticExpression"}
+         ]
+      },
 ----
-^|B |If the server implements the <<rc_functions>> conformance class the `properties` object shall be extended to allow functions calls.
+
+^|B |A server that implements the <<rc_functions>> conformance class shall include function calls in the `arithmeticOperands` and `scalarExpression` objects.
 |===

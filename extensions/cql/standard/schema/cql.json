@@ -1,83 +1,113 @@
 {
    "$schema": "https://json-schema.org/draft/2019-09/schema",
-   "$ref": "#/$defs/predicates",
+   "$ref": "#/$defs/cqlFilter",
    "$defs": {
       "$comment": "=======================================================",
-      "$comment": "=  PREDICATES                                         =",
+      "$comment": "=  CQL FILTER                                         =",
       "$comment": "=======================================================",
-      "predicates": {
+      "cqlFilter": {
          "type": "object",
          "oneOf": [
-            { "$ref": "#/$defs/logicalExpression" },
-            { "$ref": "#/$defs/comparisonExpression" },
-            { "$ref": "#/$defs/spatialExpression" },
-            { "$ref": "#/$defs/temporalExpression" }
+            { "$ref": "#/$defs/booleanValueExpression" },
+            { "$ref": "#/$defs/comparisonPredicate" },
+            { "$ref": "#/$defs/spatialPredicate" },
+            { "$ref": "#/$defs/temporalPredicate" }
          ]
       },
 
       "$comment": "=======================================================",
-      "$comment": "=  LOGICAL EXPRESSIONS                                =",
+      "$comment": "=  BOOLEAN VALUE EXPRESSION                           =",
       "$comment": "=======================================================",
 
-      "logicalExpression": {
+      "booleanValueExpression": {
          "oneOf": [
-            { "$ref": "#/$defs/andExpression" },
-            { "$ref": "#/$defs/orExpression" },
-            { "$ref": "#/$defs/notExpression" }
+            { "$ref": "#/$defs/booleanTerm" },
+            {
+               "type": "object",
+               "required": ["or"],
+               "properties": {
+                  "or":  {
+                     "type": "array",
+                     "items": {
+                        "$ref": "#/$defs/predicate",
+                        "minItems": 2,
+                        "maxItems": 2
+                     }
+                  }
+               }
+            }
          ]
       },
 
-      "andExpression": {
-         "type": "object",
-         "required": ["and"],
-         "properties": {
-            "and": {"$ref": "#/$defs/and" }
-         }
-      },
-
-      "orExpression": {
-         "type": "object",
-         "required": ["or"],
-         "properties": {
-            "or": {"$ref": "#/$defs/or" }
-         }
-      },
-
-      "notExpression": {
-         "type": "object",
-         "required": ["not"],
-         "properties": {
-            "not": {"$ref": "#/$defs/not" }
-         }
-      },
-
-      "and": { "$ref": "#/$defs/booleanOperands" },
-      "or":  { "$ref": "#/$defs/booleanOperands" },
-      "not": { "$ref": "#/$defs/predicates" },
-
-      "booleanOperands": {
-         "type": "array",
-         "items": {
-            "$ref": "#/$defs/predicates",
-            "minItems": 2,
-            "maxItems": 2
-         }
-      },
-
-      "$comment": "=======================================================",
-      "$comment": "=  COMPARISON EXPRESSIONS                             =",
-      "$comment": "=======================================================",
-
-      "comparisonExpression" : {
+      "booleanTerm": {
          "oneOf": [
-            {"$ref": "#/$defs/eqExpression"},
-            {"$ref": "#/$defs/ltExpression"},
-            {"$ref": "#/$defs/gtExpression"},
-            {"$ref": "#/$defs/lteExpression"},
-            {"$ref": "#/$defs/gteExpression"},
-            {"$ref": "#/$defs/betweenExpression"},
-            {"$ref": "#/$defs/likeExpression" },
-            {"$ref": "#/$defs/inExpression" }
+            { "$ref": "#/$defs/booleanFactor" },
+            {
+               "type": "object",
+               "required": ["and"],
+               "properties": {
+                  "and": {
+                     "type": "array",
+                     "items": {
+                        "$ref": "#/$defs/predicate",
+                        "minItems": 2,
+                        "maxItems": 2
+                     }
+                  }
+               }
+            }
+         ]
+      },
+
+      "booleanFactor": {
+         "oneOf": [
+            {
+               "type": "object",
+               "required": ["not"],
+               "properties": {
+                  "not": {"$ref": "#/$defs/booleanPrimary" }
+               }
+            },
+            { "$ref": "#/$defs/booleanPrimary" }
+         ]
+      },
+
+      "booleanPrimary": {
+         "oneOf": [
+            { "$ref": "#/$defs/predicate" },
+            { "$ref": "#/$defs/cqlFilter" }
+         ]
+      }, 
+
+      "predicate": {
+         "oneOf": [
+            { "$ref": "#/$defs/comparisonPredicate" },
+            { "$ref": "#/$defs/spatialPredicate" },
+            { "$ref": "#/$defs/temporalPredicate" }
+         ]
+      },
+
+      "$comment": "=======================================================",
+      "$comment": "=  COMPARISON PREDICATES                              =",
+      "$comment": "=======================================================",
+
+      "comparisonPredicate" : {
+         "oneOf": [
+            {"$ref": "#/$defs/binaryComparisonPredicate"},
+            {"$ref": "#/$defs/isLikePredicate" },
+            {"$ref": "#/$defs/isBetweenPredicate"},
+            {"$ref": "#/$defs/isInListPredicate" },
+            {"$ref": "#/$defs/isNullPredicate" }
+         ]
+      },
+
+      "binaryComparisonPredicate": {
+         "oneOf": [
+            { "$ref": "#/$defs/eqExpression" },
+            { "$ref": "#/$defs/ltExpression" },
+            { "$ref": "#/$defs/gtExpression" },
+            { "$ref": "#/$defs/lteExpression" },
+            { "$ref": "#/$defs/gteExpression" }
          ]
       },
 
@@ -121,7 +151,7 @@
          }
       },
 
-      "betweenExpression": {
+      "isBetweenPredicate": {
          "type": "object",
          "required": ["between"],
          "properties": {
@@ -130,14 +160,14 @@
                "required" : [ "property", "lower", "upper" ],
                "properties": {
                   "property": { "type": "string" },
-                  "lower": { "$ref": "#/$defs/scalarLiteral" },
-                  "upper": { "$ref": "#/$defs/scalarLiteral" }
+                  "lower": { "$ref": "#/$defs/scalarExpression" },
+                  "upper": { "$ref": "#/$defs/scalarExpression" }
                }
             }
          }
       },
 
-      "likeExpression": {
+      "isLikePredicate": {
          "type": "object",
          "required": ["like"],
          "properties": {
@@ -150,13 +180,13 @@
                   "escape": { "type": "string", "default": "\\" },
                   "nocase": { "type": "boolean", "default": true },
                   "property": { "type": "string" },
-                  "value": { "$ref": "#/$defs/scalarLiteral" }
+                  "value": { "$ref": "#/$defs/scalarExpression" }
                }
             }
          }
       },
 
-      "inExpression": {
+      "isInListPredicate": {
          "type": "object",
          "required": ["in"],
          "properties": {
@@ -168,42 +198,64 @@
                   "property": { "type": "string" },
                   "values": {
                      "type": "array",
-                     "items": { "$ref": "#/$defs/scalarLiteral" }
+                     "items": { "$ref": "#/$defs/scalarExpression" }
                   }
                }
             }
          }
       },
-
+   
       "scalarOperands": {
          "type": "array",
          "items": {
-            "oneOf": [
-               {"$ref": "#/$defs/scalarLiteral"},
-               {"$ref": "#/$defs/propertyRef"},
-               {"$ref": "#/$defs/functionRef"},
-               {"$ref": "#/$defs/arithmeticExpression"}
-            ],
+            "$ref": "#/$defs/scalarExpression",
             "minItems": 2,
             "maxItems": 2
          }
       },
 
+      "scalarExpression": {
+         "oneOf": [
+            {"$ref": "#/$defs/scalarLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"},
+            {"$ref": "#/$defs/arithmeticExpression"}
+         ]
+      },
+
+      "isNullPredicate": {
+         "type": "object",
+         "required": [ "isNull" ],
+         "properties": {
+            "isNull": {
+               "$ref": "#/$defs/scalarExpression"
+            }
+         }
+      },
+
       "$comment": "=======================================================",
-      "$comment": "=  SPATIAL EXPRESSIONS                                =",
+      "$comment": "=  SPATIAL PREDICATES                                 =",
       "$comment": "=======================================================",
 
-      "spatialExpression" : {
+      "spatialPredicate" : {
          "oneOf": [
+           {"$ref": "#/$defs/intersectsExpression"},
            {"$ref": "#/$defs/equalsExpression"},
            {"$ref": "#/$defs/disjointExpression"},
            {"$ref": "#/$defs/touchesExpression"},
            {"$ref": "#/$defs/withinExpression"},
            {"$ref": "#/$defs/overlapsExpression"},
            {"$ref": "#/$defs/crossesExpression"},
-           {"$ref": "#/$defs/intersectsExpression"},
            {"$ref": "#/$defs/containsExpression"}
          ]
+      },
+
+      "intersectsExpression": {
+         "type": "object",
+         "required": ["intersects"],
+         "properties": {
+            "intersects": { "$ref": "#/$defs/spatialOperands" }
+         }
       },
 
       "equalsExpression": {
@@ -254,14 +306,6 @@
          }
       },
 
-      "intersectsExpression": {
-         "type": "object",
-         "required": ["intersects"],
-         "properties": {
-            "intersects": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
       "containsExpression": {
          "type": "object",
          "required": ["contains"],
@@ -273,44 +317,41 @@
       "spatialOperands": {
          "type": "array",
          "items": {
-            "oneOf": [
-               {"$ref": "#/$defs/spatialLiteral"},
-               {"$ref": "#/$defs/propertyRef"},
-               {"$ref": "#/$defs/functionRef"}
-            ],
+            "$ref": "#/$defs/geomExpression",
             "minItems": 2,
             "maxItems": 2
          }
+      },
+
+      "geomExpression": {
+         "oneOf": [
+            {"$ref": "#/$defs/geomLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"}
+         ]
       },
 
       "$comment": "=======================================================",
       "$comment": "=  TEMPORAL EXPRESSIONS                               =",
       "$comment": "=======================================================",
 
-      "temporalExpression" : {
+      "temporalPredicate" : {
          "oneOf": [
-           {"$ref": "#/$defs/afterExpression"},
            {"$ref": "#/$defs/beforeExpression"},
-           {"$ref": "#/$defs/beginsExpression"},
-           {"$ref": "#/$defs/begunbyExpression"},
-           {"$ref": "#/$defs/tcontainsExpression"},
-           {"$ref": "#/$defs/duringExpression"},
-           {"$ref": "#/$defs/endedbyExpression"},
-           {"$ref": "#/$defs/endsExpression"},
-           {"$ref": "#/$defs/tequalsExpression"},
+           {"$ref": "#/$defs/afterExpression"},
            {"$ref": "#/$defs/meetsExpression"},
            {"$ref": "#/$defs/metbyExpression"},
            {"$ref": "#/$defs/toverlapsExpression"},
-           {"$ref": "#/$defs/overlappedbyExpression"}
+           {"$ref": "#/$defs/overlappedbyExpression"},
+           {"$ref": "#/$defs/beginsExpression"},
+           {"$ref": "#/$defs/begunbyExpression"},
+           {"$ref": "#/$defs/duringExpression"},
+           {"$ref": "#/$defs/tcontainsExpression"},
+           {"$ref": "#/$defs/endsExpression"},
+           {"$ref": "#/$defs/endedbyExpression"},
+           {"$ref": "#/$defs/tequalsExpression"},
+           {"$ref": "#/$defs/anyinteractsExpression"}
          ]
-      },
-
-      "afterExpression": {
-         "type": "object",
-         "required": ["after"],
-         "properties": {
-            "after": { "$ref": "#/$defs/temporalOperands" }
-         }
       },
 
       "beforeExpression": {
@@ -321,59 +362,11 @@
          }
       },
 
-      "beginsExpression": {
+      "afterExpression": {
          "type": "object",
-         "required": ["begins"],
+         "required": ["after"],
          "properties": {
-            "begins": { "$ref": "#/$defs/temporalOperands" }
-         }
-      },
-
-      "begunbyExpression": {
-         "type": "object",
-         "required": ["begunby"],
-         "properties": {
-            "begunby": { "$ref": "#/$defs/temporalOperands" }
-         }
-      },
-
-      "tcontainsExpression": {
-         "type": "object",
-         "required": ["tcontains"],
-         "properties": {
-            "tcontains": { "$ref": "#/$defs/temporalOperands" }
-         }
-      },
-
-      "duringExpression": {
-         "type": "object",
-         "required": ["during"],
-         "properties": {
-            "during": { "$ref": "#/$defs/temporalOperands" }
-         }
-      },
-
-      "endedbyExpression": {
-         "type": "object",
-         "required": ["endedby"],
-         "properties": {
-            "endedby": { "$ref": "#/$defs/temporalOperands" }
-         }
-      },
-
-      "endsExpression": {
-         "type": "object",
-         "required": ["ends"],
-         "properties": {
-            "ends": { "$ref": "#/$defs/temporalOperands" }
-         }
-      },
-
-      "tequalsExpression": {
-         "type": "object",
-         "required": ["tequals"],
-         "properties": {
-            "tequals": { "$ref": "#/$defs/temporalOperands" }
+            "after": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
@@ -409,17 +402,85 @@
          }
       },
 
+      "beginsExpression": {
+         "type": "object",
+         "required": ["begins"],
+         "properties": {
+            "begins": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "begunbyExpression": {
+         "type": "object",
+         "required": ["begunby"],
+         "properties": {
+            "begunby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "duringExpression": {
+         "type": "object",
+         "required": ["during"],
+         "properties": {
+            "during": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "tcontainsExpression": {
+         "type": "object",
+         "required": ["tcontains"],
+         "properties": {
+            "tcontains": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "endsExpression": {
+         "type": "object",
+         "required": ["ends"],
+         "properties": {
+            "ends": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "endedbyExpression": {
+         "type": "object",
+         "required": ["endedby"],
+         "properties": {
+            "endedby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "tequalsExpression": {
+         "type": "object",
+         "required": ["tequals"],
+         "properties": {
+            "tequals": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "anyinteractsExpression": {
+         "type": "object",
+         "required": ["anyinteracts"],
+         "properties": {
+            "anyinteracts": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
       "temporalOperands": {
          "type": "array",
          "items": {
-            "oneOf": [
-               {"$ref": "#/$defs/temporalLiteral"},
-               {"$ref": "#/$defs/propertyRef"},
-               {"$ref": "#/$defs/functionRef"}
-            ],
+            "$ref": "#/$defs/temporalExpression",
             "minimumItems": 2,
             "maximumItems": 2
          }
+      },
+
+      "temporalExpression": {
+         "oneOf": [
+            {"$ref": "#/$defs/temporalLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"}
+         ]
       },
 
       "$comment": "=======================================================",
@@ -471,10 +532,10 @@
          "type": "array",
          "items": {
             "oneOf": [
-               {"type": "number" },
+               {"$ref": "#/$defs/arithmeticExpression"},
                {"$ref": "#/$defs/propertyRef"},
                {"$ref": "#/$defs/functionRef"},
-               {"$ref": "#/$defs/arithmeticExpression"}
+               {"type": "number" }
             ],
             "minItems": 2,
             "maxItems": 2
@@ -488,7 +549,7 @@
          "type": "object",
          "required": ["property"],
          "properties": {
-            "property": { "type": "string" }
+            "propertyName": { "type": "string" }
          }
       },
 
@@ -514,7 +575,7 @@
                "items": {
                   "oneOf": [
                      { "$ref": "#/$defs/scalarLiteral" },
-                     { "$ref": "#/$defs/spatialLiteral" },
+                     { "$ref": "#/$defs/geomLiteral" },
                      { "$ref": "#/$defs/temporalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
@@ -537,7 +598,7 @@
          ]
       },
 
-      "spatialLiteral": {
+      "geomLiteral": {
          "oneOf": [
             { "$ref": "#/$defs/geometryLiteral" },
             { "$ref": "#/$defs/envelopeLiteral" }

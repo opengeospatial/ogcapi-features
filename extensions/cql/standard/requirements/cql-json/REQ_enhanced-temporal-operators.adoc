@@ -2,45 +2,149 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/cql-json/enhanced-temporal-operators* 
-^|A |A server that implements the <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> requirement class and also implements this requirement shall be able to parse a temporal operator encoded as JSON that validates against the following JSON Schema fragment:
+^|A |A server that implements the <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> requirement class and also implements this requirement shall be able to parse a temporal predicate encoded as JSON that validates against the following JSON Schema fragment which extends the list of temporal operators defined by the <<req_sql-json_simple-cql>> requirement:
 
 [source,JSON]
 ----
-   "temporalExpressions" : {
-     "type": "object",
-     "properties": {
-         "after": {"$ref": "#/definitions/after"},
-         "before": {"$ref": "#/definitions/before"},
-         "begins": {"$ref": "#/definitions/begins"},
-         "begunby": {"$ref": "#/definitions/begunby"},
-         "tcontains": {"$ref": "#/definitions/tcontains"},
-         "during": {"$ref": "#/definitions/during"},
-         "endedby": {"$ref": "#/definitions/endedby"},
-         "ends": {"$ref": "#/definitions/ends"},
-         "tequals": {"$ref": "#/definitions/tequals"},
-         "meets": {"$ref": "#/definitions/meets"},
-         "metby": {"$ref": "#/definitions/metby"},
-         "toverlaps": {"$ref": "#/definitions/toverlaps"},
-         "overlappedby": {"$ref": "#/definitions/overlappedby"}
-     },
-     "minProperties": 1,
-     "maxProperties": 1
-   },
+      "temporalPredicate" : {
+         "oneOf": [
+           {"$ref": "#/$defs/beforeExpression"},
+           {"$ref": "#/$defs/afterExpression"},
+           {"$ref": "#/$defs/meetsExpression"},
+           {"$ref": "#/$defs/metbyExpression"},
+           {"$ref": "#/$defs/toverlapsExpression"},
+           {"$ref": "#/$defs/overlappedbyExpression"},
+           {"$ref": "#/$defs/beginsExpression"},
+           {"$ref": "#/$defs/begunbyExpression"},
+           {"$ref": "#/$defs/duringExpression"},
+           {"$ref": "#/$defs/tcontainsExpression"},
+           {"$ref": "#/$defs/endsExpression"},
+           {"$ref": "#/$defs/endedbyExpression"},
+           {"$ref": "#/$defs/tequalsExpression"}
+         ]
+      },
 
-   "after":        { "$ref": "#/definitions/temporalOperands" },
-   "before":       { "$ref": "#/definitions/temporalOperands" },
-   "begins":       { "$ref": "#/definitions/temporalOperands" },
-   "begunby":      { "$ref": "#/definitions/temporalOperands" },
-   "tcontains":    { "$ref": "#/definitions/temporalOperands" },
-   "during":       { "$ref": "#/definitions/temporalOperands" },
-   "endedby":      { "$ref": "#/definitions/temporalOperands" },
-   "ends":         { "$ref": "#/definitions/temporalOperands" },
-   "tequals":      { "$ref": "#/definitions/temporalOperands" },
-   "meets":        { "$ref": "#/definitions/temporalOperands" },
-   "metby":        { "$ref": "#/definitions/temporalOperands" },
-   "toverlaps":    { "$ref": "#/definitions/temporalOperands" },
-   "overlappedby": { "$ref": "#/definitions/temporalOperands" },
-   "anyinteracts": { "$ref": "#/definitions/temporalOperands" },
-   "tintersects":  { "$ref": "#/definitions/temporalOperands" },
+      "beforeExpression": {
+         "type": "object",
+         "required": ["before"],
+         "properties": {
+            "before": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "afterExpression": {
+         "type": "object",
+         "required": ["after"],
+         "properties": {
+            "after": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "meetsExpression": {
+         "type": "object",
+         "required": ["meets"],
+         "properties": {
+            "meets": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "metbyExpression": {
+         "type": "object",
+         "required": ["metby"],
+         "properties": {
+            "metby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "toverlapsExpression": {
+         "type": "object",
+         "required": ["toverlaps"],
+         "properties": {
+            "toverlaps": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "overlappedbyExpression": {
+         "type": "object",
+         "required": ["overlappedby"],
+         "properties": {
+            "overlappedby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "beginsExpression": {
+         "type": "object",
+         "required": ["begins"],
+         "properties": {
+            "begins": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "begunbyExpression": {
+         "type": "object",
+         "required": ["begunby"],
+         "properties": {
+            "begunby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "duringExpression": {
+         "type": "object",
+         "required": ["during"],
+         "properties": {
+            "during": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "tcontainsExpression": {
+         "type": "object",
+         "required": ["tcontains"],
+         "properties": {
+            "tcontains": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "endsExpression": {
+         "type": "object",
+         "required": ["ends"],
+         "properties": {
+            "ends": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "endedbyExpression": {
+         "type": "object",
+         "required": ["endedby"],
+         "properties": {
+            "endedby": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "tequalsExpression": {
+         "type": "object",
+         "required": ["tequals"],
+         "properties": {
+            "tequals": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "temporalOperands": {
+         "type": "array",
+         "items": {
+            "$ref": "#/$defs/temporalExpression",
+            "minimumItems": 2,
+            "maximumItems": 2
+         }
+      },
+
+      "temporalExpression": {
+         "oneOf": [
+            {"$ref": "#/$defs/temporalLiteral"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"}
+         ]
+      },
 ----
+
+^|B |A server that implements the <<rc_functions>> conformance class shall include function calls in the `temporalExpression` object.
 |===

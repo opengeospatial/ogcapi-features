@@ -11,10 +11,16 @@ argumentList = argument \[ { comma argument } \];
 
 argument = characterLiteral
         \| numericLiteral
+        \| booleanLiteral
         \| geomLiteral
+        \| temporalLiteral
         \| propertyName
         \| function
         \| arithmeticExpression;
 ----
-^|B |If the server implements the <<rc_arithmetic>> conformance class then the `argument` production shall be extended to include arithmetic expressions.
+
+^|B |A server that implements the <<rc_arithmetic>> conformance class shall include arithmetic expressions in the `argument` production.
 |===
+
+
+

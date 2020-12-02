@@ -17,5 +17,5 @@ geomExpression = geomLiteral
 ----
 
 ^|B |The semantics of the INTERSECTS operator is defined in clause 6.1.5 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
-^|C |If the server implements the <<rc_functions>> conformance class then the `geomExpression` production shall be extended to include function calls.
+^|C |A server that implements the <<rc_functions>> conformance class shall include function calls in the `geomExpression` production.
 |===

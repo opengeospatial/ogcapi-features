@@ -13,5 +13,6 @@ temporalExpression = temporalLiteral
                   \| propertyName
                   \| function;
 ----
-^|B |If the server implements the <<rc_functions>> conformance class then the `temporalExpression` production shall be extended to include function calls.
+
+^|B |A server that implements the <<rc_functions>> conformance class shall include function calls in the `temporalExpression` production.
 |===

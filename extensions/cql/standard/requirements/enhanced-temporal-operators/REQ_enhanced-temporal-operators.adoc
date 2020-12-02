@@ -6,19 +6,19 @@
 
 ----
    temporalOperator = "ANYINTERACTS"
-                   \| "AFTER"
                    \| "BEFORE"
-                   \| "BEGINS"
-                   \| "BEGUNBY"
-                   \| "TCONTAINS"
-                   \| "DURING"
-                   \| "ENDEDBY"
-                   \| "ENDS"
-                   \| "TEQUALS"
+                   \| "AFTER"
                    \| "MEETS"
                    \| "METBY"
                    \| "TOVERLAPS"
-                   \| "OVERLAPPEDBY";
+                   \| "OVERLAPPEDBY"
+                   \| "BEGINS"
+                   \| "BEGUNBY"
+                   \| "DURING"
+                   \| "TCONTAINS"
+                   \| "ENDS"
+                   \| "ENDEDBY"
+                   \| "TEQUALS";
 ----
 
 ^|B |The semantics of these temporal operators are defined in clause 3.1 of <<OGC16-071r3,Time Ontology in OWL>>.
