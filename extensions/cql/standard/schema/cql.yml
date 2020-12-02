@@ -65,12 +65,12 @@ components:
        - "$ref": "#/components/schemas/isInListPredicate"
        - "$ref": "#/components/schemas/isNullPredicate"
     binaryComparisonPredicate:
+       oneOf:
        - "$ref": "#/components/schemas/eqExpression"
        - "$ref": "#/components/schemas/ltExpression"
        - "$ref": "#/components/schemas/gtExpression"
        - "$ref": "#/components/schemas/lteExpression"
        - "$ref": "#/components/schemas/gteExpression"
-       oneOf:
     eqExpression:
        type: object
        required:
