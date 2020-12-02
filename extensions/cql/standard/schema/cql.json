@@ -325,7 +325,7 @@
 
       "geomExpression": {
          "oneOf": [
-            {"$ref": "#/$defs/geomLiteral"},
+            {"$ref": "#/$defs/spatialLiteral"},
             {"$ref": "#/$defs/propertyRef"},
             {"$ref": "#/$defs/functionRef"}
          ]
@@ -575,7 +575,7 @@
                "items": {
                   "oneOf": [
                      { "$ref": "#/$defs/scalarLiteral" },
-                     { "$ref": "#/$defs/geomLiteral" },
+                     { "$ref": "#/$defs/spatialLiteral" },
                      { "$ref": "#/$defs/temporalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
@@ -598,7 +598,7 @@
          ]
       },
 
-      "geomLiteral": {
+      "spatialLiteral": {
          "oneOf": [
             { "$ref": "#/$defs/geometryLiteral" },
             { "$ref": "#/$defs/envelopeLiteral" }

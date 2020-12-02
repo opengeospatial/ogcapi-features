@@ -268,7 +268,7 @@
 
       "geomExpression": {
          "oneOf": [
-            {"$ref": "#/$defs/geomLiteral"},
+            {"$ref": "#/$defs/spatialLiteral"},
             {"$ref": "#/$defs/propertyRef"}
          ]
       },
@@ -330,7 +330,7 @@
          ]
       },
 
-      "geomLiteral": {
+      "spatialLiteral": {
          "oneOf": [
             { "$ref": "#/$defs/geometryLiteral" },
             { "$ref": "#/$defs/envelopeLiteral" }

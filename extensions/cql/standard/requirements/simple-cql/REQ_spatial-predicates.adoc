@@ -11,7 +11,7 @@ spatialPredicate =  spatialOperator
 
 spatialOperator = "INTERSECTS"; 
 
-geomExpression = geomLiteral
+geomExpression = spatialLiteral
               \| propertyName
               \| function;
 ----
