@@ -7,7 +7,8 @@
 ----
    propertyName = identifier;
 
-   identifier = identifierStart \[ {identifierPart} \];
+   identifier = identifierStart \[ {identifierPart} \]
+             \| doubleQuote identifier doubleQuote;
 
    identifierStart = alpha \[{octothorp\|dollar\|underscore\|alpha\|digit}\];
 
