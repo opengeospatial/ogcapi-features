@@ -10,12 +10,16 @@
 
 #=============================================================================#
 # A CQL filter is a logically connected expression of one or more predicates.
+# Predicates include scalar or comparison predicates, spatial predicates or
+# temporal predicates.
 #=============================================================================#
 cqlFilter = booleanValueExpression;
 
-booleanValueExpression = booleanTerm | booleanValueExpression "OR" booleanTerm;
+booleanValueExpression = booleanTerm
+                       | booleanValueExpression "OR" booleanTerm;
 
-booleanTerm = booleanFactor | booleanTerm "AND" booleanFactor;
+booleanTerm = booleanFactor
+            | booleanTerm "AND" booleanFactor;
 
 booleanFactor = ["NOT"] booleanPrimary;
 
@@ -27,8 +31,8 @@ booleanPrimary = predicate
 #=============================================================================#
 predicate = comparisonPredicate
           | spatialPredicate
-          | temporalPredicate
-          | inPredicate;
+          | temporalPredicate;
+          | arrayPredicate;
 
 #=============================================================================#
 # A comparison predicate evaluates if two scalar expression statisfy the
@@ -37,33 +41,23 @@ predicate = comparisonPredicate
 # an operator to test if a scalar expression is NULL or not.
 #=============================================================================#
 comparisonPredicate = binaryComparisonPredicate
-                    | propertyIsLikePredicate
-                    | propertyIsBetweenPredicate
-                    | propertyIsNullPredicate;
+                    | isLikePredicate
+                    | isBetweenPredicate
+                    | isInListPredicate
+                    | isNullPredicate;
 
-binaryComparisonPredicate = scalarExpression comparisonOperator scalarExpression;
-
-propertyIsLikePredicate =  scalarExpression "LIKE" regularExpression;
-
-propertyIsBetweenPredicate = scalarExpression "BETWEEN"
-                             scalarExpression "AND" scalarExpression;
-
-propertyIsNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
-
+# Binary comparison predicate
 #
-# A scalar expression is the property name, a chracter literal, a numeric
-# literal or a function/method invocation that returns a scalar value.
-#
-scalarExpression = propertyName
-                 | characterLiteral
+binaryComparisonPredicate = scalarExpression
+                            comparisonOperator
+                            scalarExpression;
+
+scalarExpression = characterLiteral 
                  | numericLiteral
+                 | booleanLiteral
+                 | propertyName
                  | function
                  | arithmeticExpression;
-
-# NOTE: This is just a place holder for a regular expression
-#       We want to be able to say stuff like "<prop> LIKE 'Toronto%'" where
-#       the '%' character means "match zero or more characters".
-regularExpression = characterLiteral;
 
 comparisonOperator = eq | neq | lt | gt | lteq | gteq;
 
@@ -73,109 +67,176 @@ gteq = gt eq;
 
 lteq = lt eq;
 
+# LIKE predicate
+#
+isLikePredicate =  scalarExpression "LIKE" patternExpression
+                   ["WILDCARD" specialCharacter]
+                   ["SINGLECHAR" specialCharacter]
+                   ["ESCAPE" specialCharacter]
+                   ["NOCASE" booleanLiteral];
+
+# NOTE: This is just a place holder for a regular expression
+#       We want to be able to say stuff like "<prop> LIKE 'Toronto%'" where
+#       the '%' character means "match zero or more characters".
+patternExpression = characterLiteral;
+
+# BETWEEN predicate
+#
+isBetweenPredicate = scalarExpression "BETWEEN"
+                     scalarExpression "AND" scalarExpression;
+
+# IN LIST predicate
+#
+isInListPredicate = inListOperand "IN" leftParen inList rightParen;
+
+inList = listItem [ {comma listItem} ];
+
+listItem = characterLiteral
+         | numericLiteral
+         | booleanLiteral
+         | temporalLiteral
+         | spatialLiteral
+         | function
+         | arithmeticExpression;
+
+inListOperand = listItem
+              | propertyName
+              | arithmeticExpression;
+
+# IS NULL predicate
+#
+isNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
+
 #=============================================================================#
 # A spatial predicate evaluates if two spatial expressions satisfy the
 # specified spatial operator.
 #=============================================================================#
-spatialPredicate =  spatialOperator leftParen geomExpression comma geomExpression rightParen;
+spatialPredicate =  spatialOperator
+                    leftParen geomExpression comma geomExpression rightParen;
 
 # NOTE: The buffer operators (DWITHIN and BEYOND) are not included because
 #       these are outside the scope of a "simple" core for CQL.  These
 #       can be added as extensions.
 #
-spatialOperator = "EQUALS" | "DISJOINT" | "TOUCHES" | "WITHIN" | "OVERLAPS"
-                | "CROSSES" | "INTERSECTS" | "CONTAINS";
+spatialOperator = "INTERSECTS"
+                | "EQUALS"
+                | "DISJOINT"
+                | "TOUCHES"
+                | "WITHIN"
+                | "OVERLAPS"
+                | "CROSSES"
+                | "CONTAINS";
 
 # A geometric expression is a property name of a geometry-valued property,
 # a geometric literal (expressed as WKT) or a function that returns a
 # geometric value.
 #
-geomExpression = propertyName
-               | geomLiteral
+geomExpression = spatialLiteral
+               | propertyName
                | function;
 
 #=============================================================================#
 # A temporal predicate evaluates if two temporal expressions satisfy the
 # specified temporal operator.
 #=============================================================================#
-temporalPredicate = temporalExpression temporalOperator
-                    temporalExpression;
+temporalPredicate = temporalExpression temporalOperator temporalExpression;
 
-temporalExpression = propertyName
-                   | temporalLiteral
+temporalExpression = temporalLiteral
+                   | propertyName
                    | function;
 
-temporalOperator = "AFTER" | "BEFORE" | "BEGINS" | "BEGUNBY" | "TCONTAINS"
-                 | "DURING" | "ENDEDBY" | "ENDS" | "TEQUALS" | "MEETS"
-                 | "METBY" | "TOVERLAPS" | "OVERLAPPEDBY" | "ANYINTERACTS"
-                 | "INTERSECTS";
+temporalOperator = "ANYINTERACTS"
+                 | "BEFORE" 
+                 | "AFTER"
+                 | "MEETS"
+                 | "METBY"
+                 | "TOVERLAPS"
+                 | "OVERLAPPEDBY"
+                 | "BEGINS"
+                 | "BEGUNBY"
+                 | "DURING"
+                 | "TCONTAINS"
+                 | "ENDS"
+                 | "ENDEDBY"
+                 | "TEQUALS";
 
 #=============================================================================#
-# The IN predicate
+# An array predicate evaluates if two array expressions statisfy the
+# specified comparison operator.  The comparion operators include equality,
+# not equal, less than, greater than, less than or equal, greater than or equal,
+# superset, subset and overlap operators.
 #=============================================================================#
-inPredicate = propertyName "IN" leftParen inList rightParen;
+arrayPredicate = arrayExpression arrayOperator arrayExpression;
 
-inList = listItem [ {comma listItem} ];
+# An array expression is a bracket-delimited, comma-separated list of array
+# elements.  An array element is either a character literal, a numeric literal,
+# a geometric literal, a temporal literal, a property name, a function, an
+# arithmetic expression or an array.
+#
+arrayExpression = propertyName | function | arrayLiteral;
 
-listItem = characterLiteral |
-           numericLiteral |
-           geomLiteral |
-           temporalLiteral |
-           function;
+arrayLiteral = leftBracket rightBracket
+             | leftBracket arrayElement [ { comma arrayElement } ] rightBracket;
 
-#=============================================================================#
-# Definition of a FUNCTION
-# NOTE: How do we advertise which functions an implementation offer?
-#       In the OpenAPI document I suppose!
-#=============================================================================#
-function = identifier {argumentList};
+arrayElement = characterLiteral
+             | numericLiteral
+             | booleanLiteral
+             | geomLiteral
+             | temporalLiteral
+             | propertyName
+             | function
+             | arithmeticExpression
+             | arrayLiteral;
 
-argumentList = leftParen [positionalArgument]  rightParen;
-
-positionalArgument = argument [ { comma argument } ];
-
-argument = characterLiteral
-         | numericLiteral
-         | geomLiteral
-         | propertyName
-         | arithmeticExpression;
+arrayOperator = "AEQUALS"
+              | "ACONTAINS"
+              | "CONTAINED BY"
+              | "AOVERLAPS";
 
 #=============================================================================#
 # An arithemtic expression is an expression composed of an arithmetic
 # operand (a property name, a number or a function that returns a number),
 # an arithmetic operators (+,-,*,/) and another arithmetic operand.
 #=============================================================================#
-arithmeticExpression = arithmeticOperand arithmeticOperator arithmeticOperand;
+arithmeticExpression = arithmeticOperand arithmeticOperator arithmeticOperand 
+                     | leftParen arithmeticExpression rightParen;
 
 arithmeticOperator = plusSign | minusSign | asterisk | solidus;
 
-arithmeticOperand = propertyName
-                   | numericLiteral
-                   | function;
+arithmeticOperand = numericLiteral
+                  | propertyName
+                  | function;
 
 #=============================================================================#
-# Definition of NUMERIC literals
+# Definition of a PROPERTYNAME
 #=============================================================================#
-numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
+propertyName = identifier;
 
-unsignedNumericLiteral = exactNumericLiteral | approximateNumericLiteral;
+identifier = identifierStart [ {identifierPart} ]
+           | doubleQuote identifier doubleQuote;
 
-signedNumericLiteral = [sign] exactNumericLiteral | approximateNumericLiteral;
+identifierStart = alpha [{octothorp|dollar|underscore|alpha|digit}];
 
-exactNumericLiteral = unsignedInteger [ period [ unsignedInteger ] ]
-                      | period unsignedInteger;
+identifierPart = alpha | digit;
 
-approximateNumericLiteral = mantissa "E" exponent;
+#=============================================================================#
+# Definition of a FUNCTION
+# NOTE: How do we advertise which functions an implementation offer?
+#       In the OpenAPI document I suppose!
+#=============================================================================#
+function = identifier leftParen {argumentList} rightParen;
 
-mantissa = exactNumericLiteral;
+argumentList = argument [ { comma argument } ];
 
-exponent = signedInteger;
-
-signedInteger = [ sign ] unsignedInteger;
-
-unsignedInteger = {digit};
-
-sign = plusSign | minusSign;
+argument = characterLiteral
+         | numericLiteral
+         | booleanLiteral
+         | spatialLiteral
+         | temporalLiteral
+         | propertyName
+         | function
+         | arithmeticExpression
+         | arrayExpression;
 
 #=============================================================================#
 # Definition of CHARACTER literals
@@ -189,14 +250,6 @@ characterStringLiteral = quote [ {character} ] quote;
 bitStringLiteral = "B" quote [ {bit} ] quote;
 
 hexStringLiteral = "X" quote [ {hexit} ] quote;
-
-propertyName = identifier;
-
-identifier = identifierStart [ {identifierPart} ];
-
-identifierStart = alpha [{octothorp|dollar|underscore|alpha|digit}];
-
-identifierPart = alpha | digit;
 
 character = alpha | digit | specialCharacter | quoteQuote;
 
@@ -275,41 +328,35 @@ bit = "0" | "1";
 hexit = digit | "A" | "B" | "C" | "D" | "E" | "F" | "a" | "b" | "c" | "d" | "e" | "f";
 
 #=============================================================================#
-# Definition of TEMPORAL literals
-#
-# NOTE: Is the fact the time zones are supported too complicated for a
-#       simple CQL?  Perhaps the "core" of CQL should just support UTC.
+# Definition of NUMERIC literals
 #=============================================================================#
-temporalLiteral = instant | interval;
+numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
 
-instant = fullDate | fullDate "T" utcTime;
+unsignedNumericLiteral = exactNumericLiteral | approximateNumericLiteral;
 
-interval = solidus |
-           solidus dotdot |
-           dotdot solidus |
-           instant solidus |
-           solidus instant |
-           instant solidus dotdot |
-           dotdot solidus instant |
-           instant solidus instant;
+signedNumericLiteral = [sign] exactNumericLiteral | approximateNumericLiteral;
 
-fullDate   = dateYear "-" dateMonth "-" dateDay;
+exactNumericLiteral = unsignedInteger [ period [ unsignedInteger ] ]
+                      | period unsignedInteger;
 
-dateYear   = digit digit digit digit;
+approximateNumericLiteral = mantissa "E" exponent;
 
-dateMonth  = digit digit;
+mantissa = exactNumericLiteral;
 
-dateDay    = digit digit;
+exponent = signedInteger;
 
-utcTime  = timeHour ":" timeMinute ":" timeSecond [timeZoneOffset];
+signedInteger = [ sign ] unsignedInteger;
 
-timeZoneOffset = "Z" | sign timeHour;
+unsignedInteger = {digit};
 
-timeHour   = digit digit;
+sign = plusSign | minusSign;
 
-timeMinute = digit digit;
-
-timeSecond = digit digit [period digit {digit}];
+#=============================================================================#
+# Boolean literal                 
+#=============================================================================#
+#
+booleanLiteral = "TRUE" | "true" | "FALSE" | "false" |
+                 "T" | "t" | "F" | "f" | "1" | "0";
 
 #=============================================================================#
 # Definition of GEOMETRIC literals
@@ -317,14 +364,14 @@ timeSecond = digit digit [period digit {digit}];
 # NOTE: This is basically BNF that define WKT encoding; it would be nice
 #       to instead reference some normative BNF for WKT.
 #=============================================================================#
-geomLiteral = pointTaggedText
-            | linestringTaggedText
-            | polygonTaggedText
-            | multipointTaggedText
-            | multilinestringTaggedText
-            | multipolygonTaggedText
-            | geometryCollectionTaggedText
-            | envelopeTaggedText;
+spatialLiteral = pointTaggedText
+               | linestringTaggedText
+               | polygonTaggedText
+               | multipointTaggedText
+               | multilinestringTaggedText
+               | multipolygonTaggedText
+               | geometryCollectionTaggedText
+               | envelopeTaggedText;
 
 pointTaggedText = "POINT" pointText;
 
@@ -360,7 +407,8 @@ multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen
 
 multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
 
-geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
+geometryCollectionText = leftParen
+                         spatialLiteral {comma spatialLiteral} rightParen;
 
 envelopeTaggedText = "ENVELOPE" envelopeText;
 
@@ -377,3 +425,41 @@ southBoundLat = signedNumericLiteral;
 minElev = signedNumericLiteral;
 
 maxElev = signedNumericLiteral;
+
+#=============================================================================#
+# Definition of TEMPORAL literals
+#
+# NOTE: Is the fact the time zones are supported too complicated for a
+#       simple CQL?  Perhaps the "core" of CQL should just support UTC.
+#=============================================================================#
+temporalLiteral = instant | interval;
+
+instant = fullDate | fullDate "T" utcTime;
+
+interval = solidus
+         | solidus dotdot
+         | dotdot solidus
+         | instant solidus
+         | solidus instant
+         | instant solidus dotdot
+         | dotdot solidus instant
+         | instant solidus instant;
+
+fullDate   = dateYear "-" dateMonth "-" dateDay;
+
+dateYear   = digit digit digit digit;
+
+dateMonth  = digit digit;
+
+dateDay    = digit digit;
+
+utcTime  = timeHour ":" timeMinute ":" timeSecond [timeZoneOffset];
+
+timeZoneOffset = "Z" | sign timeHour;
+
+timeHour   = digit digit;
+
+timeMinute = digit digit;
+
+timeSecond = digit digit [period digit {digit}];
+

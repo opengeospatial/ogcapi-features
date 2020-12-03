@@ -1,80 +1,21 @@
-[[req_simple-cql_spatial-predicates]] 
+[[req_simple-cql_spatial-predicate]] 
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicates* 
+^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicate* 
 ^|A |A server that implements this conformance class shall support the spatial
-operators defined by the following BNF fragment:
+predicates defined by the following BNF fragment:
 
 ----
-spatialPredicate = spatialOperator leftParen geomExpression comma geomExpression rightParen;
+spatialPredicate =  spatialOperator
+                    leftParen geomExpression comma geomExpression rightParen;
 
-spatialOperator = "INTERSECTS";
+spatialOperator = "INTERSECTS"; 
 
-geomExpression = propertyName
-               \| geomLiteral;
-
-geomLiteral = pointTaggedText
-            \| linestringTaggedText
-            \| polygonTaggedText
-            \| multipointTaggedText
-            \| multilinestringTaggedText
-            \| multipolygonTaggedText
-            \| geometryCollectionTaggedText
-            \| envelopeTaggedText;
-
-pointTaggedText = "POINT" pointText;
-
-linestringTaggedText = "LINESTRING" lineStringText;
-
-polygonTaggedText = "POLYGON" polygonText;
-
-multipointTaggedText = "MULTIPOINT" multiPointText;
-
-multilinestringTaggedText = "MULTILINESTRING" multiLineStringText;
-
-multipolygonTaggedText = "MULTIPOLYGON" multiPolygonText;
-
-geometryCollectionTaggedText = "GEOMETRYCOLLECTION" geometryCollectionText;
-
-pointText = leftParen point rightParen;
-
-point = xCoord yCoord [zCoord];
-
-xCoord = signedNumericLiteral;
-
-yCoord = signedNumericLiteral;
-
-zCoord = signedNumericLiteral;
-
-lineStringText = leftParen point {comma point} rightParen;
-
-polygonText =  leftParen lineStringText {comma lineStringText} rightParen;
-
-multiPointText = leftParen pointText {comma pointText} rightParen;
-
-multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen;
-
-multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
-
-geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
-
-envelopeTaggedText = "ENVELOPE" envelopeText;
-
-envelopeText = leftParen westBoundLon comma eastBoundLon comma northBoundLat comma southBoundLat [comma minElev comma maxElev] rightParen;
-
-westBoundLon = signedNumericLiteral;
-
-eastBoundLon = signedNumericLiteral;
-
-northBoundLat = signedNumericLiteral;
-
-southBoundLat = signedNumericLiteral;
-
-minElev = signedNumericLiteral;
-
-maxElev = signedNumericLiteral;
+geomExpression = spatialLiteral
+              \| propertyName
+              \| function;
 ----
 
 ^|B |The semantics of the INTERSECTS operator is defined in clause 6.1.5 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
-
+^|C |A server that implements the <<rc_functions>> conformance class shall include function calls in the `geomExpression` production.
 |===

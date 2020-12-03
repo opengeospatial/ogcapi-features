@@ -29,14 +29,14 @@ include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators.
 The following table lists the mathematical definitions of each spatial operators
 as described in <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 
-[#tldr,reftext='{table-caption} {counter:table-num}']
+[reftext='{table-caption} {counter:table-num}']
 .Mathematical definitions of spatial operators
 [width=80%,cols="30,70",options="header"]
 |===
 |Spatial operators |Definition
 |EQUALS |a EQUALS b &#x2b04; a &#x2286; b &#x2227; b &#x2286; a
 |DISJOINT |a DISJOINT b &#x2b04; a &#x2229; b = &#x2205;
-|TOUCHES |a TOUCHES b &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205; 
+|TOUCHES |a TOUCHES b &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205;
 |WITHIN | a WITHIN b &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) &#x2260; &#x2205;)
 |OVERLAPS |a OVERLAPS b &#x2b04; (dim(I(a)) = dim(I(b)) = dim(I(a) &#x2229; I(b))) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)
 |CROSSES |a CROSSES b &#x2b04; [I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)]
@@ -80,7 +80,7 @@ include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operator
 The following table maps the CQL temporal operator names with the temporal
 operator names defined in <<OGC16-071r3,Time Ontology in OWL>>.
 
-[#temporal_operators,reftext='{table-caption} {counter:table-num}']
+[reftext='{table-caption} {counter:table-num}']
 [width=80%,cols="30,70",options="header"]
 |===
 |CQL Name |Time Ontology in OWL Name
@@ -123,9 +123,7 @@ include::requirements/functions/REQ_get-functions-operation.adoc[]
 
 include::requirements/functions/REQ_get-functions-response-json.adoc[]
 
-include::requirements/functions/REQ_get-functions-response-xml.adoc[]
-
-[[example_functions]]
+[[example_4]]
 .Get functions JSON response example
 ====
 [source,JSON]
@@ -170,7 +168,7 @@ include::requirements/functions/REQ_get-functions-response-xml.adoc[]
 ----
 ====
 
-[[example_3]]
+[[example_5]]
 .Get functions XML response example
 ====
 [source,XML]
@@ -191,7 +189,7 @@ operator (i.e. one of +,-,*,/) and another arithmetic operand.
 
 include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
-[[example_4]]
+[[example_6]]
 .Arithmetic expression example in JSON
 ====
 [source,JSON]
@@ -199,3 +197,13 @@ include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
 ----
 ====
+
+[[arrays]]
+=== Requirements class "Arrays"
+
+include::requirements/requirements_class_arrays.adoc[]
+
+This clause specified requirements for support array expression is CQL.  Array
+expressions can be tested in a predicate for equality, if one array is a subset of another, it one array is a superset of another or is two arrays overlap or share elements.
+
+include::requirements/arrays/REQ_arrays.adoc[]

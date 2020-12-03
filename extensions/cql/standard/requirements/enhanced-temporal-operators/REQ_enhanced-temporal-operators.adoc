@@ -5,10 +5,20 @@
 ^|A |A server that implements this requirements class shall, in addition to `ANYINTERACTS`, support the additional temporal operators defined by the following BNF fragment which extends the list of temporal operators specified for the <<req_simple-cql_temporal-predicates,Simple CQL Temporal Predicates>> requirements class:
 
 ----
-   temporalOperator = "AFTER" \| "BEFORE" \| "BEGINS" \| "BEGUNBY"
-                   \| "TCONTAINS" \| "DURING" \| "ENDEDBY" \| "ENDS"
-                   \| "TEQUALS" \| "MEETS" \| "METBY" \| "TOVERLAPS"
-                   \| "OVERLAPPEDBY" \| "ANYINTERACTS";
+   temporalOperator = "ANYINTERACTS"
+                   \| "BEFORE"
+                   \| "AFTER"
+                   \| "MEETS"
+                   \| "METBY"
+                   \| "TOVERLAPS"
+                   \| "OVERLAPPEDBY"
+                   \| "BEGINS"
+                   \| "BEGUNBY"
+                   \| "DURING"
+                   \| "TCONTAINS"
+                   \| "ENDS"
+                   \| "ENDEDBY"
+                   \| "TEQUALS";
 ----
 
 ^|B |The semantics of these temporal operators are defined in clause 3.1 of <<OGC16-071r3,Time Ontology in OWL>>.
