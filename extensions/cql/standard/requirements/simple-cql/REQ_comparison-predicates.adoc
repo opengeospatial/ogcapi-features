@@ -6,23 +6,23 @@
 
 ----
    comparisonPredicate = binaryComparisonPredicate
-                       | isLikePredicate
-                       | isBetweenPredicate
-                       | isInListPredicate
-                       | isNullPredicate;
+                       \| isLikePredicate
+                       \| isBetweenPredicate
+                       \| isInListPredicate
+                       \| isNullPredicate;
 
    binaryComparisonPredicate = scalarExpression
                                comparisonOperator
                                scalarExpression;
 
    scalarExpression = characterLiteral
-                    | numericLiteral
-                    | booleanLiteral
-                    | propertyName
-                    | function
-                    | arithmeticExpression;
+                    \| numericLiteral
+                    \| booleanLiteral
+                    \| propertyName
+                    \| function
+                    \| arithmeticExpression;
    
-   comparisonOperator = eq | neq | lt | gt | lteq | gteq;
+   comparisonOperator = eq \| neq \| lt \| gt \| lteq \| gteq;
    
    neq = lt gt;
    
@@ -46,19 +46,18 @@
    inList = listItem [ {comma listItem} ];
    
    listItem = characterLiteral
-            | numericLiteral
-            | temporalLiteral
-            | spatialLiteral
-            | function
-            | arithmeticExpression;
+            \| numericLiteral
+            \| temporalLiteral
+            \| spatialLiteral
+            \| function
+            \| arithmeticExpression;
 
    inListOperand = listItem
-                 | propertyName
-                 | arithmeticExpression;
+                 \| propertyName
+                 \| arithmeticExpression;
 
    isNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
 ----
-
 ^|B |A server that implements the <<rc_functions>> conformance class shall include function calls in the `scalarExpression` and `listItem` productions.
 ^|C |A server that implements the <<rc_arithmetic>> conformance class shall include arithmetic expression in the `scalarExpression`, `listItem` and `inListOperand` productions.
 |===
