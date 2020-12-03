@@ -168,15 +168,6 @@ include::requirements/functions/REQ_get-functions-response-json.adoc[]
 ----
 ====
 
-[[example_5]]
-.Get functions XML response example
-====
-[source,XML]
-----
-
-----
-====
-
 [[arithmetic]]
 === Requirements Class "Arithmetic Expressions"
 
@@ -203,8 +194,10 @@ include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
 include::requirements/requirements_class_arrays.adoc[]
 
-This clause specified requirements for support array expression is CQL.  Array
-expressions can be tested in a predicate for equality, if one array is a subset of another, it one array is a superset of another or is two arrays overlap or share elements.
+This clause specifies requirements for supporting array expression in CQL.
+Array expressions can be tested in a predicate for equality, if one array
+is a subset of another, if one array is a superset of another or if two
+arrays overlap or share elements.
 
 include::requirements/arrays/REQ_arrays.adoc[]
 
