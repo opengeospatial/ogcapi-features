@@ -10,11 +10,10 @@ inPredicate = propertyName "IN" leftParen inList rightParen;
 
 inList = listItem [ {comma listItem} ];
 
-listItem = characterLiteral | 
-           numericLiteral |
-           geomLiteral |
-           temporalLiteral |
+listItem = characterLiteral \| 
+           numericLiteral \|
+           geomLiteral \|
+           temporalLiteral \|
            function;
 ----
-
 |===
