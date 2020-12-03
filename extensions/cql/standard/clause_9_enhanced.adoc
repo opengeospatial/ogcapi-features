@@ -4,14 +4,14 @@
 === Overview
 
 This clause specifies requirements for enhancements to <<cql-core,Simple CQL>>.
-Specifically, this clause defined requirements for:
+Specifically, this clause defines requirements for:
 
 * additional spatial operators
 * additional temporal operators
 * support for functions in CQL
 * support for arithmetic expression in CQL
 
-In each case, the clause also ammends and extends CQL's BNF and the text and
+In each case, the clause also amends and extends CQL's <<cql-bnf,BNF rules>> and the text and
 JSON encodings of CQL to introduce the enhanced capabilities.
 
 [[enhanced-spatial-operators]]
@@ -71,39 +71,20 @@ image::images/crosses.png[alt=Crosses,width=70%]
 include::requirements/requirements_class_enhanced-temporal-operators.adoc[]
 
 The <<rc_simple_cql,Simple CQL>> clause specifies the use of the `ANYINTERACTS`
-temporal operator.  This requirements class adds the remaining ISO temporal
-operators to the list of temporal operators that an implementations of this
-extension might offer.
+temporal operator.  This requirements class adds additional commonly used temporal
+operators that an implementation of this extension might offer.
 
 include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators.adoc[]
 
-The following table maps the CQL temporal operator names with the temporal
-operator names defined in <<OGC16-071r3,Time Ontology in OWL>>.
-
-[reftext='{table-caption} {counter:table-num}']
-[width=80%,cols="30,70",options="header"]
-|===
-|CQL Name |Time Ontology in OWL Name
-| AFTER |After
-| BEFORE |Before
-| BEGINS |Starts
-| BEGUNBY |StartedBy
-| TCONTAINS |Contains
-| DURING |During
-| ENDEDBY |FinishedBy
-| ENDS |Finishes
-| TEQUALS |Equals
-| MEETS |Meets
-| METBY |MetBy
-| TOVERLAPS |Overlaps
-| OVERLAPPEDBY |OverlappedBy
-| ANYINTERACTS | N/A
-|===
+CQL supports date and timestamps as time instants, but even the smallest "instant" has a
+duration and can be evaluated as an interval, too. For the purposes of determining 
+the temporal relationship between two temporal expressions, an instant is treated as
+the interval from the beginning to the end of the instant.
 
 The following diagram illustrates the meaning of the temporal operators.
 
 [#figure5]
-.The elementary possible relations between time periods.
+.The elementary relations between time intervals
 image::images/temporal_ops.png[alt=TemporalOps,width=70%]
 
 [[functions]]

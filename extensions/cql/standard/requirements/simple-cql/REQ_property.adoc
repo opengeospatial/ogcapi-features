@@ -2,16 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/property* 
-^|A |A server that implements this conformance class shall support property references as defined by the following BNF fragment:
-
-----
-   propertyName = identifier;
-
-   identifier = identifierStart \[ {identifierPart} \]
-             \| doubleQuote identifier doubleQuote;
-
-   identifierStart = alpha \[{octothorp\|dollar\|underscore\|alpha\|digit}\];
-
-   identifierPart = alpha \| digit;
-----
+^|A |The server SHALL support property references as defined by the BNF rule `propertyName` in <<cql-bnf>>.
 |===

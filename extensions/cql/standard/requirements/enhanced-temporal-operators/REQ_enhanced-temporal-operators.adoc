@@ -2,24 +2,23 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/enhanced-temporal-operators* 
-^|A |A server that implements this requirements class shall, in addition to `ANYINTERACTS`, support the additional temporal operators defined by the following BNF fragment which extends the list of temporal operators specified for the <<req_simple-cql_temporal-predicates,Simple CQL Temporal Predicates>> requirements class:
+^|A |The server SHALL support all temporal predicates as defined by the BNF rule `temporalPredicate` 
+in <<cql-bnf>>.
+^|B |The semantics of the additional temporal operators beyond `ANYINTERACTS` are defined the 
+<<OGC16-071r3,Time Ontology in OWL>> with the following mapping between CQL temporal operator names 
+and the property names defined in the Time Ontology in OWL:
 
-----
-   temporalOperator = "ANYINTERACTS"
-                   \| "BEFORE"
-                   \| "AFTER"
-                   \| "MEETS"
-                   \| "METBY"
-                   \| "TOVERLAPS"
-                   \| "OVERLAPPEDBY"
-                   \| "BEGINS"
-                   \| "BEGUNBY"
-                   \| "DURING"
-                   \| "TCONTAINS"
-                   \| "ENDS"
-                   \| "ENDEDBY"
-                   \| "TEQUALS";
-----
-
-^|B |The semantics of these temporal operators are defined in clause 3.1 of <<OGC16-071r3,Time Ontology in OWL>>.
+* `AFTER`: https://www.w3.org/TR/owl-time/#time:after[after]
+* `BEFORE`: https://www.w3.org/TR/owl-time/#time:before[before]
+* `BEGINS`: https://www.w3.org/TR/owl-time/#time:intervalStarts[intervalStarts]
+* `BEGUNBY`: https://www.w3.org/TR/owl-time/#time:intervalStartedBy[intervalStartedBy]
+* `TCONTAINS`: https://www.w3.org/TR/owl-time/#time:intervalContains[intervalContains]
+* `DURING`: https://www.w3.org/TR/owl-time/#time:intervalDuring[intervalDuring]
+* `ENDEDBY`: https://www.w3.org/TR/owl-time/#time:intervalFinishedBy[intervalFinishedBy]
+* `ENDS`: https://www.w3.org/TR/owl-time/#time:intervalFinishes[intervalFinishes]
+* `TEQUALS`: https://www.w3.org/TR/owl-time/#time:intervalEquals[intervalEquals]
+* `MEETS`: https://www.w3.org/TR/owl-time/#time:intervalMeets[intervalMeets]
+* `METBY`: https://www.w3.org/TR/owl-time/#time:intervalMetBy[intervalMetBy]
+* `TOVERLAPS`: https://www.w3.org/TR/owl-time/#time:intervalOverlaps[intervalOverlaps]
+* `OVERLAPPEDBY`: https://www.w3.org/TR/owl-time/#time:intervalOverlappedBy[intervalOverlappedBy]
 |===

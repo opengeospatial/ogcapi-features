@@ -2,20 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicate* 
-^|A |A server that implements this conformance class shall support the spatial
-predicates defined by the following BNF fragment:
-
-----
-spatialPredicate =  spatialOperator
-                    leftParen geomExpression comma geomExpression rightParen;
-
-spatialOperator = "INTERSECTS"; 
-
-geomExpression = spatialLiteral
-              \| propertyName
-              \| function;
-----
-
-^|B |The semantics of the INTERSECTS operator is defined in clause 6.1.5 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
-^|C |A server that implements the <<rc_functions>> conformance class shall include function calls in the `geomExpression` production.
+^|A |The server SHALL support the spatial predicates as defined by the BNF rule `spatialPredicate` 
+in <<cql-bnf>> with the exception of all values of `spatialOperator` except "INTERSECTS" and 
+with the exception of the rule `function` in `geomExpression`.
+^|B |The semantics of the `INTERSECTS` operator is defined in clause 6.1.5 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 |===

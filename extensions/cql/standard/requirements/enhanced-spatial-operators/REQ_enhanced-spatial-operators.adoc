@@ -2,18 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/enhanced/spatial-operators* 
-^|A |A server that implements this requirements class shall, in addition to `INTERSECTS`, support the additional spatial operators defined by the following BNF fragment which extends the list of spatial operators specified for the <<req_simple-cql_spatial-predicates,Simple CQL Spatial Predicates>> requirements class:
-
-----
-   spatialOperator = "INTERSECTS"
-                  \| "EQUALS"
-                  \| "DISJOINT"
-                  \| "TOUCHES"
-                  \| "WITHIN"
-                  \| "OVERLAPS"
-                  \| "CROSSES"
-                  \| "CONTAINS";
-----
-
+^|A |The server SHALL support all spatial predicates as defined by the BNF rule `spatialPredicate` 
+in <<cql-bnf>>.
 ^|B |The semantics of these spatial operators are defined in clause 6.1.5 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 |===

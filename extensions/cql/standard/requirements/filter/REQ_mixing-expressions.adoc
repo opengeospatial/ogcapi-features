@@ -2,5 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/filter/mixing-expression*
-^|A |Existing query predicates (e.g. bbox, datetime, etc.) shall be logically connected with the `AND` operator when mixed in a request with the `filter` parameter.
+^|A |Other filter predicates supported by the server (e.g. `bbox`, `datetime`, etc.) SHALL be logically connected with the `AND` operator when mixed in a request with the `filter` parameter.
 |===
