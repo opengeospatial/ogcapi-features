@@ -51,3 +51,10 @@ The list of supported functions can be discovered via the Functions resource (i.
 include::requirements/cql-json/REQ_arithmetic.adoc[]
 
 include::requirements/cql-json/REQ_arrays.adoc[]
+
+[[cql-xml]]
+=== XML encoding 
+
+This specification does not specifically define an XML-encoding for CQL.
+However, it is recognized that XML is still in common use and so
+implementors are directed to review the http://docs.opengeospatial.org/is/09-026r2/09-026r2.html[OGC Filter Encoding 2.0] standard which defines a XML-encoding for filter expressions that closely matches most of the functionality of CQL.
