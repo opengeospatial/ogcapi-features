@@ -14,6 +14,8 @@ This requirements class defines a well known text encoding of CQL. Such an
 encoding would be suitable for use with the a GET query parameter such as the
 <<rc_filter,`filter`>> parameter.
 
+include::requirements/cql-text/REQ_filter-lang.adoc[]
+
 include::requirements/cql-text/REQ_simple-cql.adoc[]
 
 include::requirements/cql-text/REQ_enhanced-spatial-operators.adoc[]
@@ -35,6 +37,8 @@ include::requirements/requirements_class_cql-json.adoc[]
 
 This requirements class defines a JSON encoding of CQL. Such an encoding
 would be suitable as the body of an HTTP POST request.
+
+include::requirements/cql-json/REQ_filter-lang.adoc[]
 
 include::requirements/cql-json/REQ_simple-cql.adoc[]
 

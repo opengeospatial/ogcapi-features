@@ -1,6 +1,7 @@
-[[req_features-filter_cql-text]]
+[[req_cql-text_filter-lang]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/features-filter/cql-text*
+^|*Requirement {counter:req-id}* |*/req/cql-text/filter-lang*
+^|Condition |Server implements requirements class <<rc_filter,Filter>>
 ^|A |If a filter expression is encoded as text, this shall be indicated using the value `cql-text` as the value of the <<filter-lang-param,filter-lang>> parameter.
 |===

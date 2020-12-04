@@ -646,6 +646,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_overview_2">11.1. Overview</a></li>
 <li><a href="#cql-text">11.2. Requirements Class "CQL Text"</a></li>
 <li><a href="#cql-json">11.3. Requirements Class "CQL JSON"</a></li>
+<li><a href="#cql-xml">11.4. XML encoding</a></li>
 </ul>
 </li>
 <li><a href="#mediatypes">12. Media Types</a></li>
@@ -3308,9 +3309,10 @@ Add examples
 </tbody>
 </table>
 <div class="paragraph">
-<p>This clause specifies requirements to support array expression is CQL. Array expressions can
-be tested in a predicate for equality, if one array is a subset of another, if one array
-is a superset of another or if two arrays overlap or share elements.</p>
+<p>This clause specifies requirements for supporting array expression in CQL.
+Array expressions can be tested in a predicate for equality, if one array
+is a subset of another, if one array is a superset of another or if two
+arrays overlap or share elements.</p>
 </div>
 <table id="req_arrays" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -3444,6 +3446,10 @@ the requirements class <a href="#rc_arithmetic">Arithmetic Expressions</a>.
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conditional Dependency</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rc_arrays">Requirements Class "Arrays"</a></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conditional Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rc_filter">Requirements Class "Filter"</a></p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -3451,7 +3457,7 @@ the requirements class <a href="#rc_arithmetic">Arithmetic Expressions</a>.
 encoding would be suitable for use with the a GET query parameter such as the
 <a href="#rc_filter"><code>filter</code></a> parameter.</p>
 </div>
-<table id="req_cql-text_simple-cql" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_cql-text_filter-lang" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -3459,6 +3465,32 @@ encoding would be suitable for use with the a GET query parameter such as the
 <tbody>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/cql-text/filter-lang</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Server implements requirements class <a href="#rc_filter">Filter</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>If a filter expression is encoded as text, this shall be indicated using the value <code>cql-text</code> as the value of the <a href="#filter-lang-param">filter-lang</a> parameter.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="req_cql-text_simple-cql" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-text/simple-cql</strong></p>
 </div></div></td>
@@ -3478,7 +3510,7 @@ encoding would be suitable for use with the a GET query parameter such as the
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-text/enhanced_spatial-operators</strong></p>
 </div></div></td>
@@ -3504,7 +3536,7 @@ encoding would be suitable for use with the a GET query parameter such as the
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-text/temporal-operators</strong></p>
 </div></div></td>
@@ -3530,7 +3562,7 @@ encoding would be suitable for use with the a GET query parameter such as the
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-text/functions</strong></p>
 </div></div></td>
@@ -3559,7 +3591,7 @@ encoding would be suitable for use with the a GET query parameter such as the
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-text/arithmetic</strong></p>
 </div></div></td>
@@ -3585,7 +3617,7 @@ encoding would be suitable for use with the a GET query parameter such as the
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-text/arrays</strong></p>
 </div></div></td>
@@ -3647,12 +3679,42 @@ encoding would be suitable for use with the a GET query parameter such as the
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conditional Dependency</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rc_arrays">Requirements Class "Arrays"</a></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conditional Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rc_filter">Requirements Class "Filter"</a></p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
 <p>This requirements class defines a JSON encoding of CQL. Such an encoding
 would be suitable as the body of an HTTP POST request.</p>
 </div>
+<table id="req_cql-json_filter-lang" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/cql-json/filter-lang</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Server implements requirements class <a href="#rc_filter">Filter</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>If a filter expression is encoded as JSON, this SHALL be indicated using the value <code>cql-json</code> as the value of the <a href="#filter-lang-param">filter-lang</a> parameter.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <table id="req_cql-json_simple-cql" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -3660,7 +3722,7 @@ would be suitable as the body of an HTTP POST request.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 39</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-json/simple-cql</strong></p>
 </div></div></td>
@@ -3765,7 +3827,7 @@ Attention is drawn to the fact that there exists an alternative JSON encoding fo
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 40</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-json/enhanced_spatial-operators</strong></p>
 </div></div></td>
@@ -3816,7 +3878,7 @@ Attention is drawn to the fact that there exists an alternative JSON encoding fo
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 39</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 41</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-json/enhanced-temporal-operators</strong></p>
 </div></div></td>
@@ -3885,7 +3947,7 @@ Attention is drawn to the fact that there exists an alternative JSON encoding fo
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 40</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 42</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-json/functions</strong></p>
 </div></div></td>
@@ -3921,7 +3983,7 @@ Attention is drawn to the fact that there exists an alternative JSON encoding fo
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 41</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 43</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-json/arithmetic</strong></p>
 </div></div></td>
@@ -3954,7 +4016,7 @@ Attention is drawn to the fact that there exists an alternative JSON encoding fo
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 42</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 44</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/cql-json/arrays</strong></p>
 </div></div></td>
@@ -3980,6 +4042,14 @@ Attention is drawn to the fact that there exists an alternative JSON encoding fo
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="cql-xml"><a class="anchor" href="#cql-xml"></a>11.4. XML encoding</h3>
+<div class="paragraph">
+<p>This specification does not specifically define an XML-encoding for CQL.
+However, it is recognized that XML is still in common use and so
+implementors are directed to review the <a href="http://docs.opengeospatial.org/is/09-026r2/09-026r2.html">OGC Filter Encoding 2.0</a> standard which defines a XML-encoding for filter expressions that closely matches most of the functionality of CQL.</p>
+</div>
 </div>
 </div>
 </div>
