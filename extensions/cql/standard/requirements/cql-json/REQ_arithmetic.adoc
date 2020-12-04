@@ -2,74 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/cql-json/arithmetic* 
-^|A |A server that implements the <<rc_arithmetic,Arithmetic Expressions>> requirements class and also implements this requirement shall be able to parse an arithmetic expression encoded as JSON that validates against the following JSON Schema fragment:
+^|Condition |Server implements requirements class <<rc_arithmetic,Arithmetic Expressions>>
+^|A |In addition to the <<req_cql-json_simple-cql,Simple CQL>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema component:
 
-[source,JSON]
-----
-      "arithmeticExpression": {
-         "oneOf": [
-            {"$ref": "#/$defs/addExpression" },
-            {"$ref": "#/$defs/subExpression" },
-            {"$ref": "#/$defs/mulExpression" },
-            {"$ref": "#/$defs/divExpression" }
-         ]
-      },
-
-      "addExpression": {
-         "type": "object",
-         "required": ["+"],
-         "properties": {
-            "+": { "$ref": "#/$defs/arithmeticOperands" }
-         }
-      },
-
-      "subExpression": {
-         "type": "object",
-         "required": ["-"],
-         "properties": {
-            "-": { "$ref": "#/$defs/arithmeticOperands" }
-         }
-      },
-
-      "mulExpression": {
-         "type": "object",
-         "required": ["*"],
-         "properties": {
-            "*": { "$ref": "#/$defs/arithmeticOperands" }
-         }
-      },
-
-      "divExpression": {
-         "type": "object",
-         "required": ["*"],
-         "properties": {
-            "/": { "$ref": "#/$defs/arithmeticOperands" }
-         }
-      },
-
-      "arithmeticOperands": {
-         "type": "array",
-         "items": {
-            "oneOf": [
-               {"$ref": "#/$defs/arithmeticExpression"},
-               {"$ref": "#/$defs/propertyRef"},
-               {"$ref": "#/$defs/functionRef"},
-               {"type": "number" }
-            ],
-            "minItems": 2,
-            "maxItems": 2
-         }
-      },
-
-      "scalarExpression": {
-         "oneOf": [
-            {"$ref": "#/$defs/scalarLiteral"},
-            {"$ref": "#/$defs/propertyRef"},
-            {"$ref": "#/$defs/functionRef"},
-            {"$ref": "#/$defs/arithmeticExpression"}
-         ]
-      },
-----
-
-^|B |A server that implements the <<rc_functions>> conformance class shall include function calls in the `arithmeticOperands` and `scalarExpression` objects.
+* "#/$defs/arithmeticExpression"
 |===

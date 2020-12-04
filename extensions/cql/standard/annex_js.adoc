@@ -1,16 +1,22 @@
 [appendix]
 :appendix-caption: Annex
 
-== JSON Schema for CQL (Normative)
+== JSON schemas for CQL (Normative)
 
-The following document specifies the JSON Schema for CQL according to the JSON Schema version '2019-09':
+[[cql-json-schema]]
+=== JSON Schema for CQL 
+
+The following document specifies the schema for CQL according to JSON Schema version '2019-09':
 
 [source,json]
 ----
 include::schema/cql.json[]
 ----
 
-The following document specifies the schema for CQL as an OpenAPI 3.0 schema:
+[[cql-openapi30-schema]]
+=== OpenAPI 3.0 schema for CQL 
+
+The following document specifies the schema for CQL as an OpenAPI 3.0 schema in YAML:
 
 [source,yaml]
 ----

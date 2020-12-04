@@ -2,10 +2,13 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/temporal-predicate* 
-^|A |The server SHALL support the temporal predicates as defined by the BNF rule `temporalPredicate` 
-in <<cql-bnf>> with the exception of all values of `temporalOperator` except "ANYINTERACTS" and 
-with the exception of the rule `function` in `temporalExpression`.
-^|B |The semantics of the `ANYINTERACTS` operator is defined as (using the enhanced temporal operators):
+^|A |A temporal predicate evaluates two time-valued expressions to determine if
+the expressions satisfy the requirements of the specified temporal operator.  
+If the requirements of the operator are satisfied, then the predicate SHALL 
+evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate
+to the Boolean value `FALSE`.
+^|B |The `ANYINTERACTS` operator SHALL evaluate as (using the temporal operators 
+from <<enhanced-temporal-operators>>):
 
 ----
 ANYINTERACTS(i,j) = NOT( BEFORE(i,j) OR MEETS(i,j) OR METBY(i,j) OR AFTER(i,j) )

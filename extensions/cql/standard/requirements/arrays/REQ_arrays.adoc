@@ -2,50 +2,20 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/arrays/array-predicate*
-^|A |A server that implements this requirement shall support arrays as defined by the following BNF fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> requirements class BNF:
+^|A |The server shall support arrays as defined by the BNF rule `arrayPredicate` in <<cql-bnf>> 
+with the exception of the following rules:
 
-----
-   predicate = comparisonPredicate
-            \| spatialPredicate
-            \| temporalPredicate;
-            \| arrayPredicate;
+* `function` in `arrayExpression`, `arrayElement` and `argument`
+* `arithmeticExpression` in `arrayElement` and `argument`.
+^|B |Both array expressions SHALL be evaluated as sets. No inherent order SHALL be implied in a array of values.
+^|C |The semantics of the array operators SHALL be evaluated as follows:
 
-   arrayPredicate = arrayExpression arrayOperator arrayExpression;
-
-   arrayExpression = propertyName \| function \| arrayLiteral;
-
-   arrayLiteral = leftBracket rightBracket
-       \| leftBracket arrayElement \[ { comma arrayElement } \] rightBracket;
-
-   arrayElement = characterLiteral
-               \| numericLiteral
-               \| booleanLiteral
-               \| geomLiteral
-               \| temporalLiteral
-               \| propertyName
-               \| function
-               \| arithmeticExpression
-               \| arrayLiteral;
-
-   arrayOperator = "AEQUALS"
-                \| "ACONTAINS"
-                \| "CONTAINED BY"
-                \| "AOVERLAPS";
-
-   argument = characterLiteral
-           \| numericLiteral
-           \| geomLiteral
-           \| temporalLiteral
-           \| propertyName
-           \| function
-           \| arithmeticExpression
-           \| arrayExpression;
-----
-
-^|B |No inherent order shall be implied in a array of values.
-^|C |See <<req_simple-cql_scalar-expressions>> for the definition of characterLiteral, numericLiteral, propertyName.
-^|D |See <<req_simple-cql_spatial-predicates>> for the definition of a geomLiteral.
-^|E |See <<req_simple-cql_temporal-predicates>> for the definition of temporalLiteral.
-^|F |If the server implements the <<functions,Requirements Class "Functions">>, see the <<req_functions>> for the definition of function.
-^|G |If the server implements the <<arithemetic,Requirements Class "Arithmetic Expressions">>, see <<req_arithmetic>> for the definition of arithmeticExpression.
+* `AEQUALS` evaluates to the Boolean value `TRUE`, if both sets are identical; otherwise the predicate 
+SHALL evaluate to the Boolean value `FALSE`.
+* `ACONTAINS` evaluates to the Boolean value `TRUE`, if the first set is a superset of the second set; 
+otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+* `CONTAINED BY` evaluates to the Boolean value `TRUE`, if the first set is a subset of the second set; 
+otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+* `AOVERLAPS` evaluates to the Boolean value `TRUE`, if both sets share at least one common element; 
+otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
 |===

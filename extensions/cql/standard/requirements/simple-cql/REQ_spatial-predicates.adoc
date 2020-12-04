@@ -2,8 +2,11 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicate* 
-^|A |The server SHALL support the spatial predicates as defined by the BNF rule `spatialPredicate` 
-in <<cql-bnf>> with the exception of all values of `spatialOperator` except "INTERSECTS" and 
-with the exception of the rule `function` in `geomExpression`.
-^|B |The semantics of the `INTERSECTS` operator is defined in clause 6.1.5 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
+^|A |A spatial predicate evaluates two geometry-valued expressions to determine, if
+the expressions satisfy the requirements of the specified spatial operator.  
+If the requirements of the operator are satisfied, then the predicate SHALL 
+evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate 
+to the Boolean value `FALSE`.
+^|B |The `INTERSECTS` operator SHALL be evaluated as defined in clause 6.1.5 of 
+<<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 |===
