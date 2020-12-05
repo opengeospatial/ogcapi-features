@@ -11,8 +11,8 @@ SHOULD be provided, where applicable.
 `maximum`, `exclusiveMaximum` SHOULD be provided, where applicable.
 ^|E |For integer properties that represent enumerated values, `enum` SHOULD
 be provided.
-^|F |For temporal properties that are a `string` literal, the appropriate
-format `date-time`, `date`, `time`, or `duration` SHOULD be provided.
+^|F |For temporal properties, the property SHOULD be a `string` literal with 
+the appropriate format `date-time`, `date`, `time`, or `duration`.
 ^|G |For spatial properties, the property SHOULD reference a well-known
 JSON schema of the geometry object.
 ^|H |For geometry types according to the Simple Features standard, the 
