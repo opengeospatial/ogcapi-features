@@ -15,7 +15,9 @@ be provided.
 format `date-time`, `date`, `time`, or `duration` SHOULD be provided.
 ^|G |For spatial properties, the property SHOULD reference a well-known
 JSON schema of the geometry object.
-^|G |For geometry types according to the Simple Features standard, the 
+^|H |For geometry types according to the Simple Features standard, the 
 JSON Schema of the GeoJSON geometry object SHOULD be referenced; 
 for example, `https://geojson.org/schema/Point.json` for a point geometry.
+^|I |For array properties, the property SHOULD consist of items that are strings
+or numbers.
 |===
