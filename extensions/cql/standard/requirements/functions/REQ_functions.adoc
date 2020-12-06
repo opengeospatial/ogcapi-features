@@ -2,24 +2,10 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/functions/functions*
-^|A |A server that implements this requirement shall support functions as defined by the following BNF fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> requirements class BNF:
-
-----
-function = identifier leftParen {argumentList} rightParen;
-
-argumentList = argument \[ { comma argument } \];
-
-argument = characterLiteral
-        \| numericLiteral
-        \| booleanLiteral
-        \| spatialLiteral
-        \| temporalLiteral
-        \| propertyName
-        \| function
-        \| arithmeticExpression;
-----
-
-^|B |A server that implements the <<rc_arithmetic>> conformance class shall include arithmetic expressions in the `argument` production.
+^|A |The server SHALL support functions as defined by the BNF rules `function` in <<cql-bnf>> 
+with the exception of the rule `arithmeticExpression` in `argument`.
+^|B |The function SHALL evaluate to a literal value that is allowed in the same rule 
+in which the function is used.
 |===
 
 

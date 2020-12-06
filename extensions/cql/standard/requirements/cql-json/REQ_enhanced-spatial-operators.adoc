@@ -2,104 +2,14 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/cql-json/enhanced_spatial-operators* 
-^|A |A server that implements the <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>> requirement class and also implements this requirement shall be able to parse a spatial predicate encoded as JSON that validates against the following JSON Schema fragment which extends the list of spatial operators defined by the <<req_sql-json_simple-cql>> requirement:
+^|Condition |Server implements requirements class <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
+^|A |In addition to the <<req_cql-json_simple-cql,Simple CQL>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema components:
 
-[source,JSON]
-----
-      "spatialPredicate" : {
-         "oneOf": [
-           {"$ref": "#/$defs/intersectsExpression"},
-           {"$ref": "#/$defs/equalsExpression"},
-           {"$ref": "#/$defs/disjointExpression"},
-           {"$ref": "#/$defs/touchesExpression"},
-           {"$ref": "#/$defs/withinExpression"},
-           {"$ref": "#/$defs/overlapsExpression"},
-           {"$ref": "#/$defs/crossesExpression"},
-           {"$ref": "#/$defs/containsExpression"}
-         ]
-      },
-
-      "intersectsExpression": {
-         "type": "object",
-         "required": ["intersects"],
-         "properties": {
-            "intersects": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
-      "equalsExpression": {
-         "type": "object",
-         "required": ["equals"],
-         "properties": {
-            "equals": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
-      "disjointExpression": {
-         "type": "object",
-         "required": ["disjoint"],
-         "properties": {
-            "disjoint": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
-      "touchesExpression": {
-         "type": "object",
-         "required": ["touches"],
-         "properties": {
-            "touches": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
-      "withinExpression": {
-         "type": "object",
-         "required": ["within"],
-         "properties": {
-            "within": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
-      "overlapsExpression": {
-         "type": "object",
-         "required": ["overlaps"],
-         "properties": {
-            "overlaps": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
-      "crossesExpression": {
-         "type": "object",
-         "required": ["crosses"],
-         "properties": {
-            "crosses": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
-      "containsExpression": {
-         "type": "object",
-         "required": ["contains"],
-         "properties": {
-            "contains": { "$ref": "#/$defs/spatialOperands" }
-         }
-      },
-
-      "spatialOperands": {
-         "type": "array",
-         "items": {
-            "$ref": "#/$defs/geomExpression",
-            "minItems": 2,
-            "maxItems": 2
-         }
-      },
-
-      "geomExpression": {
-         "oneOf": [
-            {"$ref": "#/$defs/spatialLiteral"},
-            {"$ref": "#/$defs/propertyRef"},
-            {"$ref": "#/$defs/functionRef"}
-         ]
-      },
-----
-
-^|B |A server that implements the <<rc_functions>> conformance class shall include function calls in the `geomExpression` object.
+* "#/$defs/equalsExpression"
+* "#/$defs/disjointExpression"
+* "#/$defs/touchesExpression"
+* "#/$defs/withinExpression"
+* "#/$defs/overlapsExpression"
+* "#/$defs/crossesExpression"
+* "#/$defs/containsExpression"
 |===

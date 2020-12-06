@@ -1,5 +1,7 @@
 [[req_cql-text_enhanced-temporal-operators]] 
 [width="90%",cols="2,6a"]
 |===
-^|A |A server that implements the <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> requirement class and also implements this requirement shall be able to parse a temporal operator encoded as a text string that validates against the BNF production fragment in the <<req_enhanced-temporal-operators,Enhanced Temporal Operators>> requirement.
+^|*Requirement {counter:req-id}* |*/req/cql-text/temporal-operators* 
+^|Condition |Server implements requirements class <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>
+^|A |The server SHALL be able to parse and evaluate all spatial operators encoded as a text string that validate against the BNF production fragment identified in the <<req_enhanced-temporal-operators,Enhanced Temporal Operators>> requirement.
 |===

@@ -7,112 +7,119 @@
 include::requirements/requirements_class_simple-cql.adoc[]
 
 This clause defines the core of a query language called `Common Query Language`
-(CQL) that may be used to construct filter expressions.  Subsequent clauses
-define several optional encodings of CQL as well additional filtering 
-capabilities.
+(CQL) that may be used to construct filter expressions. This core is called Simple CQL.
+
+Subsequent clauses define additional filtering capabilities as well as several 
+encodings of CQL.
 
 [[simple-cql_filter-expression]]
 === CQL filter expression
 
 A CQL filter expression is an expression that defines a logically connected
-set of predicates that are evaluated for each item of a collection.  A CQL 
-filter expression produces a Boolean value of `TRUE` is the collection item
-satisfies all the requirements of the expression; otherwise the CQL filter 
-expression evaluates to `FALSE'.
+set of predicates that are evaluated for each item of a collection. A collection 
+item that satisfies all the requirements of a CQL filter expression evaluates 
+to a Boolean value of `TRUE`; otherwise the CQL filter expression evaluates to `FALSE`.
 
-A CQL filter expression can be constructed by logically connecting zero or more
-of the following classes of predicates:
+include::requirements/simple-cql/REQ_cqlfilter.adoc[]
+
+A Simple CQL filter expression can be constructed by logically connecting one 
+or more of the following classes of predicates:
 
 * comparison predicates
 * spatial predicates
 * temporal predicates
 
-include::requirements/simple-cql/REQ_cqlfilter.adoc[]
+NOTE: Don't we need to say more in the predicates about the behavior, if a property 
+references (or function) evaluates to null?
+
+Support for the parts of CQL that are not part of Simple CQL is added in additional
+requirements classes in <<cql-enhancements>>: 
+
+* the rule `arrayPredicate` is added by requirements class <<rc_arrays,Arrays>>;
+* the rule `function` is added by requirements class <<rc_functions,Functions>>;
+* the rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>; 
+* the additional values in rule `spatialOperator` are added by requirements class <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>;
+* the additional values in rule `temporalOperator` are added by requirements class <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>.
+
+Examples of Simple CQL filter expressions are included in the subsequent sub-clauses.
 
 [[simple-cql_literals]]
 === Literal values
 
-A literal value is any part of an CQL filter expression that is be used
-exactly as it is specified in the expression.  Literal values include
-character string, numeric, boolean, geometric or temporal values.
+A literal value is any part of an CQL filter expression that is used
+exactly as it is specified in the expression. Literal values include
 
-include::requirements/simple-cql/REQ_literals.adoc[]
+* character strings (rule `characterLiteral`),
+* numbers (rule `numericLiteral`), 
+* booleans (rule `booleanLiteral`), 
+* spatial geometries (rule `spatialLiteral`) and 
+* temporal geometries (rule `temporalLiteral`).
+
+NOTE: Add examples
 
 [[simple-cql_property]]
-=== Property reference
+=== Property references
 
 Properties in an object being evaluated in the CQL filter expression can be
-referenced by their name.
+referenced by their name (rule `propertyName`).
 
 include::requirements/simple-cql/REQ_property.adoc[]
+
+For example, a property name used in a scalar expression (rule `scalarExpression`)
+has to be a queryable of type `string`, `number`, `integer` or `boolean`.
+
+NOTE: Use of `identifierPart` is unclear. And we should allow dots and colons 
+in property names.
+
+NOTE: Add examples
 
 [[simple-cql_comparison-predicates]]
 === Comparison predicates
 
-A comparison predicate evaluates two scalar expressions to determine if the
-expressions satisfy the specified comparison operator.  If the requirements
-of the operator are satisfied, then the prediate evaluates to the Boolean
-value `TRUE`; otherwise the predicate evaluates to the Boolean value `FALSE`;
+include::requirements/simple-cql/REQ_binary-comparison-predicate.adoc[]
 
-include::requirements/simple-cql/REQ_comparison-predicates.adoc[]
+NOTE: Add examples
 
-The like predicate tests whether the value of a scalar expression matches
-the specified pattern.  If the value matches the pattern then the predicate
-evaluates to the Boolean value `TRUE`; otherwise the like predicate evaluates
-to the Boolean value `FALSE`. 
+include::requirements/simple-cql/REQ_like-predicate.adoc[]
 
-The between predicate tests whether the value of a scalar expression lies within
-the specified range.  The BETWEEN operator is inclusive.  If the value lies
-within the specified range then the predicate evaluates to the Boolean value
-`TRUE`; otherwise the between predicate evalues to the Boolean value `FALSE`.
+NOTE: Add examples
 
-A list predicate tests, for equality, the value of a scalar expression against
-a list of literal values of the same type.  If the value of the named property
-is equal to one or more of the values in the list of literals, the list
-predicate evaluates to the Boolean value `TRUE`; otherwise the list predicate
-evaluates to the Boolean value `FALSE`.
+include::requirements/simple-cql/REQ_between-predicate.adoc[]
 
-include::requirements/simple-cql/REQ_in-predicate-items.adoc[]
+NOTE: Add examples
 
-The null predicate tests whether the value of a scalar expression is null.  If
-the value of the scalar expression is null, the null predicate evaluates to the
-Boolean value `TRUE`; otherwise the null predicate evaluates to the Boolean
-value `FALSE`.
+include::requirements/simple-cql/REQ_in-predicate.adoc[]
+
+NOTE: Add examples
+
+include::requirements/simple-cql/REQ_null-predicate.adoc[]
+
+NOTE: Add examples
 
 [[simple-cql_spatial]]
 === Spatial predicates
 
-A spatial predicate evaluates two geometry-valued expressions to determine if
-the expressions satsify the requirements of the specified spatial operator.  
-If the requirements of the operator are satisfied, then the predicate evaluates
-to the Boolean value `TRUE`; otherwise the predicate evaluates to the Boolean 
-value `FALSE`.
-
 include::requirements/simple-cql/REQ_spatial-predicates.adoc[]
 
-=== CRS considerations
+CQL uses Well-Known-Text (WKT) to encode geometry literals. Since WKT does not
+provide a capability to specify the CRS of a geometry literal, the server has
+to determine the CRS of the geometry literals in a filter expression through
+another mechanism. In this specification, the `filter-crs` query parameter
+is used to pass the CRS information to the server.
 
-include::requirements/simple-cql/REQ_crs_crs84.adoc[]
-
-include::requirements/simple-cql/REQ_crs-other.adoc[]
+NOTE: Add examples
 
 [[simple-cql_temporal]]
 === Temporal predicates
 
-A temporal predicate evaluates two time-valued expressions to determine if
-the expressions satsify the requirements of the specified temporal operator.  
-If the requirements of the operator are satisfied, then the predicate evaluates
-to the Boolean value `TRUE`; otherwise the predicate evaluates to the Boolean
-value `FALSE`;
-
 include::requirements/simple-cql/REQ_temporal-predicates.adoc[]
 
-=== Simple CQL Encodings
+All temporal literals are in the Gregorian Calendar.
+
+NOTE: Add examples
+
+=== CQL Encodings
 
 This standard defines a <<simple-cql-text,text>> encoding and a 
-<<simple-cql-json,JSON>> encoding of CQL and makes the following 
-recommendations:
-
-include::recommendations/simple-cql/REC_simple-cql-text.adoc[]
-
-include::recommendations/simple-cql/REC_simple-cql-json.adoc[]
+<<simple-cql-json,JSON>> encoding of CQL that covers Simple CQL
+and all enhanced capabilities specified in the next clause.

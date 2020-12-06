@@ -2,17 +2,15 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/temporal-predicate* 
-^|A |A server that implements this conformance class shall support the temporal predicates defined by the following BNF fragment:
+^|A |A temporal predicate evaluates two time-valued expressions to determine if
+the expressions satisfy the requirements of the specified temporal operator.  
+If the requirements of the operator are satisfied, then the predicate SHALL 
+evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate
+to the Boolean value `FALSE`.
+^|B |The `ANYINTERACTS` operator SHALL evaluate as (using the temporal operators 
+from <<enhanced-temporal-operators>>):
 
 ----
-temporalPredicate = temporalExpression temporalOperator temporalExpression;
-
-temporalOperator = "ANYINTERACTS";
-
-temporalExpression = temporalLiteral
-                  \| propertyName
-                  \| function;
+ANYINTERACTS(i,j) = NOT( BEFORE(i,j) OR MEETS(i,j) OR METBY(i,j) OR AFTER(i,j) )
 ----
-
-^|B |A server that implements the <<rc_functions>> conformance class shall include function calls in the `temporalExpression` production.
 |===

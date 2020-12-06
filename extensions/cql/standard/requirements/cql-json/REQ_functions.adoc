@@ -2,65 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/cql-json/functions* 
-^|A |A server that implements the <<rc_functions,Functions>> requirement class and also implements this requirement shall be able to parse a function call expression encoded as JSON that validates against the following JSON Schema fragment:
+^|Condition |Server implements requirements class <<rc_functions,Functions>>
+^|A |In addition to the <<req_cql-json_simple-cql,Simple CQL>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema component:
 
-[source,JSON]
-----
-      "functionRef": {
-         "type": "object",
-         "required": ["function"],
-         "properties": {
-            "function": { "$ref": "#/$defs/function" }
-         }
-      },
-
-      "function": {
-         "type": "object",
-         "required": [ "name" ],
-         "properties": {
-            "name": { "type": "string" },
-            "arguments": {
-               "type": "array",
-               "items": {
-                  "oneOf": [
-                     { "$ref": "#/$defs/scalarLiteral" },
-                     { "$ref": "#/$defs/spatialLiteral" },
-                     { "$ref": "#/$defs/temporalLiteral" },
-                     { "$ref": "#/$defs/propertyRef" },
-                     { "$ref": "#/$defs/functionRef" },
-                     { "$ref": "#/$defs/arithmeticExpression" },
-                  ]
-               }
-            }
-         }
-      },
-
-      "scalarExpression": {
-         "oneOf": [
-            {"$ref": "#/$defs/scalarLiteral"},
-            {"$ref": "#/$defs/propertyRef"},
-            {"$ref": "#/$defs/functionRef"},
-            { "$ref": "#/$defs/arithmeticExpression" },
-         ]
-      },
-
-      "geomExpression": {
-         "oneOf": [
-            {"$ref": "#/$defs/spatialLiteral"},
-            {"$ref": "#/$defs/propertyRef"},
-            {"$ref": "#/$defs/functionRef"}
-         ]
-      },
-
-      "temporalExpression": {
-         "oneOf": [
-            {"$ref": "#/$defs/temporalLiteral"},
-            {"$ref": "#/$defs/propertyRef"},
-            {"$ref": "#/$defs/functionRef"}
-         ]
-      },
-----
-
-^|B |The list of valid function names can be discovered via the `functions` resource (i.e. path `/functions`).
-^|C |A server that implements the <<rc_arithmetic>> conformance class shall include arithmetic expressions in the `function`, `scalarExpression`, `geomExpression` and `temporalExpression` objects.
+* "#/$defs/functionRef"
 |===

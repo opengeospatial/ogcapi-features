@@ -4,15 +4,16 @@
 === Overview
 
 This clause specifies requirements for enhancements to <<cql-core,Simple CQL>>.
-Specifically, this clause defined requirements for:
+Specifically, this clause defines requirements for:
 
 * additional spatial operators
 * additional temporal operators
 * support for functions in CQL
 * support for arithmetic expression in CQL
+* support for arrays in CQL
 
-In each case, the clause also ammends and extends CQL's BNF and the text and
-JSON encodings of CQL to introduce the enhanced capabilities.
+In each case, the clause specifies requirements for the rules in <<cql-bnf>> not 
+supported by Simple CQL.
 
 [[enhanced-spatial-operators]]
 === Requirements Class "Enhanced Spatial Operators"
@@ -20,7 +21,7 @@ JSON encodings of CQL to introduce the enhanced capabilities.
 include::requirements/requirements_class_enhanced-spatial-operators.adoc[]
 
 The <<rc_simple_cql,Simple CQL>> clause specifies the use of the `INTERSECTS`
-spatial operator.  This requirement adds the remaining Dimensionally Extended
+spatial operator.  This requirement adds additional Dimensionally Extended
 Nine-intersection Model (DE-9IM) relation operators to the list of spatial
 operators that an implementation of this extension might offer.
 
@@ -33,10 +34,10 @@ as described in <<ISO19125,OpenGIS® Implementation Standard for Geographic info
 .Mathematical definitions of spatial operators
 [width=80%,cols="30,70",options="header"]
 |===
-|Spatial operators |Definition
+|Spatial operator |Definition
 |EQUALS |a EQUALS b &#x2b04; a &#x2286; b &#x2227; b &#x2286; a
 |DISJOINT |a DISJOINT b &#x2b04; a &#x2229; b = &#x2205;
-|TOUCHES |a TOUCHES b &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205; 
+|TOUCHES |a TOUCHES b &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205;
 |WITHIN | a WITHIN b &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) &#x2260; &#x2205;)
 |OVERLAPS |a OVERLAPS b &#x2b04; (dim(I(a)) = dim(I(b)) = dim(I(a) &#x2229; I(b))) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)
 |CROSSES |a CROSSES b &#x2b04; [I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)]
@@ -44,8 +45,8 @@ as described in <<ISO19125,OpenGIS® Implementation Standard for Geographic info
 |CONTAINS | a CONTAINS b &#x2b04; b CONTAINS a
 |===
 
-The following diagrams illustrate the meaning of the TOUCHES, WITHIN, OVERLAPS,
-and CROSSES operators.
+The following diagrams illustrate the meaning of the `TOUCHES`, `WITHIN`, `OVERLAPS`,
+and `CROSSES` operators.
 
 [#figure1]
 .Examples of the TOUCHES relationship
@@ -55,7 +56,7 @@ image::images/touches.png[alt=Touches,width=70%]
 .Examples of the WITHIN relationship Polygon/Polygon(a), Polygon/LineString(b), LineString/LineString(c), and Polygon/Point(d)
 image::images/within.png[alt=Within,width=70%]
 
-NOTE: If geometry a CONTAINS geometry b, then geometry b is WITHIN geometry a.
+NOTE: If geometry a `CONTAINS` geometry b, then geometry b is `WITHIN` geometry a.
 
 [#figure3]
 .Examples of the OVERLAPS relationship Polygon/LineString(a) and LineString/LineString(b)
@@ -65,59 +66,47 @@ image::images/overlaps.png[alt=Overlaps,width=70%]
 .Examples of the CROSSES relationship Polygon/LineString(a) and LineString/LineString(b)
 image::images/crosses.png[alt=Crosses,width=70%]
 
+NOTE: Add examples
+
 [[enhanced-temporal-operators]]
 === Requirements Class "Enhanced Temporal Operators"
 
 include::requirements/requirements_class_enhanced-temporal-operators.adoc[]
 
 The <<rc_simple_cql,Simple CQL>> clause specifies the use of the `ANYINTERACTS`
-temporal operator.  This requirements class adds the remaining ISO temporal
-operators to the list of temporal operators that an implementations of this
-extension might offer.
+temporal operator.  This requirements class adds additional commonly used temporal
+operators that an implementation of this extension might offer.
 
 include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators.adoc[]
 
-The following table maps the CQL temporal operator names with the temporal
-operator names defined in <<OGC16-071r3,Time Ontology in OWL>>.
-
-[reftext='{table-caption} {counter:table-num}']
-[width=80%,cols="30,70",options="header"]
-|===
-|CQL Name |Time Ontology in OWL Name
-| AFTER |After
-| BEFORE |Before
-| BEGINS |Starts
-| BEGUNBY |StartedBy
-| TCONTAINS |Contains
-| DURING |During
-| ENDEDBY |FinishedBy
-| ENDS |Finishes
-| TEQUALS |Equals
-| MEETS |Meets
-| METBY |MetBy
-| TOVERLAPS |Overlaps
-| OVERLAPPEDBY |OverlappedBy
-| ANYINTERACTS | N/A
-|===
+CQL supports date and timestamps as time instants, but even the smallest "instant" has a
+duration and can be evaluated as an interval, too. For the purposes of determining 
+the temporal relationship between two temporal expressions, an instant is treated as
+the interval from the beginning to the end of the instant.
 
 The following diagram illustrates the meaning of the temporal operators.
 
 [#figure5]
-.The elementary possible relations between time periods.
+.The elementary relations between time intervals
 image::images/temporal_ops.png[alt=TemporalOps,width=70%]
+
+NOTE: Add examples
 
 [[functions]]
 === Requirements Class "Functions"
 
 include::requirements/requirements_class_functions.adoc[]
 
-This clause specifies requirements for supporting functions in CQL. Functions
+This sub-clause specifies requirements for supporting functions in CQL. Functions
 allow implementations to extend the language.
 
-A resource, `/functions` is also defined that allows clients to discover the
-list of function that an implementation offers.
-
 include::requirements/functions/REQ_functions.adoc[]
+
+NOTE: Support for the BNF rule `arithmeticExpression` is added by
+the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
+
+A resource, `/functions` is also defined that allows clients to discover the
+list of function that a server offers.
 
 include::requirements/functions/REQ_get-functions-operation.adoc[]
 
@@ -128,45 +117,47 @@ include::requirements/functions/REQ_get-functions-response-json.adoc[]
 ====
 [source,JSON]
 ----
-   {
-      "functions": [
-         {
-            "name": "min",
-            "arguments": [
-               {
-                  "type": ["string","number","datetime"]
-               },
-               {
-                  "type": ["string","number","datetime"]
-               },
-            ],
-            "retuns": ["string","number","datetime"]
-         },
-         {
-            "name": "max",
-            "arguments": [
-               {
-                  "type": ["string","number","datetime"]
-               },
-               {
-                  "type": ["string","number","datetime"]
-               },
-            ],
-            "retuns": ["string","number","datetime"]
-         },
-         {
-            "name": "geometryType",
-            "arguments": [
-               {
-                  "type": ["geometry"]
-               }
-            ],
-            "returns": ["string"]
-         }
-      ]
-   }
+{
+   "functions": [
+      {
+         "name": "min",
+         "arguments": [
+            {
+               "type": ["string","number","datetime"]
+            },
+            {
+               "type": ["string","number","datetime"]
+            },
+         ],
+         "retuns": ["string","number","datetime"]
+      },
+      {
+         "name": "max",
+         "arguments": [
+            {
+               "type": ["string","number","datetime"]
+            },
+            {
+               "type": ["string","number","datetime"]
+            },
+         ],
+         "retuns": ["string","number","datetime"]
+      },
+      {
+         "name": "geometryType",
+         "arguments": [
+            {
+               "type": ["geometry"]
+            }
+         ],
+         "returns": ["string"]
+      }
+   ]
+}
 ----
 ====
+
+NOTE: Add examples
 
 [[arithmetic]]
 === Requirements Class "Arithmetic Expressions"
@@ -174,20 +165,16 @@ include::requirements/functions/REQ_get-functions-response-json.adoc[]
 include::requirements/requirements_class_arithmetic.adoc[]
 
 This clause specifies requirements for supporting arithmetic expressions in CQL.
-An arithemtic expression is an expression composed of an arithmetic operand
+An arithmetic expression is an expression composed of an arithmetic operand
 (a property name, a number or a function that returns a number), an arithmetic
 operator (i.e. one of +,-,*,/) and another arithmetic operand.
 
 include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
-[[example_6]]
-.Arithmetic expression example in JSON
-====
-[source,JSON]
-----
+NOTE: Support for the BNF rule `function` is added by
+the requirements class <<rc_functions,Functions>>.
 
-----
-====
+NOTE: Add examples
 
 [[arrays]]
 === Requirements class "Arrays"
@@ -201,3 +188,7 @@ arrays overlap or share elements.
 
 include::requirements/arrays/REQ_arrays.adoc[]
 
+NOTE: Support for the BNF rule `function` is added by
+the requirements class <<rc_functions,Functions>>. 
+Support for the BNF rule `arithmeticExpression` is added by
+the requirements class <<rc_arithmetic,Arithmetic Expressions>>.

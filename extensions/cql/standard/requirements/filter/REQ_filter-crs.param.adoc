@@ -2,8 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/filter/filter-crs-param*
-^|A |If the server implementing this extension also supports the http://fix.me[Coords Reference Systems by Reference] extension, then the HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items') shall support a parameter `filter-crs` that asserts the crs being used to encode geomerty value in a filter expression specified as the value of the `filter` parameter.
-^|B |The following YAML fragment defines the `filter-crs` parameter:
+^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
+^|A |The HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items`) shall support a parameter `filter-crs` with the following characteristics (using an OpenAPI Specification 3.0 fragment):
 
 [source,YAML]
 ----
@@ -12,8 +12,10 @@ in: query
 required: false
 schema:
   type: string
-  format: uri
+  format: uri-reference
 style: form
 explode: false
 ----
+^|B |If a HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items`) includes the `filter` and the `filter-crs` parameter, the server SHALL process all geometries in the filter expression using the CRS identified by the URI in `filter-crs`.
+^|C |The server SHALL return an error, if it does not support the CRS identified in `filter-crs` for the resource.
 |===
