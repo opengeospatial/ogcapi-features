@@ -2128,9 +2128,26 @@ encodings of CQL.</p>
 <h3 id="simple-cql_filter-expression"><a class="anchor" href="#simple-cql_filter-expression"></a>9.2. CQL filter expression</h3>
 <div class="paragraph">
 <p>A CQL filter expression is an expression that defines a logically connected
-set of predicates that are evaluated for each item of a collection. A collection
-item that satisfies all the requirements of a CQL filter expression evaluates
-to a Boolean value of <code>TRUE</code>; otherwise the CQL filter expression evaluates to <code>FALSE</code>.</p>
+set of predicates that are evaluated for each item of a collection.</p>
+</div>
+<div class="paragraph">
+<p>A predicate is an expression that evaluates to the Boolean values of <code>TRUE</code>
+or <code>FALSE</code> or that evaluates to the value <code>NULL</code> when dealing with unknown
+values.</p>
+</div>
+<div class="paragraph">
+<p>If a predicate evaluates to <code>TRUE</code> for an item, the item qualifies for
+further processing (e.g. presentation in the result set, being passed on
+to the next predicate in the filter for further evaluation, etc.).</p>
+</div>
+<div class="paragraph">
+<p>If the predicate evaluates to <code>FALSE</code> or <code>NULL</code> for an item, the item is not
+available for further processing.</p>
+</div>
+<div class="paragraph">
+<p>A collection item that satisfies ALL the requirements of a CQL filter expression
+evaluates to a Boolean value of <code>TRUE</code>; otherwise the CQL filter expression
+evaluates to <code>FALSE</code>.</p>
 </div>
 <table id="req_simple-cql_cqlfilter" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -2183,19 +2200,6 @@ or more of the following classes of predicates:</p>
 <p>temporal predicates</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Don&#8217;t we need to say more in the predicates about the behavior, if a property
- references (or function) evaluates to null?
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>Support for the parts of CQL that are not part of Simple CQL is added in additional
@@ -2479,7 +2483,7 @@ evaluate to a <code>characterLiteral</code>.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The <code>patternExpression</code> shall be a POSIX regular expression (see <a href="https://pubs.opengroup.org/onlinepubs/9699919799/" class="bare">https://pubs.opengroup.org/onlinepubs/9699919799/</a>).</p>
+<p>The <code>patternExpression</code> SHALL be a POSIX regular expression (see <a href="https://pubs.opengroup.org/onlinepubs/9699919799/" class="bare">https://pubs.opengroup.org/onlinepubs/9699919799/</a>).</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4269,9 +4273,7 @@ Add conformance classes and test cases for all requirements classes and requirem
 <span class="tok-nc">isLikePredicate</span> <span class="tok-o">=</span>  <span class="tok-nc">scalarExpression</span> <span class="tok-l">&quot;LIKE&quot;</span> <span class="tok-nc">patternExpression</span>
                    <span class="tok-p">[</span><span class="tok-l">&quot;NOCASE&quot;</span> <span class="tok-nc">booleanLiteral</span><span class="tok-p">]</span><span class="tok-c1">;</span>
 
-# <span class="tok-nc">NOTE</span>: <span class="tok-nc">This</span> <span class="tok-nc">is</span> <span class="tok-nc">just</span> a <span class="tok-nc">place</span> <span class="tok-nc">holder</span> <span class="tok-nc">for</span> a <span class="tok-nc">regular</span> <span class="tok-nc">expression</span>
-#       <span class="tok-nc">We</span> <span class="tok-nc">want</span> <span class="tok-nc">to</span> <span class="tok-nc">be</span> <span class="tok-nc">able</span> <span class="tok-nc">to</span> <span class="tok-nc">say</span> <span class="tok-nc">stuff</span> <span class="tok-nc">like</span> <span class="tok-l">&quot;&lt;prop&gt; LIKE &#39;Toronto%&#39;&quot;</span> <span class="tok-nc">where</span>
-#       <span class="tok-nc">the</span> &#39;%&#39; <span class="tok-nc">character</span> <span class="tok-nc">means</span> <span class="tok-l">&quot;match zero or more characters&quot;</span>.
+# <span class="tok-nc">The</span> <span class="tok-nc">character</span> <span class="tok-nc">literal</span> <span class="tok-nc">is</span> <span class="tok-nc">interpreted</span> <span class="tok-nc">as</span> a <span class="tok-nc">POSIX</span> <span class="tok-nc">regular</span> <span class="tok-nc">expression</span>.
 <span class="tok-nc">patternExpression</span> <span class="tok-o">=</span> <span class="tok-nc">characterLiteral</span><span class="tok-c1">;</span>
 
 # <span class="tok-nc">BETWEEN</span> <span class="tok-nc">predicate</span>
@@ -4415,8 +4417,7 @@ Add conformance classes and test cases for all requirements classes and requirem
 
 #<span class="tok-o">=============================================================================</span>#
 # <span class="tok-nc">Definition</span> <span class="tok-nc">of</span> a <span class="tok-nc">FUNCTION</span>
-# <span class="tok-nc">NOTE</span>: <span class="tok-nc">How</span> <span class="tok-nc">do</span> <span class="tok-nc">we</span> <span class="tok-nc">advertise</span> <span class="tok-nc">which</span> <span class="tok-nc">functions</span> <span class="tok-nc">an</span> <span class="tok-nc">implementation</span> <span class="tok-nc">offer</span>?
-#       <span class="tok-nc">In</span> <span class="tok-nc">the</span> <span class="tok-nc">OpenAPI</span> <span class="tok-nc">document</span> I <span class="tok-nc">suppose</span>!
+# <span class="tok-nc">The</span> <span class="tok-nc">functions</span> <span class="tok-nc">offered</span> <span class="tok-nc">by</span> <span class="tok-nc">an</span> <span class="tok-nc">implementation</span> <span class="tok-nc">are</span> <span class="tok-nc">provided</span> <span class="tok-nc">at</span> `<span class="tok-o">/</span><span class="tok-nc">functions</span>`
 #<span class="tok-o">=============================================================================</span>#
 <span class="tok-nc">function</span> <span class="tok-o">=</span> <span class="tok-nc">identifier</span> <span class="tok-nc">leftParen</span> {<span class="tok-nc">argumentList</span>} <span class="tok-nc">rightParen</span><span class="tok-c1">;</span>
 
@@ -4661,7 +4662,7 @@ Add conformance classes and test cases for all requirements classes and requirem
 #<span class="tok-o">=============================================================================</span>#
 # <span class="tok-nc">Definition</span> <span class="tok-nc">of</span> <span class="tok-nc">GEOMETRIC</span> <span class="tok-nc">literals</span>
 #
-# <span class="tok-nc">NOTE</span>: <span class="tok-nc">This</span> <span class="tok-nc">is</span> <span class="tok-nc">basically</span> <span class="tok-nc">BNF</span> <span class="tok-nc">that</span> <span class="tok-nc">define</span> <span class="tok-nc">WKT</span> <span class="tok-nc">encoding</span><span class="tok-c1">; it would be nice</span>
+# <span class="tok-nc">NOTE</span>: <span class="tok-nc">This</span> <span class="tok-nc">is</span> <span class="tok-nc">basically</span> <span class="tok-nc">BNF</span> <span class="tok-nc">that</span> <span class="tok-nc">define</span> <span class="tok-nc">WKT</span> <span class="tok-nc">encoding</span>. <span class="tok-nc">It</span> <span class="tok-nc">would</span> <span class="tok-nc">be</span> <span class="tok-nc">nice</span>
 #       <span class="tok-nc">to</span> <span class="tok-nc">instead</span> <span class="tok-nc">reference</span> <span class="tok-nc">some</span> <span class="tok-nc">normative</span> <span class="tok-nc">BNF</span> <span class="tok-nc">for</span> <span class="tok-nc">WKT</span>.
 #<span class="tok-o">=============================================================================</span>#
 <span class="tok-nc">spatialLiteral</span> <span class="tok-o">=</span> <span class="tok-nc">pointTaggedText</span>
@@ -4730,7 +4731,7 @@ Add conformance classes and test cases for all requirements classes and requirem
 # <span class="tok-nc">Definition</span> <span class="tok-nc">of</span> <span class="tok-nc">TEMPORAL</span> <span class="tok-nc">literals</span>
 #
 # <span class="tok-nc">NOTE</span>: <span class="tok-nc">Is</span> <span class="tok-nc">the</span> <span class="tok-nc">fact</span> <span class="tok-nc">the</span> <span class="tok-nc">time</span> <span class="tok-nc">zones</span> <span class="tok-nc">are</span> <span class="tok-nc">supported</span> <span class="tok-nc">too</span> <span class="tok-nc">complicated</span> <span class="tok-nc">for</span> a
-#       <span class="tok-nc">simple</span> <span class="tok-nc">CQL</span>?  <span class="tok-nc">Perhaps</span> <span class="tok-nc">the</span> <span class="tok-l">&quot;core&quot;</span> <span class="tok-nc">of</span> <span class="tok-nc">CQL</span> <span class="tok-nc">should</span> <span class="tok-nc">just</span> <span class="tok-nc">support</span> <span class="tok-nc">UTC</span>.
+#       <span class="tok-nc">simple</span> <span class="tok-nc">CQL</span>? <span class="tok-nc">Perhaps</span> <span class="tok-nc">the</span> <span class="tok-l">&quot;core&quot;</span> <span class="tok-nc">of</span> <span class="tok-nc">CQL</span> <span class="tok-nc">should</span> <span class="tok-nc">just</span> <span class="tok-nc">support</span> <span class="tok-nc">UTC</span>.
 #<span class="tok-o">=============================================================================</span>#
 <span class="tok-nc">temporalLiteral</span> <span class="tok-o">=</span> <span class="tok-nc">instant</span> | <span class="tok-nc">interval</span><span class="tok-c1">;</span>
 

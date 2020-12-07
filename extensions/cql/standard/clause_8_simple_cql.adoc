@@ -16,9 +16,22 @@ encodings of CQL.
 === CQL filter expression
 
 A CQL filter expression is an expression that defines a logically connected
-set of predicates that are evaluated for each item of a collection. A collection 
-item that satisfies all the requirements of a CQL filter expression evaluates 
-to a Boolean value of `TRUE`; otherwise the CQL filter expression evaluates to `FALSE`.
+set of predicates that are evaluated for each item of a collection.
+
+A predicate is an expression that evaluates to the Boolean values of `TRUE`
+or `FALSE` or that evaluates to the value `NULL` when dealing with unknown
+values.
+
+If a predicate evaluates to `TRUE` for an item, the item qualifies for
+further processing (e.g. presentation in the result set, being passed on 
+to the next predicate in the filter for further evaluation, etc.).
+
+If the predicate evaluates to `FALSE` or `NULL` for an item, the item is not
+available for further processing.
+
+A collection item that satisfies ALL the requirements of a CQL filter expression 
+evaluates to a Boolean value of `TRUE`; otherwise the CQL filter expression 
+evaluates to `FALSE`.
 
 include::requirements/simple-cql/REQ_cqlfilter.adoc[]
 
@@ -28,9 +41,6 @@ or more of the following classes of predicates:
 * comparison predicates
 * spatial predicates
 * temporal predicates
-
-NOTE: Don't we need to say more in the predicates about the behavior, if a property 
- references (or function) evaluates to null?
 
 Support for the parts of CQL that are not part of Simple CQL is added in additional
 requirements classes in <<cql-enhancements>>: 

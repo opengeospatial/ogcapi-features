@@ -8,7 +8,7 @@ SHALL evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evalua
 to the Boolean value `FALSE`. 
 ^|B |The scalar expression (rule `scalarExpression`) in rule `isLikePredicate` SHALL 
 evaluate to a `characterLiteral`.
-^|C |The `patternExpression` shall be a POSIX regular expression (see https://pubs.opengroup.org/onlinepubs/9699919799/).
+^|C |The `patternExpression` SHALL be a POSIX regular expression (see https://pubs.opengroup.org/onlinepubs/9699919799/).
 ^|D |If `NOCASE` is `TRUE`, the comparison SHALL be case insensitive, if it is `FALSE` 
 it SHALL be case sensitive. The default is `TRUE`.
 |===

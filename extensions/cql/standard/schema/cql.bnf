@@ -72,9 +72,7 @@ lteq = lt eq;
 isLikePredicate =  scalarExpression "LIKE" patternExpression
                    ["NOCASE" booleanLiteral];
 
-# NOTE: This is just a place holder for a regular expression
-#       We want to be able to say stuff like "<prop> LIKE 'Toronto%'" where
-#       the '%' character means "match zero or more characters".
+# The character literal is interpreted as a POSIX regular expression.
 patternExpression = characterLiteral;
 
 # BETWEEN predicate
@@ -218,8 +216,7 @@ identifierPart = alpha | digit | dollar | underscore;
 
 #=============================================================================#
 # Definition of a FUNCTION
-# NOTE: How do we advertise which functions an implementation offer?
-#       In the OpenAPI document I suppose!
+# The functions offered by an implementation are provided at `/functions`
 #=============================================================================#
 function = identifier leftParen {argumentList} rightParen;
 
@@ -464,7 +461,7 @@ booleanLiteral = "TRUE" | "true" | "FALSE" | "false" |
 #=============================================================================#
 # Definition of GEOMETRIC literals
 #
-# NOTE: This is basically BNF that define WKT encoding; it would be nice
+# NOTE: This is basically BNF that define WKT encoding. It would be nice
 #       to instead reference some normative BNF for WKT.
 #=============================================================================#
 spatialLiteral = pointTaggedText
@@ -533,7 +530,7 @@ maxElev = signedNumericLiteral;
 # Definition of TEMPORAL literals
 #
 # NOTE: Is the fact the time zones are supported too complicated for a
-#       simple CQL?  Perhaps the "core" of CQL should just support UTC.
+#       simple CQL? Perhaps the "core" of CQL should just support UTC.
 #=============================================================================#
 temporalLiteral = instant | interval;
 
