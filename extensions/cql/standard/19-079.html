@@ -2192,7 +2192,7 @@ or more of the following classes of predicates:</p>
 </td>
 <td class="content">
 Don&#8217;t we need to say more in the predicates about the behavior, if a property
-references (or function) evaluates to null?
+ references (or function) evaluates to null?
 </td>
 </tr>
 </table>
@@ -2249,17 +2249,99 @@ exactly as it is specified in the expression. Literal values include</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div id="example_8_1" class="exampleblock">
+<div class="title">Example 2. Literal examples</div>
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>character string</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>'This is a literal string.'</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>number</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>3.14159</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>boolean</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>true, false, t, r</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>spatial geometry (text)</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>spatial geometry (JSON)</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+   "type": "Polygon",
+   "coordinates": [
+       [
+          [43.5845,-79.5442],
+          [43.6079,-79.4893],
+          [43.5677,-79.4632],
+          [43.6129,-79.3925],
+          [43.6223,-79.3238],
+          [43.6576,-79.3163],
+          [43.7945,-79.1178],
+          [43.8144,-79.1542],
+          [43.8555,-79.1714],
+          [43.7509,-79.6390],
+          [43.5845,-79.5442]
+      ]
+   ]
+}</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>temporal geometry</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   1969-07-16T05:32:00Z/1968-07-05:49:00Z</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2299,30 +2381,18 @@ or to <code>NULL</code>.</p>
 <p>For example, a property name used in a scalar expression (rule <code>scalarExpression</code>)
 has to be a queryable of type <code>string</code>, <code>number</code>, <code>integer</code> or <code>boolean</code>.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Use of <code>identifierPart</code> is unclear. And we should allow dots and colons
-in property names.
-</td>
-</tr>
-</table>
+<div id="example_8_2" class="exampleblock">
+<div class="title">Example 3. Property reference in a scalar expression</div>
+<div class="content">
+<div class="paragraph">
+<p>In this example, the property <code>windspeed</code> is used in a scalar expression that returns a number.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div class="listingblock">
+<div class="content">
+<pre>avg(windSpeed)</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2358,17 +2428,25 @@ evaluate to the same type of literal.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div id="example_8_3" class="exampleblock">
+<div class="title">Example 4. Binary comparison predicates</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>city='Toronto'</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>avg(windSpeed) &lt; 4</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>balance-150.0 &gt; 0</pre>
+</div>
+</div>
+</div>
 </div>
 <table id="req_simple-cql_like-predicate" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -2386,7 +2464,7 @@ Add examples
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>The like predicate (rule <code>isLikePredicate</code>) tests whether a string value matches
-the specified pattern. If the value matches the pattern, then the predicate
+the specified pattern. If the value matches the pattern (rule <code>patternExpression</code>), then the predicate
 SHALL evaluate to the Boolean value <code>TRUE</code>; otherwise the predicate SHALL evaluate
 to the Boolean value <code>FALSE</code>.</p>
 </div></div></td>
@@ -2398,19 +2476,30 @@ to the Boolean value <code>FALSE</code>.</p>
 evaluate to a <code>characterLiteral</code>.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>patternExpression</code> shall be a POSIX regular expression (see <a href="https://pubs.opengroup.org/onlinepubs/9699919799/" class="bare">https://pubs.opengroup.org/onlinepubs/9699919799/</a>).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>If <code>NOCASE</code> is <code>TRUE</code>, the comparison SHALL be case insensitive, if it is <code>FALSE</code>
+it SHALL be case sensitive. The default is <code>TRUE</code>.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div id="example_8_4" class="exampleblock">
+<div class="title">Example 5. Example of a LIKE predicate</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>name LIKE '^Ste(v|ph)en$' NOCASE true</pre>
+</div>
+</div>
+</div>
 </div>
 <table id="req_simple-cql_between-predicate" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -2443,17 +2532,15 @@ evaluate to a <code>numericLiteral</code>.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div id="example_8_5" class="exampleblock">
+<div class="title">Example 6. Examples of a BETWEEN predicate</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>depth BETWEEN 100.0 and 150.0</pre>
+</div>
+</div>
+</div>
 </div>
 <table id="req_simple-cql_in-predicate" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -2489,17 +2576,20 @@ of the same literal type as the value being tested by the predicate (rule
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div id="example_8_6" class="exampleblock">
+<div class="title">Example 7. Examples of a IN predicate</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>cityName IN ('Toronto','Franfurt','Tokyo','New York')</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>category NOT IN (1,2,3,4)</pre>
+</div>
+</div>
+</div>
 </div>
 <table id="req_simple-cql_null-predicate" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -2524,17 +2614,15 @@ evaluate to the Boolean value <code>FALSE</code>.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div id="example_8_7" class="exampleblock">
+<div class="title">Example 8. Examples of a NULL predicate</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>geometry IS NOT NULL</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2577,17 +2665,27 @@ to determine the CRS of the geometry literals in a filter expression through
 another mechanism. In this specification, the <code>filter-crs</code> query parameter
 is used to pass the CRS information to the server.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div id="example_8_8" class="exampleblock">
+<div class="title">Example 9. Example spatial predicate</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>geometry INTERSECTS POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 32.288402,36.320008 32.288458,36.319836 32.288087))</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="example_8_9" class="exampleblock">
+<div class="title">Example 10. Example for the filter-crs query parameter</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>...filter-lang=cql&amp;
+   filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&amp;
+   filter=geometry INTERSECTS POLYGON((1379213.867288 3610774.164192,1379233.837424 3610769.696029,1379246.149564 3610812.389132,1379226.494235 3610816.884823,1379213.867288 3610774.164192))...</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2631,17 +2729,15 @@ from <a href="#enhanced-temporal-operators">Requirements Class "Enhanced Tempora
 <div class="paragraph">
 <p>All temporal literals are in the Gregorian Calendar.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Add examples
-</td>
-</tr>
-</table>
+<div id="example_8_10" class="exampleblock">
+<div class="title">Example 11. Examples temporal predicate</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>event_date ANYINTERACTS 1969-07-16T05:32:00Z/1968-07-05:49:00Z</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -3155,8 +3251,8 @@ properties:
 </tr>
 </tbody>
 </table>
-<div id="example_4" class="exampleblock">
-<div class="title">Example 2. Get functions JSON response example</div>
+<div id="example_9_1" class="exampleblock">
+<div class="title">Example 12. Get functions JSON response example</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -4132,7 +4228,7 @@ Add conformance classes and test cases for all requirements classes and requirem
 #<span class="tok-o">=============================================================================</span>#
 <span class="tok-nc">predicate</span> <span class="tok-o">=</span> <span class="tok-nc">comparisonPredicate</span>
           | <span class="tok-nc">spatialPredicate</span>
-          | <span class="tok-nc">temporalPredicate</span><span class="tok-c1">;</span>
+          | <span class="tok-nc">temporalPredicate</span>
           | <span class="tok-nc">arrayPredicate</span><span class="tok-c1">;</span>
 
 #<span class="tok-o">=============================================================================</span>#
@@ -4171,9 +4267,6 @@ Add conformance classes and test cases for all requirements classes and requirem
 # <span class="tok-nc">LIKE</span> <span class="tok-nc">predicate</span>
 #
 <span class="tok-nc">isLikePredicate</span> <span class="tok-o">=</span>  <span class="tok-nc">scalarExpression</span> <span class="tok-l">&quot;LIKE&quot;</span> <span class="tok-nc">patternExpression</span>
-                   <span class="tok-p">[</span><span class="tok-l">&quot;WILDCARD&quot;</span> <span class="tok-nc">specialCharacter</span><span class="tok-p">]</span>
-                   <span class="tok-p">[</span><span class="tok-l">&quot;SINGLECHAR&quot;</span> <span class="tok-nc">specialCharacter</span><span class="tok-p">]</span>
-                   <span class="tok-p">[</span><span class="tok-l">&quot;ESCAPE&quot;</span> <span class="tok-nc">specialCharacter</span><span class="tok-p">]</span>
                    <span class="tok-p">[</span><span class="tok-l">&quot;NOCASE&quot;</span> <span class="tok-nc">booleanLiteral</span><span class="tok-p">]</span><span class="tok-c1">;</span>
 
 # <span class="tok-nc">NOTE</span>: <span class="tok-nc">This</span> <span class="tok-nc">is</span> <span class="tok-nc">just</span> a <span class="tok-nc">place</span> <span class="tok-nc">holder</span> <span class="tok-nc">for</span> a <span class="tok-nc">regular</span> <span class="tok-nc">expression</span>
@@ -4183,12 +4276,12 @@ Add conformance classes and test cases for all requirements classes and requirem
 
 # <span class="tok-nc">BETWEEN</span> <span class="tok-nc">predicate</span>
 #
-<span class="tok-nc">isBetweenPredicate</span> <span class="tok-o">=</span> <span class="tok-nc">scalarExpression</span> <span class="tok-l">&quot;BETWEEN&quot;</span>
+<span class="tok-nc">isBetweenPredicate</span> <span class="tok-o">=</span> <span class="tok-nc">scalarExpression</span> <span class="tok-p">[</span><span class="tok-l">&quot;NOT&quot;</span><span class="tok-p">]</span> <span class="tok-l">&quot;BETWEEN&quot;</span>
                      <span class="tok-nc">scalarExpression</span> <span class="tok-l">&quot;AND&quot;</span> <span class="tok-nc">scalarExpression</span><span class="tok-c1">;</span>
 
 # <span class="tok-nc">IN</span> <span class="tok-nc">LIST</span> <span class="tok-nc">predicate</span>
 #
-<span class="tok-nc">isInListPredicate</span> <span class="tok-o">=</span> <span class="tok-nc">inListOperand</span> <span class="tok-l">&quot;IN&quot;</span> <span class="tok-nc">leftParen</span> <span class="tok-nc">inList</span> <span class="tok-nc">rightParen</span><span class="tok-c1">;</span>
+<span class="tok-nc">isInListPredicate</span> <span class="tok-o">=</span> <span class="tok-nc">inListOperand</span> <span class="tok-p">[</span><span class="tok-l">&quot;NOT&quot;</span><span class="tok-p">]</span> <span class="tok-l">&quot;IN&quot;</span> <span class="tok-nc">leftParen</span> <span class="tok-nc">inList</span> <span class="tok-nc">rightParen</span><span class="tok-c1">;</span>
 
 <span class="tok-nc">inList</span> <span class="tok-o">=</span> <span class="tok-nc">listItem</span> <span class="tok-p">[</span> {<span class="tok-nc">comma</span> <span class="tok-nc">listItem</span>} <span class="tok-p">]</span><span class="tok-c1">;</span>
 
@@ -4282,7 +4375,7 @@ Add conformance classes and test cases for all requirements classes and requirem
 <span class="tok-nc">arrayElement</span> <span class="tok-o">=</span> <span class="tok-nc">characterLiteral</span>
              | <span class="tok-nc">numericLiteral</span>
              | <span class="tok-nc">booleanLiteral</span>
-             | <span class="tok-nc">geomLiteral</span>
+             | <span class="tok-nc">spatialLiteral</span>
              | <span class="tok-nc">temporalLiteral</span>
              | <span class="tok-nc">propertyName</span>
              | <span class="tok-nc">function</span>
@@ -4313,12 +4406,12 @@ Add conformance classes and test cases for all requirements classes and requirem
 #<span class="tok-o">=============================================================================</span>#
 <span class="tok-nc">propertyName</span> <span class="tok-o">=</span> <span class="tok-nc">identifier</span><span class="tok-c1">;</span>
 
-<span class="tok-nc">identifier</span> <span class="tok-o">=</span> <span class="tok-nc">identifierStart</span> <span class="tok-p">[</span> {<span class="tok-nc">identifierPart</span>} <span class="tok-p">]</span>
+<span class="tok-nc">identifier</span> <span class="tok-o">=</span> <span class="tok-nc">identifierStart</span> <span class="tok-p">[</span> {<span class="tok-nc">colon</span> | <span class="tok-nc">dot</span> | <span class="tok-nc">identifierPart</span>} <span class="tok-p">]</span>
            | <span class="tok-nc">doubleQuote</span> <span class="tok-nc">identifier</span> <span class="tok-nc">doubleQuote</span><span class="tok-c1">;</span>
 
-<span class="tok-nc">identifierStart</span> <span class="tok-o">=</span> <span class="tok-nc">alpha</span> <span class="tok-p">[</span>{<span class="tok-nc">octothorp</span>|<span class="tok-nc">dollar</span>|<span class="tok-nc">underscore</span>|<span class="tok-nc">alpha</span>|<span class="tok-nc">digit</span>}<span class="tok-p">]</span><span class="tok-c1">;</span>
+<span class="tok-nc">identifierStart</span> <span class="tok-o">=</span> <span class="tok-nc">alpha</span>
 
-<span class="tok-nc">identifierPart</span> <span class="tok-o">=</span> <span class="tok-nc">alpha</span> | <span class="tok-nc">digit</span><span class="tok-c1">;</span>
+<span class="tok-nc">identifierPart</span> <span class="tok-o">=</span> <span class="tok-nc">alpha</span> | <span class="tok-nc">digit</span> | <span class="tok-nc">dollar</span> | <span class="tok-nc">underscore</span><span class="tok-c1">;</span>
 
 #<span class="tok-o">=============================================================================</span>#
 # <span class="tok-nc">Definition</span> <span class="tok-nc">of</span> a <span class="tok-nc">FUNCTION</span>
@@ -4352,26 +4445,128 @@ Add conformance classes and test cases for all requirements classes and requirem
 
 <span class="tok-nc">hexStringLiteral</span> <span class="tok-o">=</span> <span class="tok-l">&quot;X&quot;</span> <span class="tok-nc">quote</span> <span class="tok-p">[</span> {<span class="tok-nc">hexit</span>} <span class="tok-p">]</span> <span class="tok-nc">quote</span><span class="tok-c1">;</span>
 
-<span class="tok-nc">character</span> <span class="tok-o">=</span> <span class="tok-nc">alpha</span> | <span class="tok-nc">digit</span> | <span class="tok-nc">specialCharacter</span> | <span class="tok-nc">quoteQuote</span><span class="tok-c1">;</span>
+<span class="tok-nc">character</span> <span class="tok-o">=</span> <span class="tok-nc">alpha</span> | <span class="tok-nc">digit</span> | <span class="tok-nc">extendedDigit</span> | <span class="tok-nc">ideographic</span> |
+            <span class="tok-nc">combiningChar</span> | <span class="tok-nc">extender</span><span class="tok-c1">;</span>
 
-<span class="tok-nc">quoteQuote</span> <span class="tok-o">=</span> <span class="tok-nc">quote</span> <span class="tok-nc">quote</span><span class="tok-c1">;</span>
-
-# <span class="tok-nc">NOTE</span>: <span class="tok-nc">This</span> <span class="tok-nc">production</span> <span class="tok-nc">is</span> <span class="tok-nc">supposed</span> <span class="tok-nc">to</span> <span class="tok-nc">be</span> <span class="tok-nc">any</span> <span class="tok-nc">alphabetic</span> <span class="tok-nc">character</span> <span class="tok-nc">from</span>
-#       <span class="tok-nc">the</span> <span class="tok-nc">character</span> <span class="tok-nc">set</span>.
+# <span class="tok-nc">alpha</span>, <span class="tok-nc">digit</span>, <span class="tok-nc">extendedDigit</span>, <span class="tok-nc">ideographic</span>, <span class="tok-nc">combiningChar</span> <span class="tok-nc">and</span> <span class="tok-nc">extender</span>
+# <span class="tok-nc">productions</span> <span class="tok-nc">copied</span> <span class="tok-nc">from</span> <span class="tok-nc">https</span>:<span class="tok-o">//</span><span class="tok-nc">www</span>.<span class="tok-nc">w3</span>.<span class="tok-nc">org</span><span class="tok-o">/</span><span class="tok-nc">TR</span><span class="tok-o">/</span><span class="tok-nc">REC-xml</span><span class="tok-o">/</span>#<span class="tok-nc">CharClasses</span>
 #
-#       I <span class="tok-nc">use</span> <span class="tok-nc">the</span> <span class="tok-nc">A-Z</span>, <span class="tok-nc">a-z</span> <span class="tok-nc">range</span> <span class="tok-nc">here</span> <span class="tok-nc">as</span> <span class="tok-nc">placeholders</span> <span class="tok-nc">because</span>:
-#       <span class="tok-p">(</span>a<span class="tok-p">)</span> I <span class="tok-nc">have</span> <span class="tok-nc">no</span> <span class="tok-nc">idea</span> <span class="tok-nc">how</span> <span class="tok-nc">to</span> <span class="tok-nc">indicate</span> <span class="tok-nc">that</span> <span class="tok-nc">alpha</span> <span class="tok-nc">can</span> <span class="tok-nc">be</span>
-#           <span class="tok-nc">any</span> <span class="tok-nc">alphabetic</span> <span class="tok-nc">UTF-8</span> <span class="tok-nc">character</span>
-#       <span class="tok-p">(</span>b<span class="tok-p">)</span> <span class="tok-nc">the</span> <span class="tok-nc">validators</span> I <span class="tok-nc">am</span> <span class="tok-nc">using</span> <span class="tok-nc">can</span> <span class="tok-nc">only</span> <span class="tok-nc">handle</span> <span class="tok-nc">ASCII</span> <span class="tok-nc">chars</span>
-#
-<span class="tok-nc">alpha</span> <span class="tok-o">=</span> <span class="tok-l">&quot;A&quot;</span> | <span class="tok-l">&quot;B&quot;</span> | <span class="tok-l">&quot;C&quot;</span> | <span class="tok-l">&quot;D&quot;</span> | <span class="tok-l">&quot;E&quot;</span> | <span class="tok-l">&quot;F&quot;</span> | <span class="tok-l">&quot;G&quot;</span> | <span class="tok-l">&quot;H&quot;</span> | <span class="tok-l">&quot;I&quot;</span> | <span class="tok-l">&quot;J&quot;</span> | <span class="tok-l">&quot;K&quot;</span> |
-        <span class="tok-l">&quot;L&quot;</span> | <span class="tok-l">&quot;M&quot;</span> | <span class="tok-l">&quot;N&quot;</span> | <span class="tok-l">&quot;O&quot;</span> | <span class="tok-l">&quot;P&quot;</span> | <span class="tok-l">&quot;Q&quot;</span> | <span class="tok-l">&quot;R&quot;</span> | <span class="tok-l">&quot;S&quot;</span> | <span class="tok-l">&quot;T&quot;</span> | <span class="tok-l">&quot;U&quot;</span> | <span class="tok-l">&quot;V&quot;</span> |
-        <span class="tok-l">&quot;W&quot;</span> | <span class="tok-l">&quot;X&quot;</span> | <span class="tok-l">&quot;Y&quot;</span> | <span class="tok-l">&quot;Z&quot;</span> |
-        <span class="tok-l">&quot;a&quot;</span> | <span class="tok-l">&quot;b&quot;</span> | <span class="tok-l">&quot;c&quot;</span> | <span class="tok-l">&quot;d&quot;</span> | <span class="tok-l">&quot;e&quot;</span> | <span class="tok-l">&quot;f&quot;</span> | <span class="tok-l">&quot;g&quot;</span> | <span class="tok-l">&quot;h&quot;</span> | <span class="tok-l">&quot;i&quot;</span> | <span class="tok-l">&quot;j&quot;</span> | <span class="tok-l">&quot;k&quot;</span> |
-        <span class="tok-l">&quot;l&quot;</span> | <span class="tok-l">&quot;m&quot;</span> | <span class="tok-l">&quot;n&quot;</span> | <span class="tok-l">&quot;o&quot;</span> | <span class="tok-l">&quot;p&quot;</span> | <span class="tok-l">&quot;q&quot;</span> | <span class="tok-l">&quot;r&quot;</span> | <span class="tok-l">&quot;s&quot;</span> | <span class="tok-l">&quot;t&quot;</span> | <span class="tok-l">&quot;u&quot;</span> | <span class="tok-l">&quot;v&quot;</span> |
-        <span class="tok-l">&quot;w&quot;</span> | <span class="tok-l">&quot;x&quot;</span> | <span class="tok-l">&quot;y&quot;</span> | <span class="tok-l">&quot;z&quot;</span><span class="tok-c1">;</span>
+<span class="tok-nc">alpha</span> <span class="tok-o">=</span> <span class="tok-l">&quot;\x0041&quot;</span>..<span class="tok-l">&quot;\x005A&quot;</span> | <span class="tok-l">&quot;\x0061&quot;</span>..<span class="tok-l">&quot;\x007A&quot;</span> | <span class="tok-l">&quot;\x00C0&quot;</span>..<span class="tok-l">&quot;\x00D6&quot;</span> |
+        <span class="tok-l">&quot;\x00D8&quot;</span>..<span class="tok-l">&quot;\x00F6&quot;</span> | <span class="tok-l">&quot;\x00F8&quot;</span>..<span class="tok-l">&quot;\x00FF&quot;</span> | <span class="tok-l">&quot;\x0100&quot;</span>..<span class="tok-l">&quot;\x0131&quot;</span> |
+        <span class="tok-l">&quot;\x0134&quot;</span>..<span class="tok-l">&quot;\x013E&quot;</span> | <span class="tok-l">&quot;\x0141&quot;</span>..<span class="tok-l">&quot;\x0148&quot;</span> | <span class="tok-l">&quot;\x014A&quot;</span>..<span class="tok-l">&quot;\x017E&quot;</span> |
+        <span class="tok-l">&quot;\x0180&quot;</span>..<span class="tok-l">&quot;\x01C3&quot;</span> | <span class="tok-l">&quot;\x01CD&quot;</span>..<span class="tok-l">&quot;\x01F0&quot;</span> | <span class="tok-l">&quot;\x01F4&quot;</span>..<span class="tok-l">&quot;\x01F5&quot;</span> |
+        <span class="tok-l">&quot;\x01FA&quot;</span>..<span class="tok-l">&quot;\x0217&quot;</span> | <span class="tok-l">&quot;\x0250&quot;</span>..<span class="tok-l">&quot;\x02A8&quot;</span> | <span class="tok-l">&quot;\x02BB&quot;</span>..<span class="tok-l">&quot;\x02C1&quot;</span> |
+        <span class="tok-l">&quot;\x0386&quot;</span>           | <span class="tok-l">&quot;\x0388&quot;</span>..<span class="tok-l">&quot;\x038A&quot;</span> | <span class="tok-l">&quot;\x038C&quot;</span>           |
+        <span class="tok-l">&quot;\x038E&quot;</span>..<span class="tok-l">&quot;\x03A1&quot;</span> | <span class="tok-l">&quot;\x03A3&quot;</span>..<span class="tok-l">&quot;\x03CE&quot;</span> | <span class="tok-l">&quot;\x03D0&quot;</span>..<span class="tok-l">&quot;\x03D6&quot;</span> |
+        <span class="tok-l">&quot;\x03DA&quot;</span>           | <span class="tok-l">&quot;\x03DC&quot;</span>           | <span class="tok-l">&quot;\x03DE&quot;</span>           |
+        <span class="tok-l">&quot;\x03E0&quot;</span>           | <span class="tok-l">&quot;\x03E2&quot;</span>..<span class="tok-l">&quot;\x03F3&quot;</span> | <span class="tok-l">&quot;\x0401&quot;</span>..<span class="tok-l">&quot;\x040C&quot;</span> |
+        <span class="tok-l">&quot;\x040E&quot;</span>..<span class="tok-l">&quot;\x044F&quot;</span> | <span class="tok-l">&quot;\x0451&quot;</span>..<span class="tok-l">&quot;\x045C&quot;</span> | <span class="tok-l">&quot;\x045E&quot;</span>..<span class="tok-l">&quot;\x0481&quot;</span> |
+        <span class="tok-l">&quot;\x0490&quot;</span>..<span class="tok-l">&quot;\x04C4&quot;</span> | <span class="tok-l">&quot;\x04C7&quot;</span>..<span class="tok-l">&quot;\x04C8&quot;</span> | <span class="tok-l">&quot;\x04CB&quot;</span>..<span class="tok-l">&quot;\x04CC&quot;</span> |
+        <span class="tok-l">&quot;\x04D0&quot;</span>..<span class="tok-l">&quot;\x04EB&quot;</span> | <span class="tok-l">&quot;\x04EE&quot;</span>..<span class="tok-l">&quot;\x04F5&quot;</span> | <span class="tok-l">&quot;\x04F8&quot;</span>..<span class="tok-l">&quot;\x04F9&quot;</span> |
+        <span class="tok-l">&quot;\x0531&quot;</span>..<span class="tok-l">&quot;\x0556&quot;</span> | <span class="tok-l">&quot;\x0559&quot;</span>           | <span class="tok-l">&quot;\x0561&quot;</span>..<span class="tok-l">&quot;\x0586&quot;</span> |
+        <span class="tok-l">&quot;\x05D0&quot;</span>..<span class="tok-l">&quot;\x05EA&quot;</span> | <span class="tok-l">&quot;\x05F0&quot;</span>..<span class="tok-l">&quot;\x05F2&quot;</span> | <span class="tok-l">&quot;\x0621&quot;</span>..<span class="tok-l">&quot;\x063A&quot;</span> |
+        <span class="tok-l">&quot;\x0641&quot;</span>..<span class="tok-l">&quot;\x064A&quot;</span> | <span class="tok-l">&quot;\x0671&quot;</span>..<span class="tok-l">&quot;\x06B7&quot;</span> | <span class="tok-l">&quot;\x06BA&quot;</span>..<span class="tok-l">&quot;\x06BE&quot;</span> |
+        <span class="tok-l">&quot;\x06C0&quot;</span>..<span class="tok-l">&quot;\x06CE&quot;</span> | <span class="tok-l">&quot;\x06D0&quot;</span>..<span class="tok-l">&quot;\x06D3&quot;</span> | <span class="tok-l">&quot;\x06D5&quot;</span>           |
+        <span class="tok-l">&quot;\x06E5&quot;</span>..<span class="tok-l">&quot;\x06E6&quot;</span> | <span class="tok-l">&quot;\x0905&quot;</span>..<span class="tok-l">&quot;\x0939&quot;</span> | <span class="tok-l">&quot;\x093D&quot;</span>           |
+        <span class="tok-l">&quot;\x0958&quot;</span>..<span class="tok-l">&quot;\x0961&quot;</span> | <span class="tok-l">&quot;\x0985&quot;</span>..<span class="tok-l">&quot;\x098C&quot;</span> | <span class="tok-l">&quot;\x098F&quot;</span>..<span class="tok-l">&quot;\x0990&quot;</span> |
+        <span class="tok-l">&quot;\x0993&quot;</span>..<span class="tok-l">&quot;\x09A8&quot;</span> | <span class="tok-l">&quot;\x09AA&quot;</span>..<span class="tok-l">&quot;\x09B0&quot;</span> | <span class="tok-l">&quot;\x09B2&quot;</span>           |
+        <span class="tok-l">&quot;\x09B6&quot;</span>..<span class="tok-l">&quot;\x09B9&quot;</span> | <span class="tok-l">&quot;\x09DC&quot;</span>..<span class="tok-l">&quot;\x09DD&quot;</span> | <span class="tok-l">&quot;\x09DF&quot;</span>..<span class="tok-l">&quot;\x09E1&quot;</span> |
+        <span class="tok-l">&quot;\x09F0&quot;</span>..<span class="tok-l">&quot;\x09F1&quot;</span> | <span class="tok-l">&quot;\x0A05&quot;</span>..<span class="tok-l">&quot;\x0A0A&quot;</span> | <span class="tok-l">&quot;\x0A0F&quot;</span>..<span class="tok-l">&quot;\x0A10&quot;</span> |
+        <span class="tok-l">&quot;\x0A13&quot;</span>..<span class="tok-l">&quot;\x0A28&quot;</span> | <span class="tok-l">&quot;\x0A2A&quot;</span>..<span class="tok-l">&quot;\x0A30&quot;</span> | <span class="tok-l">&quot;\x0A32&quot;</span>..<span class="tok-l">&quot;\x0A33&quot;</span> |
+        <span class="tok-l">&quot;\x0A35&quot;</span>..<span class="tok-l">&quot;\x0A36&quot;</span> | <span class="tok-l">&quot;\x0A38&quot;</span>..<span class="tok-l">&quot;\x0A39&quot;</span> | <span class="tok-l">&quot;\x0A59&quot;</span>..<span class="tok-l">&quot;\x0A5C&quot;</span> |
+        <span class="tok-l">&quot;\x0A5E&quot;</span>           | <span class="tok-l">&quot;\x0A72&quot;</span>..<span class="tok-l">&quot;\x0A74&quot;</span> | <span class="tok-l">&quot;\x0A85&quot;</span>..<span class="tok-l">&quot;\x0A8B&quot;</span> |
+        <span class="tok-l">&quot;\x0A8D&quot;</span>           | <span class="tok-l">&quot;\x0A8F&quot;</span>..<span class="tok-l">&quot;\x0A91&quot;</span> | <span class="tok-l">&quot;\x0A93&quot;</span>..<span class="tok-l">&quot;\x0AA8&quot;</span> |
+        <span class="tok-l">&quot;\x0AAA&quot;</span>..<span class="tok-l">&quot;\x0AB0&quot;</span> | <span class="tok-l">&quot;\x0AB2&quot;</span>..<span class="tok-l">&quot;\x0AB3&quot;</span> | <span class="tok-l">&quot;\x0AB5&quot;</span>..<span class="tok-l">&quot;\x0AB9&quot;</span> |
+        <span class="tok-l">&quot;\x0ABD&quot;</span>           | <span class="tok-l">&quot;\x0AE0&quot;</span>           | <span class="tok-l">&quot;\x0B05&quot;</span>..<span class="tok-l">&quot;\x0B0C&quot;</span> |
+        <span class="tok-l">&quot;\x0B0F&quot;</span>..<span class="tok-l">&quot;\x0B10&quot;</span> | <span class="tok-l">&quot;\x0B13&quot;</span>..<span class="tok-l">&quot;\x0B28&quot;</span> | <span class="tok-l">&quot;\x0B2A&quot;</span>..<span class="tok-l">&quot;\x0B30&quot;</span> |
+        <span class="tok-l">&quot;\x0B32&quot;</span>..<span class="tok-l">&quot;\x0B33&quot;</span> | <span class="tok-l">&quot;\x0B36&quot;</span>..<span class="tok-l">&quot;\x0B39&quot;</span> | <span class="tok-l">&quot;\x0B3D&quot;</span>           |
+        <span class="tok-l">&quot;\x0B5C&quot;</span>..<span class="tok-l">&quot;\x0B5D&quot;</span> | <span class="tok-l">&quot;\x0B5F&quot;</span>..<span class="tok-l">&quot;\x0B61&quot;</span> | <span class="tok-l">&quot;\x0B85&quot;</span>..<span class="tok-l">&quot;\x0B8A&quot;</span> |
+        <span class="tok-l">&quot;\x0B8E&quot;</span>..<span class="tok-l">&quot;\x0B90&quot;</span> | <span class="tok-l">&quot;\x0B92&quot;</span>..<span class="tok-l">&quot;\x0B95&quot;</span> | <span class="tok-l">&quot;\x0B99&quot;</span>..<span class="tok-l">&quot;\x0B9A&quot;</span> |
+        <span class="tok-l">&quot;\x0B9C&quot;</span>           | <span class="tok-l">&quot;\x0B9E&quot;</span>..<span class="tok-l">&quot;\x0B9F&quot;</span> | <span class="tok-l">&quot;\x0BA3&quot;</span>..<span class="tok-l">&quot;\x0BA4&quot;</span> |
+        <span class="tok-l">&quot;\x0BA8&quot;</span>..<span class="tok-l">&quot;\x0BAA&quot;</span> | <span class="tok-l">&quot;\x0BAE&quot;</span>..<span class="tok-l">&quot;\x0BB5&quot;</span> | <span class="tok-l">&quot;\x0BB7&quot;</span>..<span class="tok-l">&quot;\x0BB9&quot;</span> |
+        <span class="tok-l">&quot;\x0C05&quot;</span>..<span class="tok-l">&quot;\x0C0C&quot;</span> | <span class="tok-l">&quot;\x0C0E&quot;</span>..<span class="tok-l">&quot;\x0C10&quot;</span> | <span class="tok-l">&quot;\x0C12&quot;</span>..<span class="tok-l">&quot;\x0C28&quot;</span> |
+        <span class="tok-l">&quot;\x0C2A&quot;</span>..<span class="tok-l">&quot;\x0C33&quot;</span> | <span class="tok-l">&quot;\x0C35&quot;</span>..<span class="tok-l">&quot;\x0C39&quot;</span> | <span class="tok-l">&quot;\x0C60&quot;</span>..<span class="tok-l">&quot;\x0C61&quot;</span> |
+        <span class="tok-l">&quot;\x0C85&quot;</span>..<span class="tok-l">&quot;\x0C8C&quot;</span> | <span class="tok-l">&quot;\x0C8E&quot;</span>..<span class="tok-l">&quot;\x0C90&quot;</span> | <span class="tok-l">&quot;\x0C92&quot;</span>..<span class="tok-l">&quot;\x0CA8&quot;</span> |
+        <span class="tok-l">&quot;\x0CAA&quot;</span>..<span class="tok-l">&quot;\x0CB3&quot;</span> | <span class="tok-l">&quot;\x0CB5&quot;</span>..<span class="tok-l">&quot;\x0CB9&quot;</span> | <span class="tok-l">&quot;\x0CDE&quot;</span>           |
+        <span class="tok-l">&quot;\x0CE0&quot;</span>..<span class="tok-l">&quot;\x0CE1&quot;</span> | <span class="tok-l">&quot;\x0D05&quot;</span>..<span class="tok-l">&quot;\x0D0C&quot;</span> | <span class="tok-l">&quot;\x0D0E&quot;</span>..<span class="tok-l">&quot;\x0D10&quot;</span> |
+        <span class="tok-l">&quot;\x0D12&quot;</span>..<span class="tok-l">&quot;\x0D28&quot;</span> | <span class="tok-l">&quot;\x0D2A&quot;</span>..<span class="tok-l">&quot;\x0D39&quot;</span> | <span class="tok-l">&quot;\x0D60&quot;</span>..<span class="tok-l">&quot;\x0D61&quot;</span> |
+        <span class="tok-l">&quot;\x0E01&quot;</span>..<span class="tok-l">&quot;\x0E2E&quot;</span> | <span class="tok-l">&quot;\x0E30&quot;</span>           | <span class="tok-l">&quot;\x0E32&quot;</span>..<span class="tok-l">&quot;\x0E33&quot;</span> |
+        <span class="tok-l">&quot;\x0E40&quot;</span>..<span class="tok-l">&quot;\x0E45&quot;</span> | <span class="tok-l">&quot;\x0E81&quot;</span>..<span class="tok-l">&quot;\x0E82&quot;</span> | <span class="tok-l">&quot;\x0E84&quot;</span>           |
+        <span class="tok-l">&quot;\x0E87&quot;</span>..<span class="tok-l">&quot;\x0E88&quot;</span> | <span class="tok-l">&quot;\x0E8A&quot;</span>           | <span class="tok-l">&quot;\x0E8D&quot;</span>           |
+        <span class="tok-l">&quot;\x0E94&quot;</span>..<span class="tok-l">&quot;\x0E97&quot;</span> | <span class="tok-l">&quot;\x0E99&quot;</span>..<span class="tok-l">&quot;\x0E9F&quot;</span> | <span class="tok-l">&quot;\x0EA1&quot;</span>..<span class="tok-l">&quot;\x0EA3&quot;</span> |
+        <span class="tok-l">&quot;\x0EA5&quot;</span>           | <span class="tok-l">&quot;\x0EA7&quot;</span>           | <span class="tok-l">&quot;\x0EAA&quot;</span>..<span class="tok-l">&quot;\x0EAB&quot;</span> |
+        <span class="tok-l">&quot;\x0EAD&quot;</span>..<span class="tok-l">&quot;\x0EAE&quot;</span> | <span class="tok-l">&quot;\x0EB0&quot;</span>           | <span class="tok-l">&quot;\x0EB2&quot;</span>..<span class="tok-l">&quot;\x0EB3&quot;</span> |
+        <span class="tok-l">&quot;\x0EBD&quot;</span>           | <span class="tok-l">&quot;\x0EC0&quot;</span>..<span class="tok-l">&quot;\x0EC4&quot;</span> | <span class="tok-l">&quot;\x0F40&quot;</span>..<span class="tok-l">&quot;\x0F47&quot;</span> |
+        <span class="tok-l">&quot;\x0F49&quot;</span>..<span class="tok-l">&quot;\x0F69&quot;</span> | <span class="tok-l">&quot;\x10A0&quot;</span>..<span class="tok-l">&quot;\x10C5&quot;</span> | <span class="tok-l">&quot;\x10D0&quot;</span>..<span class="tok-l">&quot;\x10F6&quot;</span> |
+        <span class="tok-l">&quot;\x1100&quot;</span>           | <span class="tok-l">&quot;\x1102&quot;</span>..<span class="tok-l">&quot;\x1103&quot;</span> | <span class="tok-l">&quot;\x1105&quot;</span>..<span class="tok-l">&quot;\x1107&quot;</span> |
+        <span class="tok-l">&quot;\x1109&quot;</span>           | <span class="tok-l">&quot;\x110B&quot;</span>..<span class="tok-l">&quot;\x110C&quot;</span> | <span class="tok-l">&quot;\x110E&quot;</span>..<span class="tok-l">&quot;\x1112&quot;</span> |
+        <span class="tok-l">&quot;\x113C&quot;</span>           | <span class="tok-l">&quot;\x113E&quot;</span>           | <span class="tok-l">&quot;\x1140&quot;</span>           |
+        <span class="tok-l">&quot;\x114C&quot;</span>           | <span class="tok-l">&quot;\x114E&quot;</span>           | <span class="tok-l">&quot;\x1150&quot;</span>           |
+        <span class="tok-l">&quot;\x1154&quot;</span>..<span class="tok-l">&quot;\x1155&quot;</span> | <span class="tok-l">&quot;\x1159&quot;</span>           | <span class="tok-l">&quot;\x115F&quot;</span>..<span class="tok-l">&quot;\x1161&quot;</span> |
+        <span class="tok-l">&quot;\x1163&quot;</span>           | <span class="tok-l">&quot;\x1165&quot;</span>           | <span class="tok-l">&quot;\x1167&quot;</span>           |
+        <span class="tok-l">&quot;\x1169&quot;</span>           | <span class="tok-l">&quot;\x116D&quot;</span>..<span class="tok-l">&quot;\x116E&quot;</span> | <span class="tok-l">&quot;\x1172&quot;</span>..<span class="tok-l">&quot;\x1173&quot;</span> |
+        <span class="tok-l">&quot;\x1175&quot;</span>           | <span class="tok-l">&quot;\x119E&quot;</span>           | <span class="tok-l">&quot;\x11A8&quot;</span>           |
+        <span class="tok-l">&quot;\x11AB&quot;</span>           | <span class="tok-l">&quot;\x11AE&quot;</span>..<span class="tok-l">&quot;\x11AF&quot;</span> | <span class="tok-l">&quot;\x11B7&quot;</span>..<span class="tok-l">&quot;\x11B8&quot;</span> |
+        <span class="tok-l">&quot;\x11BA&quot;</span>           | <span class="tok-l">&quot;\x11BC&quot;</span>..<span class="tok-l">&quot;\x11C2&quot;</span> | <span class="tok-l">&quot;\x11EB&quot;</span>           |
+        <span class="tok-l">&quot;\x11F0&quot;</span>           | <span class="tok-l">&quot;\x11F9&quot;</span>           | <span class="tok-l">&quot;\x1E00&quot;</span>..<span class="tok-l">&quot;\x1E9B&quot;</span> |
+        <span class="tok-l">&quot;\x1EA0&quot;</span>..<span class="tok-l">&quot;\x1EF9&quot;</span> | <span class="tok-l">&quot;\x1F00&quot;</span>..<span class="tok-l">&quot;\x1F15&quot;</span> | <span class="tok-l">&quot;\x1F18&quot;</span>..<span class="tok-l">&quot;\x1F1D&quot;</span> |
+        <span class="tok-l">&quot;\x1F20&quot;</span>..<span class="tok-l">&quot;\x1F45&quot;</span> | <span class="tok-l">&quot;\x1F48&quot;</span>..<span class="tok-l">&quot;\x1F4D&quot;</span> | <span class="tok-l">&quot;\x1F50&quot;</span>..<span class="tok-l">&quot;\x1F57&quot;</span> |
+        <span class="tok-l">&quot;\x1F59&quot;</span>           | <span class="tok-l">&quot;\x1F5B&quot;</span>           | <span class="tok-l">&quot;\x1F5D&quot;</span>           |
+        <span class="tok-l">&quot;\x1F5F&quot;</span>..<span class="tok-l">&quot;\x1F7D&quot;</span> | <span class="tok-l">&quot;\x1F80&quot;</span>..<span class="tok-l">&quot;\x1FB4&quot;</span> | <span class="tok-l">&quot;\x1FB6&quot;</span>..<span class="tok-l">&quot;\x1FBC&quot;</span> |
+        <span class="tok-l">&quot;\x1FBE&quot;</span>           | <span class="tok-l">&quot;\x1FC2&quot;</span>..<span class="tok-l">&quot;\x1FC4&quot;</span> | <span class="tok-l">&quot;\x1FC6&quot;</span>..<span class="tok-l">&quot;\x1FCC&quot;</span> |
+        <span class="tok-l">&quot;\x1FD0&quot;</span>..<span class="tok-l">&quot;\x1FD3&quot;</span> | <span class="tok-l">&quot;\x1FD6&quot;</span>..<span class="tok-l">&quot;\x1FDB&quot;</span> | <span class="tok-l">&quot;\x1FE0&quot;</span>..<span class="tok-l">&quot;\x1FEC&quot;</span> |
+        <span class="tok-l">&quot;\x1FF2&quot;</span>..<span class="tok-l">&quot;\x1FF4&quot;</span> | <span class="tok-l">&quot;\x1FF6&quot;</span>..<span class="tok-l">&quot;\x1FFC&quot;</span> | <span class="tok-l">&quot;\x2126&quot;</span>           |
+        <span class="tok-l">&quot;\x212A&quot;</span>..<span class="tok-l">&quot;\x212B&quot;</span> | <span class="tok-l">&quot;\x212E&quot;</span>           | <span class="tok-l">&quot;\x2180&quot;</span>..<span class="tok-l">&quot;\x2182&quot;</span> |
+        <span class="tok-l">&quot;\x3041&quot;</span>..<span class="tok-l">&quot;\x3094&quot;</span> | <span class="tok-l">&quot;\x30A1&quot;</span>..<span class="tok-l">&quot;\x30FA&quot;</span> | <span class="tok-l">&quot;\x3105&quot;</span>..<span class="tok-l">&quot;\x312C&quot;</span> |
+        <span class="tok-l">&quot;\xAC00&quot;</span>..<span class="tok-l">&quot;\xD7A3&quot;</span><span class="tok-c1">;</span>
 
-<span class="tok-nc">digit</span> <span class="tok-o">=</span> <span class="tok-l">&quot;0&quot;</span> | <span class="tok-l">&quot;1&quot;</span> | <span class="tok-l">&quot;2&quot;</span> | <span class="tok-l">&quot;3&quot;</span> | <span class="tok-l">&quot;4&quot;</span> | <span class="tok-l">&quot;5&quot;</span> | <span class="tok-l">&quot;6&quot;</span> | <span class="tok-l">&quot;7&quot;</span> | <span class="tok-l">&quot;8&quot;</span> | <span class="tok-l">&quot;9&quot;</span><span class="tok-c1">;</span>
+<span class="tok-nc">digit</span> <span class="tok-o">=</span> <span class="tok-l">&quot;\x0030&quot;</span>..<span class="tok-l">&quot;\x0039&quot;</span><span class="tok-c1">;</span>
+
+<span class="tok-nc">ideographic</span> <span class="tok-o">=</span> <span class="tok-l">&quot;\x4E00&quot;</span>..<span class="tok-l">&quot;\x9FA5&quot;</span> | <span class="tok-l">&quot;\x3007&quot;</span> | <span class="tok-l">&quot;\x3021&quot;</span>..<span class="tok-l">&quot;\x3029&quot;</span><span class="tok-c1">;</span>
+
+<span class="tok-nc">combiningChar</span> <span class="tok-o">=</span> <span class="tok-l">&quot;\x0300&quot;</span>..<span class="tok-l">&quot;\x0345&quot;</span> | <span class="tok-l">&quot;\x0360&quot;</span>..<span class="tok-l">&quot;\x0361&quot;</span> | <span class="tok-l">&quot;\x0483&quot;</span>..<span class="tok-l">&quot;\x0486&quot;</span> |
+                <span class="tok-l">&quot;\x0591&quot;</span>..<span class="tok-l">&quot;\x05A1&quot;</span> | <span class="tok-l">&quot;\x05A3&quot;</span>..<span class="tok-l">&quot;\x05B9&quot;</span> | <span class="tok-l">&quot;\x05BB&quot;</span>..<span class="tok-l">&quot;\x05BD&quot;</span> |
+                <span class="tok-l">&quot;\x05BF&quot;</span>           | <span class="tok-l">&quot;\x05C1&quot;</span>..<span class="tok-l">&quot;\x05C2&quot;</span> | <span class="tok-l">&quot;\x05C4&quot;</span>           |
+                <span class="tok-l">&quot;\x064B&quot;</span>..<span class="tok-l">&quot;\x0652&quot;</span> | <span class="tok-l">&quot;\x0670&quot;</span>           | <span class="tok-l">&quot;\x06D6&quot;</span>..<span class="tok-l">&quot;\x06DC&quot;</span> |
+                <span class="tok-l">&quot;\x06DD&quot;</span>..<span class="tok-l">&quot;\x06DF&quot;</span> | <span class="tok-l">&quot;\x06E0&quot;</span>..<span class="tok-l">&quot;\x06E4&quot;</span> | <span class="tok-l">&quot;\x06E7&quot;</span>..<span class="tok-l">&quot;\x06E8&quot;</span> |
+                <span class="tok-l">&quot;\x06EA&quot;</span>..<span class="tok-l">&quot;\x06ED&quot;</span> | <span class="tok-l">&quot;\x0901&quot;</span>..<span class="tok-l">&quot;\x0903&quot;</span> | <span class="tok-l">&quot;\x093C&quot;</span>           |
+                <span class="tok-l">&quot;\x093E&quot;</span>..<span class="tok-l">&quot;\x094C&quot;</span> | <span class="tok-l">&quot;\x094D&quot;</span>           | <span class="tok-l">&quot;\x0951&quot;</span>..<span class="tok-l">&quot;\x0954&quot;</span> |
+                <span class="tok-l">&quot;\x0962&quot;</span>..<span class="tok-l">&quot;\x0963&quot;</span> | <span class="tok-l">&quot;\x0981&quot;</span>..<span class="tok-l">&quot;\x0983&quot;</span> | <span class="tok-l">&quot;\x09BC&quot;</span>           |
+                <span class="tok-l">&quot;\x09BE&quot;</span>           | <span class="tok-l">&quot;\x09BF&quot;</span>           | <span class="tok-l">&quot;\x09C0&quot;</span>..<span class="tok-l">&quot;\x09C4&quot;</span> |
+                <span class="tok-l">&quot;\x09C7&quot;</span>..<span class="tok-l">&quot;\x09C8&quot;</span> | <span class="tok-l">&quot;\x09CB&quot;</span>..<span class="tok-l">&quot;\x09CD&quot;</span> | <span class="tok-l">&quot;\x09D7&quot;</span>           |
+                <span class="tok-l">&quot;\x09E2&quot;</span>..<span class="tok-l">&quot;\x09E3&quot;</span> | <span class="tok-l">&quot;\x0A02&quot;</span>           | <span class="tok-l">&quot;\x0A3C&quot;</span>           |
+                <span class="tok-l">&quot;\x0A3E&quot;</span>           | <span class="tok-l">&quot;\x0A3F&quot;</span>           | <span class="tok-l">&quot;\x0A40&quot;</span>..<span class="tok-l">&quot;\x0A42&quot;</span> |
+                <span class="tok-l">&quot;\x0A47&quot;</span>..<span class="tok-l">&quot;\x0A48&quot;</span> | <span class="tok-l">&quot;\x0A4B&quot;</span>..<span class="tok-l">&quot;\x0A4D&quot;</span> | <span class="tok-l">&quot;\x0A70&quot;</span>..<span class="tok-l">&quot;\x0A71&quot;</span> |
+                <span class="tok-l">&quot;\x0A81&quot;</span>..<span class="tok-l">&quot;\x0A83&quot;</span> | <span class="tok-l">&quot;\x0ABC&quot;</span>           | <span class="tok-l">&quot;\x0ABE&quot;</span>..<span class="tok-l">&quot;\x0AC5&quot;</span> |
+                <span class="tok-l">&quot;\x0AC7&quot;</span>..<span class="tok-l">&quot;\x0AC9&quot;</span> | <span class="tok-l">&quot;\x0ACB&quot;</span>..<span class="tok-l">&quot;\x0ACD&quot;</span> | <span class="tok-l">&quot;\x0B01&quot;</span>..<span class="tok-l">&quot;\x0B03&quot;</span> |
+                <span class="tok-l">&quot;\x0B3C&quot;</span>           | <span class="tok-l">&quot;\x0B3E&quot;</span>..<span class="tok-l">&quot;\x0B43&quot;</span> | <span class="tok-l">&quot;\x0B47&quot;</span>..<span class="tok-l">&quot;\x0B48&quot;</span> |
+                <span class="tok-l">&quot;\x0B4B&quot;</span>..<span class="tok-l">&quot;\x0B4D&quot;</span> | <span class="tok-l">&quot;\x0B56&quot;</span>..<span class="tok-l">&quot;\x0B57&quot;</span> | <span class="tok-l">&quot;\x0B82&quot;</span>..<span class="tok-l">&quot;\x0B83&quot;</span> |
+                <span class="tok-l">&quot;\x0BBE&quot;</span>..<span class="tok-l">&quot;\x0BC2&quot;</span> | <span class="tok-l">&quot;\x0BC6&quot;</span>..<span class="tok-l">&quot;\x0BC8&quot;</span> | <span class="tok-l">&quot;\x0BCA&quot;</span>..<span class="tok-l">&quot;\x0BCD&quot;</span> |
+                <span class="tok-l">&quot;\x0BD7&quot;</span>           | <span class="tok-l">&quot;\x0C01&quot;</span>..<span class="tok-l">&quot;\x0C03&quot;</span> | <span class="tok-l">&quot;\x0C3E&quot;</span>..<span class="tok-l">&quot;\x0C44&quot;</span> |
+                <span class="tok-l">&quot;\x0C46&quot;</span>..<span class="tok-l">&quot;\x0C48&quot;</span> | <span class="tok-l">&quot;\x0C4A&quot;</span>..<span class="tok-l">&quot;\x0C4D&quot;</span> | <span class="tok-l">&quot;\x0C55&quot;</span>..<span class="tok-l">&quot;\x0C56&quot;</span> |
+                <span class="tok-l">&quot;\x0C82&quot;</span>..<span class="tok-l">&quot;\x0C83&quot;</span> | <span class="tok-l">&quot;\x0CBE&quot;</span>..<span class="tok-l">&quot;\x0CC4&quot;</span> | <span class="tok-l">&quot;\x0CC6&quot;</span>..<span class="tok-l">&quot;\x0CC8&quot;</span> |
+                <span class="tok-l">&quot;\x0CCA&quot;</span>..<span class="tok-l">&quot;\x0CCD&quot;</span> | <span class="tok-l">&quot;\x0CD5&quot;</span>..<span class="tok-l">&quot;\x0CD6&quot;</span> | <span class="tok-l">&quot;\x0D02&quot;</span>..<span class="tok-l">&quot;\x0D03&quot;</span> |
+                <span class="tok-l">&quot;\x0D3E&quot;</span>..<span class="tok-l">&quot;\x0D43&quot;</span> | <span class="tok-l">&quot;\x0D46&quot;</span>..<span class="tok-l">&quot;\x0D48&quot;</span> | <span class="tok-l">&quot;\x0D4A&quot;</span>..<span class="tok-l">&quot;\x0D4D&quot;</span> |
+                <span class="tok-l">&quot;\x0D57&quot;</span>           | <span class="tok-l">&quot;\x0E31&quot;</span>           | <span class="tok-l">&quot;\x0E34&quot;</span>..<span class="tok-l">&quot;\x0E3A&quot;</span> |
+                <span class="tok-l">&quot;\x0E47&quot;</span>..<span class="tok-l">&quot;\x0E4E&quot;</span> | <span class="tok-l">&quot;\x0EB1&quot;</span>           | <span class="tok-l">&quot;\x0EB4&quot;</span>..<span class="tok-l">&quot;\x0EB9&quot;</span> |
+                <span class="tok-l">&quot;\x0EBB&quot;</span>..<span class="tok-l">&quot;\x0EBC&quot;</span> | <span class="tok-l">&quot;\x0EC8&quot;</span>..<span class="tok-l">&quot;\x0ECD&quot;</span> | <span class="tok-l">&quot;\x0F18&quot;</span>..<span class="tok-l">&quot;\x0F19&quot;</span> |
+                <span class="tok-l">&quot;\x0F35&quot;</span>           | <span class="tok-l">&quot;\x0F37&quot;</span>           | <span class="tok-l">&quot;\x0F39&quot;</span>           |
+                <span class="tok-l">&quot;\x0F3E&quot;</span>           | <span class="tok-l">&quot;\x0F3F&quot;</span>           | <span class="tok-l">&quot;\x0F71&quot;</span>..<span class="tok-l">&quot;\x0F84&quot;</span> |
+                <span class="tok-l">&quot;\x0F86&quot;</span>..<span class="tok-l">&quot;\x0F8B&quot;</span> | <span class="tok-l">&quot;\x0F90&quot;</span>..<span class="tok-l">&quot;\x0F95&quot;</span> | <span class="tok-l">&quot;\x0F97&quot;</span>           |
+                <span class="tok-l">&quot;\x0F99&quot;</span>..<span class="tok-l">&quot;\x0FAD&quot;</span> | <span class="tok-l">&quot;\x0FB1&quot;</span>..<span class="tok-l">&quot;\x0FB7&quot;</span> | <span class="tok-l">&quot;\x0FB9&quot;</span>           |
+                <span class="tok-l">&quot;\x20D0&quot;</span>..<span class="tok-l">&quot;\x20DC&quot;</span> | <span class="tok-l">&quot;\x20E1&quot;</span>           | <span class="tok-l">&quot;\x302A&quot;</span>..<span class="tok-l">&quot;\x302F&quot;</span> |
+                <span class="tok-l">&quot;\x3099&quot;</span>           | <span class="tok-l">&quot;\x309A&quot;</span><span class="tok-c1">;</span>
+
+<span class="tok-nc">extendedDigit</span> <span class="tok-o">=</span> <span class="tok-l">&quot;\x0660&quot;</span>..<span class="tok-l">&quot;\x0669&quot;</span> | <span class="tok-l">&quot;\x06F0&quot;</span>..<span class="tok-l">&quot;\x06F9&quot;</span> | <span class="tok-l">&quot;\x0966&quot;</span>..<span class="tok-l">&quot;\x096F&quot;</span> |
+                <span class="tok-l">&quot;\x09E6&quot;</span>..<span class="tok-l">&quot;\x09EF&quot;</span> | <span class="tok-l">&quot;\x0A66&quot;</span>..<span class="tok-l">&quot;\x0A6F&quot;</span> | <span class="tok-l">&quot;\x0AE6&quot;</span>..<span class="tok-l">&quot;\x0AEF&quot;</span> |
+                <span class="tok-l">&quot;\x0B66&quot;</span>..<span class="tok-l">&quot;\x0B6F&quot;</span> | <span class="tok-l">&quot;\x0BE7&quot;</span>..<span class="tok-l">&quot;\x0BEF&quot;</span> | <span class="tok-l">&quot;\x0C66&quot;</span>..<span class="tok-l">&quot;\x0C6F&quot;</span> |
+                <span class="tok-l">&quot;\x0CE6&quot;</span>..<span class="tok-l">&quot;\x0CEF&quot;</span> | <span class="tok-l">&quot;\x0D66&quot;</span>..<span class="tok-l">&quot;\x0D6F&quot;</span> | <span class="tok-l">&quot;\x0E50&quot;</span>..<span class="tok-l">&quot;\x0E59&quot;</span> |
+                <span class="tok-l">&quot;\x0ED0&quot;</span>..<span class="tok-l">&quot;\x0ED9&quot;</span> | <span class="tok-l">&quot;\x0F20&quot;</span>..<span class="tok-l">&quot;\x0F29&quot;</span><span class="tok-c1">;</span>
+
+<span class="tok-nc">extender</span> <span class="tok-o">=</span>      <span class="tok-l">&quot;\x00B7&quot;</span>           | <span class="tok-l">&quot;\x02D0&quot;</span>           | <span class="tok-l">&quot;\x02D1&quot;</span>           |
+                <span class="tok-l">&quot;\x0387&quot;</span>           | <span class="tok-l">&quot;\x0640&quot;</span>           | <span class="tok-l">&quot;\x0E46&quot;</span>           |
+                <span class="tok-l">&quot;\x0EC6&quot;</span>           | <span class="tok-l">&quot;\x3005&quot;</span>           | <span class="tok-l">&quot;\x3031&quot;</span>..<span class="tok-l">&quot;\x3035&quot;</span> |
+                <span class="tok-l">&quot;\x309D&quot;</span>..<span class="tok-l">&quot;\x309E&quot;</span> | <span class="tok-l">&quot;\x30FC&quot;</span>..<span class="tok-l">&quot;\x30FE&quot;</span><span class="tok-c1">;</span>
 
 <span class="tok-nc">specialCharacter</span> <span class="tok-o">=</span> <span class="tok-nc">percent</span> | <span class="tok-nc">ampersand</span> | <span class="tok-nc">leftParen</span> | <span class="tok-nc">rightParen</span> | <span class="tok-nc">asterisk</span>
                  | <span class="tok-nc">plusSign</span> | <span class="tok-nc">comma</span> | <span class="tok-nc">minusSign</span> | <span class="tok-nc">period</span> | <span class="tok-nc">solidus</span> | <span class="tok-nc">colon</span>
@@ -4391,6 +4586,10 @@ Add conformance classes and test cases for all requirements classes and requirem
 <span class="tok-l">ampersand = &quot;</span>&amp;<span class="tok-l">&quot;;</span>
 
 <span class="tok-l">quote = &quot;</span>&#39;<span class="tok-l">&quot;;</span>
+
+<span class="tok-l">leftBracket = &quot;</span><span class="tok-p">[</span><span class="tok-l">&quot;;</span>
+
+<span class="tok-l">rightBracket = &quot;</span><span class="tok-p">]</span><span class="tok-l">&quot;;</span>
 
 <span class="tok-l">leftParen = &quot;</span><span class="tok-p">(</span><span class="tok-l">&quot;;</span>
 
@@ -6273,7 +6472,7 @@ Add conformance classes and test cases for all requirements classes and requirem
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-12-04 05:43:58 +0100
+Last updated 2020-12-07 07:32:09 +0100
 </div>
 </div>
 <style>
