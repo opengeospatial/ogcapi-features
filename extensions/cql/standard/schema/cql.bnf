@@ -79,12 +79,12 @@ patternExpression = characterLiteral;
 
 # BETWEEN predicate
 #
-isBetweenPredicate = scalarExpression "BETWEEN"
+isBetweenPredicate = scalarExpression ["NOT"] "BETWEEN"
                      scalarExpression "AND" scalarExpression;
 
 # IN LIST predicate
 #
-isInListPredicate = inListOperand "IN" leftParen inList rightParen;
+isInListPredicate = inListOperand ["NOT"] "IN" leftParen inList rightParen;
 
 inList = listItem [ {comma listItem} ];
 
