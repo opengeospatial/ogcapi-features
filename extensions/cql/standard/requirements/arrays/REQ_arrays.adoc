@@ -1,0 +1,21 @@
+[[req_arrays]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/arrays/array-predicate*
+^|A |The server shall support arrays as defined by the BNF rule `arrayPredicate` in <<cql-bnf>> 
+with the exception of the following rules:
+
+* `function` in `arrayExpression`, `arrayElement` and `argument`
+* `arithmeticExpression` in `arrayElement` and `argument`.
+^|B |Both array expressions SHALL be evaluated as sets. No inherent order SHALL be implied in a array of values.
+^|C |The semantics of the array operators SHALL be evaluated as follows:
+
+* `AEQUALS` evaluates to the Boolean value `TRUE`, if both sets are identical; otherwise the predicate 
+SHALL evaluate to the Boolean value `FALSE`.
+* `ACONTAINS` evaluates to the Boolean value `TRUE`, if the first set is a superset of the second set; 
+otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+* `CONTAINED BY` evaluates to the Boolean value `TRUE`, if the first set is a subset of the second set; 
+otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+* `AOVERLAPS` evaluates to the Boolean value `TRUE`, if both sets share at least one common element; 
+otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+|===

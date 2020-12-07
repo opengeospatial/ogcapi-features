@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/filter/filter-param-multiple-collections*
-^|A |A server that implements this extension and also supports higher-level query endpoints that support queries across multiple collections (e.g. `/tiles`) shall only allow properties from the <<req_filter_get-queryables-op-global,global list of queryables>> to be referenced in a filter expression.
+^|A |A server that implements this extension and also supports queries across multiple collections SHALL only allow properties from the <<req_filter_get-queryables-op-global,global list of queryables>> to be referenced in a filter expression.
 ^|B |If a cross-collection filter expression references properties that are not listed in the <<req_filter_get-queryables-op-global,global list of queryables>>,
-then the server shall respond with an HTTP status code of `400`.
+then the server SHALL respond with an HTTP status code of `400`.
 |===

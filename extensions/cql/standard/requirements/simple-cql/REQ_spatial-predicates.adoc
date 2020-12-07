@@ -1,80 +1,12 @@
-[[req_simple-cql_spatial-predicates]] 
+[[req_simple-cql_spatial-predicate]] 
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicates* 
-^|A |A server that implements this conformance class shall support the spatial
-operators defined by the following BNF fragment:
-
-----
-spatialPredicate = spatialOperator leftParen geomExpression comma geomExpression rightParen;
-
-spatialOperator = "INTERSECTS";
-
-geomExpression = propertyName
-               \| geomLiteral;
-
-geomLiteral = pointTaggedText
-            \| linestringTaggedText
-            \| polygonTaggedText
-            \| multipointTaggedText
-            \| multilinestringTaggedText
-            \| multipolygonTaggedText
-            \| geometryCollectionTaggedText
-            \| envelopeTaggedText;
-
-pointTaggedText = "POINT" pointText;
-
-linestringTaggedText = "LINESTRING" lineStringText;
-
-polygonTaggedText = "POLYGON" polygonText;
-
-multipointTaggedText = "MULTIPOINT" multiPointText;
-
-multilinestringTaggedText = "MULTILINESTRING" multiLineStringText;
-
-multipolygonTaggedText = "MULTIPOLYGON" multiPolygonText;
-
-geometryCollectionTaggedText = "GEOMETRYCOLLECTION" geometryCollectionText;
-
-pointText = leftParen point rightParen;
-
-point = xCoord yCoord [zCoord];
-
-xCoord = signedNumericLiteral;
-
-yCoord = signedNumericLiteral;
-
-zCoord = signedNumericLiteral;
-
-lineStringText = leftParen point {comma point} rightParen;
-
-polygonText =  leftParen lineStringText {comma lineStringText} rightParen;
-
-multiPointText = leftParen pointText {comma pointText} rightParen;
-
-multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen;
-
-multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
-
-geometryCollectionText = leftParen geomLiteral {comma geomLiteral} rightParen;
-
-envelopeTaggedText = "ENVELOPE" envelopeText;
-
-envelopeText = leftParen westBoundLon comma eastBoundLon comma northBoundLat comma southBoundLat [comma minElev comma maxElev] rightParen;
-
-westBoundLon = signedNumericLiteral;
-
-eastBoundLon = signedNumericLiteral;
-
-northBoundLat = signedNumericLiteral;
-
-southBoundLat = signedNumericLiteral;
-
-minElev = signedNumericLiteral;
-
-maxElev = signedNumericLiteral;
-----
-
-^|B |The semantics of the INTERSECTS operator is defined in clause 6.1.5 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
-
+^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicate* 
+^|A |A spatial predicate evaluates two geometry-valued expressions to determine, if
+the expressions satisfy the requirements of the specified spatial operator.  
+If the requirements of the operator are satisfied, then the predicate SHALL 
+evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate 
+to the Boolean value `FALSE`.
+^|B |The `INTERSECTS` operator SHALL be evaluated as defined in clause 6.1.5 of 
+<<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 |===

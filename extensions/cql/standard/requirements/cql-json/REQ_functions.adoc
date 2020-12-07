@@ -2,72 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/cql-json/functions* 
-^|A |A server that implements the <<rc_functions,Functions>> requirement class and also implements this requirement shall be able to parse a function call expression encoded as JSON that validates against the following JSON Schema fragment:
+^|Condition |Server implements requirements class <<rc_functions,Functions>>
+^|A |In addition to the <<req_cql-json_simple-cql,Simple CQL>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema component:
 
-[source,JSON]
-----
-   "function": {
-      "type": "object",
-      "properties": {
-         "name": { "type": "string" },
-         "arguments": {
-            "type": "array",
-            "items": {
-               "oneOf": [
-                  { "type": "string" },
-                  { "type": "number" },
-                  { "type": "boolean" },
-                  { "$ref": "#/definitions/functionObjectArgument" }
-               ]
-            }
-         }
-      }
-   },
-
-   "functionObjectArgument": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "geometry": { "$ref": "#/definitions/geometryLiteral" },
-         "bbox": { "$ref": "#/definitions/bbox" },
-         "temporalValue": { "$ref": "#/definitions/temporalLiteral" }
-      }
-   },
-
-   "scalarOperands": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "value": { "$ref": "#/definitions/scalarLiteral" }
-      },
-      "minProperties": 2,
-      "maxProperties": 2
-   },
-
-   "spatialOperands": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "value": {  "$ref": "#/definitions/geometryLiteral" }
-      },
-      "minProperties": 2,
-      "maxProperties": 2
-   },
-
-   "temporalOperands": {
-      "type": "object",
-      "properties": {
-         "property": { "type": "string" },
-         "function": { "$ref": "#/definitions/function" },
-         "value": { "$ref": "#/definitions/temporalLiteral" }
-      },
-      "minProperties": 2,
-      "maxProperties": 2
-   },
-----
-
-^|B |The list of valid function names can be discovered via the `functions` resource (i.e. path `/functions`).
+* "#/$defs/functionRef"
 |===
