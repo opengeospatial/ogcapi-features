@@ -2,39 +2,11 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/functions/functions*
-^|A |A server that implements this requirement shall support functions as defined by the following BNF fragment which extends and ammends the <<rc_simple_cql,Simple CQL>> requirements class BNF:
-
-----
-   function = identifier {argumentList};
-
-   argumentList = leftParen [positionalArgument]  rightParen;
-
-   positionalArgument = argument [ { comma argument } ];
-
-   argument = characterLiteral
-           \| numericLiteral
-           \| geomLiteral
-           \| propertyName
-
-   scalarExpression = propertyName
-                    \| characterLiteral
-                    \| numericLiteral
-                    \| function
-
-   geomExpression = propertyName
-                  \| geomLiteral
-                  \| function;
-
-   temporalExpression = propertyName
-                      \| temporalLiteral
-                      \| function;
-
-   inPredicate = propertyName "IN" leftParen { characterLiteral \| 
-                                               numericLiteral \|
-                                               geomLiteral \|
-                                               temporalLiteral \|
-                                               function } rightParen;
-----
-
-^|B |The list of valid function names can be discovered via the `functions` resource (i.e. path `/functions`).
+^|A |The server SHALL support functions as defined by the BNF rules `function` in <<cql-bnf>> 
+with the exception of the rule `arithmeticExpression` in `argument`.
+^|B |The function SHALL evaluate to a literal value that is allowed in the same rule 
+in which the function is used.
 |===
+
+
+

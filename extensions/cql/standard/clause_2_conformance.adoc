@@ -17,24 +17,27 @@ parameters that may be used to specify complex filter expressions on
 HTTP requests.  The specific set of parameters defined in this conformance
 class are:
 
-* filter
-* filter-lang
-* filter-crs
+* `filter` (the filter expression)
+* `filter-lang` (the language used in the filter expression)
+* `filter-crs` (the coordinate reference system used in the filter expression)
 
-This conformance class also defined the resources `/queryables` and
-`/collections/{collectionId}/queryables` that can be used to determine
-the list of property names and types that may be used to construct filter
-expressions.
+This conformance class also defines the Queryables resource (at paths
+`/queryables` and `/collections/{collectionId}/queryables`) that can be
+used to determine the list of property names and types that may be used
+to construct filter expressions.
 
 The <<rc_features-filter,Features Filter>> conformance class defines the
-binding between this the <<rc_filter,Filter>> conformance class the 
+binding between this the <<rc_filter,Filter>> conformance class the
 <<OAFeat-1,OGC API - Features - Part 1: Core>> standard.
 
-The <<rc_simple-cql,Simple CQL>> conformance class defines the Simple Common
-Query Language (CQL). Simple CQL is intended to be a minimal useful set of
+The <<rc_simple-cql,Simple CQL>> conformance class defines the minimal subset
+of the Common Query Language (CQL) that all implementations have to support
+("Simple CQL"). Simple CQL is intended to be a minimal useful set of
 predicates that support enhanced fine-grained read-access to collections of
-resources.  In this case `enhanced` means filtering capabilities beyond those
-supported by the core OGC API Common specification (i.e. bbox and datetime).
+resources.  In this case "enhanced" means filtering capabilities beyond those
+supported by the core OGC API Common specification (i.e., `bbox`, `datetime`
+and optionally collection-specific properties).
+
 The specific set of operators defined in this conformance class are:
 
 * Logical operators:
@@ -52,7 +55,7 @@ The specific set of operators defined in this conformance class are:
 ** between
 ** in
 * Spatial operators:
-** intersects.
+** intersects
 * Temporal operators:
 ** anyinteracts
 
@@ -72,8 +75,6 @@ additional spatial operators that must be supported is:
 * overlaps
 * crosses
 * contains
-
-NOTE: Do we need to add DWITHIN and BEYOND?  I think no.
 
 The <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> conformance
 class specifies requirements for servers that support temporal operators in
@@ -97,23 +98,23 @@ additional temporal operators that must be supported is:
 * intersects
 
 The <<rc_functions,Functions>> conformance class specifies requirements for
-supporting function calls (e.g. min, max, etc.) in a CQL expression.  Function
-calls are the primary means of extending the language.  This conformance class
-also defined a resource `/functions` that may be used to discover the list of
-available functions.
+supporting function calls (e.g. min, max, etc.) in a CQL expression. Function
+calls are the primary means of extending the language. This conformance class
+also defined a Functions resource (at path `/functions`) that may be used to
+discover the list of available functions.
 
 The <<rc_arithmetic,Arithmetic operators>> conformance class specifies
 requirements for  supporting the standard set of arithmetic operators,
 latexmath:[+, -, *, /] in a CQL expression.
 
 The <<rc_cql-text,CQL Text encoding>> conformance class defines
-a text encoding for CQL.  Such an encoding is suitable for use with HTTP query
+a text encoding for CQL. Such an encoding is suitable for use with HTTP query
 parameters such as the `filter` parameter defined by the <<rc_filter,Filter>>
 conformance class.
 
 The <<rc_cql-json,CQL JSON encoding>> conformance class defines
-a JSON encoding for CQL.  Such as encoding is suitable for use with as the 
-body of an HTTP POST request. 
+a JSON encoding for CQL. Such as encoding is suitable for use with as the
+body of an HTTP POST request.
 
 Conformance with this standard shall be checked using all the relevant tests
 specified in <<ats,Annex A>> of this document. The framework, concepts, and
@@ -123,7 +124,7 @@ OGC Compliance Testing web site.
 
 == Roadmap
 
-The content of the clause is informative.  
+The content of the clause is informative.
 
 Because CQL is not exclusively useful for features, it is anticipated that the
 following conformance classes:
@@ -137,6 +138,6 @@ following conformance classes:
 * <<rc_cql-text,CQL Text encoding>>
 * <<rc_cql-json,CQL JSON encoding>>
 
-will eventually become parts of the `OGC API - Common` suite for standards thus
+will eventually become parts of the OGC API Common suite of standards thus
 leaving the <<rc_features-filter,Features Filter>> conformance class as part
-3 of the `OGC API - Features` specifications.
+3 of the OGC API Features specifications.

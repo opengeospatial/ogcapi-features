@@ -9,34 +9,39 @@ features on the Web. OGC API Features is comprised of multiple parts, each
 of them is a separate standard.
 
 A fundamental operation performed on a collection of resources is that of
-querying in order to obtain a subset of the data which contains resource
-instances that satisfy some filtering criteria.  This part, part 4, defines
-an encoding for specifying enhanced filtering criteria in a request to a server,
-beyond what is supported in the core called the  `Common Query Language`.
+filtering in order to obtain a subset of the data which contains resource
+instances that satisfy some filtering criteria.  This part, part 3, defines
 
-The common query language defined in this document is used to specify how
-resource instances in a source collection should be filter to identify a
-result set.  Typically, CQL is used in query operations to identify the
+* query parameters (`filter`, `filter-lang`, `filter-crs`) to specify filter
+criteria in a request to an API;
+* a filter grammar called Common Query Language (CQL) for specifying enhanced
+filtering criteria beyond what is supported in the Core;
+* two encodings for CQL - a text and a JSON encoding.
+
+The Common Query Language (CQL) defined in this document can be used to specify
+how resource instances in a source collection can be filtered to identify a
+result set. Typically, CQL is used in query operations to identify the
 subset of resources that should be included in a response document.
-However, CQL may also be used in other operations (e.g. updates) to
-identify the subset of resources that  should be affected by an operation.
+However, CQL can also be used in other operations (e.g. updates) to
+identify the subset of resources that should be affected by an operation.
 
-Each resource instance in the source collection is evaluated using a filtering
-expression encoded using the common query language.  The overall filter
-expression always evaluates to `true` or `false`.  If the expression evaluates
-to true, the resource instance satisfies the expression and is marked as being
-in the result set. If the overall filter expression evaluates to false, the data
-instance is not in the result set.  Thus, the net effect of evaluating a filter
-expression is a set of resources that satisfy the predicates in the expression.
+Each resource instance in the source collection is evaluated against a filtering
+expression. The filter expression always evaluates to `true` or `false`. If the
+expression evaluates to true, the resource instance satisfies the expression and
+is marked as being in the result set. If the overall filter expression evaluates
+to false, the data instance is not in the result set.  Thus, the net effect of
+evaluating a filter expression is a set of resources that satisfy the predicates
+in the expression.
 
-CAUTION: This is a DRAFT version of the nth part of the OGC API - Features standards. This draft is not complete and there are open issues that are still under discussion.
+CAUTION: This is a DRAFT version of the 3rd part of the OGC API - Features standards.
+This draft is not complete and there are open issues that are still under discussion.
 
 [big]*ii.    Keywords*
 
 The following are keywords to be used by search engines and document catalogues.
 
 common query language, filter, expression, query, SQL, CQL, where clause,
-selection clause, 
+selection clause, OGC API
 
 [big]*iii.   Preface*
 
@@ -50,7 +55,6 @@ The following organizations submitted this document to the Open Geospatial Conso
 
 * CubeWerx Inc.
 * interactive instruments GmbH
-* Heazeltech LLC
 
 [big]*v.     Submitters*
 
@@ -58,7 +62,6 @@ All questions regarding this submission should be directed to the editors or the
 
 |===
 |*Name* |*Affiliation*
-|Panagiotis (Peter) A. Vretanos (editor)_ |CubeWerx Inc.
+|Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
 |Clemens Portele _(editor)_ |interactive instruments GmbH
-|Charles Heazel _(editor)_ |Heazeltech LLC
 |===
