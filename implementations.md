@@ -28,6 +28,7 @@ Clients:
 * [STAC](#STAC)
 * [QGIS](#QGIS)
 * [ogcapi-js](#ogcapi-js)
+* [FME](#FME)
 
 ## ldproxy
 
@@ -226,6 +227,9 @@ for their geoportal solutions. In the SDIs there are registered many OpenData cl
 Most of the core functions are implemented. The WFS behind the proxy are either based on mapserver or geoserver. The proxy does also create service metadata in form of iso19139 records. One extension is the usage of json-schema to define human readable attribute titles and descriptions at WFS level. The next extension will be the usage of json-ld to give semantical information for the attributes and allow the dynamical creation of rdf-a and other formats.
 The code of the current productional solution is available on the [OSGEO GIT](https://git.osgeo.org/gitea/armin11/GeoPortal.rlp)
 and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
+
+## FME
+*[FME](https://www.safe.com/support/downloads/#beta) (FME 2021.0+) implements a client which is accessible from FME Workbench, Data Inspector and FME Server.
 
 ### Productive list of available Interfaces
 * List of all registrated OpenData WFS: https://www.geoportal.rlp.de/mapbender/php/mod_linkedDataProxy.php (some of them wont work, cause the database tables don't have primary keys exposed and therefor paging is not possible).
