@@ -1,0 +1,5 @@
+EXAMPLE 5: Cloud cover equal to 0.1 or 0.2 (with fields restrictions and limit) 
+
+filter=ro:cloud_cover=0.1 OR ro:cloud_cover=0.2
+
+filter=ro:cloud_cover IN (0.1,0.2)

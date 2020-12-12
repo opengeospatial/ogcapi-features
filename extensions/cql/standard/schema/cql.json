@@ -1,91 +1,62 @@
 {
    "$schema": "https://json-schema.org/draft/2019-09/schema",
-   "$ref": "#/$defs/cqlFilter",
+   "type": "object",
+   "oneOf": [
+      {"$ref": "#/$defs/andExpression"},
+      {"$ref": "#/$defs/orExpression"},
+      {"$ref": "#/$defs/notExpression"},
+      {"$ref": "#/$defs/comparisonPredicate"},
+      {"$ref": "#/$defs/spatialPredicate"},
+      {"$ref": "#/$defs/temporalPredicate"},
+      {"$ref": "#/$defs/arrayPredicate"}
+   ],
+   "$recursiveAnchor": true,
    "$defs": {
-      "$comment": "=======================================================",
-      "$comment": "=  CQL FILTER                                         =",
-      "$comment": "=======================================================",
-      "cqlFilter": {
-         "type": "object",
-         "oneOf": [
-            { "$ref": "#/$defs/booleanValueExpression" },
-            { "$ref": "#/$defs/comparisonPredicate" },
-            { "$ref": "#/$defs/spatialPredicate" },
-            { "$ref": "#/$defs/temporalPredicate" },
-            { "$ref": "#/$defs/arrayPredicate" }
-         ]
-      },
-
       "$comment": "=======================================================",
       "$comment": "=  BOOLEAN VALUE EXPRESSION                           =",
       "$comment": "=======================================================",
 
-      "booleanValueExpression": {
-         "oneOf": [
-            { "$ref": "#/$defs/booleanTerm" },
-            {
-               "type": "object",
-               "required": ["or"],
-               "properties": {
-                  "or":  {
-                     "type": "array",
-                     "items": {
-                        "$ref": "#/$defs/predicate",
-                        "minItems": 2,
-                        "maxItems": 2
-                     }
-                  }
+      "andExpression": {
+         "type": "object",
+         "required": ["and"],
+         "properties": {
+            "and": {
+               "type": "array",
+               "minItems": 2,
+               "items": {
+                  "$recursiveRef": "#"
                }
             }
-         ]
+         }
       },
-
-      "booleanTerm": {
-         "oneOf": [
-            { "$ref": "#/$defs/booleanFactor" },
-            {
-               "type": "object",
-               "required": ["and"],
-               "properties": {
-                  "and": {
-                     "type": "array",
-                     "items": {
-                        "$ref": "#/$defs/predicate",
-                        "minItems": 2,
-                        "maxItems": 2
-                     }
-                  }
+      
+      "orExpression": {
+         "type": "object",
+         "required": ["or"],
+         "properties": {
+            "or": {
+               "type": "array",
+               "minItems": 2,
+               "items": {
+                  "$recursiveRef": "#"
                }
             }
-         ]
+         }
       },
 
-      "booleanFactor": {
-         "oneOf": [
-            {
-               "type": "object",
-               "required": ["not"],
-               "properties": {
-                  "not": {"$ref": "#/$defs/booleanPrimary" }
+      "notExpression": {
+         "type": "object",
+         "required": ["not"],
+         "properties": {
+            "or": {
+               "type": "array",
+               "minItems": 1,
+               "maxItems": 1,
+               "items": {
+                  "$recursiveRef": "#"
                }
-            },
-            { "$ref": "#/$defs/booleanPrimary" }
-         ]
-      },
-
-      "booleanPrimary": {
-         "oneOf": [
-            { "$ref": "#/$defs/predicate" },
-            { "$ref": "#/$defs/cqlFilter" }
-         ]
-      }, 
-
-      "predicate": {
-         "oneOf": [
-            { "$ref": "#/$defs/comparisonPredicate" },
-            { "$ref": "#/$defs/spatialPredicate" },
-            { "$ref": "#/$defs/temporalPredicate" }
-         ]
+            }
+         }
       },
 
       "$comment": "=======================================================",
@@ -158,9 +129,9 @@
          "properties": {
             "between": {
                "type": "object",
-               "required" : [ "property", "lower", "upper" ],
+               "required" : [ "value", "lower", "upper" ],
                "properties": {
-                  "property": { "type": "string" },
+                  "value": { "$ref": "#/$defs/valueExpression" },
                   "lower": { "$ref": "#/$defs/scalarExpression" },
                   "upper": { "$ref": "#/$defs/scalarExpression" }
                }
@@ -172,18 +143,8 @@
          "type": "object",
          "required": ["like"],
          "properties": {
-            "like": {
-               "type": "object",
-               "required": ["property","value"],
-               "properties": {
-                  "wildcard": { "type": "string", "default": "%" },
-                  "singleChar": { "type": "string", "default": "_" },
-                  "escape": { "type": "string", "default": "\\" },
-                  "nocase": { "type": "boolean", "default": true },
-                  "property": { "type": "string" },
-                  "value": { "$ref": "#/$defs/scalarExpression" }
-               }
-            }
+            "like": { "$ref": "#/$defs/scalarOperands" },
+            "nocase": { "type": "boolean", "default": true }
          }
       },
 
@@ -193,25 +154,38 @@
          "properties": {
             "in": {
                "type": "object",
-               "required": ["property","values"],
+               "required": ["value","list"],
                "properties": {
-                  "nocase": { "type": "boolean", "default": true },
-                  "property": { "type": "string" },
-                  "values": {
+                  "value": { "$ref": "#/$defs/valueExpression" },
+                  "list": {
                      "type": "array",
-                     "items": { "$ref": "#/$defs/scalarExpression" }
+                     "items": {
+                        "$ref": "#/$defs/valueExpression"
+                     }
+                  },
+                  "nocase": {
+                     "type": "boolean",
+                     "default": true
                   }
                }
             }
          }
       },
-   
+
+      "valueExpression": {
+         "oneOf": [
+            {"$ref": "#/$defs/scalarExpression"},
+            {"$ref": "#/$defs/spatialLiteral"},
+            {"$ref": "#/$defs/typedTemporalLiteral"}
+         ]
+      },
+
       "scalarOperands": {
          "type": "array",
+         "minItems": 2,
+         "maxItems": 2,
          "items": {
-            "$ref": "#/$defs/scalarExpression",
-            "minItems": 2,
-            "maxItems": 2
+            "$ref": "#/$defs/scalarExpression"
          }
       },
 
@@ -317,10 +291,10 @@
 
       "spatialOperands": {
          "type": "array",
+         "minItems": 2,
+         "maxItems": 2,
          "items": {
-            "$ref": "#/$defs/geomExpression",
-            "minItems": 2,
-            "maxItems": 2
+            "$ref": "#/$defs/geomExpression"
          }
       },
 
@@ -469,10 +443,10 @@
 
       "temporalOperands": {
          "type": "array",
+         "minItems": 2,
+         "maxItems": 2,
          "items": {
-            "$ref": "#/$defs/temporalExpression",
-            "minimumItems": 2,
-            "maximumItems": 2
+            "$ref": "#/$defs/temporalExpression"
          }
       },
 
@@ -501,7 +475,7 @@
          "type": "object",
          "required": ["aequals"],
          "properties": {
-            "equals": { "$ref": "#/$defs/arrayOperands" }
+            "aequals": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
@@ -509,7 +483,7 @@
          "type": "object",
          "required": ["acontains"],
          "properties": {
-            "acontains": { "$ref": "#/$defs/arrayOperands" }
+            "acontains": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
@@ -517,7 +491,7 @@
          "type": "object",
          "required": ["acontainedBy"],
          "properties": {
-            "acontainedBy": { "$ref": "#/$defs/arrayOperands" }
+            "acontainedBy": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
@@ -525,36 +499,36 @@
          "type": "object",
          "required": ["aoverlaps"],
          "properties": {
-            "aoverlaps": { "$ref": "#/$defs/arrayOperands" }
+            "aoverlaps": { "$ref": "#/$defs/arrayExpression" }
          }
       },
  
-      "arrayOperands": {
+      "arrayExpression": {
          "type": "array",
-         "items": {
-            "type": "array",
-            "items": {
-               "oneOf": [
-                  {"$ref": "#/$defs/functionRef"},
-                  {"$ref": "#/$defs/propertyRef"},
-                  {"$ref": "#/$defs/arrayLiteral"}
-               ]
-            }
-         },
          "minItems": 2,
-         "maxItems": 2
+         "maxItems": 2,
+         "items": {
+            "oneOf": [
+               { "$ref": "#/$defs/propertyRef" },
+               { "$ref": "#/$defs/functionRef" },
+               { "$ref": "#/$defs/arrayLiteral" }
+            ]
+         }
       },
 
       "arrayLiteral": {
-         "oneOf": [
-            {"$ref": "#/$defs/scalarLiteral"},
-            {"$ref": "#/$defs/geomLiteral"},
-            {"$ref": "#/$defs/temporalLiteral"},
-            {"$ref": "#/$defs/propertyRef"},
-            {"$ref": "#/$defs/functionRef"},
-            {"$ref": "#/$defs/arithmeticExpression"},
-            {"$ref": "#/$defs/arrayLiteral"}
-         ]
+         "type": "array",
+         "items": {
+            "oneOf": [
+               {"$ref": "#/$defs/scalarLiteral"},
+               {"$ref": "#/$defs/spatialLiteral"},
+               {"$ref": "#/$defs/typedTemporalLiteral"},
+               { "$ref": "#/$defs/propertyRef" },
+               { "$ref": "#/$defs/functionRef" },
+               {"$ref": "#/$defs/arithmeticExpression"},
+               { "$ref": "#/$defs/arrayLiteral" }
+            ]
+         }
       },
 
       "$comment": "=======================================================",
@@ -604,15 +578,15 @@
 
       "arithmeticOperands": {
          "type": "array",
+         "minItems": 2,
+         "maxItems": 2,
          "items": {
             "oneOf": [
                {"$ref": "#/$defs/arithmeticExpression"},
                {"$ref": "#/$defs/propertyRef"},
                {"$ref": "#/$defs/functionRef"},
                {"type": "number" }
-            ],
-            "minItems": 2,
-            "maxItems": 2
+            ]
          }
       },
 
@@ -650,7 +624,7 @@
                   "oneOf": [
                      { "$ref": "#/$defs/scalarLiteral" },
                      { "$ref": "#/$defs/spatialLiteral" },
-                     { "$ref": "#/$defs/temporalLiteral" },
+                     { "$ref": "#/$defs/typedTemporalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
                      { "$ref": "#/$defs/arithmeticExpression" },
@@ -681,14 +655,6 @@
       },
 
       "geometryLiteral": {
-         "type": "object",
-         "required": [ "geometry" ],
-         "properties": {
-            "geometry": { "$ref": "#/$defs/geometry" }
-         }
-      },
-
-      "geometry": {
          "oneOf": [
             { "$ref": "#/$defs/point" },
             { "$ref": "#/$defs/linestring" },
@@ -896,33 +862,66 @@
 
       "bbox": {
          "type": "array",
+         "oneOf": [
+            { "minItems": 4, "maxItems": 4},
+            { "minItems": 6, "maxItems": 6}
+         ],
          "items": {
-            "type": "number",
-            "oneOf": [
-               { "minItems": 4, "maxItems": 4},
-               { "minItems": 6, "maxItems": 6}
-            ]
+            "type": "number"
          }
       },
 
       "temporalLiteral": {
          "oneOf": [
-            { "$ref": "#/$defs/timeLiteral" },
-            { "$ref": "#/$defs/periodLiteral" }
+            { "$ref": "#/$defs/timeString" },
+            { "$ref": "#/$defs/periodString" }
          ]
       },
 
-      "timeLiteral": {
+      "timeString": {
          "type": "string",
-         "pattern": "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9](T[0-2][0-9]:[0-5][0-9]:[0-5][0-9](.[0-9]*)?)?"
+         "format": "date-time"
       },
 
-      "periodLiteral": {
+      "periodString": {
          "type": "array",
+         "minItems": 2,
+         "maxItems": 2,
          "items": {
-            "$ref": "#/$defs/timeLiteral",
-            "minItems": 2,
-            "maxItems": 2
+            "$ref": "#/$defs/timeString"
+         }
+      },
+
+      "typedTemporalLiteral": {
+         "oneOf": [
+            { "$ref": "#/$defs/typedTimeString" },
+            { "$ref": "#/$defs/typedPeriodString" }
+         ]
+      },
+
+      "typedTimeString": {
+         "type": "object",
+         "required": ["datetime"],
+         "properties": {
+            "datetime": {
+               "type": "string",
+               "format": "date-time"
+            }
+         }
+      },
+
+      "typedPeriodString": {
+         "type": "object",
+         "required": ["datetime"],
+         "properties": {
+            "datetime": {
+               "type": "array",
+               "minItems": 2,
+               "maxItems": 2,
+               "items": {
+                  "$ref": "#/$defs/timeString"
+               }
+            }
          }
       }
    }

@@ -7,57 +7,46 @@ info:
 paths: {}
 components:
   schemas:
-    cqlFilter:
+    booleanValueExpression:
       oneOf:
-      - "$ref": "#/components/schemas/booleanValueExpression"
+      - "$ref": "#/components/schemas/andExpression"
+      - "$ref": "#/components/schemas/orExpression"
+      - "$ref": "#/components/schemas/notExpression"
       - "$ref": "#/components/schemas/comparisonPredicate"
       - "$ref": "#/components/schemas/spatialPredicate"
       - "$ref": "#/components/schemas/temporalPredicate"
       - "$ref": "#/components/schemas/arrayExpression"
-    booleanValueExpression:
-       oneOf:
-          - "$ref": "#/components/booleanTerm"
-          - type: object
-            required:
-               - or
-            properties:
-               or:
-                  type: array
-                  items:
-                     "$ref": "#/components/schemas/predicate"
-                     minItems: 2
-                     maxItems: 2
-    booleanTerm:
-       oneOf:
-          - "$ref": "#/components/schemas/booleanFactor"
-          - type: object
-            required:
-               - and
-            properties:
-               and:
-                  type: array
-                  items:
-                     "$ref": "#/components/schemas/predicate"
-                     minItems: 2
-                     maxItems: 2
-    booleanFactor:
-       oneOf:
-          - type: object
-            required: 
-               - not
-            properties:
-               not:
-                  "$ref": "#/components/schemas/booleanPrimary"
-          - "$ref": "#/components/schemas/booleanPrimary"
-    booleanPrimary:
-       oneOf:
-          - "$ref": "#/components/schemas/predicate"
-          - "$ref": "#/components/schemas/cqlFilter"
-    predicate:
-       oneOf:
-          - "$ref": "#/components/schemas/comparisonPredicate"
-          - "$ref": "#/components/schemas/spatialPredicate"
-          - "$ref": "#/components/schemas/temporalPredicate"
+    andExpression:
+       type: object
+       required:
+          - and
+       properties:
+          and:
+             type: array
+             items:
+                "$ref": "#/components/schemas/booleanValueExpression"
+                minItems: 2
+    orExpression:
+       type: object
+       required:
+          - or
+       properties:
+          and:
+             type: array
+             items:
+                "$ref": "#/components/schemas/booleanValueExpression"
+                minItems: 2
+    notExpression:
+       type: object
+       required:
+          - not
+       properties:
+          and:
+             type: array
+             items:
+                "$ref": "#/components/schemas/booleanValueExpression"
+                minItems: 1
+                maxItems: 1
     comparisonPredicate:
        oneOf:
        - "$ref": "#/components/schemas/binaryComparisonPredicate"
@@ -115,43 +104,27 @@ components:
           between:
              type: object
              required:
-                - property
+                - value
                 - lower
                 - upper
              properties:
-                property:
-                   type: string
+                value:
+                   "$ref": "#/components/schemas/valueExpression"
                 lower:
-                   "$ref": "#/components/schemas/scalarLiteral"
+                   "$ref": "#/components/schemas/scalarExpression"
                 upper:
-                   "$ref": "#/components/schemas/scalarLiteral"
+                   "$ref": "#/components/schemas/scalarExpression"
     isLikePredicate:
        type: object
        required:
           - like
        properties:
           like:
-             type: object
-             required:
-                - property
-                - value
-             properties:
-                wildcard:
-                   type: string
-                   default: '%'
-                singleChar:
-                   type: string
-                   default: '.'
-                escape:
-                   type: string
-                   default: '\\'
-                nocase:
-                   type: boolean
-                   default: true
-                property:
-                   type: string
-                value:
-                   "$ref": "#/components/schemas/scalarLiteral"
+             "$ref": "#/components/schemas/scalarOperands"
+          nocase:
+             type: boolean
+             default: true
+
     isInListPredicate:
        type: object
        required:
@@ -160,18 +133,23 @@ components:
           in:
              type: object
              required:
-                - property
-                - values
+                - value
+                - list
              properties:
+                value:
+                   "$ref": "#/components/schemas/valueExpression"
+                list:
+                   type: array
+                   items:
+                      "$ref": "#/components/schemas/valueExpression"
                 nocase:
                    type: boolean
                    default: true
-                property:
-                   type: string
-                values:
-                   type: array
-                   items:
-                      "$ref": "#/components/schemas/scalarLiteral"
+    valueExpression:
+       oneOf:
+         - "$ref": "#/components/schemas/scalarExpression"
+         - "$ref": "#/components/schemas/spatialLiteral"
+         - "$ref": "#/components/schemas/typedTemporalLiteral"
     scalarOperands:
        type: array
        items:
@@ -179,15 +157,11 @@ components:
           minItems: 2
           maxItems: 2
     scalarExpression:
-       type: array
-       items:
-          oneOf:
-             - "$ref": "#/components/schemas/scalarLiteral"
-             - "$ref": "#/components/schemas/propertyRef"
-             - "$ref": "#/components/schemas/functionRef"
-             - "$ref": "#/components/schemas/arithmeticExpression"
-          minItems: 2
-          maxItems: 2
+       oneOf:
+          - "$ref": "#/components/schemas/scalarLiteral"
+          - "$ref": "#/components/schemas/propertyRef"
+          - "$ref": "#/components/schemas/functionRef"
+          - "$ref": "#/components/schemas/arithmeticExpression"
     isNullPredicate:
        type: object
        required:
@@ -402,44 +376,50 @@ components:
           - aequals
        properties:
           aequals:
-             "$ref": "#/components/schemas/arrayOperands"
+             "$ref": "#/components/schemas/arrayExpression"
     acontainsExpression:
        type: object
        required:
           - acontains
        properties:
           acontains:
-             "$ref": "#/components/schemas/arrayOperands"
+             "$ref": "#/components/schemas/arrayExpression"
     acontainedByExpression:
        type: object
        required:
           - acontainedBy
        properties:
           acontainedBy:
-             "$ref": "#/components/schemas/arrayOperands"
+             "$ref": "#/components/schemas/arrayExpression"
     aoverlapsExpression:
        type: object
        required:
           - aoverlaps
        properties:
           aoverlaps:
-             "$ref": "#/components/schemas/arrayOperands"
-    arrayOperands:
+             "$ref": "#/components/schemas/arrayExpression"
+    arrayExpression:
        type: array
        items:
           type: array
           items:
-             "$ref": "#/components/schemas/arrayElement"
+             oneOf:
+                - "$ref": "#/components/schemas/propertyRef"
+                - "$ref": "#/components/schemas/functionRef"
+                - "$ref": "#/components/schemas/arrayLiteral"
        minItems: 2
        maxItems: 2
-    arrayElement:
-       oneOf:
-          - "$ref": "#/components/schemas/scalarLiteral"
-          - "$ref": "#/components/schemas/spatialLiteral"
-          - "$ref": "#/components/schemas/temporalLiteral"
-          - "$ref": "#/components/schemas/functionRef"
-          - "$ref": "#/components/schemas/arithmeticExpression"
-          - "$ref": "#/components/schemas/arrayElement"
+    arrayLiteral:
+       type: array
+       items:
+          oneOf:
+             - "$ref": "#/components/schemas/scalarLiteral"
+             - "$ref": "#/components/schemas/spatialLiteral"
+             - "$ref": "#/components/schemas/typedTemporalLiteral"
+             - "$ref": "#/components/schemas/propertyRef"
+             - "$ref": "#/components/schemas/functionRef"
+             - "$ref": "#/components/schemas/arithmeticExpression"
+             - "$ref": "#/components/schemas/arrayLiteral"
     arithmeticExpression:
        oneOf:
           - "$ref": "#/components/schemas/addExpression"
@@ -511,10 +491,11 @@ components:
                 oneOf:
                    - "$ref": "#/components/schemas/scalarLiteral"
                    - "$ref": "#/components/schemas/spatialLiteral"
-                   - "$ref": "#/components/schemas/temporalLiteral"
+                   - "$ref": "#/components/schemas/typedTemporalLiteral"
                    - "$ref": "#/components/schemas/propertyRef"
                    - "$ref": "#/components/schemas/functionRef"
                    - "$ref": "#/components/schemas/arithmeticExpression"
+                   - "$ref": "#/components/schemas/arrayLiteral"
     scalarLiteral:
       oneOf:
       - type: string
@@ -680,15 +661,34 @@ components:
                maxItems: 6
     temporalLiteral:
       oneOf:
-      - "$ref": "#/components/schemas/timeLiteral"
-      - "$ref": "#/components/schemas/periodLiteral"
-    timeLiteral:
-      type: string
-      pattern: "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9](T[0-2][0-9]:[0-5][0-9]:[0-5][0-9](.[0-9]*)?)?"
-    periodLiteral:
+      - "$ref": "#/components/schemas/timeString"
+      - "$ref": "#/components/schemas/periodString"
+    timeString:
+       type: string
+       pattern: "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9](T[0-2][0-9]:[0-5][0-9]:[0-5][0-9](.[0-9]*)?)?"
+    periodString:
       type: array
       items:
-        type: string
-        pattern: "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9](T[0-2][0-9]:[0-5][0-9]:[0-5][0-9](.[0-9]*)?)?"
+        "$ref": "#/components/schemas/timeString"
         minItems: 2
         maxItems: 2
+    typedTemporalLiteral:
+      oneOf:
+      - "$ref": "#/components/schemas/typedTimeString"
+      - "$ref": "#/components/schemas/typedPeriodString"
+    typedTimeString:
+      type: object
+      required: datetime
+      properties:
+         datetime:
+            "$ref": "#/components/schemas/timeString"
+    typedPeriodString:
+      type: object
+      required: datetime
+      properties:
+         datetime:
+            type: array
+            items:
+              "$ref": "#/components/schemas/timeString"
+              minItems: 2
+              maxItems: 2
