@@ -40,11 +40,11 @@ include::requirements/requirements_class_cql-json.adoc[]
 This requirements class defines a JSON encoding of CQL. Such an encoding
 would be suitable as the body of an HTTP POST request.
 
+NOTE: Attention is drawn to the fact that there exists an alternative JSON encoding for CQL based on the use of arrays that can be found here: https://github.com/tschaub/ogcapi-features/tree/json-array-expression/extensions/cql/jfe. The SWG will review both encodings and decide which one to adopt, feedback from implementations is welcome.
+
 include::requirements/cql-json/REQ_filter-lang.adoc[]
 
 include::requirements/cql-json/REQ_simple-cql.adoc[]
-
-NOTE: Attention is drawn to the fact that there exists an alternative JSON encoding for CQL based on the use of arrays that can be found here: https://github.com/tschaub/ogcapi-features/tree/json-array-expression/extensions/cql/jfe. The SWG will review both encodings and decide which one to adopt, feedback from implementations is welcome.
 
 include::requirements/cql-json/REQ_enhanced-spatial-operators.adoc[]
 

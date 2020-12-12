@@ -75,11 +75,15 @@ exactly as it is specified in the expression. Literal values include
 ----
 * number
 ----
+-100
 3.14159
 ----
 * boolean
 ----
-true, false, t, r
+true
+false
+t
+f
 ----
 * spatial geometry (text)
 ----
@@ -107,11 +111,27 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
    ]
 }
 ----
-* temporal geometry
+* temporal geometry (instants)
 ----
-   1969-07-16T05:32:00Z/1968-07-05:49:00Z
+1969-07-20
+1969-07-20T20:17:40Z
+----
+* temporal geometry (intervals, text)
+----
+1969-07-16/1969-07-24
+1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
+2019-09-09/..
+----
+* temporal geometry (intervals, JSON)
+[source,JSON]
+----
+[ "1969-07-16", "1969-07-24" ]
+[ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ]
+[ "2019-09-09", null ]
 ----
 ====
+
+NOTE: The current BNF rule for temporal literals supports timestamps in any time zone. Should this be restricted to UTC ("Z"), at least in Simple CQL? See https://github.com/opengeospatial/ogcapi-features/issues/483[issue 483].
 
 [[simple-cql_property]]
 === Property references
@@ -127,9 +147,14 @@ has to be a queryable of type `string`, `number`, `integer` or `boolean`.
 [[example_8_2]]
 .Property reference in a scalar expression 
 ====
-In this example, the property `windspeed` is used in a scalar expression that returns a number.
+In this example, the property `windSpeed` is used in a function that returns a number.
 ----
 avg(windSpeed)
+----
+
+[source,JSON]
+----
+{ "function": { "name": "avg", "arguments": [ { "property": "windSpeed" } ] } }
 ----
 ====
 
@@ -144,11 +169,38 @@ include::requirements/simple-cql/REQ_binary-comparison-predicate.adoc[]
 ----
 city='Toronto'
 ----
+
+[source,JSON]
+----
+{ "eq": [ { "property": "city" }, "Toronto" ] }
+----
+
 ----
 avg(windSpeed) < 4
 ----
+
+[source,JSON]
+----
+{
+  "lt": [ 
+    { "function": { "name": "avg", "arguments": [ { "property": "windSpeed" } ] } }, 
+    4
+  ]
+}
+----
+
 ----
 balance-150.0 > 0
+----
+
+[source,JSON]
+----
+{
+  "gt": [ 
+    { "-": [ { "property": "windSpeed" }, 150.0 ] }, 
+    0
+  ]
+}
 ----
 ====
 
@@ -160,6 +212,17 @@ include::requirements/simple-cql/REQ_like-predicate.adoc[]
 ----
 name LIKE '^Ste(v|ph)en$' NOCASE true
 ----
+
+[source,JSON]
+----
+{
+  "like": [ 
+    { "property": "name" }, 
+    "^Ste(v|ph)en$"
+  ],
+  "nocase": true 
+}
+----
 ====
 
 include::requirements/simple-cql/REQ_between-predicate.adoc[]
@@ -170,6 +233,17 @@ include::requirements/simple-cql/REQ_between-predicate.adoc[]
 ----
 depth BETWEEN 100.0 and 150.0
 ----
+
+[source,JSON]
+----
+{
+  "between": {
+     "value": { "property": "depth" },
+     "lower": 100.0,
+     "upper": 150.0
+  }
+}
+----
 ====
 
 include::requirements/simple-cql/REQ_in-predicate.adoc[]
@@ -178,10 +252,34 @@ include::requirements/simple-cql/REQ_in-predicate.adoc[]
 .Examples of a IN predicate
 ====
 ----
-cityName IN ('Toronto','Franfurt','Tokyo','New York')
+cityName IN ('Toronto','Franfurt','Tokyo','New York') NOCASE false
 ----
+
+[source,JSON]
+----
+{
+  "in": {
+     "value": { "property": "cityName" },
+     "list": [ "Toronto", "Franfurt", "Tokyo", "New York" ],
+     "nocase": false 
+  }
+}
+----
+
 ----
 category NOT IN (1,2,3,4)
+----
+
+[source,JSON]
+----
+{
+  "not": {
+    "in": {
+       "value": { "property": "category" },
+       "list": [ 1, 2, 3, 4 ]
+    }
+  }
+}
 ----
 ====
 
@@ -192,6 +290,11 @@ include::requirements/simple-cql/REQ_null-predicate.adoc[]
 ====
 ----
 geometry IS NOT NULL
+----
+
+[source,JSON]
+----
+{ "not": { "isNull" : { "property": "geometry" } } }
 ----
 ====
 
@@ -212,13 +315,32 @@ is used to pass the CRS information to the server.
 ----
 geometry INTERSECTS POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 32.288402,36.320008 32.288458,36.319836 32.288087))
 ----
+
+[source,JSON]
+----
+{ "intersects": [
+   { "property": "geometry" },
+   {
+      "type": "Polygon",
+      "coordinates": [
+         [
+            [36.319836, 32.288087],
+            [36.320041, 32.288032],
+            [36.320210, 32.288402],
+            [36.320008, 32.288458],
+            [36.319836, 32.288087]
+         ]
+      ]
+   }
+] }
+----
 ====
 
 [[example_8_9]]
 .Example for the filter-crs query parameter
 ====
 ----
-...filter-lang=cql&
+...filter-lang=cql-text&
    filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
    filter=geometry INTERSECTS POLYGON((1379213.867288 3610774.164192,1379233.837424 3610769.696029,1379246.149564 3610812.389132,1379226.494235 3610816.884823,1379213.867288 3610774.164192))...
 ----
@@ -235,7 +357,17 @@ All temporal literals are in the Gregorian Calendar.
 .Examples temporal predicate
 ====
 ----
-event_date ANYINTERACTS 1969-07-16T05:32:00Z/1968-07-05:49:00Z
+event_date ANYINTERACTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
+----
+
+[source,JSON]
+----
+{ 
+   "anyinteracts": [
+      { "property": "event_date" }, 
+      [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ]
+   ] 
+}
 ----
 ====
 
