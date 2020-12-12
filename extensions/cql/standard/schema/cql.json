@@ -879,8 +879,10 @@
       },
 
       "timeString": {
-         "type": "string",
-         "format": "date-time"
+         "oneOf": [
+            { "type": "string", "format": "date" },
+            { "type": "string", "format": "date-time" }
+         ]
       },
 
       "periodString": {
@@ -888,7 +890,10 @@
          "minItems": 2,
          "maxItems": 2,
          "items": {
-            "$ref": "#/$defs/timeString"
+            "oneOf": [
+               { "$ref": "#/$defs/timeString" },
+               { "type": "null" }
+            ]
          }
       },
 
@@ -904,8 +909,7 @@
          "required": ["datetime"],
          "properties": {
             "datetime": {
-               "type": "string",
-               "format": "date-time"
+               "$ref": "#/$defs/timeString"
             }
          }
       },
@@ -915,12 +919,7 @@
          "required": ["datetime"],
          "properties": {
             "datetime": {
-               "type": "array",
-               "minItems": 2,
-               "maxItems": 2,
-               "items": {
-                  "$ref": "#/$defs/timeString"
-               }
+               "$ref": "#/$defs/periodString"
             }
          }
       }
