@@ -675,14 +675,22 @@ components:
       - "$ref": "#/components/schemas/timeString"
       - "$ref": "#/components/schemas/periodString"
     timeString:
-      type: string
-      format: date-time
+      oneOf:
+      - type: string
+        format: date
+      - type: string
+        format: date-time
     periodString:
       type: array
       minItems: 2
       maxItems: 2
       items:
-        "$ref": "#/components/schemas/timeString"
+         nullable: true
+         oneOf:
+         - type: string
+           format: date
+         - type: string
+           format: date-time
     typedTemporalLiteral:
       oneOf:
       - "$ref": "#/components/schemas/typedTimeString"
@@ -700,8 +708,4 @@ components:
       - datetime
       properties:
         datetime:
-          type: array
-          minItems: 2
-          maxItems: 2
-          items:
-            "$ref": "#/components/schemas/timeString"
+          "$ref": "#/components/schemas/periodString"
