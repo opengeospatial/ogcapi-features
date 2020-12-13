@@ -3,7 +3,7 @@
 
 *Author Names*:: Clemens Portele, Panagiotis (Peter) A. Vretanos, Charles (Chuck) Heazel
 *Email*:: portele@interactive-instruments.de, pvretano@cubewerx.com, cheazel@heazeltech.com
-*Date*:: 23-AUG-2019
+*Date*:: 23-AUG-2019 (Updated: 09-DEC-2019)
 *Category*:: SWG Charter
 *OGC document number*:: OGC 19-043r2
 
@@ -88,9 +88,15 @@ A number of extensions to the Core have already been developed and tested in the
 +
 The SWG is responsible for developing candidate standards for additional parts of OGC API Features.
 +
-Part 2, “Extension for Coordinate Reference Systems (by reference)”, is already under development and has several implementations. The planned schedule is: Public Review in 2019, Submission for Approval Vote by June 2020.
+Part 2, “Coordinate Reference Systems (by reference)”, is already under development and has several implementations. The planned schedule is: Public Review in 2019, Submission for Approval Vote by June 2020.
 +
-Any additional part will follow the “SWG Task approval process”.
+A new part "OpenAPI 3.1" will specify the capability to use OpenAPI 3.1 for API definitions. A key feature of OpenAPI 3.1, which is expected to be published before the end of 2019, will be the use of JSON Schema draft 2019-09 for the description of schema components. This will avoid the need to manage and publish two variants of JSON schemas, one for the latest version of JSON Schema and one for the OpenAPI variant. The planned schedule is: Public Review by January/February 2020, Submission for Approval Vote by April/May 2020.
++
+A new part “Filtering (Simple CQL)” will specify the capability to query feature collections using common spatial, temporal and comparison operators as well as combinations of them using a profile of CQL that is commonly supported (it may exclude, e.g., functions or nested attributes). The SWG may decide to split this into two documents, one for a Simple CQL standard and one for using Simple CQL in GET requests on a Features resource. It is expected that two representations may be supported: plain text and JSON. The extension is also expected to specify how additional information that clients need to generate queries (e.g., the list of queryables for a feature collections) is provided. The planned schedule is: Public Review by May/June 2020, Submission for Approval Vote by December 2020.
++
+A new part "Simple Transactions" will specify the capability for mutating features using the HTTP methods POST, PUT, DELETE and PATCH on a Features (POST) or a Feature resource (PUT, DELETE, PATCH). Support for PATCH will be optional. The planned schedule is: Public Review by May/June 2020, Submission for Approval Vote by December 2020.
++
+Any additional part beyond those listed above will follow the “SWG Task approval process”.
 
 *	Develop informative material
 +

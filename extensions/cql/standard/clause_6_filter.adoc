@@ -1,0 +1,167 @@
+== Requirements Class "Filter"
+
+[[filter-overview]]
+=== Overview
+
+include::requirements/requirements_class_filter.adoc[]
+
+<<OAFeat-1,OGC API - Features - Part 1: Core>> (and the draft http://docs.opengeospatial.org/DRAFTS/20-024.html[OGC API - Common - Part 2: Geospatial Data] standard) define two filtering parameters on the resource at path `/collections/{collectionId}/items`: `bbox` and `datetime`. <<OAFeat-1,OGC API - Features - Part 1: Core>> also adds support for simple equality predicates logically joined using the `AND` operator. These capabilities offer simple resource filtering for HTTP requests.
+
+This requirements class defines additional query parameters that allow more
+complex filtering expressions to be specified when querying server resources.
+
+Specifically, this clause defines the parameters, `filter`, `filter-lang` and
+`filter-crs`.
+
+This requirements class also defines resources for discovering the list of
+resource properties (and their types) that may be used to construct filter
+expressions.
+
+[[filter-queryables]]
+=== Queryables
+
+This extension does not assume that the content schema of a
+resource being queried is available for inspection and thus a means needs
+to exist to interrogate an endpoint to determine the names and types of the
+properties or keys that may be used to construct a filter expression
+("queryables").
+
+In addition, a publisher may want to support queryables that are not
+directly represented as resource properties in the content schema of the
+resource. Or the publisher may want to restrict filtering on certain
+properties, e.g., because the backend datastore has not been configured
+to allow high-performance queries on those properties.
+
+include::requirements/filter/REQ_get-queryables-op-global.adoc[]
+
+include::requirements/filter/REQ_get-queryables-op-local.adoc[]
+
+include::requirements/filter/REQ_get-queryables-response.adoc[]
+
+To support clients, it is recommended to provide additional detail
+about the meaning of the property and the possible values:
+
+include::recommendations/filter/REC_queryables-schema.adoc[]
+
+[[example_1]]
+.Queryables example
+====
+[source,JSON]
+----
+{
+  "$schema" : "https://json-schema.org/draft/2019-09/schema",
+  "$id" : "https://demo.ldproxy.net/daraa/collections/CulturePnt/queryables",
+  "type" : "object",
+  "title" : "Cultural (Points)",
+  "description" : "Cultural: Information about features on the landscape with a point geometry that have been constructed by man.",
+  "properties" : {
+    "F_CODE" : {
+      "title" : "Feature Type",
+      "type" : "string",
+      "enum" : [ "AK121", "AL012", "AL030", "AL130", "BH075" ]
+    },
+    "ZI001_SDV" : {
+      "title" : "Last Change",
+      "type" : "string",
+      "format" : "date-time"
+    },
+    "ZI037_REL" : {
+      "title" : "Religious Designation",
+      "type" : "integer",
+      "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+    },
+    "geometry" : {
+      "$ref" : "https://geojson.org/schema/Point.json"
+    }
+  }
+}
+----
+====
+
+[[filter-param]]
+=== Parameter filter
+
+This extension defines a general parameter, `filter`, whose value is a filter
+expression to be applied when retrieving resources in order to determine which
+resources should be included in a result set.
+
+include::requirements/filter/REQ_filter-param.adoc[]
+
+[[filter-param-multiple-collections]]
+=== Cross-collection queries
+
+The only filerable resource defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>
+is the Features resource at `/collections/{collectionId}/items` which operates 
+on a single collection.  However an API can provide other, higher level, resources 
+(e.g. at `/search` or `/tiles`) that potentially operate on multiple collections. 
+
+The simplest approach for handling such cross-collection queries is one that is 
+consistent with one-collection queries.  Specifically, the `filter` parameter, if
+provided, applies to all referenced collections.  This, of course, implies that all 
+properties referenced in the filter expression are valid for all referenced collections 
+and should be taken from the <<filter-queryables,global queryables list>>.
+
+include::requirements/filter/REQ_filter-param-multiple-collections.adoc[]
+
+The following example illustrates a notional query on a hypothetical Query resource
+that uses a CQL filter and references multiple collections:
+
+[[example_2]]
+.Multi-collection filter example
+----
+http://www.someserver.com/ogcapi/search?
+  collections=collection1,collection3&
+  filter-lang=cql-text&
+  filter=prop1=10 AND prop2>45
+----
+
+NOTE: Arrays of filter expressions that operate on each collection specified in a query (or subsets thereof) are out of scope for this extension and  would be the subject of a different part of the "OGC API - Features" suite of specifications.
+
+[[filter-lang-param]]
+=== Parameter filter-lang
+
+Any predicate language that can be suitably expressed as the value of an
+HTTP query parameter may be specified as the value of the `filter` parameter.
+In order to specify that specific language that is being used, this clause
+defines the `filter-lang` parameter.
+
+include::requirements/filter/REQ_filter-lang-param.adoc[]
+
+The enumerated value `cql-text` is used to indicate that the value of the
+<<filter-param,`filter`>> parameter is the <<simple-cql-text,text encoding of CQL>>.
+
+The enumerated value `cql-json` is used to indicate that the value of the
+<<filter-param,`filter`>> parameter is the <<simple-cql-JSON,JSON encoding of CQL>>.
+
+Servers that support other filtering languages can extend this list of values
+as necessary although the meaning of any additional values are not described
+in this standard.
+
+[[filter-filter-crs]]
+=== Parameter filter-crs
+
+include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
+
+include::requirements/filter/REQ_filter-crs.param.adoc[]
+
+=== Interaction with other predicates
+
+include::requirements/filter/REQ_mixing-expressions.adoc[]
+
+=== Filter expression languages
+
+This extension defines a filter expression language called the 
+<<cql-core,Common Query Language (CQL)>>. However, support for
+this filter expression language is not mandatory and other languages 
+can be used as the value of the <<filter-param,filter parameter>>, too.  
+
+A <<cql-core,simple CQL core>> is defined along with a
+number of <<cql-enhancements,enhancements>> that add additional, more advanced
+capabilities to the language. Two encodings, a <<simple-cql-text,text encoding>> 
+and a <<simple-cql-json,JSON>> encoding are also defined and
+recommended if they are suitable for the intended use.
+
+[[filter-response]]
+=== Response
+
+include::requirements/filter/REQ_response.adoc[]

@@ -1,0 +1,14 @@
+[[req_functions_get-functions-response-json]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/functions/get-functions-response-json*
+^|A |A successful execution of the operation SHALL be reported as a response with 
+a HTTP status code `200`.
+^|B |The content of that response SHALL be based upon the following OpenAPI 3.0 schema 
+and list all functions that the server supports:
+
+[source,YAML]
+----
+include::../../schema/functions.yml[]
+----
+|===

@@ -1,0 +1,23 @@
+[[ats_crs_crs-parameter]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/crs-parameter*
+^|Test Purpose |Verify that the parameter `crs` has been implemented correctly
+^|Requirement |<<req_crs_fc-crs-definition,/req/crs/fc-crs-definition>>, <<req_crs_fc-crs-valid-value,/req/crs/fc-crs-valid-value>> B, <<req_crs_ogc-crs-header,/req/crs/ogc-crs-header>>, <<req_crs_ogc-crs-header-value,/req/crs/ogc-crs-header-value>>, <<req_crs_geojson,/req/crs/geojson>>
+^|Test Method |For
+
+* each spatial feature collection `collectionId`,
+* every GML or GeoJSON feature representation supported by the Web API, and
+* every CRS supported for the collection (every CRS listed in the `crs` property of the collection plus those in the global CRS list, if `#/crs` is included in the `crs` property)
+
+send a request with CRS identifier in the parameter `crs` to
+
+* `/collections/{collectionId}/items` and
+* `/collections/{collectionId}/items/{featureId}` (with a valid `featureId` for the collection).
+
+Verify that
+
+* every response is a valid Features or Feature response,
+* has the status code `200` and
+* includes a `Content-Crs` http header with the value of the requested CRS identifier.
+|===

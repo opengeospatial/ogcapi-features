@@ -1,0 +1,7 @@
+[[req_features-filter_filter-crs-param]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features-filter/filter-crs-param*
+^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
+^|A |The HTTP GET operation on the `/collections/{collectionId}/items` path SHALL support the `filter-crs` parameter as defined in the <<filter-filter-crs,Parameter filter-crs>> clause.
+|===

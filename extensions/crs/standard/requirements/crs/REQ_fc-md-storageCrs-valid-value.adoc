@@ -1,8 +1,6 @@
-[[req_crs-fc-md-storageCrs-valid-value]]
+[[req_crs_fc-md-storageCrs-valid-value]]
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |*/req/core/fc-md-storageCrs-valid-value* +
-2+|The value of the `storageCrs` property shall be one of the CRS identifiers
-from the list of supported coordinate reference systems listed in the 
-spatial collection metadata using the `crs` property.
+|*Requirement {counter:req-id}* |*/req/crs/fc-md-storageCrs-valid-value* +
+2+|The value of the `storageCrs` property SHALL be one of the CRS identifiers from the list of supported CRS identifiers found in the <<crs-discovery,collection object>> using the `crs` property.
 |===

@@ -1,0 +1,14 @@
+== Security Considerations
+
+See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clause 11.
+
+Users making modifications to resources need to:
+
+. be authenticated
+
+. have "modification privileges" on one or more of the resource collections offered by the API
+
+. have access to one or more of the POST, PUT, PATCH and/or DELETE methods
+
+The specific priviledges that a user posessed need to be reflected in the resource paths and available methods described in the API document.
+

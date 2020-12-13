@@ -1,0 +1,711 @@
+---
+openapi: 3.0.3
+info:
+  title: Schema of Common Query Language (CQL)
+  description: 'For use in OpenAPI 3.0 documents'
+  version: '1.0.0-SNAPSHOT'
+paths: {}
+components:
+  schemas:
+    booleanValueExpression:
+      type: object
+      oneOf:
+      - "$ref": "#/components/schemas/andExpression"
+      - "$ref": "#/components/schemas/orExpression"
+      - "$ref": "#/components/schemas/notExpression"
+      - "$ref": "#/components/schemas/comparisonPredicate"
+      - "$ref": "#/components/schemas/spatialPredicate"
+      - "$ref": "#/components/schemas/temporalPredicate"
+      - "$ref": "#/components/schemas/arrayPredicate"
+    andExpression:
+      type: object
+      required:
+      - and
+      properties:
+        and:
+          type: array
+          minItems: 2
+          items:
+            "$ref": "#/components/schemas/booleanValueExpression"
+    orExpression:
+      type: object
+      required:
+      - or
+      properties:
+        or:
+          type: array
+          minItems: 2
+          items:
+            "$ref": "#/components/schemas/booleanValueExpression"
+    notExpression:
+      type: object
+      required:
+      - not
+      properties:
+        or:
+          type: array
+          minItems: 1
+          maxItems: 1
+          items:
+            "$ref": "#/components/schemas/booleanValueExpression"
+    comparisonPredicate:
+      oneOf:
+      - "$ref": "#/components/schemas/binaryComparisonPredicate"
+      - "$ref": "#/components/schemas/isLikePredicate"
+      - "$ref": "#/components/schemas/isBetweenPredicate"
+      - "$ref": "#/components/schemas/isInListPredicate"
+      - "$ref": "#/components/schemas/isNullPredicate"
+    binaryComparisonPredicate:
+      oneOf:
+      - "$ref": "#/components/schemas/eqExpression"
+      - "$ref": "#/components/schemas/ltExpression"
+      - "$ref": "#/components/schemas/gtExpression"
+      - "$ref": "#/components/schemas/lteExpression"
+      - "$ref": "#/components/schemas/gteExpression"
+    eqExpression:
+      type: object
+      required:
+      - eq
+      properties:
+        eq:
+          "$ref": "#/components/schemas/scalarOperands"
+    ltExpression:
+      type: object
+      required:
+      - lt
+      properties:
+        lt:
+          "$ref": "#/components/schemas/scalarOperands"
+    gtExpression:
+      type: object
+      required:
+      - gt
+      properties:
+        gt:
+          "$ref": "#/components/schemas/scalarOperands"
+    lteExpression:
+      type: object
+      required:
+      - lte
+      properties:
+        lte:
+          "$ref": "#/components/schemas/scalarOperands"
+    gteExpression:
+      type: object
+      required:
+      - gte
+      properties:
+        gte:
+          "$ref": "#/components/schemas/scalarOperands"
+    isBetweenPredicate:
+      type: object
+      required:
+      - between
+      properties:
+        between:
+          type: object
+          required:
+          - value
+          - lower
+          - upper
+          properties:
+            value:
+              "$ref": "#/components/schemas/valueExpression"
+            lower:
+              "$ref": "#/components/schemas/scalarExpression"
+            upper:
+              "$ref": "#/components/schemas/scalarExpression"
+    isLikePredicate:
+      type: object
+      required:
+      - like
+      properties:
+        like:
+          "$ref": "#/components/schemas/scalarOperands"
+        nocase:
+          type: boolean
+          default: true
+    isInListPredicate:
+      type: object
+      required:
+      - in
+      properties:
+        in:
+          type: object
+          required:
+          - value
+          - list
+          properties:
+            value:
+              "$ref": "#/components/schemas/valueExpression"
+            list:
+              type: array
+              items:
+                "$ref": "#/components/schemas/valueExpression"
+            nocase:
+              type: boolean
+              default: true
+    valueExpression:
+      oneOf:
+      - "$ref": "#/components/schemas/scalarExpression"
+      - "$ref": "#/components/schemas/spatialLiteral"
+      - "$ref": "#/components/schemas/typedTemporalLiteral"
+    scalarOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        "$ref": "#/components/schemas/scalarExpression"
+    scalarExpression:
+      oneOf:
+      - "$ref": "#/components/schemas/scalarLiteral"
+      - "$ref": "#/components/schemas/propertyRef"
+      - "$ref": "#/components/schemas/functionRef"
+      - "$ref": "#/components/schemas/arithmeticExpression"
+    isNullPredicate:
+      type: object
+      required:
+      - isNull
+      properties:
+        isNull:
+          "$ref": "#/components/schemas/scalarExpression"
+    spatialPredicate:
+      oneOf:
+      - "$ref": "#/components/schemas/intersectsExpression"
+      - "$ref": "#/components/schemas/equalsExpression"
+      - "$ref": "#/components/schemas/disjointExpression"
+      - "$ref": "#/components/schemas/touchesExpression"
+      - "$ref": "#/components/schemas/withinExpression"
+      - "$ref": "#/components/schemas/overlapsExpression"
+      - "$ref": "#/components/schemas/crossesExpression"
+      - "$ref": "#/components/schemas/containsExpression"
+    intersectsExpression:
+      type: object
+      required:
+      - intersects
+      properties:
+        intersects:
+          "$ref": "#/components/schemas/spatialOperands"
+    equalsExpression:
+      type: object
+      required:
+      - equals
+      properties:
+        equals:
+          "$ref": "#/components/schemas/spatialOperands"
+    disjointExpression:
+      type: object
+      required:
+      - disjoint
+      properties:
+        disjoint:
+          "$ref": "#/components/schemas/spatialOperands"
+    touchesExpression:
+      type: object
+      required:
+      - touches
+      properties:
+        touches:
+          "$ref": "#/components/schemas/spatialOperands"
+    withinExpression:
+      type: object
+      required:
+      - within
+      properties:
+        within:
+          "$ref": "#/components/schemas/spatialOperands"
+    overlapsExpression:
+      type: object
+      required:
+      - overlaps
+      properties:
+        overlaps:
+          "$ref": "#/components/schemas/spatialOperands"
+    crossesExpression:
+      type: object
+      required:
+      - crosses
+      properties:
+        crosses:
+          "$ref": "#/components/schemas/spatialOperands"
+    containsExpression:
+      type: object
+      required:
+      - contains
+      properties:
+        contains:
+          "$ref": "#/components/schemas/spatialOperands"
+    spatialOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        "$ref": "#/components/schemas/geomExpression"
+    geomExpression:
+      oneOf:
+      - "$ref": "#/components/schemas/spatialLiteral"
+      - "$ref": "#/components/schemas/propertyRef"
+      - "$ref": "#/components/schemas/functionRef"
+    temporalPredicate:
+      oneOf:
+      - "$ref": "#/components/schemas/beforeExpression"
+      - "$ref": "#/components/schemas/afterExpression"
+      - "$ref": "#/components/schemas/meetsExpression"
+      - "$ref": "#/components/schemas/metbyExpression"
+      - "$ref": "#/components/schemas/toverlapsExpression"
+      - "$ref": "#/components/schemas/overlappedbyExpression"
+      - "$ref": "#/components/schemas/beginsExpression"
+      - "$ref": "#/components/schemas/begunbyExpression"
+      - "$ref": "#/components/schemas/duringExpression"
+      - "$ref": "#/components/schemas/tcontainsExpression"
+      - "$ref": "#/components/schemas/endsExpression"
+      - "$ref": "#/components/schemas/endedbyExpression"
+      - "$ref": "#/components/schemas/tequalsExpression"
+      - "$ref": "#/components/schemas/anyinteractsExpression"
+    beforeExpression:
+      type: object
+      required:
+      - before
+      properties:
+        before:
+          "$ref": "#/components/schemas/temporalOperands"
+    afterExpression:
+      type: object
+      required:
+      - after
+      properties:
+        after:
+          "$ref": "#/components/schemas/temporalOperands"
+    meetsExpression:
+      type: object
+      required:
+      - meets
+      properties:
+        meets:
+          "$ref": "#/components/schemas/temporalOperands"
+    metbyExpression:
+      type: object
+      required:
+      - metby
+      properties:
+        metby:
+          "$ref": "#/components/schemas/temporalOperands"
+    toverlapsExpression:
+      type: object
+      required:
+      - toverlaps
+      properties:
+        toverlaps:
+          "$ref": "#/components/schemas/temporalOperands"
+    overlappedbyExpression:
+      type: object
+      required:
+      - overlappedby
+      properties:
+        overlappedby:
+          "$ref": "#/components/schemas/temporalOperands"
+    beginsExpression:
+      type: object
+      required:
+      - begins
+      properties:
+        begins:
+          "$ref": "#/components/schemas/temporalOperands"
+    begunbyExpression:
+      type: object
+      required:
+      - begunby
+      properties:
+        begunby:
+          "$ref": "#/components/schemas/temporalOperands"
+    duringExpression:
+      type: object
+      required:
+      - during
+      properties:
+        during:
+          "$ref": "#/components/schemas/temporalOperands"
+    tcontainsExpression:
+      type: object
+      required:
+      - tcontains
+      properties:
+        tcontains:
+          "$ref": "#/components/schemas/temporalOperands"
+    endsExpression:
+      type: object
+      required:
+      - ends
+      properties:
+        ends:
+          "$ref": "#/components/schemas/temporalOperands"
+    endedbyExpression:
+      type: object
+      required:
+      - endedby
+      properties:
+        endedby:
+          "$ref": "#/components/schemas/temporalOperands"
+    tequalsExpression:
+      type: object
+      required:
+      - tequals
+      properties:
+        tequals:
+          "$ref": "#/components/schemas/temporalOperands"
+    anyinteractsExpression:
+      type: object
+      required:
+      - anyinteracts
+      properties:
+        anyinteracts:
+          "$ref": "#/components/schemas/temporalOperands"
+    temporalOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        "$ref": "#/components/schemas/temporalExpression"
+    temporalExpression:
+      oneOf:
+      - "$ref": "#/components/schemas/temporalLiteral"
+      - "$ref": "#/components/schemas/propertyRef"
+      - "$ref": "#/components/schemas/functionRef"
+    arrayPredicate:
+      oneOf:
+      - "$ref": "#/components/schemas/aequalsExpression"
+      - "$ref": "#/components/schemas/acontainsExpression"
+      - "$ref": "#/components/schemas/acontainedByExpression"
+      - "$ref": "#/components/schemas/aoverlapsExpression"
+    aequalsExpression:
+      type: object
+      required:
+      - aequals
+      properties:
+        aequals:
+          "$ref": "#/components/schemas/arrayExpression"
+    acontainsExpression:
+      type: object
+      required:
+      - acontains
+      properties:
+        acontains:
+          "$ref": "#/components/schemas/arrayExpression"
+    acontainedByExpression:
+      type: object
+      required:
+      - acontainedBy
+      properties:
+        acontainedBy:
+          "$ref": "#/components/schemas/arrayExpression"
+    aoverlapsExpression:
+      type: object
+      required:
+      - aoverlaps
+      properties:
+        aoverlaps:
+          "$ref": "#/components/schemas/arrayExpression"
+    arrayExpression:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        oneOf:
+        - "$ref": "#/components/schemas/propertyRef"
+        - "$ref": "#/components/schemas/functionRef"
+        - "$ref": "#/components/schemas/arrayLiteral"
+    arrayLiteral:
+      type: array
+      items:
+        oneOf:
+        - "$ref": "#/components/schemas/scalarLiteral"
+        - "$ref": "#/components/schemas/spatialLiteral"
+        - "$ref": "#/components/schemas/typedTemporalLiteral"
+        - "$ref": "#/components/schemas/propertyRef"
+        - "$ref": "#/components/schemas/functionRef"
+        - "$ref": "#/components/schemas/arithmeticExpression"
+        - "$ref": "#/components/schemas/arrayLiteral"
+    arithmeticExpression:
+      oneOf:
+      - "$ref": "#/components/schemas/addExpression"
+      - "$ref": "#/components/schemas/subExpression"
+      - "$ref": "#/components/schemas/mulExpression"
+      - "$ref": "#/components/schemas/divExpression"
+    addExpression:
+      type: object
+      required:
+      - "+"
+      properties:
+        "+":
+          "$ref": "#/components/schemas/arithmeticOperands"
+    subExpression:
+      type: object
+      required:
+      - "-"
+      properties:
+        "-":
+          "$ref": "#/components/schemas/arithmeticOperands"
+    mulExpression:
+      type: object
+      required:
+      - "*"
+      properties:
+        "*":
+          "$ref": "#/components/schemas/arithmeticOperands"
+    divExpression:
+      type: object
+      required:
+      - "/"
+      properties:
+        "/":
+          "$ref": "#/components/schemas/arithmeticOperands"
+    arithmeticOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        oneOf:
+        - "$ref": "#/components/schemas/arithmeticExpression"
+        - "$ref": "#/components/schemas/propertyRef"
+        - "$ref": "#/components/schemas/functionRef"
+        - type: number
+    propertyRef:
+      type: object
+      required:
+      - property
+      properties:
+        propertyName:
+          type: string
+    functionRef:
+      type: object
+      required:
+      - function
+      properties:
+        function:
+          "$ref": "#/components/schemas/function"
+    function:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        arguments:
+          type: array
+          items:
+            oneOf:
+            - "$ref": "#/components/schemas/scalarLiteral"
+            - "$ref": "#/components/schemas/spatialLiteral"
+            - "$ref": "#/components/schemas/typedTemporalLiteral"
+            - "$ref": "#/components/schemas/propertyRef"
+            - "$ref": "#/components/schemas/functionRef"
+            - "$ref": "#/components/schemas/arithmeticExpression"
+            - "$ref": "#/components/schemas/arrayLiteral"
+    scalarLiteral:
+      oneOf:
+      - type: string
+      - type: number
+      - type: boolean
+    spatialLiteral:
+      oneOf:
+      - "$ref": "#/components/schemas/geometryLiteral"
+      - "$ref": "#/components/schemas/envelopeLiteral"
+    geometryLiteral:
+      oneOf:
+      - "$ref": "#/components/schemas/point"
+      - "$ref": "#/components/schemas/linestring"
+      - "$ref": "#/components/schemas/polygon"
+      - "$ref": "#/components/schemas/multipoint"
+      - "$ref": "#/components/schemas/multilinestring"
+      - "$ref": "#/components/schemas/multipolygon"
+    geojson-bbox:
+       type: array
+       minItems: 4
+       maxItems: 4
+       items:
+          type: number
+    point:
+      title: GeoJSON Point
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: number
+        bbox:
+          "$ref": "#/components/schemas/geojson-bbox"
+    linestring:
+      title: GeoJSON LineString
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - LineString
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+        bbox:
+          "$ref": "#/components/schemas/geojson-bbox"
+    polygon:
+      title: GeoJSON Polygon
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 4
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+        bbox:
+          "$ref": "#/components/schemas/geojson-bbox"
+    multipoint:
+      title: GeoJSON MultiPoint
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+        bbox:
+          "$ref": "#/components/schemas/geojson-bbox"
+    multilinestring:
+      title: GeoJSON MultiLineString
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiLineString
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+        bbox:
+          "$ref": "#/components/schemas/geojson-bbox"
+    multipolygon:
+      title: GeoJSON MultiPolygon
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              minItems: 4
+              items:
+                type: array
+                minItems: 2
+                items:
+                  type: number
+        bbox:
+          "$ref": "#/components/schemas/geojson-bbox"
+    envelopeLiteral:
+      type: object
+      required:
+      - bbox
+      properties:
+        bbox:
+          "$ref": "#/components/schemas/bbox"
+    bbox:
+      type: array
+      oneOf:
+      - minItems: 4
+        maxItems: 4
+      - minItems: 6
+        maxItems: 6
+      items:
+        type: number
+    temporalLiteral:
+      oneOf:
+      - "$ref": "#/components/schemas/timeString"
+      - "$ref": "#/components/schemas/periodString"
+    timeString:
+      oneOf:
+      - type: string
+        format: date
+      - type: string
+        format: date-time
+    periodString:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+         nullable: true
+         oneOf:
+         - type: string
+           format: date
+         - type: string
+           format: date-time
+    typedTemporalLiteral:
+      oneOf:
+      - "$ref": "#/components/schemas/typedTimeString"
+      - "$ref": "#/components/schemas/typedPeriodString"
+    typedTimeString:
+      type: object
+      required:
+      - datetime
+      properties:
+        datetime:
+          "$ref": "#/components/schemas/timeString"
+    typedPeriodString:
+      type: object
+      required:
+      - datetime
+      properties:
+        datetime:
+          "$ref": "#/components/schemas/periodString"

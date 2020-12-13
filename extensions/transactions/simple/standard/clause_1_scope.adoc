@@ -1,0 +1,17 @@
+== Scope
+
+This document specifies an extension that defined the behaviour of a server
+that supports simple transactions.  Simple transactions are transactions that
+add, replace, modify or delete individual resources from a single collection.
+
+Additional specifications will subsequently be created to handle complex
+transactions; that is transactions that require batch or atomic semantics.
+
+Specifically, this document specifies:
+
+* How to add a new resource instance to a collection.
+
+* How to modify an existing resource from a collection; this includes entirely replacing the existing resource or simply modifying one or more parts of a
+resource.
+
+* How to remove an existing resource from a collection.

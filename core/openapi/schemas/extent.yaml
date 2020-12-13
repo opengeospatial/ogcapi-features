@@ -30,9 +30,13 @@ properties:
             * Upper right corner, coordinate axis 2
             * Maximum value, coordinate axis 3 (optional)
 
-            The coordinate reference system of the values is WGS 84 longitude/latitude
-            (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
-            reference system is specified in `crs`.
+            If the value consists of four numbers, the coordinate reference system is
+            WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84)
+            unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+
+            If the value consists of six numbers, the coordinate reference system is
+            WGS 84 longitude/latitude/height (http://www.opengis.net/def/crs/OGC/0/CRS84h)
+            unless a different coordinate reference system is specified in a parameter `bbox-crs`.
 
             For WGS 84 longitude/latitude the values are in most cases the sequence of
             minimum longitude, minimum latitude, maximum longitude and maximum latitude.
@@ -46,8 +50,11 @@ properties:
             server whether only a single spatial geometry property is used to determine
             the extent or all relevant geometries.
           type: array
-          minItems: 4
-          maxItems: 6
+          oneOf:
+          - minItems: 4
+            maxItems: 4
+          - minItems: 6
+            maxItems: 6
           items:
             type: number
           example:
@@ -59,12 +66,14 @@ properties:
         description: |-
           Coordinate reference system of the coordinates in the spatial extent
           (property `bbox`). The default reference system is WGS 84 longitude/latitude.
-          In the Core this is the only supported coordinate reference system.
+          In the Core the only other supported coordinate reference system is
+          WGS 84 longitude/latitude/height for coordinates with height.
           Extensions may support additional coordinate reference systems and add
           additional enum values.
         type: string
         enum:
           - 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
+          - 'http://www.opengis.net/def/crs/OGC/0/CRS84h'
         default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
   temporal:
     description: |-
@@ -82,8 +91,8 @@ properties:
         minItems: 1
         items:
           description: |-
-            Begin and end times of the time interval. The timestamps
-            are in the coordinate reference system specified in `trs`. By default
+            Begin and end times of the time interval. The timestamps are in the
+            temporal coordinate reference system specified in `trs`. By default
             this is the Gregorian calendar.
           type: array
           minItems: 2
@@ -99,8 +108,8 @@ properties:
         description: |-
           Coordinate reference system of the coordinates in the temporal extent
           (property `interval`). The default reference system is the Gregorian calendar.
-          In the Core this is the only supported temporal reference system.
-          Extensions may support additional temporal reference systems and add
+          In the Core this is the only supported temporal coordinate reference system.
+          Extensions may support additional temporal coordinate reference systems and add
           additional enum values.
         type: string
         enum:

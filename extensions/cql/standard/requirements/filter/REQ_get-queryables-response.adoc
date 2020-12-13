@@ -1,0 +1,14 @@
+[[req_filter_get-queryables-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/get-queryables-response*
+^|A |A successful execution of the operation SHALL be reported as a response
+with a HTTP status code `200`.
+^|B |For responses that use `application/schema+json` as the `Content-Type` of
+the response, the response SHALL have the following characteristics:
+
+* The property `$schema` is `\http://json-schema.org/draft-07/schema#` or
+`\https://json-schema.org/draft/2019-09/schema`.
+* The property `$id` is the URI of the resource without query parameters.
+* The `type` is `object` and each property is a queryable.
+|===

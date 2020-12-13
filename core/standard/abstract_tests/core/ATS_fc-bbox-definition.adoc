@@ -1,7 +1,7 @@
 [[ats_core_fc-bbox-definition]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/core/fc-bbox-definition*
+^|*Abstract Test {counter:ats-id}* |*/conf/core/fc-bbox-definition*
 ^|Test Purpose |Validate that the bounding box query parameters are constructed correctly.
 ^|Requirement |<<req_core_fc-bbox-definition,/req/core/fc-bbox-definition>>
 ^|Test Method |Verify that the `bbox` query parameter complies with the following definition (using an OpenAPI Specification 3.0 fragment):
@@ -13,19 +13,31 @@ in: query
 required: false
 schema:
   type: array
-  minItems: 4
-  maxItems: 6
+  oneOf:
+  - minItems: 4
+    maxItems: 4
+  - minItems: 6
+    maxItems: 6
   items:
     type: number
 style: form
 explode: false
 ----
 
-Use a bounding box with four numbers in all requests:
+Use a bounding box with four numbers in all requests, if the collection has spatial geometries in 2D:
 
 * Lower left corner, WGS 84 longitude
 * Lower left corner, WGS 84 latitude
 * Upper right corner, WGS 84 longitude
 * Upper right corner, WGS 84 latitude
+
+Use a bounding box with six numbers in all requests, if the collection has spatial geometries in 3D:
+
+* Lower left corner, WGS 84 longitude
+* Lower left corner, WGS 84 latitude
+* Minimum value, WGS 84 ellipsoidal height
+* Upper right corner, WGS 84 longitude
+* Upper right corner, WGS 84 latitude
+* Maximum value, WGS 84 ellipsoidal height
 
 |===

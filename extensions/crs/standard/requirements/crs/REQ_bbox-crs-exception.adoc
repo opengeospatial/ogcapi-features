@@ -1,7 +1,7 @@
-[[req_crs-bbox-crs-exception]]
+[[req_crs_bbox-crs-exception]]
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |*/req/crs/bbox-crs-exception* +
-2+|In all cases, an invalid or unrecognized coordinate reference system value
-shall trigger a 400 exception with an appropriate message.
+^|A |In all cases, if the server encounters an invalid or unrecognized CRS identifier value it SHALL respond with a HTTP 400 status code.
+^|B |The body of the exception response SHALL contain an appropriate message.
 |===

@@ -23,7 +23,7 @@ The other approach targets developers that are not familiar with the OGC API sta
 
 === Encodings
 
-This standard does not mandate any encoding or format for representing features or feature collections. In addition to HTML as the standard encoding for Web content, rules for commonly used encodings for spatial data on the web are provided (GeoJSON, GML).
+This standard does not mandate any encoding or format for representing features or feature collections. In addition to rules for HTML, the standard encoding for Web content, rules for commonly used encodings for spatial data on the Web are provided (GeoJSON, GML).
 
 None of these encodings is mandatory and an implementation of the _Core_ requirements class may implement none of them but implement another encoding instead.
 
@@ -37,11 +37,11 @@ Some examples for cases that are out-of-scope of GeoJSON are:
 
 * Geometries that include non-linear curve interpolations that cannot be simplified (e.g., use of arcs in authoritative geometries),
 
-* Geometries that have to be represented in a coordinate reference system that is not based on WGS 84 longitude/latitude (e.g., an authoritative national reference system), or
+* Geometries that have to be represented in a coordinate reference system (CRS) that is not based on WGS 84 longitude/latitude (e.g., an authoritative national CRS), or
 
 * Features that have more than one geometric property.
 
-In addition to HTML and GeoJSON, a significant volume of feature data is available in XML-based formats, notably GML. GML supports more complex requirements than GeoJSON and does not have any of the limitations mentioned in the above bullets, but as a result GML is more complex to handle for both servers and clients. Conformance classes for GML are, therefore, included in this standard. It is expected that these conformance classes will typically be supported by servers where users are known to expect feature data in XML/GML.
+In addition to HTML and GeoJSON, a significant volume of feature data is available in XML-based formats, notably GML. GML supports more complex requirements than GeoJSON and does not have any of the limitations mentioned in the above bullets, but as a result GML is more complex to handle for both servers and clients. Requirements classes for GML are, therefore, included in this standard. It is expected that these requirements classes will typically be supported by servers where users are known to expect feature data in XML/GML.
 
 The recommendations for using HTML and GeoJSON reflect the importance of HTML and the current popularity of JSON-based data formats. As the practices in the Web community evolve, the recommendations will likely be updated in future versions of this standard to provide guidance on using other encodings.
 

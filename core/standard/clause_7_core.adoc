@@ -5,13 +5,13 @@
 
 include::requirements/requirements_class_core.adoc[]
 
-A server that implements this conformance class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset]. In other words, the API is a link:https://www.w3.org/TR/vocab-dcat/#class-distribution[distribution] of that dataset. A file download, for example, would be another distribution.
+A server that implements this requirements class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset].
 
 NOTE: Other parts of this standard may define API extensions that support multiple datasets. The statement that the features are from "a dataset" is not meant to preclude such extensions. It just reflects that this document does not specify how the API publishes features or other spatial data from multiple datasets.
 
 The entry point is a `Landing page` (path `/`).
 
-NOTE: All paths (e.g., `/`) are relative to the base URL of the distribution of the dataset. If the API covers other resources beyond those specified in this document, the landing page may also be, for example, a sub-resource of the base URL of the API.
+NOTE: All paths (e.g., `/`) are relative. If the API covers other resources beyond those specified in this document, the landing page can also be, for example, a sub-resource of the base URL of the API.
 
 The `Landing page` provides links to:
 
@@ -37,7 +37,7 @@ Accessing `Collections` using HTTP GET returns a response that contains at least
 
 * A local identifier for the collection that is unique for the dataset;
 
-* A list of coordinate reference systems (CRS) in which geometries may be returned by the server: the first CRS is the default coordinate reference system (in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
+* A list of coordinate reference systems in which geometries may be returned by the server: the first CRS is the default CRS (in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
 
 * An optional title and description for the collection;
 
@@ -73,6 +73,10 @@ include::requirements/core/REQ_root-op.adoc[]
 
 include::requirements/core/REQ_root-success.adoc[]
 
+include::recomendations/core/REC_root-links.adoc[]
+
+NOTE: Version 1.0.0 of this specification did not include `self` and `alternate` links for the landing page while the links are required in other resources. The recommendation above has been added to encourage implementations to add these links on the landing page, too.
+
 [[schema_landingPage]]
 .link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/landingPage.yaml[Schema for the landing page]
 [source,YAML]
@@ -102,6 +106,8 @@ properties:
   "links": [
     { "href": "http://data.example.org/",
       "rel": "self", "type": "application/json", "title": "this document" },
+    { "href": "http://data.example.org/?f=html",
+      "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
     { "href": "http://data.example.org/api",
       "rel": "service-desc", "type": "application/vnd.oai.openapi+json;version=3.0", "title": "the API definition" },
     { "href": "http://data.example.org/api.html",
@@ -223,10 +229,10 @@ The *Status Codes* listed in <<status_codes>> are of particular relevance to imp
 |`304` |An <<web_caching,entity tag was provided in the request>> and the resource has not been changed since the previous request.
 |`400` |The server cannot or will not process the request due to an apparent client error. For example, a query parameter had an incorrect value.
 |`401` |The request requires user authentication. The response includes a `WWW-Authenticate` header field containing a challenge applicable to the requested resource.
-|`403` |The server understood the request, but is refusing to fulfill it. While status code `401` indicates missing or bad authentication, status code `403` indicates that authentication is not the issue, but the client is not authorized to perform the requested operation on the resource.
+|`403` |The server understood the request, but is refusing to fulfil it. While status code `401` indicates missing or bad authentication, status code `403` indicates that authentication is not the issue, but the client is not authorized to perform the requested operation on the resource.
 |`404` |The requested resource does not exist on the server. For example, a path parameter had an incorrect value.
 |`405` |The request method is not supported. For example, a POST request was submitted, but the resource only supports GET requests.
-|`406` |The `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
+|`406` |Content negotiation failed. For example, the `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
 |`500` |An internal error occurred in the server.
 !===
 
@@ -276,7 +282,7 @@ This is a general rule that applies to all parameters, whether they are specifie
 [[web_caching]]
 === Web caching
 
-Entity tags are a mechanism for web cache validation and for supporting conditional requests to reduce network traffic. Entity tags are specified by <<rfc2616,HTTP/1.1 (RFC 2616)>>.
+Entity tags are a mechanism for web cache validation and for supporting conditional requests to reduce network traffic. Entity tags are specified by <<rfc723x,RFC 7232 (HTTP 1.1)>>.
 
 include::recomendations/core/REC_etag.adoc[]
 
@@ -336,13 +342,17 @@ The link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/li
 
 As discussed in Chapter 9 of the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>, how to express and share the location of features in a consistent way is one of the most fundamental aspects of publishing geographic data and it is important to be clear about the coordinate reference system that coordinates are in.
 
-For the reasons discussed in the Best Practices, OGC API Features uses WGS 84 longitude and latitude as the default coordinate reference system.
+For the reasons discussed in the Best Practices, OGC API Features uses WGS 84 longitude and latitude as the default coordinate reference system for spatial geometries.
 
 include::requirements/core/REQ_crs84.adoc[]
 
 Implementations compliant with the Core are not required to support publishing feature geometries in coordinate reference systems other than http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height) or http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with height); i.e., the (optional) third coordinate number is always the height.
 
 The Core also does not specify a capability to request feature geometries in a different coordinate reference system. Such a capability will be specified in another part of the OGC API Features series.
+
+The same principles apply for temporal geometries, which are measured relative to a temporal coordinate reference system. OGC API Features uses the Gregorian calendar and all dates or timestamps discussed in this document are in the Gregorian calendar and conform to <<rfc3339,RFC 3339>>.
+
+include::recomendations/core/REC_rfc3339.adoc[]
 
 === Link headers
 
@@ -390,9 +400,15 @@ include::recomendations/core/PER_fc-md-items.adoc[]
 
 This document does not specify mechanisms how clients may access all collections from servers with many collections. Such mechanisms may be specified in additional parts of OGC API Features. Options include support for paging and/or filtering.
 
+include::recomendations/core/REC_fc-md-self-links.adoc[]
+
+NOTE: Including the `self` link in each collection is strongly recommended. It is an oversight that no requirement has been included in the original release of the standard. To avoid a breaking change, this statement is only a recommendation in this document version. Note that the URI can be inferred by clients using the member `id` of the feature collection, if it is missing, but this should not be necessary.
+
 include::requirements/core/REQ_fc-md-items-links.adoc[]
 
 include::requirements/core/REQ_fc-md-extent.adoc[]
+
+NOTE: The member `spatial` only needs to be provided in the `extent` object, if features in the feature collection have spatial properties. The same applies to `temporal` and features with temporal properties. For example, a feature collection where features have a spatial, but no temporal property will only provide the `spatial` member.
 
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
@@ -453,9 +469,13 @@ properties:
                 * Upper right corner, coordinate axis 2
                 * Maximum value, coordinate axis 3 (optional)
 
-                The coordinate reference system of the values is WGS 84 longitude/latitude
-                (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
-                reference system is specified in `crs`.
+                If the value consists of four numbers, the coordinate reference system is
+                WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84)
+                unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+
+                If the value consists of six numbers, the coordinate reference system is
+                WGS 84 longitude/latitude/height (http://www.opengis.net/def/crs/OGC/0/CRS84h)
+                unless a different coordinate reference system is specified in a parameter `bbox-crs`.
 
                 For WGS 84 longitude/latitude the values are in most cases the sequence of
                 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
@@ -469,8 +489,11 @@ properties:
                 server whether only a single spatial geometry property is used to determine
                 the extent or all relevant geometries.
               type: array
-              minItems: 4
-              maxItems: 6
+              oneOf:
+              - minItems: 4
+                maxItems: 4
+              - minItems: 6
+                maxItems: 6
               items:
                 type: number
               example:
@@ -482,12 +505,14 @@ properties:
             description: >-
               Coordinate reference system of the coordinates in the spatial extent
               (property `bbox`). The default reference system is WGS 84 longitude/latitude.
-              In the Core this is the only supported coordinate reference system.
+              In the Core the only other supported coordinate reference system is
+              WGS 84 longitude/latitude/height for coordinates with height.
               Extensions may support additional coordinate reference systems and add
               additional enum values.
             type: string
             enum:
               - 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
+              - 'http://www.opengis.net/def/crs/OGC/0/CRS84h'
             default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
       temporal:
         description: >-
@@ -497,7 +522,7 @@ properties:
           interval:
             description: >-
               One or more time intervals that describe the temporal extent of the dataset.
-              The value `null` is supported and indicates an open time intervall.
+              The value `null` is supported and indicates an open time interval.
               In the Core only a single time interval is supported. Extensions may support
               multiple intervals. If multiple intervals are provided, the union of the
               intervals describes the temporal extent.
@@ -505,8 +530,8 @@ properties:
             minItems: 1
             items:
               description: >-
-                Begin and end times of the time interval. The timestamps
-                are in the coordinate reference system specified in `trs`. By default
+                Begin and end times of the time interval. The timestamps are in the
+                temporal coordinate reference system specified in `trs`. By default
                 this is the Gregorian calendar.
               type: array
               minItems: 2
@@ -522,8 +547,8 @@ properties:
             description: >-
               Coordinate reference system of the coordinates in the temporal extent
               (property `interval`). The default reference system is the Gregorian calendar.
-              In the Core this is the only supported temporal reference system.
-              Extensions may support additional temporal reference systems and add
+              In the Core this is the only supported temporal coordinate reference system.
+              Extensions may support additional temporal coordinate reference systems and add
               additional enum values.
             type: string
             enum:
@@ -542,16 +567,18 @@ properties:
       - http://www.opengis.net/def/crs/OGC/1.3/CRS84
 ----
 
-NOTE: The `crs` property of the `collection` object is not used by this conformance class, but reserved for future use.
+NOTE: The `crs` property of the `collection` object is not used by this requirements class, but reserved for future use.
 
 [[example_4]]
 .Feature collections response document
 =================
 This feature collections example response in JSON is for a dataset with a single collection "buildings". It includes links to the features resource in all formats that are supported by the service (link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type]: "items").
 
-Representations of the resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
+There is a link to the feature collections response itself (link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type]: "self"). Representations of this resource in other formats are referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "alternate".
 
-An additional link is to a GML application schema for the dataset - using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedBy".
+An additional link is to a GML application schema for the dataset - using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "describedby".
+
+A bulk download of all the features in the dataset is referenced using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "enclosure".
 
 Finally there are also links to the license information for the building data (using link:https://www.iana.org/assignments/link-relations/link-relations.xhtml[link relation type] "license").
 
@@ -566,7 +593,7 @@ Reference system information is not provided as the service provides geometries 
     { "href": "http://data.example.org/collections.html",
       "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
     { "href": "http://schemas.example.org/1.0/buildings.xsd",
-      "rel": "describedBy", "type": "application/xml", "title": "GML application schema for Acme Corporation building data" },
+      "rel": "describedby", "type": "application/xml", "title": "GML application schema for Acme Corporation building data" },
     { "href": "http://download.example.org/buildings.gpkg",
       "rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Bulk download (GeoPackage)", "length": 472546 }
   ],
@@ -584,6 +611,8 @@ Reference system information is not provided as the service provides geometries 
         }
       },
       "links": [
+        { "href": "http://data.example.org/collections/buildings",
+          "rel": "self", "title": "This collection" },
         { "href": "http://data.example.org/collections/buildings/items",
           "rel": "items", "type": "application/geo+json",
           "title": "Buildings" },
@@ -614,6 +643,10 @@ include::requirements/core/REQ_sfc-md-op.adoc[]
 ==== Response
 
 include::requirements/core/REQ_sfc-md-success.adoc[]
+
+include::recomendations/core/REC_sfc-md-links.adoc[]
+
+NOTE: Including the `self` and `alternates` links in each collection is strongly recommended. It is an oversight that no requirement has been included in the original release of the standard. To avoid a breaking change, this statement is only a recommendation in this document version.
 
 ==== Error situations
 
@@ -647,6 +680,8 @@ include::requirements/core/REQ_fc-bbox-definition.adoc[]
 include::requirements/core/REQ_fc-bbox-response.adoc[]
 
 "Intersects" means that the rectangular area specified in the parameter `bbox` includes a coordinate that is part of the (spatial) geometry of the feature. This includes the boundaries of the geometries (e.g., for curves the start and end position and for surfaces the outer and inner rings).
+
+In case of a degenerated bounding box, the resulting geometry is used. For example, if the lower left corner is the same as the upper right corner, all features match where the geometry intersects with this point.
 
 This standard does not specify requirements for the parameter `bbox-crs.` Those requirements will be specified in an additional part of the OGC API Features series.
 
@@ -798,9 +833,11 @@ An implementation could use opaque links that are managed by the server. It is u
 
 Another implementation approach is to use an implementation-specific parameter that specifies the index within the result set from which the server begins presenting results in the response, like the `startIndex` parameter that was used in <<WFS20,WFS 2.0>> (and which may be added again in additional parts of the OGC API Features series).
 
+The API will return no `next` link, if it has returned all selected features, and the server knows that. However, the server may not be aware that it has already returned all selected features. For example, if the request states `limit=10` and the query to the backend datastore returns 10 features, the server may not know, if there are more features or not (in most cases there will be more features), unless the total number of matches is also computed, which may be too costly. The server will then add the next link, and if there are no more features, dereferencing the next link will return am empty feature collection and no next link. This behavior is consistent with the statements above.
+
 Clients should not assume that paging is safe against changes to dataset while a client iterates through `next` links. If a server provides opaque links these could be safe and maintain the dataset state during the original request. Using a parameter for the start index, however, will not be safe.
 
-NOTE: Additional conformance classes for safe paging or an index parameter
+NOTE: Additional requirements classes for safe paging or an index parameter
 may be added in extensions to this specification.
 
 include::recomendations/core/PER_fc-prev.adoc[]

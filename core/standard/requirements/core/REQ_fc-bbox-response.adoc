@@ -5,15 +5,5 @@
 ^|A |Only features that have a spatial geometry that intersects the bounding box SHALL be part of the result set, if the `bbox` parameter is provided.
 ^|B |If a feature has multiple spatial geometry properties, it is the decision of the server whether only a single spatial geometry property is used to determine the extent or all relevant geometries.
 ^|C |The `bbox` parameter SHALL match all features in the collection that are not associated with a spatial geometry, too.
-^|D |The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (height or depth):
-
-* Lower left corner, coordinate axis 1
-* Lower left corner, coordinate axis 2
-* Minimum value, coordinate axis 3 (optional)
-* Upper right corner, coordinate axis 1
-* Upper right corner, coordinate axis 2
-* Maximum value, coordinate axis 3 (optional)
-
-^|E |The bounding box SHALL consist of four numbers and the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
-^|F |The coordinate values SHALL be within the extent specified for the coordinate reference system.
+^|D |The coordinate values SHALL be within the extent specified for the coordinate reference system.
 |===

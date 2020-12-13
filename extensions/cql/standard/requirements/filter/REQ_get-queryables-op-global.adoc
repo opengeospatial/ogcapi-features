@@ -1,0 +1,9 @@
+[[req_filter_get-queryables-op-global]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/filter/get-queryables-op-global*
+^|A |A server that implements this requirements class SHALL support the HTTP GET operation at the path `/queryables` and the media type `application/schema+json`.
+^|B |The queryables accessed at this path SHALL be valid for all collections identified in the Collections resource (path `/collections`).
+^|C |The Queryables resource SHALL be referenced from the Landing Page resource
+with a link with the link relation type `\http://www.opengis.net/def/rel/ogc/1.0/queryables`.
+|===

@@ -2,37 +2,52 @@
 
 ## Overview
 
-This page points to servers implementing drafts of the OGC API Features series.
-For now this is limited to implementations of the current draft of Part 1. Core.
+This page points to servers implementing the OGC API - Features - Part 1: Core specification and extensions (e.g. Part 2, Part 3, etc.) thereof.  If you feel so inclined, feel free to indicate whether your server is listed in the compliance database (see Issue #416).
+
+We may start managing this page a little more actively from now on (22-JUL-2020) so please include a contact email with your listing so that we can get in touch with you should we test your server and find out that it is unreachable.
 
 ## Implementations:
 
 Servers:
 
-* [interactive instruments](#interactive-instruments)
-* [CubeWerx Inc.](#cubeWerx)
+* [ldproxy](#ldproxy), portele [at] interactive-instruments.de
+* [CubeWerx Inc.](#cubeWerx), pvretano [at] cubewerx.com
 * [GeoServer](#geoserver)
 * [pygeoapi](#pygeoapi)
 * [jivan](#jivan)
 * [sofp](#sofp)
 * [STAC](#STAC)
 * [nls-fi](#nls-fi)
+* [QGIS](#QGIS)
+* [SDI Rhineland-Palatinate - mapbender2](#sdi-rhineland-palatinate---mapbender2)
 
 Clients:
 * [go-wfs3-client](https://github.com/ischneider/go-wfs3-client)
-* [ogr/gdal WFS 3.0 client driver](http://gdal.org/drv_wfs3.html)
+* [GDAL/OGR OGC API - Features driver](https://gdal.org/drivers/vector/oapif.html)
 * [OWSLib WFS 3.0 client](https://geopython.github.io/OWSLib)
 * [STAC](#STAC)
+* [QGIS](#QGIS)
+* [ogcapi-js](#ogcapi-js)
+* [FME](#FME)
 
-## interactive instruments
+## ldproxy
 
-The following are two servers implementing most of the current draft
-of part 1. They are using German data and therefore the language
+The following server has been set up in OGC Testbeds and Pilots. It includes extensions for other resources like vector tiles and styles:
+
+* OpenAPI definition: https://services.interactive-instruments.de/t15/daraa/api
+* Landing page: https://services.interactive-instruments.de/t15/daraa
+
+The server has been [certified as compliant by the OGC CITE tests](https://www.opengeospatial.org/resource/products/details/?pid=1598).
+
+Another server is implementing an older draft
+of part 1 (the server will be updated to version 1.0.0 soon).
+The APIs provide German data and therefore the language
 in general is German, including in the HTML.
 
 The first endpoint is for cadastral parcels, buildings and
 administrative areas in North-Rhine Westphalia (Germany).
-The second endpoint for topographic data in that region.
+The second endpoint for topographic data in that region,
+the third provides administrative units.
 
 For more details about the implementation and a discussion about
 how this implements the Spatial Data on the Web Best Practies see
@@ -88,12 +103,6 @@ f=json&
 bahnhofskategorie=1010&  
 bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/collections/ax_bahnverkehrsanlage/items?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
 
-Another server is from the [OGC Vector Tiles Pilot](http://www.opengeospatial.org/projects/initiatives/vt-pilot-2018) 
-and it includes extensions for vector tile and style resources:
-
-* OpenAPI definition: https://services.interactive-instruments.de/vtp/daraa/api
-* Landing page: https://services.interactive-instruments.de/vtp/daraa
-
 ## CubeWerx Inc.
 
 The following server implements a good portion of the current draft part 1
@@ -133,8 +142,8 @@ nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation
 
 ## GeoServer
 
-An incomplete implementation of the WFS3 specification is available at http://cloudsdi.geo-solutions.it/geoserver/wfs3/
-It is a community module developed from scratch during the WFS 3 hackaton. At the time of writing, still misses HTML outputs, conformance call, paging links (supports random paging with startIndex), single feature outputs and attribute filtering.
+An ccomplete implementation of the Features API specification is available at https://vtp2.geo-solutions.it/geoserver/web/
+At the time of writing, it supports core, HTML, GML and GeoJSON (as well as other output formats), queriables, CQL extensions, tiles.
 
 ## pygeoapi
 
@@ -148,7 +157,10 @@ It is a community module developed from scratch during the WFS 3 hackaton. At th
 * Feature collection single item: ([JSON](https://demo.pygeoapi.io/master/collections/utah_city_locations/items/Fairfield?f=json) ([HTML](https://demo.pygeoapi.io/master/collections/utah_city_locations/items/Fairfield?f=html))
 * Feature collection: bbox query: ([JSON](https://demo.pygeoapi.io/master/collections/lakes/items?bbox=-152,42,-52,84&f=json)) ([HTML](https://demo.pygeoapi.io/master/collections/lakes/items?bbox=-152,42,-52,84&f=html))
 
+The [British Geological Survey](https://www.bgs.ac.uk/) has a demo deployment running on Kubenetes at https://osgeodev.bgs.ac.uk/pygeoapi/. Code available @ https://github.com/BritishGeologicalSurvey/bgs-pygeoapi
+
 The Meteorological Service of Canada uses pygeoapi in production at https://geo.weather.gc.ca/geomet/features
+
 
 ## jivan
 
@@ -203,3 +215,40 @@ Topographical database of National Land Survey of Finland as an OGC API - Featur
 * First 10 roadlinks: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/tieviiva/items?limit=10
 * Roadlink with id 11: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/tieviiva/items/11
 * First 1000 buildings inside 380000,6670000,390000,6680000,EPSG:3067: https://beta-paikkatieto.maanmittauslaitos.fi/maastotiedot/wfs3/v1/collections/rakennus/items?bbox=380000,6670000,390000,6680000&bbox-crs=http://www.opengis.net/def/crs/EPSG/0/3067&crs=http://www.opengis.net/def/crs/EPSG/0/3067&limit=1000
+
+## QGIS
+* [QGIS](https://github.com/qgis/QGIS/) implements both a server and a client
+* [Server documentation](https://docs.qgis.org/testing/en/docs/user_manual/working_with_ogc/server/services.html#wfs3-ogc-api-features)
+* [Demo server](http://138.201.120.72:8084/qgisserver_demo_wfs3/wfs3/)
+
+## SDI Rhineland-Palatinate - mapbender2
+The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saarland use the mapbender2 ows registry as backend
+for their geoportal solutions. In the SDIs there are registered many OpenData classified WFS 2.0 resources and it was straightforward to develop a proxy solution, that implements the OGC API - Features interface at one central location.
+Most of the core functions are implemented. The WFS behind the proxy are either based on mapserver or geoserver. The proxy does also create service metadata in form of iso19139 records. One extension is the usage of json-schema to define human readable attribute titles and descriptions at WFS level. The next extension will be the usage of json-ld to give semantical information for the attributes and allow the dynamical creation of rdf-a and other formats.
+The code of the current productional solution is available on the [OSGEO GIT](https://git.osgeo.org/gitea/armin11/GeoPortal.rlp)
+and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
+
+### Productive list of available Interfaces
+* List of all registrated OpenData WFS: https://www.geoportal.rlp.de/mapbender/php/mod_linkedDataProxy.php (some of them wont work, cause the database tables don't have primary keys exposed and therefor paging is not possible).
+
+### Example requests:
+
+#### Transport network (classified roads)
+* Start page: https://www.geoportal.rlp.de/spatial-objects/513
+* API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/513/api
+* HTML representation for the collection of highway objects: https://www.geoportal.rlp.de/spatial-objects/513/collections/ms:Autobahnen/items?&f=html
+* HTML represenation of single highway 'A3': https://www.geoportal.rlp.de/spatial-objects/513/collections/ms:Autobahnen/items/Autobahnen.A3?f=html
+
+#### UNESCO world heritage of the city of Trier (point objects)
+* Start page: https://www.geoportal.rlp.de/spatial-objects/486
+* API definition (only available in json): https://www.geoportal.rlp.de/spatial-objects/486/api
+* HTML representation objects: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items?&f=html
+* HTML representation of the description of the amphitheater: https://www.geoportal.rlp.de/spatial-objects/486/collections/ms:unesco_welterbe/items/unesco_welterbe.3730?f=html
+
+## ogcapi-js
+
+[ogcapi-js](https://github.com/haoliangyu/ogcapi-js) is a lightweight and modular JavaScript/Tyescript library for OGC APIs. It provides a developer-friendly way to interact with Features API and useful features like query parameter validation and error handling. Developers can use this library to build both client-side (browser) or server-side applications.
+
+## FME
+[FME](https://www.safe.com/support/downloads/#beta) (FME 2021.0+) implements a client which is accessible from FME Workbench, Data Inspector and FME Server.
+

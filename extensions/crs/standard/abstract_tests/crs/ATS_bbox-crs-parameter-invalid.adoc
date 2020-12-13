@@ -1,0 +1,8 @@
+[[ats_crs_bbox-crs-parameter-invalid]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/bbox-crs-parameter-invalid*
+^|Test Purpose |Verify that the parameter `bbox-crs` has been implemented correctly
+^|Requirement |<<req_crs_fc-bbox-crs-valid-value,/req/crs/fc-bbox-crs-valid-value>>
+^|Test Method |For each spatial feature collection `collectionId`, send a request with the parameters `bbox` and `bbox-crs` to `/collections/{collectionId}/items` with a value for `bbox-crs` that is not included in the list of CRSs and verify that the response has status code `400`.
+|===

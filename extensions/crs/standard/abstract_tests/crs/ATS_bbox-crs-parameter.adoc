@@ -1,0 +1,10 @@
+[[ats_crs_bbox-crs-parameter]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/bbox-crs-parameter*
+^|Test Purpose |Verify that the parameter `bbox-crs` has been implemented correctly
+^|Requirement |<<req_crs_fc-bbox-crs-definition,/req/crs/fc-bbox-crs-definition>>, <<req_crs_bbox-crs-action,/req/crs/bbox-crs-action>>
+^|Test Method |For every CRS identifier advertized by the Web API that is known to the test engine and for which the test engine can convert geometries between the CRS and the default CRS of the Web API ("known CRS") execute the following test. Skip the test for unknown CRSs.
+
+. For each spatial feature collection `collectionId` and every GML or GeoJSON feature representation supported by the Web API, send a request with the parameters `bbox` and `bbox-crs` to `/collections/{collectionId}/items` for every known CRS. Use a `bbox` value in the spatial extent of the collection, converted to the known CRS. Send the same request, but with no `bbox-crs` parameter and a `bbox` value in the default CRS. Do not include a `crs` parameter in the requests. Verify that the responses include the same features.
+|===

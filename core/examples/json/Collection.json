@@ -1,7 +1,7 @@
 {
    "id": "roadl_1m",
    "title": "Roads",
-   "extent": 
+   "extent":
    {
       "spatial":  {
          "bbox": [
@@ -19,6 +19,18 @@
    },
    "links": [
       {
+        "rel": "self",
+        "title": "This document",
+        "type": "application/json",
+        "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fjson"
+      },
+      {
+        "rel": "alternate",
+        "title": "This document as HTML",
+        "type": "text/html",
+        "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=text%2Fhtml"
+      },
+      {
          "rel": "items",
          "title": "Roads",
          "type": "application/geo+json",
@@ -27,17 +39,17 @@
       {
          "rel": "items",
          "title": "Roads",
-         "type": "application/gml+xml;version=3.2;profile=http://www.opengis.net/def/profile/ogc/2.0/gml-sf0",
-         "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fgml%2Bxml%3B%20version%3D3.2%3B%20profile%3Dhttp%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0"
-      },
-      {
-         "rel": "alternate",
-         "title": "Roads",
          "type": "text/html",
          "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=text%2Fhtml"
       },
       {
-         "rel": "describedBy",
+         "rel": "items",
+         "title": "Roads",
+         "type": "application/gml+xml;version=3.2;profile=\"http://www.opengis.net/def/profile/ogc/2.0/gml-sf0\"",
+         "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/items?f=application%2Fgml%2Bxml%3B%20version%3D3.2%3B%20profile%3D%22http%3A%2F%2Fwww.opengis.net%2Fdef%2Fprofile%2Fogc%2F2.0%2Fgml-sf0%22"
+      },
+      {
+         "rel": "describedby",
          "title": "Schema for Roads",
          "type": "application/xml",
          "href": "http://www.acme.com/3.0/wfs/collections/roadl_1m/schema"

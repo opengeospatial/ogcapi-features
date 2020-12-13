@@ -1,0 +1,7 @@
+[[req_cql-text_arithmetic]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql-text/arithmetic*
+^|Condition |Server implements requirements class <<rc_arithmetic,Arithmetic Expressions>>
+^|A |The server SHALL be able to parse and evaluate all arithmetic expressions encoded as a text string that validate against the BNF production fragment identified in the <<req_arithmetic,Arithmetic Expressions>> requirement.
+|===

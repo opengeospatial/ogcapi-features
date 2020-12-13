@@ -53,8 +53,11 @@ components:
       required: false
       schema:
         type: array
-        minItems: 4
-        maxItems: 6
+        oneOf:
+        - minItems: 4
+          maxItems: 4
+        - minItems: 6
+          maxItems: 6
         items:
           type: number
       style: form
@@ -142,7 +145,7 @@ components:
             - href: http://data.example.com/buildings
               rel: item
             - href: http://example.com/concepts/buildings.html
-              rel: describedBy
+              rel: describedby
               type: text/html
         extent:
           $ref: "#/components/schemas/extent"
@@ -243,8 +246,11 @@ components:
                   server whether only a single spatial geometry property is used to determine
                   the extent or all relevant geometries.
                 type: array
-                minItems: 4
-                maxItems: 6
+                oneOf:
+                - minItems: 4
+                  maxItems: 4
+                - minItems: 6
+                  maxItems: 6
                 items:
                   type: number
                 example:
@@ -271,7 +277,7 @@ components:
             interval:
               description: |-
                 One or more time intervals that describe the temporal extent of the dataset.
-                The value `null` is supported and indicates an open time intervall.
+                The value `null` is supported and indicates an open time interval.
                 In the Core only a single time interval is supported. Extensions may support
                 multiple intervals. If multiple intervals are provided, the union of the
                 intervals describes the temporal extent.
@@ -279,8 +285,8 @@ components:
               minItems: 1
               items:
                 description: |-
-                  Begin and end times of the time interval. The timestamps
-                  are in the coordinate reference system specified in `trs`. By default
+                  Begin and end times of the time interval. The timestamps are in the
+                  temporal coordinate reference system specified in `trs`. By default
                   this is the Gregorian calendar.
                 type: array
                 minItems: 2
@@ -296,8 +302,8 @@ components:
               description: |-
                 Coordinate reference system of the coordinates in the temporal extent
                 (property `interval`). The default reference system is the Gregorian calendar.
-                In the Core this is the only supported temporal reference system.
-                Extensions may support additional temporal reference systems and add
+                In the Core this is the only supported temporal coordinate reference system.
+                Extensions may support additional temporal coordinate reference systems and add
                 additional enum values.
               type: string
               enum:
@@ -640,7 +646,7 @@ components:
                 type: text/html
                 title: this document as HTML
               - href: 'http://schemas.example.org/1.0/buildings.xsd'
-                rel: describedBy
+                rel: describedby
                 type: application/xml
                 title: GML application schema for Acme Corporation building data
               - href: 'http://download.example.org/buildings.gpkg'
@@ -853,7 +859,10 @@ components:
             type: string
     NotFound:
       description: |-
-        The requested URI was not found.
+        The requested resource does not exist on the server. For example, a path parameter had an incorrect value.
+    NotAcceptable:
+      description: |-
+        Content negotiation failed. For example, the `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
     ServerError:
       description: |-
         A server error occurred.

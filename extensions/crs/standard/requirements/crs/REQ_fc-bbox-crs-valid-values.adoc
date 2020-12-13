@@ -1,8 +1,7 @@
-[[req_crs-bbox-crs-valid-value]]
+[[req_crs_fc-bbox-crs-valid-value]]
 [width="90%",cols="2,6a"]
 |===
-|*Requirement {counter:req-id}* |*/req/core/fc-bbox-crs-valid-value* +
-2+|The value of the `bbox-crs` parameter shall be one of the CRS identifiers
-from the list of supported coordinate reference systems listed in the 
-spatial collection metadata using the `crs` property.
+|*Requirement {counter:req-id}* |*/req/crs/fc-bbox-crs-valid-value* +
+^|A |If the value of the `bbox-crs` parameter is not one of the CRS identifiers from the list of supported CRS identifiers, then the server SHALL respond with the HTTP status code 400.
+^|B |The list of supported CRS identifiers is found in the <<crs-discovery,collection object>> using the `crs` property.
 |===

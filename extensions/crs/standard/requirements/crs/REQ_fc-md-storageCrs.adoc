@@ -1,8 +1,9 @@
-[[req_crs-fc-md-storageCrs]]
+[[req_crs_fc-md-storageCrs]]
 [width="90%",cols="2,6a"]
 |===
 |*Requirement {counter:req-id}* |*/req/crs/fc-md-storageCrs* +
-2+| If all features in a spatial collection are stored using a particular CRS
-then the property `storageCRS` shall be used in the collection metadata to
-indicate the identifier for this storage CRS.
+2+| If all features in a spatial feature collection are stored using a
+particular CRS then the property `storageCrs` SHALL be specified in the
+collection object of the spatial feature collection to indicate the
+identifier for this storage CRS.
 |===

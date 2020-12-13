@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/core/fc-md-license* 
-^|A |For each feature collection in this distribution of the dataset, the `links` property of the collection SHOULD include an item for each supported encoding with a link to the collection resource (relation: `license`).
+^|A |For each feature collection included in the response, the `links` property of the collection SHOULD include a link to the applicable license (relation: `license`).
 ^|B |Alternatively, if all data shared via the API is available under the same license, the link MAY instead be added to the top-level `links` property of the response.
-^|C |Multiple links to the license in different content types MAY be provided. At least a link to content type `text/html` or `text/plain` SHOULD be provided.
+^|C |Multiple links to the license in different media types MAY be provided. At least a link to media type `text/html` or `text/plain` SHOULD be provided.
 |===

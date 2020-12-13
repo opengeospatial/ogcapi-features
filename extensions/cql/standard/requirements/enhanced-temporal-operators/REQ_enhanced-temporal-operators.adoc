@@ -1,0 +1,24 @@
+[[req_enhanced-temporal-operators]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/enhanced-temporal-operators* 
+^|A |The server SHALL support all temporal operators as defined by the BNF rule `temporalOperator` 
+in <<cql-bnf>>.
+^|B |The spatial operators in addition to `ANYINTERACTS` SHALL be evaluated as defined in the 
+<<OGC16-071r3,Time Ontology in OWL>> with the following mapping between CQL temporal operator names 
+and the property names defined in the Time Ontology in OWL:
+
+* `AFTER`: https://www.w3.org/TR/owl-time/#time:after[after]
+* `BEFORE`: https://www.w3.org/TR/owl-time/#time:before[before]
+* `BEGINS`: https://www.w3.org/TR/owl-time/#time:intervalStarts[intervalStarts]
+* `BEGUNBY`: https://www.w3.org/TR/owl-time/#time:intervalStartedBy[intervalStartedBy]
+* `TCONTAINS`: https://www.w3.org/TR/owl-time/#time:intervalContains[intervalContains]
+* `DURING`: https://www.w3.org/TR/owl-time/#time:intervalDuring[intervalDuring]
+* `ENDEDBY`: https://www.w3.org/TR/owl-time/#time:intervalFinishedBy[intervalFinishedBy]
+* `ENDS`: https://www.w3.org/TR/owl-time/#time:intervalFinishes[intervalFinishes]
+* `TEQUALS`: https://www.w3.org/TR/owl-time/#time:intervalEquals[intervalEquals]
+* `MEETS`: https://www.w3.org/TR/owl-time/#time:intervalMeets[intervalMeets]
+* `METBY`: https://www.w3.org/TR/owl-time/#time:intervalMetBy[intervalMetBy]
+* `TOVERLAPS`: https://www.w3.org/TR/owl-time/#time:intervalOverlaps[intervalOverlaps]
+* `OVERLAPPEDBY`: https://www.w3.org/TR/owl-time/#time:intervalOverlappedBy[intervalOverlappedBy]
+|===

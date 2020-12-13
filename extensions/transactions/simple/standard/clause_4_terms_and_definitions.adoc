@@ -1,0 +1,21 @@
+== Terms, definitions and abbreviated terms
+
+=== Terms and Definitions
+This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+
+For the purposes of this document, the following additional terms, definitions and abbreviated terms apply in addition to those defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
+
+==== collection items end point
+the path of the end point from which the resources of items of a collection can be accesses
+
+EXAMPLE: For features, the collection items end point is  '/collections/{collectionId}/items'.
+
+EXAMPLE: For processes, the collection items end point is '/processes'
+
+==== resource end point
+the path of the end point used to access a specific instance of a resource from a collection
+
+EXAMPLE: For features, the resource end point is '/collections/{collectionId}/items/{featureId}'.
+
+EXAMPLE: For processes, the resource end point is '/processes/{processId}'.
+

@@ -5,7 +5,7 @@
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/landingPage.yaml[landingPage.yaml] and include at least links to the following resources:
 
-* the API definition (relation type 'service-desc' or 'service-doc')
-* `/conformance` (relation type 'conformance')
-* `/collections` (relation type 'data')
+* the API definition (relation type `service-desc` or `service-doc`)
+* `/conformance` (relation type `conformance`)
+* `/collections` (relation type `data`)
 |===

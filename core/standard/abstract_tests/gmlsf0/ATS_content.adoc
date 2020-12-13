@@ -1,10 +1,11 @@
 [[ats_gmlsf0_content]]
 [width="90%",cols="2,6a"]
 |===
-^|*Abstract Test {counter:ats-id}* |*/ats/gmlsf0/content*
+^|*Abstract Test {counter:ats-id}* |*/conf/gmlsf0/content*
 ^|Test Purpose |Verify the content of an GML Simple Features 0 document given an input document and schema.
-^|Requirement |<<req_gmlsf0_content,/req/gmlsf0/content>>
+^|Requirement |<<req_gmlsf0_content,/req/gmlsf0/content>>, <<req_gmlsf0_headers,/req/gmlsf0/headers>>
 ^|Test Method |. For the resources "Features" and "Feature", validate that the document is a GML Simple Features level 0 document.
 . Verify that the document has the expected root element.
 . Validate the document against the schema using an XML schema validator.
+. If the API supports the GeoJSON encoding, too, and the response to the same request, but with a different `Accept` header includes the properties `timeStamp`, `numberMatched`, `numberReturned` and/or links in the payload, verify that the same information is included as HTTP headers in the GML response.
 |===

@@ -29,10 +29,40 @@
                 ]
         },
         "2":  {
-                "OGC_doc_number": "17-069r3",
+                "OGC_doc_number": "17-069r4",
                 "urn":"http://www.opengis.net/doc/IS/ogcapi-features-1/1.0",
                 "title":"OGC API - Features - Part 1: Core",
                 "path":"core/standard/17-069.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "3":  {
+                "OGC_doc_number": "20-002",
+                "urn":"http://www.opengis.net/doc/IS/ogcapi-features-4/1.0",
+                "title":"OGC API - Features - Part 4: Simple Transactions",
+                "path":"extensions/transactions/simple/standard/20-002.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "4":  {
+                "OGC_doc_number": "19-079",
+                "urn":"http://www.opengis.net/doc/IS/ogcapi-features-3/1.0",
+                "title":"OGC API - Features - Part 3: Common Query Language",
+                "path":"extensions/cql/standard/19-079.adoc",
                 "options": ["--trace"],
                 "a":[
                         "data-uri",

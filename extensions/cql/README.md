@@ -9,12 +9,12 @@ syntax defined in "OGC® Catalogue Services 3.0 - General Model" (OGC 12-168r6).
 This query language can be used as a query parameter in an OAPIF URI.
 For example:
 
-   http://.../collection/MyCollection/items?filter="..."&filter-language=cql-text&...
+   http://.../collection/MyCollection/items?filter="..."&filter-lang=CQL&...
 
-NOTE: The ideal here is that two URL query parameters are defined; one whose
+NOTE: The idea here is that two URL query parameters are defined; one whose
       value is the CQL expression (i.e. "filter" in this example) and another
-      (i.e. "filter-language") to indicate that the query language in use 
-      (i.e. cql-text in this example).
+      (i.e. "filter-lang") to indicate that the query language in use 
+      (i.e. CQL in this example).
       This allows for other filter language expressions to be supported as well.
 
 The BNF seems to validate using the following BNF parsers:

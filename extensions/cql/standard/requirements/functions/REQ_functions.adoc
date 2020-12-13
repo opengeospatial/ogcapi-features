@@ -1,0 +1,12 @@
+[[req_functions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/functions/functions*
+^|A |The server SHALL support functions as defined by the BNF rules `function` in <<cql-bnf>> 
+with the exception of the rule `arithmeticExpression` in `argument`.
+^|B |The function SHALL evaluate to a literal value that is allowed in the same rule 
+in which the function is used.
+|===
+
+
+

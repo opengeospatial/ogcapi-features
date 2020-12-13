@@ -1,5 +1,5 @@
-:Title: OGC API - Features - Part 3: Common Query Language
-:titletext: OGC API - Features - Part 3: Common Query Language
+:Title: OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)
+:titletext: OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)
 :doctype: book
 :encoding: utf-8
 :lang: en
@@ -29,12 +29,12 @@
 |Submission Date: <yyyy-mm-dd>
 |Approval Date:  <yyyy-mm-dd>
 |Publication Date:  <yyyy-mm-dd>
-|External identifier of this OGC(R) document: http://www.opengis.net/doc/IS/ogcapi-features-n/1.0
+|External identifier of this OGC(R) document: http://www.opengis.net/doc/IS/ogcapi-features-3/1.0
 |Internal reference number of this OGC(R) document:    19-079
 |Version: link:http://docs.opengeospatial.org/DRAFTS/19-079.html[1.0.0-SNAPSHOT (Editor's draft)]
 |Latest Published Draft: n/a
 |Category: OGC(R) Implementation Specification
-|Editors: TBD
+|Editors: Panagiotis (Peter) A. Vretanos, Clemens Portele
 |===
 
 [cols = "^", frame = "none"]
@@ -45,7 +45,7 @@
 [cols = "^", frame = "none", grid = "none"]
 |===
 |*Copyright notice*
-|Copyright (C) 2019 Open Geospatial Consortium
+|Copyright (C) 2020 Open Geospatial Consortium
 |To obtain additional rights of use, visit http://www.opengeospatial.org/legal/
 |===
 
@@ -101,14 +101,26 @@ include::clause_4_terms_and_definitions.adoc[]
 
 include::clause_5_conventions.adoc[]
 
-include::clause_6_cc.adoc[]
+include::clause_6_filter.adoc[]
 
-include::clause_7_media_types.adoc[]
+include::clause_7_features.adoc[]
 
-include::clause_8_security_considerations.adoc[]
+include::clause_8_simple_cql.adoc[]
+
+include::clause_9_enhanced.adoc[]
+
+include::clause_10_encodings.adoc[]
+
+include::clause_11_media_types.adoc[]
+
+include::clause_12_security_considerations.adoc[]
 
 <<<
 include::annex_ats.adoc[]
+
+include::annex_bnf.adoc[]
+
+include::annex_js.adoc[]
 
 <<<
 ////

@@ -1,0 +1,8 @@
+[[ats_crs_storageCrs]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/crs/storageCrs*
+^|Test Purpose |Verify that the storage CRS identifier is a valid value
+^|Requirement |<<req_crs_fc-md-storageCrs-valid-value,/req/crs/fc-md-storageCrs-valid-value>>
+^|Test Method |For each collection object that includes a `storageCrs` property in the paths `/collections` and `/collections/{collectionId}`, validate that the string is also found in the `crs` property of the collection or, in case the `crs` property includes a value `#/crs`, in the global list of CRSs.
+|===
