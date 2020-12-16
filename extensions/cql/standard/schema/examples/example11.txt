@@ -1,0 +1,6 @@
+EXAMPLE: Owner name contains the name 'Jones'.
+         NOTE: The CQL LIKE operator uses POSIX regular expressions for
+               pattern matching where the wildcard character is '*'
+               (see https://pubs.opengroup.org/onlinepubs/9699919799/).
+
+owner LIKE '*Jones*'

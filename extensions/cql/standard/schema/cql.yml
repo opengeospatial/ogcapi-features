@@ -42,7 +42,7 @@ components:
       required:
       - not
       properties:
-        or:
+        not:
           type: array
           minItems: 1
           maxItems: 1

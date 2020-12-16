@@ -1,0 +1,6 @@
+EXAMPLE: Find building features that have a swimming pool and, more than five
+         floors or the building material is brick.
+
+swimming_pool=true AND (floors>5 OR
+                        material LIKE 'brick*' OR
+                        material LIKE '*brick')
