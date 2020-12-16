@@ -1,0 +1,6 @@
+[[req_simpletx_insert_response-crs]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/simpletx/crs/response-crs* 
+^|A |If the server implements the http://fix.me[OGC API - Features - Part 2: Coordinate Reference Systems by Reference] extension then upon the successfull <<simpletx-insert,creation>> of a feature, the server shall include the `Content-Crs` HTTP header (see: https://github.com/opengeospatial/conneg-by-crs[Negotiating Content by Coordinate Reference System (CRS)]) to indicate that the server understood and accepted to CRS used for geometry-valued properties in the HTTP POST <<rec_simpletx_insert_body,request body>>.
+|===

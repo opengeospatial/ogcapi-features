@@ -11,7 +11,7 @@ For example:
 
    http://.../collection/MyCollection/items?filter="..."&filter-lang=CQL&...
 
-NOTE: The ideal here is that two URL query parameters are defined; one whose
+NOTE: The idea here is that two URL query parameters are defined; one whose
       value is the CQL expression (i.e. "filter" in this example) and another
       (i.e. "filter-lang") to indicate that the query language in use 
       (i.e. CQL in this example).
@@ -41,6 +41,7 @@ at it.  Some outstanding issues include:
 * add more comments
 * need to add BNF for regular expressions for the LIKE operator
 * need to add (or at least consider adding) CIRCLES/ELLIPSE/ARC
+* need to add (or at least consider adding) geometry CRS (to go along with CRS extension)
 * compare the spatial and temporal predicate sytax to SQLMM
 * consider property existence operators; since OAPIF is schema-less it might
   be nice to be able to have predicates like "<propertyName> EXISTS AND 

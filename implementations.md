@@ -28,6 +28,7 @@ Clients:
 * [STAC](#STAC)
 * [QGIS](#QGIS)
 * [ogcapi-js](#ogcapi-js)
+* [FME](#FME)
 
 ## ldproxy
 
@@ -247,3 +248,7 @@ and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
 ## ogcapi-js
 
 [ogcapi-js](https://github.com/haoliangyu/ogcapi-js) is a lightweight and modular JavaScript/Tyescript library for OGC APIs. It provides a developer-friendly way to interact with Features API and useful features like query parameter validation and error handling. Developers can use this library to build both client-side (browser) or server-side applications.
+
+## FME
+[FME](https://www.safe.com/support/downloads/#beta) (FME 2021.0+) implements a client which is accessible from FME Workbench, Data Inspector and FME Server.
+
