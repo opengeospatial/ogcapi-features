@@ -4,8 +4,8 @@
       {
          "or": [
             {"gt": [{"property": "floor"},5]},
-            {"like":[{"property": "material"},"brick*"]},
-            {"like":[{"property": "material"},"*brick"]} 
+            {"like":[{"property": "material"},"brick.*"]},
+            {"like":[{"property": "material"},".*brick"]} 
          ]
       }
    ]
