@@ -892,7 +892,7 @@
          "items": {
             "oneOf": [
                { "$ref": "#/$defs/timeString" },
-               { "type": "null" }
+               { "type": "string", "enum": [".."] }
             ]
          }
       },

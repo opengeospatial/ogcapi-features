@@ -685,12 +685,14 @@ components:
       minItems: 2
       maxItems: 2
       items:
-         nullable: true
          oneOf:
          - type: string
            format: date
          - type: string
            format: date-time
+         - type: string
+           enum:
+           - ..
     typedTemporalLiteral:
       oneOf:
       - "$ref": "#/components/schemas/typedTimeString"
