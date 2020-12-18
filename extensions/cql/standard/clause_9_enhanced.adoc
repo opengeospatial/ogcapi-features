@@ -199,7 +199,7 @@ image::images/temporal_ops.png[alt=TemporalOps,width=70%]
 ====
 
 [[example_9_5]]
-.Examples of temporal relationships using a proprety and a temporal literal.
+.Examples of temporal relationships using a property and a temporal literal.
 ====
 ----
     touchdown DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
@@ -326,10 +326,10 @@ Support for the BNF rule `arithmeticExpression` is added by
 the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
 [[example_9_8]]
-.Evalutate if the value of an array property contains the specified subset of values.
+.Evalute if the value of an array property contains the specified subset of values.
 ====
 ----
-   layer:ids ACONTAINS ["layers-ca","layers-us"]
+layer:ids ACONTAINS ["layers-ca","layers-us"]
 ----
 
 [source,JSON]

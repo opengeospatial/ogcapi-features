@@ -90,7 +90,7 @@ include::requirements/filter/REQ_filter-param.adoc[]
 [[filter-param-multiple-collections]]
 === Cross-collection queries
 
-The only filerable resource defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>
+The only filterable resource defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>
 is the Features resource at `/collections/{collectionId}/items` which operates 
 on a single collection.  However an API can provide other, higher level, resources 
 (e.g. at `/search` or `/tiles`) that potentially operate on multiple collections. 
