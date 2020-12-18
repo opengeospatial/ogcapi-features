@@ -9,9 +9,26 @@ transactions; that is transactions that require batch or atomic semantics.
 
 Specifically, this document specifies:
 
-* How to add a new resource instance to a collection.
+* How to add a new resource instance to a collection (i.e. insert).
 
-* How to modify an existing resource from a collection; this includes entirely replacing the existing resource or simply modifying one or more parts of a
-resource.
+* How to modify an existing resource from a collection; this includes entirely replacing the existing resource (i.e. replace) or simply modifying one or more parts of a resource (i.e. update).
 
-* How to remove an existing resource from a collection.
+* How to remove an existing resource from a collection (i.e. delete).
+
+The following table crosswalks each of the resource endpoints discussed in this
+standard with the HTTP methods POST, PUT, PATCH and DELETE.  Each intersecting
+cell in the table either contains the name of the operation that, that 
+combination of resource endpoint and HTTP method enables OR contains the
+phrase `NOT DEFINE` which is used to indicate that this specification does not
+describe any behaviour for that combination of resource endpoint and HTTP 
+method.
+
+[#endpoint_method_matrix,reftext='{table-caption} {counter:table-num}']
+.Supported HTTP methods by resource
+[cols="50,12,13,13,12",options="header"]
+|===
+|Resource endpoint 4+|HTTP METHOD
+| |**POST** |**PUT** |**PATCH** |**DELETE**
+|/collections/{collectionId}/items |<<simpletx-insert,insert>> |NOT DEFINED |NOT DEFINED |NOT DEFINED
+|/collections/{collectionId}/items/{resourceId} |**NOT DEFINED** |<<simpletx-update-put,replace>> |<<path-update,update>> |<<simpletx-delete,delete>>
+|===

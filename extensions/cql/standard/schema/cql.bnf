@@ -13,26 +13,22 @@
 # Predicates include scalar or comparison predicates, spatial predicates or
 # temporal predicates.
 #=============================================================================#
-cqlFilter = booleanValueExpression;
+booleanValueExpression = andExpression
+                       | orExpression
+                       | notExpression
+                       | comparisonPredicate
+                       | spatialPredicate
+                       | temporalPredicate
+                       | arrayPredicate
+                       | subExpression;
 
-booleanValueExpression = booleanTerm
-                       | booleanValueExpression "OR" booleanTerm;
+andExpression = booleanValueExpression "AND" booleanValueExpression;
 
-booleanTerm = booleanFactor
-            | booleanTerm "AND" booleanFactor;
+orExpression = booleanValueExpression "OR" booleanValueExpression;
 
-booleanFactor = ["NOT"] booleanPrimary;
+notExpression = "NOT" booleanValueExpression;
 
-booleanPrimary = predicate
-               | leftParen cqlFilter rightParen;
-
-#=============================================================================#
-#  CQL supports scalar, spatial and temporal predicates.
-#=============================================================================#
-predicate = comparisonPredicate
-          | spatialPredicate
-          | temporalPredicate
-          | arrayPredicate;
+subExpression = leftParen booleanValueExpression rightParen;
 
 #=============================================================================#
 # A comparison predicate evaluates if two scalar expression statisfy the
@@ -77,26 +73,23 @@ patternExpression = characterLiteral;
 
 # BETWEEN predicate
 #
-isBetweenPredicate = scalarExpression ["NOT"] "BETWEEN"
-                     scalarExpression "AND" scalarExpression;
+isBetweenPredicate = numericExpression ["NOT"] "BETWEEN"
+                     numericExpression "AND" numericExpression;
+
+numericExpression = numericLiteral
+                  | propertyName
+                  | function
+                  | arithmeticExpression;
 
 # IN LIST predicate
 #
 isInListPredicate = inListOperand ["NOT"] "IN" leftParen inList rightParen;
 
-inList = listItem [ {comma listItem} ];
+inList = inListOperand [ {comma inListOperand} ];
 
-listItem = characterLiteral
-         | numericLiteral
-         | booleanLiteral
-         | temporalLiteral
-         | spatialLiteral
-         | function
-         | arithmeticExpression;
-
-inListOperand = listItem
-              | propertyName
-              | arithmeticExpression;
+inListOperand = scalarExpression
+              | temporalLiteral
+              | spatialLiteral;
 
 # IS NULL predicate
 #
@@ -207,10 +200,10 @@ arithmeticOperand = numericLiteral
 #=============================================================================#
 propertyName = identifier;
 
-identifier = identifierStart [ {colon | dot | identifierPart} ]
+identifier = identifierStart [ {colon | period | identifierPart} ]
            | doubleQuote identifier doubleQuote;
 
-identifierStart = alpha 
+identifierStart = alpha;
 
 identifierPart = alpha | digit | dollar | underscore;
 
@@ -368,22 +361,11 @@ extender =      "\x00B7"           | "\x02D0"           | "\x02D1"           |
                 "\x0EC6"           | "\x3005"           | "\x3031".."\x3035" |
                 "\x309D".."\x309E" | "\x30FC".."\x30FE";
 
-specialCharacter = percent | ampersand | leftParen | rightParen | asterisk
-                 | plusSign | comma | minusSign | period | solidus | colon
-                 | semicolon | lt | gt | eq | questionMark | underscore
-                 | verticalBar | doubleQuote | dotdot;
-
-octothorp = "#";
-
 dollar = "$";
 
 underscore = "_";
 
 doubleQuote = "\"";
-
-percent = "%";
-
-ampersand = "&";
 
 quote = "'";
 
@@ -411,17 +393,11 @@ solidus = "/";
 
 colon = ":";
 
-semicolon = ";";
-
 lt = "<";
 
 eq = "=";
 
 gt = ">";
-
-questionMark = "?";
-
-verticalBar = "|";
 
 bit = "0" | "1";
 
@@ -555,11 +531,10 @@ dateDay    = digit digit;
 
 utcTime  = timeHour ":" timeMinute ":" timeSecond [timeZoneOffset];
 
-timeZoneOffset = "Z" | sign timeHour;
+timeZoneOffset = "Z" | sign timeHour [[colon] timeMinute];
 
 timeHour   = digit digit;
 
 timeMinute = digit digit;
 
 timeSecond = digit digit [period digit {digit}];
-

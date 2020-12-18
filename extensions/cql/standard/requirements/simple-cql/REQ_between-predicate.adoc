@@ -7,6 +7,5 @@ lies within the specified range. The between operator is inclusive.
 If the value lies within the specified range, then the predicate 
 SHALL evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL 
 evaluate to the Boolean value `FALSE`.
-^|B |All scalar expressions (rule `scalarExpression`) in rule `isBetweenPredicate` SHALL 
-evaluate to a `numericLiteral`.
+^|B |Any function (rule `function`) or property (rule `propertyName`) in rule `isBetweenPredicate` SHALL evaluate to a `numericLiteral`.
 |===

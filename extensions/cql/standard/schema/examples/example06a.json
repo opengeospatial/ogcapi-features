@@ -1,0 +1,13 @@
+{
+   "and": [
+      {
+         "between": {
+            "value": {"property": "eo:cloud_cover"},
+            "lower": 0.1,
+            "upper": 0.2
+        }
+     },
+     { "eq": [{"property": "landsat:wrs_row"},28] },
+     { "eq": [{"property": "landsat:wrs_path"},203] }
+   ]
+}
