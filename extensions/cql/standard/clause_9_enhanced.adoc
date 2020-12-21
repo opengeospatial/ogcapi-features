@@ -145,6 +145,8 @@ road CROSSES POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
 [[example_9_3]]
 .Example of a spatial relationship between a property and a function that return a geometry value.
 ====
+It should be noted that the function "Buffer()" in this example is not part of CQL but is an example of a function that an implementation may offer that returns a geometry value.
+
 ----
 road WITHIN Buffer(geometry,10,"m")
 ----
@@ -192,8 +194,8 @@ image::images/temporal_ops.png[alt=TemporalOps,width=70%]
 [source,JSON]
 ----
 {
-   "during": ['1969-07-20T20:17:40Z',['1969-07-16T13:32:00Z',
-                                      '1969-07-24T16:50:35Z']]
+   "during": ["1969-07-20T20:17:40Z",["1969-07-16T13:32:00Z",
+                                      "1969-07-24T16:50:35Z"]]
 }
 ----
 ====
@@ -208,8 +210,8 @@ image::images/temporal_ops.png[alt=TemporalOps,width=70%]
 [source,JSON]
 ----
 {
-   "during": [{"property": "touchdown"},['1969-07-16T13:32:00Z',
-                                         '1969-07-24T16:50:35Z']]
+   "during": [{"property": "touchdown"},["1969-07-16T13:32:00Z",
+                                         "1969-07-24T16:50:35Z"]]
 }
 ----
 ====
