@@ -216,7 +216,7 @@ include::requirements/simple-cql/REQ_like-predicate.adoc[]
 .Example of a LIKE predicate
 ====
 ----
-name LIKE '^Ste(v|ph)en$' NOCASE true
+name LIKE 'Smith.' SINGLECHAR '.' NOCASE true
 ----
 
 [source,JSON]
@@ -224,8 +224,9 @@ name LIKE '^Ste(v|ph)en$' NOCASE true
 {
   "like": [ 
     { "property": "name" }, 
-    "^Ste(v|ph)en$"
+    "Smith."
   ],
+  "singleChar": ".",
   "nocase": true 
 }
 ----
