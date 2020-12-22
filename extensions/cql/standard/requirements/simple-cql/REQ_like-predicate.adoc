@@ -4,6 +4,12 @@
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/like-predicate* 
 ^|A |The like predicate (rule `isLikePredicate`) tests whether a string value matches the specified pattern. If the value matches the pattern (rule `patternExpression`), then the predicate SHALL evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate to the Boolean value `FALSE`. 
 ^|B |The scalar expression (rule `scalarExpression`) in rule `isLikePredicate` SHALL evaluate to a `characterLiteral`.
-^|C |The `patternExpression` SHALL be a POSIX regular expression (see https://pubs.opengroup.org/onlinepubs/9699919799/).
-^|D |If `NOCASE` is `TRUE`, the comparison SHALL be case insensitive, if it is `FALSE` it SHALL be case sensitive. The default is `TRUE`.
+^|C |The character specified using the `WILDCARD` modifier shall match zero of more characters in the test value.
+^|D |The wildchar character shall not match the NULL value.
+^|E |If the `WILDCHAR` modifier is not specified, the default wildcard character shall be "%".
+^|F |The character specified using the `SINGLECHAR` modifier shall match exactly one characters in the test value.
+^|G |If the `SINGLECHAR` modifier is not specified, the default singlechar character shall be "_".
+^|H |The character specified using the `ESCAPECHAR` modifier shall be used to escape the `WILDCHAR` and/or `SINGLECAHR` characters in the pattern string.
+^|I |If the `ESCAPECHAR` modifier is not specified, the default escapechar character shall be "\\".
+^|J |If `NOCASE` is `TRUE`, the comparison SHALL be case insensitive, if it is `FALSE` it SHALL be case sensitive. The default is `TRUE`.
 |===

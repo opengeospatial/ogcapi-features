@@ -32,9 +32,9 @@ subExpression = leftParen booleanValueExpression rightParen;
 
 #=============================================================================#
 # A comparison predicate evaluates if two scalar expression statisfy the
-# specified comparison operator.  The comparion operators include an operator
-# to evaluate regular expressions (LIKE), a range evaluation operator and
-# an operator to test if a scalar expression is NULL or not.
+# specified comparison operator.  The comparion operators includes an operator
+# to evaluate pattern matching expressions (LIKE), a range evaluation operator
+# and an operator to test if a scalar expression is NULL or not.
 #=============================================================================#
 comparisonPredicate = binaryComparisonPredicate
                     | isLikePredicate
@@ -66,9 +66,11 @@ lteq = lt eq;
 # LIKE predicate
 #
 isLikePredicate =  scalarExpression "LIKE" patternExpression
-                   ["NOCASE" booleanLiteral];
+                   ["WILDCARD" quote alpha quote]
+                   ["SINGLECHAR" quote alpha quote]
+                   ["ESCAPECHAR" quote alpha quote]
+                   ["NOCASE" booleanLiteral] ;
 
-# The character literal is interpreted as a POSIX regular expression.
 patternExpression = characterLiteral;
 
 # BETWEEN predicate

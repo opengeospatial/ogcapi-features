@@ -1,7 +1,4 @@
 EXAMPLE: Find building features where owner name starts with 'mike' or 'Mike'
          and the building is shorter than 4 floors.
  
-(owner LIKE '^mike' OR owner like '^Mike') AND floors<4
-
-ALTERNATIVE EXPRESSION: owner LIKE '^[Mm]ike' AND floors<4
-
+(owner LIKE 'mike%' OR owner LIKE 'Mike%') AND floors<4

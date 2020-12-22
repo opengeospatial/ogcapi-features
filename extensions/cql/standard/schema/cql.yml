@@ -122,6 +122,15 @@ components:
       properties:
         like:
           "$ref": "#/components/schemas/scalarOperands"
+        wildcard:
+           type: string
+           default: "%"
+        singleChar:
+           type: string
+           default: "."
+        escapeChar:
+           type: string
+           default: "\\"
         nocase:
           type: boolean
           default: true
