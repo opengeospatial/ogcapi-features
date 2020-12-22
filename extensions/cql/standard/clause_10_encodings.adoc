@@ -5,7 +5,7 @@
 
 This clause specifies requirements for a text encoding and a JSON encoding of CQL.
 
-[[cql-text]] 
+[[cql-text]]
 === Requirements Class "CQL Text"
 
 include::requirements/requirements_class_cql-text.adoc[]
@@ -14,7 +14,65 @@ This requirements class defines a well known text encoding of CQL. Such an
 encoding would be suitable for use with the a GET query parameter such as the
 <<rc_filter,`filter`>> parameter.
 
-include::requirements/cql-text/REQ_nocase.adoc[]
+// include::requirements/cql-text/REQ_nocase.adoc[]
+The "CQL Text" encoding is defined by the BNF grammar defined in <<cql-bnf>>.
+
+Keywords in the BNF grammar are case-insensitive. <<BNF,Augmented BNF for Syntax Specifications>> states:
+
+> ABNF strings are case insensitive and the character set for these strings is US-ASCII.
+
+The list of CQL keywords includes:
+
+* "ACONTAINS"
+* "AEQUALS"
+* "AFTER"
+* "AND"
+* "ANYINTERACTS"
+* "AOVERLAPS"
+* "B"
+* "BEFORE"
+* "BEGINS"
+* "BEGUNBY"
+* "BETWEEN"
+* "CONTAINED BY"
+* "CONTAINS"
+* "CROSSES"
+* "DISJOINT"
+* "DURING"
+* "E"
+* "ENDEDBY"
+* "ENDS"
+* "ENVELOPE"
+* "EQUALS"
+* "F"
+* "FALSE"
+* "GEOMETRYCOLLECTION"
+* "IN"
+* "INTERSECTS"
+* "LIKE"
+* "LINESTRING"
+* "MEETS"
+* "METBY"
+* "MULTILINESTRING"
+* "MULTIPOINT"
+* "MULTIPOLYGON"
+* "NOCASE"
+* "NOT"
+* "NULL";
+* "OR"
+* "OVERLAPPEDBY"
+* "OVERLAPS"
+* "POINT"
+* "POLYGON"
+* "T"
+* "TCONTAINS"
+* "TEQUALS"
+* "TOUCHES"
+* "TOVERLAPS"
+* "TRUE"
+* "WITHIN"
+* "X"
+* "Z"
 
 include::requirements/cql-text/REQ_filter-lang.adoc[]
 
@@ -59,7 +117,7 @@ include::requirements/cql-json/REQ_arithmetic.adoc[]
 include::requirements/cql-json/REQ_arrays.adoc[]
 
 [[cql-xml]]
-=== XML encoding 
+=== XML encoding
 
 This specification does not specifically define an XML-encoding for CQL.
 However, it is recognized that XML is still in common use and so
