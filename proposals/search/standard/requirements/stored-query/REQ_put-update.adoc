@@ -1,0 +1,9 @@
+[[req_stored-query_put-update]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/stored-query/put-update*
+^|Condition |The value of the `mutable` parameter (JSONPath: `$.queries[*].mutable`) SHALL be `true`.
+^|A |The server SHALL support the HTTP PUT operation at the path `/collections/{collectionId}/search/{queryId}`.
+^|B |The parameter `queryId` is each `id` property in the stored queries response (JSONPath: `$.queries[*].id`).
+^|C |The parameter `collectionId` is each `id` property in the resource collections response (JSONPath: `$.collections[*].id`). 
+|===

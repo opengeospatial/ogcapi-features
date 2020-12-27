@@ -1,0 +1,51 @@
+[[clause-parameterized-query-expression]]
+== Requirements Class "Parameterized Query Expression"
+
+=== Overview
+
+include::requirements/requirements_class_parameterized-query-expression.adoc[]
+
+[[clause-parameterized-query-expression-substitution-variables]]
+=== Substitution variables 
+
+include::requirements/parameterized-query-expression/REQ_substitution-variable.adoc[]
+
+[[example_12_1]]
+.A parameterized query expression
+====
+In this example, the ${geometry} substitution variable is used to parameterized this stored query allowing it to be executed with different geometries each time.
+[source,JSON]
+----
+   {
+      "and": [
+         {
+            "like": [
+               {"property": "eo_instruments"},
+               "OLI%"
+            ]
+         },
+         {
+            "intersects": [
+               {"property": "footprint"},
+               ${geometry}
+            ]
+         }
+      ]
+   }
+----
+====
+
+[[clause-parameterized-query-expression-url-query-parameters]]
+=== URL query parameters
+
+include::requirements/parameterized-query-expression/REQ_url-query-parameter.adoc[]
+
+[[example_12_2]]
+.Invoking a prameterized stored query
+====
+Assuming that a parameterized stored query named `FindInstrument` is created using the query expression from the example <<example_12_1,A parameterized query expression>>, then the following is an example invocation:
+
+----
+   /collections/landsat/search/FindInstrument?geometry=POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
+----
+====

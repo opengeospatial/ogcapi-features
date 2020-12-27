@@ -1,0 +1,7 @@
+[[req_multi-collection-stored-query_get-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/multi-collection-stored-query/get-op*
+^|A |For every stored query identified in the stored queries response (path `/search`), the server SHALL support the HTTP GET operation at the path `/search/{queryId}`.
+^|B |The parameter `queryId` is each `id` property in the stored queries response (JSONPath: `$.queries[*].id`).
+|===

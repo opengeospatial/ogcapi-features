@@ -1,0 +1,113 @@
+[[clause-stored-query]]
+== Requirements Class "Stored Query"
+
+=== Overview
+
+include::requirements/requirements_class_stored-query.adoc[]
+
+[[clause-stored-query-discovery]]
+=== Discovering stored queries
+
+include::requirements/stored-query/REQ_queries-op.adoc[]
+
+include::requirements/stored-query/REQ_queries-success.adoc[]
+
+[[schema_queries]]
+.link:http://fix.me/queries.yaml[Schema for the list of stored queries (queries.yaml)]
+[source,YAML]
+----
+type: object
+required:
+  - queries
+properties:
+  queries:
+    type: array
+    items:
+      $ref: query-md.yaml
+  links:
+    type: array
+    items:
+      $ref: link.yaml
+----
+
+[[schema_query-md]]
+.link:http://fix.me/query-md.yaml[Schema describing a stored query (query-md.yaml)]
+[source,YAML]
+----
+type: object
+required:
+  - id
+  - mutable
+properties:
+  id:
+    description: identifier of the stored query
+    type: string
+  mutable:
+    description: indicates whether this query can be modified through the API
+    type: boolean
+    default: true
+  title:
+    description: human readable title for the stored query
+    type: string
+  description:
+    description: a description of the stored query 
+    type: string
+  collections:
+    description: the list of collections, specified by id, that this query accesses
+    type: array
+    items:
+      type: string
+  query:
+    description: the text of the stored query
+    oneOf:
+    - type: string
+    - type: object
+  links:
+    type: array
+    items:
+      $ref: link.yaml
+----
+
+An implementation may choose to deploy a pre-installed set of stored queries that cannot be modified (i.e. cannot be updated or deleted).  Such stored queries are called `immutable` stored queries.
+
+[[clause-stored-query-execute]]
+=== Executing stored queries
+
+include::requirements/stored-query/REQ_get-op.adoc[]
+
+include::requirements/stored-query/REQ_post-op.adoc[]
+
+include::requirements/stored-query/REQ_limit-definition.adoc[]
+
+include::requirements/stored-query/REQ_get-success.adoc[]
+
+include::requirements/stored-query/REQ_limit-response.adoc[]
+
+[[clause-stored-query-create]]
+=== Creating stored queries
+
+include::requirements/stored-query/REQ_put-create.adoc[]
+
+include::requirements/stored-query/REQ_put-body.adoc[]
+
+This specification does not mandate a specific query expression language.
+
+This specification does, however, recommend:  <<rec_ogc-json-query-expression>>.
+
+include::requirements/stored-query/REQ_put-create-success.adoc[]
+
+[[clause-stored-query-update]]
+=== Updating stored queries
+
+include::requirements/stored-query/REQ_put-update.adoc[]
+
+See <<req_stored-query_put-body>>.
+
+include::requirements/stored-query/REQ_put-update-success.adoc[]
+
+[[clause-stored-query-delete]]
+=== Deleting stored queries 
+
+include::requirements/stored-query/REQ_delete-op.adoc[]
+
+include::requirements/stored-query/REQ_delete-success.adoc[]

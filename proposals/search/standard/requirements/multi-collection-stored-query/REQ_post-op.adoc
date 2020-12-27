@@ -1,0 +1,9 @@
+[[req_multi-collection-stored-query_post-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/multi-collection-stored-query/post-op*
+^|A |For every stored query identified in the stored queries response (path `/search`), the server SHALL support the HTTP POST operation at the path `/search/{queryId}`.
+^|B |The parameter `queryId` is each `id` property in the stored queries response (JSONPath: `$.queries[*].id`).
+^|C |The parameter `collectionId` is each `id` property in the resource collections response (JSONPath: `$.collections[*].id`).
+^|D |The content type of the POST body shall be `application/x-www-form-urlencoded`.
+|===

@@ -1,0 +1,40 @@
+[big]*i.     Abstract*
+
+NOTE: This is a PROPOSAL DRAFT for a search extension to OGC API Features.  As such it is INCOMPLETE.
+
+OGC API standards define modular API building blocks to spatially enable Web APIs in a consistent way. The <<OpenAPI,OpenAPI specification>> is used to define the API building blocks.
+
+This extension defines the behaviour of an API that supports search capabilities
+beyond those defined in Part 1 and which may include query expressions that are not conveniently encoded as query parameters on a URL as defined in Part 3.
+
+NOTE: This specification is being developed in the OGC API - Features SWG but is being written as a generic extension that is applicable to a variety of resource types including features.  The feature-specific portions of this extension are issolated to the clause titled <<features,Features>>.  It is anticipated that the bulk of this extension will eventually be moved into 'OGC API - Common' and only the feature-specific content will remain to be managed by the 'OGC API - Features' SWG.
+
+CAUTION: This is a DRAFT version of the 5th part of the OGC API - Features standards. This draft is not complete and there are open issues that are still under discussion.
+
+[big]*ii.    Keywords*
+
+The following are keywords to be used by search engines and document catalogues.
+
+resource feature collection instance spatial data openapi query stored REST PUT POST DELETE join filter CQL
+
+[big]*iii.   Preface*
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.
+
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
+
+[big]*iv.    Submitting organizations*
+
+The following organizations submitted this document to the Open Geospatial Consortium (OGC):
+
+* CubeWerx Inc.
+
+[big]*v.     Submitters*
+
+All questions regarding this submission should be directed to the editors or the submitters:
+
+|===
+|*Name* |*Affiliation*
+|Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
+|===
+

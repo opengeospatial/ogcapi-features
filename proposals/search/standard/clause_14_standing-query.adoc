@@ -1,0 +1,20 @@
+== Requirements Class "Standing Query"
+
+[[search-overview]]
+=== Overview
+
+include::requirements/requirements_class_standing-query.adoc[]
+
+T.B.D.
+
+Standing queries are stored queries that are run perodically the results of
+which are sent to a response handler (e.g. email, webhook, etc.).
+
+[[example_14_1]]
+.A standing query example.
+====
+This is an example of a standing query invocation.  In this case the parameters `responseHandler` and `period` are requirements of the standing query.  The parameter `since` is a parameter os the `NewBuildings` stored query.
+----
+.../collections/Buildings/search/NewBuildings?responseHandler=someone@somemail.com&period=P1W&since=2020-01-01
+----
+====

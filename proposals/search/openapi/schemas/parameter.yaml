@@ -1,0 +1,53 @@
+type: object
+required:
+   - id   
+   - type
+properties:
+   id:
+      description: the token that may be used as a query parameter
+      type: string
+   title:
+      description: a human readable title for the queryable
+      type: string
+   description:
+      description: a human-readable narrative describing the queryable
+      type: string
+   language:
+      description: the language used for the title and description
+      type: string
+   type:
+      description: the data type of the queryable
+      type: string
+      enum:
+      - string
+      - number
+      - integer
+      - boolean
+      - spatial
+      - temporal
+   spatial-types:
+      description: the list of allowed spatial geometry types, if known
+      type: string
+      enum:
+      - point
+      - multi-point
+      - curve
+      - multi-curve
+      - surface
+      - multi-surface
+      - solid
+      - multi-solid
+      - aggregate
+      - any
+   temporal-types:
+      description: the list of allowed temporal geometry types, if known
+      type: string
+      enum:
+      - instant
+      - interval
+   links:
+      description: additional links, e.g. to documentation or to the schema of the values
+      type: array
+      items:
+         $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'
+

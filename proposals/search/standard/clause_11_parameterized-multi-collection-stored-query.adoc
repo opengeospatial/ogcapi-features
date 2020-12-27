@@ -1,0 +1,60 @@
+[[clause-parameterized-multi-collection-stored-query]]
+== Requirements Class "Parameterized Multi-Collection Stored Query"
+
+=== Overview
+
+include::requirements/requirements_class_parameterized-multi-collection-stored-query.adoc[]
+
+NOTE: Not sure we need a separate conformance class for parameterization since stored queries without parameters seem useless to me.  Probably need more developer feedback for this one.
+
+[[clause-parameterized-multi-collection-stored-query-discovery]]
+=== Parameter discovery
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameters-op.adoc[]
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameters-success.adoc[]
+
+See <<schema_parameters,parameters.yaml>>.
+
+See <<schema_parameter,parameter.yaml>>.
+
+[[clause-parameterized-multi-collection-stored-query-parameter-define]]
+=== Defining query parameters
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameter-define.adoc[]
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameter-define-body.adoc[]
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameter-define-success.adoc[]
+
+[[clause-parameterized-multi-collection-stored-query-parameter-update]]
+=== Update a query parameter
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameter-update.adoc[]
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameter-update-body.adoc[]
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameter-update-success.adoc[]
+
+[[clause-parameterized-multi-collection-stored-query-parameter-delete]]
+=== Delete a query parameter
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameter-delete.adoc[]
+
+include::requirements/parameterized-multi-collection-stored-query/REQ_parameter-delete-success.adoc[]
+
+=== Executing a multi-collection stored query with parameters
+
+See <<clause-multi-collection-stored-query-execute,Executing stored queries>> to understand how to execute an un-parameterized stored query.
+
+See <<clause-parameterized-query-expression-url-query-parameters,URL query parameters>> to understand how to append query parameters to the stored query path.
+
+[[example_11_1]]
+.Invoking a parameterized multi-collection stored query.
+====
+This example invoked the parameterized multi-collection stored query with idenfitier `MyQuery02` that takes two parameters `myParam01` and `myParam02`.
+
+----
+.../search/MyQuery02?myParam01=X&myParam02=Y
+----
+====

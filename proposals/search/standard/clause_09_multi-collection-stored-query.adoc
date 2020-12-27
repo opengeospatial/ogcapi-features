@@ -1,0 +1,109 @@
+[[clause-multi-collection-stored-query]]
+== Requirements Class "Multi-Collection Stored Query"
+
+=== Overview
+
+include::requirements/requirements_class_multi-collection-stored-query.adoc[]
+
+[[clause-multi-collection-stored-query-discovery]]
+=== Discovering multi-collection stored queries
+
+include::requirements/multi-collection-stored-query/REQ_queries-op.adoc[]
+
+include::requirements/multi-collection-stored-query/REQ_queries-success.adoc[]
+
+[[schema_mc-queries]]
+.link:http://fix.me/queries.yaml[Schema for the list of multi-collection stored queries]
+[source,YAML]
+----
+type: object
+required:
+  - queries
+properties:
+  queries:
+    type: array
+    items:
+      $ref: query-md.yaml
+  links:
+    type: array
+    items:
+      $ref: link.yaml
+----
+
+[[schema_mc-query-md]]
+.link:http://fix.me/query-md.yaml[Schema describing a multi-collection stored query]
+[source,YAML]
+----
+type: object
+required:
+  - id
+  - mutable
+properties:
+  id:
+    description: identifier of the stored query
+    type: string
+  mutable:
+    description: indicates whether this query can be modified through the API
+    type: boolean
+    default: true
+  title:
+    description: human readable title for the stored query
+    type: string
+  description:
+    description: a description of the stored query 
+    type: string
+  collections:
+    description: the list of collections, specified by id, that this query accesses
+    type: array
+    items:
+      type: string
+  query:
+    description: the text of the stored query
+    oneOf:
+    - type: string
+    - type: object
+  links:
+    type: array
+    items:
+      $ref: link.yaml
+----
+
+[[clause-multi-collection-stored-query-execute]]
+=== Executing multi-collection stored queries
+
+include::requirements/multi-collection-stored-query/REQ_get-op.adoc[]
+
+include::requirements/multi-collection-stored-query/REQ_limit-definition.adoc[]
+
+include::requirements/multi-collection-stored-query/REQ_get-success.adoc[]
+
+include::requirements/multi-collection-stored-query/REQ_limit-response.adoc[]
+
+[[clause-multi-collection-stored-query-create]]
+=== Creating multi-collection stored queries
+
+include::requirements/multi-collection-stored-query/REQ_put-create.adoc[]
+
+include::requirements/multi-collection-stored-query/REQ_put-body.adoc[]
+
+This specification does not mandate a specific query expression language.
+
+This specification does, however, recommend:  <<rec_ogc-json-query-expression>>.
+
+include::requirements/multi-collection-stored-query/REQ_put-create-success.adoc[]
+
+[[clause-multi-collection-stored-query-update]]
+=== Updating multi-collection stored queries
+
+include::requirements/multi-collection-stored-query/REQ_put-update.adoc[]
+
+See: <<req_multi-collection-stored-query_put-body>>.
+
+include::requirements/multi-collection-stored-query/REQ_put-update-success.adoc[]
+
+[[clause-multi-collection-stored-query-delete]]
+=== Deleting multi-collection stored queries 
+
+include::requirements/multi-collection-stored-query/REQ_delete-op.adoc[]
+
+include::requirements/multi-collection-stored-query/REQ_delete-success.adoc[]
