@@ -7,6 +7,7 @@
 # 28-OCT-2019  pvretano[at]cubewerx.com               Initial checkin into github
 # 22-NOV-2020  pvretano[at]cubewerx.com               Updates based on issues
 # 22-NOV-2020  portele[at]interactive-instruments.de  Document restructuring
+# 21-DEC-2020  pvretano[at]cubewerx.com               Updates to resolve issues
 
 #=============================================================================#
 # A CQL filter is a logically connected expression of one or more predicates.
@@ -32,9 +33,9 @@ subExpression = leftParen booleanValueExpression rightParen;
 
 #=============================================================================#
 # A comparison predicate evaluates if two scalar expression statisfy the
-# specified comparison operator.  The comparion operators include an operator
-# to evaluate regular expressions (LIKE), a range evaluation operator and
-# an operator to test if a scalar expression is NULL or not.
+# specified comparison operator.  The comparion operators includes an operator
+# to evaluate pattern matching expressions (LIKE), a range evaluation operator
+# and an operator to test if a scalar expression is NULL or not.
 #=============================================================================#
 comparisonPredicate = binaryComparisonPredicate
                     | isLikePredicate
@@ -48,7 +49,7 @@ binaryComparisonPredicate = scalarExpression
                             comparisonOperator
                             scalarExpression;
 
-scalarExpression = characterLiteral 
+scalarExpression = characterLiteral
                  | numericLiteral
                  | booleanLiteral
                  | propertyName
@@ -66,9 +67,11 @@ lteq = lt eq;
 # LIKE predicate
 #
 isLikePredicate =  scalarExpression "LIKE" patternExpression
-                   ["NOCASE" booleanLiteral];
+                   ["WILDCARD" quote alpha quote]
+                   ["SINGLECHAR" quote alpha quote]
+                   ["ESCAPECHAR" quote alpha quote]
+                   ["NOCASE" booleanLiteral] ;
 
-# The character literal is interpreted as a POSIX regular expression.
 patternExpression = characterLiteral;
 
 # BETWEEN predicate
@@ -134,7 +137,7 @@ temporalExpression = temporalLiteral
                    | function;
 
 temporalOperator = "ANYINTERACTS"
-                 | "BEFORE" 
+                 | "BEFORE"
                  | "AFTER"
                  | "MEETS"
                  | "METBY"
@@ -186,7 +189,7 @@ arrayOperator = "AEQUALS"
 # operand (a property name, a number or a function that returns a number),
 # an arithmetic operators (+,-,*,/) and another arithmetic operand.
 #=============================================================================#
-arithmeticExpression = arithmeticOperand arithmeticOperator arithmeticOperand 
+arithmeticExpression = arithmeticOperand arithmeticOperator arithmeticOperand
                      | leftParen arithmeticExpression rightParen;
 
 arithmeticOperator = plusSign | minusSign | asterisk | solidus;
@@ -355,7 +358,7 @@ extendedDigit = "\x0660".."\x0669" | "\x06F0".."\x06F9" | "\x0966".."\x096F" |
                 "\x0B66".."\x0B6F" | "\x0BE7".."\x0BEF" | "\x0C66".."\x0C6F" |
                 "\x0CE6".."\x0CEF" | "\x0D66".."\x0D6F" | "\x0E50".."\x0E59" |
                 "\x0ED0".."\x0ED9" | "\x0F20".."\x0F29";
-        
+
 extender =      "\x00B7"           | "\x02D0"           | "\x02D1"           |
                 "\x0387"           | "\x0640"           | "\x0E46"           |
                 "\x0EC6"           | "\x3005"           | "\x3031".."\x3035" |
@@ -428,7 +431,7 @@ unsignedInteger = {digit};
 sign = plusSign | minusSign;
 
 #=============================================================================#
-# Boolean literal                 
+# Boolean literal
 #=============================================================================#
 #
 booleanLiteral = "TRUE" | "true" | "FALSE" | "false" |
@@ -488,7 +491,7 @@ geometryCollectionText = leftParen
 
 envelopeTaggedText = "ENVELOPE" envelopeText;
 
-envelopeText = leftParen westBoundLon comma southBoundLat comma [minElev comma] eastBoundLon comma northBoundLat [comma maxElev] rightParen; 
+envelopeText = leftParen westBoundLon comma southBoundLat comma [minElev comma] eastBoundLon comma northBoundLat [comma maxElev] rightParen;
 
 westBoundLon = signedNumericLiteral;
 

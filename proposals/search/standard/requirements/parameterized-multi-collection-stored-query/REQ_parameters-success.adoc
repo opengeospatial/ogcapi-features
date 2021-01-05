@@ -1,0 +1,8 @@
+[[req_parameterized-multi-collection-stored-query_parameters-success]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/parameterized-multi-collection-stored-query/parameters-success* 
+|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema http://fix.me/parameters.yaml[parameters.yaml].
+^|C |Each parameter identifier, `id`, SHALL also be valid URL query parameter name as defined in https://tools.ietf.org/html/rfc3986[Uniform Resource Identifier (URI): Genertic Syntax].
+|===

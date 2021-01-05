@@ -1,0 +1,8 @@
+type: object
+required:
+- parameters   
+properties:
+   parameters:
+      type: array
+      items: 
+         $ref: parameter.yaml

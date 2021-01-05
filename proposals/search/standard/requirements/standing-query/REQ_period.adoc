@@ -1,0 +1,21 @@
+[[req_standing-queries_period-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/standing-queries/period-definition*
+^|A |The operation SHALL support a parameter `period` with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: period
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: string
+style: form
+explode: false
+----
+
+^|B |The format of each array element value SHALL be an ISO 8601 period specification.
+|===

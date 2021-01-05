@@ -1,0 +1,9 @@
+[[req_parameterized-multi-collection-stored-query_parameter-update]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/parametrized-multi-collection-stored-query/parameter-update*
+^|A |For each stored query parameter identified in the parameters response (path: `/search/{queryId}/parameters`), the server SHALL support the HTTP PUT operation at the path `/search/{queryId}/parameters/{parameterId}`.
+^|B |The parameter `parameterId` is each `id` property (JSONPath: `$.parameters[*].id`) in the parameters response (path: `/search/{queryid}/parameters`).
+^|C |The parameter `queryId` is each `id` property (JSONPath: `$.queries[*].id`) in the stored queries response (path: `/search`).
+^|D |The parameter `collectionId` is each `id` property (JSONPath: `$.collections[*].id`) in the resource collections response (path: `/collections`).
+|===

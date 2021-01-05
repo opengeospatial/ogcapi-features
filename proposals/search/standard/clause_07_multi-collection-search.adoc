@@ -1,0 +1,23 @@
+[[clause-multi-collection-search]]
+== Requirements Class "Multi-Collection Search"
+
+=== Overview
+
+include::requirements/requirements_class_multi-collection-search.adoc[]
+
+[[clause-multi-collection-search-adhoc-execute]]
+=== Executing ad-hoc multi-collection queries
+
+include::requirements/multi-collection-search/REQ_post-op.adoc[]
+
+include::requirements/multi-collection-search/REQ_limit-definition.adoc[]
+
+include::requirements/multi-collection-search/REQ_post-body.adoc[]
+
+This specification does not mandate a specific query expression language.
+
+This specification does, however, recommend:  <<rec_ogc-json-query-expression>>.
+
+include::requirements/multi-collection-search/REQ_response.adoc[]
+
+include::requirements/multi-collection-search/REQ_limit-response.adoc[]

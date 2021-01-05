@@ -1,0 +1,135 @@
+
+EXAMPLE 1: Ad-hoc query on a single collection
+
+   CLIENT                                                     SERVER
+     |                                                           |
+     |   POST /collections/{collectionId}/query   HTTP/1.1       |
+     |   Host: www.someserver.com                                |
+     |   Content-Type: application/cql-query+json                |
+     |   Accept: application/geo+json                            |
+     |                                                           |
+     |   {                                                       |
+     |      "filter-crs": "...",                                 |
+     |      "filter": {                                          |
+     |         "and": [                                          |
+     |            {                                              |
+     |               "eq": [{"property": "prop0"},"value0"]      |
+     |            },                                             |
+     |            {                                              |
+     |               "intersects": [                             |
+     |                  {"property": "footprint"},               |
+     |                  {                                        |
+     |                     "type": "Polygon",                    |
+     |                     "coordinates": [                      |
+     |                        [                                  |
+     |                           [43.5845,-79.5442],             |
+     |                           [43.6079,-79.4893],             |
+     |                           [43.5677,-79.4632],             |
+     |                           [43.6129,-79.3925],             |
+     |                           [43.6223,-79.3238],             |
+     |                           [43.6576,-79.3163],             |
+     |                           [43.7945,-79.1178],             |
+     |                           [43.8144,-79.1542],             |
+     |                           [43.8555,-79.1714],             |
+     |                           [43.7509,-79.6390],             |
+     |                           [43.5845,-79.5442]              |
+     |                        ]                                  |
+     |                     ]                                     |
+     |                  }                                        |
+     |               ]                                           |
+     |            }                                              |
+     |         ]                                                 |
+     |      }                                                    |
+     |   }                                                       |
+     |---------------------------------------------------------->|
+     |                                                           |
+     |   HTTP/1.1 200 OK                                         |
+     |   Content-Type: application/geo+json                      |
+     |                                                           |
+     |   {                                                       |
+     |      "type": "FeatureCollection",                         |
+     |      "bbox": [ ... ],                                     |
+     |      "features": [                                        |
+     |         {                                                 |
+     |            "type": "Feature",                             |
+     |            "id": "id01",                                  |
+     |            "bbox": [...],                                 |
+     |            "geometry": { ... },                           |
+     |            "properties": { "prop0": "value0", ... },      |
+     |         },                                                |
+     |         {                                                 |
+     |            "type": "Feature",                             |
+     |            "id": "id1310",                                |
+     |            "bbox": [...],                                 |
+     |            "geometry": { ... },                           |
+     |            "properties": { "prop0": "value0", ... },      |
+     |         },                                                |
+     |         ...                                               |
+     |      ]                                                    |
+     |   }                                                       |
+     |<----------------------------------------------------------|
+
+
+EXAMPLE 2: Ad-hoc query on multiple collections 
+   CLIENT                                                     SERVER
+     |                                                           |
+     |   POST /query   HTTP/1.1                                  |
+     |   Host: www.someserver.com                                |
+     |   Content-Type: application/query+json                    |
+     |   Accept: application/geo+json                            |
+     |                                                           |
+     |   {                                                       |
+     |      "collections": ["collection01","collection02"],      |
+     |      "filter": {                                          |
+     |         "intersects": [                                   |
+     |            {"property": "footprint"},                     |
+     |            {                                              |
+     |               "type": "Polygon",                          |
+     |               "coordinates": [                            |
+     |                  [                                        |
+     |                     [43.5845,-79.5442],                   |
+     |                     [43.6079,-79.4893],                   |
+     |                     [43.5677,-79.4632],                   |
+     |                     [43.6129,-79.3925],                   |
+     |                     [43.6223,-79.3238],                   |
+     |                     [43.6576,-79.3163],                   |
+     |                     [43.7945,-79.1178],                   |
+     |                     [43.8144,-79.1542],                   |
+     |                     [43.8555,-79.1714],                   |
+     |                     [43.7509,-79.6390],                   |
+     |                     [43.5845,-79.5442]                    |
+     |                  ]                                        |
+     |               ]                                           |
+     |            }                                              |
+     |         ]                                                 |
+     |      }                                                    |
+     |   }                                                       |
+     |---------------------------------------------------------->|
+     |                                                           |
+     |   HTTP/1.1 200 OK                                         |
+     |   Content-Type: application/geo+json                      |
+     |                                                           |
+     |   {                                                       |
+     |      "type": "FeatureCollection",                         |
+     |      "bbox": [ ... ],                                     |
+     |      "features": [                                        |
+     |         {                                                 |
+     |             "@context": "http://.../collections/collection01",
+     |            "type": "Feature",                             |
+     |            "id": "id01",                                  |
+     |            "bbox": [...],                                 |
+     |            "geometry": { ... },                           |
+     |            "properties": { ... },                         |
+     |         },                                                |
+     |         {                                                 |
+     |             "@context": "http://.../collections/collection02",
+     |            "type": "Feature",                             |
+     |            "id": "id1310",                                |
+     |            "bbox": [...],                                 |
+     |            "geometry": { ... },                           |
+     |            "properties": { ... },                         |
+     |         },                                                |
+     |         ...                                               |
+     |      ]                                                    |
+     |   }                                                       |
+     |<----------------------------------------------------------|

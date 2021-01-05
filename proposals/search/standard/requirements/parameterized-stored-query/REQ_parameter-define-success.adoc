@@ -1,0 +1,7 @@
+[[req_parameterized-stored-query_parameter-define-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/parameterized-stored-query/parameter-define-success*
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code '201'.
+^|B |For each defined stored query parameter, the response SHALL include a 'Location' header with the URL of the newly created parameter.
+|===

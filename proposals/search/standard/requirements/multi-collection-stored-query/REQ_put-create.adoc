@@ -1,0 +1,8 @@
+[[req_multi-collection-stored-query_put-create]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/multi-collection-stored-query/put-create*
+^|A |The server SHALL support the HTTP PUT operation at the path `/search/{queryId}`.
+^|B |The parameter `queryId` SHALL be specified by the client.
+^|C |The parameter `collectionId` is each `id` property in the resource collections response (JSONPath: `$.collections[*].id`). 
+|===

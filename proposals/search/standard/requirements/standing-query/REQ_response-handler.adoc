@@ -1,0 +1,20 @@
+[[req_standing-queries_reponse-handler-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/standing-queries/response-handler-definition*
+^|A |The operation SHALL support a parameter `responseHandler` with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: responseHandler
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: string
+    format: uri
+style: form
+explode: false
+----
+|===

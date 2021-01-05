@@ -12,7 +12,7 @@ Specifically, this clause defines requirements for:
 * support for arithmetic expression in CQL
 * support for arrays in CQL
 
-In each case, the clause specifies requirements for the rules in <<cql-bnf>> not 
+In each case, the clause specifies requirements for the rules in <<cql-bnf>> not
 supported by Simple CQL.
 
 [[enhanced-spatial-operators]]
@@ -27,6 +27,15 @@ operators that an implementation of this extension might offer.
 
 include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators.adoc[]
 
+NOTE: The spatial predicates currently use a different pattern than the
+comparison and temporal predicates and are written like function calls.
+This difference is inherited from previous versions of CQL. It is an open
+issue, whether this version of CQL should change the spatial predicates to
+be consistent with the other predicates or to keep the legacy because of
+existing CQL implementations. Comments are welcome in the
+https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue]
+on this topic.
+
 The following table lists the mathematical definitions of each spatial operators
 as described in <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 
@@ -35,14 +44,14 @@ as described in <<ISO19125,OpenGIS® Implementation Standard for Geographic info
 [width=80%,cols="30,70",options="header"]
 |===
 |Spatial operator |Definition
-|EQUALS |a EQUALS b &#x2b04; a &#x2286; b &#x2227; b &#x2286; a
-|DISJOINT |a DISJOINT b &#x2b04; a &#x2229; b = &#x2205;
-|TOUCHES |a TOUCHES b &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205;
-|WITHIN | a WITHIN b &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) &#x2260; &#x2205;)
-|OVERLAPS |a OVERLAPS b &#x2b04; (dim(I(a)) = dim(I(b)) = dim(I(a) &#x2229; I(b))) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)
-|CROSSES |a CROSSES b &#x2b04; [I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)]
-|INTERSECTS | a INTERSECTS b &#x2b04; ! a DISJOINT b
-|CONTAINS | a CONTAINS b &#x2b04; b CONTAINS a
+|EQUALS |EQUALS(a,b) &#x2b04; a &#x2286; b &#x2227; b &#x2286; a
+|DISJOINT |DISJOINT(a,b) &#x2b04; a &#x2229; b = &#x2205;
+|TOUCHES |TOUCHES(a,b) &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205;
+|WITHIN |WITHIN(a,b) &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) &#x2260; &#x2205;)
+|OVERLAPS |OVERLAPS(a,b) &#x2b04; (dim(I(a)) = dim(I(b)) = dim(I(a) &#x2229; I(b))) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)
+|CROSSES |CROSSES(a,b) &#x2b04; [I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)]
+|INTERSECTS |INTERSECTS(a,b) &#x2b04; ! a DISJOINT b
+|CONTAINS |CONTAINS(a,b) &#x2b04; b CONTAINS a
 |===
 
 The following diagrams illustrate the meaning of the `TOUCHES`, `WITHIN`, `OVERLAPS`,
@@ -70,15 +79,14 @@ image::images/crosses.png[alt=Crosses,width=70%]
 .Example of a spatial relationship between two literal geometries
 ====
 ----
-LINESTRING(43.72992 -79.2998, 43.73005 -79.2991, 43.73006 -79.2984,
-           43.73140 -79.2956, 43.73259 -79.2950, 43.73266 -79.2945,
-           43.73320 -79.2936, 43.73378 -79.2936, 43.73486 -79.2917)
-CROSSES
-POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972, 43.7326 -79.2971,
-         43.7350 -79.2981, 43.7350 -79.2982, 43.7352 -79.2982, 43.7357 -79.2956,
-         43.7337 -79.2948, 43.7343 -79.2933, 43.7339 -79.2923, 43.7327 -79.2947,
-         43.7320 -79.2942, 43.7322 -79.2937, 43.7306 -79.2930, 43.7303 -79.2930,
-         43.7299 -79.2928, 43.7286 -79.2986))
+CROSSES(LINESTRING(43.72992 -79.2998, 43.73005 -79.2991, 43.73006 -79.2984,
+                   43.73140 -79.2956, 43.73259 -79.2950, 43.73266 -79.2945,
+                   43.73320 -79.2936, 43.73378 -79.2936, 43.73486 -79.2917),
+        POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972, 43.7326 -79.2971,
+                 43.7350 -79.2981, 43.7350 -79.2982, 43.7352 -79.2982, 43.7357 -79.2956,
+                 43.7337 -79.2948, 43.7343 -79.2933, 43.7339 -79.2923, 43.7327 -79.2947,
+                 43.7320 -79.2942, 43.7322 -79.2937, 43.7306 -79.2930, 43.7303 -79.2930,
+                 43.7299 -79.2928, 43.7286 -79.2986)))
 ----
 
 [source,JSON]
@@ -113,12 +121,12 @@ POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972, 43.7326 -79.2971,
 .Example of a spatial relationship between a property and a literal geometry
 ====
 ----
-road CROSSES POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
+CROSSES(road,POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
                       43.7326 -79.2971, 43.7350 -79.2981, 43.7350 -79.2982,
                       43.7352 -79.2982, 43.7357 -79.2956, 43.7337 -79.2948,
                       43.7343 -79.2933, 43.7339 -79.2923, 43.7327 -79.2947,
                       43.7320 -79.2942, 43.7322 -79.2937, 43.7306 -79.2930,
-                      43.7303 -79.2930, 43.7299 -79.2928, 43.7286 -79.2986))
+                      43.7303 -79.2930, 43.7299 -79.2928, 43.7286 -79.2986)))
 ----
 
 [source,JSON]
@@ -148,7 +156,7 @@ road CROSSES POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
 It should be noted that the function "Buffer()" in this example is not part of CQL but is an example of a function that an implementation may offer that returns a geometry value.
 
 ----
-road WITHIN Buffer(geometry,10,"m")
+WITHIN(road,Buffer(geometry,10,"m"))
 ----
 
 [source,JSON]
@@ -174,7 +182,7 @@ operators that an implementation of this extension might offer.
 include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators.adoc[]
 
 CQL supports date and timestamps as time instants, but even the smallest "instant" has a
-duration and can be evaluated as an interval, too. For the purposes of determining 
+duration and can be evaluated as an interval, too. For the purposes of determining
 the temporal relationship between two temporal expressions, an instant is treated as
 the interval from the beginning to the end of the instant.
 
@@ -323,7 +331,7 @@ arrays overlap or share elements.
 include::requirements/arrays/REQ_arrays.adoc[]
 
 NOTE: Support for the BNF rule `function` is added by
-the requirements class <<rc_functions,Functions>>. 
+the requirements class <<rc_functions,Functions>>.
 Support for the BNF rule `arithmeticExpression` is added by
 the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 

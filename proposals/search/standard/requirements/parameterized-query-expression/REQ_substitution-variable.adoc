@@ -1,0 +1,16 @@
+[[req_parameterized-query-expression_substitution-variable]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/parametrized-query-expression/substitution-variable*
+^|A |For each parameter identifier (JSONPath: `$.parameters[*].id`) in the parameters response (path: `/collections/{collectionId}/search/{queryId}/parameters`) there SHALL be a correponding substitution variable of the form:
+
+[source]
+----
+"$" "{" substitutionVariableName "}"
+----
+
+in the text of the query expression used to create the stored query.
+^|B |The name of the substitution variable (denoted using the token `substitutionVariableName` above) SHALL be the same as the `id` of the stored query parameter (JSONPath: `$.parameters[*].id`).
+|===
+
+NOTE: Need to include substitution rules for the server.

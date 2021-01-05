@@ -1,0 +1,128 @@
+[[clause-parameterized-stored-query]]
+== Requirements Class "Parameterized Stored Query"
+
+=== Overview
+
+include::requirements/requirements_class_parameterized-stored-query.adoc[]
+
+NOTE: Not sure we need a separate conformance class for parameterization since stored queries without parameters seem useless to me.  Probably need more developer feedback for this one.
+
+[[clause-parameterized-stored-query-discovery]]
+=== Parameter discovery
+
+include::requirements/parameterized-stored-query/REQ_parameters-op.adoc[]
+
+include::requirements/parameterized-stored-query/REQ_parameters-success.adoc[]
+
+[[schema_parameters]]
+.link:http://fix.me/parameters.yaml[Schema for the list of parameters (parameters.yaml)]
+[source,YAML]
+----
+type: object
+required:
+- parameters   
+properties:
+   parameters:
+      type: array
+      items: 
+         $ref: parameter.yaml
+----
+
+[[schema_parameter]]
+.link:http://fix.me/parameters.yaml[Schema for a parameter description(parameter.yaml)]
+[source,YAML]
+----
+type: object
+required:
+   - id   
+   - type
+properties:
+   id:
+      description: the token that may be used as a query parameter
+      type: string
+   title:
+      description: a human readable title for the queryable
+      type: string
+   description:
+      description: a human-readable narrative describing the queryable
+      type: string
+   language:
+      description: the language used for the title and description
+      type: string
+   type:
+      description: the data type of the queryable
+      type: string
+      enum:
+      - string
+      - number
+      - integer
+      - boolean
+      - spatial
+      - temporal
+   spatial-types:
+      description: the list of allowed spatial geometry types, if known
+      type: string
+      enum:
+      - point
+      - multi-point
+      - curve
+      - multi-curve
+      - surface
+      - multi-surface
+      - solid
+      - multi-solid
+      - aggregate
+      - any
+   temporal-types:
+      description: the list of allowed temporal geometry types, if known
+      type: string
+      enum:
+      - instant
+      - interval
+   links:
+      description: additional links, e.g. to documentation or to the schema of the values
+      type: array
+      items:
+         $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/link'
+----
+
+[[clause-parameterized-stored-query-parameter-define]]
+=== Defining query parameters
+
+include::requirements/parameterized-stored-query/REQ_parameter-define.adoc[]
+
+include::requirements/parameterized-stored-query/REQ_parameter-define-body.adoc[]
+
+include::requirements/parameterized-stored-query/REQ_parameter-define-success.adoc[]
+
+[[clause-parameterized-stored-query-parameter-update]]
+=== Updating a query parameter
+
+include::requirements/parameterized-stored-query/REQ_parameter-update.adoc[]
+
+include::requirements/parameterized-stored-query/REQ_parameter-update-body.adoc[]
+
+include::requirements/parameterized-stored-query/REQ_parameter-update-success.adoc[]
+
+[[clause-parameterized-stored-query-parameter-delete]]
+=== Deleting a query parameter
+
+include::requirements/parameterized-stored-query/REQ_parameter-delete.adoc[]
+
+include::requirements/parameterized-stored-query/REQ_parameter-delete-success.adoc[]
+
+=== Executing a stored query with parameters
+
+See <<clause-stored-query-execute,Executing stored queries>> to understand how to execute an un-parameterized stored query.
+
+See <<clause-parameterized-query-expression-url-query-parameters,URL query parameters>> to understand how to append query parameters to the stored query path.
+
+[[example_10_1]]
+.Invoking a parameterized stored query.
+====
+This example invoked the parameterized stored query with identifier `MyQuery01` that takes two parameters `myParam01` and `myParam02`.
+
+----
+.../collections/MyCollection01/search/MyQuery01?myParam01=X&myParam02=Y
+----
+====

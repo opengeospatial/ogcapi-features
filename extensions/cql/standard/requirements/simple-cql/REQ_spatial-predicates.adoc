@@ -1,7 +1,7 @@
-[[req_simple-cql_spatial-predicate]] 
+[[req_simple-cql_spatial-predicate]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicate* 
+^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicate*
 ^|A |A spatial predicate evaluates two geometry-valued expressions to determine, if the expressions satisfy the requirements of the specified spatial operator.  If the requirements of the operator are satisfied, then the predicate SHALL evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
-^|B |The `INTERSECTS` operator SHALL be evaluated as defined in clause 6.1.15 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
+^|B |The `INTERSECTS` operator SHALL be evaluated as defined in clause 6.1.15 of <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>> (except that in CQL the predicates evaluate to a Boolean, not an Integer).
 |===

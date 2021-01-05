@@ -1,0 +1,12 @@
+type: object
+required:
+  - queries
+properties:
+  queries:
+    type: array
+    items:
+      $ref: query-md.yaml
+  links:
+    type: array
+    items:
+      $ref: link.yaml

@@ -1,0 +1,33 @@
+ype: object
+required:
+  - id
+  - mutable
+  - collections
+properties:
+  id:
+    description: identifier of the stored query
+    type: string
+  mutable:
+    description: indicates whether this query can be modified through the API
+    type: boolean
+    default: true
+  title:
+    description: human readable title for the stored query
+    type: string
+  description:
+    description: a description of the stored query 
+    type: string
+  collections:
+    description: the list of collections, specified by id, that this query accesses
+    type: array
+    items:
+      type: string
+  query:
+    description: the text of the stored query
+    oneOf:
+    - type: string
+    - type: object
+  links:
+    type: array
+    items:
+      $ref: link.yaml

@@ -1,0 +1,75 @@
+[[clause-conformance]]
+== Conformance
+
+This standard defines three requirements / conformance classes:
+
+
+   * <<rc_search,Search>>
+
+   * <<rc_multi-collection-search,Multi-Collection Search>>
+
+   * <<rc_stored-query,Stored Query>>
+
+   * <<rc_multi-collection-stored-query,Multi-Collection Stored Query>>
+
+   * <<rc_parameterized-stored-query,Parameterized Stored Query>>
+
+   * <<rc_parameterized-multi-collection-stored-query,Parameterized Multi-Collection Stored Query>>
+
+   * <<rc_parameterized-query-expression,Parameterized Query Expressions>>
+
+   * <<rc_ogc-json-query-expression,OGC JSON Encoding for Query Expressions>>
+
+   * <<rc_standing-query,Standing Query>>
+
+   * <<rc_html,HTML>>
+
+   * <<rc_geojson,GeoJSON>>
+
+   * <<rc_gmlsf0,Geography Markup Language (GML), Simple Features Profile, Level 0>>
+
+   * <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>
+
+The standardization target is "Web APIs".
+
+The URIs of the associated conformance classes are: 
+
+[#conf_class_uris,reftext='{table-caption} {counter:table-num}']
+.Conformance class URIs
+[cols="25,75",options="header"]
+|===
+|Conformance class |URI
+
+|Search |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/search
+
+|Multi-Collection Search |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/multi-collection-search
+
+|Stored Query |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/stored-query
+
+|Multi-Collection Stored Query |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/multi-collection-stored-query
+
+|Parameterized Stored Query |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/parameterized-stored-query
+
+|Parameterized Multi-Collection Stored Query |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/parameterized-multi-collection-stored-query
+
+|Parameterized Query Expressions |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/parametrized-query-expression
+
+|OGC JSON Encoding for Query Expressions |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/ogc-json-query-expression
+
+|Standing Query |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/standing-query
+
+|HTML |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/html
+
+|GeoJSON |http://www.opengis.net/spec/ogcapi-features-5/1.0/req/geojson
+
+|GML Simple Features Profile, Level 0|http://www.opengis.net/spec/ogcapi-features-5/1.0/req/gmlsf0
+
+|GML Simple Features Profile, Level 2|http://www.opengis.net/spec/ogcapi-features-5/1.0/req/gmlsf2
+
+|===
+
+Conformance with this standard shall be checked using all the relevant tests
+specified in <<ats,Annex A>> of this document. The framework, concepts, and
+methodology for testing, and the criteria to be achieved to claim conformance
+are specified in the OGC Compliance Testing Policies and Procedures and the
+OGC Compliance Testing web site.

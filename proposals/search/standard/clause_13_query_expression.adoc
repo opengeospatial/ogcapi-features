@@ -1,0 +1,221 @@
+[[clause-ogc-json-query-expression]]
+== Requirements Class "OGC JSON Encoding for Query Expressions"
+
+=== Overview
+
+include::requirements/requirements_class_ogc-json-query-expression.adoc[]
+
+=== Query Expressions
+
+include::requirements/ogc-json-query-expression/REQ_schema.adoc[]
+
+include::requirements/ogc-json-query-expression/REQ_crs.adoc[]
+
+NOTE: Need to define what join output looks like ... i.e. tuples.
+
+=== Examples
+
+[[example_13_1]]
+.Query a single collection.
+====
+This example queries a collection, radarsat2, for images that intersect a
+specific area and acquired from any instrument that start with "OLI".
+
+[source,JSON]
+----
+   CLIENT                                                               SERVER
+     |                                                                     |
+     |   POST /collections/radarsat2/search?limit=500   HTTP/1.1           |
+     |   Host: www.someserver.com/                                         |
+     |   Accept: application/geo+json                                      |
+     |   Content-Type: application/ogcqry+json                             |
+     |                                                                     |    
+     |   {                                                                 |
+     |      "and": [                                                       |
+     |         {                                                           |
+     |            "like": [                                                |
+     |               {"property": "eo_instruments"},                       |
+     |               "OLI%"                                                |
+     |            ]                                                        |
+     |         },                                                          |
+     |         {                                                           |
+     |            "intersects": [                                          |
+     |               {"property": "footprint"},                            |
+     |               {                                                     |
+     |                  "type": "Polygon",                                 |
+     |                  "coordinates": [                                   |
+     |                      [                                              |
+     |                         [43.5845,-79.5442],                         |
+     |                         [43.6079,-79.4893],                         |
+     |                         [43.5677,-79.4632],                         |
+     |                         [43.6129,-79.3925],                         |
+     |                         [43.6223,-79.3238],                         |
+     |                         [43.6576,-79.3163],                         |
+     |                         [43.7945,-79.1178],                         |
+     |                         [43.8144,-79.1542],                         |
+     |                         [43.8555,-79.1714],                         |
+     |                         [43.7509,-79.6390],                         |
+     |                         [43.5845,-79.5442]                          |
+     |                     ]                                               |
+     |                  ]                                                  |
+     |               }                                                     |
+     |            ]                                                        |
+     |         }                                                           |
+     |      ]                                                              |
+     |   }                                                                 |
+     |-------------------------------------------------------------------->|
+     |                                                                     |
+     |   Content-Type: application/json                                    |
+     |   {                                                                 |
+     |      "type": "FeatureCollection"                                    |
+     |      "features": [                                                  |
+     |         {                                                           |
+     |            "id": "radarsat2.1010",                                  |
+     |            "type": "Feature",                                       |
+     |            "geometry": { ... },                                     |
+     |            "properties": { ... }                                    |
+     |         },                                                          |
+     |         .                                                           |
+     |         .                                                           |
+     |         .                                                           |
+     |         {                                                           |
+     |            "id": "radarsat2.4763",                                  |
+     |            "type": "Feature",                                       |
+     |            "geometry": { ... },                                     |
+     |            "properties": { ... }                                    |
+     |         }                                                           |
+     |         .                                                           |
+     |         .                                                           |
+     |         .                                                           |
+     |      ]                                                              |
+     |   }                                                                 |
+     |<--------------------------------------------------------------------|
+----
+====
+
+[[example_13_2]]
+.Example of a bundled query.
+====
+This example bundles two queries; one of "parks" and some on "lakes".
+The response is a GeoJSON feature collection containing the features
+
+[source,JSON]
+----
+   CLIENT                                                               SERVER
+     |                                                                     |
+     |   POST /search   HTTP/1.1                                           |
+     |   Host: www.someserver.com/                                         |
+     |   Accept: application/json                                          |
+     |   Content-Type: application/ogcqry+json                             |
+     |                                                                     |    
+     |   [                                                                 |
+     |      {                                                              |
+     |         "collections": ["parks"]                                    |
+     |      },                                                             |
+     |      {                                                              |
+     |         "collections": ["lakes"]                                    |
+     |      }                                                              |
+     |   ]                                                                 |
+     |-------------------------------------------------------------------->|
+     |                                                                     |
+     |   Content-Type: application/json                                    |
+     |   {                                                                 |
+     |      "type": "FeatureCollection"                                    |
+     |      "features": [                                                  |
+     |         {                                                           |
+     |            "id": "park.001",                                        |
+     |            "type": "Feature",                                       |
+     |            "geometry": { ... },                                     |
+     |            "properties": { ... }                                    |
+     |         },                                                          |
+     |         .                                                           |
+     |         .                                                           |
+     |         .                                                           |
+     |         {                                                           |
+     |            "id": "lake.001",                                        |
+     |            "type": "Feature",                                       |
+     |            "geometry": { ... },                                     |
+     |            "properties": { ... }                                    |
+     |         }                                                           |
+     |         .                                                           |
+     |         .                                                           |
+     |         .                                                           |
+     |      ]                                                              |
+     |   }                                                                 |
+     |<--------------------------------------------------------------------|
+----
+====
+
+[[example_13_3]]
+.Example of a spatial join query.
+====
+Find all the lakes in Algonquin Park.  The query object contains a 
+"collections" key which is the list of collections being queries.
+The "filter" key is simply CQL.
+
+The response is an array of "tuples".  That is, pairs (since we are 
+querying two collections) of features that satisfy the query predicates.
+Since the "parks" feature in each tuple would always be the same (i.e.
+Algonquin Park) we use a JSON reference in every tuple after the first
+one to reference the Algoquin Park feature rather than duplicating it
+over and over.
+
+The features themselves are encoded as GeoJSON.
+
+[source,JSON]
+----
+   CLIENT                                                               SERVER
+     |                                                                     |
+     |   POST /search   HTTP/1.1                                           |
+     |   Host: www.someserver.com/                                         |
+     |   Accept: application/json                                          |
+     |   Content-Type: application/ogcqry+json                             |
+     |                                                                     |    
+     |   [                                                                 |
+     |      {                                                              |
+     |         "collections": ["parks","lakes"]                            |
+     |         "filter": {                                                 |
+     |            "and": [                                                 |
+     |               {"eq": [{"property": "parks.name"},"Algonquin Park"]} |
+     |               {"contains": [{"property": "parks.geometry"},         |
+     |                             {"property": "lakes.geometry"}]}        |
+     |            ]                                                        |
+     |         }                                                           |
+     |      }                                                              |
+     |   ]                                                                 |
+     |-------------------------------------------------------------------->|
+     |                                                                     |
+     |   Content-Type: application/json                                    |
+     |   {                                                                 |
+     |      "tuples": [                                                    |
+     |         [                                                           |
+     |            {                                                        |
+     |               "id": "park.001",                                     |
+     |               "type": "Feature",                                    |
+     |               "geometry": { ... },                                  |
+     |               "properties": { ... }                                 |
+     |            },                                                       |
+     |            {                                                        |
+     |               "id": "lake.001",                                     |
+     |               "type": "Feature",                                    |
+     |               "geometry": { ... },                                  |
+     |               "properties": { ... }                                 |
+     |            }                                                        |
+     |         ],                                                          |
+     |         [                                                           |
+     |            { "$ref": "#/tuples[0]/[0]" },                           |
+     |            {                                                        |
+     |               "id": "lake.001",                                     |
+     |               "type": "Feature",                                    |
+     |               "geometry": { ... },                                  |
+     |               "properties": { ... }                                 |
+     |            }                                                        |
+     |         ],                                                          |
+     |         .                                                           |
+     |         .                                                           |
+     |         .                                                           |
+     |      ]                                                              |
+     |   }                                                                 |
+     |<--------------------------------------------------------------------|
+----
+====

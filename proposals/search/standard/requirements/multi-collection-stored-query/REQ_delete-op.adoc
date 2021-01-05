@@ -1,0 +1,8 @@
+[[req_multi-collection-stored-query_delete-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/multi-collection-stored-query/delete-op*
+^|Condition |The value of the `mutable` property (JSONPath: `$.queries[*].mutable`) SHALL be `true`.
+^|A |For every stored query in the stored queries response (path '/search'), the server SHALL support the HTTP DELETE operation at the path '/search/{queryId}'.
+^|B |The parameter `queryId` is each `id` property in the stored queries response (JSONPath: `$.queries[*].id`).
+|===

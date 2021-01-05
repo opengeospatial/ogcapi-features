@@ -1,0 +1,9 @@
+[[req_multi-collection-stored-query_queries-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/multi-collection-stored-query/queries-success*
+^|A |A successful execution of the operation SHALL be reported as a response wit
+h a HTTP status code `200`.
+^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema http://fix.me/queries.yaml[queries.yaml].
+^|C |The parameters `collections` (JSONPAth: `$.queries[*].collections`) SHALL be required.
+|===

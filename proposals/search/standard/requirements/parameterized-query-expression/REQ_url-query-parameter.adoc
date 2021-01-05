@@ -1,0 +1,19 @@
+[[req_parameterized-query-expression_url-query-parameter]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/parametrized-query-expression/url-query-parameter*
+^|A |For every stored query identified in the stored queries response (path: `/collections/{collectionId}/search`) and for each defined query parameter identified in the query parameters response (path: `/collections/{collectionId}/search/{queryId}/parameters`), a URL query parameter with the following characteristics (using an OpenAPI specification 3.0 fragment) SHALL be supported by the operation:
+
+[source,YAML]
+----
+name: {parameterId}
+in: query
+required: true
+style: form
+explode: false
+----
+
+^|B |The parameter `parameterId` is each `id` property (JSONPath: `$.parameters[*].id`) in the query parameters response (path: `/collections/{collectionId}/search/{queryId}/parameters`).
+^|C |The parameter `queryId` is each `id` property (JSONPath: `$.queries[*].id`) in the stored queries response (path: `/collections/{collectionId}/search`).
+^|D |The parameter `collectionId` is each `id` property (JSONPath: `$.collections[*].id`) in the resource collections response (path: `/collections`).
+|===

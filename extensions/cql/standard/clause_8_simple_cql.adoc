@@ -9,7 +9,7 @@ include::requirements/requirements_class_simple-cql.adoc[]
 This clause defines the core of a query language called `Common Query Language`
 (CQL) that may be used to construct filter expressions. This core is called Simple CQL.
 
-Subsequent clauses define additional filtering capabilities as well as several 
+Subsequent clauses define additional filtering capabilities as well as several
 encodings of CQL.
 
 [[simple-cql_filter-expression]]
@@ -23,19 +23,19 @@ or `FALSE` or that evaluates to the value `NULL` when dealing with unknown
 values.
 
 If a predicate evaluates to `TRUE` for an item, the item qualifies for
-further processing (e.g. presentation in the result set, being passed on 
+further processing (e.g. presentation in the result set, being passed on
 to the next predicate in the filter for further evaluation, etc.).
 
 If the predicate evaluates to `FALSE` or `NULL` for an item, the item is not
 available for further processing.
 
-A collection item that satisfies ALL the requirements of a CQL filter expression 
-evaluates to a Boolean value of `TRUE`; otherwise the CQL filter expression 
+A collection item that satisfies ALL the requirements of a CQL filter expression
+evaluates to a Boolean value of `TRUE`; otherwise the CQL filter expression
 evaluates to `FALSE`.
 
 include::requirements/simple-cql/REQ_cqlfilter.adoc[]
 
-A Simple CQL filter expression can be constructed by logically connecting one 
+A Simple CQL filter expression can be constructed by logically connecting one
 or more of the following classes of predicates:
 
 * comparison predicates
@@ -43,11 +43,11 @@ or more of the following classes of predicates:
 * temporal predicates
 
 Support for the parts of CQL that are not part of Simple CQL is added in additional
-requirements classes in <<cql-enhancements>>: 
+requirements classes in <<cql-enhancements>>:
 
 * the rule `arrayPredicate` is added by requirements class <<rc_arrays,Arrays>>;
 * the rule `function` is added by requirements class <<rc_functions,Functions>>;
-* the rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>; 
+* the rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>;
 * the additional values in rule `spatialOperator` are added by requirements class <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>;
 * the additional values in rule `temporalOperator` are added by requirements class <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>.
 
@@ -60,9 +60,9 @@ A literal value is any part of an CQL filter expression that is used
 exactly as it is specified in the expression. Literal values include
 
 * character strings (rule `characterLiteral`),
-* numbers (rule `numericLiteral`), 
-* booleans (rule `booleanLiteral`), 
-* spatial geometries (rule `spatialLiteral`) and 
+* numbers (rule `numericLiteral`),
+* booleans (rule `booleanLiteral`),
+* spatial geometries (rule `spatialLiteral`) and
 * temporal geometries (rule `temporalLiteral`).
 
 [[example_8_1]]
@@ -151,7 +151,7 @@ For example, a property name used in a scalar expression (rule `scalarExpression
 has to be a queryable of type `string`, `number`, `integer` or `boolean`.
 
 [[example_8_2]]
-.Property reference in a scalar expression 
+.Property reference in a scalar expression
 ====
 In this example, the property `windSpeed` is used in a function that returns a number.
 ----
@@ -188,8 +188,8 @@ avg(windSpeed) < 4
 [source,JSON]
 ----
 {
-  "lt": [ 
-    { "function": { "name": "avg", "arguments": [ { "property": "windSpeed" } ] } }, 
+  "lt": [
+    { "function": { "name": "avg", "arguments": [ { "property": "windSpeed" } ] } },
     4
   ]
 }
@@ -202,8 +202,8 @@ balance-150.0 > 0
 [source,JSON]
 ----
 {
-  "gt": [ 
-    { "-": [ { "property": "windSpeed" }, 150.0 ] }, 
+  "gt": [
+    { "-": [ { "property": "windSpeed" }, 150.0 ] },
     0
   ]
 }
@@ -216,17 +216,18 @@ include::requirements/simple-cql/REQ_like-predicate.adoc[]
 .Example of a LIKE predicate
 ====
 ----
-name LIKE '^Ste(v|ph)en$' NOCASE true
+name LIKE 'Smith.' SINGLECHAR '.' NOCASE true
 ----
 
 [source,JSON]
 ----
 {
-  "like": [ 
-    { "property": "name" }, 
-    "^Ste(v|ph)en$"
+  "like": [
+    { "property": "name" },
+    "Smith."
   ],
-  "nocase": true 
+  "singleChar": ".",
+  "nocase": true
 }
 ----
 ====
@@ -267,7 +268,7 @@ cityName IN ('Toronto','Franfurt','Tokyo','New York') NOCASE false
   "in": {
      "value": { "property": "cityName" },
      "list": [ "Toronto", "Franfurt", "Tokyo", "New York" ],
-     "nocase": false 
+     "nocase": false
   }
 }
 ----
@@ -308,6 +309,15 @@ geometry IS NOT NULL
 === Spatial predicates
 
 include::requirements/simple-cql/REQ_spatial-predicates.adoc[]
+
+NOTE: The spatial predicates currently use a different pattern than the
+comparison and temporal predicates and are written like function calls.
+This difference is inherited from previous versions of CQL. It is an open
+issue, whether this version of CQL should change the spatial predicates to
+be consistent with the other predicates or to keep the legacy because of
+existing CQL implementations. Comments are welcome in the
+https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue]
+on this topic.
 
 CQL uses Well-Known-Text (WKT) to encode geometry literals. Since WKT does not
 provide a capability to specify the CRS of a geometry literal, the server has
@@ -368,17 +378,17 @@ event_date ANYINTERACTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 
 [source,JSON]
 ----
-{ 
+{
    "anyinteracts": [
-      { "property": "event_date" }, 
+      { "property": "event_date" },
       [ "1969-07-16T05:32:00Z","1969-07-24T16:50:35Z" ]
-   ] 
+   ]
 }
 ----
 ====
 
 === CQL Encodings
 
-This standard defines a <<simple-cql-text,text>> encoding and a 
+This standard defines a <<simple-cql-text,text>> encoding and a
 <<simple-cql-json,JSON>> encoding of CQL that covers Simple CQL
 and all enhanced capabilities specified in the next clause.
