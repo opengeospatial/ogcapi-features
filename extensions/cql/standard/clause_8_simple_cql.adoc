@@ -23,8 +23,8 @@ or `FALSE` or that evaluates to the value `NULL` when dealing with unknown
 values.
 
 If a predicate evaluates to `TRUE` for an item, the item qualifies for
-further processing (e.g. presentation in the result set, being passed on
-to the next predicate in the filter for further evaluation, etc.).
+further processing such as presentation in the result set, being passed on
+to the next predicate in the filter for further evaluation, and so forth.
 
 If the predicate evaluates to `FALSE` or `NULL` for an item, the item is not
 available for further processing.
@@ -45,11 +45,11 @@ or more of the following classes of predicates:
 Support for the parts of CQL that are not part of Simple CQL is added in additional
 requirements classes in <<cql-enhancements>>:
 
-* the rule `arrayPredicate` is added by requirements class <<rc_arrays,Arrays>>;
-* the rule `function` is added by requirements class <<rc_functions,Functions>>;
-* the rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>;
-* the additional values in rule `spatialOperator` are added by requirements class <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>;
-* the additional values in rule `temporalOperator` are added by requirements class <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>.
+* The rule `arrayPredicate` is added by requirements class <<rc_arrays,Arrays>>;
+* The rule `function` is added by requirements class <<rc_functions,Functions>>;
+* The rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>;
+* The additional values in rule `spatialOperator` are added by requirements class <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>;
+* The additional values in rule `temporalOperator` are added by requirements class <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>.
 
 Examples of Simple CQL filter expressions are included in the subsequent sub-clauses.
 
@@ -57,7 +57,7 @@ Examples of Simple CQL filter expressions are included in the subsequent sub-cla
 === Literal values
 
 A literal value is any part of an CQL filter expression that is used
-exactly as it is specified in the expression. Literal values include
+exactly as it is specified in the expression. Literal values include:
 
 * character strings (rule `characterLiteral`),
 * numbers (rule `numericLiteral`),

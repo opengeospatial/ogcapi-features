@@ -6,11 +6,34 @@ This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which 
 For the purposes of this document, the following additional terms and definitions apply in addition to the terms defined
 in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 
+[[collection-def]]
+==== collection
+an object that groups multiple resources in a single unit
+
+[[endpoint-def]]
+==== endpoint 
+a web address (URI) at which access can be gained to a service or resource
+
+[[filter-def]]
 ==== filter
 **predicate** encoded for transmission between systems
 
+[[predicate-def]]
 ==== predicate
 set of computational operations applied to a data instance which evaluate to true or false [Filter Encoding 2.0.2]
+
+[[publisher-def]]
+==== publisher
+an entity offering a resource at an endpoint
+
+[[queryable-def]]
+==== queryable
+a token that represents a property of a resource that can be used in a filter expression
+
+[[resource-def]]
+==== resource / web resource
+any thing, whether digital, physical or abstract that is identified using a
+https://tools.ietf.org/html/rfc8820[Uniform Resource Identifier]
 
 === Symbols
 
