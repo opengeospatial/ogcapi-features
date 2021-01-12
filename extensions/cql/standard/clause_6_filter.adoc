@@ -7,7 +7,7 @@ include::requirements/requirements_class_filter.adoc[]
 
 <<OAFeat-1,OGC API - Features - Part 1: Core>> (and the draft http://docs.opengeospatial.org/DRAFTS/20-024.html[OGC API - Common - Part 2: Geospatial Data] standard) define two filtering parameters on the resource at path `/collections/{collectionId}/items`: `bbox` and `datetime`. <<OAFeat-1,OGC API - Features - Part 1: Core>> also adds support for simple equality predicates logically joined using the `AND` operator. These capabilities offer simple resource filtering for HTTP requests.
 
-This Filter class defines additional query parameters that allow more
+The Filter requirements class defines additional query parameters that allow more
 complex filtering expressions to be specified when querying server resources.
 
 Specifically, this clause defines the parameters, `filter`, `filter-lang` and
@@ -20,7 +20,7 @@ expressions.
 [[filter-queryables]]
 === Queryables
 
-Part 3 does not assume that the content schema of a
+This standard does not assume that the content schema of a
 resource being queried is available for inspection. Therefore, a means needs
 to exist to interrogate an <<endpoint-def,endpoint>> to determine the names and types of the
 properties or keys that may be used to construct a filter expression
@@ -154,7 +154,7 @@ include::requirements/filter/REQ_mixing-expressions.adoc[]
 
 === Filter expression languages
 
-Part 3 defines a filter expression language called the 
+This standard defines a filter expression language called the 
 <<cql-core,Common Query Language (CQL)>>. However, support for
 this filter expression language is not mandatory and other languages 
 can be used as the value of the <<filter-param,filter parameter>>, too.  

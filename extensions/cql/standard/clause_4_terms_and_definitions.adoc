@@ -8,7 +8,7 @@ in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 
 [[collection-def]]
 ==== collection
-an object that groups multiple resources in a single unit
+a body of resources that belong or are used together; an aggregate, set, or group of related resources (OGC 20-024).
 
 [[endpoint-def]]
 ==== endpoint 
@@ -20,11 +20,13 @@ a web address (URI) at which access can be gained to a service or resource
 
 [[predicate-def]]
 ==== predicate
-set of computational operations applied to a data instance which evaluate to true or false [Filter Encoding 2.0.2]
+set of computational operations applied to a data instance which evaluate to true or false (http://docs.opengeospatial.org/is/09-026r2/09-026r2.html[OGC Filter Encoding 2.0 Encoding Standard - With Corrigendum])
 
 [[publisher-def]]
 ==== publisher
-an entity offering a resource at an endpoint
+entity responsible for making a resource available (https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher[Dublic Core Metadata Initiative - DCMI Metadata Terms])
+
+NOTE: As content of OGC API standards, a resource is typically published at an endpoint.
 
 [[queryable-def]]
 ==== queryable
@@ -32,8 +34,7 @@ a token that represents a property of a resource that can be used in a filter ex
 
 [[resource-def]]
 ==== resource / web resource
-any thing, whether digital, physical or abstract that is identified using a
-https://tools.ietf.org/html/rfc8820[Uniform Resource Identifier]
+any information that can be named and is the intended conceptual target of a hypertext reference (https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf[Architectural Styles and the Design of Network-based Software Architectures])
 
 === Symbols
 
