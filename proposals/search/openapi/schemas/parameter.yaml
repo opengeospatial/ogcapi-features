@@ -4,19 +4,19 @@ required:
    - type
 properties:
    id:
-      description: the token that may be used as a query parameter
+      description: the identifier/name for the stored query parameter
       type: string
    title:
-      description: a human readable title for the queryable
+      description: a human readable title for the stored query parameter
       type: string
    description:
-      description: a human-readable narrative describing the queryable
+      description: a human-readable narrative describing the stored query parameter
       type: string
    language:
       description: the language used for the title and description
       type: string
    type:
-      description: the data type of the queryable
+      description: the data type of the stored query parameter
       type: string
       enum:
       - string
