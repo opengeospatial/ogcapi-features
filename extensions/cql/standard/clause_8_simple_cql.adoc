@@ -369,6 +369,8 @@ include::requirements/simple-cql/REQ_temporal-predicates.adoc[]
 
 All temporal literals are in the Gregorian Calendar.
 
+NOTE: This is a deliberate restriction to keep implementations of CQL simple, avoiding requirements to transformation time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API standards.
+
 [[example_8_10]]
 .Examples temporal predicate
 ====
