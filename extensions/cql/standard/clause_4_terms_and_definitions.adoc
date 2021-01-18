@@ -6,11 +6,35 @@ This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which 
 For the purposes of this document, the following additional terms and definitions apply in addition to the terms defined
 in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 
+[[collection-def]]
+==== collection
+a body of resources that belong or are used together; an aggregate, set, or group of related resources (http://docs.opengeospatial.org/DRAFTS/20-024.html#terms_and_definitions[OGC 20-024, OGC API - Common - Part 2: Collections]).
+
+[[endpoint-def]]
+==== endpoint 
+a web address (URI) at which access can be gained to a service or resource
+
+[[filter-def]]
 ==== filter
 **predicate** encoded for transmission between systems
 
+[[predicate-def]]
 ==== predicate
-set of computational operations applied to a data instance which evaluate to true or false [Filter Encoding 2.0.2]
+set of computational operations applied to a data instance which evaluate to true or false (http://docs.opengeospatial.org/is/09-026r2/09-026r2.html[OGC Filter Encoding 2.0 Encoding Standard - With Corrigendum])
+
+[[publisher-def]]
+==== publisher
+entity responsible for making a resource available (https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher[Dublic Core Metadata Initiative - DCMI Metadata Terms])
+
+NOTE: As content of OGC API standards, a resource is typically published at an endpoint.
+
+[[queryable-def]]
+==== queryable
+a token that represents a property of a resource that can be used in a filter expression
+
+[[resource-def]]
+==== resource / web resource
+any information that can be named and is the intended conceptual target of a hypertext reference (https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf[Architectural Styles and the Design of Network-based Software Architectures])
 
 === Symbols
 

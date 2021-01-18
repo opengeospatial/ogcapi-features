@@ -6,14 +6,14 @@
 This clause specifies requirements for enhancements to <<cql-core,Simple CQL>>.
 Specifically, this clause defines requirements for:
 
-* additional spatial operators
-* additional temporal operators
-* support for functions in CQL
-* support for arithmetic expression in CQL
-* support for arrays in CQL
+* Additional spatial operators;
+* Additional temporal operators;
+* Support for functions in CQL;
+* Support for arithmetic expression in CQL;
+* Support for arrays in CQL.
 
-In each case, the clause specifies requirements for the rules in <<cql-bnf>> not
-supported by Simple CQL.
+In each case, this clause specifies requirements for the rules in <<cql-bnf>>
+not supported by Simple CQL.
 
 [[enhanced-spatial-operators]]
 === Requirements Class "Enhanced Spatial Operators"
@@ -29,14 +29,13 @@ include::requirements/enhanced-spatial-operators/REQ_enhanced-spatial-operators.
 
 NOTE: The spatial predicates currently use a different pattern than the
 comparison and temporal predicates and are written like function calls.
-This difference is inherited from previous versions of CQL. It is an open
-issue, whether this version of CQL should change the spatial predicates to
-be consistent with the other predicates or to keep the legacy because of
-existing CQL implementations. Comments are welcome in the
-https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue]
-on this topic.
+This difference is inherited from previous versions of CQL. This is an open
+issue: Whether this version of CQL used in the OGC API - Features - Part 3 
+standard should change the spatial predicates to be consistent with the other
+predicates or to keep the legacy because of existing CQL implementations.
+Comments are welcome in the https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue] on this topic.
 
-The following table lists the mathematical definitions of each spatial operators
+The following table lists the mathematical definitions of each spatial operator
 as described in <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 
 [reftext='{table-caption} {counter:table-num}']
@@ -65,18 +64,18 @@ image::images/touches.png[alt=Touches,width=70%]
 .Examples of the WITHIN relationship Polygon/Polygon(a), Polygon/LineString(b), LineString/LineString(c), and Polygon/Point(d)
 image::images/within.png[alt=Within,width=70%]
 
-NOTE: If geometry a `CONTAINS` geometry b, then geometry b is `WITHIN` geometry a.
+NOTE: If geometry *_a_* `CONTAINS` geometry *_b_*, then geometry *_b_* is `WITHIN` geometry *_a_*.
 
 [#figure3]
-.Examples of the OVERLAPS relationship Polygon/LineString(a) and LineString/LineString(b)
+.Examples of the OVERLAPS relationship Polygon/LineString(a) and LineString/LineString(b).
 image::images/overlaps.png[alt=Overlaps,width=70%]
 
 [#figure4]
-.Examples of the CROSSES relationship Polygon/LineString(a) and LineString/LineString(b)
+.Examples of the CROSSES relationship Polygon/LineString(a) and LineString/LineString(b).
 image::images/crosses.png[alt=Crosses,width=70%]
 
 [[example_9_1]]
-.Example of a spatial relationship between two literal geometries
+.Example of a spatial relationship between two literal geometries.
 ====
 ----
 CROSSES(LINESTRING(43.72992 -79.2998, 43.73005 -79.2991, 43.73006 -79.2984,
@@ -118,7 +117,7 @@ CROSSES(LINESTRING(43.72992 -79.2998, 43.73005 -79.2991, 43.73006 -79.2984,
 ====
 
 [[example_9_2]]
-.Example of a spatial relationship between a property and a literal geometry
+.Example of a spatial relationship between a property and a literal geometry.
 ====
 ----
 CROSSES(road,POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
@@ -181,12 +180,8 @@ operators that an implementation of this extension might offer.
 
 include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators.adoc[]
 
-CQL supports date and timestamps as time instants, but even the smallest "instant" has a
-duration and can be evaluated as an interval, too. For the purposes of determining
-the temporal relationship between two temporal expressions, an instant is treated as
-the interval from the beginning to the end of the instant.
-
-The following diagram illustrates the meaning of the temporal operators.
+CQL supports date and timestamps as time instants, but even the smallest
+"instant" has a duration and can also be evaluated as an interval. For the purposes of determining the temporal relationship between two temporal expressions, an instant is treated as the interval from the beginning to the end of the instant. The following diagram illustrates the meaning of the temporal operators.
 
 [#figure5]
 .The elementary relations between time intervals
