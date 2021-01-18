@@ -25,14 +25,24 @@ document. However, CQL can also be used in other operations, such as updates,
 to identify the subset of resources that should be affected by an operation.
 
 Each resource instance in the source collection is evaluated against a filtering
-expression. The filter expression always evaluates to `true` or `false`. If the
+expression. The filter expression always evaluates to `true`, `false` or `null`. If the
 expression evaluates to `true`, the resource instance satisfies the expression and
 is marked as being in the result set. If the overall filter expression evaluates
-to `false`, the data instance is not in the result set.  Thus, the net effect of
-evaluating a filter expression is a set of resources that satisfy the <<predicate-def,predicates>>
+to `false` or `null`, the data instance is not in the result set.  Thus, the net effect of
+evaluating a filter expression is a set of resources that satisfy the predicates
 in the expression.
 
-CAUTION: This is a DRAFT version of part three (3) of the OGC API - Features standard.
+CQL and its text encoding are not new, but this is the first time CQL is properly
+specified. CQL was created as a text encoding based on the capabilities defined in 
+the https://www.ogc.org/standards/filter[OGC Filter Encoding] standard for use in
+the https://www.ogc.org/standards/cat[OGC Catalogue Service] standard. It was one
+of the design goals to keep CQL as compatible as possible with existing implementations. 
+For example, the classification of operators into logical, comparison, spatial and 
+temporal operators as well as their names and syntax are unchanged from the original 
+definitions in OGC Filter Encoding. For the spatial and temporal operators this 
+document either defines the operator or references to definition of the operator.
+
+CAUTION: This is a DRAFT version of the 3rd part of the OGC API - Features standards.
 This draft is not complete and there are open issues that are still under discussion.
 
 [big]*ii.    Keywords*
@@ -53,7 +63,9 @@ Recipients of this document are requested to submit, with their comments, notifi
 The following organizations submitted this document to the Open Geospatial Consortium (OGC):
 
 * CubeWerx Inc.
+* GeoSolutions di Giannecchini Simone & C. s.a.s. 
 * interactive instruments GmbH
+* US Army Geospatial Center (AGC)
 
 [big]*v.     Submitters*
 
@@ -63,4 +75,6 @@ All questions regarding this submission should be directed to the editors or the
 |*Name* |*Affiliation*
 |Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
 |Clemens Portele _(editor)_ |interactive instruments GmbH
+|Andrea Aime |GeoSolutions di Giannecchini Simone & C. s.a.s.
+|Jeff Harrison |US Army Geospatial Center (AGC)
 |===
