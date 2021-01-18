@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/temporal-predicate* 
-^|A |A temporal predicate evaluates two time-valued expressions to determine if the expressions satisfy the requirements of the specified temporal operator.  If the requirements of the operator are satisfied, then the predicate SHALL evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+^|A |If the requirements of the temporal operator are satisfied, then the predicate SHALL evaluate to the Boolean value `TRUE`. Otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
 ^|B |The `ANYINTERACTS` operator SHALL evaluate as (using the temporal operators from <<enhanced-temporal-operators>>):
 
 ----
