@@ -16,11 +16,11 @@ This standard defines the following conformance classes:
 The <<rc_filter,Filter>> conformance class defines a set of HTTP query
 parameters that may be used to specify complex filter expressions on
 HTTP requests.  The specific set of parameters defined in this conformance
-class are:
+class is:
 
-* `filter` (the filter expression)
-* `filter-lang` (the language used in the filter expression)
-* `filter-crs` (the coordinate reference system used in the filter expression)
+* `filter` - The filter expression.
+* `filter-lang` - The language used in the filter expression.
+* `filter-crs` - The Coordinate Reference System used in the filter expression.
 
 This conformance class also defines the Queryables resource (at paths
 `/queryables` and `/collections/{collectionId}/queryables`) that can be
@@ -28,18 +28,20 @@ used to determine the list of property names and types that may be used
 to construct filter expressions.
 
 The <<rc_features-filter,Features Filter>> conformance class defines the
-binding between this the <<rc_filter,Filter>> conformance class the
+binding between the <<rc_filter,Filter>> conformance class and the
 <<OAFeat-1,OGC API - Features - Part 1: Core>> standard.
 
 The <<rc_simple-cql,Simple CQL>> conformance class defines the minimal subset
-of the Common Query Language (CQL) that all implementations have to support
+of the Common Query Language (CQL) that all implementations must support
 ("Simple CQL"). Simple CQL is intended to be a minimal useful set of
 predicates that support enhanced fine-grained read-access to collections of
-resources.  In this case "enhanced" means filtering capabilities beyond those
-supported by the core OGC API Common specification (i.e., `bbox`, `datetime`
+resources.  In this case, "enhanced" means filtering capabilities beyond those
+supported by the core OGC API Common standard (i.e., `bbox`, `datetime`
 and optionally collection-specific properties).
 
-The specific set of operators defined in this conformance class are:
+NOTE: OGC API - Common is still in draft form and is not an official OGC standard.
+
+The specific set of operators defined in this conformance class is:
 
 * Logical operators:
 ** and
@@ -59,6 +61,8 @@ The specific set of operators defined in this conformance class are:
 ** intersects
 * Temporal operators:
 ** anyinteracts
+
+NOTE: The `anyinteracts` temporal operator is defined in this document by requirement <<req_simple-cql_temporal-predicate,/req/simple-cql/temporal-predicate>>.
 
 An encoding of CQL may be used as the value of the filter parameters defined
 in the <<rc_filter,Filter>> conformance class.

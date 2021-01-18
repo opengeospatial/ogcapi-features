@@ -7,29 +7,29 @@ include::requirements/requirements_class_filter.adoc[]
 
 <<OAFeat-1,OGC API - Features - Part 1: Core>> (and the draft http://docs.opengeospatial.org/DRAFTS/20-024.html[OGC API - Common - Part 2: Geospatial Data] standard) define two filtering parameters on the resource at path `/collections/{collectionId}/items`: `bbox` and `datetime`. <<OAFeat-1,OGC API - Features - Part 1: Core>> also adds support for simple equality predicates logically joined using the `AND` operator. These capabilities offer simple resource filtering for HTTP requests.
 
-This requirements class defines additional query parameters that allow more
+The Filter requirements class defines additional query parameters that allow more
 complex filtering expressions to be specified when querying server resources.
 
 Specifically, this clause defines the parameters, `filter`, `filter-lang` and
 `filter-crs`.
 
-This requirements class also defines resources for discovering the list of
+The Filter requirements class also defines resources for discovering the list of
 resource properties (and their types) that may be used to construct filter
 expressions.
 
 [[filter-queryables]]
 === Queryables
 
-This extension does not assume that the content schema of a
-resource being queried is available for inspection and thus a means needs
-to exist to interrogate an endpoint to determine the names and types of the
+This standard does not assume that the content schema of a
+resource being queried is available for inspection. Therefore, a means needs
+to exist to interrogate an <<endpoint-def,endpoint>> to determine the names and types of the
 properties or keys that may be used to construct a filter expression
 ("queryables").
 
-In addition, a publisher may want to support queryables that are not
+In addition, a <<publisher-def,publisher>> may want to support <<queryable-def,queryables>> that are not
 directly represented as resource properties in the content schema of the
-resource. Or the publisher may want to restrict filtering on certain
-properties, e.g., because the backend datastore has not been configured
+resource. Or the <<publisher-def,publisher>> may want to restrict filtering on certain
+properties. For example, because the backend datastore has not been configured
 to allow high-performance queries on those properties.
 
 include::requirements/filter/REQ_get-queryables-op-global.adoc[]
@@ -38,8 +38,8 @@ include::requirements/filter/REQ_get-queryables-op-local.adoc[]
 
 include::requirements/filter/REQ_get-queryables-response.adoc[]
 
-To support clients, it is recommended to provide additional detail
-about the meaning of the property and the possible values:
+To support clients, providing additional detail about the meaning of the
+property and the possible values is recommended:
 
 include::recommendations/filter/REC_queryables-schema.adoc[]
 
@@ -81,9 +81,9 @@ include::recommendations/filter/REC_queryables-schema.adoc[]
 [[filter-param]]
 === Parameter filter
 
-This extension defines a general parameter, `filter`, whose value is a filter
-expression to be applied when retrieving resources in order to determine which
-resources should be included in a result set.
+The <<rc_filter,Filter>> requirements class defines a general parameter, `filter`, whose
+value is a filter expression to be applied when retrieving resources. This
+is necessary to determine which resources should be included in a result set.
 
 include::requirements/filter/REQ_filter-param.adoc[]
 
@@ -92,12 +92,11 @@ include::requirements/filter/REQ_filter-param.adoc[]
 
 The only filterable resource defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>
 is the Features resource at `/collections/{collectionId}/items` which operates 
-on a single collection.  However an API can provide other, higher level, resources 
-(e.g. at `/search` or `/tiles`) that potentially operate on multiple collections. 
+on a single collection.  However an API can provide other, higher level, resources that potentially operate on multiple collections. 
 
 The simplest approach for handling such cross-collection queries is one that is 
 consistent with one-collection queries.  Specifically, the `filter` parameter, if
-provided, applies to all referenced collections.  This, of course, implies that all 
+provided, applies to all referenced collections.  Of course this implies that all 
 properties referenced in the filter expression are valid for all referenced collections 
 and should be taken from the <<filter-queryables,global queryables list>>.
 
@@ -140,17 +139,22 @@ in this standard.
 [[filter-filter-crs]]
 === Parameter filter-crs
 
+For reasons discussed in the http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#SDWBP[W3C/OGC Spatial Data on the Web Best Practices document], 
+<<OAFeat-1,OGC API - Features - Part 1: Core>> uses WGS 84 longitude and latitude and the default Coordinate Reference System. <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>> extends the capabilities of Part 1 to allow other coordinate systems to be used.  The `filter-crs` parameter defined in this clause allows clients to indicate to servers that support other CRSs, which CRS is being used to encode geometric values in a filter expression.
+
 include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
 
 include::requirements/filter/REQ_filter-crs.param.adoc[]
 
 === Interaction with other predicates
 
+<<OAFeat-1,OGC API - Features - Part 1: Core>> defines the parameters `bbox`, `datetime` and http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameters_for_filtering_on_feature_properties[parameters for filtering on feature properties].  This clause defines how the `filter` parameter and these core parameters should interact if specified in a single request.
+
 include::requirements/filter/REQ_mixing-expressions.adoc[]
 
 === Filter expression languages
 
-This extension defines a filter expression language called the 
+This standard defines a filter expression language called the 
 <<cql-core,Common Query Language (CQL)>>. However, support for
 this filter expression language is not mandatory and other languages 
 can be used as the value of the <<filter-param,filter parameter>>, too.  
@@ -163,5 +167,7 @@ recommended if they are suitable for the intended use.
 
 [[filter-response]]
 === Response
+
+A filter expression defines a subset of items from a collection that should be presented in a query response.
 
 include::requirements/filter/REQ_response.adoc[]
