@@ -1,26 +1,25 @@
 == Scope
 
-This document specifies an extension that defined the behaviour of a server
-that supports simple transactions.  Simple transactions are transactions that
-add, replace, modify or delete individual resources from a single collection.
+This document specifies an extension that defines the behaviour of a server
+that supports operations to add, replace, modify or delete individual resources 
+from a collection.
 
-Additional specifications will subsequently be created to handle complex
-transactions; that is transactions that require batch or atomic semantics.
+NOTE: Additional specifications are planned to handle transactions that require batch or atomicity semantics.
 
 Specifically, this document specifies:
 
 * How to add a new resource instance to a collection (i.e. insert).
 
-* How to modify an existing resource from a collection; this includes entirely replacing the existing resource (i.e. replace) or simply modifying one or more parts of a resource (i.e. update).
+* How to modify an existing resource from a collection; this includes entirely replacing the existing resource (i.e. replace) or simply modifying one or more properties of a resource (i.e. update).
 
 * How to remove an existing resource from a collection (i.e. delete).
 
 The following table crosswalks each of the resource endpoints discussed in this
 standard with the HTTP methods POST, PUT, PATCH and DELETE.  Each intersecting
-cell in the table either contains the name of the operation that, that 
-combination of resource endpoint and HTTP method enables OR contains the
-phrase `NOT DEFINE` which is used to indicate that this specification does not
-describe any behaviour for that combination of resource endpoint and HTTP 
+cell in the table either contains the name of the operation for that 
+combination of resource endpoint and HTTP method, or it contains the
+phrase "n/a" which is used to indicate that this specification does not
+specify any behaviour for that combination of resource endpoint and HTTP 
 method.
 
 [#endpoint_method_matrix,reftext='{table-caption} {counter:table-num}']
@@ -29,6 +28,6 @@ method.
 |===
 |Resource endpoint 4+|HTTP METHOD
 | |**POST** |**PUT** |**PATCH** |**DELETE**
-|/collections/{collectionId}/items |<<simpletx-insert,insert>> |NOT DEFINED |NOT DEFINED |NOT DEFINED
-|/collections/{collectionId}/items/{resourceId} |**NOT DEFINED** |<<simpletx-update-put,replace>> |<<path-update,update>> |<<simpletx-delete,delete>>
+|/collections/{collectionId}/items |<<simpletx-insert,insert>> |n/a |n/a |n/a
+|/collections/{collectionId}/items/{resourceId} |n/a |<<simpletx-update-put,replace>> |<<path-update,update>> |<<simpletx-delete,delete>>
 |===

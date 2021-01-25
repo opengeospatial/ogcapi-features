@@ -5,17 +5,23 @@ This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which 
 
 For the purposes of this document, the following additional terms, definitions and abbreviated terms apply in addition to those defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 
-==== collection items end point
-the path of the end point from which the resources of items of a collection can be accesses
+[[endpoint-def]]
+==== endpoint 
+a web address (URI) at which access can be gained to a service or resource [from OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)]
 
-EXAMPLE: For features, the collection items end point is  '/collections/{collectionId}/items'.
+[[resources-endpoint-def]]
+==== resources endpoint
+endpoint of the collection of resource instances from a collection
 
-EXAMPLE: For processes, the collection items end point is '/processes'
+EXAMPLE 1: For features or records, the endpoint is `{landingPageUrl}/collections/{collectionId}/items`.
 
-==== resource end point
-the path of the end point used to access a specific instance of a resource from a collection
+EXAMPLE 2: For processes, the endpoint is `{landingPageUrl}/processes`.
 
-EXAMPLE: For features, the resource end point is '/collections/{collectionId}/items/{featureId}'.
+[[resource-endpoint-def]]
+==== resource endpoint
+endpoint of a specific instance of a resource from a collection
 
-EXAMPLE: For processes, the resource end point is '/processes/{processId}'.
+EXAMPLE 1: For features, the endpoint is `{landingPageUrl}/collections/{collectionId}/items/{featureId}`.
+
+EXAMPLE 2: For processes, the endpoint is `{landingPageUrl}/processes/{processId}`.
 
