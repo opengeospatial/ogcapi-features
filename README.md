@@ -128,13 +128,13 @@ Then run:
 
 ```
 # Part 1: Core
-asciidoctor core/standard/17-069.adoc
+asciidoctor -a data-uri -r asciidoctor-diagram core/standard/17-069.adoc
 # Part 2: Coordinate Reference Systems by Reference
-asciidoctor extensions/crs/standard/18-058.adoc
+asciidoctor -a data-uri -r asciidoctor-diagram extensions/crs/standard/18-058.adoc
 # Part 3: Common Query Language
-asciidoctor extensions/cql/standard/19-079.adoc
+asciidoctor -a data-uri -r asciidoctor-diagram extensions/cql/standard/19-079.adoc
 # Part 4: Simple Transactions
-asciidoctor extensions/transactions/simple/standard/20-002.adoc
+asciidoctor -a data-uri -r asciidoctor-diagram extensions/transactions/simple/standard/20-002.adoc
 ```
 
 The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.
