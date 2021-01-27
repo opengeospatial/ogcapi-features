@@ -1,3 +1,58 @@
 == Conventions and background
 
+=== General remarks
+
 See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clauses 5 and 6.
+
+=== Additional link relation types
+
+#TODO#
+
+////
+The following OGC link relation types are introduced in this document (no applicable registered link relation type could be identified):
+
+* **\http://www.opengis.net/def/rel/ogc/1.0/queryables**: Refers to a resource that lists properties that can be used to query items in the collection represented by the link's context.
+////
+
+////
+=== Use of BNF
+
+BNF as specified in <<BNF,Augmented BNF for Syntax Specifications>> is used to formally specify the grammar of the Common Query Language (CQL).
+////
+
+////
+=== Use of JSON Schema
+
+JSON Schema draft 2019-09 (<<JSONSCHEMA>>, <<JSONSCHEMAVALIDATION>>) is used to formally specify the schema of the JSON encoding of CQL (CQL-JSON).
+////
+
+=== Sequence diagrams
+
+This document uses sequence diagrams to illustrate the flow of requests and responses 
+between client and server.
+
+The token `<resources endpoint>` is used for an endpoint that accesses
+resources from a collection. 
+
+EXAMPLE 1: For features, these endpoints are described by the 
+URI template `{landingPageUrl}/collections/{collectionId}/items`. See <<OAFeat-1>>.
+
+EXAMPLE 2: For processes, these endpoints are described by the 
+URI template `{landingPageUrl}/process`. See <<OAProc-1>>.
+
+The token `<resource endpoint>`` is used for the endpoint that accesses a specific 
+resource from a collection.
+
+EXAMPLE 3: For features, these endpoints are described by the 
+URI template `{landingPageUrl}/collections/{collectionId}/items/{featureId}`. See <<OAFeat-1>>.
+
+EXAMPLE 4: For processes, these endpoints are described by the 
+URI template `{landingPageUrl}/process/{processId}`. See <<OAProc-1>>.
+
+=== Dependencies to other requirements classes
+
+The requirements classes in this extension distinguish two types of dependencies to other specifications or requirements classes:
+
+First, there are the "regular" dependencies. Every server implementing the requirements class has to conform to the referenced specification or requirements class.
+
+In addition, requirements classes can also have "conditional dependencies". Servers implementing the requirements class do not have to conform to the referenced specification or requirements class, but if they do, they have to conform to the requirements that identify the conditional dependency as a pre-condition for the normative statement.

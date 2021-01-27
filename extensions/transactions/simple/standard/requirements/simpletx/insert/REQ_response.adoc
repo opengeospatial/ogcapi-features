@@ -1,7 +1,7 @@
-[[req_simpletx_insert_response]]
+[[req_simpletx_insert-response]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/simpletx/insert/response* 
-^|A |A successful execution of the operation shall be reported as a response with a HTTP status code '201'.
-^|B |The response shall include a 'Location' header with the URL of the newly added resource (i.e. path of the resource end point).
+^|*Requirement {counter:req-id}* |*/req/simpletx/insert-response* 
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `201`.
+^|B |The response SHALL include a `Location` header with the URI of the newly added resource (i.e. path of the resource endpoint).
 |===

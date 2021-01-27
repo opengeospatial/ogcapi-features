@@ -8,7 +8,7 @@ NOTE: Additional specifications are planned to handle transactions that require 
 
 Specifically, this document specifies:
 
-* How to add a new resource instance to a collection (i.e. insert).
+* How to add a new resource instance to a collection (i.e. create).
 
 * How to modify an existing resource from a collection; this includes entirely replacing the existing resource (i.e. replace) or simply modifying one or more properties of a resource (i.e. update).
 
@@ -28,6 +28,6 @@ method.
 |===
 |Resource endpoint 4+|HTTP METHOD
 | |**POST** |**PUT** |**PATCH** |**DELETE**
-|/collections/{collectionId}/items |<<simpletx-insert,insert>> |n/a |n/a |n/a
-|/collections/{collectionId}/items/{resourceId} |n/a |<<simpletx-update-put,replace>> |<<path-update,update>> |<<simpletx-delete,delete>>
+|/collections/{collectionId}/items |<<simpletx-create,create>> |n/a |n/a |n/a
+|/collections/{collectionId}/items/{resourceId} |n/a |<<simpletx-replace,replace>> |<<patch-update,update>> |<<simpletx-delete,delete>>
 |===
