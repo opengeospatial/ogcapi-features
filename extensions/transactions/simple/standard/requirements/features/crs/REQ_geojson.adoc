@@ -1,7 +1,0 @@
-[[req_simpletx_crs_geojson]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/simpletx/crs/geojson* 
-^|A |If a server implements this standard and also implements the http://fix.me[OGC API - Features - Part 2: Coordinate Reference Systems by Reference] extension and the request body contains a feature encoded using GeoJSON then the prior arrangements provision of the GeoJSON standard (see https://tools.ietf.org/html/rfc7946#page-12) shall apply between the server and the client.
-^|B |The feature in the request body shall thus be subject to requirements articulated in <<request-body-crs>>.
-|===

@@ -1,7 +1,9 @@
-[[req_simpletx_crs_other-crs]]
+[[req_features_crs-other-crs]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/simpletx/crs/other-crs*
-^|A |If a server implementing this standard also supports the http://fix.me[OGC API - Features - Part 2: Coordinate Reference Systems by Reference] extension, then all geometry-valued feature proprties presented to the server in a request body shall be expressed using a mutually agreeable crs that has been negotiated as per https://github.com/opengeospatial/conneg-by-crs/blob/master/18-072-Content-Negotiation-by-CRS.md[Negotiating Content by Coordinate Reference System (CRS)] for the collection being operated on.
-^|B |The specific collection being operated on is indicated by the {collectionId} component of the resource path.
+^|*Requirement {counter:req-id}* |*/req/features/crs-other-crs*
+^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
+^|Condition |The request declares that coordinates are in a specific coordinate reference system (by using the `Content-Crs` HTTP header or through information in the request body). 
+^|A |The server SHALL interpret all geometries in request bodies of requests to the resources or resource endpoints to be in the coordinate reference system declared in the request.
+^|B |If the server does not support the coordinate reference system declared in the request for the feature collection, the server SHALL return an error.
 |===

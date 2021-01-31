@@ -3,5 +3,6 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/simpletx/insert-response* 
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `201`.
-^|B |The response SHALL include a `Location` header with the URI of the newly added resource (i.e. path of the resource endpoint).
+^|B |A response with HTTP status code `201` SHALL include a `Location` header with the URI of the newly added resource (i.e. path of the resource endpoint).
+^|C |If the operation is not executed immediately, but is added to a processing queue, the response SHALL have a HTTP status code `202`.
 |===

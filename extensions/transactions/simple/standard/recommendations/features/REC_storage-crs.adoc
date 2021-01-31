@@ -1,8 +1,9 @@
-[[rec_simpletx_crs_storage-crs]]
+[[rec_features_crs-storage-crs]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommendation {counter:rec-id}* |*/rec/simpletx/crs/storage-crs*
-^|A |If a server implementing this standard also supports the http://fix.me[OGC API - Features - Part 2: Coordinate Reference Systems by Reference] extension and if it is suitable for the intended use, then it is recommended that all geometry-valued feature properties presented to the server in a request body be expressed using the storage crs advertised by the server (see: http://fix.me[OGC API - Features - Part 2: Coordinate Reference Systems by Reference, Storage CRS]) for the collection being operated on.
-^|B |The specific collection being operated on is indicated by the {collectionId
-} component of the resource path.
+^|*Recommendation {counter:rec-id}* |*/rec/features/crs-storage-crs*
+^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
+^|A |The server SHOULD declare the `storageCrs` property in each Collection resource for each feature collection that supports CREATE, REPLACE or UPDATE  requests.
+^|B |The server SHOULD support all CRSs that are declared in the `crs` property of the Collection resource for each feature collection that supports CREATE, REPLACE or UPDATE  requests.
+^|C |The server MAY only support the storage CRS in CREATE, REPLACE or UPDATE requests to avoid coordinate conversion in mutations of feature resources.
 |===

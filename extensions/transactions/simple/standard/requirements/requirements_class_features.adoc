@@ -4,5 +4,13 @@
 2+|*Requirements Class*
 2+|http://www.opengis.net/spec/ogcapi-features-4/1.0/req/features
 |Target type |Web API
-|Dependency |<<OAFeat-1,OGC API - Features - Part 1: Core>>
+|Dependency |<<simpletx>>
+|Dependency |<<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "Core">>
+|Conditional Dependency |<<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "GeoJSON">>
+|Conditional Dependency |<<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "Geography Markup Language (GML), Simple Features Profile, Level 0">>
+|Conditional Dependency |<<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "Geography Markup Language (GML), Simple Features Profile, Level 2">>
+|Conditional Dependency |<<update>>
+|Conditional Dependency |<<rfc7396,RFC 7396 (JSON Merge Patch)>>
+|Conditional Dependency |<<rfc5261,RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)>>
+|Conditional Dependency |<<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
 |===

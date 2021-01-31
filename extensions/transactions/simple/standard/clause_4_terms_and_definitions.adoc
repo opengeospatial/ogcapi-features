@@ -13,15 +13,15 @@ a web address (URI) at which access can be gained to a service or resource [from
 ==== resources endpoint
 endpoint of the set of resource instances from a collection
 
-EXAMPLE 1: For features or records, the endpoint is `{landingPageUrl}/collections/{collectionId}/items`.
+EXAMPLE 1: For features or records, the endpoint is `{landingPageUri}/collections/{collectionId}/items`.
 
-EXAMPLE 2: For processes, the endpoint is `{landingPageUrl}/processes`.
+EXAMPLE 2: For processes, the endpoint is `{landingPageUri}/processes`.
 
 [[resource-endpoint-def]]
 ==== resource endpoint
 endpoint of a specific instance of a resource from a collection
 
-EXAMPLE 1: For features, the endpoint is `{landingPageUrl}/collections/{collectionId}/items/{featureId}`.
+EXAMPLE 1: For features, the endpoint is `{landingPageUri}/collections/{collectionId}/items/{featureId}`.
 
-EXAMPLE 2: For processes, the endpoint is `{landingPageUrl}/processes/{processId}`.
+EXAMPLE 2: For processes, the endpoint is `{landingPageUri}/processes/{processId}`.
 
