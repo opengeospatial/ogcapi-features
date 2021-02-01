@@ -13,7 +13,7 @@ to transmit a complete replacement resource.
 Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This standard does not mandate that a specific encoding for this document be supported by a server.  However, this extension provides requirements for the use of <<rfc7396,RFC 7396 (JSON Merge Patch)>> for resource encoded using JSON (e.g. GeoJSON) and the use of <<rfc5261,RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)>> for resources encoded using XML (e.g. GML).
 
 [[patch-update]]
-=== Modifying and existing resource (UPDATE)
+=== Modifying an existing resource (UPDATE)
 
 ==== Sequence diagram
 
