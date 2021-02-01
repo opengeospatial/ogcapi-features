@@ -1,18 +1,18 @@
-[[update]]
+[[update_clause]]
 == Requirements Class "Update"
 
-[[patch-update-overview]]
+[[update-overview]]
 === Overview
 
-include::requirements/requirements_class_patch-update.adoc[]
+include::requirements/requirements_class_update.adoc[]
 
 A server that implements this requirements class provides the ability to use
 the HTTP PATCH method to modify parts of an existing resource without the need
 to transmit a complete replacement resource.
 
-Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This standard does not mandate that a specific encoding for this document be supported by a server.  However, this extension provides requirements for the use of <<rfc7396,RFC 7396 (JSON Merge Patch)>> for resource encoded using JSON (e.g. GeoJSON) and the use of <<rfc5261,RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)>> for resources encoded using XML (e.g. GML).
+Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This standard does not mandate that a specific encoding for this document be supported by a server.  However, this extension provides requirements for the use of <<rfc7396,RFC 7396 (JSON Merge Patch)>> for resource encoded using JSON (e.g. GeoJSON).
 
-[[patch-update]]
+[[update]]
 === Modifying an existing resource (UPDATE)
 
 ==== Sequence diagram
@@ -37,23 +37,17 @@ updated.
 
 ==== Operation
 
-include::requirements/patch-update/update/patch/REQ_patch-op.adoc[]
+include::requirements/update/REQ_patch-op.adoc[]
 
 ==== Request body
 
-include::requirements/patch-update/update/patch/REQ_body.adoc[]
+include::requirements/update/REQ_body.adoc[]
 
 Details how a PATCH request body has to be processed by a server depends on the resource representation and have to be specified for each resource type and its representations.
 
-////
-include::recommendations/patch-update/update/patch/REC_body-json-merge-patch.adoc[]
-
-include::recommendations/patch-update/update/patch/REC_body-xml-patch.adoc[]
-////
-
 ==== Response
 
-include::requirements/patch-update/update/patch/REQ_response.adoc[]
+include::requirements/update/REQ_response.adoc[]
 
 The status code depends on the server. If the server has updated the resource, the
 response is either `200`, if the response includes additional content such as the

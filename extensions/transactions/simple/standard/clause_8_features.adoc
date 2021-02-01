@@ -1,4 +1,4 @@
-[[features]]
+[[features_clause]]
 == Features
 
 === Overview
@@ -39,6 +39,12 @@ If the server includes the `storageCrs` property in the Collection resource, as 
 
 include::recommendations/features/REC_storage-crs.adoc[]
 
+NOTE: See https://github.com/opengeospatial/ogcapi-features/issues/505[Issue 505]. 
+This does not provide a clear mechanism how a client can determine all the CRSs that 
+are supported for a specific request and it may involve some try and error. Adding yet
+more information to the Collection resource does not seem to be the right approach.
+Use OPTIONS for this?
+
 [[feature-representations]]
 === Representation of features
 
@@ -48,6 +54,17 @@ mandate that a specific feature encoding be supported by a server.
 
 However, this standard provides guidance for the feature encodings specified in
 Part 1: Core with the exception of HTML.
+
+Features in a collection can be constrained to a specific schema, but this does 
+not have to be the case. This standard recommends that servers that have schema
+constraints expose these to clients in the Schema resource at 
+`{landingPageUri}/collections/{collectionId}/schema`, so that clients are able to 
+generate feature representations that are acceptable to the server. 
+The feature schema can and often will depend in the operation, so a Schema
+resource will publish the specific schema representations for the
+CREATE, REPLACE and UPDATE operations.
+
+include::recommendations/features/REC_schema.adoc[]
 
 [[feature-geojson]]
 ==== GeoJSON
@@ -73,5 +90,10 @@ include::requirements/features/REQ_representation-gml-create.adoc[]
 include::requirements/features/REQ_representation-gml-replace.adoc[]
 
 include::requirements/features/REQ_representation-gml-update.adoc[]
+
+This standard does not specify the PATCH syntax / semantics that has to be applied for GML feature updates. Two options are:
+
+- use of the http://docs.opengeospatial.org/is/09-025r2/09-025r2.html#283[Update action from OGC Web Feature Service 2.0]; 
+- use of <<rfc5261,RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)>>.
 
 include::requirements/features/crs/REQ_gml-srsname.adoc[]

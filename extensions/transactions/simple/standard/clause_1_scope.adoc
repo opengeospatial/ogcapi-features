@@ -26,8 +26,8 @@ method.
 .Supported HTTP methods by resource
 [cols="50,12,13,13,12",options="header"]
 |===
-|Resource endpoint 4+|HTTP METHOD
+|Resource endpoint 4+|HTTP method
 | |**POST** |**PUT** |**PATCH** |**DELETE**
-|/collections/{collectionId}/items |<<simpletx-create,create>> |n/a |n/a |n/a
-|/collections/{collectionId}/items/{resourceId} |n/a |<<simpletx-replace,replace>> |<<patch-update,update>> |<<simpletx-delete,delete>>
+|`/collections/{collectionId}/items` |<<create,create>> |n/a |n/a |n/a
+|`/collections/{collectionId}/items/{resourceId}` |n/a |<<replace,replace>> |<<update,update>> |<<delete,delete>>
 |===

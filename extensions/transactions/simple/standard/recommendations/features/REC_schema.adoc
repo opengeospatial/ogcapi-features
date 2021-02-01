@@ -1,0 +1,8 @@
+[[rec_features_schema]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/features/schema*
+^|Condition |The server has schema constraints for features in a collection.
+^|A |The server SHOULD support the HTTP GET method at the Schema resource at `{landingPageUri}/collections/{collectionId}/schema`.
+^|B |The server SHOULD link to the Schema resource from the Collection resource at `{landingPageUri}/collections/{collectionId}` with a link relation type `describedby`.
+|===

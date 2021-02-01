@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>OGC API - Features - Part 4: Simple Transactions</title>
+<title>OGC API - Features - Part 4: Create, Replace, Update and Delete</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book">
 <div id="header">
-<h1>OGC API - Features - Part 4: Simple Transactions</h1>
+<h1>OGC API - Features - Part 4: Create, Replace, Update and Delete</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -490,7 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">OGC API - Features - Part 4: Simple Transactions</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">OGC API - Features - Part 4: Create, Replace, Update and Delete</strong></p></td>
 </tr>
 </tbody>
 </table>
@@ -593,14 +593,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_dependencies_to_other_requirements_classes">5.4. Dependencies to other requirements classes</a></li>
 </ul>
 </li>
-<li><a href="#simpletx">6. Requirements Class "Create/Replace/Delete"</a>
+<li><a href="#create-replace-delete_clause">6. Requirements Class "Create/Replace/Delete"</a>
 <ul class="sectlevel2">
-<li><a href="#simpletx-overview">6.1. Overview</a>
+<li><a href="#create-replace-delete-overview">6.1. Overview</a>
 <ul class="sectlevel3">
 <li><a href="#http_status_codes">6.1.1. HTTP status codes</a></li>
 </ul>
 </li>
-<li><a href="#simpletx-create">6.2. Adding a new resource to a collection (CREATE)</a>
+<li><a href="#create">6.2. Adding a new resource to a collection (CREATE)</a>
 <ul class="sectlevel3">
 <li><a href="#_sequence_diagram">6.2.1. Sequence diagram</a></li>
 <li><a href="#_operation">6.2.2. Operation</a></li>
@@ -609,7 +609,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_exceptions">6.2.5. Exceptions</a></li>
 </ul>
 </li>
-<li><a href="#simpletx-replace">6.3. Replacing an existing resource (REPLACE)</a>
+<li><a href="#replace">6.3. Replacing an existing resource (REPLACE)</a>
 <ul class="sectlevel3">
 <li><a href="#_sequence_diagram_2">6.3.1. Sequence diagram</a></li>
 <li><a href="#_operation_2">6.3.2. Operation</a></li>
@@ -619,7 +619,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_exceptions_2">6.3.6. Exceptions</a></li>
 </ul>
 </li>
-<li><a href="#simpletx-delete">6.4. Removing a resource from a collection (DELETE)</a>
+<li><a href="#delete">6.4. Removing a resource from a collection (DELETE)</a>
 <ul class="sectlevel3">
 <li><a href="#_sequence_diagram_3">6.4.1. Sequence diagram</a></li>
 <li><a href="#_operation_3">6.4.2. Operation</a></li>
@@ -629,10 +629,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#update">7. Requirements Class "Update"</a>
+<li><a href="#update_clause">7. Requirements Class "Update"</a>
 <ul class="sectlevel2">
-<li><a href="#patch-update-overview">7.1. Overview</a></li>
-<li><a href="#patch-update">7.2. Modifying and existing resource (UPDATE)</a>
+<li><a href="#update-overview">7.1. Overview</a></li>
+<li><a href="#update">7.2. Modifying an existing resource (UPDATE)</a>
 <ul class="sectlevel3">
 <li><a href="#_sequence_diagram_4">7.2.1. Sequence diagram</a></li>
 <li><a href="#_operation_4">7.2.2. Operation</a></li>
@@ -643,7 +643,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#features">8. Features</a>
+<li><a href="#features_clause">8. Features</a>
 <ul class="sectlevel2">
 <li><a href="#_overview_3">8.1. Overview</a></li>
 <li><a href="#features-endpoint">8.2. Resources endpoint</a></li>
@@ -818,7 +818,7 @@ method.</p>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Resource endpoint</th>
-<th class="tableblock halign-left valign-top" colspan="4" style="background-color: #FFFFFF;">HTTP METHOD</th>
+<th class="tableblock halign-left valign-top" colspan="4" style="background-color: #FFFFFF;">HTTP method</th>
 </tr>
 </thead>
 <tbody>
@@ -830,18 +830,18 @@ method.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>DELETE</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/collections/{collectionId}/items</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#simpletx-create">create</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{collectionId}/items</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#create">create</a></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">n/a</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">n/a</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">n/a</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/collections/{collectionId}/items/{resourceId}</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>/collections/{collectionId}/items/{resourceId}</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">n/a</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#simpletx-replace">replace</a></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#patch-update">update</a></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#simpletx-delete">delete</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#replace">replace</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#update">update</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#delete">delete</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -856,7 +856,7 @@ method.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#rc_simpletx">Create/Replace/Delete</a>.</p>
+<p><a href="#rc_create-replace-delete">Create/Replace/Delete</a>.</p>
 </li>
 <li>
 <p><a href="#rc_simeletx_patch">Update</a></p>
@@ -886,11 +886,11 @@ method.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Simple Transactions</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx" class="bare">http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Create/Replace/Delete</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/create-replace-delete" class="bare">http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/create-replace-delete</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PATCH Update</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Update</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/update" class="bare">http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/update</a></p></td>
 </tr>
 <tr>
@@ -917,9 +917,6 @@ OGC Compliance Testing web site.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a id="rfc5261"></a> Internet Engineering Task Force (IETF). RFC 5261: <strong>An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors</strong> [online]. Edited by J. Urpalainen. 2008 [viewed 2021-01-25]. Available at <a href="http://tools.ietf.org/rfc/rfc5261.txt" class="bare">http://tools.ietf.org/rfc/rfc5261.txt</a></p>
-</li>
-<li>
 <p><a id="rfc5789"></a> Internet Engineering Task Force (IETF). RFC 5789: <strong>PATCH Method for HTTP</strong> [online]. Edited by L. Dusseault, J. Snell. 2010 [viewed 2021-01-25]. Available at <a href="http://tools.ietf.org/rfc/rfc5789.txt" class="bare">http://tools.ietf.org/rfc/rfc5789.txt</a></p>
 </li>
 <li>
@@ -930,6 +927,9 @@ OGC Compliance Testing web site.</p>
 </li>
 <li>
 <p><a id="OAFeat-1"></a> Open Geospatial Consortium (OGC). <strong>OGC API - Features - Part 1: Core 1.0</strong> [online]. Edited by C. Portele, P. Vretanos, C. Heazel. 2019 [viewed 2020-05-24]. Available at <a href="http://www.opengis.net/doc/IS/ogcapi-features-1/1.0" class="bare">http://www.opengis.net/doc/IS/ogcapi-features-1/1.0</a></p>
+</li>
+<li>
+<p><a id="OAFeat-2"></a> Open Geospatial Consortium (OGC). <strong>OGC API - Features - Part 2: Coordinate Reference Systems by Reference 1.0</strong> [online]. Edited by C. Portele, P. Vretanos. 2020 [viewed 2020-12-03]. Available at <a href="http://docs.opengeospatial.org/is/18-058/18-058.html" class="bare">http://docs.opengeospatial.org/is/18-058/18-058.html</a></p>
 </li>
 </ul>
 </div>
@@ -1016,7 +1016,7 @@ URI template <code>{landingPageUri}/collections/{collectionId}/items</code>. See
 URI template <code>{landingPageUri}/process</code>. See <a href="#OAProc-1">OGC API - Processes - Part 1: Core</a>.</p>
 </div>
 <div class="paragraph">
-<p>The token <code>&lt;resource endpoint&gt;`</code> is used for the endpoint that accesses a specific
+<p>The token <code>&lt;resource endpoint&gt;</code> is used for the endpoint that accesses a specific
 resource from a collection.</p>
 </div>
 <div class="paragraph">
@@ -1043,11 +1043,11 @@ URI template <code>{landingPageUri}/process/{processId}</code>. See <a href="#OA
 </div>
 </div>
 <div class="sect1">
-<h2 id="simpletx"><a class="anchor" href="#simpletx"></a>6. Requirements Class "Create/Replace/Delete"</h2>
+<h2 id="create-replace-delete_clause"><a class="anchor" href="#create-replace-delete_clause"></a>6. Requirements Class "Create/Replace/Delete"</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="simpletx-overview"><a class="anchor" href="#simpletx-overview"></a>6.1. Overview</h3>
-<table id="rc_simpletx" class="tableblock frame-all grid-all" style="width: 90%;">
+<h3 id="create-replace-delete-overview"><a class="anchor" href="#create-replace-delete-overview"></a>6.1. Overview</h3>
+<table id="rc_create-replace-delete" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 80%;">
@@ -1057,7 +1057,7 @@ URI template <code>{landingPageUri}/process/{processId}</code>. See <a href="#OA
 <td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-4/1.0/req/simpletx" class="bare">http://www.opengis.net/spec/ogcapi-features-4/1.0/req/simpletx</a></p></td>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-4/1.0/req/create-replace-delete" class="bare">http://www.opengis.net/spec/ogcapi-features-4/1.0/req/create-replace-delete</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
@@ -1232,7 +1232,7 @@ Status code <code>422</code> is not yet an official HTTP status code, but is exp
 </div>
 </div>
 <div class="sect2">
-<h3 id="simpletx-create"><a class="anchor" href="#simpletx-create"></a>6.2. Adding a new resource to a collection (CREATE)</h3>
+<h3 id="create"><a class="anchor" href="#create"></a>6.2. Adding a new resource to a collection (CREATE)</h3>
 <div class="sect3">
 <h4 id="_sequence_diagram"><a class="anchor" href="#_sequence_diagram"></a>6.2.1. Sequence diagram</h4>
 <div class="paragraph">
@@ -1257,7 +1257,7 @@ to a collection.</p>
 </div>
 <div class="sect3">
 <h4 id="_operation"><a class="anchor" href="#_operation"></a>6.2.2. Operation</h4>
-<table id="req_simpletx_insert-post-op" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_create-replace-delete_insert-post-op" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1266,7 +1266,7 @@ to a collection.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/insert-post-op</strong></p>
+<p><strong>/req/create-replace-delete/insert-post-op</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1282,7 +1282,7 @@ to a collection.</p>
 <h4 id="_request_body"><a class="anchor" href="#_request_body"></a>6.2.3. Request body</h4>
 <div class="sect4">
 <h5 id="_overview"><a class="anchor" href="#_overview"></a>6.2.3.1. Overview</h5>
-<table id="rec_simpletx_insert_body" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="rec_create-replace-delete_insert_body" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1291,7 +1291,7 @@ to a collection.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/insert-body</strong></p>
+<p><strong>/req/create-replace-delete/insert-body</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1302,7 +1302,7 @@ to a collection.</p>
 </tr>
 </tbody>
 </table>
-<table id="per_simpletx_insert-body" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="per_create-replace-delete_insert-body" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1311,7 +1311,7 @@ to a collection.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 2</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/per/simpletx/insert-body</strong></p>
+<p><strong>/per/create-replace-delete/insert-body</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1322,7 +1322,7 @@ to a collection.</p>
 </tr>
 </tbody>
 </table>
-<table id="rec_simpletx_insert-content-type" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="rec_create-replace-delete_insert-content-type" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1331,7 +1331,7 @@ to a collection.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/insert-content-type</strong></p>
+<p><strong>/req/create-replace-delete/insert-content-type</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1349,7 +1349,7 @@ to a collection.</p>
 </div>
 <div class="sect3">
 <h4 id="_response"><a class="anchor" href="#_response"></a>6.2.4. Response</h4>
-<table id="req_simpletx_insert-response-rid" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_create-replace-delete_insert-response-rid" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1358,7 +1358,7 @@ to a collection.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/insert-response-rid</strong></p>
+<p><strong>/req/create-replace-delete/insert-response-rid</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1369,7 +1369,7 @@ to a collection.</p>
 </tr>
 </tbody>
 </table>
-<table id="req_simpletx_insert-response" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_create-replace-delete_insert-response" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1378,7 +1378,7 @@ to a collection.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/insert-response</strong></p>
+<p><strong>/req/create-replace-delete/insert-response</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1415,7 +1415,7 @@ about the result or the resource identifier.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="simpletx-replace"><a class="anchor" href="#simpletx-replace"></a>6.3. Replacing an existing resource (REPLACE)</h3>
+<h3 id="replace"><a class="anchor" href="#replace"></a>6.3. Replacing an existing resource (REPLACE)</h3>
 <div class="sect3">
 <h4 id="_sequence_diagram_2"><a class="anchor" href="#_sequence_diagram_2"></a>6.3.1. Sequence diagram</h4>
 <div class="paragraph">
@@ -1453,7 +1453,7 @@ discussed in this standard.
 </div>
 <div class="sect3">
 <h4 id="_operation_2"><a class="anchor" href="#_operation_2"></a>6.3.2. Operation</h4>
-<table id="req_simpletx_update-put-put-op" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_create-replace-delete_update-put-put-op" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1462,7 +1462,7 @@ discussed in this standard.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/update-put-put-op</strong></p>
+<p><strong>/req/create-replace-delete/update-put-put-op</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1480,7 +1480,7 @@ discussed in this standard.
 </div>
 <div class="sect3">
 <h4 id="_overview_2"><a class="anchor" href="#_overview_2"></a>6.3.4. Overview</h4>
-<table id="rec_simpletx_update-put-body" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="rec_create-replace-delete_update-put-body" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1489,7 +1489,7 @@ discussed in this standard.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/update-put-body</strong></p>
+<p><strong>/req/create-replace-delete/update-put-body</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1500,7 +1500,7 @@ discussed in this standard.
 </tr>
 </tbody>
 </table>
-<table id="per_simpletx_update_put_body" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="per_create-replace-delete_update_put_body" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1509,7 +1509,7 @@ discussed in this standard.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 3</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/per/simpletx/update/put/body</strong></p>
+<p><strong>/per/create-replace-delete/update/put/body</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1520,7 +1520,7 @@ discussed in this standard.
 </tr>
 </tbody>
 </table>
-<table id="rec_simpletx_update-put-content-type" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="rec_create-replace-delete_update-put-content-type" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1529,7 +1529,7 @@ discussed in this standard.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/update-put-content-type</strong></p>
+<p><strong>/req/create-replace-delete/update-put-content-type</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1546,7 +1546,7 @@ discussed in this standard.
 </div>
 <div class="sect3">
 <h4 id="_response_2"><a class="anchor" href="#_response_2"></a>6.3.5. Response</h4>
-<table id="req_simpletx_update_put_response" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_create-replace-delete_update_put_response" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1555,7 +1555,7 @@ discussed in this standard.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/update-put-response</strong></p>
+<p><strong>/req/create-replace-delete/update-put-response</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1588,9 +1588,9 @@ case, the processing can succeed or fail, without further notification to the cl
 <p>The assignment of resource identifiers is the pervue of the server and as a
 result, clients cannot simply use the HTTP PUT operation to create a new resource.
 Instead, the creation of new resource instances have be preformed
-using the HTTP POST operation as described in <a href="#simpletx-create">Adding a new resource to a collection (CREATE)</a>.</p>
+using the HTTP POST operation as described in <a href="#create">Adding a new resource to a collection (CREATE)</a>.</p>
 </div>
-<table id="req_simpletx_update-put-rid-exception" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_create-replace-delete_update-put-rid-exception" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1599,7 +1599,7 @@ using the HTTP POST operation as described in <a href="#simpletx-create">Adding 
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/update-put-rid-exception</strong></p>
+<p><strong>/req/create-replace-delete/update-put-rid-exception</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1616,7 +1616,7 @@ using the HTTP POST operation as described in <a href="#simpletx-create">Adding 
 </div>
 </div>
 <div class="sect2">
-<h3 id="simpletx-delete"><a class="anchor" href="#simpletx-delete"></a>6.4. Removing a resource from a collection (DELETE)</h3>
+<h3 id="delete"><a class="anchor" href="#delete"></a>6.4. Removing a resource from a collection (DELETE)</h3>
 <div class="sect3">
 <h4 id="_sequence_diagram_3"><a class="anchor" href="#_sequence_diagram_3"></a>6.4.1. Sequence diagram</h4>
 <div class="paragraph">
@@ -1637,7 +1637,7 @@ from a collection.</p>
 </div>
 <div class="sect3">
 <h4 id="_operation_3"><a class="anchor" href="#_operation_3"></a>6.4.2. Operation</h4>
-<table id="req_simpletx_delete_delete-op" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_create-replace-delete_delete_delete-op" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1646,7 +1646,7 @@ from a collection.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/delete/delete-op</strong></p>
+<p><strong>/req/create-replace-delete/delete/delete-op</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1660,7 +1660,7 @@ from a collection.</p>
 </div>
 <div class="sect3">
 <h4 id="_response_3"><a class="anchor" href="#_response_3"></a>6.4.3. Response</h4>
-<table id="req_simpletx_delete_response" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_create-replace-delete_delete_response" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1669,7 +1669,7 @@ from a collection.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/simpletx/delete/response</strong></p>
+<p><strong>/req/create-replace-delete/delete/response</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1694,6 +1694,19 @@ case, the processing can succeed or fail, without further notification to the cl
 <p>Note that if no resource with the identifier exists in the collection, the server can respond
 with a success status (<code>200</code> or <code>204</code>) or with a not-found exception (<code>404</code>).</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+See <a href="https://github.com/opengeospatial/ogcapi-features/issues/328">Issue 328</a>.
+Should it be up to the server whether it responds with a 204 or a 404, if no feature exists?
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_exceptions_3"><a class="anchor" href="#_exceptions_3"></a>6.4.4. Exceptions</h4>
@@ -1705,11 +1718,11 @@ with a success status (<code>200</code> or <code>204</code>) or with a not-found
 </div>
 </div>
 <div class="sect1">
-<h2 id="update"><a class="anchor" href="#update"></a>7. Requirements Class "Update"</h2>
+<h2 id="update_clause"><a class="anchor" href="#update_clause"></a>7. Requirements Class "Update"</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="patch-update-overview"><a class="anchor" href="#patch-update-overview"></a>7.1. Overview</h3>
-<table id="rc_patch-update" class="tableblock frame-all grid-all" style="width: 90%;">
+<h3 id="update-overview"><a class="anchor" href="#update-overview"></a>7.1. Overview</h3>
+<table id="rc_update" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 80%;">
@@ -1719,7 +1732,7 @@ with a success status (<code>200</code> or <code>204</code>) or with a not-found
 <td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-4/1.0/req/simpletx/patch-update" class="bare">http://www.opengis.net/spec/ogcapi-features-4/1.0/req/simpletx/patch-update</a></p></td>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-features-4/1.0/req/create-replace-delete/update" class="bare">http://www.opengis.net/spec/ogcapi-features-4/1.0/req/create-replace-delete/update</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
@@ -1737,11 +1750,11 @@ the HTTP PATCH method to modify parts of an existing resource without the need
 to transmit a complete replacement resource.</p>
 </div>
 <div class="paragraph">
-<p>Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This standard does not mandate that a specific encoding for this document be supported by a server.  However, this extension provides requirements for the use of <a href="#rfc7396">RFC 7396 (JSON Merge Patch)</a> for resource encoded using JSON (e.g. GeoJSON) and the use of <a href="#rfc5261">RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)</a> for resources encoded using XML (e.g. GML).</p>
+<p>Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This standard does not mandate that a specific encoding for this document be supported by a server.  However, this extension provides requirements for the use of <a href="#rfc7396">RFC 7396 (JSON Merge Patch)</a> for resource encoded using JSON (e.g. GeoJSON).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="patch-update"><a class="anchor" href="#patch-update"></a>7.2. Modifying and existing resource (UPDATE)</h3>
+<h3 id="update"><a class="anchor" href="#update"></a>7.2. Modifying an existing resource (UPDATE)</h3>
 <div class="sect3">
 <h4 id="_sequence_diagram_4"><a class="anchor" href="#_sequence_diagram_4"></a>7.2.1. Sequence diagram</h4>
 <div class="paragraph">
@@ -1862,7 +1875,7 @@ case, the processing can succeed or fail, without further notification to the cl
 </div>
 </div>
 <div class="sect1">
-<h2 id="features"><a class="anchor" href="#features"></a>8. Features</h2>
+<h2 id="features_clause"><a class="anchor" href="#features_clause"></a>8. Features</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_overview_3"><a class="anchor" href="#_overview_3"></a>8.1. Overview</h3>
@@ -1884,7 +1897,7 @@ case, the processing can succeed or fail, without further notification to the cl
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#simpletx">Requirements Class "Create/Replace/Delete"</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#create-replace-delete_clause">Requirements Class "Create/Replace/Delete"</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
@@ -1904,15 +1917,11 @@ case, the processing can succeed or fail, without further notification to the cl
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conditional Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#update">Requirements Class "Update"</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#update_clause">Requirements Class "Update"</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conditional Dependency</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc7396">RFC 7396 (JSON Merge Patch)</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conditional Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc5261">RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conditional Dependency</p></td>
@@ -1962,7 +1971,7 @@ feature.</p>
 </div>
 <div class="sect2">
 <h3 id="feature-endpoint"><a class="anchor" href="#feature-endpoint"></a>8.3. Resource endpoint</h3>
-<table id="req_feature_endpoint" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_resource_endpoint" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1971,7 +1980,7 @@ feature.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/features/feature-endpoint</strong></p>
+<p><strong>/req/features/resource-endpoint</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2181,6 +2190,22 @@ feature.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+See <a href="https://github.com/opengeospatial/ogcapi-features/issues/505">Issue 505</a>.
+This does not provide a clear mechanism how a client can determine all the CRSs that
+are supported for a specific request and it may involve some try and error. Adding yet
+more information to the Collection resource does not seem to be the right approach.
+Use OPTIONS for this?
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="feature-representations"><a class="anchor" href="#feature-representations"></a>8.5. Representation of features</h3>
@@ -2193,6 +2218,48 @@ mandate that a specific feature encoding be supported by a server.</p>
 <p>However, this standard provides guidance for the feature encodings specified in
 Part 1: Core with the exception of HTML.</p>
 </div>
+<div class="paragraph">
+<p>Features in a collection can be constrained to a specific schema, but this does
+not have to be the case. This standard recommends that servers that have schema
+constraints expose these to clients in the Schema resource at
+<code>{landingPageUri}/collections/{collectionId}/schema</code>, so that clients are able to
+generate feature representations that are acceptable to the server.
+The feature schema can and often will depend in the operation, so a Schema
+resource will publish the specific schema representations for the
+CREATE, REPLACE and UPDATE operations.</p>
+</div>
+<table id="rec_features_schema" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/features/schema</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The server has schema constraints for features in a collection.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The server SHOULD support the HTTP GET method at the Schema resource at <code>{landingPageUri}/collections/{collectionId}/schema</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The server SHOULD link to the Schema resource from the Collection resource at <code>{landingPageUri}/collections/{collectionId}</code> with a link relation type <code>describedby</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
 <h4 id="feature-geojson"><a class="anchor" href="#feature-geojson"></a>8.5.1. GeoJSON</h4>
 <table id="req_features_representation-geojson-create" class="tableblock frame-all grid-all" style="width: 90%;">
@@ -2217,6 +2284,12 @@ Part 1: Core with the exception of HTML.</p>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>Server advertises support for media type <code>application/geo+json</code> in the API definition for CREATE requests for a feature collection <code>collectionId</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Server supports the Schema resource for the feature collection at <code>{landingPageUri}/collections/{collectionId}/schema</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2264,6 +2337,12 @@ Part 1: Core with the exception of HTML.</p>
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Server supports the Schema resource for the feature collection at <code>{landingPageUri}/collections/{collectionId}/schema</code></p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>The server SHALL support the HTTP GET method at <code>{landingPageUri}/collections/{collectionId}/schema?type=replace</code>.</p>
@@ -2304,13 +2383,19 @@ Part 1: Core with the exception of HTML.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>Server implements <a href="#update">Requirements Class "Update"</a></p>
+<p>Server implements <a href="#update_clause">Requirements Class "Update"</a></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>Server advertises support for media type <code>application/merge-patch+json</code> in the API definition for UPDATE requests for a feature collection <code>collectionId</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Server supports the Schema resource for the feature collection at <code>{landingPageUri}/collections/{collectionId}/schema</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2375,6 +2460,12 @@ to invoke the "prior arrangement" provision.</p>
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Server supports the Schema resource for the feature collection at <code>{landingPageUri}/collections/{collectionId}/schema</code></p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>The server SHALL support the HTTP GET method at <code>{landingPageUri}/collections/{collectionId}/schema?type=create</code>.</p>
@@ -2419,6 +2510,12 @@ to invoke the "prior arrangement" provision.</p>
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Server supports the Schema resource for the feature collection at <code>{landingPageUri}/collections/{collectionId}/schema</code></p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>The server SHALL support the HTTP GET method at <code>{landingPageUri}/collections/{collectionId}/schema?type=replace</code>.</p>
@@ -2459,13 +2556,19 @@ to invoke the "prior arrangement" provision.</p>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>Server implements <a href="#update">Requirements Class "Update"</a></p>
+<p>Server implements <a href="#update_clause">Requirements Class "Update"</a></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>Server advertises support for media type <code>application/xml</code> in the API definition for UPDATE requests for a feature collection <code>collectionId</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Condition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Server supports the Schema resource for the feature collection at <code>{landingPageUri}/collections/{collectionId}/schema</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2486,14 +2589,21 @@ to invoke the "prior arrangement" provision.</p>
 <p>The response content SHALL be an XML Schema that a patch update has to validate against.</p>
 </div></div></td>
 </tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The server SHALL process HTTP PATCH requests with a content type <code>application/xml</code> to such a resource endpoint as specified by <a href="#rfc5261">RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)</a>.</p>
-</div></div></td>
-</tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>This standard does not specify the PATCH syntax / semantics that has to be applied for GML feature updates. Two options are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>use of the <a href="http://docs.opengeospatial.org/is/09-025r2/09-025r2.html#283">Update action from OGC Web Feature Service 2.0</a>;</p>
+</li>
+<li>
+<p>use of <a href="#rfc5261">RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)</a>.</p>
+</li>
+</ul>
+</div>
 <table id="req_features_gml-srsname" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2705,6 +2815,9 @@ Add conformance classes and test cases for all requirements classes and requirem
 <li>
 <p><a id="OAProc-1"></a> Open Geospatial Consortium (OGC). <strong>OGC API - Processes - Part 1: Core (Editor&#8217;s Draft)</strong> [online]. Edited by B. Pross. 2021 [viewed 2021-01-26]. Available at <a href="https://docs.ogc.org/DRAFTS/18-062.html" class="bare">https://docs.ogc.org/DRAFTS/18-062.html</a></p>
 </li>
+<li>
+<p><a id="rfc5261"></a> Internet Engineering Task Force (IETF). RFC 5261: <strong>An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors</strong> [online]. Edited by J. Urpalainen. 2008 [viewed 2021-01-25]. Available at <a href="http://tools.ietf.org/rfc/rfc5261.txt" class="bare">http://tools.ietf.org/rfc/rfc5261.txt</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -2712,7 +2825,7 @@ Add conformance classes and test cases for all requirements classes and requirem
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-01-31 16:17:13 +0100
+Last updated 2021-02-01 17:20:37 +0100
 </div>
 </div>
 </body>
