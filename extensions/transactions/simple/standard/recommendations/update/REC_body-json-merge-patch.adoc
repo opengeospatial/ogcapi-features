@@ -1,0 +1,7 @@
+[[rec_update_patch_body-json-merge-patch]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/create-replace-delete/update/patch/body-json-merge-patch*
+^|A |If a resource can be represented for the intended use in JSON, implementations should consider supporting the use of a JSON Merge Patch (RFC 7396) document for describing the incremental changes to be applied to a target resource.
+^|B |The media type 'application/merge-patch+json'shall be used to indicate that request body contains a JSON Merge Patch document.
+|===

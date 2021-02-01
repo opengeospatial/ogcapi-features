@@ -1,0 +1,7 @@
+[[req_patch-update_update-patch-response]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/patch-update/update-patch-response*   
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200` or `204`.
+^|B |If the operation is not executed immediately, but is added to a processing queue, the response SHALL have a HTTP status code `202`.
+|===

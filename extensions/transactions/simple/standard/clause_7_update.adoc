@@ -1,0 +1,61 @@
+[[update_clause]]
+== Requirements Class "Update"
+
+[[update-overview]]
+=== Overview
+
+include::requirements/requirements_class_update.adoc[]
+
+A server that implements this requirements class provides the ability to use
+the HTTP PATCH method to modify parts of an existing resource without the need
+to transmit a complete replacement resource.
+
+Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This standard does not mandate that a specific encoding for this document be supported by a server.  However, this extension provides requirements for the use of <<rfc7396,RFC 7396 (JSON Merge Patch)>> for resource encoded using JSON (e.g. GeoJSON).
+
+[[update]]
+=== Modifying an existing resource (UPDATE)
+
+==== Sequence diagram
+
+The following diagram illustrates the sequence diagram for modifying part
+of an existing resource by only specifying the specific parts that should be
+updated.
+
+....
+   Client                                                          Server
+     |                                                               |
+     |   PATCH <resource endpoint>   HTTP/1.1                        |
+     |   Content-Type: <media type of body>                          |
+     |                                                               |
+     |   ... Body contains a document describing the changes to make |
+     |       to parts of the specified resource ...                  |
+     |-------------------------------------------------------------->|
+     |                                                               |
+     |   HTTP/1.1 204 OK                                             | 
+     |<--------------------------------------------------------------|
+....
+
+==== Operation
+
+include::requirements/update/REQ_patch-op.adoc[]
+
+==== Request body
+
+include::requirements/update/REQ_body.adoc[]
+
+Details how a PATCH request body has to be processed by a server depends on the resource representation and have to be specified for each resource type and its representations.
+
+==== Response
+
+include::requirements/update/REQ_response.adoc[]
+
+The status code depends on the server. If the server has updated the resource, the
+response is either `200`, if the response includes additional content such as the
+updated representation of the resource, or `204`, if the response has no additional content. 
+
+If the server will process the update request later, it will return a `202`. In this
+case, the processing can succeed or fail, without further notification to the client.
+
+==== Exceptions
+
+See <<http_status_codes,HTTP status codes>>.

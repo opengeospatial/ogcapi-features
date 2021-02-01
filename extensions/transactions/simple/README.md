@@ -1,6 +1,6 @@
 # Standard template
 
-This folder contains the content for the OGC API - Features - Part 3: Simple Transactions.
+This folder contains the content for OGC API - Features - Part 4: Create, replace, update and delete.
 
 The repo is organized as follows:
 

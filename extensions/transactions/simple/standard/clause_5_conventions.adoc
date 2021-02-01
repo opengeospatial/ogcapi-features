@@ -1,3 +1,42 @@
 == Conventions and background
 
+=== General remarks
+
 See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clauses 5 and 6.
+
+=== Identifiers
+
+The normative provisions in this standard are denoted by the URI `http://www.opengis.net/spec/ogcapi-features-4/1.0`.
+
+All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
+
+=== Sequence diagrams
+
+This document uses sequence diagrams to illustrate the flow of requests and responses 
+between client and server.
+
+The token `<resources endpoint>` is used for an endpoint that accesses
+resources from a collection. 
+
+EXAMPLE 1: For features, these endpoints are described by the 
+URI template `{landingPageUri}/collections/{collectionId}/items`. See <<OAFeat-1,OGC API - Features - Part 1: Core>>.
+
+EXAMPLE 2: For processes, these endpoints are described by the 
+URI template `{landingPageUri}/process`. See <<OAProc-1,OGC API - Processes - Part 1: Core>>.
+
+The token `<resource endpoint>` is used for the endpoint that accesses a specific 
+resource from a collection.
+
+EXAMPLE 3: For features, these endpoints are described by the 
+URI template `{landingPageUri}/collections/{collectionId}/items/{featureId}`. See <<OAFeat-1,OGC API - Features - Part 1: Core>>.
+
+EXAMPLE 4: For processes, these endpoints are described by the 
+URI template `{landingPageUri}/process/{processId}`. See <<OAProc-1,OGC API - Processes - Part 1: Core>>.
+
+=== Dependencies to other requirements classes
+
+The requirements classes in this extension distinguish two types of dependencies to other specifications or requirements classes:
+
+First, there are the "regular" dependencies. Every server implementing the requirements class has to conform to the referenced specification or requirements class.
+
+In addition, requirements classes can also have "conditional dependencies". Servers implementing the requirements class do not have to conform to the referenced specification or requirements class, but if they do, they have to conform to the requirements that identify the conditional dependency as a pre-condition for the normative statement.

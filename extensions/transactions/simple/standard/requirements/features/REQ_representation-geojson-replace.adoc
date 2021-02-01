@@ -1,0 +1,11 @@
+[[req_features_representation-geojson-replace]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/representation-geojson-replace*
+^|Condition |Server implements <<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "GeoJSON">>
+^|Condition |Server advertises support for media type `application/geo+json` in the API definition for REPLACE requests for a feature collection `collectionId`
+^|Condition |Server supports the Schema resource for the feature collection at `{landingPageUri}/collections/{collectionId}/schema`
+^|A |The server SHALL support the HTTP GET method at `{landingPageUri}/collections/{collectionId}/schema?type=replace`.
+^|B |`200`-responses of the server to these requests SHALL support the media type `application/schema+json`.
+^|C |The response content SHALL be a JSON Schema that a replacement feature has to validate against.
+|===

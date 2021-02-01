@@ -1,0 +1,13 @@
+[[req_features_representation-geojson-update]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/representation-geojson-update*
+^|Condition |Server implements <<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "GeoJSON">>
+^|Condition |Server implements <<update_clause>>
+^|Condition |Server advertises support for media type `application/merge-patch+json` in the API definition for UPDATE requests for a feature collection `collectionId`
+^|Condition |Server supports the Schema resource for the feature collection at `{landingPageUri}/collections/{collectionId}/schema`
+^|A |The server SHALL support the HTTP GET method at `{landingPageUri}/collections/{collectionId}/schema?type=update`.
+^|B |`200`-responses of the server to these requests SHALL support the media type `application/schema+json`.
+^|C |The response content SHALL be a JSON Schema that a patch update has to validate against.
+^|D |The server SHALL process PATCH requests with a content type `application/merge-patch+json` to such a resource endpoint as specified by <<rfc7396,RFC 7396 (JSON Merge Patch)>>.
+|===
