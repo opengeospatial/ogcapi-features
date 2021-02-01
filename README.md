@@ -85,9 +85,9 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 3: Common Query Language](http://docs.opengeospatial.org/DRAFTS/19-079.html)
+* [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](http://docs.opengeospatial.org/DRAFTS/19-079.html)
   * Draft with multiple implementations. The grammar of the query language should be fairly stable, but the organisation into conformance classes and the JSON encoding need more review and discussion before the next phases (OGC Architecture Board Review, Public Review).
-* [OGC API - Features - Part 4: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
+* [OGC API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html)
   * The draft needs more implementations, testing and review to move forward.
 * OGC API - Features - Part 5: OpenAPI 3.1
   * Waiting for the release of OpenAPI Specification version 3.1.0.
@@ -101,8 +101,8 @@ Open issues for Part 1 (Core) are documented in a [GitHub project](https://githu
 Open issues for the other parts are documented in GitHub project boards, too:
 
 * [Part 2 (CRS by Reference)](https://github.com/opengeospatial/ogcapi-features/projects/2)
-* [Part 3 (Common Query Language)](https://github.com/opengeospatial/ogcapi-features/projects/4)
-* [Part 4 (Simple Transactions)](https://github.com/opengeospatial/ogcapi-features/projects/3)
+* [Part 3 (Filtering and the Common Query Language](https://github.com/opengeospatial/ogcapi-features/projects/4)
+* [Part 4 (Create, Replace, Update and Delete)](https://github.com/opengeospatial/ogcapi-features/projects/3)
 * [Part 5 (OpenAPI 3.1)](https://github.com/opengeospatial/ogcapi-features/projects/7)
 
 Additional links:
@@ -119,8 +119,8 @@ The latest drafts of each standard in this repository are build daily (based on 
 
 * [Part 1: Core](http://docs.opengeospatial.org/DRAFTS/17-069r4.html)
 * [Part 2: Coordinate Reference Systems by Reference](http://docs.opengeospatial.org/DRAFTS/18-058.html)
-* [Part 3: Common Query Language](http://docs.opengeospatial.org/DRAFTS/19-079.html)
-* [Part 4: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
+* [Part 3: Filtering and the Common Query Language (CQL)](http://docs.opengeospatial.org/DRAFTS/19-079.html)
+* [Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
 [Asciidoctor](https://asciidoctor.org/) set up and [installed](https://asciidoctor.org/docs/#get-started-with-asciidoctor).
@@ -131,9 +131,9 @@ Then run:
 asciidoctor core/standard/17-069.adoc
 # Part 2: Coordinate Reference Systems by Reference
 asciidoctor extensions/crs/standard/18-058.adoc
-# Part 3: Common Query Language
+# Part 3: Filtering and the Common Query Language (CQL)
 asciidoctor extensions/cql/standard/19-079.adoc
-# Part 4: Simple Transactions
+# Part 4: Create, Replace, Update and Delete
 asciidoctor extensions/transactions/simple/standard/20-002.adoc
 ```
 
