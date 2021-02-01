@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/like-predicate*
-^|A |The like predicate (rule `isLikePredicate`) tests whether a string value matches the specified pattern. If the value matches the pattern (rule `patternExpression`), then the predicate SHALL evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+^|A |The _like predicate_ (rule `isLikePredicate`) tests whether a string value matches the specified pattern. If the value matches the pattern (rule `patternExpression`), then the predicate SHALL evaluate to the Boolean value `TRUE`. Otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
 ^|B |The scalar expression (rule `scalarExpression`) in rule `isLikePredicate` SHALL evaluate to a `characterLiteral`.
 ^|C |The character specified using the `WILDCARD` modifier SHALL match zero of more characters in the test value.
 ^|D |The wildchar character SHALL not match the NULL value.

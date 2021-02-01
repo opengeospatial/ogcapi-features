@@ -1,0 +1,6 @@
+[[req_create-replace-delete_update-put-rid-exception]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/create-replace-delete/update-put-rid-exception*
+^|A |If the target resource does not exist, then the server SHALL indicate an unsuccessful execution of the operation that shall be reported as a response with a HTTP status code `404`.
+|===

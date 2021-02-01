@@ -1,0 +1,17 @@
+== Security Considerations
+
+See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clause 11.
+
+Since CREATE, REPLACE, DELETE and UPDATE operations will change the resources 
+and not "just" query them, servers will in almost all cases restrict the 
+access to these operations.
+
+Users making modifications to resources need to:
+
+. be authenticated,
+
+. have "modification privileges" on one or more of the resource collections offered by the API,
+
+. have access to one or more of the POST, PUT, PATCH and/or DELETE methods on the resources / resource endpoints.
+
+The API definition has to reflect this in the resource paths and their available methods.

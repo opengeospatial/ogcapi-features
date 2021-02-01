@@ -1,4 +1,4 @@
-[[features]]
+[[features_clause]]
 == Features
 
 === Overview
@@ -8,61 +8,92 @@ include::requirements/requirements_class_features.adoc[]
 This clause defines requirements for the case when the resource type is a
 feature.
 
-[[feature-collection-items-end-point]]
-=== Collection items end point
+[[features-endpoint]]
+=== Resources endpoint
 
-include::requirements/features/REQ_collection-items-end-point.adoc[]
+include::requirements/features/REQ_resources-endpoint.adoc[]
 
-[[feature-end-point]]
-=== Resource end point
+[[feature-endpoint]]
+=== Resource endpoint
 
-include::requirements/features/REQ_resource-end-point.adoc[]
-
-[[feature-represenations]]
-=== Representation of features
-
-Adding or replacing a feature requires that a representation of that feature
-be provided by the client.  As is the case in the core, this standard does not
-mandate that a specific feature encoding be supported by a server.  However,
-in order to promote interoperability, this standard provides recommendations
-for features encoded using GeoJSON or GML.
-
-include::recommendations/features/REC_body-geojson.adoc[]
-
-include::recommendations/features/REC_body-gmlsf0.adoc[]
-
-include::recommendations/features/REC_body-gmlsf2.adoc[]
+include::requirements/features/REQ_resource-endpoint.adoc[]
 
 [[feature-crs]]
-=== Coordinate reference systems
+=== Coordinate reference systems (CRS)
 
-[[request-body-crs]]
-==== Request body CRS
+Unless the server supports <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>, all geometries have to be submitted in the default CRS.
 
 include::requirements/features/crs/REQ_crs84.adoc[]
 
+If the server supports <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>, the default CRS can be overridden by declaring the `Content-Crs` header in the request. Alternatively, if the feature representation supports expressing CRS information for each feature / geometry, the information can also be included in the feature representation.
+
+include::requirements/features/crs/REQ_content-crs-header.adoc[]
+
+include::requirements/features/crs/REQ_default-crs.adoc[]
+
 include::requirements/features/crs/REQ_other-crs.adoc[]
 
-NOTE: When interacting with a server that supports http://fix.me[OGC API - Features - Part2: Coordinate Reference System by Reference] and also supports this extension, this requirement allows a client that only supports CRS84(h) to negotiate to CRS84(h) while a more capable client can negotiate to some other mutually agreeable CRS.
+This approach is consistent with the use of WGS84 longitude/latitude as the default CRS for all feature-related requests in the APIs. If both the server and the client are CRS-aware and have the capability to handle geometries in other CRSs, this requirement enables the client to negotiate to some other mutually agreeable CRS.
+
+If the server includes the `storageCrs` property in the Collection resource, as specified in <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>, then it is recommended that client express all geometry-valued feature properties presented to the server in a request body using the storage CRS. This avoids geometric errors from the conversion of coordinates on the server when storing the geometry.
 
 include::recommendations/features/REC_storage-crs.adoc[]
 
-==== Insert response
+NOTE: See https://github.com/opengeospatial/ogcapi-features/issues/505[Issue 505]. 
+This does not provide a clear mechanism how a client can determine all the CRSs that 
+are supported for a specific request and it may involve some try and error. Adding yet
+more information to the Collection resource does not seem to be the right approach.
+Use OPTIONS for this?
 
-include::requirements/features/crs/REQ_insert_response-crs.adoc[]
+[[feature-representations]]
+=== Representation of features
 
-==== GML request body 
+Adding or replacing a feature requires that a representation of that feature
+be provided by the client. As is the case in Part 1: Core, this standard does not
+mandate that a specific feature encoding be supported by a server. 
 
-GML has full CRS support and no further requirements are imposed by this
-standard.
+However, this standard provides guidance for the feature encodings specified in
+Part 1: Core with the exception of HTML.
 
-==== GeoJSON request body
+Features in a collection can be constrained to a specific schema, but this does 
+not have to be the case. This standard recommends that servers that have schema
+constraints expose these to clients in the Schema resource at 
+`{landingPageUri}/collections/{collectionId}/schema`, so that clients are able to 
+generate feature representations that are acceptable to the server. 
+The feature schema can and often will depend in the operation, so a Schema
+resource will publish the specific schema representations for the
+CREATE, REPLACE and UPDATE operations.
 
-GeoJSON normatively supports WGS84 (lon,lat) but the "prior arrangement"
-provision allows other coordinate reference systems to be used.
+include::recommendations/features/REC_schema.adoc[]
 
-include::requirements/features/crs/REQ_geojson.adoc[]
+[[feature-geojson]]
+==== GeoJSON
 
-==== HTML request body
+include::requirements/features/REQ_representation-geojson-create.adoc[]
 
-The use of HTML as a feature encoding format is not specified by this standard.
+include::requirements/features/REQ_representation-geojson-replace.adoc[]
+
+include::requirements/features/REQ_representation-geojson-update.adoc[]
+
+GeoJSON normatively supports WGS84 longitude/latitude, but the 
+https://tools.ietf.org/html/rfc7946#section-4["prior arrangement" provision] 
+allows that other CRSs are used, if both client and server agree on the CRS. 
+Clients that want to use a CRS that is not the default CRS have to state
+the CRS in the POST, PUT or PATCH request using the `Content-Crs` HTTP header
+to invoke the "prior arrangement" provision. 
+
+[[feature-gml]]
+==== Geography Markup Language (GML)
+
+include::requirements/features/REQ_representation-gml-create.adoc[]
+
+include::requirements/features/REQ_representation-gml-replace.adoc[]
+
+include::requirements/features/REQ_representation-gml-update.adoc[]
+
+This standard does not specify the PATCH syntax / semantics that has to be applied for GML feature updates. Two options are:
+
+- use of the http://docs.opengeospatial.org/is/09-025r2/09-025r2.html#283[Update action from OGC Web Feature Service 2.0]; 
+- use of <<rfc5261,RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)>>.
+
+include::requirements/features/crs/REQ_gml-srsname.adoc[]

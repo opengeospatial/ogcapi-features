@@ -1,37 +1,46 @@
 [big]*i.     Abstract*
 
-OGC API standards define modular API building blocks to spatially enable Web API
-in a consistent way. The <<OpenAPI,OpenAPI specification>> is used to define the
-API building blocks.
+OGC API standards define modular API building blocks to spatially enable Web APIs in a consistent way. The <<OpenAPI,OpenAPI specification>> is used to define the API building blocks.
 
-OGC API Features provides API building blocks to create, modify and query
-features on the Web. OGC API Features is comprised of multiple parts, each
-of them is a separate standard.
+OGC API - Features provides API building blocks to create, modify and query
+features on the Web. OGC API Features is comprised of multiple parts. Each
+part is a separate standard.
 
-A fundamental operation performed on a collection of resources is that of
-filtering in order to obtain a subset of the data which contains resource
-instances that satisfy some filtering criteria.  This part, part 3, defines
+A fundamental operation performed on a <<collection-def,collection>> of features is that of
+filtering in order to obtain a subset of the data which contains feature
+instances that satisfy some filtering criteria.  Part three of the OGC API - Feature Standard defines
 
-* query parameters (`filter`, `filter-lang`, `filter-crs`) to specify filter
+* Query parameters (`filter`, `filter-lang`, `filter-crs`) to specify filter
 criteria in a request to an API;
-* a filter grammar called Common Query Language (CQL) for specifying enhanced
+* A filter grammar called Common Query Language (CQL) for specifying enhanced
 filtering criteria beyond what is supported in the Core;
-* two encodings for CQL - a text and a JSON encoding.
+* Two encodings for CQL - a text and a JSON encoding.
 
-The Common Query Language (CQL) defined in this document can be used to specify
-how resource instances in a source collection can be filtered to identify a
-result set. Typically, CQL is used in query operations to identify the
-subset of resources that should be included in a response document.
-However, CQL can also be used in other operations (e.g. updates) to
-identify the subset of resources that should be affected by an operation.
+The Common Query Language (CQL) defined in this document is a generic filter
+grammar that can be used to specify how <<resource-def,resource>> instances in a source
+collection of any item type, including features, can be filtered to identify
+a results set. Typically, CQL is used in query operations to identify the
+subset of resources, such as features, that should be included in a response
+document. However, CQL can also be used in other operations, such as updates,
+to identify the subset of resources that should be affected by an operation.
 
 Each resource instance in the source collection is evaluated against a filtering
-expression. The filter expression always evaluates to `true` or `false`. If the
-expression evaluates to true, the resource instance satisfies the expression and
+expression. The filter expression always evaluates to `true`, `false` or `null`. If the
+expression evaluates to `true`, the resource instance satisfies the expression and
 is marked as being in the result set. If the overall filter expression evaluates
-to false, the data instance is not in the result set.  Thus, the net effect of
+to `false` or `null`, the data instance is not in the result set.  Thus, the net effect of
 evaluating a filter expression is a set of resources that satisfy the predicates
 in the expression.
+
+CQL and its text encoding are not new, but this is the first time CQL is properly
+specified. CQL was created as a text encoding based on the capabilities defined in 
+the https://www.ogc.org/standards/filter[OGC Filter Encoding] standard for use in
+the https://www.ogc.org/standards/cat[OGC Catalogue Service] standard. It was one
+of the design goals to keep CQL as compatible as possible with existing implementations. 
+For example, the classification of operators into logical, comparison, spatial and 
+temporal operators as well as their names and syntax are unchanged from the original 
+definitions in OGC Filter Encoding. For the spatial and temporal operators this 
+document either defines the operator or references to definition of the operator.
 
 CAUTION: This is a DRAFT version of the 3rd part of the OGC API - Features standards.
 This draft is not complete and there are open issues that are still under discussion.
@@ -40,7 +49,7 @@ This draft is not complete and there are open issues that are still under discus
 
 The following are keywords to be used by search engines and document catalogues.
 
-common query language, filter, expression, query, SQL, CQL, where clause,
+OGC, common query language, filter, expression, query, SQL, CQL, where clause,
 selection clause, OGC API
 
 [big]*iii.   Preface*
@@ -54,7 +63,9 @@ Recipients of this document are requested to submit, with their comments, notifi
 The following organizations submitted this document to the Open Geospatial Consortium (OGC):
 
 * CubeWerx Inc.
+* GeoSolutions di Giannecchini Simone & C. s.a.s. 
 * interactive instruments GmbH
+* US Army Geospatial Center (AGC)
 
 [big]*v.     Submitters*
 
@@ -64,4 +75,6 @@ All questions regarding this submission should be directed to the editors or the
 |*Name* |*Affiliation*
 |Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
 |Clemens Portele _(editor)_ |interactive instruments GmbH
+|Andrea Aime |GeoSolutions di Giannecchini Simone & C. s.a.s.
+|Jeff Harrison |US Army Geospatial Center (AGC)
 |===

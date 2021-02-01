@@ -1,5 +1,5 @@
-:Title: OGC API - Features - Part 4: Simple Transactions
-:titletext: OGC API - Features - Part 4: Simple Transactions
+:Title: OGC API - Features - Part 4: Create, Replace, Update and Delete
+:titletext: OGC API - Features - Part 4: Create, Replace, Update and Delete
 :doctype: book
 :encoding: utf-8
 :lang: en
@@ -34,7 +34,7 @@
 |Version: link:http://docs.opengeospatial.org/DRAFTS/20-002.html[1.0.0-SNAPSHOT (Editor's draft)]
 |Latest Published Draft: n/a
 |Category: OGC(R) Implementation Specification
-|Editors: TBD
+|Editors: Panagiotis (Peter) A. Vretanos, Clemens Portele
 |===
 
 [cols = "^", frame = "none"]
@@ -45,7 +45,7 @@
 [cols = "^", frame = "none", grid = "none"]
 |===
 |*Copyright notice*
-|Copyright (C) 2019 Open Geospatial Consortium
+|Copyright (C) 2021 Open Geospatial Consortium
 |To obtain additional rights of use, visit http://www.opengeospatial.org/legal/
 |===
 
@@ -101,17 +101,15 @@ include::clause_4_terms_and_definitions.adoc[]
 
 include::clause_5_conventions.adoc[]
 
-include::clause_6_simpletx.adoc[]
+include::clause_6_create-replace-delete.adoc[]
 
-include::clause_7_patch.adoc[]
+include::clause_7_update.adoc[]
 
 include::clause_8_features.adoc[]
 
-include::clause_9_oas.adoc[]
+include::clause_9_media_types.adoc[]
 
-include::clause_10_media_types.adoc[]
-
-include::clause_11_security_considerations.adoc[]
+include::clause_10_security_considerations.adoc[]
 
 <<<
 include::annex_ats.adoc[]

@@ -1,0 +1,8 @@
+[[req_resources-endpoint]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/resources-endpoint*
+^|A |For features, the resources endpoints SHALL be URIs specified by the URI template `{landingPageUri}/collections/{collectionsId}/items`.
+^|B |The parameter `landingPageUri` SHALL be the URI of the Landing Page resource. 
+^|C |The parameter `collectionId` SHALL be each `id` property in the `collections` array of the Collections resource (i.e., the response to a GET request to `{landingPageUri}/collections`) where the collection has an `itemType` with no value or a value `feature`.
+|===

@@ -1,0 +1,7 @@
+[[rec_update_patch_body-xml-patch]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/create-replace-delete/update/patch/body-xml-patch*
+^|A |If a resource can be represented for the intended use in XML, implementations should consider supporting the use of a XML diff document (RFC 5261) for describing the incremental changes to be applied to a target resource.
+^|B |The media type 'application/xml'shall be used to indicate that request body contains a XML diff document.
+|===
