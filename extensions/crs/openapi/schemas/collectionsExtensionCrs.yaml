@@ -1,0 +1,8 @@
+type: object
+properties:
+  crs:
+    description: a global list of CRS identifiers that are supported by spatial feature collections offered by the service
+    type: array
+    items:
+      type: string
+      format: uri
