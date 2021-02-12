@@ -87,7 +87,7 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](http://docs.ogc.org/DRAFTS/19-079.html)
+* [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](http://docs.ogc.org/DRAFTS/19-079r1.html)
   * Draft with multiple implementations. The grammar of the query language should be fairly stable. The final Public Review will run until April 2021. Once all comments have been resolved, the release candidate will enter the OGC approval process. The release of version 1.0.0 is expected in Q3 of 2021.
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](http://docs.ogc.org/DRAFTS/20-002.html)
   * The draft is fairly complete, but needs more implementations, testing and review to move to the final Public Review.
@@ -120,7 +120,7 @@ The latest drafts of each standard in this repository are build daily (based on 
 
 * [Part 1: Core](http://docs.ogc.org/DRAFTS/17-069r4.html)
 * [Part 2: Coordinate Reference Systems by Reference](http://docs.ogc.org/DRAFTS/18-058r1.html)
-* [Part 3: Filtering and the Common Query Language (CQL)](http://docs.ogc.org/DRAFTS/19-079.html)
+* [Part 3: Filtering and the Common Query Language (CQL)](http://docs.ogc.org/DRAFTS/19-079r1.html)
 * [Part 4: Create, Replace, Update and Delete](http://docs.ogc.org/DRAFTS/20-002.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
