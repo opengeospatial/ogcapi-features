@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: "Building Blocks specified in OGC API - Features - Part 2: Coordinate Reference Systems by Reference"
+  description: |-
+    Common components used in the
+    [OGC standard "OGC API - Features - Part 2: Coordinate Reference Systems by Reference"](http://docs.opengeospatial.org/is/18-058/18-058.html).
+
+    OGC API - Features - art 2: Coordinate Reference Systems by Reference 1.0 is an OGC Standard.
+    Copyright (c) 2020 Open Geospatial Consortium.
+    To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ .
+
+    This document is also available on
+    [OGC](http://schemas.opengis.net/ogcapi/features/part2/1.0/openapi/ogcapi-features-2.yaml).
+  version: '1.0.0'
+  contact:
+    name: Clemens Portele
+    email: portele@interactive-instruments.de
+  license:
+    name: OGC License
+    url: 'http://www.opengeospatial.org/legal/'
+components:
+  parameters:
+    bbox-crs:
+      name: bbox-crs
+      in: query
+      required: false
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: false
+    crs:
+      name: crs
+      in: query
+      required: false
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: false
+  schemas:
+    collection:
+      allOf:
+      - $ref: http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collection.yaml
+      - $ref: '#/components/schemas/collectionExtensionCrs'
+    collectionExtensionCrs:
+      type: object
+      properties:
+        storageCrs:
+          description: the CRS identifier, from the list of supported CRS identifiers, that may be used to retrieve features from a collection without the need to apply a CRS transformation
+          type: string
+          format: uri
+        storageCrsCoordinateEpoch:
+          description: point in time at which coordinates in the spatial feature collection are referenced to the dynamic coordinate reference system in `storageCrs`, that may be used to retrieve features from a collection without the need to apply a change of coordinate epoch. It is expressed as a decimal year in the Gregorian calendar
+          type: number
+          example: '2017-03-25 in the Gregorian calendar is epoch 2017.23'
+    collections:
+      allOf:
+      - $ref: http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml
+      - $ref: '#/components/schemas/collectionsExtensionCrs'
+    collectionsExtensionCrs:
+      type: object
+      properties:
+        crs:
+          description: a global list of CRS identifiers that are supported by spatial feature collections offered by the service
+          type: array
+          items:
+            type: string
+            format: uri
+  headers:
+    Content-Crs:
+      description: a URI, in angular brackets, identifying the coordinate reference system used in the content / payload
+      schema:
+        type: string
+      example: '<http://www.opengis.net/def/crs/EPSG/0/3395>'

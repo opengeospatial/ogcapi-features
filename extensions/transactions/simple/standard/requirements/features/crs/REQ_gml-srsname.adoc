@@ -5,5 +5,5 @@
 ^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
 ^|Condition |A CREATE, REPLACE and UPDATE request has been submitted with a `Content-Type` HTTP header with a GML media type (`application/gml+xml`).
 ^|A |The server SHALL inspect the `srsName` XML attribute of the element that represents the value of each geometry-valued feature property. 
-^|B |If a `srsName` XML attribute is provided, it SHALL override the `Content-Type` HTTP header.
+^|B |A `srsName` XML attribute SHALL override the `Content-Type` HTTP header.
 |===

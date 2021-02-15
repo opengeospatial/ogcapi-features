@@ -1,0 +1,10 @@
+type: object
+properties:
+  storageCrs:
+     description: the CRS identifier, from the list of supported CRS identifiers, that may be used to retrieve features from a collection without the need to apply a CRS transformation
+     type: string
+     format: uri
+  storageCrsCoordinateEpoch:
+     description: point in time at which coordinates in the spatial feature collection are referenced to the dynamic coordinate reference system in `storageCrs`, that may be used to retrieve features from a collection without the need to apply a change of coordinate epoch. It is expressed as a decimal year in the Gregorian calendar
+     type: number
+     example: '2017-03-25 in the Gregorian calendar is epoch 2017.23'

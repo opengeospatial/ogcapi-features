@@ -22,11 +22,11 @@ Not all future new features will be introduced in this way. Some new features im
 
 Draft Features are matured and validated through community efforts. This requires that there is a authoritative published description of the current version of each draft feature. The following procedures govern the creation and maintenance of those descriptions.
 
-. The definitions of a draft feature shall be avalable under the ``proposals`` directory on the GitHub site for the applicable OGC standard.
-. The definition of each draft feature shall reside in a subdirectory of ``proposals``. That subdirectory shall have a name indicative of the nature of the draft feature.
-. This definition shall provide an exact description of the changes to the contents of the OGC specification required to support the new feature. That description should include a extract of each section of the specification which is impacted by the proposal with all proposed modifications applied. 
-. Each draft feature shall be described in a description document using the template provided by the 000_OGC-Proposal-template.md file.
-. The draft feature description documents shall reside in the ``Proposals`` directory
+1. The definitions of a draft feature shall be available under the ``proposals`` directory on the GitHub site for the applicable OGC standard.
+2. The definition of each draft feature shall reside in a subdirectory of ``proposals``. That subdirectory shall have a name indicative of the nature of the draft feature.
+3. This definition shall provide an exact description of the changes to the contents of the OGC specification required to support the new feature. That description should include a extract of each section of the specification which is impacted by the proposal with all proposed modifications applied. 
+4. Each draft feature shall be described in a description document using the template provided by the 000_OGC-Proposal-template.md file.
+5. The draft feature description documents shall reside in the ``Proposals`` directory
 
 A proposed extension to OpenAPI to support alternative schema has been included both as an example and for consideration by the OGC community.
 
