@@ -32,76 +32,32 @@ Clients:
 
 ## ldproxy
 
-The following server has been set up in OGC Testbeds and Pilots. It includes extensions for other resources like vector tiles and styles:
+The following APIs are available as an [OGC Reference Implementation](https://www.opengeospatial.org/resource/products/details/?pid=1598). The APIs support Features part 1, 2 and 3. They also implement drafts of OGC API Tiles and Styles.
 
-* OpenAPI definition: https://services.interactive-instruments.de/t15/daraa/api
-* Landing page: https://services.interactive-instruments.de/t15/daraa
+* Daraa dataset (used in several OGC testbeds and pilots):
+  * OpenAPI definition: https://demo.ldproxy.net/daraa/api
+  * Landing page: https://demo.ldproxy.net/daraa
+* Vineyards in Rhineland-Palatinate dataset:
+  * OpenAPI definition: https://demo.ldproxy.net/vineyards/api
+  * Landing page: https://demo.ldproxy.net/vineyards
 
-The server has been [certified as compliant by the OGC CITE tests](https://www.opengeospatial.org/resource/products/details/?pid=1598).
+Most resources are available as HTML and JSON. Add `f=json` or `f=html` to override HTTP content negotiation.
 
-Another server is implementing an older draft
-of part 1 (the server will be updated to version 1.0.0 soon).
-The APIs provide German data and therefore the language
-in general is German, including in the HTML.
+Sample requests:
 
-The first endpoint is for cadastral parcels, buildings and
-administrative areas in North-Rhine Westphalia (Germany).
-The second endpoint for topographic data in that region,
-the third provides administrative units.
-
-For more details about the implementation and a discussion about
-how this implements the Spatial Data on the Web Best Practies see
-the [Implementation Report](https://github.com/w3c/sdw/blob/gh-pages/bp/BP-implementation-report-00003.md).
-
-OpenAPI documents:
-* https://www.ldproxy.nrw.de/kataster/api/
-* https://www.ldproxy.nrw.de/topographie/api/
-* https://www.ldproxy.nrw.de/dvg/api/
-
-HTML landing pages:
-* https://www.ldproxy.nrw.de/kataster/
-* https://www.ldproxy.nrw.de/topographie/
-* https://www.ldproxy.nrw.de/dvg/
-
-The implementations are proxy services that sit on top of WFS 2.0 instances.
-
-Here are some example requests for features using GeoJSON output (for HTML output
-simply change `f=json` to `f=html`, for GML to `f=xml`):
-
-* Municipalities close to Bonn (attribute and spatial filter):  
-[https://www.ldproxy.nrw.de/kataster/collections/verwaltungseinheit/items?  
-f=json&  
-art=Gemeinde&  
-bbox=7.0,50.6,7.2,50.8&  
-count=20](https://www.ldproxy.nrw.de/kataster/collections/verwaltungseinheit/items?f=json&art=Gemeinde&bbox=7.0%2C50.6%2C7.2%2C50.8&count=20)  
-
-* Same filter, just to determine the number of selected municipalities (13):  
-[https://www.ldproxy.nrw.de/kataster/collections/verwaltungseinheit/items?  
-f=json&  
-art=Gemeinde&  
-bbox=7.0,50.6,7.2,50.8&  
-resultType=hits](https://www.ldproxy.nrw.de/kataster/collections/verwaltungseinheit/items?f=json&art=Gemeinde&bbox=7.0%2C50.6%2C7.2%2C50.8&resultType=hits)  
-
-* Cadastral parcels at Schadowplatz in Düsseldorf:  
-[https://www.ldproxy.nrw.de/kataster/collections/flurstueck/items?  
-f=json&  
-lagebeztxt=Schadowplatz\*&  
-bbox=6.7,51.2,6.9,51.4](https://www.ldproxy.nrw.de/kataster/collections/flurstueck/items?f=json&lagebeztxt=Schadowplatz*&bbox=6.7%2C51.2%2C6.9%2C51.4)
-
-* Cadastral Parcel for Schadowplatz 14 in Düsseldorf:  
-[https://www.ldproxy.nrw.de/kataster/collections/flurstueck/items/DENW20AL0000qTfzFL?  
-f=json](https://www.ldproxy.nrw.de/kataster/collections/flurstueck/items/DENW20AL0000qTfzFL?f=json)
-
-* Railway stations, bus/tram stops, etc. near Düsseldorf:  
-[https://www.ldproxy.nrw.de/topographie/collections/ax_bahnverkehrsanlage/items?  
-f=json&  
-bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/collections/ax_bahnverkehrsanlage/items?f=json&bbox=6.70%2C51.18%2C6.87%2C51.27)
-
-* Railway stations near Düsseldorf:  
-[https://www.ldproxy.nrw.de/topographie/collections/ax_bahnverkehrsanlage/items?  
-f=json&  
-bahnhofskategorie=1010&  
-bbox=6.70,51.18,6.87,51.27](https://www.ldproxy.nrw.de/topographie/collections/ax_bahnverkehrsanlage/items?f=json&bahnhofskategorie=1010&bbox=6.70%2C51.18%2C6.87%2C51.27)
+* A conformance declaration: https://demo.ldproxy.net/vineyards/conformance
+* Available collections: https://demo.ldproxy.net/daraa/collections
+* A collection in a dataset (agricultural surfaces): https://demo.ldproxy.net/daraa/collections/AgricultureSrf
+* First page of features in a collection (ground transportation points): https://demo.ldproxy.net/daraa/collections/TransportationGroundPnt/items
+* The same features in Web Mercator: https://demo.ldproxy.net/daraa/collections/TransportationGroundPnt/items?f=json&crs=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3857
+* A single feature (a cemetery): https://demo.ldproxy.net/daraa/collections/CulturePnt/items/1
+* Queryable attributes of a collection (ground transportation curves): https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/queryables
+* JSON Schema of the features of a collection (ground transportation curves): https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/schema
+* Features in a spatial area (vineyards between 7.0° and 7.1° East and between 49.9° and 50.0° North): https://demo.ldproxy.net/vineyards/collections/vineyards/items?bbox=7.0%2C49.9%2C7.1%2C50.0
+* Features selected by an attribute value (vineyards in Lieser): https://demo.ldproxy.net/vineyards/collections/vineyards/items?village=Lieser
+* Same query using a CQL filter: https://demo.ldproxy.net/vineyards/collections/vineyards/items?filter=village%3D%27Lieser%27
+* Features selected by time (ground transportation curves last updated in 2011/2012): https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/items?datetime=2011-01-01/2012-12-31
+* Features selected by space, time and attributes (ground transportation curves last updated in 2011/2012, in the city of Daraa, restricted to roads): https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/items?F_CODE=AP030&bbox=36.08%2C32.59%2C36.12%2C32.64&datetime=2011-01-01%2F2012-12-31
 
 ## CubeWerx Inc.
 
