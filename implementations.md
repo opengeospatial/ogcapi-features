@@ -98,7 +98,7 @@ nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation
 
 ## GeoServer
 
-An ccomplete implementation of the Features API specification is available at https://vtp2.geo-solutions.it/geoserver/web/
+An complete implementation of the Features API specification is available at https://vtp2.geo-solutions.it/geoserver/web/
 At the time of writing, it supports core, HTML, GML and GeoJSON (as well as other output formats), queriables, CQL extensions, tiles.
 
 ## pygeoapi
@@ -106,14 +106,25 @@ At the time of writing, it supports core, HTML, GML and GeoJSON (as well as othe
 [pygeoapi](https://geopython.github.io/pygeoapi) implements the majority of the current draft.  pygeoapi is implemented in Python, and supports JSON and HTML responses.
 
 ### Example requests:
-* OpenAPI 3 document: ([JSON](https://demo.pygeoapi.io/master/api?f=json)) ([HTML](https://demo.pygeoapi.io/master/api))
+* OpenAPI 3 document: ([JSON](https://demo.pygeoapi.io/master/?f=json)) ([HTML](https://demo.pygeoapi.io/master/))
 * All feature collections: ([JSON](https://demo.pygeoapi.io/master/collections?f=json)) ([HTML](https://demo.pygeoapi.io/master/collections?f=html))
 * Single feature collection: ([JSON](https://demo.pygeoapi.io/master/collections/utah_city_locations?f=json)) ([HTML](https://demo.pygeoapi.io/master/collections/utah_city_locations?f=html))
 * Feature collection items: ([JSON](https://demo.pygeoapi.io/master/collections/utah_city_locations/items?f=json)) ([HTML](https://demo.pygeoapi.io/master/collections/utah_city_locations/items?f=html))
 * Feature collection single item: ([JSON](https://demo.pygeoapi.io/master/collections/utah_city_locations/items/Fairfield?f=json) ([HTML](https://demo.pygeoapi.io/master/collections/utah_city_locations/items/Fairfield?f=html))
 * Feature collection: bbox query: ([JSON](https://demo.pygeoapi.io/master/collections/lakes/items?bbox=-152,42,-52,84&f=json)) ([HTML](https://demo.pygeoapi.io/master/collections/lakes/items?bbox=-152,42,-52,84&f=html))
 
-The [British Geological Survey](https://www.bgs.ac.uk/) has a demo deployment running on Kubenetes at https://osgeodev.bgs.ac.uk/pygeoapi/. Code available @ https://github.com/BritishGeologicalSurvey/bgs-pygeoapi
+### [British Geological Survey](https://www.bgs.ac.uk/)
+
+Demo deployment using an ammeded [pygeoapi-skin-dashboard](https://github.com/BritishGeologicalSurvey/pygeoapi-skin-dashboard) running on Kubenetes at https://osgeodev.bgs.ac.uk/pygeoapi/. Code available @ https://github.com/BritishGeologicalSurvey/bgs-pygeoapi
+
+#### Example requests:
+* OpenAPI 3 document: ([JSON](https://osgeodev.bgs.ac.uk/pygeoapi/?f=json)) ([HTML](https://osgeodev.bgs.ac.uk/pygeoapi/))
+* All feature collections: ([JSON](https://osgeodev.bgs.ac.uk/pygeoapi/collections?f=json)) ([HTML](https://osgeodev.bgs.ac.uk/pygeoapi/collections))
+* Single feature collection: ([JSON](https://osgeodev.bgs.ac.uk/pygeoapi/collections/BGSGeology625kBedrock?f=json)) ([HTML](https://osgeodev.bgs.ac.uk/pygeoapi/collections/BGSGeology625kBedrock))
+* Feature collection items: ([JSON](https://osgeodev.bgs.ac.uk/pygeoapi/collections/BGSGeology625kBedrock/items?f=json)) ([HTML](https://osgeodev.bgs.ac.uk/pygeoapi/collections/BGSGeology625kBedrock/items))
+* Feature collection single item: ([JSON](https://osgeodev.bgs.ac.uk/pygeoapi/collections/BGSGeology625kBedrock/items/7?f=json) ([HTML](https://osgeodev.bgs.ac.uk/pygeoapi/collections/BGSGeology625kBedrock/items/7))
+
+### Meteorological Service of Canada
 
 The Meteorological Service of Canada uses pygeoapi in production at https://geo.weather.gc.ca/geomet/features
 
