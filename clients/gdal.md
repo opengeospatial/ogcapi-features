@@ -147,7 +147,7 @@ X,Y,type,name1
 532473.000769929,181219.003820829,City,City of London
 ```
 
-The following command fetches all name features that is one of "Country", "Capital", "City", "Town", "Village", or "Hamlet" and creates a GeoPackage file `places.gpkg` with the features (roughly 30000 features):
+The following command fetches all name features that is one of "Country", "Capital", "City", "Town", "Village", or "Hamlet" and creates a GeoPackage file `places.gpkg` with the features:
 
 ```sh
 % ogr2ogr -where "type='Country' OR type='Capital' OR type='City' OR type='Town' OR type='Village' OR type='Hamlet'" -oo PAGE_SIZE=10000 -f GPKG places.gpkg OAPIF:https://demo.ldproxy.net/zoomstack names
@@ -192,7 +192,7 @@ name2: String (0.0)
 name2language: String (0.0)
 ```
 
-And the following command fetches all local road features that have "Queen" as part of the name and creates a GeoPackage file `queen-roads.gpkg` with the features (roughly 8200 features):
+And the following command fetches all local road features that have "Queen" as part of the name and creates a GeoPackage file `queen-roads.gpkg` with the features:
 
 ```sh
 % ogr2ogr -where "name LIKE '%Queen%'" -oo PAGE_SIZE=10000 -f GPKG queen-roads.gpkg OAPIF:https://demo.ldproxy.net/zoomstack roads_local --debug on
