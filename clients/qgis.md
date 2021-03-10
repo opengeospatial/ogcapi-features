@@ -24,17 +24,25 @@ Press "New" to open the dialog for a new connections.
 
 Provide the connection information. The URL is the URL of the OGC API Landing Page resource, in this case "https://demo.ldproxy.net/zoomstack". Make sure "Enable feature paging" is checked. 
 
-It is recommended to provide a explicit "Page size" value, if there are more than a handful of features in the dataset. Use a value that is close to maximum value for the `limit` parameter that is specified in the documentation of the API. Otherwise the default value will be used, which often is a low value (e.g., 10) to avoid that API requests unintentionally place a high load on the API.
+It is recommended to provide an explicit "Page size" value, if there are more than a handful of features in the dataset. Use a value that is close to maximum value for the `limit` parameter that is specified in the documentation of the API. Otherwise the default value will be used, which often is a low value (e.g., 10) to avoid that API requests unintentionally place a high load on the API.
 
 Then press "OK".
 
 ![](images/qgis-add-api.png "Add an API with access to OS Open Zoomstack feature data")
 
-In the Data Source Manager, the new API connection should now be selected. Press "Connect", the list of collections should now appear.
+In the Data Source Manager, the new API connection should now be selected. 
+
+### Step 2: Selecting the collections
+
+Press "Connect", the list of collections should now appear.
 
 ![](images/qgis-select-layers.png "Connect and select the collections")
 
-Select the collections that should be added to the project as a layer and press "Add". The features from the selected collections should now be added to the map and can be used like other feature data in QGIS. If the number of features in a layer is higher than the page size, the features are progressively loaded page by page.
+Select the collections that should be added to the project as a layer and press "Add". 
+
+### Step 3: Use the features
+
+The features from the selected collections should now be added to the map and can be used like other feature data in QGIS. If the number of features in a layer is higher than the page size, the features are progressively loaded page by page.
 
 Note that, if a collection has millions of features and the map view covers the extent of the collection, QGIS will try to load all features. To avoid this, you can, for example, restrict the scale range in which the layer should be visible.
 
