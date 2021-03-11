@@ -4,7 +4,7 @@ This page shows an example how to connect with the ArcGIS API for JavaScript to 
 
 ## Links
 
-- Open the example as a [map](http://htmlpreview.github.io/?https://github.com/cportele/ogcapi-features-1/blob/master/clients/html/arcgis-js-vineyards.html)
+- Open the example as a [map](https://portele.de/arcgis-js-vineyards.html)
 - Open the example in [Codepen](https://codepen.io/cportele/pen/ZEBVpby)
 - The [example from Esri](https://developers.arcgis.com/javascript/latest/sample-code/layers-ogcfeaturelayer/) that was used as a starting point
 - [OGCFeatureLayer documentation from Esri](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-OGCFeatureLayer.html)
@@ -33,7 +33,7 @@ const vineyards = new OGCFeatureLayer({
    url: "https://demo.ldproxy.net/vineyards", 
    // identifier of the collection
    collectionId: "vineyards", 
-   // title is derived from the API
+   // the layer title is derived from the API
    // displayField is the property used to label features, e.g. in popups
    displayField: "name",
    // show the name of the vineyard in larger scales
