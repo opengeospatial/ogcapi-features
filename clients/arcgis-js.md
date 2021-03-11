@@ -25,7 +25,7 @@ A collection in an API implementing OGC API Features is represented in the ArcGI
 
 The definition below creates a feature layer for the use in a map from the vineyard features in this API: https://demo.ldproxy.net/vineyards
 
-Open the complete HTML document as a [map](http://htmlpreview.github.io/?https://github.com/cportele/ogcapi-features-1/blob/master/clients/html/arcgis-js-vineyards.html) or in [Codepen](https://codepen.io/cportele/pen/ZEBVpby).
+Open the complete HTML document as a [map](https://portele.de/arcgis-js-vineyards.html) or in [Codepen](https://codepen.io/cportele/pen/ZEBVpby).
 
 ```javascript
 const vineyards = new OGCFeatureLayer({
