@@ -4,7 +4,7 @@ This page shows an example how to connect with Leaflet to an API that implements
 
 ## Links
 
-- Open the example as a [map](https://portele.de/leaflet-js-airports.html)
+- Open the example as a [map](https://portele.de/leaflet-airports.html)
 - Open the example in [Codepen](https://codepen.io/cportele/pen/VwmqPWy)
 - [GeoJSON documentation from Leaflet](https://leafletjs.com/reference-1.7.1.html#geojson)
 - This [tutorial from the Leaflet documentation](https://leafletjs.com/examples/geojson/) may also be helpful
@@ -37,4 +37,4 @@ Here is an example using the Fetch API:
 })();
 ```
 
-Open the complete HTML document as a [map](https://portele.de/leaflet-js-airports.html) or in [Codepen](https://codepen.io/cportele/pen/VwmqPWy).
+Open the complete HTML document as a [map](https://portele.de/leaflet-airports.html) or in [Codepen](https://codepen.io/cportele/pen/VwmqPWy).
