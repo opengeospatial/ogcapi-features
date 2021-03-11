@@ -1,4 +1,4 @@
-# OWSlib
+# OWSLib
 
 This page shows how to connect with OWSLib to an API that implements OGC API - Features - Part 1: Core.
 
