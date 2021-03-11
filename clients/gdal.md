@@ -2,6 +2,10 @@
 
 This page shows how to connect with GDAL to an API that implements OGC API - Features - Part 1: Core.
 
+## Links
+
+- [GDAL OGC API Features driver documentation](https://gdal.org/drivers/vector/oapif.html)
+
 ## Software version
 
 This description uses GDAL 3.2.0.
@@ -11,10 +15,6 @@ This description uses GDAL 3.2.0.
 The API must support the [Core](http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core), [GeoJSON](http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson) and [OpenAPI 3.0](http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas3) conformance classes.
 
 The CRS conformance class from Part 2 (Coordinate Reference Systems by Reference) is not supported. GDAL, however, can also transform the WGS84 geometries returned from the API to other coordinate reference systems as needed.
-
-## Links
-
-- [GDAL OGC API Features driver documentation](https://gdal.org/drivers/vector/oapif.html)
 
 ## Examples
 
