@@ -9,7 +9,7 @@ This folder contains descriptions how GIS clients and libraries can be used to c
 ## Libraries
 
 - [GDAL 3.2.0](gdal.md)
-- OWSlib 0.23
+- [OWSLib 0.23.0](owslib.md)
 
 ## JavaScript APIs
 
