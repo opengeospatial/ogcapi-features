@@ -18,4 +18,8 @@ The CRS conformance class from Part 2 (Coordinate Reference Systems by Reference
 
 ## Examples
 
-The "OGCAPIFeaturesWithOWSLib.ipynb" Jupyter notebook on [binder](https://mybinder.org/v2/gh/ghobona/notebooks/main) has multiple steps to read and navigate in Python through an API.
+The `OGCAPIFeaturesWithOWSLib.ipynb` Jupyter notebook on [binder](https://mybinder.org/v2/gh/ghobona/notebooks/main) has multiple steps to read and navigate in Python through an API. To create a copy of the notebook, click on `OGCAPIFeaturesWithOWSLib.ipynb`. 
+
+Press `Run` to execute the selected step of the notebook. Python code in steps can be edited.
+
+For more information on Jupyter notebooks, see [jupyter.org](https://jupyter.org/).
