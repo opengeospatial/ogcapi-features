@@ -4,16 +4,16 @@ This folder contains descriptions how GIS clients and libraries can be used to c
 
 ## Desktop GIS
 
-- [QGIS 3.16](qgis.md)
+- [QGIS](qgis.md)
 
 ## Libraries
 
-- [GDAL 3.2.0](gdal.md)
-- [OWSLib 0.23.0](owslib.md)
+- [GDAL](gdal.md)
+- [OWSLib](owslib.md)
 
 ## JavaScript APIs
 
-- [ArcGIS API for JavaScript 4.18](arcgis-js.md)
-- [Leaflet 1.7.1](leaflet.md)
-- [Mapbox GL JS 1.13.0](mapbox-gl-js.md)
-- [OpenLayers 6.5.0](openlayers.md)
+- [ArcGIS API for JavaScript](arcgis-js.md)
+- [Leaflet](leaflet.md)
+- [Mapbox GL JS](mapbox-gl-js.md)
+- [OpenLayers](openlayers.md)
