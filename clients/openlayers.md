@@ -4,7 +4,7 @@ This page shows an example how to connect with OpenLayers to an API that impleme
 
 ## Links
 
-- Open the example as a [map](https://portele.de/ogc/openlayers-airports.html)
+- Open the example as a [map](https://ogc.portele.de/maps/openlayers-airports.html)
 - Open the example in [Codepen](https://codepen.io/cportele/pen/OJbrgKe)
 - [GeoJSON documentation from OpenLayers](https://openlayers.org/en/latest/apidoc/module-ol_format_GeoJSON-GeoJSON.html)
 - This [example from the OpenLayers documentation](https://openlayers.org/en/latest/examples/geojson.html) was used as a starting point
@@ -44,4 +44,4 @@ Here is an example using the Fetch API:
 })();
 ```
 
-Open the complete HTML document as a [map](https://portele.de/ogc/openlayers-airports.html) or in [Codepen](https://codepen.io/cportele/pen/OJbrgKe).
+Open the complete HTML document as a [map](https://ogc.portele.de/maps/openlayers-airports.html) or in [Codepen](https://codepen.io/cportele/pen/OJbrgKe).

@@ -4,7 +4,7 @@ This page shows an example how to connect with Mapbox GL JS to an API that imple
 
 ## Links
 
-- Open the example as a [map](https://portele.de/ogc/mapbox-gl-js-airports.html)
+- Open the example as a [map](https://ogc.portele.de/maps/mapbox-gl-js-airports.html)
 - Open the example in [Codepen](https://codepen.io/cportele/pen/GRNPWyR)
 - [GeoJSON documentation from Mapbox](https://docs.mapbox.com/mapbox-gl-js/api/sources/#geojsonsource)
 
@@ -42,11 +42,10 @@ Here is an example using the Fetch API:
       'type': 'symbol',
       'source': 'airports',
       "layout": {
-         "icon-image": "airport",
-         "icon-size": 2
+         "icon-image": "topo_airport-15"
       }
    });
 })();
 ```
 
-Open the complete HTML document as a [map](https://portele.de/ogc/mapbox-gl-js-airports.html) or in [Codepen](https://codepen.io/cportele/pen/GRNPWyR).
+Open the complete HTML document as a [map](https://ogc.portele.de/maps/mapbox-gl-js-airports.html) or in [Codepen](https://codepen.io/cportele/pen/GRNPWyR).
