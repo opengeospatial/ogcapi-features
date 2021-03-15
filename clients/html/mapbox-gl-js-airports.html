@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Airports in Great Britain</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css' rel='stylesheet'/>
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<style>
+.mapboxgl-popup {
+font: 12px/20px Arial, Helvetica, sans-serif;
+}
+</style>
+<div id='map'></div>
+<script>
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: {
+    "version": 8,
+    "name": "Airports",
+    "center": [ -2, 55 ],
+    "zoom": 5.0,
+    "bearing": 0.0,
+    "pitch": 0.0,
+    "sources": {
+      "basemap": {
+        "type": "raster",
+        "tiles": [
+          "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        ],
+        "scheme": "xyz",
+        "attribution": "Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+      }
+    },
+    // TODO use other sprite
+    "sprite": "https://dev.adv-smart.de/sprites/sprite",
+    "layers": [
+      {
+        "id": "background",
+        "type": "raster",
+        "source": "basemap"
+      }
+    ]
+  }
+});
+
+(async () => {
+  const airports = await fetch('https://demo.ldproxy.net/zoomstack/collections/airports/items?limit=100', {
+    headers: {
+      'Accept': 'application/geo+json'
+    }
+  }).then(response => response.json());
+
+  map.addSource('airports', {
+    type: 'geojson',
+    data: airports
+  });
+
+  map.addLayer({
+    'id': 'airports',
+    'type': 'symbol',
+    'source': 'airports',
+    "layout": {
+      "icon-image": "test_flughafen_modWebAtlas",
+      "icon-size": 2
+    }
+  });
+})();
+
+map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.ScaleControl());
+
+map.on('load', function() {
+  var popup = new mapboxgl.Popup({
+    offset: 10,
+    closeButton: false,
+    closeOnClick: true
+  });
+
+  map.on('click', function(e) {
+    let features = map.queryRenderedFeatures(e.point);
+    if (features.length) {
+      var popupContent = "<a href='https://demo.ldproxy.net/zoomstack/collections/airports/items/" + features[0].id + "' target='_blank'>" + features[0].properties['name'] + "</a>";
+    popup
+    .setLngLat(e.lngLat)
+    .setHTML(popupContent)
+    .addTo(map);
+    }
+  });
+
+  map.on('mousemove', function(e) {
+    if (map.queryRenderedFeatures(e.point).length) {
+      map.getCanvas().style.cursor = 'pointer';
+    } else {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+    }
+  });
+});
+</script>
+</body>
+</html>
