@@ -72,9 +72,12 @@ OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/mast
 The reference version of the OpenAPI components and XML schemas are published
 in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
 
-Several implementations exist:
+## Server and client implementations
 
-* [Implementations / demo services](implementations.md)
+[Overview of tools implementing OGC API Features](implementations.adoc)
+  
+* [Server implementations - examples, more information and how-to guides](servers/README.md)
+* [Client implementations - examples, more information and how-to guides](clients/README.md)
 
 ## Communication
 
