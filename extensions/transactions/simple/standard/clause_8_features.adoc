@@ -81,11 +81,28 @@ include::requirements/features/REQ_representation-geojson-create.adoc[]
 
 *Example*
 
-The following example fetches the create schema for the `oakland_buildings` collection.  The `type` parameter with a value of `create` is used to indicate that the desired schema is the schema that should be followed to create a new feature instance. A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
+The following examples fetch the "create", "replace" and "update" schemas for the `oakland_buildings` collection.  The `type` parameter with a value of `create`, `replace` and `update` are used to indicate that the desired schema is the schema that should be followed to create, replace or update a feature instance. Pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
 
-[#create-schema,reftext=`Create Schema Example`]
-.Create Schema Example
+All schemas are based on the GeoJSON schema of a `oakland_buildings` feature. The server will reject any feature that does not validate against the schema for the requested operation. Since each schema includes a statement `"additionalProperties": false`, the server will reject any feature that has additional properties that are not specified in the schema.
+
+The differences between the schemas are in the nature of the operation: 
+
+- The "create" schema is the standard GeoJSON schema. It includes an `id` member and likely indicates that the server will take the value into account when assigning a feature id to the new feature, but this is the decision of the server.
+- The "replace" schema is identical to the "create" schema. The server may reject feature instances that have an `id` member that is not the same as the feature identifier of the feature that is replaced.
+- The "update" schema has no `id` member and no required members since in the PATCH request only the members that are changed will be included. In addition, the schema allows `null` values for properties that are not required in the create/replace schema.
+
+[#create-schema,reftext=`"Create" Schema Example`]
+."Create" Schema Example
 include::../examples/json/create_schema.adoc[]
+
+[#replace-schema,reftext=`"Replace" Schema Example`]
+."Replace" Schema Example
+include::../examples/json/replace_schema.adoc[]
+
+[#update-schema,reftext=`"Update Schema Example`]
+."Update" Schema Example
+include::../examples/json/update_schema.adoc[]
+
 
 include::requirements/features/REQ_representation-geojson-replace.adoc[]
 
