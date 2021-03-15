@@ -1,12 +1,12 @@
 ....
    Client                                                              Server
      |                                                                   |
-     | GET /collections/oakland_buildings/schema?type=create   HTTP/1.1  |
+     | GET /collections/oakland_buildings/schema?type=replace  HTTP/1.1  |
      | Accept: application/schema+json                                   |
      |------------------------------------------------------------------>|
      |                                                                   |
-     | HTTP/1.1 200 OK                                                   | 
-     | Content-Type: application/schema+json                             |    
+     | HTTP/1.1 200 OK                                                   |
+     | Content-Type: application/schema+json                             |
      |                                                                   |
      | {                                                                 |
      |   "type": "object",                                               |
