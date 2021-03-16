@@ -408,9 +408,39 @@ include::requirements/core/REQ_fc-md-items-links.adoc[]
 
 include::requirements/core/REQ_fc-md-extent.adoc[]
 
-NOTE: The member `spatial` only needs to be provided in the `extent` object, if features in the feature collection have spatial properties. The same applies to `temporal` and features with temporal properties. For example, a feature collection where features have a spatial, but no temporal property will only provide the `spatial` member.
+The member `spatial` only needs to be provided in the `extent` object, if features in the feature collection have spatial properties. The same applies to `temporal` and features with temporal properties. For example, a feature collection where features have a spatial, but no temporal property will only provide the `spatial` member.
+
+The spatial and temporal extents support multiple bounding boxes (`bbox` array) and time intervals (`interval` array).
+
+include::requirements/core/REQ_fc-md-extent-multi.adoc[]
 
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
+
+The last requirement and recommendation reflect that most clients will only be interested in a single extent, for example, to set the map view. They will only have to look at the first item in each array. 
+
+At the same time, for some data and for some use cases, a more fine-grained description of the extent will be useful. In that case the first bounding box / time interval is simply the union of all the other bounding boxes / time intervals. 
+
+[[example_4a]]
+.Spatial extent with multiple bounding boxes
+=================
+The following extent represents the United States of America (excluding Territories). The first bounding box of the four bounding boxes is the union of the three other bounding boxes representing the 48 contiguous states, Alaska and Hawaii respectively.
+
+Note that the overall bounding box as well as the bounding box of Alaska crosses the anti-meridian.
+
+[source,JSON]
+----
+{
+  "spatial": {
+    "bbox": [ 
+      [172.461667, 18.910361, -66.9513812, 71.365162], 
+      [-124.7844079, 24.7433195, -66.9513812, 49.3457868], 
+      [172.461667, 51.214183, -129.979511, 71.365162], 
+      [-178.334698, 18.910361, -154.806773, 28.402123] 
+    ]
+  }
+}
+----
+=================
 
 include::recomendations/core/PER_fc-md-extent-extensions.adoc[]
 
