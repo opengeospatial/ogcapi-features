@@ -8,6 +8,7 @@ This page shows an example how to connect with the ArcGIS API for JavaScript to 
 - Open the example in [Codepen](https://codepen.io/cportele/pen/ZEBVpby)
 - The [example from Esri](https://developers.arcgis.com/javascript/latest/sample-code/layers-ogcfeaturelayer/) that was used as a starting point
 - [OGCFeatureLayer documentation from Esri](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-OGCFeatureLayer.html)
+- [ArcGIS API for JavaScript - Licensing & Attribution requirements](https://developers.arcgis.com/javascript/latest/licensing/)
 
 ## Software version
 
