@@ -416,9 +416,9 @@ include::requirements/core/REQ_fc-md-extent-multi.adoc[]
 
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
-The last requirement and recommendation reflect that most clients will only be interested in a single extent, for example, to set the map view. They will only have to look at the first item in each array. 
+The last requirement and recommendation reflect that most clients will only be interested in a single extent, for example, to set the map view or a time slider. They will only have to look at the first item in each array. 
 
-At the same time, for some data and for some use cases, a more fine-grained description of the extent will be useful. In that case the first bounding box / time interval is simply the union of all the other bounding boxes / time intervals. 
+At the same time, for some data and for some use cases, a more fine-grained description of the extent will be useful. In that case the first bounding box / time interval is simply the union of all the other bounding boxes / time intervals. Clients can then choose, if they want to use the simpler or the more detailed extent information.
 
 [[example_4a]]
 .Spatial extent with multiple bounding boxes
