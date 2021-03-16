@@ -1,3 +1,3 @@
 # Implementations
 
-Replaced by [implementations.adoc](implementations.adoc).
+Replaced by [implementations/README.adoc](implementations/README.adoc).

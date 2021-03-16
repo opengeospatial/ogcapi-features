@@ -74,10 +74,10 @@ in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
 
 ## Server and client implementations
 
-[Overview of tools implementing OGC API Features](implementations.adoc)
+[Overview of tools implementing OGC API Features](implementations/README.adoc)
   
-* [Server implementations - examples, more information and how-to guides](servers/README.md)
-* [Client implementations - examples, more information and how-to guides](clients/README.md)
+* [Server implementations - examples, more information and how-to guides](implementations/servers/README.md)
+* [Client implementations - examples, more information and how-to guides](implementations/clients/README.md)
 
 ## Communication
 
