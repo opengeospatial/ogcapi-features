@@ -1,3 +1,3 @@
-# Implementations
+This file has been migrated to the a sub-folder [implementations](implementations).
 
-Replaced by [implementations/README.adoc](implementations/README.adoc).
+This is a temporary placeholder during the transition, it will be removed again shortly.
