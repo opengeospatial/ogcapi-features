@@ -9,7 +9,7 @@ We welcome pull requests to update this page to add or update an entry for a cli
 - [QGIS](qgis.md)
 - [FME](fme.md)
 
-## Libraries
+## Native APIs / Libraries
 
 - [GDAL](gdal.md)
 - [OWSLib](owslib.md)
