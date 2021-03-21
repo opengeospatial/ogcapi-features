@@ -118,6 +118,14 @@ about the result or the resource identifier.
 
 See <<http_status_codes,HTTP status codes>>.
 
+==== Example
+
+The following example adds a new feature to the `oakland_buildings` collection.  The feature is represented as GeoJSON using the default CRS of http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS 84 longitude/latitude).  A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
+
+[#create-example,reftext=`Create Example`]
+.Create a New Feature Example
+include::../examples/json/ex01_create.adoc[]
+
 [[replace]]
 === Replacing an existing resource (REPLACE)
 
@@ -181,6 +189,14 @@ include::requirements/create-replace-delete/replace/REQ_rid-exception.adoc[]
 
 See also <<http_status_codes,HTTP status codes>>.
 
+==== Example
+
+The following example replaces the feature created by the <<create-example>> with a new feature.  Once again, the replacement feature is represented as GeoJSON using the default CRS of http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS 84 longitude/latitude).  A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
+
+[#replace-example,reftext=`Replace Example`]
+.Replace an Existing Feature Example
+include::../examples/json/ex02_replace.adoc[]
+
 [[delete]]
 === Removing a resource from a collection (DELETE)
 
@@ -219,3 +235,11 @@ Should it be up to the server whether it responds with a 204 or a 404, if no fea
 ==== Exceptions
 
 See <<http_status_codes,HTTP status codes>>.
+
+==== Example
+
+The following example deletes the feature created by the <<create-example>> and replaced with a new feature in the <<replace-example>>.  A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
+
+[#delete-example,reftext=`Delete Example`]
+.Delete an Existing Feature Example
+include::../examples/json/ex04_delete.adoc[]

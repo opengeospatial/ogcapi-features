@@ -1,0 +1,71 @@
+....
+   Client                                                              Server
+     |                                                                   |
+     | GET /collections/oakland_buildings/schema?type=create&f=xml  HTTP/1.1
+     |------------------------------------------------------------------>|
+     |                                                                   |
+     | HTTP/1.1 200 OK                                                   | 
+     | Content-Type: application/xml                                     |    
+     |                                                                   |
+     | <?xml version="1.0" encoding="UTF-8"?>                            |
+     | <xs:schema xmlns:f="http://schemas.cubewerx.com/namespaces/null"  |
+     |            xmlns:xs="http://www.w3.org/2001/XMLSchema"            |
+     |            xmlns:gml="http://www.opengis.net/gml/3.2"             |
+     |     targetNamespace="http://schemas.cubewerx.com/namespaces/null" |
+     |            elementFormDefault="qualified" version="1.0">          |
+     |    <xs:import namespace="http://www.opengis.net/gml/3.2"          |
+     |    schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>|
+     |    <xs:element name="oakland_buildings"                           |
+     |                type="f:oakland_buildingsType"                     |
+     |                substitutionGroup="gml:AbstractFeature"/>          |
+     |    <xs:complexType name="oakland_buildingsType">                  |
+     |       <xs:complexContent>                                         |
+     |          <xs:extension base="gml:AbstractFeatureType">            |
+     |             <xs:sequence>                                         |
+     |                <xs:element name="geometry"                        |
+     |                            type="gml:SurfacePropertyType"         |
+     |                            minOccurs="0"/>                        |
+     |                <xs:element name="id" type="xs:uri"                |
+     |                            minOccurs="0"/>                        |
+     |                <xs:element name="shape_len" type="xs:double"      |
+     |                            minOccurs="0"/>                        |
+     |                <xs:element name="shape_area" type="xs:double"     |
+     |                            minOccurs="0"/>                        |
+     |                <xs:element name="bldgid3" type="xs:string"        |
+     |                            minOccurs="0"/>                        |
+     |                <xs:element name="bldgid2" type="xs:string"/>      |
+     |                <xs:element name="bldgtype">                       |     
+     |                   <xs:simpleType>                                 |    
+     |                      <xs:restriction base="xs:string">            |   
+     |                         <xs:enumeration value="Commercial"/>      |  
+     |                         <xs:enumeration value="Residential"/>     | 
+     |                      </xs:restriction>                            |
+     |                   </xs:simpleType>                                |
+     |                </xs:element>                                      |
+     |                <xs:element name="final_apn">                      |
+     |                   <xs:simpleType>                                 |
+     |                      <xs:pattern value="\\f{13}"/>                |
+     |                   </xs:simpleType>                                |
+     |                </xs:element>                                      |
+     |                <xs:element name="apnid" type="xs:integer"/>       |
+     |                <xs:element name="nostory" minOccurs="0">          |     
+     |                   <xs:simpleType>                                 |    
+     |                      <xs:restriction base="xs:integer">           |   
+     |                         <xs:minInclusive value="1"/>              |  
+     |                         <xs:maxInclusive value="400"/>            |   
+     |                      </xs:restriction>                            |
+     |                   </xs:simpleType>                                |
+     |                </xs:element>                                      |
+     |                <xs:element name="bldgnum" type="xs:string"        |
+     |                            minOccurs="0"/>                        |
+     |                <xs:element name="numbldgs" type="xs:integer"      |
+     |                            minOccurs="0"/>                        |
+     |                <xs:element name="comname" type="xs:string"        |
+     |                            minOccurs="0"/>                        |
+     |             </xs:sequence>                                        |
+     |          </xs:extension>                                          |
+     |       </xs:complexContent>                                        |
+     |    </xs:complexType>                                              |
+     | </xs:schema>                                                      |
+     |<------------------------------------------------------------------|
+....
