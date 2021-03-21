@@ -46,6 +46,7 @@ The *Status Codes* listed in <<status_codes>> are of particular relevance to imp
 |`404` |The requested resource does not exist on the server. For example, a path parameter had an incorrect value.
 |`405` |The request method is not supported. For example, a POST request was submitted, but the resource only supports GET requests.
 |`406` |Content negotiation failed. For example, the `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
+|`412` |The status code indicates that one or more conditions given in the request header fields evaluated to false when tested by the server.
 |`413` |The server is refusing to process the request because the request content is larger than the server is willing or able to process.
 |`415` |The server is refusing to service the request because the content is in a format not supported by this method on the target resource.
 |`422` |The server understands the content type of the request content and the syntax of the request content is correct, but was unable to process the contained instructions. For example, the submitted resource does not meet a semantic constraint, e.g. a mandatory property is missing.
@@ -171,7 +172,7 @@ case, the processing can succeed or fail, without further notification to the cl
 
 ==== Exceptions
 
-The assignment of resource identifiers is the pervue of the server and as a
+The assignment of resource identifiers is the perview of the server and as a
 result, clients cannot simply use the HTTP PUT operation to create a new resource.
 Instead, the creation of new resource instances have be preformed
 using the HTTP POST operation as described in <<create>>.

@@ -24,3 +24,7 @@ endpoint of a specific instance of a resource from a collection
 EXAMPLE 1: For features, the endpoint is `{landingPageUri}/collections/{collectionId}/items/{featureId}`.
 
 EXAMPLE 2: For processes, the endpoint is `{landingPageUri}/processes/{processId}`.
+
+[[optimistic-locking]]
+==== optimistic locking
+a locking protocol that resolves change conflicts at the very last moment; this is accomplished by a server providing a state token when a resource is fetched and the client using that state token on a subsequent update operation; if the state token provided by the client matches the current state token for the resource then the update can proceed normally; if the state tokens do no match the operation fails and the client must re-fetch the resource and retry the update operation with a more current state token 
