@@ -34,12 +34,12 @@ NOTE: The alphabetic letters delimited using `[]` are time instants and correspo
    |                                            |<-------------------------------------------|[B]
    |                                            |                                            |
    |                                            | HTTP/1.1 200 OK                            |
-   |                                            | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|
+   |                                            | Last-Modified: Sat,13 Mar 2021 11:28:17 GMT|
    |                                            | ETag: 1986bf5c                             |
    |                                            |------------------------------------------->|[C]
    |                                            |                                            |
    | HTTP/1.1 200 OK                            |                                            |
-   | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|                                            |
+   | Last-Modified: Sat,13 Mar 2021 11:28:17 GMT|                                            |
    | ETag: 1986bf5c                             |                                            |
 [D]|<-------------------------------------------|                                            |
    |                                            |                                            |
@@ -141,12 +141,12 @@ NOTE: The alphabetic letters delimited using `[]` are time instants and correspo
    |                                            |<-------------------------------------------|[B]
    |                                            |                                            |
    |                                            | HTTP/1.1 200 OK                            |
-   |                                            | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|
+   |                                            | Last-Modified: Sat,13 Mar 2021 11:28:17 GMT|
    |                                            | ETag: 1986bf5c                             |
    |                                            |------------------------------------------->|[C]
    |                                            |                                            |
    | HTTP/1.1 200 OK                            |                                            |
-   | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|                                            |
+   | Last-Modified: Sat,13 Mar 2021 11:28:17 GMT|                                            |
    | ETag: 1986bf5c                             |                                            |
 [D]|<-------------------------------------------|                                            |
    |                                            |                                            |
@@ -198,7 +198,7 @@ NOTE: The alphabetic letters delimited using `[]` are time instants and correspo
 |C |The server responds to Client B.  The response includes `ETag 1986bf5c` .
 |D |The server responds to Client A.  The response also includes `ETag 1986bf5c` since the feature has not changed since the server responded to Client B.
 |E |Client A modifies its local copy of `OB.2` and pushes the changes to the server.  The client includes the `ETag 1986bf5c`.
-|F |Since the value of the client-provided `If-Match` HTPP header matches the current `ETag` for the resource -- indicating the Client A's understanding of the state of the resource is current - the server successfully processes Client A's request. A new `ETag`, `66ba0c91`, is generated to reflect the new state of the resource.
+|F |Since the value of the client-provided `If-Match` HTTP header matches the current `ETag` for the resource -- indicating the Client A's understanding of the state of the resource is current - the server successfully processes Client A's request. A new `ETag`, `66ba0c91`, is generated to reflect the new state of the resource.
 |G |Client B, unaware of Client A's changes, modifies its local copy of `OB.2` and pushes the changes to the server using an `If-Match` HTTP header value of `1986bf5c` which reflects Client B's outdated understanding of the resource's state.
 |H |The server evaluates the `If-Match` HTTP header value specified by Client B and because it does not match the current state of the resource (i.e. `ETag 66ba0c91`) the operation's precondition fails and thus the operation fails.  The server responds with a HTTP status code of 412.
 |I |The Client B re-fetches the resource to obtain its current state.
