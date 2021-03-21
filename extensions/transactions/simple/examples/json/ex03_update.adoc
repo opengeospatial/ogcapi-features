@@ -1,0 +1,52 @@
+....
+   Client                                                              Server
+     |                                                                     |
+     | PATCH /collections/oakland_buildings/items/OB.2   HTTP/1.1          |
+     | Content-Type: application/merge-patch+json                          |
+     |                                                                     |
+     | {                                                                   |
+     |    "geometry": {                                                    |
+     |       "coordinates": [                                              |
+     |         [[[-122.2679,37.8009],[-122.2679,37.8009],                  |
+     |           [-122.2681,37.8007],[-122.2678,37.8005],                  |
+     |           [-122.2676,37.8008],[-122.2679,37.8009]]]                 |
+     |       ]                                                             |
+     |    },                                                               |
+     |    "properties": {                                                  |
+     |       "apnid": 1310,                                                |
+     |       "primary_material": "red brick"                               |
+     |    }                                                                |
+     | }                                                                   |
+     |-------------------------------------------------------------------->|
+     |                                                                     |
+     | HTTP/1.1 200 OK                                                     | 
+     | Content-Type: application/geo+json                                  |
+     |                                                                     |
+     | {                                                                   |
+     |   "type": "Feature",                                                |
+     |   "id": "OB.2",                                                     |
+     |   "geometry": {                                                     |
+     |     "type": "MultiPolygon",                                         |
+     |     "coordinates": [                                                |
+     |       [[[-122.2679,37.8009],[-122.2679,37.8009],                    |
+     |         [-122.2681,37.8007],[-122.2678,37.8005],                    |
+     |         [-122.2676,37.8008],[-122.2679,37.8009]]]                   |
+     |     ]                                                               |
+     |   },                                                                |
+     |   "properties": {                                                   |
+     |     "shape_len": 402.19805753,                                      |
+     |     "shape_area": 10117.0666708,                                    |
+     |     "bldgid3": "258 11TH ST_bldg1",                                 |
+     |     "bldgid2": "258 11TH ST",                                       |
+     |     "bldgtype": "Store Building",                                   |
+     |     "final_apn": "002 006901000",                                   |
+     |     "apnid": 1310                                                   |
+     |     "nostory": 1,                                                   |
+     |     "bldgnum": "bldg1",                                             |
+     |     "numbldgs": 1,                                                  |
+     |     "comname": "John Sardell & Sons"                                |
+     |     "primary_material": "red brick"                                 |
+     |   }                                                                 |
+     | }                                                                   |
+     |<--------------------------------------------------------------------|
+....
