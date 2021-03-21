@@ -1,26 +1,17 @@
 ....
    Client                                                              Server
      |                                                                   |
-     | GET /collections/oakland_buildings/schema?type=create   HTTP/1.1  |
+     | GET /collections/oakland_buildings/schema?type=update   HTTP/1.1  |
      | Accept: application/schema+json                                   |
      |------------------------------------------------------------------>|
      |                                                                   |
-     | HTTP/1.1 200 OK                                                   | 
-     | Content-Type: application/schema+json                             |    
+     | HTTP/1.1 200 OK                                                   |
+     | Content-Type: application/schema+json                             |
      |                                                                   |
      | {                                                                 |
      |   "type": "object",                                               |
-     |   "required": [                                                   |
-     |      "type",                                                      |
-     |      "geometry",                                                  |
-     |      "properties"                                                 |
-     |   ],                                                              |
      |   "additionalProperties": false,                                  |
      |   "properties": {                                                 |
-     |      "id": {                                                      |
-     |         "type": "string",                                         |
-     |         "format": "uri"                                           |
-     |      },                                                           |
      |      "type": {                                                    |
      |         "type": "string",                                         |
      |         "enum": [ "Feature" ]                                     |
@@ -30,23 +21,21 @@
      |      },                                                           |
      |      "properties": {                                              |
      |         "type": "object",                                         |
-     |         "required": [                                             |
-     |            "apnid",                                               |
-     |            "bldgid2",                                             |
-     |            "bldgtype",                                            |
-     |            "final_apn"                                            |
-     |         ],                                                        |
      |         "properties": {                                           |
      |            "shape_len": {                                         |
-     |               "type": "number",                                   |
-     |               "format": "double"                                  |
+     |               "oneOf": [                                          |
+     |                  { "type": "number", "format": "double" },        |
+     |                  { "type": "null" }                               |
+     |               ]                                                   |
      |            },                                                     |
      |            "shape_area": {                                        |
-     |               "type": "number",                                   |
-     |               "format": "double"                                  |
+     |               "oneOf": [                                          |
+     |                  { "type": "number", "format": "double" },        |
+     |                  { "type": "null" }                               |
+     |               ]                                                   |
      |            },                                                     |
      |            "bldgid3": {                                           |
-     |               "type": "string"                                    |
+     |               "type": [ "string", "null" ]                        |
      |            },                                                     |
      |            "bldgid2": {                                           |
      |               "type": "string"                                    |
@@ -64,20 +53,27 @@
      |               "format": "integer"                                 |
      |            },                                                     |
      |            "nostory": {                                           |
-     |               "type": "number",                                   |
-     |               "format": "integer",                                |
-     |               "minimum": 1,                                       |
-     |               "maximum": 400                                      |
+     |               "oneOf": [                                          |
+     |                  {                                                |
+     |                     "type": "number",                             | 
+     |                     "format": "integer",                          |
+     |                     "minimum": 1,                                 |
+     |                     "maximum": 400                                |
+     |                  },                                               |
+     |                  { "type": "null" }                               |
+     |               ]                                                   |
      |            },                                                     |
      |            "bldgnum": {                                           |
-     |               "type": "string"                                    |
+     |               "type": [ "string", "null" ]                        |
      |            },                                                     |
      |            "numbldgs": {                                          |
-     |               "type": "number",                                   |
-     |               "format": "integer"                                 |
+     |               "oneOf": [                                          |
+     |                  { "type": "number", "format": "integer" },       |
+     |                  { "type": "null" }                               |
+     |               ]                                                   |
      |            },                                                     |
      |            "comname": {                                           |
-     |               "type": "string"                                    |
+     |               "type": [ "string", "null" ]                        |
      |            }                                                      |
      |         }                                                         |
      |      },                                                           |
