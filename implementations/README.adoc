@@ -10,84 +10,78 @@ This page lists software packages that implement approved or draft OGC API Featu
 
 Two types of software packages are distinguished:
 
-* Server implementations are software products that can be used to set up APIs that implement OGC API Features conformance classes. 
+* Server implementations are software products that can be used to set up APIs that implement OGC API Features conformance classes.
 * Client implementations are software products that connect to APIs implementing OGC API Features conformance classes to use the feature data.
 
-## OGC Product Database
-
-OGC maintains a public database of software products implementing approved OGC standards. The database also identifies products that pass the https://www.ogc.org/compliance[OGC Compliance Test] for the standard, where available. 
-
-* OGC API - Features - Part 1: Core 1.0 (https://www.ogc.org/resource/products?display_opt=3&specid=1022[All Products], https://www.ogc.org/resource/products?display_opt=1&specid=1022[Compliant Products], https://www.ogc.org/resource/products?display_opt=2&specid=1022[Reference Implementations])
-* OGC API - Features - Part 2: Coordinate Reference Systems by Reference 1.0 (https://www.ogc.org/resource/products?display_opt=3&specid=1121[All Products], no compliance test available)
 
 ## Contribute
 
-If you have a server or client implementation of OGC API Features, we welcome a pull request to update this page to add or update an entry for the product. You may add a link to a sub-page with more details in the link:servers[servers] and link:clients[clients] folders of this repository and you may add a link to the associated entry in the OGC Product Database. Please include a contact email address so that we may later contact you in case of page updates or questions. 
+If you have a server or client implementation of OGC API Features, we welcome a pull request to update this page to add or update an entry for the product. You may add a link to a sub-page with more details in the link:servers[servers] and link:clients[clients] folders of this repository and you may add a link to the associated entry in the OGC Product Database. Please include a contact email address so that we may later contact you in case of page updates or questions.
 
 If you have a server product, please consider to https://www.ogc.org/resource/products/registration[register it in the OGC Product Database] and https://cite.opengeospatial.org/teamengine/[test it for compliance], too.
 
 ## Servers
 
-The columns for each part list the conformance classes of the standard that are implemented by the server implementation. The conformance classes available in a specific API that is provided using the implementation will be listed in the http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_declaration_of_conformance_classes[Conformance Declaration resource] of the API. 
+The columns for each part list the conformance classes of the standard that are implemented by the server implementation. The conformance classes available in a specific API that is provided using the implementation will be listed in the http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_declaration_of_conformance_classes[Conformance Declaration resource] of the API.
 
 .Server implementations
 [cols="5h,^3,^3,^3,^1a,2",options="header",grid="rows",stripes="hover"]
 |===
 | Product | Part 1 | Part 2 | Part 3 | OGC Product Database | Contact email
 
-| link:servers/ldproxy.md[ldproxy] 
-| `core`, `oas30`, `geojson`, `html`, `gmlsf2` 
-| `crs` 
-| `filter`, `features-filter`, `simple-cql`, `cql-json`, `cql-text` 
-| https://www.ogc.org/resource/products/details/?pid=1598[Link] 
-| portele [at] interactive-instruments.de 
+| link:servers/ldproxy.md[ldproxy]
+| `core`, `oas30`, `geojson`, `html`, `gmlsf2`
+| `crs`
+| `filter`, `features-filter`, `simple-cql`, `cql-json`, `cql-text`
+| https://www.ogc.org/resource/products/details/?pid=1598[Link]
+| portele [at] interactive-instruments.de
 
 | link:servers/cubewerx.md[CubeWerx Suite]
-| `core`, `oas30`, `geojson`, `html`, #to be updated# 
-| `crs` 
-| `filter`, `features-filter`, `simple-cql`, `cql-json`, `cql-text`, #to be updated# 
-| https://www.ogc.org/resource/products/details/?pid=1676[Link] 
+| `core`, `oas30`, `geojson`, `html`, #to be updated#
+| `crs`
+| `filter`, `features-filter`, `simple-cql`, `cql-json`, `cql-text`, #to be updated#
+| https://www.ogc.org/resource/products/details/?pid=1676[Link]
 | pvretano [at] cubewerx.com
 
 | link:servers/geoserver.md[GeoServer]
-3+| please consult the product documentation for details 
-| https://www.ogc.org/resource/products/details/?pid=1668[Link] 
-| 
+3+| please consult the product documentation for details
+| https://www.ogc.org/resource/products/details/?pid=1668[Link]
+|
 
 | link:servers/pygeoapi.md[pygeoapi]
-3+| please consult the product documentation for details 
-| https://www.ogc.org/resource/products/details/?pid=1663[Link] 
-| 
+3+| please consult the product documentation for details
+| https://www.ogc.org/resource/products/details/?pid=1663[Link]
+|
 
 | link:servers/sofp.md[sofp Server]
-3+| please consult the product documentation for details 
-| https://www.ogc.org/resource/products/details/?pid=1669[Link] 
-| 
+3+| please consult the product documentation for details
+| https://www.ogc.org/resource/products/details/?pid=1669[Link]
+|
 
 | link:servers/nlsfi.md[nls-fi]
 3+| please consult the product documentation for details
-| - 
-| 
+| -
+|
 
 | link:servers/qgis.md[QGIS Server]
 3+| please consult the product documentation for details
-| https://www.ogc.org/resource/products/details/?pid=1611[Link] 
-| 
+| https://www.ogc.org/resource/products/details/?pid=1611[Link]
+|
 
 | link:servers/sdirp.md[SDI Rhineland-Palatinate]
 3+| please consult the product documentation for details
-| https://www.ogc.org/resource/products/details/?pid=1667[Link] 
-| 
+| https://www.ogc.org/resource/products/details/?pid=1667[Link]
+|
 
 | GNOSIS Map Server
 3+| please consult the product documentation for details
-| https://www.ogc.org/resource/products/details/?pid=1670[Link] 
-| 
+| https://www.ogc.org/resource/products/details/?pid=1670[Link]
+|
 
 | TerraNexus OGC API Server
 3+| please consult the product documentation for details
-| https://www.ogc.org/resource/products/details/?pid=1675[Link] 
-| 
+| https://www.ogc.org/resource/products/details/?pid=1675[Link]
+|
 |===
 
 ## Clients
@@ -101,17 +95,17 @@ The columns for each part list the conformance classes of the standard that the 
 |===
 | Product | Part 1 | Part 2 | Part 3 | OGC Product Database | Contact email
 
-| link:clients/qgis.md[QGIS] 
+| link:clients/qgis.md[QGIS]
 | `core`, `oas30`, `geojson`
-| - 
 | -
 | -
-| 
+| -
+|
 
 | link:clients/fme.md[FME]
 3+| please consult the product documentation for details
 | -
-| 
+|
 |===
 
 ### Native APIs / Libraries
@@ -121,19 +115,19 @@ The columns for each part list the conformance classes of the standard that the 
 |===
 | Product | Part 1 | Part 2 | Part 3 | OGC Product Database | Contact email
 
-| link:clients/gdal.md[GDAL/OGR - OGC API Features driver] 
-| `core`, `oas30`, `geojson` 
-| - 
-| `filter`, `features-filter`, `simple-cql`, `cql-text` 
+| link:clients/gdal.md[GDAL/OGR - OGC API Features driver]
+| `core`, `oas30`, `geojson`
 | -
-| 
+| `filter`, `features-filter`, `simple-cql`, `cql-text`
+| -
+|
 
-| link:clients/owslib.md[OWSLib] 
-| `core`, `oas30`, `geojson` 
-| - 
+| link:clients/owslib.md[OWSLib]
+| `core`, `oas30`, `geojson`
 | -
 | -
-| 
+| -
+|
 |===
 
 ### JavaScript APIs
@@ -143,19 +137,19 @@ The columns for each part list the conformance classes of the standard that the 
 |===
 | Product | Part 1 | Part 2 | Part 3 | OGC Product Database | Contact email
 
-| link:clients/arcgis-js.md[ArcGIS API for JavaScript - OGCFeatureLayer] 
-| `core`, `oas30`, `geojson` 
-| - 
-| - 
+| link:clients/arcgis-js.md[ArcGIS API for JavaScript - OGCFeatureLayer]
+| `core`, `oas30`, `geojson`
 | -
-| 
+| -
+| -
+|
 
-| link:clients/ogcapi-js.md[ogcapi-js] 
-| `core`, `geojson` 
-| `crs` 
+| link:clients/ogcapi-js.md[ogcapi-js]
+| `core`, `geojson`
+| `crs`
 | -
 | https://www.ogc.org/resource/products/details/?pid=1673[Link]
-| 
+|
 |===
 
 ### Clients supporting GeoJSON

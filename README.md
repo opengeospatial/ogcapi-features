@@ -75,9 +75,19 @@ in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
 ## Server and client implementations
 
 [Overview of tools implementing OGC API Features](implementations/README.adoc)
-  
+
 * [Server implementations - examples, more information and how-to guides](implementations/servers/README.md)
 * [Client implementations - examples, more information and how-to guides](implementations/clients/README.md)
+
+### OGC Product Database
+
+OGC maintains a public database of software products implementing approved OGC standards. The database also identifies products that pass the https://www.ogc.org/compliance[OGC Compliance Test] for the standard, where available.
+
+Implementers of OGC standards are encouraged to register their products in the database.
+
+* OGC API - Features - Part 1: Core 1.0 (https://www.ogc.org/resource/products?display_opt=3&specid=1022[All Products], https://www.ogc.org/resource/products?display_opt=1&specid=1022[Compliant Products], https://www.ogc.org/resource/products?display_opt=2&specid=1022[Reference Implementations])
+* OGC API - Features - Part 2: Coordinate Reference Systems by Reference 1.0 (https://www.ogc.org/resource/products?display_opt=3&specid=1121[All Products], no compliance test available)
+
 
 ## Communication
 
@@ -103,7 +113,7 @@ Part 1 (Core) has also been published by ISO as [ISO 19168-1:2020](https://www.i
 
 Open issues for all parts are organized in [GitHub projects](https://github.com/opengeospatial/ogcapi-features/projects):
 
-* [Open issues for Part 1: Core](https://github.com/opengeospatial/ogcapi-features/projects/1), 
+* [Open issues for Part 1: Core](https://github.com/opengeospatial/ogcapi-features/projects/1),
 * [Open issues for Part 2: Coordinate Reference Systems by Reference](https://github.com/opengeospatial/ogcapi-features/projects/2)
 * [Open issues for Part 3: Filtering and the Common Query Language (CQL)](https://github.com/opengeospatial/ogcapi-features/projects/4)
 * [Open issues for Part 4: Create, Replace, Update and Delete](https://github.com/opengeospatial/ogcapi-features/projects/3)
