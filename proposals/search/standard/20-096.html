@@ -875,27 +875,6 @@ method.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" rowspan="4" style="background-color: #FFFFFF;"><p class="tableblock">/search</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Get the list of multi-collection stored queries.</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-discovery">Discovering multi-collection stored queries</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Execute an ad-hoc search that references multiple collections.</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-search-adhoc-execute">Executing ad-hoc multi-collection queries</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PUT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NOT DEFINED</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DELETE</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NOT DEFINED</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top" rowspan="4" style="background-color: #FFFFFF;"><p class="tableblock">/collections/{collectionId}/search/{queryId}</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Execute this stored query.</p></td>
@@ -917,27 +896,6 @@ method.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-stored-query-delete">Deleting stored queries</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" rowspan="4" style="background-color: #FFFFFF;"><p class="tableblock">/search/{queryId}</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Execute this multi-collection stored query.</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-execute">Executing multi-collection stored queries</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Execute this multi-collection stored query with an application/x-www-form-urlencoded body.</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-execute">Executing multi-collection stored queries</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PUT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Create or replace a multi-collection stored query.</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-create">Creating multi-collection stored queries</a>, <a href="#clause-multi-collection-stored-query-update">Updating multi-collection stored queries</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DELETE</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Delete this stored query.</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-delete">Deleting multi-collection stored queries</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top" rowspan="4" style="background-color: #FFFFFF;"><p class="tableblock">/collections/{collectionId}/search/{queryId}/parameters</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Get the list of parameters for this stored query.</p></td>
@@ -957,6 +915,48 @@ method.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DELETE</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Delete a stored query parameter.</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-parameterized-stored-query-parameter-delete">Delete a query parameter</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="4" style="background-color: #FFFFFF;"><p class="tableblock">/search</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Get the list of multi-collection stored queries.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-discovery">Discovering multi-collection stored queries</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Execute an ad-hoc search that references multiple collections.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-search-adhoc-execute">Executing ad-hoc multi-collection queries</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PUT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NOT DEFINED</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NOT DEFINED</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="4" style="background-color: #FFFFFF;"><p class="tableblock">/search/{queryId}</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Execute this multi-collection stored query.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-execute">Executing multi-collection stored queries</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Execute this multi-collection stored query with an application/x-www-form-urlencoded body.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-execute">Executing multi-collection stored queries</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PUT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Create or replace a multi-collection stored query.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-create">Creating multi-collection stored queries</a>, <a href="#clause-multi-collection-stored-query-update">Updating multi-collection stored queries</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Delete this stored query.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#clause-multi-collection-stored-query-delete">Deleting multi-collection stored queries</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" rowspan="4" style="background-color: #FFFFFF;"><p class="tableblock">/search/{queryId}/parameters</p></td>
@@ -3947,7 +3947,7 @@ This needs to be updated.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-12-27 01:45:58 -0500
+Last updated 2021-02-08 08:25:17 -0500
 </div>
 </div>
 <style>
