@@ -3,9 +3,9 @@
 
 *Author Names*:: Clemens Portele, Panagiotis (Peter) A. Vretanos, Charles (Chuck) Heazel
 *Email*:: portele@interactive-instruments.de, pvretano@cubewerx.com, cheazel@heazeltech.com
-*Date*:: 23-AUG-2019 (Updated: 09-DEC-2019)
+*Date*:: 23-AUG-2019 (last update: 14-DEC-2020)
 *Category*:: SWG Charter
-*OGC document number*:: OGC 19-043r2
+*OGC document number*:: OGC 19-043r3
 
 To:  OGC members & interested parties
 
@@ -73,9 +73,10 @@ The following activities are in scope of the working group.
 
 * Maintain existing parts of the OGC API Features multipart standard
 +
-At the time of this writing, the first part of OGC API Features (Core) is in the TC approval vote. If the candidate standard is approved and published, the SWG will process Change Requests to the standard.
+At the time of this writing, the first two parts of OGC API Features ("Core" and "Coordinate Reference Systems (by Reference)") have been approved and published.
 +
-Once additional parts of OGC API Features have been approved and published, the SWG will also process Change Requests for these standards. +
+The SWG will process Change Requests for all approved and published parts of OGC API Features. 
++
 If the SWG recommends that a Change Requests results in a new version of a standard (with the exception of corrigenda), the “SWG Task approval process” will be used.
 
 * Develop new parts of the OGC API Features multipart standard
@@ -88,13 +89,23 @@ A number of extensions to the Core have already been developed and tested in the
 +
 The SWG is responsible for developing candidate standards for additional parts of OGC API Features.
 +
-Part 2, “Coordinate Reference Systems (by reference)”, is already under development and has several implementations. The planned schedule is: Public Review in 2019, Submission for Approval Vote by June 2020.
+Part 3, "Filtering and Common Query Language (CQL)" will specify the capability to query feature collections using common spatial, temporal and comparison operators as well as combinations of them using a profile of CQL that is commonly supported (it may exclude, e.g., functions or nested attributes). The SWG may decide to split this into two documents, one for a CQL standard and one for using CQL in GET requests on a Features resource. It is expected that two representations may be supported: plain text and JSON. The extension is also expected to specify how additional information that clients need to generate queries (e.g., the list of queryables for a feature collections) is provided. The planned schedule is: Public Review by January 2021.
 +
-A new part "OpenAPI 3.1" will specify the capability to use OpenAPI 3.1 for API definitions. A key feature of OpenAPI 3.1, which is expected to be published before the end of 2019, will be the use of JSON Schema draft 2019-09 for the description of schema components. This will avoid the need to manage and publish two variants of JSON schemas, one for the latest version of JSON Schema and one for the OpenAPI variant. The planned schedule is: Public Review by January/February 2020, Submission for Approval Vote by April/May 2020.
+Part 4, "Simple Transactions" will specify the capability for mutating features using the HTTP methods POST, PUT, DELETE and PATCH on a Features (POST) or a Feature resource (PUT, DELETE, PATCH). Support for PATCH will be optional. The planned schedule is: Public Review by June 2021.
 +
-A new part “Filtering (Simple CQL)” will specify the capability to query feature collections using common spatial, temporal and comparison operators as well as combinations of them using a profile of CQL that is commonly supported (it may exclude, e.g., functions or nested attributes). The SWG may decide to split this into two documents, one for a Simple CQL standard and one for using Simple CQL in GET requests on a Features resource. It is expected that two representations may be supported: plain text and JSON. The extension is also expected to specify how additional information that clients need to generate queries (e.g., the list of queryables for a feature collections) is provided. The planned schedule is: Public Review by May/June 2020, Submission for Approval Vote by December 2020.
+Part 5, "OpenAPI 3.1" will specify the capability to use OpenAPI 3.1 for API definitions. A key feature of OpenAPI 3.1 will be the use of JSON Schema draft 2019-09 or 2020-12 for the description of schema components. This will avoid the need to manage and publish two variants of JSON schemas, one for JSON Schema and one for the OpenAPI schema variant. The planned schedule depends on the release of OpenAPI 3.1: Public Review no later than 6 months after availability of OpenAPI 3.1 and initial tool support for this version.
 +
-A new part "Simple Transactions" will specify the capability for mutating features using the HTTP methods POST, PUT, DELETE and PATCH on a Features (POST) or a Feature resource (PUT, DELETE, PATCH). Support for PATCH will be optional. The planned schedule is: Public Review by May/June 2020, Submission for Approval Vote by December 2020.
+A new part "Property Selection" will specify one or more query parameters to reduce the properties that are returned for a feature (resources Features and Features). The planned schedule is: Public Review by June 2021.
++
+A new part "Geometry simplification" will specify a query parameter to indicate a scale or zoom level at which the features will be displayed (resources Features and Features). The returned curve/surface/solid geometries will be simplified accordingly. The planned schedule is: Public Review by October 2021.
++
+A new part "Schemas" will specify Schema resources for the features in a feature collections and will consider at least the following types of schemas in a consistent way: the queryable properties of the features that may be used in filter expressions; the returnable properties included in feature representations retrieved from the Features and Feature resource; the storage properties that are processed in requests mutating a feature; the sortable properties that may be used to sort features in Features responses. Existing specifications for Schema resources in OGC API Features standards should eventually be moved to this part. The planned schedule is: Public Review by June 2021.
++
+A new part "Queries" will specify the Query resource (path element ”search”) supporting GET and POST. The Query resource at path “/search” will support multi-collection queries, the Query resource at path “/collections/{collectionId}/search” will support queries on a single collection. Support for stored/persistent queries will be considered. 
++
+The SWG will attempt to document requirements in a way so that aspects that are not specific to features are in separate requirements classes that could eventually be moved to OGC API Common.
++
+All names of candidate standards are subject to change.
 +
 Any additional part beyond those listed above will follow the “SWG Task approval process”.
 
@@ -186,6 +197,7 @@ The SWG intends to monitor the work of or collaborate with the following organiz
 * ISO/TC 211, ISO 19168 project teams and the Joint Advisory Group of ISO/TC 211 and OGC;
 * the OpenAPI Initiative;
 * the joint OGC/W3C Spatial Data on the Web Interest Group;
+* the Building Blocks for HTTP APIs Working Group in IETF;
 * relevant W3C working groups.
 
 === Details of first meeting

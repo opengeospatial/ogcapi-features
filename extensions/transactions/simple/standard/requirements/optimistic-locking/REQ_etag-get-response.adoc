@@ -1,0 +1,6 @@
+[[req_optimistic-locking_etag-get-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking/get-etag-response*
+^|A |The response to a HTTP GET operation used to retrieve a representation of a resource SHALL include an `ETag` header representing the state of the resource as determined at the conclusion of handing the request. 
+|===

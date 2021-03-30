@@ -41,25 +41,25 @@ method.
 1+|PUT  |NOT DEFINED |
 1+|DELETE |NOT DEFINED |
 
-1.4+|/search |GET |Get the list of multi-collection stored queries. |<<clause-multi-collection-stored-query-discovery,Discovering multi-collection stored queries>>
-1+|POST |Execute an ad-hoc search that references multiple collections. |<<clause-multi-collection-search-adhoc-execute,Executing ad-hoc multi-collection queries>>
-1+|PUT  |NOT DEFINED |
-1+|DELETE |NOT DEFINED |
-
 1.4+|/collections/{collectionId}/search/{queryId} |GET |Execute this stored query. |<<clause-stored-query-execute,Executing stored queries>>
 1+|POST |Execute this stored query with an application/x-www-form-urlencoded body. |<<clause-stored-query-execute,Executing stored queries>>
 1+|PUT  |Create or replace a stored query for this collection with this identifier. |<<clause-stored-query-create,Creating stored queries>>, <<clause-stored-query-update,Updating stored queries>>
 1+|DELETE |Delete this stored query. |<<clause-stored-query-delete,Deleting stored queries>>
 
-1.4+|/search/{queryId} |GET |Execute this multi-collection stored query. |<<clause-multi-collection-stored-query-execute,Executing multi-collection stored queries>>
-1+|POST |Execute this multi-collection stored query with an application/x-www-form-urlencoded body. |<<clause-multi-collection-stored-query-execute,Executing multi-collection stored queries>>
-1+|PUT  |Create or replace a multi-collection stored query. |<<clause-multi-collection-stored-query-create,Creating multi-collection stored queries>>, <<clause-multi-collection-stored-query-update,Updating multi-collection stored queries>>
-1+|DELETE |Delete this stored query. |<<clause-multi-collection-stored-query-delete,Deleting multi-collection stored queries>>
-
 1.4+|/collections/{collectionId}/search/{queryId}/parameters |GET |Get the list of parameters for this stored query. |<<clause-parameterized-stored-query,Retirieving the list of stored query parameters>>
 1+|POST |Define the parameters for a stored query.  |<<clause-parameterized-stored-query-parameter-define,Defining query parameter>>
 1+|PUT  |Update a stored query parameter. |<<clause-parameterized-stored-query-parameter-update,Updating a query parameter>> 
 1+|DELETE |Delete a stored query parameter. |<<clause-parameterized-stored-query-parameter-delete,Delete a query parameter>>
+
+1.4+|/search |GET |Get the list of multi-collection stored queries. |<<clause-multi-collection-stored-query-discovery,Discovering multi-collection stored queries>>
+1+|POST |Execute an ad-hoc search that references multiple collections. |<<clause-multi-collection-search-adhoc-execute,Executing ad-hoc multi-collection queries>>
+1+|PUT  |NOT DEFINED |
+1+|DELETE |NOT DEFINED |
+
+1.4+|/search/{queryId} |GET |Execute this multi-collection stored query. |<<clause-multi-collection-stored-query-execute,Executing multi-collection stored queries>>
+1+|POST |Execute this multi-collection stored query with an application/x-www-form-urlencoded body. |<<clause-multi-collection-stored-query-execute,Executing multi-collection stored queries>>
+1+|PUT  |Create or replace a multi-collection stored query. |<<clause-multi-collection-stored-query-create,Creating multi-collection stored queries>>, <<clause-multi-collection-stored-query-update,Updating multi-collection stored queries>>
+1+|DELETE |Delete this stored query. |<<clause-multi-collection-stored-query-delete,Deleting multi-collection stored queries>>
 
 1.4+|/search/{queryId}/parameters |GET |Get the list of parameters for this parametertized multi-collection stored query. |<<clause-parameterized-multi-collection-stored-query-discovery,Retrieving the list of multi-collection-stored-query-parameters>>
 1+|POST |Define the parameters for a multi-collection stored query.  |<<clause-parameterized-multi-collection-stored-query-parameter-define,Defining query parameter>>

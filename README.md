@@ -1,11 +1,11 @@
 # OGC API - Features
 
-This GitHub repository contains [OGC](http://opengeospatial.org)'s
+This GitHub repository contains [OGC](https://www.ogc.org)'s
 multi-part standard for querying geospatial information on the web, "OGC API - Features".
 All approved versions of the specification can be found [here](https://www.opengeospatial.org/standards/ogcapi-features).
 
 [OGC API standards](https://ogcapi.ogc.org/) define modular API building blocks to spatially enable Web APIs
-in a consistent way. [OpenAPI](http://openapis.org) is used to define the reusable
+in a consistent way. [OpenAPI](https://openapis.org) is used to define the reusable
 API building blocks with responses in JSON and HTML.
 
 The OGC API family of standards is organized by resource type. OGC API Features
@@ -34,7 +34,7 @@ GET /collections/buildings/items?bbox=160.6,-55.95,-170,-25.89
 ```
 
 Requests all the data in the collection "buildings" that is in the New Zealand economic zone.
-The response format (typically HTML or a [GeoJSON](http://geojson.org/) feature
+The response format (typically HTML or a [GeoJSON](https://geojson.org/) feature
 collection, but GML is supported, too, and extensions can easily supply others) is determined using
 [HTTP content negotiation](https://restfulapi.net/content-negotiation/).
 
@@ -60,11 +60,11 @@ an overview of the extensions to support additional coordinate reference systems
 The standard is on the OGC website:
 
 * OGC API - Features - Part 1: Core
-  * [Version 1.0.0 (latest approved version)](http://docs.ogc.org/is/17-069r3/17-069r3.html)
-  * [Editor's draft (includes errata and clarifications)](http://docs.ogc.org/DRAFTS/17-069r4.html)
+  * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/17-069r3/17-069r3.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/17-069r4.html)
 * OGC API - Features - Part 2: Coordinate Reference Systems by Reference
-  * [Version 1.0.0 (latest approved version)](http://docs.ogc.org/is/18-058/18-058.html)
-  * [Editor's draft (includes errata and clarifications)](http://docs.ogc.org/DRAFTS/18-058r1.html)
+  * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/18-058/18-058.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/18-058r1.html)
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
@@ -75,9 +75,19 @@ in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
 ## Server and client implementations
 
 [Overview of tools implementing OGC API Features](implementations/README.adoc)
-  
+
 * [Server implementations - examples, more information and how-to guides](implementations/servers/README.md)
 * [Client implementations - examples, more information and how-to guides](implementations/clients/README.md)
+
+### OGC Product Database
+
+OGC maintains a public database of software products implementing approved OGC standards. The database also identifies products that pass the https://www.ogc.org/compliance[OGC Compliance Test] for the standard, where available.
+
+Implementers of OGC standards are encouraged to register their products in the database.
+
+* OGC API - Features - Part 1: Core 1.0 (https://www.ogc.org/resource/products?display_opt=3&specid=1022[All Products], https://www.ogc.org/resource/products?display_opt=1&specid=1022[Compliant Products], https://www.ogc.org/resource/products?display_opt=2&specid=1022[Reference Implementations])
+* OGC API - Features - Part 2: Coordinate Reference Systems by Reference 1.0 (https://www.ogc.org/resource/products?display_opt=3&specid=1121[All Products], no compliance test available)
+
 
 ## Communication
 
@@ -90,9 +100,9 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](http://docs.ogc.org/DRAFTS/19-079r1.html)
+* [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://docs.ogc.org/DRAFTS/19-079r1.html)
   * Draft with multiple implementations. The grammar of the query language should be fairly stable. The final Public Review will run until April 2021. Once all comments have been resolved, the release candidate will enter the OGC approval process. The release of version 1.0.0 is expected in Q3 of 2021.
-* [OGC API - Features - Part 4: Create, Replace, Update and Delete](http://docs.ogc.org/DRAFTS/20-002.html)
+* [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
   * The draft is fairly complete, but needs more implementations, testing and review to move to the final Public Review.
 * OGC API - Features - Part 5: OpenAPI 3.1
   * Waiting for the release of OpenAPI Specification version 3.1.0.
@@ -103,7 +113,7 @@ Part 1 (Core) has also been published by ISO as [ISO 19168-1:2020](https://www.i
 
 Open issues for all parts are organized in [GitHub projects](https://github.com/opengeospatial/ogcapi-features/projects):
 
-* [Open issues for Part 1: Core](https://github.com/opengeospatial/ogcapi-features/projects/1), 
+* [Open issues for Part 1: Core](https://github.com/opengeospatial/ogcapi-features/projects/1),
 * [Open issues for Part 2: Coordinate Reference Systems by Reference](https://github.com/opengeospatial/ogcapi-features/projects/2)
 * [Open issues for Part 3: Filtering and the Common Query Language (CQL)](https://github.com/opengeospatial/ogcapi-features/projects/4)
 * [Open issues for Part 4: Create, Replace, Update and Delete](https://github.com/opengeospatial/ogcapi-features/projects/3)
@@ -111,9 +121,9 @@ Open issues for all parts are organized in [GitHub projects](https://github.com/
 
 Additional links:
 
-* [Background of this activity](background.md)
-* [The next version of WFS - an overview](overview.md)
-* [UML for Part 1, Core](uml/README.md)
+* [Background of this activity](docs/background.md)
+* [The next version of WFS - an overview](docs/overview.md)
+* [UML for Part 1, Core](docs/uml/README.md)
 * [Status of Part 1, Core, in ISO](https://www.iso.org/standard/32586.html)
 * [Home of the standard on the OGC website](https://www.opengeospatial.org/standards/ogcapi-features)
 
@@ -121,10 +131,10 @@ Additional links:
 
 The latest drafts of each standard in this repository are build daily (based on the configuration contained in the [asciidoctor.json](https://github.com/opengeospatial/ogcapi-features/blob/master/asciidoctor.json) file):
 
-* [Part 1: Core](http://docs.ogc.org/DRAFTS/17-069r4.html)
-* [Part 2: Coordinate Reference Systems by Reference](http://docs.ogc.org/DRAFTS/18-058r1.html)
-* [Part 3: Filtering and the Common Query Language (CQL)](http://docs.ogc.org/DRAFTS/19-079r1.html)
-* [Part 4: Create, Replace, Update and Delete](http://docs.ogc.org/DRAFTS/20-002.html)
+* [Part 1: Core](https://docs.ogc.org/DRAFTS/17-069r4.html)
+* [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r1.html)
+* [Part 3: Filtering and the Common Query Language (CQL)](https://docs.ogc.org/DRAFTS/19-079r1.html)
+* [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
 [Asciidoctor](https://asciidoctor.org/) set up and [installed](https://asciidoctor.org/docs/#get-started-with-asciidoctor).
