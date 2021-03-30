@@ -171,6 +171,13 @@ namespace DisplayOAFeatCollection
 ```
 </details>
 
+<details>
+  <summary>Screenshot - pan and zoom to add more features from "TransportationGroundCrv"</summary>
+
+  ![PanZoomToSeeFeatures](https://user-images.githubusercontent.com/3813516/112913433-6ea5c900-90ae-11eb-8f03-32535527a7ed.png)
+
+</details>
+
 ### Sample 2: Browsing Collections using OGCFeatureService
 
 <details>
@@ -421,3 +428,10 @@ namespace BrowseOAFeatServices
 </Window>
 ```
 </details>
+
+<details>
+  <summary>Screenshot - load and browse "https://demo.ldproxy.net/daraa", select and add "Agriculture (Surfaces)"</summary>
+
+  ![BrowseSelectAddCollection](https://user-images.githubusercontent.com/3813516/112913532-ab71c000-90ae-11eb-9857-c102b0388d50.png)
+
+</details> 
