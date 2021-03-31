@@ -13,6 +13,7 @@ We welcome pull requests to update this page to add or update an entry for a cli
 
 - [GDAL](gdal.md)
 - [OWSLib](owslib.md)
+- [ArcGIS Runtime API for .NET/Android/iOS/Java/Qt](arcgis-runtime.md)
 
 ## JavaScript APIs
 
