@@ -136,6 +136,23 @@ methodology for testing, and the criteria to be achieved to claim conformance
 are specified in the OGC Compliance Testing Policies and Procedures and the
 OGC Compliance Testing web site.
 
+[#conf_class_uris,reftext='{table-caption} {counter:table-num}']
+.Conformance class URIs
+[cols="40,60",options="header"]
+|===
+|Conformance class |URI
+|<<ats_filter,Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter
+|<<ats_features-filter,Features Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter
+|<<ats_simple-cql,Simple CQL>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/simple-cql
+|<<ats_enhanced-spatial-operators,Enhanced Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/enhanced-spatial-operators
+|<<ats_enhanced-temporal-operators,Enhanced Temporal Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/enhanced-temporal-operators
+|<<ats_functions,Functions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions
+|<<ats_arithmetic,Arithmetic>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic
+|<<ats_arrays,Arrays>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arrays
+|<<ats_cql-text,CQL Text encoding>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text
+|<<ats_cql-json,CQL JSON encoding>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json 
+|===
+
 === Roadmap
 
 The content of this sub-clause is informative.
@@ -156,3 +173,7 @@ following conformance classes:
 will eventually become parts of the OGC API Common suite of standards thus
 leaving the <<rc_features-filter,Features Filter>> conformance class as part
 3 of the OGC API Features specifications.
+
+
+
+
