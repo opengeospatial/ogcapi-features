@@ -1,38 +1,60 @@
 # CubeWerx Suite
 
-NOTE: This is outdated content and should be updated.
+## Introduction 
 
-The following server implements a good portion of the current draft part 1
-standard.  Just to illustrate that GML may still be used, and to contrast
-the interactive instruments examples, these queries will return GML rather
-than JSON (although GeoJSON can be returned by requesting the appropriate
-MIME type).
+For features, CubeSERV implements Parts 1, 2, 3 and 4 plus some of the proposed
+extensions like geometry simplification and search.  This page, however, will
+concentrate on Part 1, 2 and 3.  CubeSERV also implements a lot of other OGC
+API modules.
 
-Like the interactive instruments server, this 3.0 alpha implementation is a
-facade sitting on top of our previous WFS 2.X implementation.
+* To test the latest version of OGC API - Features:
+  * https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi
 
-HTML landing page:
-* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation
-* http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/usbuildingfootprints
+* To test the other OGC API modules:
+  * https://test.cubewerx.com/cubewerx/cubeserv/demo
 
-Here are some example requests for features using GML v3.2 output.
+## HTML landing page:
 
-* Built up areas around Washington DC:
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?  
+The following examples are performed on the [VMAP Level 0 datastore](https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation).
+
+## Example queries
+
+* See what the server implements:
+
+[https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/conformance?f=json](https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/conformance?f=json)
+
+* Built up areas around Washington DC (in XML just for fun):
+[https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?
 count=20&  
 f=application/gml%2Bxml;%20version=3.2&  
-bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+bbox=-79.5854,36.8207,-74.4218,39.7519](https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=-79.5854,36.8207,-74.4218,39.7519)
 
-* ... and the corresponding building footprints
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/usbuildingfootprints/collections/US_Building_Footprints/items?count=1000&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/usbuildingfootprints/collections/US_Building_Footprints/items?count=1000&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+* Get the list of supported CRS's:
+[https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m?f=json](https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m?f=json)
 
-* Same filter, just to determine the number of built up areas:  
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?  
-resultType=hits&  
-f=application/gml%2Bxml;%20version=3.2&  
-bbox=36.8207,-79.5854,39.7519,-74.4218](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?resultType=hits&f=application/gml%2Bxml;%20version=3.2&bbox=36.8207,-79.5854,39.7519,-74.4218)
+* Request the features in another CRS (3857):
+[https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?
+count=20&
+f=application/gml%2Bxml;%20version=3.2
+&bbox=-79.5854,36.8207,-74.4218,39.7519&
+crs=http://www.opengis.net/def/crs/EPSG/0/3857](https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=-79.5854,36.8207,-74.4218,39.7519&crs=http://www.opengis.net/def/crs/EPSG/0/3857)
 
-* All municipalities that start with "Wash":  
-[http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?  
-f=application/gml%2Bxml;%20version=3.2&  
-nam=Wash\*](http://www.pvretano.com/cubewerx/cubeserv/default/wfs/3.0/foundation/collections/builtupa_1m/items?&f=application/gml%2Bxml;%20version=3.2&nam=Wash*)
+* Get the list of queryables for this collection:
+[https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/queryables?f=json](https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/queryables?f=json)
+
+* Add a CQL filter expression to the query:
+[https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?
+count=20&
+f=application/gml%2Bxml;%20version=3.2&
+bbox=-79.5854,36.8207,-74.4218,39.7519&
+filter-lang=cql-text&
+filter=nam like 'A%'](https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=-79.5854,36.8207,-74.4218,39.7519&filter-lang=cql-text&filter=nam%20like%20%27A%25%27)
+
+* Refine the query further by adding an additional predicate to the filter:
+[https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?
+count=20&
+f=application/gml%2Bxml;%20version=3.2&
+bbox=-79.5854,36.8207,-74.4218,39.7519&
+filter-lang=cql-text&
+filter=nam like 'A%'and fac_id>140](https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=-79.5854,36.8207,-74.4218,39.7519&filter-lang=cql-text&filter=nam%20like%20%27A%25%27%20and%20fac_id%3E140)
+
