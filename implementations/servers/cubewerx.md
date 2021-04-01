@@ -49,11 +49,11 @@ bbox=-79.5854,36.8207,-74.4218,39.7519&
 filter-lang=cql-text&
 filter=nam like 'A%'](https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=-79.5854,36.8207,-74.4218,39.7519&filter-lang=cql-text&filter=nam%20like%20%27A%25%27)
 
-* Refine the query further by adding an additional predicate to the filter:
+* Refine the query further by adding an additional predicate to the filter (in JSON just to show that):
 [https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?
 count=20&
-f=application/gml%2Bxml;%20version=3.2&
+f=json&
 bbox=-79.5854,36.8207,-74.4218,39.7519&
 filter-lang=cql-text&
-filter=nam like 'A%'and fac_id>140](https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?count=20&f=application/gml%2Bxml;%20version=3.2&bbox=-79.5854,36.8207,-74.4218,39.7519&filter-lang=cql-text&filter=nam%20like%20%27A%25%27%20and%20fac_id%3E140)
+filter=nam like 'A%'and fac_id>140](https://pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/collections/builtupa_1m/items?count=20&f=json&bbox=-79.5854,36.8207,-74.4218,39.7519&filter-lang=cql-text&filter=nam%20like%20%27A%25%27%20and%20fac_id%3E140)
 
