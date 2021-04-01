@@ -20,7 +20,6 @@ The following examples are performed on the [VMAP Level 0 datastore](https://www
 ## Example queries
 
 * See what the server implements:
-
 [https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/conformance?f=json](https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation/conformance?f=json)
 
 * Built up areas around Washington DC (in XML just for fun):
