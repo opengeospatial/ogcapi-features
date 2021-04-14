@@ -412,18 +412,22 @@ The member `spatial` only needs to be provided in the `extent` object, if featur
 
 The spatial and temporal extents support multiple bounding boxes (`bbox` array) and time intervals (`interval` array).
 
+The first bounding box/time interval always describes the overall spatial/temporal extent of the data. All subsequent bounding boxes and time intervals can be used to provide a more precise description of the extent and identify clusters of data. Clients only interested in the overall extent will only access the first item in each array.
+
+The `bbox` and `interval` properties will typically be derived automatically from the feature data and be the exact minimal bounding box / time interval containing the features in the collection (or cluster).
+
 include::requirements/core/REQ_fc-md-extent-multi.adoc[]
 
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
 The last requirement and recommendation reflect that most clients will only be interested in a single extent, for example, to set the map view or a time slider. They will only have to look at the first item in each array. 
 
-At the same time, for some data and for some use cases, a more fine-grained description of the extent will be useful. In that case the first bounding box / time interval is simply the union of all the other bounding boxes / time intervals. Clients can then choose, if they want to use the simpler or the more detailed extent information.
+At the same time, for some data and for some use cases, a more fine-grained description of the extent will be useful. In that case the first bounding box / time interval is a union of all the other bounding boxes / time intervals. Clients can then choose, if they want to use the simpler or the more detailed extent information.
 
 [[example_4a]]
 .Spatial extent with multiple bounding boxes
 =================
-The following extent represents the United States of America (excluding Territories). The first bounding box of the four bounding boxes is the union of the three other bounding boxes representing the 48 contiguous states, Alaska and Hawaii respectively.
+The following extent can describe feature data in the United States of America (excluding Territories). The first bounding box of the four bounding boxes is the union of the three other bounding boxes representing the 48 contiguous states, Alaska and Hawaii respectively - from the west-bound longitude of Alaska to the east-bound longitude of the 48 contiguous states.
 
 Note that the overall bounding box as well as the bounding box of Alaska crosses the anti-meridian.
 
@@ -441,6 +445,8 @@ Note that the overall bounding box as well as the bounding box of Alaska crosses
 }
 ----
 =================
+
+As can be seen in the example, there can be multiple ways how to construct the overall bounding box from its component bounding boxes since longitudes are cyclic (that is, -180° is equal to 180°). Another union of the component bounding boxes for the 48 contiguous states, Alaska and Hawaii would be `[-124.7844079, 18.910361, -129.979511, 71.365162]` - from the west-bound longitude of the 48 contiguous states to the east-bound longitude of Alaska. The typical approach in such cases is to select the option with the smallest area, as it was done in the example.
 
 include::recomendations/core/PER_fc-md-extent-extensions.adoc[]
 
