@@ -3,9 +3,9 @@ description: |-
   extents are specified. Extensions may add additional members to represent other
   extents, for example, thermal or pressure ranges.
 
-  The first items in the arrays always describe the overall extent of
-  the data. All subsequent extents can be used to provide a more precise
-  description of the extent and identify clusters of data.
+  The first item in the array describes the overall extent of
+  the data. All subsequent items describe more precise extents, 
+  e.g., to identify clusters of data.
   Clients only interested in the overall extent will only need to
   access the first item in each array.
 type: object
@@ -21,10 +21,9 @@ properties:
           In the Core only a single bounding box is supported.
           
           Extensions may support additional areas.
-          The first bounding box always describes the overall spatial
-          extent of the data. All subsequent bounding boxes can be
-          used to provide a more precise description of the extent and
-          identify clusters of data.
+          The first bounding box describes the overall spatial
+          extent of the data. All subsequent bounding boxes describe 
+          more precise bounding boxes, e.g., to identify clusters of data.
           Clients only interested in the overall spatial extent will
           only need to access the first item in each array.
         type: array
@@ -98,10 +97,9 @@ properties:
           In the Core only a single time interval is supported.
           
           Extensions may support multiple intervals.
-          The first time interval always describes the overall
-          temporal extent of the data. All subsequent time intervals
-          can be used to provide a more precise description of the
-          extent and identify clusters of data.
+          The first time interval describes the overall
+          temporal extent of the data. All subsequent time intervals describe 
+          more precise time intervals, e.g., to identify clusters of data.
           Clients only interested in the overall extent will only need
           to access the first item in each array.
         type: array

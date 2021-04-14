@@ -412,7 +412,7 @@ The member `spatial` only needs to be provided in the `extent` object, if featur
 
 The spatial and temporal extents support multiple bounding boxes (`bbox` array) and time intervals (`interval` array).
 
-The first bounding box/time interval always describes the overall spatial/temporal extent of the data. All subsequent bounding boxes and time intervals can be used to provide a more precise description of the extent and identify clusters of data. Clients only interested in the overall extent will only access the first item in each array.
+The first bounding box/time interval describes the overall spatial/temporal extent of the data. All subsequent bounding boxes and time intervals describe more precise extents, e.g., to identify clusters of data. Clients only interested in the overall extent will only access the first item in each array.
 
 The `bbox` and `interval` properties will typically be derived automatically from the feature data and be the exact minimal bounding box / time interval containing the features in the collection (or cluster).
 
