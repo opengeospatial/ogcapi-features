@@ -2,5 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/filter/filter-crs-wgs84*
-^|A |If a HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items`) includes a `filter` parameter, but no `filter-crs` parameter, the server SHALL process all geometries in the filter expression using CRS84 (for coordinates without height) or CRS84h (for coordinates with height) as the coordinate reference system (CRS).
+^|A |If a HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items`) includes a `filter` parameter, but no `filter-crs` parameter, the server SHALL process all geometries in the filter expression using http://www.opengis.net/def/crs/OGC/1.3/CRS84[CRS84] (for coordinates without height) or http://www.opengis.net/def/crs/OGC/0/CRS84h[CRS84h] (for coordinates with height) as the coordinate reference system (CRS).
 |===

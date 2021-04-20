@@ -85,7 +85,7 @@ false
 t
 f
 ----
-* spatial geometry (text)
+* spatial geometry (WKT)
 ----
 POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
 ----
@@ -203,7 +203,7 @@ balance-150.0 > 0
 ----
 {
   "gt": [
-    { "-": [ { "property": "windSpeed" }, 150.0 ] },
+    { "-": [ { "property": "balance" }, 150.0 ] },
     0
   ]
 }
@@ -326,7 +326,7 @@ existing CQL implementations. Comments are welcome in the
 https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue]
 on this topic.
 
-CQL uses Well-Known-Text (WKT) to encode geometry literals. Since WKT does not
+CQL uses Well-Known Text (WKT) to encode geometry literals. Since WKT does not
 provide a capability to specify the CRS of a geometry literal, the server has
 to determine the CRS of the geometry literals in a filter expression through
 another mechanism. In this standard, the `filter-crs` query parameter
