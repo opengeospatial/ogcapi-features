@@ -1,4 +1,6 @@
 name: crs
+description: |-
+  If the parameter is specified, then the coordinates of all geometry-valued properties in the response document are in the requested CRS. Otherwise the coordinates are in the default CRS, that is http://www.opengis.net/def/crs/OGC/1.3/CRS84 for coordinates without ellipsoidal height and http://www.opengis.net/def/crs/OGC/0/CRS84h for coordinates with ellipsoidal height.
 in: query
 required: false
 schema:
