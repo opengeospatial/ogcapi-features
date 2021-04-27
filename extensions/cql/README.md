@@ -43,4 +43,26 @@ These filtering capabilities can be combined with the capabilities specified in 
 
 ## Implementations available for testing
 
-To be added shortly with details of supported conformance classes and any deviations from version "1.0.0-draft.2" for each implementation.
+The following servers are available for testing and implement version "1.0.0-draft.2". For each implementation, the supported conformance classes and any deviations from [version "1.0.0-draft.2"](https://portal.ogc.org/files/?artifact_id=96288&version=2) are documented.
+
+### ldproxy / interactive instruments
+
+Endpoint:
+
+- https://demo.ldproxy.net/daraa (or any of the other APIs on https://demo.ldproxy.net/)
+
+Conformance classes:
+
+- Filter
+- Features Filter
+- Simple CQL
+- Enhanced Spatial Operators
+- CQL Text
+- CQL JSON
+
+Limitations:
+
+- The following `BOOLEAN` literals are not accepted: "T" | "t" | "F" | "f" | "1" | "0". See #545, #550.
+- `IN` operator: currently restricted to a property on the left side and literals on the right side, `NOCASE` is not supported.
+- In addition to `ANYINTERACTS`, the following temporal operators are supported: `AFTER`, `BEFORE`, `TEQUALS` (instants only), `DURING` (right side must be an interval).
+- Array predicates, functions or arithmetic expressions are not yet supported.
