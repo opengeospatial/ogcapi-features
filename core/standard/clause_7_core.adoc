@@ -446,7 +446,7 @@ Note that the overall bounding box as well as the bounding box of Alaska crosses
 ----
 =================
 
-As can be seen in the example, there can be multiple ways how to construct the overall bounding box from its component bounding boxes since longitudes are cyclic (that is, -180° is equal to 180°). Another union of the component bounding boxes for the 48 contiguous states, Alaska and Hawaii would be `[-124.7844079, 18.910361, -129.979511, 71.365162]` - from the west-bound longitude of the 48 contiguous states to the east-bound longitude of Alaska. The typical approach in such cases is to select the option with the smallest area, as it was done in the example.
+As can be seen in the example, there can be multiple ways to construct the overall bounding box from its component bounding boxes since longitudes are cyclic (that is, -180° is equal to 180°). Another union of the component bounding boxes for the 48 contiguous states, Alaska and Hawaii would be `[-124.7844079, 18.910361, -129.979511, 71.365162]` - from the west-bound longitude of the 48 contiguous states to the east-bound longitude of Alaska. The typical approach in such cases is to select the option with the smallest area, as was done in the example.
 
 include::recomendations/core/PER_fc-md-extent-extensions.adoc[]
 
