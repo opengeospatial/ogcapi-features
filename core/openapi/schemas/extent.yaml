@@ -2,6 +2,12 @@ description: |-
   The extent of the features in the collection. In the Core only spatial and temporal
   extents are specified. Extensions may add additional members to represent other
   extents, for example, thermal or pressure ranges.
+
+  The first item in the array describes the overall extent of
+  the data. All subsequent items describe more precise extents, 
+  e.g., to identify clusters of data.
+  Clients only interested in the overall extent will only need to
+  access the first item in each array.
 type: object
 properties:
   spatial:
@@ -12,9 +18,14 @@ properties:
       bbox:
         description: |-
           One or more bounding boxes that describe the spatial extent of the dataset.
-          In the Core only a single bounding box is supported. Extensions may support
-          additional areas. If multiple areas are provided, the union of the bounding
-          boxes describes the spatial extent.
+          In the Core only a single bounding box is supported.
+          
+          Extensions may support additional areas.
+          The first bounding box describes the overall spatial
+          extent of the data. All subsequent bounding boxes describe 
+          more precise bounding boxes, e.g., to identify clusters of data.
+          Clients only interested in the overall spatial extent will
+          only need to access the first item in each array.
         type: array
         minItems: 1
         items:
@@ -83,10 +94,14 @@ properties:
       interval:
         description: |-
           One or more time intervals that describe the temporal extent of the dataset.
-          The value `null` is supported and indicates an open time interval.
-          In the Core only a single time interval is supported. Extensions may support
-          multiple intervals. If multiple intervals are provided, the union of the
-          intervals describes the temporal extent.
+          In the Core only a single time interval is supported.
+          
+          Extensions may support multiple intervals.
+          The first time interval describes the overall
+          temporal extent of the data. All subsequent time intervals describe 
+          more precise time intervals, e.g., to identify clusters of data.
+          Clients only interested in the overall extent will only need
+          to access the first item in each array.
         type: array
         minItems: 1
         items:
@@ -94,6 +109,8 @@ properties:
             Begin and end times of the time interval. The timestamps are in the
             temporal coordinate reference system specified in `trs`. By default
             this is the Gregorian calendar.
+            
+            The value `null` is supported and indicates an open time interval.
           type: array
           minItems: 2
           maxItems: 2

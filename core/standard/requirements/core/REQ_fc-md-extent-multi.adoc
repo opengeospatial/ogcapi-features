@@ -1,0 +1,9 @@
+[[req_core_fc-md-extent-multi]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/fc-md-extent-multi* 
+^|A |If the `extent` property includes a member `spatial`, each feature in the collection SHALL be inside the extent described by the first bounding box in the `bbox` array.
+^|B |If the `extent` property includes a member `spatial` and the `bbox` array has more than one item, each feature in the collection SHALL be inside the extent described by one of the other bounding boxes in the `bbox` array.
+^|C |If the `extent` property includes a member `temporal`, each feature in the collection SHALL be inside the extent described by the first time interval in the `interval` array.
+^|D |If the `extent` property includes a member `temporal` and the `interval` array has more than one item, each feature in the collection SHALL be inside the extent described by one of the other time intervals in the `interval` array.
+|===
