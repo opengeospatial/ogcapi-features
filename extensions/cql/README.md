@@ -66,3 +66,23 @@ Limitations:
 - `IN` operator: currently restricted to a property on the left side and literals on the right side, `NOCASE` is not supported.
 - In addition to `ANYINTERACTS`, the following temporal operators are supported: `AFTER`, `BEFORE`, `TEQUALS` (instants only), `DURING` (right side must be an interval).
 - Array predicates, functions or arithmetic expressions are not yet supported.
+
+### cubeserv / CubeWerx
+
+Endpoint:
+
+- https://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/foundation (or any landing page endpoint off https://www.pvretano.com/cubewerx/cubeserv)
+
+Conformance classes:
+
+- Filter
+- Features Filter
+- Simple CQL
+- CQL Text
+
+Limitations:
+
+- The following `BOOLEAN` literals are not accepted: "T" | "t" | "F" | "f" | "1" | "0". See #545, #550.
+- `IN` operator: currently restricted to a property on the left side and literals on the right side, `NOCASE` is not supported.
+- The spatial/temporal operators are not yet supported.
+- Array predicates are not supported.
