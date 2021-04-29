@@ -27,4 +27,4 @@ Example requests:
 
 ## Meteorological Service of Canada
 
-The Meteorological Service of Canada uses pygeoapi in production at https://geo.weather.gc.ca/geomet/features.
+The Meteorological Service of Canada uses pygeoapi in production at https://api.weather.gc.ca.
