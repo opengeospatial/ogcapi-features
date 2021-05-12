@@ -148,7 +148,7 @@ asciidoctor -a data-uri -r asciidoctor-diagram extensions/crs/standard/18-058.ad
 # Part 3: Filtering and the Common Query Language (CQL)
 asciidoctor -a data-uri -r asciidoctor-diagram extensions/cql/standard/19-079.adoc
 # Part 4: Create, Replace, Update and Delete
-asciidoctor -a data-uri -r asciidoctor-diagram extensions/transactions/simple/standard/20-002.adoc
+asciidoctor -a data-uri -r asciidoctor-diagram extensions/transactions/create-replace-update-delete/standard/20-002.adoc
 ```
 
 The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.
