@@ -2,7 +2,7 @@
 
 # Overview 
 
-This directory contains [OGC](https://www.ogc.org)'s extensions to "OGC API - Features" for handling transactions on features.  Two classes of transactions are specified.
+This directory contains extensions to [OGC API - Features](https://ogcapi.ogc.org/features/) for handling transactions on features.  Two classes of transactions are specified.
 
 * **OGC API - Features - Part 4: Create, Replace, Update and Delete**
 
