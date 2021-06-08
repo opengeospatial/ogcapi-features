@@ -6,10 +6,10 @@
 ^|B |The scalar expression (rule `scalarExpression`) in rule `isLikePredicate` SHALL evaluate to a `characterLiteral`.
 ^|C |The character specified using the `WILDCARD` modifier SHALL match zero of more characters in the test value.
 ^|D |The wildchar character SHALL not match the NULL value.
-^|E |If the `WILDCHAR` modifier is not specified, the default wildcard character SHALL be "%".
+^|E |If the `WILDCARD` modifier is not specified, the default wildcard character SHALL be "%".
 ^|F |The character specified using the `SINGLECHAR` modifier SHALL match exactly one characters in the test value.
 ^|G |If the `SINGLECHAR` modifier is not specified, the default singlechar character SHALL be "_".
-^|H |The character specified using the `ESCAPECHAR` modifier SHALL be used to escape the `WILDCHAR` and/or `SINGLECAHR` characters in the pattern string.
+^|H |The character specified using the `ESCAPECHAR` modifier SHALL be used to escape the `WILDCARD` and/or `SINGLECHAR` characters in the pattern string.
 ^|I |If the `ESCAPECHAR` modifier is not specified, the default escapechar character SHALL be "\".
 ^|J |If `NOCASE` is `TRUE`, the comparison SHALL be case insensitive, if it is `FALSE` it SHALL be case sensitive. The default is `TRUE`.
 |===

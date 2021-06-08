@@ -133,14 +133,14 @@ The enumerated value `cql-json` is used to indicate that the value of the
 <<filter-param,`filter`>> parameter is the <<simple-cql-JSON,JSON encoding of CQL>>.
 
 Servers that support other filtering languages can extend this list of values
-as necessary although the meaning of any additional values are not described
+as necessary although the meanings of any additional values are not described
 in this standard.
 
 [[filter-filter-crs]]
 === Parameter filter-crs
 
 For reasons discussed in the http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#SDWBP[W3C/OGC Spatial Data on the Web Best Practices document], 
-<<OAFeat-1,OGC API - Features - Part 1: Core>> uses WGS 84 longitude and latitude and the default Coordinate Reference System. <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>> extends the capabilities of Part 1 to allow other coordinate systems to be used.  The `filter-crs` parameter defined in this clause allows clients to indicate to servers that support other CRSs, which CRS is being used to encode geometric values in a filter expression.
+<<OAFeat-1,OGC API - Features - Part 1: Core>> uses WGS 84 longitude and latitude and the default Coordinate Reference System. <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>> extends the capabilities of Part 1 to allow other coordinate reference systems to be used.  The `filter-crs` parameter defined in this clause allows clients to indicate to servers that support other CRSs, which CRS is being used to encode geometric values in a filter expression.
 
 include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
 
