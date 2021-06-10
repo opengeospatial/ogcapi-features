@@ -876,25 +876,25 @@
 
       "temporalLiteral": {
          "oneOf": [
-            { "$ref": "#/$defs/timeString" },
-            { "$ref": "#/$defs/periodString" }
+            { "$ref": "#/$defs/instantString" },
+            { "$ref": "#/$defs/intervalString" }
          ]
       },
 
-      "timeString": {
+      "instantString": {
          "oneOf": [
             { "type": "string", "format": "date" },
             { "type": "string", "format": "date-time" }
          ]
       },
 
-      "periodString": {
+      "intervalString": {
          "type": "array",
          "minItems": 2,
          "maxItems": 2,
          "items": {
             "oneOf": [
-               { "$ref": "#/$defs/timeString" },
+               { "$ref": "#/$defs/instantString" },
                { "type": "string", "enum": [".."] }
             ]
          }
@@ -902,27 +902,27 @@
 
       "typedTemporalLiteral": {
          "oneOf": [
-            { "$ref": "#/$defs/typedTimeString" },
-            { "$ref": "#/$defs/typedPeriodString" }
+            { "$ref": "#/$defs/typedInstantString" },
+            { "$ref": "#/$defs/typedIntervalString" }
          ]
       },
 
-      "typedTimeString": {
+      "typedInstantString": {
          "type": "object",
          "required": ["datetime"],
          "properties": {
             "datetime": {
-               "$ref": "#/$defs/timeString"
+               "$ref": "#/$defs/instantString"
             }
          }
       },
 
-      "typedPeriodString": {
+      "typedIntervalString": {
          "type": "object",
          "required": ["datetime"],
          "properties": {
             "datetime": {
-               "$ref": "#/$defs/periodString"
+               "$ref": "#/$defs/intervalString"
             }
          }
       }

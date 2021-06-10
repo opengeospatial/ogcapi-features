@@ -681,15 +681,15 @@ components:
         type: number
     temporalLiteral:
       oneOf:
-      - "$ref": "#/components/schemas/timeString"
-      - "$ref": "#/components/schemas/periodString"
-    timeString:
+      - "$ref": "#/components/schemas/instantString"
+      - "$ref": "#/components/schemas/intervalString"
+    instantString:
       oneOf:
       - type: string
         format: date
       - type: string
         format: date-time
-    periodString:
+    intervalString:
       type: array
       minItems: 2
       maxItems: 2
@@ -704,19 +704,19 @@ components:
            - ..
     typedTemporalLiteral:
       oneOf:
-      - "$ref": "#/components/schemas/typedTimeString"
-      - "$ref": "#/components/schemas/typedPeriodString"
-    typedTimeString:
+      - "$ref": "#/components/schemas/typedInstantString"
+      - "$ref": "#/components/schemas/typedIntervalString"
+    typedInstantString:
       type: object
       required:
       - datetime
       properties:
         datetime:
-          "$ref": "#/components/schemas/timeString"
-    typedPeriodString:
+          "$ref": "#/components/schemas/instantString"
+    typedIntervalString:
       type: object
       required:
       - datetime
       properties:
         datetime:
-          "$ref": "#/components/schemas/periodString"
+          "$ref": "#/components/schemas/intervalString"
