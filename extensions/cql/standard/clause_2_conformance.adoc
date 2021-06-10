@@ -1,37 +1,41 @@
 == Conformance
 
-This standard defines the following conformance classes:
+This standard defines the following requirements classes, 
+grouped by their standardization target:
 
-* <<rc_filter,Filter>>
-* <<rc_features-filter,Features Filter>>
-* <<rc_simple-cql,Simple CQL>>
-* <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
-* <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>
-* <<rc_functions,Functions>>
-* <<rc_arithmetic,Arithmetic expressions>>
-* <<rc_arrays,Arrays>>
-* <<rc_cql-text,CQL Text encoding>>
-* <<rc_cql-json,CQL JSON encoding>>
+* Web API
+** <<rc_filter,Filter>>
+** <<rc_features-filter,Features Filter>>
+* Filter expressions
+** <<rc_simple-cql,Simple CQL>>
+** <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
+** <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>
+** <<rc_functions,Functions>>
+** <<rc_arithmetic,Arithmetic expressions>>
+** <<rc_arrays,Arrays>>
+* Representations of a filter expression
+** <<rc_cql-text,CQL Text encoding>>
+** <<rc_cql-json,CQL JSON encoding>>
 
-The <<rc_filter,Filter>> conformance class defines a set of HTTP query
+The <<rc_filter,Filter>> requirements class defines a set of HTTP query
 parameters that may be used to specify complex filter expressions on
-HTTP requests.  The specific set of parameters defined in this conformance
+HTTP requests.  The specific set of parameters defined in this requirements
 class is:
 
 * `filter` - The filter expression.
 * `filter-lang` - The language used in the filter expression.
-* `filter-crs` - The Coordinate Reference System used in the filter expression.
+* `filter-crs` - The coordinate reference system used in the filter expression.
 
-This conformance class also defines the Queryables resource (at paths
+This requirements class also defines the Queryables resource (at paths
 `/queryables` and `/collections/{collectionId}/queryables`) that can be
 used to determine the list of property names and types that may be used
 to construct filter expressions.
 
-The <<rc_features-filter,Features Filter>> conformance class defines the
-binding between the <<rc_filter,Filter>> conformance class and the
+The <<rc_features-filter,Features Filter>> requirements class defines the
+binding between the <<rc_filter,Filter>> requirements class and the
 <<OAFeat-1,OGC API - Features - Part 1: Core>> standard.
 
-The <<rc_simple-cql,Simple CQL>> conformance class defines the minimal subset
+The <<rc_simple-cql,Simple CQL>> requirements class defines the minimal subset
 of the Common Query Language (CQL) that all implementations must support
 ("Simple CQL"). Simple CQL is intended to be a minimal useful set of
 predicates that support enhanced fine-grained read-access to collections of
@@ -41,7 +45,7 @@ and optionally collection-specific properties).
 
 NOTE: OGC API - Common is still in draft form and is not an official OGC standard.
 
-The specific set of operators defined in this conformance class is:
+The specific set of operators defined in this requirements class is:
 
 * Logical operators:
 ** and
@@ -65,12 +69,12 @@ The specific set of operators defined in this conformance class is:
 NOTE: The `anyinteracts` temporal operator is defined in this document by requirement <<req_simple-cql_temporal-predicate,/req/simple-cql/temporal-predicate>>.
 
 An encoding of CQL may be used as the value of the filter parameters defined
-in the <<rc_filter,Filter>> conformance class.
+in the <<rc_filter,Filter>> requirements class.
 
-The <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>> conformance
+The <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>> requirements
 class specifies requirements for servers that support spatial operators in
 addition to the `intersects` operator that is defined in the
-<<simple-cql_spatial-predicates,Simple CQL>> conformance class. The list of
+<<simple-cql_spatial-predicates,Simple CQL>> requirements class. The list of
 additional spatial operators that must be supported is:
 
 * equals
@@ -81,10 +85,10 @@ additional spatial operators that must be supported is:
 * crosses
 * contains
 
-The <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> conformance
+The <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> requirements
 class specifies requirements for servers that support temporal operators in
 addition to the `anyinteracts` operator defined in the
-<<simple-cql_temporal-predicates,Simple CQL>> conformance class. The list of
+<<simple-cql_temporal-predicates,Simple CQL>> requirements class. The list of
 additional temporal operators that must be supported is:
 
 * after
@@ -102,17 +106,17 @@ additional temporal operators that must be supported is:
 * overlappedby
 * intersects
 
-The <<rc_functions,Functions>> conformance class specifies requirements for
+The <<rc_functions,Functions>> requirements class specifies requirements for
 supporting function calls (e.g. min, max, etc.) in a CQL expression. Function
-calls are the primary means of extending the language. This conformance class
+calls are the primary means of extending the language. This requirements class
 also defined a Functions resource (at path `/functions`) that may be used to
 discover the list of available functions.
 
-The <<rc_arithmetic,Arithmetic operators>> conformance class specifies
+The <<rc_arithmetic,Arithmetic operators>> requirements class specifies
 requirements for supporting the standard set of arithmetic operators,
 latexmath:[+, -, *, /] in a CQL expression.
 
-The <<rc_arrays,Arrays>> conformance class specifies
+The <<rc_arrays,Arrays>> requirements class specifies
 requirements for comparison operators for sets of values. 
 The operators that must be supported are:
 
@@ -121,12 +125,12 @@ The operators that must be supported are:
 * containedby
 * aoverlaps
 
-The <<rc_cql-text,CQL Text encoding>> conformance class defines
+The <<rc_cql-text,CQL Text encoding>> requirements class defines
 a text encoding for CQL. Such an encoding is suitable for use with HTTP query
 parameters such as the `filter` parameter defined by the <<rc_filter,Filter>>
-conformance class.
+requirements class.
 
-The <<rc_cql-json,CQL JSON encoding>> conformance class defines
+The <<rc_cql-json,CQL JSON encoding>> requirements class defines
 a JSON encoding for CQL. Such as encoding is suitable for use with as the
 body of an HTTP POST request.
 
@@ -158,7 +162,7 @@ OGC Compliance Testing web site.
 The content of this sub-clause is informative.
 
 Because CQL is not exclusively useful for features, it is anticipated that the
-following conformance classes:
+following requirements classes:
 
 * <<rc_filter,Filter>>
 * <<rc_simple-cql,Simple CQL>>
@@ -171,7 +175,7 @@ following conformance classes:
 * <<rc_cql-json,CQL JSON encoding>>
 
 will eventually become parts of the OGC API Common suite of standards thus
-leaving the <<rc_features-filter,Features Filter>> conformance class as part
+leaving the <<rc_features-filter,Features Filter>> requirements class as part
 3 of the OGC API Features specifications.
 
 

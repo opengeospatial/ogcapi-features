@@ -1,10 +1,11 @@
-== Terms, Definitions and Symbols
+== Terms, Definitions, Symbols and Abbreviated Terms
 
 === Terms and Definitions
-This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+This document used the terms defined in https://portal.ogc.org/public_ogc/directives/directives.php[OGC Policy Directive 49], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard and OGC documents do not use the equivalent phrases in the ISO/IEC Directives, Part 2.
 
-For the purposes of this document, the following additional terms and definitions apply in addition to the terms defined
-in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
+This document also uses terms defined in the OGC Standard for Modular specifications (https://portal.opengeospatial.org/files/?artifact_id=34762[OGC 08-131r3]), also known as the 'ModSpec'. The definitions of terms such as standard, specification, requirement, and conformance test are provided in the ModSpec.
+
+For the purposes of this document, the following additional terms and definitions apply.
 
 [[collection-def]]
 ==== collection
@@ -15,7 +16,7 @@ a body of resources that belong or are used together; an aggregate, set, or grou
 a web address (URI) at which access can be gained to a service or resource
 
 [[filter-def]]
-==== filter
+==== filter expression
 **predicate** encoded for transmission between systems
 
 [[predicate-def]]
@@ -30,7 +31,7 @@ NOTE: As content of OGC API standards, a resource is typically published at an e
 
 [[queryable-def]]
 ==== queryable
-a token that represents a property of a resource that can be used in a filter expression
+a token that represents a property of a resource that can be used in a **filter expression**
 
 [[resource-def]]
 ==== resource / web resource
@@ -48,3 +49,32 @@ any information that can be named and is the intended conceptual target of a hyp
 * **I(x)** represents the interior of the geometric object x
 * **B(x)** represents the boundary of the geometric object x
 * **E(x)** represents the exterior of the geometric object x
+
+=== Abbreviated terms
+
+ABNF::
+  Augmented Backus-Naur Form
+API::
+  Application Programming Interface
+BNF::
+  Backus-Naur Form 
+CQL::
+  Common Query Language
+CRS::
+  Coordinate Reference System
+HTTP::
+  Hypertext Transfer Protocol
+HTTPS::
+  Hypertext Transfer Protocol Secure
+IANA::
+  Internet Assigned Numbers Authority
+JSON::
+  JavaScript Object Notation
+OGC::
+  Open Geospatial Consortium
+URI::
+  Uniform Resource Identifier
+WKT::
+  Well-Known Text
+YAML::
+  YAML Ain't Markup Language

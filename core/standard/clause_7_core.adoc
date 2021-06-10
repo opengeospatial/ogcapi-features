@@ -743,7 +743,7 @@ include::requirements/core/REQ_fc-time-response.adoc[]
 
 "Intersects" means that the time (instant or interval) specified in the parameter `datetime` includes a timestamp that is part of the temporal geometry of the feature (again, a time instant or interval). For time intervals this includes the start and end time.
 
-NOTE: ISO 8601-2 distinguishes open start/end timestamps (double-dot) and unknown start/end timestamps (empty string). For queries, an unknown start/end has the same effect as an open start/end.
+NOTE: The interval notation is taken from <<iso8601-2,ISO 8601-2:2019>>. ISO 8601-2 distinguishes open start/end timestamps (double-dot) and unknown start/end timestamps (empty string). For queries, an unknown start/end has the same effect as an open start/end.
 
 [[example_6]]
 .A date-time

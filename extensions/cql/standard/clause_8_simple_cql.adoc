@@ -60,10 +60,10 @@ A literal value is any part of an CQL filter expression that is used
 exactly as it is specified in the expression. Literal values include:
 
 * character strings (rule `characterLiteral`),
-* numbers (rule `numericLiteral`),
+* numbers including integers and floating point values (rule `numericLiteral`),
 * booleans (rule `booleanLiteral`),
-* spatial geometries (rule `spatialLiteral`) and
-* temporal geometries (rule `temporalLiteral`).
+* spatial geometries like points, line strings or polygons (rule `spatialLiteral`) and
+* temporal geometries like instants or intervals (rule `temporalLiteral`).
 
 [[example_8_1]]
 .Literal examples
@@ -136,6 +136,18 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 [ "2019-09-09", ".." ]
 ----
 ====
+
+For spatial and temporal geometries existing representations are used:
+
+* Spatial geometry:
+  * Text: an OGC Well-Known Text (WKT) literal
+  * JSON: a GeoJSON geometry object
+* Temporal instant:
+  * Text: an RFC 3339 literal
+  * JSON: a string of a RFC 3339 literal
+* Temporal interval:
+  * Text: an ISO 8601-2 interval literal
+  * JSON: an array from an ISO 8601-2 interval literal that is split at the solidus
 
 NOTE: The current BNF rule for temporal literals supports timestamps in any time zone. Should this be restricted to UTC ("Z"), at least in Simple CQL? See https://github.com/opengeospatial/ogcapi-features/issues/483[issue 483].
 
@@ -259,7 +271,7 @@ include::requirements/simple-cql/REQ_in-predicate.adoc[]
 .Examples of a IN predicate
 ====
 ----
-cityName IN ('Toronto','Franfurt','Tokyo','New York') NOCASE false
+cityName IN ('Toronto','Frankfurt','Tokyo','New York') NOCASE false
 ----
 
 [source,JSON]
@@ -267,7 +279,7 @@ cityName IN ('Toronto','Franfurt','Tokyo','New York') NOCASE false
 {
   "in": {
      "value": { "property": "cityName" },
-     "list": [ "Toronto", "Franfurt", "Tokyo", "New York" ],
+     "list": [ "Toronto", "Frankfurt", "Tokyo", "New York" ],
      "nocase": false
   }
 }
@@ -365,8 +377,10 @@ INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 3
 ----
 ...filter-lang=cql-text&
    filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
-   filter=INTERSECTS(geometry,POLYGON((1379213.867288 3610774.164192,1379233.837424 3610769.696029,1379246.149564 3610812.389132,1379226.494235 3610816.884823,1379213.867288 3610774.164192)))...
+   filter=INTERSECTS(geometry,POLYGON((379213.87 3610774.16,379233.84 3610769.70,379246.15 3610812.39,379226.49 3610816.88,379213.87 3610774.16)))...
 ----
+
+Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
 ====
 
 [[simple-cql_temporal]]

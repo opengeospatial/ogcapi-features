@@ -36,7 +36,7 @@ predicates or to keep the legacy because of existing CQL implementations.
 Comments are welcome in the https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue] on this topic.
 
 The following table lists the mathematical definitions of each spatial operator
-as described in <<ISO19125,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
+as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 
 [reftext='{table-caption} {counter:table-num}']
 .Mathematical definitions of spatial operators
@@ -256,7 +256,7 @@ include::requirements/functions/REQ_get-functions-response-json.adoc[]
                "type": ["string","number","datetime"]
             },
          ],
-         "retuns": ["string","number","datetime"]
+         "returns": ["string","number","datetime"]
       },
       {
          "name": "max",
@@ -268,7 +268,7 @@ include::requirements/functions/REQ_get-functions-response-json.adoc[]
                "type": ["string","number","datetime"]
             },
          ],
-         "retuns": ["string","number","datetime"]
+         "returns": ["string","number","datetime"]
       },
       {
          "name": "geometryType",
@@ -302,13 +302,13 @@ NOTE: Support for the BNF rule `function` is added by the requirements class <<r
 .Predicate with an arithmetic expression finding all vehicles that are too tall to pass under a bridge.
 ====
 ----
-vehicle_height > (bridge_height-1)
+vehicle_height > (bridge_clearance-1)
 ----
 
 [source,JSON]
 ----
 {
-   "gt": [{"property":"vehicle_height"},{"-":[{"property":"bridge_height"},1]}]
+   "gt": [{"property":"vehicle_height"},{"-":[{"property":"bridge_clearance"},1]}]
 }
 ----
 ====

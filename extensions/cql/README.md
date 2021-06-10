@@ -22,7 +22,7 @@ A simple example: Select all roads (attribute F_CODE is AP030) that are motorway
 
 Examples for CQL expressions in both CQL Text and CQL JSON are available in the [examples folder](standard/schema/examples).
 
-CQL supports filter predicates for standard data types like strings, numbers and boolean as well as for spatial and temporal geometries. Every CQL implementation must support a subset of CQL ("Simple CQL") with more advanced capabilities (array operators, more spatial and temporal operators, functions, arithmetic expressions) in separate conformance classes that can be supported, if needed. The conformance classes supported by an API can be determined by inspecting the [Conformance Declaration](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_declaration_of_conformance_classes).
+CQL supports filter predicates for standard data types like strings, numbers and boolean as well as for spatial geometries (point, lines, polygons) and temporal geometries (instants and intervals). Every CQL implementation must support a subset of CQL ("Simple CQL") with more advanced capabilities (array operators, more spatial and temporal operators, functions, arithmetic expressions) in separate conformance classes that can be supported, if needed. The conformance classes supported by an API can be determined by inspecting the [Conformance Declaration](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_declaration_of_conformance_classes).
 
 ![CQL conformance classes](./cql-cc.png "CQL conformance classes")
 

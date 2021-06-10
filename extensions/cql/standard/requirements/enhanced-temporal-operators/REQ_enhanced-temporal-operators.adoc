@@ -5,7 +5,7 @@
 ^|A |The server SHALL support all temporal operators as defined by the BNF rule `temporalOperator` 
 in <<cql-bnf>>.
 ^|B |The spatial operators in addition to `ANYINTERACTS` SHALL be evaluated as defined in the 
-<<OGC16-071r3,Time Ontology in OWL>> with the following mapping between CQL temporal operator names 
+<<owl-time,Time Ontology in OWL>> with the following mapping between CQL temporal operator names 
 and the property names defined in the Time Ontology in OWL:
 
 * `AFTER`: https://www.w3.org/TR/owl-time/#time:after[after]
