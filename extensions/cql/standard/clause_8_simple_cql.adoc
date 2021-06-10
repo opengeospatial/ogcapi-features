@@ -137,6 +137,18 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 ----
 ====
 
+For spatial and temporal geometries existing representations are used:
+
+* Spatial geometry:
+  * Text: an OGC Well-Known Text (WKT) literal
+  * JSON: a GeoJSON geometry object
+* Temporal instant:
+  * Text: an RFC 3339 literal
+  * JSON: a string of a RFC 3339 literal
+* Temporal interval:
+  * Text: an ISO 8601-2 interval literal
+  * JSON: an array from an ISO 8601-2 interval literal that is split at the solidus
+
 NOTE: The current BNF rule for temporal literals supports timestamps in any time zone. Should this be restricted to UTC ("Z"), at least in Simple CQL? See https://github.com/opengeospatial/ogcapi-features/issues/483[issue 483].
 
 [[simple-cql_property]]
