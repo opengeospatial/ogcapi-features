@@ -32,9 +32,7 @@ resource. Or the <<publisher-def,publisher>> may want to restrict filtering on c
 properties. For example, because the backend datastore has not been configured
 to allow high-performance queries on those properties.
 
-include::requirements/filter/REQ_get-queryables-op-global.adoc[]
-
-include::requirements/filter/REQ_get-queryables-op-local.adoc[]
+include::requirements/filter/REQ_get-queryables-op.adoc[]
 
 include::requirements/filter/REQ_get-queryables-response.adoc[]
 
@@ -89,35 +87,6 @@ value is a filter expression to be applied when retrieving resources. This
 is necessary to determine which resources should be included in a result set.
 
 include::requirements/filter/REQ_filter-param.adoc[]
-
-[[filter-param-multiple-collections]]
-=== Cross-collection queries
-
-The only filterable resource defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>
-is the Features resource at `/collections/{collectionId}/items` which operates 
-on a single collection.  However an API can provide other, higher level, resources that potentially operate on multiple collections. 
-
-The simplest approach for handling such cross-collection queries is one that is 
-consistent with one-collection queries.  Specifically, the `filter` parameter, if
-provided, applies to all referenced collections.  Of course this implies that all 
-properties referenced in the filter expression are valid for all referenced collections 
-and should be taken from the <<filter-queryables,global queryables list>>.
-
-include::requirements/filter/REQ_filter-param-multiple-collections.adoc[]
-
-The following example illustrates a notional query on a hypothetical Query resource
-that uses a CQL filter and references multiple collections:
-
-[[example_2]]
-.Multi-collection filter example
-----
-http://www.someserver.com/ogcapi/search?
-  collections=collection1,collection3&
-  filter-lang=cql-text&
-  filter=prop1=10 AND prop2>45
-----
-
-NOTE: Arrays of filter expressions that operate on each collection specified in a query (or subsets thereof) are out of scope for this extension and  would be the subject of a different part of the "OGC API - Features" suite of specifications.
 
 [[filter-lang-param]]
 === Parameter filter-lang
