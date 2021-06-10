@@ -169,36 +169,100 @@ WITHIN(road,Buffer(geometry,10,"m"))
 ----
 ====
 
-[[enhanced-temporal-operators]]
-=== Requirements Class "Enhanced Temporal Operators"
+[[temporal-operators]]
+=== Requirements Class "Temporal Operators"
 
-include::requirements/requirements_class_enhanced-temporal-operators.adoc[]
+include::requirements/requirements_class_temporal-operators.adoc[]
 
-The <<rc_simple_cql,Simple CQL>> clause specifies the use of the `ANYINTERACTS`
-temporal operator.  This requirements class adds additional commonly used temporal
-operators that an implementation of this extension might offer.
+A temporal predicate evaluates two time-valued expressions to determine, if the expressions satisfy the requirements of the specified temporal operator.
 
-include::requirements/enhanced-temporal-operators/REQ_enhanced-temporal-operators.adoc[]
+The operands in a temporal predicate are temporal geometries. A temporal geometry is either an instant or an interval.
 
-CQL supports date and timestamps as time instants, but even the smallest
-"instant" has a duration and can also be evaluated as an interval. For the purposes of determining the temporal relationship between two temporal expressions, an instant is treated as the interval from the beginning to the end of the instant. The following diagram illustrates the meaning of the temporal operators.
+An instant is either a date or a timestamp in accordance with <<rfc3339,RFC 3339>> (rules `full-date` or `date-time`). Note that since time is continuous, every instant has a duration and a start/end. Nevertheless, the geometry can be considered an instant in the temporal resolution that is applicable for the specific property.
+
+An interval is the time between a start instant and an end instant, including both bounding instances.
+
+Depending on the implementation environment, the underlying datastore may or may not support intervals as data types of properties. If not, intervals are typically represented by two separate properties that are instants, one for the start and one for the end of the interval.
+
+All temporal geometries are in the Gregorian Calendar. This is a deliberate restriction to keep implementations of CQL simple, avoiding requirements to transform time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API standards.
+
+The temporal operators in CQL are based on the definitions in the <<owl-time,W3C/OGC Time Ontology in OWL>>. 
+
+The following table specifies the definition of the temporal operators where both operands may be instants or intervals, including mixed combinations.
+
+[[temporal-operators-1]]
+[reftext='{table-caption} {counter:table-num}']
+.Definitions of temporal operators that support both instants and intervals
+[width=100%,cols="30,70",options="header"]
+|===
+|Temporal operator |Definition (t1: first operand, t2: second operand)
+|T_AFTER |See https://www.w3.org/TR/owl-time/#time:after[after] 
+|T_BEFORE |See https://www.w3.org/TR/owl-time/#time:before[before] 
+|T_DISJOINT |(t1 T_BEFORE t2) OR (t1 T_AFTER t2)
+|T_EQUALS |Start and end of t1 and t2 are coincident
+|T_INTERSECTS |NOT (t1 T_DISJOINT t2)
+|===
+
+Additional temporal operators are available, but only applicable for intervals.
+
+[[temporal-operators-2]]
+[reftext='{table-caption} {counter:table-num}']
+.Definitions of temporal operators between intervals
+[width=100%,cols="30,70",options="header"]
+|===
+|Temporal operator |Definition
+|T_CONTAINS |See https://www.w3.org/TR/owl-time/#time:intervalContains[intervalContains]
+|T_DURING |See https://www.w3.org/TR/owl-time/#time:intervalDuring[intervalDuring]
+|T_FINISHEDBY |See https://www.w3.org/TR/owl-time/#time:intervalFinishedBy[intervalFinishedBy]
+|T_FINISHES |See https://www.w3.org/TR/owl-time/#time:intervalFinishes[intervalFinishes]
+|T_MEETS |See https://www.w3.org/TR/owl-time/#time:intervalMeets[intervalMeets]
+|T_METBY |See https://www.w3.org/TR/owl-time/#time:intervalMetBy[intervalMetBy]
+|T_OVERLAPPEDBY |See https://www.w3.org/TR/owl-time/#time:intervalOverlappedBy[intervalOverlappedBy]
+|T_OVERLAPS |See https://www.w3.org/TR/owl-time/#time:intervalOverlaps[intervalOverlaps]
+|T_STARTEDBY |See https://www.w3.org/TR/owl-time/#time:intervalStarts[intervalStarts]
+|T_STARTS |See https://www.w3.org/TR/owl-time/#time:intervalStartedBy[intervalStartedBy]
+|===
+
+The following diagram illustrates the meaning of most of the temporal operators when applied to intervals.
 
 [#figure5]
 .The elementary relations between time intervals
 image::images/temporal_ops.png[alt=TemporalOps,width=70%]
 
-[[example_9_4]]
-.Examples of temporal relationships using temporal literals.
+include::requirements/temporal-operators/REQ_temporal-predicates.adoc[]
+
+include::requirements/temporal-operators/REQ_temporal-operators.adoc[]
+
+[[example_8_10]]
+.Examples of temporal predicate using T_INTERSECTS
 ====
 ----
-    1969-07-20T20:17:40Z DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
+event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 ----
 
 [source,JSON]
 ----
 {
-   "during": ["1969-07-20T20:17:40Z",["1969-07-16T13:32:00Z",
-                                      "1969-07-24T16:50:35Z"]]
+   "t_intersects": [
+      { "property": "event_date" },
+      [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ]
+   ]
+}
+----
+====
+
+[[example_9_4]]
+.Examples of temporal relationships using temporal literals.
+====
+----
+1969-07-20T20:17:40Z T_DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
+----
+
+[source,JSON]
+----
+{
+   "t_during": ["1969-07-20T20:17:40Z",["1969-07-16T13:32:00Z",
+                                        "1969-07-24T16:50:35Z"]]
 }
 ----
 ====
@@ -207,14 +271,14 @@ image::images/temporal_ops.png[alt=TemporalOps,width=70%]
 .Examples of temporal relationships using a property and a temporal literal.
 ====
 ----
-    touchdown DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
+touchdown T_DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
 ----
 
 [source,JSON]
 ----
 {
-   "during": [{"property": "touchdown"},["1969-07-16T13:32:00Z",
-                                         "1969-07-24T16:50:35Z"]]
+   "t_during": [{"property": "touchdown"},["1969-07-16T13:32:00Z",
+                                           "1969-07-24T16:50:35Z"]]
 }
 ----
 ====

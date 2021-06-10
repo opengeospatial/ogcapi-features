@@ -136,20 +136,21 @@ temporalExpression = temporalLiteral
                    | propertyName
                    | function;
 
-temporalOperator = "ANYINTERACTS"
-                 | "BEFORE"
-                 | "AFTER"
-                 | "MEETS"
-                 | "METBY"
-                 | "TOVERLAPS"
-                 | "OVERLAPPEDBY"
-                 | "BEGINS"
-                 | "BEGUNBY"
-                 | "DURING"
-                 | "TCONTAINS"
-                 | "ENDS"
-                 | "ENDEDBY"
-                 | "TEQUALS";
+temporalOperator = "T_AFTER"
+                 | "T_BEFORE"
+                 | "T_CONTAINS"
+                 | "T_DISJOINT"
+                 | "T_DURING"
+                 | "T_EQUALS"
+                 | "T_FINISHEDBY"
+                 | "T_FINISHES"
+                 | "T_INTERSECTS"
+                 | "T_MEETS"
+                 | "T_METBY"
+                 | "T_OVERLAPPEDBY"
+                 | "T_OVERLAPS"
+                 | "T_STARTEDBY"
+                 | "T_STARTS";
 
 #=============================================================================#
 # An array predicate evaluates if two array expressions statisfy the
