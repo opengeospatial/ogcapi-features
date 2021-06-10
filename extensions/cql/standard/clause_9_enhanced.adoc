@@ -302,13 +302,13 @@ NOTE: Support for the BNF rule `function` is added by the requirements class <<r
 .Predicate with an arithmetic expression finding all vehicles that are too tall to pass under a bridge.
 ====
 ----
-vehicle_height > (bridge_height-1)
+vehicle_height > (bridge_clearance-1)
 ----
 
 [source,JSON]
 ----
 {
-   "gt": [{"property":"vehicle_height"},{"-":[{"property":"bridge_height"},1]}]
+   "gt": [{"property":"vehicle_height"},{"-":[{"property":"bridge_clearance"},1]}]
 }
 ----
 ====
