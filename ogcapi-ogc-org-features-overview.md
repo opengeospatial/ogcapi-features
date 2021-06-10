@@ -53,7 +53,7 @@ an overview of the extensions to support additional coordinate reference systems
 
 ## Overview of OGC API - Features - Part 2: Coordinate Reference Systems By Reference
 
-In Part 1 (Core) the default spatial Coordinate Reference System (CRS) is WGS 84 longitude/latitude with or without height. Part 2 extends Part 1 to support presenting geometry-valued properties in a response document in additional CRSs. Each supported CRS must be identified by a URI such as http://www.opengis.net/def/crs/EPSG/0/4326.
+In Part 1 (Core) the default spatial coordinate reference system (CRS) is WGS 84 longitude/latitude with or without height. Part 2 extends Part 1 to support presenting geometry-valued properties in a response document in additional CRSs. Each supported CRS must be identified by a URI such as http://www.opengis.net/def/crs/EPSG/0/4326.
 
 ### Discovery of information
 

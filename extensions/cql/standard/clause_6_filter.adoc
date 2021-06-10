@@ -49,29 +49,32 @@ include::recommendations/filter/REC_queryables-schema.adoc[]
 [source,JSON]
 ----
 {
-  "$schema" : "https://json-schema.org/draft/2019-09/schema",
-  "$id" : "https://demo.ldproxy.net/daraa/collections/CulturePnt/queryables",
-  "type" : "object",
-  "title" : "Cultural (Points)",
-  "description" : "Cultural: Information about features on the landscape with a point geometry that have been constructed by man.",
-  "properties" : {
-    "F_CODE" : {
-      "title" : "Feature Type",
-      "type" : "string",
-      "enum" : [ "AK121", "AL012", "AL030", "AL130", "BH075" ]
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://demo.ldproxy.net/zoomstack/collections/roads_national/queryables",
+  "type": "object",
+  "title": "National Roads",
+  "description": "Lines representing the road network. A road is defined as a metalled way for vehicles.",
+  "properties": {
+    "geom": {
+      "$ref" : "https://geojson.org/schema/LineString.json"
     },
-    "ZI001_SDV" : {
-      "title" : "Last Change",
-      "type" : "string",
-      "format" : "date-time"
+    "level": {
+      "type": "integer",
+      "title": "Level",
+      "enum": [ 0, 1, 2 ]
     },
-    "ZI037_REL" : {
-      "title" : "Religious Designation",
-      "type" : "integer",
-      "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+    "name": {
+      "type": "string",
+      "title": "Name"
     },
-    "geometry" : {
-      "$ref" : "https://geojson.org/schema/Point.json"
+    "number": {
+      "type": "string",
+      "title": "Number"
+    },
+    "type": {
+      "type": "string",
+      "title": "Type",
+      "enum": [ "Primary", "Motorway" ]
     }
   }
 }
@@ -140,7 +143,7 @@ in this standard.
 === Parameter filter-crs
 
 For reasons discussed in the http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#SDWBP[W3C/OGC Spatial Data on the Web Best Practices document], 
-<<OAFeat-1,OGC API - Features - Part 1: Core>> uses WGS 84 longitude and latitude and the default Coordinate Reference System. <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>> extends the capabilities of Part 1 to allow other coordinate reference systems to be used.  The `filter-crs` parameter defined in this clause allows clients to indicate to servers that support other CRSs, which CRS is being used to encode geometric values in a filter expression.
+<<OAFeat-1,OGC API - Features - Part 1: Core>> uses WGS 84 longitude and latitude and the default coordinate reference system. <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>> extends the capabilities of Part 1 to allow other coordinate reference systems to be used.  The `filter-crs` parameter defined in this clause allows clients to indicate to servers that support other CRSs, which CRS is being used to encode geometric values in a filter expression.
 
 include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
 

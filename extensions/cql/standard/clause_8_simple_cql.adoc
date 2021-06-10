@@ -60,10 +60,10 @@ A literal value is any part of an CQL filter expression that is used
 exactly as it is specified in the expression. Literal values include:
 
 * character strings (rule `characterLiteral`),
-* numbers (rule `numericLiteral`),
+* numbers including integers and floating point values (rule `numericLiteral`),
 * booleans (rule `booleanLiteral`),
-* spatial geometries (rule `spatialLiteral`) and
-* temporal geometries (rule `temporalLiteral`).
+* spatial geometries like points, line strings or polygons (rule `spatialLiteral`) and
+* temporal geometries like instants or intervals (rule `temporalLiteral`).
 
 [[example_8_1]]
 .Literal examples
