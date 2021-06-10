@@ -18,6 +18,10 @@ The following OGC link relation types are introduced in this document (no applic
 
 NOTE: This link relation type still needs to be registered in the <<ogc-link-relations,OGC Link Relation Type Register>>.
 
+=== HTTP URIs
+
+If URIs include reserved characters that are delimiters in the URI subcomponent, these have to be percent-encoded. See Clause 2 of <<rfc3986,RFC 3986>> for details. Not all URIs in this document are properly percent-encoded for better readability.
+
 === Use of BNF
 
 BNF as specified in <<BNF,Augmented BNF for Syntax Specifications>> is used to formally specify the grammar of the Common Query Language (CQL).
