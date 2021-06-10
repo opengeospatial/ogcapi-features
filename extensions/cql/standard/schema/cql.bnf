@@ -201,10 +201,9 @@ arithmeticOperand = numericLiteral
 #=============================================================================#
 # Definition of a PROPERTYNAME
 #=============================================================================#
-propertyName = identifier;
+propertyName = identifier | doubleQuote identifier doubleQuote;
 
-identifier = identifierStart [ {colon | period | identifierPart} ]
-           | doubleQuote identifier doubleQuote;
+identifier = identifierStart [ {colon | period | identifierPart} ];
 
 identifierStart = alpha;
 
