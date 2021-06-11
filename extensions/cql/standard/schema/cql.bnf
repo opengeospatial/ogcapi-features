@@ -230,15 +230,7 @@ argument = characterLiteral
 #=============================================================================#
 # Definition of CHARACTER literals
 #=============================================================================#
-characterLiteral = characterStringLiteral
-                 | bitStringLiteral
-                 | hexStringLiteral;
-
-characterStringLiteral = quote [ {character} ] quote;
-
-bitStringLiteral = "B" quote [ {bit} ] quote;
-
-hexStringLiteral = "X" quote [ {hexit} ] quote;
+characterLiteral = quote [ {character} ] quote;
 
 character = alpha | digit | extendedDigit | ideographic |
             combiningChar | extender;
