@@ -203,7 +203,7 @@ The following table specifies the definition of the temporal operators where bot
 |T_INTERSECTS |NOT (t1 T_DISJOINT t2)
 |===
 
-Additional temporal operators are available, but only applicable for intervals.
+Additional temporal operators are available, but only applicable for intervals. Using these operators with instants will result in a client error.
 
 [[temporal-operators-2]]
 [reftext='{table-caption} {counter:table-num}']
