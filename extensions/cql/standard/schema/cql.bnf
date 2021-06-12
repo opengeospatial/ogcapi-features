@@ -109,14 +109,14 @@ spatialPredicate =  spatialOperator
 #       these are outside the scope of a "simple" core for CQL.  These
 #       can be added as extensions.
 #
-spatialOperator = "INTERSECTS"
-                | "EQUALS"
-                | "DISJOINT"
-                | "TOUCHES"
-                | "WITHIN"
-                | "OVERLAPS"
-                | "CROSSES"
-                | "CONTAINS";
+spatialOperator = "S_INTERSECTS"
+                | "S_EQUALS"
+                | "S_DISJOINT"
+                | "S_TOUCHES"
+                | "S_WITHIN"
+                | "S_OVERLAPS"
+                | "S_CROSSES"
+                | "S_CONTAINS";
 
 # A geometric expression is a property name of a geometry-valued property,
 # a geometric literal (expressed as WKT) or a function that returns a
@@ -180,10 +180,10 @@ arrayElement = characterLiteral
              | arithmeticExpression
              | arrayLiteral;
 
-arrayOperator = "AEQUALS"
-              | "ACONTAINS"
-              | "CONTAINED BY"
-              | "AOVERLAPS";
+arrayOperator = "A_EQUALS"
+              | "A_CONTAINS"
+              | "A_CONTAINED BY"
+              | "A_OVERLAPS";
 
 #=============================================================================#
 # An arithemtic expression is an expression composed of an arithmetic

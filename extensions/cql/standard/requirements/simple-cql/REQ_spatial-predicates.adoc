@@ -3,5 +3,5 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/spatial-predicate*
 ^|A |If the requirements of the spatial operator are satisfied, then the predicate SHALL evaluate to the Boolean value `TRUE`. Otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
-^|B |The `INTERSECTS` operator SHALL be evaluated as defined in clause 6.1.15 of <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>> (except that in CQL the predicates evaluate to a Boolean, not as an Integer).
+^|B |The `S_INTERSECTS` operator SHALL be evaluated as defined in clause 6.1.15 of <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>> (except that in CQL the predicates evaluate to a Boolean, not as an Integer).
 |===

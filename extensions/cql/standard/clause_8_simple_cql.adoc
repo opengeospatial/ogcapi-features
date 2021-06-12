@@ -348,12 +348,12 @@ is used to pass the CRS information to the server.
 .Example spatial predicate
 ====
 ----
-INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 32.288402,36.320008 32.288458,36.319836 32.288087)))
+S_INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 32.288402,36.320008 32.288458,36.319836 32.288087)))
 ----
 
 [source,JSON]
 ----
-{ "intersects": [
+{ "s_intersects": [
    { "property": "geometry" },
    {
       "type": "Polygon",
@@ -377,7 +377,7 @@ INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 3
 ----
 ...filter-lang=cql-text&
    filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
-   filter=INTERSECTS(geometry,POLYGON((379213.87 3610774.16,379233.84 3610769.70,379246.15 3610812.39,379226.49 3610816.88,379213.87 3610774.16)))...
+   filter=S_INTERSECTS(geometry,POLYGON((379213.87 3610774.16,379233.84 3610769.70,379246.15 3610812.39,379226.49 3610816.88,379213.87 3610774.16)))...
 ----
 
 Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
