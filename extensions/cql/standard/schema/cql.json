@@ -141,10 +141,16 @@
 
       "isLikePredicate": {
          "type": "object",
-         "required": ["value","pattern"],
+         "required": ["like"],
          "properties": {
-            "value": { "$ref": "#/$defs/scalarOperands" },
-            "pattern": { "type": "string" }
+            "like": {
+               "type": "object",
+               "requires": [ "value","pattern" ],
+               "properties": {
+                  "value": { "$ref": "#/$defs/scalarExpression" },
+                  "pattern": { "type": "string" }
+               }
+            }
          }
       },
 
@@ -596,12 +602,13 @@
                "required": ["property"],
                "properties": {
                  "property": { "type": "string" }
+               }
             },
             {
                "type": "object",
                "required": [ "upper" ],
                "properties": {
-                  "upper": { "$ref": "#/defs/propertyRef" }
+                  "upper": { "$ref": "#/$defs/propertyRef" }
                },
                "additionalProperties": false
             },
@@ -609,7 +616,7 @@
                "type": "object",
                "required": [ "lower" ],
                "properties": {
-                  "lower": { "$ref": "#/defs/propertyRef" }
+                  "lower": { "$ref": "#/$defs/propertyRef" }
                },
                "additionalProperties": false
             }
@@ -633,7 +640,7 @@
                "type": "object",
                "required": [ "upper" ],
                "properties": {
-                  "upper": { "$ref": "#/defs/functionRef" }
+                  "upper": { "$ref": "#/$defs/functionRef" }
                },
                "additionalProperties": false
             },
@@ -641,7 +648,7 @@
                "type": "object",
                "required": [ "lower" ],
                "properties": {
-                  "lower": { "$ref": "#/defs/functionRef" }
+                  "lower": { "$ref": "#/$defs/functionRef" }
                },
                "additionalProperties": false
             }

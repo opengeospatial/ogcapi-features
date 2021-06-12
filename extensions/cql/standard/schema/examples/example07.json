@@ -1,10 +1,10 @@
 {
    "and": [
       {
-         "like": [
-            {"property": "eo_instruments"},
-            "OLI%"
-         ]
+         "like": {
+            "value": {"property": "eo:instrument"},
+            "pattern": "OLI%"
+         }
       },
       {
          "intersects": [

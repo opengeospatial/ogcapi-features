@@ -2,8 +2,8 @@
    "and": [
       {
          "or": [
-            {"like":[{"property": "owner"}, "mike%"]},
-            {"like":[{"property": "owner"}, "Mike%"]}
+            {"like":{"value": {"property": "owner"}, "pattern": "mike%"}},
+            {"like":{"value": {"property": "owner"}, "pattern": "Mike%"}}
          ]
       },
       {"lt":[{"property": "floors"},4]}

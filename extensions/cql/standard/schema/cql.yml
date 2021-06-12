@@ -117,14 +117,18 @@ components:
               "$ref": "#/components/schemas/scalarExpression"
     isLikePredicate:
       type: object
-      required:
-        - value
-        - pattern
+      required: like
       properties:
         like:
-          "$ref": "#/components/schemas/scalarOperands"
-        pattern:
-          type: string
+          type: object
+          required: 
+            - value
+            - pattern
+          properties:
+             value:
+               "$ref": "#/components/schemas/scalarOperands"
+             pattern:
+               type: string
     isInListPredicate:
       type: object
       required:
