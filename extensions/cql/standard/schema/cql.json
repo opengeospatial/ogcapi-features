@@ -141,9 +141,10 @@
 
       "isLikePredicate": {
          "type": "object",
-         "required": ["like"],
+         "required": ["value","pattern"],
          "properties": {
-            "like": { "$ref": "#/$defs/scalarOperands" }
+            "value": { "$ref": "#/$defs/scalarOperands" },
+            "pattern": { "type": "string" }
          }
       },
 

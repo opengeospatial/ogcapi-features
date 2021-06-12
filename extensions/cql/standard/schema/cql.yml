@@ -118,19 +118,13 @@ components:
     isLikePredicate:
       type: object
       required:
-      - like
+        - value
+        - pattern
       properties:
         like:
           "$ref": "#/components/schemas/scalarOperands"
-        wildcard:
-           type: string
-           default: "%"
-        singleChar:
-           type: string
-           default: "."
-        escapeChar:
-           type: string
-           default: "\\"
+        pattern:
+          type: string
     isInListPredicate:
       type: object
       required:
