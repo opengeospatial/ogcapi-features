@@ -2,12 +2,10 @@
    "and": [
       {
          "or": [
-            {"like":{"value": {"property": "owner"}, "pattern": "mike%"}},
-            {"like":{"value": {"property": "owner"}, "pattern": "Mike%"}}
+            {"like":[ {"property": "owner"}, "mike%"]},
+            {"like":[ {"property": "owner"}, "Mike%"]}
          ]
       },
       {"lt":[{"property": "floors"},4]}
    ]
 }
-
-

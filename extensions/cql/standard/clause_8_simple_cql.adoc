@@ -233,12 +233,7 @@ name LIKE 'Smith%'
 
 [source,JSON]
 ----
-{
-  "like": {
-    "value": { "property": "name" },
-    "pattern": "Smith%"
-  }
-}
+{"like": [ { "property": "name" }, "Smith%" ] }
 ----
 ====
 
