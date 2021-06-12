@@ -29,7 +29,7 @@
             }
          }
       },
-      
+
       "orExpression": {
          "type": "object",
          "required": ["or"],
@@ -143,11 +143,7 @@
          "type": "object",
          "required": ["like"],
          "properties": {
-            "like": { "$ref": "#/$defs/scalarOperands" },
-            "wildcard": { "type": "string", "default": "%" },
-            "singleChar": { "type": "string", "default": "." },
-            "escapeChar": { "type": "string", "default": "\\" },
-            "nocase": { "type": "boolean", "default": true }
+            "like": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
@@ -165,10 +161,6 @@
                      "items": {
                         "$ref": "#/$defs/valueExpression"
                      }
-                  },
-                  "nocase": {
-                     "type": "boolean",
-                     "default": true
                   }
                }
             }
@@ -371,7 +363,7 @@
             "toverlaps": { "$ref": "#/$defs/temporalOperands" }
          }
       },
-   
+
       "overlappedbyExpression": {
          "type": "object",
          "required": ["overlappedby"],
@@ -505,7 +497,7 @@
             "aoverlaps": { "$ref": "#/$defs/arrayExpression" }
          }
       },
- 
+
       "arrayExpression": {
          "type": "array",
          "minItems": 2,
@@ -597,11 +589,30 @@
       "$comment": "=  PROPERTY REFERENCE                                 =",
       "$comment": "=======================================================",
       "propertyRef": {
-         "type": "object",
-         "required": ["property"],
-         "properties": {
-            "property": { "type": "string" }
-         }
+         "oneOf": [
+            {
+               "type": "object",
+               "required": ["property"],
+               "properties": {
+                 "property": { "type": "string" }
+            },
+            {
+               "type": "object",
+               "required": [ "upper" ],
+               "properties": {
+                  "upper": { "$ref": "#/defs/propertyRef" }
+               },
+               "additionalProperties": false
+            },
+            {
+               "type": "object",
+               "required": [ "lower" ],
+               "properties": {
+                  "lower": { "$ref": "#/defs/propertyRef" }
+               },
+               "additionalProperties": false
+            }
+         ]
       },
 
       "$comment": "=======================================================",
@@ -609,11 +620,31 @@
       "$comment": "=======================================================",
 
       "functionRef": {
-         "type": "object",
-         "required": ["function"],
-         "properties": {
-            "function": { "$ref": "#/$defs/function" }
-         }
+         "oneOf": [
+            {
+               "type": "object",
+               "required": ["function"],
+               "properties": {
+                  "function": { "$ref": "#/$defs/function" }
+               }
+            },
+            {
+               "type": "object",
+               "required": [ "upper" ],
+               "properties": {
+                  "upper": { "$ref": "#/defs/functionRef" }
+               },
+               "additionalProperties": false
+            },
+            {
+               "type": "object",
+               "required": [ "lower" ],
+               "properties": {
+                  "lower": { "$ref": "#/defs/functionRef" }
+               },
+               "additionalProperties": false
+            }
+         ]
       },
 
       "function": {
@@ -646,7 +677,23 @@
          "oneOf": [
             { "type": "string" },
             { "type": "number" },
-            { "type": "boolean"}
+            { "type": "boolean"},
+            {
+              "type": "object",
+              "required": [ "upper" ],
+              "properties": {
+                "upper": { "type": "string" }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [ "lower" ],
+              "properties": {
+                "lower": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
          ]
       },
 

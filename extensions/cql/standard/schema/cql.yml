@@ -131,9 +131,6 @@ components:
         escapeChar:
            type: string
            default: "\\"
-        nocase:
-          type: boolean
-          default: true
     isInListPredicate:
       type: object
       required:
@@ -151,9 +148,6 @@ components:
               type: array
               items:
                 "$ref": "#/components/schemas/valueExpression"
-            nocase:
-              type: boolean
-              default: true
     valueExpression:
       oneOf:
       - "$ref": "#/components/schemas/scalarExpression"
@@ -479,19 +473,45 @@ components:
         - "$ref": "#/components/schemas/functionRef"
         - type: number
     propertyRef:
-      type: object
-      required:
-      - property
-      properties:
-        propertyName:
-          type: string
+      oneOf:
+      - type: object
+        required:
+        - property
+        properties:
+          property:
+            type: string
+      - type: object
+        required: upper
+        properties:
+          upper:
+            "$ref": "#/components/schemas/propertyRef"
+        additionalProperties: false
+      - type: object
+        required: lower
+        properties:
+          lower:
+            "$ref": "#/components/schemas/propertyRef"
+        additionalProperties: false
     functionRef:
-      type: object
-      required:
-      - function
-      properties:
-        function:
-          "$ref": "#/components/schemas/function"
+      oneOf:
+      - type: object
+        required:
+        - function
+        properties:
+          function:
+            "$ref": "#/components/schemas/function"
+      - type: object
+        required: upper
+        properties:
+          upper:
+            "$ref": "#/components/schemas/functionRef"
+        additionalProperties: false
+      - type: object
+        required: lower
+        properties:
+          lower:
+            "$ref": "#/components/schemas/functionRef"
+        additionalProperties: false
     function:
       type: object
       required:
@@ -515,6 +535,16 @@ components:
       - type: string
       - type: number
       - type: boolean
+      - type: object
+        required: upper
+        properties:
+          upper:
+            type: string
+      - type: object
+        required: lower
+        properties:
+          lower:
+            type: string
     spatialLiteral:
       oneOf:
       - "$ref": "#/components/schemas/geometryLiteral"
