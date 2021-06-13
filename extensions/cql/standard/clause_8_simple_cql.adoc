@@ -48,7 +48,7 @@ requirements classes in <<cql-enhancements>>:
 * The rule `arrayPredicate` is added by requirements class <<rc_arrays,Arrays>>;
 * The rule `function` is added by requirements class <<rc_functions,Functions>>;
 * The rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>;
-* The additional values in rule `spatialOperator` are added by requirements class <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>;
+* The additional values in rule `spatialOperator` are added by requirements class <<rc_spatial-operators,Spatial Operators>>;
 * The additional values in rule `temporalOperator` are added by requirements class <<rc_temporal-operators,Temporal Operators>>.
 
 Examples of Simple CQL filter expressions are included in the subsequent sub-clauses.
@@ -315,72 +315,6 @@ geometry IS NOT NULL
 ----
 { "not": { "isNull" : { "property": "geometry" } } }
 ----
-====
-
-[[simple-cql_spatial]]
-=== Spatial predicates
-
-A _spatial predicate_ evaluates two geometry-valued expressions to determine
-if the expressions satisfy the requirements of the specified spatial operator.
-
-In this conformance class, the only required spatial operator is _intersects_.
-Additional spatial operators are specified in the <<enhanced-spatial-operators,
-Enhanced Spatial Operators>> requirements class.
-
-include::requirements/simple-cql/REQ_spatial-predicates.adoc[]
-
-NOTE: The spatial predicates currently use a different pattern than the
-comparison and temporal predicates and are written like function calls.
-This difference is inherited from previous versions of CQL. It is an open
-issue, whether this version of CQL should change the spatial predicates to
-be consistent with the other predicates or to keep the legacy because of
-existing CQL implementations. Comments are welcome in the
-https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue]
-on this topic.
-
-CQL uses Well-Known Text (WKT) to encode geometry literals. Since WKT does not
-provide a capability to specify the CRS of a geometry literal, the server has
-to determine the CRS of the geometry literals in a filter expression through
-another mechanism. In this standard, the `filter-crs` query parameter
-is used to pass the CRS information to the server.
-
-[[example_8_8]]
-.Example spatial predicate
-====
-----
-S_INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 32.288402,36.320008 32.288458,36.319836 32.288087)))
-----
-
-[source,JSON]
-----
-{ "s_intersects": [
-   { "property": "geometry" },
-   {
-      "type": "Polygon",
-      "coordinates": [
-         [
-            [36.319836, 32.288087],
-            [36.320041, 32.288032],
-            [36.320210, 32.288402],
-            [36.320008, 32.288458],
-            [36.319836, 32.288087]
-         ]
-      ]
-   }
-] }
-----
-====
-
-[[example_8_9]]
-.Example for the filter-crs query parameter
-====
-----
-...filter-lang=cql-text&
-   filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
-   filter=S_INTERSECTS(geometry,POLYGON((379213.87 3610774.16,379233.84 3610769.70,379246.15 3610812.39,379226.49 3610816.88,379213.87 3610774.16)))...
-----
-
-Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
 ====
 
 === CQL Encodings

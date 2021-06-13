@@ -8,7 +8,7 @@ grouped by their standardization target:
 ** <<rc_features-filter,Features Filter>>
 * Filter expressions
 ** <<rc_simple-cql,Simple CQL>>
-** <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
+** <<rc_spatial-operators,Spatial Operators>>
 ** <<rc_temporal-operators,Temporal Operators>>
 ** <<rc_functions,Functions>>
 ** <<rc_arithmetic,Arithmetic expressions>>
@@ -61,22 +61,17 @@ The specific set of operators defined in this requirements class is:
 ** is null
 ** between
 ** in
-* Spatial operators:
-** s_intersects
 
 An encoding of CQL may be used as the value of the filter parameters defined
 in the <<rc_filter,Filter>> requirements class.
 
-The <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>> requirements
-class specifies requirements for servers that support spatial operators in
-addition to the `intersects` operator that is defined in the
-<<simple-cql_spatial-predicates,Simple CQL>> requirements class. The list of
-additional spatial operators that must be supported is:
+The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support spatial operators.  The list of additional spatial operators that must be supported is:
 
 * s_contains
 * s_crosses
 * s_disjoint
 * s_equals
+* s_intersects
 * s_overlaps
 * s_touches
 * s_within
@@ -143,7 +138,7 @@ OGC Compliance Testing web site.
 |<<ats_filter,Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter
 |<<ats_features-filter,Features Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter
 |<<ats_simple-cql,Simple CQL>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/simple-cql
-|<<ats_enhanced-spatial-operators,Enhanced Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/enhanced-spatial-operators
+|<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators
 |<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators
 |<<ats_functions,Functions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions
 |<<ats_arithmetic,Arithmetic>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic
@@ -161,7 +156,7 @@ following requirements classes:
 
 * <<rc_filter,Filter>>
 * <<rc_simple-cql,Simple CQL>>
-* <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
+* <<rc_spatial-operators,Spatial Operators>>
 * <<rc_temporal-operators,Temporal Operators>>
 * <<rc_functions,Functions>>
 * <<rc_arithmetic,Arithmetic expressions>>
