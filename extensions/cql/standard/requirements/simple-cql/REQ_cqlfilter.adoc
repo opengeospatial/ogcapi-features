@@ -4,8 +4,6 @@
 ^|*Requirement {counter:req-id}* |*/req/simple-cql/cqlfilter* 
 ^|A |A server SHALL support a CQL filter expression composed of a logically connected series of one or more predicates as described by the BNF rule `booleanValueExpression` in <<cql-bnf>> with the following exceptions:
 
-* the rules `arrayPredicate`, `function` and `arithmeticExpression` do not have to be supported;
-* in rule `spatialOperator` only "INTERSECTS" has to be supported;
-* in rule `temporalOperator` only "ANYINTERACTS" has to be supported.
+* the rules `spatialPredicate`, `temporalPredicate`, `arrayPredicate`, `function` and `arithmeticExpression` do not have to be supported.
 |===
 
