@@ -937,9 +937,9 @@
 
       "intervalLiteral": {
          "type": "object",
-         "required": ["datetime"],
+         "required": ["interval"],
          "properties": {
-            "datetime": {
+            "interval": {
                "$ref": "#/$defs/intervalArray"
             }
          }
