@@ -179,7 +179,7 @@
          "oneOf": [
             {"$ref": "#/$defs/scalarExpression"},
             {"$ref": "#/$defs/spatialLiteral"},
-            {"$ref": "#/$defs/typedTemporalLiteral"}
+            {"$ref": "#/$defs/intervalLiteral"}
          ]
       },
 
@@ -217,78 +217,78 @@
 
       "spatialPredicate" : {
          "oneOf": [
-           {"$ref": "#/$defs/intersectsExpression"},
-           {"$ref": "#/$defs/equalsExpression"},
-           {"$ref": "#/$defs/disjointExpression"},
-           {"$ref": "#/$defs/touchesExpression"},
-           {"$ref": "#/$defs/withinExpression"},
-           {"$ref": "#/$defs/overlapsExpression"},
-           {"$ref": "#/$defs/crossesExpression"},
-           {"$ref": "#/$defs/containsExpression"}
+           {"$ref": "#/$defs/s_containsExpression"},
+           {"$ref": "#/$defs/s_crossesExpression"},
+           {"$ref": "#/$defs/s_disjointExpression"},
+           {"$ref": "#/$defs/s_equalsExpression"},
+           {"$ref": "#/$defs/s_intersectsExpression"},
+           {"$ref": "#/$defs/s_overlapsExpression"},
+           {"$ref": "#/$defs/s_touchesExpression"},
+           {"$ref": "#/$defs/s_withinExpression"}
          ]
       },
 
-      "intersectsExpression": {
+      "s_containsExpression": {
          "type": "object",
-         "required": ["intersects"],
+         "required": ["s_contains"],
          "properties": {
-            "intersects": { "$ref": "#/$defs/spatialOperands" }
+            "s_contains": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "equalsExpression": {
+      "s_crossesExpression": {
          "type": "object",
-         "required": ["equals"],
+         "required": ["s_crosses"],
          "properties": {
-            "equals": { "$ref": "#/$defs/spatialOperands" }
+            "s_crosses": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "disjointExpression": {
+      "s_disjointExpression": {
          "type": "object",
-         "required": ["disjoint"],
+         "required": ["s_disjoint"],
          "properties": {
-            "disjoint": { "$ref": "#/$defs/spatialOperands" }
+            "s_disjoint": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "touchesExpression": {
+      "s_equalsExpression": {
          "type": "object",
-         "required": ["touches"],
+         "required": ["s_equals"],
          "properties": {
-            "touches": { "$ref": "#/$defs/spatialOperands" }
+            "s_equals": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "withinExpression": {
+      "s_intersectsExpression": {
          "type": "object",
-         "required": ["within"],
+         "required": ["s_intersects"],
          "properties": {
-            "within": { "$ref": "#/$defs/spatialOperands" }
+            "s_intersects": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "overlapsExpression": {
+      "s_overlapsExpression": {
          "type": "object",
-         "required": ["overlaps"],
+         "required": ["s_overlaps"],
          "properties": {
-            "overlaps": { "$ref": "#/$defs/spatialOperands" }
+            "s_overlaps": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "crossesExpression": {
+      "s_touchesExpression": {
          "type": "object",
-         "required": ["crosses"],
+         "required": ["s_touches"],
          "properties": {
-            "crosses": { "$ref": "#/$defs/spatialOperands" }
+            "s_touches": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "containsExpression": {
+      "s_withinExpression": {
          "type": "object",
-         "required": ["contains"],
+         "required": ["s_within"],
          "properties": {
-            "contains": { "$ref": "#/$defs/spatialOperands" }
+            "s_within": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
@@ -476,45 +476,45 @@
 
       "arrayPredicate" : {
          "oneOf": [
-            {"$ref": "#/$defs/aequalsExpression"},
-            {"$ref": "#/$defs/acontainsExpression"},
-            {"$ref": "#/$defs/acontainedByExpression"},
-            {"$ref": "#/$defs/aoverlapsExpression"}
+            {"$ref": "#/$defs/a_containedByExpression"},
+            {"$ref": "#/$defs/a_containsExpression"},
+            {"$ref": "#/$defs/a_equalsExpression"},
+            {"$ref": "#/$defs/a_overlapsExpression"}
          ]
       },
 
-      "aequalsExpression": {
+      "a_containedByExpression": {
          "type": "object",
-         "required": ["aequals"],
+         "required": ["a_containedBy"],
          "properties": {
-            "aequals": { "$ref": "#/$defs/arrayExpression" }
+            "a_containedBy": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
-      "acontainsExpression": {
+      "a_containsExpression": {
          "type": "object",
-         "required": ["acontains"],
+         "required": ["a_contains"],
          "properties": {
-            "acontains": { "$ref": "#/$defs/arrayExpression" }
+            "a_contains": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
-      "acontainedByExpression": {
+      "a_equalsExpression": {
          "type": "object",
-         "required": ["acontainedBy"],
+         "required": ["a_equals"],
          "properties": {
-            "acontainedBy": { "$ref": "#/$defs/arrayExpression" }
+            "a_equals": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
-      "aoverlapsExpression": {
+      "a_overlapsExpression": {
          "type": "object",
-         "required": ["aoverlaps"],
+         "required": ["a_overlaps"],
          "properties": {
-            "aoverlaps": { "$ref": "#/$defs/arrayExpression" }
+            "a_overlaps": { "$ref": "#/$defs/arrayExpression" }
          }
       },
- 
+
       "arrayExpression": {
          "type": "array",
          "minItems": 2,
@@ -532,12 +532,12 @@
          "type": "array",
          "items": {
             "oneOf": [
-               {"$ref": "#/$defs/scalarLiteral"},
-               {"$ref": "#/$defs/spatialLiteral"},
-               {"$ref": "#/$defs/typedTemporalLiteral"},
+               { "$ref": "#/$defs/scalarLiteral"},
+               { "$ref": "#/$defs/spatialLiteral"},
+               { "$ref": "#/$defs/intervalLiteral"},
                { "$ref": "#/$defs/propertyRef" },
                { "$ref": "#/$defs/functionRef" },
-               {"$ref": "#/$defs/arithmeticExpression"},
+               { "$ref": "#/$defs/arithmeticExpression"},
                { "$ref": "#/$defs/arrayLiteral" }
             ]
          }
@@ -636,7 +636,7 @@
                   "oneOf": [
                      { "$ref": "#/$defs/scalarLiteral" },
                      { "$ref": "#/$defs/spatialLiteral" },
-                     { "$ref": "#/$defs/typedTemporalLiteral" },
+                     { "$ref": "#/$defs/intervalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
                      { "$ref": "#/$defs/arithmeticExpression" },
@@ -655,7 +655,8 @@
          "oneOf": [
             { "type": "string" },
             { "type": "number" },
-            { "type": "boolean"}
+            { "type": "boolean"},
+            { "$ref": "#/$defs/instantLiteral" }
          ]
       },
 
@@ -885,19 +886,66 @@
 
       "temporalLiteral": {
          "oneOf": [
-            { "$ref": "#/$defs/instantString" },
-            { "$ref": "#/$defs/intervalString" }
+            { "$ref": "#/$defs/instantLiteral" },
+            { "$ref": "#/$defs/intervalLiteral" }
          ]
+      },
+
+      "instantLiteral": {
+         "oneOf": [
+            { "$ref": "#/$defs/dateLiteral" },
+            { "$ref": "#/$defs/timestampLiteral" }
+         ]
+      },
+
+      "dateLiteral": {
+         "type": "object",
+         "required": ["date"],
+         "properties": {
+            "date": {
+               "$ref": "#/$defs/dateString"
+            }
+         }
+      },
+
+      "timestampLiteral": {
+         "type": "object",
+         "required": ["timestamp"],
+         "properties": {
+            "timestamp": {
+               "$ref": "#/$defs/timestampString"
+            }
+         }
       },
 
       "instantString": {
          "oneOf": [
-            { "type": "string", "format": "date" },
-            { "type": "string", "format": "date-time" }
+            { "$ref": "#/$defs/dateString" },
+            { "$ref": "#/$defs/timestampString" }
          ]
       },
 
-      "intervalString": {
+      "dateString": { 
+         "type": "string", 
+         "format": "date" 
+      },
+
+      "timestampString": { 
+         "type": "string", 
+         "format": "date-time"
+      },
+
+      "intervalLiteral": {
+         "type": "object",
+         "required": ["interval"],
+         "properties": {
+            "interval": {
+               "$ref": "#/$defs/intervalArray"
+            }
+         }
+      },
+
+      "intervalArray": {
          "type": "array",
          "minItems": 2,
          "maxItems": 2,
@@ -906,33 +954,6 @@
                { "$ref": "#/$defs/instantString" },
                { "type": "string", "enum": [".."] }
             ]
-         }
-      },
-
-      "typedTemporalLiteral": {
-         "oneOf": [
-            { "$ref": "#/$defs/typedInstantString" },
-            { "$ref": "#/$defs/typedIntervalString" }
-         ]
-      },
-
-      "typedInstantString": {
-         "type": "object",
-         "required": ["datetime"],
-         "properties": {
-            "datetime": {
-               "$ref": "#/$defs/instantString"
-            }
-         }
-      },
-
-      "typedIntervalString": {
-         "type": "object",
-         "required": ["datetime"],
-         "properties": {
-            "datetime": {
-               "$ref": "#/$defs/intervalString"
-            }
          }
       }
    }

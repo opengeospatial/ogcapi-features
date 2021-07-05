@@ -23,33 +23,25 @@ Keywords in the BNF grammar are case-insensitive. <<BNF,Augmented BNF for Syntax
 
 The list of CQL keywords includes:
 
-* "ACONTAINS"
-* "AEQUALS"
-* "AFTER"
+* "A_EQUALS"
+* "A_CONTAINS"
+* "A_CONTAINED BY"
+* "A_OVERLAPS"
 * "AND"
-* "ANYINTERACTS"
-* "AOVERLAPS"
-* "BEFORE"
+* "B"
 * "BEGINS"
 * "BEGUNBY"
 * "BETWEEN"
-* "CONTAINED BY"
-* "CONTAINS"
-* "CROSSES"
-* "DISJOINT"
-* "DURING"
+* "E"
 * "ENDEDBY"
 * "ENDS"
 * "ENVELOPE"
-* "EQUALS"
+* "F"
 * "FALSE"
 * "GEOMETRYCOLLECTION"
 * "IN"
-* "INTERSECTS"
 * "LIKE"
 * "LINESTRING"
-* "MEETS"
-* "METBY"
 * "MULTILINESTRING"
 * "MULTIPOINT"
 * "MULTIPOLYGON"
@@ -57,22 +49,41 @@ The list of CQL keywords includes:
 * "NOT"
 * "NULL";
 * "OR"
-* "OVERLAPPEDBY"
-* "OVERLAPS"
 * "POINT"
 * "POLYGON"
-* "TCONTAINS"
-* "TEQUALS"
-* "TOUCHES"
-* "TOVERLAPS"
+* "S_INTERSECTS"
+* "S_EQUALS"
+* "S_DISJOINT"
+* "S_TOUCHES"
+* "S_WITHIN"
+* "S_OVERLAPS"
+* "S_CROSSES"
+* "S_CONTAINS"
+* "T"
+* "T_AFTER"
+* "T_BEFORE"
+* "T_CONTAINS"
+* "T_DISJOINT"
+* "T_DURING"
+* "T_EQUALS"
+* "T_FINISHEDBY"
+* "T_FINISHES"
+* "T_INTERSECTS"
+* "T_MEETS"
+* "T_METBY"
+* "T_OVERLAPPEDBY"
+* "T_OVERLAPS"
+* "T_STARTEDBY"
+* "T_STARTS"
 * "TRUE"
-* "WITHIN"
+* "X"
+* "Z"
 
 include::requirements/cql-text/REQ_filter-lang.adoc[]
 
 include::requirements/cql-text/REQ_simple-cql.adoc[]
 
-include::requirements/cql-text/REQ_enhanced-spatial-operators.adoc[]
+include::requirements/cql-text/REQ_spatial-operators.adoc[]
 
 include::requirements/cql-text/REQ_temporal-operators.adoc[]
 
@@ -98,7 +109,7 @@ include::requirements/cql-json/REQ_filter-lang.adoc[]
 
 include::requirements/cql-json/REQ_simple-cql.adoc[]
 
-include::requirements/cql-json/REQ_enhanced-spatial-operators.adoc[]
+include::requirements/cql-json/REQ_spatial-operators.adoc[]
 
 include::requirements/cql-json/REQ_temporal-operators.adoc[]
 

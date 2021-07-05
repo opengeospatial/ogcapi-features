@@ -52,6 +52,7 @@ binaryComparisonPredicate = scalarExpression
 scalarExpression = characterLiteral
                  | numericLiteral
                  | booleanLiteral
+                 | instantLiteral
                  | propertyName
                  | function
                  | arithmeticExpression;
@@ -91,7 +92,7 @@ isInListPredicate = inListOperand ["NOT"] "IN" leftParen inList rightParen;
 inList = inListOperand [ {comma inListOperand} ];
 
 inListOperand = scalarExpression
-              | temporalLiteral
+              | intervalLiteral
               | spatialLiteral;
 
 # IS NULL predicate
@@ -109,14 +110,14 @@ spatialPredicate =  spatialOperator
 #       these are outside the scope of a "simple" core for CQL.  These
 #       can be added as extensions.
 #
-spatialOperator = "INTERSECTS"
-                | "EQUALS"
-                | "DISJOINT"
-                | "TOUCHES"
-                | "WITHIN"
-                | "OVERLAPS"
-                | "CROSSES"
-                | "CONTAINS";
+spatialOperator = "S_INTERSECTS"
+                | "S_EQUALS"
+                | "S_DISJOINT"
+                | "S_TOUCHES"
+                | "S_WITHIN"
+                | "S_OVERLAPS"
+                | "S_CROSSES"
+                | "S_CONTAINS";
 
 # A geometric expression is a property name of a geometry-valued property,
 # a geometric literal (expressed as WKT) or a function that returns a
@@ -130,7 +131,8 @@ geomExpression = spatialLiteral
 # A temporal predicate evaluates if two temporal expressions satisfy the
 # specified temporal operator.
 #=============================================================================#
-temporalPredicate = temporalExpression temporalOperator temporalExpression;
+temporalPredicate = temporalOperator 
+                    leftParen temporalExpression comma temporalExpression rightParen;
 
 temporalExpression = temporalLiteral
                    | propertyName
@@ -158,7 +160,8 @@ temporalOperator = "T_AFTER"
 # not equal, less than, greater than, less than or equal, greater than or equal,
 # superset, subset and overlap operators.
 #=============================================================================#
-arrayPredicate = arrayExpression arrayOperator arrayExpression;
+arrayPredicate = arrayOperator
+                 leftParen arrayExpression comma arrayExpression rightParen;
 
 # An array expression is a bracket-delimited, comma-separated list of array
 # elements.  An array element is either a character literal, a numeric literal,
@@ -180,10 +183,10 @@ arrayElement = characterLiteral
              | arithmeticExpression
              | arrayLiteral;
 
-arrayOperator = "AEQUALS"
-              | "ACONTAINS"
-              | "CONTAINED BY"
-              | "AOVERLAPS";
+arrayOperator = "A_EQUALS"
+              | "A_CONTAINS"
+              | "A_CONTAINEDBY"
+              | "A_OVERLAPS";
 
 #=============================================================================#
 # An arithemtic expression is an expression composed of an arithmetic
@@ -502,18 +505,31 @@ maxElev = signedNumericLiteral;
 # NOTE: Is the fact the time zones are supported too complicated for a
 #       simple CQL? Perhaps the "core" of CQL should just support UTC.
 #=============================================================================#
-temporalLiteral = instant | interval;
+temporalLiteral = instantLiteral | intervalLiteral;
 
-instant = fullDate | fullDate "T" utcTime;
+instantLiteral = dateInstant | timestampInstant;
 
-interval = solidus
-         | solidus dotdot
-         | dotdot solidus
-         | instant solidus
-         | solidus instant
-         | instant solidus dotdot
-         | dotdot solidus instant
-         | instant solidus instant;
+dateInstant = "DATE" 
+              leftParen dateInstantString rightParen;
+
+dateInstantString = quote fullDate quote;
+
+timestampInstant = "TIMESTAMP" 
+                   leftParen timestampInstantString rightParen;
+
+timestampInstantString = quote fullDate "T" utcTime quote;
+
+instantLiteral = fullDate | fullDate "T" utcTime;
+
+intervalLiteral = "INTERVAL" 
+                  leftParen instantParameter comma instantParameter rightParen;
+
+instantParameter = instantLiteral
+                 | dateInstantString
+                 | timestampInstantString
+                 | quote dotdot quote
+                 | propertyName
+                 | function;
 
 fullDate   = dateYear "-" dateMonth "-" dateDay;
 
