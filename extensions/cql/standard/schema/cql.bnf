@@ -234,15 +234,7 @@ argument = characterLiteral
 #=============================================================================#
 # Definition of CHARACTER literals
 #=============================================================================#
-characterLiteral = characterStringLiteral
-                 | bitStringLiteral
-                 | hexStringLiteral;
-
-characterStringLiteral = quote [ {character} ] quote;
-
-bitStringLiteral = "B" quote [ {bit} ] quote;
-
-hexStringLiteral = "X" quote [ {hexit} ] quote;
+characterLiteral = quote [ {character} ] quote;
 
 character = alpha | digit | extendedDigit | ideographic |
             combiningChar | extender;
@@ -437,8 +429,7 @@ sign = plusSign | minusSign;
 # Boolean literal
 #=============================================================================#
 #
-booleanLiteral = "TRUE" | "true" | "FALSE" | "false" |
-                 "T" | "t" | "F" | "f" | "1" | "0";
+booleanLiteral = "TRUE" | "FALSE";
 
 #=============================================================================#
 # Definition of GEOMETRIC literals
