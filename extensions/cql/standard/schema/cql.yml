@@ -172,69 +172,69 @@ components:
           "$ref": "#/components/schemas/scalarExpression"
     spatialPredicate:
       oneOf:
-      - "$ref": "#/components/schemas/intersectsExpression"
-      - "$ref": "#/components/schemas/equalsExpression"
-      - "$ref": "#/components/schemas/disjointExpression"
-      - "$ref": "#/components/schemas/touchesExpression"
-      - "$ref": "#/components/schemas/withinExpression"
-      - "$ref": "#/components/schemas/overlapsExpression"
-      - "$ref": "#/components/schemas/crossesExpression"
-      - "$ref": "#/components/schemas/containsExpression"
-    intersectsExpression:
+      - "$ref": "#/components/schemas/s_containsExpression"
+      - "$ref": "#/components/schemas/s_crossesExpression"
+      - "$ref": "#/components/schemas/s_disjointExpression"
+      - "$ref": "#/components/schemas/s_equalsExpression"
+      - "$ref": "#/components/schemas/s_intersectsExpression"
+      - "$ref": "#/components/schemas/s_overlapsExpression"
+      - "$ref": "#/components/schemas/s_touchesExpression"
+      - "$ref": "#/components/schemas/s_withinExpression"
+    s_containsExpression:
       type: object
       required:
-      - intersects
+      - s_contains
       properties:
-        intersects:
+        s_contains:
           "$ref": "#/components/schemas/spatialOperands"
-    equalsExpression:
+    s_crossesExpression:
       type: object
       required:
-      - equals
+      - s_crosses
       properties:
-        equals:
+        s_crosses:
           "$ref": "#/components/schemas/spatialOperands"
-    disjointExpression:
+    s_disjointExpression:
       type: object
       required:
-      - disjoint
+      - s_disjoint
       properties:
-        disjoint:
+        s_disjoint:
           "$ref": "#/components/schemas/spatialOperands"
-    touchesExpression:
+    s_equalsExpression:
       type: object
       required:
-      - touches
+      - s_equals
       properties:
-        touches:
+        s_equals:
           "$ref": "#/components/schemas/spatialOperands"
-    withinExpression:
+    s_intersectsExpression:
       type: object
       required:
-      - within
+      - s_intersects
       properties:
-        within:
+        s_intersects:
           "$ref": "#/components/schemas/spatialOperands"
-    overlapsExpression:
+    s_overlapsExpression:
       type: object
       required:
-      - overlaps
+      - s_overlaps
       properties:
-        overlaps:
+        s_overlaps:
           "$ref": "#/components/schemas/spatialOperands"
-    crossesExpression:
+    s_touchesExpression:
       type: object
       required:
-      - crosses
+      - s_touches
       properties:
-        crosses:
+        s_touches:
           "$ref": "#/components/schemas/spatialOperands"
-    containsExpression:
+    s_withinExpression:
       type: object
       required:
-      - contains
+      - s_within
       properties:
-        contains:
+        s_within:
           "$ref": "#/components/schemas/spatialOperands"
     spatialOperands:
       type: array
@@ -249,117 +249,125 @@ components:
       - "$ref": "#/components/schemas/functionRef"
     temporalPredicate:
       oneOf:
-      - "$ref": "#/components/schemas/beforeExpression"
-      - "$ref": "#/components/schemas/afterExpression"
-      - "$ref": "#/components/schemas/meetsExpression"
-      - "$ref": "#/components/schemas/metbyExpression"
-      - "$ref": "#/components/schemas/toverlapsExpression"
-      - "$ref": "#/components/schemas/overlappedbyExpression"
-      - "$ref": "#/components/schemas/beginsExpression"
-      - "$ref": "#/components/schemas/begunbyExpression"
-      - "$ref": "#/components/schemas/duringExpression"
-      - "$ref": "#/components/schemas/tcontainsExpression"
-      - "$ref": "#/components/schemas/endsExpression"
-      - "$ref": "#/components/schemas/endedbyExpression"
-      - "$ref": "#/components/schemas/tequalsExpression"
-      - "$ref": "#/components/schemas/anyinteractsExpression"
-    beforeExpression:
+      - "$ref": "#/components/schemas/t_afterExpression"
+      - "$ref": "#/components/schemas/t_beforeExpression"
+      - "$ref": "#/components/schemas/t_containsExpression"
+      - "$ref": "#/components/schemas/t_disjointExpression"
+      - "$ref": "#/components/schemas/t_duringExpression"
+      - "$ref": "#/components/schemas/t_equalsExpression"
+      - "$ref": "#/components/schemas/t_finishedbyExpression"
+      - "$ref": "#/components/schemas/t_finishesExpression"
+      - "$ref": "#/components/schemas/t_intersectsExpression"
+      - "$ref": "#/components/schemas/t_meetsExpression"
+      - "$ref": "#/components/schemas/t_metbyExpression"
+      - "$ref": "#/components/schemas/t_overlappedbyExpression"
+      - "$ref": "#/components/schemas/t_overlapsExpression"
+      - "$ref": "#/components/schemas/t_startedbyExpression"
+      - "$ref": "#/components/schemas/t_startsExpression"
+    t_afterExpression:
       type: object
       required:
-      - before
+      - t_after
       properties:
-        before:
+        t_after:
           "$ref": "#/components/schemas/temporalOperands"
-    afterExpression:
+    t_beforeExpression:
       type: object
       required:
-      - after
+      - t_before
       properties:
-        after:
+        t_before:
           "$ref": "#/components/schemas/temporalOperands"
-    meetsExpression:
+    t_containsExpression:
       type: object
       required:
-      - meets
+      - t_contains
       properties:
-        meets:
+        t_contains:
           "$ref": "#/components/schemas/temporalOperands"
-    metbyExpression:
+    t_disjointExpression:
       type: object
       required:
-      - metby
+      - t_disjoint
       properties:
-        metby:
+        t_disjoint:
           "$ref": "#/components/schemas/temporalOperands"
-    toverlapsExpression:
+    t_duringExpression:
       type: object
       required:
-      - toverlaps
+      - t_during
       properties:
-        toverlaps:
+        t_during:
           "$ref": "#/components/schemas/temporalOperands"
-    overlappedbyExpression:
+    t_equalsExpression:
       type: object
       required:
-      - overlappedby
+      - t_equals
       properties:
-        overlappedby:
+        t_equals:
           "$ref": "#/components/schemas/temporalOperands"
-    beginsExpression:
+    t_finishedbyExpression:
       type: object
       required:
-      - begins
+      - t_finishedby
       properties:
-        begins:
+        t_finishedby:
           "$ref": "#/components/schemas/temporalOperands"
-    begunbyExpression:
+    t_finishesExpression:
       type: object
       required:
-      - begunby
+      - t_finishes
       properties:
-        begunby:
+        t_finishes:
           "$ref": "#/components/schemas/temporalOperands"
-    duringExpression:
+    t_intersectsExpression:
       type: object
       required:
-      - during
+      - t_intersects
       properties:
-        during:
+        t_intersects:
           "$ref": "#/components/schemas/temporalOperands"
-    tcontainsExpression:
+    t_meetsExpression:
       type: object
       required:
-      - tcontains
+      - t_meets
       properties:
-        tcontains:
+        t_meets:
           "$ref": "#/components/schemas/temporalOperands"
-    endsExpression:
+    t_metbyExpression:
       type: object
       required:
-      - ends
+      - t_metby
       properties:
-        ends:
+        t_metby:
           "$ref": "#/components/schemas/temporalOperands"
-    endedbyExpression:
+    t_overlappedbyExpression:
       type: object
       required:
-      - endedby
+      - t_overlappedby
       properties:
-        endedby:
+        t_overlappedby:
           "$ref": "#/components/schemas/temporalOperands"
-    tequalsExpression:
+    t_overlapsExpression:
       type: object
       required:
-      - tequals
+      - t_overlaps
       properties:
-        tequals:
+        t_overlaps:
           "$ref": "#/components/schemas/temporalOperands"
-    anyinteractsExpression:
+    t_startedbyExpression:
       type: object
       required:
-      - anyinteracts
+      - t_startedby
       properties:
-        anyinteracts:
+        t_startedby:
+          "$ref": "#/components/schemas/temporalOperands"
+    t_startsExpression:
+      type: object
+      required:
+      - t_starts
+      properties:
+        t_starts:
           "$ref": "#/components/schemas/temporalOperands"
     temporalOperands:
       type: array
@@ -374,37 +382,37 @@ components:
       - "$ref": "#/components/schemas/functionRef"
     arrayPredicate:
       oneOf:
-      - "$ref": "#/components/schemas/aequalsExpression"
-      - "$ref": "#/components/schemas/acontainsExpression"
-      - "$ref": "#/components/schemas/acontainedByExpression"
-      - "$ref": "#/components/schemas/aoverlapsExpression"
-    aequalsExpression:
+      - "$ref": "#/components/schemas/a_containedByExpression"
+      - "$ref": "#/components/schemas/a_containsExpression"
+      - "$ref": "#/components/schemas/a_equalsExpression"
+      - "$ref": "#/components/schemas/a_overlapsExpression"
+    a_containedByExpression:
       type: object
       required:
-      - aequals
+      - a_containedBy
       properties:
-        aequals:
+        a_containedBy:
           "$ref": "#/components/schemas/arrayExpression"
-    acontainsExpression:
+    a_containsExpression:
       type: object
       required:
-      - acontains
+      - a_contains
       properties:
-        acontains:
+        a_contains:
           "$ref": "#/components/schemas/arrayExpression"
-    acontainedByExpression:
+    a_equalsExpression:
       type: object
       required:
-      - acontainedBy
+      - a_equals
       properties:
-        acontainedBy:
+        a_equals:
           "$ref": "#/components/schemas/arrayExpression"
-    aoverlapsExpression:
+    a_overlapsExpression:
       type: object
       required:
-      - aoverlaps
+      - a_overlaps
       properties:
-        aoverlaps:
+        a_overlaps:
           "$ref": "#/components/schemas/arrayExpression"
     arrayExpression:
       type: array

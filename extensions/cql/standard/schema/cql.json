@@ -188,7 +188,7 @@
          "oneOf": [
             {"$ref": "#/$defs/scalarExpression"},
             {"$ref": "#/$defs/spatialLiteral"},
-            {"$ref": "#/$defs/typedTemporalLiteral"}
+            {"$ref": "#/$defs/intervalLiteral"}
          ]
       },
 
@@ -226,78 +226,78 @@
 
       "spatialPredicate" : {
          "oneOf": [
-           {"$ref": "#/$defs/intersectsExpression"},
-           {"$ref": "#/$defs/equalsExpression"},
-           {"$ref": "#/$defs/disjointExpression"},
-           {"$ref": "#/$defs/touchesExpression"},
-           {"$ref": "#/$defs/withinExpression"},
-           {"$ref": "#/$defs/overlapsExpression"},
-           {"$ref": "#/$defs/crossesExpression"},
-           {"$ref": "#/$defs/containsExpression"}
+           {"$ref": "#/$defs/s_containsExpression"},
+           {"$ref": "#/$defs/s_crossesExpression"},
+           {"$ref": "#/$defs/s_disjointExpression"},
+           {"$ref": "#/$defs/s_equalsExpression"},
+           {"$ref": "#/$defs/s_intersectsExpression"},
+           {"$ref": "#/$defs/s_overlapsExpression"},
+           {"$ref": "#/$defs/s_touchesExpression"},
+           {"$ref": "#/$defs/s_withinExpression"}
          ]
       },
 
-      "intersectsExpression": {
+      "s_containsExpression": {
          "type": "object",
-         "required": ["intersects"],
+         "required": ["s_contains"],
          "properties": {
-            "intersects": { "$ref": "#/$defs/spatialOperands" }
+            "s_contains": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "equalsExpression": {
+      "s_crossesExpression": {
          "type": "object",
-         "required": ["equals"],
+         "required": ["s_crosses"],
          "properties": {
-            "equals": { "$ref": "#/$defs/spatialOperands" }
+            "s_crosses": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "disjointExpression": {
+      "s_disjointExpression": {
          "type": "object",
-         "required": ["disjoint"],
+         "required": ["s_disjoint"],
          "properties": {
-            "disjoint": { "$ref": "#/$defs/spatialOperands" }
+            "s_disjoint": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "touchesExpression": {
+      "s_equalsExpression": {
          "type": "object",
-         "required": ["touches"],
+         "required": ["s_equals"],
          "properties": {
-            "touches": { "$ref": "#/$defs/spatialOperands" }
+            "s_equals": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "withinExpression": {
+      "s_intersectsExpression": {
          "type": "object",
-         "required": ["within"],
+         "required": ["s_intersects"],
          "properties": {
-            "within": { "$ref": "#/$defs/spatialOperands" }
+            "s_intersects": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "overlapsExpression": {
+      "s_overlapsExpression": {
          "type": "object",
-         "required": ["overlaps"],
+         "required": ["s_overlaps"],
          "properties": {
-            "overlaps": { "$ref": "#/$defs/spatialOperands" }
+            "s_overlaps": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "crossesExpression": {
+      "s_touchesExpression": {
          "type": "object",
-         "required": ["crosses"],
+         "required": ["s_touches"],
          "properties": {
-            "crosses": { "$ref": "#/$defs/spatialOperands" }
+            "s_touches": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
-      "containsExpression": {
+      "s_withinExpression": {
          "type": "object",
-         "required": ["contains"],
+         "required": ["s_within"],
          "properties": {
-            "contains": { "$ref": "#/$defs/spatialOperands" }
+            "s_within": { "$ref": "#/$defs/spatialOperands" }
          }
       },
 
@@ -324,132 +324,141 @@
 
       "temporalPredicate" : {
          "oneOf": [
-           {"$ref": "#/$defs/beforeExpression"},
-           {"$ref": "#/$defs/afterExpression"},
-           {"$ref": "#/$defs/meetsExpression"},
-           {"$ref": "#/$defs/metbyExpression"},
-           {"$ref": "#/$defs/toverlapsExpression"},
-           {"$ref": "#/$defs/overlappedbyExpression"},
-           {"$ref": "#/$defs/beginsExpression"},
-           {"$ref": "#/$defs/begunbyExpression"},
-           {"$ref": "#/$defs/duringExpression"},
-           {"$ref": "#/$defs/tcontainsExpression"},
-           {"$ref": "#/$defs/endsExpression"},
-           {"$ref": "#/$defs/endedbyExpression"},
-           {"$ref": "#/$defs/tequalsExpression"},
-           {"$ref": "#/$defs/anyinteractsExpression"}
+           {"$ref": "#/$defs/t_afterExpression"},
+           {"$ref": "#/$defs/t_beforeExpression"},
+           {"$ref": "#/$defs/t_containsExpression"},
+           {"$ref": "#/$defs/t_disjointExpression"},
+           {"$ref": "#/$defs/t_duringExpression"},
+           {"$ref": "#/$defs/t_equalsExpression"},
+           {"$ref": "#/$defs/t_finishedByExpression"},
+           {"$ref": "#/$defs/t_finishesExpression"},
+           {"$ref": "#/$defs/t_intersectsExpression"},
+           {"$ref": "#/$defs/t_meetsExpression"},
+           {"$ref": "#/$defs/t_metByExpression"},
+           {"$ref": "#/$defs/t_overlappedByExpression"},
+           {"$ref": "#/$defs/t_overlapsExpression"},
+           {"$ref": "#/$defs/t_startedByExpression"},
+           {"$ref": "#/$defs/t_startsExpression"}
          ]
       },
 
-      "beforeExpression": {
+      "t_afterExpression": {
          "type": "object",
-         "required": ["before"],
+         "required": ["t_after"],
          "properties": {
-            "before": { "$ref": "#/$defs/temporalOperands" }
+            "t_after": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "afterExpression": {
+      "t_beforeExpression": {
          "type": "object",
-         "required": ["after"],
+         "required": ["t_before"],
          "properties": {
-            "after": { "$ref": "#/$defs/temporalOperands" }
+            "t_before": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "meetsExpression": {
+      "t_containsExpression": {
          "type": "object",
-         "required": ["meets"],
+         "required": ["t_contains"],
          "properties": {
-            "meets": { "$ref": "#/$defs/temporalOperands" }
+            "t_contains": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "metbyExpression": {
+      "t_disjointExpression": {
          "type": "object",
-         "required": ["metby"],
+         "required": ["t_disjoint"],
          "properties": {
-            "metby": { "$ref": "#/$defs/temporalOperands" }
+            "t_disjoint": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "toverlapsExpression": {
+      "t_duringExpression": {
          "type": "object",
-         "required": ["toverlaps"],
+         "required": ["t_during"],
          "properties": {
-            "toverlaps": { "$ref": "#/$defs/temporalOperands" }
+            "t_during": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "overlappedbyExpression": {
+      "t_equalsExpression": {
          "type": "object",
-         "required": ["overlappedby"],
+         "required": ["t_equals"],
          "properties": {
-            "overlappedby": { "$ref": "#/$defs/temporalOperands" }
+            "t_equals": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "beginsExpression": {
+      "t_finishedByExpression": {
          "type": "object",
-         "required": ["begins"],
+         "required": ["t_finishedBy"],
          "properties": {
-            "begins": { "$ref": "#/$defs/temporalOperands" }
+            "t_finishedBy": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "begunbyExpression": {
+      "t_finishesExpression": {
          "type": "object",
-         "required": ["begunby"],
+         "required": ["t_finishes"],
          "properties": {
-            "begunby": { "$ref": "#/$defs/temporalOperands" }
+            "t_finishes": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "duringExpression": {
+      "t_intersectsExpression": {
          "type": "object",
-         "required": ["during"],
+         "required": ["t_intersects"],
          "properties": {
-            "during": { "$ref": "#/$defs/temporalOperands" }
+            "t_intersects": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "tcontainsExpression": {
+      "t_meetsExpression": {
          "type": "object",
-         "required": ["tcontains"],
+         "required": ["t_meets"],
          "properties": {
-            "tcontains": { "$ref": "#/$defs/temporalOperands" }
+            "t_meets": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "endsExpression": {
+      "t_metByExpression": {
          "type": "object",
-         "required": ["ends"],
+         "required": ["t_metBy"],
          "properties": {
-            "ends": { "$ref": "#/$defs/temporalOperands" }
+            "t_metBy": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "endedbyExpression": {
+      "t_overlappedByExpression": {
          "type": "object",
-         "required": ["endedby"],
+         "required": ["t_overlappedBy"],
          "properties": {
-            "endedby": { "$ref": "#/$defs/temporalOperands" }
+            "t_overlappedBy": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "tequalsExpression": {
+      "t_overlapsExpression": {
          "type": "object",
-         "required": ["tequals"],
+         "required": ["t_overlaps"],
          "properties": {
-            "tequals": { "$ref": "#/$defs/temporalOperands" }
+            "t_overlaps": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
-      "anyinteractsExpression": {
+      "t_startedByExpression": {
          "type": "object",
-         "required": ["anyinteracts"],
+         "required": ["t_startedBy"],
          "properties": {
-            "anyinteracts": { "$ref": "#/$defs/temporalOperands" }
+            "t_startedBy": { "$ref": "#/$defs/temporalOperands" }
+         }
+      },
+
+      "t_startsExpression": {
+         "type": "object",
+         "required": ["t_starts"],
+         "properties": {
+            "t_starts": { "$ref": "#/$defs/temporalOperands" }
          }
       },
 
@@ -476,42 +485,42 @@
 
       "arrayPredicate" : {
          "oneOf": [
-            {"$ref": "#/$defs/aequalsExpression"},
-            {"$ref": "#/$defs/acontainsExpression"},
-            {"$ref": "#/$defs/acontainedByExpression"},
-            {"$ref": "#/$defs/aoverlapsExpression"}
+            {"$ref": "#/$defs/a_containedByExpression"},
+            {"$ref": "#/$defs/a_containsExpression"},
+            {"$ref": "#/$defs/a_equalsExpression"},
+            {"$ref": "#/$defs/a_overlapsExpression"}
          ]
       },
 
-      "aequalsExpression": {
+      "a_containedByExpression": {
          "type": "object",
-         "required": ["aequals"],
+         "required": ["a_containedBy"],
          "properties": {
-            "aequals": { "$ref": "#/$defs/arrayExpression" }
+            "a_containedBy": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
-      "acontainsExpression": {
+      "a_containsExpression": {
          "type": "object",
-         "required": ["acontains"],
+         "required": ["a_contains"],
          "properties": {
-            "acontains": { "$ref": "#/$defs/arrayExpression" }
+            "a_contains": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
-      "acontainedByExpression": {
+      "a_equalsExpression": {
          "type": "object",
-         "required": ["acontainedBy"],
+         "required": ["a_equals"],
          "properties": {
-            "acontainedBy": { "$ref": "#/$defs/arrayExpression" }
+            "a_equals": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
-      "aoverlapsExpression": {
+      "a_overlapsExpression": {
          "type": "object",
-         "required": ["aoverlaps"],
+         "required": ["a_overlaps"],
          "properties": {
-            "aoverlaps": { "$ref": "#/$defs/arrayExpression" }
+            "a_overlaps": { "$ref": "#/$defs/arrayExpression" }
          }
       },
 
@@ -532,12 +541,12 @@
          "type": "array",
          "items": {
             "oneOf": [
-               {"$ref": "#/$defs/scalarLiteral"},
-               {"$ref": "#/$defs/spatialLiteral"},
-               {"$ref": "#/$defs/typedTemporalLiteral"},
+               { "$ref": "#/$defs/scalarLiteral"},
+               { "$ref": "#/$defs/spatialLiteral"},
+               { "$ref": "#/$defs/intervalLiteral"},
                { "$ref": "#/$defs/propertyRef" },
                { "$ref": "#/$defs/functionRef" },
-               {"$ref": "#/$defs/arithmeticExpression"},
+               { "$ref": "#/$defs/arithmeticExpression"},
                { "$ref": "#/$defs/arrayLiteral" }
             ]
          }
@@ -676,7 +685,7 @@
                   "oneOf": [
                      { "$ref": "#/$defs/scalarLiteral" },
                      { "$ref": "#/$defs/spatialLiteral" },
-                     { "$ref": "#/$defs/typedTemporalLiteral" },
+                     { "$ref": "#/$defs/intervalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
                      { "$ref": "#/$defs/arithmeticExpression" },
@@ -941,19 +950,66 @@
 
       "temporalLiteral": {
          "oneOf": [
-            { "$ref": "#/$defs/instantString" },
-            { "$ref": "#/$defs/intervalString" }
+            { "$ref": "#/$defs/instantLiteral" },
+            { "$ref": "#/$defs/intervalLiteral" }
          ]
+      },
+
+      "instantLiteral": {
+         "oneOf": [
+            { "$ref": "#/$defs/dateLiteral" },
+            { "$ref": "#/$defs/timestampLiteral" }
+         ]
+      },
+
+      "dateLiteral": {
+         "type": "object",
+         "required": ["date"],
+         "properties": {
+            "date": {
+               "$ref": "#/$defs/dateString"
+            }
+         }
+      },
+
+      "timestampLiteral": {
+         "type": "object",
+         "required": ["timestamp"],
+         "properties": {
+            "timestamp": {
+               "$ref": "#/$defs/timestampString"
+            }
+         }
       },
 
       "instantString": {
          "oneOf": [
-            { "type": "string", "format": "date" },
-            { "type": "string", "format": "date-time" }
+            { "$ref": "#/$defs/dateString" },
+            { "$ref": "#/$defs/timestampString" }
          ]
       },
 
-      "intervalString": {
+      "dateString": { 
+         "type": "string", 
+         "format": "date" 
+      },
+
+      "timestampString": { 
+         "type": "string", 
+         "format": "date-time"
+      },
+
+      "intervalLiteral": {
+         "type": "object",
+         "required": ["interval"],
+         "properties": {
+            "interval": {
+               "$ref": "#/$defs/intervalArray"
+            }
+         }
+      },
+
+      "intervalArray": {
          "type": "array",
          "minItems": 2,
          "maxItems": 2,
@@ -962,33 +1018,6 @@
                { "$ref": "#/$defs/instantString" },
                { "type": "string", "enum": [".."] }
             ]
-         }
-      },
-
-      "typedTemporalLiteral": {
-         "oneOf": [
-            { "$ref": "#/$defs/typedInstantString" },
-            { "$ref": "#/$defs/typedIntervalString" }
-         ]
-      },
-
-      "typedInstantString": {
-         "type": "object",
-         "required": ["datetime"],
-         "properties": {
-            "datetime": {
-               "$ref": "#/$defs/instantString"
-            }
-         }
-      },
-
-      "typedIntervalString": {
-         "type": "object",
-         "required": ["datetime"],
-         "properties": {
-            "datetime": {
-               "$ref": "#/$defs/intervalString"
-            }
          }
       }
    }

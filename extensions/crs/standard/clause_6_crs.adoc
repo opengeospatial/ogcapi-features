@@ -32,7 +32,7 @@ The list has to include the default CRS -- that is the CRS used unless something
 
 * http://www.opengis.net/def/crs/OGC/1.3/CRS84 (for coordinates without height)
 
-* http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with height)
+* http://www.opengis.net/def/crs/OGC/0/CRS84h (for coordinates with ellipsoidal height)
 
 ==== Storage CRS
 
@@ -334,7 +334,7 @@ NOTE: The CRS model in GML is based on ISO 19111:2007, but GML geometries refere
 
 HTML does not have any provisions for spatial geometries and coordinate reference systems. However, note that schema.org that is embedded in HTML only supports WGS 84 in the axis order latitude/longitude, so any coordinates in schema.org markup will have to be in that coordinate reference system, independent of the requested coordinate reference system.
 
-GeoJSON normatively supports WGS 84 (without height: http://www.opengis.net/def/crs/OGC/1.3/CRS84[CRS84]; with height: http://www.opengis.net/def/crs/OGC/0/CRS84h[CRS84h]), but the "prior arrangement" provision allows other coordinate systems to be used.
+GeoJSON normatively supports WGS 84 (without height: http://www.opengis.net/def/crs/OGC/1.3/CRS84[CRS84]; with ellipsoidal height: http://www.opengis.net/def/crs/OGC/0/CRS84h[CRS84h]), but the "prior arrangement" provision allows other coordinate systems to be used.
 
 include::requirements/crs/REQ_geojson.adoc[]
 

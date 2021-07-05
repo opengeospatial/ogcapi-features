@@ -38,7 +38,7 @@ include::requirements/filter/REQ_get-queryables-response.adoc[]
 
 The response is returned as a JSON Schema document that describes a single JSON object where each property is a queryable. Note that the queryables schema does not specify a schema of any object that can be retrieved from the API. JSON Schema is used for the queryables to have a consistent approach for describing schema information and JSON Schema is/will be used in other parts of OGC API Features to describe schemas for GeoJSON feature content including in OpenAPI documents.
 
-NOTE: The OGC Feature API Standards Working Group has a schema harmonization task that could lead to a future OGC API standard that will deprecate the approach for the queryables resource specified in this document.
+NOTE: The OGC Features API Standards Working Group has a schema harmonization task that could lead to a future OGC API standard that will deprecate the approach for the queryables resource specified in this document.
 
 To support clients, providing additional detail about the meaning of the
 property and the possible values is recommended:

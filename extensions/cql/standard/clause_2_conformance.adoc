@@ -8,8 +8,8 @@ grouped by their standardization target:
 ** <<rc_features-filter,Features Filter>>
 * Filter expressions
 ** <<rc_simple-cql,Simple CQL>>
-** <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
-** <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>
+** <<rc_spatial-operators,Spatial Operators>>
+** <<rc_temporal-operators,Temporal Operators>>
 ** <<rc_functions,Functions>>
 ** <<rc_arithmetic,Arithmetic expressions>>
 ** <<rc_arrays,Arrays>>
@@ -61,50 +61,40 @@ The specific set of operators defined in this requirements class is:
 ** is null
 ** between
 ** in
-* Spatial operators:
-** intersects
-* Temporal operators:
-** anyinteracts
-
-NOTE: The `anyinteracts` temporal operator is defined in this document by requirement <<req_simple-cql_temporal-predicate,/req/simple-cql/temporal-predicate>>.
 
 An encoding of CQL may be used as the value of the filter parameters defined
 in the <<rc_filter,Filter>> requirements class.
 
-The <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>> requirements
-class specifies requirements for servers that support spatial operators in
-addition to the `intersects` operator that is defined in the
-<<simple-cql_spatial-predicates,Simple CQL>> requirements class. The list of
-additional spatial operators that must be supported is:
+The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support spatial operators.  The list of additional spatial operators that must be supported is:
 
-* equals
-* disjoint
-* touches
-* within
-* overlaps
-* crosses
-* contains
+* s_contains
+* s_crosses
+* s_disjoint
+* s_equals
+* s_intersects
+* s_overlaps
+* s_touches
+* s_within
 
-The <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>> requirements
-class specifies requirements for servers that support temporal operators in
-addition to the `anyinteracts` operator defined in the
-<<simple-cql_temporal-predicates,Simple CQL>> requirements class. The list of
-additional temporal operators that must be supported is:
+The <<rc_temporal-operators,Temporal Operators>> requirements
+class specifies requirements for servers that support temporal operators. 
+The list of temporal operators that must be supported is:
 
-* after
-* before
-* begins
-* begunby
-* tcontains
-* during
-* endedby
-* ends
-* tequals
-* meets
-* metby
-* toverlaps
-* overlappedby
-* intersects
+* t_after
+* t_before
+* t_contains
+* t_disjoint
+* t_during
+* t_equals
+* t_finishedby
+* t_finishes
+* t_intersects
+* t_meets
+* t_metby
+* t_overlappedby
+* t_overlaps
+* t_startedby
+* t_starts
 
 The <<rc_functions,Functions>> requirements class specifies requirements for
 supporting function calls (e.g. min, max, etc.) in a CQL expression. Function
@@ -120,10 +110,10 @@ The <<rc_arrays,Arrays>> requirements class specifies
 requirements for comparison operators for sets of values. 
 The operators that must be supported are:
 
-* aequals 
-* acontains
-* containedby
-* aoverlaps
+* a_containedby
+* a_contains
+* a_equals 
+* a_overlaps
 
 The <<rc_cql-text,CQL Text encoding>> requirements class defines
 a text encoding for CQL. Such an encoding is suitable for use with HTTP query
@@ -148,8 +138,8 @@ OGC Compliance Testing web site.
 |<<ats_filter,Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter
 |<<ats_features-filter,Features Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter
 |<<ats_simple-cql,Simple CQL>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/simple-cql
-|<<ats_enhanced-spatial-operators,Enhanced Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/enhanced-spatial-operators
-|<<ats_enhanced-temporal-operators,Enhanced Temporal Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/enhanced-temporal-operators
+|<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators
+|<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators
 |<<ats_functions,Functions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions
 |<<ats_arithmetic,Arithmetic>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic
 |<<ats_arrays,Arrays>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arrays
@@ -166,8 +156,8 @@ following requirements classes:
 
 * <<rc_filter,Filter>>
 * <<rc_simple-cql,Simple CQL>>
-* <<rc_enhanced-spatial-operators,Enhanced Spatial Operators>>
-* <<rc_enhanced-temporal-operators,Enhanced Temporal Operators>>
+* <<rc_spatial-operators,Spatial Operators>>
+* <<rc_temporal-operators,Temporal Operators>>
 * <<rc_functions,Functions>>
 * <<rc_arithmetic,Arithmetic expressions>>
 * <<rc_arrays,Arrays>>
