@@ -226,19 +226,12 @@ include::requirements/simple-cql/REQ_like-predicate.adoc[]
 .Example of a LIKE predicate
 ====
 ----
-name LIKE 'Smith.' SINGLECHAR '.' NOCASE true
+name LIKE 'Smith%' 
 ----
 
 [source,JSON]
 ----
-{
-  "like": [
-    { "property": "name" },
-    "Smith."
-  ],
-  "singleChar": ".",
-  "nocase": true
-}
+{"like": [ { "property": "name" }, "Smith%" ] }
 ----
 ====
 
@@ -269,7 +262,7 @@ include::requirements/simple-cql/REQ_in-predicate.adoc[]
 .Examples of a IN predicate
 ====
 ----
-cityName IN ('Toronto','Frankfurt','Tokyo','New York') NOCASE false
+cityName IN ('Toronto','Frankfurt','Tokyo','New York')
 ----
 
 [source,JSON]
@@ -277,8 +270,7 @@ cityName IN ('Toronto','Frankfurt','Tokyo','New York') NOCASE false
 {
   "in": {
      "value": { "property": "cityName" },
-     "list": [ "Toronto", "Frankfurt", "Tokyo", "New York" ],
-     "nocase": false
+     "list": [ "Toronto", "Frankfurt", "Tokyo", "New York" ]
   }
 }
 ----

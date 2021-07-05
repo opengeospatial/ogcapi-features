@@ -67,11 +67,7 @@ lteq = lt eq;
 
 # LIKE predicate
 #
-isLikePredicate =  scalarExpression "LIKE" patternExpression
-                   ["WILDCARD" quote alpha quote]
-                   ["SINGLECHAR" quote alpha quote]
-                   ["ESCAPECHAR" quote alpha quote]
-                   ["NOCASE" booleanLiteral] ;
+isLikePredicate =  scalarExpression "LIKE" patternExpression;
 
 patternExpression = characterLiteral;
 
@@ -205,7 +201,9 @@ arithmeticOperand = numericLiteral
 #=============================================================================#
 # Definition of a PROPERTYNAME
 #=============================================================================#
-propertyName = identifier | doubleQuote identifier doubleQuote;
+propertyName = identifier | doubleQuote identifier doubleQuote
+             | "UPPER" leftParen propertyName rightParen
+             | "LOWER" leftParen propertyName rightParen;
 
 identifier = identifierStart [ {colon | period | identifierPart} ];
 
@@ -217,7 +215,9 @@ identifierPart = alpha | digit | dollar | underscore;
 # Definition of a FUNCTION
 # The functions offered by an implementation are provided at `/functions`
 #=============================================================================#
-function = identifier leftParen {argumentList} rightParen;
+function = identifier leftParen {argumentList} rightParen
+         | "UPPER" leftParen function rightParen
+         | "LOWER" leftParen function rightParen;
 
 argumentList = argument [ { comma argument } ];
 
@@ -234,7 +234,13 @@ argument = characterLiteral
 #=============================================================================#
 # Definition of CHARACTER literals
 #=============================================================================#
-characterLiteral = quote [ {character} ] quote;
+characterLiteral = characterStringLiteral
+                 | "UPPER" leftParent characterLiteral rightParen
+                 | "LOWER" leftParent characterLiteral rightParen
+                 | bitStringLiteral
+                 | hexStringLiteral;
+
+characterStringLiteral = quote [ {character} ] quote;
 
 character = alpha | digit | extendedDigit | ideographic |
             combiningChar | extender;

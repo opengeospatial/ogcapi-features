@@ -29,7 +29,7 @@
             }
          }
       },
-      
+
       "orExpression": {
          "type": "object",
          "required": ["or"],
@@ -123,54 +123,63 @@
          }
       },
 
+      "$comment": "NOTE: Positional arguments for BETWEEN operator:",
+      "$comment": "      Array item 1: test expression",
+      "$comment": "      Array item 2: lower range boundry",
+      "$comment": "      Array item 2: upper range boundry",
       "isBetweenPredicate": {
          "type": "object",
          "required": ["between"],
          "properties": {
             "between": {
-               "type": "object",
-               "required" : [ "value", "lower", "upper" ],
-               "properties": {
-                  "value": { "$ref": "#/$defs/valueExpression" },
-                  "lower": { "$ref": "#/$defs/scalarExpression" },
-                  "upper": { "$ref": "#/$defs/scalarExpression" }
-               }
+               "type": "array",
+               "items": [
+                  { "$ref": "#/$defs/valueExpression" },
+                  { "$ref": "#/$defs/scalarExpression" },
+                  { "$ref": "#/$defs/scalarExpression" }
+               ],
+               "additionalItems": false
             }
          }
       },
 
+      "$comment": "NOTE: Positional arguments for LIKE operator:",
+      "$comment": "      Array item 1: test expression",
+      "$comment": "      Array item 2: pattern",
       "isLikePredicate": {
          "type": "object",
          "required": ["like"],
          "properties": {
-            "like": { "$ref": "#/$defs/scalarOperands" },
-            "wildcard": { "type": "string", "default": "%" },
-            "singleChar": { "type": "string", "default": "." },
-            "escapeChar": { "type": "string", "default": "\\" },
-            "nocase": { "type": "boolean", "default": true }
+            "like": {
+               "type": "array",
+               "items": [
+                  { "$ref": "#/$defs/scalarExpression" },
+                  { "type": "string" }
+               ],
+               "additionalItems": false
+            }
          }
       },
 
+      "$comment": "NOTE: Positional arguments for IN operator:",
+      "$comment": "      Array item 1: test expression",
+      "$comment": "      Array item 2: expression list",
       "isInListPredicate": {
          "type": "object",
          "required": ["in"],
          "properties": {
             "in": {
-               "type": "object",
-               "required": ["value","list"],
-               "properties": {
-                  "value": { "$ref": "#/$defs/valueExpression" },
-                  "list": {
+               "type": "array",
+               "items": [
+                   { "$ref": "#/$defs/valueExpression" },
+                   {
                      "type": "array",
                      "items": {
                         "$ref": "#/$defs/valueExpression"
                      }
-                  },
-                  "nocase": {
-                     "type": "boolean",
-                     "default": true
                   }
-               }
+               ],
+               "additionalItems": false
             }
          }
       },
@@ -606,11 +615,31 @@
       "$comment": "=  PROPERTY REFERENCE                                 =",
       "$comment": "=======================================================",
       "propertyRef": {
-         "type": "object",
-         "required": ["property"],
-         "properties": {
-            "property": { "type": "string" }
-         }
+         "oneOf": [
+            {
+               "type": "object",
+               "required": ["property"],
+               "properties": {
+                 "property": { "type": "string" }
+               }
+            },
+            {
+               "type": "object",
+               "required": [ "upper" ],
+               "properties": {
+                  "upper": { "$ref": "#/$defs/propertyRef" }
+               },
+               "additionalProperties": false
+            },
+            {
+               "type": "object",
+               "required": [ "lower" ],
+               "properties": {
+                  "lower": { "$ref": "#/$defs/propertyRef" }
+               },
+               "additionalProperties": false
+            }
+         ]
       },
 
       "$comment": "=======================================================",
@@ -618,11 +647,31 @@
       "$comment": "=======================================================",
 
       "functionRef": {
-         "type": "object",
-         "required": ["function"],
-         "properties": {
-            "function": { "$ref": "#/$defs/function" }
-         }
+         "oneOf": [
+            {
+               "type": "object",
+               "required": ["function"],
+               "properties": {
+                  "function": { "$ref": "#/$defs/function" }
+               }
+            },
+            {
+               "type": "object",
+               "required": [ "upper" ],
+               "properties": {
+                  "upper": { "$ref": "#/$defs/functionRef" }
+               },
+               "additionalProperties": false
+            },
+            {
+               "type": "object",
+               "required": [ "lower" ],
+               "properties": {
+                  "lower": { "$ref": "#/$defs/functionRef" }
+               },
+               "additionalProperties": false
+            }
+         ]
       },
 
       "function": {
@@ -656,7 +705,22 @@
             { "type": "string" },
             { "type": "number" },
             { "type": "boolean"},
-            { "$ref": "#/$defs/instantLiteral" }
+            {
+              "type": "object",
+              "required": [ "upper" ],
+              "properties": {
+                "upper": { "type": "string" }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [ "lower" ],
+              "properties": {
+                "lower": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
          ]
       },
 
