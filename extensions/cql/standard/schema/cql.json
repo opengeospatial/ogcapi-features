@@ -179,7 +179,7 @@
          "oneOf": [
             {"$ref": "#/$defs/scalarExpression"},
             {"$ref": "#/$defs/spatialLiteral"},
-            {"$ref": "#/$defs/typedTemporalLiteral"}
+            {"$ref": "#/$defs/intervalLiteral"}
          ]
       },
 
@@ -532,12 +532,12 @@
          "type": "array",
          "items": {
             "oneOf": [
-               {"$ref": "#/$defs/scalarLiteral"},
-               {"$ref": "#/$defs/spatialLiteral"},
-               {"$ref": "#/$defs/typedTemporalLiteral"},
+               { "$ref": "#/$defs/scalarLiteral"},
+               { "$ref": "#/$defs/spatialLiteral"},
+               { "$ref": "#/$defs/intervalLiteral"},
                { "$ref": "#/$defs/propertyRef" },
                { "$ref": "#/$defs/functionRef" },
-               {"$ref": "#/$defs/arithmeticExpression"},
+               { "$ref": "#/$defs/arithmeticExpression"},
                { "$ref": "#/$defs/arrayLiteral" }
             ]
          }
@@ -636,7 +636,7 @@
                   "oneOf": [
                      { "$ref": "#/$defs/scalarLiteral" },
                      { "$ref": "#/$defs/spatialLiteral" },
-                     { "$ref": "#/$defs/typedTemporalLiteral" },
+                     { "$ref": "#/$defs/intervalLiteral" },
                      { "$ref": "#/$defs/propertyRef" },
                      { "$ref": "#/$defs/functionRef" },
                      { "$ref": "#/$defs/arithmeticExpression" },
@@ -655,7 +655,8 @@
          "oneOf": [
             { "type": "string" },
             { "type": "number" },
-            { "type": "boolean"}
+            { "type": "boolean"},
+            { "$ref": "#/$defs/instantLiteral" }
          ]
       },
 
@@ -885,19 +886,66 @@
 
       "temporalLiteral": {
          "oneOf": [
-            { "$ref": "#/$defs/instantString" },
-            { "$ref": "#/$defs/intervalString" }
+            { "$ref": "#/$defs/instantLiteral" },
+            { "$ref": "#/$defs/intervalLiteral" }
          ]
+      },
+
+      "instantLiteral": {
+         "oneOf": [
+            { "$ref": "#/$defs/dateLiteral" },
+            { "$ref": "#/$defs/timestampLiteral" }
+         ]
+      },
+
+      "dateLiteral": {
+         "type": "object",
+         "required": ["date"],
+         "properties": {
+            "date": {
+               "$ref": "#/$defs/dateString"
+            }
+         }
+      },
+
+      "timestampLiteral": {
+         "type": "object",
+         "required": ["timestamp"],
+         "properties": {
+            "timestamp": {
+               "$ref": "#/$defs/timestampString"
+            }
+         }
       },
 
       "instantString": {
          "oneOf": [
-            { "type": "string", "format": "date" },
-            { "type": "string", "format": "date-time" }
+            { "$ref": "#/$defs/dateString" },
+            { "$ref": "#/$defs/timestampString" }
          ]
       },
 
-      "intervalString": {
+      "dateString": { 
+         "type": "string", 
+         "format": "date" 
+      },
+
+      "timestampString": { 
+         "type": "string", 
+         "format": "date-time"
+      },
+
+      "intervalLiteral": {
+         "type": "object",
+         "required": ["datetime"],
+         "properties": {
+            "datetime": {
+               "$ref": "#/$defs/intervalArray"
+            }
+         }
+      },
+
+      "intervalArray": {
          "type": "array",
          "minItems": 2,
          "maxItems": 2,
@@ -906,33 +954,6 @@
                { "$ref": "#/$defs/instantString" },
                { "type": "string", "enum": [".."] }
             ]
-         }
-      },
-
-      "typedTemporalLiteral": {
-         "oneOf": [
-            { "$ref": "#/$defs/typedInstantString" },
-            { "$ref": "#/$defs/typedIntervalString" }
-         ]
-      },
-
-      "typedInstantString": {
-         "type": "object",
-         "required": ["datetime"],
-         "properties": {
-            "datetime": {
-               "$ref": "#/$defs/instantString"
-            }
-         }
-      },
-
-      "typedIntervalString": {
-         "type": "object",
-         "required": ["datetime"],
-         "properties": {
-            "datetime": {
-               "$ref": "#/$defs/intervalString"
-            }
          }
       }
    }
