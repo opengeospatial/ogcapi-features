@@ -26,11 +26,21 @@ NOTE: More details about the term 'feature' may be found in the <<SDWBP,W3C/OGC 
 ==== feature collection; collection
 a set of *features* from a *dataset*
 
+[[resource-def]]
+==== resource
+entity that might be identified (<<iso15836-2,Dublin Core Metadata Initiative - DCMI Metadata Terms>>)
+
+NOTE: The term "resource", when used in the context of an OGC API standard, should be understood to mean a <<web-resource-def,web resource>> unless otherwise indicated.
+
 [[webapi]]
 ==== Web API
 API using an architectural style that is founded on the technologies of the Web <<DWBP>>
 
 NOTE: link:https://www.w3.org/TR/dwbp/#APIHttpVerbs[Best Practice 24: Use Web Standards as the foundation of APIs] in the <<DWBP,W3C Data on the Web Best Practices>> provides more detail.
+
+[[web-resource-def]]
+==== web resource
+a **resource** that is identified by a HTTP URI.
 
 === Abbreviated terms
 
