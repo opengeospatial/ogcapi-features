@@ -432,13 +432,13 @@ the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 .Evalute if the value of an array property contains the specified subset of values.
 ====
 ----
-layer:ids A_CONTAINS ["layers-ca","layers-us"]
+A_CONTAINS(layer:ids, ["layers-ca","layers-us"])
 ----
 
 [source,JSON]
 ----
 {
-   "a_contains": [{"property": "layer:ids"},["layers-ca","layers-us"]]
+   "a_contains": [{"property": "layer:ids"}, ["layers-ca","layers-us"]]
 }
 ----
 ====
