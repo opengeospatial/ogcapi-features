@@ -3,7 +3,7 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/conf/crs/crs-parameter-transform*
 ^|Test Purpose |Verify that the geometries are transformed
-^|Requirement |<<req_crs_crs-action,/req/crs/crs-action>>
+^|Requirement |<<req_crs_fc-crs-action,/req/crs/fc-crs-action>>
 ^|Test Method |For every CRS identifier advertized by the Web API that is known to the test engine and for which the test engine can convert geometries between the CRS and the default CRS of the Web API ("known CRS") execute the following test. Skip the test for unknown CRSs.
 
 . For each spatial feature collection `collectionId`, send a request with the parameter `crs` to `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{featureId}` (with a valid `featureId` for the collection) for every known CRS listed. In addition, send the same request, but without the `crs` parameter.
