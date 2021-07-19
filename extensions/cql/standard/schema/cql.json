@@ -12,9 +12,6 @@
    ],
    "$recursiveAnchor": true,
    "$defs": {
-      "$comment": "=======================================================",
-      "$comment": "=  BOOLEAN VALUE EXPRESSION                           =",
-      "$comment": "=======================================================",
 
       "andExpression": {
          "type": "object",
@@ -59,10 +56,6 @@
          }
       },
 
-      "$comment": "=======================================================",
-      "$comment": "=  COMPARISON PREDICATES                              =",
-      "$comment": "=======================================================",
-
       "comparisonPredicate" : {
          "oneOf": [
             {"$ref": "#/$defs/binaryComparisonPredicate"},
@@ -76,6 +69,7 @@
       "binaryComparisonPredicate": {
          "oneOf": [
             { "$ref": "#/$defs/eqExpression" },
+            { "$ref": "#/$defs/neqExpression" },
             { "$ref": "#/$defs/ltExpression" },
             { "$ref": "#/$defs/gtExpression" },
             { "$ref": "#/$defs/lteExpression" },
@@ -88,6 +82,14 @@
          "required": ["eq"],
          "properties": {
             "eq": { "$ref": "#/$defs/scalarOperands" }
+         }
+      },
+
+      "neqExpression": {
+         "type": "object",
+         "required": ["neq"],
+         "properties": {
+            "neq": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
@@ -123,10 +125,6 @@
          }
       },
 
-      "$comment": "NOTE: Positional arguments for BETWEEN operator:",
-      "$comment": "      Array item 1: test expression",
-      "$comment": "      Array item 2: lower range boundry",
-      "$comment": "      Array item 2: upper range boundry",
       "isBetweenPredicate": {
          "type": "object",
          "required": ["between"],
@@ -143,9 +141,6 @@
          }
       },
 
-      "$comment": "NOTE: Positional arguments for LIKE operator:",
-      "$comment": "      Array item 1: test expression",
-      "$comment": "      Array item 2: pattern",
       "isLikePredicate": {
          "type": "object",
          "required": ["like"],
@@ -161,9 +156,6 @@
          }
       },
 
-      "$comment": "NOTE: Positional arguments for IN operator:",
-      "$comment": "      Array item 1: test expression",
-      "$comment": "      Array item 2: expression list",
       "isInListPredicate": {
          "type": "object",
          "required": ["in"],
@@ -219,10 +211,6 @@
             }
          }
       },
-
-      "$comment": "=======================================================",
-      "$comment": "=  SPATIAL PREDICATES                                 =",
-      "$comment": "=======================================================",
 
       "spatialPredicate" : {
          "oneOf": [
@@ -317,10 +305,6 @@
             {"$ref": "#/$defs/functionRef"}
          ]
       },
-
-      "$comment": "=======================================================",
-      "$comment": "=  TEMPORAL EXPRESSIONS                               =",
-      "$comment": "=======================================================",
 
       "temporalPredicate" : {
          "oneOf": [
@@ -479,10 +463,6 @@
          ]
       },
 
-      "$comment": "=======================================================",
-      "$comment": "=  ARRAY PREDICATE                                    =",
-      "$comment": "=======================================================",
-
       "arrayPredicate" : {
          "oneOf": [
             {"$ref": "#/$defs/a_containedByExpression"},
@@ -552,10 +532,6 @@
          }
       },
 
-      "$comment": "=======================================================",
-      "$comment": "=  ARITHMETIC EXPRESSIONS                             =",
-      "$comment": "=======================================================",
-
       "arithmeticExpression": {
          "oneOf": [
             {"$ref": "#/$defs/addExpression" },
@@ -611,9 +587,6 @@
          }
       },
 
-      "$comment": "=======================================================",
-      "$comment": "=  PROPERTY REFERENCE                                 =",
-      "$comment": "=======================================================",
       "propertyRef": {
          "oneOf": [
             {
@@ -641,10 +614,6 @@
             }
          ]
       },
-
-      "$comment": "=======================================================",
-      "$comment": "=  FUNCTIONS                                          =",
-      "$comment": "=======================================================",
 
       "functionRef": {
          "oneOf": [
@@ -695,10 +664,6 @@
             }
          }
       },
-
-      "$comment": "=======================================================",
-      "$comment": "=  LITERALS                                           =",
-      "$comment": "=======================================================",
 
       "scalarLiteral": {
          "oneOf": [

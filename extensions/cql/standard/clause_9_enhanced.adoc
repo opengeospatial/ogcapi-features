@@ -216,6 +216,8 @@ An instant is either a date or a timestamp in accordance with <<rfc3339,RFC 3339
 
 An interval is the time between a start instant and an end instant, including both bounding instances.
 
+CQL follows ISO 8601-1/ISO 8601-2 in defining intervals as closed at both start and end. Note that some implementations and other specifications use a different definition and it may be necessary to convert between the interval representations. For example, SQL uses half-closed intervals - closed at the start, open at the end.
+
 Depending on the implementation environment, the underlying datastore may or may not support intervals as data types of properties. If not, intervals are typically represented by two separate properties that are instants, one for the start and one for the end of the interval.
 
 All temporal geometries are in the Gregorian Calendar. This is a deliberate restriction to keep implementations of CQL simple, avoiding requirements to transform time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API standards.
@@ -271,7 +273,7 @@ include::requirements/temporal-operators/REQ_temporal-operators.adoc[]
 .Examples of temporal predicate using T_INTERSECTS
 ====
 ----
-event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
+T_INTERSECTS(event_date, INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
@@ -279,7 +281,7 @@ event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 {
    "t_intersects": [
       { "property": "event_date" },
-      [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ]
+      { "interval": [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ] }
    ]
 }
 ----
@@ -289,14 +291,14 @@ event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 .Examples of temporal relationships using temporal literals.
 ====
 ----
-1969-07-20T20:17:40Z T_DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
+T_DURING(DATE("1969-07-20T20:17:40Z"), INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
 ----
 {
-   "t_during": ["1969-07-20T20:17:40Z",["1969-07-16T13:32:00Z",
-                                        "1969-07-24T16:50:35Z"]]
+   "t_during": [ { "timestamp": "1969-07-20T20:17:40Z" },
+                 { "interval": ["1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"] } ]
 }
 ----
 ====
@@ -305,14 +307,14 @@ event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 .Examples of temporal relationships using a property and a temporal literal.
 ====
 ----
-touchdown T_DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
+T_DURING(touchdown, INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
 ----
 {
-   "t_during": [{"property": "touchdown"},["1969-07-16T13:32:00Z",
-                                           "1969-07-24T16:50:35Z"]]
+   "t_during": [ {"property": "touchdown"},
+                 {"interval": [ "1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"] } ]
 }
 ----
 ====
@@ -432,13 +434,13 @@ the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 .Evalute if the value of an array property contains the specified subset of values.
 ====
 ----
-layer:ids A_CONTAINS ["layers-ca","layers-us"]
+A_CONTAINS(layer:ids, ["layers-ca","layers-us"])
 ----
 
 [source,JSON]
 ----
 {
-   "a_contains": [{"property": "layer:ids"},["layers-ca","layers-us"]]
+   "a_contains": [{"property": "layer:ids"}, ["layers-ca","layers-us"]]
 }
 ----
 ====
