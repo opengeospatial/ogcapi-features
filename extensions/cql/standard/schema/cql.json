@@ -69,6 +69,7 @@
       "binaryComparisonPredicate": {
          "oneOf": [
             { "$ref": "#/$defs/eqExpression" },
+            { "$ref": "#/$defs/neqExpression" },
             { "$ref": "#/$defs/ltExpression" },
             { "$ref": "#/$defs/gtExpression" },
             { "$ref": "#/$defs/lteExpression" },
@@ -81,6 +82,14 @@
          "required": ["eq"],
          "properties": {
             "eq": { "$ref": "#/$defs/scalarOperands" }
+         }
+      },
+
+      "neqExpression": {
+         "type": "object",
+         "required": ["neq"],
+         "properties": {
+            "neq": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
