@@ -216,6 +216,8 @@ An instant is either a date or a timestamp in accordance with <<rfc3339,RFC 3339
 
 An interval is the time between a start instant and an end instant, including both bounding instances.
 
+CQL follows ISO 8601-1/ISO 8601-2 in defining intervals as closed at both start and end. Note that some implementations and other specifications use a different definition and it may be necessary to convert between the interval representations. For example, SQL uses half-closed intervals - closed at the start, open at the end.
+
 Depending on the implementation environment, the underlying datastore may or may not support intervals as data types of properties. If not, intervals are typically represented by two separate properties that are instants, one for the start and one for the end of the interval.
 
 All temporal geometries are in the Gregorian Calendar. This is a deliberate restriction to keep implementations of CQL simple, avoiding requirements to transform time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API standards.
