@@ -505,12 +505,6 @@ minElev = signedNumericLiteral;
 
 maxElev = signedNumericLiteral;
 
-#=============================================================================#
-# Definition of TEMPORAL literals
-#
-# NOTE: Is the fact the time zones are supported too complicated for a
-#       simple CQL? Perhaps the "core" of CQL should just support UTC.
-#=============================================================================#
 temporalLiteral = instantLiteral | intervalLiteral;
 
 instantLiteral = dateInstant | timestampInstant;
@@ -545,9 +539,7 @@ dateMonth  = digit digit;
 
 dateDay    = digit digit;
 
-utcTime  = timeHour ":" timeMinute ":" timeSecond [timeZoneOffset];
-
-timeZoneOffset = "Z" | sign timeHour [[colon] timeMinute];
+utcTime  = timeHour ":" timeMinute ":" timeSecond "Z";
 
 timeHour   = digit digit;
 

@@ -111,43 +111,43 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 ----
 * temporal geometry (instants, text)
 ----
-1969-07-20
-1969-07-20T20:17:40Z
+DATE("1969-07-20")
+TIMESTAMP("1969-07-20T20:17:40Z")
 ----
 * temporal geometry (instants, JSON)
 [source,JSON]
 ----
-"1969-07-20"
-"1969-07-20T20:17:40Z"
+{ "date": "1969-07-20" }
+{ "timestamp": "1969-07-20T20:17:40Z" }
 ----
 * temporal geometry (intervals, text)
 ----
-1969-07-16/1969-07-24
-1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
-2019-09-09/..
+INTERVAL("1969-07-16", "1969-07-24")
+INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z")
+INTERVAL("2019-09-09", "..")
 ----
 * temporal geometry (intervals, JSON)
 [source,JSON]
 ----
-[ "1969-07-16", "1969-07-24" ]
-[ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ]
-[ "2019-09-09", ".." ]
+{ "interval": [ "1969-07-16", "1969-07-24" ] }
+{ "interval": [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ] }
+{ "interval": [ "2019-09-09", ".." ] }
 ----
 ====
 
 For spatial and temporal geometries existing representations are used:
 
 * Spatial geometry:
-  * Text: an OGC Well-Known Text (WKT) literal
-  * JSON: a GeoJSON geometry object
+** Text: an OGC Well-Known Text (WKT) literal
+** JSON: a GeoJSON geometry object
 * Temporal instant:
-  * Text: an RFC 3339 literal
-  * JSON: a string of a RFC 3339 literal
+** Text: a `DATE` or `TIMESTAMP` function with a RFC 3339 literal string
+** JSON: an object with a `date` or `timestamp` member with a RFC 3339 literal string value
 * Temporal interval:
-  * Text: an ISO 8601-2 interval literal
-  * JSON: an array from an ISO 8601-2 interval literal that is split at the solidus
+** Text: an `INTERVAL` function with two temporal instants as parameters
+** JSON: an object with an `interval` member with an array of RFC 3339 literal string values (or ".." for an open end)
 
-NOTE: The current BNF rule for temporal literals supports timestamps in any time zone. Should this be restricted to UTC ("Z"), at least in Simple CQL? See https://github.com/opengeospatial/ogcapi-features/issues/483[issue 483].
+All temporal literals are in UTC ("Z").
 
 [[simple-cql_property]]
 === Property references

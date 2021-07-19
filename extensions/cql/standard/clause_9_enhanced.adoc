@@ -271,7 +271,7 @@ include::requirements/temporal-operators/REQ_temporal-operators.adoc[]
 .Examples of temporal predicate using T_INTERSECTS
 ====
 ----
-event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
+T_INTERSECTS(event_date, INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
@@ -279,7 +279,7 @@ event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 {
    "t_intersects": [
       { "property": "event_date" },
-      [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ]
+      { "interval": [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ] }
    ]
 }
 ----
@@ -289,14 +289,14 @@ event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 .Examples of temporal relationships using temporal literals.
 ====
 ----
-1969-07-20T20:17:40Z T_DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
+T_DURING(DATE("1969-07-20T20:17:40Z"), INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
 ----
 {
-   "t_during": ["1969-07-20T20:17:40Z",["1969-07-16T13:32:00Z",
-                                        "1969-07-24T16:50:35Z"]]
+   "t_during": [ { "timestamp": "1969-07-20T20:17:40Z" },
+                 { "interval": ["1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"] } ]
 }
 ----
 ====
@@ -305,14 +305,14 @@ event_date T_INTERSECTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 .Examples of temporal relationships using a property and a temporal literal.
 ====
 ----
-touchdown T_DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
+T_DURING(touchdown, INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
 ----
 {
-   "t_during": [{"property": "touchdown"},["1969-07-16T13:32:00Z",
-                                           "1969-07-24T16:50:35Z"]]
+   "t_during": [ {"property": "touchdown"},
+                 {"interval": [ "1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"] } ]
 }
 ----
 ====
