@@ -1,6 +1,6 @@
 {
    "or": [
-      { "eq": [{"property": "ro:cloud_cover"},0.1] },
-      { "eq": [{"property": "ro:cloud_cover"},0.2] }
+      { "=": [{"property": "ro:cloud_cover"},0.1] },
+      { "=": [{"property": "ro:cloud_cover"},0.2] }
    ]
 }

@@ -1,6 +1,6 @@
 {
    "or": [
-      {"not":[{"lt":[{"property": "floors"},5]}]},
-      {"eq":[{"property": "swimming_pool"},true]}
+      {"not":[{"<":[{"property": "floors"},5]}]},
+      {"=":[{"property": "swimming_pool"},true]}
    ]
 }

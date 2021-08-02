@@ -190,7 +190,7 @@ city='Toronto'
 
 [source,JSON]
 ----
-{ "eq": [ { "property": "city" }, "Toronto" ] }
+{ "=": [ { "property": "city" }, "Toronto" ] }
 ----
 
 ----
@@ -200,7 +200,7 @@ avg(windSpeed) < 4
 [source,JSON]
 ----
 {
-  "lt": [
+  "<": [
     { "function": { "name": "avg", "arguments": [ { "property": "windSpeed" } ] } },
     4
   ]
@@ -214,7 +214,7 @@ balance-150.0 > 0
 [source,JSON]
 ----
 {
-  "gt": [
+  ">": [
     { "-": [ { "property": "balance" }, 150.0 ] },
     0
   ]
