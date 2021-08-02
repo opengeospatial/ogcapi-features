@@ -1,7 +1,7 @@
 {
    "and": [
-      { "lt": [{"property": "ro:cloud_cover"},0.1] },
-      { "eq": [{"property": "landsat:wrs_row"},28] },
-      { "eq": [{"property": "landsat:wrs_path"},203] }
+      { "<": [{"property": "ro:cloud_cover"},0.1] },
+      { "=": [{"property": "landsat:wrs_row"},28] },
+      { "=": [{"property": "landsat:wrs_path"},203] }
    ]
 }

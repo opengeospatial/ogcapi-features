@@ -79,49 +79,49 @@
 
       "eqExpression": {
          "type": "object",
-         "required": ["eq"],
+         "required": ["="],
          "properties": {
-            "eq": { "$ref": "#/$defs/scalarOperands" }
+            "=": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
       "neqExpression": {
          "type": "object",
-         "required": ["neq"],
+         "required": ["<>"],
          "properties": {
-            "neq": { "$ref": "#/$defs/scalarOperands" }
+            "<>": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
       "ltExpression": {
          "type": "object",
-           "required": ["lt"],
+           "required": ["<"],
            "properties": {
-              "lt": { "$ref": "#/$defs/scalarOperands" }
+              "<": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
       "gtExpression": {
          "type": "object",
-         "required": ["gt"],
+         "required": [">"],
          "properties": {
-            "gt": { "$ref": "#/$defs/scalarOperands" }
+            ">": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
       "lteExpression": {
          "type": "object",
-         "required": ["lte"],
+         "required": ["<="],
          "properties": {
-            "lte": { "$ref": "#/$defs/scalarOperands" }
+            "<=": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
       "gteExpression": {
          "type": "object",
-         "required": ["gte"],
+         "required": [">="],
          "properties": {
-            "gte": { "$ref": "#/$defs/scalarOperands" }
+            ">=": { "$ref": "#/$defs/scalarOperands" }
          }
       },
 
@@ -567,7 +567,7 @@
 
       "divExpression": {
          "type": "object",
-         "required": ["*"],
+         "required": ["/"],
          "properties": {
             "/": { "$ref": "#/$defs/arithmeticOperands" }
          }
