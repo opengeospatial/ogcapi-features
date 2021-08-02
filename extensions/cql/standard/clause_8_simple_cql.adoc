@@ -138,14 +138,14 @@ INTERVAL('2019-09-09', '..')
 For spatial and temporal geometries existing representations are used:
 
 * Spatial geometry:
-** Text: an OGC Well-Known Text (WKT) literal
-** JSON: a GeoJSON geometry object
+** Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
+** JSON: a https://datatracker.ietf.org/doc/html/rfc7946#section-3.1[GeoJSON geometry] object
 * Temporal instant:
-** Text: a `DATE` or `TIMESTAMP` function with a RFC 3339 literal string
-** JSON: an object with a `date` or `timestamp` member with a RFC 3339 literal string value
+** Text: a `DATE` or `TIMESTAMP` function with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string]
+** JSON: an object with a `date` or `timestamp` member with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string value]
 * Temporal interval:
 ** Text: an `INTERVAL` function with two temporal instants as parameters
-** JSON: an object with an `interval` member with an array of RFC 3339 literal string values (or ".." for an open end)
+** JSON: an object with an `interval` member with an array of https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string] values (or ".." for an open end)
 
 All temporal literals are in UTC ("Z").
 
