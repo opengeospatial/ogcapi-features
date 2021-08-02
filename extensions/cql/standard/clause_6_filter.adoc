@@ -123,7 +123,7 @@ in this standard.
 === Parameter filter-crs
 
 For reasons discussed in the http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#SDWBP[W3C/OGC Spatial Data on the Web Best Practices document], 
-<<OAFeat-1,OGC API - Features - Part 1: Core>> uses WGS 84 longitude and latitude (`http://www.opengis.net/def/crs/OGC/1.3/CRS84`) for 2-D coordinates and WGS 84 longitude, latitude and height in meters (`http://www.opengis.net/def/crs/OGC/0/CRS84h`) for 3-D coordinates as the default coordinate reference systems. <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>> extends the capabilities of Part 1 to allow other coordinate reference systems to be used.
+<<OAFeat-1,OGC API - Features - Part 1: Core>> uses WGS 84 longitude and latitude (`http://www.opengis.net/def/crs/OGC/1.3/CRS84`) for 2-D coordinates and WGS 84 longitude, latitude and ellipsoidal height in meters (`http://www.opengis.net/def/crs/OGC/0/CRS84h`) for 3-D coordinates as the default coordinate reference systems. <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>> extends the capabilities of Part 1 to allow other coordinate reference systems to be used.
 
 For servers that implement <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>, the `filter-crs` parameter defined in this clause allows clients to assert which CRS is being used to encode geometric values in a filter expression.  The `filter-crs` parameter has no use if the server does not implement <<OAFeat-2,Part 2>>.
 
