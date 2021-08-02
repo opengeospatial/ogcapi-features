@@ -131,7 +131,7 @@ include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
 
 include::requirements/filter/REQ_filter-crs.param.adoc[]
 
-NOTE: Discovery of the list of supported coordinate reference systems for use with the `filter-crs` parameter is fully described in <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>.  Briefly, the list of supported CRSs can be found in the global list of CRS identifiers (path: `/crs`) and/or the list of collection-specific CRS identifiers (path: `/collections/{collectionsId}/crs`).
+NOTE: Discovery of the list of supported coordinate reference systems for use with the `filter-crs` parameter is fully described in <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>.  Briefly, the list of supported CRSs can be found in the global list of CRS identifiers (path: `/collections/crs`) and/or the list of collection-specific CRS identifiers (path: `/collections/{collectionsId}/crs`).
 
 === Interaction with other predicates
 
