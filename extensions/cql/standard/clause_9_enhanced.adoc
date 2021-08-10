@@ -1,9 +1,9 @@
-[[cql-enhancements]]
+[[cql2-enhancements]]
 == Common Query Language enhancements
 
 === Overview
 
-This clause specifies requirements for enhancements to <<cql-core,Basic CQL>>.
+This clause specifies requirements for enhancements to <<cql2-core,Basic CQL2>>.
 Specifically, this clause defines requirements for:
 
 * Advanced comparison operators;
@@ -11,11 +11,11 @@ Specifically, this clause defines requirements for:
 * Temporal operators;
 * Array operators;
 * Property-property and literal-literal comparisons;
-* Support for functions in CQL;
-* Support for arithmetic expression in CQL;
+* Support for functions in CQL2;
+* Support for arithmetic expression in CQL2;
 
-In each case, this clause specifies requirements for the rules in <<cql-bnf>>
-not supported by Basic CQL.
+In each case, this clause specifies requirements for the rules in <<cql2-bnf>>
+not supported by Basic CQL2.
 
 [[advanced-comparison-operators]]
 === Requirements Class "Advanced Comparison Operators"
@@ -107,7 +107,7 @@ category NOT IN (1,2,3,4)
 
 include::requirements/requirements_class_spatial-operators.adoc[]
 
-This requirement adds a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL filter expression.
+This requirement adds a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL2 filter expression.
 
 A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial operator.
 
@@ -117,9 +117,9 @@ include::requirements/spatial-operators/REQ_spatial-operators.adoc[]
 
 include::recommendations/spatial-operators/PER_spatial-predicates.adoc[]
 
-CQL uses Well-Known Text (WKT) to encode geometry literals. Since WKT does not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. In this standard, the `filter-crs` query parameter is used to pass the CRS information to the server.
+CQL2 uses Well-Known Text (WKT) to encode geometry literals. Since WKT does not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. In this standard, the `filter-crs` query parameter is used to pass the CRS information to the server.
 
-NOTE: The spatial predicates currently use a different pattern than the comparison and temporal predicates and are written as function calls.  This difference is inherited from previous versions of CQL. This is an open issue: Whether this version of CQL used in the OGC API - Features - Part 3 standard should change the spatial predicates to be consistent with the other predicates or to keep the legacy because of existing CQL implementations.  Comments are welcome in the https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue] on this topic.
+NOTE: The spatial predicates currently use a different pattern than the comparison and temporal predicates and are written as function calls.  This difference is inherited from previous versions of CQL2. This is an open issue: Whether this version of CQL2 used in the OGC API - Features - Part 3 standard should change the spatial predicates to be consistent with the other predicates or to keep the legacy because of existing CQL2 implementations.  Comments are welcome in the https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue] on this topic.
 
 The following table lists the mathematical definitions of each spatial operator as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 
@@ -222,7 +222,7 @@ S_INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210
 .Example for the filter-crs query parameter
 ====
 ----
-...filter-lang=cql-text&
+...filter-lang=cql2-text&
    filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
    filter=S_INTERSECTS(geometry,POLYGON((379213.87 3610774.16,379233.84 3610769.70,379246.15 3610812.39,379226.49 3610816.88,379213.87 3610774.16)))...
 ----
@@ -243,13 +243,13 @@ An instant is either a date or a timestamp in accordance with <<rfc3339,RFC 3339
 
 An interval is the time between a start instant and an end instant, including both bounding instances.
 
-CQL follows ISO 8601-1/ISO 8601-2 in defining intervals as closed at both start and end. Note that some implementations and other specifications use a different definition and it may be necessary to convert between the interval representations. For example, SQL uses half-closed intervals - closed at the start, open at the end.
+CQL2 follows ISO 8601-1/ISO 8601-2 in defining intervals as closed at both start and end. Note that some implementations and other specifications use a different definition and it may be necessary to convert between the interval representations. For example, SQL uses half-closed intervals - closed at the start, open at the end.
 
 Depending on the implementation environment, the underlying datastore may or may not support intervals as data types of properties. If not, intervals are typically represented by two separate properties that are instants, one for the start and one for the end of the interval.
 
-All temporal geometries are in the Gregorian Calendar. This is a deliberate restriction to keep implementations of CQL simple, avoiding requirements to transform time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API standards.
+All temporal geometries are in the Gregorian Calendar. This is a deliberate restriction to keep implementations of CQL2 simple, avoiding requirements to transform time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API standards.
 
-The temporal operators in CQL are based on the definitions in the <<owl-time,W3C/OGC Time Ontology in OWL>>. 
+The temporal operators in CQL2 are based on the definitions in the <<owl-time,W3C/OGC Time Ontology in OWL>>. 
 
 The following table specifies the definition of the temporal operators where both operands may be instants or intervals, including mixed combinations.
 
@@ -337,7 +337,7 @@ T_DURING(touchdown, INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 
 include::requirements/requirements_class_array-operators.adoc[]
 
-This clause specifies requirements for supporting array expression in CQL.
+This clause specifies requirements for supporting array expression in CQL2.
 Array expressions can be tested in a predicate for equality, if one array
 is a subset of another, if one array is a superset of another or if two
 arrays overlap or share elements.
@@ -438,7 +438,7 @@ T_DURING(DATE("1969-07-20T20:17:40Z"), INTERVAL("1969-07-16T13:32:00Z", "1969-07
 
 include::requirements/requirements_class_functions.adoc[]
 
-This sub-clause specifies requirements for supporting functions in CQL. Functions
+This sub-clause specifies requirements for supporting functions in CQL2. Functions
 allow implementations to extend the language.
 
 include::requirements/functions/REQ_functions.adoc[]
@@ -449,7 +449,7 @@ the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 [[example_9_9]]
 .Example of a spatial relationship between a property and a function that return a geometry value.
 ====
-It should be noted that the function "Buffer()" in this example is not part of CQL but is an example of a function that an implementation may offer that returns a geometry value.
+It should be noted that the function "Buffer()" in this example is not part of CQL2 but is an example of a function that an implementation may offer that returns a geometry value.
 
 ----
 S_WITHIN(road,Buffer(geometry,10,"m"))
@@ -524,7 +524,7 @@ include::requirements/functions/REQ_get-functions-response-json.adoc[]
 
 include::requirements/requirements_class_arithmetic.adoc[]
 
-This clause specifies requirements for supporting arithmetic expressions in CQL.
+This clause specifies requirements for supporting arithmetic expressions in CQL2.
 An arithmetic expression is an expression composed of an arithmetic operand
 (a property name, a number or a function that returns a number), an arithmetic
 operator (i.e. one of +,-,*,/) and another arithmetic operand.

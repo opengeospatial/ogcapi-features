@@ -23,7 +23,7 @@ Sample requests:
 * JSON Schema of the features of a collection (ground transportation curves): https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/schema
 * Features in a spatial area (vineyards between 7.0° and 7.1° East and between 49.9° and 50.0° North): https://demo.ldproxy.net/vineyards/collections/vineyards/items?bbox=7.0%2C49.9%2C7.1%2C50.0
 * Features selected by an attribute value (vineyards in Lieser): https://demo.ldproxy.net/vineyards/collections/vineyards/items?village=Lieser
-* Same query using a CQL filter: https://demo.ldproxy.net/vineyards/collections/vineyards/items?filter=village%3D%27Lieser%27
+* Same query using a CQL2 filter: https://demo.ldproxy.net/vineyards/collections/vineyards/items?filter=village%3D%27Lieser%27
 * Features selected by time (ground transportation curves last updated in 2011/2012): https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/items?datetime=2011-01-01/2012-12-31
 * Features selected by space, time and attributes (ground transportation curves last updated in 2011/2012, in the city of Daraa, restricted to roads): https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/items?F_CODE=AP030&bbox=36.08%2C32.59%2C36.12%2C32.64&datetime=2011-01-01%2F2012-12-31
 
