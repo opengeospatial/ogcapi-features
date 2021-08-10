@@ -103,10 +103,10 @@ defines the `filter-lang` parameter.
 include::requirements/filter/REQ_filter-lang-param.adoc[]
 
 The enumerated value `cql-text` is used to indicate that the value of the
-<<filter-param,`filter`>> parameter is the <<simple-cql-text,text encoding of CQL>>.
+<<filter-param,`filter`>> parameter is the <<basic-cql-text,text encoding of CQL>>.
 
 The enumerated value `cql-json` is used to indicate that the value of the
-<<filter-param,`filter`>> parameter is the <<simple-cql-JSON,JSON encoding of CQL>>.
+<<filter-param,`filter`>> parameter is the <<basic-cql-JSON,JSON encoding of CQL>>.
 
 Servers that support other filtering languages can extend this list of values
 as necessary although the meanings of any additional values are not described
@@ -135,10 +135,10 @@ This standard defines a filter expression language called the
 this filter expression language is not mandatory and other languages 
 can be used as the value of the <<filter-param,filter parameter>>, too.  
 
-A <<cql-core,simple CQL core>> is defined along with a
+A <<cql-core,Basic CQL core>> is defined along with a
 number of <<cql-enhancements,enhancements>> that add additional, more advanced
-capabilities to the language. Two encodings, a <<simple-cql-text,text encoding>> 
-and a <<simple-cql-json,JSON>> encoding are also defined and
+capabilities to the language. Two encodings, a <<basic-cql-text,text encoding>> 
+and a <<basic-cql-json,JSON>> encoding are also defined and
 recommended if they are suitable for the intended use.
 
 [[filter-response]]
