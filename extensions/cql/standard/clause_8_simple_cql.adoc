@@ -1,21 +1,21 @@
-[[cql-core]]
-== Requirements Class "Basic CQL"
+[[cql2-core]]
+== Requirements Class "Basic CQL2"
 
-[[basic-cql-overview]]
+[[basic-cql2-overview]]
 === Overview
 
-include::requirements/requirements_class_basic-cql.adoc[]
+include::requirements/requirements_class_basic-cql2.adoc[]
 
 This clause defines the core of a query language called `Common Query Language`
-(CQL) that may be used to construct filter expressions. This core is called Basic CQL.
+(CQL2) that may be used to construct filter expressions. This core is called Basic CQL2.
 
 Subsequent clauses define additional filtering capabilities as well as several
-encodings of CQL.
+encodings of CQL2.
 
-[[basic-cql_filter-expression]]
-=== CQL filter expression
+[[basic-cql2_filter-expression]]
+=== CQL2 filter expression
 
-A CQL filter expression is an expression that defines a logically connected
+A CQL2 filter expression is an expression that defines a logically connected
 set of predicates that are evaluated for each item of a collection.
 
 A predicate is an expression that evaluates to the Boolean values of `TRUE`
@@ -29,23 +29,23 @@ to the next predicate in the filter for further evaluation, and so forth.
 If the predicate evaluates to `FALSE` or `NULL` for an item, the item is not
 available for further processing.
 
-A collection item that satisfies ALL the requirements of a CQL filter expression
-evaluates to a Boolean value of `TRUE`; otherwise the CQL filter expression
+A collection item that satisfies ALL the requirements of a CQL2 filter expression
+evaluates to a Boolean value of `TRUE`; otherwise the CQL2 filter expression
 evaluates to `FALSE`.
 
-include::requirements/basic-cql/REQ_cqlfilter.adoc[]
+include::requirements/basic-cql2/REQ_cql2-filter.adoc[]
 
 Literal values do not have to be supported on the left hand side of predicates and 
 property references do not have to be supported on the right hand side of
 predicates.
 
-include::recommendations/basic-cql/PER_cqlfilter.adoc[]
+include::recommendations/basic-cql2/PER_cql2-filter.adoc[]
 
-A Basic CQL filter expression can be constructed by logically connecting one
+A Basic CQL2 filter expression can be constructed by logically connecting one
 or more comparison predicates.
 
-Support for the parts of CQL that are not part of Basic CQL is added in additional
-requirements classes in <<cql-enhancements>>:
+Support for the parts of CQL2 that are not part of Basic CQL2 is added in additional
+requirements classes in <<cql2-enhancements>>:
 
 * The rules `isLikePredicate`, `isBetweenPredicate` and `isInListPredicate` are added by requirements class <<rc_advanced-comparison-operators,Advanced Comparison Operators>>;
 * The rule `spatialPredicate` is added by requirements class <<rc_spatial-operators,Spatial Operators>>;
@@ -55,12 +55,12 @@ requirements classes in <<cql-enhancements>>:
 * The rule `function` is added by requirements class <<rc_functions,Custom Functions>>;
 * The rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
-Examples of Basic CQL filter expressions are included in the subsequent sub-clauses.
+Examples of Basic CQL2 filter expressions are included in the subsequent sub-clauses.
 
-[[basic-cql_literals]]
+[[basic-cql2_literals]]
 === Literal values
 
-A literal value is any part of an CQL filter expression that is used
+A literal value is any part of an CQL2 filter expression that is used
 exactly as it is specified in the expression. Literal values include:
 
 * character strings (rule `characterLiteral`),
@@ -153,13 +153,13 @@ For spatial and temporal geometries existing representations are used:
 
 All temporal literals are in UTC ("Z").
 
-[[basic-cql_property]]
+[[basic-cql2_property]]
 === Property references
 
-Properties in an object being evaluated in the CQL filter expression can be
+Properties in an object being evaluated in the CQL2 filter expression can be
 referenced by their name (rule `propertyName`).
 
-include::requirements/basic-cql/REQ_property.adoc[]
+include::requirements/basic-cql2/REQ_property.adoc[]
 
 For example, a property name used in a scalar expression (rule `scalarExpression`)
 has to be a queryable of type `string`, `number`, `integer` or `boolean`.
@@ -178,12 +178,12 @@ avg(windSpeed)
 ----
 ====
 
-[[basic-cql_comparison-predicates]]
+[[basic-cql2_comparison-predicates]]
 === Standard comparison predicates
 
-include::requirements/basic-cql/REQ_binary-comparison-predicate.adoc[]
+include::requirements/basic-cql2/REQ_binary-comparison-predicate.adoc[]
 
-include::recommendations/simple-sql/PER_time-instant-comparisons.adoc[]
+include::recommendations/basic-cql2/PER_time-instant-comparisons.adoc[]
 
 [[example_8_3]]
 .Binary comparison predicates
@@ -237,7 +237,7 @@ updated >= date('1970-01-01')
 ----
 ====
 
-include::requirements/basic-cql/REQ_null-predicate.adoc[]
+include::requirements/basic-cql2/REQ_null-predicate.adoc[]
 
 [[example_8_7]]
 .Examples of a NULL predicate
@@ -252,8 +252,8 @@ geometry IS NOT NULL
 ----
 ====
 
-=== CQL Encodings
+=== CQL2 Encodings
 
-This OGC API - Features - Part 3 standard defines a <<basic-cql-text,text>>
-encoding and a <<basic-cql-json,JSON>> encoding of CQL that covers Basic CQL
+This OGC API - Features - Part 3 standard defines a <<basic-cql2-text,text>>
+encoding and a <<basic-cql2-json,JSON>> encoding of CQL2 that covers Basic CQL
 and all enhanced capabilities specified in the next clause.

@@ -1,6 +1,6 @@
 #
-# MODULE:  cql.bnf
-# PURPOSE: A BNF grammar for the Common Query Language (CQL).
+# MODULE:  cql2.bnf
+# PURPOSE: A BNF grammar for the Common Query Language (CQL2).
 # HISTORY:
 # DATE         EMAIL                                  DESCRIPTION
 # 13-SEP-2019  pvretano[at]cubewerx.com               Initial creation
@@ -10,7 +10,7 @@
 # 21-DEC-2020  pvretano[at]cubewerx.com               Updates to resolve issues
 
 #=============================================================================#
-# A CQL filter is a logically connected expression of one or more predicates.
+# A CQL2 filter is a logically connected expression of one or more predicates.
 # Predicates include scalar or comparison predicates, spatial predicates or
 # temporal predicates.
 #=============================================================================#
@@ -103,7 +103,7 @@ spatialPredicate =  spatialOperator
                     leftParen geomExpression comma geomExpression rightParen;
 
 # NOTE: The buffer operators (DWITHIN and BEYOND) are not included because
-#       these are outside the scope of a "simple" core for CQL.  These
+#       these are outside the scope of a "simple" core for CQL2.  These
 #       can be added as extensions.
 #
 spatialOperator = "S_INTERSECTS"
