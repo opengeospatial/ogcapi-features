@@ -7,12 +7,14 @@ grouped by their standardization target:
 ** <<rc_filter,Filter>>
 ** <<rc_features-filter,Features Filter>>
 * Filter expressions
-** <<rc_simple-cql,Simple CQL>>
+** <<rc_basic-cql,Basic CQL>>
+** <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
+** <<rc_property-property,Property-Property Comparisons>>
 ** <<rc_spatial-operators,Spatial Operators>>
 ** <<rc_temporal-operators,Temporal Operators>>
-** <<rc_functions,Functions>>
-** <<rc_arithmetic,Arithmetic expressions>>
-** <<rc_arrays,Arrays>>
+** <<rc_array-operators,Array Operators>>
+** <<rc_functions,Custom Functions>>
+** <<rc_arithmetic,Arithmetic Expressions>>
 * Representations of a filter expression
 ** <<rc_cql-text,CQL Text encoding>>
 ** <<rc_cql-json,CQL JSON encoding>>
@@ -24,7 +26,7 @@ class is:
 
 * `filter` - The filter expression.
 * `filter-lang` - The language used in the filter expression.
-* `filter-crs` - The coordinate reference system used in the filter expression.
+* `filter-crs` - The coordinate reference system used in the filter expression, if Part 2 is supported.
 
 This requirements class also defines the Queryables resource (at paths
 `/queryables` and `/collections/{collectionId}/queryables`) that can be
@@ -35,15 +37,15 @@ The <<rc_features-filter,Features Filter>> requirements class defines the
 binding between the <<rc_filter,Filter>> requirements class and the
 <<OAFeat-1,OGC API - Features - Part 1: Core>> standard.
 
-The <<rc_simple-cql,Simple CQL>> requirements class defines the minimal subset
+The <<rc_basic-cql,Basic CQL>> requirements class defines the minimal subset
 of the Common Query Language (CQL) that all implementations must support
-("Simple CQL"). Simple CQL is intended to be a minimal useful set of
+("Basic CQL"). Basic CQL is intended to be a minimal useful set of
 predicates that support enhanced fine-grained read-access to collections of
 resources.  In this case, "enhanced" means filtering capabilities beyond those
-supported by the core OGC API Common standard (i.e., `bbox`, `datetime`
+supported by the OGC API Common standard (i.e., `bbox`, `datetime`
 and optionally collection-specific properties).
 
-NOTE: OGC API - Common is still in draft form and is not an official OGC standard.
+NOTE: OGC API Common is still in draft form and is not an official OGC standard.
 
 The specific set of operators defined in this requirements class is:
 
@@ -53,17 +55,30 @@ The specific set of operators defined in this requirements class is:
 ** not
 * Comparison operators:
 ** equal to
+** not equal to
 ** less than
 ** less than or equal to
 ** greater than
 ** greater than or equal to
-** like
 ** is null
-** between
-** in
+
+All expressions on the left hand side of the operator must be a property, all expressions on the right hand side must be a literal value.
 
 An encoding of CQL may be used as the value of the filter parameters defined
 in the <<rc_filter,Filter>> requirements class.
+
+The <<rc_advanced-comparison-operators,Advanced Comparison Operators>> requirements class specifies additional comparison operators:
+
+* like
+* between
+* in
+
+In addition, requirements to support the following pre-defined string functions:
+
+* upper
+* lower
+
+The <<rc_property-property,Property-Property Comparisons>> requirements class drops the requirement that all expressions on the left hand side must be a property and that all expressions on the right hand side must be a literal value. This supports property-property, but also literal-literal comparisons.
 
 The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support spatial operators.  The list of additional spatial operators that must be supported is:
 
@@ -96,17 +111,7 @@ The list of temporal operators that must be supported is:
 * t_startedby
 * t_starts
 
-The <<rc_functions,Functions>> requirements class specifies requirements for
-supporting function calls (e.g. min, max, etc.) in a CQL expression. Function
-calls are the primary means of extending the language. This requirements class
-also defined a Functions resource (at path `/functions`) that may be used to
-discover the list of available functions.
-
-The <<rc_arithmetic,Arithmetic operators>> requirements class specifies
-requirements for supporting the standard set of arithmetic operators,
-latexmath:[+, -, *, /] in a CQL expression.
-
-The <<rc_arrays,Arrays>> requirements class specifies
+The <<rc_array-operators,Array Operators>> requirements class specifies
 requirements for comparison operators for sets of values. 
 The operators that must be supported are:
 
@@ -114,6 +119,16 @@ The operators that must be supported are:
 * a_contains
 * a_equals 
 * a_overlaps
+
+The <<rc_functions,Custom Functions>> requirements class specifies requirements for
+supporting custom function calls (e.g. min, max, etc.) in a CQL expression. Function
+calls are the primary means of extending the language. This requirements class
+also defined a Functions resource (at path `/functions`) that may be used to
+discover the list of available functions.
+
+The <<rc_arithmetic,Arithmetic Expressions>> requirements class specifies
+requirements for supporting the standard set of arithmetic operators,
+latexmath:[+, -, *, /] in a CQL expression.
 
 The <<rc_cql-text,CQL Text encoding>> requirements class defines
 a text encoding for CQL. Such an encoding is suitable for use with HTTP query
@@ -137,12 +152,14 @@ OGC Compliance Testing web site.
 |Conformance class |URI
 |<<ats_filter,Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter
 |<<ats_features-filter,Features Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter
-|<<ats_simple-cql,Simple CQL>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/simple-cql
+|<<ats_basic-cql,Basic CQL>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql
+|<<ats_advanced-comparison-operators,Advanced Comparison Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators
+|<<ats_property-property,Property-Property Comparisons>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property
 |<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators
 |<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators
-|<<ats_functions,Functions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions
-|<<ats_arithmetic,Arithmetic>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic
-|<<ats_arrays,Arrays>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arrays
+|<<ats_array-operators,Array Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators
+|<<ats_functions,Custom Functions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions
+|<<ats_arithmetic,Arithmetic Expressions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic
 |<<ats_cql-text,CQL Text encoding>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text
 |<<ats_cql-json,CQL JSON encoding>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json 
 |===
@@ -155,12 +172,14 @@ Because CQL is not exclusively useful for features, it is anticipated that the
 following requirements classes:
 
 * <<rc_filter,Filter>>
-* <<rc_simple-cql,Simple CQL>>
+* <<rc_basic-cql,Basic CQL>>
+* <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
+* <<rc_property-property,Property-Property Comparisons>>
 * <<rc_spatial-operators,Spatial Operators>>
 * <<rc_temporal-operators,Temporal Operators>>
-* <<rc_functions,Functions>>
-* <<rc_arithmetic,Arithmetic expressions>>
-* <<rc_arrays,Arrays>>
+* <<rc_array-operators,Arrays Operators>>
+* <<rc_functions,Custom Functions>>
+* <<rc_arithmetic,Arithmetic Expressions>>
 * <<rc_cql-text,CQL Text encoding>>
 * <<rc_cql-json,CQL JSON encoding>>
 
