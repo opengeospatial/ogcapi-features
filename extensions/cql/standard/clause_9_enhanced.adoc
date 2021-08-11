@@ -22,7 +22,7 @@ not supported by Basic CQL.
 
 include::requirements/requirements_class_advanced_comparison_operators.adoc[]
 
-This requirements class adds support for the operators LIKE, BETWEEN and IN.
+This requirements class adds support for the operators LIKE, BETWEEN and IN as well as for pre-defined string functions UPPER() and LOWER().
 
 include::requirements/advanced-comparison-operators/REQ_like-predicate.adoc[]
 
@@ -101,6 +101,8 @@ category NOT IN (1,2,3,4)
 }
 ----
 ====
+
+#TODO: add requirement for UPPER() and LOWER(). However, there is still the unresolved question how we exactly define UPPER() and LOWER(). Or whether we should define a unicode case folding function instead (see http://unicode.org/reports/tr21/tr21-5.html#Caseless_Matching[Unicode] or https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[W3C]). And there is the open comment that this capability should be in a separate requirements class.#
 
 [[spatial-operators]]
 === Requirements Class "Spatial Operators"

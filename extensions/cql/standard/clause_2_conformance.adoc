@@ -78,7 +78,7 @@ In addition, requirements to support the following pre-defined string functions:
 * upper
 * lower
 
-The <<rc_property-property,Property-Property Comparisons>> requirements class drops the requirement that all expressions on the left hand side must be a property and that all expressions on the right hand side must be a literal value. This supports property-property, but also literal-literal comparisons.
+The <<rc_property-property,Property-Property Comparisons>> requirements class drops the permission to restrict expressions on the left hand side to properties and to restrict expressions on the right hand side to literal values. This supports property-property, but also literal-literal comparisons.
 
 The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support spatial operators.  The list of additional spatial operators that must be supported is:
 
