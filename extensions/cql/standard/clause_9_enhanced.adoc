@@ -104,6 +104,62 @@ category NOT IN (1,2,3,4)
 
 #TODO: add requirement for UPPER() and LOWER(). However, there is still the unresolved question how we exactly define UPPER() and LOWER(). Or whether we should define a unicode case folding function instead (see http://unicode.org/reports/tr21/tr21-5.html#Caseless_Matching[Unicode] or https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[W3C]). And there is the open comment that this capability should be in a separate requirements class.#
 
+[[basic-spatial-operators]]
+=== Requirements Class "Basic Spatial Operators"
+
+include::requirements/requirements_class_basic-spatial-operators.adoc[]
+
+A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial operator.
+
+In this conformance class, the only required spatial operator is _intersects_. Additional spatial operators are specified in the <<rc_spatial-operators,Spatial Operators>> requirements class.
+
+include::requirements/basic-spatial-operators/REQ_spatial-predicate.adoc[]
+
+include::requirements/basic-spatial-operators/REQ_spatial-operators.adoc[]
+
+include::recommendations/basic-spatial-operators/PER_spatial-predicates.adoc[]
+
+CQL uses Well-Known Text (WKT) to encode geometry literals. Since WKT does not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. In this standard, the `filter-crs` query parameter is used to pass the CRS information to the server.
+
+[[example_9_1]]
+.Example spatial predicate
+====
+----
+S_INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 32.288402,36.320008 32.288458,36.319836 32.288087)))
+----
+
+[source,JSON]
+----
+{ "s_intersects": [
+   { "property": "geometry" },
+   {
+      "type": "Polygon",
+      "coordinates": [
+         [
+            [36.319836, 32.288087],
+            [36.320041, 32.288032],
+            [36.320210, 32.288402],
+            [36.320008, 32.288458],
+            [36.319836, 32.288087]
+         ]
+      ]
+   }
+] }
+----
+====
+
+[[example_9_2]]
+.Example for the filter-crs query parameter
+====
+----
+...filter-lang=cql-text&
+   filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
+   filter=S_INTERSECTS(geometry,POLYGON((379213.87 3610774.16,379233.84 3610769.70,379246.15 3610812.39,379226.49 3610816.88,379213.87 3610774.16)))...
+----
+
+Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
+====
+
 [[spatial-operators]]
 === Requirements Class "Spatial Operators"
 
@@ -111,17 +167,7 @@ include::requirements/requirements_class_spatial-operators.adoc[]
 
 This requirement adds a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL filter expression.
 
-A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial operator.
-
-include::requirements/spatial-operators/REQ_spatial-predicate.adoc[]
-
 include::requirements/spatial-operators/REQ_spatial-operators.adoc[]
-
-include::recommendations/spatial-operators/PER_spatial-predicates.adoc[]
-
-CQL uses Well-Known Text (WKT) to encode geometry literals. Since WKT does not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. In this standard, the `filter-crs` query parameter is used to pass the CRS information to the server.
-
-NOTE: The spatial predicates currently use a different pattern than the comparison and temporal predicates and are written as function calls.  This difference is inherited from previous versions of CQL. This is an open issue: Whether this version of CQL used in the OGC API - Features - Part 3 standard should change the spatial predicates to be consistent with the other predicates or to keep the legacy because of existing CQL implementations.  Comments are welcome in the https://github.com/opengeospatial/ogcapi-features/issues/493[GitHub issue] on this topic.
 
 The following table lists the mathematical definitions of each spatial operator as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
 
@@ -160,7 +206,7 @@ image::images/within.png[alt=Within,width=70%]
 
 NOTE: If geometry *_a_* `S_CONTAINS` geometry *_b_*, then geometry *_b_* is `S_WITHIN` geometry *_a_*.
 
-[[example_9_1]]
+[[example_9_3]]
 .Example of a spatial relationship between a property and a literal geometry.
 ====
 ----
@@ -191,45 +237,6 @@ S_CROSSES(road,POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
    ]
 }
 ----
-====
-
-[[example_9_2]]
-.Example spatial predicate
-====
-----
-S_INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 32.288402,36.320008 32.288458,36.319836 32.288087)))
-----
-
-[source,JSON]
-----
-{ "s_intersects": [
-   { "property": "geometry" },
-   {
-      "type": "Polygon",
-      "coordinates": [
-         [
-            [36.319836, 32.288087],
-            [36.320041, 32.288032],
-            [36.320210, 32.288402],
-            [36.320008, 32.288458],
-            [36.319836, 32.288087]
-         ]
-      ]
-   }
-] }
-----
-====
-
-[[example_9_3]]
-.Example for the filter-crs query parameter
-====
-----
-...filter-lang=cql-text&
-   filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
-   filter=S_INTERSECTS(geometry,POLYGON((379213.87 3610774.16,379233.84 3610769.70,379246.15 3610812.39,379226.49 3610816.88,379213.87 3610774.16)))...
-----
-
-Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
 ====
 
 [[temporal-operators]]

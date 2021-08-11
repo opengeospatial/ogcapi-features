@@ -10,6 +10,7 @@ grouped by their standardization target:
 ** <<rc_basic-cql,Basic CQL>>
 ** <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
 ** <<rc_property-property,Property-Property Comparisons>>
+** <<rc_basic-spatial-operators,Basic Spatial Operators>>
 ** <<rc_spatial-operators,Spatial Operators>>
 ** <<rc_temporal-operators,Temporal Operators>>
 ** <<rc_array-operators,Array Operators>>
@@ -78,15 +79,16 @@ In addition, requirements to support the following pre-defined string functions:
 * upper
 * lower
 
-The <<rc_property-property,Property-Property Comparisons>> requirements class drops the permission to restrict expressions on the left hand side to properties and to restrict expressions on the right hand side to literal values. This supports property-property, but also literal-literal comparisons.
+The <<rc_basic-spatial-operators,Basic Spatial Operators>> requirements class specifies minimal requirements for servers that support spatial operators. Only the following spatial operator must be supported:
 
-The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support spatial operators.  The list of additional spatial operators that must be supported is:
+* s_intersects
+
+The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support a richer set of spatial operators.  The list of additional spatial operators that must be supported is:
 
 * s_contains
 * s_crosses
 * s_disjoint
 * s_equals
-* s_intersects
 * s_overlaps
 * s_touches
 * s_within
@@ -119,6 +121,8 @@ The operators that must be supported are:
 * a_contains
 * a_equals 
 * a_overlaps
+
+The <<rc_property-property,Property-Property Comparisons>> requirements class drops the permission to restrict expressions on the left hand side to properties and to restrict expressions on the right hand side to literal values. This supports property-property, but also literal-literal comparisons.
 
 The <<rc_functions,Custom Functions>> requirements class specifies requirements for
 supporting custom function calls (e.g. min, max, etc.) in a CQL expression. Function
@@ -154,10 +158,11 @@ OGC Compliance Testing web site.
 |<<ats_features-filter,Features Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter
 |<<ats_basic-cql,Basic CQL>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql
 |<<ats_advanced-comparison-operators,Advanced Comparison Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators
-|<<ats_property-property,Property-Property Comparisons>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property
+|<<ats_basic-spatial-operators,Basic Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators
 |<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators
 |<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators
 |<<ats_array-operators,Array Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators
+|<<ats_property-property,Property-Property Comparisons>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property
 |<<ats_functions,Custom Functions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions
 |<<ats_arithmetic,Arithmetic Expressions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic
 |<<ats_cql-text,CQL Text encoding>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text
@@ -175,6 +180,7 @@ following requirements classes:
 * <<rc_basic-cql,Basic CQL>>
 * <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
 * <<rc_property-property,Property-Property Comparisons>>
+* <<rc_basic-spatial-operators,Basic Spatial Operators>>
 * <<rc_spatial-operators,Spatial Operators>>
 * <<rc_temporal-operators,Temporal Operators>>
 * <<rc_array-operators,Arrays Operators>>
