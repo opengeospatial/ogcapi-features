@@ -1,0 +1,9 @@
+[[req_cql2-json_basic-spatial-operators]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-json/basic-spatial-operators* 
+^|Condition |Server implements requirements class <<rc_basic-spatial-operators,Basic Spatial Operators>>
+^|A |The server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema components:
+
+* "#/$defs/s_intersectsExpression"
+|===
