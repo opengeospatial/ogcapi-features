@@ -1,6 +1,6 @@
-# OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)
+# OGC API - Features - Part 3: Filtering and the Common Query Language (CQL2)
 
-This folder contains the content for the candidate standard [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288).
+This folder contains the content for the candidate standard [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL2)](https://portal.ogc.org/files/96288).
 
 ## Status
 
@@ -15,16 +15,16 @@ The issues are managed in a [GitHub project board](https://github.com/opengeospa
 The candidate standard specifies three query parameters that can be used to select a subset of the features:
 
 - `filter`: The filter expression, like a WHERE clause in SQL.
-- `filter-lang`: The language of the filter expression. The candidate standard specifies the Common Query Language (CQL) and two encodings for filter expressions - a text grammar (`cql-text`, the default) and a JSON representation (`cql-json`).
+- `filter-lang`: The language of the filter expression. The candidate standard specifies the Common Query Language (CQL2) and two encodings for filter expressions - a text grammar (`cql2-text`, the default) and a JSON representation (`cql2-json`).
 - `filter-crs`: By default, all geometries in filter expressions are in the coordinate reference system WGS 84 (longitude, latitude, optional height). If the geometries in the filter expression are in a different coordinate reference system, that coordinate reference system is specified in this parameter. It must be one of the coordinate reference systems that is supported by the API for the feature collection as declared in the [`crs` property of the Collection](https://docs.opengeospatial.org/is/18-058/18-058.html#crs-discovery).
 
-A simple example: Select all roads (attribute F_CODE is AP030) that are motorways (attribute RTY is 1 or 2) that have been changed (attribute ZI001_SDV) after 2011. Filter expression in CQL Text: [`F_CODE='AP030' AND RTY IN (1,2) AND ZI001_SDV AFTER 2011-12-31T23:59:59Z`](https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/items?filter=F_CODE%3D%27AP030%27%20AND%20ZI001_SDV%20AFTER%202011-12-31T23%3A59%3A59Z%20AND%20RTY%20IN%20(1%2C2)).
+A simple example: Select all roads (attribute F_CODE is AP030) that are motorways (attribute RTY is 1 or 2) that have been changed (attribute ZI001_SDV) after 2011. Filter expression in CQL2 Text: [`F_CODE='AP030' AND RTY IN (1,2) AND ZI001_SDV AFTER 2011-12-31T23:59:59Z`](https://demo.ldproxy.net/daraa/collections/TransportationGroundCrv/items?filter=F_CODE%3D%27AP030%27%20AND%20ZI001_SDV%20AFTER%202011-12-31T23%3A59%3A59Z%20AND%20RTY%20IN%20(1%2C2)).
 
-Examples for CQL expressions in both CQL Text and CQL JSON are available in the [examples folder](standard/schema/examples).
+Examples for CQL2 expressions in both CQL2 Text and CQL2 JSON are available in the [examples folder](standard/schema/examples).
 
-CQL supports filter predicates for standard data types like strings, numbers and boolean as well as for spatial geometries (point, lines, polygons) and temporal geometries (instants and intervals). Every CQL implementation must support a subset of CQL ("Simple CQL") with more advanced capabilities (array operators, more spatial and temporal operators, functions, arithmetic expressions) in separate conformance classes that can be supported, if needed. The conformance classes supported by an API can be determined by inspecting the [Conformance Declaration](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_declaration_of_conformance_classes).
+CQL2 supports filter predicates for standard data types like strings, numbers and boolean as well as for spatial geometries (point, lines, polygons) and temporal geometries (instants and intervals). Every CQL2 implementation must support a subset of CQL2 ("Simple CQL2") with more advanced capabilities (array operators, more spatial and temporal operators, functions, arithmetic expressions) in separate conformance classes that can be supported, if needed. The conformance classes supported by an API can be determined by inspecting the [Conformance Declaration](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_declaration_of_conformance_classes).
 
-![CQL conformance classes](./cql-cc.png "CQL conformance classes")
+![CQL2 conformance classes](./cql2-cc.png "CQL2 conformance classes")
 
 ## Filtering capabilities specified in other parts of OGC API Features
 
@@ -57,8 +57,8 @@ Conformance classes:
 - Features Filter
 - Simple CQL
 - Enhanced Spatial Operators
-- CQL Text
-- CQL JSON
+- CQL2 Text
+- CQL2 JSON
 
 Limitations:
 
@@ -78,7 +78,7 @@ Conformance classes:
 - Filter
 - Features Filter
 - Simple CQL
-- CQL Text
+- CQL2 Text
 
 Limitations:
 

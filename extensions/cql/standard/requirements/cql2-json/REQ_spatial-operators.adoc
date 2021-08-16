@@ -1,0 +1,15 @@
+[[req_cql2-json_spatial-operators]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-json/spatial-operators* 
+^|Condition |Server implements requirements class <<rc_spatial-operators,Spatial Operators>>
+^|A |The server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema components:
+
+* "#/$defs/s_containsExpression"
+* "#/$defs/s_crossesExpression"
+* "#/$defs/s_disjointExpression"
+* "#/$defs/s_equalsExpression"
+* "#/$defs/s_overlapsExpression"
+* "#/$defs/s_touchesExpression"
+* "#/$defs/s_withinExpression"
+|===

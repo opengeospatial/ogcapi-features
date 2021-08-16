@@ -1,0 +1,7 @@
+[[req_cql2-text_spatial-operators]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-text/spatial-operators* 
+^|Condition |Server implements requirements class <<rc_spatial-operators,Spatial Operators>>
+^|A |The server SHALL be able to parse and evaluate all spatial operators encoded as a text string that validate against the BNF production fragments identified in the <<req_spatial-operators,Spatial Operators>> requirements class.
+|===

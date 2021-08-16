@@ -1,7 +1,0 @@
-[[req_basic-cql_cqlfilter]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/basic-cql/cqlfilter* 
-^|A |A server SHALL support a CQL filter expression composed of a logically connected series of one or more predicates as described by the BNF rule `booleanValueExpression` in <<cql-bnf>> exception that the rules `isLikePredicate`, `isBetweenPredicate`, `isInListPredicate`, `spatialPredicate`, `temporalPredicate`, `arrayPredicate`, `function` and `arithmeticExpression` as well as the pre-defined functions `UPPER` and `LOWER` in the rules `propertyName`, `characterLiteral` and `function` do not have to be supported.
-|===
-
