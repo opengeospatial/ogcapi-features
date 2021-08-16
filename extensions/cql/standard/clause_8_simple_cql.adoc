@@ -1,18 +1,18 @@
 [[cql-core]]
-== Requirements Class "Simple CQL"
+== Requirements Class "Basic CQL"
 
-[[simple-cql-overview]]
+[[basic-cql-overview]]
 === Overview
 
-include::requirements/requirements_class_simple-cql.adoc[]
+include::requirements/requirements_class_basic-cql.adoc[]
 
 This clause defines the core of a query language called `Common Query Language`
-(CQL) that may be used to construct filter expressions. This core is called Simple CQL.
+(CQL) that may be used to construct filter expressions. This core is called Basic CQL.
 
 Subsequent clauses define additional filtering capabilities as well as several
 encodings of CQL.
 
-[[simple-cql_filter-expression]]
+[[basic-cql_filter-expression]]
 === CQL filter expression
 
 A CQL filter expression is an expression that defines a logically connected
@@ -33,27 +33,31 @@ A collection item that satisfies ALL the requirements of a CQL filter expression
 evaluates to a Boolean value of `TRUE`; otherwise the CQL filter expression
 evaluates to `FALSE`.
 
-include::requirements/simple-cql/REQ_cqlfilter.adoc[]
+include::requirements/basic-cql/REQ_cqlfilter.adoc[]
 
-A Simple CQL filter expression can be constructed by logically connecting one
-or more of the following classes of predicates:
+Literal values do not have to be supported on the left hand side of predicates and 
+property references do not have to be supported on the right hand side of
+predicates.
 
-* comparison predicates
-* spatial predicates
-* temporal predicates
+include::recommendations/basic-cql/PER_cqlfilter.adoc[]
 
-Support for the parts of CQL that are not part of Simple CQL is added in additional
+A Basic CQL filter expression can be constructed by logically connecting one
+or more comparison predicates.
+
+Support for the parts of CQL that are not part of Basic CQL is added in additional
 requirements classes in <<cql-enhancements>>:
 
-* The rule `arrayPredicate` is added by requirements class <<rc_arrays,Arrays>>;
-* The rule `function` is added by requirements class <<rc_functions,Functions>>;
-* The rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>;
-* The additional values in rule `spatialOperator` are added by requirements class <<rc_spatial-operators,Spatial Operators>>;
-* The additional values in rule `temporalOperator` are added by requirements class <<rc_temporal-operators,Temporal Operators>>.
+* The rules `isLikePredicate`, `isBetweenPredicate` and `isInListPredicate` are added by requirements class <<rc_advanced-comparison-operators,Advanced Comparison Operators>>;
+* The rule `spatialPredicate` is added by requirements class <<rc_spatial-operators,Spatial Operators>>;
+* The rule `temporalPredicate` is added by requirements class <<rc_temporal-operators,Temporal Operators>>.
+* The rule `arrayPredicate` is added by requirements class <<rc_array-operators,Array Operators>>;
+* The permission to not support the literal rules on the left hand side of predicates and the rule `propertyName` on the right hand side are removed by requirements class <<rc_property-property,Property-Property Comparisons>>;
+* The rule `function` is added by requirements class <<rc_functions,Custom Functions>>;
+* The rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
-Examples of Simple CQL filter expressions are included in the subsequent sub-clauses.
+Examples of Basic CQL filter expressions are included in the subsequent sub-clauses.
 
-[[simple-cql_literals]]
+[[basic-cql_literals]]
 === Literal values
 
 A literal value is any part of an CQL filter expression that is used
@@ -149,13 +153,13 @@ For spatial and temporal geometries existing representations are used:
 
 All temporal literals are in UTC ("Z").
 
-[[simple-cql_property]]
+[[basic-cql_property]]
 === Property references
 
 Properties in an object being evaluated in the CQL filter expression can be
 referenced by their name (rule `propertyName`).
 
-include::requirements/simple-cql/REQ_property.adoc[]
+include::requirements/basic-cql/REQ_property.adoc[]
 
 For example, a property name used in a scalar expression (rule `scalarExpression`)
 has to be a queryable of type `string`, `number`, `integer` or `boolean`.
@@ -174,10 +178,10 @@ avg(windSpeed)
 ----
 ====
 
-[[simple-cql_comparison-predicates]]
-=== Comparison predicates
+[[basic-cql_comparison-predicates]]
+=== Standard comparison predicates
 
-include::requirements/simple-cql/REQ_binary-comparison-predicate.adoc[]
+include::requirements/basic-cql/REQ_binary-comparison-predicate.adoc[]
 
 include::recommendations/simple-sql/PER_time-instant-comparisons.adoc[]
 
@@ -233,79 +237,7 @@ updated >= date('1970-01-01')
 ----
 ====
 
-include::requirements/simple-cql/REQ_like-predicate.adoc[]
-
-[[example_8_4]]
-.Example of a LIKE predicate
-====
-----
-name LIKE 'Smith%' 
-----
-
-[source,JSON]
-----
-{"like": [ { "property": "name" }, "Smith%" ] }
-----
-====
-
-include::requirements/simple-cql/REQ_between-predicate.adoc[]
-
-[[example_8_5]]
-.Examples of a BETWEEN predicate
-====
-----
-depth BETWEEN 100.0 and 150.0
-----
-
-[source,JSON]
-----
-{
-  "between": {
-     "value": { "property": "depth" },
-     "lower": 100.0,
-     "upper": 150.0
-  }
-}
-----
-====
-
-include::requirements/simple-cql/REQ_in-predicate.adoc[]
-
-[[example_8_6]]
-.Examples of a IN predicate
-====
-----
-cityName IN ('Toronto','Frankfurt','Tokyo','New York')
-----
-
-[source,JSON]
-----
-{
-  "in": {
-     "value": { "property": "cityName" },
-     "list": [ "Toronto", "Frankfurt", "Tokyo", "New York" ]
-  }
-}
-----
-
-----
-category NOT IN (1,2,3,4)
-----
-
-[source,JSON]
-----
-{
-  "not": {
-    "in": {
-       "value": { "property": "category" },
-       "list": [ 1, 2, 3, 4 ]
-    }
-  }
-}
-----
-====
-
-include::requirements/simple-cql/REQ_null-predicate.adoc[]
+include::requirements/basic-cql/REQ_null-predicate.adoc[]
 
 [[example_8_7]]
 .Examples of a NULL predicate
@@ -322,6 +254,6 @@ geometry IS NOT NULL
 
 === CQL Encodings
 
-This OGC API - Features - Part 3 standard defines a <<simple-cql-text,text>>
-encoding and a <<simple-cql-json,JSON>> encoding of CQL that covers Simple CQL
+This OGC API - Features - Part 3 standard defines a <<basic-cql-text,text>>
+encoding and a <<basic-cql-json,JSON>> encoding of CQL that covers Basic CQL
 and all enhanced capabilities specified in the next clause.

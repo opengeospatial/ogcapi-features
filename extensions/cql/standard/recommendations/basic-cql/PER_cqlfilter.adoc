@@ -1,0 +1,8 @@
+[[per_basic-cql_cqlfilter]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/basic-cql/cqlfilter* 
+^|A |In the rule `binaryComparisonPredicate` the server MAY only support `propertyName` in the first `scalarExpression` rule as well as `characterLiteral`, `numericLiteral`, `booleanLiteral`, and `instantLiteral` in the second `scalarExpression` rule.
+^|B |In the rule `isNullPredicate` the server MAY only support `propertyName` in the `scalarExpression` rule.
+|===
+
