@@ -1,27 +1,27 @@
 == Terms and Definitions
 This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
 
-For the purposes of this document, the following additional terms and definitions apply in addition to the terms defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
+For the purposes of this document, the following additional terms and definitions apply in addition to the terms defined in <<OAFeat-1,Geospatial API for Features - Part 1: Core>>.
 
 coordinate::
-one of a sequence of numbers designating the position of a point [ISO 19111:2019, definition 3.1.5]
+one of a sequence of numbers designating the position of a point [SOURCE: ISO 19111:2019, 3.1.5]
 
 NOTE: In a spatial coordinate reference system, the coordinate numbers are qualified by units.
 
 coordinate reference system (CRS)::
-*coordinate system* that is related to an object by a datum [ISO 19111:2019, definition 3.1.9]
+*coordinate system* that is related to an object by a datum [SOURCE: ISO 19111:2019, 3.1.9]
 
 coordinate system::
-set of mathematical rules for specifying how *coordinates* are to be assigned to points [ISO 19111:2019, definition 3.1.11]
+set of mathematical rules for specifying how *coordinates* are to be assigned to points [SOURCE: ISO 19111:2019, 3.1.11]
 
 feature::
-abstraction of real world phenomena [ISO 19101-1:2014]
+abstraction of real world phenomena [SOURCE: ISO 19101-1:2014, 4.1.11, modified - Note 1 to entry has been added]
 
 NOTE: More details about the term 'feature' may be found in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practice>> in the section link:https://www.w3.org/TR/sdw-bp/#spatial-things-features-and-geometry['Spatial Things, Features and Geometry'].
 
 [[_feature_collection]]
 feature collection; collection::
-a set of *features* from a dataset
+a set of *features* from a dataset [SOURCE: ISO 19168-1:2020, 3.1.4]
 
 spatial feature collection; spatial collection::
 a *feature collection* that includes one or more geometry-valued properties

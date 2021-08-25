@@ -1,8 +1,8 @@
 == Scope
 
-This document specifies an extension to the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard that defines the behavior of a server that supports the ability to present geometry valued properties in a response document in one from a list of supported Coordinates Reference Systems (CRS).
+This document specifies an extension to the <<OAFeat-1,Geospatial API for Features - Part 1: Core>> standard that defines the behavior of a server that supports the ability to present geometry valued properties in a response document in one from a list of supported Coordinates Reference Systems (CRS).  
 
-This document assumes that each supported CRS can be referenced by a uniform resource identifier (i.e., a URI) such as `http://www.opengis.net/def/crs/EPSG/0/4326`.
+Each supported CRS is specified by reference using a uniform resource identifier (URI).
 
 This document specifies:
 
