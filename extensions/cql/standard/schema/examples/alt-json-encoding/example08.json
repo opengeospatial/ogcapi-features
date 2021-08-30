@@ -1,7 +1,7 @@
 ["any",
-  ["=", ["get", "beamMode"], "ScanSAR Narrow"],
-  ["=", ["get", "swathDirection"], "ascending"],
-  ["=", ["get", "polarization"], "HH+VV+HV+VH"],
+  ["==", ["get", "beamMode"], "ScanSAR Narrow"],
+  ["==", ["get", "swathDirection"], "ascending"],
+  ["==", ["get", "polarization"], "HH+VV+HV+VH"],
   ["s_intersects", ["get", "footprint"],
                    {"type": "Polygon", "coordinates": [[
                    [-77.117938,38.936860], [-77.040604,39.995648],
