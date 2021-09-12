@@ -980,8 +980,10 @@
          "maxItems": 2,
          "items": {
             "oneOf": [
-               { "$ref": "#/$defs/instantString" },
-               { "type": "string", "enum": [".."] }
+               {"$ref": "#/$defs/instantString"},
+               {"type": "string", "enum": [".."]},
+               {"$ref": "#/$defs/propertyRef"},
+               {"$ref": "#/$defs/functionRef"}
             ]
          }
       }
