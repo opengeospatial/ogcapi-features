@@ -519,13 +519,10 @@ timestampInstant = "TIMESTAMP"
 
 timestampInstantString = quote fullDate "T" utcTime quote;
 
-instantLiteral = fullDate | fullDate "T" utcTime;
-
 intervalLiteral = "INTERVAL" 
                   leftParen instantParameter comma instantParameter rightParen;
 
-instantParameter = instantLiteral
-                 | dateInstantString
+instantParameter = dateInstantString
                  | timestampInstantString
                  | quote dotdot quote
                  | propertyName
