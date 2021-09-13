@@ -9,6 +9,7 @@ grouped by their standardization target:
 * Filter expressions
 ** <<rc_basic-cql2,Basic CQL2>>
 ** <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
+** <<rc_case-insensitive-comparison,Case-insensitive Comparison>>
 ** <<rc_basic-spatial-operators,Basic Spatial Operators>>
 ** <<rc_spatial-operators,Spatial Operators>>
 ** <<rc_temporal-operators,Temporal Operators>>
@@ -74,10 +75,9 @@ The <<rc_advanced-comparison-operators,Advanced Comparison Operators>> requireme
 * between
 * in
 
-In addition, requirements to support the following pre-defined string functions:
+The <<rc_case-insensitive-comparison,Case-insensitive Comparison>> requirements class adds a capability for case-insensitive string comparisons:
 
-* upper
-* lower
+* #TODO#
 
 The <<rc_basic-spatial-operators,Basic Spatial Operators>> requirements class specifies minimal requirements for servers that support spatial operators. Only the following spatial operator must be supported:
 
@@ -158,6 +158,7 @@ OGC Compliance Testing web site.
 |<<ats_features-filter,Features Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter
 |<<ats_basic-cql2,Basic CQL2>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql
 |<<ats_advanced-comparison-operators,Advanced Comparison Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators
+|<<ats_case-insensitive-comparison,Case-insensitive Comparison>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/case-insensitive-comparison
 |<<ats_basic-spatial-operators,Basic Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators
 |<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators
 |<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators
@@ -179,11 +180,12 @@ following requirements classes:
 * <<rc_filter,Filter>>
 * <<rc_basic-cql2,Basic CQL2>>
 * <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
-* <<rc_property-property,Property-Property Comparisons>>
+* <<rc_case-insensitive-comparison,Case-insensitive Comparison>>
 * <<rc_basic-spatial-operators,Basic Spatial Operators>>
 * <<rc_spatial-operators,Spatial Operators>>
 * <<rc_temporal-operators,Temporal Operators>>
 * <<rc_array-operators,Arrays Operators>>
+* <<rc_property-property,Property-Property Comparisons>>
 * <<rc_functions,Custom Functions>>
 * <<rc_arithmetic,Arithmetic Expressions>>
 * <<rc_cql2-text,CQL2 Text encoding>>

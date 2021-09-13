@@ -7,6 +7,7 @@ This clause specifies requirements for enhancements to <<cql2-core,Basic CQL2>>.
 Specifically, this clause defines requirements for:
 
 * Advanced comparison operators;
+* Case-insensitive comparison;
 * Spatial operators;
 * Temporal operators;
 * Array operators;
@@ -22,7 +23,7 @@ not supported by Basic CQL2.
 
 include::requirements/requirements_class_advanced_comparison_operators.adoc[]
 
-This requirements class adds support for the operators LIKE, BETWEEN and IN as well as for pre-defined string functions UPPER() and LOWER().
+This requirements class adds support for the operators LIKE, BETWEEN and IN.
 
 include::requirements/advanced-comparison-operators/REQ_like-predicate.adoc[]
 
@@ -102,7 +103,14 @@ category NOT IN (1,2,3,4)
 ----
 ====
 
-#TODO: add requirement for UPPER() and LOWER(). However, there is still the unresolved question how we exactly define UPPER() and LOWER(). Or whether we should define a unicode case folding function instead (see http://unicode.org/reports/tr21/tr21-5.html#Caseless_Matching[Unicode] or https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[W3C]). And there is the open comment that this capability should be in a separate requirements class.#
+[[case-insensitive-comparison]]
+=== Requirements Class "Case-insensitive Comparison"
+
+include::requirements/requirements_class_case-insensitive-comparison.adoc[]
+
+This requirements class adds support for case-insensitive string comparisons.
+
+#TODO: add requirement for UPPER() and LOWER(). However, there is still the unresolved question how we exactly define UPPER() and LOWER(). Or whether we should define a unicode case folding function instead (see http://unicode.org/reports/tr21/tr21-5.html#Caseless_Matching[Unicode] or https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[W3C]).#
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
