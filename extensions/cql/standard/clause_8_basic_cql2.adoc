@@ -33,6 +33,8 @@ A collection item that satisfies ALL the requirements of a CQL2 filter expressio
 evaluates to a Boolean value of `TRUE`; otherwise the CQL2 filter expression
 evaluates to `FALSE`.
 
+NOTE: The requirements in the rest of this specification only discuss predicates as evaluating to `TRUE` or `FALSE` and don't explicitly discuss predicates that evaluate to `NULL`.  For the purpose of evaluating a CQL2 filter expression, a query prediate that evaluates to `NULL` (i.e. of unknown value) is essentually the same as one that evaluates to `FALSE`.  That is, its effect is that a collection item being evaluated by the CQL2 filter expression would _not_ be passed on for further evaluation.
+
 include::requirements/basic-cql2/REQ_cql2-filter.adoc[]
 
 Literal values do not have to be supported on the left hand side of predicates and 
