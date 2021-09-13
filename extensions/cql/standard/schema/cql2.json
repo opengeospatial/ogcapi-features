@@ -132,13 +132,22 @@
             "between": {
                "type": "array",
                "items": [
-                  { "$ref": "#/$defs/valueExpression" },
-                  { "$ref": "#/$defs/scalarExpression" },
-                  { "$ref": "#/$defs/scalarExpression" }
+                  { "$ref": "#/$defs/numericExpression" },
+                  { "$ref": "#/$defs/numericExpression" },
+                  { "$ref": "#/$defs/numericExpression" }
                ],
                "additionalItems": false
             }
          }
+      },
+
+      "numericExpression": {
+         "oneOf": [
+            {"type": "number"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"},
+            {"$ref": "#/$defs/arithmeticExpression"}
+         ]
       },
 
       "isLikePredicate": {
@@ -670,6 +679,7 @@
             { "type": "string" },
             { "type": "number" },
             { "type": "boolean"},
+            { "$ref": "#/$defs/instantLiteral" },
             {
               "type": "object",
               "required": [ "upper" ],
