@@ -91,6 +91,68 @@ include::recommendations/filter/REC_queryables-schema.adoc[]
 ----
 ====
 
+[[example_1b]]
+.Filtering on complex data structures
+====
+Queryables also support simplified filtering on complex data structures. This example illustrates one potential approach to define a queryable on specific https://stacspec.org[SpatioTemporal Asset Catalog (STAC)] assets. The following is a STAC snippet:
+
+[source,JSON]
+----
+"features": [
+  {
+    "type": "Feature",
+    "assets": {
+      "B5": {
+        "eo:bands": [
+          {
+            "common_name": "nir",
+            "name": "B5"
+          }
+        ],
+        "href": "https://landsat-pds.s3.us-west-2.amazonaws.com/c1/L8/060/247/LC08_L1TP_060247_20180905_20180912_01_T1/LC08_L1TP_060247_20180905_20180912_01_T1_B5.TIF",
+        "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+      }
+    }
+  }
+]
+----
+
+A common type of filter is to fetch only resources that have in their `assets` object a value that has an `eo:bands` value that contains a `common_name` value of "nir". 
+
+This could be implemented using a queryable `common_band_names` defined as an array of strings:
+
+[source,JSON]
+----
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://example.net/stac/collections/landsat/queryables",
+  "type": "object",
+  "title": "A STAC item",
+  "properties": {
+    "common_band_names": {
+      "title": "Common band names",
+      "description": "an array of common band names included in the assets",
+      "type" : "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
+----
+
+Internally this could be mapped to the following JSON Path for a STAC item (`item`): 
+
+`item['assets'][\*]['eo:bands'][\*]['common_name']`
+
+Note that the JSON Path is just included here to clarify the mapping. An implementation would use a mapping that fits its backend datastore, but these details are hidden from the user.
+
+A client can now use, e.g., the CQL2 array predicates to filter with the queryable. Examples using the CQL2 text encoding:
+
+* `A_CONTAINS(common_band_names, ["nir"])` - includes at least a 'nir' band
+* `A_EQUALS(common_band_names, ["nir","blue"])` - 'nir' and 'blue' exist for the feature, but no other band
+====
+
 [[filter-param]]
 === Parameter filter
 
