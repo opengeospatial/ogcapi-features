@@ -1,0 +1,7 @@
+[[req_basic-spatial-operators_spatial-operators]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/basic-spatial-operators/spatial-operators*
+^|A |The server SHALL support the `S_INTERSECTS` operator as defined by the BNF rule `spatialOperator` in <<cql2-bnf>>.
+^|B |All supported spatial operators SHALL be evaluated as defined in clause 6.1.15 of <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>> (except that in CQL2 the predicates evaluate to a Boolean, not an Integer).
+|===

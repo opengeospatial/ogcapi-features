@@ -1,8 +1,8 @@
 {
    "and": [
-      {"eq": [{"property": "beamMode"},"ScanSAR Narrow"]},
-      {"eq": [{"property": "swathDirection"},"ascending"]},
-      {"eq": [{"property": "polarization"},"HH+VV+HV+VH"]},
+      {"=": [{"property": "beamMode"},"ScanSAR Narrow"]},
+      {"=": [{"property": "swathDirection"},"ascending"]},
+      {"=": [{"property": "polarization"},"HH+VV+HV+VH"]},
       {
          "s_intersects": [
             {"property": "footprint"},

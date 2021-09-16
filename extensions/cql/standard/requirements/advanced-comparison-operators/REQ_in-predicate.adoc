@@ -1,0 +1,7 @@
+[[req_advanced-comparison-operators_in-predicate]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/advanced-comparison-operators/in-predicate* 
+^|A |The _in-list predicate_ (rule `isInListPredicate`) tests, for equality, the value of a scalar expression against a list of values of the same type.  If the value on the left side of the predicate is equal to one or more of the values in the list on the right side of the predicate, the predicate SHALL evaluate to the Boolean value `TRUE`. Otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+^|B |The items in the list of an in-list predicate (rule `inList`, i.e., the items on the right hand side of the predicate) SHALL be of the same literal type as the value being tested by the predicate (rule `inListOperand`, i.e., the left hand side of the predicate), if evaluated.
+|===

@@ -2,10 +2,10 @@
    "or": [
       {
          "and": [
-            {"gt":[{"property": "floors"},5]},
-            {"eq":[{"property": "material"},"brick"]}
+            {">":[{"property": "floors"},5]},
+            {"=":[{"property": "material"},"brick"]}
          ]
       },
-      {"eq":[{"property": "swimming_pool"},true]}
+      {"=":[{"property": "swimming_pool"},true]}
    ]
 }

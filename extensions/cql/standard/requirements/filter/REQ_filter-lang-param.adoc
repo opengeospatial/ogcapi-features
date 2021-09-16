@@ -12,9 +12,9 @@ required: false
 schema:
   type: string
   enum:
-     - 'cql-text'
-     - 'cql-json'
-  default: 'cql-text'
+     - 'cql2-text'
+     - 'cql2-json'
+  default: 'cql2-text'
 style: form
 ----
 ^|B |The `enum` array in the schema of `filter-lang` SHALL list the filter encodings that the server supports for the resource.

@@ -1,0 +1,9 @@
+[[req_cql2-json_arithmetic]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-json/arithmetic* 
+^|Condition |Server implements requirements class <<rc_arithmetic,Arithmetic Expressions>>
+^|A |In addition to the <<req_cql2-json_basic-cql2,Basic CQL2>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema component:
+
+* "#/$defs/arithmeticExpression"
+|===

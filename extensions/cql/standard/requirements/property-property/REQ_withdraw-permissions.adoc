@@ -1,0 +1,15 @@
+[[req_property-property_withdraw-permissions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/property-property/withdraw-permissions*
+^|A |The following permissions SHALL not apply: 
+
+* **/per/basic-cql2/cql2filter**
+* **/per/advanced-comparison-operators/like-predicate**
+* **/per/advanced-comparison-operators/between-predicate**
+* **/per/advanced-comparison-operators/in-predicate**
+* **/per/spatial-operators/spatial-predicates**
+* **/per/temporal-operators/temporal-predicates**
+* **/per/array-operators/array-predicates**
+
+|===

@@ -100,7 +100,7 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://docs.ogc.org/DRAFTS/19-079r1.html)
+* [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/19-079r1.html)
   * Draft with multiple implementations. The grammar of the query language should be fairly stable. The final Public Review will run until April 2021. Once all comments have been resolved, the release candidate will enter the OGC approval process. The release of version 1.0.0 is expected in Q3 of 2021.
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
   * The draft is fairly complete, but needs more implementations, testing and review to move to the final Public Review.
@@ -115,7 +115,7 @@ Open issues for all parts are organized in [GitHub projects](https://github.com/
 
 * [Open issues for Part 1: Core](https://github.com/opengeospatial/ogcapi-features/projects/1),
 * [Open issues for Part 2: Coordinate Reference Systems by Reference](https://github.com/opengeospatial/ogcapi-features/projects/2)
-* [Open issues for Part 3: Filtering and the Common Query Language (CQL)](https://github.com/opengeospatial/ogcapi-features/projects/4)
+* [Open issues for Part 3: Filtering and the Common Query Language (CQL2)](https://github.com/opengeospatial/ogcapi-features/projects/4)
 * [Open issues for Part 4: Create, Replace, Update and Delete](https://github.com/opengeospatial/ogcapi-features/projects/3)
 * [Open issues for Part 5: OpenAPI 3.1](https://github.com/opengeospatial/ogcapi-features/projects/7)
 
@@ -133,7 +133,7 @@ The latest drafts of each standard in this repository are build daily (based on 
 
 * [Part 1: Core](https://docs.ogc.org/DRAFTS/17-069r4.html)
 * [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r1.html)
-* [Part 3: Filtering and the Common Query Language (CQL)](https://docs.ogc.org/DRAFTS/19-079r1.html)
+* [Part 3: Filtering and the Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/19-079r1.html)
 * [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
@@ -145,7 +145,7 @@ Then run:
 asciidoctor -a data-uri -r asciidoctor-diagram core/standard/17-069.adoc
 # Part 2: Coordinate Reference Systems by Reference
 asciidoctor -a data-uri -r asciidoctor-diagram extensions/crs/standard/18-058.adoc
-# Part 3: Filtering and the Common Query Language (CQL)
+# Part 3: Filtering and the Common Query Language (CQL2)
 asciidoctor -a data-uri -r asciidoctor-diagram extensions/cql/standard/19-079.adoc
 # Part 4: Create, Replace, Update and Delete
 asciidoctor -a data-uri -r asciidoctor-diagram extensions/transactions/create-replace-update-delete/standard/20-002.adoc

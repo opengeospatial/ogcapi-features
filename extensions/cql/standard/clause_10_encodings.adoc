@@ -1,26 +1,26 @@
-[[cql-encodings]]
+[[cql2-encodings]]
 == Requirements classes for encodings
 
 === Overview
 
-This clause specifies requirements for a text encoding and a JSON encoding of CQL.
+This clause specifies requirements for a text encoding and a JSON encoding of CQL2.
 
-[[cql-text]]
-=== Requirements Class "CQL Text"
+[[cql2-text]]
+=== Requirements Class "CQL2 Text"
 
-include::requirements/requirements_class_cql-text.adoc[]
+include::requirements/requirements_class_cql2-text.adoc[]
 
-This requirements class defines a Well Known Text (WKT) encoding of CQL. Such an
+This requirements class defines a Well Known Text (WKT) encoding of CQL2. Such an
 encoding would be suitable for use with the GET query parameter such as the
 <<rc_filter,`filter`>> parameter.
 
-The "CQL Text" encoding is defined by the BNF grammar defined in <<cql-bnf>>.
+The "CQL2 Text" encoding is defined by the BNF grammar defined in <<cql2-bnf>>.
 
 Keywords in the BNF grammar are case-insensitive. <<BNF,Augmented BNF for Syntax Specifications>> states:
 
 > ABNF strings are case insensitive and the character set for these strings is US-ASCII.
 
-The list of CQL keywords includes:
+The list of CQL2 keywords includes:
 
 * "A_EQUALS"
 * "A_CONTAINS"
@@ -67,51 +67,55 @@ The list of CQL keywords includes:
 * "T_STARTS"
 * "TRUE"
 
-include::requirements/cql-text/REQ_filter-lang.adoc[]
+include::requirements/cql2-text/REQ_filter-lang.adoc[]
 
-include::requirements/cql-text/REQ_simple-cql.adoc[]
+include::requirements/cql2-text/REQ_basic-cql2.adoc[]
 
-include::requirements/cql-text/REQ_spatial-operators.adoc[]
+include::requirements/cql2-text/REQ_basic-spatial-operators.adoc[]
 
-include::requirements/cql-text/REQ_temporal-operators.adoc[]
+include::requirements/cql2-text/REQ_spatial-operators.adoc[]
 
-include::requirements/cql-text/REQ_functions.adoc[]
+include::requirements/cql2-text/REQ_temporal-operators.adoc[]
+
+include::requirements/cql2-text/REQ_arrays.adoc[]
+
+include::requirements/cql2-text/REQ_functions.adoc[]
 
 The list of supported functions can be discovered via the Functions resource (i.e. path `/functions`).
 
-include::requirements/cql-text/REQ_arithmetic.adoc[]
+include::requirements/cql2-text/REQ_arithmetic.adoc[]
 
-include::requirements/cql-text/REQ_arrays.adoc[]
+[[cql2-json]]
+=== Requirements Class "CQL2 JSON"
 
-[[cql-json]]
-=== Requirements Class "CQL JSON"
+include::requirements/requirements_class_cql2-json.adoc[]
 
-include::requirements/requirements_class_cql-json.adoc[]
-
-This requirements class defines a JSON encoding of CQL. Such an encoding
+This requirements class defines a JSON encoding of CQL2. Such an encoding
 would be suitable as the body of an HTTP POST request.
 
-NOTE: Attention is drawn to the fact that there exists an alternative JSON encoding for CQL based on the use of arrays that can be found here: https://github.com/tschaub/ogcapi-features/tree/json-array-expression/extensions/cql/jfe. The OGC API - Features Standards Working Group will review both encodings and decide which one to adopt. Feedback from implementers is welcome.
+NOTE: Attention is drawn to the fact that there exists an alternative JSON encoding for CQL2 based on the use of arrays that can be found here: https://github.com/tschaub/ogcapi-features/tree/json-array-expression/extensions/cql/jfe. The OGC API - Features Standards Working Group will review both encodings and decide which one to adopt. Feedback from implementers is welcome.
 
-include::requirements/cql-json/REQ_filter-lang.adoc[]
+include::requirements/cql2-json/REQ_filter-lang.adoc[]
 
-include::requirements/cql-json/REQ_simple-cql.adoc[]
+include::requirements/cql2-json/REQ_basic-cql2.adoc[]
 
-include::requirements/cql-json/REQ_spatial-operators.adoc[]
+include::requirements/cql2-json/REQ_basic-spatial-operators.adoc[]
 
-include::requirements/cql-json/REQ_temporal-operators.adoc[]
+include::requirements/cql2-json/REQ_spatial-operators.adoc[]
 
-include::requirements/cql-json/REQ_functions.adoc[]
+include::requirements/cql2-json/REQ_temporal-operators.adoc[]
+
+include::requirements/cql2-json/REQ_arrays.adoc[]
+
+include::requirements/cql2-json/REQ_functions.adoc[]
 
 The list of supported functions can be discovered via the Functions resource (i.e. path `/functions`).
 
-include::requirements/cql-json/REQ_arithmetic.adoc[]
+include::requirements/cql2-json/REQ_arithmetic.adoc[]
 
-include::requirements/cql-json/REQ_arrays.adoc[]
-
-[[cql-xml]]
+[[cql2-xml]]
 === XML encoding
 
 This OGC API - Features - Part 3 standard does not specifically define an
-XML-encoding for CQL. However, it is recognized that XML is still in common
-use and so implementers are directed to review the http://docs.opengeospatial.org/is/09-026r2/09-026r2.html[OGC Filter Encoding 2.0] standard which defines a XML-encoding for filter expressions that closely matches most of the functionality of CQL.
+XML-encoding for CQL2. However, it is recognized that XML is still in common
+use and so implementers are directed to review the http://docs.opengeospatial.org/is/09-026r2/09-026r2.html[OGC Filter Encoding 2.0] standard which defines a XML-encoding for filter expressions that closely matches most of the functionality of CQL2.

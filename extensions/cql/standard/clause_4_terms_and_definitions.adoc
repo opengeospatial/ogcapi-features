@@ -34,8 +34,14 @@ NOTE: As content of OGC API standards, a resource is typically published at an e
 a token that represents a property of a resource that can be used in a **filter expression**
 
 [[resource-def]]
-==== resource / web resource
-any information that can be named and is the intended conceptual target of a hypertext reference (https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf[Architectural Styles and the Design of Network-based Software Architectures])
+==== resource
+entity that might be identified (<<iso15836-2,Dublin Core Metadata Initiative - DCMI Metadata Terms>>)
+
+NOTE: The term "resource", when used in the context of an OGC API standard, should be understood to mean a <<web-resource-def,web resource>> unless otherwise indicated.
+
+[[web-resource-def]]
+==== web resource
+a **resource** that is identified by a HTTP URI.
 
 === Symbols
 
@@ -58,7 +64,7 @@ API::
   Application Programming Interface
 BNF::
   Backus-Naur Form 
-CQL::
+CQL2::
   Common Query Language
 CRS::
   Coordinate Reference System

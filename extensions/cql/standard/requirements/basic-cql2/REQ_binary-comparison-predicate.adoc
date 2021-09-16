@@ -1,0 +1,7 @@
+[[req_basic-cql2_binary-comparison-predicate]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/basic-cql2/binary-comparison-predicate* 
+^|A |A binary comparison predicate as specified by rule `binaryComparisonPredicate` evaluates two scalar expressions to determine if the expressions satisfy the specified comparison operator. If the requirements of the operator are satisfied, then the predicate SHALL evaluate to the Boolean value `TRUE`; otherwise the predicate SHALL evaluate to the Boolean value `FALSE`.
+^|B |Both scalar expressions (rules `scalarExpression`) in rule `binaryComparisonPredicate` SHALL evaluate to the same type of literal.
+|===
