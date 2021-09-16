@@ -24,7 +24,7 @@ The CRS conformance class from Part 2 (Coordinate Reference Systems by Reference
 On the Insert tab, in the Project group, click the Connections drop-down list and click New OGC API Server.
 The Add OGC API Server Connection dialog box appears.
 
-![](images/ArcGISPro-1-add-server.png "Add an OGC API Features Server connection with access to demo German Vineyard feature data")
+![](images/ArcGISPro-1-add-server.PNG "Add an OGC API Features Server connection with access to demo German Vineyard feature data")
 
 Enter the URL of the OGC API server site you want to connect to in the Server URL text box (e.g. https://demo.ldproxy.net/vineyards). The URL may vary depending on the site configuration.
 
