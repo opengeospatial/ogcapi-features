@@ -31,7 +31,7 @@ Enter the URL of the OGC API server site you want to connect to in the Server UR
 If the OGC API service you are connecting to has additional capabilities or requires a special key-value pair (for example, an api key), you can add custom request parameter names and values to the Custom request parameters section. Be aware that ArcGIS Pro cannot validate these additional parameters.
 Type your user name and password if appropriate.
 
-![](images/ArcGISPro-2-add-server-options.png "Configure OGC API Features Server connection properties for your Project")
+![](images/ArcGISPro-2-add-server-options.PNG "Configure OGC API Features Server connection properties for your Project")
 
 Click OK.
 
@@ -46,7 +46,7 @@ From the Map View window, click the "Add Data" button within the Map tab at the 
 
 Select the collections that should be added to the project as a layer and press "OK". 
 
-![](images/ArcGISPro-3-add-collection-to-map.png "Add OGC API Feature collections as layer data to a map within your Project")
+![](images/ArcGISPro-3-add-collection-to-map.PNG "Add OGC API Feature collections as layer data to a map within your Project")
 
 From the Catalog window, go to the Contents catalog pane on the left hand side, expand the *Servers* folder within the Project section to see the newly added OGC API Server connection.
 
@@ -55,7 +55,7 @@ Right-click a layer and click either Add to new map or Add to current map to add
 
 The features within the collection should now appear in the map centered around the features.
 
-![](images/ArcGISPro-3-data-catalog.png "Select and open the collections")
+![](images/ArcGISPro-3-data-catalog.PNG "Select and open the collections")
 
 
 
@@ -63,7 +63,7 @@ The features within the collection should now appear in the map centered around 
 
 The features from the selected collections should now be added to the map.
 
-![](images/ArcGISPro-4-vineyards.png "Loaded and symbolized German Vineyard data")
+![](images/ArcGISPro-4-vineyards.PNG "Loaded and symbolized German Vineyard data")
 
 When an OGC API Features layer has been added to ArcGIS Pro, it behaves as a read-only feature layer. For example, you can open the attribute table to view the records in the layer, query features in the map, or change the symbology of the layer. Since the OGC API Features layer is not editable, you cannot make edits to the data or schema through ArcGIS Pro. If the number of features in a layer is higher than the page size, the features are progressively loaded page by page.
 
