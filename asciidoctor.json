@@ -61,8 +61,23 @@
         "4":  {
                 "OGC_doc_number": "19-079r1",
                 "urn":"http://www.opengis.net/doc/IS/ogcapi-features-3/1.0",
-                "title":"OGC API - Features - Part 3: Filtering and the Common Query Language (CQL2)",
-                "path":"extensions/cql/standard/19-079.adoc",
+                "title":"OGC API - Features - Part 3: Filtering",
+                "path":"extensions/filtering/standard/19-079.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "5":  {
+                "OGC_doc_number": "21-065",
+                "urn":"http://www.opengis.net/doc/IS/cql2/1.0",
+                "title":"Common Query Language (CQL2)",
+                "path":"cql2/standard/21-065.adoc",
                 "options": ["--trace"],
                 "a":[
                         "data-uri",

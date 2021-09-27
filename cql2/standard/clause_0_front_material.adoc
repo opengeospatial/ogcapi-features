@@ -1,0 +1,77 @@
+[big]*i.     Abstract*
+
+A fundamental operation performed on a <<collection-def,collection>> of features is that of
+filtering in order to obtain a subset of the data which contains feature
+instances that satisfy some filtering criteria. This document specifies
+
+* A filter grammar called Common Query Language (CQL2);
+* Two encodings for CQL2 - a text and a JSON encoding.
+
+The Common Query Language (CQL2) defined in this document is a generic filter
+grammar that can be used to specify how <<resource-def,resource>> instances in a source
+collection of any item type, including features, can be filtered to identify
+a results set. Typically, CQL2 is used in query operations to identify the
+subset of resources, such as features, that should be included in a response
+document. However, CQL2 can also be used in other operations, such as updates,
+to identify the subset of resources that should be affected by an operation.
+
+Each resource instance in the source collection is evaluated against a filtering
+expression. The filter expression always evaluates to `true`, `false` or `null`. If the
+expression evaluates to `true`, the resource instance satisfies the expression and
+is marked as being in the result set. If the overall filter expression evaluates
+to `false` or `null`, the data instance is not in the result set.  Thus, the net effect of
+evaluating a filter expression is a set of resources that satisfy the predicates
+in the expression.
+
+The Common Query Language and its text encoding are not new, but this is the first time 
+that the language is properly specified. The Common Query Language with the acronym CQL 
+was originally created as a text encoding based on the capabilities defined in the 
+https://www.ogc.org/standards/filter[OGC Filter Encoding] standard for use in the 
+https://www.ogc.org/standards/cat[OGC Catalogue Service] standard. 
+
+The Common Query Language as specified in this document is a revision of this earlier
+version. While the language design including the classification of operators are 
+consistent with the earlier specification, there have been a number of changes and 
+existing implementations of CQL will need to be updated to process filter expressions
+specified by this document. This document therefore uses the acronym CQL2 to refer to
+the current version of the Common Query Language.
+
+NOTE: The use of CQL2 also distinguishes the Common Query Language from other existing uses
+of CQL for query languages, for example, for the Cassandra Query Language.
+
+CAUTION: This is a DRAFT version, the draft is not complete and there are open issues 
+that are still under discussion.
+
+[big]*ii.    Keywords*
+
+The following are keywords to be used by search engines and document catalogues.
+
+OGC, common query language, filter, expression, query, SQL, CQL2, where clause,
+selection clause
+
+[big]*iii.   Preface*
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.
+
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
+
+[big]*iv.    Submitting organizations*
+
+The following organizations submitted this document to the Open Geospatial Consortium (OGC):
+
+* CubeWerx Inc.
+* GeoSolutions di Giannecchini Simone & C. s.a.s. 
+* interactive instruments GmbH
+* US Army Geospatial Center (AGC)
+
+[big]*v.     Submitters*
+
+All questions regarding this submission should be directed to the editors or the submitters:
+
+|===
+|*Name* |*Affiliation*
+|Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
+|Clemens Portele _(editor)_ |interactive instruments GmbH
+|Andrea Aime |GeoSolutions di Giannecchini Simone & C. s.a.s.
+|Jeff Harrison |US Army Geospatial Center (AGC)
+|===

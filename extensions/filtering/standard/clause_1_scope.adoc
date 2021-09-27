@@ -1,0 +1,15 @@
+== Scope
+
+This document specifies an extension to the <<OAFeat-1,OGC API - Features -
+Part 1: Core>> standard that defines the behavior of a server that supports
+enhanced filtering capabilities expressed using the Common Query Language (CQL2).
+
+Enhanced filtering capabilities in this case means that the server supports
+the ability to define selection clauses using predicates beyond those supported
+by Part 1 (i.e., `bbox` and `datetime`).
+
+This document defines
+
+* Query parameters for specifying a filter in a request to a Web API;
+* Support for CQL2 Text and CQL2 JSON as languages for filter expressions;
+* How the set of properties that can be used to construct filter expressions ("queryables") are published by a Web API.
