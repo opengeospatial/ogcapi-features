@@ -1,0 +1,31 @@
+== Conventions and background
+
+=== General remarks
+
+See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clauses 5 and 6.
+
+=== Identifiers
+
+The normative provisions in this standard are denoted by the URI `http://www.opengis.net/spec/ogcapi-features-3/1.0`.
+
+All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
+
+=== Additional link relation types
+
+The following OGC link relation types are introduced in this document (no applicable link relation type in the <<link-relations,IANA link relation type register>> could be identified):
+
+* **\http://www.opengis.net/def/rel/ogc/1.0/queryables**: Refers to a resource that lists properties that can be used to query items in the collection represented by the link's context.
+
+NOTE: This link relation type still needs to be registered in the <<ogc-link-relations,OGC Link Relation Type Register>>.
+
+=== HTTP URIs
+
+If URIs include reserved characters that are delimiters in the URI subcomponent, these have to be percent-encoded. See Clause 2 of <<rfc3986,RFC 3986>> for details. Not all URIs in this document are properly percent-encoded for better readability.
+
+=== Dependencies to other requirements classes
+
+The requirements classes in this extension distinguish two types of dependencies to other specifications or requirements classes:
+
+First, there are the obligatory dependencies. Every server implementing the requirements class has to conform to the referenced specification or requirements class.
+
+In addition, requirements classes can also have conditional dependencies. Servers implementing the requirements class do not have to conform to the referenced specification or requirements class, but if they do, they have to conform to the requirements that identify the conditional dependency as a pre-condition for the normative statement.

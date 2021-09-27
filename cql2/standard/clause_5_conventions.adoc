@@ -1,0 +1,23 @@
+== Conventions and background
+
+=== Identifiers
+
+The normative provisions in this standard are denoted by the URI `http://www.opengis.net/spec/cql2/1.0`.
+
+All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
+
+=== Use of BNF
+
+BNF as specified in <<BNF,Augmented BNF for Syntax Specifications>> is used to formally specify the grammar of the Common Query Language (CQL2).
+
+=== Use of JSON Schema
+
+JSON Schema draft 2019-09 (<<json-schema, JSON Schema>>, <<json-schema-validation, JSON Schema Validation>>) is used to formally specify the schema of the JSON encoding of CQL2 (CQL2-JSON).
+
+=== Dependencies to other requirements classes
+
+The requirements classes in this document distinguish two types of dependencies to other specifications or requirements classes:
+
+First, there are the obligatory dependencies. Every server implementing the requirements class has to conform to the referenced specification or requirements class.
+
+In addition, requirements classes can also have conditional dependencies. Servers implementing the requirements class do not have to conform to the referenced specification or requirements class, but if they do, they have to conform to the requirements that identify the conditional dependency as a pre-condition for the normative statement.

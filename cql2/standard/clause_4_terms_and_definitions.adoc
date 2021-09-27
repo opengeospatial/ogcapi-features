@@ -1,0 +1,70 @@
+== Terms, Definitions, Symbols and Abbreviated Terms
+
+=== Terms and Definitions
+This document used the terms defined in https://portal.ogc.org/public_ogc/directives/directives.php[OGC Policy Directive 49], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard and OGC documents do not use the equivalent phrases in the ISO/IEC Directives, Part 2.
+
+This document also uses terms defined in the OGC Standard for Modular specifications (https://portal.opengeospatial.org/files/?artifact_id=34762[OGC 08-131r3]), also known as the 'ModSpec'. The definitions of terms such as standard, specification, requirement, and conformance test are provided in the ModSpec.
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+[[collection-def]]
+==== collection
+a body of resources that belong or are used together; an aggregate, set, or group of related resources (http://docs.opengeospatial.org/DRAFTS/20-024.html#terms_and_definitions[OGC 20-024, OGC API - Common - Part 2: Collections]).
+
+[[filter-def]]
+==== filter expression
+**predicate** encoded for transmission between systems
+
+[[predicate-def]]
+==== predicate
+set of computational operations applied to a data instance which evaluate to true or false (http://docs.opengeospatial.org/is/09-026r2/09-026r2.html[OGC Filter Encoding 2.0 Encoding Standard - With Corrigendum])
+
+[[queryable-def]]
+==== queryable
+a token that represents a property of a resource that can be used in a **filter expression**
+
+[[resource-def]]
+==== resource
+entity that might be identified (<<iso15836-2,Dublin Core Metadata Initiative - DCMI Metadata Terms>>)
+
+=== Symbols
+
+* **&#x2229;** intersection, operation on two or more sets
+* **&#x2227;** and, logical intersection
+* **&#x2205;** empty set, the set having no members
+* **&#x2260;** not equal
+* **&#x2b04;** if and only if, logical equivalence between statements
+* **&#x2286;** is a subset of
+* **dim(x)** returns the maximum dimension (-1, 0, 1, or 2) of the geometric object x
+* **I(x)** represents the interior of the geometric object x
+* **B(x)** represents the boundary of the geometric object x
+* **E(x)** represents the exterior of the geometric object x
+
+=== Abbreviated terms
+
+ABNF::
+  Augmented Backus-Naur Form
+API::
+  Application Programming Interface
+BNF::
+  Backus-Naur Form 
+CQL2::
+  Common Query Language
+CRS::
+  Coordinate Reference System
+HTTP::
+  Hypertext Transfer Protocol
+HTTPS::
+  Hypertext Transfer Protocol Secure
+IANA::
+  Internet Assigned Numbers Authority
+JSON::
+  JavaScript Object Notation
+OGC::
+  Open Geospatial Consortium
+URI::
+  Uniform Resource Identifier
+WKT::
+  Well-Known Text
+YAML::
+  YAML Ain't Markup Language
