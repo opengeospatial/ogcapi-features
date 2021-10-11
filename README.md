@@ -81,13 +81,12 @@ in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
 
 ### OGC Product Database
 
-OGC maintains a public database of software products implementing approved OGC standards. The database also identifies products that pass the https://www.ogc.org/compliance[OGC Compliance Test] for the standard, where available.
+OGC maintains a public database of software products implementing approved OGC standards. The database also identifies products that pass the [OGC Compliance Test](https://www.ogc.org/compliance) for the standard, where available.
 
 Implementers of OGC standards are encouraged to register their products in the database.
 
-* OGC API - Features - Part 1: Core 1.0 (https://www.ogc.org/resource/products?display_opt=3&specid=1022[All Products], https://www.ogc.org/resource/products?display_opt=1&specid=1022[Compliant Products], https://www.ogc.org/resource/products?display_opt=2&specid=1022[Reference Implementations])
-* OGC API - Features - Part 2: Coordinate Reference Systems by Reference 1.0 (https://www.ogc.org/resource/products?display_opt=3&specid=1121[All Products], no compliance test available)
-
+* OGC API - Features - Part 1: Core 1.0 ([All Products](https://www.ogc.org/resource/products?display_opt=3&specid=1022), [Compliant Products](https://www.ogc.org/resource/products?display_opt=1&specid=1022), [Reference Implementations](https://www.ogc.org/resource/products?display_opt=2&specid=1022))
+* OGC API - Features - Part 2: Coordinate Reference Systems by Reference 1.0 ([All Products](https://www.ogc.org/resource/products?display_opt=3&specid=1121), [Compliant Products](https://www.ogc.org/resource/products?display_opt=1&specid=1121), [Reference Implementations](https://www.ogc.org/resource/products?display_opt=2&specid=1121))
 
 ## Communication
 
@@ -100,12 +99,11 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/19-079r1.html)
-  * Draft with multiple implementations. The grammar of the query language should be fairly stable. The final Public Review will run until April 2021. Once all comments have been resolved, the release candidate will enter the OGC approval process. The release of version 1.0.0 is expected in Q3 of 2021.
+* [OGC API - Features - Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r1.html) and [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065.html)
+  * Drafts with multiple implementations. Once all comments have been resolved and at least two implementations updated to the release candidate, the release candidate will enter the OGC approval process.
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
-  * The draft is fairly complete, but needs more implementations, testing and review to move to the final Public Review.
-* OGC API - Features - Part 5: OpenAPI 3.1
-  * Waiting for the release of OpenAPI Specification version 3.1.0.
+  * The draft is fairly complete, but needs more implementations, testing and review to move to the Public Review.
+* OGC API - Features - Part n: Schemas
 
 ## Additional information
 
@@ -115,9 +113,13 @@ Open issues for all parts are organized in [GitHub projects](https://github.com/
 
 * [Open issues for Part 1: Core](https://github.com/opengeospatial/ogcapi-features/projects/1),
 * [Open issues for Part 2: Coordinate Reference Systems by Reference](https://github.com/opengeospatial/ogcapi-features/projects/2)
-* [Open issues for Part 3: Filtering and the Common Query Language (CQL2)](https://github.com/opengeospatial/ogcapi-features/projects/4)
+* [Open issues for Part 3: Filtering / Common Query Language (CQL2)](https://github.com/opengeospatial/ogcapi-features/projects/4)
 * [Open issues for Part 4: Create, Replace, Update and Delete](https://github.com/opengeospatial/ogcapi-features/projects/3)
-* [Open issues for Part 5: OpenAPI 3.1](https://github.com/opengeospatial/ogcapi-features/projects/7)
+* [Open issues for Part n: OpenAPI 3.1](https://github.com/opengeospatial/ogcapi-features/projects/7)
+* [Open issues for Part n: Schemas](https://github.com/opengeospatial/ogcapi-features/projects/11)
+* [Open issues for Part n: Search/Queries](https://github.com/opengeospatial/ogcapi-features/projects/10)
+* [Open issues for Part n: Geometry Simplification](https://github.com/opengeospatial/ogcapi-features/projects/13)
+* [Open issues for Part n: Property Selection](https://github.com/opengeospatial/ogcapi-features/projects/12)
 
 Additional links:
 
@@ -133,20 +135,24 @@ The latest drafts of each standard in this repository are build daily (based on 
 
 * [Part 1: Core](https://docs.ogc.org/DRAFTS/17-069r4.html)
 * [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r1.html)
-* [Part 3: Filtering and the Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/19-079r1.html)
+* [Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r1.html)
 * [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
+
+* [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
 [Asciidoctor](https://asciidoctor.org/) set up and [installed](https://asciidoctor.org/docs/#get-started-with-asciidoctor).
 Then run:
 
-```
+```text
 # Part 1: Core
 asciidoctor -a data-uri -r asciidoctor-diagram core/standard/17-069.adoc
 # Part 2: Coordinate Reference Systems by Reference
 asciidoctor -a data-uri -r asciidoctor-diagram extensions/crs/standard/18-058.adoc
-# Part 3: Filtering and the Common Query Language (CQL2)
-asciidoctor -a data-uri -r asciidoctor-diagram extensions/cql/standard/19-079.adoc
+# Part 3: Filtering
+asciidoctor -a data-uri -r asciidoctor-diagram extensions/filtering/standard/19-079.adoc
+# Common Query Language (CQL2)
+asciidoctor -a data-uri -r asciidoctor-diagram cql2/standard/21-065.adoc
 # Part 4: Create, Replace, Update and Delete
 asciidoctor -a data-uri -r asciidoctor-diagram extensions/transactions/create-replace-update-delete/standard/20-002.adoc
 ```
