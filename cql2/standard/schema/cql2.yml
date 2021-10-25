@@ -142,12 +142,13 @@ components:
       properties:
         in:
           type: array
-          items:
+          prefixItems:
             - $ref: '#/components/schemas/valueExpression'
             - type: array
               items:
                 $ref: '#/components/schemas/valueExpression'
-          additionalItems: false
+          minItems: 2
+          maxItems: 2
     valueExpression:
       oneOf:
         - $ref: '#/components/schemas/scalarExpression'
@@ -481,87 +482,60 @@ components:
           - $ref: '#/components/schemas/functionRef'
           - type: number
     propertyRef:
-      oneOf:
-        - type: object
-          required:
-            - property
-          properties:
-            property:
-              type: string
-        - type: object
-          required:
-            - upper
-          properties:
-            upper:
-              $ref: '#/components/schemas/propertyRef'
-          additionalProperties: false
-        - type: object
-          required:
-            - lower
-          properties:
-            lower:
-              $ref: '#/components/schemas/propertyRef'
-          additionalProperties: false
-    functionRef:
-      oneOf:
-        - type: object
-          required:
-            - function
-          properties:
-            function:
-              $ref: '#/components/schemas/function'
-        - type: object
-          required:
-            - upper
-          properties:
-            upper:
-              $ref: '#/components/schemas/functionRef'
-          additionalProperties: false
-        - type: object
-          required:
-            - lower
-          properties:
-            lower:
-              $ref: '#/components/schemas/functionRef'
-          additionalProperties: false
-    function:
       type: object
       required:
-        - name
+        - property
       properties:
-        name:
+        property:
           type: string
-        arguments:
-          type: array
-          items:
-            oneOf:
-              - $ref: '#/components/schemas/scalarLiteral'
-              - $ref: '#/components/schemas/spatialLiteral'
-              - $ref: '#/components/schemas/intervalLiteral'
-              - $ref: '#/components/schemas/propertyRef'
-              - $ref: '#/components/schemas/functionRef'
-              - $ref: '#/components/schemas/arithmeticExpression'
-              - $ref: '#/components/schemas/arrayLiteral'
+    functionRef:
+      type: object
+      required:
+        - function
+      properties:
+        function:
+          $ref: '#/components/schemas/function'
+    function:
+      oneOf:
+        - type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+            arguments:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/scalarLiteral'
+                  - $ref: '#/components/schemas/spatialLiteral'
+                  - $ref: '#/components/schemas/intervalLiteral'
+                  - $ref: '#/components/schemas/propertyRef'
+                  - $ref: '#/components/schemas/functionRef'
+                  - $ref: '#/components/schemas/arithmeticExpression'
+                  - $ref: '#/components/schemas/arrayLiteral'
+        - type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              enum:
+                - casei
+                - accenti
+            arguments:
+              type: array
+              items:
+                oneOf:
+                  - type: string
+                  - $ref: '#/components/schemas/propertyRef'
+                  - $ref: '#/components/schemas/functionRef'
     scalarLiteral:
       oneOf:
         - type: string
         - type: number
         - type: boolean
         - $ref: '#/components/schemas/instantLiteral'
-        - type: object
-          required:
-            - upper
-          properties:
-            upper:
-              type: string
-          additionalProperties: false
-        - type: object
-          required:
-            - lower
-          properties:
-            lower:
-              type: string
-          additionalProperties: false
     spatialLiteral:
       oneOf:
         - $ref: '#/components/schemas/geometryLiteral'
