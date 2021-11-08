@@ -72,8 +72,7 @@ isLikePredicate =  characterExpression "LIKE" patternExpression;
 
 characterExpression = characterLiteral
                     | propertyName
-                    | function
-                    | arithmeticExpression;
+                    | function;
 
 patternExpression = characterLiteral;
 
