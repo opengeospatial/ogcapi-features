@@ -158,13 +158,22 @@
                "type": "array",
                "items": {
                   "oneOf": [
-                     { "$ref": "#/$defs/scalarExpression" },
+                     { "$ref": "#/$defs/characterExpression" },
                      { "type": "string" }
                   ]
                },
                "additionalItems": false
             }
          }
+      },
+
+      "characterExpression": {
+         "oneOf": [
+            {"type": "string"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"},
+            {"$ref": "#/$defs/arithmeticExpression"}
+         ]
       },
 
       "isInListPredicate": {

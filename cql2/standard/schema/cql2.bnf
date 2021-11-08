@@ -4,10 +4,11 @@
 # HISTORY:
 # DATE         EMAIL                                  DESCRIPTION
 # 13-SEP-2019  pvretano[at]cubewerx.com               Initial creation
-# 28-OCT-2019  pvretano[at]cubewerx.com               Initial checkin into github
-# 22-NOV-2020  pvretano[at]cubewerx.com               Updates based on issues
-# 22-NOV-2020  portele[at]interactive-instruments.de  Document restructuring
-# 21-DEC-2020  pvretano[at]cubewerx.com               Updates to resolve issues
+# 28-OCT-2019  pvretano[at]cubewerx.com               Initial check-in into github
+# 22-DEC-2020  pvretano[at]cubewerx.com               1.0.0-draft.1 (version for public review)
+#              portele[at]interactive-instruments.de  
+# xx-xxx-202x  pvretano[at]cubewerx.com               1.0.0-draft.x (release candidate)
+#              portele[at]interactive-instruments.de  
 
 #=============================================================================#
 # A CQL2 filter is a logically connected expression of one or more predicates.
@@ -67,7 +68,12 @@ lteq = lt eq;
 
 # LIKE predicate
 #
-isLikePredicate =  scalarExpression "LIKE" patternExpression;
+isLikePredicate =  characterExpression "LIKE" patternExpression;
+
+characterExpression = characterLiteral
+                    | propertyName
+                    | function
+                    | arithmeticExpression;
 
 patternExpression = characterLiteral;
 

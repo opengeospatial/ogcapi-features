@@ -127,7 +127,7 @@ include::requirements/basic-spatial-operators/REQ_spatial-operators.adoc[]
 
 include::recommendations/basic-spatial-operators/PER_spatial-predicates.adoc[]
 
-CQL2 uses Well-Known Text (WKT) to encode geometry literals. Since WKT does not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. In this standard, the `filter-crs` query parameter is used to pass the CRS information to the server.
+CQL2 uses Well-Known Text (WKT) or GeoJSON to encode geometry literals. Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
 
 [[example_9_1]]
 .Example spatial predicate

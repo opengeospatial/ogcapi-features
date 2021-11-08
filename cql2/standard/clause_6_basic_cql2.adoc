@@ -50,7 +50,8 @@ Support for the parts of CQL2 that are not part of Basic CQL2 is added in additi
 requirements classes in <<cql2-enhancements>>:
 
 * The rules `isLikePredicate`, `isBetweenPredicate` and `isInListPredicate` are added by requirements class <<rc_advanced-comparison-operators,Advanced Comparison Operators>>;
-* The rule `spatialPredicate` is added by requirements class <<rc_spatial-operators,Spatial Operators>>;
+* #TODO: add Case-insensitive Comparison#
+* The rule `spatialPredicate` is added by requirements classes <<rc_basic-spatial-operators,Basic Spatial Operators>> and <<rc_spatial-operators,Spatial Operators>>;
 * The rule `temporalPredicate` is added by requirements class <<rc_temporal-operators,Temporal Operators>>.
 * The rule `arrayPredicate` is added by requirements class <<rc_array-operators,Array Operators>>;
 * The permission to not support the literal rules on the left hand side of predicates and the rule `propertyName` on the right hand side are removed by requirements class <<rc_property-property,Property-Property Comparisons>>;
@@ -93,7 +94,7 @@ false
 ----
 POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
 ----
-* spatial geometry (JSON)
+* spatial geometry (GeoJSON)
 [source,JSON]
 ----
 {
