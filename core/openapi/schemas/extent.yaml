@@ -110,7 +110,7 @@ properties:
             temporal coordinate reference system specified in `trs`. By default
             this is the Gregorian calendar.
             
-            The value `null` is supported and indicates an open time interval.
+            The value `null` at start or end is supported and indicates a half-bounded interval.
           type: array
           minItems: 2
           maxItems: 2
