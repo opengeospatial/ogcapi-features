@@ -143,16 +143,11 @@ components:
         in:
           type: array
           items:
-            - $ref: '#/components/schemas/valueExpression'
+            - $ref: '#/components/schemas/scalarExpression'
             - type: array
               items:
-                $ref: '#/components/schemas/valueExpression'
+                $ref: '#/components/schemas/scalarExpression'
           additionalItems: false
-    valueExpression:
-      oneOf:
-        - $ref: '#/components/schemas/scalarExpression'
-        - $ref: '#/components/schemas/spatialLiteral'
-        - $ref: '#/components/schemas/intervalLiteral'
     scalarOperands:
       type: array
       minItems: 2

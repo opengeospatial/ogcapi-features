@@ -175,11 +175,11 @@
                "type": "array",
                "items": {
                   "oneOf": [
-                     { "$ref": "#/$defs/valueExpression" },
+                     { "$ref": "#/$defs/scalarExpression" },
                      {
                         "type": "array",
                         "items": {
-                           "$ref": "#/$defs/valueExpression"
+                           "$ref": "#/$defs/scalarExpression"
                         }
                      }
                   ]
@@ -187,14 +187,6 @@
                "additionalItems": false
             }
          }
-      },
-
-      "valueExpression": {
-         "oneOf": [
-            {"$ref": "#/$defs/scalarExpression"},
-            {"$ref": "#/$defs/spatialLiteral"},
-            {"$ref": "#/$defs/intervalLiteral"}
-         ]
       },
 
       "scalarOperands": {

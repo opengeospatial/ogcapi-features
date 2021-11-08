@@ -85,11 +85,7 @@ numericExpression = numericLiteral
 #
 isInListPredicate = inListOperand ["NOT"] "IN" leftParen inList rightParen;
 
-inList = inListOperand [ {comma inListOperand} ];
-
-inListOperand = scalarExpression
-              | intervalLiteral
-              | spatialLiteral;
+inList = scalarExpression [ {comma scalarExpression} ];
 
 # IS NULL predicate
 #
