@@ -158,13 +158,21 @@
                "type": "array",
                "items": {
                   "oneOf": [
-                     { "$ref": "#/$defs/scalarExpression" },
+                     { "$ref": "#/$defs/characterExpression" },
                      { "type": "string" }
                   ]
                },
                "additionalItems": false
             }
          }
+      },
+
+      "characterExpression": {
+         "oneOf": [
+            {"type": "string"},
+            {"$ref": "#/$defs/propertyRef"},
+            {"$ref": "#/$defs/functionRef"}
+         ]
       },
 
       "isInListPredicate": {
@@ -175,11 +183,11 @@
                "type": "array",
                "items": {
                   "oneOf": [
-                     { "$ref": "#/$defs/valueExpression" },
+                     { "$ref": "#/$defs/scalarExpression" },
                      {
                         "type": "array",
                         "items": {
-                           "$ref": "#/$defs/valueExpression"
+                           "$ref": "#/$defs/scalarExpression"
                         }
                      }
                   ]
@@ -187,14 +195,6 @@
                "additionalItems": false
             }
          }
-      },
-
-      "valueExpression": {
-         "oneOf": [
-            {"$ref": "#/$defs/scalarExpression"},
-            {"$ref": "#/$defs/spatialLiteral"},
-            {"$ref": "#/$defs/intervalLiteral"}
-         ]
       },
 
       "scalarOperands": {
