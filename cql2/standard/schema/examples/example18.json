@@ -1,6 +1,28 @@
 {
-   "or": [
-      {"not":[{"<":[{"property": "floors"},5]}]},
-      {"=":[{"property": "swimming_pool"},true]}
-   ]
+  "op": "or",
+  "args": [
+    {
+      "op": "not",
+      "args": [
+        {
+          "op": "<",
+          "args": [
+            {
+              "property": "floors"
+            },
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "op": "=",
+      "args": [
+        {
+          "property": "swimming_pool"
+        },
+        true
+      ]
+    }
+  ]
 }
