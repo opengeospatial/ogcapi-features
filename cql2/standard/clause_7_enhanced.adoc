@@ -103,16 +103,16 @@ category NOT IN (1,2,3,4)
 ----
 ====
 
-[[case-insensitive-comparison]]
-=== Requirements Class "Case-insensitive Comparison"
+[[accent-case-insensitive-comparison]]
+=== Requirements Class "Accent and Case-insensitive Comparison"
 
-include::requirements/requirements_class_case-insensitive-comparison.adoc[]
+include::requirements/requirements_class_accent-case-insensitive-comparison.adoc[]
 
 This requirements class adds support for case-insensitive string comparisons.
 
-include::requirements/case-insensitive-comparison/REQ_casei-builtin-function.adoc[]
+include::requirements/accent-case-insensitive-comparison/REQ_casei-builtin-function.adoc[]
 
-[[example_7_4]]
+[[example_7_4_casei]]
 .Example case-insensitive comparisons
 ====
 
@@ -134,7 +134,29 @@ CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))
 ----
 ====
 
-NOTE: Although the `CASEI` function is used in CQL2 to trigger case insensitive matching, how this function is mapped to an underlying query engine is outside the scope of this specification.  In some cases this mapping may be to a function such as `UPPER()` which is commonly available in many RDBMs.  In other cases, the mapping may be to include a clause in the predicate that signals the use of a case-insensitive collation.
+This requirements class adds support for accent-insensitive string comparisons.
+
+include::requirements/accent-case-insensitive-comparison/REQ_accenti-builtin-function.adoc[]
+
+[[example_7_4_accenti]]
+.Example accent-insensitive comparison
+====
+
+----
+ACCENTI('débárquér')='debarquer'
+----
+
+[source,JSON]
+----
+{
+  "op": "=",
+  "args": [
+     { "function": { "name": "accenti", "args": ["débárquér"] } },
+     'debarquer'
+  ]
+}
+----
+====
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
