@@ -1,16 +1,31 @@
 {
-   "s_intersects": [
-      {"property": "location"},
-      {
-         "type": "Polygon",
-         "coordinates": [
-            [
-               [-10.0, -10.0],
-               [10.0, -10.0],
-               [10.0, 10.0],
-               [-10.0, -10.0]
-            ]
-         ]
-      }
-   ]
+  "op": "s_intersects",
+  "args": [
+    {
+      "property": "location"
+    },
+    {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -10,
+            -10
+          ],
+          [
+            10,
+            -10
+          ],
+          [
+            10,
+            10
+          ],
+          [
+            -10,
+            -10
+          ]
+        ]
+      ]
+    }
+  ]
 }

@@ -10,29 +10,24 @@ components:
     booleanValueExpression:
       type: object
       oneOf:
-        - $ref: '#/components/schemas/andExpression'
-        - $ref: '#/components/schemas/orExpression'
+        - $ref: '#/components/schemas/logicalExpression'
         - $ref: '#/components/schemas/notExpression'
         - $ref: '#/components/schemas/comparisonPredicate'
         - $ref: '#/components/schemas/spatialPredicate'
         - $ref: '#/components/schemas/temporalPredicate'
         - $ref: '#/components/schemas/arrayPredicate'
-    andExpression:
+    logicalExpression:
       type: object
       required:
-        - and
+        - op
+        - args
       properties:
-        and:
-          type: array
-          minItems: 2
-          items:
-            $ref: '#/components/schemas/booleanValueExpression'
-    orExpression:
-      type: object
-      required:
-        - or
-      properties:
-        or:
+        op:
+          type: string
+          enum:
+            - and
+            - or
+        args:
           type: array
           minItems: 2
           items:
@@ -40,9 +35,14 @@ components:
     notExpression:
       type: object
       required:
-        - not
+        - op
+        - args
       properties:
-        not:
+        op:
+          type: string
+          enum:
+            - not
+        args:
           type: array
           minItems: 1
           maxItems: 1
@@ -56,103 +56,22 @@ components:
         - $ref: '#/components/schemas/isInListPredicate'
         - $ref: '#/components/schemas/isNullPredicate'
     binaryComparisonPredicate:
-      oneOf:
-        - $ref: '#/components/schemas/eqExpression'
-        - $ref: '#/components/schemas/neqExpression'
-        - $ref: '#/components/schemas/ltExpression'
-        - $ref: '#/components/schemas/gtExpression'
-        - $ref: '#/components/schemas/lteExpression'
-        - $ref: '#/components/schemas/gteExpression'
-    eqExpression:
       type: object
       required:
-        - =
+        - op
+        - args
       properties:
-        =:
+        op:
+          type: string
+          enum:
+            - =
+            - <
+            - >
+            - '<='
+            - '>='
+            - <>
+        args:
           $ref: '#/components/schemas/scalarOperands'
-    neqExpression:
-      type: object
-      required:
-        - <>
-      properties:
-        <>:
-          $ref: '#/components/schemas/scalarOperands'
-    ltExpression:
-      type: object
-      required:
-        - <
-      properties:
-        <:
-          $ref: '#/components/schemas/scalarOperands'
-    gtExpression:
-      type: object
-      required:
-        - '>'
-      properties:
-        '>':
-          $ref: '#/components/schemas/scalarOperands'
-    lteExpression:
-      type: object
-      required:
-        - <=
-      properties:
-        <=:
-          $ref: '#/components/schemas/scalarOperands'
-    gteExpression:
-      type: object
-      required:
-        - '>='
-      properties:
-        '>=':
-          $ref: '#/components/schemas/scalarOperands'
-    isBetweenPredicate:
-      type: object
-      required:
-        - between
-      properties:
-        between:
-          type: array
-          minItems: 3
-          maxItems: 3
-          items:
-            $ref: '#/components/schemas/numericExpression'
-    numericExpression:
-      oneOf:
-        - type: number
-        - $ref: '#/components/schemas/propertyRef'
-        - $ref: '#/components/schemas/functionRef'
-        - $ref: '#/components/schemas/arithmeticExpression'
-    isLikePredicate:
-      type: object
-      required:
-        - like
-      properties:
-        like:
-          type: array
-          minItems: 2
-          maxItems: 2
-          items:
-            # the second item is always a characterLiteral
-            $ref: '#/components/schemas/characterExpression'
-    characterExpression:
-      oneOf:
-        - type: string
-        - $ref: '#/components/schemas/propertyRef'
-        - $ref: '#/components/schemas/functionRef'
-    isInListPredicate:
-      type: object
-      required:
-        - in
-      properties:
-        in:
-          type: array
-          items:
-            # the first item is always a scalarExpression, the second an array
-            oneOf:
-              - $ref: '#/components/schemas/scalarExpression'
-              - type: array
-                items:
-                  $ref: '#/components/schemas/scalarExpression'
     scalarOperands:
       type: array
       minItems: 2
@@ -165,78 +84,105 @@ components:
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
         - $ref: '#/components/schemas/arithmeticExpression'
+    isLikePredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - like
+        args:
+          $ref: '#/components/schemas/isLikeOperands'
+    isLikeOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        # the second item is always a characterLiteral
+        $ref: '#/components/schemas/characterExpression'
+    characterExpression:
+      oneOf:
+        - type: string
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
+    isBetweenPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - between
+        args:
+          $ref: '#/components/schemas/isBetweenOperands'
+    isBetweenOperands:
+      type: array
+      minItems: 3
+      maxItems: 3
+      items:
+        $ref: '#/components/schemas/numericExpression'
+    numericExpression:
+      oneOf:
+        - type: number
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
+        - $ref: '#/components/schemas/arithmeticExpression'
+    isInListPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - in
+        args:
+          $ref: '#/components/schemas/inListOperands'
+    inListOperands:
+      type: array
+      items:
+        # the first item is always a scalarExpression, the second an array
+        oneOf:
+          - $ref: '#/components/schemas/scalarExpression'
+          - type: array
+            items:
+              $ref: '#/components/schemas/scalarExpression'
     isNullPredicate:
       type: object
       required:
-        - isNull
+        - op
+        - args
       properties:
-        isNull:
+        op:
+          type: string
+          enum:
+            - isNull
+        args:
           $ref: '#/components/schemas/scalarExpression'
     spatialPredicate:
-      oneOf:
-        - $ref: '#/components/schemas/s_containsExpression'
-        - $ref: '#/components/schemas/s_crossesExpression'
-        - $ref: '#/components/schemas/s_disjointExpression'
-        - $ref: '#/components/schemas/s_equalsExpression'
-        - $ref: '#/components/schemas/s_intersectsExpression'
-        - $ref: '#/components/schemas/s_overlapsExpression'
-        - $ref: '#/components/schemas/s_touchesExpression'
-        - $ref: '#/components/schemas/s_withinExpression'
-    s_containsExpression:
       type: object
       required:
-        - s_contains
+        - op
+        - args
       properties:
-        s_contains:
-          $ref: '#/components/schemas/spatialOperands'
-    s_crossesExpression:
-      type: object
-      required:
-        - s_crosses
-      properties:
-        s_crosses:
-          $ref: '#/components/schemas/spatialOperands'
-    s_disjointExpression:
-      type: object
-      required:
-        - s_disjoint
-      properties:
-        s_disjoint:
-          $ref: '#/components/schemas/spatialOperands'
-    s_equalsExpression:
-      type: object
-      required:
-        - s_equals
-      properties:
-        s_equals:
-          $ref: '#/components/schemas/spatialOperands'
-    s_intersectsExpression:
-      type: object
-      required:
-        - s_intersects
-      properties:
-        s_intersects:
-          $ref: '#/components/schemas/spatialOperands'
-    s_overlapsExpression:
-      type: object
-      required:
-        - s_overlaps
-      properties:
-        s_overlaps:
-          $ref: '#/components/schemas/spatialOperands'
-    s_touchesExpression:
-      type: object
-      required:
-        - s_touches
-      properties:
-        s_touches:
-          $ref: '#/components/schemas/spatialOperands'
-    s_withinExpression:
-      type: object
-      required:
-        - s_within
-      properties:
-        s_within:
+        op:
+          type: string
+          enum:
+            - s_contains
+            - s_crosses
+            - s_disjoint
+            - s_equals
+            - s_intersects
+            - s_overlaps
+            - s_touches
+            - s_within
+        args:
           $ref: '#/components/schemas/spatialOperands'
     spatialOperands:
       type: array
@@ -250,126 +196,30 @@ components:
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
     temporalPredicate:
-      oneOf:
-        - $ref: '#/components/schemas/t_afterExpression'
-        - $ref: '#/components/schemas/t_beforeExpression'
-        - $ref: '#/components/schemas/t_containsExpression'
-        - $ref: '#/components/schemas/t_disjointExpression'
-        - $ref: '#/components/schemas/t_duringExpression'
-        - $ref: '#/components/schemas/t_equalsExpression'
-        - $ref: '#/components/schemas/t_finishedByExpression'
-        - $ref: '#/components/schemas/t_finishesExpression'
-        - $ref: '#/components/schemas/t_intersectsExpression'
-        - $ref: '#/components/schemas/t_meetsExpression'
-        - $ref: '#/components/schemas/t_metByExpression'
-        - $ref: '#/components/schemas/t_overlappedByExpression'
-        - $ref: '#/components/schemas/t_overlapsExpression'
-        - $ref: '#/components/schemas/t_startedByExpression'
-        - $ref: '#/components/schemas/t_startsExpression'
-    t_afterExpression:
       type: object
       required:
-        - t_after
+        - op
+        - args
       properties:
-        t_after:
-          $ref: '#/components/schemas/temporalOperands'
-    t_beforeExpression:
-      type: object
-      required:
-        - t_before
-      properties:
-        t_before:
-          $ref: '#/components/schemas/temporalOperands'
-    t_containsExpression:
-      type: object
-      required:
-        - t_contains
-      properties:
-        t_contains:
-          $ref: '#/components/schemas/temporalOperands'
-    t_disjointExpression:
-      type: object
-      required:
-        - t_disjoint
-      properties:
-        t_disjoint:
-          $ref: '#/components/schemas/temporalOperands'
-    t_duringExpression:
-      type: object
-      required:
-        - t_during
-      properties:
-        t_during:
-          $ref: '#/components/schemas/temporalOperands'
-    t_equalsExpression:
-      type: object
-      required:
-        - t_equals
-      properties:
-        t_equals:
-          $ref: '#/components/schemas/temporalOperands'
-    t_finishedByExpression:
-      type: object
-      required:
-        - t_finishedBy
-      properties:
-        t_finishedBy:
-          $ref: '#/components/schemas/temporalOperands'
-    t_finishesExpression:
-      type: object
-      required:
-        - t_finishes
-      properties:
-        t_finishes:
-          $ref: '#/components/schemas/temporalOperands'
-    t_intersectsExpression:
-      type: object
-      required:
-        - t_intersects
-      properties:
-        t_intersects:
-          $ref: '#/components/schemas/temporalOperands'
-    t_meetsExpression:
-      type: object
-      required:
-        - t_meets
-      properties:
-        t_meets:
-          $ref: '#/components/schemas/temporalOperands'
-    t_metByExpression:
-      type: object
-      required:
-        - t_metBy
-      properties:
-        t_metBy:
-          $ref: '#/components/schemas/temporalOperands'
-    t_overlappedByExpression:
-      type: object
-      required:
-        - t_overlappedBy
-      properties:
-        t_overlappedBy:
-          $ref: '#/components/schemas/temporalOperands'
-    t_overlapsExpression:
-      type: object
-      required:
-        - t_overlaps
-      properties:
-        t_overlaps:
-          $ref: '#/components/schemas/temporalOperands'
-    t_startedByExpression:
-      type: object
-      required:
-        - t_startedBy
-      properties:
-        t_startedBy:
-          $ref: '#/components/schemas/temporalOperands'
-    t_startsExpression:
-      type: object
-      required:
-        - t_starts
-      properties:
-        t_starts:
+        op:
+          type: string
+          enum:
+            - t_after
+            - t_before
+            - t_contains
+            - t_disjoint
+            - t_during
+            - t_equals
+            - t_finishedBy
+            - t_finishes
+            - t_intersects
+            - t_meets
+            - t_metBy
+            - t_overlappedBy
+            - t_overlaps
+            - t_startedBy
+            - t_starts
+        args:
           $ref: '#/components/schemas/temporalOperands'
     temporalOperands:
       type: array
@@ -383,38 +233,19 @@ components:
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
     arrayPredicate:
-      oneOf:
-        - $ref: '#/components/schemas/a_containedByExpression'
-        - $ref: '#/components/schemas/a_containsExpression'
-        - $ref: '#/components/schemas/a_equalsExpression'
-        - $ref: '#/components/schemas/a_overlapsExpression'
-    a_containedByExpression:
       type: object
       required:
-        - a_containedBy
+        - op
+        - args
       properties:
-        a_containedBy:
-          $ref: '#/components/schemas/arrayExpression'
-    a_containsExpression:
-      type: object
-      required:
-        - a_contains
-      properties:
-        a_contains:
-          $ref: '#/components/schemas/arrayExpression'
-    a_equalsExpression:
-      type: object
-      required:
-        - a_equals
-      properties:
-        a_equals:
-          $ref: '#/components/schemas/arrayExpression'
-    a_overlapsExpression:
-      type: object
-      required:
-        - a_overlaps
-      properties:
-        a_overlaps:
+        op:
+          type: string
+          enum:
+            - a_containedBy
+            - a_contains
+            - a_equals
+            - a_overlaps
+        args:
           $ref: '#/components/schemas/arrayExpression'
     arrayExpression:
       type: array
@@ -437,38 +268,19 @@ components:
           - $ref: '#/components/schemas/arithmeticExpression'
           - $ref: '#/components/schemas/arrayLiteral'
     arithmeticExpression:
-      oneOf:
-        - $ref: '#/components/schemas/addExpression'
-        - $ref: '#/components/schemas/subExpression'
-        - $ref: '#/components/schemas/mulExpression'
-        - $ref: '#/components/schemas/divExpression'
-    addExpression:
       type: object
       required:
-        - +
+        - op
+        - args
       properties:
-        +:
-          $ref: '#/components/schemas/arithmeticOperands'
-    subExpression:
-      type: object
-      required:
-        - '-'
-      properties:
-        '-':
-          $ref: '#/components/schemas/arithmeticOperands'
-    mulExpression:
-      type: object
-      required:
-        - '*'
-      properties:
-        '*':
-          $ref: '#/components/schemas/arithmeticOperands'
-    divExpression:
-      type: object
-      required:
-        - /
-      properties:
-        /:
+        op:
+          type: string
+          enum:
+            - +
+            - '-'
+            - '*'
+            - /
+        args:
           $ref: '#/components/schemas/arithmeticOperands'
     arithmeticOperands:
       type: array
@@ -531,7 +343,7 @@ components:
       properties:
         name:
           type: string
-        arguments:
+        args:
           type: array
           items:
             oneOf:

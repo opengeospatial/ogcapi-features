@@ -1,6 +1,23 @@
 {
-   "or": [
-      { "=": [{"property": "ro:cloud_cover"},0.1] },
-      { "=": [{"property": "ro:cloud_cover"},0.2] }
-   ]
+  "op": "or",
+  "args": [
+    {
+      "op": "=",
+      "args": [
+        {
+          "property": "ro:cloud_cover"
+        },
+        0.1
+      ]
+    },
+    {
+      "op": "=",
+      "args": [
+        {
+          "property": "ro:cloud_cover"
+        },
+        0.2
+      ]
+    }
+  ]
 }
