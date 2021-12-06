@@ -158,7 +158,7 @@ etat_vol = ACCENTI('débárquér')
 ----
 ====
 
-The CASEI() and ACCENTI() functions return a string typed representation of the input expression that is guaranteed to be equal to any other case or accent insensitive representation of that string.  In order to ensure correct comparisons, these functions should be applied to both sides of an expression.  So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) == CASEI('Straße')`.  An expression such as `CASEI(some_property) == 'strasse'` might work but is not guranteed to work across implementations or between versions of the same implementation.
+The CASEI() and ACCENTI() functions return a string typed representation of the input expression that is guaranteed to be equal to any other case or accent insensitive representation of that string.  In order to ensure correct comparisons, these functions should be applied to both sides of an expression.  So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guranteed to work across implementations or between versions of the same implementation.
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
