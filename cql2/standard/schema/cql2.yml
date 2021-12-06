@@ -17,7 +17,6 @@ components:
         - $ref: '#/components/schemas/spatialPredicate'
         - $ref: '#/components/schemas/temporalPredicate'
         - $ref: '#/components/schemas/arrayPredicate'
-      $recursiveAnchor: true
     andExpression:
       type: object
       required:
@@ -27,7 +26,7 @@ components:
           type: array
           minItems: 2
           items:
-            $recursiveRef: '#'
+            $ref: '#/components/schemas/booleanValueExpression'
     orExpression:
       type: object
       required:
@@ -37,7 +36,7 @@ components:
           type: array
           minItems: 2
           items:
-            $recursiveRef: '#'
+            $ref: '#/components/schemas/booleanValueExpression'
     notExpression:
       type: object
       required:
@@ -48,7 +47,7 @@ components:
           minItems: 1
           maxItems: 1
           items:
-            $recursiveRef: '#'
+            $ref: '#/components/schemas/booleanValueExpression'
     comparisonPredicate:
       oneOf:
         - $ref: '#/components/schemas/binaryComparisonPredicate'
@@ -113,11 +112,10 @@ components:
       properties:
         between:
           type: array
+          minItems: 3
+          maxItems: 3
           items:
-            - $ref: '#/components/schemas/numericExpression'
-            - $ref: '#/components/schemas/numericExpression'
-            - $ref: '#/components/schemas/numericExpression'
-          additionalItems: false
+            $ref: '#/components/schemas/numericExpression'
     numericExpression:
       oneOf:
         - type: number
@@ -131,10 +129,16 @@ components:
       properties:
         like:
           type: array
+          minItems: 2
+          maxItems: 2
           items:
-            - $ref: '#/components/schemas/scalarExpression'
-            - type: string
-          additionalItems: false
+            # the second item is always a characterLiteral
+            $ref: '#/components/schemas/characterExpression'
+    characterExpression:
+      oneOf:
+        - type: string
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
     isInListPredicate:
       type: object
       required:
@@ -142,18 +146,13 @@ components:
       properties:
         in:
           type: array
-          prefixItems:
-            - $ref: '#/components/schemas/valueExpression'
-            - type: array
-              items:
-                $ref: '#/components/schemas/valueExpression'
-          minItems: 2
-          maxItems: 2
-    valueExpression:
-      oneOf:
-        - $ref: '#/components/schemas/scalarExpression'
-        - $ref: '#/components/schemas/spatialLiteral'
-        - $ref: '#/components/schemas/intervalLiteral'
+          items:
+            # the first item is always a scalarExpression, the second an array
+            oneOf:
+              - $ref: '#/components/schemas/scalarExpression'
+              - type: array
+                items:
+                  $ref: '#/components/schemas/scalarExpression'
     scalarOperands:
       type: array
       minItems: 2

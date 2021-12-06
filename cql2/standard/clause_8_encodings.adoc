@@ -12,7 +12,8 @@ include::requirements/requirements_class_cql2-text.adoc[]
 
 This requirements class defines a Well Known Text (WKT) encoding of CQL2. Such an
 encoding would be suitable for use with the GET query parameter such as the
-<<rc_filter,`filter`>> parameter.
+`filter` query parameter specified by the "Filter" requirements class
+in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>>.
 
 The "CQL2 Text" encoding is defined by the BNF grammar defined in <<cql2-bnf>>.
 
@@ -67,8 +68,6 @@ The list of CQL2 keywords includes:
 * "T_STARTS"
 * "TRUE"
 
-include::requirements/cql2-text/REQ_filter-lang.adoc[]
-
 include::requirements/cql2-text/REQ_basic-cql2.adoc[]
 
 include::requirements/cql2-text/REQ_basic-spatial-operators.adoc[]
@@ -94,8 +93,6 @@ This requirements class defines a JSON encoding of CQL2. Such an encoding
 would be suitable as the body of an HTTP POST request.
 
 NOTE: Attention is drawn to the fact that there exists an alternative JSON encoding for CQL2 based on the use of arrays that can be found here: https://github.com/tschaub/ogcapi-features/tree/json-array-expression/extensions/cql/jfe. The OGC API - Features Standards Working Group will review both encodings and decide which one to adopt. Feedback from implementers is welcome.
-
-include::requirements/cql2-json/REQ_filter-lang.adoc[]
 
 include::requirements/cql2-json/REQ_basic-cql2.adoc[]
 

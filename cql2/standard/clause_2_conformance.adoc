@@ -38,10 +38,10 @@ The specific set of operators defined in this requirements class is:
 ** greater than or equal to
 ** is null
 
-Basic CQL2 only requires support for property-literal comparisons. That means that servers only has to support property references as expressions on the left hand side of an operator, and only literal values as expressions on the right hand side.
+Basic CQL2 only requires support for property-literal comparisons. That means that servers only have to support property references as expressions on the left hand side of an operator, and only literal values as expressions on the right hand side.
 
 An encoding of CQL2 may be used as the value of the filter parameters defined
-in the <<rc_filter,Filter>> requirements class.
+in the "Filter" requirements class specified in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>>.
 
 The <<rc_advanced-comparison-operators,Advanced Comparison Operators>> requirements class specifies additional comparison operators:
 
@@ -110,8 +110,8 @@ latexmath:[+, -, *, /] in a CQL2 expression.
 
 The <<rc_cql2-text,CQL2 Text encoding>> requirements class defines
 a text encoding for CQL2. Such an encoding is suitable for use with HTTP query
-parameters such as the `filter` parameter defined by the <<rc_filter,Filter>>
-requirements class.
+parameters such as the `filter` parameter defined by the "Filter" requirements class specified 
+in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>>.
 
 The <<rc_cql2-json,CQL2 JSON encoding>> requirements class defines
 a JSON encoding for CQL2. Such as encoding is suitable for use as the
@@ -128,16 +128,16 @@ OGC Compliance Testing web site.
 [cols="40,60",options="header"]
 |===
 |Conformance class |URI
-|<<ats_basic-cql2,Basic CQL2>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql
-|<<ats_advanced-comparison-operators,Advanced Comparison Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators
-|<<ats_case-insensitive-comparison,Case-insensitive Comparison>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/case-insensitive-comparison
-|<<ats_basic-spatial-operators,Basic Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators
-|<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators
-|<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators
-|<<ats_array-operators,Array Operators>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators
-|<<ats_property-property,Property-Property Comparisons>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property
-|<<ats_functions,Custom Functions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions
-|<<ats_arithmetic,Arithmetic Expressions>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic
-|<<ats_cql2-text,CQL2 Text encoding>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-text
-|<<ats_cql2-json,CQL2 JSON encoding>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-json 
+|<<ats_basic-cql2,Basic CQL2>> |http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2
+|<<ats_advanced-comparison-operators,Advanced Comparison Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators
+|<<ats_case-insensitive-comparison,Case-insensitive Comparison>> |http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison
+|<<ats_basic-spatial-operators,Basic Spatial Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators
+|<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/spatial-operators
+|<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators
+|<<ats_array-operators,Array Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/array-operators
+|<<ats_property-property,Property-Property Comparisons>> |http://www.opengis.net/spec/cql2/1.0/conf/property-property
+|<<ats_functions,Custom Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/functions
+|<<ats_arithmetic,Arithmetic Expressions>> |http://www.opengis.net/spec/cql2/1.0/conf/arithmetic
+|<<ats_cql2-text,CQL2 Text encoding>> |http://www.opengis.net/spec/cql2/1.0/conf/cql2-text
+|<<ats_cql2-json,CQL2 JSON encoding>> |http://www.opengis.net/spec/cql2/1.0/conf/cql2-json 
 |===
