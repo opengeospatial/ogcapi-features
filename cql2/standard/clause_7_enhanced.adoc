@@ -113,7 +113,7 @@ This requirements class adds support for case-insensitive string comparisons.
 include::requirements/accent-case-insensitive-comparison/REQ_casei-builtin-function.adoc[]
 
 [[example_7_4_casei]]
-.Example case-insensitive comparisons
+.Example case-insensitive comparison
 ====
 
 ----
@@ -143,7 +143,7 @@ include::requirements/accent-case-insensitive-comparison/REQ_accenti-builtin-fun
 ====
 
 ----
-ACCENTI('débárquér')='debarquer'
+etat_vol = ACCENTI('débárquér')
 ----
 
 [source,JSON]
@@ -151,8 +151,8 @@ ACCENTI('débárquér')='debarquer'
 {
   "op": "=",
   "args": [
+     { "property": "etat" },
      { "function": { "name": "accenti", "args": ["débárquér"] } },
-     'debarquer'
   ]
 }
 ----
