@@ -237,9 +237,7 @@ argument = characterLiteral
 #=============================================================================#
 characterLiteral = characterStringLiteral
                  | "UPPER" leftParent characterLiteral rightParen
-                 | "LOWER" leftParent characterLiteral rightParen
-                 | bitStringLiteral
-                 | hexStringLiteral;
+                 | "LOWER" leftParent characterLiteral rightParen;
 
 characterStringLiteral = quote [ {character} ] quote;
 
