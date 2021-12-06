@@ -214,7 +214,7 @@ identifierPart = alpha | digit | dollar | underscore;
 # The functions offered by an implementation are provided at `/functions`
 #=============================================================================#
 function = identifier leftParen {argumentList} rightParen
-         | "CASEI" leftParen characterExpression rightParens
+         | "CASEI" leftParen characterExpression rightParen
          | "ACCENTI" leftParen characterExpression rightParen;
 
 argumentList = argument [ { comma argument } ];
