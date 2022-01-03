@@ -8,4 +8,5 @@
 . Verify that the document has the expected root element.
 . Validate the document against the schema using an XML schema validator.
 . If the API supports the GeoJSON encoding, too, and the response to the same request, but with a different `Accept` header includes the properties `timeStamp`, `numberMatched`, `numberReturned` and/or links in the payload, verify that the same information is included as HTTP headers in the GML response.
+. For a GML document that is the response of a GET request to a Feature resource, verify that the `gml:id` XML attribute of the GML feature element is identical to the `featureId` path parameter of the request.
 |===

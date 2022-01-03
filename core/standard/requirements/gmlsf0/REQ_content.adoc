@@ -3,6 +3,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/gmlsf0/content* 
 ^|A |<<gml_content>> specifies the XML document root element that the server SHALL return in a `200`-response for each resource.
-^|B |Every representation of a feature SHALL conform to the <<GMLSF,GML Simple Features Profile, Level 0>> and be substitutable for `gml:AbstractFeature`.
-^|C |The schema of all responses with a root element in the `core` namespace SHALL validate against the link:http://schemas.opengis.net/ogcapi/features/part1/1.0/xml/core.xsd[OGC API Features Core XML Schema].
+^|B |The `gml:id` XML attribute of a GML feature element that is the response to a GET request to a Feature resource SHALL be the same as the `featureId` path parameter in the request.
+^|C |Every representation of a feature SHALL conform to the <<GMLSF,GML Simple Features Profile, Level 0>> and be substitutable for `gml:AbstractFeature`.
+^|D |The schema of all responses with a root element in the `core` namespace SHALL validate against the link:http://schemas.opengis.net/ogcapi/features/part1/1.0/xml/core.xsd[OGC API Features Core XML Schema].
 |===
