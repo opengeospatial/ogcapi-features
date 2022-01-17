@@ -3,7 +3,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/accent-case-insensitive-comparison/casei-builtin-function*
 ^|A |The server SHALL support a built-in function named `CASEI`.
-^|B |The function SHALL accept one argument that can be a character string literal, the name of a property that evaluates to a string literal or a function that returns a string literal (see rules `characterLiteral`, `propertyName`, `function`).
+^|B |The function SHALL accept one argument that can be a character string literal, the name of a property that evaluates to a character string literal or a function that returns a character string literal (see rules `characterLiteral`, `propertyName`, `function`).
 ^|C |The function SHALL return a character string literal.
 ^|D |The function SHALL implement the https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[full case folding] algorithm defined in the implementation guidelines of https://www.unicode.org/versions/Unicode14.0.0[The Unicode Standard, Version 14.0] (see https://www.unicode.org/versions/Unicode14.0.0/ch05.pdf[clause 5.18 Case Mappings, sub-clause Caseless Matching]).
 |===
