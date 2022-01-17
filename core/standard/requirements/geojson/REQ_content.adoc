@@ -7,6 +7,7 @@
 * a link:https://tools.ietf.org/html/rfc7946#section-3.3[GeoJSON FeatureCollection Object] for features, and
 * a link:https://tools.ietf.org/html/rfc7946#section-3.2[GeoJSON Feature Object] for a single feature.
 
-^|B |The links specified in the requirements `/req/core/fc-links` and `/req/core/f-links` SHALL be added in a extension property (foreign member) with the name `links`.
-^|C |The schema of all responses with the media type `application/json` SHALL conform with the JSON Schema specified for the resource in the <<rc_core,Core>> requirements class.
+^|B |The `id` member of the GeoJSON feature object that is the response to a GET request to a Feature resource SHALL be the same as the `featureId` path parameter in the request.
+^|C |The links specified in the requirements `/req/core/fc-links` and `/req/core/f-links` SHALL be added in a extension property (foreign member) with the name `links`.
+^|D |The schema of all responses with the media type `application/json` SHALL conform with the JSON Schema specified for the resource in the <<rc_core,Core>> requirements class.
 |===

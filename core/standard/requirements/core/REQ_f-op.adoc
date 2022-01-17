@@ -3,5 +3,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/f-op*
 ^|A |For every feature in a feature collection (path `/collections/{collectionId}`), the server SHALL support the HTTP GET operation at the path `/collections/{collectionId}/items/{featureId}`.
-^|B |The parameter `collectionId` is each `id` property in the feature collections response (JSONPath: `$.collections[*].id`). `featureId` is a local identifier of the feature.
+^|B |The parameter `collectionId` is each `id` property in the feature collections response (JSONPath: `$.collections[*].id`). `featureId` is the local identifier of the feature.
 |===
+
+NOTE: The representation of the `featureId` in the response payload depends on the feature encoding.
