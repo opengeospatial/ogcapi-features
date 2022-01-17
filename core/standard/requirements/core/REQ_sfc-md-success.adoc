@@ -3,5 +3,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/sfc-md-success*
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The content of that response SHALL be consistent with the content for this feature collection in the `/collections` response. That is, the values for `id`, `title`, `description` and `extent` SHALL be identical and `links` SHALL include all links included for this feature collection in the `/collections` response.
+^|B |The content of that response SHALL be consistent with the content for this feature collection in the `/collections` response. That is, the values for `id`, `title`, `description`, `extent` and `itemType` SHALL be identical and `links` SHALL include all links included for this feature collection in the `/collections` response.
 |===
+
+NOTE: This requirement implies that the content of that response is based upon the OpenAPI 3.0 schema link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collection.yaml[collection.yaml] and that the response can include additional properties or additional links. Note that the property `crs` is not included in sub-requirement A since the property is specified by OGC API - Features - Part 2: Coordinate Reference Systems by Reference.
