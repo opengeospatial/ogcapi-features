@@ -1,0 +1,6 @@
+[[rec_core_fc-extent]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/fc-extent* 
+^|A |If the response is a partial, paged response (i.e., the number of features in the response is less than the number of features that match the selection parameters) and the response includes information about the extent of the response (e.g. the member `bbox` in a GeoJSON feature collection), the extent SHOULD be the extent of the complete result set, not the extent of the features in the response / page.
+|===
