@@ -833,6 +833,7 @@ For string-valued properties, servers could support wildcard searches. The examp
 
 Any combination of `bbox`, `datetime` and parameters for filtering on feature properties is allowed. Note that the requirements on these parameters imply that only features matching all the predicates are in the result set; i.e., the logical operator between the predicates is 'AND.'
 
+[[fc-response]]
 ==== Response
 
 include::requirements/core/REQ_fc-response.adoc[]

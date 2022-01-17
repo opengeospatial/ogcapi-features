@@ -7,4 +7,5 @@
 ^|Test Method |. Count the Features which are on the first level of the collection. Any nested objects contained within the explicitly requested items  are not be counted.
 . Verify that this count is not greater than the value specified by the `limit` parameter. 
 . If the API definition specifies a maximum value for `limit` parameter, verify that the count does not exceed this maximum value.
+. If the API definition specifies a maximum value for `limit` parameter, submit another request with a `limit` value that is greater than the maximum and verify that the response is not an error and that the count does not exceed this maximum value.
 |===
