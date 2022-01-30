@@ -177,7 +177,7 @@ avg(windSpeed)
 
 [source,JSON]
 ----
-{ "function": { "name": "avg", "arguments": [ { "property": "windSpeed" } ] } }
+{ "function": { "name": "avg", "arg": [ { "property": "windSpeed" } ] } }
 ----
 ====
 
@@ -197,7 +197,12 @@ city='Toronto'
 
 [source,JSON]
 ----
-{ "=": [ { "property": "city" }, "Toronto" ] }
+{
+  "op": "=",
+  "args": [
+    { "property": "city" },
+    "Toronto" ]
+}
 ----
 
 ----
@@ -207,8 +212,16 @@ avg(windSpeed) < 4
 [source,JSON]
 ----
 {
-  "<": [
-    { "function": { "name": "avg", "arguments": [ { "property": "windSpeed" } ] } },
+  "op": "<",
+  "args": [
+    {
+      "function": {
+        "name": "avg",
+        "args": [
+          { "property": "windSpeed" }
+        ]
+      }
+    },
     4
   ]
 }
@@ -221,8 +234,15 @@ balance-150.0 > 0
 [source,JSON]
 ----
 {
-  ">": [
-    { "-": [ { "property": "balance" }, 150.0 ] },
+  "op": ">",
+  "args": [
+    {
+      "op": "-",
+      "args": [
+        { "property": "balance" },
+        150.0
+      ]
+    },
     0
   ]
 }
@@ -235,7 +255,11 @@ updated >= date('1970-01-01')
 [source,JSON]
 ----
 {
-  "gte": [ { "property": "updated" }, { "date": "1970-01-01" } ]
+  "op": ">=",
+  "args": [
+    { "property": "updated" },
+    { "date": "1970-01-01" }
+  ]
 }
 ----
 ====
@@ -251,7 +275,17 @@ geometry IS NOT NULL
 
 [source,JSON]
 ----
-{ "not": { "isNull" : { "property": "geometry" } } }
+{
+  "op": "not",
+  "args": [
+    {
+      "op": "isNull",
+      "args": [
+        { "property": "geometry" }
+      ]
+    }
+  ]
+}
 ----
 ====
 

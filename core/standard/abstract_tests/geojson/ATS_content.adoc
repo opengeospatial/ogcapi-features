@@ -6,4 +6,5 @@
 ^|Requirement |<<req_geojson_content,/req/geojson/content>>
 ^|Test Method |. Validate that the document is a GeoJSON document.
 . Validate the document against the schema using an JSON Schema validator.
+. For a GeoJSON document that is the response of a GET request to a Feature resource, verify that the `id` member of the GeoJSON feature object is identical to the `featureId` path parameter of the request.
 |===

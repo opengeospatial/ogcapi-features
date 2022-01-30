@@ -1,11 +1,37 @@
 {
-   "or": [
-      {
-         "and": [
-            {">":[{"property": "floors"},5]},
-            {"=":[{"property": "material"},"brick"]}
-         ]
-      },
-      {"=":[{"property": "swimming_pool"},true]}
-   ]
+  "op": "or",
+  "args": [
+    {
+      "op": "and",
+      "args": [
+        {
+          "op": ">",
+          "args": [
+            {
+              "property": "floors"
+            },
+            5
+          ]
+        },
+        {
+          "op": "=",
+          "args": [
+            {
+              "property": "material"
+            },
+            "brick"
+          ]
+        }
+      ]
+    },
+    {
+      "op": "=",
+      "args": [
+        {
+          "property": "swimming_pool"
+        },
+        true
+      ]
+    }
+  ]
 }

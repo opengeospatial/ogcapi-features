@@ -507,11 +507,11 @@ properties:
 
                 If the value consists of four numbers, the coordinate reference system is
                 WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84)
-                unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+                unless a different coordinate reference system is specified in `crs`.
 
                 If the value consists of six numbers, the coordinate reference system is WGS 84
                 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h)
-                unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+                unless a different coordinate reference system is specified in `crs`.
 
                 For WGS 84 longitude/latitude the values are in most cases the sequence of
                 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
@@ -558,7 +558,7 @@ properties:
           interval:
             description: >-
               One or more time intervals that describe the temporal extent of the dataset.
-              The value `null` is supported and indicates an open time interval.
+              The value `null` is supported and indicates an unbounded interval end.
               In the Core only a single time interval is supported. Extensions may support
               multiple intervals. If multiple intervals are provided, the union of the
               intervals describes the temporal extent.
@@ -719,7 +719,7 @@ include::requirements/core/REQ_fc-bbox-response.adoc[]
 
 In case of a degenerated bounding box, the resulting geometry is used. For example, if the lower left corner is the same as the upper right corner, all features match where the geometry intersects with this point.
 
-This standard does not specify requirements for the parameter `bbox-crs.` Those requirements will be specified in an additional part of the OGC API Features series.
+This standard does not specify requirements for the parameter `bbox-crs`, which adds support for other coordinate reference systems that can be used in the `bbox` parameter. See OGC API - Features - Part 2: Coordinate Reference Systems by Reference for the specification of the [parameter `bbox-crs`](http://www.opengis.net/doc/IS/ogcapi-features-2/1.0#_parameter_bbox_crs).
 
 For WGS 84 longitude/latitude the bounding box is in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the anti-meridian the first value (west-most box edge) is larger than the third value (east-most box edge).
 
@@ -743,7 +743,7 @@ include::requirements/core/REQ_fc-time-response.adoc[]
 
 "Intersects" means that the time (instant or interval) specified in the parameter `datetime` includes a timestamp that is part of the temporal geometry of the feature (again, a time instant or interval). For time intervals this includes the start and end time.
 
-NOTE: The interval notation is taken from <<iso8601-2,ISO 8601-2:2019>>. ISO 8601-2 distinguishes open start/end timestamps (double-dot) and unknown start/end timestamps (empty string). For queries, an unknown start/end has the same effect as an open start/end.
+NOTE: The interval notation is taken from <<iso8601-2,ISO 8601-2:2019>>. ISO 8601-2 distinguishes between bounded start/end timestamps (double-dot) and unknown start/end timestamps (empty string). For queries, an unknown start/end has the same effect as an unbounded start/end.
 
 [[example_6]]
 .A date-time
@@ -833,6 +833,7 @@ For string-valued properties, servers could support wildcard searches. The examp
 
 Any combination of `bbox`, `datetime` and parameters for filtering on feature properties is allowed. Note that the requirements on these parameters imply that only features matching all the predicates are in the result set; i.e., the logical operator between the predicates is 'AND.'
 
+[[fc-response]]
 ==== Response
 
 include::requirements/core/REQ_fc-response.adoc[]
@@ -887,6 +888,8 @@ include::requirements/core/REQ_fc-timeStamp.adoc[]
 include::requirements/core/REQ_fc-numberMatched.adoc[]
 
 include::requirements/core/REQ_fc-numberReturned.adoc[]
+
+include::recomendations/core/REC_fc-extent.adoc[]
 
 NOTE: The representation of the links and the other properties in the payload depends on the encoding of the feature collection.
 

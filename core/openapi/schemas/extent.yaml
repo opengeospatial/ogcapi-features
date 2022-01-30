@@ -3,11 +3,10 @@ description: |-
   extents are specified. Extensions may add additional members to represent other
   extents, for example, thermal or pressure ranges.
 
-  The first item in the array describes the overall extent of
-  the data. All subsequent items describe more precise extents, 
-  e.g., to identify clusters of data.
-  Clients only interested in the overall extent will only need to
-  access the first item in each array.
+  An array of extents is provided for each extent type (spatial, temporal). The first item 
+  in the array describes the overall extent of the data. All subsequent items describe more 
+  precise extents, e.g., to identify clusters of data. Clients only interested in the 
+  overall extent will only need to access the first extent in the array.
 type: object
 properties:
   spatial:
@@ -25,7 +24,7 @@ properties:
           extent of the data. All subsequent bounding boxes describe 
           more precise bounding boxes, e.g., to identify clusters of data.
           Clients only interested in the overall spatial extent will
-          only need to access the first item in each array.
+          only need to access the first bounding box in the array.
         type: array
         minItems: 1
         items:
@@ -43,11 +42,11 @@ properties:
 
             If the value consists of four numbers, the coordinate reference system is
             WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84)
-            unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+            unless a different coordinate reference system is specified in `crs`.
 
             If the value consists of six numbers, the coordinate reference system is WGS 84 
             longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h)
-            unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+            unless a different coordinate reference system is specified in `crs`.
 
             For WGS 84 longitude/latitude the values are in most cases the sequence of
             minimum longitude, minimum latitude, maximum longitude and maximum latitude.
@@ -100,8 +99,9 @@ properties:
           The first time interval describes the overall
           temporal extent of the data. All subsequent time intervals describe 
           more precise time intervals, e.g., to identify clusters of data.
-          Clients only interested in the overall extent will only need
-          to access the first item in each array.
+          Clients only interested in the overall temporal extent will only need
+          to access the first time interval in the array (a pair of lower and upper 
+          bound instants).
         type: array
         minItems: 1
         items:
@@ -110,7 +110,7 @@ properties:
             temporal coordinate reference system specified in `trs`. By default
             this is the Gregorian calendar.
             
-            The value `null` is supported and indicates an open time interval.
+            The value `null` at start or end is supported and indicates a half-bounded interval.
           type: array
           minItems: 2
           maxItems: 2

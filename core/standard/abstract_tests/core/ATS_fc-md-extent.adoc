@@ -5,5 +5,5 @@
 ^|Test Purpose |Validate the `extent` property, if it is present
 ^|Requirement |<<req_core_fc-md-extent,/req/core/fc-md-extent>>
 ^|Test Method |. Verify that the `extent`, if present, provides bounding boxes that include all spatial geometries in this collection.
-. Verify that the `extent`, if present, provides time intervals that include all temporal geometries in this collection. A temporal boundary of `null` indicates an open time interval.
+. Verify that the `extent`, if present, provides time intervals that include all temporal geometries in this collection. A temporal boundary of `null` at start or end indicates a half-bounded interval.
 |===

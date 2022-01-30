@@ -8,12 +8,12 @@
 ^|D |Temporal geometries are either a date-time value or a time interval. The parameter value SHALL conform to the following syntax (using link:https://tools.ietf.org/html/rfc2234[ABNF]):
 
 ```
-interval-closed     = date-time "/" date-time
-interval-open-start = [".."] "/" date-time
-interval-open-end   = date-time "/" [".."]
-interval            = interval-closed / interval-open-start / interval-open-end
-datetime            = date-time / interval
+interval-bounded            = date-time "/" date-time
+interval-half-bounded-start = [".."] "/" date-time
+interval-half-bounded-end   = date-time "/" [".."]
+interval                    = interval-closed / interval-half-bounded-start / interval-half-bounded-end
+datetime                    = date-time / interval
 ```
 ^|E |The syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6].
-^|F |Open ranges in time intervals at the start or end are supported using a double-dot (`..`) or an empty string for the start/end.
+^|F |Half-bounded time intervals are supported using a double-dot (`..`) or an empty string for the start/end.
 |===
