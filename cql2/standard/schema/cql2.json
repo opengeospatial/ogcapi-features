@@ -446,111 +446,89 @@
     },
 
     "propertyRef": {
-      "oneOf": [
-        {
-          "type": "object",
-          "required": [ "property" ],
-          "properties": {
-            "property": {
-              "type": "string"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "required": [ "upper" ],
-          "properties": {
-            "upper": {
-              "$ref": "#/$defs/propertyRef"
-            }
-          },
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "required": [ "lower" ],
-          "properties": {
-            "lower": {
-              "$ref": "#/$defs/propertyRef"
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    },
-
-    "functionRef": {
-      "oneOf": [
-        {
-          "type": "object",
-          "required": [ "function" ],
-          "properties": {
-            "function": {
-              "$ref": "#/$defs/function"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "required": [ "upper" ],
-          "properties": {
-            "upper": {
-              "$ref": "#/$defs/functionRef"
-            }
-          },
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "required": [ "lower" ],
-          "properties": {
-            "lower": {
-              "$ref": "#/$defs/functionRef"
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    },
-
-    "function": {
       "type": "object",
-      "required": [ "name" ],
+      "required": [ "property" ],
       "properties": {
-        "name": {
+        "property": {
           "type": "string"
-        },
-        "args": {
-          "type": "array",
-          "items": {
-            "oneOf": [
-              {
-                "$ref": "#/$defs/scalarLiteral"
-              },
-              {
-                "$ref": "#/$defs/spatialLiteral"
-              },
-              {
-                "$ref": "#/$defs/intervalLiteral"
-              },
-              {
-                "$ref": "#/$defs/propertyRef"
-              },
-              {
-                "$ref": "#/$defs/functionRef"
-              },
-              {
-                "$ref": "#/$defs/arithmeticExpression"
-              },
-              {
-                "$ref": "#/$defs/arrayLiteral"
-              }
-            ]
-          }
         }
       }
     },
 
+    "functionRef": {
+      "type": "object",
+      "required": [ "function" ],
+      "properties": {
+        "function": {
+          "$ref": "#/$defs/function"
+        }
+      }
+    },
+
+    "function": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [ "name" ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/scalarLiteral"
+                  },
+                  {
+                    "$ref": "#/$defs/spatialLiteral"
+                  },
+                  {
+                    "$ref": "#/$defs/intervalLiteral"
+                  },
+                  {
+                    "$ref": "#/$defs/propertyRef"
+                  },
+                  {
+                    "$ref": "#/$defs/functionRef"
+                  },
+                  {
+                    "$ref": "#/$defs/arithmeticExpression"
+                  },
+                  {
+                    "$ref": "#/$defs/arrayLiteral"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [ "name" ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": ["casei","accenti"]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "$ref": "#/$defs/propertyRef" },
+                  { "$ref": "#/$defs/functionRef" }
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 1
+            }
+          }
+        }
+      ]
+    },
+   
     "scalarLiteral": {
       "oneOf": [
         {
@@ -564,26 +542,6 @@
         },
         {
           "$ref": "#/$defs/instantLiteral"
-        },
-        {
-          "type": "object",
-          "required": [ "upper" ],
-          "properties": {
-            "upper": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "required": [ "lower" ],
-          "properties": {
-            "lower": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
         }
       ]
     },

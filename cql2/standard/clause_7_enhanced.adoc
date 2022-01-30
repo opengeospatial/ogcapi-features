@@ -29,7 +29,7 @@ include::requirements/advanced-comparison-operators/REQ_like-predicate.adoc[]
 
 include::recommendations/advanced-comparison-operators/PER_like-predicate.adoc[]
 
-[[example_8_4]]
+[[example_7_1]]
 .Example of a LIKE predicate
 ====
 ----
@@ -52,7 +52,7 @@ include::requirements/advanced-comparison-operators/REQ_between-predicate.adoc[]
 
 include::recommendations/advanced-comparison-operators/PER_between-predicate.adoc[]
 
-[[example_8_5]]
+[[example_7_2]]
 .Examples of a BETWEEN predicate
 ====
 ----
@@ -76,7 +76,7 @@ include::requirements/advanced-comparison-operators/REQ_in-predicate.adoc[]
 
 include::recommendations/advanced-comparison-operators/PER_in-predicate.adoc[]
 
-[[example_8_6]]
+[[example_7_3]]
 .Examples of a IN predicate
 ====
 ----
@@ -112,14 +112,62 @@ category NOT IN (1,2,3,4)
 ----
 ====
 
-[[case-insensitive-comparison]]
-=== Requirements Class "Case-insensitive Comparison"
+[[accent-case-insensitive-comparison]]
+=== Requirements Class "Accent and Case-insensitive Comparison"
 
-include::requirements/requirements_class_case-insensitive-comparison.adoc[]
+include::requirements/requirements_class_accent-case-insensitive-comparison.adoc[]
 
-This requirements class adds support for case-insensitive string comparisons.
+The following requirements class adds support for case-insensitive string comparisons.
 
-#TODO: add requirement for UPPER() and LOWER(). However, there is still the unresolved question how we exactly define UPPER() and LOWER(). Or whether we should define a unicode case folding function instead (see http://unicode.org/reports/tr21/tr21-5.html#Caseless_Matching[Unicode] or https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[W3C]).#
+include::requirements/accent-case-insensitive-comparison/REQ_casei-builtin-function.adoc[]
+
+[[example_7_4_casei]]
+.Example case-insensitive comparison
+====
+
+----
+CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))
+----
+
+[source,JSON]
+----
+{
+  "in": [
+    { "function": { "name": "casei", "arguments": ["road_class"] } },
+    [
+      { "function": { "name": "casei", "arguments": ["Οδος"] } },
+      { "function": { "name": "casei", "arguments": ["Straße"] } }
+    ]
+  ]
+}
+----
+====
+
+This requirements class adds support for accent-insensitive string comparisons.
+
+include::requirements/accent-case-insensitive-comparison/REQ_accenti-builtin-function.adoc[]
+
+[[example_7_4_accenti]]
+.Example accent-insensitive comparison
+====
+
+----
+etat_vol = ACCENTI('débárquér')
+----
+
+[source,JSON]
+----
+{
+  "op": "=",
+  "args": [
+     { "property": "etat_vol" },
+     { "function": { "name": "accenti", "args": ["débárquér"] } },
+  ]
+}
+----
+====
+
+The CASEI() and ACCENTI() functions return a string typed representation of the input expression that is guaranteed to be equal to any other case or accent insensitive representation of that string.  In order to ensure correct comparisons, these functions should be applied to both sides of an expression.  So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guranteed to work across implementations or between versions of the same implementation.
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
@@ -138,7 +186,7 @@ include::recommendations/basic-spatial-operators/PER_spatial-predicates.adoc[]
 
 CQL2 uses Well-Known Text (WKT) or GeoJSON to encode geometry literals. Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
 
-[[example_9_1]]
+[[example_7_5]]
 .Example spatial predicate
 ====
 ----
@@ -168,7 +216,7 @@ S_INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210
 ----
 ====
 
-[[example_9_2]]
+[[example_7_6]]
 .Example for the filter-crs query parameter
 ====
 ----
@@ -226,7 +274,7 @@ image::images/within.png[alt=Within,width=70%]
 
 NOTE: If geometry *_a_* `S_CONTAINS` geometry *_b_*, then geometry *_b_* is `S_WITHIN` geometry *_a_*.
 
-[[example_9_3]]
+[[example_7_7]]
 .Example of a spatial relationship between a property and a literal geometry.
 ====
 ----
@@ -330,7 +378,7 @@ include::requirements/temporal-operators/REQ_temporal-operators.adoc[]
 
 include::recommendations/temporal-operators/PER_temporal-predicates.adoc[]
 
-[[example_9_4]]
+[[example_7_8]]
 .Examples of temporal predicate using T_INTERSECTS
 ====
 ----
@@ -349,7 +397,7 @@ T_INTERSECTS(event_date, INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z"
 ----
 ====
 
-[[example_9_5]]
+[[example_7_9]]
 .Examples of temporal relationships using a property and a temporal literal.
 ====
 ----
@@ -387,7 +435,7 @@ the requirements class <<rc_functions,Custom Functions>>.
 Support for the BNF rule `arithmeticExpression` is added by
 the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
-[[example_9_6]]
+[[example_7_10]]
 .Evalute if the value of an array property contains the specified subset of values.
 ====
 ----
@@ -415,7 +463,7 @@ This requirements class adds support for properties on the right side of predica
 
 include::requirements/property-property/REQ_withdraw-permissions.adoc[]
 
-[[example_9_7]]
+[[example_7_11]]
 .Example of a spatial relationship between two literal geometries.
 ====
 ----
@@ -458,7 +506,7 @@ S_CROSSES(LINESTRING(43.72992 -79.2998, 43.73005 -79.2991, 43.73006 -79.2984,
 ----
 ====
 
-[[example_9_8]]
+[[example_7_12]]
 .Examples of temporal relationships using temporal literals.
 ====
 ----
@@ -490,7 +538,7 @@ include::requirements/functions/REQ_functions.adoc[]
 NOTE: Support for the BNF rule `arithmeticExpression` is added by
 the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
-[[example_9_9]]
+[[example_7_13]]
 .Example of a spatial relationship between a property and a function that return a geometry value.
 ====
 It should be noted that the function "Buffer()" in this example is not part of CQL2 but is an example of a function that an implementation may offer that returns a geometry value.
@@ -534,7 +582,7 @@ include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
 NOTE: Support for the BNF rule `function` is added by the requirements class <<rc_functions,Custom Functions>>.
 
-[[example_9_11]]
+[[example_7_14]]
 .Predicate with an arithmetic expression finding all vehicles that are too tall to pass under a bridge.
 ====
 ----

@@ -202,9 +202,7 @@ arithmeticOperand = numericLiteral
 #=============================================================================#
 # Definition of a PROPERTYNAME
 #=============================================================================#
-propertyName = identifier | doubleQuote identifier doubleQuote
-             | "UPPER" leftParen propertyName rightParen
-             | "LOWER" leftParen propertyName rightParen;
+propertyName = identifier | doubleQuote identifier doubleQuote;
 
 identifier = identifierStart [ {colon | period | identifierPart} ];
 
@@ -217,8 +215,8 @@ identifierPart = alpha | digit | dollar | underscore;
 # The functions offered by an implementation are provided at `/functions`
 #=============================================================================#
 function = identifier leftParen {argumentList} rightParen
-         | "UPPER" leftParen function rightParen
-         | "LOWER" leftParen function rightParen;
+         | "CASEI" leftParen characterExpression rightParen
+         | "ACCENTI" leftParen characterExpression rightParen;
 
 argumentList = argument [ { comma argument } ];
 
@@ -232,12 +230,16 @@ argument = characterLiteral
          | arithmeticExpression
          | arrayExpression;
 
+characterExpression = characterLiteral
+                    | propertyName
+                    | function;
+
 #=============================================================================#
 # Definition of CHARACTER literals
 #=============================================================================#
 characterLiteral = characterStringLiteral
-                 | "UPPER" leftParent characterLiteral rightParen
-                 | "LOWER" leftParent characterLiteral rightParen;
+                 | bitStringLiteral
+                 | hexStringLiteral;
 
 characterStringLiteral = quote [ {character} ] quote;
 
