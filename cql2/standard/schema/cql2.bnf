@@ -237,11 +237,7 @@ characterExpression = characterLiteral
 #=============================================================================#
 # Definition of CHARACTER literals
 #=============================================================================#
-characterLiteral = characterStringLiteral
-                 | bitStringLiteral
-                 | hexStringLiteral;
-
-characterStringLiteral = quote [ {character} ] quote;
+characterLiteral = quote [ {character} ] quote;
 
 character = alpha | digit | extendedDigit | ideographic |
             combiningChar | extender;
@@ -403,10 +399,6 @@ lt = "<";
 eq = "=";
 
 gt = ">";
-
-bit = "0" | "1";
-
-hexit = digit | "A" | "B" | "C" | "D" | "E" | "F" | "a" | "b" | "c" | "d" | "e" | "f";
 
 #=============================================================================#
 # Definition of NUMERIC literals
