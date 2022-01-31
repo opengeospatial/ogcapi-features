@@ -142,7 +142,7 @@ CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))
 {
   "op": "in",
   "args": [
-    { "function": { "name": "casei", "arguments": [{ "property": "road_class" }] } },
+    { "function": { "name": "casei", "args": [{ "property": "road_class" }] } },
     [
       { "function": { "name": "casei", "args": ["Οδος"] } },
       { "function": { "name": "casei", "args": ["Straße"] } }
@@ -169,8 +169,8 @@ ACCENTI(etat_vol) = ACCENTI('débárquér')
 {
   "op": "=",
   "args": [
-    { "function": { "name": "accenti", "arguments": [{ "property": "etat_vol" }] } },
-    { "function": { "name": "accenti", "arguments": ["débárquér"] } },
+    { "function": { "name": "accenti", "args": [{ "property": "etat_vol" }] } },
+    { "function": { "name": "accenti", "args": ["débárquér"] } },
   ]
 }
 ----
