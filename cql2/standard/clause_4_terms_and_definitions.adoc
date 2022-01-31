@@ -7,11 +7,6 @@ This document also uses terms defined in the OGC Standard for Modular specificat
 
 For the purposes of this document, the following additional terms and definitions apply.
 
-[[collation-def]]
-==== collation
-a set of rules that indicate how to compare and sort character string data
-the process of ordering units of textual information https://www.unicode.org/glossary/#collation[Glossary of Unicode Terms]
-
 [[collection-def]]
 ==== collection
 a body of **resources** that belong or are used together; an aggregate, set, or group of related **resources** (http://docs.opengeospatial.org/DRAFTS/20-024.html#terms_and_definitions[OGC 20-024, OGC API - Common - Part 2: Collections]).
@@ -31,6 +26,16 @@ a token that represents a property of a resource that can be used in a **filter 
 [[resource-def]]
 ==== resource
 entity that might be identified (<<iso15836-2,Dublin Core Metadata Initiative - DCMI Metadata Terms>>)
+
+[[case-folding-def]]
+==== unicode case folding; case folding
+process of making two texts which differ only in case identical for comparison purposes (https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[W3C Character Model for the World Wide Web: String Matching])
+
+NOTE: Case folding is meant for the purpose of case-insensitive string matching.
+
+[[normalization-def]]
+==== unicode normalization; normalization
+process of removing alternate representations of equivalent sequences from textual data, to convert the data into a form that can be binary-compared for equivalence (https://www.unicode.org/glossary/#normalization[Glossary of Unicode Terms])
 
 === Symbols
 
