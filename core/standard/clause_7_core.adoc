@@ -603,6 +603,8 @@ properties:
       - http://www.opengis.net/def/crs/OGC/1.3/CRS84
 ----
 
+NOTE: The `itemType` property is optional with a default value "feature" to be compatible with implementations that existed before the property was introduced. It is recommended that all implementations explicitly state the `itemType` in the collection object. Other standards that specify other types of data items have to require that the `itemType` is included so there is no ambiguity.
+
 NOTE: The `crs` property of the `collection` object is not used by this requirements class, but reserved for future use.
 
 [[example_4]]
@@ -646,6 +648,7 @@ Reference system information is not provided as the service provides geometries 
           "interval": [ [ "2010-02-15T12:34:56Z", null ] ]
         }
       },
+      "itemType": "feature",
       "links": [
         { "href": "http://data.example.org/collections/buildings",
           "rel": "self", "title": "This collection" },
