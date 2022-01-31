@@ -7,5 +7,3 @@
 ^|C |The function SHALL return a character string literal.
 ^|D |The function SHALL implement https://www.w3.org/TR/charmod-norm/#unicodeNormalization[unicode normalization] described in the implementation guidelines of https://www.unicode.org/versions/Unicode14.0.0[The Unicode Standard, Version 14.0] (see https://www.unicode.org/versions/Unicode14.0.0/ch05.pdf[clause 5.6 Normalization]).
 |===
-
-NOTE: The references in D need to be verified.  Also need to have some discussion about NFC (cacnonically-composed form) or NFD (canonically decomposed form).  I think the correct thing is to say that ACCENTI() must do NFC ... but I need to verify.
