@@ -1,7 +1,7 @@
 {
   "op": "=",
   "args": [
-     { "property": "etat_vol" },
-     { "function": { "name": "accenti", "args": ["débárquér"] } }
+    { "function": { "name": "accenti", "args": [{ "property": "etat_vol" }] } },
+    { "function": { "name": "accenti", "args": ["débárquér"] } }
   ]
 }

@@ -117,7 +117,15 @@ category NOT IN (1,2,3,4)
 
 include::requirements/requirements_class_accent-case-insensitive-comparison.adoc[]
 
-The following requirements class adds support for case-insensitive string comparisons.
+The following requirements class adds support for case- and accent-insensitive string comparisons.
+
+Both capabilities are useful to operate across data that has not been normalized or has been normalized to values that are different than they should be. This is implemented via string-valued functions to normalize a string with respect to case (`CASEI`) or accents (`ACCENTI`). Examples:
+
+* The `CASEI` function is useful when a property is set to "PLANET", "Planet", or "planet" and I want to match either without having to enumerate all the variations.
+
+* The `ACCENTI` function is useful when accents (or, more generally, diacritics not available in ASCII) were dropped when indexing a property. This may be useful, for example, to support users that are not familiar with accents or that do not know how to type them on their keyboard. For example, "papa" would also match "papá". Note that accent-insensitive comparisons can match values with a different meaning. E.g., in Spanish "papa" is potato and "papá" is father. "papá" in an accent-insensitive comparison will match both, but this may also be intentional, because I know that some of the data has been processed in ASCII.
+
+Implementations of these functions can be complex, but in many cases the underlying datastore will provide a capability that these CQL2 functions can be mapped to.
 
 include::requirements/accent-case-insensitive-comparison/REQ_casei-builtin-function.adoc[]
 
@@ -132,11 +140,12 @@ CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))
 [source,JSON]
 ----
 {
-  "in": [
-    { "function": { "name": "casei", "arguments": ["road_class"] } },
+  "op": "in",
+  "args": [
+    { "function": { "name": "casei", "args": [{ "property": "road_class" }] } },
     [
-      { "function": { "name": "casei", "arguments": ["Οδος"] } },
-      { "function": { "name": "casei", "arguments": ["Straße"] } }
+      { "function": { "name": "casei", "args": ["Οδος"] } },
+      { "function": { "name": "casei", "args": ["Straße"] } }
     ]
   ]
 }
@@ -152,7 +161,7 @@ include::requirements/accent-case-insensitive-comparison/REQ_accenti-builtin-fun
 ====
 
 ----
-etat_vol = ACCENTI('débárquér')
+ACCENTI(etat_vol) = ACCENTI('débárquér')
 ----
 
 [source,JSON]
@@ -160,14 +169,14 @@ etat_vol = ACCENTI('débárquér')
 {
   "op": "=",
   "args": [
-     { "property": "etat_vol" },
-     { "function": { "name": "accenti", "args": ["débárquér"] } },
+    { "function": { "name": "accenti", "args": [{ "property": "etat_vol" }] } },
+    { "function": { "name": "accenti", "args": ["débárquér"] } },
   ]
 }
 ----
 ====
 
-The CASEI() and ACCENTI() functions return a string typed representation of the input expression that is guaranteed to be equal to any other case or accent insensitive representation of that string.  In order to ensure correct comparisons, these functions should be applied to both sides of an expression.  So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guranteed to work across implementations or between versions of the same implementation.
+The `CASEI()` and `ACCENTI()`` functions return a string typed representation of the input expression that is guaranteed to be equal to any other case or accent insensitive representation of that string.  In order to ensure correct comparisons, these functions should be applied to both sides of an expression.  So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guranteed to work across implementations or between versions of the same implementation.
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
