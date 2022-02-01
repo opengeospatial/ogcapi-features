@@ -1,4 +1,4 @@
-# Releases of OGC API - Features - Part 1: Core
+# Releases of OGC API - Features - Part 2: Coordinate Reference Systems by Reference
 
 ## Version 1.0.1
 
