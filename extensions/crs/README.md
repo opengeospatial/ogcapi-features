@@ -71,3 +71,4 @@ This folder is organized as follows:
 * openapi - normative OpenAPI components specified by the standard
 * xml - normative XML/XSD components specified by the standard
 * examples - JSON and XML examples
+* release-notes.md - overview of changes in new releases
