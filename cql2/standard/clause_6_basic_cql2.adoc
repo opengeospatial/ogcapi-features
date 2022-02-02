@@ -72,13 +72,17 @@ exactly as it is specified in the expression. Literal values include:
 * spatial geometries like points, line strings or polygons (rule `spatialLiteral`) and
 * temporal geometries like instants or intervals (rule `temporalLiteral`).
 
-[[example_8_1]]
-.Literal examples
+[[example_8_1_a]]
+.Simple literal examples
 ====
 
 * character string
 ----
 'This is a literal string.'
+----
+* character string with an escaped embeded quote 
+----
+'Via dell''Avvento'
 ----
 * number
 ----
@@ -90,6 +94,15 @@ exactly as it is specified in the expression. Literal values include:
 true
 false
 ----
+
+====
+
+For character literals, embeded quotes are escaped using double quotes (i.e. `''`).
+
+[[example_8_1_b]]
+.Spatial literal examples
+====
+
 * spatial geometry (WKT)
 ----
 POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
@@ -116,6 +129,18 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
    ]
 }
 ----
+
+====
+
+For spatial geometries existing representations are used:
+
+* Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
+* JSON: a https://datatracker.ietf.org/doc/html/rfc7946#section-3.1[GeoJSON geometry] object
+
+[[example_8_1_c]]
+.Temporal literal examples
+====
+
 * temporal geometry (instants, text)
 ----
 DATE('1969-07-20')
@@ -142,11 +167,8 @@ INTERVAL('2019-09-09', '..')
 ----
 ====
 
-For spatial and temporal geometries existing representations are used:
+For temporal values existing representations are used:
 
-* Spatial geometry:
-** Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
-** JSON: a https://datatracker.ietf.org/doc/html/rfc7946#section-3.1[GeoJSON geometry] object
 * Temporal instant:
 ** Text: a `DATE` or `TIMESTAMP` function with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string]
 ** JSON: an object with a `date` or `timestamp` member with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string value]
