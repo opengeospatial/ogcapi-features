@@ -240,7 +240,7 @@ characterExpression = characterLiteral
 characterLiteral = quote [ {character} ] quote;
 
 character = alpha | digit | extendedDigit | ideographic |
-            combiningChar | extender;
+            combiningChar | extender | escapedquote;
 
 # alpha, digit, extendedDigit, ideographic, combiningChar and extender
 # productions copied from https://www.w3.org/TR/REC-xml/#CharClasses
@@ -369,6 +369,8 @@ underscore = "_";
 doubleQuote = "\"";
 
 quote = "'";
+
+escapedquote = "''";
 
 leftBracket = "[";
 
