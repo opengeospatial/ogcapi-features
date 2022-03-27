@@ -15,7 +15,7 @@ Example requests:
 
 ## [British Geological Survey](https://www.bgs.ac.uk/)
 
-Production deployment using an custom jinja template running on Kubenetes at https://ogcapi.bgs.ac.uk/. Code available at https://github.com/BritishGeologicalSurvey/bgs-pygeoapi.
+Production deployment using an custom jinja template running on Kubernetes at https://ogcapi.bgs.ac.uk/. Code available at https://github.com/BritishGeologicalSurvey/bgs-pygeoapi.
 
 Example requests:
 
