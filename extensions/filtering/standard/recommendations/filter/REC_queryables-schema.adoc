@@ -4,7 +4,9 @@
 ^|*Recommendation {counter:rec-id}* |*/rec/filter/queryables-schema*
 ^|A |Each property SHOULD have a human readable title (`title`) and where
 necessary a description (`description`).
-^|B |Each property SHOULD have a single type (`type`).
+^|B |Each property SHOULD have a single type (`type`) with one of the following
+values: `string` (string or temporal properties), `number`/`integer` (numeric properties), 
+`boolean` (boolean properties), `array` (array properties), or `object` (spatial properties).
 ^|C |For string properties, `minLength`, `maxLength`, `enum` and/or `pattern`
 SHOULD be provided, where applicable.
 ^|D |For numeric properties, `multipleOf`, `minimum`, `exclusiveMinimum`,
@@ -12,9 +14,9 @@ SHOULD be provided, where applicable.
 ^|E |For integer properties that represent enumerated values, `enum` SHOULD
 be provided.
 ^|F |For temporal properties, the property SHOULD be a `string` literal with 
-the appropriate format `date-time`, `date`, `time`, or `duration`.
+the appropriate format `date-time` or `date`, depending on the temporal granularity.
 ^|G |For spatial properties, the property SHOULD reference a well-known
-JSON schema of the geometry object.
+JSON Schema of the geometry object.
 ^|H |For geometry types according to the Simple Features standard, the 
 canonical JSON Schema of the GeoJSON geometry object SHOULD be referenced; 
 for example, `https://geojson.org/schema/Point.json` for a point geometry.
