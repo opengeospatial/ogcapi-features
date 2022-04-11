@@ -61,20 +61,40 @@ requirements classes in <<cql2-enhancements>>:
 
 Examples of Basic CQL2 filter expressions are included in the subsequent sub-clauses.
 
-[[basic-cql2_literals]]
-=== Literal values
+[[basic-cql2_data-types-and-literals]]
+=== Data types and literal values
+
+This section identifies the data types supported by CQL2. and has examples 
+of literal values for each data type.
 
 A literal value is any part of an CQL2 filter expression that is used
-exactly as it is specified in the expression. Literal values include:
+exactly as it is specified in the expression.
 
-* character strings (rule `characterLiteral`),
-* numbers including integers and floating point values (rule `numericLiteral`),
-* booleans (rule `booleanLiteral`),
-* spatial geometries like points, line strings or polygons (rule `spatialLiteral`) and
-* temporal geometries like instants or intervals (rule `temporalLiteral`).
+==== Scalar data types
+
+The scalar data types are:
+
+* "string": character strings (literal rule `characterLiteral`);
+* "number": numbers including integers and floating point values (literal rule `numericLiteral`);
+* "boolean": booleans (literal rule `booleanLiteral`);
+* "timestamp": an instant with a granularity of a second or smaller (literal rule: `timestampLiteral`)
+* "date": an instant with a granularity of a day (literal rule: `dateLiteral`)
+
+For character string, numeric and boolean literals, the standard representations are used. For character string literals, embeded quotes are escaped using double quotes (i.e. `''`).
+
+Conceptually, an instant is a "temporal entity with zero extent or duration" [<<owl-time,Time Ontology in OWL>>]. In practice, the temporal position of an instant is described using data types where each value has some duration or granularity that is sufficient for the intended use of the data. 
+
+CQL2 supports two commonly used granularities: a second or smaller (data type "timestamp") and days (data type "date"). Literal timestamps are always in the time zone UTC ("Z"), dates are local dates without an associated timezone. 
+
+If timezone information is important for the intended use, then the "date" data type should not be used and the temporal information should be provided as an interval with start and end timestamps.
+
+For timestamp and date values representations based on RFC 3339 are used:
+
+* Text: a `DATE` or `TIMESTAMP` operator with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 `date-time` or `full-date` string]
+* JSON: an object with a `date` or `timestamp` member with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 `date-time` or `full-date` string]
 
 [[example_8_1_a]]
-.Simple literal examples
+.Scalar literal examples
 ====
 
 * character string
@@ -95,20 +115,54 @@ exactly as it is specified in the expression. Literal values include:
 true
 false
 ----
+* timestamp (Text)
+----
+TIMESTAMP('1969-07-20T20:17:40Z')
+----
+* timestamp (JSON)
+[source,JSON]
+----
+{ "timestamp": "1969-07-20T20:17:40Z" }
+----
+* date (Text)
+----
+DATE('1969-07-20')
+----
+* date (JSON)
+[source,JSON]
+----
+{ "date": "1969-07-20" }
+----
 
 ====
 
-For character literals, embeded quotes are escaped using double quotes (i.e. `''`).
+==== Spatial data types
+
+The spatial data types are (literal rule `spatialLiteral`): 
+
+* "Point": a point;
+* "MultiPoint": a collection of points;
+* "LineString": a curve with linear interpolation between the vertices;
+* "MultiLineString": a collection of line strings;
+* "Polygon": a planar surface bounded by closed line strings;
+* "MultiPolygon": a collection of polygons;
+* "Geometry": an instance of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", or "MultiPolygon";
+* "GeometryCollection": a collection of "Geometry" instances.
+
+For spatial geometries existing representations are used:
+
+* Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
+* JSON: a https://datatracker.ietf.org/doc/html/rfc7946#section-3.1[GeoJSON geometry] object
 
 [[example_8_1_b]]
-.Spatial literal examples
+.Spatial literal example
 ====
 
-* spatial geometry (WKT)
+* spatial geometry (Text)
 ----
 POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
 ----
-* spatial geometry (GeoJSON)
+* spatial geometry (JSON)
 [source,JSON]
 ----
 {
@@ -133,33 +187,30 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 
 ====
 
-For spatial geometries existing representations are used:
+==== Temporal data types 
 
-* Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
-* JSON: a https://datatracker.ietf.org/doc/html/rfc7946#section-3.1[GeoJSON geometry] object
+The temporal data types are "timestamp" and "date" (see <<scalar_data_types>>) as well as "intervals" (rule `temporalLiteral`).
+
+An interval has an start and end instant, which are both included in the interval. Unbounded intervals ends are represented by a double-dot string ("..") for the start/end. This follows the convention of ISO 8601-2.
+
+For intervals, the following representations are used:
+
+* Text: an `INTERVAL` operator with two instants or double-dot strings as parameters;
+* JSON: an object with an `interval` member with an array of two instants or double-dot strings as parameters.
+
+In case two instants are provided, both instants have the same granularity (i.e., they are either timestamps or dates).
 
 [[example_8_1_c]]
-.Temporal literal examples
+.Interval examples
 ====
 
-* temporal geometry (instants, text)
-----
-DATE('1969-07-20')
-TIMESTAMP('1969-07-20T20:17:40Z')
-----
-* temporal geometry (instants, JSON)
-[source,JSON]
-----
-{ "date": "1969-07-20" }
-{ "timestamp": "1969-07-20T20:17:40Z" }
-----
-* temporal geometry (intervals, text)
+* intervals (Text)
 ----
 INTERVAL('1969-07-16', '1969-07-24')
 INTERVAL('1969-07-16T05:32:00Z', '1969-07-24T16:50:35Z')
 INTERVAL('2019-09-09', '..')
 ----
-* temporal geometry (intervals, JSON)
+* intervals (JSON)
 [source,JSON]
 ----
 { "interval": [ "1969-07-16", "1969-07-24" ] }
@@ -168,16 +219,41 @@ INTERVAL('2019-09-09', '..')
 ----
 ====
 
-For temporal values existing representations are used:
+==== Arrays
 
-* Temporal instant:
-** Text: a `DATE` or `TIMESTAMP` function with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string]
-** JSON: an object with a `date` or `timestamp` member with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string value]
-* Temporal interval:
-** Text: an `INTERVAL` function with two temporal instants as parameters
-** JSON: an object with an `interval` member with an array of https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string] values (or ".." for an open end)
+An array is a bracket-delimited, comma-separated list of array elements. An array element is either a scalar value,
+a geometry, an interval, or another array.
 
-All temporal literals are in UTC ("Z").
+[[example_8_1_d]]
+.Array examples
+====
+
+* arrays (Text)
+----
+[ 'a', 'c' ] 
+[ 'a', true, 1 ] 
+[ DATE('1969-07-16'), DATE('1969-07-20'), DATE('1969-07-24') ]
+----
+* arrays (JSON)
+[source,JSON]
+----
+[ "a", "c" ] 
+[ "a", true, 1 ] 
+[ { "date" : "1969-07-16" }, { "date" : "1969-07-20" }, { "date" : "1969-07-24" } ]
+----
+====
+
+==== Type casts
+
+include::recommendations/basic-cql2/PER_type-casts.adoc[]
+
+This Standard does not prescribe how types are cast. The evaluation of filter expressions that involve type casts will, therefore, be system dependent.
+
+For example, a system that evaluates the interval `INTERVAL('2022-01-01','2022-04-11T12:41:13Z')` can, for example,
+
+* throw an error (incompatible types in an interval);
+* cast the value to an interval of dates, e.g., `INTERVAL('2022-01-01','2022-04-11')`;
+* cast the value to an interval of timestamps, e.g., `INTERVAL('2022-01-01Z00:00:00Z','2022-04-11T12:41:13Z')`.
 
 [[basic-cql2_property]]
 === Property references
