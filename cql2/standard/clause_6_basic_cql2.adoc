@@ -50,7 +50,8 @@ Support for the parts of CQL2 that are not part of Basic CQL2 is added in additi
 requirements classes in <<cql2-enhancements>>:
 
 * The rules `isLikePredicate`, `isBetweenPredicate` and `isInListPredicate` are added by requirements class <<rc_advanced-comparison-operators,Advanced Comparison Operators>>;
-* #TODO: add Case-insensitive Comparison#
+* The rule `TODO` (#TODO as part of issue 674#) is added by requirements class <<rc_case-insensitive-comparison,Case-insensitive Comparison>>;
+* The rule `TODO` (#TODO as part of issue 674#) is added by requirements class <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>>;
 * The rule `spatialPredicate` is added by requirements classes <<rc_basic-spatial-operators,Basic Spatial Operators>> and <<rc_spatial-operators,Spatial Operators>>;
 * The rule `temporalPredicate` is added by requirements class <<rc_temporal-operators,Temporal Operators>>.
 * The rule `arrayPredicate` is added by requirements class <<rc_array-operators,Array Operators>>;
@@ -187,7 +188,7 @@ referenced by their name (rule `propertyName`).
 include::requirements/basic-cql2/REQ_property.adoc[]
 
 For example, a property name used in a scalar expression (rule `scalarExpression`)
-has to be a queryable of type `string`, `number`, `integer` or `boolean`.
+has to be a queryable of type `string`, `number`, `integer`, `boolean`, `date`, or `timestamp`.
 
 [[example_8_2]]
 .Property reference in a scalar expression

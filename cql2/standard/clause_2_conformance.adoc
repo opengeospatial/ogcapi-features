@@ -49,9 +49,13 @@ The <<rc_advanced-comparison-operators,Advanced Comparison Operators>> requireme
 * between
 * in
 
-The <<rc_case-insensitive-comparison,Case-insensitive Comparison>> requirements class adds a capability for case-insensitive string comparisons:
+The <<rc_case-insensitive-comparison,Case-insensitive Comparison>> requirements class adds an operator to support case-insensitive string comparisons:
 
-* #TODO#
+* casei
+
+The <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>> requirements class adds an operator to support accent-insensitive string comparisons:
+
+* accenti
 
 The <<rc_basic-spatial-operators,Basic Spatial Operators>> requirements class specifies minimal requirements for servers that support spatial operators. Only the following spatial operator must be supported:
 
@@ -131,6 +135,7 @@ OGC Compliance Testing web site.
 |<<ats_basic-cql2,Basic CQL2>> |http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2
 |<<ats_advanced-comparison-operators,Advanced Comparison Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators
 |<<ats_case-insensitive-comparison,Case-insensitive Comparison>> |http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison
+|<<ats_accent-insensitive-comparison,Accent-insensitive Comparison>> |http://www.opengis.net/spec/cql2/1.0/conf/accent-insensitive-comparison
 |<<ats_basic-spatial-operators,Basic Spatial Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators
 |<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/spatial-operators
 |<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators
