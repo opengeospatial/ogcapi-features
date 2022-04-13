@@ -14,23 +14,26 @@
 # A CQL2 filter is a logically connected expression of one or more predicates.
 # Predicates include scalar or comparison predicates, spatial predicates or
 # temporal predicates.
+#
+# NOTE: Validated using: https://www.icosaedro.it/bnf_chk/bnf_chk-on-line.html
 #=============================================================================#
-booleanValueExpression = andExpression
-                       | orExpression
-                       | notExpression
-                       | comparisonPredicate
-                       | spatialPredicate
-                       | temporalPredicate
-                       | arrayPredicate
-                       | subExpression;
+booleanExpression = andExpression 
+                  | orExpression
+                  | notExpression
+                  | comparisonPredicate
+                  | spatialPredicate
+                  | temporalPredicate
+                  | arrayPredicate
+                  | subExpression
+                  | booleanLiteral;
 
-andExpression = booleanValueExpression "AND" booleanValueExpression;
+andExpression = booleanExpression "AND" booleanExpression;
 
-orExpression = booleanValueExpression "OR" booleanValueExpression;
+orExpression = booleanExpression "OR" booleanExpression;
 
-notExpression = "NOT" booleanValueExpression;
+notExpression = "NOT" booleanExpression;
 
-subExpression = leftParen booleanValueExpression rightParen;
+subExpression = leftParen booleanExpression rightParen;
 
 #=============================================================================#
 # A comparison predicate evaluates if two scalar expression statisfy the
@@ -50,13 +53,14 @@ binaryComparisonPredicate = scalarExpression
                             comparisonOperator
                             scalarExpression;
 
-scalarExpression = characterLiteral
-                 | numericLiteral
-                 | booleanLiteral
-                 | instantLiteral
-                 | propertyName
-                 | function
-                 | arithmeticExpression;
+scalarExpression = characterExpression
+                 | temporalInstantExpression
+                 | numericExpression
+                 | booleanExpression;
+
+temporalInstantExpression = instantLiteral
+                          | propertyName
+                          | function;
 
 comparisonOperator = eq | neq | lt | gt | lteq | gteq;
 
@@ -70,21 +74,19 @@ lteq = lt eq;
 #
 isLikePredicate =  characterExpression "LIKE" patternExpression;
 
-characterExpression = characterLiteral
-                    | propertyName
-                    | function;
-
-patternExpression = characterLiteral;
+patternExpression = "CASEI" leftParen patternExpression rightParen
+                  | "ACCENTI" leftParen patternExpression rightParen
+                  | characterLiteral;
 
 # BETWEEN predicate
 #
 isBetweenPredicate = numericExpression ["NOT"] "BETWEEN"
                      numericExpression "AND" numericExpression;
 
-numericExpression = numericLiteral
+numericExpression = arithmeticExpression
+                  | numericLiteral
                   | propertyName
-                  | function
-                  | arithmeticExpression;
+                  | function;
 
 # IN LIST predicate
 #
@@ -94,7 +96,13 @@ inList = scalarExpression [ {comma scalarExpression} ];
 
 # IS NULL predicate
 #
-isNullPredicate = scalarExpression "IS" ["NOT"] "NULL";
+isNullPredicate = isNullOperand "IS" ["NOT"] "NULL";
+
+isNullOperand = characterExpression
+              | numericExpression
+              | temporalExpression
+              | booleanExpression
+              | geomExpression;
 
 #=============================================================================#
 # A spatial predicate evaluates if two spatial expressions satisfy the
@@ -153,9 +161,9 @@ temporalOperator = "T_AFTER"
 
 #=============================================================================#
 # An array predicate evaluates if two array expressions statisfy the
-# specified comparison operator.  The comparion operators include equality,
-# not equal, less than, greater than, less than or equal, greater than or equal,
-# superset, subset and overlap operators.
+# specified array operator.  Arrays can be equal, one is a superset of
+# the other, one is a subset of the other and the two arrays have
+# overlapping elements.
 #=============================================================================#
 arrayPredicate = arrayOperator
                  leftParen arrayExpression comma arrayExpression rightParen;
@@ -165,20 +173,19 @@ arrayPredicate = arrayOperator
 # a geometric literal, a temporal literal, a property name, a function, an
 # arithmetic expression or an array.
 #
-arrayExpression = propertyName | function | arrayLiteral;
+arrayExpression = arrayLiteral
+                | propertyName
+                | function;
 
 arrayLiteral = leftBracket rightBracket
              | leftBracket arrayElement [ { comma arrayElement } ] rightBracket;
 
-arrayElement = characterLiteral
-             | numericLiteral
-             | booleanLiteral
-             | spatialLiteral
-             | temporalLiteral
-             | propertyName
-             | function
-             | arithmeticExpression
-             | arrayLiteral;
+arrayElement = characterExpression
+             | temporalExpression
+             | numericExpression
+             | booleanExpression
+             | geomExpression
+             | arrayExpression;
 
 arrayOperator = "A_EQUALS"
               | "A_CONTAINS"
@@ -190,14 +197,10 @@ arrayOperator = "A_EQUALS"
 # operand (a property name, a number or a function that returns a number),
 # an arithmetic operators (+,-,*,/) and another arithmetic operand.
 #=============================================================================#
-arithmeticExpression = arithmeticOperand arithmeticOperator arithmeticOperand
+arithmeticExpression = numericExpression arithmeticOperator numericExpression
                      | leftParen arithmeticExpression rightParen;
 
 arithmeticOperator = plusSign | minusSign | asterisk | solidus;
-
-arithmeticOperand = numericLiteral
-                  | propertyName
-                  | function;
 
 #=============================================================================#
 # Definition of a PROPERTYNAME
@@ -214,23 +217,23 @@ identifierPart = alpha | digit | dollar | underscore;
 # Definition of a FUNCTION
 # The functions offered by an implementation are provided at `/functions`
 #=============================================================================#
-function = identifier leftParen {argumentList} rightParen
-         | "CASEI" leftParen characterExpression rightParen
-         | "ACCENTI" leftParen characterExpression rightParen;
+function = identifier leftParen {argumentList} rightParen;
 
 argumentList = argument [ { comma argument } ];
 
-argument = characterLiteral
-         | numericLiteral
-         | booleanLiteral
-         | spatialLiteral
-         | temporalLiteral
-         | propertyName
-         | function
-         | arithmeticExpression
+argument = characterExpression
+         | numericExpression
+         | temporalExpression
+         | booleanExpression
+         | geomExpression
          | arrayExpression;
 
-characterExpression = characterLiteral
+#=============================================================================#
+# Character expression
+#=============================================================================#
+characterExpression = "CASEI" leftParen characterExpression rightParen
+                    | "ACCENTI" leftParen characterExpression rightParen
+                    | characterLiteral
                     | propertyName
                     | function;
 

@@ -4,7 +4,7 @@
   "type": "object",
   "oneOf": [
     {
-      "$ref": "#/$defs/logicalExpression"
+      "$ref": "#/$defs/andOrExpression"
     },
     {
       "$ref": "#/$defs/notExpression"
@@ -20,11 +20,14 @@
     },
     {
       "$ref": "#/$defs/arrayPredicate"
+    },
+    {
+      "type": "boolean"
     }
   ],
   "$defs": {
 
-    "logicalExpression": {
+    "andOrExpression": {
       "type": "object",
       "required": [ "op", "args" ],
       "properties": {
@@ -98,23 +101,43 @@
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
-      "items": {
-        "$ref": "#/$defs/scalarExpression"
-      }
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/scalarExpression"
+        },
+        {
+          "$ref": "#/$defs/scalarExpression"
+        }
+      ]
     },
+
     "scalarExpression": {
       "oneOf": [
         {
-          "$ref": "#/$defs/scalarLiteral"
+          "$ref": "#/$defs/characterExpression"
+        },
+        {
+          "$ref": "#/$defs/numericExpression"
+        },
+        {
+          "$dynamicRef": "#cql2expression"
+        },
+        {
+          "$ref": "#/$defs/temporalInstantExpression"
+        }
+      ]
+    },
+
+    "temporalInstantExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/instantLiteral"
         },
         {
           "$ref": "#/$defs/propertyRef"
         },
         {
           "$ref": "#/$defs/functionRef"
-        },
-        {
-          "$ref": "#/$defs/arithmeticExpression"
         }
       ]
     },
@@ -139,21 +162,34 @@
               "$ref": "#/$defs/characterExpression"
             },
             {
-              "type": "string"
+              "$ref": "#/$defs/patternExpression"
             }
           ],
           "additionalItems": false
     },
-    "characterExpression": {
+
+    "patternExpression": {
       "oneOf": [
         {
+          "type": "object",
+          "required": [ "casei" ],
+          "properties": {
+            "casei": {
+              "$ref": "#/$defs/patternExpression"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [ "accenti" ],
+          "properties": {
+            "accenti": {
+              "$ref": "#/$defs/patternExpression"
+            }
+          }
+        },
+        {
           "type": "string"
-        },
-        {
-          "$ref": "#/$defs/propertyRef"
-        },
-        {
-          "$ref": "#/$defs/functionRef"
         }
       ]
     },
@@ -183,6 +219,9 @@
     "numericExpression": {
       "oneOf": [
         {
+          "$ref": "#/$defs/arithmeticExpression"
+        },
+        {
           "type": "number"
         },
         {
@@ -190,9 +229,6 @@
         },
         {
           "$ref": "#/$defs/functionRef"
-        },
-        {
-          "$ref": "#/$defs/arithmeticExpression"
         }
       ]
     },
@@ -212,19 +248,17 @@
     },
     "inListOperands": {
       "type": "array",
-      "items": {
-        "oneOf": [
-          {
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/scalarExpression"
+        },
+        {
+          "type": "array",
+          "items": {
             "$ref": "#/$defs/scalarExpression"
-          },
-          {
-            "type": "array",
-            "items": {
-              "$ref": "#/$defs/scalarExpression"
-            }
           }
-        ]
-      },
+        }
+      ],
       "additionalItems": false
     },
 
@@ -237,9 +271,28 @@
           "enum": [ "isNull" ]
         },
         "args": {
-          "$ref": "#/$defs/scalarExpression"
+          "$ref": "#/$defs/isNullOperand"
         }
       }
+    },
+    "isNullOperand": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/characterExpression"
+        },
+        {
+          "$ref": "#/$defs/numericExpression"
+        },
+        {
+          "$dynamicRef": "#cql2expression"
+        },
+        {
+          "$ref": "#/$defs/geomExpression"
+        },
+        {
+          "$ref": "#/$defs/temporalExpression"
+        }
+      ]
     },
 
     "spatialPredicate": {
@@ -370,13 +423,13 @@
       "items": {
         "oneOf": [
           {
+            "$ref": "#/$defs/arrayLiteral"
+          },
+          {
             "$ref": "#/$defs/propertyRef"
           },
           {
             "$ref": "#/$defs/functionRef"
-          },
-          {
-            "$ref": "#/$defs/arrayLiteral"
           }
         ]
       }
@@ -386,22 +439,19 @@
       "items": {
         "oneOf": [
           {
-            "$ref": "#/$defs/scalarLiteral"
+            "$ref": "#/$defs/characterExpression"
           },
           {
-            "$ref": "#/$defs/spatialLiteral"
+            "$ref": "#/$defs/numericExpression"
           },
           {
-            "$ref": "#/$defs/intervalLiteral"
+            "$dynamicRef": "#cql2expression"
           },
           {
-            "$ref": "#/$defs/propertyRef"
+            "$ref": "#/$defs/geomExpression"
           },
           {
-            "$ref": "#/$defs/functionRef"
-          },
-          {
-            "$ref": "#/$defs/arithmeticExpression"
+            "$ref": "#/$defs/temporalExpression"
           },
           {
             "$ref": "#/$defs/arrayLiteral"
@@ -455,6 +505,46 @@
       }
     },
 
+    "casei": {
+      "type": "object",
+      "required": [ "casei" ],
+      "properties": {
+        "casei": {
+          "$ref": "#/$defs/characterExpression"
+        }
+      }
+    },
+
+    "accenti": {
+      "type": "object",
+      "required": [ "accenti" ],
+      "properties": {
+        "accenti": {
+          "$ref": "#/$defs/characterExpression"
+        }
+      }
+    },
+
+    "characterExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/casei"
+        },
+        {
+          "$ref": "#/$defs/accenti"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/propertyRef"
+        },
+        {
+          "$ref": "#/$defs/functionRef"
+        }
+      ]
+    },
+
     "functionRef": {
       "type": "object",
       "required": [ "function" ],
@@ -466,69 +556,40 @@
     },
 
     "function": {
-      "oneOf": [
-        {
-          "type": "object",
-          "required": [ "name" ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "args": {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  {
-                    "$ref": "#/$defs/scalarLiteral"
-                  },
-                  {
-                    "$ref": "#/$defs/spatialLiteral"
-                  },
-                  {
-                    "$ref": "#/$defs/intervalLiteral"
-                  },
-                  {
-                    "$ref": "#/$defs/propertyRef"
-                  },
-                  {
-                    "$ref": "#/$defs/functionRef"
-                  },
-                  {
-                    "$ref": "#/$defs/arithmeticExpression"
-                  },
-                  {
-                    "$ref": "#/$defs/arrayLiteral"
-                  }
-                ]
-              }
-            }
-          }
+      "type": "object",
+      "required": [ "name" ],
+      "properties": {
+        "name": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "required": [ "name" ],
-          "properties": {
-            "name": {
-              "type": "string",
-              "enum": ["casei","accenti"]
-            },
-            "args": {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  { "type": "string" },
-                  { "$ref": "#/$defs/propertyRef" },
-                  { "$ref": "#/$defs/functionRef" }
-                ]
+        "args": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/characterExpression"
               },
-              "minItems": 1,
-              "maxItems": 1
-            }
+              {
+                "$ref": "#/$defs/numericExpression"
+              },
+              {
+                "$dynamicRef": "#cql2expression"
+              },
+              {
+                "$ref": "#/$defs/geomExpression"
+              },
+              {
+                "$ref": "#/$defs/temporalExpression"
+              },
+              {
+                "$ref": "#/$defs/arrayLiteral"
+              }
+            ]
           }
         }
-      ]
+      }
     },
-   
+
     "scalarLiteral": {
       "oneOf": [
         {

@@ -8,6 +8,7 @@ Specifically, this clause defines requirements for:
 
 * Advanced comparison operators;
 * Case-insensitive comparison;
+* Accent-insensitive comparison;
 * Spatial operators;
 * Temporal operators;
 * Array operators;
@@ -123,9 +124,9 @@ This capability is useful to operate across data that has not been normalized or
 
 For example, the `CASEI` operator is useful when a property is set to "PLANET", "Planet", or "planet" and one wants to match either without having to enumerate all the variations.
 
-Implementations of the `CASEI` operator can be complex, but in many cases the underlying datastore will provide a capability that the operator can be mapped to.
+Implementations of the `CASEI` operator can be complex and depend on the locale, but in many cases the underlying datastore will provide a capability that the operator can be mapped to.
 
-include::requirements/case-insensitive-comparison/REQ_casei-builtin-function.adoc[]
+include::requirements/case-insensitive-comparison/REQ_casei-operator.adoc[]
 
 [[example_7_4_casei]]
 .Example case-insensitive comparison
@@ -140,10 +141,10 @@ CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))
 {
   "op": "in",
   "args": [
-    { "function": { "name": "casei", "args": [{ "property": "road_class" }] } },
+    { "casei": { "property": "road_class" } },
     [
-      { "function": { "name": "casei", "args": ["Οδος"] } },
-      { "function": { "name": "casei", "args": ["Straße"] } }
+      { "casei": "Οδος" },
+      { "casei": "Straße"}
     ]
   ]
 }
@@ -159,13 +160,13 @@ include::requirements/requirements_class_accent-insensitive-comparison.adoc[]
 
 This requirements class adds support for accent-insensitive string comparisons to operate across data that has not been normalized or has been normalized to values that are different than they should be.
 
-Similar to the case-insensitive comparison, this capability is supported via an operator `ACCENTI`. 
+Similar to the case-insensitive comparison, this capability is supported via a string-valued operator `ACCENTI`. 
 
 For example, the `ACCENTI` operator is useful when accents (or, more generally, diacritics not available in ASCII) were dropped when indexing a property. This may be useful, for example, to support users that are not familiar with accents or that do not know how to type them on their keyboard. For example, "papa" would also match "papá". Note that accent-insensitive comparisons can match values with a different meaning. E.g., in Spanish "papa" is potato and "papá" is father. "papá" in an accent-insensitive comparison will match both, but this may also be intentional, because the users knows that some of the data has been processed in ASCII.
 
 Implementations of the `ACCENTI` operator can be complex, but in many cases the underlying datastore will provide a capability that the operator can be mapped to.
 
-include::requirements/accent-insensitive-comparison/REQ_accenti-builtin-function.adoc[]
+include::requirements/accent-insensitive-comparison/REQ_accenti-operator.adoc[]
 
 [[example_7_4_accenti]]
 .Example accent-insensitive comparison
@@ -180,14 +181,14 @@ ACCENTI(etat_vol) = ACCENTI('débárquér')
 {
   "op": "=",
   "args": [
-    { "function": { "name": "accenti", "args": [{ "property": "etat_vol" }] } },
-    { "function": { "name": "accenti", "args": ["débárquér"] } },
+    { "accenti": { "property": "etat_vol" } },
+    { "accenti": "débárquér" }
   ]
 }
 ----
 ====
 
-Like `CASEI`, the `ACCENTI` operator returns a string typed representation of the input expression that is guaranteed to be equal to any other accent insensitive representation of that string.
+Like `CASEI`, the `ACCENTI` operator returns a string typed representation of the input expression that is guaranteed to be equal to any other accent insensitive representation of that string. In order to ensure correct comparisons, the operator should be applied to both sides of an expression.  So, for example, the only durable accent-insensitive equality comparison would be `ACCENTI(some_property) = ACCENTI('papá')`. An expression such as `ACCENTI(some_property) = 'papa'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
@@ -456,7 +457,7 @@ Support for the BNF rule `arithmeticExpression` is added by
 the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
 [[example_7_10]]
-.Evalute if the value of an array property contains the specified subset of values.
+.Evaluate if the value of an array property contains the specified subset of values.
 ====
 ----
 A_CONTAINS(layer:ids, ["layers-ca","layers-us"])
