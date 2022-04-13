@@ -8,6 +8,7 @@ Specifically, this clause defines requirements for:
 
 * Advanced comparison operators;
 * Case-insensitive comparison;
+* Accent-insensitive comparison;
 * Spatial operators;
 * Temporal operators;
 * Array operators;
@@ -176,7 +177,7 @@ ACCENTI(etat_vol) = ACCENTI('débárquér')
 ----
 ====
 
-The `CASEI()` and `ACCENTI()`` operators return a string typed representation of the input expression that is guaranteed to be equal to any other case or accent insensitive representation of that string.  In order to ensure correct comparisons, these operators should be applied to both sides of an expression.  So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guranteed to work across implementations or between versions of the same implementation.
+The `CASEI()` and `ACCENTI()` operators return a string typed representation of the input expression that is guaranteed to be equal to any other case or accent insensitive representation of that string.  In order to ensure correct comparisons, these operators should be applied to both sides of an expression.  So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
@@ -445,7 +446,7 @@ Support for the BNF rule `arithmeticExpression` is added by
 the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
 [[example_7_10]]
-.Evalute if the value of an array property contains the specified subset of values.
+.Evaluate if the value of an array property contains the specified subset of values.
 ====
 ----
 A_CONTAINS(layer:ids, ["layers-ca","layers-us"])
