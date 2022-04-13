@@ -64,12 +64,13 @@ Examples of Basic CQL2 filter expressions are included in the subsequent sub-cla
 [[basic-cql2_data-types-and-literals]]
 === Data types and literal values
 
-This section identifies the data types supported by CQL2. and has examples 
+This section documents the data types supported by CQL2 and has examples 
 of literal values for each data type.
 
 A literal value is any part of an CQL2 filter expression that is used
 exactly as it is specified in the expression.
 
+[[scalar-data-types]]
 ==== Scalar data types
 
 The scalar data types are:
@@ -189,9 +190,9 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 
 ==== Temporal data types 
 
-The temporal data types are "timestamp" and "date" (see <<scalar_data_types>>) as well as "intervals" (rule `temporalLiteral`).
+The temporal data types are "timestamp" and "date" (see <<scalar-data-types>>) as well as "intervals" (rule `temporalLiteral`).
 
-An interval has an start and end instant, which are both included in the interval. Unbounded intervals ends are represented by a double-dot string ("..") for the start/end. This follows the convention of ISO 8601-2.
+An interval has an start and end instant, which are both included in the interval. Unbounded interval ends are represented by a double-dot string ("..") based on the convention specified in ISO 8601-2.
 
 For intervals, the following representations are used:
 
@@ -269,7 +270,7 @@ has to be a queryable of type `string`, `number`, `integer`, `boolean`, `date`, 
 [[example_8_2]]
 .Property reference in a scalar expression
 ====
-In this example, the property `windSpeed` is used in a function that returns a number.
+In this example, the property `windSpeed` is used in a function that receives an array of numbers and returns a number.
 ----
 avg(windSpeed)
 ----
@@ -300,7 +301,8 @@ city='Toronto'
   "op": "=",
   "args": [
     { "property": "city" },
-    "Toronto" ]
+    "Toronto" 
+  ]
 }
 ----
 
