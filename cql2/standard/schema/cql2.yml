@@ -10,13 +10,14 @@ components:
     booleanValueExpression:
       type: object
       oneOf:
-        - $ref: '#/components/schemas/logicalExpression'
+        - $ref: '#/components/schemas/andOrExpression'
         - $ref: '#/components/schemas/notExpression'
         - $ref: '#/components/schemas/comparisonPredicate'
         - $ref: '#/components/schemas/spatialPredicate'
         - $ref: '#/components/schemas/temporalPredicate'
         - $ref: '#/components/schemas/arrayPredicate'
-    logicalExpression:
+        - type: boolean
+    andOrExpression:
       type: object
       required:
         - op
@@ -80,10 +81,15 @@ components:
         $ref: '#/components/schemas/scalarExpression'
     scalarExpression:
       oneOf:
-        - $ref: '#/components/schemas/scalarLiteral'
+        - $ref: '#/components/schemas/characterExpression'
+        - $ref: '#/components/schemas/temporalInstantExpression'
+        - $ref: '#/components/schemas/numericExpression'
+        - $ref: '#/components/schemas/booleanValueExpression'
+    temporalInstantExpression:
+      oneOf:
+        - $ref: '#/components/schemas/instantLiteral'
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
-        - $ref: '#/components/schemas/arithmeticExpression'
     isLikePredicate:
       type: object
       required:
@@ -101,13 +107,24 @@ components:
       minItems: 2
       maxItems: 2
       items:
-        # the second item is always a characterLiteral
+        # The second argument is a string or a CASEI or
+        # ACCENTI call with a str.
         $ref: '#/components/schemas/characterExpression'
-    characterExpression:
+    patternExpression:
       oneOf:
+        - type: object
+          required:
+            - casei
+          properties:
+            casei:
+              type: string
+        - type: object
+          required:
+            - accenti
+          properties:
+            accenti:
+              type: string
         - type: string
-        - $ref: '#/components/schemas/propertyRef'
-        - $ref: '#/components/schemas/functionRef'
     isBetweenPredicate:
       type: object
       required:
@@ -128,10 +145,10 @@ components:
         $ref: '#/components/schemas/numericExpression'
     numericExpression:
       oneOf:
+        - $ref: '#/components/schemas/arithmeticExpression'
         - type: number
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
-        - $ref: '#/components/schemas/arithmeticExpression'
     isInListPredicate:
       type: object
       required:
@@ -164,7 +181,14 @@ components:
           enum:
             - isNull
         args:
-          $ref: '#/components/schemas/scalarExpression'
+          $ref: '#/components/schemas/isNullOperand'
+    isNullOperand:
+      oneOf:
+        - $ref: '#/components/schemas/characterExpression'
+        - $ref: '#/components/schemas/numericExpression'
+        - $ref: '#/components/schemas/temporalExpression'
+        - $ref: '#/components/schemas/booleanValueExpression'
+        - $ref: '#/components/schemas/geomExpression'
     spatialPredicate:
       type: object
       required:
@@ -260,12 +284,11 @@ components:
       type: array
       items:
         oneOf:
-          - $ref: '#/components/schemas/scalarLiteral'
-          - $ref: '#/components/schemas/spatialLiteral'
-          - $ref: '#/components/schemas/intervalLiteral'
-          - $ref: '#/components/schemas/propertyRef'
-          - $ref: '#/components/schemas/functionRef'
-          - $ref: '#/components/schemas/arithmeticExpression'
+          - $ref: '#/components/schemas/characterExpression'
+          - $ref: '#/components/schemas/numericExpression'
+          - $ref: '#/components/schemas/booleanValueExpression'
+          - $ref: '#/components/schemas/geomExpression'
+          - $ref: '#/components/schemas/temporalExpression'
           - $ref: '#/components/schemas/arrayLiteral'
     arithmeticExpression:
       type: object
@@ -299,6 +322,30 @@ components:
       properties:
         property:
           type: string
+    casei:
+      type: object
+      required:
+        - casei
+      properties:
+        casei:
+          $ref: '#/components/schemas/characterClause'
+    accenti:
+      type: object
+      required:
+        - accenti
+      properties:
+        casei:
+          $ref: '#/components/schemas/characterClause'
+    characterExpression:
+      oneOf:
+        - $ref: '#/components/schemas/casei'
+        - $ref: '#/components/schemas/accenti'
+        - $ref: '#/components/schemas/characterClause'
+    characterClause:
+      oneOf:
+        - type: string
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
     functionRef:
       type: object
       required:
@@ -307,40 +354,22 @@ components:
         function:
           $ref: '#/components/schemas/function'
     function:
-      oneOf:
-        - type: object
-          required:
-            - name
-          properties:
-            name:
-              type: string
-            args:
-              type: array
-              items:
-                oneOf:
-                  - $ref: '#/components/schemas/scalarLiteral'
-                  - $ref: '#/components/schemas/spatialLiteral'
-                  - $ref: '#/components/schemas/intervalLiteral'
-                  - $ref: '#/components/schemas/propertyRef'
-                  - $ref: '#/components/schemas/functionRef'
-                  - $ref: '#/components/schemas/arithmeticExpression'
-                  - $ref: '#/components/schemas/arrayLiteral'
-        - type: object
-          required:
-            - name
-          properties:
-            name:
-              type: string
-              enum:
-                - casei
-                - accenti
-            args:
-              type: array
-              items:
-                oneOf:
-                  - type: string
-                  - $ref: '#/components/schemas/propertyRef'
-                  - $ref: '#/components/schemas/functionRef'
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        args:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/characterExpression'
+              - $ref: '#/components/schemas/numericExpression'
+              - $ref: '#/components/schemas/booleanValueExpression'
+              - $ref: '#/components/schemas/geomExpression'
+              - $ref: '#/components/schemas/temporalExpression'
+              - $ref: '#/components/schemas/arrayExpression'
     scalarLiteral:
       oneOf:
         - type: string

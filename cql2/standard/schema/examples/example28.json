@@ -1,17 +1,7 @@
 {
   "op": "like",
   "args": [
-    {
-      "function": {
-        "name": "casei",
-        "args": [{ "property": "geophys:SURVEY_NAME" }]
-      }
-    },
-    {
-      "function": {
-        "name": "casei",
-        "args": ["%calcutta%"]
-      }
-    }
+    { "casei": { "property": "geophys:SURVEY_NAME" } },
+    { "casei": "%calcutta%" }
   ]
 }
