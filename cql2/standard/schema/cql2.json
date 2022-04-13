@@ -175,7 +175,7 @@
           "required": [ "casei" ],
           "properties": {
             "casei": {
-              "type": "string"
+              "$ref": "#/$defs/patternExpression"
             }
           }
         },
@@ -184,7 +184,7 @@
           "required": [ "accenti" ],
           "properties": {
             "accenti": {
-              "type": "string"
+              "$ref": "#/$defs/patternExpression"
             }
           }
         },
@@ -510,7 +510,7 @@
       "required": [ "casei" ],
       "properties": {
         "casei": {
-          "$ref": "#/$defs/characterClause"
+          "$ref": "#/$defs/characterExpression"
         }
       }
     },
@@ -520,7 +520,7 @@
       "required": [ "accenti" ],
       "properties": {
         "accenti": {
-          "$ref": "#/$defs/characterClause"
+          "$ref": "#/$defs/characterExpression"
         }
       }
     },
@@ -533,14 +533,6 @@
         {
           "$ref": "#/$defs/accenti"
         },
-        {
-          "$ref": "#/$defs/characterClause"
-        }
-      ]
-    },
-
-    "characterClause": {
-      "oneOf": [
         {
           "type": "string"
         },

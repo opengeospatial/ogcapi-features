@@ -74,8 +74,8 @@ lteq = lt eq;
 #
 isLikePredicate =  characterExpression "LIKE" patternExpression;
 
-patternExpression = "CASEI" leftParen characterLiteral rightParen
-                  | "ACCENTI" leftParen characterLiteral rightParen
+patternExpression = "CASEI" leftParen patternExpression rightParen
+                  | "ACCENTI" leftParen patternExpression rightParen
                   | characterLiteral;
 
 # BETWEEN predicate
@@ -231,13 +231,11 @@ argument = characterExpression
 #=============================================================================#
 # Character expression
 #=============================================================================#
-characterExpression = "CASEI" leftParen characterClause rightParen
-                    | "ACCENTI" leftParen characterClause rightParen
-                    | characterClause;
-
-characterClause = characterLiteral
-                | propertyName
-                | function;
+characterExpression = "CASEI" leftParen characterExpression rightParen
+                    | "ACCENTI" leftParen characterExpression rightParen
+                    | characterLiteral
+                    | propertyName
+                    | function;
 
 #=============================================================================#
 # Definition of CHARACTER literals

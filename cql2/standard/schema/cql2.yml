@@ -117,13 +117,13 @@ components:
             - casei
           properties:
             casei:
-              type: string
+              $ref: '#/components/schemas/patternExpression'
         - type: object
           required:
             - accenti
           properties:
             accenti:
-              type: string
+              $ref: '#/components/schemas/patternExpression'
         - type: string
     isBetweenPredicate:
       type: object
@@ -328,21 +328,18 @@ components:
         - casei
       properties:
         casei:
-          $ref: '#/components/schemas/characterClause'
+          $ref: '#/components/schemas/characterExpression'
     accenti:
       type: object
       required:
         - accenti
       properties:
         casei:
-          $ref: '#/components/schemas/characterClause'
+          $ref: '#/components/schemas/characterExpression'
     characterExpression:
       oneOf:
         - $ref: '#/components/schemas/casei'
         - $ref: '#/components/schemas/accenti'
-        - $ref: '#/components/schemas/characterClause'
-    characterClause:
-      oneOf:
         - type: string
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
