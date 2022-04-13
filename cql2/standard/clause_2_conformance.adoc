@@ -3,7 +3,7 @@
 This standard defines the following requirements classes, 
 grouped by their standardization target:
 
-* Filter expressions
+* Servers that evaluate filter expressions
 ** <<rc_basic-cql2,Basic CQL2>>
 ** <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
 ** <<rc_case-insensitive-comparison,Case-insensitive Comparisons>>
@@ -18,6 +18,9 @@ grouped by their standardization target:
 * Representations of a filter expression
 ** <<rc_cql2-text,CQL2 Text encoding>>
 ** <<rc_cql2-json,CQL2 JSON encoding>>
+
+NOTE: "Server" is used in this Standard to identify any executable software that is
+able to evaluate filter expressions on data.
 
 The <<rc_basic-cql2,Basic CQL2>> requirements class defines the minimal subset
 of the Common Query Language (CQL2) that all implementations must support
