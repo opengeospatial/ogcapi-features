@@ -1,0 +1,99 @@
+{
+  "title" : "ne_110m_populated_places_simple",
+  "properties" : {
+    "geom" : {
+      "$ref" : "https://geojson.org/schema/Point.json"
+    },
+    "featurecla" : {
+      "title" : "featurecla",
+      "type" : "string"
+    },
+    "name" : {
+      "title" : "name",
+      "type" : "string"
+    },
+    "namepar" : {
+      "title" : "namepar",
+      "type" : "string"
+    },
+    "namealt" : {
+      "title" : "namealt",
+      "type" : "string"
+    },
+    "nameascii" : {
+      "title" : "nameascii",
+      "type" : "string"
+    },
+    "capin" : {
+      "title" : "capin",
+      "type" : "string"
+    },
+    "sov0name" : {
+      "title" : "sov0name",
+      "type" : "string"
+    },
+    "sov_a3" : {
+      "title" : "sov_a3",
+      "type" : "string"
+    },
+    "adm0name" : {
+      "title" : "adm0name",
+      "type" : "string"
+    },
+    "adm0_a3" : {
+      "title" : "adm0_a3",
+      "type" : "string"
+    },
+    "adm1name" : {
+      "title" : "adm1name",
+      "type" : "string"
+    },
+    "note" : {
+      "title" : "note",
+      "type" : "string"
+    },
+    "pop_max" : {
+      "title" : "pop_max",
+      "type" : "integer"
+    },
+    "pop_min" : {
+      "title" : "pop_min",
+      "type" : "integer"
+    },
+    "pop_other" : {
+      "title" : "pop_other",
+      "type" : "integer"
+    },
+    "meganame" : {
+      "title" : "meganame",
+      "type" : "string"
+    },
+    "ls_name" : {
+      "title" : "ls_name",
+      "type" : "string"
+    },
+    "date" : {
+      "title" : "date",
+      "format" : "date",
+      "type" : "string"
+    },
+    "start" : {
+      "title" : "start",
+      "format" : "date-time",
+      "type" : "string"
+    },
+    "end" : {
+      "title" : "end",
+      "format" : "date-time",
+      "type" : "string"
+    },
+    "boolean" : {
+      "title" : "boolean",
+      "type" : "boolean"
+    }
+  },
+  "additionalProperties" : false,
+  "type" : "object",
+  "$schema" : "https://json-schema.org/draft/2019-09/schema",
+  "$id" : "https://cql2test.ldproxy.net/ne110m4cql2/collections/ne_110m_populated_places_simple/queryables"
+}
