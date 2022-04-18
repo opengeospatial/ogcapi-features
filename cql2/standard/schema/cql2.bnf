@@ -72,7 +72,7 @@ lteq = lt eq;
 
 # LIKE predicate
 #
-isLikePredicate =  characterExpression "LIKE" patternExpression;
+isLikePredicate =  characterExpression ["NOT"] "LIKE" patternExpression;
 
 patternExpression = "CASEI" leftParen patternExpression rightParen
                   | "ACCENTI" leftParen patternExpression rightParen
