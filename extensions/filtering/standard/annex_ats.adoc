@@ -7,7 +7,7 @@ This test suite uses the https://en.wikipedia.org/wiki/Given-When-Then[Given-Whe
 
 In order to execute tests against the Web API under test, the Web API needs to support one of the specified encodings. Since all known implementations at this time support JSON, this test suite uses the JSON encoding and adds a dependency to the Conformance Class "JSON" in OGC API - Common - Part 1: Core for the general "Filter" tests and to the Conformance Class "GeoJSON" in OGC API - Features - Part 1: Core for the feature-specific tests. 
 
-The Web API under test can require authorization. Any Executable Test Suite implementing this test suite should at least implement the following security schemes supported by OpenAPI 3.0: HTTP Authorization schemes "basic" and "bearer", API keys, and OAuth2 flow "authorizationCode".
+The Web API under test can require authorization. Any Executable Test Suite implementing this test suite should implement the following security schemes supported by OpenAPI 3.0: HTTP Authorization schemes "basic" and "bearer", API keys, and OAuth2 flow "authorizationCode".
 
 === Conformance Class "Filter"
 
