@@ -13,7 +13,7 @@ grouped by their standardization target:
 ** <<rc_temporal-operators,Temporal Operators>>
 ** <<rc_array-operators,Array Operators>>
 ** <<rc_property-property,Property-Property Comparisons>>
-** <<rc_functions,Custom Functions>>
+** <<rc_functions,Functions>>
 ** <<rc_arithmetic,Arithmetic Expressions>>
 * Representations of a filter expression
 ** <<rc_cql2-text,CQL2 Text encoding>>
@@ -106,8 +106,8 @@ The operators that must be supported are:
 
 The <<rc_property-property,Property-Property Comparisons>> requirements class drops the permission to restrict expressions on the left hand side to properties and to restrict expressions on the right hand side to literal values. This supports property-property, but also literal-literal or literal-property comparisons.
 
-The <<rc_functions,Custom Functions>> requirements class specifies requirements for
-supporting custom function calls (e.g. min, max, etc.) in a CQL2 expression. Function
+The <<rc_functions,Functions>> requirements class specifies requirements for
+supporting function calls (e.g. min, max, etc.) in a CQL2 expression. Function
 calls are the primary means of extending the language. This requirements class
 also defined a Functions resource (at path `/functions`) that may be used to
 discover the list of available functions.
@@ -145,7 +145,7 @@ OGC Compliance Testing web site.
 |<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators
 |<<ats_array-operators,Array Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/array-operators
 |<<ats_property-property,Property-Property Comparisons>> |http://www.opengis.net/spec/cql2/1.0/conf/property-property
-|<<ats_functions,Custom Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/functions
+|<<ats_functions,Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/functions
 |<<ats_arithmetic,Arithmetic Expressions>> |http://www.opengis.net/spec/cql2/1.0/conf/arithmetic
 |<<ats_cql2-text,CQL2 Text encoding>> |http://www.opengis.net/spec/cql2/1.0/conf/cql2-text
 |<<ats_cql2-json,CQL2 JSON encoding>> |http://www.opengis.net/spec/cql2/1.0/conf/cql2-json 
