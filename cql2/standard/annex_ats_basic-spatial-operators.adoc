@@ -1,0 +1,106 @@
+=== Conformance Class "Basic Spatial Operators"
+
+:conf-class: basic-spatial-operators
+[[conf_basic-spatial-operators]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_basic-spatial-operators,Requirements Class "Basic Spatial Operators">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|===
+
+The term "geometry data type" is used for the following data types: Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, Geometry, or GeometryCollection.
+
+:conf-test: s_intersects
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-predicate,/req/{conf-class}/spatial-predicate>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Test purpose: | Test the S_INTERSECTS operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* At least one queryable has a geometry data type.
+
+When:
+
+For each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
+
+* `S_INTERSECTS({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_INTERSECTS({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+* `S_INTERSECTS({queryable},LINESTRING(7 50, 10 51))`
+* `S_INTERSECTS({queryable},POINT(7.02 49.92))`
+* `S_INTERSECTS({queryable},POINT(90 180))`
+
+Then:
+
+* assert successful execution of the evaluation for the first four filter expressions;
+* assert unsuccessful execution of the evaluation for the fifth filter expressions (invalid coordinate);
+* assert that the two result sets of the first two filter expressions for each queryable are identical;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-s_intersects-operator>>.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-s_intersects-operator]]
+.Predicates and expected results
+[width="100%",cols="3",options="header"]
+|===
+|Data Source |Predicate |Expected number of items
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,ENVELOPE(0,40,10,50))` |8
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,ENVELOPE(150,-90,-150,90))` |10
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |8
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,LINESTRING(0 40,10 50))` |4
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,POINT(7.02 49.92))` |1
+|ne_110m_populated_places_simple |`S_INTERSECTS(geom,ENVELOPE(0,40,10,50))` |7
+|ne_110m_populated_places_simple |`S_INTERSECTS(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |7
+|ne_110m_rivers_lake_centerlines |`S_INTERSECTS(geom,ENVELOPE(-180,-90,0,90))` |4
+|ne_110m_rivers_lake_centerlines |`S_INTERSECTS(geom,LINESTRING(-60 -90,-60 90))` |2
+|===
+
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

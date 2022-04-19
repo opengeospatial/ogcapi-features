@@ -1,0 +1,93 @@
+=== Conformance Class "Temporal Operators"
+
+:conf-class: temporal-operators
+[[conf_temporal-operators]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_temporal-operators,Requirements Class "Temporal Operators">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|===
+
+The term "temporal data type" is used for the following data types: Timestamp, Date, or Interval.
+
+:conf-test: temporal-operators-1
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_temporal-predicates,/req/{conf-class}/temporal-predicates>>, <<req_{conf-class}_temporal-operators,/req/{conf-class}/temporal-operators>>
+|Test purpose: | Test the T_AFTER, T_BEFORE, T_DISJOINT, T_EQUALS, T_INTERSECTS operators
+|Test method: | 
+Given:
+
+* The list of queryables with their data types.
+
+When:
+
+For each queryable `{queryable}` with a temporal data type, evaluate the following filter expressions
+
+* #TODO#
+
+Then:
+
+* assert successful execution of the evaluation;
+* #TODO#
+* store the valid expressions for each data source.
+|===
+
+#TODO: interval-operators#
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-temporal-operators>>.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-temporal-operators]]
+.Predicates and expected results
+[width="100%",cols="3",options="header"]
+|===
+|Data Source |Predicate |Expected number of items
+|#TODO# |#TODO# |#TODO#
+|===
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

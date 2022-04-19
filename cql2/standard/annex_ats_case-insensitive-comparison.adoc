@@ -1,0 +1,129 @@
+=== Conformance Class "Case-insensitive Comparison"
+
+:conf-class: case-insensitive-comparison
+[[conf_case-insensitive-comparison]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_case-insensitive-comparison,Requirements Class "Case-insensitive Comparison">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|Conditional Dependency |<<conf_advanced-comparison-operators,Advanced Comparison Operators>>
+|===
+
+:conf-test: casei
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_casei-operator,/req/{conf-class}/casei-operator>>
+|Test purpose: | Test the CASEI operator in comparisons
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+For each queryable `{queryable}` of type String, evaluate the following filter expressions
+
+* `CASEI({queryable}) = casei('foo')`
+* `CASEI({queryable}) <> casei('FOO')`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable have no item in common;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: casei-like
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_casei-operator,/req/{conf-class}/casei-operator>>
+|Test purpose: | Test the CASEI operator in LIKE predicates
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* The conformance class <<conf_advanced-comparison-operators,Advanced Comparison Operators>> passes.
+
+When:
+
+For each queryable `{queryable}` of type String, evaluate the following filter expressions
+
+* `CASEI({queryable}) LIKE casei('foo%')`
+* `CASEI({queryable}) LIKE casei('FOO%')`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable are identical;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-casei-operator>>, if the conditional dependency is met.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-casei-operator]]
+.Predicates and expected results
+[width="100%",cols="4",options="header"]
+|===
+|Dependency |Data Source |Predicate |Expected number of items
+|n/a |ne_110m_populated_places_simple |`CASEI(name)=casei('KIEV')` |1
+|n/a |ne_110m_populated_places_simple |`CASEI(name)=casei('kiev')` |1
+|n/a |ne_110m_populated_places_simple |`CASEI(name)=casei('Kiev')` |1
+|n/a |ne_110m_populated_places_simple |`CASEI(name)=casei('København')` |1
+|n/a |ne_110m_populated_places_simple |`CASEI(name)=casei('københavn')` |1
+|n/a |ne_110m_populated_places_simple |`CASEI(name)=casei('KØBENHAVN')` |1
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`CASEI(name) LIKE casei('B_r%')` |3
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`CASEI(name) LIKE casei('b_r%')` |3
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`CASEI(name) LIKE casei('B_R%')` |3
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`CASEI(name) IN (casei('Kiev'), casei('kobenhavn'), casei('Berlin'), casei('athens'), casei('foo'))` |3
+|===
+
+name 
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===
