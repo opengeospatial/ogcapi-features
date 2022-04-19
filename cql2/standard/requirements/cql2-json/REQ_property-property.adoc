@@ -1,0 +1,10 @@
+[[req_cql2-json_property-property]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-json/property-property* 
+^|Condition |Server implements requirements class <<rc_property-property,Property-Property Comparisons>>
+^|A |In addition to the <<req_cql2-json_basic-cql2,Basic CQL2>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use 
+
+* the schema component "#/$defs/propertyRef" in an operand of a comparison, spatial, temporal or array operator starting with the second operand,
+* the schema components "\#/$defs/scalarLiteral", "#/$defs/spatialLiteral", "\#/$defs/temporalLiteral" or "#/$defs/arrayLiteral" in the first operand of a comparison, spatial, temporal or array operator.
+|===

@@ -1,0 +1,11 @@
+[[req_cql2-json_advanced-comparison-operators]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-text/advanced-comparison-operators* 
+^|Condition |Server implements requirements class <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
+^|A |In addition to the <<req_cql2-json_basic-cql2,Basic CQL2>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema components:
+
+* "#/$defs/isLikePredicate"
+* "#/$defs/isBetweenPredicate"
+* "#/$defs/isInListPredicate"
+|===

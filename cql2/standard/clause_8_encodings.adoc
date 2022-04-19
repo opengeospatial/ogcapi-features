@@ -72,7 +72,15 @@ The list of CQL2 keywords includes:
 * "TIMESTAMP"
 * "TRUE"
 
+If a queryable uses a property name that is one of the keywords, the property name can be used in double quotes to avoid conflicts with the keyword.
+
 include::requirements/cql2-text/REQ_basic-cql2.adoc[]
+
+include::requirements/cql2-text/REQ_advanced-comparison-operators.adoc[]
+
+include::requirements/cql2-text/REQ_case-insensitive-comparison.adoc[]
+
+include::requirements/cql2-text/REQ_accent-insensitive-comparison.adoc[]
 
 include::requirements/cql2-text/REQ_basic-spatial-operators.adoc[]
 
@@ -80,11 +88,11 @@ include::requirements/cql2-text/REQ_spatial-operators.adoc[]
 
 include::requirements/cql2-text/REQ_temporal-operators.adoc[]
 
-include::requirements/cql2-text/REQ_arrays.adoc[]
+include::requirements/cql2-text/REQ_array-operators.adoc[]
+
+include::requirements/cql2-text/REQ_property-property.adoc[]
 
 include::requirements/cql2-text/REQ_functions.adoc[]
-
-The list of supported functions can be discovered via the Functions resource (i.e. path `/functions`).
 
 include::requirements/cql2-text/REQ_arithmetic.adoc[]
 
@@ -96,9 +104,15 @@ include::requirements/requirements_class_cql2-json.adoc[]
 This requirements class defines a JSON encoding of CQL2. Such an encoding
 would be suitable as the body of an HTTP POST request.
 
-NOTE: Attention is drawn to the fact that there exists an alternative JSON encoding for CQL2 based on the use of arrays that can be found here: https://github.com/tschaub/ogcapi-features/tree/json-array-expression/extensions/cql/jfe. The OGC API - Features Standards Working Group will review both encodings and decide which one to adopt. Feedback from implementers is welcome.
-
 include::requirements/cql2-json/REQ_basic-cql2.adoc[]
+
+include::recommendations/cql2-json/PER_basic-cql2.adoc[]
+
+include::requirements/cql2-json/REQ_advanced-comparison-operators.adoc[]
+
+include::requirements/cql2-json/REQ_case-insensitive-comparison.adoc[]
+
+include::requirements/cql2-json/REQ_accent-insensitive-comparison.adoc[]
 
 include::requirements/cql2-json/REQ_basic-spatial-operators.adoc[]
 
@@ -106,11 +120,11 @@ include::requirements/cql2-json/REQ_spatial-operators.adoc[]
 
 include::requirements/cql2-json/REQ_temporal-operators.adoc[]
 
-include::requirements/cql2-json/REQ_arrays.adoc[]
+include::requirements/cql2-json/REQ_array-operators.adoc[]
+
+include::requirements/cql2-json/REQ_property-property.adoc[]
 
 include::requirements/cql2-json/REQ_functions.adoc[]
-
-The list of supported functions can be discovered via the Functions resource (i.e. path `/functions`).
 
 include::requirements/cql2-json/REQ_arithmetic.adoc[]
 
