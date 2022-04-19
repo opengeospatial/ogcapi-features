@@ -135,7 +135,7 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 For spatial geometries existing representations are used:
 
 * Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
-* JSON: a https://datatracker.ietf.org/doc/html/rfc7946#section-3.1[GeoJSON geometry] object
+* JSON: a https://www.rfc-editor.org/rfc/rfc7946.html#section-3.1[GeoJSON geometry] object
 
 [[example_8_1_c]]
 .Temporal literal examples
@@ -170,11 +170,11 @@ INTERVAL('2019-09-09', '..')
 For temporal values existing representations are used:
 
 * Temporal instant:
-** Text: a `DATE` or `TIMESTAMP` function with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string]
-** JSON: an object with a `date` or `timestamp` member with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string value]
+** Text: a `DATE` or `TIMESTAMP` function with a https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 literal string]
+** JSON: an object with a `date` or `timestamp` member with a https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 literal string value]
 * Temporal interval:
 ** Text: an `INTERVAL` function with two temporal instants as parameters
-** JSON: an object with an `interval` member with an array of https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 literal string] values (or ".." for an open end)
+** JSON: an object with an `interval` member with an array of https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 literal string] values (or ".." for an open end)
 
 All temporal literals are in UTC ("Z").
 
