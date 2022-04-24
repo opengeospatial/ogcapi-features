@@ -201,6 +201,8 @@ Then:
 |ne_110m_populated_places_simple |`start>=TIMESTAMP('2022-04-16T10:13:19Z')` |2
 |ne_110m_populated_places_simple |`start>TIMESTAMP('2022-04-16T10:13:19Z')` |1
 |ne_110m_populated_places_simple |`start<>TIMESTAMP('2022-04-16T10:13:19Z')` |2
+|ne_110m_populated_places_simple |`boolean IS NOT NULL` |3
+|ne_110m_populated_places_simple |`boolean IS NULL` |240
 |ne_110m_populated_places_simple |`boolean=true` |2
 |ne_110m_populated_places_simple |`boolean=false` |1
 |===

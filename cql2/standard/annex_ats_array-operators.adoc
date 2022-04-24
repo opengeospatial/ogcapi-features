@@ -11,7 +11,33 @@
 |Dependency |<<conf_basic-cql2,Basic CQL2>>
 |===
 
-#TODO#
+:conf-test: array-predicates
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_array-predicates,/req/{conf-class}/array-predicates>>
+|Test purpose: | Test the array operators
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* At least one queryable has an array data type.
+
+When:
+
+For each queryable `{queryable}` with an array data type, evaluate the following filter expressions
+
+* `A_CONTAINS({queryable},["foo","bar"])`
+* `A_CONTAINEDBY({queryable},["foo","bar"])`
+* `A_EQUALS({queryable},["foo","bar"])`
+* `A_OVERLAPS({queryable},["foo","bar"])`
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
 
 :conf-test: logical
 ==== Conformance Test {counter:test-id}
