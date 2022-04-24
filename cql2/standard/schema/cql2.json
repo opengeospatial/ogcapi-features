@@ -466,7 +466,7 @@
       "properties": {
         "op": {
           "type": "string",
-          "enum": [ "+", "-", "*", "/" ]
+          "enum": [ "+", "-", "*", "/", "^" ]
         },
         "args": {
           "$ref": "#/$defs/arithmeticOperands"
