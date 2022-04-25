@@ -109,7 +109,7 @@ include::requirements/features/REQ_representation-geojson-replace.adoc[]
 include::requirements/features/REQ_representation-geojson-update.adoc[]
 
 GeoJSON normatively supports WGS84 longitude/latitude, but the 
-https://tools.ietf.org/html/rfc7946#section-4["prior arrangement" provision] 
+https://www.rfc-editor.org/rfc/rfc7946.html#section-4["prior arrangement" provision] 
 allows that other CRSs are used, if both client and server agree on the CRS. 
 Clients that want to use a CRS that is not the default CRS have to state
 the CRS in the POST, PUT or PATCH request using the `Content-Crs` HTTP header
