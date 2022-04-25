@@ -91,8 +91,8 @@ If timezone information is important for the intended use, then the "date" data 
 
 For timestamp and date values representations based on RFC 3339 are used:
 
-* Text: a `DATE` or `TIMESTAMP` operator with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 `date-time` or `full-date` string]
-* JSON: an object with a `date` or `timestamp` member with a https://datatracker.ietf.org/doc/html/rfc3339#section-5.6[RFC 3339 `date-time` or `full-date` string]
+* Text: a `DATE` or `TIMESTAMP` operator with a https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 `date-time` or `full-date` string]
+* JSON: an object with a `date` or `timestamp` member with a https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 `date-time` or `full-date` string]
 
 [[example_8_1_a]]
 .Scalar literal examples
@@ -153,7 +153,7 @@ The spatial data types are (literal rule `spatialLiteral`):
 For spatial geometries existing representations are used:
 
 * Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
-* JSON: a https://datatracker.ietf.org/doc/html/rfc7946#section-3.1[GeoJSON geometry] object
+* JSON: a https://www.rfc-editor.org/rfc/rfc7946.html#section-3.1[GeoJSON geometry] object
 
 [[example_8_1_b]]
 .Spatial literal example
