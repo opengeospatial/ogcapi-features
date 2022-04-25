@@ -1,0 +1,203 @@
+=== Conformance Class "Temporal Operators"
+
+:conf-class: temporal-operators
+[[conf_temporal-operators]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_temporal-operators,Requirements Class "Temporal Operators">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|===
+
+The term "temporal data type" is used for the following data types: Timestamp, Date, or Interval.
+
+:conf-test: temporal-operators-1
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_temporal-predicates,/req/{conf-class}/temporal-predicates>>, <<req_{conf-class}_temporal-operators,/req/{conf-class}/temporal-operators>>
+|Test purpose: | Test the T_AFTER, T_BEFORE, T_DISJOINT, T_EQUALS, T_INTERSECTS operators
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables with at least one queryable of type Timestamp or Date.
+
+When:
+
+For each queryable `{queryable}` of data type Timestamp, evaluate the following filter expressions
+
+* `T_AFTER({queryable},TIMESTAMP('2022-04-24T07:59:57Z'))`
+* `T_AFTER({queryable},INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_BEFORE({queryable},TIMESTAMP('2022-04-24T07:59:57Z'))`
+* `T_BEFORE({queryable},INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_DISJOINT({queryable},TIMESTAMP('2022-04-24T07:59:57Z'))`
+* `T_DISJOINT({queryable},INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_EQUALS({queryable},TIMESTAMP('2022-04-24T07:59:57Z'))`
+* `T_EQUALS({queryable},INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_INTERSECTS({queryable},TIMESTAMP('2022-04-24T07:59:57Z'))`
+* `T_INTERSECTS({queryable},INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+
+For each queryable `{queryable}` of data type Date, evaluate the following filter expressions
+
+* `T_AFTER({queryable},DATE('2022-04-24'))`
+* `T_AFTER({queryable},INTERVAL('2021-01-01','2021-12-31'))`
+* `T_BEFORE({queryable},DATE('2022-04-24'))`
+* `T_BEFORE({queryable},INTERVAL('2021-01-01','2021-12-31'))`
+* `T_DISJOINT({queryable},DATE('2022-04-24'))`
+* `T_DISJOINT({queryable},INTERVAL('2021-01-01','2021-12-31'))`
+* `T_EQUALS({queryable},DATE('2022-04-24'))`
+* `T_EQUALS({queryable},INTERVAL('2021-01-01','2021-12-31'))`
+* `T_INTERSECTS({queryable},DATE('2022-04-24'))`
+* `T_INTERSECTS({queryable},INTERVAL('2021-01-01','2021-12-31'))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: temporal-operators-2
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_temporal-predicates,/req/{conf-class}/temporal-predicates>>, <<req_{conf-class}_temporal-operators,/req/{conf-class}/temporal-operators>>
+|Test purpose: | Test the temporal operators with intervals
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables with at least two queryables of type Timestamp or Date.
+
+When:
+
+For each pair of queryables `{queryable2}` and `{queryable2}` of data type Timestamp, evaluate the following filter expressions
+
+* `T_AFTER(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_BEFORE(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_DISJOINT(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_EQUALS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_INTERSECTS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_CONTAINS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_DURING(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_FINISHEDBY(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_FINISHES(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_MEETS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_METBY(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_OVERLAPPEDBY(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_OVERLAPS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_STARTEDBY(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+* `T_STARTS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01T00:00:00Z','2021-12-31T23:59:59Z'))`
+
+For each pair of queryables `{queryable2}` and `{queryable2}` of data type Date, evaluate the following filter expressions
+
+* `T_AFTER(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_BEFORE(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_DISJOINT(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_EQUALS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_INTERSECTS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_CONTAINS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_DURING(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_FINISHEDBY(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_FINISHES(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_MEETS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_METBY(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_OVERLAPPEDBY(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_OVERLAPS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_STARTEDBY(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+* `T_STARTS(INTERVAL({queryable1},{queryable2}),INTERVAL('2021-01-01','2021-12-31'))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-temporal-operators>>.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-temporal-operators]]
+.Predicates and expected results
+[width="100%",cols="3",options="header"]
+|===
+|Data Source |Predicate |Expected number of items
+|ne_110m_populated_places_simple |`t_after("date",date('2022-04-16'))` |1
+|ne_110m_populated_places_simple |`t_before("date",date('2022-04-16'))` |1
+|ne_110m_populated_places_simple |`t_disjoint("date",date('2022-04-16'))` |2
+|ne_110m_populated_places_simple |`t_equals("date",date('2022-04-16'))` |1
+|ne_110m_populated_places_simple |`t_intersects("date",date('2022-04-16'))` |1
+|ne_110m_populated_places_simple |`t_after("date",interval('2022-01-01','2022-12-31'))` |1
+|ne_110m_populated_places_simple |`t_before("date",interval('2022-01-01','2022-12-31'))` |1
+|ne_110m_populated_places_simple |`t_disjoint("date",interval('2022-01-01','2022-12-31'))` |2
+|ne_110m_populated_places_simple |`t_equals("date",interval('2022-01-01','2022-12-31'))` |0
+|ne_110m_populated_places_simple |`t_equals("date",interval('2022-04-16','2022-04-16'))` |1
+|ne_110m_populated_places_simple |`t_intersects("date",interval('2022-01-01','2022-12-31'))` |1
+|ne_110m_populated_places_simple |`t_after(start,timestamp('2022-04-16T10:13:19Z'))` |1
+|ne_110m_populated_places_simple |`t_before(start,timestamp('2022-04-16T10:13:19Z'))` |1
+|ne_110m_populated_places_simple |`t_disjoint(start,timestamp('2022-04-16T10:13:19Z'))` |2
+|ne_110m_populated_places_simple |`t_equals(start,timestamp('2022-04-16T10:13:19Z'))` |1
+|ne_110m_populated_places_simple |`t_intersects(start,timestamp('2022-04-16T10:13:19Z'))` |1
+|ne_110m_populated_places_simple |`t_after(start,interval('2022-01-01T00:00:00Z','2022-12-31T23:59:59Z'))` |0
+|ne_110m_populated_places_simple |`t_before(start,interval('2022-01-01T00:00:00Z','2022-12-31T23:59:59Z'))` |1
+|ne_110m_populated_places_simple |`t_disjoint(start,interval('2022-01-01T00:00:00Z','2022-12-31T23:59:59Z'))` |1
+|ne_110m_populated_places_simple |`t_equals(start,interval('2022-01-01T00:00:00Z','2022-12-31T23:59:59Z'))` |0
+|ne_110m_populated_places_simple |`t_intersects(start,interval('2022-01-01T00:00:00Z','2022-12-31T23:59:59Z'))` |2
+|ne_110m_populated_places_simple |`t_after(interval(start,end),interval('..','2022-04-16T10:13:19Z'))` |1
+|ne_110m_populated_places_simple |`t_before(interval(start,end),interval('2023-01-01T00:00:00Z','..'))` |2
+|ne_110m_populated_places_simple |`t_disjoint(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:09Z'))` |1
+|ne_110m_populated_places_simple |`t_equals(interval(start,end),interval('2021-04-16T10:15:59Z','2022-04-16T10:16:06Z'))` |1
+|ne_110m_populated_places_simple |`t_intersects(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:09Z'))` |2
+|ne_110m_populated_places_simple |`T_CONTAINS(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |1
+|ne_110m_populated_places_simple |`T_DURING(interval(start,end),interval('2022-01-01T00:00:00Z','2022-12-31T23:59:59Z'))` |1
+|ne_110m_populated_places_simple |`T_FINISHES(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:16:06Z'))` |1
+|ne_110m_populated_places_simple |`T_FINISHEDBY(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:16:06Z'))` |1
+|ne_110m_populated_places_simple |`T_MEETS(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |0
+|ne_110m_populated_places_simple |`T_METBY(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |1
+|ne_110m_populated_places_simple |`T_OVERLAPPEDBY(interval(start,end),interval('2020-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |2
+|ne_110m_populated_places_simple |`T_OVERLAPS(interval(start,end),interval('2022-04-16T10:13:19Z','2023-04-16T10:15:10Z'))` |1
+|ne_110m_populated_places_simple |`T_STARTEDBY(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |1
+|ne_110m_populated_places_simple |`T_STARTS(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |0
+|===
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

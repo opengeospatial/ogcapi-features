@@ -1,0 +1,9 @@
+[[req_cql2-json_accent-insensitive-comparison]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-text/accent-insensitive-comparison* 
+^|Condition |Server implements requirements class <<rc_accent-insensitive-comparison,Accent-insensitive Comparisons>>
+^|A |In addition to the <<req_cql2-json_basic-cql2,Basic CQL2>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema component:
+
+* "#/$defs/accenti"
+|===

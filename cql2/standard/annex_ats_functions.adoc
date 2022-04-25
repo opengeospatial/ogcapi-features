@@ -1,0 +1,33 @@
+=== Conformance Class "Functions"
+
+:conf-class: functions
+[[conf_functions]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_functions,Requirements Class "Functions">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|===
+
+:conf-test: functions
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_functions,/req/{conf-class}/functions>>
+|Test purpose: | Test predicates with functions
+|Test method: | 
+Given:
+
+* The list of functions with arguments and return type supported by the implementation under test.
+
+When:
+
+* For each function construct multiple valid filter expressions involving different operators.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

@@ -1,0 +1,36 @@
+{
+  "title" : "ne_110m_rivers_lake_centerlines",
+  "properties" : {
+    "geom" : {
+      "$ref" : "https://geojson.org/schema/LineString.json"
+    },
+    "name" : {
+      "title" : "name",
+      "type" : "string"
+    },
+    "name_en" : {
+      "title" : "name_en",
+      "type" : "string"
+    },
+    "wikidataid" : {
+      "title" : "wikidataid",
+      "type" : "string"
+    },
+    "label" : {
+      "title" : "label",
+      "type" : "string"
+    },
+    "name_de" : {
+      "title" : "name_de",
+      "type" : "string"
+    },
+    "name_el" : {
+      "title" : "name_el",
+      "type" : "string"
+    }
+  },
+  "additionalProperties" : false,
+  "type" : "object",
+  "$schema" : "https://json-schema.org/draft/2019-09/schema",
+  "$id" : "https://cql2test.ldproxy.net/ne110m4cql2/collections/ne_110m_rivers_lake_centerlines/queryables"
+}

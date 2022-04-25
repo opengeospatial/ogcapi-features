@@ -3,20 +3,24 @@
 This standard defines the following requirements classes, 
 grouped by their standardization target:
 
-* Filter expressions
+* Servers that evaluate filter expressions
 ** <<rc_basic-cql2,Basic CQL2>>
 ** <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
 ** <<rc_case-insensitive-comparison,Case-insensitive Comparisons>>
+** <<rc_accent-insensitive-comparison,Accent-insensitive Comparisons>>
 ** <<rc_basic-spatial-operators,Basic Spatial Operators>>
 ** <<rc_spatial-operators,Spatial Operators>>
 ** <<rc_temporal-operators,Temporal Operators>>
 ** <<rc_array-operators,Array Operators>>
 ** <<rc_property-property,Property-Property Comparisons>>
-** <<rc_functions,Custom Functions>>
+** <<rc_functions,Functions>>
 ** <<rc_arithmetic,Arithmetic Expressions>>
 * Representations of a filter expression
 ** <<rc_cql2-text,CQL2 Text encoding>>
 ** <<rc_cql2-json,CQL2 JSON encoding>>
+
+NOTE: "Server" is used in this Standard to identify any executable software that is
+able to evaluate filter expressions on data.
 
 The <<rc_basic-cql2,Basic CQL2>> requirements class defines the minimal subset
 of the Common Query Language (CQL2) that all implementations must support
@@ -49,9 +53,13 @@ The <<rc_advanced-comparison-operators,Advanced Comparison Operators>> requireme
 * between
 * in
 
-The <<rc_case-insensitive-comparison,Case-insensitive Comparison>> requirements class adds a capability for case-insensitive string comparisons:
+The <<rc_case-insensitive-comparison,Case-insensitive Comparison>> requirements class adds an operator to support case-insensitive string comparisons:
 
-* #TODO#
+* casei
+
+The <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>> requirements class adds an operator to support accent-insensitive string comparisons:
+
+* accenti
 
 The <<rc_basic-spatial-operators,Basic Spatial Operators>> requirements class specifies minimal requirements for servers that support spatial operators. Only the following spatial operator must be supported:
 
@@ -98,8 +106,8 @@ The operators that must be supported are:
 
 The <<rc_property-property,Property-Property Comparisons>> requirements class drops the permission to restrict expressions on the left hand side to properties and to restrict expressions on the right hand side to literal values. This supports property-property, but also literal-literal or literal-property comparisons.
 
-The <<rc_functions,Custom Functions>> requirements class specifies requirements for
-supporting custom function calls (e.g. min, max, etc.) in a CQL2 expression. Function
+The <<rc_functions,Functions>> requirements class specifies requirements for
+supporting function calls (e.g. min, max, etc.) in a CQL2 expression. Function
 calls are the primary means of extending the language. This requirements class
 also defined a Functions resource (at path `/functions`) that may be used to
 discover the list of available functions.
@@ -131,12 +139,13 @@ OGC Compliance Testing web site.
 |<<ats_basic-cql2,Basic CQL2>> |http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2
 |<<ats_advanced-comparison-operators,Advanced Comparison Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators
 |<<ats_case-insensitive-comparison,Case-insensitive Comparison>> |http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison
+|<<ats_accent-insensitive-comparison,Accent-insensitive Comparison>> |http://www.opengis.net/spec/cql2/1.0/conf/accent-insensitive-comparison
 |<<ats_basic-spatial-operators,Basic Spatial Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators
 |<<ats_spatial-operators,Spatial Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/spatial-operators
 |<<ats_temporal-operators,Temporal Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators
 |<<ats_array-operators,Array Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/array-operators
 |<<ats_property-property,Property-Property Comparisons>> |http://www.opengis.net/spec/cql2/1.0/conf/property-property
-|<<ats_functions,Custom Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/functions
+|<<ats_functions,Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/functions
 |<<ats_arithmetic,Arithmetic Expressions>> |http://www.opengis.net/spec/cql2/1.0/conf/arithmetic
 |<<ats_cql2-text,CQL2 Text encoding>> |http://www.opengis.net/spec/cql2/1.0/conf/cql2-text
 |<<ats_cql2-json,CQL2 JSON encoding>> |http://www.opengis.net/spec/cql2/1.0/conf/cql2-json 

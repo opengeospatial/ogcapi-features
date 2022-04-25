@@ -1,0 +1,230 @@
+=== Conformance Class "Basic-CQL2"
+
+:conf-class: basic-cql2
+[[conf_basic-cql2]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_basic-cql2,Requirements Class "Basic-CQL2">>
+|===
+
+:conf-test: basic-test
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Implementation under test provides sufficient information to construct filter expressions and supports comparison predicates
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+n/a
+
+Then:
+
+* assert that there is at least one queryable for each data source;
+* assert that the data type (String, Number, Integer, Boolean, Timestamp, Date, Interval, Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, Geometry, GeometryCollection, or Array) is specified for each queryable;
+* assert that at least one queryable for each data source is of data type String, Boolean, Number, Integer, Timestamp or Date.
+|===
+
+:conf-test: comparison
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_cql2-filter,/req/{conf-class}/cql2-filter>>, <<req_{conf-class}_property,/req/{conf-class}/property>>, <<req_{conf-class}_binary-comparison-predicate,/req/{conf-class}/binary-comparison-predicate>>
+|Test purpose: | Test comparison predicates
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* Test '/conf/{conf-class}/basic-test' passes.
+
+When:
+
+For each queryable `{queryable}` of one of the data types String, Boolean, Number, Integer, Timestamp or Date, evaluate the following filter expressions
+
+* `{queryable} = {value}`
+* `{queryable} <> {value}`
+* `{queryable} > {value}`
+* `{queryable} < {value}`
+* `{queryable} >= {value}`
+* `{queryable} \<= {value}`
+
+where `{value}` depends on the data type:
+
+* String: `'foo'`
+* Boolean: `true`
+* Number: `3.14`
+* Integer: `1`
+* Timestamp: `TIMESTAMP('2022-04-14T14:48:46Z')`
+* Date: `DATE('2022-04-14')`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable for the operators `=` and `<>` have no item in common;
+* assert that the two result sets for each queryable for the operators `>` and `\<=` have no item in common;
+* assert that the two result sets for each queryable for the operators `<` and `>=` have no item in common;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: is-null
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_cql2-filter,/req/{conf-class}/cql2-filter>>, <<req_{conf-class}_property,/req/{conf-class}/property>>, <<req_{conf-class}_null-predicate,/req/{conf-class}/null-predicate>>
+|Test purpose: | Test IS NULL predicate
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* Test '/conf/{conf-class}/basic-test' passes.
+
+When:
+
+For each queryable `{queryable}`, evaluate the following filter expressions
+
+* `{queryable} IS NULL`
+* `{queryable} is not null`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable have no item in common;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: boolean
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_cql2-filter,/req/{conf-class}/cql2-filter>>
+|Test purpose: | Test boolean filter expression
+|Test method: | 
+Given:
+
+* One of more data sources.
+* Test '/conf/{conf-class}/basic-test' passes.
+
+When:
+
+For each data source, evaluate the following filter expressions
+
+* `true`
+* `false`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the result sets for `false` are empty;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-basic-cql2>>.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-basic-cql2]]
+.Predicates and expected results
+[width="100%",cols="3",options="header"]
+|===
+|Data Source |Predicate |Expected number of items
+|ne_110m_admin_0_countries |`NAME='Luxembourg'` |1
+|ne_110m_admin_0_countries |`NAME>='Luxembourg'` |84
+|ne_110m_admin_0_countries |`NAME>'Luxembourg'` |83
+|ne_110m_admin_0_countries |`NAME<='Luxembourg'` |94
+|ne_110m_admin_0_countries |`NAME<'Luxembourg'` |93
+|ne_110m_admin_0_countries |`NAME<>'Luxembourg'` |176
+|ne_110m_admin_0_countries |`POP_EST=37589262` |1
+|ne_110m_admin_0_countries |`POP_EST>=37589262` |39
+|ne_110m_admin_0_countries |`POP_EST>37589262` |38
+|ne_110m_admin_0_countries |`POP_EST<=37589262` |139
+|ne_110m_admin_0_countries |`POP_EST<37589262` |138
+|ne_110m_admin_0_countries |`POP_EST<>37589262` |176
+|ne_110m_populated_places_simple |`name IS NOT NULL` |243
+|ne_110m_populated_places_simple |`name IS NULL` |0
+|ne_110m_populated_places_simple |`name='København'` |1
+|ne_110m_populated_places_simple |`name>='København'` |137
+|ne_110m_populated_places_simple |`name>'København'` |136
+|ne_110m_populated_places_simple |`name<='København'` |107
+|ne_110m_populated_places_simple |`name<'København'` |106
+|ne_110m_populated_places_simple |`name<>'København'` |242
+|ne_110m_populated_places_simple |`pop_other IS NOT NULL` |243
+|ne_110m_populated_places_simple |`pop_other IS NULL` |0
+|ne_110m_populated_places_simple |`pop_other=1038288` |1
+|ne_110m_populated_places_simple |`pop_other>=1038288` |123
+|ne_110m_populated_places_simple |`pop_other>1038288` |122
+|ne_110m_populated_places_simple |`pop_other<=1038288` |121
+|ne_110m_populated_places_simple |`pop_other<1038288` |120
+|ne_110m_populated_places_simple |`pop_other<>1038288` |242
+|ne_110m_populated_places_simple |`"date" IS NOT NULL` |3
+|ne_110m_populated_places_simple |`"date" IS NULL` |240
+|ne_110m_populated_places_simple |`"date"=DATE('2022-04-16')` |1
+|ne_110m_populated_places_simple |`"date">=DATE('2022-04-16')` |2
+|ne_110m_populated_places_simple |`"date">DATE('2022-04-16')` |1
+|ne_110m_populated_places_simple |`"date"<=DATE('2022-04-16')` |2
+|ne_110m_populated_places_simple |`"date"<DATE('2022-04-16')` |1
+|ne_110m_populated_places_simple |`"date"<>DATE('2022-04-16')` |2
+|ne_110m_populated_places_simple |`start IS NOT NULL` |3
+|ne_110m_populated_places_simple |`start IS NULL` |240
+|ne_110m_populated_places_simple |`start=TIMESTAMP('2022-04-16T10:13:19Z')` |1
+|ne_110m_populated_places_simple |`start<=TIMESTAMP('2022-04-16T10:13:19Z')` |2
+|ne_110m_populated_places_simple |`start<TIMESTAMP('2022-04-16T10:13:19Z')` |1
+|ne_110m_populated_places_simple |`start>=TIMESTAMP('2022-04-16T10:13:19Z')` |2
+|ne_110m_populated_places_simple |`start>TIMESTAMP('2022-04-16T10:13:19Z')` |1
+|ne_110m_populated_places_simple |`start<>TIMESTAMP('2022-04-16T10:13:19Z')` |2
+|ne_110m_populated_places_simple |`boolean IS NOT NULL` |3
+|ne_110m_populated_places_simple |`boolean IS NULL` |240
+|ne_110m_populated_places_simple |`boolean=true` |2
+|ne_110m_populated_places_simple |`boolean=false` |1
+|===
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_cql2-filter,/req/{conf-class}/cql2-filter>>
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* One of more data sources.
+* The stored predicates for each data source.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

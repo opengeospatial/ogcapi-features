@@ -1,0 +1,276 @@
+=== Conformance Class "Spatial Operators"
+
+:conf-class: spatial-operators
+[[conf_spatial-operators]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_spatial-operators,Requirements Class "Spatial Operators">>
+|Dependency |<<conf_basic-spatial-operators,Basic Spatial Operators>>
+|===
+
+:conf-test: s_disjoint
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Test purpose: | Test the S_DISJOINT spatial operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
+
+* `S_DISJOINT({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_DISJOINT({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+* `S_DISJOINT({queryable},LINESTRING(7 50,10 51))`
+* `S_DISJOINT({queryable},POINT(7.02 49.92))`
+* `S_DISJOINT({queryable},POINT(90 180))`
+
+Then:
+
+* assert successful execution of the evaluation for the first four filter expressions;
+* assert unsuccessful execution of the evaluation for the fifth filter expressions (invalid coordinate);
+* assert that the two result sets of the first two filter expressions for each queryable are empty;
+* assert that the results sets of the third and fourth filter expressions for each queryable do not have an item in common with the corresponding S_INTERSECTS expression;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: s_equals
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Test purpose: | Test the S_EQUALS spatial operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
+
+* `S_EQUALS({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+* `S_EQUALS({queryable},LINESTRING(7 50,10 51))`
+* `S_EQUALS({queryable},POINT(7.02 49.92))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets of the first two filter expressions for each queryable are identical;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: s_touches
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Test purpose: | Test the S_TOUCHES spatial operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
+
+* `S_TOUCHES({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_TOUCHES({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+* `S_TOUCHES({queryable},LINESTRING(7 50,10 51))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: s_crosses
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Test purpose: | Test the S_CROSSES spatial operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+for each queryable `{queryable}` of type Point, MultiPoint, LineString or MultiLineString, evaluate the following filter expressions
+
+* `S_CROSSES({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_CROSSES({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+* `S_CROSSES({queryable},LINESTRING(7 50,10 51))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: s_within
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Test purpose: | Test the S_WITHIN spatial operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
+
+* `S_WITHIN({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_WITHIN({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+* `S_WITHIN({queryable},LINESTRING(7 50,10 51))`
+* `S_WITHIN({queryable},MULTIPOINT(7 50,10 51))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets of the first two filter expressions for each queryable are identical;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: s_contains
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Test purpose: | Test the S_CONTAINS spatial operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
+
+* `S_CONTAINS({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_CONTAINS({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+* `S_CONTAINS({queryable},LINESTRING(7 50,10 51))`
+* `S_CONTAINS({queryable},MULTIPOINT(7 50,10 51))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets of the first two filter expressions for each queryable are identical;
+* assert that the results sets for each queryable do not have an item in common with the corresponding S_WITHIN expression;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: s_overlaps
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Test purpose: | Test the S_OVERLAPS spatial operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+* For each queryable `{queryable}` of type Point or MultiPoint, evaluate the filter expression `S_OVERLAPS({queryable},MULTIPOINT(7 50,10 51))`
+* For each queryable `{queryable}` of type LineString or MultiLineString, evaluate the filter expression `S_OVERLAPS({queryable},LINESTRING(7 50,10 51))`
+* For each queryable `{queryable}` of type Polygon or MultiPolygon, evaluate the filter expression `S_OVERLAPS({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-spatial-operators>>.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-spatial-operators]]
+.Predicates and expected results
+[width="100%",cols="3",options="header"]
+|===
+|Data Source |Predicate |Expected number of items
+|ne_110m_admin_0_countries |`S_DISJOINT(geom,ENVELOPE(0,40,10,50))` |169
+|ne_110m_admin_0_countries |`S_DISJOINT(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |169
+|ne_110m_admin_0_countries |`S_DISJOINT(geom,LINESTRING(0 40,10 50))` |173
+|ne_110m_admin_0_countries |`S_DISJOINT(geom,POINT(7.02 49.92))` |176
+|ne_110m_populated_places_simple |`S_DISJOINT(geom,ENVELOPE(0,40,10,50))` |236
+|ne_110m_populated_places_simple |`S_DISJOINT(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |236
+|ne_110m_rivers_lake_centerlines |`S_DISJOINT(geom,ENVELOPE(-180,-90,0,90))` |9
+|ne_110m_rivers_lake_centerlines |`S_DISJOINT(geom,LINESTRING(-60 -90,-60 90))` |11
+|ne_110m_populated_places_simple |`S_EQUALS(geom,POINT(6.1300028 49.6116604))` |1
+|ne_110m_admin_0_countries |`S_TOUCHES(geom,POLYGON\((6.043073357781111 50.128051662794235,6.242751092156993 49.90222565367873,6.186320428094177 49.463802802114515,5.897759230176348 49.44266714130711,5.674051954784829 49.529483547557504,5.782417433300907 50.09032786722122,6.043073357781111 50.128051662794235)))` |3
+|ne_110m_admin_0_countries |`S_TOUCHES(geom,POINT(6.043073357781111 50.128051662794235))` |3
+|ne_110m_admin_0_countries |`S_TOUCHES(geom,POINT(6.242751092156993 49.90222565367873))` |2
+|ne_110m_admin_0_countries |`S_TOUCHES(geom,LINESTRING(6.043073357781111 50.128051662794235,6.242751092156993 49.90222565367873))` |3
+|ne_110m_rivers_lake_centerlines |`S_CROSSES(geom,ENVELOPE(0,40,10,50))` |1
+|ne_110m_rivers_lake_centerlines |`S_CROSSES(geom,LINESTRING(-60 -90,-60 90))` |2
+|ne_110m_admin_0_countries |`S_WITHIN(geom,ENVELOPE(-180,-90,0,90))` |44
+|ne_110m_populated_places_simple |`S_WITHIN(geom,ENVELOPE(-180,-90,0,90))` |74
+|ne_110m_rivers_lake_centerlines |`S_WITHIN(geom,ENVELOPE(-180,-90,0,90))` |4
+|ne_110m_admin_0_countries |`S_CONTAINS(geom,ENVELOPE(7,50,8,51))` |1
+|ne_110m_admin_0_countries |`S_CONTAINS(geom,LINESTRING(7 50,8 51))` |1
+|ne_110m_admin_0_countries |`S_CONTAINS(geom,POINT(7.02 49.92))` |1
+|ne_110m_admin_0_countries |`S_OVERLAPS(geom,ENVELOPE(-180,-90,0,90))` |11
+|===
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

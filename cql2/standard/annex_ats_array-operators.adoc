@@ -1,0 +1,61 @@
+=== Conformance Class "Array Operators"
+
+:conf-class: array-operators
+[[conf_array-operators]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_array-operators,Requirements Class "Array Operators">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|===
+
+:conf-test: array-predicates
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_array-predicates,/req/{conf-class}/array-predicates>>
+|Test purpose: | Test the array operators
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* At least one queryable has an array data type.
+
+When:
+
+For each queryable `{queryable}` with an array data type, evaluate the following filter expressions
+
+* `A_CONTAINS({queryable},["foo","bar"])`
+* `A_CONTAINEDBY({queryable},["foo","bar"])`
+* `A_EQUALS({queryable},["foo","bar"])`
+* `A_OVERLAPS({queryable},["foo","bar"])`
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

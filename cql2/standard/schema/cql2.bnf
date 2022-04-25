@@ -72,7 +72,7 @@ lteq = lt eq;
 
 # LIKE predicate
 #
-isLikePredicate =  characterExpression "LIKE" patternExpression;
+isLikePredicate =  characterExpression ["NOT"] "LIKE" patternExpression;
 
 patternExpression = "CASEI" leftParen patternExpression rightParen
                   | "ACCENTI" leftParen patternExpression rightParen
@@ -197,10 +197,19 @@ arrayOperator = "A_EQUALS"
 # operand (a property name, a number or a function that returns a number),
 # an arithmetic operators (+,-,*,/) and another arithmetic operand.
 #=============================================================================#
-arithmeticExpression = numericExpression arithmeticOperator numericExpression
-                     | leftParen arithmeticExpression rightParen;
-
-arithmeticOperator = plusSign | minusSign | asterisk | solidus;
+arithmeticExpression = arithmeticExpression plusSign arithmeticTerm
+                     | arithmeticExpression minusSign arithmeticTerm
+                     | arithmeticTerm;
+arithmeticTerm = arithmeticTerm asterisk powerTerm
+               | arithmeticTerm solidus powerTerm
+               | powerTerm;
+powerTerm = arithmeticFactor caret powerTerm
+          | arithmeticFactor;
+arithmeticFactor = leftParen arithmeticExpression rightParen
+                 | arithmeticOperand;
+arithmeticOperand = numericLiteral
+                  | propertyName
+                  | function;
 
 #=============================================================================#
 # Definition of a PROPERTYNAME

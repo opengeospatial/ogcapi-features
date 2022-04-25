@@ -1,0 +1,99 @@
+=== Conformance Class "Arithmetic Expressions"
+
+:conf-class: arithmetic
+[[conf_arithmetic]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_arithmetic,Requirements Class "Arithmetic Expressions">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|Conditional Dependency |<<conf_advanced-comparison-operators,Advanced Comparison Operators>>
+|Conditional Dependency |<<conf_property-property,Property-Property Comparisons>>
+|===
+
+:conf-test: arithmetic
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_arithmetic,/req/{conf-class}/arithmetic>>
+|Test purpose: | Test predicates with arithmetic expressions
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* At least one queryable has a numeric data type.
+
+When:
+
+* For each queryable construct multiple valid filter expressions involving arithmetic expressions.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-arithmetic>>, if the conditional dependency is met.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-arithmetic]]
+.Predicates and expected results
+[width="100%",cols="4",options="header"]
+|===
+|Dependency |Data Source |Predicate |Expected number of items
+|n/a |ne_110m_populated_places_simple |`pop_other=1038280+8` |1
+|n/a |ne_110m_populated_places_simple |`pop_other>=1038290-2*2^0` |123
+|n/a |ne_110m_populated_places_simple |`pop_other>1038290-20/10` |122
+|n/a |ne_110m_populated_places_simple |`pop_other\<=1038200+8*11` |121
+|n/a |ne_110m_populated_places_simple |`pop_other<1038280+2^3` |120
+|n/a |ne_110m_populated_places_simple |`pop_other<>1038290-2^1` |242
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`pop_other between 4000000/4 and (3*(900000+100000))` |75
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`pop_other not between 4000000/4 and (3*(900000+100000))` |168
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`pop_other in (1000000+38288,1000000+600000+11692,3*1000000+13258,3*1000000+13257,30*100000+13259)` |3
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`pop_other not in (1000000+38288,1000000+600000+11692,3*1000000+13258,3*1000000+13257,30*100000+13259)` |240
+|Property-Property Comparisons |ne_110m_populated_places_simple |`1038280+8=pop_other` |1
+|===
+
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

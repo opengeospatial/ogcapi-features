@@ -7,7 +7,7 @@ info:
 paths: {}
 components:
   schemas:
-    booleanValueExpression:
+    booleanExpression:
       type: object
       oneOf:
         - $ref: '#/components/schemas/andOrExpression'
@@ -32,7 +32,7 @@ components:
           type: array
           minItems: 2
           items:
-            $ref: '#/components/schemas/booleanValueExpression'
+            $ref: '#/components/schemas/booleanExpression'
     notExpression:
       type: object
       required:
@@ -48,7 +48,7 @@ components:
           minItems: 1
           maxItems: 1
           items:
-            $ref: '#/components/schemas/booleanValueExpression'
+            $ref: '#/components/schemas/booleanExpression'
     comparisonPredicate:
       oneOf:
         - $ref: '#/components/schemas/binaryComparisonPredicate'
@@ -84,7 +84,7 @@ components:
         - $ref: '#/components/schemas/characterExpression'
         - $ref: '#/components/schemas/temporalInstantExpression'
         - $ref: '#/components/schemas/numericExpression'
-        - $ref: '#/components/schemas/booleanValueExpression'
+        - $ref: '#/components/schemas/booleanExpression'
     temporalInstantExpression:
       oneOf:
         - $ref: '#/components/schemas/instantLiteral'
@@ -187,7 +187,7 @@ components:
         - $ref: '#/components/schemas/characterExpression'
         - $ref: '#/components/schemas/numericExpression'
         - $ref: '#/components/schemas/temporalExpression'
-        - $ref: '#/components/schemas/booleanValueExpression'
+        - $ref: '#/components/schemas/booleanExpression'
         - $ref: '#/components/schemas/geomExpression'
     spatialPredicate:
       type: object
@@ -286,7 +286,7 @@ components:
         oneOf:
           - $ref: '#/components/schemas/characterExpression'
           - $ref: '#/components/schemas/numericExpression'
-          - $ref: '#/components/schemas/booleanValueExpression'
+          - $ref: '#/components/schemas/booleanExpression'
           - $ref: '#/components/schemas/geomExpression'
           - $ref: '#/components/schemas/temporalExpression'
           - $ref: '#/components/schemas/arrayLiteral'
@@ -303,6 +303,7 @@ components:
             - '-'
             - '*'
             - /
+            - '^'
         args:
           $ref: '#/components/schemas/arithmeticOperands'
     arithmeticOperands:
@@ -363,7 +364,7 @@ components:
             oneOf:
               - $ref: '#/components/schemas/characterExpression'
               - $ref: '#/components/schemas/numericExpression'
-              - $ref: '#/components/schemas/booleanValueExpression'
+              - $ref: '#/components/schemas/booleanExpression'
               - $ref: '#/components/schemas/geomExpression'
               - $ref: '#/components/schemas/temporalExpression'
               - $ref: '#/components/schemas/arrayExpression'

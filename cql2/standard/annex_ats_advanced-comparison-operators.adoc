@@ -1,0 +1,159 @@
+=== Conformance Class "Advanced Comparison Operators"
+
+:conf-class: advanced-comparison-operators
+[[conf_advanced-comparison-operators]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_advanced-comparison-operators,Requirements Class "Advanced Comparison Operators">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|===
+
+:conf-test: like
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_like-predicate,/req/{conf-class}/like-predicate>>
+|Test purpose: | Test LIKE predicate
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+For each queryable `{queryable}` of type String, evaluate the following filter expressions
+
+* `{queryable} LIKE '%'`
+* `{queryable} like '_%'`
+* `{queryable} like ''`
+* `{queryable} like '%%'`
+* `{queryable} like '\\%\\_'`
+
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable for the pattern expression `'_%'` and `''` have no item in common;
+* assert that the two result sets for each queryable for the pattern expression `'%'` and `'%%'` are identical;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: between
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}-between-predicate,/req/{conf-class}/between-predicate>>
+|Test purpose: | Test BETWEEN predicate
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+for each queryable `{queryable}` of type Number or Integer, evaluate the following filter expressions
+
+* `{queryable} BETWEEN 0 AND 100`
+* `{queryable} between 100.0 and 1.0`
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: in
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}-in-predicate,/req/{conf-class}/in-predicate>>
+|Test purpose: | Test IN predicate
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+* for each queryable `{queryable}` of type Number or Integer, evaluate the following filter expression `{queryable} IN (1, 2, 3)`;
+* for each queryable `{queryable}` of type String, evaluate the following filter expression `{queryable} in ('foo', 'bar')`;
+* for each queryable `{queryable}` of type Boolean, evaluate the following filter expression `{queryable} in (true)`;
+* for each queryable `{queryable}` of type Timestamp, evaluate the following filter expression `{queryable} in ('2022-04-14T14:52:56Z', '2022-04-14T15:52:56Z')`;
+* for each queryable `{queryable}` of type Date, evaluate the following filter expression `{queryable} in ('2022-04-14', '2022-04-15')`;
+
+Then:
+
+* assert successful execution of the evaluation;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-advanced-comparison-operators>>.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-advanced-comparison-operators]]
+.Predicates and expected results
+[width="100%",cols="3",options="header"]
+|===
+|Data Source |Predicate |Expected number of items
+|ne_110m_populated_places_simple |`name LIKE 'B_r%'` |3
+|ne_110m_populated_places_simple |`name NOT LIKE 'B_r%'` |240
+|ne_110m_populated_places_simple |`pop_other between 1000000 and 3000000` |75
+|ne_110m_populated_places_simple |`pop_other not between 1000000 and 3000000` |168
+|ne_110m_populated_places_simple |`name IN ('Kiev','kobenhavn','Berlin','athens','foo')` |2
+|ne_110m_populated_places_simple |`name NOT IN ('Kiev','kobenhavn','Berlin','athens','foo')` |241
+|ne_110m_populated_places_simple |`pop_other in (1038288,1611692,3013258,3013257,3013259)` |3
+|ne_110m_populated_places_simple |`pop_other not in (1038288,1611692,3013258,3013257,3013259)` |240
+|ne_110m_populated_places_simple |`"date" in (DATE('2021-04-16'),DATE('2022-04-16'),DATE('2022-04-18'))` |2
+|ne_110m_populated_places_simple |`"date" not in (DATE('2021-04-16'),DATE('2022-04-16'),DATE('2022-04-18'))` |1
+|ne_110m_populated_places_simple |`start in (TIMESTAMP('2022-04-16T10:13:19Z'))` |1
+|ne_110m_populated_places_simple |`start not in (TIMESTAMP('2022-04-16T10:13:19Z'))` |2
+|ne_110m_populated_places_simple |`boolean in (true)` |2
+|ne_110m_populated_places_simple |`boolean not in (false)` |2
+|===
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===

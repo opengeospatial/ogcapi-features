@@ -3,4 +3,61 @@
 :appendix-caption: Annex
 == Abstract Test Suite (Normative)
 
-NOTE: Add conformance classes and test cases for all requirements classes and requirements once the requirements are final.
+This test suite uses the https://en.wikipedia.org/wiki/Given-When-Then[Given-When-Then] notation to specify the tests.
+
+Each implementation under test supports the evaluation of filter expressions on one or more data sources. A data source may be, for example, a feature collection in an OGC Web API that implements OGC API Features. The implementation must declare the queryable properties (queryables) for each data source.
+
+The requirements specified in this Standard can only be tested, if the test can assess whether the result of an evaluation matches the filter expression. However, in general, the queryables may not be part of the response; that is, it is not possible to perform such an assessment in general without knowledge about the data and the relationship between the queryables and the data. In addition, to assess the implementation of some requirements (e.g., case folding) the test needs to know the data.
+
+With just the knowledge about the queryables and their data types, the tests can typically assess that valid filter expressions for a set of queryables are evaluated without an error. These tests are basic tests specified in this test suite and can be executed against any data.
+
+In addition, to properly test an implementation, conditional tests are provided, if the implementation operates on a test dataset and where the queryables are properties of the features. 
+
+The test dataset contains of feature types with point, line string and polygon geometries. It is available as a GeoPackage file with the associated queryables specified in JSON Schema for each feature collection in the link:https://github.com/opengeospatial/ogcapi-features/tree/master/cql2/standard/data[OGC API Features GitHub repository]. The test dataset has been derived from three layers of the link:[Natural Earth vector dataset] at scale 1:110 million (ne_110m_admin_0_countries, ne_110m_populated_places_simple, ne_110m_rivers_lake_centerlines). Some columns have been removed and a few columns have been added with random data in order to test also filter expressions on date, timestamp and boolean properties.
+
+All eleven conformance classes for the standardization target type "servers that evaluate filter expressions" have the following parameter:
+
+* Filter Language: The CQL2 encoding to be used in the test, either "CQL2 Text" or "CQL2 JSON";
+
+General rules for the encoding of all filter expressions in tests:
+
+* The conformance tests in this annex are specified using the CQL2 BNF grammar. Depending on the Filter Language parameter, the filter expressions have to be instantiated in an executable test as CQL2 Text or CQL2 JSON;
+* If a property name in a filter expression is a reserved CQL2 keyword, the property name has to be placed in double quotes.
+
+Executable test suites for the eleven conformance classes will also need to decide on the following questions and support at least option per question:
+
+* How to execute the evaluation of a filter expression for a data source? At a minimum, Web API endpoints specified in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>>, requirements class "Filter", should be supported;
+* What are the queryables for a data source? At a minimum, queryables specified using JSON Schema, see <<OGCFeat-3,OGC API - Features - Part 3: Filtering>>, requirements class "Filter", should be supported;
+* What is the format of the response that matches the filter expression? At a minimum, GeoJSON feature collections should be supported.
+
+To qualify as an OGC Reference Implementation for CQL2, an implementation under test has to
+
+* support the tests with the test dataset;
+* support both CQL2 Text and CQL2 JSON;
+* support at least the conformance classes "Case-insensitive comparison", "Spatial operators" and "Temporal operators" (including all dependencies).
+
+include::annex_ats_basic-cql2.adoc[]
+
+include::annex_ats_advanced-comparison-operators.adoc[]
+
+include::annex_ats_case-insensitive-comparison.adoc[]
+
+include::annex_ats_accent-insensitive-comparison.adoc[]
+
+include::annex_ats_basic-spatial-operators.adoc[]
+
+include::annex_ats_spatial-operators.adoc[]
+
+include::annex_ats_temporal-operators.adoc[]
+
+include::annex_ats_array-operators.adoc[]
+
+include::annex_ats_property-property.adoc[]
+
+include::annex_ats_functions.adoc[]
+
+include::annex_ats_arithmetic.adoc[]
+
+include::annex_ats_cql2-text.adoc[]
+
+include::annex_ats_cql2-json.adoc[]

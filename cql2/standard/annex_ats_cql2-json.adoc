@@ -1,0 +1,32 @@
+=== Conformance Class "CQL2 JSON"
+
+:conf-class: cql2-json
+[[conf_cql2-json]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Representations of a filter expression
+|Requirements class |<<rc_cql2-json,Requirements Class "CQL2 JSON">>
+|===
+
+:conf-test: validate
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Validate the filter expression against the JSON Schema
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+Validate the filter expression in CQL2 JSON against the JSON Schema in <<cql2-json-schema>> after all schema components that are not supported by the implementation have been removed.
+
+Then:
+
+* assert the validation is successful.
+|===

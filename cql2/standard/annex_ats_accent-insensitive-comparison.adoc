@@ -1,0 +1,184 @@
+=== Conformance Class "Accent-insensitive Comparison"
+
+:conf-class: accent-insensitive-comparison
+[[conf_accent-insensitive-comparison]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Requirements class |<<rc_accent-insensitive-comparison,Requirements Class "Accent-insensitive Comparison">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|Conditional Dependency |<<conf_advanced-comparison-operators,Advanced Comparison Operators>>
+|Conditional Dependency |<<conf_conf_case-insensitive-comparison,Case-insensitive Comparison>>
+|===
+
+:conf-test: accenti
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_accenti-operator,/req/{conf-class}/accenti-operator>>
+|Test purpose: | Test the CASEI operator in comparisons
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+
+When:
+
+For each queryable `{queryable}` of type String, evaluate the following filter expressions
+
+* `ACCENTI({queryable}) = accenti('äöüéáí')`
+* `ACCENTI({queryable}) <> accenti('aoueai')`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable have no item in common;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: accenti-like
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_accenti-operator,/req/{conf-class}/accenti-operator>>
+|Test purpose: | Test the ACCENTI operator in LIKE predicates
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* The conformance class <<conf_advanced-comparison-operators,Advanced Comparison Operators>> passes.
+
+When:
+
+For each queryable `{queryable}` of type String, evaluate the following filter expressions
+
+* `ACCENTI({queryable}) LIKE accenti('Ä%')`
+* `ACCENTI({queryable}) LIKE accenti('A%')`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable are identical;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: accenti-casei
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_accenti-operator,/req/{conf-class}/accenti-operator>>
+|Test purpose: | Test the ACCENTI operator with the CASEI operator 
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* The conformance class <<conf_conf_case-insensitive-comparison,Case-insensitive Comparison>> passes.
+
+When:
+
+For each queryable `{queryable}` of type String, evaluate the following filter expressions
+
+* `ACCENTI(CASEI({queryable})) = accenti(casei('ÄÉ'))`
+* `ACCENTI(CASEI({queryable})) = accenti(casei('ae'))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable are identical;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: accenti-casei-like
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_accenti-operator,/req/{conf-class}/accenti-operator>>
+|Test purpose: | Test the ACCENTI operator with the CASEI operator in LIKE predicates
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* The conformance class <<conf_conf_case-insensitive-comparison,Case-insensitive Comparison>> passes.
+* The conformance class <<conf_advanced-comparison-operators,Advanced Comparison Operators>> passes.
+
+When:
+
+For each queryable `{queryable}` of type String, evaluate the following filter expressions
+
+* `ACCENTI(CASEI({queryable})) LIKE accenti(casei('Ä%'))`
+* `ACCENTI(CASEI({queryable})) LIKE accenti(casei('a%'))`
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the two result sets for each queryable are identical;
+* store the valid predicates for each data source.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-accenti-operator>>, if the conditional dependency is met.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned;
+* store the valid predicates for each data source.
+|===
+
+[[test-data-predicates-accenti-operator]]
+.Predicates and expected results
+[width="100%",cols="4",options="header"]
+|===
+|Dependency |Data Source |Predicate |Expected number of items
+|n/a |ne_110m_populated_places_simple |`ACCENTI(name)=accenti('København')` |1
+|n/a |ne_110m_populated_places_simple |`ACCENTI(name)=accenti('Kobenhavn')` |1
+|n/a |ne_110m_populated_places_simple |`ACCENTI(name)=accenti('Kiev')` |1
+|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('københavn'))` |1
+|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('kobenhavn'))` |1
+|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('KOBENHAVN'))` |1
+|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('KØBENHAVN'))` |1
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(name) LIKE accenti('Ko%')` |2
+|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) LIKE accenti(casei('kØ%'))` |2
+|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) LIKE accenti(casei('kO%'))` |2
+|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) IN (accenti(casei('Kiev')), accenti(casei('kobenhavn')), accenti(casei('Berlin')), accenti(casei('athens')), accenti(casei('foo')))` |4
+|===
+
+:conf-test: logical
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Test filter expressions with AND, OR and NOT including sub-expressions
+|Test method: | 
+Given:
+
+* The stored predicates for each data source, including from the dependencies.
+
+When:
+
+For each data source, select at least 10 random combinations of four predicates (`{p1}` to `{p4}`) from the stored predicates and evaluate the filter expression `\((NOT {p1} AND {p2}) OR ({p3} and NOT {p4}) or not ({p1} AND {p4}))`.
+
+Then:
+
+* assert successful execution of the evaluation.
+|===
