@@ -53,7 +53,7 @@ The *Status Codes* listed in <<status_codes>> are of particular relevance to imp
 |`500` |An internal error occurred in the server.
 !===
 
-NOTE: Status code `422` is not yet an official HTTP status code, but is expected to be added by the https://www.ietf.org/archive/id/draft-ietf-httpbis-semantics-14.html#name-422-unprocessable-content[draft IETF RFC "HTTP Semantics"].
+NOTE: Status code `422` is not yet an official HTTP status code, but is expected to be added by the https://www.ietf.org/archive/id/draft-ietf-httpbis-semantics-19.html#name-422-unprocessable-content[draft IETF RFC "HTTP Semantics"].
 
 More specific guidance is provided for each resource, where applicable.
 
@@ -102,7 +102,7 @@ include::recommendations/create-replace-delete/create/PER_body.adoc[]
 
 include::requirements/create-replace-delete/create/REQ_content-type.adoc[]
 
-See https://tools.ietf.org/html/rfc7231#section-3.1.1.5[section 3.1.1.5 of RFC 7231] for details.
+See https://www.rfc-editor.org/rfc/rfc7231.html#section-3.1.1.5[section 3.1.1.5 of RFC 7231] for details.
 
 ==== Response
 
@@ -165,7 +165,7 @@ include::recommendations/create-replace-delete/replace/PER_body.adoc[]
 
 include::requirements/create-replace-delete/replace/REQ_content-type.adoc[]
 
-See https://tools.ietf.org/html/rfc7231#section-3.1.1.5[section 3.1.1.5 of RFC 7231] for details.
+See https://www.rfc-editor.org/rfc/rfc7231.html#section-3.1.1.5[section 3.1.1.5 of RFC 7231] for details.
 
 ==== Response
 

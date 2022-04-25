@@ -109,7 +109,7 @@ properties:
 
 To prevent unnecessary duplication of lists of supported CRS identifiers in the <<crs-discovery,collection object>>, a global list of supported CRS identifiers may be provided as part of the collections object.
 
-This global list of CRS identifiers is not automatically inherited by each collection offered by the service.  Rather the global list of CRS identifiers must be explicitly referenced in the `crs` property of the collection object using a link:https://tools.ietf.org/rfc/rfc6901.txt[JSON Pointer (RFC 6901)].
+This global list of CRS identifiers is not automatically inherited by each collection offered by the service.  Rather the global list of CRS identifiers must be explicitly referenced in the `crs` property of the collection object using a link:https://www.rfc-editor.org/rfc/rfc6901.html[JSON Pointer (RFC 6901)].
 
 include::requirements/crs/REQ_fc-md-crs-list-global.adoc[]
 
