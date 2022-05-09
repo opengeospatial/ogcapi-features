@@ -16,10 +16,7 @@ class is:
 * `filter-lang` - The language used in the filter expression.
 * `filter-crs` - The coordinate reference system used in the filter expression, if Part 2 is supported.
 
-This requirements class also defines the Queryables resource (at paths
-`/queryables` and `/collections/{collectionId}/queryables`) that can be
-used to determine the list of property names and types that may be used
-to construct filter expressions.
+This requirements class also defines the Queryables resource (at path `/collections/{collectionId}/queryables`) that can be used to determine the list of property names and types that may be used to construct filter expressions.
 
 The <<rc_features-filter,Features Filter>> requirements class defines the
 binding between the <<rc_filter,Filter>> requirements class and the
