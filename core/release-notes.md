@@ -2,12 +2,12 @@
 
 ## Version 1.0.1
 
-|Status: |Release Candidate
+|Status: |Published
 | --- | --- |
-|Document reference: |[OGC 17-069r4](https://portal.ogc.org/files/?artifact_id=100016)
-|Date: |2022-01-31
+|Document reference: |[OGC 17-069r4](https://docs.ogc.org/is/17-069r4/17-069r4.html)
+|Date: |2022-05-11
 
-This will be a corrigendum that corrects errors and adds clarifications.
+This release is a corrigendum that corrects errors and adds clarifications.
 
 Bugfixes:
 
