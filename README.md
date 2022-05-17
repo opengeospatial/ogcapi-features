@@ -60,11 +60,11 @@ an overview of the extensions to support additional coordinate reference systems
 The standard is on the OGC website:
 
 * OGC API - Features - Part 1: Core
-  * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/17-069r3/17-069r3.html)
-  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/17-069r4.html)
+  * [Version 1.0.1 (latest approved version)](https://docs.ogc.org/is/17-069r4/17-069r4.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/17-069r5.html)
 * OGC API - Features - Part 2: Coordinate Reference Systems by Reference
-  * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/18-058/18-058.html)
-  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/18-058r1.html)
+  * [Version 1.0.1 (latest approved version)](https://docs.ogc.org/is/18-058r1/18-058r1.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/18-058r2.html)
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
@@ -133,8 +133,8 @@ Additional links:
 
 The latest drafts of each standard in this repository are build daily (based on the configuration contained in the [asciidoctor.json](https://github.com/opengeospatial/ogcapi-features/blob/master/asciidoctor.json) file):
 
-* [Part 1: Core](https://docs.ogc.org/DRAFTS/17-069r4.html)
-* [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r1.html)
+* [Part 1: Core](https://docs.ogc.org/DRAFTS/17-069r5.html)
+* [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r2.html)
 * [Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r1.html)
 * [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
 
