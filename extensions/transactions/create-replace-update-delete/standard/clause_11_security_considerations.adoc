@@ -2,16 +2,115 @@
 
 See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clause 11.
 
-Since CREATE, REPLACE, DELETE and UPDATE operations will change the resources 
-and not "just" query them, servers will in almost all cases restrict the 
-access to these operations.
+Since CREATE, REPLACE, DELETE and UPDATE operations will change the resources and not "just" query them, servers will in almost all cases restrict the access to these operations.
 
 Users making modifications to resources need to:
 
 . be authenticated,
-
 . have "modification privileges" on one or more of the resource collections offered by the API,
-
 . have access to one or more of the POST, PUT, PATCH and/or DELETE methods on the resources / resource endpoints.
 
 The API definition has to reflect this in the resource paths and their available methods.
+
+The examples in the chapters specifying the requirements classes focus on the mechanics of the POST, PUT, DELETE, and PATCH methods and exclude authentication. Since authentication will typically be required for all requests, this some examples / guidance:
+
+The OpenAPI definition will declare the authentication schemes that the API supports for each operation (or for all operations in the API).
+
+A member "security" in the OpenAPI definition object can be provided to list the default security schemes supported by all operations. Individual operations can override this default by providing a "security" member for the individual operation.
+
+[#auth-example-1,reftext=`Example OpenAPI definition with security requirements`]
+.Example OpenAPI definition with security requirements
+====
+The following OpenAPI definition declares that the API accepts either api keys in an "X-API-Key" header or JWT bearer tokens to authenticate the requestor. The API will decide, if an authenticated request is rejected or executed based on privileges of the authenticated user.
+
+[source,JSON]
+----
+{
+  "openapi" : "3.0.3",
+  "info" : {
+    "title" : "My API",
+    "description" : "This API ...",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://example.com/api/v1"
+  } ],
+  "security" : [ {
+    "JWT" : [ ],
+    "api_key": [ ]
+  } ], 
+  "paths" : { },
+  "components" : {
+    "securitySchemes": {
+      "JWT" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      },
+      "api_key" : {
+        "type": "apiKey",
+        "name": "X-API-Key",
+        "in": "header"
+      }
+    }
+  }
+}
+----
+====
+
+If the authentication of a secured request fails or if the user does not have sufficient privileges, the API will return an error.
+
+In case the request does not include information to authenticate the user, the server will respond with a 401 response ("Unauthorized"). The response will include a "WWW-Authenticate" header with hints how to provide authentication credentials.
+
+[#auth-example-2,reftext=`Unauthorized request`]
+.Unauthorized request
+....
+   Client                                                              Server
+     |                                                                   |
+     | DELETE /api/v1/collections/buildings/items/1234 HTTP/1.1          |
+     | Host: example.com                                                 |
+     |------------------------------------------------------------------>|
+     |                                                                   |
+     | HTTP/1.1 401 Unauthorized                                         |
+     | Date: Mon, 23 May 2022 11:18:45 GMT                               |
+     | WWW-Authenticate: Bearer realm="my-realm"                         |
+     | WWW-Authenticate: ApiKey header="X-API-Key"                       |
+     | Content-Type: application/problem+json                            |
+     | Vary: Accept                                                      |
+     | Content-Length: 86                                                |
+     |                                                                   |
+     | {                                                                 |
+     |   "status" : 401,                                                 |
+     |   "title" : "Unauthorized",                                       |
+     |   "detail" : "HTTP 401 Unauthorized"                              |
+     | }                                                                 |
+     |<------------------------------------------------------------------|
+....
+
+If valid authentication credentials have been provided, but the API refuses to execute the operation, because the user has insufficient privileges, the server will typically return a 403 response ("Forbidden").
+
+[#auth-example-2,reftext=`Forbidden request`]
+.Forbidden request
+....
+   Client                                                              Server
+     |                                                                   |
+     | DELETE /api/v1/collections/buildings/items/1234 HTTP/1.1          |
+     | Host: example.com                                                 |
+     | Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...7HgQ |
+     |------------------------------------------------------------------>|
+     |                                                                   |
+     | HTTP/1.1 403 Forbidden                                            |
+     | Date: Mon, 23 May 2022 11:18:55 GMT                               |
+     | Content-Type: application/problem+json                            |
+     | Vary: Accept                                                      |
+     | Content-Length: 80                                                |
+     |                                                                   |
+     | {                                                                 |
+     |   "status" : 403,                                                 |
+     |   "title" : "Forbidden",                                          |
+     |   "detail" : "HTTP 403 Forbidden"                                 |
+     | }                                                                 |
+     |<------------------------------------------------------------------|
+....
+
+However, for security reasons, the server may also decide to return other status codes to hide information from a potential attacker. For example, the server may decie to return a 401 response even for a valid, but un-privileged user. Or the server may return a 404 response ("Not Found") to hide the fact that the resource exists in the first place, typically if the user would also not be privileged to fetch the resource with a GET operation.
