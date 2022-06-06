@@ -89,6 +89,12 @@ a subsequent retry of the update operation.
 A server that implements this conformance class generates an https://tools.ietf.org/html/rfc7232#section-2.3[entity tag] representing the state of the resource
 when the resource is fetched or modified and recognizes the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] conditional HTTP header in order to implement optimistic locking of resources to support concurrency.
 
+=== Last-Modified tag
+
+In the <<optimistic-locking-overview>> above, the example makes use of the https://datatracker.ietf.org/doc/html/rfc7232#section-2.2["Last-Modified"] header field to provide additional information about the state of the resource being modified.  The https://datatracker.ietf.org/doc/html/rfc7232#section-2.2["Last-Modified"] header field in a response provides a timestamp indicating the date and time at which the origin server believes the selected resource was last modified.
+
+include::recommendations/optimistic-locking/REC_last-modified.adoc[]
+
 [[etags]]
 === Entity tags
 
@@ -103,11 +109,11 @@ include::requirements/optimistic-locking/REQ_etag-patch-response.adoc[]
 [[conditional-processing]]
 === Conditional processing
 
-Optimistic resource locking is implemented using the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header.  The value of the header is evaluated according to rules defined in https://tools.ietf.org/html/rfc7232[RFC 7232] and the result of that evaluation is used to determine if the operation shall be performed or not.
+Optimistic resource locking is implemented using the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header.  The value of the header is evaluated by the server according to rules defined in https://tools.ietf.org/html/rfc7232[RFC 7232] and the result of that evaluation is used to determine if the operation shall be performed or not.
 
-If the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header evaluation results in a value of `true` then the operation can proceed.
+If the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header evaluation by the server results in a value of `true` then the operation can proceed.
 
-If the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header evaluation, however, evaluates to `false` then the server generates a response according to the rules defined in https://tools.ietf.org/html/rfc7232#section-3.1[RFC 7232].  Normally, in this case, the response is a HTTP status code of 412, precondition failed.  However, if the requested change is already reflected in the current state of the resource then the server can respond with a 2xx, successful HTTP status code.
+If the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header evaluation by the server, however, evaluates to `false` then the server generates a response according to the rules defined in https://tools.ietf.org/html/rfc7232#section-3.1[RFC 7232].  Normally, in this case, the server responds with a HTTP status code of 412, precondition failed.  However, if the requested change is already reflected in the current state of the resource then the server can respond with a 2xx, successful HTTP status code.
 
 include::requirements/optimistic-locking/REQ_ifmatch-put-op.adoc[]
 
@@ -116,6 +122,10 @@ include::requirements/optimistic-locking/REQ_ifmatch-put-eval.adoc[]
 include::requirements/optimistic-locking/REQ_ifmatch-patch-op.adoc[]
 
 include::requirements/optimistic-locking/REQ_ifmatch-patch-eval.adoc[]
+
+include::requirements/optimistic-locking/REQ_ifmatch-missing.adoc[]
+
+include::recommendations/optimistic-locking/PER_ifmatch-star.adoc[]
 
 === Example
 
