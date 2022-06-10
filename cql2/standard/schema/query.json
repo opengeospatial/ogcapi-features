@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/query"
+    },
+    {
+      "$ref": "#/$defs/queries"
+    }
+  ],
+  "$defs": {
+    "queryExpression": {
+      "type": "object",
+      "required": ["collections"],
+      "properties": {
+        "collections": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "filter": {
+          "$ref": "https://schemas/opengis.org/cql2/cql2.json"
+        }
+      }
+    },
+    "query": {
+      "allOf": [
+        { "$ref": "#/$defs/queryExpression" },
+        {
+          "type": "object",
+          "properties": {
+            "sortby": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "pattern": "[+|-]?[A-Za-z_].*"
+              }
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "default": "1000"
+            }
+          }
+        }
+      ]
+    },
+    "queries": {
+      "type": "object",
+      "properties": {
+        "queries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/queryExpression"
+          }
+        },
+        "properties": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "filter": {
+          "$ref": "https://schemas/opengis.org/cql2/cql2.json"
+        },
+        "filterOperator": {
+          "type": "string",
+          "enum": ["and","or"],
+          "default": "and"
+        },
+        "sortby": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "[+|-]?[A-Za-z_].*"
+          }
+        }
+      }
+    }
+  }
+}
