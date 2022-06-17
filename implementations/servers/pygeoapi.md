@@ -1,6 +1,6 @@
 # pygeoapi
 
-[pygeoapi](https://geopython.github.io/pygeoapi) is implemented in Python, and supports JSON and HTML responses.
+[pygeoapi](https://pygeoapi.io/) is implemented in Python, and supports JSON and HTML responses.
 
 ## Demo deployment
 
