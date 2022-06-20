@@ -197,6 +197,61 @@ include::requirements/requirements_class_basic-spatial-operators.adoc[]
 
 A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial operator.
 
+==== Spatial data types and literal values
+
+The spatial data types are (literal rule `spatialLiteral`): 
+
+* "Point": a point;
+* "MultiPoint": a collection of points;
+* "LineString": a curve with linear interpolation between the vertices;
+* "MultiLineString": a collection of line strings;
+* "Polygon": a planar surface bounded by closed line strings;
+* "MultiPolygon": a collection of polygons;
+* "Geometry": an instance of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", or "MultiPolygon";
+* "GeometryCollection": a collection of "Geometry" instances.
+
+Existing representations are used for literal values:
+
+* Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
+* JSON: a https://www.rfc-editor.org/rfc/rfc7946.html#section-3.1[GeoJSON geometry] object
+
+Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
+
+[[example_8_1_b]]
+.Spatial literal example
+====
+
+* spatial geometry (Text)
+----
+POLYGON\((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
+----
+* spatial geometry (JSON)
+[source,JSON]
+----
+{
+   "type": "Polygon",
+   "coordinates": [
+       [
+          [43.5845,-79.5442],
+          [43.6079,-79.4893],
+          [43.5677,-79.4632],
+          [43.6129,-79.3925],
+          [43.6223,-79.3238],
+          [43.6576,-79.3163],
+          [43.7945,-79.1178],
+          [43.8144,-79.1542],
+          [43.8555,-79.1714],
+          [43.7509,-79.6390],
+          [43.5845,-79.5442]
+      ]
+   ]
+}
+----
+
+====
+
+==== Spatial Operators
+
 In this conformance class, the only required spatial operator is _intersects_. Additional spatial operators are specified in the <<rc_spatial-operators,Spatial Operators>> requirements class.
 
 include::requirements/basic-spatial-operators/REQ_spatial-predicate.adoc[]
@@ -205,7 +260,7 @@ include::requirements/basic-spatial-operators/REQ_spatial-operators.adoc[]
 
 include::recommendations/basic-spatial-operators/PER_spatial-predicates.adoc[]
 
-CQL2 uses Well-Known Text (WKT) or GeoJSON to encode geometry literals. Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
+==== Examples
 
 [[example_7_5]]
 .Example spatial predicate
@@ -338,15 +393,47 @@ A temporal predicate evaluates two time-valued expressions to determine, if the 
 
 The operands in a temporal predicate are temporal geometries. A temporal geometry is either an instant or an interval.
 
-An instant is either a date or a timestamp in accordance with <<rfc3339,RFC 3339>> (rules `full-date` or `date-time`). Note that since time is continuous, every instant has a duration and a start/end. Nevertheless, the geometry can be considered an instant in the temporal resolution that is applicable for the specific property.
+==== Temporal data types and literal values
 
-An interval is the time between a start instant and an end instant, including both bounding instances.
+An instant is either a date (rule `dateInstant`) or a timestamp (rule `timestampInstant`) in accordance with <<rfc3339,RFC 3339>> (RFC 3339 rules `full-date` or `date-time`). Note that since time is continuous, every instant has a duration and a start/end. Nevertheless, the geometry can be considered an instant in the temporal resolution that is applicable for the specific property. 
+
+An interval is the time between a start instant and an end instant, including both bounding instances (rule `intervalLiteral`). Unbounded interval ends are represented by a double-dot string ("..") based on the convention specified in ISO 8601-2.
 
 CQL2 follows ISO 8601-1/ISO 8601-2 in defining intervals as closed at both start and end. Note that some implementations and other specifications use a different definition and it may be necessary to convert between the interval representations. For example, SQL uses half-closed intervals - closed at the start, open at the end.
 
 Depending on the implementation environment, the underlying datastore may or may not support intervals as data types of properties. If not, intervals are typically represented by two separate properties that are instants, one for the start and one for the end of the interval.
 
 All temporal geometries are in the Gregorian Calendar. This is a deliberate restriction to keep implementations of CQL2 simple, avoiding requirements to transform time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API standards.
+
+For intervals, the following representations are used:
+
+* Text: an `INTERVAL` operator with two instants or double-dot strings as parameters;
+* JSON: an object with an `interval` member with an array of two instants or double-dot strings as parameters.
+
+In case two instants are provided, both instants have the same granularity (i.e., they are either timestamps or dates).
+
+NOTE: Instants are also scalar data types; for the representations and examples of instances see <<scalar-data-types>>.
+
+[[example_8_1_c]]
+.Interval examples
+====
+
+* intervals (Text)
+----
+INTERVAL('1969-07-16', '1969-07-24')
+INTERVAL('1969-07-16T05:32:00Z', '1969-07-24T16:50:35Z')
+INTERVAL('2019-09-09', '..')
+----
+* intervals (JSON)
+[source,JSON]
+----
+{ "interval": [ "1969-07-16", "1969-07-24" ] }
+{ "interval": [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ] }
+{ "interval": [ "2019-09-09", ".." ] }
+----
+====
+
+==== Temporal Operators 
 
 The temporal operators in CQL2 are based on the definitions in the <<owl-time,W3C/OGC Time Ontology in OWL>>. 
 
@@ -399,6 +486,8 @@ include::requirements/temporal-operators/REQ_temporal-operators.adoc[]
 
 include::recommendations/temporal-operators/PER_temporal-predicates.adoc[]
 
+==== Examples
+
 [[example_7_8]]
 .Examples of temporal predicate using T_INTERSECTS
 ====
@@ -443,6 +532,33 @@ T_DURING(touchdown, INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 include::requirements/requirements_class_array-operators.adoc[]
 
 This clause specifies requirements for supporting array expression in CQL2.
+
+==== Arrays and literal values
+
+An array is a bracket-delimited, comma-separated list of array elements. An array element is either a scalar value,
+a geometry, an interval, or another array.
+
+[[example_8_1_d]]
+.Array examples
+====
+
+* arrays (Text)
+----
+[ 'a', 'c' ] 
+[ 'a', true, 1 ] 
+[ DATE('1969-07-16'), DATE('1969-07-20'), DATE('1969-07-24') ]
+----
+* arrays (JSON)
+[source,JSON]
+----
+[ "a", "c" ] 
+[ "a", true, 1 ] 
+[ { "date" : "1969-07-16" }, { "date" : "1969-07-20" }, { "date" : "1969-07-24" } ]
+----
+====
+
+==== Array Operators
+
 Array expressions can be tested in a predicate for equality, if one array
 is a subset of another, if one array is a superset of another or if two
 arrays overlap or share elements.
@@ -455,6 +571,8 @@ NOTE: Support for the BNF rule `function` is added by
 the requirements class <<rc_functions,Functions>>.
 Support for the BNF rule `arithmeticExpression` is added by
 the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
+
+==== Examples
 
 [[example_7_10]]
 .Evaluate if the value of an array property contains the specified subset of values.
