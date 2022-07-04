@@ -92,6 +92,8 @@ CQL2 supports two commonly used granularities: a second or smaller (data type "t
 
 If timezone information is important for the intended use, then the "date" data type should not be used and the temporal information should be provided as an interval with start and end timestamps.
 
+NOTE: While instants (timestamps and dates) are scalar data types that can be used with the basic comparison operators, intervals are more complex data types. Support for intervals is added in the requirements class <<rc_temporal-operators,Temporal Operators>> where intervals can be provided as arguments in temporal operators.
+
 For timestamp and date values representations based on RFC 3339 are used:
 
 * Text: a `DATE` or `TIMESTAMP` operator with a https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 `date-time` or `full-date` string]
@@ -140,17 +142,18 @@ DATE('1969-07-20')
 
 ====
 
+[[type-casts]]
 ==== Type casts
 
 include::recommendations/basic-cql2/PER_type-casts.adoc[]
 
 This Standard does not prescribe how types are cast. The evaluation of filter expressions that involve type casts will, therefore, be system dependent.
 
-For example, a system that evaluates the interval `INTERVAL('2022-01-01','2022-04-11T12:41:13Z')` can, for example,
+For example, a system that evaluates the an expression `'5' > 4` can, for example,
 
-* throw an error (incompatible types in an interval);
-* cast the value to an interval of dates, e.g., `INTERVAL('2022-01-01','2022-04-11')`;
-* cast the value to an interval of timestamps, e.g., `INTERVAL('2022-01-01Z00:00:00Z','2022-04-11T12:41:13Z')`.
+* throw an error (incompatible types in a comparison operator);
+* cast the number to an string (`'5' > '4'`);
+* cast the string to a number (`5 > 4`).
 
 [[basic-cql2_property]]
 === Property references

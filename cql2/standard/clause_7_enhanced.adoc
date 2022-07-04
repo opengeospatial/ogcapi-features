@@ -486,6 +486,16 @@ include::requirements/temporal-operators/REQ_temporal-operators.adoc[]
 
 include::recommendations/temporal-operators/PER_temporal-predicates.adoc[]
 
+==== Type casts
+
+As stated in <<type-casts>>, the evaluation of filter expressions that involve type casts is system dependent.
+
+For example, a system that evaluates the interval `INTERVAL('2022-01-01','2022-04-11T12:41:13Z')` can, for example,
+
+* throw an error (incompatible types in an interval);
+* cast the value to an interval of dates, e.g., `INTERVAL('2022-01-01','2022-04-11')`;
+* cast the value to an interval of timestamps, e.g., `INTERVAL('2022-01-01Z00:00:00Z','2022-04-11T12:41:13Z')`.
+
 ==== Examples
 
 [[example_7_8]]
