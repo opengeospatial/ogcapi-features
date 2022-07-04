@@ -195,13 +195,15 @@ arrayOperator = "A_EQUALS"
 #=============================================================================#
 # An arithmetic expression is an expression composed of an arithmetic
 # operand (a property name, a number or a function that returns a number),
-# an arithmetic operators (+,-,*,/) and another arithmetic operand.
+# an arithmetic operators (+,-,*,/,%,div,^) and another arithmetic operand.
 #=============================================================================#
 arithmeticExpression = arithmeticExpression plusSign arithmeticTerm
                      | arithmeticExpression minusSign arithmeticTerm
                      | arithmeticTerm;
 arithmeticTerm = arithmeticTerm asterisk powerTerm
                | arithmeticTerm solidus powerTerm
+               | arithmeticTerm percent powerTerm
+               | arithmeticTerm "div" powerTerm
                | powerTerm;
 powerTerm = arithmeticFactor caret powerTerm
           | arithmeticFactor;
@@ -412,6 +414,10 @@ lt = "<";
 eq = "=";
 
 gt = ">";
+
+caret = "^";
+
+percent = "%";
 
 #=============================================================================#
 # Definition of NUMERIC literals
