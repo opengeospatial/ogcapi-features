@@ -206,7 +206,7 @@ arithmeticTerm = arithmeticTerm asterisk powerTerm
 powerTerm = arithmeticFactor caret powerTerm
           | arithmeticFactor;
 arithmeticFactor = leftParen arithmeticExpression rightParen
-                 | arithmeticOperand;
+                 | [ minusSign ] arithmeticOperand;
 arithmeticOperand = numericLiteral
                   | propertyName
                   | function;
