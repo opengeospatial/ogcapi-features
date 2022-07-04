@@ -224,7 +224,6 @@ identifierPart = alpha | digit | dollar | underscore;
 
 #=============================================================================#
 # Definition of a FUNCTION
-# The functions offered by an implementation are provided at `/functions`
 #=============================================================================#
 function = identifier leftParen {argumentList} rightParen;
 
