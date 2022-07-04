@@ -108,9 +108,8 @@ The <<rc_property-property,Property-Property Comparisons>> requirements class dr
 
 The <<rc_functions,Functions>> requirements class specifies requirements for
 supporting function calls (e.g. min, max, etc.) in a CQL2 expression. Function
-calls are the primary means of extending the language. This requirements class
-also defined a Functions resource (at path `/functions`) that may be used to
-discover the list of available functions.
+calls are the primary means of extending the language. Implementations 
+should provide a capability to discover the available functions.
 
 The <<rc_arithmetic,Arithmetic Expressions>> requirements class specifies
 requirements for supporting the standard set of arithmetic operators,
