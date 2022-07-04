@@ -160,13 +160,13 @@ Then:
 |ne_110m_admin_0_countries |`NAME='Luxembourg'` |1
 |ne_110m_admin_0_countries |`NAME>='Luxembourg'` |84
 |ne_110m_admin_0_countries |`NAME>'Luxembourg'` |83
-|ne_110m_admin_0_countries |`NAME<='Luxembourg'` |94
+|ne_110m_admin_0_countries |`NAME\<='Luxembourg'` |94
 |ne_110m_admin_0_countries |`NAME<'Luxembourg'` |93
 |ne_110m_admin_0_countries |`NAME<>'Luxembourg'` |176
 |ne_110m_admin_0_countries |`POP_EST=37589262` |1
 |ne_110m_admin_0_countries |`POP_EST>=37589262` |39
 |ne_110m_admin_0_countries |`POP_EST>37589262` |38
-|ne_110m_admin_0_countries |`POP_EST<=37589262` |139
+|ne_110m_admin_0_countries |`POP_EST\<=37589262` |139
 |ne_110m_admin_0_countries |`POP_EST<37589262` |138
 |ne_110m_admin_0_countries |`POP_EST<>37589262` |176
 |ne_110m_populated_places_simple |`name IS NOT NULL` |243
@@ -174,7 +174,7 @@ Then:
 |ne_110m_populated_places_simple |`name='København'` |1
 |ne_110m_populated_places_simple |`name>='København'` |137
 |ne_110m_populated_places_simple |`name>'København'` |136
-|ne_110m_populated_places_simple |`name<='København'` |107
+|ne_110m_populated_places_simple |`name\<='København'` |107
 |ne_110m_populated_places_simple |`name<'København'` |106
 |ne_110m_populated_places_simple |`name<>'København'` |242
 |ne_110m_populated_places_simple |`pop_other IS NOT NULL` |243
@@ -182,7 +182,7 @@ Then:
 |ne_110m_populated_places_simple |`pop_other=1038288` |1
 |ne_110m_populated_places_simple |`pop_other>=1038288` |123
 |ne_110m_populated_places_simple |`pop_other>1038288` |122
-|ne_110m_populated_places_simple |`pop_other<=1038288` |121
+|ne_110m_populated_places_simple |`pop_other\<=1038288` |121
 |ne_110m_populated_places_simple |`pop_other<1038288` |120
 |ne_110m_populated_places_simple |`pop_other<>1038288` |242
 |ne_110m_populated_places_simple |`"date" IS NOT NULL` |3
@@ -190,13 +190,13 @@ Then:
 |ne_110m_populated_places_simple |`"date"=DATE('2022-04-16')` |1
 |ne_110m_populated_places_simple |`"date">=DATE('2022-04-16')` |2
 |ne_110m_populated_places_simple |`"date">DATE('2022-04-16')` |1
-|ne_110m_populated_places_simple |`"date"<=DATE('2022-04-16')` |2
+|ne_110m_populated_places_simple |`"date"\<=DATE('2022-04-16')` |2
 |ne_110m_populated_places_simple |`"date"<DATE('2022-04-16')` |1
 |ne_110m_populated_places_simple |`"date"<>DATE('2022-04-16')` |2
 |ne_110m_populated_places_simple |`start IS NOT NULL` |3
 |ne_110m_populated_places_simple |`start IS NULL` |240
 |ne_110m_populated_places_simple |`start=TIMESTAMP('2022-04-16T10:13:19Z')` |1
-|ne_110m_populated_places_simple |`start<=TIMESTAMP('2022-04-16T10:13:19Z')` |2
+|ne_110m_populated_places_simple |`start\<=TIMESTAMP('2022-04-16T10:13:19Z')` |2
 |ne_110m_populated_places_simple |`start<TIMESTAMP('2022-04-16T10:13:19Z')` |1
 |ne_110m_populated_places_simple |`start>=TIMESTAMP('2022-04-16T10:13:19Z')` |2
 |ne_110m_populated_places_simple |`start>TIMESTAMP('2022-04-16T10:13:19Z')` |1
