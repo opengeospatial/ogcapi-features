@@ -3,6 +3,5 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/basic-cql2/property* 
 ^|A |The property name (rule `propertyName`) SHALL be a queryable of the data.
-^|B |The property name reference SHALL evaluate to a literal value or `NULL`.
-^|C |The data type of the literal value SHALL match the expected data type for the expression within which the property name reference appears.
+^|B |The property name reference SHALL evaluate to its corresponding value, or `NULL` if unset.
 |===
