@@ -157,7 +157,7 @@ Then:
 |===
 |Dependency |Data Source |Predicate |Expected number of items
 |n/a |ne_110m_populated_places_simple |`'København'=name` |1
-|n/a |ne_110m_populated_places_simple |`'København'<=name` |137
+|n/a |ne_110m_populated_places_simple |`'København'\<=name` |137
 |n/a |ne_110m_populated_places_simple |`'København'<name` |136
 |n/a |ne_110m_populated_places_simple |`'København'>=name` |107
 |n/a |ne_110m_populated_places_simple |`'København'>name` |106
@@ -165,23 +165,23 @@ Then:
 |n/a |ne_110m_populated_places_simple |`name=nameascii` |230
 |n/a |ne_110m_populated_places_simple |`name>=nameascii` |243
 |n/a |ne_110m_populated_places_simple |`name>nameascii` |13
-|n/a |ne_110m_populated_places_simple |`name<=nameascii` |230
+|n/a |ne_110m_populated_places_simple |`name\<=nameascii` |230
 |n/a |ne_110m_populated_places_simple |`name<nameascii` |0
 |n/a |ne_110m_populated_places_simple |`name<>nameascii` |13
 |n/a |ne_110m_populated_places_simple |`1038288=pop_other` |1
-|n/a |ne_110m_populated_places_simple |`1038288<=pop_other` |123
+|n/a |ne_110m_populated_places_simple |`1038288\<=pop_other` |123
 |n/a |ne_110m_populated_places_simple |`1038288<pop_other` |122
 |n/a |ne_110m_populated_places_simple |`1038288>=pop_other` |121
 |n/a |ne_110m_populated_places_simple |`1038288>pop_other` |120
 |n/a |ne_110m_populated_places_simple |`1038288<>pop_other` |242
 |n/a |ne_110m_populated_places_simple |`pop_min=pop_max` |27
-|n/a |ne_110m_populated_places_simple |`pop_min<=pop_max` |243
+|n/a |ne_110m_populated_places_simple |`pop_min\<=pop_max` |243
 |n/a |ne_110m_populated_places_simple |`pop_min<pop_max` |216
 |n/a |ne_110m_populated_places_simple |`pop_min>=pop_max` |27
 |n/a |ne_110m_populated_places_simple |`pop_min>pop_max` |0
 |n/a |ne_110m_populated_places_simple |`pop_min<>pop_max` |216
 |n/a |ne_110m_populated_places_simple |`start=end` |0
-|n/a |ne_110m_populated_places_simple |`start<=end` |3
+|n/a |ne_110m_populated_places_simple |`start\<=end` |3
 |n/a |ne_110m_populated_places_simple |`start<end` |3
 |n/a |ne_110m_populated_places_simple |`start>=end` |0
 |n/a |ne_110m_populated_places_simple |`start>end` |0
