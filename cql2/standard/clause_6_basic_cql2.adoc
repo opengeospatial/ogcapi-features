@@ -84,7 +84,7 @@ The scalar data types are:
 * "timestamp": an instant with a granularity of a second or smaller (literal rule: `timestampLiteral`)
 * "date": an instant with a granularity of a day (literal rule: `dateLiteral`)
 
-For character string, numeric and boolean literals, the standard representations are used. For character string literals, embeded quotes are escaped using double quotes (i.e. `''`).
+For character string, numeric and boolean literals, the standard representations are used. For character string literals, embeded quotes are escaped using two consecutive single quotes (i.e. `''`).
 
 Conceptually, an instant is a "temporal entity with zero extent or duration" [<<owl-time,Time Ontology in OWL>>]. In practice, the temporal position of an instant is described using data types where each value has some duration or granularity that is sufficient for the intended use of the data. 
 
