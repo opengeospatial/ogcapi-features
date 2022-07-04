@@ -168,18 +168,18 @@ temporalOperator = "T_AFTER"
 arrayPredicate = arrayOperator
                  leftParen arrayExpression comma arrayExpression rightParen;
 
-# An array expression is a bracket-delimited, comma-separated list of array
-# elements.  An array element is either a character literal, a numeric literal,
-# a geometric literal, a temporal literal, a property name, a function, an
-# arithmetic expression or an array.
-#
 arrayExpression = arrayLiteral
                 | propertyName
                 | function;
 
+# An array literal is a bracket-delimited, comma-separated list of array
+# elements.
 arrayLiteral = leftBracket rightBracket
              | leftBracket arrayElement [ { comma arrayElement } ] rightBracket;
 
+# An array element is either a character literal, a numeric literal,
+# a geometric literal, a temporal literal, a property name, a function, an
+# arithmetic expression or an array.
 arrayElement = characterExpression
              | temporalExpression
              | numericExpression
