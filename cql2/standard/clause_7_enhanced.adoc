@@ -715,7 +715,9 @@ include::requirements/requirements_class_arithmetic.adoc[]
 This clause specifies requirements for supporting arithmetic expressions in CQL2.
 An arithmetic expression is an expression composed of an arithmetic operand
 (a property name, a number or a function that returns a number), an arithmetic
-operator (i.e., one of `+`, `-`, `*`, `/`, `^`) and another arithmetic operand.
+operator (i.e., one of `+`, `-`, `*`, `/`, `%`, `div`, or `^`) and another arithmetic operand.
+
+`+`, `-`, `*`, and `/` are the four basic arithmetic operations (addition, subtraction, multiplication and division). In addition, the modulo operator (`%`), integer division (`div`), and the exponention operator (`^`) are supported.
 
 include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
