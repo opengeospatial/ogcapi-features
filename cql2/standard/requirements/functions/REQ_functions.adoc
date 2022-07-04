@@ -4,7 +4,7 @@
 ^|*Requirement {counter:req-id}* |*/req/functions/functions*
 ^|A |The server SHALL support functions as defined by the BNF rules `function` in <<cql2-bnf>> 
 with the exception of the rule `arithmeticExpression` in `argument`.
-^|B |The function SHALL evaluate to a literal value that is allowed in the same rule 
+^|B |The function SHALL evaluate to its return value that is allowed in the same rule 
 in which the function is used.
 |===
 
