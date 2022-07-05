@@ -66,6 +66,8 @@ Then:
 |n/a |ne_110m_populated_places_simple |`pop_other=1038280+8` |1
 |n/a |ne_110m_populated_places_simple |`pop_other>=1038290-2*2^0` |123
 |n/a |ne_110m_populated_places_simple |`pop_other>1038290-20/10` |122
+|n/a |ne_110m_populated_places_simple |`pop_other>1038290-21 div 10` |122
+|n/a |ne_110m_populated_places_simple |`pop_other>1038290-5%2` |122
 |n/a |ne_110m_populated_places_simple |`pop_other\<=1038200+8*11` |121
 |n/a |ne_110m_populated_places_simple |`pop_other<1038280+2^3` |120
 |n/a |ne_110m_populated_places_simple |`pop_other<>1038290-2^1` |242
