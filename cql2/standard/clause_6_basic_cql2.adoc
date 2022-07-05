@@ -185,7 +185,7 @@ avg(windSpeed)
 
 include::requirements/basic-cql2/REQ_binary-comparison-predicate.adoc[]
 
-Instants (timestamps and dates) are scalar data types. All implementations have to support the comparison of two timestamps or tw dates. How this is implemented is a decision of the server and will depend on the internal represenation. For example, the server could compare the RFC 3339 string representations of the two timestamps.
+Instants (timestamps and dates) are scalar data types. All implementations have to support the comparison of two timestamps or two dates. How this is implemented is a decision of the server and will depend on the internal represenation. For example, the server could compare the RFC 3339 string representations of the two timestamps.
 
 [[example_8_3]]
 .Binary comparison predicates
