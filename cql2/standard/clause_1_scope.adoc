@@ -6,3 +6,10 @@ This document defines
 
 * A text encoding for a CQL2 filter;
 * A JSON encoding for a CQL2 filter.
+
+NOTE: The CQL2 grammar contains many language elements of a general purpose, spatio-temporal expression language.
+The focus of this version of the language are boolean-valued filter expressions. It is planned to investigate, if CQL2
+should be extended through additional functions and operators to evolve into a backward-compatible expression language
+that is not restricted to boolean-valued expressions, but support expressions that result in other values, too, including
+geometries. Such expressions can be used, for example, in a style language or to define derived properties. In this case,
+a new requirements class for boolean-valued filter expressions would be added to the Standard.
