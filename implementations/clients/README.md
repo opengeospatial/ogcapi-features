@@ -19,7 +19,8 @@ We welcome pull requests to update this page to add or update an entry for a cli
 ## JavaScript APIs
 
 - [ArcGIS API for JavaScript](arcgis-js.md)
-- [Leaflet](leaflet.md)
+- [Leaflet](leaflet.md) (Part 1)
+- [Leaflet.FeatureGroup.OGCAPI](leaflet-featuregroup-ogcapi.md) (Parts 1 & 4)
 - [Mapbox GL JS](mapbox-gl-js.md)
 - [OpenLayers](openlayers.md)
 - [ogcapi-js](ogcapi-js.md)
