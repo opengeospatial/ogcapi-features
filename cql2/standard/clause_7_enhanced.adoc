@@ -212,8 +212,8 @@ The spatial data types are (literal rule `spatialLiteral`):
 
 Existing representations are used for literal values:
 
-* Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
-* JSON: a https://www.rfc-editor.org/rfc/rfc7946.html#section-3.1[GeoJSON geometry] object
+* Text: an OGC Well-Known Text (WKT) literal (see clause 7 of <<ogc06-103r4,Simple feature access - Part 1: Common architecture>>)
+* JSON: a GeoJSON geometry object (see clause 3.1 of <<GeoJSON,GeoJSON>>)
 
 Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
 
