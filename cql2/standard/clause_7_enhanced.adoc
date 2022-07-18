@@ -313,21 +313,21 @@ This requirement adds a set of Dimensionally Extended Nine-intersection Model (D
 
 include::requirements/spatial-operators/REQ_spatial-operators.adoc[]
 
-The following table lists the mathematical definitions of each spatial operator as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
+The following table lists the mathematical definitions of each spatial operator as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>. `a` and `b` are geometries, `I(a)` is the set of all positions in the interior of the geometry (i.e., all positions on the geometry, but which are not on the boundary), and `E(a)` is the set of all exterior positions (i.e., all positions except those in the interior or on the boundary of the geometry).
 
 [reftext='{table-caption} {counter:table-num}']
 .Mathematical definitions of spatial operators
 [width=100%,cols="30,70",options="header"]
 |===
 |Spatial operator |Definition
-|S_CONTAINS |S_CONTAINS(a,b) &#x2b04; b CONTAINS a
+|S_CONTAINS |S_CONTAINS(a,b) &#x2b04; b WITHIN a
 |S_CROSSES |S_CROSSES(a,b) &#x2b04; [I(a) &#x2229; I(b) &#x2260; &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)]
 |S_DISJOINT |S_DISJOINT(a,b) &#x2b04; a &#x2229; b = &#x2205;
 |S_EQUALS |S_EQUALS(a,b) &#x2b04; a &#x2286; b &#x2227; b &#x2286; a
 |S_INTERSECTS |S_INTERSECTS(a,b) &#x2b04; ! a DISJOINT b
 |S_OVERLAPS |S_OVERLAPS(a,b) &#x2b04; (dim(I(a)) = dim(I(b)) = dim(I(a) &#x2229; I(b))) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)
 |S_TOUCHES |S_TOUCHES(a,b) &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205;
-|S_WITHIN |S_WITHIN(a,b) &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) &#x2260; &#x2205;)
+|S_WITHIN |S_WITHIN(a,b) &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) = &#x2205;)
 |===
 
 The following diagrams illustrate the meaning of the `S_CROSSES`, `S_OVERLAPS`, `S_TOUCHES` and `S_WITHIN` operators.
