@@ -209,13 +209,31 @@ The spatial data types are (literal rule `spatialLiteral`):
 * "MultiPolygon": a collection of polygons;
 * "Geometry": an instance of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", or "MultiPolygon";
 * "GeometryCollection": a collection of "Geometry" instances.
+* "BBox": a bounding rectangle or box
 
-Existing representations are used for literal values:
+Existing representations are in general used for literal values:
 
 * Text: an OGC Well-Known Text (WKT) literal (see clause 7 of <<ogc06-103r4,Simple feature access - Part 1: Common architecture>>)
 * JSON: a GeoJSON geometry object (see clause 3.1 of <<GeoJSON,GeoJSON>>)
 
+The BBox data type is an exception as it is not specified in WKT. In the Text representation, the type is encoded as a `BBOX()` operator with four or six numerical arguments, depending on whether the coordinates include a vertical axis (height or depth):
+
+* Lower left corner, coordinate axis 1
+* Lower left corner, coordinate axis 2
+* Minimum value, coordinate axis 3 (optional)
+* Upper right corner, coordinate axis 1
+* Upper right corner, coordinate axis 2
+* Maximum value, coordinate axis 3 (optional)
+
+In cases where the bounding box spans the antimeridian of a geographic coordinate reference system, the lower-left value (west-most box edge) is larger than the upper-right value (east-most box edge).
+
+If the vertical axis is included, the third and the sixth number are the bottom and the top of the 3-dimensional bounding box.
+
+In JSON, the BBox type is encoded as a JSON object with a "bbox" member with an array with four or six numbers. This representation is consistent with the GeoJSON representation of a bounding box (see clause 5 of <<GeoJSON,GeoJSON>>).
+
 Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
+
+
 
 [[example_8_1_b]]
 .Spatial literal example
@@ -245,6 +263,17 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
           [43.5845,-79.5442]
       ]
    ]
+}
+----
+* bounding box (Text)
+----
+BBOX(160.6,-55.95,-170,-25.89)
+----
+* bounding box (JSON)
+[source,JSON]
+----
+{
+   "bbox": [160.6, -55.95, -170, -25.89]
 }
 ----
 

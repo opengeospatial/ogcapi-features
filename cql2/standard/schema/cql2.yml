@@ -377,7 +377,7 @@ components:
     spatialLiteral:
       oneOf:
         - $ref: '#/components/schemas/geometryLiteral'
-        - $ref: '#/components/schemas/envelopeLiteral'
+        - $ref: '#/components/schemas/bboxLiteral'
     geometryLiteral:
       oneOf:
         - $ref: '#/components/schemas/point'
@@ -534,7 +534,7 @@ components:
           minItems: 4
           items:
             type: number
-    envelopeLiteral:
+    bboxLiteral:
       type: object
       required:
         - bbox

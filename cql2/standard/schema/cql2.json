@@ -613,7 +613,7 @@
           "$ref": "#/$defs/geometryLiteral"
         },
         {
-          "$ref": "#/$defs/envelopeLiteral"
+          "$ref": "#/$defs/bboxLiteral"
         }
       ]
     },
@@ -820,7 +820,7 @@
         }
       }
     },
-    "envelopeLiteral": {
+    "bboxLiteral": {
       "type": "object",
       "required": [
         "bbox"
