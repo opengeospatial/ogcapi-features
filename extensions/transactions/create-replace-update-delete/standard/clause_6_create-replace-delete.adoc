@@ -12,7 +12,7 @@ replace and remove individual resources from a collection.
 The HTTP POST method is used to add a new resource instance to a collection.
 
 The HTTP PUT method is used to replace an existing resource in a collection
-with a replacement resource.
+with a replacement resource with the same resource identifier.
 
 Finally, the HTTP DELETE method is used to remove a resource from a collection.
 
@@ -108,6 +108,8 @@ See https://www.rfc-editor.org/rfc/rfc7231.html#section-3.1.1.5[section 3.1.1.5 
 
 include::requirements/create-replace-delete/create/REQ_response-rid.adoc[]
 
+include::recommendations/create-replace-delete/create/PER_rid.adoc[]
+
 include::requirements/create-replace-delete/create/REQ_response.adoc[]
 
 If the server will process the create request later, it will return a `202`. In this
@@ -177,6 +179,8 @@ if the response has no additional content.
 
 If the server will process the update request later, it will return a `202`. In this
 case, the processing can succeed or fail, without further notification to the client.
+
+include::requirements/create-replace-delete/replace/REQ_rid.adoc[]
 
 ==== Exceptions
 
