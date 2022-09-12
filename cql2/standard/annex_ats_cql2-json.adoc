@@ -6,8 +6,19 @@
 |===
 2+|*Conformance Class*
 2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
-|Target type |Representations of a filter expression
+|Target type |Servers that evaluate filter expressions
 |Requirements class |<<rc_cql2-json,Requirements Class "CQL2 JSON">>
+|Dependency |<<conf_basic-cql2,Basic CQL2>>
+|Conditional Dependency |<<conf_advanced-comparison-operators,Advanced Comparison Operators>>
+|Conditional Dependency |<<conf_case-insensitive-comparison,Case-insensitive Comparisons>>
+|Conditional Dependency |<<conf_accent-insensitive-comparison,Accent-insensitive Comparisons>>
+|Conditional Dependency |<<conf_basic-spatial-operators,Basic Spatial Operators>>
+|Conditional Dependency |<<conf_spatial-operators,Spatial Operators>>
+|Conditional Dependency |<<conf_temporal-operators,Temporal Operators>>
+|Conditional Dependency |<<conf_array-operators,Array Operators>>
+|Conditional Dependency |<<conf_property-property,Property-Property Comparisons>>
+|Conditional Dependency |<<conf_functions,Functions>>
+|Conditional Dependency |<<conf_arithmetic,Arithmetic Expressions>>
 |===
 
 :conf-test: validate
@@ -16,15 +27,15 @@
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
 |Requirements: | all requirements
-|Test purpose: | Validate the filter expression against the JSON Schema
+|Test purpose: | Validate that CQL2 JSON is supported by the server
 |Test method: | 
 Given:
 
-* n/a
+* A filter expression
 
 When:
 
-Validate the filter expression in CQL2 JSON against the JSON Schema in <<cql2-json-schema>> after all schema components that are not supported by the implementation have been removed.
+Execute conformance tests for all supported conformance classes with the parameter "Filter Language". Use the value "CQL2 JSON". Note that the filter expressions in the test cases have to be converted to a CQL2 JSON representation.
 
 Then:
 
