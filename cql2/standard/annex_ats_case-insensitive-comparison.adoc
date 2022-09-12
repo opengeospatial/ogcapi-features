@@ -17,8 +17,8 @@
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_casei-operator,/req/{conf-class}/casei-operator>>
-|Test purpose: | Test the CASEI operator in comparisons
+|Requirements: | <<req_{conf-class}_casei-constructor,/req/{conf-class}/casei-constructor>>
+|Test purpose: | Test the CASEI constructor in comparisons
 |Test method: | 
 Given:
 
@@ -43,8 +43,8 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_casei-operator,/req/{conf-class}/casei-operator>>
-|Test purpose: | Test the CASEI operator in LIKE predicates
+|Requirements: | <<req_{conf-class}_casei-constructor,/req/{conf-class}/casei-constructor>>
+|Test purpose: | Test the CASEI constructor in LIKE predicates
 |Test method: | 
 Given:
 
@@ -79,7 +79,7 @@ Given:
 
 When:
 
-Evaluate each predicate in <<test-data-predicates-casei-operator>>, if the conditional dependency is met.
+Evaluate each predicate in <<test-data-predicates-casei-constructor>>, if the conditional dependency is met.
 
 Then:
 
@@ -88,7 +88,7 @@ Then:
 * store the valid predicates for each data source.
 |===
 
-[[test-data-predicates-casei-operator]]
+[[test-data-predicates-casei-constructor]]
 .Predicates and expected results
 [width="100%",cols="4",options="header"]
 |===

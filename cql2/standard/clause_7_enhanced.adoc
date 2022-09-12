@@ -120,13 +120,13 @@ include::requirements/requirements_class_case-insensitive-comparison.adoc[]
 
 The following requirements class adds support for case-insensitive string comparisons.
 
-This capability is useful to operate across data that has not been normalized or has been normalized to values that are different than they should be. This is implemented via a string-valued operator to normalize a string with respect to case (`CASEI`). 
+This capability is useful to operate across data that has not been normalized or has been normalized to values that are different than they should be. This is implemented via a string constructor to normalize a string with respect to case (`CASEI`). 
 
-For example, the `CASEI` operator is useful when a property is set to "PLANET", "Planet", or "planet" and one wants to match either without having to enumerate all the variations.
+For example, the `CASEI` constructor is useful when a property is set to "PLANET", "Planet", or "planet" and one wants to match either without having to enumerate all the variations.
 
-Implementations of the `CASEI` operator can be complex and depend on the locale, but in many cases the underlying datastore will provide a capability that the operator can be mapped to.
+Implementations of the `CASEI` constructor can be complex and depend on the locale, but in many cases the underlying datastore will provide a capability that the constructor can be mapped to.
 
-include::requirements/case-insensitive-comparison/REQ_casei-operator.adoc[]
+include::requirements/case-insensitive-comparison/REQ_casei-constructor.adoc[]
 
 [[example_7_4_casei]]
 .Example case-insensitive comparison
@@ -151,7 +151,7 @@ CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))
 ----
 ====
 
-The `CASEI` operator returns a string typed representation of the input expression that is guaranteed to be equal to any other case insensitive representation of that string.  In order to ensure correct comparisons, these operator should be applied to both sides of an expression. So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
+The `CASEI` constructor returns a string typed representation of the input expression that is guaranteed to be equal to any other case insensitive representation of that string.  In order to ensure correct comparisons, the constructor should be applied to both sides of an expression. So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
 
 [[accent-insensitive-comparison]]
 === Requirements Class "Accent-insensitive Comparison"
@@ -160,13 +160,13 @@ include::requirements/requirements_class_accent-insensitive-comparison.adoc[]
 
 This requirements class adds support for accent-insensitive string comparisons to operate across data that has not been normalized or has been normalized to values that are different than they should be.
 
-Similar to the case-insensitive comparison, this capability is supported via a string-valued operator `ACCENTI`. 
+Similar to the case-insensitive comparison, this capability is supported via a string constructor `ACCENTI`. 
 
-For example, the `ACCENTI` operator is useful when accents (or, more generally, diacritics not available in ASCII) were dropped when indexing a property. This may be useful, for example, to support users that are not familiar with accents or that do not know how to type them on their keyboard. For example, "papa" would also match "papá". Note that accent-insensitive comparisons can match values with a different meaning. E.g., in Spanish "papa" is potato and "papá" is father. "papá" in an accent-insensitive comparison will match both, but this may also be intentional, because the users knows that some of the data has been processed in ASCII.
+For example, the `ACCENTI` constructor is useful when accents (or, more generally, diacritics not available in ASCII) were dropped when indexing a property. This may be useful, for example, to support users that are not familiar with accents or that do not know how to type them on their keyboard. For example, "papa" would also match "papá". Note that accent-insensitive comparisons can match values with a different meaning. E.g., in Spanish "papa" is potato and "papá" is father. "papá" in an accent-insensitive comparison will match both, but this may also be intentional, because the users knows that some of the data has been processed in ASCII.
 
-Implementations of the `ACCENTI` operator can be complex, but in many cases the underlying datastore will provide a capability that the operator can be mapped to.
+Implementations of the `ACCENTI` constructor can be complex, but in many cases the underlying datastore will provide a capability that the constructor can be mapped to.
 
-include::requirements/accent-insensitive-comparison/REQ_accenti-operator.adoc[]
+include::requirements/accent-insensitive-comparison/REQ_accenti-constructor.adoc[]
 
 [[example_7_4_accenti]]
 .Example accent-insensitive comparison
@@ -188,7 +188,7 @@ ACCENTI(etat_vol) = ACCENTI('débárquér')
 ----
 ====
 
-Like `CASEI`, the `ACCENTI` operator returns a string typed representation of the input expression that is guaranteed to be equal to any other accent insensitive representation of that string. In order to ensure correct comparisons, the operator should be applied to both sides of an expression.  So, for example, the only durable accent-insensitive equality comparison would be `ACCENTI(some_property) = ACCENTI('papá')`. An expression such as `ACCENTI(some_property) = 'papa'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
+Like `CASEI`, the `ACCENTI` constructor returns a string typed representation of the input expression that is guaranteed to be equal to any other accent insensitive representation of that string. In order to ensure correct comparisons, the constructor should be applied to both sides of an expression.  So, for example, the only durable accent-insensitive equality comparison would be `ACCENTI(some_property) = ACCENTI('papá')`. An expression such as `ACCENTI(some_property) = 'papa'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
@@ -436,7 +436,7 @@ All temporal geometries are in the Gregorian Calendar. This is a deliberate rest
 
 For intervals, the following representations are used:
 
-* Text: an `INTERVAL` operator with two instants or double-dot strings as parameters;
+* Text: an `INTERVAL` constructor with two instants or double-dot strings as parameters;
 * JSON: an object with an `interval` member with an array of two instants or double-dot strings as parameters.
 
 In case two instants are provided, both instants have the same granularity (i.e., they are either timestamps or dates).

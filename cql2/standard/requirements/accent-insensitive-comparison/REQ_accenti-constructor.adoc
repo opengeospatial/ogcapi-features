@@ -1,0 +1,9 @@
+[[req_accent-insensitive-comparison_accenti-constructor]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/accent-insensitive-comparison/accenti-constructor*
+^|A |The server SHALL support a constructor named `ACCENTI`.
+^|B |The constructor SHALL accept one argument that can be a character string literal, the name of a property that evaluates to a character string literal or a function that returns a character string literal (see rules `characterLiteral`, `propertyName`, `function`).
+^|C |The constructor SHALL return a character string.
+^|D |The constructor SHALL implement https://www.w3.org/TR/charmod-norm/#unicodeNormalization[unicode normalization] described in the implementation guidelines of https://www.unicode.org/versions/Unicode14.0.0[The Unicode Standard, Version 14.0] (see https://www.unicode.org/versions/Unicode14.0.0/ch05.pdf[clause 5.6 Normalization]).
+|===
