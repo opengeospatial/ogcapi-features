@@ -56,6 +56,8 @@ updated representation of the resource, or `204`, if the response has no additio
 If the server will process the update request later, it will return a `202`. In this
 case, the processing can succeed or fail, without further notification to the client.
 
+include::requirements/update/REQ_rid.adoc[]
+
 ==== Exceptions
 
 See <<http_status_codes,HTTP status codes>>.
