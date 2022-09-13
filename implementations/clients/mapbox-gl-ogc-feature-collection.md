@@ -1,6 +1,6 @@
 # mapbox-gl-ogc-feature-collection
 
-Mapbox GL JS supports loading GeoJSON data, but `mapbox-gl-ogc-feature-collection` offers a more complete implementation - with details such as using the bbox and attribution found in the collection metadata.
+Mapbox GL JS supports loading GeoJSON data, but `mapbox-gl-ogc-feature-collection` offers a more complete implementation - with details such as using the bbox and filtering.
 
 ## Links
 
