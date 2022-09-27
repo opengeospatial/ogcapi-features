@@ -23,5 +23,6 @@ We welcome pull requests to update this page to add or update an entry for a cli
 - [Leaflet](leaflet.md) (Part 1)
 - [Leaflet.FeatureGroup.OGCAPI](leaflet-featuregroup-ogcapi.md) (Parts 1 & 4)
 - [Mapbox GL JS](mapbox-gl-js.md)
+- [mapbox-gl-ogc-feature-collection](mapbox-gl-ogc-feature-collection.md)
 - [OpenLayers](openlayers.md)
 - [ogcapi-js](ogcapi-js.md)
