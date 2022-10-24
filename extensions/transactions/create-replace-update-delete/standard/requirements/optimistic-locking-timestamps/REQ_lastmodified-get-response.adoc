@@ -1,0 +1,6 @@
+[[req_optimistic-locking_last-modified-get-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking/get-last-modified-response*
+^|A |The response to a HTTP GET operation used to retrieve a representation of a resource SHALL include a `Last-Modified` header representing the date and time the representation was last modified as determined at the conclusion of handling the request.
+|===

@@ -1,0 +1,8 @@
+[[req_optimistic-locking_ifunmodifiedsince-patch-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking/ifunmodifiedsince-patch-op*
+^|Condition |Server implements the <<update_clause>> conformance class.
+^|A |A HTTP PUT operation that updates a resource SHALL include an `If-Unmodified-Since` header.
+^|B |The value of the `If-Unmodified-Since` header SHALL be a timestamp representing that last time the representation of the resource was retrieved.
+|===
