@@ -1,0 +1,8 @@
+[[req_optimistic-locking_ifmatch-missing]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking/ifmatch-patch-op*
+^|Condition |. Server implements the <<optimistic_locking_clause>> conformance class.
+. The `If-Match` HTTP header is omitted from the operation.
+^|A |The server SHALL respond with a HTTP status code of 412, preconsidition failed.
+|===
