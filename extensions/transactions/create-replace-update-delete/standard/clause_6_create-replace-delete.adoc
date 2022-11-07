@@ -50,10 +50,9 @@ The *Status Codes* listed in <<status_codes>> are of particular relevance to imp
 |`413` |The server is refusing to process the request because the request content is larger than the server is willing or able to process.
 |`415` |The server is refusing to service the request because the content is in a format not supported by this method on the target resource.
 |`422` |The server understands the content type of the request content and the syntax of the request content is correct, but was unable to process the contained instructions. For example, the submitted resource does not meet a semantic constraint, e.g. a mandatory property is missing.
+|`428` |The server requires the request to be conditional.
 |`500` |An internal error occurred in the server.
 !===
-
-NOTE: Status code `422` is not yet an official HTTP status code, but is expected to be added by the https://www.ietf.org/archive/id/draft-ietf-httpbis-semantics-19.html#name-422-unprocessable-content[draft IETF RFC "HTTP Semantics"].
 
 More specific guidance is provided for each resource, where applicable.
 
@@ -102,7 +101,7 @@ include::recommendations/create-replace-delete/create/PER_body.adoc[]
 
 include::requirements/create-replace-delete/create/REQ_content-type.adoc[]
 
-See https://www.rfc-editor.org/rfc/rfc7231.html#section-3.1.1.5[section 3.1.1.5 of RFC 7231] for details.
+See https://www.rfc-editor.org/rfc/rfc9110#field.content-type[section 8.3 of RFC 9110] for details.
 
 ==== Response
 
@@ -143,7 +142,7 @@ discussed in this standard.
 ....
    Client                                                            Server
      |                                                                 |
-     |   PUT <resource end point>   HTTP/1.1                           |
+     |   PUT <resource endpoint>   HTTP/1.1                            |
      |   Content-Type: <media type of updated resource representation> |
      |                                                                 |
      |   ... Body contains representation of new resource content ...  |
@@ -167,7 +166,7 @@ include::recommendations/create-replace-delete/replace/PER_body.adoc[]
 
 include::requirements/create-replace-delete/replace/REQ_content-type.adoc[]
 
-See https://www.rfc-editor.org/rfc/rfc7231.html#section-3.1.1.5[section 3.1.1.5 of RFC 7231] for details.
+See https://www.rfc-editor.org/rfc/rfc9110#field.content-type[section 8.3 of RFC 9110] for details.
 
 ==== Response
 

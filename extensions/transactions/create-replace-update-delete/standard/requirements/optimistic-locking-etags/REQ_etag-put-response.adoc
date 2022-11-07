@@ -1,7 +1,7 @@
-[[req_optimistic-locking_etag-put-response]]
+[[req_optimistic-locking-etags_put-etag-response]]
 [width="90%",cols="2,6a"]
 |===
 ^|Condition |Server implements the 
-^|*Requirement {counter:req-id}* |*/req/optimistic-locking/put-etag-response*
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking-etags/put-etag-response*
 ^|A |A resource successfully replaced by a HTTP PUT operation SHALL include an `ETag` header in the response whose value is an opaque token that represents the state of the resource as determined at the conclusion of handing the request.
 |===
