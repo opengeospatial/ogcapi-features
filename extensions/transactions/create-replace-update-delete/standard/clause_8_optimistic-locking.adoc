@@ -118,6 +118,8 @@ The client submitting the request will set the value of the `If-Unmodified-Since
 * to a timestamp representing the last time the representation of the resource was retrieved; or 
 * to the value of the `Last-Modified` header of the response when the representation of the resource was retrieved last.
 
+If no `If-Unmodified-Since` header is provided by the client, the behavior will depend on the server. The appropriate behavior will vary depending on the dataset and use case.
+
 include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-put-op.adoc[]
 
 include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-put-eval.adoc[]
@@ -126,7 +128,7 @@ include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-patch-
 
 include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-patch-eval.adoc[]
 
-include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-missing.adoc[]
+include::recommendations/optimistic-locking-timestamps/PER_ifunmodifiedsince-missing.adoc[]
 
 ==== Example
 
@@ -243,6 +245,8 @@ If the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] HTTP head
 
 The value of the `If-Match` header will be a strong `ETag` token obtained by a preceding HTTP GET operation used to fetch a representation of the resource to be changed. Note that submitting a weak `ETag` token will always result in a failed precondition.
 
+If no `If-Match` header is provided by the client, the behavior will depend on the server. The appropriate behavior will vary depending on the dataset and use case.
+
 include::requirements/optimistic-locking-etags/REQ_ifmatch-put-op.adoc[]
 
 include::requirements/optimistic-locking-etags/REQ_ifmatch-put-eval.adoc[]
@@ -251,7 +255,7 @@ include::requirements/optimistic-locking-etags/REQ_ifmatch-patch-op.adoc[]
 
 include::requirements/optimistic-locking-etags/REQ_ifmatch-patch-eval.adoc[]
 
-include::requirements/optimistic-locking-etags/REQ_ifmatch-missing.adoc[]
+include::recommendations/optimistic-locking-etags/PER_ifmatch-missing.adoc[]
 
 include::recommendations/optimistic-locking-etags/PER_ifmatch-star.adoc[]
 

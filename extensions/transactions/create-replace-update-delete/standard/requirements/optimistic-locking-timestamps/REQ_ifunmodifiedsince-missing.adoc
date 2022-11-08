@@ -1,7 +1,0 @@
-[[req_optimistic-locking-timestamps_ifunmodifiedsince-missing]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/optimistic-locking-timestamps/ifunmodifiedsince-missing*
-^|Condition |The `If-Unmodified-Since` HTTP header is omitted from the operation.
-^|A |The server SHALL respond with a HTTP status code of 428 (Precondition required), as specified in <<rfc6585,RFC 6585>>.
-|===
