@@ -30,7 +30,7 @@ When:
 
 For each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
 
-* `S_INTERSECTS({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_INTERSECTS({queryable},BBOX(-180,-90,180,90))`
 * `S_INTERSECTS({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
 * `S_INTERSECTS({queryable},LINESTRING(7 50, 10 51))`
 * `S_INTERSECTS({queryable},POINT(7.02 49.92))`
@@ -72,14 +72,14 @@ Then:
 [width="100%",cols="3",options="header"]
 |===
 |Data Source |Predicate |Expected number of items
-|ne_110m_admin_0_countries |`S_INTERSECTS(geom,ENVELOPE(0,40,10,50))` |8
-|ne_110m_admin_0_countries |`S_INTERSECTS(geom,ENVELOPE(150,-90,-150,90))` |10
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50))` |8
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(150,-90,-150,90))` |10
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |8
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,LINESTRING(0 40,10 50))` |4
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,POINT(7.02 49.92))` |1
-|ne_110m_populated_places_simple |`S_INTERSECTS(geom,ENVELOPE(0,40,10,50))` |7
+|ne_110m_populated_places_simple |`S_INTERSECTS(geom,BBOX(0,40,10,50))` |7
 |ne_110m_populated_places_simple |`S_INTERSECTS(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |7
-|ne_110m_rivers_lake_centerlines |`S_INTERSECTS(geom,ENVELOPE(-180,-90,0,90))` |4
+|ne_110m_rivers_lake_centerlines |`S_INTERSECTS(geom,BBOX(-180,-90,0,90))` |4
 |ne_110m_rivers_lake_centerlines |`S_INTERSECTS(geom,LINESTRING(-60 -90,-60 90))` |2
 |===
 

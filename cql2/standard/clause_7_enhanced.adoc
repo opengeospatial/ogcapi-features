@@ -120,13 +120,13 @@ include::requirements/requirements_class_case-insensitive-comparison.adoc[]
 
 The following requirements class adds support for case-insensitive string comparisons.
 
-This capability is useful to operate across data that has not been normalized or has been normalized to values that are different than they should be. This is implemented via a string-valued operator to normalize a string with respect to case (`CASEI`). 
+This capability is useful to operate across data that has not been normalized or has been normalized to values that are different than they should be. This is implemented via a standardized string function to normalize a string with respect to case (`CASEI`). 
 
-For example, the `CASEI` operator is useful when a property is set to "PLANET", "Planet", or "planet" and one wants to match either without having to enumerate all the variations.
+For example, the `CASEI` function is useful when a property is set to "PLANET", "Planet", or "planet" and one wants to match either without having to enumerate all the variations.
 
-Implementations of the `CASEI` operator can be complex and depend on the locale, but in many cases the underlying datastore will provide a capability that the operator can be mapped to.
+Implementations of the `CASEI` function can be complex and depend on the locale, but in many cases the underlying datastore will provide a capability that the function can be mapped to.
 
-include::requirements/case-insensitive-comparison/REQ_casei-operator.adoc[]
+include::requirements/case-insensitive-comparison/REQ_casei-function.adoc[]
 
 [[example_7_4_casei]]
 .Example case-insensitive comparison
@@ -151,7 +151,7 @@ CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))
 ----
 ====
 
-The `CASEI` operator returns a string typed representation of the input expression that is guaranteed to be equal to any other case insensitive representation of that string.  In order to ensure correct comparisons, these operator should be applied to both sides of an expression. So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
+The `CASEI` function returns a string typed representation of the input expression that is guaranteed to be equal to any other case insensitive representation of that string.  In order to ensure correct comparisons, the function should be applied to both sides of an expression. So, for example, the only durable case-insensitive equality comparison would be `CASEI(some_property) = CASEI('Straße')`.  An expression such as `CASEI(some_property) = 'strasse'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
 
 [[accent-insensitive-comparison]]
 === Requirements Class "Accent-insensitive Comparison"
@@ -160,13 +160,13 @@ include::requirements/requirements_class_accent-insensitive-comparison.adoc[]
 
 This requirements class adds support for accent-insensitive string comparisons to operate across data that has not been normalized or has been normalized to values that are different than they should be.
 
-Similar to the case-insensitive comparison, this capability is supported via a string-valued operator `ACCENTI`. 
+Similar to the case-insensitive comparison, this capability is supported via a string function `ACCENTI`. 
 
-For example, the `ACCENTI` operator is useful when accents (or, more generally, diacritics not available in ASCII) were dropped when indexing a property. This may be useful, for example, to support users that are not familiar with accents or that do not know how to type them on their keyboard. For example, "papa" would also match "papá". Note that accent-insensitive comparisons can match values with a different meaning. E.g., in Spanish "papa" is potato and "papá" is father. "papá" in an accent-insensitive comparison will match both, but this may also be intentional, because the users knows that some of the data has been processed in ASCII.
+For example, the `ACCENTI` function is useful when accents (or, more generally, diacritics not available in ASCII) were dropped when indexing a property. This may be useful, for example, to support users that are not familiar with accents or that do not know how to type them on their keyboard. For example, "papa" would also match "papá". Note that accent-insensitive comparisons can match values with a different meaning. E.g., in Spanish "papa" is potato and "papá" is father. "papá" in an accent-insensitive comparison will match both, but this may also be intentional, because the users knows that some of the data has been processed in ASCII.
 
-Implementations of the `ACCENTI` operator can be complex, but in many cases the underlying datastore will provide a capability that the operator can be mapped to.
+Implementations of the `ACCENTI` function can be complex, but in many cases the underlying datastore will provide a capability that the function can be mapped to.
 
-include::requirements/accent-insensitive-comparison/REQ_accenti-operator.adoc[]
+include::requirements/accent-insensitive-comparison/REQ_accenti-function.adoc[]
 
 [[example_7_4_accenti]]
 .Example accent-insensitive comparison
@@ -188,7 +188,7 @@ ACCENTI(etat_vol) = ACCENTI('débárquér')
 ----
 ====
 
-Like `CASEI`, the `ACCENTI` operator returns a string typed representation of the input expression that is guaranteed to be equal to any other accent insensitive representation of that string. In order to ensure correct comparisons, the operator should be applied to both sides of an expression.  So, for example, the only durable accent-insensitive equality comparison would be `ACCENTI(some_property) = ACCENTI('papá')`. An expression such as `ACCENTI(some_property) = 'papa'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
+Like `CASEI`, the `ACCENTI` function returns a string typed representation of the input expression that is guaranteed to be equal to any other accent insensitive representation of that string. In order to ensure correct comparisons, the function should be applied to both sides of an expression.  So, for example, the only durable accent-insensitive equality comparison would be `ACCENTI(some_property) = ACCENTI('papá')`. An expression such as `ACCENTI(some_property) = 'papa'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
 
 [[basic-spatial-operators]]
 === Requirements Class "Basic Spatial Operators"
@@ -208,14 +208,32 @@ The spatial data types are (literal rule `spatialLiteral`):
 * "Polygon": a planar surface bounded by closed line strings;
 * "MultiPolygon": a collection of polygons;
 * "Geometry": an instance of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", or "MultiPolygon";
-* "GeometryCollection": a collection of "Geometry" instances.
+* "GeometryCollection": a collection of "Geometry" instances;
+* "BBox": a bounding rectangle or box.
 
-Existing representations are used for literal values:
+Existing representations are in general used for literal values:
 
-* Text: an https://portal.ogc.org/files/?artifact_id=25355[OGC Well-Known Text (WKT)] literal
-* JSON: a https://www.rfc-editor.org/rfc/rfc7946.html#section-3.1[GeoJSON geometry] object
+* Text: an OGC Well-Known Text (WKT) literal (see clause 7 of <<ogc06-103r4,Simple feature access - Part 1: Common architecture>>)
+* JSON: a GeoJSON geometry object (see clause 3.1 of <<GeoJSON,GeoJSON>>)
+
+The BBox data type is an exception as it is not specified in WKT. In the Text representation, the type is encoded as a `BBOX()` operator with four or six numerical arguments, depending on whether the coordinates include a vertical axis (height or depth):
+
+* Lower left corner, coordinate axis 1
+* Lower left corner, coordinate axis 2
+* Minimum value, coordinate axis 3 (optional)
+* Upper right corner, coordinate axis 1
+* Upper right corner, coordinate axis 2
+* Maximum value, coordinate axis 3 (optional)
+
+In cases where the bounding box spans the antimeridian of a geographic coordinate reference system, the lower-left value (west-most box edge) is larger than the upper-right value (east-most box edge).
+
+If the vertical axis is included, the third and the sixth number are the bottom and the top of the 3-dimensional bounding box.
+
+In JSON, the BBox type is encoded as a JSON object with a "bbox" member with an array with four or six numbers. This representation is consistent with the GeoJSON representation of a bounding box (see clause 5 of <<GeoJSON,GeoJSON>>).
 
 Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
+
+
 
 [[example_8_1_b]]
 .Spatial literal example
@@ -245,6 +263,17 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
           [43.5845,-79.5442]
       ]
    ]
+}
+----
+* bounding box (Text)
+----
+BBOX(160.6,-55.95,-170,-25.89)
+----
+* bounding box (JSON)
+[source,JSON]
+----
+{
+   "bbox": [160.6, -55.95, -170, -25.89]
 }
 ----
 
@@ -313,21 +342,21 @@ This requirement adds a set of Dimensionally Extended Nine-intersection Model (D
 
 include::requirements/spatial-operators/REQ_spatial-operators.adoc[]
 
-The following table lists the mathematical definitions of each spatial operator as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>.
+The following table lists the mathematical definitions of each spatial operator as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>. `a` and `b` are geometries, `I(a)` is the set of all positions in the interior of the geometry (i.e., all positions on the geometry, but which are not on the boundary), and `E(a)` is the set of all exterior positions (i.e., all positions except those in the interior or on the boundary of the geometry).
 
 [reftext='{table-caption} {counter:table-num}']
 .Mathematical definitions of spatial operators
 [width=100%,cols="30,70",options="header"]
 |===
 |Spatial operator |Definition
-|S_CONTAINS |S_CONTAINS(a,b) &#x2b04; b CONTAINS a
+|S_CONTAINS |S_CONTAINS(a,b) &#x2b04; b WITHIN a
 |S_CROSSES |S_CROSSES(a,b) &#x2b04; [I(a) &#x2229; I(b) &#x2260; &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)]
 |S_DISJOINT |S_DISJOINT(a,b) &#x2b04; a &#x2229; b = &#x2205;
 |S_EQUALS |S_EQUALS(a,b) &#x2b04; a &#x2286; b &#x2227; b &#x2286; a
 |S_INTERSECTS |S_INTERSECTS(a,b) &#x2b04; ! a DISJOINT b
 |S_OVERLAPS |S_OVERLAPS(a,b) &#x2b04; (dim(I(a)) = dim(I(b)) = dim(I(a) &#x2229; I(b))) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)
 |S_TOUCHES |S_TOUCHES(a,b) &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205;
-|S_WITHIN |S_WITHIN(a,b) &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) &#x2260; &#x2205;)
+|S_WITHIN |S_WITHIN(a,b) &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) = &#x2205;)
 |===
 
 The following diagrams illustrate the meaning of the `S_CROSSES`, `S_OVERLAPS`, `S_TOUCHES` and `S_WITHIN` operators.
@@ -407,7 +436,7 @@ All temporal geometries are in the Gregorian Calendar. This is a deliberate rest
 
 For intervals, the following representations are used:
 
-* Text: an `INTERVAL` operator with two instants or double-dot strings as parameters;
+* Text: an `INTERVAL` function with two instants or double-dot strings as parameters;
 * JSON: an object with an `interval` member with an array of two instants or double-dot strings as parameters.
 
 In case two instants are provided, both instants have the same granularity (i.e., they are either timestamps or dates).
@@ -679,7 +708,7 @@ T_DURING(DATE("1969-07-20T20:17:40Z"), INTERVAL("1969-07-16T13:32:00Z", "1969-07
 
 include::requirements/requirements_class_functions.adoc[]
 
-This sub-clause specifies requirements for supporting functions in CQL2. Functions
+This sub-clause specifies requirements for supporting custom functions in CQL2. Functions
 allow implementations to extend the language.
 
 include::requirements/functions/REQ_functions.adoc[]

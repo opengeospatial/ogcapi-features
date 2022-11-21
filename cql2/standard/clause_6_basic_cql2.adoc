@@ -16,7 +16,10 @@ encodings of CQL2.
 === CQL2 filter expression
 
 A CQL2 filter expression is an expression that defines a logically connected
-set of predicates that are evaluated for each item of a collection.
+set of predicates that are evaluated for each item of a collection. Each 
+predicate is an operator with operands where the number of operands depends 
+on the operator. An operand is either a literal, a standardized or custom function 
+or an arithmetic expression.
 
 A predicate is an expression that evaluates to the Boolean values of `TRUE`
 or `FALSE` or that evaluates to the value `NULL` when dealing with unknown
@@ -43,15 +46,14 @@ predicates.
 
 include::recommendations/basic-cql2/PER_cql2-filter.adoc[]
 
-A Basic CQL2 filter expression can be constructed by logically connecting one
-or more comparison predicates.
+A Basic CQL2 filter expression can be constructed by logically connecting comparison predicates.
 
 Support for the parts of CQL2 that are not part of Basic CQL2 is added in additional
 requirements classes in <<cql2-enhancements>>:
 
 * The rules `isLikePredicate`, `isBetweenPredicate` and `isInListPredicate` are added by requirements class <<rc_advanced-comparison-operators,Advanced Comparison Operators>>;
-* Support for the `CASEI` operator is added by requirements class <<rc_case-insensitive-comparison,Case-insensitive Comparison>>;
-* Support for the `ACCENTI` operator is added by requirements class <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>>;
+* Support for the `CASEI` function is added by requirements class <<rc_case-insensitive-comparison,Case-insensitive Comparison>>;
+* Support for the `ACCENTI` function is added by requirements class <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>>;
 * The rule `spatialPredicate` is added by requirements classes <<rc_basic-spatial-operators,Basic Spatial Operators>> and <<rc_spatial-operators,Spatial Operators>>;
 * The rule `temporalPredicate` is added by requirements class <<rc_temporal-operators,Temporal Operators>>.
 * The rule `arrayPredicate` is added by requirements class <<rc_array-operators,Array Operators>>;
@@ -96,7 +98,7 @@ NOTE: While instants (timestamps and dates) are scalar data types that can be us
 
 For timestamp and date values representations based on RFC 3339 are used:
 
-* Text: a `DATE` or `TIMESTAMP` operator with a https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 `date-time` or `full-date` string]
+* Text: a `DATE` or `TIMESTAMP` constructor with a https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 `date-time` or `full-date` string]
 * JSON: an object with a `date` or `timestamp` member with a https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339 `date-time` or `full-date` string]
 
 [[example_8_1_a]]

@@ -27,7 +27,7 @@ When:
 
 for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
 
-* `S_DISJOINT({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_DISJOINT({queryable},BBOX(-180,-90,180,90))`
 * `S_DISJOINT({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
 * `S_DISJOINT({queryable},LINESTRING(7 50,10 51))`
 * `S_DISJOINT({queryable},POINT(7.02 49.92))`
@@ -85,7 +85,7 @@ When:
 
 for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
 
-* `S_TOUCHES({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_TOUCHES({queryable},BBOX(-180,-90,180,90))`
 * `S_TOUCHES({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
 * `S_TOUCHES({queryable},LINESTRING(7 50,10 51))`
 
@@ -111,7 +111,7 @@ When:
 
 for each queryable `{queryable}` of type Point, MultiPoint, LineString or MultiLineString, evaluate the following filter expressions
 
-* `S_CROSSES({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_CROSSES({queryable},BBOX(-180,-90,180,90))`
 * `S_CROSSES({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
 * `S_CROSSES({queryable},LINESTRING(7 50,10 51))`
 
@@ -137,7 +137,7 @@ When:
 
 for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
 
-* `S_WITHIN({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_WITHIN({queryable},BBOX(-180,-90,180,90))`
 * `S_WITHIN({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
 * `S_WITHIN({queryable},LINESTRING(7 50,10 51))`
 * `S_WITHIN({queryable},MULTIPOINT(7 50,10 51))`
@@ -165,7 +165,7 @@ When:
 
 for each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
 
-* `S_CONTAINS({queryable},ENVELOPE(-180,-90,180,90))`
+* `S_CONTAINS({queryable},BBOX(-180,-90,180,90))`
 * `S_CONTAINS({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
 * `S_CONTAINS({queryable},LINESTRING(7 50,10 51))`
 * `S_CONTAINS({queryable},MULTIPOINT(7 50,10 51))`
@@ -230,28 +230,28 @@ Then:
 [width="100%",cols="3",options="header"]
 |===
 |Data Source |Predicate |Expected number of items
-|ne_110m_admin_0_countries |`S_DISJOINT(geom,ENVELOPE(0,40,10,50))` |169
+|ne_110m_admin_0_countries |`S_DISJOINT(geom,BBOX(0,40,10,50))` |169
 |ne_110m_admin_0_countries |`S_DISJOINT(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |169
 |ne_110m_admin_0_countries |`S_DISJOINT(geom,LINESTRING(0 40,10 50))` |173
 |ne_110m_admin_0_countries |`S_DISJOINT(geom,POINT(7.02 49.92))` |176
-|ne_110m_populated_places_simple |`S_DISJOINT(geom,ENVELOPE(0,40,10,50))` |236
+|ne_110m_populated_places_simple |`S_DISJOINT(geom,BBOX(0,40,10,50))` |236
 |ne_110m_populated_places_simple |`S_DISJOINT(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |236
-|ne_110m_rivers_lake_centerlines |`S_DISJOINT(geom,ENVELOPE(-180,-90,0,90))` |9
+|ne_110m_rivers_lake_centerlines |`S_DISJOINT(geom,BBOX(-180,-90,0,90))` |9
 |ne_110m_rivers_lake_centerlines |`S_DISJOINT(geom,LINESTRING(-60 -90,-60 90))` |11
 |ne_110m_populated_places_simple |`S_EQUALS(geom,POINT(6.1300028 49.6116604))` |1
 |ne_110m_admin_0_countries |`S_TOUCHES(geom,POLYGON\((6.043073357781111 50.128051662794235,6.242751092156993 49.90222565367873,6.186320428094177 49.463802802114515,5.897759230176348 49.44266714130711,5.674051954784829 49.529483547557504,5.782417433300907 50.09032786722122,6.043073357781111 50.128051662794235)))` |3
 |ne_110m_admin_0_countries |`S_TOUCHES(geom,POINT(6.043073357781111 50.128051662794235))` |3
 |ne_110m_admin_0_countries |`S_TOUCHES(geom,POINT(6.242751092156993 49.90222565367873))` |2
 |ne_110m_admin_0_countries |`S_TOUCHES(geom,LINESTRING(6.043073357781111 50.128051662794235,6.242751092156993 49.90222565367873))` |3
-|ne_110m_rivers_lake_centerlines |`S_CROSSES(geom,ENVELOPE(0,40,10,50))` |1
+|ne_110m_rivers_lake_centerlines |`S_CROSSES(geom,BBOX(0,40,10,50))` |1
 |ne_110m_rivers_lake_centerlines |`S_CROSSES(geom,LINESTRING(-60 -90,-60 90))` |2
-|ne_110m_admin_0_countries |`S_WITHIN(geom,ENVELOPE(-180,-90,0,90))` |44
-|ne_110m_populated_places_simple |`S_WITHIN(geom,ENVELOPE(-180,-90,0,90))` |74
-|ne_110m_rivers_lake_centerlines |`S_WITHIN(geom,ENVELOPE(-180,-90,0,90))` |4
-|ne_110m_admin_0_countries |`S_CONTAINS(geom,ENVELOPE(7,50,8,51))` |1
+|ne_110m_admin_0_countries |`S_WITHIN(geom,BBOX(-180,-90,0,90))` |44
+|ne_110m_populated_places_simple |`S_WITHIN(geom,BBOX(-180,-90,0,90))` |74
+|ne_110m_rivers_lake_centerlines |`S_WITHIN(geom,BBOX(-180,-90,0,90))` |4
+|ne_110m_admin_0_countries |`S_CONTAINS(geom,BBOX(7,50,8,51))` |1
 |ne_110m_admin_0_countries |`S_CONTAINS(geom,LINESTRING(7 50,8 51))` |1
 |ne_110m_admin_0_countries |`S_CONTAINS(geom,POINT(7.02 49.92))` |1
-|ne_110m_admin_0_countries |`S_OVERLAPS(geom,ENVELOPE(-180,-90,0,90))` |11
+|ne_110m_admin_0_countries |`S_OVERLAPS(geom,BBOX(-180,-90,0,90))` |11
 |===
 
 :conf-test: logical

@@ -462,7 +462,7 @@ spatialLiteral = pointTaggedText
                | multilinestringTaggedText
                | multipolygonTaggedText
                | geometryCollectionTaggedText
-               | envelopeTaggedText;
+               | bboxTaggedText;
 
 pointTaggedText = "POINT" pointText;
 
@@ -501,9 +501,9 @@ multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
 geometryCollectionText = leftParen
                          spatialLiteral {comma spatialLiteral} rightParen;
 
-envelopeTaggedText = "ENVELOPE" envelopeText;
+bboxTaggedText = "BBOX" bboxText;
 
-envelopeText = leftParen westBoundLon comma southBoundLat comma [minElev comma] eastBoundLon comma northBoundLat [comma maxElev] rightParen;
+bboxText = leftParen westBoundLon comma southBoundLat comma [minElev comma] eastBoundLon comma northBoundLat [comma maxElev] rightParen;
 
 westBoundLon = signedNumericLiteral;
 

@@ -11,9 +11,23 @@ For the purposes of this document, the following additional terms and definition
 ==== collection
 a body of **resources** that belong or are used together; an aggregate, set, or group of related **resources** (http://docs.opengeospatial.org/DRAFTS/20-024.html#terms_and_definitions[OGC 20-024, OGC API - Common - Part 2: Collections]).
 
+[[custom-function-def]]
+==== custom function
+**function** that is not specified in the CQL2 standard
+
+NOTE: Custom functions require support for the <<rc_functions,Functions>> requirements class.
+
 [[filter-def]]
 ==== filter expression
 **predicate** encoded for transmission between systems
+
+[[function-def]]
+==== function
+rule that associates each element from a domain (source, or domain of the function) to a unique element in another domain (target, co-domain, or range) (ISO 19107:2003, definition 4.41)
+
+[[standardized-function-def]]
+==== standardized function
+**function** specified in the CQL2 standard
 
 [[predicate-def]]
 ==== predicate
