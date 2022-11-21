@@ -1,7 +1,7 @@
 [[options]]
-=== Requirements Class "OPTIONS method"
+== Requirements Class "OPTIONS method"
 
-==== Overview
+=== Overview
 
 include::requirements/requirements_class_options.adoc[]
 
@@ -9,7 +9,7 @@ A server is not required to implement every method described in this specificati
 
 The HTTP OPTIONS method allows the server to explicitly declare which HTTP methods are supported for a particular resource.  This specification deals with the HTTP POST, PUT, PATCH and DELETE methods but any relevant HTTP method may be listed for a particular resource.
 
-==== Sequence diagram
+=== Sequence diagram
 
 The following diagram illustrates the sequence diagram for requesting the options available at a resource from a collection.
 
@@ -24,25 +24,25 @@ The following diagram illustrates the sequence diagram for requesting the option
      +<--------------------------------------------------------------|
 ....
 
-==== Operation
+=== Operation
 
 include::requirements/options/REQ_op.adoc[]
 
-==== Request body
+=== Request body
 
 include::requirements/options/REQ_body.adoc[]
 
-==== Response
+=== Response
 
 include::requirements/options/REQ_response.adoc[]
 
 include::recommendations/options/PER_other-methods.adoc[]
 
-==== Exceptions
+=== Exceptions
 
 See <<http_status_codes,HTTP status codes>>.
 
-==== Example
+=== Examples
 
 The following example illustrate how to get the supported HTTP methods for specific feature resources.  A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
 
