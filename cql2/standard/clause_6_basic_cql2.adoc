@@ -18,7 +18,7 @@ encodings of CQL2.
 A CQL2 filter expression is an expression that defines a logically connected
 set of predicates that are evaluated for each item of a collection. Each 
 predicate is an operator with operands where the number of operands depends 
-on the operator. An operand is either a literal, a constructor, a function 
+on the operator. An operand is either a literal, a standardized or custom function 
 or an arithmetic expression.
 
 A predicate is an expression that evaluates to the Boolean values of `TRUE`
@@ -52,8 +52,8 @@ Support for the parts of CQL2 that are not part of Basic CQL2 is added in additi
 requirements classes in <<cql2-enhancements>>:
 
 * The rules `isLikePredicate`, `isBetweenPredicate` and `isInListPredicate` are added by requirements class <<rc_advanced-comparison-operators,Advanced Comparison Operators>>;
-* Support for the `CASEI` constructor is added by requirements class <<rc_case-insensitive-comparison,Case-insensitive Comparison>>;
-* Support for the `ACCENTI` constructor is added by requirements class <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>>;
+* Support for the `CASEI` function is added by requirements class <<rc_case-insensitive-comparison,Case-insensitive Comparison>>;
+* Support for the `ACCENTI` function is added by requirements class <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>>;
 * The rule `spatialPredicate` is added by requirements classes <<rc_basic-spatial-operators,Basic Spatial Operators>> and <<rc_spatial-operators,Spatial Operators>>;
 * The rule `temporalPredicate` is added by requirements class <<rc_temporal-operators,Temporal Operators>>.
 * The rule `arrayPredicate` is added by requirements class <<rc_array-operators,Array Operators>>;

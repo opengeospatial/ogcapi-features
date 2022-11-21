@@ -2,6 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/basic-cql2/cql2-filter* 
-^|A |A server SHALL support a CQL2 filter expression composed of a logically connected series of one or more predicates as described by the BNF rule `booleanExpression` in <<cql2-bnf>> with the exception that the rules `isLikePredicate`, `isBetweenPredicate`, `isInListPredicate`, `spatialPredicate`, `temporalPredicate`, `arrayPredicate`, `function` and `arithmeticExpression` as well as the constructors `CASEI` and `ACCENTI` in the rules `characterExpression` and `patternExpression` do not have to be supported.
+^|A |A server SHALL support a CQL2 filter expression composed of a logically connected series of one or more predicates as described by the BNF rule `booleanExpression` in <<cql2-bnf>> with the exception that the rules `isLikePredicate`, `isBetweenPredicate`, `isInListPredicate`, `spatialPredicate`, `temporalPredicate`, `arrayPredicate`, `function` and `arithmeticExpression` as well as the functions `CASEI` and `ACCENTI` in the rules `characterExpression` and `patternExpression` do not have to be supported.
 |===
 
