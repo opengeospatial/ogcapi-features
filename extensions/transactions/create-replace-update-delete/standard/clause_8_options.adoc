@@ -1,0 +1,55 @@
+[[options]]
+=== Requirements Class "OPTIONS method"
+
+==== Overview
+
+include::requirements/requirements_class_options.adoc[]
+
+A server is not required to implement every method described in this specification (i.e. POST, PUT, PATCH or DELETE) for every mutable resource that it offers.  Furthermore, a server that supports the ability to add, modify or remove resources from collections is not likely to be an open server.  That is, access to the server, and specifically the operations that allow resource creation, modification and/or removal, will be controlled.  Such controls might, for example, take the form of policy requirements (e.g. resources on this server can be inserted or updated but not deleted) or user access control requirements (e.g. user "X" is only allowed to create resources but not update or delete resources).  Regardless of the controls the server must be able to advertise, within the control context in place, which methods are available for each resource that it offers.  This is accomplished using the https://www.rfc-editor.org/rfc/rfc2616.html#section-9.2[HTTP OPTIONS] method.
+
+The HTTP OPTIONS method allows the server to explicitly declare which HTTP methods are supported for a particular resource.  This specification deals with the HTTP POST, PUT, PATCH and DELETE methods but any relevant HTTP method may be listed for a particular resource.
+
+==== Sequence diagram
+
+The following diagram illustrates the sequence diagram for requesting the options available at a resource from a collection.
+
+....
+   Client                                                          Server 
+     |                                                               | 
+     |   OPTIONS <resource endpoint>   HTTP/1.1                      | 
+     +-------------------------------------------------------------->| 
+     |                                                               | 
+     |   HTTP/1.1 200 OK                                             | 
+     |   Allow: <list of relevant HTTP methods>                      |
+     +<--------------------------------------------------------------|
+....
+
+==== Operation
+
+include::requirements/options/REQ_op.adoc[]
+
+==== Request body
+
+include::requirements/options/REQ_body.adoc[]
+
+==== Response
+
+include::requirements/options/REQ_response.adoc[]
+
+include::recommendations/options/PER_other-methods.adoc[]
+
+==== Exceptions
+
+See <<http_status_codes,HTTP status codes>>.
+
+==== Example
+
+The following example illustrate how to get the supported HTTP methods for specific feature resources.  A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
+
+[#options-example-1,reftext=`OPTIONS Example 1`]
+.Get the OPTIONS available at the "items" endpoint.
+include::../examples/json/ex06a_options.adoc[]
+
+[#options-example-2,reftext=`OPTIONS Example 2`]
+.Get the OPTIONS available for a specific feature.
+include::../examples/json/ex06b_options.adoc[]
