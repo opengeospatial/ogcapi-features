@@ -1,0 +1,6 @@
+[[req_optimistic-locking-timestamps_last-modified-put-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking-timestamps/put-last-modified-response*
+^|A |A resource successfully replaced by a HTTP PUT operation SHALL include a `Last-Modified` header whose value is a date and time representing when the representation was last modified as determined at the conclusion of handing the request.
+|===

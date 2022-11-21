@@ -1,11 +1,12 @@
 == Conformance
 
-This standard defines three requirements / conformance classes:
+This standard defines five requirements / conformance classes:
 
-   *  <<create-replace-delete_clause,Create/Replace/Delete>>.
-   *  <<update_clause,Update>>
-   *  <<optimistic_locking_clause,Optimistic Locking>>
-   *  <<features_clause,Features>>
+   *  <<rc_create-replace-delete,Create/Replace/Delete>>.
+   *  <<rc_update,Update>>
+   *  <<rc_optimistic-locking-timestamps,Optimistic Locking using Timestamps>>
+   *  <<rc_optimistic-locking-etags,Optimistic Locking using ETags>>
+   *  <<rc_features,Features>>
 
 The standardization target is "Web APIs".
 
@@ -18,7 +19,8 @@ The URIs of the associated conformance classes are:
 |Conformance class |URI
 |Create/Replace/Delete |http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/create-replace-delete
 |Update |http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/update
-|Optimistic Locking |http://www.opengis.net/spec/ogcapi-features-4/1.0/req/optimistic-locking
+|Optimistic Locking using Timestamps |http://www.opengis.net/spec/ogcapi-features-4/1.0/req/optimistic-locking-timestamps
+|Optimistic Locking using ETags |http://www.opengis.net/spec/ogcapi-features-4/1.0/req/optimistic-locking-etags
 |Features |http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/features
 |===
 

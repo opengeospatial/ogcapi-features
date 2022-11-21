@@ -1,0 +1,222 @@
+[[optimistic_locking_clause]]
+== Requirements Class "Optimistic Locking"
+
+[[optimistic-locking-overview]]
+=== Overview
+
+include::requirements/requirements_class_optimistic-locking.adoc[]
+
+This conformance class defines an optimistic locking mechanism to support 
+concurrent updates of resources.
+
+In an environment where several clients are operating on the same resource, each
+client's understanding of a resource's state may differ from the other's and
+from the server.  Without some mechanism for synchronizing each client's 
+understanding of a resource's state with the server, changes requested by a
+client that has an out-of-date understanding of the resource's state may have
+undesirable effects.  For example, the following sequence diagram
+illustrates a concurrent race condition where one client's updates are 
+silently lost.
+
+NOTE: The request and response payloads are intentionally omitted in the example to highlight the HTTP header interactions between the server and the clients.
+
+NOTE: Some names in this example are contracted using ellipses to save space.
+
+NOTE: The alphabetic letters delimited using `[]` are time instants and correspond to the time instants in <<concurrent_race_condition>>
+
+....
+   Client A                                  Server                                   Client B
+   |                                            |                                            |
+   | GET /col...ns/oakland_buildings/items/OB.2 |                                            |
+[A]|------------------------------------------->|                                            |
+   |                                            |                                            |
+   |                                            | GET /col...ns/oakland_buildings/items/OB.2 |
+   |                                            |<-------------------------------------------|[B]
+   |                                            |                                            |
+   |                                            | HTTP/1.1 200 OK                            |
+   |                                            | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|
+   |                                            | ETag: 1986bf5c                             |
+   |                                            |------------------------------------------->|[C]
+   |                                            |                                            |
+   | HTTP/1.1 200 OK                            |                                            |
+   | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|                                            |
+   | ETag: 1986bf5c                             |                                            |
+[D]|<-------------------------------------------|                                            |
+   |                                            |                                            |
+   |                                            |                                            |
+   | PUT /col...ns/oakland_buildings/items/OB.2 |                                            |
+[E]|------------------------------------------->|                                            |
+   |                                            |                                            |
+   | HTTP/1.1 204 No Content                    |                                            |
+   | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|                                            |
+   | ETag: 66ba0c91                             |                                            |
+[F]|<-------------------------------------------|                                            |
+   |                                            |                                            |
+   |                                            |                                            |
+   |                                            | PUT /col...ns/oakland_buildings/items/OB.2 |
+   |                                            |<-------------------------------------------|[G]
+   |                                            |                                            |
+   |                                            | HTTP/1.1 204 No Content                    |
+   |                                            | Last-Modified: Sun,14 Mar 2021 13:17:02 GMT|
+   |                                            | ETag: 11e34a43                             |
+   |                                            |------------------------------------------->|[H]
+....
+
+
+[#concurrent_race_condition,reftext='{table-caption} {counter:table-num}']
+.Example of a concurrent race condition
+[cols="5,95",options="header"]
+|===
+|Time Instance|Description
+|A |Client A issues a GET to retrieve feature `OB.2`.
+|B |Client B issues a GET to retrieve the same feature `OB.2`.
+|C |The server responds to Client B.  The response includes entity tag (Etag) `1986bf5c` .
+|D |The server responds to Client A.  The response also includes ETag `1986bf5c` since the feature has not changed since the server responded to Client B.
+|E |Client A modifies its local copy of `OB.2` and pushes the changes to the server.
+|F |The server successfully processes Client A's request. The server generates a new ETag `66ba0c91` to reflect the new state of the feature.
+|G |Client B, unaware of Client A's changes, modifies its (now outdated) local copy of `OB.2` and pushes the changes to the server.
+|H |The server successfully processes Client B's request and Client A's change is silently lost.  Once again, since the stage of the resource has changed, the server generates a new ETag `11e34a43` for the feature..
+|===
+
+Optimistic locking resolves such change conflicts by exchanging state tokens
+(i.e. ETags) between clients and servers to ensure that a resource's state has
+not changed between a read request to fetch a resource and a subsequent update
+request.  If the state of the resource has changed in the intervening time
+interval the exchanged state token will not match and the operation fails.
+This necessitates a re-read of the resource to obtain a fresh state token and
+a subsequent retry of the update operation. 
+
+A server that implements this conformance class generates an https://tools.ietf.org/html/rfc7232#section-2.3[entity tag] representing the state of the resource
+when the resource is fetched or modified and recognizes the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] conditional HTTP header in order to implement optimistic locking of resources to support concurrency.
+
+=== Last-Modified tag
+
+In the <<optimistic-locking-overview>> above, the example makes use of the https://datatracker.ietf.org/doc/html/rfc7232#section-2.2["Last-Modified"] header field to provide additional information about the state of the resource being modified.  The https://datatracker.ietf.org/doc/html/rfc7232#section-2.2["Last-Modified"] header field in a response provides a timestamp indicating the date and time at which the origin server believes the selected resource was last modified.
+
+include::recommendations/optimistic-locking/REC_last-modified.adoc[]
+
+[[etags]]
+=== Entity tags
+
+As defined in https://tools.ietf.org/html/rfc7232[RFC 7232], for the purposes of this conformance class, an https://tools.ietf.org/html/rfc7232#section-2.3[ETag] is an opaque token generated by the server for differentiating between multiple representations of the same resource resulting from state changes over time.
+
+include::requirements/optimistic-locking/REQ_etag-get-response.adoc[]
+
+include::requirements/optimistic-locking/REQ_etag-put-response.adoc[]
+
+include::requirements/optimistic-locking/REQ_etag-patch-response.adoc[]
+
+[[conditional-processing]]
+=== Conditional processing
+
+Optimistic resource locking is implemented using the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header.  The value of the header is evaluated by the server according to rules defined in https://tools.ietf.org/html/rfc7232[RFC 7232] and the result of that evaluation is used to determine if the operation shall be performed or not.
+
+If the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header evaluation by the server results in a value of `true` then the operation can proceed.
+
+If the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] HTTP header evaluation by the server, however, evaluates to `false` then the server generates a response according to the rules defined in https://tools.ietf.org/html/rfc7232#section-3.1[RFC 7232].  Normally, in this case, the server responds with a HTTP status code of 412, precondition failed.  However, if the requested change is already reflected in the current state of the resource then the server can respond with a 2xx, successful HTTP status code.
+
+include::requirements/optimistic-locking/REQ_ifmatch-put-op.adoc[]
+
+include::requirements/optimistic-locking/REQ_ifmatch-put-eval.adoc[]
+
+include::requirements/optimistic-locking/REQ_ifmatch-patch-op.adoc[]
+
+include::requirements/optimistic-locking/REQ_ifmatch-patch-eval.adoc[]
+
+include::requirements/optimistic-locking/REQ_ifmatch-missing.adoc[]
+
+include::recommendations/optimistic-locking/PER_ifmatch-star.adoc[]
+
+=== Example
+
+The following example, taken from the <<optimistic-locking-overview>>,
+optimistically locks the resources being operated on using the 
+the https://tools.ietf.org/html/rfc7232#section-3.1[If-Match] header.
+Client A successfully updates the resource while Client B's update fails.
+Client B, then proceeded to re-fetch the resource and try the update again.
+
+NOTE: The request and response payload are intentionally omitted in the example to highlight the HTTP header interactions between the server and the clients.
+
+NOTE: Some names in the example are contracted using ellipses to save space.
+
+NOTE: The alphabetic letters delimited using `[]` are time instants and correspond to the time instants in <<concurrent_update>>
+
+....
+   Client A                                  Server                                   Client B
+   |                                            |                                            |
+   | GET /col...ns/oakland_buildings/items/OB.2 |                                            |
+[A]|------------------------------------------->|                                            |
+   |                                            |                                            |
+   |                                            | GET /col...ns/oakland_buildings/items/OB.2 |
+   |                                            |<-------------------------------------------|[B]
+   |                                            |                                            |
+   |                                            | HTTP/1.1 200 OK                            |
+   |                                            | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|
+   |                                            | ETag: 1986bf5c                             |
+   |                                            |------------------------------------------->|[C]
+   |                                            |                                            |
+   | HTTP/1.1 200 OK                            |                                            |
+   | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|                                            |
+   | ETag: 1986bf5c                             |                                            |
+[D]|<-------------------------------------------|                                            |
+   |                                            |                                            |
+   |                                            |                                            |
+   | PUT /col...ns/oakland_buildings/items/OB.2 |                                            |
+   | If-Match: 1986bf5c                         |                                            |
+[E]|------------------------------------------->|                                            |
+   |                                            |                                            |
+   | HTTP/1.1 204 No Content                    |                                            |
+   | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|                                            |
+   | ETag: 66ba0c91                             |                                            |
+[F]|<-------------------------------------------|                                            |
+   |                                            |                                            |
+   |                                            |                                            |
+   |                                            | PUT /col...ns/oakland_buildings/items/OB.2 |
+   |                                            | If-Match: 1986bf5c                         |
+   |                                            |<-------------------------------------------|[G]
+   |                                            |                                            |
+   |                                            | HTTP/1.1 412 Precondition Failed           |
+   |                                            |------------------------------------------->|[H]
+   |                                            |                                            |
+   |                                            |                                            |
+   |                                            | GET /col...ns/oakland_buildings/item/OB.2  |
+   |                                            |<-------------------------------------------|[I]
+   |                                            |                                            |
+   |                                            | HTTP/1.1 200 OK                            |
+   |                                            | Last-Modified: Sun,14 Mar 2021 13:14:15 GMT|
+   |                                            | ETag: 66ba0c91                             |
+   |                                            |------------------------------------------->|[J]
+   |                                            |                                            |
+   |                                            | PUT /col...ns/oakland_buildings/items/OB.2 |
+   |                                            | If-Match: 66ba0c91                         |
+   |                                            |<-------------------------------------------|[K]
+   |                                            |                                            |
+   |                                            | HTTP/1.1 204 No Content                    |
+   |                                            | Last-Modified: Sun,14 Mar 2021 13:14:27 GMT|
+   |                                            | ETag: 7f1319eb                             |
+   |                                            |------------------------------------------->|[L]
+....
+
+
+[#concurrent_update,reftext='{table-caption} {counter:table-num}']
+.Example of a concurrent update 
+[cols="5,95",options="header"]
+|===
+|Time Instance|Description
+|A |Client A issues a GET to retrieve the feature with identifier `OB.2`.
+|B |Client B issues a GET to retrieve the same feature, `OB.2`.
+|C |The server responds to Client B.  The response includes `ETag 1986bf5c` .
+|D |The server responds to Client A.  The response also includes `ETag 1986bf5c` since the feature has not changed since the server responded to Client B.
+|E |Client A modifies its local copy of `OB.2` and pushes the changes to the server.  The client includes the `ETag 1986bf5c`.
+|F |Since the value of the client-provided `If-Match` HTPP header matches the current `ETag` for the resource -- indicating the Client A's understanding of the state of the resource is current - the server successfully processes Client A's request. A new `ETag`, `66ba0c91`, is generated to reflect the new state of the resource.
+|G |Client B, unaware of Client A's changes, modifies its local copy of `OB.2` and pushes the changes to the server using an `If-Match` HTTP header value of `1986bf5c` which reflects Client B's outdated understanding of the resource's state.
+|H |The server evaluates the `If-Match` HTTP header value specified by Client B and because it does not match the current state of the resource (i.e. `ETag 66ba0c91`) the operation's precondition fails and thus the operation fails.  The server responds with a HTTP status code of 412.
+|I |The Client B re-fetches the resource to obtain its current state.
+|J |The server responds and includes `ETag 66ba0c91` representing the current state of the resource.
+|K |Client B once again modifies its local copy of `OB.2` and pushes the changes to the server using the latest received ETag of `66ba0c91` as the value of the `If-Match` HTTP header.
+|L |Since the value of the client-provided `If-Match` header matches current `ETag` value for the resource -- indicating the Client B's understanding of the state of the resource is current - the server successfully processes Client B's request. A new `ETag`, `7f1319eb`, is generated to reflect the new state of the resource.
+|===
+
+==== Exceptions
+
+See <<http_status_codes,HTTP status codes>>.

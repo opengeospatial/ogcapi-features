@@ -1,0 +1,7 @@
+[[req_optimistic-locking-etags_ifmatch-patch-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking-etags/ifmatch-patch-op*
+^|Condition |Server implements the <<rc_update,Update>> conformance class.
+^|A |A HTTP PUT operation that updates a resource SHALL include an `If-Match` header.
+|===

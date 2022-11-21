@@ -1,0 +1,7 @@
+[[req_optimistic-locking-timestamps_last-modified-patch-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking-timestamps/patch-last-modified-response*
+^|Condition |Server implements the <<rc_update,Update>> conformance class.
+^|A |A resource successfully updated by a HTTP PATCH operation SHALL include a `Last-Modified` header whose value is a date and time representing when the representation was last modified as determined at the conclusion of handing the request.
+|===

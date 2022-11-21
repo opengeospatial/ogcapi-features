@@ -1,0 +1,7 @@
+[[req_optimistic-locking-etags_ifmatch-patch-eval]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/optimistic-locking-etags/ifmatch-patch-eval*
+^|Condition |Server implements the <<rc_update,Update>> conformance class.
+^|A |The value of an `If-Match` header SHALL be evaluated by the server before a HTTP PATCH operation is performed according to the rules defined in https://www.rfc-editor.org/rfc/rfc9110#section-13.1.1[RFC9110, Section 13.1.1].
+|===

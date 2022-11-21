@@ -1,7 +1,0 @@
-[[req_optimistic-locking_ifmatch-patch-eval]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/optimistic-locking/ifmatch-patch-eval*
-^|Condition |Server implements the <<update_clause>> conformance class.
-^|A |The value of an `If-Match` header SHALL be evaluated before a HTTP PATCH operation is performed according to the rules defined in https://www.rfc-editor.org/rfc/rfc7232.html#section-3.1[RFC7232, Section 3.1].
-|===

@@ -1,0 +1,8 @@
+[[per_optimistic-locking-timestamps_ifunmodifiedsince-missing]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/optimistic-locking-timestamps/ifunmodifiedsince-missing*
+^|Condition |The `If-Unmodified-Since` HTTP header is omitted from the operation.
+^|A |The server MAY respond with a HTTP status code of 428 (Precondition required), as specified in <<rfc6585,RFC 6585>>, or 409 (Conflict).
+^|B |Alternatively, the server MAY execute the operation and return a HTTP status code in the 2xx range.
+|===

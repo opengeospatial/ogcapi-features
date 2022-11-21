@@ -1,7 +1,0 @@
-[[req_optimistic-locking_ifmatch-put-op]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/optimistic-locking/ifmatch-put-op*
-^|A |A HTTP PUT operation that replaces a resource SHALL include an `If-Match` header.
-^|B |The value of the `If-Match` header SHALL be an `ETag` token obtained by a preceding HTTP GET operation used to fetch a representation of the resource to be replaced.
-|===

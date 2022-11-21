@@ -29,4 +29,4 @@ EXAMPLE 2: For processes, the endpoint is `{landingPageUri}/processes/{processId
 ==== optimistic locking
 locking protocol that resolves change conflicts at the very last moment
 
-NOTE: This is accomplished by a server providing a state token when a resource is fetched and the client using that state token on a subsequent update operation; if the state token provided by the client matches the current state token for the resource then the update can proceed normally. If the state tokens do no match the operation fails and the client must re-fetch the resource and retry the update operation with a more current state token.
+NOTE: This is accomplished by a server providing HTTP validator fields describing the state of a resource and evualting preconditions submitted by clients about the current state of a resource that the client wants to change. See <<rfc9110,RFC 9110 (HTTP Semantics)>>, section 8.8. If the validator in a client request does no match the state of the resource on the server, the operation fails and the client must re-fetch the resource and retry the update operation based on the new state.
