@@ -17,23 +17,20 @@
 #
 # NOTE: Validated using: https://www.icosaedro.it/bnf_chk/bnf_chk-on-line.html
 #=============================================================================#
-booleanExpression = andExpression 
-                  | orExpression
-                  | notExpression
-                  | comparisonPredicate
-                  | spatialPredicate
-                  | temporalPredicate
-                  | arrayPredicate
-                  | subExpression
-                  | booleanLiteral;
+booleanExpression = booleanTerm [ {"OR" booleanTerm} ];
 
-andExpression = booleanExpression "AND" booleanExpression;
+booleanTerm = booleanFactor [ {"AND" booleanFactor} ];
 
-orExpression = booleanExpression "OR" booleanExpression;
+booleanFactor = ["NOT"] booleanPrimary;
 
-notExpression = "NOT" booleanExpression;
+booleanPrimary = predicate
+               | booleanLiteral
+               | leftParen booleanExpression rightParen;
 
-subExpression = leftParen booleanExpression rightParen;
+predicate = comparisonPredicate
+          | spatialPredicate
+          | temporalPredicate
+          | arrayPredicate;
 
 #=============================================================================#
 # A comparison predicate evaluates if two scalar expression statisfy the
@@ -53,14 +50,13 @@ binaryComparisonPredicate = scalarExpression
                             comparisonOperator
                             scalarExpression;
 
-scalarExpression = characterExpression
-                 | temporalInstantExpression
-                 | numericExpression
-                 | booleanExpression;
-
-temporalInstantExpression = instantLiteral
-                          | propertyName
-                          | function;
+scalarExpression = characterClause
+                 | numericLiteral
+                 | instantLiteral
+                 | arithmeticExpression
+                 | booleanExpression
+                 | propertyName
+                 | function;
 
 comparisonOperator = eq | neq | lt | gt | lteq | gteq;
 
@@ -98,11 +94,14 @@ inList = scalarExpression [ {comma scalarExpression} ];
 #
 isNullPredicate = isNullOperand "IS" ["NOT"] "NULL";
 
-isNullOperand = characterExpression
-              | numericExpression
-              | temporalExpression
+isNullOperand = characterClause
+              | numericLiteral
+              | temporalLiteral
+              | spatialLiteral
+              | arithmeticExpression
               | booleanExpression
-              | geomExpression;
+              | propertyName
+              | function;
 
 #=============================================================================#
 # A spatial predicate evaluates if two spatial expressions satisfy the
@@ -180,12 +179,15 @@ arrayLiteral = leftBracket rightBracket
 # An array element is either a character literal, a numeric literal,
 # a geometric literal, a temporal literal, a property name, a function, an
 # arithmetic expression or an array.
-arrayElement = characterExpression
-             | temporalExpression
-             | numericExpression
+arrayElement = characterClause
+             | numericLiteral
+             | temporalLiteral
+             | spatialLiteral
+             | arrayLiteral
+             | arithmeticExpression
              | booleanExpression
-             | geomExpression
-             | arrayExpression;
+             | propertyName
+             | function;
 
 arrayOperator = "A_EQUALS"
               | "A_CONTAINS"
@@ -197,18 +199,20 @@ arrayOperator = "A_EQUALS"
 # operand (a property name, a number or a function that returns a number),
 # an arithmetic operators (+,-,*,/,%,div,^) and another arithmetic operand.
 #=============================================================================#
-arithmeticExpression = arithmeticExpression plusSign arithmeticTerm
-                     | arithmeticExpression minusSign arithmeticTerm
-                     | arithmeticTerm;
-arithmeticTerm = arithmeticTerm asterisk powerTerm
-               | arithmeticTerm solidus powerTerm
-               | arithmeticTerm percent powerTerm
-               | arithmeticTerm "div" powerTerm
-               | powerTerm;
-powerTerm = arithmeticFactor caret powerTerm
-          | arithmeticFactor;
+
+arithmeticExpression = arithmeticTerm [ {arithmeticOperatorPlusMinus arithmeticTerm} ];
+
+arithmeticOperatorPlusMinus = plusSign | minusSign;
+
+arithmeticTerm = powerTerm [ {arithmeticOperatorMultDiv powerTerm} ];
+
+arithmeticOperatorMultDiv = asterisk | solidus | percent | "div";
+
+powerTerm = arithmeticFactor [ caret arithmeticFactor ];
+
 arithmeticFactor = leftParen arithmeticExpression rightParen
                  | [ minusSign ] arithmeticOperand;
+
 arithmeticOperand = numericLiteral
                   | propertyName
                   | function;
@@ -231,21 +235,26 @@ function = identifier leftParen {argumentList} rightParen;
 
 argumentList = argument [ { comma argument } ];
 
-argument = characterExpression
-         | numericExpression
-         | temporalExpression
+argument = characterClause
+         | numericLiteral
+         | temporalLiteral
+         | spatialLiteral
+         | arrayLiteral
+         | arithmeticExpression
          | booleanExpression
-         | geomExpression
-         | arrayExpression;
+         | propertyName
+         | function;
 
 #=============================================================================#
 # Character expression
 #=============================================================================#
-characterExpression = "CASEI" leftParen characterExpression rightParen
-                    | "ACCENTI" leftParen characterExpression rightParen
-                    | characterLiteral
+characterExpression = characterClause
                     | propertyName
                     | function;
+
+characterClause = "CASEI" leftParen characterExpression rightParen
+                | "ACCENTI" leftParen characterExpression rightParen
+                | characterLiteral;
 
 #=============================================================================#
 # Definition of CHARACTER literals
