@@ -12,6 +12,8 @@ to transmit a complete replacement resource.
 
 Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This standard does not mandate that a specific encoding for this document be supported by a server.  However, this extension provides requirements for the use of <<rfc7396,RFC 7396 (JSON Merge Patch)>> for resource encoded using JSON (e.g. GeoJSON).
 
+include::requirements/update/REQ_methods.adoc[]
+
 [[update]]
 === Modifying an existing resource (UPDATE)
 

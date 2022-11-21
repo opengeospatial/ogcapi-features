@@ -1,0 +1,8 @@
+[[req_create-replace-delete_options-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/create-replace-delete/options-response* 
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |A response with HTTP status code `200` SHALL include an `Allow` header.
+^|C |The value of the `Allow` header SHALL be the list of methods that are allowed for the resource at the time and within the context of the request.
+|===
