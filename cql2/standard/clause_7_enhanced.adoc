@@ -197,26 +197,22 @@ include::requirements/requirements_class_basic-spatial-operators.adoc[]
 
 A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial operator.
 
-==== Spatial data types and literal values
+[[basic-spatial-data-types]]
+==== Basic spatial data types and literal values
 
-The spatial data types are (literal rule `spatialLiteral`): 
+The basic spatial data types are (part of rule `spatialLiteral`): 
 
 * "Point": a point;
-* "MultiPoint": a collection of points;
-* "LineString": a curve with linear interpolation between the vertices;
-* "MultiLineString": a collection of line strings;
-* "Polygon": a planar surface bounded by closed line strings;
-* "MultiPolygon": a collection of polygons;
-* "Geometry": an instance of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", or "MultiPolygon";
-* "GeometryCollection": a collection of "Geometry" instances;
 * "BBox": a bounding rectangle or box.
 
-Existing representations are in general used for literal values:
+For the Point data type, the following representations are used for literal values:
 
 * Text: an OGC Well-Known Text (WKT) literal (see clause 7 of <<ogc06-103r4,Simple feature access - Part 1: Common architecture>>)
 * JSON: a GeoJSON geometry object (see clause 3.1 of <<GeoJSON,GeoJSON>>)
 
-The BBox data type is an exception as it is not specified in WKT. In the Text representation, the type is encoded as a `BBOX()` operator with four or six numerical arguments, depending on whether the coordinates include a vertical axis (height or depth):
+For the BBox data type:
+
+In the Text representation, the type is encoded as a `BBOX()` operator with four or six numerical arguments, depending on whether the coordinates include a vertical axis (height or depth):
 
 * Lower left corner, coordinate axis 1
 * Lower left corner, coordinate axis 2
@@ -233,9 +229,115 @@ In JSON, the BBox type is encoded as a JSON object with a "bbox" member with an 
 
 Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
 
-
-
 [[example_8_1_b]]
+.Spatial literal example
+====
+
+* spatial geometry (Text)
+----
+POINT(43.5845 -79.5442)
+----
+* spatial geometry (JSON)
+[source,JSON]
+----
+{
+   "type": "Point",
+   "coordinates": [43.5845,-79.5442]
+}
+----
+* bounding box (Text)
+----
+BBOX(160.6,-55.95,-170,-25.89)
+----
+* bounding box (JSON)
+[source,JSON]
+----
+{
+   "bbox": [160.6, -55.95, -170, -25.89]
+}
+----
+
+====
+
+==== Spatial Operators
+
+In this conformance class, the only required spatial operator is _intersects_ and the only required spatial data types are point and BBox. Additional spatial operators and spatial data types are specified in the <<rc_spatial-operators,Spatial Operators>> requirements class.
+
+include::requirements/basic-spatial-operators/REQ_spatial-predicate.adoc[]
+
+include::requirements/basic-spatial-operators/REQ_spatial-operators.adoc[]
+
+include::recommendations/basic-spatial-operators/PER_spatial-predicates.adoc[]
+
+include::recommendations/basic-spatial-operators/PER_spatial-data-types.adoc[]
+
+==== Examples
+
+[[example_7_5]]
+.Example spatial predicate
+====
+----
+S_INTERSECTS(geometry,POINT(36.319836 32.288087))
+----
+
+[source,JSON]
+----
+{
+  "op": "s_intersects",
+  "args": [
+    { "property": "geometry" },
+    {
+      "type": "Point",
+      "coordinates": [36.319836, 32.288087]
+    }
+  ]
+}
+----
+====
+
+[[example_7_6]]
+.Example for the filter-crs query parameter
+====
+----
+...filter-lang=cql2-text&
+   filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
+   filter=S_INTERSECTS(geometry,POINT(379213.87 3610774.16))...
+----
+
+Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
+====
+
+[[spatial-operators]]
+=== Requirements Class "Spatial Operators"
+
+include::requirements/requirements_class_spatial-operators.adoc[]
+
+This requirement adds 
+
+* additional geometry types;
+* a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL2 filter expression.
+
+[[additional-spatial-data-types]]
+==== Additional spatial data types and literal values
+
+include::requirements/spatial-operators/REQ_spatial-data-types.adoc[]
+
+The additional spatial data types in addition to "Point" and "BBox" (see <<basic-spatial-data-types>>) are: 
+
+* "MultiPoint": a collection of points;
+* "LineString": a curve with linear interpolation between the vertices;
+* "MultiLineString": a collection of line strings;
+* "Polygon": a planar surface bounded by closed line strings;
+* "MultiPolygon": a collection of polygons;
+* "Geometry": an instance of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", or "MultiPolygon";
+* "GeometryCollection": a collection of "Geometry" instances.
+
+Existing representations are used for literal values:
+
+* Text: an OGC Well-Known Text (WKT) literal (see clause 7 of <<ogc06-103r4,Simple feature access - Part 1: Common architecture>>)
+* JSON: a GeoJSON geometry object (see clause 3.1 of <<GeoJSON,GeoJSON>>)
+
+[[example_8_1_b2]]
 .Spatial literal example
 ====
 
@@ -265,80 +367,10 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
    ]
 }
 ----
-* bounding box (Text)
-----
-BBOX(160.6,-55.95,-170,-25.89)
-----
-* bounding box (JSON)
-[source,JSON]
-----
-{
-   "bbox": [160.6, -55.95, -170, -25.89]
-}
-----
 
 ====
 
 ==== Spatial Operators
-
-In this conformance class, the only required spatial operator is _intersects_. Additional spatial operators are specified in the <<rc_spatial-operators,Spatial Operators>> requirements class.
-
-include::requirements/basic-spatial-operators/REQ_spatial-predicate.adoc[]
-
-include::requirements/basic-spatial-operators/REQ_spatial-operators.adoc[]
-
-include::recommendations/basic-spatial-operators/PER_spatial-predicates.adoc[]
-
-==== Examples
-
-[[example_7_5]]
-.Example spatial predicate
-====
-----
-S_INTERSECTS(geometry,POLYGON((36.319836 32.288087,36.320041 32.288032,36.320210 32.288402,36.320008 32.288458,36.319836 32.288087)))
-----
-
-[source,JSON]
-----
-{
-  "op": "s_intersects",
-  "args": [
-    { "property": "geometry" },
-    {
-      "type": "Polygon",
-      "coordinates": [
-         [
-            [36.319836, 32.288087],
-            [36.320041, 32.288032],
-            [36.320210, 32.288402],
-            [36.320008, 32.288458],
-            [36.319836, 32.288087]
-         ]
-      ]
-    }
-  ]
-}
-----
-====
-
-[[example_7_6]]
-.Example for the filter-crs query parameter
-====
-----
-...filter-lang=cql2-text&
-   filter-crs=http://www.opengis.net/def/crs/EPSG/0/32635&
-   filter=S_INTERSECTS(geometry,POLYGON((379213.87 3610774.16,379233.84 3610769.70,379246.15 3610812.39,379226.49 3610816.88,379213.87 3610774.16)))...
-----
-
-Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
-====
-
-[[spatial-operators]]
-=== Requirements Class "Spatial Operators"
-
-include::requirements/requirements_class_spatial-operators.adoc[]
-
-This requirement adds a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL2 filter expression.
 
 include::requirements/spatial-operators/REQ_spatial-operators.adoc[]
 
