@@ -220,7 +220,7 @@ propertyName = identifier | doubleQuote identifier doubleQuote;
 
 identifier = identifierStart [ { identifierPart } ];
 
-identifierPart = identifierStart | dash | period | digit |
+identifierPart = identifierStart | period | digit |
                  "\x0300".."\x036F" | "\x203F".."\x0240";
 
 identifierStart = colon | underscore |
