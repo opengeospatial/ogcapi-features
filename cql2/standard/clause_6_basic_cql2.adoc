@@ -256,6 +256,11 @@ For example, a system that evaluates the interval `INTERVAL('2022-01-01','2022-0
 * cast the value to an interval of dates, e.g., `INTERVAL('2022-01-01','2022-04-11')`;
 * cast the value to an interval of timestamps, e.g., `INTERVAL('2022-01-01Z00:00:00Z','2022-04-11T12:41:13Z')`.
 
+[[basic-cql2_identifier]]
+=== Identifiers
+
+An identifier is a token that represents a resource or a named part of a resource within a CQL2 expression that is not a CQL2 keyword or command.  Identifiers are composed of a sequence of UTF-8 characters.  Valid starting characters for identifiers can include the colon (i.e. ":"), the underscore (i.e. "_") and letters of the alphabet (e.g. "A-Z, a-z").  Additional continuing characters in an identifier can include the period (i.e ".") and numeric digits (i.e. "0-9").  The `identifier` production in the <<cql2-bnf,CQL2 BNF>> enumerates the specific characters that can be used to start an identifier as well as additional identifier continuing characters.
+
 [[basic-cql2_property]]
 === Property references
 
