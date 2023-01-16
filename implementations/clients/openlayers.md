@@ -11,7 +11,7 @@ This page shows an example how to connect with OpenLayers to an API that impleme
 
 ## Software version
 
-This example uses Leaflet 6.5.0.
+This example uses OpenLayers 6.5.0.
 
 ## Required and supported Conformance classes
 
