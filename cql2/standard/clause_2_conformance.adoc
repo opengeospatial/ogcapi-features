@@ -60,11 +60,11 @@ The <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>> requireme
 
 * accenti
 
-The <<rc_basic-spatial-operators,Basic Spatial Operators>> requirements class specifies minimal requirements for servers that support spatial operators. Only the following spatial operator must be supported:
+The <<rc_basic-spatial-operators,Basic Spatial Operators>> requirements class specifies minimal requirements for servers that support standardized spatial comparison function. Only the following spatial comparison function must be supported:
 
 * s_intersects
 
-The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support a richer set of spatial operators.  The list of additional spatial operators that must be supported is:
+The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support a richer set of standardized spatial comparison functions.  The list of additional spatial comparison functions that must be supported is:
 
 * s_contains
 * s_crosses
@@ -75,8 +75,8 @@ The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requ
 * s_within
 
 The <<rc_temporal-operators,Temporal Operators>> requirements
-class specifies requirements for servers that support temporal operators. 
-The list of temporal operators that must be supported is:
+class specifies requirements for servers that support standardized temporal comparison function. 
+The list of temporal comparison function that must be supported is:
 
 * t_after
 * t_before
@@ -95,8 +95,8 @@ The list of temporal operators that must be supported is:
 * t_starts
 
 The <<rc_array-operators,Array Operators>> requirements class specifies
-requirements for comparison operators for sets of values. 
-The operators that must be supported are:
+requirements for standardized array comparison functions for sets of values. 
+The array comparison functions that must be supported are:
 
 * a_containedby
 * a_contains

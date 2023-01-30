@@ -105,16 +105,18 @@ isNullOperand = characterClause
 
 #=============================================================================#
 # A spatial predicate evaluates if two spatial expressions satisfy the
-# specified spatial operator.
+# condition implied by a standardized spatial comparison function.  If the
+# conditions of the spatial comparison function are met, the function returns
+# a Boolean value of true.  Otherwise the function returns false.
 #=============================================================================#
-spatialPredicate =  spatialOperator
+spatialPredicate =  spatialFunction
                     leftParen geomExpression comma geomExpression rightParen;
 
-# NOTE: The buffer operators (DWITHIN and BEYOND) are not included because
+# NOTE: The buffer functions (DWITHIN and BEYOND) are not included because
 #       these are outside the scope of a "simple" core for CQL2.  These
 #       can be added as extensions.
 #
-spatialOperator = "S_INTERSECTS"
+spatialFunction = "S_INTERSECTS"
                 | "S_EQUALS"
                 | "S_DISJOINT"
                 | "S_TOUCHES"
@@ -133,16 +135,18 @@ geomExpression = spatialLiteral
 
 #=============================================================================#
 # A temporal predicate evaluates if two temporal expressions satisfy the
-# specified temporal operator.
+# condition implied by a standardized temporal comparison function.  If the
+# conditions of the temporal comparison function are met, the function returns
+# a Boolean value of true.  Otherwise the function returns false.
 #=============================================================================#
-temporalPredicate = temporalOperator 
+temporalPredicate = temporalFunction 
                     leftParen temporalExpression comma temporalExpression rightParen;
 
 temporalExpression = temporalLiteral
                    | propertyName
                    | function;
 
-temporalOperator = "T_AFTER"
+temporalFunction = "T_AFTER"
                  | "T_BEFORE"
                  | "T_CONTAINS"
                  | "T_DISJOINT"
@@ -159,12 +163,12 @@ temporalOperator = "T_AFTER"
                  | "T_STARTS";
 
 #=============================================================================#
-# An array predicate evaluates if two array expressions statisfy the
-# specified array operator.  Arrays can be equal, one is a superset of
-# the other, one is a subset of the other and the two arrays have
-# overlapping elements.
+# An array predicate evaluates if two array expressions satisfy the
+# condition implied by a standardized array comparison function.  If the
+# conditions of the array comparison function are met, the function returns
+# a Boolean value of true.  Otherwise the function returns false.
 #=============================================================================#
-arrayPredicate = arrayOperator
+arrayPredicate = arrayFunction
                  leftParen arrayExpression comma arrayExpression rightParen;
 
 arrayExpression = arrayLiteral
@@ -189,7 +193,7 @@ arrayElement = characterClause
              | propertyName
              | function;
 
-arrayOperator = "A_EQUALS"
+arrayFunction = "A_EQUALS"
               | "A_CONTAINS"
               | "A_CONTAINEDBY"
               | "A_OVERLAPS";

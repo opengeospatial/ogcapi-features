@@ -94,7 +94,7 @@ CQL2 supports two commonly used granularities: a second or smaller (data type "t
 
 If timezone information is important for the intended use, then the "date" data type should not be used and the temporal information should be provided as an interval with start and end timestamps.
 
-NOTE: While instants (timestamps and dates) are scalar data types that can be used with the basic comparison operators, intervals are more complex data types. Support for intervals is added in the requirements class <<rc_temporal-operators,Temporal Operators>> where intervals can be provided as arguments in temporal operators.
+NOTE: While instants (timestamps and dates) are scalar data types that can be used with the basic comparison operators, intervals are more complex data types. Support for intervals is added in the requirements class <<rc_temporal-operators,Temporal Operators>> where intervals can be provided as arguments in temporal comparison functions.
 
 For timestamp and date values representations based on RFC 3339 are used:
 

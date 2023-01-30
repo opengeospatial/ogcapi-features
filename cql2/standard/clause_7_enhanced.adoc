@@ -195,7 +195,7 @@ Like `CASEI`, the `ACCENTI` function returns a string typed representation of th
 
 include::requirements/requirements_class_basic-spatial-operators.adoc[]
 
-A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial operator.
+A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial comparison function.
 
 ==== Spatial data types and literal values
 
@@ -216,7 +216,7 @@ Existing representations are in general used for literal values:
 * Text: an OGC Well-Known Text (WKT) literal (see clause 7 of <<ogc06-103r4,Simple feature access - Part 1: Common architecture>>)
 * JSON: a GeoJSON geometry object (see clause 3.1 of <<GeoJSON,GeoJSON>>)
 
-The BBox data type is an exception as it is not specified in WKT. In the Text representation, the type is encoded as a `BBOX()` operator with four or six numerical arguments, depending on whether the coordinates include a vertical axis (height or depth):
+The BBox data type is an exception as it is not specified in WKT. In the Text representation, the type is encoded as a `BBOX()` function with four or six numerical arguments, depending on whether the coordinates include a vertical axis (height or depth):
 
 * Lower left corner, coordinate axis 1
 * Lower left corner, coordinate axis 2
@@ -281,7 +281,7 @@ BBOX(160.6,-55.95,-170,-25.89)
 
 ==== Spatial Operators
 
-In this conformance class, the only required spatial operator is _intersects_. Additional spatial operators are specified in the <<rc_spatial-operators,Spatial Operators>> requirements class.
+In this conformance class, the only required standardized spatial comparison function is _intersects_. Additional standardized spatial comparison functions are specified in the <<rc_spatial-operators,Spatial Operators>> requirements class.
 
 include::requirements/basic-spatial-operators/REQ_spatial-predicate.adoc[]
 
@@ -338,17 +338,17 @@ Note that the values of the `filter-crs` and `filter` parameters have not been p
 
 include::requirements/requirements_class_spatial-operators.adoc[]
 
-This requirement adds a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL2 filter expression.
+This requirement adds a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL2 filter expression.  These operators are implemented in CQL2 as standardized functions.
 
 include::requirements/spatial-operators/REQ_spatial-operators.adoc[]
 
-The following table lists the mathematical definitions of each spatial operator as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>. `a` and `b` are geometries, `I(a)` is the set of all positions in the interior of the geometry (i.e., all positions on the geometry, but which are not on the boundary), and `E(a)` is the set of all exterior positions (i.e., all positions except those in the interior or on the boundary of the geometry).
+The following table lists the mathematical definitions of each standardized spatial comparison function as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>. `a` and `b` are geometries, `I(a)` is the set of all positions in the interior of the geometry (i.e., all positions on the geometry, but which are not on the boundary), and `E(a)` is the set of all exterior positions (i.e., all positions except those in the interior or on the boundary of the geometry).
 
 [reftext='{table-caption} {counter:table-num}']
-.Mathematical definitions of spatial operators
+.Mathematical definitions of standardized spatial comparison functions
 [width=100%,cols="30,70",options="header"]
 |===
-|Spatial operator |Definition
+|Spatial comparison function |Definition
 |S_CONTAINS |S_CONTAINS(a,b) &#x2b04; b WITHIN a
 |S_CROSSES |S_CROSSES(a,b) &#x2b04; [I(a) &#x2229; I(b) &#x2260; &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)]
 |S_DISJOINT |S_DISJOINT(a,b) &#x2b04; a &#x2229; b = &#x2205;
@@ -359,7 +359,7 @@ The following table lists the mathematical definitions of each spatial operator 
 |S_WITHIN |S_WITHIN(a,b) &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) = &#x2205;)
 |===
 
-The following diagrams illustrate the meaning of the `S_CROSSES`, `S_OVERLAPS`, `S_TOUCHES` and `S_WITHIN` operators.
+The following diagrams illustrate the meaning of the `S_CROSSES`, `S_OVERLAPS`, `S_TOUCHES` and `S_WITHIN` spatial comparison functions.
 
 [#figure4]
 .Examples of the S_CROSSES relationship Polygon/LineString(a) and LineString/LineString(b).
@@ -418,7 +418,7 @@ S_CROSSES(road,POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
 
 include::requirements/requirements_class_temporal-operators.adoc[]
 
-A temporal predicate evaluates two time-valued expressions to determine, if the expressions satisfy the requirements of the specified temporal operator.
+A temporal predicate evaluates two time-valued expressions to determine, if the expressions satisfy the requirements of the specified standardized temporal comparison function.
 
 The operands in a temporal predicate are temporal geometries. A temporal geometry is either an instant or an interval.
 
@@ -464,18 +464,18 @@ INTERVAL('2019-09-09', '..')
 
 ==== Temporal Operators 
 
-The temporal operators in CQL2 are based on the definitions in the <<owl-time,W3C/OGC Time Ontology in OWL>>. 
+The standardized temporal comparison functions in CQL2 are based on the temporal operator definitions in the <<owl-time,W3C/OGC Time Ontology in OWL>>. 
 
 NOTE: <<per_basic-cql2_time-instant-comparison,Simple temporal predicates>> involving time instants can also be evaluated using the <<basic-cql2_comparison-predicates,standard comparison operators>>.
 
-The following table specifies the definition of the temporal operators where both operands may be instants or intervals, including mixed combinations.
+The following table specifies the definition of the standardized temporal comparison functions where both operands may be instants or intervals, including mixed combinations.
 
 [[temporal-operators-1]]
 [reftext='{table-caption} {counter:table-num}']
-.Definitions of temporal operators that support both instants and intervals
+.Definitions of standardized temporal comparison functions that support both instants and intervals
 [width=100%,cols="30,70",options="header"]
 |===
-|Temporal operator |Definition (t1: first operand, t2: second operand)
+|Temporal comparison function |Definition (t1: first operand, t2: second operand)
 |T_AFTER |See https://www.w3.org/TR/owl-time/#time:after[after] 
 |T_BEFORE |See https://www.w3.org/TR/owl-time/#time:before[before] 
 |T_DISJOINT |(t1 T_BEFORE t2) OR (t1 T_AFTER t2)
@@ -483,14 +483,14 @@ The following table specifies the definition of the temporal operators where bot
 |T_INTERSECTS |NOT (t1 T_DISJOINT t2)
 |===
 
-Additional temporal operators are available, but only applicable for intervals. Using these operators with instants will result in a client error.
+Additional temporal comparison functions are available, but only applicable for intervals. Using these functions with instants will result in a client error.
 
 [[temporal-operators-2]]
 [reftext='{table-caption} {counter:table-num}']
-.Definitions of temporal operators between intervals
+.Definitions of standardized temporal comparison function between intervals
 [width=100%,cols="30,70",options="header"]
 |===
-|Temporal operator |Definition
+|Temporal comparison function |Definition
 |T_CONTAINS |See https://www.w3.org/TR/owl-time/#time:intervalContains[intervalContains]
 |T_DURING |See https://www.w3.org/TR/owl-time/#time:intervalDuring[intervalDuring]
 |T_FINISHEDBY |See https://www.w3.org/TR/owl-time/#time:intervalFinishedBy[intervalFinishedBy]
@@ -503,7 +503,7 @@ Additional temporal operators are available, but only applicable for intervals. 
 |T_STARTS |See https://www.w3.org/TR/owl-time/#time:intervalStartedBy[intervalStartedBy]
 |===
 
-The following diagram illustrates the meaning of most of the temporal operators when applied to intervals.
+The following diagram illustrates the meaning of most of the standardized temporal comparison functions when applied to intervals.
 
 [#figure5]
 .The elementary relations between time intervals
@@ -600,7 +600,8 @@ a geometry, an interval, or another array.
 
 Array expressions can be tested in a predicate for equality, if one array
 is a subset of another, if one array is a superset of another or if two
-arrays overlap or share elements.
+arrays overlap or share elements using a standardized set of array comparison 
+functions.
 
 include::requirements/array-operators/REQ_array-predicates.adoc[]
 
