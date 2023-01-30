@@ -173,8 +173,8 @@ arrayExpression = arrayLiteral
 
 # An array literal is a bracket-delimited, comma-separated list of array
 # elements.
-arrayLiteral = leftBracket rightBracket
-             | leftBracket arrayElement [ { comma arrayElement } ] rightBracket;
+arrayLiteral = leftParen rightParen
+             | leftParen arrayElement [ { comma arrayElement } ] rightParen;
 
 # An array element is either a character literal, a numeric literal,
 # a geometric literal, a temporal literal, a property name, a function, an
@@ -231,19 +231,7 @@ identifierPart = alpha | digit | dollar | underscore;
 #=============================================================================#
 # Definition of a FUNCTION
 #=============================================================================#
-function = identifier leftParen {argumentList} rightParen;
-
-argumentList = argument [ { comma argument } ];
-
-argument = characterClause
-         | numericLiteral
-         | temporalLiteral
-         | spatialLiteral
-         | arrayLiteral
-         | arithmeticExpression
-         | booleanExpression
-         | propertyName
-         | function;
+function = identifier arrayLiteral;
 
 #=============================================================================#
 # Character expression
