@@ -220,24 +220,113 @@ propertyName = identifier | doubleQuote identifier doubleQuote;
 
 identifier = identifierStart [ { identifierPart } ];
 
-identifierPart = identifierStart | period | digit |
-                 "\x0300".."\x036F" | "\x203F".."\x0240";
+identifierPart = identifierStart |
+                 period |              # "\x002E"
+                 digit  |              # 0-9
+                 "\x0300".."\x036F" |  # combining and diacritical marks
+                 "\x203F".."\x2040";   # ‿ and ⁀
 
-identifierStart = colon | underscore |
-                  "\x0041".."\x0051" |
-                  "\x0061".."\x0071" |
-                  "\x00C0".."\x00D6" |
-                  "\x00D8".."\x00F6" |
-                  "\x00F8".."\x02FF" |
-                  "\x0370".."\x037D" |
-                  "\x037F".."\x1FFF" |
-                  "\x200C".."\x200D" |
-                  "\x2070".."\x218F" |
-                  "\x2C00".."\x2FEF" |
-                  "\x3001".."\xD7FF" |
-                  "\xF900".."\xFDCF" |
-                  "\xFDF0".."\xFFFD" |
-                  "\x10000".."\xEFFFF"
+identifierStart = colon |              # \x003A
+                  underscore |         # \x005F
+                  "\x0041".."\x005A" | # A-Z
+                  "\x0061".."\x007A" | # a-z
+                  "\x00C0".."\x00D6" | # À-Ö Latin-1 Supplement Letters
+                  "\x00D8".."\x00F6" | # Ø-ö Latin-1 Supplement Letters
+                  "\x00F8".."\x02FF" | # ø-ÿ Latin-1 Supplement Letters
+                  "\x0370".."\x037D" | # Ͱ-ͽ Greek and Coptic (without ";")
+                  "\x037F".."\x1FFE" | # See note 1.
+                  "\x200C".."\x200D" | # zero width non-joiner and joiner
+                  "\x2070".."\x218F" | # See note 2.
+                  "\x2C00".."\x2FEF" | # See note 3.
+                  "\x3001".."\xD7FF" | # See note 4.
+                  "\xF900".."\xFDCF" | # See note 5.
+                  "\xFDF0".."\xFFFD" | # See note 6.
+                  "\x10000".."\xEFFFF" # See note 7.
+
+# See: https://unicode-table.com/en/blocks/
+
+# Note 1: Greek, Coptic, Cyrillic, Cyrillic Supplement, Armenian, Hebrew,
+#         Arabic, Syriac, Arabic Supplement, Thaana, NKo, Samaritan, Mandaic,
+#         Syriac Supplement, Arabic Extended-A, Devanagari, Bengali, Gurmukhi,
+#         Gujarati, Oriya, Tamil, Telugu, Kannada, Malayalam, Sinhala, Thai,
+#         Lao, Tibetan, Myanmar, Georgian, Hangul Jamo, Ethiopic, Ethiopic
+#         Supplement, Cherokee, Unified Canadian Aboriginal Syllabics, Ogham,
+#         Runic, Tagalog, Hanunoo, Buhid, Tagbanwa, Khmer, Mongolian, Unified
+#         Canadian Aboriginal Syllabics Extended, Limbu, Tai Le, New Tai Lue,
+#         Khmer Symbols, Buginese, Tai Tham, Combining Diacritical Marks
+#         Extended, Balinese, Sundanese, Batak, Lepcha, Ol Chiki, Cyrillic
+#         Extended C, Georgian Extended, Sundanese Supplement, Vedic
+#         Extensions, Phonetic Extensions, Phonetic Extensions Supplement,
+#         Combining Diacritical Marks Supplement, Latin Extended Additional,
+#         Greek Extended
+#
+# Note 2: Superscripts and Subscripts, Currency Symbols, Combining Diacritical
+#         Marks for Symbols, Letterlike Symbols, Number Forms (e.g. Roman
+#         numbers)
+#
+# Note 3: Glagolitic, Latin Extended-C, Coptic, Georgian Supplement, Tifinagh,
+#         Ethiopic Extended, Cyrillic Extended-A, Supplemental Punctuation,
+#         CJK Radicals Supplement, Kangxi Radicals
+#
+# Note 4: CJK Symbols and Punctuation Hiragana, Katakana, Bopomofo, Hangul
+#         Compatibility Jamo, Kanbun, Bopomofo Extended, CJK Strokes, Katakana
+#         Phonetic Extensions, Enclosed CJK Letters and Months, CJK
+#         Compatibility, CJK Unified Ideographs Extension A, Yijing Hexagram
+#         Symbols, CJK Unified Ideographs, Yi Syllables, Yi Radicals, Lisu,
+#         Vai, Cyrillic Extended-B, Bamum, Modifier Tone Letters, Latin
+#         Extended-D, Syloti Nagri, Common Indic Number Forms, Phags-pa,
+#         Saurashtra, Devanagari Extended, Kayah Li, Rejang, Hangul Jamo
+#         Extended-A, Javanese, Myanmar Extended-B, Cham, Myanmar Extended-A,
+#         Tai Viet, Meetei Mayek Extensions, Ethiopic Extended-A, Latin
+#         Extended-E, Cherokee Supplement, Meetei Mayek, Hangul Syllables,
+#         Hangul Jamo Extended-B
+#
+# Note 5: CJK Compatibility Ideographs, Alphabetic Presentation Forms, 
+#         Arabic Presentation Forms-A
+#
+# Note 6: Arabic Presentation Forms-A, Variation Selectors, Vertical Forms,
+#         Combining Half Marks, CJK Compatibility Forms, Small Form Variants,
+#         Arabic Presentation Forms-B, Halfwidth and Fullwidth Forms, Specials
+#
+# Note 7: Linear B Syllabary, Linear B Ideograms, Aegean Numbers, Ancient
+#         Greek Numbers, Ancient Symbols, Phaistos Disc, Lycian, Carian,
+#         Coptic Epact Numbers, Old Italic, Gothic, Old Permic, Ugaritic, Old
+#         Persian, Deseret, Shavian, Osmanya, Osage, Elbasan, Caucasian
+#         Albanian, Linear A, Cypriot Syllabary, Imperial Aramaic, Palmyrene,
+#         Nabataean, Hatran, Phoenician, Lydian, Meroitic Hieroglyphs,
+#         Meroitic Cursive, Kharoshthi, Old South Arabian, Old North Arabian,
+#         Manichaean, Avestan, Inscriptional Parthian, Inscriptional Pahlavi,
+#         Psalter Pahlavi, Old Turkic, Old Hungarian, Hanifi Rohingya, Rumi
+#         Numeral Symbols, Yezidi, Old Sogdian, Sogdian, Chorasmian, Elymaic,
+#         Brahmi, Kaithi, Sora Sompeng, Chakma, Mahajani, Sharada, Sinhala
+#         Archaic Numbers, Khojki, Multani, Khudawadi, Grantha, Newa, Tirhuta,
+#         Siddham, Modi, Mongolian Supplement, Takri, Ahom, Dogra, Warang Citi,
+#         Dives Akuru, Nandinagari, Zanabazar Square, Soyombo, Pau Cin Hau,
+#         Bhaiksuki, Marchen, Masaram Gondi, Gunjala Gondi, Makasar, Lisu
+#         Supplement, Tamil Supplement, Cuneiform, Cuneiform Numbers and
+#         Punctuation, Early Dynastic Cuneiform, Egyptian Hieroglyphs,
+#         Egyptian Hieroglyph Format Controls, Anatolian Hieroglyphs,Bamum
+#         Supplement, Mro, Bassa Vah, Pahawh Hmong, Medefaidrin, Miao,
+#         Ideographic Symbols and Punctuation, Tangut, Tangut Components,
+#         Khitan Small Script, Tangut Supplement, Kana Supplement, Kana
+#         Extended-A, Small Kana Extension, Nushu, Duployan, Shorthand Format
+#         Controls, Byzantine Musical Symbols, Musical Symbols, Ancient Greek
+#         Musical Notation, Mayan Numerals, Tai Xuan Jing Symbols, Counting
+#         Rod Numerals, Mathematical Alphanumeric Symbols, Sutton SignWriting,
+#         Glagolitic Supplement, Nyiakeng Puachue Hmong, Wancho, Mende Kikakui,
+#         Adlam, Indic Siyaq Numbers, Ottoman Siyaq Numbers, Arabic
+#         Mathematical Alphabetic Symbols, Mahjong Tiles, Domino Tiles,
+#         Playing Cards, Enclosed Alphanumeric Supplement, Enclosed Ideographic
+#         Supplement, Miscellaneous Symbols and Pictographs, Emoticons (Emoji),
+#         Ornamental Dingbats, Transport and Map Symbols, Alchemical Symbols,
+#         Geometric Shapes Extended, Supplemental Arrows-C, Supplemental
+#         Symbols and Pictographs, Chess Symbols, Symbols and Pictographs
+#         Extended-A, Symbols for Legacy Computing, CJK Unified Ideographs
+#         Extension B, CJK Unified Ideographs Extension C, CJK Unified
+#         Ideographs Extension D, CJK Unified Ideographs Extension E, CJK
+#         Unified Ideographs Extension F, CJK Compatibility Ideographs
+#         Supplement, CJK Unified Ideographs Extension G, Tags, Variation
+#         Selectors Supplement,
 
 #=============================================================================#
 # Definition of a FUNCTION
