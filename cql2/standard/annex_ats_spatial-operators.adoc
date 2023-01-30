@@ -12,12 +12,43 @@
 |Dependency |<<conf_basic-spatial-operators,Basic Spatial Operators>>
 |===
 
+:conf-test: s_intersects
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-data-types>>
+|Test purpose: | Test the S_INTERSECTS operator
+|Test method: | 
+Given:
+
+* One of more data sources each with a list of queryables.
+* At least one queryable has a geometry data type.
+
+When:
+
+For each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
+
+* `S_INTERSECTS({queryable},BBOX(-180,-90,180,90))`
+* `S_INTERSECTS({queryable},POLYGON\((-180 -90,180 -90,180 90,-180 90,-180 -90)))`
+* `S_INTERSECTS({queryable},LINESTRING(7 50, 10 51))`
+* `S_INTERSECTS({queryable},POINT(7.02 49.92))`
+* `S_INTERSECTS({queryable},POINT(90 180))`
+
+Then:
+
+* assert successful execution of the evaluation for the first four filter expressions;
+* assert unsuccessful execution of the evaluation for the fifth filter expressions (invalid coordinate);
+* assert that the two result sets of the first two filter expressions for each queryable are identical;
+* store the valid predicates for each data source.
+|===
+
 :conf-test: s_disjoint
 ==== Conformance Test {counter:test-id}
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-data-types>>
 |Test purpose: | Test the S_DISJOINT spatial operator
 |Test method: | 
 Given:
@@ -48,7 +79,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-data-types>>
 |Test purpose: | Test the S_EQUALS spatial operator
 |Test method: | 
 Given:
@@ -75,7 +106,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-data-types>>
 |Test purpose: | Test the S_TOUCHES spatial operator
 |Test method: | 
 Given:
@@ -101,7 +132,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-data-types>>
 |Test purpose: | Test the S_CROSSES spatial operator
 |Test method: | 
 Given:
@@ -127,7 +158,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-data-types>>
 |Test purpose: | Test the S_WITHIN spatial operator
 |Test method: | 
 Given:
@@ -155,7 +186,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-data-types>>
 |Test purpose: | Test the S_CONTAINS spatial operator
 |Test method: | 
 Given:
@@ -184,7 +215,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>
+|Requirements: | <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-operators>>, <<req_{conf-class}_spatial-operators,/req/{conf-class}/spatial-data-types>>
 |Test purpose: | Test the S_OVERLAPS spatial operator
 |Test method: | 
 Given:
@@ -231,6 +262,10 @@ Then:
 [width="100%",cols="3",options="header"]
 |===
 |Data Source |Predicate |Expected number of items
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |8
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,LINESTRING(0 40,10 50))` |4
+|ne_110m_populated_places_simple |`S_INTERSECTS(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |7
+|ne_110m_rivers_lake_centerlines |`S_INTERSECTS(geom,LINESTRING(-60 -90,-60 90))` |2
 |ne_110m_admin_0_countries |`S_DISJOINT(geom,BBOX(0,40,10,50))` |169
 |ne_110m_admin_0_countries |`S_DISJOINT(geom,POLYGON\((0 40,10 40,10 50,0 50,0 40)))` |169
 |ne_110m_admin_0_countries |`S_DISJOINT(geom,LINESTRING(0 40,10 50))` |173
