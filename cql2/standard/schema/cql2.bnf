@@ -52,7 +52,7 @@ binaryComparisonPredicate = scalarExpression
 
 scalarExpression = characterClause
                  | numericLiteral
-                 | instantLiteral
+                 | instantInstance
                  | arithmeticExpression
                  | booleanExpression
                  | propertyName
@@ -96,8 +96,8 @@ isNullPredicate = isNullOperand "IS" ["NOT"] "NULL";
 
 isNullOperand = characterClause
               | numericLiteral
-              | temporalLiteral
-              | spatialLiteral
+              | temporalInstance
+              | spatialInstance
               | arithmeticExpression
               | booleanExpression
               | propertyName
@@ -129,7 +129,7 @@ spatialFunction = "S_INTERSECTS"
 # a geometric literal (expressed as WKT) or a function that returns a
 # geometric value.
 #
-geomExpression = spatialLiteral
+geomExpression = spatialInstance
                | propertyName
                | function;
 
@@ -142,7 +142,7 @@ geomExpression = spatialLiteral
 temporalPredicate = temporalFunction 
                     leftParen temporalExpression comma temporalExpression rightParen;
 
-temporalExpression = temporalLiteral
+temporalExpression = temporalInstance
                    | propertyName
                    | function;
 
@@ -171,23 +171,23 @@ temporalFunction = "T_AFTER"
 arrayPredicate = arrayFunction
                  leftParen arrayExpression comma arrayExpression rightParen;
 
-arrayExpression = arrayLiteral
+arrayExpression = arrayInstance
                 | propertyName
                 | function;
 
 # An array literal is a bracket-delimited, comma-separated list of array
 # elements.
-arrayLiteral = leftParen rightParen
-             | leftParen arrayElement [ { comma arrayElement } ] rightParen;
+arrayInstance = leftParen rightParen
+              | leftParen arrayElement [ { comma arrayElement } ] rightParen;
 
 # An array element is either a character literal, a numeric literal,
 # a geometric literal, a temporal literal, a property name, a function, an
 # arithmetic expression or an array.
 arrayElement = characterClause
              | numericLiteral
-             | temporalLiteral
-             | spatialLiteral
-             | arrayLiteral
+             | temporalInstance
+             | spatialInstance
+             | arrayInstance
              | arithmeticExpression
              | booleanExpression
              | propertyName
@@ -347,9 +347,9 @@ argumentList = argument [ { comma argument } ];
 
 argument = characterClause
          | numericLiteral
-         | temporalLiteral
-         | spatialLiteral
-         | arrayLiteral
+         | temporalInstance
+         | spatialInstance
+         | arrayInstance
          | arithmeticExpression
          | booleanExpression
          | propertyName
@@ -459,14 +459,14 @@ booleanLiteral = "TRUE" | "FALSE";
 # NOTE: This is basically BNF that define WKT encoding. It would be nice
 #       to instead reference some normative BNF for WKT.
 #=============================================================================#
-spatialLiteral = pointTaggedText
-               | linestringTaggedText
-               | polygonTaggedText
-               | multipointTaggedText
-               | multilinestringTaggedText
-               | multipolygonTaggedText
-               | geometryCollectionTaggedText
-               | bboxTaggedText;
+spatialInstance = pointTaggedText
+                | linestringTaggedText
+                | polygonTaggedText
+                | multipointTaggedText
+                | multilinestringTaggedText
+                | multipolygonTaggedText
+                | geometryCollectionTaggedText
+                | bboxTaggedText;
 
 pointTaggedText = "POINT" pointText;
 
@@ -503,7 +503,7 @@ multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen
 multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
 
 geometryCollectionText = leftParen
-                         spatialLiteral {comma spatialLiteral} rightParen;
+                         spatialInstance {comma spatialInstance} rightParen;
 
 bboxTaggedText = "BBOX" bboxText;
 
@@ -521,9 +521,9 @@ minElev = signedNumericLiteral;
 
 maxElev = signedNumericLiteral;
 
-temporalLiteral = instantLiteral | intervalLiteral;
+temporalInstance = instantInstance | intervalLiteral;
 
-instantLiteral = dateInstant | timestampInstant;
+instantInstance = dateInstant | timestampInstant;
 
 dateInstant = "DATE" 
               leftParen dateInstantString rightParen;
