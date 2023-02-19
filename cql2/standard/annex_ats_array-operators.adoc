@@ -29,10 +29,10 @@ When:
 
 For each queryable `{queryable}` with an array data type, evaluate the following filter expressions
 
-* `A_CONTAINS({queryable},["foo","bar"])`
-* `A_CONTAINEDBY({queryable},["foo","bar"])`
-* `A_EQUALS({queryable},["foo","bar"])`
-* `A_OVERLAPS({queryable},["foo","bar"])`
+* `A_CONTAINS({queryable},("foo","bar"))`
+* `A_CONTAINEDBY({queryable},("foo","bar"))`
+* `A_EQUALS({queryable},("foo","bar"))`
+* `A_OVERLAPS({queryable},("foo","bar"))`
 
 Then:
 
