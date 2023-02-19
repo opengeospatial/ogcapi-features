@@ -20,7 +20,7 @@ The term "temporal data type" is used for the following data types: Timestamp, D
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
 |Requirements: | <<req_{conf-class}_temporal-predicates,/req/{conf-class}/temporal-predicates>>, <<req_{conf-class}_temporal-operators,/req/{conf-class}/temporal-operators>>
-|Test purpose: | Test the T_AFTER, T_BEFORE, T_DISJOINT, T_EQUALS, T_INTERSECTS operators
+|Test purpose: | Test the T_AFTER, T_BEFORE, T_DISJOINT, T_EQUALS, T_INTERSECTS temporal comparison functions.
 |Test method: | 
 Given:
 
@@ -66,7 +66,7 @@ Then:
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
 |Requirements: | <<req_{conf-class}_temporal-predicates,/req/{conf-class}/temporal-predicates>>, <<req_{conf-class}_temporal-operators,/req/{conf-class}/temporal-operators>>
-|Test purpose: | Test the temporal operators with intervals
+|Test purpose: | Test the temporal comparison functions with intervals
 |Test method: | 
 Given:
 
