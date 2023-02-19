@@ -4,8 +4,7 @@ The SDIs of the three German Federal States Rhineland-Palatinate, Hesse and Saar
 
 Most of the core functions are implemented. The WFSs behind the proxy are either based on mapserver or geoserver. The proxy does also create service metadata in form of iso19139 records. One extension is the usage of json-schema to define human readable attribute titles and descriptions at WFS level. The next extension will be the usage of json-ld to give semantical information for the attributes and allow the dynamical creation of rdf-a and other formats.
 
-The code of the current production solution is available on the [OSGEO GIT](https://git.osgeo.org/gitea/armin11/GeoPortal.rlp)
-and [OSGEO SVN](https://trac.osgeo.org/mapbender/browser/trunk/mapbender/).
+The code of the current production solution is available on [GITHUB](https://github.com/mrmap-community/Mapbender2.8).
 
 List of available APIs:
 

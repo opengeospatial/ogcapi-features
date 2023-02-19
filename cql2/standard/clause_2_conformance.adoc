@@ -60,11 +60,11 @@ The <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>> requireme
 
 * accenti
 
-The <<rc_basic-spatial-operators,Basic Spatial Operators>> requirements class specifies minimal requirements for servers that support standardized spatial comparison function. Only the following spatial comparison function must be supported:
+The <<rc_basic-spatial-operators,Basic Spatial Operators>> requirements class specifies minimal requirements for servers that support standardized spatial comparison functions. Only the following spatial comparison function must be supported, and only for points and bounding boxes:
 
 * s_intersects
 
-The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support a richer set of standardized spatial comparison functions.  The list of additional spatial comparison functions that must be supported is:
+The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requirements for servers that support a richer set of spatial comparison functions and spatial data types. The list of additional spatial comparison functions that must be supported is:
 
 * s_contains
 * s_crosses
@@ -73,6 +73,8 @@ The <<rc_spatial-operators,Spatial Operators>> requirements class specifies requ
 * s_overlaps
 * s_touches
 * s_within
+
+All spatial data types from the Simple Feature Access Standard must be supported.
 
 The <<rc_temporal-operators,Temporal Operators>> requirements
 class specifies requirements for servers that support standardized temporal comparison function. 

@@ -193,13 +193,13 @@ Then:
 |Advanced Comparison Operators |ne_110m_populated_places_simple |`pop_other not between pop_min and pop_max` |149
 |Basic Spatial Operators |ne_110m_admin_0_countries |`S_INTERSECTS(BBOX(0,40,10,50),geom)` |8
 |Basic Spatial Operators |ne_110m_admin_0_countries |`S_INTERSECTS(BBOX(150,-90,-150,90),geom)` |10
-|Basic Spatial Operators |ne_110m_admin_0_countries |`S_INTERSECTS(POLYGON\((0 40,10 40,10 50,0 50,0 40)),geom)` |8
-|Basic Spatial Operators |ne_110m_admin_0_countries |`S_INTERSECTS(LINESTRING(0 40,10 50),geom)` |4
 |Basic Spatial Operators |ne_110m_admin_0_countries |`S_INTERSECTS(POINT(7.02 49.92),geom)` |1
 |Basic Spatial Operators |ne_110m_populated_places_simple |`S_INTERSECTS(BBOX(0,40,10,50),geom)` |7
-|Basic Spatial Operators |ne_110m_populated_places_simple |`S_INTERSECTS(POLYGON\((0 40,10 40,10 50,0 50,0 40)),geom)` |7
 |Basic Spatial Operators |ne_110m_rivers_lake_centerlines |`S_INTERSECTS(BBOX(-180,-90,0,90),geom)` |4
-|Basic Spatial Operators |ne_110m_rivers_lake_centerlines |`S_INTERSECTS(LINESTRING(-60 -90,-60 90),geom)` |2
+|Spatial Operators |ne_110m_admin_0_countries |`S_INTERSECTS(POLYGON\((0 40,10 40,10 50,0 50,0 40)),geom)` |8
+|Spatial Operators |ne_110m_admin_0_countries |`S_INTERSECTS(LINESTRING(0 40,10 50),geom)` |4
+|Spatial Operators |ne_110m_populated_places_simple |`S_INTERSECTS(POLYGON\((0 40,10 40,10 50,0 50,0 40)),geom)` |7
+|Spatial Operators |ne_110m_rivers_lake_centerlines |`S_INTERSECTS(LINESTRING(-60 -90,-60 90),geom)` |2
 |Spatial Operators |ne_110m_admin_0_countries |`S_DISJOINT(BBOX(0,40,10,50),geom)` |169
 |Spatial Operators |ne_110m_admin_0_countries |`S_DISJOINT(POLYGON\((0 40,10 40,10 50,0 50,0 40)),geom)` |169
 |Spatial Operators |ne_110m_admin_0_countries |`S_DISJOINT(LINESTRING(0 40,10 50),geom)` |173
