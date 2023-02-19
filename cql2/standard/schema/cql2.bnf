@@ -231,7 +231,19 @@ identifierPart = alpha | digit | dollar | underscore;
 #=============================================================================#
 # Definition of a FUNCTION
 #=============================================================================#
-function = identifier arrayLiteral;
+function = identifier leftParen {argumentList} rightParen;
+
+argumentList = argument [ { comma argument } ];
+
+argument = characterClause
+         | numericLiteral
+         | temporalLiteral
+         | spatialLiteral
+         | arrayLiteral
+         | arithmeticExpression
+         | booleanExpression
+         | propertyName
+         | function;
 
 #=============================================================================#
 # Character expression
