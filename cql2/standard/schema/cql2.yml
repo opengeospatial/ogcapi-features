@@ -553,19 +553,19 @@ components:
     temporalInstance:
       oneOf:
         - $ref: '#/components/schemas/instantInstance'
-        - $ref: '#/components/schemas/intervalLiteral'
+        - $ref: '#/components/schemas/intervalInstance'
     instantInstance:
       oneOf:
-        - $ref: '#/components/schemas/dateLiteral'
-        - $ref: '#/components/schemas/timestampLiteral'
-    dateLiteral:
+        - $ref: '#/components/schemas/dateInsant'
+        - $ref: '#/components/schemas/timestampInstant'
+    dateInsant:
       type: object
       required:
         - date
       properties:
         date:
           $ref: '#/components/schemas/dateString'
-    timestampLiteral:
+    timestampInstant:
       type: object
       required:
         - timestamp
@@ -582,7 +582,7 @@ components:
     timestampString:
       type: string
       format: date-time
-    intervalLiteral:
+    intervalInstance:
       type: object
       required:
         - interval

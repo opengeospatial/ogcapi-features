@@ -854,21 +854,21 @@
           "$ref": "#/$defs/instantInstance"
         },
         {
-          "$ref": "#/$defs/intervalLiteral"
+          "$ref": "#/$defs/intervalInstance"
         }
       ]
     },
     "instantInstance": {
       "oneOf": [
         {
-          "$ref": "#/$defs/dateLiteral"
+          "$ref": "#/$defs/dateInstant"
         },
         {
-          "$ref": "#/$defs/timestampLiteral"
+          "$ref": "#/$defs/timestampInstant"
         }
       ]
     },
-    "dateLiteral": {
+    "dateInstant": {
       "type": "object",
       "required": [ "date" ],
       "properties": {
@@ -877,7 +877,7 @@
         }
       }
     },
-    "timestampLiteral": {
+    "timestampInstant": {
       "type": "object",
       "required": [ "timestamp" ],
       "properties": {
@@ -904,7 +904,7 @@
       "type": "string",
       "format": "date-time"
     },
-    "intervalLiteral": {
+    "intervalInstance": {
       "type": "object",
       "required": [
         "interval"

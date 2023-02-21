@@ -175,14 +175,13 @@ arrayExpression = arrayInstance
                 | propertyName
                 | function;
 
-# An array literal is a bracket-delimited, comma-separated list of array
-# elements.
+# An array is a bracket-delimited, comma-separated list of array elements.
 arrayInstance = leftParen rightParen
               | leftParen arrayElement [ { comma arrayElement } ] rightParen;
 
 # An array element is either a character literal, a numeric literal,
-# a geometric literal, a temporal literal, a property name, a function, an
-# arithmetic expression or an array.
+# a geometric literal, a temporal instance, a property name, a function,
+# an arithmetic expression or an array.
 arrayElement = characterClause
              | numericLiteral
              | temporalInstance
@@ -521,7 +520,7 @@ minElev = signedNumericLiteral;
 
 maxElev = signedNumericLiteral;
 
-temporalInstance = instantInstance | intervalLiteral;
+temporalInstance = instantInstance | intervalInstance;
 
 instantInstance = dateInstant | timestampInstant;
 
@@ -535,8 +534,8 @@ timestampInstant = "TIMESTAMP"
 
 timestampInstantString = quote fullDate "T" utcTime quote;
 
-intervalLiteral = "INTERVAL" 
-                  leftParen instantParameter comma instantParameter rightParen;
+intervalInstance = "INTERVAL" 
+                   leftParen instantParameter comma instantParameter rightParen;
 
 instantParameter = dateInstantString
                  | timestampInstantString
