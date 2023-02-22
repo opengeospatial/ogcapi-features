@@ -1,0 +1,11 @@
+[[req_queryables-query-parameters_parameters]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/queryables-query-parameters/parameters*
+^|A |For every queryable of a collection (defined by the Queryables resource at path 
+`/collections/{collectionId}/queryables`) that has a simple value (string, number or boolean),
+the collection SHALL support a query parameter at path `/collections/{collectionId}/items`
+with the same schema as the schema of the queryable.
+^|B |If the query parameter is provided in a request, the response SHALL only include
+resources that match the provided value for the queryable.
+|===

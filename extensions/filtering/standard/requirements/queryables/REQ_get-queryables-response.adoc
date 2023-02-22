@@ -7,8 +7,8 @@ with a HTTP status code `200`.
 ^|B |For responses that use `application/schema+json` as the `Content-Type` of
 the response, the response SHALL have the following characteristics:
 
-* The property `$schema` is `\http://json-schema.org/draft-07/schema#` or
-`\https://json-schema.org/draft/2019-09/schema`.
+* The property `$schema` is `\https://json-schema.org/draft/2019-09/schema` 
+or `\https://json-schema.org/draft/2020-12/schema`.
 * The property `$id` is the URI of the resource without query parameters.
 * The `type` is `object` and each property is a queryable.
 |===

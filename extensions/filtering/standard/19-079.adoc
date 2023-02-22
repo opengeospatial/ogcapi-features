@@ -34,7 +34,7 @@
 |Publication Date:  <yyyy-mm-dd>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/IS/{standard}/{m_n}
 |Internal reference number of this OGC(R) document:    19-079r1
-|Version: {m_n}.0-rc.1
+|Version: {m_n}.0-rc.2-SNAPSHOT
 |Latest Published Draft: n/a
 |Category: OGC(R) Implementation Specification
 |Editors: Panagiotis (Peter) A. Vretanos, Clemens Portele
@@ -104,13 +104,17 @@ include::clause_4_terms_and_definitions.adoc[]
 
 include::clause_5_conventions.adoc[]
 
-include::clause_6_filter.adoc[]
+include::clause_6_queryables.adoc[]
 
-include::clause_7_features.adoc[]
+include::clause_7_queryables-query-parameters.adoc[]
 
-include::clause_8_media_types.adoc[]
+include::clause_8_filter.adoc[]
 
-include::clause_9_security_considerations.adoc[]
+include::clause_9_features.adoc[]
+
+include::clause_10_media_types.adoc[]
+
+include::clause_11_security_considerations.adoc[]
 
 <<<
 include::annex_ats.adoc[]

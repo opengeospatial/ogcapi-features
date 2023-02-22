@@ -20,7 +20,15 @@ JSON Schema of the geometry object.
 ^|H |For geometry types according to the Simple Features standard, the 
 canonical JSON Schema of the GeoJSON geometry object SHOULD be referenced; 
 for example, `https://geojson.org/schema/Point.json` for a point geometry.
-^|I |For array properties, the property SHOULD consist of items that are strings
+^|I |For geometry types according to the Simple Features standard, the
+`format` keyword SHOULD be added in addition to the `$ref` to indicate the geometry 
+type in a way that is simple to parse. The format value is "geojson", followed 
+by a hyphen, followed by the name of the geometry in lower case. I.e., the values 
+are:
+`geojson-geometry`, `geojson-point`, `geojson-multipoint`, `geojson-linestring`, 
+`geojson-multilinestring`, `geojson-polygon`, `geojson-multipolygon`, and
+`geojson-geometrycollection`.
+^|J |For array properties, the property SHOULD consist of items that are strings
 or numbers.
-^|J |The `additionalProperties` member with a value of `true` or `false` SHOULD be used to control the behavior with respect to properties that are not explicitly declared in the queryables schema. If the member is missing or has the default value `true`, any property name is valid in a filter expression and the property reference will evaluate to `null`, if the property does not exist for a resource. If `additionalProperties` is set to `false`, property references that are not explicitly declared in the queryables schema will result in a `400` response.
+^|K |The `additionalProperties` member with a value of `true` or `false` SHOULD be used to control the behavior with respect to properties that are not explicitly declared in the queryables schema. If the member is missing or has the default value `true`, any property name is valid in a filter expression and the property reference will evaluate to `null`, if the property does not exist for a resource. If `additionalProperties` is set to `false`, property references that are not explicitly declared in the queryables schema will result in a `400` response.
 |===

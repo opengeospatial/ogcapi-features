@@ -1,0 +1,56 @@
+[[queryables-query-parameters]]
+== Requirements Class "Queryables as Query Parameters"
+
+include::requirements/requirements_class_queryables-query-parameters.adoc[]
+
+This requirements class specifies a requirement to provide query parameters for queryables according to the recommendation in the section https://docs.ogc.org/is/17-069r4/17-069r4.html#rec_core_fc-filters[Parameters for filtering on feature properties] in OGC API - Features - Part 1: Core.
+
+include::requirements/queryables-query-parameters/REQ_parameters.adoc[]
+
+[[example_1c]]
+.Queryables as Query Parameters example
+====
+The OpenAPI 3.0 definitions of the query parameters for the Queryables in <<example_1>> would be:
+
+[source,YAML]
+----
+type_roads_national:
+  name: type
+  in: query
+  description: Filter the collection by property 'type' (Road Type).
+  required: false
+  style: form
+  explode: false
+  schema:
+    title: Road Type
+    description: The road type, one of 'Primary' or 'Motorway'.
+    type: string
+    enum:
+    - Primary
+    - Motorway
+name_roads_national:
+  name: name
+  in: query
+  description: Filter the collection by property 'name' (Road Name).
+  required: false
+  style: form
+  explode: false
+  schema:
+    title: Road Name
+    description: The common, human readable, name of the road.
+    type: string
+number_roads_national:
+  name: number
+  in: query
+  description: Filter the collection by property 'number' (Road Identifier).
+  required: false
+  style: form
+  explode: false
+  schema:
+    title: Road Identifier
+    description: The official number of the road.
+    type: integer
+    minimum: 1
+    maximum: 9999
+----
+====

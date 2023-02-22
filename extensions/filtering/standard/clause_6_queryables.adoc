@@ -1,0 +1,142 @@
+[[queryables]]
+== Requirements Class "Queryables"
+
+include::requirements/requirements_class_queryables.adoc[]
+
+This requirements class defines a resource for discovering the list of
+resource properties (and their types) that may be used to construct filter
+expressions.
+
+This standard does not assume that the content schema of a
+resource being queried is available for inspection. Therefore, a means needs
+to exist to interrogate an <<endpoint-def,endpoint>> to determine the names and types of the
+properties that may be used to construct a filter expression
+("queryables").
+
+In addition, a <<publisher-def,publisher>> may want to support <<queryable-def,queryables>> that are not
+directly represented as resource properties in the content schema of the
+resource. Or the <<publisher-def,publisher>> may want to restrict filtering on certain
+properties. For example, because the backend datastore has not been configured
+to allow high-performance queries on those properties.
+
+include::requirements/queryables/REQ_get-queryables-op.adoc[]
+
+include::requirements/queryables/REQ_get-queryables-response.adoc[]
+
+include::requirements/queryables/REQ_expression-construction.adoc[]
+
+The response is returned as a JSON Schema document that describes a single JSON object where each property is a queryable.
+
+NOTE: The queryables schema does not specify a schema of any object that can be retrieved from the API. JSON Schema is used for the queryables to have a consistent approach for describing schema information and JSON Schema is/will be used in other parts of OGC API Features to describe schemas for GeoJSON feature content including in OpenAPI documents. The queryables schema describes a "virtual" resource view for the purpose of filtering.
+
+NOTE: The OGC Features API Standards Working Group has a schema harmonization task that could lead to a future OGC API standard that will deprecate the approach for the queryables resource specified in this document.
+
+To support clients, providing additional detail about the meaning of the
+property and the possible values is recommended:
+
+include::recommendations/queryables/REC_queryables-schema.adoc[]
+
+[[example_1]]
+.Queryables example
+====
+[source,JSON]
+----
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://demo.ldproxy.net/zoomstack/collections/roads_national/queryables",
+  "type": "object",
+  "title": "National Roads",
+  "description": "Lines representing the road network. A road is defined as a metalled way for vehicles.",
+  "properties": {
+    "geom": {
+      "title": "Centerline",
+      "description": "The geometry of the road.",
+      "$ref" : "https://geojson.org/schema/LineString.json",
+      "format" : "geojson-linestring"
+    },
+    "name": {
+      "title": "Road Name",
+      "description": "The common, human readable, name of the road.",
+      "type": "string",
+      "title": "Name"
+    },
+    "number": {
+      "title": "Road Identifier",
+      "description": "The official number of the road.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9999
+    },
+    "type": {
+      "title": "Road Type",
+      "description": "The road type, one of 'Primary' or 'Motorway'.",
+      "type": "string",
+      "enum": [ "Primary", "Motorway" ]
+    }
+  },
+  "additionalProperties": false
+}
+----
+====
+
+[[example_1b]]
+.Filtering on complex data structures
+====
+Queryables also support simplified filtering on complex data structures. This example illustrates one potential approach to define a queryable on specific https://stacspec.org[SpatioTemporal Asset Catalog (STAC)] assets. The following is a STAC snippet:
+
+[source,JSON]
+----
+"features": [
+  {
+    "type": "Feature",
+    "assets": {
+      "B5": {
+        "eo:bands": [
+          {
+            "common_name": "nir",
+            "name": "B5"
+          }
+        ],
+        "href": "https://landsat-pds.s3.us-west-2.amazonaws.com/c1/L8/060/247/LC08_L1TP_060247_20180905_20180912_01_T1/LC08_L1TP_060247_20180905_20180912_01_T1_B5.TIF",
+        "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+      }
+    }
+  }
+]
+----
+
+A common type of filter is to fetch only resources that have in their `assets` object a value that has an `eo:bands` value that contains a `common_name` value of "nir". 
+
+This could be implemented using a queryable `common_band_names` defined as an array of strings:
+
+[source,JSON]
+----
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://example.net/stac/collections/landsat/queryables",
+  "type": "object",
+  "title": "A STAC item",
+  "properties": {
+    "common_band_names": {
+      "title": "Common band names",
+      "description": "an array of common band names included in the assets",
+      "type" : "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
+----
+
+Internally this could be mapped to the following JSON Path for a STAC item (`item`): 
+
+`item['assets'][\*]['eo:bands'][\*]['common_name']`
+
+Note that the JSON Path is just included here to clarify the mapping. An implementation would use a mapping that fits its backend datastore, but these details are hidden from the user.
+
+A client can now use, e.g., the CQL2 array predicates to filter with the queryable. Examples using the CQL2 text encoding:
+
+* `A_CONTAINS(common_band_names, ["nir"])` - includes at least a 'nir' band
+* `A_EQUALS(common_band_names, ["nir","blue"])` - 'nir' and 'blue' exist for the feature, but no other band
+====
