@@ -101,14 +101,9 @@
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
-      "prefixItems": [
-        {
-          "$ref": "#/$defs/scalarExpression"
-        },
-        {
-          "$ref": "#/$defs/scalarExpression"
-        }
-      ]
+      "items": {
+        "$ref": "#/$defs/scalarExpression"
+      }
     },
 
     "scalarExpression": {
@@ -156,16 +151,17 @@
       }
     },
     "isLikeOperands": {
-          "type": "array",
-          "prefixItems": [
-            {
-              "$ref": "#/$defs/characterExpression"
-            },
-            {
-              "$ref": "#/$defs/patternExpression"
-            }
-          ],
-          "additionalItems": false
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/characterExpression"
+        },
+        {
+          "$ref": "#/$defs/patternExpression"
+        }
+      ]
     },
 
     "patternExpression": {
@@ -248,6 +244,8 @@
     },
     "inListOperands": {
       "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
       "prefixItems": [
         {
           "$ref": "#/$defs/scalarExpression"
@@ -258,8 +256,7 @@
             "$ref": "#/$defs/scalarExpression"
           }
         }
-      ],
-      "additionalItems": false
+      ]
     },
 
     "isNullPredicate": {
@@ -319,15 +316,11 @@
     },
     "spatialOperands": {
       "type": "array",
-      "prefixItems": [
-        {
-          "$ref": "#/$defs/geomExpression"
-        },
-        {
-          "$ref": "#/$defs/geomExpression"
-        }
-      ],
-      "additionalItems": false
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/geomExpression"
+      }
     },
     "geomExpression": {
       "oneOf": [
@@ -374,15 +367,11 @@
     },
     "temporalOperands": {
       "type": "array",
-      "prefixItems": [
-        {
-          "$ref": "#/$defs/temporalExpression"
-        },
-        {
-          "$ref": "#/$defs/temporalExpression"
-        }
-      ],
-      "additionalItems": false
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/temporalExpression"
+      }
     },
     "temporalExpression": {
       "oneOf": [
@@ -466,7 +455,7 @@
       "properties": {
         "op": {
           "type": "string",
-          "enum": [ "+", "-", "*", "/", "^" ]
+          "enum": [ "+", "-", "*", "/", "^", "%", "div" ]
         },
         "args": {
           "$ref": "#/$defs/arithmeticOperands"
@@ -582,7 +571,7 @@
                 "$ref": "#/$defs/temporalExpression"
               },
               {
-                "$ref": "#/$defs/arrayLiteral"
+                "$ref": "#/$defs/arrayExpression"
               }
             ]
           }

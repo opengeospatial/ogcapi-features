@@ -65,12 +65,12 @@ components:
         op:
           type: string
           enum:
-            - =
-            - <
-            - >
+            - '='
+            - '<>'
+            - '<'
+            - '>'
             - '<='
             - '>='
-            - <>
         args:
           $ref: '#/components/schemas/scalarOperands'
     scalarOperands:
@@ -107,9 +107,12 @@ components:
       minItems: 2
       maxItems: 2
       items:
-        # The second argument is a string or a CASEI or
-        # ACCENTI call with a str.
-        $ref: '#/components/schemas/characterExpression'
+        oneOf:
+          - $ref: '#/components/schemas/characterExpression'
+          - $ref: '#/components/schemas/patternExpression'
+      description: >-
+        The first argument is a characterExpression and the second item
+        is a patternExpression.
     patternExpression:
       oneOf:
         - type: object
@@ -163,13 +166,17 @@ components:
           $ref: '#/components/schemas/inListOperands'
     inListOperands:
       type: array
+      minItems: 2
+      maxItems: 2
       items:
-        # the first item is always a scalarExpression, the second an array
         oneOf:
           - $ref: '#/components/schemas/scalarExpression'
           - type: array
             items:
               $ref: '#/components/schemas/scalarExpression'
+      description: >-
+        The first item is a scalarExpression and the second item is an array
+        of scalarExpression. 
     isNullPredicate:
       type: object
       required:
@@ -299,11 +306,13 @@ components:
         op:
           type: string
           enum:
-            - +
+            - '+'
             - '-'
             - '*'
-            - /
+            - '/'
             - '^'
+            - '%'
+            - 'div'
         args:
           $ref: '#/components/schemas/arithmeticOperands'
     arithmeticOperands:
