@@ -279,8 +279,8 @@ components:
         oneOf:
           - $ref: '#/components/schemas/propertyRef'
           - $ref: '#/components/schemas/functionRef'
-          - $ref: '#/components/schemas/arrayInstance'
-    arrayInstance:
+          - $ref: '#/components/schemas/array'
+    array:
       type: array
       items:
         oneOf:
@@ -289,7 +289,7 @@ components:
           - $ref: '#/components/schemas/booleanExpression'
           - $ref: '#/components/schemas/geomExpression'
           - $ref: '#/components/schemas/temporalExpression'
-          - $ref: '#/components/schemas/arrayInstance'
+          - $ref: '#/components/schemas/array'
     arithmeticExpression:
       type: object
       required:
