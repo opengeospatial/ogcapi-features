@@ -169,7 +169,7 @@ temporalFunction = "T_AFTER"
 arrayPredicate = arrayFunction
                  "(" arrayExpression "," arrayExpression ")";
 
-arrayExpression = arrayInstance
+arrayExpression = array
                 | propertyName
                 | function;
 
@@ -185,7 +185,7 @@ arrayElement = characterClause
              | numericLiteral
              | temporalInstance
              | spatialInstance
-             | arrayInstance
+             | array
              | arithmeticExpression
              | booleanExpression
              | propertyName
@@ -347,7 +347,7 @@ argument = characterClause
          | numericLiteral
          | temporalInstance
          | spatialInstance
-         | arrayInstance
+         | array
          | arithmeticExpression
          | booleanExpression
          | propertyName
