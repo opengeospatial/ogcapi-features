@@ -18,7 +18,7 @@ encodings of CQL2.
 A CQL2 filter expression is an expression that defines a logically connected
 set of predicates that are evaluated for each item of a collection. Each 
 predicate is an operator with operands where the number of operands depends 
-on the operator. An operand is either a literal, a standardized or custom function 
+on the operator. An operand is either a literal, a property, a standardized or custom function 
 or an arithmetic expression.
 
 A predicate is an expression that evaluates to the Boolean values of `TRUE`
@@ -80,11 +80,11 @@ specifying the requirements class.
 
 The scalar data types are:
 
-* "string": character strings (literal rule `characterLiteral`);
-* "number": numbers including integers and floating point values (literal rule `numericLiteral`);
-* "boolean": booleans (literal rule `booleanLiteral`);
-* "timestamp": an instant with a granularity of a second or smaller (literal rule: `timestampLiteral`)
-* "date": an instant with a granularity of a day (literal rule: `dateLiteral`)
+* "string": character strings (rule `characterLiteral`);
+* "number": numbers including integers and floating point values (rule `numericLiteral`);
+* "boolean": booleans (rule `booleanLiteral`);
+* "timestamp": an instant with a granularity of a second or smaller (rule `timestampInstant`)
+* "date": an instant with a granularity of a day (rule `dateInstant`)
 
 For character string, numeric and boolean literals, the standard representations are used. For character string literals, embeded quotes are escaped using two consecutive single quotes (i.e. `''`).
 

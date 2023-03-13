@@ -87,7 +87,7 @@ components:
         - $ref: '#/components/schemas/booleanExpression'
     temporalInstantExpression:
       oneOf:
-        - $ref: '#/components/schemas/instantLiteral'
+        - $ref: '#/components/schemas/instantInstance'
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
     isLikePredicate:
@@ -216,7 +216,7 @@ components:
         $ref: '#/components/schemas/geomExpression'
     geomExpression:
       oneOf:
-        - $ref: '#/components/schemas/spatialLiteral'
+        - $ref: '#/components/schemas/spatialInstance'
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
     temporalPredicate:
@@ -253,7 +253,7 @@ components:
         $ref: '#/components/schemas/temporalExpression'
     temporalExpression:
       oneOf:
-        - $ref: '#/components/schemas/temporalLiteral'
+        - $ref: '#/components/schemas/temporalInstance'
         - $ref: '#/components/schemas/propertyRef'
         - $ref: '#/components/schemas/functionRef'
     arrayPredicate:
@@ -279,8 +279,8 @@ components:
         oneOf:
           - $ref: '#/components/schemas/propertyRef'
           - $ref: '#/components/schemas/functionRef'
-          - $ref: '#/components/schemas/arrayLiteral'
-    arrayLiteral:
+          - $ref: '#/components/schemas/array'
+    array:
       type: array
       items:
         oneOf:
@@ -289,7 +289,7 @@ components:
           - $ref: '#/components/schemas/booleanExpression'
           - $ref: '#/components/schemas/geomExpression'
           - $ref: '#/components/schemas/temporalExpression'
-          - $ref: '#/components/schemas/arrayLiteral'
+          - $ref: '#/components/schemas/array'
     arithmeticExpression:
       type: object
       required:
@@ -373,8 +373,8 @@ components:
         - type: string
         - type: number
         - type: boolean
-        - $ref: '#/components/schemas/instantLiteral'
-    spatialLiteral:
+        - $ref: '#/components/schemas/instantInstance'
+    spatialInstance:
       oneOf:
         - $ref: '#/components/schemas/geometryLiteral'
         - $ref: '#/components/schemas/bboxLiteral'
@@ -550,22 +550,22 @@ components:
           maxItems: 6
       items:
         type: number
-    temporalLiteral:
+    temporalInstance:
       oneOf:
-        - $ref: '#/components/schemas/instantLiteral'
-        - $ref: '#/components/schemas/intervalLiteral'
-    instantLiteral:
+        - $ref: '#/components/schemas/instantInstance'
+        - $ref: '#/components/schemas/intervalInstance'
+    instantInstance:
       oneOf:
-        - $ref: '#/components/schemas/dateLiteral'
-        - $ref: '#/components/schemas/timestampLiteral'
-    dateLiteral:
+        - $ref: '#/components/schemas/dateInsant'
+        - $ref: '#/components/schemas/timestampInstant'
+    dateInsant:
       type: object
       required:
         - date
       properties:
         date:
           $ref: '#/components/schemas/dateString'
-    timestampLiteral:
+    timestampInstant:
       type: object
       required:
         - timestamp
@@ -582,7 +582,7 @@ components:
     timestampString:
       type: string
       format: date-time
-    intervalLiteral:
+    intervalInstance:
       type: object
       required:
         - interval

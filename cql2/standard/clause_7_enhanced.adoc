@@ -200,7 +200,7 @@ A _spatial predicate_ evaluates two geometry-valued expressions to determine if 
 [[basic-spatial-data-types]]
 ==== Basic spatial data types and literal values
 
-The basic spatial data types are (part of rule `spatialLiteral`): 
+The basic spatial data types are (part of rule `spatialInstance`): 
 
 * "Point": a point;
 * "BBox": a bounding rectangle or box.
@@ -454,11 +454,11 @@ A temporal predicate evaluates two time-valued expressions to determine, if the 
 
 The operands in a temporal predicate are temporal geometries. A temporal geometry is either an instant or an interval.
 
-==== Temporal data types and literal values
+==== Temporal data types and instances
 
 An instant is either a date (rule `dateInstant`) or a timestamp (rule `timestampInstant`) in accordance with <<rfc3339,RFC 3339>> (RFC 3339 rules `full-date` or `date-time`). Note that since time is continuous, every instant has a duration and a start/end. Nevertheless, the geometry can be considered an instant in the temporal resolution that is applicable for the specific property. 
 
-An interval is the time between a start instant and an end instant, including both bounding instances (rule `intervalLiteral`). Unbounded interval ends are represented by a double-dot string ("..") based on the convention specified in ISO 8601-2.
+An interval is the time between a start instant and an end instant, including both bounding instances (rule `intervalInstance`). Unbounded interval ends are represented by a double-dot string ("..") based on the convention specified in ISO 8601-2.
 
 CQL2 follows ISO 8601-1/ISO 8601-2 in defining intervals as closed at both start and end. Note that some implementations and other specifications use a different definition and it may be necessary to convert between the interval representations. For example, SQL uses half-closed intervals - closed at the start, open at the end.
 
@@ -604,7 +604,7 @@ include::requirements/requirements_class_array-operators.adoc[]
 
 This clause specifies requirements for supporting array expression in CQL2.
 
-==== Arrays and literal values
+==== Arrays
 
 An array is a bracket-delimited, comma-separated list of array elements. An array element is either a scalar value,
 a geometry, an interval, or another array.

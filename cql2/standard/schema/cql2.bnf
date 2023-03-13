@@ -52,7 +52,7 @@ binaryComparisonPredicate = scalarExpression
 
 scalarExpression = characterClause
                  | numericLiteral
-                 | instantLiteral
+                 | instantInstance
                  | arithmeticExpression
                  | booleanExpression
                  | propertyName
@@ -95,8 +95,8 @@ isNullPredicate = isNullOperand "IS" ["NOT"] "NULL";
 
 isNullOperand = characterClause
               | numericLiteral
-              | temporalLiteral
-              | spatialLiteral
+              | temporalInstance
+              | spatialInstance
               | arithmeticExpression
               | booleanExpression
               | propertyName
@@ -127,7 +127,7 @@ spatialFunction = "S_INTERSECTS"
 # a geometric literal (expressed as WKT) or a function that returns a
 # geometric value.
 #
-geomExpression = spatialLiteral
+geomExpression = spatialInstance
                | propertyName
                | function;
 
@@ -140,7 +140,7 @@ geomExpression = spatialLiteral
 temporalPredicate = temporalFunction 
                     "(" temporalExpression "," temporalExpression ")";
 
-temporalExpression = temporalLiteral
+temporalExpression = temporalInstance
                    | propertyName
                    | function;
 
@@ -169,23 +169,23 @@ temporalFunction = "T_AFTER"
 arrayPredicate = arrayFunction
                  "(" arrayExpression "," arrayExpression ")";
 
-arrayExpression = arrayLiteral
+arrayExpression = array
                 | propertyName
                 | function;
 
-# An array literal is a bracket-delimited, comma-separated list of array
+# An array literal is a parentheses-delimited, comma-separated list of array
 # elements.
 arrayLiteral = "(" ")"
              | "(" arrayElement [ { "," arrayElement } ] ")";
 
 # An array element is either a character literal, a numeric literal,
-# a geometric literal, a temporal literal, a property name, a function, an
-# arithmetic expression or an array.
+# a geometric literal, a temporal instance, a property name, a function,
+# an arithmetic expression or an array.
 arrayElement = characterClause
              | numericLiteral
-             | temporalLiteral
-             | spatialLiteral
-             | arrayLiteral
+             | temporalInstance
+             | spatialInstance
+             | array
              | arithmeticExpression
              | booleanExpression
              | propertyName
@@ -345,9 +345,9 @@ argumentList = argument [ { "," argument } ];
 
 argument = characterClause
          | numericLiteral
-         | temporalLiteral
-         | spatialLiteral
-         | arrayLiteral
+         | temporalInstance
+         | spatialInstance
+         | array
          | arithmeticExpression
          | booleanExpression
          | propertyName
@@ -468,14 +468,14 @@ booleanLiteral = "TRUE" | "FALSE";
 # NOTE: This is basically BNF that define WKT encoding. It would be nice
 #       to instead reference some normative BNF for WKT.
 #=============================================================================#
-spatialLiteral = pointTaggedText
-               | linestringTaggedText
-               | polygonTaggedText
-               | multipointTaggedText
-               | multilinestringTaggedText
-               | multipolygonTaggedText
-               | geometryCollectionTaggedText
-               | bboxTaggedText;
+spatialInstance = pointTaggedText
+                | linestringTaggedText
+                | polygonTaggedText
+                | multipointTaggedText
+                | multilinestringTaggedText
+                | multipolygonTaggedText
+                | geometryCollectionTaggedText
+                | bboxTaggedText;
 
 pointTaggedText = "POINT" pointText;
 
@@ -511,8 +511,7 @@ multiLineStringText = "(" lineStringText {"," lineStringText} ")";
 
 multiPolygonText = "(" polygonText {"," polygonText} ")";
 
-geometryCollectionText = "("
-                         spatialLiteral {"," spatialLiteral} ")";
+geometryCollectionText = "(" spatialLiteral {"," spatialLiteral} ")";
 
 bboxTaggedText = "BBOX" bboxText;
 
@@ -530,9 +529,9 @@ minElev = signedNumericLiteral;
 
 maxElev = signedNumericLiteral;
 
-temporalLiteral = instantLiteral | intervalLiteral;
+temporalInstance = instantInstance | intervalInstance;
 
-instantLiteral = dateInstant | timestampInstant;
+instantInstance = dateInstant | timestampInstant;
 
 dateInstant = "DATE" 
               "(" dateInstantString ")";
@@ -544,8 +543,7 @@ timestampInstant = "TIMESTAMP"
 
 timestampInstantString = "'" fullDate "T" utcTime "'";
 
-intervalLiteral = "INTERVAL" 
-                  "(" instantParameter "," instantParameter ")";
+intervalLiteral = "INTERVAL" "(" instantParameter "," instantParameter ")";
 
 instantParameter = dateInstantString
                  | timestampInstantString
