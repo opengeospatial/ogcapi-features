@@ -423,7 +423,7 @@
       "items": {
         "oneOf": [
           {
-            "$ref": "#/$defs/arrayInstance"
+            "$ref": "#/$defs/array"
           },
           {
             "$ref": "#/$defs/propertyRef"
@@ -434,7 +434,7 @@
         ]
       }
     },
-    "arrayInstance": {
+    "array": {
       "type": "array",
       "items": {
         "oneOf": [
@@ -454,7 +454,7 @@
             "$ref": "#/$defs/temporalExpression"
           },
           {
-            "$ref": "#/$defs/arrayInstance"
+            "$ref": "#/$defs/array"
           }
         ]
       }
@@ -582,7 +582,7 @@
                 "$ref": "#/$defs/temporalExpression"
               },
               {
-                "$ref": "#/$defs/arrayInstance"
+                "$ref": "#/$defs/array"
               }
             ]
           }
