@@ -4,8 +4,14 @@ This standard defines the following requirements classes,
 grouped by their standardization target:
 
 * Web API
+** <<rc_queryables,Queryables>>
+** <<rc_queryables_param,Queryables as Query Parameters>>
 ** <<rc_filter,Filter>>
 ** <<rc_features-filter,Features Filter>>
+
+The <<rc_queryables,Queryables>> requirements class defines the Queryables resource (at path `/collections/{collectionId}/queryables`) and its representation as a JSON Schema. Queryables can be used to determine the list of property names and their schemas that may be used to construct filter expressions.
+
+The <<rc_queryables_param,Queryables as Query Parameters>> requirements class adds the requirement to provide query parameters for queryables according to recommendation in the section https://docs.ogc.org/is/17-069r4/17-069r4.html#rec_core_fc-filters[Parameters for filtering on feature properties] in OGC API - Features - Part 1: Core.
 
 The <<rc_filter,Filter>> requirements class defines a set of HTTP query
 parameters that may be used to specify complex filter expressions on
@@ -15,8 +21,6 @@ class is:
 * `filter` - The filter expression.
 * `filter-lang` - The language used in the filter expression.
 * `filter-crs` - The coordinate reference system used in the filter expression, if Part 2 is supported.
-
-This requirements class also defines the Queryables resource (at path `/collections/{collectionId}/queryables`) that can be used to determine the list of property names and types that may be used to construct filter expressions.
 
 The <<rc_features-filter,Features Filter>> requirements class defines the
 binding between the <<rc_filter,Filter>> requirements class and the
@@ -44,6 +48,6 @@ APIs that implement the <<CQL2,Common Query Language (CQL2)>> standard should ad
 The content of this sub-clause is informative.
 
 Because the filter parameters is not exclusively useful for features, it is anticipated that the
-<<rc_filter,Filter>> requirements class will eventually become parts of the OGC API Common suite of standards thus
-leaving the <<rc_features-filter,Features Filter>> requirements class as part
+<<rc_queryables,Queryables>> and <<rc_filter,Filter>> requirements classes will eventually become parts of the OGC API Common suite of standards thus
+leaving the <<rc_queryables_param,Queryables as Query Parameters>> and <<rc_features-filter,Features Filter>> requirements classes as part
 3 of the OGC API Features specifications.

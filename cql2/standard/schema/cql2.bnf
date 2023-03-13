@@ -25,7 +25,7 @@ booleanFactor = ["NOT"] booleanPrimary;
 
 booleanPrimary = predicate
                | booleanLiteral
-               | leftParen booleanExpression rightParen;
+               | "(" booleanExpression ")";
 
 predicate = comparisonPredicate
           | spatialPredicate
@@ -58,20 +58,19 @@ scalarExpression = characterClause
                  | propertyName
                  | function;
 
-comparisonOperator = eq | neq | lt | gt | lteq | gteq;
-
-neq = lt gt;
-
-gteq = gt eq;
-
-lteq = lt eq;
+comparisonOperator = "="      # equal
+                   | "<" ">"  # not equal
+                   | "<"      # less than
+                   | ">"      # greater than
+                   | "<" "="  # less than or equal
+                   | ">" "="; # greater than or equal
 
 # LIKE predicate
 #
 isLikePredicate =  characterExpression ["NOT"] "LIKE" patternExpression;
 
-patternExpression = "CASEI" leftParen patternExpression rightParen
-                  | "ACCENTI" leftParen patternExpression rightParen
+patternExpression = "CASEI" "(" patternExpression ")"
+                  | "ACCENTI" "(" patternExpression ")"
                   | characterLiteral;
 
 # BETWEEN predicate
@@ -86,9 +85,9 @@ numericExpression = arithmeticExpression
 
 # IN LIST predicate
 #
-isInListPredicate = scalarExpression ["NOT"] "IN" leftParen inList rightParen;
+isInListPredicate = scalarExpression ["NOT"] "IN" "(" inList ")";
 
-inList = scalarExpression [ {comma scalarExpression} ];
+inList = scalarExpression [ {"," scalarExpression} ];
 
 # IS NULL predicate
 #
@@ -109,8 +108,7 @@ isNullOperand = characterClause
 # conditions of the spatial comparison function are met, the function returns
 # a Boolean value of true.  Otherwise the function returns false.
 #=============================================================================#
-spatialPredicate =  spatialFunction
-                    leftParen geomExpression comma geomExpression rightParen;
+spatialPredicate =  spatialFunction "(" geomExpression "," geomExpression ")";
 
 # NOTE: The buffer functions (DWITHIN and BEYOND) are not included because
 #       these are outside the scope of a "simple" core for CQL2.  These
@@ -140,7 +138,7 @@ geomExpression = spatialInstance
 # a Boolean value of true.  Otherwise the function returns false.
 #=============================================================================#
 temporalPredicate = temporalFunction 
-                    leftParen temporalExpression comma temporalExpression rightParen;
+                    "(" temporalExpression "," temporalExpression ")";
 
 temporalExpression = temporalInstance
                    | propertyName
@@ -169,15 +167,16 @@ temporalFunction = "T_AFTER"
 # a Boolean value of true.  Otherwise the function returns false.
 #=============================================================================#
 arrayPredicate = arrayFunction
-                 leftParen arrayExpression comma arrayExpression rightParen;
+                 "(" arrayExpression "," arrayExpression ")";
 
 arrayExpression = arrayInstance
                 | propertyName
                 | function;
 
-# An array is a bracket-delimited, comma-separated list of array elements.
-arrayInstance = leftParen rightParen
-              | leftParen arrayElement [ { comma arrayElement } ] rightParen;
+# An array literal is a parentheses-delimited, comma-separated list of array
+# elements.
+arrayLiteral = "(" ")"
+             | "(" arrayElement [ { "," arrayElement } ] ")";
 
 # An array element is either a character literal, a numeric literal,
 # a geometric literal, a temporal instance, a property name, a function,
@@ -205,16 +204,16 @@ arrayFunction = "A_EQUALS"
 
 arithmeticExpression = arithmeticTerm [ {arithmeticOperatorPlusMinus arithmeticTerm} ];
 
-arithmeticOperatorPlusMinus = plusSign | minusSign;
+arithmeticOperatorPlusMinus = "+" | "-";
 
 arithmeticTerm = powerTerm [ {arithmeticOperatorMultDiv powerTerm} ];
 
-arithmeticOperatorMultDiv = asterisk | solidus | percent | "div";
+arithmeticOperatorMultDiv = "*" | "/" | "%" | "div";
 
-powerTerm = arithmeticFactor [ caret arithmeticFactor ];
+powerTerm = arithmeticFactor [ "^" arithmeticFactor ];
 
-arithmeticFactor = leftParen arithmeticExpression rightParen
-                 | [ minusSign ] arithmeticOperand;
+arithmeticFactor = "(" arithmeticExpression ")"
+                 | [ "-" ] arithmeticOperand;
 
 arithmeticOperand = numericLiteral
                   | propertyName
@@ -225,32 +224,32 @@ arithmeticOperand = numericLiteral
 # Production copied from: https://www.w3.org/TR/REC-xml/#sec-common-syn,
 #                         "Names and Tokens".
 #=============================================================================#
-propertyName = identifier | doubleQuote identifier doubleQuote;
+propertyName = identifier | "\"" identifier "\"";
 
 identifier = identifierStart [ { identifierPart } ];
 
-identifierPart = identifierStart |
-                 period |              # "\x002E"
-                 digit  |              # 0-9
-                 "\x0300".."\x036F" |  # combining and diacritical marks
-                 "\x203F".."\x2040";   # ‿ and ⁀
+identifierPart = identifierStart
+               | "."                    # "\x002E"
+               | digit                  # 0-9
+               | "\x0300".."\x036F"     # combining and diacritical marks
+               | "\x203F".."\x2040";    # ‿ and ⁀
 
-identifierStart = colon |              # \x003A
-                  underscore |         # \x005F
-                  "\x0041".."\x005A" | # A-Z
-                  "\x0061".."\x007A" | # a-z
-                  "\x00C0".."\x00D6" | # À-Ö Latin-1 Supplement Letters
-                  "\x00D8".."\x00F6" | # Ø-ö Latin-1 Supplement Letters
-                  "\x00F8".."\x02FF" | # ø-ÿ Latin-1 Supplement Letters
-                  "\x0370".."\x037D" | # Ͱ-ͽ Greek and Coptic (without ";")
-                  "\x037F".."\x1FFE" | # See note 1.
-                  "\x200C".."\x200D" | # zero width non-joiner and joiner
-                  "\x2070".."\x218F" | # See note 2.
-                  "\x2C00".."\x2FEF" | # See note 3.
-                  "\x3001".."\xD7FF" | # See note 4.
-                  "\xF900".."\xFDCF" | # See note 5.
-                  "\xFDF0".."\xFFFD" | # See note 6.
-                  "\x10000".."\xEFFFF" # See note 7.
+identifierStart = "\x003A"              # colon
+                | "\x005F"              # underscore
+                | "\x0041".."\x005A"    # A-Z
+                | "\x0061".."\x007A"    # a-z
+                | "\x00C0".."\x00D6"    # À-Ö Latin-1 Supplement Letters
+                | "\x00D8".."\x00F6"    # Ø-ö Latin-1 Supplement Letters
+                | "\x00F8".."\x02FF"    # ø-ÿ Latin-1 Supplement Letters
+                | "\x0370".."\x037D"    # Ͱ-ͽ Greek and Coptic (without ";")
+                | "\x037F".."\x1FFE"    # See note 1.
+                | "\x200C".."\x200D"    # zero width non-joiner and joiner
+                | "\x2070".."\x218F"    # See note 2.
+                | "\x2C00".."\x2FEF"    # See note 3.
+                | "\x3001".."\xD7FF"    # See note 4.
+                | "\xF900".."\xFDCF"    # See note 5.
+                | "\xFDF0".."\xFFFD"    # See note 6.
+                | "\x10000".."\xEFFFF"; # See note 7.
 
 # See: https://unicode-table.com/en/blocks/
 
@@ -340,9 +339,9 @@ identifierStart = colon |              # \x003A
 #=============================================================================#
 # Definition of a FUNCTION
 #=============================================================================#
-function = identifier leftParen {argumentList} rightParen;
+function = identifier "(" {argumentList} ")";
 
-argumentList = argument [ { comma argument } ];
+argumentList = argument [ { "," argument } ];
 
 argument = characterClause
          | numericLiteral
@@ -361,66 +360,77 @@ characterExpression = characterClause
                     | propertyName
                     | function;
 
-characterClause = "CASEI" leftParen characterExpression rightParen
-                | "ACCENTI" leftParen characterExpression rightParen
+characterClause = "CASEI" "(" characterExpression ")"
+                | "ACCENTI" "(" characterExpression ")"
                 | characterLiteral;
 
 #=============================================================================#
 # Definition of CHARACTER literals
 #=============================================================================#
-characterLiteral = quote [ {character} ] quote;
+characterLiteral = "'" [ {character} ] "'";
 
-character = alpha | digit | escapedquote;
+character = alpha | digit | "''";
 
 # character & digit productions copied from:
 # https://www.w3.org/TR/REC-xml/#charsets
 #
-alpha = "\x0009" | "\x000A" | "\x000D" | "\x0020".."\x0029" |
-        "\x0040".."\xD7FF" | "\xE000".."\xFFFD" | "\x10000".."\x10FFFF"
+alpha = "\x0007".."\x000D"     # bell, bs, htab, lf, vt, ff, cr
+      | "\x0020".."\x0026"     # spc, !, ", #, $, %, &
+      | "\x0028".."\x002F"     # (, ), *, +, comma, -, ., /
+      | "\x003A".."\xD7FF"     # :,;,<,=,>,?,@,A-Z,[,\,],^,_,`,a-z,{,|,},~,...
+      | "\xE000".."\xFFFD"     # See note 8.
+      | "\x10000".."\x10FFFF"; # See note 9.
+
+# Note 8: Private Use, CJK Compatibility Ideographs, Alphabetic Presentation
+#         Forms, Arabic Presentation Forms-A, Combining Half Marks, CJK
+#         Compatibility Forms, Small Form Variants, Arabic Presentation Forms-B,
+#         Specials, Halfwidth and Fullwidth Forms, Specials
+# Note 9: Linear B Syllabary, Linear B Ideograms, Aegean Numbers, Ancient Greek
+#         Numbers, Ancient Symbols, Phaistos Disc, Lycian, Carian, Coptic
+#         Epact Numbers, Old Italic, Gothic, Old Permic, Ugaritic, Old Persian,
+#         Deseret, Shavian, Osmanya, Osage, Elbasan, Caucasian Albanian,
+#         Vithkuqi, Linear A, Latin Extended-F, Cypriot Syllabary, Imperial
+#         Aramaic, Palmyrene, Nabataean, Hatran, Phoenician, Lydian, Meroitic
+#         Hieroglyphs, Meroitic Cursive, Kharoshthi, Old South Arabian, Old
+#         North Arabian, Manichaean, Avestan, Inscriptional Parthian,
+#         Inscriptional Pahlavi, Psalter Pahlavi, Old Turkic, Old Hungarian,
+#         Hanifi Rohingya, Rumi Numeral Symbols, Yezidi, Arabic Extended-C,
+#         Old Sogdian, Sogdian, Old Uyghur, Chorasmian, Elymaic, Brahmi,
+#         Kaithi, Sora Sompeng, Chakma, Mahajani, Sharada, Sinhala Archaic
+#         Numbers, Khojki, Multani, Khudawadi, Grantha, Newa, Tirhuta, Siddham,
+#         Modi, Mongolian Supplement, Takri, Ahom, Dogra, Warang Citi, Dives
+#         Akuru, Nandinagari, Zanabazar Square, Soyombo, Unified Canadian
+#         Aboriginal Syllabics Extended-A, Pau Cin Hau, Devanagari Extended-A,
+#         Bhaiksuki, Marchen, Masaram Gondi, Gunjala Gondi, Makasar, Kawi,
+#         Lisu Supplement, Tamil Supplement, Cuneiform, Cuneiform Numbers and
+#         Punctuation, Early Dynastic Cuneiform, Cypro-Minoan, Egyptian
+#         Hieroglyphs, Egyptian Hieroglyph Format Controls, Anatolian
+#         Hieroglyphs, Bamum Supplement, Mro, Tangsa, Bassa Vah, Pahawh Hmong,
+#         Medefaidrin, Miao, Ideographic Symbols and Punctuation, Tangut,
+#         Tangut Components, Khitan Small Script, Tangut Supplement, Kana
+#         Extended-B, Kana Supplement, Kana Extended-A, Small Kana Extension,
+#         Nushu, Duployan, Shorthand Format Controls, Znamenny Musical Notation,
+#         Byzantine Musical Symbols, Musical Symbols, Ancient Greek Musical
+#         Notation, Kaktovik Numerals, Mayan Numerals, Tai Xuan Jing Symbols,
+#         Counting Rod Numerals, Mathematical Alphanumeric Symbols, Sutton
+#         SignWriting, Latin Extended-G, Glagolitic Supplement, Cyrillic
+#         Extended-D, Nyiakeng Puachue Hmong, Toto, Wancho, Nag Mundari,
+#         Ethiopic Extended-B, Mende Kikakui, Adlam, Indic Siyaq Numbers,
+#         Ottoman Siyaq Numbers, Arabic Mathematical Alphabetic Symbols,
+#         Mahjong Tiles, Domino Tiles, Playing Cards, Enclosed Alphanumeric
+#         Supplement, Enclosed Ideographic Supplement, Miscellaneous Symbols
+#         and Pictographs, Emoticons, Ornamental Dingbats, Transport and Map
+#         Symbols, Alchemical Symbols, Geometric Shapes Extended, Supplemental
+#         Arrows-C, Supplemental Symbols and Pictographs, Chess Symbols, Symbols
+#         and Pictographs Extended-A, Symbols for Legacy Computing, CJK Unified
+#         Ideographs Extension B, CJK Unified Ideographs Extension C, CJK
+#         Unified Ideographs Extension D, CJK Unified Ideographs Extension E,
+#         CJK Unified Ideographs Extension F, CJK Compatibility Ideographs
+#         Supplement, CJK Unified Ideographs Extension G, CJK Unified
+#         Ideographs Extension H, Tags, Variation Selectors Supplement,
+#         Supplementary Private Use Area-A, Supplementary Private Use Area-B
 
 digit = "\x0030".."\x0039";
-
-underscore = "_";    # "\x005F"
-
-doubleQuote = "\"";  # "\x0022"
-
-quote = "'";         # "\x0027"
-
-escapedquote = "''";
-
-leftBracket = "[";   # "\x005B"
-
-rightBracket = "]";  # "\x005D"
-
-leftParen = "(";     # "\x0028"
-
-rightParen = ")";    # "\x0029"
-
-asterisk = "*";      # "\x002A"
-
-plusSign = "+";      # "\x002B"
-
-comma = ",";         # "\x002C"
-
-minusSign = "-";     # "\x002D"
-
-period = ".";        # "\x002E"
-
-dotdot = "..";
-
-solidus = "/";       # "\x002F"
-
-colon = ":";         # "\x003A"
-
-lt = "<";            # "\x003C"
-
-eq = "=";            # "\x003D"
-
-gt = ">";            # "\x003F"
-
-caret = "^";
-
-percent = "%";
 
 #=============================================================================#
 # Definition of NUMERIC literals
@@ -431,8 +441,8 @@ unsignedNumericLiteral = exactNumericLiteral | approximateNumericLiteral;
 
 signedNumericLiteral = [sign] exactNumericLiteral | approximateNumericLiteral;
 
-exactNumericLiteral = unsignedInteger [ period [ unsignedInteger ] ]
-                      | period unsignedInteger;
+exactNumericLiteral = unsignedInteger [ "." [ unsignedInteger ] ]
+                      | "." unsignedInteger;
 
 approximateNumericLiteral = mantissa "E" exponent;
 
@@ -444,7 +454,7 @@ signedInteger = [ sign ] unsignedInteger;
 
 unsignedInteger = {digit};
 
-sign = plusSign | minusSign;
+sign = "+" | "-";
 
 #=============================================================================#
 # Boolean literal
@@ -481,7 +491,7 @@ multipolygonTaggedText = "MULTIPOLYGON" multiPolygonText;
 
 geometryCollectionTaggedText = "GEOMETRYCOLLECTION" geometryCollectionText;
 
-pointText = leftParen point rightParen;
+pointText = "(" point ")";
 
 point = xCoord yCoord [zCoord];
 
@@ -491,22 +501,21 @@ yCoord = signedNumericLiteral;
 
 zCoord = signedNumericLiteral;
 
-lineStringText = leftParen point {comma point} rightParen;
+lineStringText = "(" point {"," point} ")";
 
-polygonText =  leftParen lineStringText {comma lineStringText} rightParen;
+polygonText =  "(" lineStringText {"," lineStringText} ")";
 
-multiPointText = leftParen pointText {comma pointText} rightParen;
+multiPointText = "(" pointText {"," pointText} ")";
 
-multiLineStringText = leftParen lineStringText {comma lineStringText} rightParen;
+multiLineStringText = "(" lineStringText {"," lineStringText} ")";
 
-multiPolygonText = leftParen polygonText {comma polygonText} rightParen;
+multiPolygonText = "(" polygonText {"," polygonText} ")";
 
-geometryCollectionText = leftParen
-                         spatialInstance {comma spatialInstance} rightParen;
+geometryCollectionText = "(" spatialLiteral {"," spatialLiteral} ")";
 
 bboxTaggedText = "BBOX" bboxText;
 
-bboxText = leftParen westBoundLon comma southBoundLat comma [minElev comma] eastBoundLon comma northBoundLat [comma maxElev] rightParen;
+bboxText = "(" westBoundLon "," southBoundLat "," [minElev ","] eastBoundLon "," northBoundLat ["," maxElev] ")";
 
 westBoundLon = signedNumericLiteral;
 
@@ -525,21 +534,20 @@ temporalInstance = instantInstance | intervalInstance;
 instantInstance = dateInstant | timestampInstant;
 
 dateInstant = "DATE" 
-              leftParen dateInstantString rightParen;
+              "(" dateInstantString ")";
 
-dateInstantString = quote fullDate quote;
+dateInstantString = "'" fullDate "'";
 
 timestampInstant = "TIMESTAMP" 
-                   leftParen timestampInstantString rightParen;
+                   "(" timestampInstantString ")";
 
-timestampInstantString = quote fullDate "T" utcTime quote;
+timestampInstantString = "'" fullDate "T" utcTime "'";
 
-intervalInstance = "INTERVAL" 
-                   leftParen instantParameter comma instantParameter rightParen;
+intervalLiteral = "INTERVAL" "(" instantParameter "," instantParameter ")";
 
 instantParameter = dateInstantString
                  | timestampInstantString
-                 | quote dotdot quote
+                 | "'..'"
                  | propertyName
                  | function;
 
@@ -557,4 +565,4 @@ timeHour   = digit digit;
 
 timeMinute = digit digit;
 
-timeSecond = digit digit [period digit {digit}];
+timeSecond = digit digit ["." digit {digit}];
