@@ -2,9 +2,9 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/cql2-text/escaping* 
-^|A |The escape character in a string literal SHALL be the backslash (`\\`).
-^|B |Embeded single quotations (`'`) in a string literal SHALL be escaped using a double single quotation (`''`) OR the backslash (`\\`) character.
-^|C | The server SHALL be able to parse the following escaped sequences for encoding control characters in a string literal:
+^|A |The escape character in a character literal SHALL be the backslash (`\\`).
+^|B |Embeded single quotations (`'`) in a character literal SHALL be escaped using a double single quotation (`''`) OR the backslash (`\\`) character.
+^|C | The server SHALL be able to parse the following escaped sequences for encoding control characters in a character literal:
 
 * '\a' BELL CHR(07)
 * '\b' BACKSPACE CHR(08)
@@ -14,6 +14,3 @@
 * '\f' FORM FEED CHR(12)
 * '\r' CARRIAGE RETURN CHR(13)
 |===
-
-
-
