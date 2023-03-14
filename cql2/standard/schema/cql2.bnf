@@ -369,7 +369,9 @@ characterClause = "CASEI" "(" characterExpression ")"
 #=============================================================================#
 characterLiteral = "'" [ {character} ] "'";
 
-character = alpha | digit | whitespace | "''";
+character = alpha | digit | whitespace | escapeQuote;
+
+escapeQuote = "''" | "\'";
 
 # character & digit productions copied from:
 # https://www.w3.org/TR/REC-xml/#charsets
