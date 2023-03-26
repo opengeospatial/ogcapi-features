@@ -9,10 +9,12 @@ include::requirements/requirements_class_create-replace-delete.adoc[]
 A server that implements this requirements class provides the ability to add,
 replace and/or remove individual resources from a collection.  Not all operations need to be implemented for all offered mutable resources.
 
-The HTTP POST method is used to add a new resource instance to a collection.
+The HTTP POST method is used to add a new resource instance to a collection. The resource identifier is assigned by the server.
 
 The HTTP PUT method is used to replace an existing resource in a collection
 with a replacement resource with the same resource identifier.
+
+If the HTTP PUT method is executed on a non-existing resource in a collection, the server can add a new resource instance to a collection, if the collection supports that resource identifiers can be assigned by the client.
 
 Finally, the HTTP DELETE method is used to remove a resource from a collection.
 
@@ -25,6 +27,8 @@ NOTE: The use of the HTTP PATCH method is not defined in this requirements class
 NOTE: In order to promote interoperability, each standard that extends this standard should make recommendations concerning the representation of resources.  See <<features,Features>> for a discussion of feature representations.
 
 include::requirements/create-replace-delete/REQ_methods.adoc[]
+
+Note that the POST, PUT and/or DELETE methods will typically only be available for authorized users with sufficient permissions. The available methods of a user are available via the <<options,OPTIONS method>> for each resource.
 
 [[http_status_codes]]
 ==== HTTP status codes
@@ -158,6 +162,9 @@ discussed in this standard.
 
 include::requirements/create-replace-delete/replace/REQ_put-op.adoc[]
 
+include::recommendations/create-replace-delete/replace/PER_create.adoc[]
+
+
 ==== Request body
 
 ==== Overview 
@@ -185,9 +192,10 @@ include::requirements/create-replace-delete/replace/REQ_rid.adoc[]
 
 ==== Exceptions
 
-The assignment of resource identifiers is the perview of the server and as a
-result, clients cannot simply use the HTTP PUT operation to create a new resource.
-Instead, the creation of new resource instances have be preformed
+If the server does not support the PUT method on non-existing resources, 
+the assignment of resource identifiers is the perview of the server and as a
+result, clients cannot use the HTTP PUT operation to create a new resource.
+In this case, the creation of new resource instances has be performed
 using the HTTP POST operation as described in <<create>>.
 
 include::requirements/create-replace-delete/replace/REQ_rid-exception.adoc[]
@@ -250,13 +258,13 @@ The following example deletes the feature created by the <<create-example>> and 
 include::../examples/json/ex04_delete.adoc[]
 
 [[options]]
-=== Determining available methods at a resource endpoint (OPTIONS)
+=== Determining available methods at an endpoint (OPTIONS)
 
 ==== Overview
 
 A server is not required to implement every method described in this specification (i.e. POST, PUT, <<update_clause,PATCH>> or DELETE) for every mutable resource that it offers.  Furthermore, a server that supports the ability to add, modify or remove resources from collections is not likely to be an open server.  That is, access to the server, and specifically the operations that allow resource creation, modification and/or removal, will be controlled.  Such controls might, for example, take the form of policy requirements (e.g. resources on this server can be inserted or updated but not deleted) or user access control requirements (e.g. user "X" is only allowed to create resources but not update or delete resources).  Regardless of the controls the server must be able to advertise, within the control context in place, which methods are available for each resource that it offers.  This is accomplished using the https://www.rfc-editor.org/rfc/rfc2616.html#section-9.2[HTTP OPTIONS] method.
 
-The HTTP OPTIONS method allows the server to explicitly declare which HTTP methods are supported for a particular resource endpoint.  This specification deals with the HTTP POST, PUT, PATCH and DELETE methods but any relevant HTTP method may be listed for a particular resource.
+The HTTP OPTIONS method allows the server to explicitly declare which HTTP methods are supported for a particular resource(s) endpoint.  This specification deals with the HTTP POST, PUT, PATCH and DELETE methods but any relevant HTTP method may be listed for a particular resource.
 
 ==== Sequence diagram
 

@@ -2,6 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:per-id}* |*/req/core/methods*
-^|A |A server SHALL implement one or more of the methods HTTP POST, PUT and/or DELETE for each resource.
+^|A |A server SHALL implement the method HTTP POST on some resources endpoint for or the methods HTTP PUT or DELETE on some resource endpoint.
 ^|B |A server SHALL declare which methods are supported for each resource via the <<options,HTTP OPTIONS>> method.
 |===

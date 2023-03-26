@@ -1,6 +1,7 @@
-[[req_create-replace-delete_insert-post-op]]
+[[req_create-replace-delete_post-op]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/create-replace-delete/insert-post-op*
+^|*Requirement {counter:req-id}* |*/req/create-replace-delete/post-op*
+^|Condition |Server declares support for the POST method on the resources endpoint via the `Allow` header in the response to an OPTIONS request.
 ^|A |The server SHALL support the HTTP POST operation at the resources endpoint.
 |===

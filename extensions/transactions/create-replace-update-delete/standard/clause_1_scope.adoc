@@ -29,5 +29,7 @@ method.
 |Resource endpoint 4+|HTTP method
 | |**POST** |**PUT** |**PATCH** |**DELETE**
 |`/collections/{collectionId}/items` |<<create,create>> |n/a |n/a |n/a
-|`/collections/{collectionId}/items/{resourceId}` |n/a |<<replace,replace>> |<<update,update>> |<<delete,delete>>
+|`/collections/{collectionId}/items/{resourceId}` |n/a |<<replace,replace>>, <<create,create>> |<<update,update>> |<<delete,delete>>
 |===
+
+The option to create a new resource with PUT is conditional and depends on the characteristics of the collection.
