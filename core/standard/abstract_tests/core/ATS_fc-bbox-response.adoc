@@ -2,9 +2,29 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Abstract Test {counter:ats-id}* |*/conf/core/fc-bbox-response*
-^|Test Purpose |Validate that the bounding box query parameters are processed correctly.
-^|Requirement |<<req_core_fc-bbox-response,/req/core/fc-bbox-response>>
-^|Test Method |. Verify that only features that have a spatial geometry that intersects the bounding box are returned as part of the result set.
-. Verify that the `bbox` parameter matched all features in the collection that were not associated with a spatial geometry (this is only applicable for datasets that include features without a spatial geometry).
-. Verify that the coordinate reference system of the geometries is WGS 84 longitude/latitude ("http://www.opengis.net/def/crs/OGC/1.3/CRS84" or "http://www.opengis.net/def/crs/OGC/0/CRS84h") since no parameter `bbox-crs` was specified in the request.
+^|Test Purpose |Validate that the bounding box query parameters are evaluated correctly.
+^|Requirement |<<req_core_fc-bbox-definition,/req/core/fc-bbox-definition>>, <<req_core_fc-bbox-response,/req/core/fc-bbox-response>>
+^|Test Method |Request Features with the `bbox` parameter and without a `bbox-crs` parameter.
+
+Use a bounding box with four numbers in all requests, if the collection has spatial geometries in 2D:
+
+* Lower left corner, WGS 84 longitude
+* Lower left corner, WGS 84 latitude
+* Upper right corner, WGS 84 longitude
+* Upper right corner, WGS 84 latitude
+
+Use a bounding box with six numbers in all requests, if the collection has spatial geometries in 3D:
+
+* Lower left corner, WGS 84 longitude
+* Lower left corner, WGS 84 latitude
+* Minimum value, WGS 84 ellipsoidal height
+* Upper right corner, WGS 84 longitude
+* Upper right corner, WGS 84 latitude
+* Maximum value, WGS 84 ellipsoidal height
+
+Verify that
+
+. only features that have a spatial geometry that intersects the bounding box are returned as part of the result set;
+. the `bbox` parameter matched all features in the collection that were not associated with a spatial geometry (this is only applicable for datasets that include features without a spatial geometry);
+. the coordinate reference system of the geometries is WGS 84 longitude/latitude ("http://www.opengis.net/def/crs/OGC/1.3/CRS84" or "http://www.opengis.net/def/crs/OGC/0/CRS84h") since no parameter `bbox-crs` was specified in the request.
 |===

@@ -2,9 +2,10 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Abstract Test {counter:ats-id}* |*/conf/core/fc-time-response*
-^|Test Purpose |Validate that the datetime query parameters are processed correctly.
-^|Requirement |<<req_core_fc-time-response,/req/core/fc-time-response>>
-^|Test Method |. Verify that only features that have a temporal geometry that intersects the temporal information in the `datetime` parameter were included in the result set
-. Verify that all features in the collection that are not associated with a temporal geometry are included in the result set
-. Validate that the dateime parameter complies with the syntax described in <<req_core_fc-time-response,/req/core/fc-time-response>>.
+^|Test Purpose |Validate that the datetime query parameters are evaluated correctly.
+^|Requirement |<<req_core_fc-time-definition,/req/core/fc-time-definition>>, <<req_core_fc-time-response,/req/core/fc-time-response>>
+^|Test Method |Send requests with all variations described in <<req_core_fc-time-response,/req/core/fc-time-response>>: a date-time value, a bounded interval, a half-bounded interval at the start and a half-bounded interval at the end. Use both double-dot and the empty string for the half-bounded values.
+
+. Verify that only features that have a temporal geometry that intersects the temporal information in the `datetime` parameter were included in the result set.
+. Verify that all features in the collection that are not associated with a temporal geometry are included in the result set.
 |===

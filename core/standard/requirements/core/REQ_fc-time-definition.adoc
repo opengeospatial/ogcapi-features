@@ -14,4 +14,15 @@ schema:
 style: form
 explode: false
 ----
+^|B |Temporal geometries are either a date-time value or a time interval. The parameter SHALL support the following syntax (using link:https://www.rfc-editor.org/rfc/rfc2234.html[ABNF]):
+
+```
+interval-bounded            = date-time "/" date-time
+interval-half-bounded-start = [".."] "/" date-time
+interval-half-bounded-end   = date-time "/" [".."]
+interval                    = interval-bounded / interval-half-bounded-start / interval-half-bounded-end
+datetime                    = date-time / interval
+```
+^|C |The syntax of `date-time` is specified by link:https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339, 5.6].
+^|D |Half-bounded time intervals are supported using a double-dot (`..`) or an empty string for the start/end.
 |===
