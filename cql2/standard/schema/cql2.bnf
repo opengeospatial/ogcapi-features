@@ -174,7 +174,7 @@ arrayExpression = array
                 | propertyName
                 | function;
 
-# An array literal is a parentheses-delimited, comma-separated list of array
+# An array is a parentheses-delimited, comma-separated list of array
 # elements.
 array = "(" ")"
       | "(" arrayElement [ { "," arrayElement } ] ")";
