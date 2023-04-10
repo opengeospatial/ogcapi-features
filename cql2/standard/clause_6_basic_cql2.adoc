@@ -86,7 +86,7 @@ The scalar data types are:
 * "timestamp": an instant with a granularity of a second or smaller (rule `timestampInstant`)
 * "date": an instant with a granularity of a day (rule `dateInstant`)
 
-For character string, numeric and boolean literals, the standard representations are used. For character string literals, embeded quotes are escaped using two consecutive single quotes (i.e. `''`).
+For character string, numeric and boolean literals, the standard representations are used. 
 
 Conceptually, an instant is a "temporal entity with zero extent or duration" [<<owl-time,Time Ontology in OWL>>]. In practice, the temporal position of an instant is described using data types where each value has some duration or granularity that is sufficient for the intended use of the data. 
 
@@ -143,6 +143,12 @@ DATE('1969-07-20')
 ----
 
 ====
+
+==== Escaping in string literals
+
+In general, escaping special character sequences in a string literal will be handled according to the rules of the specific encoding being used.  For example, for the JSON encoding of CQL2, an embeded newline in a string literal would be encoded as `\n`.  If, however, an XML encoding of CQL2 existed the embeded newline character would be encoded as `&#xA`.  Furthermore, additional processing of a string literal may be necessary before it can be passed down to an underlying platform (e.g. RDBMS) for further handling.
+
+For the text encoding of CQL2 see <<cql2-text>> and requirement <<req_cql2-text_escaping>> for additional requirements concerning escaping in string literals.
 
 [[type-casts]]
 ==== Type casts
