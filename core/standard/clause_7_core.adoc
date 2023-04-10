@@ -406,6 +406,8 @@ NOTE: Including the `self` link in each collection is strongly recommended. It i
 
 include::requirements/core/REQ_fc-md-items-links.adoc[]
 
+include::recomendations/core/REC_fc-md-item-link-templates.adoc[]
+
 include::requirements/core/REQ_fc-md-extent.adoc[]
 
 The member `spatial` only needs to be provided in the `extent` object, if features in the feature collection have spatial properties. The same applies to `temporal` and features with temporal properties. For example, a feature collection where features have a spatial, but no temporal property will only provide the `spatial` member.
@@ -626,13 +628,13 @@ Reference system information is not provided as the service provides geometries 
 ----
 {
   "links": [
-    { "href": "http://data.example.org/collections.json",
+    { "href": "https://data.example.org/collections.json",
       "rel": "self", "type": "application/json", "title": "this document" },
-    { "href": "http://data.example.org/collections.html",
+    { "href": "https://data.example.org/collections.html",
       "rel": "alternate", "type": "text/html", "title": "this document as HTML" },
-    { "href": "http://schemas.example.org/1.0/buildings.xsd",
+    { "href": "https://schemas.example.org/1.0/buildings.xsd",
       "rel": "describedby", "type": "application/xml", "title": "GML application schema for Acme Corporation building data" },
-    { "href": "http://download.example.org/buildings.gpkg",
+    { "href": "https://download.example.org/buildings.gpkg",
       "rel": "enclosure", "type": "application/geopackage+sqlite3", "title": "Bulk download (GeoPackage)", "length": 472546 }
   ],
   "collections": [
@@ -650,11 +652,14 @@ Reference system information is not provided as the service provides geometries 
       },
       "itemType": "feature",
       "links": [
-        { "href": "http://data.example.org/collections/buildings",
+        { "href": "https://data.example.org/collections/buildings",
           "rel": "self", "title": "This collection" },
-        { "href": "http://data.example.org/collections/buildings/items",
+        { "href": "https://data.example.org/collections/buildings/items",
           "rel": "items", "type": "application/geo+json",
           "title": "Buildings" },
+        { "href": "https://data.example.org/collections/buildings/items/{featureId}",
+          "rel": "item", "title": "Link template for buildung features", 
+          "templated": true },  
         { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
           "rel": "license", "type": "text/html",
           "title": "CC0-1.0" },
@@ -665,6 +670,29 @@ Reference system information is not provided as the service provides geometries 
     }
   ]
 }
+----
+
+The HTTP headers of the response could be as follows:
+
+[source,JSON]
+----
+HTTP/2 200 
+content-disposition: inline; filename="collections.json"
+content-language: en
+content-type: application/json
+date: Mon, 10 Apr 2023 08:59:29 GMT
+etag: W/"f72928133dff8a0e5d5504adab977445"
+link: <https://data.example.org/collections.json>; rel="self"; type="application/json"; title="this document"
+link: <https://data.example.org/collections.html>; rel="alternate"; type="text/html"; title="this document as HTML"
+link: <https://schemas.example.org/1.0/buildings.xsd>; rel="describedby"; type="application/xml"; title="GML application schema for Acme Corporation building data"
+link: <https://download.example.org/buildings.gpkg>; rel="enclosure"; type="application/geopackage+sqlite3"; title="Bulk download (GeoPackage)"; length=472546
+link: <https://data.example.org/collections/buildings>; anchor="#/collections/0"; rel="self"; title="This collection"
+link: <https://data.example.org/collections/buildings/items>; anchor="#/collections/0"; rel="items"; type="application/geo+json"; title="Buildings"
+link: <https://creativecommons.org/publicdomain/zero/1.0/>; anchor="#/collections/0"; rel="license"; type="text/html"; title="CC0-1.0"
+link: <https://creativecommons.org/publicdomain/zero/1.0/rdf>; anchor="#/collections/0"; rel="license"; type="application/rdf+xml"; title="CC0-1.0"
+link-template: <https://data.example.org/collections/buildings/items/{featureId}>; anchor="#/collections/0"; rel="item"; title="Link template for buildung features"
+vary: Accept,Accept-Language,Accept-Encoding
+content-length: 6178
 ----
 =================
 
