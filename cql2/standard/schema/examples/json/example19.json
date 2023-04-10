@@ -1,0 +1,31 @@
+{
+  "op": "and",
+  "args": [
+    {
+      "op": "or",
+      "args": [
+        {
+          "op": "like",
+          "args": [
+            { "property": "owner" },
+            "mike%"
+          ]
+        },
+        {
+          "op": "like",
+          "args": [
+            { "property": "owner" },
+            "Mike%"
+          ]
+        }
+      ]
+    },
+    {
+      "op": "<",
+      "args": [
+        { "property": "floors" },
+        4
+      ]
+    }
+  ]
+}
