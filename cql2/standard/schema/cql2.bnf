@@ -23,7 +23,8 @@ booleanTerm = booleanFactor [ {"AND" booleanFactor} ];
 
 booleanFactor = ["NOT"] booleanPrimary;
 
-booleanPrimary = predicate
+booleanPrimary = function
+               | predicate
                | booleanLiteral
                | "(" booleanExpression ")";
 
@@ -173,10 +174,10 @@ arrayExpression = array
                 | propertyName
                 | function;
 
-# An array literal is a parentheses-delimited, comma-separated list of array
+# An array is a parentheses-delimited, comma-separated list of array
 # elements.
-arrayLiteral = "(" ")"
-             | "(" arrayElement [ { "," arrayElement } ] ")";
+array = "(" ")"
+      | "(" arrayElement [ { "," arrayElement } ] ")";
 
 # An array element is either a character literal, a numeric literal,
 # a geometric literal, a temporal instance, a property name, a function,
@@ -511,7 +512,7 @@ multiLineStringText = "(" lineStringText {"," lineStringText} ")";
 
 multiPolygonText = "(" polygonText {"," polygonText} ")";
 
-geometryCollectionText = "(" spatialLiteral {"," spatialLiteral} ")";
+geometryCollectionText = "(" spatialInstance {"," spatialInstance} ")";
 
 bboxTaggedText = "BBOX" bboxText;
 
@@ -543,7 +544,7 @@ timestampInstant = "TIMESTAMP"
 
 timestampInstantString = "'" fullDate "T" utcTime "'";
 
-intervalLiteral = "INTERVAL" "(" instantParameter "," instantParameter ")";
+intervalInstance = "INTERVAL" "(" instantParameter "," instantParameter ")";
 
 instantParameter = dateInstantString
                  | timestampInstantString
