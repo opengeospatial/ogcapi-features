@@ -109,7 +109,7 @@ For timestamp and date values representations based on RFC 3339 are used:
 ----
 'This is a literal string.'
 ----
-* character string with an escaped embeded quote 
+* character string with an escaped embedded quote 
 ----
 'Via dell''Avvento'
 ----
@@ -146,7 +146,7 @@ DATE('1969-07-20')
 
 ==== Escaping in string literals
 
-In general, escaping special character sequences in a string literal will be handled according to the rules of the specific encoding being used.  For example, for the JSON encoding of CQL2, an embeded newline in a string literal would be encoded as `\n`.  If, however, an XML encoding of CQL2 existed the embeded newline character would be encoded as `&#xA`.  Furthermore, additional processing of a string literal may be necessary before it can be passed down to an underlying platform (e.g. RDBMS) for further handling.
+In general, escaping special character sequences in a string literal will be handled according to the rules of the specific encoding being used.  For example, for the JSON encoding of CQL2, an embedded newline in a string literal would be encoded as `\n`.  If, however, an XML encoding of CQL2 existed the embedded newline character would be encoded as `&#xA`.  Furthermore, additional processing of a string literal may be necessary before it can be passed down to an underlying platform (e.g. RDBMS) for further handling.
 
 For the text encoding of CQL2 see <<cql2-text>> and requirement <<req_cql2-text_escaping>> for additional requirements concerning escaping in string literals.
 
