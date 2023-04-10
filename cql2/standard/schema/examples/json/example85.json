@@ -1,0 +1,34 @@
+{
+  "op": "=",
+  "args": [
+    { "property": "value" },
+    {
+      "op": "-",
+      "args": [
+        {
+          "op": "+",
+          "args": [
+            {
+              "op": "*",
+              "args": [
+                {
+                  "op": "*",
+                  "args": [ -1, { "property": "foo" } ]
+                },
+                2.0
+              ]
+            },
+            {
+              "op": "/",
+              "args": [ { "property": "bar" }, 6.1234 ]
+            }
+          ]
+        },
+        {
+          "op": "^",
+          "args": [ { "property": "x" }, 2.0 ]
+        }
+      ]
+    }
+  ]
+}

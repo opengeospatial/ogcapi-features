@@ -1,7 +1,0 @@
-EXAMPLE: Find building features that have a swimming pool and, more than five
-         floors or the name of the building material starts or ends with the
-         string "brick".
-
-swimming_pool=true AND (floors>5 OR
-                        material LIKE 'brick%' OR
-                        material LIKE '%brick')
