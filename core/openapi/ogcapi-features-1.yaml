@@ -634,7 +634,7 @@ components:
         This information includes:
 
         * A local identifier for the collection that is unique for the dataset;
-        * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
+        * An optional list of coordinate reference systems (CRS) in which geometries may be returned by the server. The default value is a list with the default CRS (WGS 84 with axis order longitude/latitude).
         * An optional title and description for the collection;
         * An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
         * An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature').
@@ -706,7 +706,7 @@ components:
         includes:
 
         * A local identifier for the collection that is unique for the dataset;
-        * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
+        * An optional list of coordinate reference systems (CRS) in which geometries may be returned by the server. The default value is a list with the default CRS (WGS 84 with axis order longitude/latitude).
         * An optional title and description for the collection;
         * An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
         * An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature').
