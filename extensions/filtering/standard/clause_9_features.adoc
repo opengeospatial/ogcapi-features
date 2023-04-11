@@ -39,6 +39,8 @@ include::recommendations/features-filter/REC_json-encoding.adoc[]
 
 include::requirements/features-filter/REQ_filter-crs-param.adoc[]
 
+Discovery of the list of supported coordinate reference systems for use with the filter-crs parameter is fully described in <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>.  Briefly, the list of supported CRSs can be found in the global list of CRS identifiers (path: `/collections/crs`) and/or the list of collection-specific CRS identifiers (path: `/collections/{collectionsId}/crs`).
+
 ==== Response
 
 include::requirements/features-filter/REQ_response.adoc[]
