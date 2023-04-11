@@ -1,0 +1,19 @@
+{
+  "op": "and",
+  "args": [
+    {
+      "op": ">",
+      "args": [
+        { "property": "floors" },
+        5
+      ]
+    },
+    {
+      "op": "s_within",
+      "args": [
+        { "property": "geometry" },
+        { "bbox": [ -118, 33.8, -117.9, 34 ] }
+      ]
+    }
+  ]
+}

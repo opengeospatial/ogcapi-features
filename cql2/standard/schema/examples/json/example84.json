@@ -1,0 +1,38 @@
+{
+  "op": "s_equals",
+  "args": [
+    {
+      "type": "GeometryCollection",
+      "geometries": [
+        {
+          "type": "Point",
+          "coordinates": [ 1.9, 2.00001 ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [ 0.0, -2.00001 ]
+        },
+        {
+          "type": "MultiLineString",
+          "coordinates": [ [ [ -2.00001, -0.0 ],
+                             [ -77.292642, -0.5 ],
+                             [ -87.515626, -0.0 ],
+                             [ -180.0, 12.502773 ],
+                             [ 21.204842, -1.5 ],
+                             [ -21.878857, -90.0 ] ] ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [ 1.9, 0.5 ]
+        },
+        {
+          "type": "LineString",
+          "coordinates": [ [ 179.0, 1.179148 ],
+                           [ -148.192487, -65.007816 ],
+                           [ 0.5, 0.333333 ] ]
+        }
+      ]
+    },
+    { "property": "geometry" }
+  ]
+}

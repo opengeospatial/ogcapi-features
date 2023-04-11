@@ -37,7 +37,7 @@ Accessing `Collections` using HTTP GET returns a response that contains at least
 
 * A local identifier for the collection that is unique for the dataset;
 
-* A list of coordinate reference systems in which geometries may be returned by the server: the first CRS is the default CRS (in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
+* An optional list of coordinate reference systems (CRS) in which geometries may be returned by the server. The default value is a list with the default CRS (WGS 84 with axis order longitude/latitude);
 
 * An optional title and description for the collection;
 
@@ -282,7 +282,7 @@ This is a general rule that applies to all parameters, whether they are specifie
 [[web_caching]]
 === Web caching
 
-Entity tags are a mechanism for web cache validation and for supporting conditional requests to reduce network traffic. Entity tags are specified by <<rfc723x,RFC 7232 (HTTP 1.1)>>.
+Entity tags are a mechanism for web cache validation and for supporting conditional requests to reduce network traffic. Entity tags are specified by <<rfc9110,RFC 9110 (HTTP Semantics)>>.
 
 include::recomendations/core/REC_etag.adoc[]
 
@@ -516,7 +516,7 @@ properties:
                 For WGS 84 longitude/latitude the values are in most cases the sequence of
                 minimum longitude, minimum latitude, maximum longitude and maximum latitude.
                 However, in cases where the box spans the antimeridian the first value
-                (west-most box edge) is larger than the third value (east-most box edge).
+                (west-most box edge) is larger than the third or fourth value (east-most box edge).
 
                 If the vertical axis is included, the third and the sixth number are
                 the bottom and the top of the 3-dimensional bounding box.

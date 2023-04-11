@@ -1,0 +1,4 @@
+EXAMPLE: Do a caseless comparison between a property named 'road_class' and
+         the Greek word 'Οδος' or the German word 'Straße'.
+
+CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))

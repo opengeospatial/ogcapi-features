@@ -6,12 +6,14 @@ description: |-
   Only items are counted that are on the first level of the collection in the response document.
   Nested objects contained within the explicitly requested items shall not be counted.
 
-  Minimum = 1. Maximum = 10000. Default = 10.
+  Minimum = 1. Maximum = 10000. Default = 100.
+
+  Note that the values for minimum, maximum and default are examples and can be changed.
 required: false
 schema:
   type: integer
   minimum: 1
   maximum: 10000
-  default: 10
+  default: 100
 style: form
 explode: false
