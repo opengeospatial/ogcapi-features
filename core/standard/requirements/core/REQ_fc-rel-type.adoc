@@ -2,5 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/fc-rel-type* 
-^|A |All links SHALL include the `rel` and `type` link parameters.
+^|A |All links in a `200`-response where `rel` is `self`, `alternate`, `next`, or `prev` SHALL include the `type` link parameter.
 |===

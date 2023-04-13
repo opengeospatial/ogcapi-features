@@ -2,8 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/core/fc-md-descriptions*
-^|A |If external schemas or descriptions for the dataset exist that provide information about the structure or semantics of the data, a `200`-response SHOULD include links to each of those resources in the `links` property of the response (relation: `describedby`).
-^|B |The `type` link parameter SHOULD be provided for each link. This applies to resources that describe the whole dataset. 
+^|A |If external schemas or descriptions for the dataset exist that provide information about the structure or semantics of the data, a `200`-response SHOULD include links to each of those resources in the `links` property of the response (relation: `describedby`). This applies to resources that describe the whole dataset.
+^|B |The `type` link parameter SHOULD be provided for links in that response where `rel` is `describedby`.  
 ^|C |For resources that describe the contents of a feature collection, the links SHOULD be set in the `links` property of the appropriate object in the `collections` resource.
 ^|D |Examples for descriptions are: XML Schema, Schematron, JSON Schema, RDF Schema, OWL, SHACL, a feature catalogue, etc.
 |===
