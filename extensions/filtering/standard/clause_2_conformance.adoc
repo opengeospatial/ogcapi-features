@@ -37,8 +37,10 @@ OGC Compliance Testing web site.
 [cols="40,60",options="header"]
 |===
 |Conformance class |URI
-|<<ats_filter,Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter
-|<<ats_features-filter,Features Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter
+|<<conf_queryables,Queryables>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/queryables
+|<<conf_queryables-query-parameters,Queryables as Query Parameters>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/queryables-query-parameters
+|<<conf_filter,Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter
+|<<conf_features-filter,Features Filter>> |http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter
 |===
 
 APIs that implement the <<CQL2,Common Query Language (CQL2)>> standard should advertize all supported CQL2 conformance classes in the Conformance Declaration, too.
