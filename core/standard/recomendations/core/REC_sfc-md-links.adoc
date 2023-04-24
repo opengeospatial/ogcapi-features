@@ -7,5 +7,5 @@
 * a link to this response document (relation: `self`),
 * a link to the response document in every other media type supported by the server (relation: `alternate`).
 
-^|B |All links SHOULD include the `rel` and `type` link parameters.
+^|B |All links in that response where `rel` is `self` or `alternate` SHOULD include the `type` link parameter.
 |===
