@@ -73,8 +73,9 @@ This specification makes no assumptions about any schema constraints that a serv
 
 In the "schema-less" case, as long as the incoming feature meets the requirements of the declared media type (e.g. a valid GeoJSON feature) then the resource should be created/updated with a 20x status response.  
 
-In the case where the server imposes schema constraints, the server should publish schemas in order to help clients create requests that are not rejected.  How those schemas are published is out of scope for this standard although other parts of the OGC API Features suite of standard may address this topic.
+In the case where the server imposes schema constraints, the server should publish schemas in order to help clients create requests that are not rejected.  As recommended in clause <<feature-representations,Representation of features>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
 
+NOTE: How schemas are obtained is still an open issue.  See https://github.com/opengeospatial/ogcapi-features/issues/740[issue #740] and https://github.com/opengeospatial/ogcapi-features/issues/612[612].
 
 [[create]]
 === Adding a new resource to a collection (CREATE)
