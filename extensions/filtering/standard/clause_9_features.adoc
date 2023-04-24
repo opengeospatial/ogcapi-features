@@ -5,7 +5,19 @@
 
 include::requirements/requirements_class_features-filter.adoc[]
 
-This clause defines the binding between the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard and the filter parameters defined in the <<rc_filter,Filter conformance class>>.
+This clause defines the binding between the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard and the filter parameters defined in the <<rc_filter,Filter conformance class>> as well as the Queryables resource defined in the <<rc_queryables,Queryables conformance class>>.
+
+=== Queryables
+
+==== Operation
+
+include::requirements/features-filter/REQ_get-queryables-op.adoc[]
+
+=== Feature Collection
+
+==== Response
+
+include::requirements/features-filter/REQ_queryables-link.adoc[]
 
 === Features
 
@@ -26,6 +38,8 @@ include::recommendations/features-filter/REC_json-encoding.adoc[]
 // TODO include::requirements/features-filter/REQ_cql2-json.adoc[]
 
 include::requirements/features-filter/REQ_filter-crs-param.adoc[]
+
+Discovery of the list of supported coordinate reference systems for use with the filter-crs parameter is fully described in <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>.  Briefly, the list of supported CRSs can be found in the global list of CRS identifiers (path: `/collections/crs`) and/or the list of collection-specific CRS identifiers (path: `/collections/{collectionsId}/crs`).
 
 ==== Response
 

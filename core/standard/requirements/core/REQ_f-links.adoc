@@ -8,5 +8,5 @@
 * a link to the response document in every other media type supported by the service (relation: `alternate`), and
 * a link to the feature collection that contains this feature (relation: `collection`).
 
-^|B |All links SHALL include the `rel` and `type` link parameters.
+^|B |All links in that response where `rel` is `self`, `alternate`, or `collection` SHALL include the `type` link parameter.
 |===

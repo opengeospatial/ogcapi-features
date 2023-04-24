@@ -27,7 +27,514 @@ NOTE: The Conformance Class "JSON" in Common Core has a dependency to the Confor
 The following table lists input given to all tests in this conformance class:
 
 * The landing page URI of the OGC Web API (`{apiURI}`);
+* A list of filterable resources in the API (`{apiURI}/{pathToResource}`);
 * Authentication credentials (optional);
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: `GET`
+** path: `{apiURI}/conformance`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+
+:conf-test: get-queryables-uris
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_queryables-link,/req/{conf-class}/queryables-link>>
+|Test purpose: | Check that a link to the Queryables resource exists for every filterable resource
+|Test method: | 
+Given:
+
+* the list of filterable resources (`{apiURI}/{pathToResource}`);
+
+When:
+
+* a request is executed for every filterable resource
+** method: `HEAD` (if `HEAD` results in a 405 response, use `GET` instead)
+** path: `{apiURI}/{pathToResource}`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* assert that the response includes a `Link` header with `rel` set to `\http://www.opengis.net/def/rel/ogc/1.0/queryables` or `[ogc-rel:queryables]`;
+* store the `href` value as the Queryables URI for the filterable resource ({queryablesUri}).
+|===
+
+:conf-test: get-queryables
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_get-queryables-op,/req/{conf-class}/get-queryables-op>>; <<req_{conf-class}_get-queryables-response,/req/{conf-class}/get-queryables-response>>
+|Test purpose: | Check that the Queryables resource exists for every filterable resource
+|Test method: | 
+Given:
+
+* test "get-queryables-uris" was successful
+* the list of Queryables URI for the filterable resource ({queryablesUri}) 
+
+When:
+
+* the request for the Queryables page is executed for every filterable resource
+** method: `GET`
+** path: `{queryablesUri}`
+** header: `Accept: application/schema+json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/schema+json");
+* assert that the value of the `$schema` member is "\https://json-schema.org/draft/2019-09/schema" or "\https://json-schema.org/draft/2020-12/schema"
+* assert that the value of the `$id` member is "{queryablesUri}".
+* assert that the value of the `type` member is "object".
+* assert that `$.properties` is a non-empty object;
+* assert that each member in `$.properties` has an object as its value and the object either includes `type` member or a `format` member whose value starts with `geometry-`;
+* assert that the response is a valid JSON Schema;
+* store the key of an arbitrary property with a `type` member as the sample queryable of the filterable resource;
+* store the key of an arbitrary property of the object as the spatial queryable of the filterable resource, if the value of member is an object that includes no `type` member and a `format` member with a value `geometry-{type}` where `{type}` is one of "point", "multipoint", "linestring", "multilinestring", "polygon", "multipolygon", or "geometry";
+* store the value of the `additionalProperties` member or `true`, if it is not provided.
+|===
+
+NOTE: Sub-requirement F of `/req/queryables/get-queryables-response` can only be checked when executing filter queries in dependent conformance classes.
+
+=== Conformance Class "Queryables as Query Parameters"
+
+:conf-class: queryables-query-parameters
+[[conf_queryables-query-parameters]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_queryable-query-parameters,Requirements Class "Queryables as Query Parameters">>
+|Dependency |<<conf_queryables,Conformance Class "Queryables">>
+|===
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API (`{apiURI}`);
+* Authentication credentials (optional);
+* A list of filterable resources in the API (`{apiURI}/{pathToResource}`), where `{pathToResource}` is `/collections/{collectionId}/items`;
+* The media type of the response when accessing these resources (`{responseMediaType}`)
+* The list of acceptable status codes for a successful filter execution (default: "200");
+* The list of acceptable status codes for an unsuccessful filter execution (default: "400");
+* A valid value for each queryable `{queryable}`;
+* An invalid valid value for each queryable `{queryable}`;
+* The information stored during the execution of conformance tests of conformance class "Queryables".
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: `GET`
+** path: `{apiURI}/conformance`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: query-param
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_queryables-query-parameters-parameters,/req/{conf-class}/queryables-query-parameters-parameters>>
+|Test purpose: | Check that query parameters for queryables is supported
+|Test method: | 
+Given:
+
+* test "get-queryables" was successful
+* the list of collections 
+* the sample queryable of every collection
+
+When:
+
+* a request for every filterable resource that supports filtering is executed and every queryable (`queryable`) with a valid value for the queryable (`{valid-value}`)
+** method: `GET`
+** path: `{apiURI}/collections/{collectionId}/items`
+** query parameters (before percent encoding): `{queryable}={valid-value}`
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* assert that each returned resource matches the filter.
+
+When:
+
+* a request for every filterable resource that supports filtering is executed and every queryable (`queryable`) with a invalid value for the queryable (`{invalid-value}`)
+** method: `GET`
+** path: `{apiURI}/collections/{collectionId}/items`
+** query parameters (before percent encoding): `{queryable}={invalid-value}`
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
+|===
+
+=== Conformance Class "Filter"
+
+:conf-class: filter
+[[conf_filter]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_filter,Requirements Class "Filter">>
+|Dependency |<<conf_queryables,Conformance Class "Queryables">>
+|===
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API (`{apiURI}`);
+* Authentication credentials (optional);
+* The list of filterable resources in the API (`{apiURI}/{pathToResource}`);
+* The media type of the response when accessing these resources (`{responseMediaType}`)
+* The list of acceptable status codes for a successful filter execution (default: "200", "204");
+* The list of acceptable status codes for an unsuccessful filter execution (default: "400");
+* The name of the filter language to test  (`{filter-lang}`; default: "cql2-text");
+* A flag that indicates whether the filter language is the default filter language;
+* A valid filter expression in the filter language for a queryable `{queryable}` (`{filter-valid}`; default: `{queryable} IS NULL`);
+* An invalid filter expression in the filter language (`{filter-invalid}`; default: `THIS IS NOT A FILTER`);
+* A valid bbox filter expression in the filter language for a spatial queryable `{spatialQueryable}` and two longitude/latitude positions in WGS 84 `{x1}`/`{y1}` and `{x2}`/`{y2}` (`{bbox-filter}`; default: `S_INTERSECTS({spatialQueryable},ENVELOPE({x1},{y1},{x2},{y2})`);
+* A flag that indicates whether the API supports custom functions in filter expressions;
+* The information stored during the execution of conformance tests of conformance class "Queryables".
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: `GET`
+** path: `{apiURI}/conformance`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: filter-param
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_filter-param,/req/{conf-class}/filter-param>>, <<req_{conf-class}_filter-lang-param,/req/{conf-class}/filter-lang-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the query parameter `filter` is supported
+|Test method: | 
+Given:
+
+* test "get-queryables" was successful
+* the list of filterable resources 
+* the sample queryable of every filterable resource
+
+When:
+
+* a request for each resource that supports filtering is executed without a filter parameter
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* store the result as the unfiltered result of the resource.
+
+When:
+
+* a request for each resource that supports filtering is executed with a valid filter expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={filter-valid}` where `{queryable}` in `{filter-valid}` is replaced by the sample queryable of the filterable resource
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* assert that each returned resource matches the filter expression.
+
+When:
+
+* a request for each resource that supports filtering is executed with an invalid filter expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={filter-invalid}` where `{queryable}` in `{filter-invalid}` is replaced by the sample queryable of the filterable resource
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
+|===
+
+:conf-test: filter-lang-default
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_filter-param,/req/{conf-class}/filter-param>>, <<req_{conf-class}_filter-lang-param,/req/{conf-class}/filter-lang-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the query parameter `filter-lang` default value is supported
+|Test method: | 
+Given:
+
+* test "get-queryables" was successful
+* the list of filterable resources 
+* the queryables of every filterable resource
+* the filter language `{filter-lang}` is the default filter language
+
+When:
+
+* a request for each resource that supports filtering is executed with a valid filter expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter={filter-valid}` where `{queryable}` in `{filter-valid}` is replaced by the sample queryable of the collection
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* assert that each returned resource matches the filter expression.
+
+When:
+
+* a request for each resource that supports filtering is executed with an invalid filter expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter={filter-invalid}` where `{queryable}` in `{filter-invalid}` is replaced by the sample queryable of the collection
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
+|===
+
+:conf-test: expression-construction
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_queryables_get-queryables-response,/req/queryables/get-queryables-response>> F
+|Test purpose: | Check that unknown queryables are rejected, if this is declared in the Queryables resource
+|Test method: | 
+Given:
+
+* test "get-queryables" was successful
+* the list of filterable resources, reduced to those where `additionalProperties` is `false``
+* the sample queryable of every filterable resource in the list
+
+When:
+
+* a request for each resource is executed with a filter expression with an unsupported queryable
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={filter-valid}` where `{queryable}` in `{filter-valid}` is replaced by "this_is_not_a_queryable"
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
+|===
+
+:conf-test: filter-crs-wgs84
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_filter-crs-wgs84,/req/{conf-class}/filter-crs-wgs84>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that spatial predicates assume WGS84 by default
+|Test method: | 
+Given:
+
+* test "get-queryables" was successful
+* the list of filterable resources with a spatial queryable
+* the spatial queryable of each filterable resource
+* the WGS84 bbox of the resources in each filterable resource
+
+When:
+
+* a request for each filterable resource is executed with a filter expression with a spatial predicate
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the resource, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`).
+* assert that result contains the same features as the unfiltered result of the filterable resource.
+
+When:
+
+* a request for each filterable resource with a filter expression with a spatial predicate
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{x1}` is replaced by "1000000", `{y1}` by "1000000", `{x2}` by "2000000", and `{y2}`  by "2000000"
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
+|===
+
+:conf-test: filter-crs-param
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_filter-crs-param,/req/{conf-class}/filter-crs-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that spatial predicates assume WGS84 by default
+|Test method: | 
+Given:
+
+* test "get-queryables" was successful
+* the list of filterable resources, that have a non-empty list of supported CRSs
+* the spatial queryable of every collection
+* the WGS84 bbox of every collection
+
+When:
+
+* a request for each filterable resource and every CRS for that resource with a filter expression with a spatial predicate
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter-crs={crsId}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{crsId}` by the URI of the CRS, `{x1}` and `{y1}` by the coordinates of the west-bound longitude and south-bound latitude of the WGS84 bbox of the collection transformed to the CRS, and `{x2}` and `{y2}` by the coordinates of the east-bound longitude and north-bound latitude of the WGS84 bbox of the collection transformed to the CRS
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* assert that result contains the same features as the unfiltered result of the collection.
+
+When:
+
+* a request for each filterable resource with a filter expression with a spatial predicate
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter-crs={crsId}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{crsId}` by "http://www.opengis.net/def/crs/OGC/0/does_not_exist", `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
+|===
+
+:conf-test: get-functions
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_get-functions-operation,/req/{conf-class}/get-functions-operation>>; <<req_{conf-class}_get-functions-response-json,/req/{conf-class}/get-functions-response-json>>
+|Test purpose: | Check that the Functions resource exists and is schema valid
+|Test method: | 
+Given:
+
+* test "get-conformance" was successful
+* the API supports custom functions in filter expressions
+
+When:
+
+* the request for the Functions page is executed
+** method: `GET`
+** path: `{apiURI}/functions`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that the response is valid against the OpenAPI 3.0 schema identified in the requirement.
+|===
+
+NOTE: Requirement `/req/filter/mixing-expression` can only be checked in dependent conformance classes, when additional filtering parameters are known.
+
+=== Conformance Class "Features Filter"
+
+:conf-class: features-filter
+[[conf_features-filter]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_features-filter,Requirements Class "Features Filter">>
+|Dependency |<<conf_filter,Conformance Class "Filter">>
+|Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|===
+
+NOTE: The Conformance Class "GeoJSON" has a dependency to the Conformance Class "Core"; that is, testing against "GeoJSON" will automatically test against the dependencies.
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API (`{apiURI}`);
+* Authentication credentials (optional);
+* The name of the filter language to test  (`{filter-lang}`; default: "cql2-text");
+* A flag that indicates whether the filter language is the default filter language;
+* A valid filter expression in the filter language for a queryable `{queryable}` (`{filter-valid}`; default: `{queryable} IS NULL`);
+* An invalid filter expression in the filter language (`{filter-invalid}`; default: `THIS IS NOT A FILTER`);
+* A valid bbox filter expression in the filter language for a spatial queryable `{spatialQueryable}` and two longitude/latitude positions in WGS 84 `{x1}`/`{y1}` and `{x2}`/`{y2}` (`{bbox-filter}`; default: `S_INTERSECTS({spatialQueryable},ENVELOPE({x1},{y1},{x2},{y2})`);
+* A flag that indicates whether the API supports custom functions in filter expressions.
 
 :conf-test: get-conformance
 ==== Conformance Test {counter:test-id}
@@ -82,45 +589,13 @@ Then:
 * store the array as the list of collections.
 |===
 
-:conf-test: get-queryables
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_get-queryables-op,/req/{conf-class}/get-queryables-op>> A, B; <<req_{conf-class}_get-queryables-response,/req/{conf-class}/get-queryables-response>>
-|Test purpose: | Check that the Queryables resource exists for every collection
-|Test method: | 
-Given:
-
-* test "get-collections" was successful
-* the list of collections 
-
-When:
-
-* the request for the Queryables page is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`)
-** method: `GET`
-** path: `{apiURI}/collections/{collectionId}/queryables`
-** header: `Accept: application/schema+json`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (status code is "200", `Content-Type` header is "application/schema+json");
-* assert that the value of the "$schema" member is "\https://json-schema.org/draft/2019-09/schema" or "\https://json-schema.org/draft/2020-12/schema"
-* assert that the value of the "$id" member is "{apiURI}/collections/{collectionId}/queryables".
-* assert that the value of the "type" member is "object".
-* assert that `$.properties` is a non-empty object;
-* assert that the response is a valid JSON Schema;
-* store the key of an arbitrary member of the object as the sample queryable of the collection;
-* store the key of an arbitrary member of the object as the spatial queryable of the collection, if the value of member is an object that includes a `$ref` member with a value `https://geojson.org/schema/{type}.json` where `{type}` is one of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon", or "Geometry".
-|===
 
 :conf-test: get-collection
 ==== Conformance Test {counter:test-id}
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_get-queryables-op,/req/{conf-class}/get-queryables-op>> C
+|Requirements: | <<req_{conf-class}_queryables-link,/req/{conf-class}/queryables-link>>
 |Test purpose: | Check that a link to the Queryables resource exists for every collection
 |Test method: | 
 Given:
@@ -139,379 +614,43 @@ When:
 Then:
 
 * assert successful execution (status code is "200", `Content-Type` header is "application/json");
-* assert that a non-negative integer `n` exists where `$.links[{n}].rel` is "http://www.opengis.net/def/rel/ogc/1.0/queryables" and where `$.links[{n}].href` is (after normalization) the URI `{apiURI}/collections/{collectionId}/queryables`;
+* assert that a non-negative integer `n` exists where `$.links[{n}].rel` is "http://www.opengis.net/def/rel/ogc/1.0/queryables" or "[ogc-rel:queryables]" and where `$.links[{n}].href` is (after normalization) the URI `{apiURI}/collections/{collectionId}/queryables`;
 * store `$.extent.spatial.bbox[0]` as the WGS84 bbox of the collection
 * store `$.crs[*]` as the list of CRS supported for the collection
 |===
 
-=== Conformance Class "Queryables as Query Parameters"
 
-:conf-class: queryables-query-parameters
-[[conf_queryables-query-parameters]]
-[cols="1,4a",width="90%"]
-|===
-2+|*Conformance Class*
-2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
-|Target type |Web API
-|Requirements class |<<rc_queryable-query-parameters,Requirements Class "Queryables as Query Parameters">>
-|Dependency |<<conf_queryables,Conformance Class "Queryables">>
-|===
-
-The following table lists input given to all tests in this conformance class:
-
-* The landing page URI of the OGC Web API (`{apiURI}`);
-* Authentication credentials (optional);
-* The path to a sub-resource of `{apiURI}/collections/{collectionId}` that supports filtering (`{pathToResource}`);
-* The media type of the response when accessing that resource (`{responseMediaType}`)
-* The list of acceptable status codes for a successful filter execution (default: "200");
-* The list of acceptable status codes for an unsuccessful filter execution (default: "400");
-* A valid value for each queryable `{queryable}`;
-* An invalid valid value for each queryable `{queryable}`;
-* The information stored during the execution of conformance tests of conformance class "Queryables".
-
-:conf-test: get-conformance
+:conf-test: filter-on-items
 ==== Conformance Test {counter:test-id}
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | n/a
-|Test purpose: | Check that the API declares support for the conformance class
+|Requirements: | <<req_{conf-class}_filter-param,/req/{conf-class}/filter-param>>, <<req_{conf-class}_filter-lang-param,/req/{conf-class}/filter-lang-param>>, <<req_{conf-class}_filter-crs-param,/req/{conf-class}/filter-crs-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the API supports filters on the Features resource.
 |Test method: | 
 Given:
 
-* n/a
+* test "get-conformance" was successful
 
 When:
 
-* the request for the Conformance Declaration is executed
-** method: `GET`
-** path: `{apiURI}/conformance`
-** header: `Accept: application/json`
-** authentication, if authentication credentials are provided
+* the tests for the "Filter" conformance class are executed with the following input parameters:
+** All input parameters given to this conformance class (see above);
+** The path template to the resource that supports filtering is `{apiURI}/collections/{collectionId}/items` with a response media type `application/geo+json` (GeoJSON);
+** The acceptable status codes for a successful filter execution are: "200";
+** The list of acceptable status codes for an unsuccessful filter execution are: "400".
 
 Then:
 
-* assert successful execution (status code is "200", `Content-Type` header is "application/json");
-* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+* the Web API under test passes the tests.
 |===
-
-:conf-test: query-param
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_queryables-query-parameters-parameters,/req/{conf-class}/queryables-query-parameters-parameters>>
-|Test purpose: | Check that query parameters for queryables is supported
-|Test method: | 
-Given:
-
-* test "get-queryables" was successful
-* the list of collections 
-* the sample queryable of every collection
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) and every queryable (`queryable`) with a valid value for the queryable (`{valid-value}`)
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `{queryable}={valid-value}`
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
-* assert that each returned resource matches the filter.
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) and every queryable (`queryable`) with a invalid value for the queryable (`{invalid-value}`)
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `{queryable}={invalid-value}`
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
-|===
-
-=== Conformance Class "Filter"
-
-:conf-class: filter
-[[conf_filter]]
-[cols="1,4a",width="90%"]
-|===
-2+|*Conformance Class*
-2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
-|Target type |Web API
-|Requirements class |<<rc_filter,Requirements Class "Filter">>
-|Dependency |<<conf_queryables,Conformance Class "Queryables">>
-|===
-
-The following table lists input given to all tests in this conformance class:
-
-* The landing page URI of the OGC Web API (`{apiURI}`);
-* Authentication credentials (optional);
-* The path to a sub-resource of `{apiURI}/collections/{collectionId}` that supports filtering (`{pathToResource}`);
-* The media type of the response when accessing that resource (`{responseMediaType}`)
-* The list of acceptable status codes for a successful filter execution (default: "200", "204");
-* The list of acceptable status codes for an unsuccessful filter execution (default: "400");
-* The name of the filter language to test  (`{filter-lang}`; default: "cql2-text");
-* A flag that indicates whether the filter language is the default filter language;
-* A valid filter expression in the filter language for a queryable `{queryable}` (`{filter-valid}`; default: `{queryable} IS NULL`);
-* An invalid filter expression in the filter language (`{filter-invalid}`; default: `THIS IS NOT A FILTER`);
-* A valid bbox filter expression in the filter language for a spatial queryable `{spatialQueryable}` and two longitude/latitude positions in WGS 84 `{x1}`/`{y1}` and `{x2}`/`{y2}` (`{bbox-filter}`; default: `S_INTERSECTS({spatialQueryable},ENVELOPE({x1},{y1},{x2},{y2})`);
-* A flag that indicates whether the API supports custom functions in filter expressions;
-* The information stored during the execution of conformance tests of conformance class "Queryables".
-
-:conf-test: get-conformance
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | n/a
-|Test purpose: | Check that the API declares support for the conformance class
-|Test method: | 
-Given:
-
-* n/a
-
-When:
-
-* the request for the Conformance Declaration is executed
-** method: `GET`
-** path: `{apiURI}/conformance`
-** header: `Accept: application/json`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (status code is "200", `Content-Type` header is "application/json");
-* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
-|===
-
-:conf-test: filter-param
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_filter-param,/req/{conf-class}/filter-param>>, <<req_{conf-class}_filter-lang-param,/req/{conf-class}/filter-lang-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
-|Test purpose: | Check that the query parameter `filter` is supported
-|Test method: | 
-Given:
-
-* test "get-queryables" was successful
-* the list of collections 
-* the sample queryable of every collection
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) without a filter parameter
-** method: `GET`
-** path: `{pathToResource}`
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
-* store the result as the unfiltered result of the collection.
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with a valid filter expression
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={filter-valid}` where `{queryable}` in `{filter-valid}` is replaced by the sample queryable of the collection
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
-* assert that each returned resource matches the filter expression.
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with an invalid filter expression
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={filter-invalid}` where `{queryable}` in `{filter-invalid}` is replaced by the sample queryable of the collection
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
-|===
-
-:conf-test: filter-lang-default
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_filter-param,/req/{conf-class}/filter-param>>, <<req_{conf-class}_filter-lang-param,/req/{conf-class}/filter-lang-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
-|Test purpose: | Check that the query parameter `filter-lang` default value is supported
-|Test method: | 
-Given:
-
-* test "get-queryables" was successful
-* the list of collections 
-* the queryables of every collection
-* the filter language `{filter-lang}` is the default filter language
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with a valid filter expression
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter={filter-valid}` where `{queryable}` in `{filter-valid}` is replaced by the sample queryable of the collection
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
-* assert that each returned resource matches the filter expression.
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with an invalid filter expression
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter={filter-invalid}` where `{queryable}` in `{filter-invalid}` is replaced by the sample queryable of the collection
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
-|===
-
-:conf-test: expression-construction
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_expression-construction,/req/{conf-class}/expression-construction>>
-|Test purpose: | Check that unknown queryables are rejected
-|Test method: | 
-Given:
-
-* test "get-queryables" was successful
-* the list of collections 
-* the sample queryable of every collection
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with a filter expression with an unsupported queryable
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={filter-valid}` where `{queryable}` in `{filter-valid}` is replaced by "this_is_not_a_queryable"
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
-|===
-
-:conf-test: filter-crs-wgs84
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_filter-crs-wgs84,/req/{conf-class}/filter-crs-wgs84>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
-|Test purpose: | Check that spatial predicates assume WGS84 by default
-|Test method: | 
-Given:
-
-* test "get-queryables" was successful
-* the list of collections 
-* the spatial queryable of every collection
-* the WGS84 bbox of every collection
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with a filter expression with a spatial predicate, where the collection has a WGS84 bbox and a spatial queryable
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`).
-* assert that result contains the same features as the unfiltered result of the collection.
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with a filter expression with a spatial predicate, where the collection has a WGS84 bbox and a spatial queryable
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{x1}` is replaced by "1000000", `{y1}` by "1000000", `{x2}` by "2000000", and `{y2}`  by "2000000"
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
-|===
-
-:conf-test: filter-crs-param
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_filter-crs-param,/req/{conf-class}/filter-crs-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
-|Test purpose: | Check that spatial predicates assume WGS84 by default
-|Test method: | 
-Given:
-
-* test "get-queryables" was successful
-* the list of collections 
-* the spatial queryable of every collection
-* the WGS84 bbox of every collection
-* the non-empty list of CRSs supported by every collection
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) and every CRS for that collection with a filter expression with a spatial predicate, where the collection has a WGS84 bbox and a spatial queryable
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter-crs={crsId}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{crsId}` by the URI of the CRS, `{x1}` and `{y1}` by the coordinates of the west-bound longitude and south-bound latitude of the WGS84 bbox of the collection transformed to the CRS, and `{x2}` and `{y2}` by the coordinates of the east-bound longitude and north-bound latitude of the WGS84 bbox of the collection transformed to the CRS
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
-* assert that result contains the same features as the unfiltered result of the collection.
-
-When:
-
-* a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with a filter expression with a spatial predicate, where the collection has a WGS84 bbox and a spatial queryable
-** method: `GET`
-** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter-crs={crsId}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{crsId}` by "http://www.opengis.net/def/crs/OGC/0/does_not_exist", `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
-** header: `Accept: {responseMediaType}`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
-|===
-
 
 :conf-test: mixing-expression
 ==== Conformance Test {counter:test-id}
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_mixing-expression,/req/{conf-class}/mixing-expression>>
+|Requirements: | <<req_filter_mixing-expression,/req/filter/mixing-expression>>
 |Test purpose: | Check that a filter and a bbox parameter are evaluated with an AND
 |Test method: | 
 Given:
@@ -549,109 +688,3 @@ Then:
 * assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`).
 * assert that result contains no features.
 |===
-
-:conf-test: get-functions
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_get-functions-operation,/req/{conf-class}/get-functions-operation>>; <<req_{conf-class}_get-functions-response-json,/req/{conf-class}/get-functions-response-json>>
-|Test purpose: | Check that the Functions resource exists and is schema valid
-|Test method: | 
-Given:
-
-* test "get-conformance" was successful
-* the API supports custom functions in filter expressions
-
-When:
-
-* the request for the Functions page is executed
-** method: `GET`
-** path: `{apiURI}/functions`
-** header: `Accept: application/json`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (status code is "200", `Content-Type` header is "application/json");
-* assert that the response is valid against the OpenAPI 3.0 schema identified in the requirement.
-|===
-
-=== Conformance Class "Features Filter"
-
-:conf-class: features-filter
-[[conf_features-filter]]
-[cols="1,4a",width="90%"]
-|===
-2+|*Conformance Class*
-2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
-|Target type |Web API
-|Requirements class |<<rc_features-filter,Requirements Class "Features Filter">>
-|Dependency |<<conf_filter,Conformance Class "Filter">>
-|Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
-|===
-
-NOTE: The Conformance Class "JSON" in Common Core has a dependency to the Conformance Classes "Core" and "Landing Page"; that is, testing against "JSON" will automatically test against the dependencies.
-
-The following table lists input given to all tests in this conformance class:
-
-* The landing page URI of the OGC Web API (`{apiURI}`);
-* Authentication credentials (optional);
-* The name of the filter language to test  (`{filter-lang}`; default: "cql2-text");
-* A flag that indicates whether the filter language is the default filter language;
-* A valid filter expression in the filter language for a queryable `{queryable}` (`{filter-valid}`; default: `{queryable} IS NULL`);
-* An invalid filter expression in the filter language (`{filter-invalid}`; default: `THIS IS NOT A FILTER`);
-* A valid bbox filter expression in the filter language for a spatial queryable `{spatialQueryable}` and two longitude/latitude positions in WGS 84 `{x1}`/`{y1}` and `{x2}`/`{y2}` (`{bbox-filter}`; default: `S_INTERSECTS({spatialQueryable},ENVELOPE({x1},{y1},{x2},{y2})`);
-* A flag that indicates whether the API supports custom functions in filter expressions.
-
-:conf-test: get-conformance
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | n/a
-|Test purpose: | Check that the API declares support for the conformance class
-|Test method: | 
-Given:
-
-* n/a
-
-When:
-
-* the request for the Conformance Declaration is executed
-** method: `GET`
-** path: `{apiURI}/conformance`
-** header: `Accept: application/json`
-** authentication, if authentication credentials are provided
-
-Then:
-
-* assert successful execution (status code is "200", `Content-Type` header is "application/json");
-* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
-|===
-
-:conf-test: filter-on-items
-==== Conformance Test {counter:test-id}
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_filter-param,/req/{conf-class}/filter-param>>, <<req_{conf-class}_filter-lang-param,/req/{conf-class}/filter-lang-param>>, <<req_{conf-class}_filter-crs-param,/req/{conf-class}/filter-crs-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
-|Test purpose: | Check that the API supports filters on the Features resource.
-|Test method: | 
-Given:
-
-* test "get-conformance" was successful
-
-When:
-
-* the tests for the "Filter" conformance class are executed with the following input parameters:
-** All input parameters given to this conformance class (see above);
-** The path template to the resource that supports filtering is `{apiURI}/collections/{collectionId}/items` with a response media type `application/geo+json` (GeoJSON);
-** The acceptable status codes for a successful filter execution are: "200";
-** The list of acceptable status codes for an unsuccessful filter execution are: "400".
-
-Then:
-
-* the Web API under test passes the tests.
-|===
-
