@@ -3,9 +3,9 @@
 
 include::requirements/requirements_class_queryables.adoc[]
 
-This requirements class defines a resource for discovering the list of
-resource properties (and their types) that may be used to construct filter
-expressions.
+This requirements class defines the Queryables resource for discovering a list of
+resource properties with their types and constraints that may be used to construct filter
+expressions on a collection of resources, for example, a set of features.
 
 This standard does not assume that the content schema of a
 resource being queried is available for inspection. Therefore, a means needs
@@ -19,20 +19,20 @@ resource. Or the <<publisher-def,publisher>> may want to restrict filtering on c
 properties. For example, because the backend datastore has not been configured
 to allow high-performance queries on those properties.
 
+include::requirements/queryables/REQ_queryables-link.adoc[]
+
 include::requirements/queryables/REQ_get-queryables-op.adoc[]
-
-include::requirements/queryables/REQ_get-queryables-response.adoc[]
-
-include::requirements/queryables/REQ_expression-construction.adoc[]
 
 The response is returned as a JSON Schema document that describes a single JSON object where each property is a queryable.
 
-NOTE: The queryables schema does not specify a schema of any object that can be retrieved from the API. JSON Schema is used for the queryables to have a consistent approach for describing schema information and JSON Schema is/will be used in other parts of OGC API Features to describe schemas for GeoJSON feature content including in OpenAPI documents. The queryables schema describes a "virtual" resource view for the purpose of filtering.
+include::requirements/queryables/REQ_get-queryables-response.adoc[]
+
+NOTE: The queryables schema does not specify a schema of any object that can be retrieved from the API. JSON Schema is used for the queryables to have a consistent approach for describing schema information. The queryables schema describes a "virtual" resource view for the purpose of filtering. JSON Schema is/will be used in other parts of OGC API Features to describe schemas for feature content including in OpenAPI documents.
 
 NOTE: The OGC Features API Standards Working Group has a schema harmonization task that could lead to a future OGC API standard that will deprecate the approach for the queryables resource specified in this document.
 
 To support clients, providing additional detail about the meaning of the
-property and the possible values is recommended:
+queryable properties and their value range is recommended:
 
 include::recommendations/queryables/REC_queryables-schema.adoc[]
 
@@ -51,14 +51,12 @@ include::recommendations/queryables/REC_queryables-schema.adoc[]
     "geom": {
       "title": "Centerline",
       "description": "The geometry of the road.",
-      "$ref" : "https://geojson.org/schema/LineString.json",
-      "format" : "geojson-linestring"
+      "format" : "geometry-linestring"
     },
     "name": {
       "title": "Road Name",
       "description": "The common, human readable, name of the road.",
-      "type": "string",
-      "title": "Name"
+      "type": "string"
     },
     "number": {
       "title": "Road Identifier",

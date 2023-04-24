@@ -5,7 +5,7 @@
 
 include::requirements/requirements_class_filter.adoc[]
 
-<<OAFeat-1,OGC API - Features - Part 1: Core>> define two filtering parameters on the resource at path `/collections/{collectionId}/items`: `bbox` and `datetime`. <<OAFeat-1,OGC API - Features - Part 1: Core>> also adds support for simple equality predicates logically joined using the `AND` operator. These capabilities offer simple resource filtering for HTTP requests.
+<<OAFeat-1,OGC API - Features - Part 1: Core>> defines two filtering parameters on the resource at path `/collections/{collectionId}/items`: `bbox` and `datetime`. <<OAFeat-1,OGC API - Features - Part 1: Core>> also adds support for simple equality predicates logically joined using the `AND` operator. These capabilities offer simple resource filtering for HTTP requests.
 
 The Filter requirements class defines additional query parameters that allow more
 complex filtering expressions to be specified when querying server resources.
@@ -45,20 +45,19 @@ in this standard.
 [[filter-crs-param]]
 === Parameter filter-crs
 
-For reasons discussed in the http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#SDWBP[W3C/OGC Spatial Data on the Web Best Practices document], 
-<<OAFeat-1,OGC API - Features - Part 1: Core>> uses WGS 84 longitude and latitude (`http://www.opengis.net/def/crs/OGC/1.3/CRS84`) for 2-D coordinates and WGS 84 longitude, latitude and ellipsoidal height in meters (`http://www.opengis.net/def/crs/OGC/0/CRS84h`) for 3-D coordinates as the default coordinate reference systems. <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>> extends the capabilities of Part 1 to allow other coordinate reference systems to be used.
-
-For servers that implement <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>, the `filter-crs` parameter defined in this clause allows clients to assert which CRS is being used to encode geometric values in a filter expression.  The `filter-crs` parameter has no use if the server does not implement <<OAFeat-2,Part 2>>.
+For reasons discussed in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>, spatial coordinates by default are in the coordinate reference system WGS 84 longitude and latitude for 2D coordinates and WGS 84 longitude, latitude and ellipsoidal height in meters for 3D coordinates. For server that support geometries in other coordinate reference systems, the `filter-crs` parameter defined in this clause allows clients to assert which CRS is being used to encode geometric values in a filter expression.  Otherwiese, the `filter-crs` parameter has no use.
 
 include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
 
-include::requirements/filter/REQ_filter-crs.param.adoc[]
+include::requirements/filter/REQ_filter-crs-param.adoc[]
 
-NOTE: Discovery of the list of supported coordinate reference systems for use with the `filter-crs` parameter is fully described in <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>.  Briefly, the list of supported CRSs can be found in the global list of CRS identifiers (path: `/collections/crs`) and/or the list of collection-specific CRS identifiers (path: `/collections/{collectionsId}/crs`).
+NOTE: Discovery of the list of supported coordinate reference systems for use with the `filter-crs` parameter depends on the filterable resource.
+
+include::recommendations/filter/REC_filter-crs-list.adoc[]
 
 === Interaction with other predicates
 
-<<OAFeat-1,OGC API - Features - Part 1: Core>> defines the parameters `bbox`, `datetime` and http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameters_for_filtering_on_feature_properties[parameters for filtering on feature properties].  This clause defines how the `filter` parameter and these core parameters should interact if specified in a single request.
+Servers can and often will support additional filtering parameters on filterable resources.  This clause defines how the `filter` parameter and other filtering parameters should interact if specified in a single request.
 
 include::requirements/filter/REQ_mixing-expressions.adoc[]
 
