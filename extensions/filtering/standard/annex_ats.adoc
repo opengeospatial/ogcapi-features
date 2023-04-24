@@ -79,7 +79,7 @@ When:
 Then:
 
 * assert successful execution (status code is "200");
-* assert that the response includes a `Link` header with `rel` set to `\http://www.opengis.net/def/rel/ogc/1.0/queryables`;
+* assert that the response includes a `Link` header with `rel` set to `\http://www.opengis.net/def/rel/ogc/1.0/queryables` or `[ogc-rel:queryables]`;
 * store the `href` value as the Queryables URI for the filterable resource ({queryablesUri}).
 |===
 
@@ -614,7 +614,7 @@ When:
 Then:
 
 * assert successful execution (status code is "200", `Content-Type` header is "application/json");
-* assert that a non-negative integer `n` exists where `$.links[{n}].rel` is "http://www.opengis.net/def/rel/ogc/1.0/queryables" and where `$.links[{n}].href` is (after normalization) the URI `{apiURI}/collections/{collectionId}/queryables`;
+* assert that a non-negative integer `n` exists where `$.links[{n}].rel` is "http://www.opengis.net/def/rel/ogc/1.0/queryables" or "[ogc-rel:queryables]" and where `$.links[{n}].href` is (after normalization) the URI `{apiURI}/collections/{collectionId}/queryables`;
 * store `$.extent.spatial.bbox[0]` as the WGS84 bbox of the collection
 * store `$.crs[*]` as the list of CRS supported for the collection
 |===
