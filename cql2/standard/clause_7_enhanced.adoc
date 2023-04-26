@@ -102,13 +102,16 @@ category NOT IN (1,2,3,4)
 [source,JSON]
 ----
 {
-  "not": {
-    "op": "in",
-    "args": [
-      { "property": "category" },
-      [ 1, 2, 3, 4 ]
-    ]
-  }
+  "op": "not",
+  "args": [
+    {
+      "op": "in",
+      "args": [
+        { "property": "category" },
+        [ 1, 2, 3, 4 ]
+      ]
+    }
+  ]
 }
 ----
 ====
