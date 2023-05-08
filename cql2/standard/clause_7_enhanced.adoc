@@ -9,9 +9,9 @@ Specifically, this clause defines requirements for:
 * Advanced comparison operators;
 * Case-insensitive comparison;
 * Accent-insensitive comparison;
-* Spatial operators;
-* Temporal operators;
-* Array operators;
+* Spatial relation functions;
+* Temporal relation functions;
+* Array relation functions;
 * Property-property and literal-literal comparisons;
 * Support for functions in CQL2;
 * Support for arithmetic expression in CQL2;
@@ -34,7 +34,7 @@ include::recommendations/advanced-comparison-operators/PER_like-predicate.adoc[]
 .Example of a LIKE predicate
 ====
 ----
-name LIKE 'Smith%' 
+name LIKE 'Smith%'
 ----
 
 [source,JSON]
@@ -123,7 +123,7 @@ include::requirements/requirements_class_case-insensitive-comparison.adoc[]
 
 The following requirements class adds support for case-insensitive string comparisons.
 
-This capability is useful to operate across data that has not been normalized or has been normalized to values that are different than they should be. This is implemented via a standardized string function to normalize a string with respect to case (`CASEI`). 
+This capability is useful to operate across data that has not been normalized or has been normalized to values that are different than they should be. This is implemented via a standardized string function to normalize a string with respect to case (`CASEI`).
 
 For example, the `CASEI` function is useful when a property is set to "PLANET", "Planet", or "planet" and one wants to match either without having to enumerate all the variations.
 
@@ -163,7 +163,7 @@ include::requirements/requirements_class_accent-insensitive-comparison.adoc[]
 
 This requirements class adds support for accent-insensitive string comparisons to operate across data that has not been normalized or has been normalized to values that are different than they should be.
 
-Similar to the case-insensitive comparison, this capability is supported via a string function `ACCENTI`. 
+Similar to the case-insensitive comparison, this capability is supported via a string function `ACCENTI`.
 
 For example, the `ACCENTI` function is useful when accents (or, more generally, diacritics not available in ASCII) were dropped when indexing a property. This may be useful, for example, to support users that are not familiar with accents or that do not know how to type them on their keyboard. For example, "papa" would also match "papá". Note that accent-insensitive comparisons can match values with a different meaning. E.g., in Spanish "papa" is potato and "papá" is father. "papá" in an accent-insensitive comparison will match both, but this may also be intentional, because the users knows that some of the data has been processed in ASCII.
 
@@ -193,17 +193,17 @@ ACCENTI(etat_vol) = ACCENTI('débárquér')
 
 Like `CASEI`, the `ACCENTI` function returns a string typed representation of the input expression that is guaranteed to be equal to any other accent insensitive representation of that string. In order to ensure correct comparisons, the function should be applied to both sides of an expression.  So, for example, the only durable accent-insensitive equality comparison would be `ACCENTI(some_property) = ACCENTI('papá')`. An expression such as `ACCENTI(some_property) = 'papa'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
 
-[[basic-spatial-operators]]
-=== Requirements Class "Basic Spatial Operators"
+[[basic-spatial-relations]]
+=== Requirements Class "Basic Spatial Relation Functions"
 
-include::requirements/requirements_class_basic-spatial-operators.adoc[]
+include::requirements/requirements_class_basic-spatial-relations.adoc[]
 
 A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial comparison function.
 
 [[basic-spatial-data-types]]
 ==== Basic spatial data types and literal values
 
-The basic spatial data types are (part of rule `spatialInstance`): 
+The basic spatial data types are (part of rule `spatialInstance`):
 
 * "Point": a point;
 * "BBox": a bounding rectangle or box.
@@ -262,17 +262,17 @@ BBOX(160.6,-55.95,-170,-25.89)
 
 ====
 
-==== Spatial Operators
+==== Spatial Relation Functions
 
-In this conformance class, the only required spatial comparison function is _intersects_ and the only required spatial data types are point and BBox. Additional spatial comparison functions and spatial data types are specified in the <<rc_spatial-operators,Spatial Operators>> requirements class.
+In this conformance class, the only required spatial comparison function is _intersects_ and the only required spatial data types are point and BBox. Additional spatial comparison functions and spatial data types are specified in the <<rc_spatial-relations,Spatial Relation Functions>> requirements class.
 
-include::requirements/basic-spatial-operators/REQ_spatial-predicate.adoc[]
+include::requirements/basic-spatial-relations/REQ_spatial-predicate.adoc[]
 
-include::requirements/basic-spatial-operators/REQ_spatial-operators.adoc[]
+include::requirements/basic-spatial-relations/REQ_spatial-relations.adoc[]
 
-include::recommendations/basic-spatial-operators/PER_spatial-predicates.adoc[]
+include::recommendations/basic-spatial-relations/PER_spatial-predicates.adoc[]
 
-include::recommendations/basic-spatial-operators/PER_spatial-data-types.adoc[]
+include::recommendations/basic-spatial-relations/PER_spatial-data-types.adoc[]
 
 ==== Examples
 
@@ -310,12 +310,12 @@ S_INTERSECTS(geometry,POINT(36.319836 32.288087))
 Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
 ====
 
-[[spatial-operators]]
-=== Requirements Class "Spatial Operators"
+[[spatial-relations]]
+=== Requirements Class "Spatial Relation Functions"
 
-include::requirements/requirements_class_spatial-operators.adoc[]
+include::requirements/requirements_class_spatial-relations.adoc[]
 
-This requirement adds: 
+This requirement adds:
 
 * additional geometry types;
 * a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL2 filter expression. These operators are implemented in CQL2 as standardized functions.
@@ -323,9 +323,9 @@ This requirement adds:
 [[additional-spatial-data-types]]
 ==== Additional spatial data types and literal values
 
-include::requirements/spatial-operators/REQ_spatial-data-types.adoc[]
+include::requirements/spatial-relations/REQ_spatial-data-types.adoc[]
 
-The additional spatial data types in addition to "Point" and "BBox" (see <<basic-spatial-data-types>>) are: 
+The additional spatial data types in addition to "Point" and "BBox" (see <<basic-spatial-data-types>>) are:
 
 * "MultiPoint": a collection of points;
 * "LineString": a curve with linear interpolation between the vertices;
@@ -373,9 +373,9 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 
 ====
 
-==== Spatial Operators
+==== Spatial Relation Functions
 
-include::requirements/spatial-operators/REQ_spatial-operators.adoc[]
+include::requirements/spatial-relations/REQ_spatial-relations.adoc[]
 
 The following table lists the mathematical definitions of each standardized spatial comparison function as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>. `a` and `b` are geometries, `I(a)` is the set of all positions in the interior of the geometry (i.e., all positions on the geometry, but which are not on the boundary), and `E(a)` is the set of all exterior positions (i.e., all positions except those in the interior or on the boundary of the geometry).
 
@@ -448,10 +448,10 @@ S_CROSSES(road,POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
 ----
 ====
 
-[[temporal-operators]]
-=== Requirements Class "Temporal Operators"
+[[temporal-functions]]
+=== Requirements Class "Temporal Relation Functions"
 
-include::requirements/requirements_class_temporal-operators.adoc[]
+include::requirements/requirements_class_temporal-relations.adoc[]
 
 A temporal predicate evaluates two time-valued expressions to determine, if the expressions satisfy the requirements of the specified standardized temporal comparison function.
 
@@ -459,7 +459,7 @@ The operands in a temporal predicate are temporal geometries. A temporal geometr
 
 ==== Temporal data types and instances
 
-An instant is either a date (rule `dateInstant`) or a timestamp (rule `timestampInstant`) in accordance with <<rfc3339,RFC 3339>> (RFC 3339 rules `full-date` or `date-time`). Note that since time is continuous, every instant has a duration and a start/end. Nevertheless, the geometry can be considered an instant in the temporal resolution that is applicable for the specific property. 
+An instant is either a date (rule `dateInstant`) or a timestamp (rule `timestampInstant`) in accordance with <<rfc3339,RFC 3339>> (RFC 3339 rules `full-date` or `date-time`). Note that since time is continuous, every instant has a duration and a start/end. Nevertheless, the geometry can be considered an instant in the temporal resolution that is applicable for the specific property.
 
 An interval is the time between a start instant and an end instant, including both bounding instances (rule `intervalInstance`). Unbounded interval ends are represented by a double-dot string ("..") based on the convention specified in ISO 8601-2.
 
@@ -497,22 +497,22 @@ INTERVAL('2019-09-09', '..')
 ----
 ====
 
-==== Temporal Operators 
+==== Temporal Relation Functions
 
-The standardized temporal comparison functions in CQL2 are based on the temporal operator definitions in the <<owl-time,W3C/OGC Time Ontology in OWL>>. 
+The standardized temporal comparison functions in CQL2 are based on the temporal operator definitions in the <<owl-time,W3C/OGC Time Ontology in OWL>>.
 
 NOTE: <<per_basic-cql2_time-instant-comparison,Simple temporal predicates>> involving time instants can also be evaluated using the <<basic-cql2_comparison-predicates,standard comparison operators>>.
 
 The following table specifies the definition of the standardized temporal comparison functions where both operands may be instants or intervals, including mixed combinations.
 
-[[temporal-operators-1]]
+[[temporal-functions-1]]
 [reftext='{table-caption} {counter:table-num}']
 .Definitions of standardized temporal comparison functions that support both instants and intervals
 [width=100%,cols="30,70",options="header"]
 |===
 |Temporal comparison function |Definition (t1: first operand, t2: second operand)
-|T_AFTER |See https://www.w3.org/TR/owl-time/#time:after[after] 
-|T_BEFORE |See https://www.w3.org/TR/owl-time/#time:before[before] 
+|T_AFTER |See https://www.w3.org/TR/owl-time/#time:after[after]
+|T_BEFORE |See https://www.w3.org/TR/owl-time/#time:before[before]
 |T_DISJOINT |(t1 T_BEFORE t2) OR (t1 T_AFTER t2)
 |T_EQUALS |Start and end of t1 and t2 are coincident
 |T_INTERSECTS |NOT (t1 T_DISJOINT t2)
@@ -520,7 +520,7 @@ The following table specifies the definition of the standardized temporal compar
 
 Additional temporal comparison functions are available, but only applicable for intervals. Using these functions with instants will result in a client error.
 
-[[temporal-operators-2]]
+[[temporal-functions-2]]
 [reftext='{table-caption} {counter:table-num}']
 .Definitions of standardized temporal comparison function between intervals
 [width=100%,cols="30,70",options="header"]
@@ -544,11 +544,11 @@ The following diagram illustrates the meaning of most of the standardized tempor
 .The elementary relations between time intervals
 image::images/temporal_ops.png[alt=TemporalOps,width=70%]
 
-include::requirements/temporal-operators/REQ_temporal-predicates.adoc[]
+include::requirements/temporal-relations/REQ_temporal-predicates.adoc[]
 
-include::requirements/temporal-operators/REQ_temporal-operators.adoc[]
+include::requirements/temporal-relations/REQ_temporal-relations.adoc[]
 
-include::recommendations/temporal-operators/PER_temporal-predicates.adoc[]
+include::recommendations/temporal-relations/PER_temporal-predicates.adoc[]
 
 ==== Type casts
 
@@ -600,10 +600,10 @@ T_DURING(touchdown, INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 ====
 
-[[array-operators]]
-=== Requirements class "Array Operators"
+[[array-relations]]
+=== Requirements class "Array Relation Functions"
 
-include::requirements/requirements_class_array-operators.adoc[]
+include::requirements/requirements_class_array-relations.adoc[]
 
 This clause specifies requirements for supporting array expression in CQL2.
 
@@ -618,29 +618,29 @@ a geometry, an interval, or another array.
 
 * arrays (Text)
 ----
-[ 'a', 'c' ] 
-[ 'a', true, 1 ] 
+[ 'a', 'c' ]
+[ 'a', true, 1 ]
 [ DATE('1969-07-16'), DATE('1969-07-20'), DATE('1969-07-24') ]
 ----
 * arrays (JSON)
 [source,JSON]
 ----
-[ "a", "c" ] 
-[ "a", true, 1 ] 
+[ "a", "c" ]
+[ "a", true, 1 ]
 [ { "date" : "1969-07-16" }, { "date" : "1969-07-20" }, { "date" : "1969-07-24" } ]
 ----
 ====
 
-==== Array Operators
+==== Array Relation Functions
 
 Array expressions can be tested in a predicate for equality, if one array
 is a subset of another, if one array is a superset of another or if two
-arrays overlap or share elements using a standardized set of array comparison 
+arrays overlap or share elements using a standardized set of array comparison
 functions.
 
-include::requirements/array-operators/REQ_array-predicates.adoc[]
+include::requirements/array-relations/REQ_array-predicates.adoc[]
 
-include::recommendations/array-operators/PER_array-predicates.adoc[]
+include::recommendations/array-relations/PER_array-predicates.adoc[]
 
 NOTE: Support for the BNF rule `function` is added by
 the requirements class <<rc_functions,Functions>>.
@@ -765,7 +765,7 @@ S_WITHIN(road,Buffer(geometry,10,"m"))
 ----
 {
   "op": "s_within",
-  "args": [ 
+  "args": [
     {"property": "road"},
     {
       "function": {
