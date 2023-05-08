@@ -1,7 +1,7 @@
-[[req_filter_get-queryables-response]]
+[[req_queryables_get-queryables-response]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/filter/get-queryables-response*
+^|*Requirement {counter:req-id}* |*/req/queryables/get-queryables-response*
 ^|A |A successful execution of the operation SHALL be reported as a response
 with a HTTP status code `200`.
 ^|B |For responses that use `application/schema+json` as the `Content-Type` of
@@ -11,4 +11,23 @@ the response, the response SHALL have the following characteristics:
 or `\https://json-schema.org/draft/2020-12/schema`.
 * The property `$id` is the URI of the resource without query parameters.
 * The `type` is `object` and each property is a queryable.
+^|C |Each property SHALL include a `type` member, except for spatial properties.
+^|D |Each spatial property SHALL not include a `type` or `$ref` member.
+^|E |Each spatial property SHALL include a `format` member with a string value 
+"geometry", followed by a hyphen, followed by the name of the geometry type in 
+lower case with "any" as the wildcard for any geometry type. I.e., the values 
+for the Simple Feature geometry types are: 
+`geometry-any`, `geometry-point`, `geometry-multipoint`, `geometry-linestring`, 
+`geometry-multilinestring`, `geometry-polygon`, `geometry-multipolygon`, and
+`geometry-geometrycollection`.
+^|F |The `additionalProperties` member with a value of `true` or `false` is used
+to state the behavior with respect to properties that are not explicitly declared 
+in the queryables schema. 
+
+If `additionalProperties` is missing or has the default value `true`, 
+any property name is valid in a filter expression and the property reference SHALL 
+evaluate to `null`, if the property does not exist for a resource. 
+
+If `additionalProperties` is set to `false`, property references that are not 
+explicitly declared in the queryables schema SHALL result in a `400` response.
 |===

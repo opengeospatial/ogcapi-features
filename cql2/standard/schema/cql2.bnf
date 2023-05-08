@@ -23,7 +23,8 @@ booleanTerm = booleanFactor [ {"AND" booleanFactor} ];
 
 booleanFactor = ["NOT"] booleanPrimary;
 
-booleanPrimary = predicate
+booleanPrimary = function
+               | predicate
                | booleanLiteral
                | "(" booleanExpression ")";
 
@@ -52,7 +53,7 @@ binaryComparisonPredicate = scalarExpression
 
 scalarExpression = characterClause
                  | numericLiteral
-                 | instantLiteral
+                 | instantInstance
                  | arithmeticExpression
                  | booleanExpression
                  | propertyName
@@ -95,8 +96,8 @@ isNullPredicate = isNullOperand "IS" ["NOT"] "NULL";
 
 isNullOperand = characterClause
               | numericLiteral
-              | temporalLiteral
-              | spatialLiteral
+              | temporalInstance
+              | spatialInstance
               | arithmeticExpression
               | booleanExpression
               | propertyName
@@ -127,7 +128,7 @@ spatialFunction = "S_INTERSECTS"
 # a geometric literal (expressed as WKT) or a function that returns a
 # geometric value.
 #
-geomExpression = spatialLiteral
+geomExpression = spatialInstance
                | propertyName
                | function;
 
@@ -140,7 +141,7 @@ geomExpression = spatialLiteral
 temporalPredicate = temporalFunction 
                     "(" temporalExpression "," temporalExpression ")";
 
-temporalExpression = temporalLiteral
+temporalExpression = temporalInstance
                    | propertyName
                    | function;
 
@@ -169,23 +170,23 @@ temporalFunction = "T_AFTER"
 arrayPredicate = arrayFunction
                  "(" arrayExpression "," arrayExpression ")";
 
-arrayExpression = arrayLiteral
+arrayExpression = array
                 | propertyName
                 | function;
 
-# An array literal is a bracket-delimited, comma-separated list of array
+# An array is a parentheses-delimited, comma-separated list of array
 # elements.
-arrayLiteral = "(" ")"
-             | "(" arrayElement [ { "," arrayElement } ] ")";
+array = "(" ")"
+      | "(" arrayElement [ { "," arrayElement } ] ")";
 
 # An array element is either a character literal, a numeric literal,
-# a geometric literal, a temporal literal, a property name, a function, an
-# arithmetic expression or an array.
+# a geometric literal, a temporal instance, a property name, a function,
+# an arithmetic expression or an array.
 arrayElement = characterClause
              | numericLiteral
-             | temporalLiteral
-             | spatialLiteral
-             | arrayLiteral
+             | temporalInstance
+             | spatialInstance
+             | array
              | arithmeticExpression
              | booleanExpression
              | propertyName
@@ -345,9 +346,9 @@ argumentList = argument [ { "," argument } ];
 
 argument = characterClause
          | numericLiteral
-         | temporalLiteral
-         | spatialLiteral
-         | arrayLiteral
+         | temporalInstance
+         | spatialInstance
+         | array
          | arithmeticExpression
          | booleanExpression
          | propertyName
@@ -369,15 +370,25 @@ characterClause = "CASEI" "(" characterExpression ")"
 #=============================================================================#
 characterLiteral = "'" [ {character} ] "'";
 
-character = alpha | digit | "''";
+character = alpha | digit | whitespace | escapeQuote;
+
+escapeQuote = "''" | "\'";
 
 # character & digit productions copied from:
 # https://www.w3.org/TR/REC-xml/#charsets
 #
-alpha = "\x0007".."\x000D"     # bell, bs, htab, lf, vt, ff, cr
-      | "\x0020".."\x0026"     # spc, !, ", #, $, %, &
+alpha = "\x0007".."\x0008"     # bell, bs
+      | "\x0021".."\x0026"     # !, ", #, $, %, &
       | "\x0028".."\x002F"     # (, ), *, +, comma, -, ., /
-      | "\x003A".."\xD7FF"     # :,;,<,=,>,?,@,A-Z,[,\,],^,_,`,a-z,{,|,},~,...
+      | "\x003A".."\x0084"     # --+
+      | "\x0086".."\x009F"     #   |
+      | "\x00A1".."\x167F"     #   |
+      | "\x1681".."\x1FFF"     #   |
+      | "\x200B".."\x2027"     #   +-> :,;,<,=,>,?,@,A-Z,[,\,],^,_,`,a-z,...
+      | "\x202A".."\x202E"     #   |
+      | "\x2030".."\x205E"     #   |
+      | "\x2060".."\x2FFF"     #   |
+      | "\x3001".."\xD7FF"     # --+
       | "\xE000".."\xFFFD"     # See note 8.
       | "\x10000".."\x10FFFF"; # See note 9.
 
@@ -432,6 +443,32 @@ alpha = "\x0007".."\x000D"     # bell, bs, htab, lf, vt, ff, cr
 
 digit = "\x0030".."\x0039";
 
+whitespace = "\x0009"  # Character tabulation
+           | "\x000A"  # Line feed
+           | "\x000B"  # Line tabulation
+           | "\x000C"  # Form feed
+           | "\x000D"  # Carriage return
+           | "\x0020"  # Space
+           | "\x0085"  # Next line
+           | "\x00A0"  # No-break space
+           | "\x1680"  # Ogham space mark
+           | "\x2000"  # En quad
+           | "\x2001"  # Em quad
+           | "\x2002"  # En space
+           | "\x2003"  # Em space
+           | "\x2004"  # Three-per-em space
+           | "\x2005"  # Four-per-em space
+           | "\x2006"  # Six-per-em space
+           | "\x2007"  # Figure space
+           | "\x2008"  # Punctuation space
+           | "\x2009"  # Thin space
+           | "\x200A"  # Hair space
+           | "\x2028"  # Line separator
+           | "\x2029"  # Paragraph separator
+           | "\x202F"  # Narrow no-break space
+           | "\x205F"  # Medium mathematical space
+           | "\x3000"; # Ideographic space
+
 #=============================================================================#
 # Definition of NUMERIC literals
 #=============================================================================#
@@ -468,14 +505,14 @@ booleanLiteral = "TRUE" | "FALSE";
 # NOTE: This is basically BNF that define WKT encoding. It would be nice
 #       to instead reference some normative BNF for WKT.
 #=============================================================================#
-spatialLiteral = pointTaggedText
-               | linestringTaggedText
-               | polygonTaggedText
-               | multipointTaggedText
-               | multilinestringTaggedText
-               | multipolygonTaggedText
-               | geometryCollectionTaggedText
-               | bboxTaggedText;
+spatialInstance = pointTaggedText
+                | linestringTaggedText
+                | polygonTaggedText
+                | multipointTaggedText
+                | multilinestringTaggedText
+                | multipolygonTaggedText
+                | geometryCollectionTaggedText
+                | bboxTaggedText;
 
 pointTaggedText = "POINT" pointText;
 
@@ -511,8 +548,7 @@ multiLineStringText = "(" lineStringText {"," lineStringText} ")";
 
 multiPolygonText = "(" polygonText {"," polygonText} ")";
 
-geometryCollectionText = "("
-                         spatialLiteral {"," spatialLiteral} ")";
+geometryCollectionText = "(" spatialInstance {"," spatialInstance} ")";
 
 bboxTaggedText = "BBOX" bboxText;
 
@@ -530,9 +566,9 @@ minElev = signedNumericLiteral;
 
 maxElev = signedNumericLiteral;
 
-temporalLiteral = instantLiteral | intervalLiteral;
+temporalInstance = instantInstance | intervalInstance;
 
-instantLiteral = dateInstant | timestampInstant;
+instantInstance = dateInstant | timestampInstant;
 
 dateInstant = "DATE" 
               "(" dateInstantString ")";
@@ -544,8 +580,7 @@ timestampInstant = "TIMESTAMP"
 
 timestampInstantString = "'" fullDate "T" utcTime "'";
 
-intervalLiteral = "INTERVAL" 
-                  "(" instantParameter "," instantParameter ")";
+intervalInstance = "INTERVAL" "(" instantParameter "," instantParameter ")";
 
 instantParameter = dateInstantString
                  | timestampInstantString

@@ -48,11 +48,11 @@ Each resource representation includes an array of links. Implementations are fre
 
 === Use of HTTPS
 
-For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS." In fact, most servers are expected to use <<rfc2818,HTTPS>>, not <<rfc723x,HTTP>>.
+For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS." In fact, most servers are expected to use <<rfc2818,HTTPS>>, not <<rfc9110,HTTP>>.
 
 === HTTP URIs
 
-This document does not restrict the lexical space of URIs used in the API beyond the requirements of the <<rfc723x,HTTP>> and <<rfc3986,URI Syntax>> IETF RFCs. If URIs include reserved characters that are delimiters in the URI subcomponent, these have to be percent-encoded. See Clause 2 of <<rfc3986,RFC 3986>> for details.
+This document does not restrict the lexical space of URIs used in the API beyond the requirements of the <<rfc9110,HTTP>> and <<rfc3986,URI Syntax>> IETF RFCs. If URIs include reserved characters that are delimiters in the URI subcomponent, these have to be percent-encoded. See Clause 2 of <<rfc3986,RFC 3986>> for details.
 
 === API definition
 

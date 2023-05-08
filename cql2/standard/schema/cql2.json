@@ -22,6 +22,9 @@
       "$ref": "#/$defs/arrayPredicate"
     },
     {
+       "$ref": "#/$defs/functionRef"
+    },
+    {
       "type": "boolean"
     }
   ],
@@ -126,7 +129,7 @@
     "temporalInstantExpression": {
       "oneOf": [
         {
-          "$ref": "#/$defs/instantLiteral"
+          "$ref": "#/$defs/instantInstance"
         },
         {
           "$ref": "#/$defs/propertyRef"
@@ -325,7 +328,7 @@
     "geomExpression": {
       "oneOf": [
         {
-          "$ref": "#/$defs/spatialLiteral"
+          "$ref": "#/$defs/spatialInstance"
         },
         {
           "$ref": "#/$defs/propertyRef"
@@ -376,7 +379,7 @@
     "temporalExpression": {
       "oneOf": [
         {
-          "$ref": "#/$defs/temporalLiteral"
+          "$ref": "#/$defs/temporalInstance"
         },
         {
           "$ref": "#/$defs/propertyRef"
@@ -412,7 +415,7 @@
       "items": {
         "oneOf": [
           {
-            "$ref": "#/$defs/arrayLiteral"
+            "$ref": "#/$defs/array"
           },
           {
             "$ref": "#/$defs/propertyRef"
@@ -423,7 +426,7 @@
         ]
       }
     },
-    "arrayLiteral": {
+    "array": {
       "type": "array",
       "items": {
         "oneOf": [
@@ -443,7 +446,7 @@
             "$ref": "#/$defs/temporalExpression"
           },
           {
-            "$ref": "#/$defs/arrayLiteral"
+            "$ref": "#/$defs/array"
           }
         ]
       }
@@ -571,7 +574,7 @@
                 "$ref": "#/$defs/temporalExpression"
               },
               {
-                "$ref": "#/$defs/arrayExpression"
+                "$ref": "#/$defs/array"
               }
             ]
           }
@@ -591,12 +594,12 @@
           "type": "boolean"
         },
         {
-          "$ref": "#/$defs/instantLiteral"
+          "$ref": "#/$defs/instantInstance"
         }
       ]
     },
 
-    "spatialLiteral": {
+    "spatialInstance": {
       "oneOf": [
         {
           "$ref": "#/$defs/geometryLiteral"
@@ -837,27 +840,27 @@
       }
     },
 
-    "temporalLiteral": {
+    "temporalInstance": {
       "oneOf": [
         {
-          "$ref": "#/$defs/instantLiteral"
+          "$ref": "#/$defs/instantInstance"
         },
         {
-          "$ref": "#/$defs/intervalLiteral"
+          "$ref": "#/$defs/intervalInstance"
         }
       ]
     },
-    "instantLiteral": {
+    "instantInstance": {
       "oneOf": [
         {
-          "$ref": "#/$defs/dateLiteral"
+          "$ref": "#/$defs/dateInstant"
         },
         {
-          "$ref": "#/$defs/timestampLiteral"
+          "$ref": "#/$defs/timestampInstant"
         }
       ]
     },
-    "dateLiteral": {
+    "dateInstant": {
       "type": "object",
       "required": [ "date" ],
       "properties": {
@@ -866,7 +869,7 @@
         }
       }
     },
-    "timestampLiteral": {
+    "timestampInstant": {
       "type": "object",
       "required": [ "timestamp" ],
       "properties": {
@@ -893,7 +896,7 @@
       "type": "string",
       "format": "date-time"
     },
-    "intervalLiteral": {
+    "intervalInstance": {
       "type": "object",
       "required": [
         "interval"

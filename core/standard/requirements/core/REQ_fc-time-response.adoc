@@ -5,15 +5,4 @@
 ^|A |Only features that have a temporal geometry that intersects the temporal information in the `datetime` parameter SHALL be part of the result set, if the parameter is provided.
 ^|B |If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties.
 ^|C |The `datetime` parameter SHALL match all features in the collection that are not associated with a temporal geometry, too.
-^|D |Temporal geometries are either a date-time value or a time interval. The parameter value SHALL conform to the following syntax (using link:https://www.rfc-editor.org/rfc/rfc2234.html[ABNF]):
-
-```
-interval-bounded            = date-time "/" date-time
-interval-half-bounded-start = [".."] "/" date-time
-interval-half-bounded-end   = date-time "/" [".."]
-interval                    = interval-bounded / interval-half-bounded-start / interval-half-bounded-end
-datetime                    = date-time / interval
-```
-^|E |The syntax of `date-time` is specified by link:https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339, 5.6].
-^|F |Half-bounded time intervals are supported using a double-dot (`..`) or an empty string for the start/end.
 |===

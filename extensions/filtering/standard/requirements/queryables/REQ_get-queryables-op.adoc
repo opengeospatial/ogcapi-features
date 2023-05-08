@@ -1,10 +1,6 @@
-[[req_filter_get-queryables-op]]
+[[req_queryables_get-queryables-op]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/filter/get-queryables-op*
-^|A |For every collection of geospatial resources, the server SHALL support the HTTP GET operation at the path
- `/collections/{collectionId}/queryables` and the media type `application/schema+json`.
-^|B |The parameter `collectionId` is each `id` property in the Collections resource (JSONPath: `$.collections[*].id`).
-^|C |The Queryables resource SHALL be referenced from the Collection resource
-with a link with the link relation type `\http://www.opengis.net/def/rel/ogc/1.0/queryables`.
+^|*Requirement {counter:req-id}* |*/req/queryables/get-queryables-op*
+^|A |The Queryables resource SHALL support the HTTP GET operation and the media type `application/schema+json`.
 |===

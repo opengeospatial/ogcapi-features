@@ -16,8 +16,8 @@ This document outlines the support by OGC API Features of the design principles 
 - [x] Principle #4 – Construct consistent URIs
   - the resources are structured in a [simple path structure](https://docs.ogc.org/is/17-069r3/17-069r3.html#tldr) that is intuitive and at the same time extensible (both for additional parts of Features that will make use of other HTTP methods beyond GET, HEAD, OPTIONS or add resources as well as for other top-level OGC API resource types)
   - the path structure is consistent with the examples in Principle #4
-- [x] Principle #5 – Use HTTP Methods consistent with RFC 7231
-  - Part 1/2/3 use GET (and recommend support for HEAD and OPTIONS), Part 4 specifies the behavior of POST/PUT/DELETE/PATCH on the feature resources. All methods are used in conformance with the requirements and semantics specified in RFC 7231
+- [x] Principle #5 – Use HTTP Methods consistent with RFC 9110
+  - Part 1/2/3 use GET (and recommend support for HEAD and OPTIONS), Part 4 specifies the behavior of POST/PUT/DELETE/PATCH on the feature resources. All methods are used in conformance with the requirements and semantics specified in RFC 9110
 - [x] Principle #6 – Put Selection Criteria behind the ‘?’
   - selection criteria for the representation are query parameters (Part 1: `limit`, `bbox`, `datetime`, collection-specific filters; Part 2: `crs`, `bbox-crs`; Part 3: `filter`, `filter-bbox`, `filter-lang`)
 - [x] Principle #7 – Error Handling and use of HTTP Status Codes

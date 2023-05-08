@@ -2,10 +2,12 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/queryables-query-parameters/parameters*
-^|A |For every queryable of a collection (defined by the Queryables resource at path 
-`/collections/{collectionId}/queryables`) that has a simple value (string, number or boolean),
+^|A |For every feature collection, the server SHALL support the Queryables resource at the path
+ `/collections/{collectionId}/queryables`.
+^|B |The parameter `collectionId` is each `id` property in the Collections resource (JSONPath: `$.collections[*].id`).
+^|C |For every queryable of a feature collection that has a simple value (string, number, integer or boolean),
 the collection SHALL support a query parameter at path `/collections/{collectionId}/items`
 with the same schema as the schema of the queryable.
-^|B |If the query parameter is provided in a request, the response SHALL only include
+^|D |If the query parameter is provided in a request, the response SHALL only include
 resources that match the provided value for the queryable.
 |===

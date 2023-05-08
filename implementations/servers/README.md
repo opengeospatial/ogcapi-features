@@ -12,3 +12,4 @@ We welcome pull requests to update this page to add or update an entry for a ser
 - [nls-fi](nlsfi.md)
 - [QGIS Server](qgis.md)
 - [SDI Rhineland-Palatinate](sdirp.md)
+- [pg_featureserv](pg_featureserv.md)

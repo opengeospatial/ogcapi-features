@@ -42,3 +42,24 @@ Then:
 * assert that all conformance tests are successful.
 |===
 
+:conf-test: escaping
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_escaping,/req/{conf-class}/escaping>>
+|Test purpose: | Test escaping in string literals.
+|Test method: | 
+Given:
+
+* One of more data sources containing string literals with embedded single quotation (`'`) and/or BELL, and/or BACKSPACE, and/or HORIZONTAL TAB, and/or NEWLINE, and/or VERTICAL TAB, and/or FORM FEED, and/or CARRIAGE RETURN characters.
+
+When:
+
+Decode each string literal.
+
+Then:
+
+* assert that the escaped embedded characters have been correctly recovered.
+
+|===

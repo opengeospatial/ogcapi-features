@@ -3,5 +3,5 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/fc-md-items-links*
 ^|A |For each feature collection included in the response, the `links` property of the collection SHALL include an item for each supported encoding with a link to the features resource (relation: `items`).
-^|B |All links SHALL include the `rel` and `type` properties.
+^|B |These links (`rel` is `items`) SHALL include the `type` link parameter.
 |===

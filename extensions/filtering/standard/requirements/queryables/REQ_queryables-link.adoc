@@ -1,0 +1,9 @@
+[[req_queryables_queryables-link]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/queryables/queryables-link*
+^|A |The Queryables resource SHALL be referenced from any filterable resource 
+with a link with the link relation type `\http://www.opengis.net/def/rel/ogc/1.0/queryables` 
+(or, alternatively, `[ogc-rel:queryables]`).
+^|B |The link SHALL be included as a `Link` header in the response.
+|===
