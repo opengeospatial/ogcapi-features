@@ -9,7 +9,10 @@ properties:
     enum:
       - Feature
   geometry:
-    $ref: geometryGeoJSON.yaml
+    oneOf:
+    - enum:
+      - null
+    - $ref: geometryGeoJSON.yaml
   properties:
     type: object
     nullable: true
