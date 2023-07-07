@@ -36,7 +36,7 @@ Logically connected predicates are evaluated according to the following truth ta
 |NULL |NULL |NULL |NULL
 |===
 
-A collection item that satisfies ALL the requirements of a CQL2 filter expression according to the above true tables evaluates to a Boolean value of `TRUE`; otherwise the CQL2 filter expression evaluates to `FALSE` or `NULL`.
+A collection item that satisfies ALL the requirements of a CQL2 filter expression according to the above true table evaluates to a Boolean value of `TRUE`; otherwise the CQL2 filter expression evaluates to `FALSE` or `NULL`.
 
 If a CQL2 filter expression evaluates to `TRUE` for an item, the item is included in the result set and is thus available for further processing such as presentation in a response document.
 
