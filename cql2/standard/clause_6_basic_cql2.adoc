@@ -15,33 +15,36 @@ encodings of CQL2.
 [[basic-cql2_filter-expression]]
 === CQL2 filter expression
 
-A CQL2 filter expression is an expression that defines a logically connected
-set of predicates that are evaluated for each item of a collection. Each 
-predicate is an operator with operands where the number of operands depends 
-on the operator. An operand is either a literal, a property, a standardized or custom function 
-or an arithmetic expression.
+A CQL2 filter expression is an expression that defines a logically connected set of predicates that are evaluated for each item of a collection. Each predicate is an operator with operands where the number of operands depends on the operator. An operand is either a literal, a property, a standardized or custom function or an arithmetic expression.
 
-A predicate is an expression that evaluates to the Boolean values of `TRUE`
-or `FALSE` or that evaluates to the value `NULL` when dealing with unknown
-values.
+A predicate is an expression that evaluates to the Boolean values of `TRUE` or `FALSE` or that evaluates to the value `NULL` when dealing with unknown values.
+Logically connected predicates are evaluated according to the following truth table:
 
-If a predicate evaluates to `TRUE` for an item, the item qualifies for
-further processing such as presentation in the result set, being passed on
-to the next predicate in the filter for further evaluation, and so forth.
+[reftext='{table-caption} {counter:table-num}']
+.Truth table of evaluating CQL2 predicates
+[width=75%,cols="15,15,35,35",options="header"]
+|===
+|Predicate1 |Predicate2 |Predicate1 AND Predicate2 |Predicate1 OR Predicate2
+|TRUE |TRUE |TRUE |TRUE
+|TRUE |FALSE |FALSE |TRUE
+|FALSE |TRUE |FALSE |TRUE
+|FALSE |FALSE |FALSE |FALSE
+|TRUE |NULL |NULL |TRUE
+|FALSE |NULL |FALSE |NULL
+|NULL |TRUE |NULL |TRUE
+|NULL |FALSE |FALSE |NULL
+|NULL |NULL |NULL |NULL
+|===
 
-If the predicate evaluates to `FALSE` or `NULL` for an item, the item is not
-available for further processing.
+A collection item that satisfies ALL the requirements of a CQL2 filter expression according to the above true tables evaluates to a Boolean value of `TRUE`; otherwise the CQL2 filter expression evaluates to `FALSE` or `NULL`.
 
-A collection item that satisfies ALL the requirements of a CQL2 filter expression
-evaluates to a Boolean value of `TRUE`; otherwise the CQL2 filter expression
-evaluates to `FALSE`.
+If a CQL2 filter expression evaluates to `TRUE` for an item, the item is included in the result set and is thus available for further processing such as presentation in a response document.
 
-NOTE: The requirements in the rest of this specification only discuss predicates as evaluating to `TRUE` or `FALSE` and don't explicitly discuss predicates that evaluate to `NULL`.  For the purpose of evaluating a CQL2 filter expression, a query predicate that evaluates to `NULL` (i.e. of unknown value) is essentually the same as one that evaluates to `FALSE`.  That is, its effect is that a collection item being evaluated by the CQL2 filter expression would _not_ be passed on for further evaluation.
+If a CQL2 filter expression overall evaluates to `FALSE` or `NULL` for an item, the item is not included in the result set and is thus not available for further processing.
 
 include::requirements/basic-cql2/REQ_cql2-filter.adoc[]
 
-Literal values do not have to be supported on the left hand side of predicates and 
-property references do not have to be supported on the right hand side of
+Literal values do not have to be supported on the left hand side of predicates and property references do not have to be supported on the right hand side of
 predicates.
 
 include::recommendations/basic-cql2/PER_cql2-filter.adoc[]
