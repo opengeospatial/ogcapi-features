@@ -2,6 +2,8 @@
 
 This page shows how to connect with QGIS to an API that implements OGC API - Features - Part 1: Core. 
 
+From version 3.32.0 on, QGIS also supports OGC API - Features - Part 4 "CRUD"  (see https://github.com/qgis/QGIS/pull/52504).
+
 ## Software version
 
 This description uses QGIS 3.16 (LTR).
