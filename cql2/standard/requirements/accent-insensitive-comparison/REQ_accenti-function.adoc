@@ -5,5 +5,5 @@
 ^|A |The server SHALL support a function named `ACCENTI`.
 ^|B |The function SHALL accept one argument that can be a character string literal, the name of a property that evaluates to a character string literal or a function that returns a character string literal (see rules `characterLiteral`, `propertyName`, `function`).
 ^|C |The function SHALL return a character string.
-^|D |The function SHALL implement https://www.w3.org/TR/charmod-norm/#unicodeNormalization[unicode normalization] described in the implementation guidelines of the https://www.unicode.org/versions/Unicode15.0.0[Unicode 15.0.0] standard (see https://www.unicode.org/versions/Unicode14.0.0/ch05.pdf[clause 5.6 Normalization]).
+^|D |T.B.D.  The function needs to support accent stripping, diacritic folding and one of the Japanase foldings (likely Katakana folding).
 |===
