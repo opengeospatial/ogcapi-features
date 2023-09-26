@@ -13,3 +13,4 @@ We welcome pull requests to update this page to add or update an entry for a ser
 - [QGIS Server](qgis.md)
 - [SDI Rhineland-Palatinate](sdirp.md)
 - [pg_featureserv](pg_featureserv.md)
+- [MapServer](mapserver.md)
