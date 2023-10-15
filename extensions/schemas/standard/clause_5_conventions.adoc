@@ -1,14 +1,12 @@
 == Conventions
 
-TODO
-
 === General remarks
 
 See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clauses 5 and 6.
 
 === Identifiers
 
-The normative provisions in this standard are denoted by the URI `\http://www.opengis.net/spec/ogcapi-features-5/1.0`.
+The normative provisions in this standard are denoted by the URI `\http://www.opengis.net/spec/{standard}/{m_n}`.
 
 All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
 
@@ -20,7 +18,7 @@ The following OGC link relation types are introduced in this document (no applic
 * **\http://www.opengis.net/def/rel/ogc/1.0/queryables**: Refers to a resource that lists properties that can be used to filter items in the collection represented by the link's context.
 * **\http://www.opengis.net/def/rel/ogc/1.0/sortables**: Refers to a resource that lists properties that can be used to sort items in the collection represented by the link's context.
 
-As an alternative, the https://docs.ogc.org/pol/09-048r6.html#toc14[Compact URI (CURIE)] **[ogc-rel:queryables]** can be used, too.
+As an alternative, the https://docs.ogc.org/pol/09-048r6.html#toc14[Compact URI (CURIE)], e.g., **[ogc-rel:schema]**, can be used, too.
 
 NOTE: This link relation type needs to be registered in the <<ogc-link-relations,OGC Link Relation Type Register>> as well as in the <<ogc-curies,OGC CURIE Register>>. This note has to be removed before publication.
 
