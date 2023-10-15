@@ -1,7 +1,5 @@
 == Terms, Definitions, Symbols and Abbreviated Terms
 
-TODO
-
 === Terms and Definitions
 This document used the terms defined in https://portal.ogc.org/public_ogc/directives/directives.php[OGC Policy Directive 49], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard and OGC documents do not use the equivalent phrases in the ISO/IEC Directives, Part 2.
 
@@ -11,31 +9,35 @@ For the purposes of this document, the following additional terms and definition
 
 [[collection-def]]
 collection::
-a body of resources that belong or are used together; an aggregate, set, or group of related resources (http://docs.opengeospatial.org/DRAFTS/20-024.html#terms_and_definitions[OGC 20-024, OGC API - Common - Part 2: Collections]).
+a body of resources that belong or are used together; an aggregate, set, or group of related resources (http://docs.opengeospatial.org/DRAFTS/20-024.html#terms_and_definitions[OGC API - Common - Part 2: Collections]).
 
 [[endpoint-def]]
 endpoint::
 a web address (URI) at which access can be gained to a service or resource
 
-[[json-key]]
+[[json-key-def]]
 <JSON> key::
 the name of a *member*
 
-[[json-member]]
+[[json-member-def]]
 <JSON> member::
 a name/value pair in a JSON object
 
-[[logical-model]]
+[[logical-model-def]]
 logical model::
 an abstracted representation of domain knowledge that could feasibly be used in Model Driven Architecture to generate physical artifacts (https://docs.ogc.org/dp/21-041r2.html[OGC Conceptual Modeling Discussion Paper])
 
-[[primary-geometry]]
+[[ogc-webapi-def]]
+OGC Web API::
+A Web API that implements one or more Conformance Classes from an OGC API Standard (<<OAFeat-1,OGC API - Features - Part 1: Core>>)
+
+[[primary-geometry-def]]
 primary geometry::
 the geometry that the publisher considers as the most important spatial characteristic of a *feature*
 
-NOTE: A feature can be described by multiple spatial properties. For example, a radio tower can have a property with a point value that describes the location of the tower and another property with a multi-polygon value that describes the transmission area. Some feature formats represent only a single geometry per feature. In those cases, the primary geometry will be used when the feature is encoded in such a format.
+NOTE: A feature can be described by multiple spatial properties. For example, a radio tower can have a property with a point value that describes the location of the tower and another property with a multi-polygon value that describes the transmission area. Some feature formats can represent only a single geometry per feature. In those cases, the primary geometry will be used when the feature is encoded in such a format.
 
-[[primary-temporal-information]]
+[[primary-temporal-information-def]]
 primary temporal information::
 the position or extent in time that the publisher considers as the most important temporal characteristic of a *feature*
 
@@ -49,7 +51,11 @@ NOTE: As content of OGC API standards, a resource is typically published at an e
 
 [[queryable-def]]
 queryable::
-a token that represents a property of a resource that can be used in a **filter expression**
+a token that represents a property of a resource that can be used in a filter expression
+
+[[receivable-def]]
+receivable::
+a token that represents a property of a resource that is available in representations of the resource when creating or updating a resource
 
 [[resource-def]]
 resource::
@@ -57,9 +63,17 @@ entity that might be identified (<<iso15836-2,Dublin Core Metadata Initiative - 
 
 NOTE: The term "resource", when used in the context of an OGC API standard, should be understood to mean a <<web-resource-def,web resource>> unless otherwise indicated.
 
+[[returnable-def]]
+returnable::
+a token that represents a property of a resource that is available in representations of the resource when fetching the resource
+
+[[sortable-def]]
+sortable::
+a token that represents a property of a resource that can be used to sort resources of the same type
+
 [[web-resource-def]]
 web resource::
-a **resource** that is identified by a HTTP URI.
+a **resource** that is identified by a HTTP URI (<<OAFeat-1,OGC API - Features - Part 1: Core>>)
 
 === Abbreviated terms
 
