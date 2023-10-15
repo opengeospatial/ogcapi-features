@@ -7,7 +7,7 @@ The Requirements Class "Schemas" specifies basic provisions for schemas of items
 [cols="2,7",width="90%"]
 |===
 ^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
-|Target type |Web resources
+|Target type |Web resource
 |Dependency |<<json-schema,JSON Schema: A Media Type for Describing JSON Documents>>
 |Indirect Dependency |<<json-schema-validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>
 |Indirect Dependency |<<ogc06_103r4,Simple feature access - Part 1: Common architecture>>
@@ -39,7 +39,7 @@ The Requirements Class "Schemas" specifies basic provisions for schemas of items
 * "type" is "object".
 |===
 
-In addition to the JSON Schema data types, geospatial data typically also uses spatial and temporal data types.
+In addition to the JSON Schema data types, geospatial data typically uses spatial and temporal data types, too. 
 
 :req: properties
 [#{req-class}_{req}]
@@ -101,15 +101,16 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |A property with "x-ogc-role" set to "id" SHALL be the identifier of the item in a data collection.
-^|B |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
+^|A |A property with "x-ogc-role" set to "id" SHALL be the identifier of the item in the collection that contains the item.
+^|B |A property with role "id" SHALL either be a string or integer.
+^|C |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
 |===
 
 === Example
 
 The following example is the schema of a feature type that also includes additional keywords that apply to feature data (specified in the next Clause).
 
-[[example_1]]
+[[example_7_1]]
 .Schema example of a feature type
 ====
 [source,JSON]
