@@ -1,0 +1,165 @@
+:req-class: core-roles-features
+[#rc_{req-class}]
+== Requirements Class "Core roles for features"
+
+The Requirements Class "Core roles for features" specifies additional property roles for feature data.
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web resources
+|Dependency |<<rc_schemas>>
+|===
+
+In order to understand how features are encoded in a specific feature format, additional property roles need to be identified in the logical schema, depending on the format.
+
+For example, the role "primary-geometry" is needed in feature types with multiple spatial properties to decide
+
+* which geometry is encoded as the geometry of a feature in encodings like FlatGeobuf, Shapefile or Mapbox Vector Tiles, which only support a single geometry; or
+* which geometry is encoded in the "geometry" member in GeoJSON.
+
+The other roles specified in this requirements class support feature formats that support representing primary temporal information or the type of the feature, e.g., JSON-FG.
+
+=== Primary geometry
+
+If the features have multiple spatial properties, the role "primary-geometry" can be used to identify the primary geometry of the features.
+
+:req: role-primary-geometry
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A property with "x-ogc-role" set to "primary-geometry" SHALL be a spatial property.
+^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-geometry".
+^|C |If the schema has only one spatial property, the property SHALL be the primary geometry also if the property is not explicitly tagged with the role "primary-geometry".
+|===
+
+=== Primary temporal information
+
+If the features have multiple temporal properties, the roles "primary-instant", "primary-interval-start" and "primary-interval-end" can be used to identify the primary temporal information of the features.
+
+:req: role-primary-instant
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A property with "x-ogc-role" set to "primary-instant" SHALL be a temporal property.
+^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-instant".
+^|C |If the schema has only one temporal property, the property SHALL be the primary temporal information also if the property is not explicitly tagged with the role "primary-instant".
+|===
+
+:req: role-primary-interval-start
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A property with "x-ogc-role" set to "primary-interval-start" SHALL be a temporal property.
+^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-interval-start".
+|===
+
+:req: role-primary-interval-end
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A property with "x-ogc-role" set to "primary-interval-end" SHALL be a temporal property.
+^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-interval-end".
+|===
+
+:req: primary-temporal-constraints
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |If a schema has a property with role "primary-instant", the schema SHALL NOT have properties with role "primary-interval-start" or "primary-interval-end".
+^|B |If a schema has properties with both roles "primary-interval-start" and "primary-interval-end", both properties SHALL have the same temporal granularity ("date" or "date-time").
+|===
+
+=== Feature type
+
+If the features have a property that represents the feature type, the role "type" can be used for this property.
+
+:req: role-type
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A property with "x-ogc-role" set to "type" SHALL be a string property.
+^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "type".
+|===
+
+=== Examples
+
+The previous Clause includes <<example_1,an example with the roles "id", "primary-geometry", "primary-instant" and "type">>.
+
+The following example is the schema of a feature type with the roles "id", "primary-geometry", "primary-interval-start" and "primary-interval-end".
+
+[[example_2]]
+.Schema example of a feature type 
+====
+[source,JSON]
+----
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://demo.ldproxy.net/cshapes/collections/boundary/schema",
+  "title" : "Historical Country Boundaries",
+  "description" : "Core territories of the given country, excluding colonies and other dependent territories, between the start and end date.",
+  "type" : "object",
+  "properties" : {
+    "fid" : {
+      "title" : "Unique identifier",
+      "readOnly" : true,
+      "x-ogc-role" : "id",
+      "type" : "integer"
+    },
+    "name" : {
+      "title" : "Country name",
+      "type" : "string"
+    },
+    "area_km2" : {
+      "title" : "Area (km²)",
+      "description" : "The polygon area in square kilometers, computed using an Eckert VI projection.",
+      "type" : "number"
+    },
+    "capname" : {
+      "title" : "Country capital",
+      "description" : "The name of the country capital.",
+      "type" : "string"
+    },
+    "caplong" : {
+      "title" : "Longitude of the capital",
+      "description" : "Longitude of the capital, in decimal degrees",
+      "type" : "number"
+    },
+    "caplat" : {
+      "title" : "Latitude of the capital",
+      "description" : "Latitude of the capital, in decimal degrees",
+      "type" : "number"
+    },
+    "gwsdate" : {
+      "title" : "Start date",
+      "description" : "Start date of the entry.",
+      "x-ogc-role" : "primary-interval-start",
+      "format" : "date",
+      "type" : "string"
+    },
+    "gwedate" : {
+      "title" : "End date",
+      "description" : "End date of the entry.",
+      "x-ogc-role" : "primary-interval-end",
+      "format" : "date",
+      "type" : "string"
+    },
+    "gwcode" : {
+      "title" : "Source identifier",
+      "description" : "Numeric identifier code in the source data.",
+      "type" : "integer"
+    },
+    "geometry" : {
+      "x-ogc-role" : "primary-geometry",
+      "format" : "geometry-multipolygon"
+    }
+  }
+}
+----
+====

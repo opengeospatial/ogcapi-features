@@ -1,0 +1,26 @@
+:req-class: profile-parameter
+[#rc_{req-class}]
+== Requirements Class "Profile query parameter"
+
+The Requirements Class "Profile query parameter" specifies additional provisons for properties that reference another resource.
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web API
+|Dependency |<<rc_core-api-bblocks>>
+|===
+
+Some properties may be represented in multiple representations in the same feature format, depending on the intended use of the data. One example are references to another web resource (see the next Clause).
+
+IETF has specified RFC 6906 for such cases using the concept of profiles:
+
+> A profile is defined not to alter the semantics of the resource representation itself, but to allow clients to learn about additional semantics (constraints, conventions, extensions) that are associated with the resource representation, in addition to those defined by the media type and possibly other mechanisms.
+
+TODO
+
+* optional query parameter "profile"
+* part of the content-negotiation
+* include links to the selected profile(s) in the response, including in the HTTP response headers
+* formats can support only a subset of the standardized profiles and will select/negotiate the "best" profile(s) that they support
+

@@ -1,0 +1,24 @@
+:req-class: profile-references
+[#rc_{req-class}]
+== Requirements Class "Profiles for references"
+
+The Requirements Class "Profiles for references" specifies three profiles for representing references another resource.
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web resources
+|Dependency |<<rc_schemas>>
+|===
+
+TODO
+
+If a collection includes a property with role „reference“, operations to request features support a parameter „profile“ to select the representation of the reference in the response.
+
+* rel-as-key – the foreign key
+* rel-as-uri – the URI of the referenced resource
+* rel-as-link – an object with property "href" (the URI) and, optionally, "title" (a human readable label, e.g. for a clickable link)
+
+Discuss negotiation depending on the format
+
+Examples
