@@ -1,17 +1,30 @@
 == Conformance
 
-TODO
-
 This standard defines the following requirements classes, grouped by their standardization target:
 
 * Web Resource
-** <<rc_schemas>>
-** <<rc_core-roles-features>>
-** <<rc_references>>
+** <<rc_schemas>> specifies basic provisions for schemas of items in a collection of geospatial data, for example, features, and the representation of a schema in JSON Schema.
+** <<rc_core-roles-features>> specifies additional property roles for feature data.
+** <<rc_references>> specifies additional provisons for properties that reference another resource.
 * Web API
-** <<rc_core-api-bblocks>>
-** <<rc_profile-parameter>>
-** <<rc_profile-references>>
+** <<rc_core-api-bblocks>> specifies the main web resources representing schemas in OGC Web APIs.
+** <<rc_profile-parameter>> specifies additional provisons for properties that reference another resource.
+** <<rc_profile-references>> specifies three profiles for representing references another resource.
+
+Conformance with this standard shall be checked using all the relevant tests specified in <<ats,Annex A>> of this document for each conformance class. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
+
+[#conf_class_uris,reftext='{table-caption} {counter:table-num}']
+.Conformance class URIs
+[cols="25,75",options="header"]
+|===
+|Conformance class |URI
+|Schemas |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/schemas`
+|Core roles for features |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/core-roles-features`
+|References |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/references`
+|Core API building blocks |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/core-api-bblocks`
+|Profile query parameter |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-parameter`
+|Profiles for references |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-references`
+|===
 
 ////
 
