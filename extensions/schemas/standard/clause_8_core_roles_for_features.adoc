@@ -34,6 +34,8 @@ If the features have multiple spatial properties, the role "primary-geometry" ca
 ^|C |If the schema has only one spatial property, the property SHALL be the primary geometry also if the property is not explicitly tagged with the role "primary-geometry".
 |===
 
+NOTE: Since only a single property can be tagged in the schema as the primary geometry, varying primary geometries at different zoom levels are currently not supported. This would require the capability to assign the role depening on the zoom level.
+
 === Primary temporal information
 
 If the features have multiple temporal properties, the roles "primary-instant", "primary-interval-start" and "primary-interval-end" can be used to identify the primary temporal information of the features.

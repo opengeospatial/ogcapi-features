@@ -37,6 +37,8 @@ the geometry that the publisher considers as the most important spatial characte
 
 NOTE: A feature can be described by multiple spatial properties. For example, a radio tower can have a property with a point value that describes the location of the tower and another property with a multi-polygon value that describes the transmission area. Some feature formats can represent only a single geometry per feature. In those cases, the primary geometry will be used when the feature is encoded in such a format.
 
+NOTE: The primary geometry of a feature can also vary depending on the zoom level. At a smaller scale, the primary geometry could be a point while a polygon could be used at a larger scale.
+
 [[primary-temporal-information-def]]
 primary temporal information::
 the position or extent in time that the publisher considers as the most important temporal characteristic of a *feature*
