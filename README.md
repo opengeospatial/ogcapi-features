@@ -138,6 +138,7 @@ The latest drafts of each standard in this repository are build daily (based on 
 * [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r2.html)
 * [Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r1.html)
 * [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
+* [Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058.html)
 
 * [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065.html)
 
@@ -156,6 +157,8 @@ asciidoctor -a data-uri -r asciidoctor-diagram extensions/filtering/standard/19-
 asciidoctor -a data-uri -r asciidoctor-diagram cql2/standard/21-065.adoc
 # Part 4: Create, Replace, Update and Delete
 asciidoctor -a data-uri -r asciidoctor-diagram extensions/transactions/create-replace-update-delete/standard/20-002.adoc
+# Part 5: Schemas
+asciidoctor -a data-uri -r asciidoctor-diagram extensions/schemas/standard/23-058.adoc
 ```
 
 The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.
