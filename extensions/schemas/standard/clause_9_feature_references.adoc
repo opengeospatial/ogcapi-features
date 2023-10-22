@@ -29,5 +29,49 @@ If the features have a property that represents a reference to another feature i
 ^|G |If F applies, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
 |===
 
-TODO add examples
+[[example_9_1]]
+.Schema example 
+====
+This is the schema of a raod accident feature type. The "roadSegment" property is a reference to the road segment on which the accident occured.
 
+[source,JSON]
+----
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/apis/roads/collections/accidents/schema",
+  "type": "object",
+  "title": "Road accidents",
+  "properties": {
+    "id": {
+      "title": "Feature identifier",
+      "readOnly": true,
+      "x-ogc-role": "id",
+      "type": "integer"
+    },
+    "timeOfAccident": {
+      "title": "Time of the accident",
+      "x-ogc-role": "primary-instant",
+      "format": "date-time",
+      "type": "string"
+    },
+    "roadSegement": {
+      "title": "Road segment",
+      "description": "Road segment on which the accident occured, identified by its 16-character code (8 characters for the start and end node).",
+      "x-ogc-role": "reference",
+      "x-ogc-collectionId": "roadsegments",
+      "type": "string"
+    },
+    "distanceFromStart": {
+      "title": "Distance from start [m]",
+      "description": "Distance from the start node of the road segment. The unit is meter.",
+      "minimum": 0.0,
+      "type": "number"
+    },
+    "geometry": {
+      "x-ogc-role": "primary-geometry",
+      "format": "geometry-point"
+    }
+  }
+}
+----
+====
