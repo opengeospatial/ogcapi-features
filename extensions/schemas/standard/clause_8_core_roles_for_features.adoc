@@ -31,7 +31,7 @@ If the features have multiple spatial properties, the role "primary-geometry" ca
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |A property with "x-ogc-role" set to "primary-geometry" SHALL be a spatial property.
 ^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-geometry".
-^|C |If the schema has only one spatial property, the property SHALL be the primary geometry also if the property is not explicitly tagged with the role "primary-geometry".
+^|C |If the schema has only one spatial property, the property SHALL be the primary geometry even if the property is not explicitly tagged with the role "primary-geometry".
 |===
 
 NOTE: Since only a single property can be tagged in the schema as the primary geometry, varying primary geometries at different zoom levels are currently not supported. This would require the capability to assign the role depening on the zoom level.
@@ -47,7 +47,7 @@ If the features have multiple temporal properties, the roles "primary-instant", 
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |A property with "x-ogc-role" set to "primary-instant" SHALL be a temporal property.
 ^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-instant".
-^|C |If the schema has only one temporal property, the property SHALL be the primary temporal information also if the property is not explicitly tagged with the role "primary-instant".
+^|C |If the schema has only one temporal property, the property SHALL be the primary temporal information even if the property is not explicitly tagged with the role "primary-instant".
 |===
 
 :req: role-primary-interval-start
@@ -76,6 +76,8 @@ If the features have multiple temporal properties, the roles "primary-instant", 
 ^|A |If a schema has a property with role "primary-instant", the schema SHALL NOT have properties with role "primary-interval-start" or "primary-interval-end".
 ^|B |If a schema has properties with both roles "primary-interval-start" and "primary-interval-end", both properties SHALL have the same temporal granularity ("date" or "date-time").
 |===
+
+NOTE: Consider to add a role "primary-interval" with a proper representation of an interval, e.g., the interval representation in JSON-FG (an array with two dates or timestamps).
 
 === Feature type
 
@@ -121,7 +123,9 @@ The following example is the schema of a feature type with the roles "id", "prim
     "area_km2" : {
       "title" : "Area (km²)",
       "description" : "The polygon area in square kilometers, computed using an Eckert VI projection.",
-      "type" : "number"
+      "type" : "number",
+      "x-ogc-unit": "km2"
+
     },
     "capname" : {
       "title" : "Country capital",

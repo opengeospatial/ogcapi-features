@@ -54,7 +54,7 @@ This is the schema of a raod accident feature type. The "roadSegment" property i
       "format": "date-time",
       "type": "string"
     },
-    "roadSegement": {
+    "roadSegment": {
       "title": "Road segment",
       "description": "Road segment on which the accident occured, identified by its 16-character code (8 characters for the start and end node).",
       "x-ogc-role": "reference",
@@ -65,7 +65,8 @@ This is the schema of a raod accident feature type. The "roadSegment" property i
       "title": "Distance from start [m]",
       "description": "Distance from the start node of the road segment. The unit is meter.",
       "minimum": 0.0,
-      "type": "number"
+      "type": "number",
+      "x-ogc-unit": "m"
     },
     "geometry": {
       "x-ogc-role": "primary-geometry",
