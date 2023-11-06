@@ -8,10 +8,10 @@ grouped by their standardization target:
 ** <<rc_advanced-comparison-operators,Advanced Comparison Operators>>
 ** <<rc_case-insensitive-comparison,Case-insensitive Comparisons>>
 ** <<rc_accent-insensitive-comparison,Accent-insensitive Comparisons>>
-** <<rc_basic-spatial-relations,Basic Spatial Relation Functions>>
-** <<rc_spatial-relations,Spatial Relation Functions>>
-** <<rc_temporal-relations,Temporal Relation Functions>>
-** <<rc_array-relations,Array Relation Functions>>
+** <<rc_basic-spatial-functions,Basic Spatial Functions>>
+** <<rc_spatial-functions,Spatial Functions>>
+** <<rc_temporal-functions,Temporal Functions>>
+** <<rc_array-functions,Array Functions>>
 ** <<rc_property-property,Property-Property Comparisons>>
 ** <<rc_functions,Functions>>
 ** <<rc_arithmetic,Arithmetic Expressions>>
@@ -60,11 +60,11 @@ The <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>> requireme
 
 * accenti
 
-The <<rc_basic-spatial-relations,Basic Spatial Relation Functions>> requirements class specifies minimal requirements for servers that support standardized spatial comparison functions. Only the following spatial comparison function must be supported, and only for points and bounding boxes:
+The <<rc_basic-spatial-functions,Basic Spatial Functions>> requirements class specifies minimal requirements for servers that support standardized spatial comparison functions. Only the following spatial comparison function must be supported, and only for points and bounding boxes:
 
 * s_intersects
 
-The <<rc_spatial-relations,Spatial Relation Functions>> requirements class specifies requirements for servers that support a richer set of spatial comparison functions and spatial data types. The list of additional spatial comparison functions that must be supported is:
+The <<rc_spatial-functions,Spatial Functions>> requirements class specifies requirements for servers that support a richer set of spatial comparison functions and spatial data types. The list of additional spatial comparison functions that must be supported is:
 
 * s_contains
 * s_crosses
@@ -76,7 +76,7 @@ The <<rc_spatial-relations,Spatial Relation Functions>> requirements class speci
 
 All spatial data types from the Simple Feature Access Standard must be supported.
 
-The <<rc_temporal-relations,Temporal Relation Functions>> requirements
+The <<rc_temporal-functions,Temporal Functions>> requirements
 class specifies requirements for servers that support standardized temporal comparison function. 
 The list of temporal comparison function that must be supported is:
 
@@ -96,7 +96,7 @@ The list of temporal comparison function that must be supported is:
 * t_startedby
 * t_starts
 
-The <<rc_array-relations,Array Relation Functions>> requirements class specifies
+The <<rc_array-functions,Array Functions>> requirements class specifies
 requirements for standardized array comparison functions for sets of values. 
 The array comparison functions that must be supported are:
 
@@ -140,10 +140,10 @@ OGC Compliance Testing web site.
 |<<ats_advanced-comparison-operators,Advanced Comparison Operators>> |http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators
 |<<ats_case-insensitive-comparison,Case-insensitive Comparison>> |http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison
 |<<ats_accent-insensitive-comparison,Accent-insensitive Comparison>> |http://www.opengis.net/spec/cql2/1.0/conf/accent-insensitive-comparison
-|<<ats_basic-spatial-relations,Basic Spatial Relation Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-relations
-|<<ats_spatial-relations,Spatial Relation Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/spatial-relations
-|<<ats_temporal-relations,Temporal Relation Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/temporal-relations
-|<<ats_array-relations,Array Relation Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/array-relations
+|<<ats_basic-spatial-functions,Basic Spatial Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-functions
+|<<ats_spatial-functions,Spatial Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/spatial-functions
+|<<ats_temporal-functions,Temporal Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/temporal-functions
+|<<ats_array-functions,Array Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/array-functions
 |<<ats_property-property,Property-Property Comparisons>> |http://www.opengis.net/spec/cql2/1.0/conf/property-property
 |<<ats_functions,Functions>> |http://www.opengis.net/spec/cql2/1.0/conf/functions
 |<<ats_arithmetic,Arithmetic Expressions>> |http://www.opengis.net/spec/cql2/1.0/conf/arithmetic
