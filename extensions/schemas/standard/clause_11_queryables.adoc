@@ -40,12 +40,12 @@ In addition, a <<publisher-def,publisher>> may want to support <<queryable-def,q
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|B |For responses that use `application/schema+json` as the `Content-Type` of the response, the response SHALL conform to <<rc_schemas>>.
-^|C |No property SHALL be of type "object".
-^|D |The items of a property of type "array" SHALL either be strings or numbers.
-^|D |If `additionalProperties` is not included or has the default value `true`, any property name is valid in a filter expression on the collection that is evalutated by the Web API and the property reference SHALL evaluate to `null`, if the property does not exist for a resource.
+^|C |If `additionalProperties` is not included or has the default value `true`, any property name is valid in a filter expression on the collection that is evalutated by the Web API and the property reference SHALL evaluate to `null`, if the property does not exist for a resource.
 
 If `additionalProperties` is set to false, property references that are not explicitly declared in the queryables schema SHALL result in a 400 response.
 |===
+
+NOTE: Depending on the filter language, some properties can not be supported in filter expressions. For example, if the filter language does not support predicates on object-valued properties, using such properties in a filter expression will result in an error.
 
 [[example_11_1]]
 .Filtering on complex data structures

@@ -2,7 +2,7 @@
 [#rc_{req-class}]
 == Requirements Class "Schemas"
 
-The Requirements Class "Schemas" specifies basic provisions for schemas of items in a collection of geospatial data, for example, features, and the representation of a schema in JSON Schema.
+The Requirements Class "Schemas" specifies basic provisions for schemas of items in a collection of geospatial data, for example, features, and the representation of a schema in JSON Schema. The schema represents a logical model, independent of the format in which the feature is encoded.
 
 [cols="2,7",width="90%"]
 |===
@@ -11,16 +11,7 @@ The Requirements Class "Schemas" specifies basic provisions for schemas of items
 |Dependency |<<json-schema,JSON Schema: A Media Type for Describing JSON Documents>>
 |Indirect Dependency |<<json-schema-validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>
 |Indirect Dependency |<<ogc06_103r4,Simple feature access - Part 1: Common architecture>>
-|===
-
-:req: logical-model
-[#{req-class}_{req}]
-=== Level of abstraction
-
-[width="90%",cols="2,7a"]
-|===
-^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |The schema SHALL be a logical model.
+|Indirect Dependency |<<ucum,The Unified Code for Units of Measure>>
 |===
 
 [#schema-representation]
@@ -34,7 +25,7 @@ The Requirements Class "Schemas" specifies basic provisions for schemas of items
 ^|A |The schema SHALL be a valid JSON Schema.
 ^|B |The schema SHALL have the following characteristics:
 
-* "$schema" is "\https://json-schema.org/draft/2020-12/schema" or "\https://json-schema.org/draft/2019-09/schema";
+* "$schema" is "\https://json-schema.org/draft/2020-12/schema";
 * "$id" is a HTTP(S) URI without query parameters that returns the schema, if requested with the header "Accept: application/schema+json"; and 
 * "type" is "object".
 |===
@@ -70,6 +61,8 @@ The following recommendations are intended to simplify parsing a schema and to h
 ^|G |For numeric properties, "multipleOf", "minimum", "exclusiveMinimum", "maximum", "exclusiveMaximum" SHOULD be provided, where applicable.
 ^|H |For integer properties that represent enumerated values, "enum" SHOULD be provided.
 ^|I |Required properties SHOULD be included in "required".
+^|J |The JSON Schema keywords SHOULD be constrainted to the those mentioned in this recommendation and requirement `/req/{req-class}/properties`.
+
 |===
 
 [#additional-keywords]
@@ -106,6 +99,33 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 ^|C |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
 |===
 
+For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-property-seq".
+
+:req: property-index
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The keyword "x-ogc-property-seq" SHALL be used to declare a specific relative position of the property.
+^|B |The value of the keyword "x-ogc-property-seq" SHALL be an integer representing the relative position in ascending order.
+^|C |Each value of the keyword SHALL be unique for all members of a "properties" object in the JSON Schema.
+|===
+
+In geospatial data, numeric property values often represent a measurement and have a unit of measure. For fixed units, this can be expressed in the schema using a keyword "x-ogc-unit".
+
+:req: unit
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The keyword "x-ogc-unit" SHALL be used to declare the unit of measure of the property.
+^|B |The value of the keyword "x-ogc-unit" SHALL be a string representing the unit of measure.
+^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unit-lang".
+^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unit-lang", SHALL be "UCUM". 
+|===
+
+Communities or other OGC Standards can specify additional values for other unit languages, e.g., the https://www.qudt.org/doc/DOC_VOCAB-UNITS.html[QUDT Units] or https://www.opengis.net/def/uom[units registered in the OGC Rainbow]. For each language it must be specified how units have to be represented in the "x-ogc-unit" value.
+
 === Example
 
 The following example is the schema of a feature type that also includes additional keywords that apply to feature data (specified in the next Clause).
@@ -121,51 +141,61 @@ The following example is the schema of a feature type that also includes additio
   "type" : "object",
   "title" : "Cultural (Points)",
   "properties" : {
-    "id" : {
+    "FID" : {
       "readOnly" : true,
       "x-ogc-role" : "id",
-      "type" : "integer"
+      "type" : "integer",
+      "x-ogc-property-seq": 1
     },
     "F_CODE" : {
       "title" : "Feature Type Code",
       "x-ogc-role" : "type",
       "enum" : [ "AK121", "AL012", "AL030", "AL130", "BH075" ],
-      "type" : "string"
+      "type" : "string",
+      "x-ogc-property-seq": 2
     },
     "geometry" : {
       "x-ogc-role" : "primary-geometry",
-      "format" : "geometry-point"
+      "format" : "geometry-point",
+      "x-ogc-property-seq": 3
     },
     "ZI001_SDV" : {
       "title" : "Last Change",
       "x-ogc-role" : "primary-instant",
       "format" : "date-time",
-      "type" : "string"
+      "type" : "string",
+      "x-ogc-property-seq": 4
     },
     "UFI" : {
       "title" : "Unique Entity Identifier",
-      "type" : "string"
+      "type" : "string",
+      "x-ogc-property-seq": 5
     },
     "ZI005_FNA" : {
       "title" : "Name",
-      "type" : "string"
+      "type" : "string",
+      "x-ogc-property-seq": 6
     },
     "FCSUBTYPE" : {
       "title" : "Feature Subtype Code",
-      "type" : "integer"
+      "type" : "integer",
+      "x-ogc-property-seq": 7
     },
     "ZI037_REL" : {
       "title" : "Religious Designation",
       "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
-      "type" : "integer"
+      "type" : "integer",
+      "x-ogc-property-seq": 8
     },
     "ZI006_MEM" : {
       "title" : "Memorandum",
-      "type" : "string"
+      "type" : "string",
+      "x-ogc-property-seq": 9
     },
     "ZI001_SDP" : {
       "title" : "Source Description",
-      "type" : "string"
+      "type" : "string",
+      "x-ogc-property-seq": 10
     }
   }
 }
