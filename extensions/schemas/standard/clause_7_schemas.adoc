@@ -99,15 +99,15 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 ^|C |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
 |===
 
-For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-property-index".
+For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-property-seq".
 
 :req: property-index
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |The keyword "x-ogc-property-index" SHALL be used to declare a specific relative position of the property.
-^|B |The value of the keyword "x-ogc-role" SHALL be an integer representing the relative position in ascending order.
+^|A |The keyword "x-ogc-property-seq" SHALL be used to declare a specific relative position of the property.
+^|B |The value of the keyword "x-ogc-property-seq" SHALL be an integer representing the relative position in ascending order.
 ^|C |Each value of the keyword SHALL be unique for all members of a "properties" object in the JSON Schema.
 |===
 
@@ -123,6 +123,8 @@ In geospatial data, numeric property values often represent a measurement and ha
 ^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unit-lang".
 ^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unit-lang", SHALL be "UCUM". 
 |===
+
+Communities or other OGC Standards can specify additional values for other unit languages, e.g., the https://www.qudt.org/doc/DOC_VOCAB-UNITS.html[QUDT Units] or https://www.opengis.net/def/uom[units registered in the OGC Rainbow]. For each language it must be specified how units have to be represented in the "x-ogc-unit" value.
 
 === Example
 
@@ -143,57 +145,57 @@ The following example is the schema of a feature type that also includes additio
       "readOnly" : true,
       "x-ogc-role" : "id",
       "type" : "integer",
-      "x-ogc-property-index": 1
+      "x-ogc-property-seq": 1
     },
     "F_CODE" : {
       "title" : "Feature Type Code",
       "x-ogc-role" : "type",
       "enum" : [ "AK121", "AL012", "AL030", "AL130", "BH075" ],
       "type" : "string",
-      "x-ogc-property-index": 2
+      "x-ogc-property-seq": 2
     },
     "geometry" : {
       "x-ogc-role" : "primary-geometry",
       "format" : "geometry-point",
-      "x-ogc-property-index": 3
+      "x-ogc-property-seq": 3
     },
     "ZI001_SDV" : {
       "title" : "Last Change",
       "x-ogc-role" : "primary-instant",
       "format" : "date-time",
       "type" : "string",
-      "x-ogc-property-index": 4
+      "x-ogc-property-seq": 4
     },
     "UFI" : {
       "title" : "Unique Entity Identifier",
       "type" : "string",
-      "x-ogc-property-index": 5
+      "x-ogc-property-seq": 5
     },
     "ZI005_FNA" : {
       "title" : "Name",
       "type" : "string",
-      "x-ogc-property-index": 6
+      "x-ogc-property-seq": 6
     },
     "FCSUBTYPE" : {
       "title" : "Feature Subtype Code",
       "type" : "integer",
-      "x-ogc-property-index": 7
+      "x-ogc-property-seq": 7
     },
     "ZI037_REL" : {
       "title" : "Religious Designation",
       "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
       "type" : "integer",
-      "x-ogc-property-index": 8
+      "x-ogc-property-seq": 8
     },
     "ZI006_MEM" : {
       "title" : "Memorandum",
       "type" : "string",
-      "x-ogc-property-index": 9
+      "x-ogc-property-seq": 9
     },
     "ZI001_SDP" : {
       "title" : "Source Description",
       "type" : "string",
-      "x-ogc-property-index": 10
+      "x-ogc-property-seq": 10
     }
   }
 }
