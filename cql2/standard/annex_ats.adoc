@@ -15,9 +15,14 @@ In addition, to properly test an implementation, conditional tests are provided,
 
 The test dataset contains of feature types with point, line string and polygon geometries. It is available as a GeoPackage file with the associated queryables specified in JSON Schema for each feature collection in the link:https://github.com/opengeospatial/ogcapi-features/tree/master/cql2/standard/data[OGC API Features GitHub repository]. The test dataset has been derived from three layers of the link:[Natural Earth vector dataset] at scale 1:110 million (ne_110m_admin_0_countries, ne_110m_populated_places_simple, ne_110m_rivers_lake_centerlines). Some columns have been removed and a few columns have been added with random data in order to test also filter expressions on date, timestamp and boolean properties.
 
+The tests assumes that 
+
+* all feature properties are also queryables;
+* the queryable for the feature geometry is `geom`.
+
 All eleven conformance classes for the standardization target type "servers that evaluate filter expressions" have the following parameter:
 
-* Filter Language: The CQL2 encoding to be used in the test, either "CQL2 Text" or "CQL2 JSON";
+* Filter Language: The CQL2 encoding to be used in the test, either "CQL2 Text" or "CQL2 JSON".
 
 General rules for the encoding of all filter expressions in tests:
 
