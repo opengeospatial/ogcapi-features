@@ -3,7 +3,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/filter/filter-crs-param*
 ^|Condition |Server supports additional coordinate reference systems
-^|A |The HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items`) SHALL support a parameter `filter-crs` with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+^|A |The HTTP GET operation on the path that fetches resource instances (e.g. `/collections/{collectionId}/items`) SHALL support a parameter `filter-crs` based on the following OpenAPI 3.0 fragment:
 
 [source,YAML]
 ----

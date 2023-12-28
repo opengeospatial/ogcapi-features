@@ -744,6 +744,8 @@ A template for the definition of the parameter in YAML according to OpenAPI 3.0 
 
 include::requirements/core/REQ_fc-bbox-definition.adoc[]
 
+include::recomendations/core/PER_fc-bbox-default.adoc[]
+
 include::requirements/core/REQ_fc-bbox-response.adoc[]
 
 "Intersects" means that the rectangular area specified in the parameter `bbox` includes a coordinate that is part of the (spatial) geometry of the feature. This includes the boundaries of the geometries (e.g., for curves the start and end position and for surfaces the outer and inner rings).
@@ -769,6 +771,8 @@ A template for the definition of the parameter in YAML according to OpenAPI 3.0 
 ==== Parameter datetime
 
 include::requirements/core/REQ_fc-time-definition.adoc[]
+
+include::recomendations/core/PER_fc-time-default.adoc[]
 
 include::requirements/core/REQ_fc-time-response.adoc[]
 
@@ -813,6 +817,8 @@ A template for the definition of the parameter in YAML according to OpenAPI 3.0 
 ==== Parameters for filtering on feature properties
 
 include::recomendations/core/REC_fc-filters.adoc[]
+
+include::recomendations/core/PER_fc-filters-default.adoc[]
 
 [[example_8]]
 .An additional parameter to filter buildings based on their function
@@ -863,6 +869,8 @@ For string-valued properties, servers could support wildcard searches. The examp
 ==== Combinations of filter parameters
 
 Any combination of `bbox`, `datetime` and parameters for filtering on feature properties is allowed. Note that the requirements on these parameters imply that only features matching all the predicates are in the result set; i.e., the logical operator between the predicates is 'AND.'
+
+NOTE: If a parameter has a default value and the parameter is not provided in the request, the parameter with the default value is included as a predicate.
 
 [[fc-response]]
 ==== Response
