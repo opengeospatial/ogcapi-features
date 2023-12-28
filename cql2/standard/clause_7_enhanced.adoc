@@ -566,7 +566,7 @@ For example, a system that evaluates the interval `INTERVAL('2022-01-01','2022-0
 .Examples of temporal predicate using T_INTERSECTS
 ====
 ----
-T_INTERSECTS(event_date, INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z"))
+T_INTERSECTS(event_time, INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
@@ -574,7 +574,7 @@ T_INTERSECTS(event_date, INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z"
 {
   "op": "t_intersects",
   "args": [
-    { "property": "event_date" },
+    { "property": "event_time" },
     { "interval": [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ] }
   ]
 }
@@ -585,7 +585,7 @@ T_INTERSECTS(event_date, INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z"
 .Examples of temporal relationships using a property and a temporal literal.
 ====
 ----
-T_DURING(touchdown, INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
+T_DURING(INTERVAL(touchdown, liftOff), INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
@@ -593,8 +593,8 @@ T_DURING(touchdown, INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 {
   "op": "t_during",
   "args": [
-    {"property": "touchdown"},
-    {"interval": [ "1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"] }
+    {"interval": [ {"property": "touchdown"}, {"property": "liftOff"} ] }
+    {"interval": [ "1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z" ] }
   ]
 }
 ----
@@ -618,9 +618,9 @@ a geometry, an interval, or another array.
 
 * arrays (Text)
 ----
-[ 'a', 'c' ]
-[ 'a', true, 1 ]
-[ DATE('1969-07-16'), DATE('1969-07-20'), DATE('1969-07-24') ]
+( 'a', 'c' )
+( 'a', true, 1 )
+( DATE('1969-07-16'), DATE('1969-07-20'), DATE('1969-07-24') )
 ----
 * arrays (JSON)
 [source,JSON]
@@ -653,7 +653,7 @@ the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 .Evaluate if the value of an array property contains the specified subset of values.
 ====
 ----
-A_CONTAINS(layer:ids, ["layers-ca","layers-us"])
+A_CONTAINS(layer:ids, ("layers-ca","layers-us"))
 ----
 
 [source,JSON]
@@ -724,7 +724,7 @@ S_CROSSES(LINESTRING(43.72992 -79.2998, 43.73005 -79.2991, 43.73006 -79.2984,
 .Examples of temporal relationships using temporal literals.
 ====
 ----
-T_DURING(DATE("1969-07-20T20:17:40Z"), INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
+T_DURING(INTERVAL("1969-07-20T20:17:40Z", "1969-07-21T17:54:00Z"), INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
 ----
 
 [source,JSON]
@@ -732,7 +732,7 @@ T_DURING(DATE("1969-07-20T20:17:40Z"), INTERVAL("1969-07-16T13:32:00Z", "1969-07
 {
   "op": "t_during",
   "args": [
-    { "timestamp": "1969-07-20T20:17:40Z" },
+    { "interval": ["1969-07-20T20:17:40Z", "1969-07-21T17:54:00Z"] },
     { "interval": ["1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"] }
   ]
 }
