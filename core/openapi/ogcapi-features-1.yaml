@@ -154,6 +154,10 @@ components:
             - href: http://example.com/concepts/buildings.html
               rel: describedby
               type: text/html
+        linkTemplates:
+          type: array
+          items:
+            $ref: "#/components/schemas/linkTemplate"
         extent:
           $ref: "#/components/schemas/extent"
         itemType:
@@ -442,6 +446,25 @@ components:
           example: Trierer Strasse 70, 53115 Bonn
         length:
           type: integer
+    linkTemplate:
+      type: object
+      required:
+        - uriTemplate
+        - rel
+      properties:
+        uriTemplate:
+          type: string
+          example: https://data.example.org/collections/buildings/items/{featureId}
+        rel:
+          type: string
+        title:
+          type: string
+          example: Link template for building features
+        type:
+          type: string
+          example: application/geo+json
+        varBase:
+          type: string
     multilinestringGeoJSON:
       type: object
       required:

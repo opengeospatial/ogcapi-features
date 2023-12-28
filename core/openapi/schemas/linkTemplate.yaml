@@ -1,0 +1,18 @@
+type: object
+required:
+  - uriTemplate
+  - rel
+properties:
+  uriTemplate:
+    type: string
+    example: https://data.example.org/collections/buildings/items/{featureId}
+  rel:
+    type: string
+  title:
+    type: string
+    example: Link template for building features
+  type:
+    type: string
+    example: application/geo+json
+  varBase:
+    type: string
