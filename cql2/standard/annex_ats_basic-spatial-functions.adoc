@@ -34,6 +34,7 @@ For each queryable `{queryable}` with a geometry data type, evaluate the followi
 * `S_INTERSECTS({queryable},BBOX(-180,-90,180,90))`
 * `S_INTERSECTS({queryable},POINT(7.02 49.92))`
 * `S_INTERSECTS({queryable},POINT(90 180))`
+* `S_INTERSECTS({queryable},BBOX(-180,-90,-90,90)) AND S_INTERSECTS({queryable},BBOX(90,-90,180,90))`
 
 Then:
 
@@ -73,10 +74,12 @@ Then:
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50))` |8
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(150,-90,-150,90))` |10
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,POINT(7.02 49.92))` |1
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50)) and S_INTERSECTS(geom,BBOX(5,50,10,60))` |3
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50)) and not S_INTERSECTS(geom,BBOX(5,50,10,60))` |5
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50)) or S_INTERSECTS(geom,BBOX(-90,40,-60,50))` |11
 |ne_110m_populated_places_simple |`S_INTERSECTS(geom,BBOX(0,40,10,50))` |7
 |ne_110m_rivers_lake_centerlines |`S_INTERSECTS(geom,BBOX(-180,-90,0,90))` |4
 |===
-
 
 :conf-test: logical
 ==== Conformance Test {counter:test-id}
