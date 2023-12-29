@@ -4,4 +4,23 @@
 ^|*Requirement {counter:req-id}* |*/req/core/fc-md-success*
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml[collections.yaml].
+
+[[schema_collections]]
+.link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml[Schema for the collections resource (collections.yaml)]
+[source,YAML]
+----
+type: object
+required:
+  - links
+  - collections
+properties:
+  links:
+    type: array
+    items:
+      $ref: http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/link.yaml
+  collections:
+    type: array
+    items:
+      $ref: http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collection.yaml
+----
 |===

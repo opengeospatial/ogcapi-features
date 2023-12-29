@@ -2,7 +2,7 @@
 
 === Overview
 
-This clause specifies four pre-defined requirements classes for encodings to be used by a OGC API Features implementation. These encodings are commonly used encodings for spatial data on the web:
+This clause specifies four pre-defined requirements classes for encodings to be used by a OGC API Features implementation. These encodings are commonly used encodings for spatial data on the Web:
 
 * <<rc_html,HTML>>
 
@@ -12,7 +12,7 @@ This clause specifies four pre-defined requirements classes for encodings to be 
 
 * <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>
 
-None of these encodings are mandatory and an implementation of the <<rc_core,Core>> requirements class may also implement none of them but implement another encoding instead.
+None of these encodings are mandatory and an implementation of the <<rc_core,Core>> requirements class can also implement none of them but implement another encoding instead.
 
 The <<rc_core,Core>> requirements class includes recommendations to support <<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings, where practical. <<overview,Clause 6 (Overview)>> includes a discussion about recommended encodings.
 
@@ -24,7 +24,7 @@ Geographic information that is only accessible in formats like GeoJSON or GML ha
 
 * The data can not be viewed directly in a browser - additional tools are required to view the data.
 
-Therefore, sharing data on the Web should include publication in HTML. To be consistent with the Web, it should be done in a way that enables users and search engines to access all data.
+Therefore, sharing data on the Web will benefit for publishing the data also in HTML. To maintain consistency with the Web, it is important to execute this in a manner that allows both users and search engines to access all data.
 
 This is discussed in detail in link:https://www.w3.org/TR/sdw-bp/#indexable-by-search-engines[Best Practice 2: Make your spatial data indexable by search engines] <<SDWBP>>. This standard therefore <<rec_html,recommends supporting HTML as an encoding>>.
 

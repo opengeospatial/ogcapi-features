@@ -4,5 +4,5 @@
 ^|*Abstract Test {counter:ats-id}* |*/conf/core/fc-numberMatched*
 ^|Test Purpose |Validate the numberMatched parameter returned with a Features response
 ^|Requirement |<<req_core_fc-numberMatched,/req/core/fc-numberMatched>>
-^|Test Method |Validate that the value of the `numberMatched` parameter is identical to the number of features in the feature collections that match the selection parameters like `bbox`, `datetime` or additional filter parameters.
+^|Test Method |When a property `numberMatched` is included in the response, validate that the value of the `numberMatched` parameter is identical to the number of features in the feature collections that match the selection parameters like bbox, datetime or additional filter parameters.
 |===
