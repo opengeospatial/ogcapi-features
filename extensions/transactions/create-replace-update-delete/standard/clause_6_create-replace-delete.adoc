@@ -28,7 +28,7 @@ NOTE: In order to promote interoperability, each standard that extends this stan
 
 include::requirements/create-replace-delete/REQ_methods.adoc[]
 
-Note that the POST, PUT and/or DELETE methods will typically only be available for authorized users with sufficient permissions. The available methods of a user are available via the <<options,OPTIONS method>> for each resource.
+Note that the POST, PUT and/or DELETE methods will typically only be available for authorized users with sufficient permissions. The methods available to a user are available via the <<options,OPTIONS method>> for each resource.
 
 [[http_status_codes]]
 ==== HTTP status codes
