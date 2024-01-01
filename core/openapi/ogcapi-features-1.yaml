@@ -644,11 +644,11 @@ components:
             $ref: '#/components/schemas/collections'
           example:
             links:
-              - href: 'http://data.example.org/collections.json'
+              - href: 'http://data.example.org/collections?f=json'
                 rel: self
                 type: application/json
                 title: this document
-              - href: 'http://data.example.org/collections.html'
+              - href: 'http://data.example.org/collections?f=html'
                 rel: alternate
                 type: text/html
                 title: this document as HTML
@@ -681,7 +681,7 @@ components:
                     rel: items
                     type: application/geo+json
                     title: Buildings
-                  - href: 'http://data.example.org/collections/buildings/items.html'
+                  - href: 'http://data.example.org/collections/buildings/items?f=html'
                     rel: items
                     type: text/html
                     title: Buildings
@@ -734,7 +734,7 @@ components:
                 rel: items
                 type: application/geo+json
                 title: Buildings
-              - href: 'http://data.example.org/collections/buildings/items.html'
+              - href: 'http://data.example.org/collections/buildings/items?f=html'
                 rel: items
                 type: text/html
                 title: Buildings
@@ -777,15 +777,15 @@ components:
           example:
             type: FeatureCollection
             links:
-              - href: 'http://data.example.com/collections/buildings/items.json'
+              - href: 'http://data.example.com/collections/buildings/items?f=json'
                 rel: self
                 type: application/geo+json
                 title: this document
-              - href: 'http://data.example.com/collections/buildings/items.html'
+              - href: 'http://data.example.com/collections/buildings/items?f=html'
                 rel: alternate
                 type: text/html
                 title: this document as HTML
-              - href: 'http://data.example.com/collections/buildings/items.json&offset=10&limit=2'
+              - href: 'http://data.example.com/collections/buildings/items?f=json&offset=10&limit=2'
                 rel: next
                 type: application/geo+json
                 title: next page
@@ -830,11 +830,11 @@ components:
               - href: 'http://data.example.com/id/building/123'
                 rel: canonical
                 title: canonical URI of the building
-              - href: 'http://data.example.com/collections/buildings/items/123.json'
+              - href: 'http://data.example.com/collections/buildings/items/123?f=json'
                 rel: self
                 type: application/geo+json
                 title: this document
-              - href: 'http://data.example.com/collections/buildings/items/123.html'
+              - href: 'http://data.example.com/collections/buildings/items/123?f=html'
                 rel: alternate
                 type: text/html
                 title: this document as HTML
