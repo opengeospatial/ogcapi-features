@@ -103,7 +103,8 @@ The OGC Features API SWG has identified the following extensions as the highest 
   * Drafts with multiple implementations. Once all comments have been resolved and at least two implementations updated to the release candidate, the release candidate will enter the OGC approval process.
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
   * The draft is fairly complete, but needs more implementations, testing and review to move to the Public Review.
-* OGC API - Features - Part n: Schemas
+* [OGC API - Features - Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058.html)
+  * Incomplete draft.
 
 ## Additional information
 
@@ -115,8 +116,8 @@ Open issues for all parts are organized in [GitHub projects](https://github.com/
 * [Open issues for Part 2: Coordinate Reference Systems by Reference](https://github.com/opengeospatial/ogcapi-features/projects/2)
 * [Open issues for Part 3: Filtering / Common Query Language (CQL2)](https://github.com/opengeospatial/ogcapi-features/projects/4)
 * [Open issues for Part 4: Create, Replace, Update and Delete](https://github.com/opengeospatial/ogcapi-features/projects/3)
+* [Open issues for Part 5: Schemas](https://github.com/opengeospatial/ogcapi-features/projects/11)
 * [Open issues for Part n: OpenAPI 3.1](https://github.com/opengeospatial/ogcapi-features/projects/7)
-* [Open issues for Part n: Schemas](https://github.com/opengeospatial/ogcapi-features/projects/11)
 * [Open issues for Part n: Search/Queries](https://github.com/opengeospatial/ogcapi-features/projects/10)
 * [Open issues for Part n: Geometry Simplification](https://github.com/opengeospatial/ogcapi-features/projects/13)
 * [Open issues for Part n: Property Selection](https://github.com/opengeospatial/ogcapi-features/projects/12)
@@ -137,6 +138,7 @@ The latest drafts of each standard in this repository are build daily (based on 
 * [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r2.html)
 * [Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r1.html)
 * [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
+* [Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058.html)
 
 * [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065.html)
 
@@ -155,6 +157,8 @@ asciidoctor -a data-uri -r asciidoctor-diagram extensions/filtering/standard/19-
 asciidoctor -a data-uri -r asciidoctor-diagram cql2/standard/21-065.adoc
 # Part 4: Create, Replace, Update and Delete
 asciidoctor -a data-uri -r asciidoctor-diagram extensions/transactions/create-replace-update-delete/standard/20-002.adoc
+# Part 5: Schemas
+asciidoctor -a data-uri -r asciidoctor-diagram extensions/schemas/standard/23-058.adoc
 ```
 
 The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.

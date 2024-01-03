@@ -1,0 +1,39 @@
+:req-class: returnables-and-receivables
+[#rc_{req-class}]
+== Requirements Class "Returnables and Receivables"
+
+The Requirements Class "Returnables and Receivables" specifies the web resources representing the schema with the <<returnable-def,returnable>> and <<receivable-def,receivable>> properties of a collection in OGC Web APIs.
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web API
+|Dependency |<<rc_schemas>>
+|===
+
+This requirements class supports clients that want to discover the list of resource properties with their types and constraints that is returned when fetching a representation of the resource or when creating a new or updating an existing resource.
+
+:req: link
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A Returnables and Receivables resource SHALL be referenced from all Collection resources with a link with the link relation type `\http://www.opengis.net/def/rel/ogc/1.0/schema` (or, alternatively, `[ogc-rel:schema]`).
+|===
+
+:req: op
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The Returnables and Receivables resource SHALL support the HTTP GET operation and the media type `application/schema+json`.
+|===
+
+:req: response
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |For responses that use `application/schema+json` as the `Content-Type` of the response, the response SHALL conform to <<rc_schemas>>.
+|===

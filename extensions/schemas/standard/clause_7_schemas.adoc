@@ -1,0 +1,203 @@
+:req-class: schemas
+[#rc_{req-class}]
+== Requirements Class "Schemas"
+
+The Requirements Class "Schemas" specifies basic provisions for schemas of items in a collection of geospatial data, for example, features, and the representation of a schema in JSON Schema. The schema represents a logical model, independent of the format in which the feature is encoded.
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web resource
+|Dependency |<<json-schema,JSON Schema: A Media Type for Describing JSON Documents>>
+|Indirect Dependency |<<json-schema-validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>
+|Indirect Dependency |<<ogc06_103r4,Simple feature access - Part 1: Common architecture>>
+|Indirect Dependency |<<ucum,The Unified Code for Units of Measure>>
+|===
+
+[#schema-representation]
+=== Schema representation
+
+:req: json-schema
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The schema SHALL be a valid JSON Schema.
+^|B |The schema SHALL have the following characteristics:
+
+* "$schema" is "\https://json-schema.org/draft/2020-12/schema";
+* "$id" is a HTTP(S) URI without query parameters that returns the schema, if requested with the header "Accept: application/schema+json"; and 
+* "type" is "object".
+|===
+
+In addition to the JSON Schema data types, geospatial data typically uses spatial and temporal data types, too. 
+
+:req: properties
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |Each property SHALL include a "type" member, except for spatial properties.
+^|B |Each spatial property SHALL not include a "type" or "$ref" member.
+^|C |Each spatial property SHALL include a "format" member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case with "any" as the wildcard for any geometry type. I.e., the values for the Simple Feature geometry types are: "geometry-any", "geometry-point", "geometry-multipoint", "geometry-linestring", "geometry-multilinestring", "geometry-polygon", "geometry-multipolygon", and "geometry-geometrycollection".
+^|D |Each temporal property SHALL be a "string" literal with the appropriate format (e.g., "date-time" or "date" for instances, depending on the temporal granularity).
+^|E  |Properties that are only applicable when creating new data or updating existing data SHALL include "writeOnly: true".
+^|F  |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
+^|G  |The "additionalProperties" member with a value of "true" (the default) or "false" is used to state the expected behavior with respect to properties that are not explicitly declared in the schema. If "additionalProperties" is set to "false", properties that are not explicitly declared in the schema SHALL NOT be allowed, otherwise they SHALL be allowed.
+|===
+
+The following recommendations are intended to simplify parsing a schema and to help understanding the meaning of the properties:
+
+:rec: properties
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A |Each property SHOULD have a human readable title ("title") and, where necessary for the understanding of the property, a description ("description").
+^|B |The "type" SHOULD be one of the following values: "string" (string or temporal properties), "number"/"integer" (numeric properties), "boolean" (boolean properties), "object" (object properties) or "array" (array properties).
+^|C |Properties that represent a URI SHOULD be represented as a string with format "uri" or "uri-reference".
+^|D |Properties that represent a URI template SHOULD be represented as a string with format "uri-template".
+^|E |Properties that represent a UUID SHOULD be represented as a string with format "uuid".
+^|F |For string properties that are , "minLength", "maxLength", "enum" and/or "pattern" SHOULD be provided, where applicable.
+^|G |For numeric properties, "multipleOf", "minimum", "exclusiveMinimum", "maximum", "exclusiveMaximum" SHOULD be provided, where applicable.
+^|H |For integer properties that represent enumerated values, "enum" SHOULD be provided.
+^|I |Required properties SHOULD be included in "required".
+^|J |The JSON Schema keywords SHOULD be constrainted to the those mentioned in this recommendation and requirement `/req/{req-class}/properties`.
+
+|===
+
+[#additional-keywords]
+=== Additional keywords
+
+In order to be able to map the logical schema to a format-specific schema, extensions to the JSON Schema vocabulary are needed.
+
+:req: additional-keywords
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |Additional keywords SHALL start with "x-ogc-".
+|===
+
+CAUTION: The next version of JSON Schema will likely restrict the use of additional keywords. As a result, this Standard may need to change the prefix or change the way how the vocabulary is extended.
+
+:req: role
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The keyword "x-ogc-role" SHALL be used to declare a specific role of the property.
+^|B |The value of the keyword "x-ogc-role" SHALL be a string.
+|===
+
+:req: role-id
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A property with "x-ogc-role" set to "id" SHALL be the identifier of the item in the collection that contains the item.
+^|B |A property with role "id" SHALL either be a string or integer.
+^|C |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
+|===
+
+For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-property-seq".
+
+:req: property-seq
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The keyword "x-ogc-property-seq" SHALL be used to declare a specific relative position of the property.
+^|B |The value of the keyword "x-ogc-property-seq" SHALL be an integer representing the relative position in ascending order.
+^|C |Each value of the keyword SHALL be unique for all members of a "properties" object in the JSON Schema.
+|===
+
+In geospatial data, numeric property values often represent a measurement and have a unit of measure. For fixed units, this can be expressed in the schema using a keyword "x-ogc-unit".
+
+:req: unit
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The keyword "x-ogc-unit" SHALL be used to declare the unit of measure of the property.
+^|B |The value of the keyword "x-ogc-unit" SHALL be a string representing the unit of measure.
+^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unit-lang".
+^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unit-lang", SHALL be "UCUM". 
+|===
+
+Communities or other OGC Standards can specify additional values for other unit languages, e.g., the https://www.qudt.org/doc/DOC_VOCAB-UNITS.html[QUDT Units] or https://www.opengis.net/def/uom[units registered in the OGC Rainbow]. For each language it must be specified how units have to be represented in the "x-ogc-unit" value.
+
+=== Example
+
+The following example is the schema of a feature type that also includes additional keywords that apply to feature data (specified in the next Clause).
+
+[[example_7_1]]
+.Schema example of a feature type
+====
+[source,JSON]
+----
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://demo.ldproxy.net/daraa/collections/CulturePnt/schema",
+  "type" : "object",
+  "title" : "Cultural (Points)",
+  "properties" : {
+    "FID" : {
+      "readOnly" : true,
+      "x-ogc-role" : "id",
+      "type" : "integer",
+      "x-ogc-property-seq": 1
+    },
+    "F_CODE" : {
+      "title" : "Feature Type Code",
+      "x-ogc-role" : "type",
+      "enum" : [ "AK121", "AL012", "AL030", "AL130", "BH075" ],
+      "type" : "string",
+      "x-ogc-property-seq": 2
+    },
+    "geometry" : {
+      "x-ogc-role" : "primary-geometry",
+      "format" : "geometry-point",
+      "x-ogc-property-seq": 3
+    },
+    "ZI001_SDV" : {
+      "title" : "Last Change",
+      "x-ogc-role" : "primary-instant",
+      "format" : "date-time",
+      "type" : "string",
+      "x-ogc-property-seq": 4
+    },
+    "UFI" : {
+      "title" : "Unique Entity Identifier",
+      "type" : "string",
+      "x-ogc-property-seq": 5
+    },
+    "ZI005_FNA" : {
+      "title" : "Name",
+      "type" : "string",
+      "x-ogc-property-seq": 6
+    },
+    "FCSUBTYPE" : {
+      "title" : "Feature Subtype Code",
+      "type" : "integer",
+      "x-ogc-property-seq": 7
+    },
+    "ZI037_REL" : {
+      "title" : "Religious Designation",
+      "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+      "type" : "integer",
+      "x-ogc-property-seq": 8
+    },
+    "ZI006_MEM" : {
+      "title" : "Memorandum",
+      "type" : "string",
+      "x-ogc-property-seq": 9
+    },
+    "ZI001_SDP" : {
+      "title" : "Source Description",
+      "type" : "string",
+      "x-ogc-property-seq": 10
+    }
+  }
+}
+----
+====

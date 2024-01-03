@@ -1,9 +1,0 @@
-[[req_cql2-json_arrays]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/cql2-json/arrays* 
-^|Condition |Server implements requirements class <<rc_array-operators,Array Operators>>
-^|A |In addition to the <<req_cql2-json_basic-cql2,Basic CQL2>> requirement, the server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema component:
-
-* "#/$defs/arrayPredicate"
-|===
