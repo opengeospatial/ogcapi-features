@@ -28,7 +28,7 @@ The following sections describe some of the most serious vulnerabilities which c
 
 === Multiple Access Routes
 
-APIs deliver a representation of a resource.  OGC APIs can deliver multiple representations (formats) of the same resource. An attacker can find that information which is prohibited in one representation can be accessed through another. API designers are expected to take care that the access controls on their resources are implemented consistently across all representations. That does not mean that they have to be the same.  For example, consider the following.
+APIs deliver a representation of a resource.  OGC Web APIs can deliver multiple representations (formats) of the same resource. An attacker can find that information which is prohibited in one representation can be accessed through another. API designers are expected to take care that the access controls on their resources are implemented consistently across all representations. That does not mean that they have to be the same.  For example, consider the following.
 
 * HTML vs. GeoTIFF – The HTML representation could consist of a text description of the resource accompanied by a thumbnail image. This has less information than the GeoTIFF representation and could be subject to more liberal access policies.
 
