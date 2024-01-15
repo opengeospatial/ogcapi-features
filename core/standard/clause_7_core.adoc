@@ -7,7 +7,7 @@ include::requirements/requirements_class_core.adoc[]
 
 A server that implements this requirements class provides access to the features in a link:https://www.w3.org/TR/vocab-dcat/#class-dataset[dataset].
 
-NOTE: Other parts of this standard may define API extensions that support multiple datasets. The statement that the features are from "a dataset" is not meant to preclude such extensions. It just reflects that this document does not specify how the API publishes features or other spatial data from multiple datasets.
+NOTE: Other parts of this standard can define API extensions that support multiple datasets. The statement that the features are from "a dataset" is not meant to preclude such extensions. It just reflects that this document does not specify how the API publishes features or other spatial data from multiple datasets.
 
 The entry point is a `Landing page` (path `/`).
 
@@ -27,11 +27,11 @@ The `Conformance declaration` states the conformance classes from standards or c
 
 The data is organized into one or more collections. `Collections` provides information about and access to the collections.
 
-This document specifies requirements only for collections consisting of features. That is, each collection considered by this document is a feature collection. Other OGC API standards may add requirements for other types of collections.
+This document specifies requirements only for collections consisting of features. That is, each collection considered by this document is a feature collection. Other OGC API standards can add requirements for other types of collections.
 
 NOTE: To support the future use of datasets with items that are not features, the term "feature" has not been added in the names of the resource types or their paths.
 
-This standard does not include any requirements about how the features in the dataset have to be aggregated into collections. A typical approach is to aggregate by feature type but any other approach that fits the dataset or the applications using this distribution may also be used.
+This standard does not include any requirements about how the features in the dataset have to be aggregated into collections. A typical approach is to aggregate by feature type but any other approach that fits the dataset or the applications using this distribution can also be used.
 
 Accessing `Collections` using HTTP GET returns a response that contains at least the list of collections. For each `Collection`, a link to the items in the collection (`Features`, path `/collections/{collectionId}/items`, link relation `items`) as well as key information about the collection. This information includes:
 
@@ -53,13 +53,13 @@ Each feature in a dataset is part of exactly one collection.
 
 Accessing the `Features` using HTTP GET returns a document consisting of features in the collection. The features included in the response are determined by the server based on the query parameters of the request. To support access to larger collections without overloading the client, the API supports paged access with links to the next page, if more features are selected than the page size.
 
-A `bbox` or `datetime` parameter may be used to select only a subset of the features in the collection (the features that are in the bounding box or time interval). The `bbox` parameter matches all features in the collection that are not associated with a location, too. The `datetime` parameter matches all features in the collection that are not associated with a time stamp or interval, too.
+A `bbox` or `datetime` parameter can be used to select only a subset of the features in the collection (the features that are in the bounding box or time interval). The `bbox` parameter matches all features in the collection that are not associated with a location, too. The `datetime` parameter matches all features in the collection that are not associated with a time stamp or interval, too.
 
-The `limit` parameter may be used to control the subset of the selected features that should be returned in the response, the page size.
+The `limit` parameter can be used to control the subset of the selected features that will be returned in the response, the page size.
 
-Each page may include information about the number of selected and returned features (`numberMatched` and `numberReturned`) as well as links to support paging (link relation `next`).
+Each page can include information about the number of selected and returned features (`numberMatched` and `numberReturned`) as well as links to support paging (link relation `next`).
 
-Each `Feature` (path `/collections/{collectionId}/items/{featureId}`) is also a separate resource and may be requested individually using HTTP GET.
+Each `Feature` (path `/collections/{collectionId}/items/{featureId}`) is also a separate resource and can be requested individually using HTTP GET.
 
 In addition to the simple path structures described above, where all features are organized in a one-level collection hierarchy, additional parts of the OGC API Feature series are expected to provide alternate access to the features served by the API via additional, deeper collection hierarchies.
 
@@ -76,24 +76,6 @@ include::requirements/core/REQ_root-success.adoc[]
 include::recomendations/core/REC_root-links.adoc[]
 
 NOTE: Version 1.0.0 of this specification did not include `self` and `alternate` links for the landing page while the links are required in other resources. The recommendation above has been added to encourage implementations to add these links on the landing page, too.
-
-[[schema_landingPage]]
-.link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/landingPage.yaml[Schema for the landing page]
-[source,YAML]
-----
-type: object
-required:
-  - links
-properties:
-  title:
-    type: string
-  description:
-    type: string
-  links:
-    type: array
-    items:
-      $ref: http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/link.yaml
-----
 
 [[example_2]]
 .Landing page response document
@@ -129,7 +111,7 @@ See <<http_status_codes>> for general guidance.
 
 ==== Operation
 
-Every API is expected to provide a definition that describes the capabilities of the server and which can be used by developers to understand the API, by software clients to connect to the server, or by development tools to support the implementation of servers and clients.
+Every OGC Web API is expected to provide a definition that describes the capabilities of the server and which can be used by developers to understand the API, by software clients to connect to the server, or by development tools to support the implementation of servers and clients.
 
 include::requirements/core/REQ_api-definition-op.adoc[]
 
@@ -143,9 +125,9 @@ include::requirements/core/REQ_api-definition-success.adoc[]
 
 include::recomendations/core/REC_api-definition-oas.adoc[]
 
-If the server hosts the API definition under the base path of the API (for example, at path `/api`, see above), there is no need to include the path of the API definition in the API definition itself.
+If the server hosts the API definition under the base path of the API (for example, at path `/api`), there is no need to include the path of the API definition in the API definition itself.
 
-The idea is that any OGC API Features implementation can be used by developers that are familiar with the API definition language(s) supported by the server. For example, if an OpenAPI definition is used, it should be possible to create a working client using the OpenAPI definition. The developer may need to learn a little bit about geometry data types, etc., but it should not be required to read this standard to access the data via the API.
+The idea is that any OGC API Features implementation can be used by developers that are familiar with the API definition language(s) supported by the server. For example, if an OpenAPI definition is used, it is possible to create a working client using the OpenAPI definition. The developer may need to learn a little bit about geometry data types, etc., but it is not necessary to read this standard to access the data via the API.
 
 In case the API definition is based on OpenAPI 3.0, consider the <<two_appraoches_oas,two approaches>> discussed in OpenAPI requirements class.
 
@@ -164,20 +146,6 @@ include::requirements/core/REQ_conformance-op.adoc[]
 ==== Response
 
 include::requirements/core/REQ_conformance-success.adoc[]
-
-[[schema_confClasses]]
-.link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/confClasses.yaml[Schema for the list of conformance classes]
-[source,YAML]
-----
-type: object
-required:
-  - conformsTo
-properties:
-  conformsTo:
-    type: array
-    items:
-      type: string
-----
 
 [[example_3]]
 .Conformance declaration response document
@@ -216,7 +184,7 @@ Servers implementing <<cross_origin,CORS>> will implement the method OPTIONS, to
 [[http_status_codes]]
 ==== HTTP status codes
 
-This API standard does not impose any restrictions on which features of the HTTP and HTTPS protocols may be used. API clients should be prepared to handle any legal HTTP or HTTPS status code.
+This API standard does not impose any restrictions on which features of the HTTP and HTTPS protocols can be used. API clients have to be prepared to handle any legal HTTP or HTTPS status code.
 
 The *Status Codes* listed in <<status_codes>> are of particular relevance to implementors of this standard. Status codes 200, 400, and 404 are called out in API requirements. Therefore, support for these status codes is mandatory for all compliant implementations. The remainder of the status codes in <<status_codes>> are not mandatory, but are important for the implementation of a well functioning API. Support for these status codes is strongly encouraged for both client and server implementations.
 
@@ -240,7 +208,7 @@ More specific guidance is provided for each resource, where applicable.
 
 include::recomendations/core/PER_additional-status-codes.adoc[]
 
-The API Description Document describes the HTTP status codes generated by that API. This should not be an exhaustive list of all possible status codes. It is not reasonable to expect an API designer to control the use of HTTP status codes which are not generated by their software. Therefore, it is recommended that the API Description Document limit itself to describing HTTP status codes relevant to the proper operation of the API application logic. Client implementations should be prepared to receive HTTP status codes in addition to those described in the API Description Document.
+The API Description Document describes the HTTP status codes generated by that API. This is not an exhaustive list of all possible status codes. It is not reasonable to expect an API designer to control the use of HTTP status codes which are not generated by their software. Therefore, it is recommended that the API Description Document limit itself to describing HTTP status codes relevant to the proper operation of the API application logic. Client implementations have to be prepared to receive HTTP status codes in addition to those described in the API Description Document.
 
 [[query_parameters]]
 === Unknown or invalid query parameters
@@ -312,7 +280,7 @@ include::recomendations/core/REC_geojson.adoc[]
 
 The section <<mediatypes,Media Types>> includes guidance on media types for <<encodings,encodings>> that are specified in this document.
 
-Note that any server that supports multiple encodings will have to support a mechanism to mint encoding-specific URIs for resources in order to express links, for example, to alternate representations of the same resource. This document does not mandate any particular approach how this is supported by the server.
+Note that any server that supports multiple encodings will have to support a mechanism to mint encoding-specific URIs for resources in order to express links, for example, to alternate representations of the same resource. This document does not mandate any particular approach as to how this is supported.
 
 As clients simply need to dereference the URI of the link, the implementation details and the mechanism how the encoding is included in the URI of the link are not important. Developers interested in the approach of a particular implementation, for example, to manipulate ("hack") URIs in the browser address bar, can study the API definition.
 
@@ -334,9 +302,9 @@ If the server supports representing resources in multiple languages, the usual H
 
 include::recomendations/core/REC_string_i18n.adoc[]
 
-For example, if JSON-LD is used as an encoding, the built-in capabilities to link:https://www.w3.org/TR/json-ld/#string-internationalization[annotate a string with its language] should be used.
+For example, if JSON-LD is used as an encoding, the built-in capabilities to link:https://www.w3.org/TR/json-ld/#string-internationalization[annotate a string with its language] can be used.
 
-The link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/link.yaml[link object] based on <<rfc8228,RFC 8288 (Web Linking)>> includes a `hreflang` attribute that can be used to state the language of the referenced resource. This can be used to include links to the same data in, for example, English or French. Just like with <<encodings,multiple encodings>> a server that wants to use language-specific links will have to support a mechanism to mint language-specific URIs for resources in order to express links to, for example, the same resource in another language. Again, this document does not mandate any particular approach how such a capability is supported by the server.
+The link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/link.yaml[link object] based on <<rfc8228,RFC 8288 (Web Linking)>> includes a `hreflang` attribute that can be used to state the language of the referenced resource. This can be used to include links to the same data in, for example, English or French. Just like with <<encodings,multiple encodings>> a server that wants to use language-specific links will have to support a mechanism to mint language-specific URIs for resources in order to express links to, for example, the same resource in another language. Again, this document does not mandate any particular approach as to how this is supported.
 
 === Coordinate reference systems
 
@@ -369,25 +337,6 @@ include::requirements/core/REQ_fc-md-op.adoc[]
 
 include::requirements/core/REQ_fc-md-success.adoc[]
 
-[[schema_collections]]
-.link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml[Schema for the collections resource]
-[source,YAML]
-----
-type: object
-required:
-  - links
-  - collections
-properties:
-  links:
-    type: array
-    items:
-      $ref: http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/link.yaml
-  collections:
-    type: array
-    items:
-      $ref: http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collection.yaml
-----
-
 include::requirements/core/REQ_fc-md-links.adoc[]
 
 include::recomendations/core/REC_fc-md-descriptions.adoc[]
@@ -398,11 +347,11 @@ include::requirements/core/REQ_fc-md-items.adoc[]
 
 include::recomendations/core/PER_fc-md-items.adoc[]
 
-This document does not specify mechanisms how clients may access all collections from servers with many collections. Such mechanisms may be specified in additional parts of OGC API Features. Options include support for paging and/or filtering.
+This document does not specify mechanisms for how clients best access all collections from servers with many collections. Such mechanisms can be specified in additional parts of OGC API Features. Options include support for paging and/or filtering.
 
 include::recomendations/core/REC_fc-md-self-links.adoc[]
 
-NOTE: Including the `self` link in each collection is strongly recommended. It is an oversight that no requirement has been included in the original release of the standard. To avoid a breaking change, this statement is only a recommendation in this document version. Note that the URI can be inferred by clients using the member `id` of the feature collection, if it is missing, but this should not be necessary.
+NOTE: Including the `self` link in each collection is strongly recommended. It is an oversight that no requirement has been included in the original release of the standard. To avoid a breaking change, this statement is only a recommendation in this document version. Note that the URI can be inferred by clients using the member `id` of the feature collection, if it is missing, but parsing URIs is not a good practice.
 
 include::requirements/core/REQ_fc-md-items-links.adoc[]
 
@@ -422,9 +371,9 @@ include::requirements/core/REQ_fc-md-extent-multi.adoc[]
 
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
-The last requirement and recommendation reflect that most clients will only be interested in a single extent, for example, to set the map view or a time slider. They will only have to look at the first item in each array. 
+Requirement `/req/core/fc-md-extent-multi` and recommendation `/rec/core/fc-md-extent-single` reflect that most clients will only be interested in a single extent, for example, to set the map view or a time slider. They will only have to look at the first item in each array. 
 
-At the same time, for some data and for some use cases, a more fine-grained description of the extent will be useful. In that case the first bounding box / time interval is a union of all the other bounding boxes / time intervals. Clients can then choose, if they want to use the simpler or the more detailed extent information.
+At the same time, for some data and for some use cases, a more fine-grained description of the extent will be useful. In that case the first bounding box / time interval is a union of all the other bounding boxes / time intervals. Clients can then choose whether they want to use the simpler or the more detailed extent information.
 
 [[example_4a]]
 .Spatial extent with multiple bounding boxes
@@ -477,7 +426,7 @@ properties:
   extent:
     description: >-
       The extent of the features in the collection. In the Core only spatial and temporal
-      extents are specified. Extensions may add additional members to represent other
+      extents are specified. Extensions can add additional members to represent other
       extents, for example, thermal or pressure ranges.
     type: object
     properties:
@@ -489,7 +438,7 @@ properties:
           bbox:
             description: >-
               One or more bounding boxes that describe the spatial extent of the dataset.
-              In the Core only a single bounding box is supported. Extensions may support
+              In the Core only a single bounding box is supported. Extensions can support
               additional areas. If multiple areas are provided, the union of the bounding
               boxes describes the spatial extent.
             type: array
@@ -545,7 +494,7 @@ properties:
               (property `bbox`). The default reference system is WGS 84 longitude/latitude.
               In the Core the only other supported coordinate reference system is
               WGS 84 longitude/latitude/ellipsoidal height for coordinates with height.
-              Extensions may support additional coordinate reference systems and add
+              Extensions can support additional coordinate reference systems and add
               additional enum values.
             type: string
             enum:
@@ -561,7 +510,7 @@ properties:
             description: >-
               One or more time intervals that describe the temporal extent of the dataset.
               The value `null` is supported and indicates an unbounded interval end.
-              In the Core only a single time interval is supported. Extensions may support
+              In the Core only a single time interval is supported. Extensions can support
               multiple intervals. If multiple intervals are provided, the union of the
               intervals describes the temporal extent.
             type: array
@@ -586,7 +535,7 @@ properties:
               Coordinate reference system of the coordinates in the temporal extent
               (property `interval`). The default reference system is the Gregorian calendar.
               In the Core this is the only supported temporal coordinate reference system.
-              Extensions may support additional temporal coordinate reference systems and add
+              Extensions can support additional temporal coordinate reference systems and add
               additional enum values.
             type: string
             enum:
@@ -889,13 +838,13 @@ The number of features returned depends on the server and the parameter `limit.`
 
 So (using the default/maximum values of 10/10000 from the OpenAPI fragment in requirement `/req/core/fc-limit-definition`):
 
-* If you ask for 10, you will get 0 to 10 (as requested) and if there are more, a `next` link;
+* Asking for 10 will return 0 to 10 (as requested) and if there are more, a `next` link;
 
-* If you don't specify a limit, you will get 0 to 10 (default) and if there are more, a `next` link;
+* Asking without a limit will return 0 to 10 (default) and if there are more, a `next` link;
 
-* If you ask for 50000, you might get up to 10000 (server-limited) and if there are more, a `next` link;
+* Asking for 50000 will return up to 10000 (server-limited) and if there are more, a `next` link;
 
-* If you follow the next link from the previous response, you might get up to 10000 additional features and if there are more, a `next` link.
+* Following the next link from the previous response will return up to 10000 additional features and if there are more, a `next` link.
 
 include::requirements/core/REQ_fc-links.adoc[]
 
@@ -907,20 +856,19 @@ include::recomendations/core/REC_fc-next-3.adoc[]
 
 This document does not mandate any specific implementation approach for the `next` links.
 
-An implementation could use opaque links that are managed by the server. It is up to the server to determine how long these links can be de-referenced. Clients should be prepared to receive a 404 response.
+An implementation could use opaque links that are managed by the server. It is up to the server to determine how long these links can be de-referenced. Clients have to be prepared to receive a 404 response.
 
-Another implementation approach is to use an implementation-specific parameter that specifies the index within the result set from which the server begins presenting results in the response, like the `startIndex` parameter that was used in <<WFS20,WFS 2.0>> (and which may be added again in additional parts of the OGC API Features series).
+Another implementation approach is to use an implementation-specific parameter that specifies the index within the result set from which the server begins presenting results in the response, like the `startIndex` parameter that was used in <<WFS20,WFS 2.0>> (and which could be added again in additional parts of the OGC API Features series).
 
-The API will return no `next` link, if it has returned all selected features, and the server knows that. However, the server may not be aware that it has already returned all selected features. For example, if the request states `limit=10` and the query to the backend datastore returns 10 features, the server may not know, if there are more features or not (in most cases there will be more features), unless the total number of matches is also computed, which may be too costly. The server will then add the next link, and if there are no more features, dereferencing the next link will return am empty feature collection and no next link. This behavior is consistent with the statements above.
+The API will return no `next` link, if it has returned all selected features, and the server knows that. However, the server can not be aware that it has already returned all selected features. For example, if the request states `limit=10` and the query to the backend datastore returns 10 features, the server may not know, if there are more features or not (in most cases there will be more features), unless the total number of matches is also computed, which can be too costly. The server will then add the next link, and if there are no more features, dereferencing the next link will return an empty feature collection and no next link. This behavior is consistent with the statements above.
 
-Clients should not assume that paging is safe against changes to dataset while a client iterates through `next` links. If a server provides opaque links these could be safe and maintain the dataset state during the original request. Using a parameter for the start index, however, will not be safe.
+Clients cannot assume that paging is safe against changes to dataset while a client iterates through `next` links. If a server provides opaque links these could be safe and maintain the dataset state during the original request. Using a parameter for the start index, however, will not be safe.
 
-NOTE: Additional requirements classes for safe paging or an index parameter
-may be added in extensions to this specification.
+Additional requirements classes for safe paging or an index parameter can be added in extensions to this specification.
 
 include::recomendations/core/PER_fc-prev.adoc[]
 
-Providing `prev` links supports navigating back and forth between pages, but depending on the implementation approach it may be too complex to implement.
+Providing `prev` links supports navigating back and forth between pages, but depending on the implementation approach it can be too complex to implement.
 
 include::requirements/core/REQ_fc-rel-type.adoc[]
 

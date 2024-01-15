@@ -1,0 +1,12 @@
+[[ats_core_fc-md-extent-multi]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/core/fc-md-extent-multi*
+^|Test Purpose |Validate the `extent` property, if it is present and includes multiple bounding boxes or intervals
+^|Requirement |<<req_core_fc-md-extent-multi,/req/core/fc-md-extent-multi>>
+^|Test Method |
+. If the member `spatial` in the `extent` is present, verify that the first bounding box includes all spatial geometries in this collection.
+. If the member `spatial` in the `extent` is present and if it includes more than one bounding box, verify that all spatial geometries in this collection are inside one for the second to last bounding boxes.
+. If the member `temporal` in the `extent` is present, verify that the first interval includes all temporal geometries in this collection.
+. If the member `temporal` in the `extent` is present and if it includes more than one interval, verify that all temporal geometries in this collection are inside one for the second to last intervals.
+|===
