@@ -1,0 +1,11 @@
+[[req_features_geojson-create-replace]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/geojson-create-replace*
+^|Condition |Server implements <<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "GeoJSON">>
+^|Condition |Server advertises support for media type `application/geo+json` in the API definition for CREATE or REPLACE operation for a feature collection `collectionId`
+^|Condition |Server implements <<OAFeat-5,OGC API - Features - Part 5: Schemas, Requirements Class "Returnables and Receivables">>
+^|A |In a REPLACE operation, the server SHALL ignore an "id" member in the request or, alternatively, reject the request, if the "id" value differs from the `featureId` of the resource.
+^|B |The value of the "geometry" member SHALL be mapped to the property with the role "primary-geometry".
+|===
+

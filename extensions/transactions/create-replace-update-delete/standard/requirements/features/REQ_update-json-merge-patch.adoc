@@ -1,0 +1,12 @@
+[[req_features_update-json-merge-patch]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/update-json-merge-patch*
+^|Condition |Server implements <<update_clause>>
+^|Condition |Server implements <<OAFeat-5,OGC API - Features - Part 5: Schemas, Requirements Class "Returnables and Receivables">>
+^|Condition |Server advertises support for media type `application/merge-patch+json` in the API definition for UPDATE operations for a feature collection `collectionId`
+^|A |The server SHALL process PATCH requests with a content type `application/merge-patch+json` to such a resource endpoint as specified by <<rfc7396,RFC 7396 (JSON Merge Patch)>> under the assumption that the feature is represented in JSON according to the JSON Schema describing the Returnables and Receivables.
+^|B |The server SHALL reject requests where the property with `x-ogc-role` set to "id" is updated.
+^|C |The server SHALL process requests that update a spatial property under the assumption that the value is a GeoJSON geometry object.
+^|D |The server SHALL unset properties that have the value `null`.
+|===
