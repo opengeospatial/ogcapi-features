@@ -1,0 +1,20 @@
+---
+allOf:
+  - $ref: 'linkBase.yaml'
+  - type: object
+    required:
+      - uriTemplate
+    properties: 
+      uriTemplate:
+        type: string
+        description:
+          Supplies a URI template that when expanded using 
+          a set of variables, results in a URI.
+        example: http://data.example.com/buildings/{building-id}
+      varBase:
+        type: string
+        description:
+          The base URI to which the variable name can be
+          appended to retrieve the definition of the
+          variable as a JSON Schema fragment.
+        format: uri-reference

@@ -657,15 +657,17 @@ Reference system information is not provided as the service provides geometries 
         { "href": "https://data.example.org/collections/buildings/items",
           "rel": "items", "type": "application/geo+json",
           "title": "Buildings" },
-        { "href": "https://data.example.org/collections/buildings/items/{featureId}",
-          "rel": "item", "title": "Link template for building features", 
-          "templated": true },  
         { "href": "https://creativecommons.org/publicdomain/zero/1.0/",
           "rel": "license", "type": "text/html",
           "title": "CC0-1.0" },
         { "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
           "rel": "license", "type": "application/rdf+xml",
           "title": "CC0-1.0" }
+      ],
+      "linkTemplates": [
+        { "uriTemplate": "https://data.example.org/collections/buildings/items/{featureId}",
+          "rel": "item", "title": "Link template for building features", 
+          "varBase": "https://data.example.org/collections/buildings/var-base/" }
       ]
     }
   ]
@@ -690,7 +692,7 @@ link: <https://data.example.org/collections/buildings>; anchor="#/collections/0"
 link: <https://data.example.org/collections/buildings/items>; anchor="#/collections/0"; rel="items"; type="application/geo+json"; title="Buildings"
 link: <https://creativecommons.org/publicdomain/zero/1.0/>; anchor="#/collections/0"; rel="license"; type="text/html"; title="CC0-1.0"
 link: <https://creativecommons.org/publicdomain/zero/1.0/rdf>; anchor="#/collections/0"; rel="license"; type="application/rdf+xml"; title="CC0-1.0"
-link-template: <https://data.example.org/collections/buildings/items/{featureId}>; anchor="#/collections/0"; rel="item"; title="Link template for buildung features"
+link-template: <https://data.example.org/collections/buildings/items/{featureId}>; anchor="#/collections/0"; rel="item"; title="Link template for buildung features"; var-base="https://data.example.org/collections/buildings/var-base/"
 vary: Accept,Accept-Language,Accept-Encoding
 content-length: 6178
 ----
