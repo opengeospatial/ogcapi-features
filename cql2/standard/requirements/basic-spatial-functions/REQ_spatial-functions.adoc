@@ -1,0 +1,7 @@
+[[req_basic-spatial-functions_spatial-functions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/basic-spatial-functions/spatial-functions*
+^|A |The server SHALL support the standardized `S_INTERSECTS` spatial comparison function as defined by the BNF rule `spatialFunction` in <<cql2-bnf>>.
+^|B |All supported standardized spatial comparison functions SHALL be evaluated as defined in clause 6.1.15 of <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>> (except that in CQL2 the predicates evaluate to a Boolean, not an Integer).
+|===

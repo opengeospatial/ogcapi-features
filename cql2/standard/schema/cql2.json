@@ -171,19 +171,27 @@
       "oneOf": [
         {
           "type": "object",
-          "required": [ "casei" ],
+          "required": [ "op", "args" ],
           "properties": {
-            "casei": {
-              "$ref": "#/$defs/patternExpression"
+            "op": { "type": "string", "enum": [ "casei" ] },
+            "args": {
+               "type": "array",
+               "items": { "$ref": "#/$defs/patternExpression" },
+               "minItems": 1,
+               "maxItems": 1
             }
           }
         },
         {
           "type": "object",
-          "required": [ "accenti" ],
+          "required": [ "op", "args" ],
           "properties": {
-            "accenti": {
-              "$ref": "#/$defs/patternExpression"
+            "op": { "type": "string", "enum": [ "accenti" ] },
+            "args": {
+               "type": "array",
+               "items": { "$ref": "#/$defs/patternExpression" },
+               "minItems": 1,
+               "maxItems": 1
             }
           }
         },
@@ -499,20 +507,28 @@
 
     "casei": {
       "type": "object",
-      "required": [ "casei" ],
+      "required": [ "op", "args" ],
       "properties": {
-        "casei": {
-          "$ref": "#/$defs/characterExpression"
+        "op": { "type": "string", "enum": [ "casei" ] },
+        "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 1,
+           "maxItems": 1
         }
       }
     },
 
     "accenti": {
       "type": "object",
-      "required": [ "accenti" ],
+      "required": [ "op", "args" ],
       "properties": {
-        "accenti": {
-          "$ref": "#/$defs/characterExpression"
+        "op": { "type": "string", "enum": [ "accenti" ] },
+        "args": {
+           "type": "array",
+           "items": { "$ref": "#/$defs/characterExpression" },
+           "minItems": 1,
+           "maxItems": 1
         }
       }
     },
@@ -539,19 +555,9 @@
 
     "functionRef": {
       "type": "object",
-      "required": [ "function" ],
+      "required": [ "op", "args" ],
       "properties": {
-        "function": {
-          "$ref": "#/$defs/function"
-        }
-      }
-    },
-
-    "function": {
-      "type": "object",
-      "required": [ "name" ],
-      "properties": {
-        "name": {
+        "op": {
           "type": "string"
         },
         "args": {

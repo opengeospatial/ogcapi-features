@@ -1,0 +1,9 @@
+[[req_cql2-json_spatial-functions]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-json/spatial-functions* 
+^|Condition |Server implements requirements class <<rc_spatial-functions,Spatial Functions>>
+^|A |The server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema components:
+
+* "#/$defs/spatialPredicate"
+|===

@@ -1,0 +1,94 @@
+:req-class: profile-parameter
+[#rc_{req-class}]
+== Requirements Class "Profile query parameter"
+
+The Requirements Class "Profile query parameter" specifies additional provisons for properties that reference another resource.
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web API
+|===
+
+Some properties may be represented in multiple representations in the same format, depending on the intended use of the data. One example are references to another web resource (see the <<rc_profile-references>>).
+
+IETF defines the concept of a profile to support such use cases. See <<rfc6906,RFC 6906>>:
+
+> A profile is defined not to alter the semantics of the resource representation itself, but to allow clients to learn about additional semantics (constraints, conventions, extensions) that are associated with the resource representation, in addition to those defined by the media type and possibly other mechanisms.
+
+To request one or more profiles, a query parameter "profile" can be used:
+
+:req: profile-param
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The GET operation on selected resources SHALL support a query parameter "profile" with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: profile
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: string
+style: form
+explode: false
+----
+^|B |Each item SHALL be one of the follwoing:
+
+* A HTTP(S) URI of a profile, e.g., in the OGC Profile Register (\http://www.opengis.net/def/profile);
+* A Safe CURIE of a profile in the OGC Profile Register (e.g., `[ogc-profile:my-profile]`);
+* A profile identifier (the `profileId` value in the URI template `\http://www.opengis.net/def/profile/OGC/0/{profileId}`)
+|===
+
+:per: profile-param-default
+[#{req-class}_{per}]
+[width="90%",cols="2,7a"]
+|===
+^|*Permission {counter:per-num}* |/per/{req-class}/{per}
+^|A |The server MAY specify a default value for the query parameter "profile".
+|===
+
+Determining the profile(s) of the response is part of the content negotiation process after the proactive content negotiation as specified by the https://www.rfc-editor.org/rfc/rfc9110.html#name-content-negotiation[HTTP RFC] has been completed. The server determines the applicable profile(s) for the selected media type.
+
+Different media types have different characteristics. A consequence is that it can be impossible to support a profile for a media type or it can be against the design goals of a media type to support a profile.
+
+:per: profiles-of-media-type
+[#{req-class}_{per}]
+[width="90%",cols="2,7a"]
+|===
+^|*Permission {counter:per-num}* |/per/{req-class}/{per}
+^|A |For any media type that can represent a resource, the server MAY support only a subset of the profiles offered for the resource.
+^|B |The subset of supported profiles for a media type MAY be empty, too.
+|===
+
+The server will select the profile(s) of the response, if any, from the list of profiles supported for the media type and resource.
+
+:rec: profile-negotiation
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A |If the server supports one or more of the requested profile(s) for the media type and resource, these profiles SHOULD be used for the response. 
+^|B |The profile negotiation SHOULD NOT result in an error, e.g., because a requested profile cannot be provided.
+|===
+
+:req: profile-param-response
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The query parameter is not required, that is, omitting the parameter in a request SHALL not result in an error. 
+^|B |If the media type of the response supports web links in accordance with <<rfc8288,RFC 8288>>, the response SHALL include links to the selected profile(s) with the link relation type "profile".
+|===
+
+:rec: profile-link-header
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A |The response SHOULD include links to the selected profile(s) in the HTTP response headers.
+|===

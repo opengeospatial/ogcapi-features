@@ -1,6 +1,8 @@
 == Security Considerations
 
-A Web API is a powerful tool for sharing information and analysis resources. It also provides many avenues for unscrupulous users to attack those resources. Designers and developers of Web APIs should be familiar with the potential vulnerabilities and how to address them.
+=== General
+
+A Web API is a powerful tool for sharing information and analysis resources. It also provides many avenues for unscrupulous users to attack those resources. Designers and developers of Web APIs are expected to be familiar with the potential vulnerabilities and how to address them.
 
 A valuable resource is the Common Weakness Enumeration (CWE) registry at http://cwe.mitre.org/data/index.html[http://cwe.mitre.org/data/index.html]. The CWE is organized around three views; Research, Architectural, and Development.
 
@@ -10,9 +12,9 @@ A valuable resource is the Common Weakness Enumeration (CWE) registry at http://
 
 * *Development:* organizes weaknesses around concepts that are frequently used or encountered in software development.
 
-API developers should focus on the Development view. These vulnerabilities primarily deal with the details of software design and implementation.
+API developers are expected to focus on the Development view. These vulnerabilities primarily deal with the details of software design and implementation.
 
-API designers should focus primarily on the Architectural view. However, there are critical vulnerabilities described in the Development view which are also relevant to API design. Vulnerabilities described under the following categories are particularly important:
+API designers are expected to focus primarily on the Architectural view. However, there are critical vulnerabilities described in the Development view which are also relevant to API design. Vulnerabilities described under the following categories are particularly important:
 
 * Pathname Traversal and Equivalence Errors,
 
@@ -20,31 +22,31 @@ API designers should focus primarily on the Architectural view. However, there a
 
 * Web Problems.
 
-Many of the vulnerabilities described in the CWE are introduced through the HTTP protocol. API designers and developers should be familiar with how the HTTP 1.1 addresses these vulnerabilities. This information can be found in the "Security Considerations" sections of <<rfc9110,IETF RFC 9110>> and <<rfc9112,IETF RFC 9112>>.
+Many of the vulnerabilities described in the CWE are introduced through the HTTP protocol. API designers and developers are expected to be familiar with how the HTTP 1.1 addresses these vulnerabilities. This information can be found in the "Security Considerations" sections of <<rfc9110,IETF RFC 9110>> and <<rfc9112,IETF RFC 9112>>.
 
 The following sections describe some of the most serious vulnerabilities which can be mitigated by the API designer and developer. These are high-level generalizations of the more detailed vulnerabilities described in the CWE.
 
 === Multiple Access Routes
 
-APIs deliver a representation of a resource.  OGC APIs can deliver multiple representations (formats) of the same resource. An attacker may find that information which is prohibited in one representation can be accessed through another. API designers must take care that the access controls on their resources are implemented consistently across all representations. That does not mean that they have to be the same.  For example, consider the following.
+APIs deliver a representation of a resource.  OGC Web APIs can deliver multiple representations (formats) of the same resource. An attacker can find that information which is prohibited in one representation can be accessed through another. API designers are expected to take care that the access controls on their resources are implemented consistently across all representations. That does not mean that they have to be the same.  For example, consider the following.
 
-* HTML vs. GeoTIFF – The HTML representation may consist of a text description of the resource accompanied by a thumbnail image. This has less information than the GeoTIFF representation and may be subject to more liberal access policies.
+* HTML vs. GeoTIFF – The HTML representation could consist of a text description of the resource accompanied by a thumbnail image. This has less information than the GeoTIFF representation and could be subject to more liberal access policies.
 
 * Data Centric Security – techniques to embed access controls into the representation itself. A GeoTIFF with Data Centric Security would have more liberal access policies than a GeoTIFF without.
 
-Bottom Line: the information content of the resources exposed by an API must be protected to the same level across all access routes.
+In a properly secured Web API, the information content of the resources exposed by an API is protected to the same level across all access routes.
 
 === Multiple Servers
 
-The implementation of an API may span a number of servers. Each server is an entry point into the API. Without careful management, information which is not accessible though one server may be accessible through another.
+The implementation of an API can span a number of servers. Each server is an entry point into the API. Without careful management, information which is not accessible though one server can be accessible through another.
 
-Bottom Line: Understand the information flows through your API and verify that information is properly protected along all access paths.
+The information flows through the API have to be understood. It has to be verified that information is properly protected along all access paths.
 
 === Path Manipulation on GET
 
-RFC-2626 section 15.2 states “If an HTTP server translates HTTP URIs directly into file system calls, the server MUST take special care not to serve files that were not intended to be delivered to HTTP clients.” The threat is that an attacker could use the HTTP path to access sensitive data, such as password files, which could be used to further subvert the server.
+RFC 2626 section 15.2 states “If an HTTP server translates HTTP URIs directly into file system calls, the server MUST take special care not to serve files that were not intended to be delivered to HTTP clients.” The threat is that an attacker could use the HTTP path to access sensitive data, such as password files, which could be used to further subvert the server.
 
-Bottom Line: Validate all GET URLs to make sure they are not trying to access resources they should not have access to.
+All GET URLs have to be validated to make sure the request is not trying to access resources that are not meant to be accessed.
 
 === Path Manipulation on PUT and POST
 
@@ -52,4 +54,4 @@ A transaction operation adds new or updates existing resources on the API. This 
 
 Many of the resources exposed though an OGC API include hyperlinks to other resources. API clients follow these hyperlinks to access new resources or alternate representations of a resource. Once a client authenticates to an API, they tend to trust the data returned by that API. However, a resource posted by an attacker could contain hyperlinks which contain an attack. For example, the link to an alternate representation could require the client to re-authenticate prior to passing them on to the original destination. The client sees the representation they asked for and the attacker collects the clients’ authentication credentials.
 
-Bottom Line:  APIs which support transaction operations should validate that an update does not contain any malignant content prior to exposing it through the API.
+APIs which support transaction operations are expected to validate that an update does not contain any malignant content prior to exposing it through the API.

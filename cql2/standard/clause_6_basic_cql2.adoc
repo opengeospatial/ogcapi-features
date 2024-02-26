@@ -57,9 +57,9 @@ requirements classes in <<cql2-enhancements>>:
 * The rules `isLikePredicate`, `isBetweenPredicate` and `isInListPredicate` are added by requirements class <<rc_advanced-comparison-operators,Advanced Comparison Operators>>;
 * Support for the `CASEI` function is added by requirements class <<rc_case-insensitive-comparison,Case-insensitive Comparison>>;
 * Support for the `ACCENTI` function is added by requirements class <<rc_accent-insensitive-comparison,Accent-insensitive Comparison>>;
-* The rule `spatialPredicate` is added by requirements classes <<rc_basic-spatial-operators,Basic Spatial Operators>> and <<rc_spatial-operators,Spatial Operators>>;
-* The rule `temporalPredicate` is added by requirements class <<rc_temporal-operators,Temporal Operators>>.
-* The rule `arrayPredicate` is added by requirements class <<rc_array-operators,Array Operators>>;
+* The rule `spatialPredicate` is added by requirements classes <<rc_basic-spatial-functions,Basic Spatial Functions>> and <<rc_spatial-functions,Spatial Functions>>;
+* The rule `temporalPredicate` is added by requirements class <<rc_temporal-functions,Temporal Functions>>.
+* The rule `arrayPredicate` is added by requirements class <<rc_array-functions,Array Functions>>;
 * The permission to not support the literal rules on the left hand side of predicates and the rule `propertyName` on the right hand side is removed by requirements class <<rc_property-property,Property-Property Comparisons>>;
 * The rule `function` is added by requirements class <<rc_functions,Functions>>;
 * The rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>.
@@ -97,7 +97,7 @@ CQL2 supports two commonly used granularities: a second or smaller (data type "t
 
 If timezone information is important for the intended use, then the "date" data type should not be used and the temporal information should be provided as an interval with start and end timestamps.
 
-NOTE: While instants (timestamps and dates) are scalar data types that can be used with the basic comparison operators, intervals are more complex data types. Support for intervals is added in the requirements class <<rc_temporal-operators,Temporal Operators>> where intervals can be provided as arguments in temporal comparison functions.
+NOTE: While instants (timestamps and dates) are scalar data types that can be used with the basic comparison operators, intervals are more complex data types. Support for intervals is added in the requirements class <<rc_temporal-functions,Temporal Functions>> where intervals can be provided as arguments in temporal comparison functions.
 
 For timestamp and date values representations based on RFC 3339 are used:
 

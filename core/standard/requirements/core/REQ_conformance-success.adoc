@@ -4,4 +4,18 @@
 ^|*Requirement {counter:req-id}* |*/req/core/conformance-success*
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/confClasses.yaml[confClasses.yaml] and list all OGC API conformance classes that the server conforms to.
+
+[[schema_confClasses]]
+.link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/confClasses.yaml[Schema for the list of conformance classes (confClasses.yaml)]
+[source,YAML]
+----
+type: object
+required:
+  - conformsTo
+properties:
+  conformsTo:
+    type: array
+    items:
+      type: string
+----
 |===

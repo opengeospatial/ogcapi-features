@@ -1,0 +1,8 @@
+[[req_basic-spatial-functions_spatial-predicate]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/basic-spatial-operators/spatial-predicate*
+^|A |If the requirements of the standardized spatial comparison function are satisfied, then the predicate SHALL evaluate to the Boolean value `TRUE`.
+^|B |If the requirements of the standardized spatial comparison function are not satisfied, then the predicate SHALL evaluate to the Boolean value `FALSE`.
+^|C |If either geometry expression (rule `geomExpression`) of the predicate is `NULL` then the predicate SHALL evaluate to the value `NULL`.
+|===

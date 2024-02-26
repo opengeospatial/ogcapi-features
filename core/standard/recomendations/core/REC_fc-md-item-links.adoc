@@ -1,8 +1,0 @@
-[[rec_core_fc-md-item-links]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/fc-md-item-links*
-^|A |For each feature collection included in the response, the `links` property of the collection SHOULD include a link template to the URI of the features (relation: `item`). 
-^|B |The link template SHALL be encoded as a Link object with a property `templated` set to `true` and the URI template in `href`.
-^|C |If links are included in `Link` HTTP headers of the response, the link templates SHOULD also be included in `Link-Template` HTTP headers according to the https://datatracker.ietf.org/doc/draft-ietf-httpapi-link-template/[draft "The Link-Template HTTP Header Field" specification].
-|===
