@@ -310,15 +310,15 @@ S_INTERSECTS(geometry,POINT(36.319836 32.288087))
 Note that the values of the `filter-crs` and `filter` parameters have not been percent-encoded (see section 2.1 of <<rfc3986,RFC 3986>>) in this example for better readability.
 ====
 
-[[extended-basic-spatial-function]]
-=== Requirements Class "Extended Basic Spatial Functions"
+[[basic-spatial-functions-plus]]
+=== Requirements Class "Basic Spatial Functions with additional Spatial Data Types"
 
-include::requirements/requirements_class_extended-basic-spatial-functions.adoc[]
+include::requirements/requirements_class_basic-spatial-functions-plus.adoc[]
 
 This requirements class is similar to the <<basic-spatial-functions,Basic Spatial Functions>> requirements class except it removes the restrictions on the spatial data types that can participate in the expression.
 
-[[extended-spatial-data-types]]
-==== Extended spatial data types and literal values
+[[additional-spatial-data-types]]
+==== Additional spatial data types and literal values
 
 In addition to the spatial types listed in the <<basic-spatial-functions,Basic Spatial Functions>> requirements class (i.e. "Point", "BBox"), this requirements class allows the following additional spatial data types (part of rule `spatialInstance`):
 
@@ -328,6 +328,8 @@ In addition to the spatial types listed in the <<basic-spatial-functions,Basic S
 * "MultiLineString": a collection of line strings;
 * "MultiPolygon": a collection of polygons;
 * "GeometryCollection": a collection of one or more of "Point", "Polygon", "MultiPoint", "MultiLineString", "MultiPolygon" or "GeometryCollection"  instances;
+
+include::requirements/basic-spatial-functions-plus/REQ_spatial-data-types.adoc[]
 
 The following representations are used for literal values:
 
@@ -387,20 +389,6 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 
 ====
 
-==== Spatial Functions
-
-In this conformance class, the only required spatial comparison function is _intersects_.
-
-include::requirements/extended-basic-spatial-functions/REQ_spatial-predicate.adoc[]
-
-include::requirements/extended-basic-spatial-functions/REQ_spatial-functions.adoc[]
-
-include::recommendations/extended-basic-spatial-functions/PER_spatial-predicates.adoc[]
-
-include::recommendations/extended-basic-spatial-functions/PER_spatial-data-types.adoc[]
-
-==== Examples
-
 [[example_x_2]]
 .Example spatial predicate
 ====
@@ -456,61 +444,8 @@ include::requirements/requirements_class_spatial-functions.adoc[]
 
 This requirement adds:
 
-* additional geometry types;
 * a set of Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators that may be used to add spatial predicates to a CQL2 filter expression. These operators are implemented in CQL2 as standardized functions.
 
-[[additional-spatial-data-types]]
-==== Additional spatial data types and literal values
-
-include::requirements/spatial-functions/REQ_spatial-data-types.adoc[]
-
-The additional spatial data types in addition to "Point" and "BBox" (see <<basic-spatial-data-types>>) are:
-
-* "MultiPoint": a collection of points;
-* "LineString": a curve with linear interpolation between the vertices;
-* "MultiLineString": a collection of line strings;
-* "Polygon": a planar surface bounded by closed line strings;
-* "MultiPolygon": a collection of polygons;
-* "Geometry": an instance of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", or "MultiPolygon";
-* "GeometryCollection": a collection of "Geometry" instances.
-
-Existing representations are used for literal values:
-
-* Text: an OGC Well-Known Text (WKT) literal (see clause 7 of <<ogc06-103r4,Simple feature access - Part 1: Common architecture>>)
-* JSON: a GeoJSON geometry object (see clause 3.1 of <<GeoJSON,GeoJSON>>)
-
-[[example_8_1_b2]]
-.Spatial literal example
-====
-
-* spatial geometry (Text)
-----
-POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
-----
-* spatial geometry (JSON)
-[source,JSON]
-----
-{
-   "type": "Polygon",
-   "coordinates": [
-       [
-          [43.5845,-79.5442],
-          [43.6079,-79.4893],
-          [43.5677,-79.4632],
-          [43.6129,-79.3925],
-          [43.6223,-79.3238],
-          [43.6576,-79.3163],
-          [43.7945,-79.1178],
-          [43.8144,-79.1542],
-          [43.8555,-79.1714],
-          [43.7509,-79.6390],
-          [43.5845,-79.5442]
-      ]
-   ]
-}
-----
-
-====
 
 ==== Spatial Functions
 
