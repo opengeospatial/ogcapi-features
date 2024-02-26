@@ -179,17 +179,17 @@ include::requirements/basic-cql2/REQ_property.adoc[]
 For example, a property name used in a scalar expression (rule `scalarExpression`)
 has to be a queryable of type `string`, `number`, `integer`, `boolean`, `date`, or `timestamp`.
 
-[[example_8_2]]
+[[example_6_01]]
 .Property reference in a scalar expression
 ====
 In this example, the property `windSpeed` is used in a function that receives an array of numbers and returns a number.
 ----
-avg(windSpeed)
+include::schema/examples/text/clause6_01.txt[]
 ----
 
 [source,JSON]
 ----
-{ "function": { "name": "avg", "args": [ { "property": "windSpeed" } ] } }
+include::schema/examples/json/clause6_01.json[]
 ----
 ====
 
@@ -200,105 +200,58 @@ include::requirements/basic-cql2/REQ_binary-comparison-predicate.adoc[]
 
 Instants (timestamps and dates) are scalar data types. All implementations have to support the comparison of two timestamps or two dates. How this is implemented is a decision of the server and will depend on the internal represenation. For example, the server could compare the RFC 3339 string representations of the two timestamps.
 
-[[example_8_3]]
+[[example_6_02]]
 .Binary comparison predicates
 ====
 ----
-city='Toronto'
+include::schema/examples/text/clause6_02a.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "=",
-  "args": [
-    { "property": "city" },
-    "Toronto" 
-  ]
-}
+include::schema/examples/json/clause6_02a.json[]
 ----
 
 ----
-avg(windSpeed) < 4
+include::schema/examples/text/clause6_02b.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "<",
-  "args": [
-    {
-      "function": {
-        "name": "avg",
-        "args": [
-          { "property": "windSpeed" }
-        ]
-      }
-    },
-    4
-  ]
-}
+include::schema/examples/json/clause6_02b.json[]
 ----
 
 ----
-balance-150.0 > 0
+include::schema/examples/text/clause6_02c.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": ">",
-  "args": [
-    {
-      "op": "-",
-      "args": [
-        { "property": "balance" },
-        150.0
-      ]
-    },
-    0
-  ]
-}
+include::schema/examples/json/clause6_02c.json[]
 ----
 
 ----
-updated >= date('1970-01-01')
+include::schema/examples/text/clause6_02d.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": ">=",
-  "args": [
-    { "property": "updated" },
-    { "date": "1970-01-01" }
-  ]
-}
+include::schema/examples/json/clause6_02d.json[]
 ----
 ====
 
 include::requirements/basic-cql2/REQ_null-predicate.adoc[]
 
-[[example_8_7]]
+[[example_6_03]]
 .Examples of a NULL predicate
 ====
 ----
-geometry IS NOT NULL
+include::schema/examples/text/clause6_03.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "not",
-  "args": [
-    {
-      "op": "isNull",
-      "args": [
-        { "property": "geometry" }
-      ]
-    }
-  ]
-}
+include::schema/examples/json/clause6_03.json[]
 ----
 ====
 

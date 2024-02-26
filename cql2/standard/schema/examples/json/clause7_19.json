@@ -1,0 +1,13 @@
+{
+  "op": ">",
+  "args": [
+    { "property": "vehicle_height" },
+    {
+      "op": "-",
+      "args": [
+        { "property": "bridge_clearance" },
+        1
+      ]
+    }
+  ]
+}
