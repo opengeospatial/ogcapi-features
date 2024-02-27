@@ -1,0 +1,16 @@
+{
+  "op": "s_within",
+  "args": [
+    { "property": "road" },
+    {
+      "function": {
+        "name": "Buffer",
+        "args": [
+          { "property": "geometry" },
+          10,
+          "m"
+        ]
+      }
+    }
+  ]
+}

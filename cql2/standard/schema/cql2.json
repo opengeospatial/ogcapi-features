@@ -22,7 +22,7 @@
       "$ref": "#/$defs/arrayPredicate"
     },
     {
-       "$ref": "#/$defs/functionRef"
+      "$ref": "#/$defs/functionRef"
     },
     {
       "type": "boolean"
@@ -175,10 +175,10 @@
           "properties": {
             "op": { "type": "string", "enum": [ "casei" ] },
             "args": {
-               "type": "array",
-               "items": { "$ref": "#/$defs/patternExpression" },
-               "minItems": 1,
-               "maxItems": 1
+              "type": "array",
+              "items": { "$ref": "#/$defs/patternExpression" },
+              "minItems": 1,
+              "maxItems": 1
             }
           }
         },
@@ -188,10 +188,10 @@
           "properties": {
             "op": { "type": "string", "enum": [ "accenti" ] },
             "args": {
-               "type": "array",
-               "items": { "$ref": "#/$defs/patternExpression" },
-               "minItems": 1,
-               "maxItems": 1
+              "type": "array",
+              "items": { "$ref": "#/$defs/patternExpression" },
+              "minItems": 1,
+              "maxItems": 1
             }
           }
         },
@@ -284,23 +284,28 @@
       }
     },
     "isNullOperand": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/characterExpression"
-        },
-        {
-          "$ref": "#/$defs/numericExpression"
-        },
-        {
-          "$dynamicRef": "#cql2expression"
-        },
-        {
-          "$ref": "#/$defs/geomExpression"
-        },
-        {
-          "$ref": "#/$defs/temporalExpression"
-        }
-      ]
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/characterExpression"
+          },
+          {
+            "$ref": "#/$defs/numericExpression"
+          },
+          {
+            "$dynamicRef": "#cql2expression"
+          },
+          {
+            "$ref": "#/$defs/geomExpression"
+          },
+          {
+            "$ref": "#/$defs/temporalExpression"
+          }
+        ]
+      }
     },
 
     "spatialPredicate": {
@@ -511,10 +516,10 @@
       "properties": {
         "op": { "type": "string", "enum": [ "casei" ] },
         "args": {
-           "type": "array",
-           "items": { "$ref": "#/$defs/characterExpression" },
-           "minItems": 1,
-           "maxItems": 1
+          "type": "array",
+          "items": { "$ref": "#/$defs/characterExpression" },
+          "minItems": 1,
+          "maxItems": 1
         }
       }
     },
@@ -525,10 +530,10 @@
       "properties": {
         "op": { "type": "string", "enum": [ "accenti" ] },
         "args": {
-           "type": "array",
-           "items": { "$ref": "#/$defs/characterExpression" },
-           "minItems": 1,
-           "maxItems": 1
+          "type": "array",
+          "items": { "$ref": "#/$defs/characterExpression" },
+          "minItems": 1,
+          "maxItems": 1
         }
       }
     },

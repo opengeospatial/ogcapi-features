@@ -191,12 +191,16 @@ components:
         args:
           $ref: '#/components/schemas/isNullOperand'
     isNullOperand:
-      oneOf:
-        - $ref: '#/components/schemas/characterExpression'
-        - $ref: '#/components/schemas/numericExpression'
-        - $ref: '#/components/schemas/temporalExpression'
-        - $ref: '#/components/schemas/booleanExpression'
-        - $ref: '#/components/schemas/geomExpression'
+      type: array
+      minItems: 1
+      maxItems: 1
+      items:
+        oneOf:
+          - $ref: '#/components/schemas/characterExpression'
+          - $ref: '#/components/schemas/numericExpression'
+          - $ref: '#/components/schemas/temporalExpression'
+          - $ref: '#/components/schemas/booleanExpression'
+          - $ref: '#/components/schemas/geomExpression'
     spatialPredicate:
       type: object
       required:
