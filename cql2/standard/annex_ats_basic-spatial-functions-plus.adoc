@@ -1,0 +1,82 @@
+=== Conformance Class "Basic Spatial Functions with additional Spatial Data Types"
+
+:conf-class: basic-spatial-functions-plus
+[[conf_basic-spatial-functions-plus]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Servers that evaluate filter expressions
+|Parameter |Filter Language: "CQL2 Text" or "CQL2 JSON"
+|Requirements class |<<rc_basic-spatial-functions-plus,Requirements Class "Basic Spatial Functions with additional Spatial Data Types">>
+|Dependency |<<conf_basic-spatial-functions,Basic Spatial Functions>>
+|===
+
+The term "geometry data type" is used for the following data types: Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, or GeometryCollection.
+
+:conf-test: s_intersects
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_spatial-predicate,/req/{conf-class}/spatial-predicate>>, <<req_{conf-class}_spatial-functions,/req/{conf-class}/spatial-functions>>, <<req_{conf-class}_spatial-functions,/req/{conf-class}/spatial-data-types>>
+|Test purpose: | Test the S_INTERSECTS spatial comparison function with points, multi-points, line strings, multi-line string, polyons, mult-polygons, geometry collections and bounding boxes.
+|Test method: | 
+Given:
+
+* One or more data sources each with a list of queryables.
+* At least one queryable has a geometry data type.
+
+When:
+
+For each queryable `{queryable}` with a geometry data type, evaluate the following filter expressions
+
+* `S_INTERSECTS({queryable},MULTIPOINT(7.02 49.92, 90 180))`
+* `S_INTERSECTS({queryable},LINESTRING(-180 -45, 0 -45))`
+* `S_INTERSECTS({queryable},MULTILINESTRING((-180 -45, 0 -45), (0 45, 180 45)))`
+* `S_INTERSECTS({queryable},POLYGON((-180 -90, -90 -90, -90 90, -180 90, -180 -90), (-120 -50, -100 -50, -100 -40, -120 -40, -120 -50)))`
+* `S_INTERSECTS({queryable},MULTIPOLYGON(((-180 -90, -90 -90, -90 90, -180 90, -180 -90), (-120 -50, -100 -50, -100 -40, -120 -40, -120 -50)),((0 0, 10 0, 10 10, 0 10, 0 0))))`
+* `S_INTERSECTS({queryable},GEOMETRYCOLLECTION(POINT(7.02 49.92), POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))))`
+
+Then:
+
+* assert successful execution of the evaluation for all filter expressions except the first;
+* assert unsuccessful execution of the evaluation for the first filter expressions (invalid coordinate);
+* store the valid predicates for each data source.
+|===
+
+:conf-test: test-data
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | all requirements
+|Test purpose: | Test predicates against the test dataset
+|Test method: | 
+Given:
+
+* The implementation under test uses the test dataset.
+
+When:
+
+Evaluate each predicate in <<test-data-predicates-s_intersects-operator>>.
+
+Then:
+
+* assert successful execution of the evaluation;
+* assert that the expected result is returned.
+|===
+
+[[test-data-predicates-s_intersects-operator-plus]]
+.Predicates and expected results
+[width="100%",cols="3",options="header"]
+|===
+|Data Source |Predicate |Expected number of items
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,LINESTRING(-180 -45, 0 -45))` |2
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,MULTILINESTRING((-180 -45, 0 -45), (0 45, 180 45)))` |14
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,POLYGON((-180 -90, -90 -90, -90 90, -180 90, -180 -90), (-120 -50, -100 -50, -100 -40, -120 -40, -120 -50)))` |8
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,MULTIPOLYGON(((-180 -90, -90 -90, -90 90, -180 90, -180 -90), (-120 -50, -100 -50, -100 -40, -120 -40, -120 -50)),((0 0, 10 0, 10 10, 0 10, 0 0))))` |15
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,GEOMETRYCOLLECTION(POINT(7.02 49.92), POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))))` |8
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,POLYGON((-180 -90, -90 -90, -90 90, -180 90, -180 -90), (-120 -50, -100 -50, -100 -40, -120 -40, -120 -50))) or S_INTERSECTS(geom,POLYGON((0 0, 10 0, 10 10, 0 10, 0 0)))` |15
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,POLYGON((-180 -90, -90 -90, -90 90, -180 90, -180 -90), (-120 -50, -100 -50, -100 -40, -120 -40, -120 -50))) and not S_INTERSECTS(geom,POLYGON((-130 0, 0 0, 0 50, -130 50, -130 0)))` |3
+|===

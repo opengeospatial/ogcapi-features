@@ -9,6 +9,7 @@ grouped by their standardization target:
 ** <<rc_case-insensitive-comparison,Case-insensitive Comparisons>>
 ** <<rc_accent-insensitive-comparison,Accent-insensitive Comparisons>>
 ** <<rc_basic-spatial-functions,Basic Spatial Functions>>
+** <<rc_basic-spatial-functions-plus,Basic Spatial Functions with additional Spatial Data Types>>
 ** <<rc_spatial-functions,Spatial Functions>>
 ** <<rc_temporal-functions,Temporal Functions>>
 ** <<rc_array-functions,Array Functions>>
@@ -64,7 +65,9 @@ The <<rc_basic-spatial-functions,Basic Spatial Functions>> requirements class sp
 
 * s_intersects
 
-The <<rc_spatial-functions,Spatial Functions>> requirements class specifies requirements for servers that support a richer set of spatial comparison functions and spatial data types. The list of additional spatial comparison functions that must be supported is:
+The <<rc_basic-spatial-functions,Basic Spatial Functions with additional Spatial Data Types>> requirements class is similar to the <<rc_basic-spatial-functions,Basic Spatial Functions>> requirements class except it removes the restrictions on the spatial data types that may participate in the expression.
+
+The <<rc_spatial-functions,Spatial Functions>> requirements class specifies requirements for servers that support a richer set of spatial comparison functions. The list of additional spatial comparison functions that must be supported is:
 
 * s_contains
 * s_crosses
