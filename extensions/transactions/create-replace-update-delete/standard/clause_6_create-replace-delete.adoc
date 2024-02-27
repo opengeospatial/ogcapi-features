@@ -249,15 +249,11 @@ include::requirements/create-replace-delete/delete/REQ_response.adoc[]
 If the server will process the update request later, it will return a `202`. In this
 case, the processing can succeed or fail, without further notification to the client.
 
-Note that if no resource with the identifier exists in the collection, the server can respond 
-with a success status (`200` or `204`) or with a not-found exception (`404`).
-
-NOTE: See https://github.com/opengeospatial/ogcapi-features/issues/328[Issue 328]. 
-Should it be up to the server whether it responds with a 204 or a 404, if no feature exists?
-
 ==== Exceptions
 
 See <<http_status_codes,HTTP status codes>>.
+
+include::recommendations/create-replace-delete/delete/REC_no-feature.adoc[]
 
 ==== Example
 
