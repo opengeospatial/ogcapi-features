@@ -377,21 +377,52 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925,
 
 include::requirements/spatial-functions/REQ_spatial-functions.adoc[]
 
-The following table lists the mathematical definitions of each standardized spatial comparison function as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>>. `a` and `b` are geometries, `I(a)` is the set of all positions in the interior of the geometry (i.e., all positions on the geometry, but which are not on the boundary), and `E(a)` is the set of all exterior positions (i.e., all positions except those in the interior or on the boundary of the geometry).
+This clause specifies a set of standardized spatial comparison functions that can be used to evaludate whether a specific spatial relationship exists between a pair of geometries.  
+
+The definition of these spatial comparison functions is based on a Dimensionally Extended 9-Intersection Model (DE-9IM) and further discussion and explanation about this model can be found at <<DE-9IM,DE-9IM>> and <<PostGIS-26,Dimensionally Extended 9-Intersection Model>>.
+
+Consider geometries `a` and `b`.
+
+The spatial relationships between `a` and `b` can be represented by the following intersection matrix (see <<DE-9IM,DE-9IM>>):
+
+[#figure20]
+.The DE-9IM intersection matrix.
+image::images/DE9IM_Matrix.png[alt=Within,width=70%]
+
+`I()` represents the set of all positions in the <<interior-def,interior>> of the geometry, `B()` represents the set of all positions on the <<boundary-def,boundary>> of the geometry and `E()` represents the set of all <<exterior-def,exterior>> positions.  `dim()` represents the https://en.wikipedia.org/wiki/Dimension[dimension] of the intersection of the interior (`I`), boundary (`B`) and exterior (`E`) of geometries `a` and `b`.
+
+The value of each cell in this intersection matrix is either:
+
+* `0` (i.e. the dimension of the intersection is a point),
+* `1` (i.e. the dimension of the intersection is a line),
+* `2` (i.e. the dimension of the intersection is an area) or,
+* `∅` for the empty set or no intersection.
+
+These values are sometimes simplified to:
+
+* `T` representing `{0,1,2}` (if the actual value of the dimension does not matter),
+* `F` representing the empty set and,
+* `*` representing a value that is not relevant to the evalutation of a spatial comparison function.
+
+An example of such an intersection matrix is:
+
+stem:[[[T,"*",F\],["*","*",F\],[F,F,"*"\]\]]
+
+The following table lists the mathematical definitions of each standardized spatial comparison function as described in <<ogc06-103r4,OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture>> and also using DE-9IM.
 
 [reftext='{table-caption} {counter:table-num}']
 .Mathematical definitions of standardized spatial comparison functions
-[width=100%,cols="30,70",options="header"]
+[width=100%,cols="15,40,45",options="header"]
 |===
-|Spatial comparison function |Definition
-|S_CONTAINS |S_CONTAINS(a,b) &#x2b04; b WITHIN a
-|S_CROSSES |S_CROSSES(a,b) &#x2b04; [I(a) &#x2229; I(b) &#x2260; &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)]
-|S_DISJOINT |S_DISJOINT(a,b) &#x2b04; a &#x2229; b = &#x2205;
-|S_EQUALS |S_EQUALS(a,b) &#x2b04; a &#x2286; b &#x2227; b &#x2286; a
-|S_INTERSECTS |S_INTERSECTS(a,b) &#x2b04; ! a DISJOINT b
-|S_OVERLAPS |S_OVERLAPS(a,b) &#x2b04; (dim(I(a)) = dim(I(b)) = dim(I(a) &#x2229; I(b))) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)
-|S_TOUCHES |S_TOUCHES(a,b) &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205;
-|S_WITHIN |S_WITHIN(a,b) &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) = &#x2205;)
+|Spatial comparison function |Definition |Intersection matrix
+|S_CONTAINS |S_CONTAINS(a,b) &#x2b04; b WITHIN a |stem:[[[T,"*","*"\],["*","*","*"\],[F,F,"*"\]\]]
+|S_CROSSES |S_CROSSES(a,b) &#x2b04; [I(a) &#x2229; I(b) &#x2260; &#x2205;) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b)] |stem:[[[T,"*",T\],["*","*","*"\],["*","*","*"\]\]], stem:[[[T,"*","*"\],["*","*","*"\],[T,"*","*"\]\]], stem:[[[0,"*","*"\],["*","*","*"\],["*","*","*"\]\]]
+|S_DISJOINT |S_DISJOINT(a,b) &#x2b04; a &#x2229; b = &#x2205; |stem:[[[F,F,"*"\],[F,F,"*"\],["*","*","*"\]\]]
+|S_EQUALS |S_EQUALS(a,b) &#x2b04; a &#x2286; b &#x2227; b &#x2286; a |stem:[[[T,"*",F\],["*","*",F\],[F,F,"*"\]\]]
+|S_INTERSECTS |S_INTERSECTS(a,b) &#x2b04; ! a DISJOINT b |stem:[[[T,"*","*"\],["*","*","*"\],["*","*","*"\]\]],stem:[[["*",T,"*"\],["*","*","*"\],["*","*","*"\]\]],stem:[[["*","*","*"\],[T,"*","*"\],["*","*","*"\]\]],stem:[[["*","*","*"\],["*",T,"*"\],["*","*","*"\]\]]
+|S_OVERLAPS |S_OVERLAPS(a,b) &#x2b04; (dim(I(a)) = dim(I(b)) = dim(I(a) &#x2229; I(b))) &#x2227; (a &#x2229; b &#x2260; a) &#x2227; (a &#x2229; b &#x2260; b) |stem:[[[T,"*",T\],["*","*","*"\],[T,"*","*"\]\]],stem:[[[1,"*",T\],["*","*","*"\],[T,"*","*"\]\]],
+|S_TOUCHES |S_TOUCHES(a,b) &#x2b04; (I(a) &#x2229; I(b) = &#x2205;) &#x2227; (a &#x2229; b) &#x2260; &#x2205; |stem:[[[F,T,"*"\],["*","*","*"\],["*","*","*"\]\]],stem:[[[F,"*","*"\],[F,"*","*"\],["*","*","*"\]\]],stem:[[[F,"*","*"\],["*",T,"*"\],["*","*","*"\]\]]
+|S_WITHIN |S_WITHIN(a,b) &#x2b04; (a &#x2229; b = a) &#x2227; (I(a) &#x2229; E(b) = &#x2205;) |stem:[[[T,"*",F\],["*","*",F\],["*","*","*"\]\]]
 |===
 
 The following diagrams illustrate the meaning of the `S_CROSSES`, `S_OVERLAPS`, `S_TOUCHES` and `S_WITHIN` spatial comparison functions.

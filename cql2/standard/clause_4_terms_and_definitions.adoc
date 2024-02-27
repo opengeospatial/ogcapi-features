@@ -7,6 +7,12 @@ This document also uses terms defined in the OGC Standard for Modular specificat
 
 For the purposes of this document, the following additional terms and definitions apply.
 
+[[boundary-def]]
+==== boundary
+set that represents the limit of an entity (ISO 19107:2019, definition 3.6)
+
+NOTE: Boundary is most commonly used in the context of geometry, where the set is a collection of points or a collection of objects that represent those points. In other arenas, the term is used metaphorically to describe the transition between an entity and the rest of its domain of discourse.
+
 [[collection-def]]
 ==== collection
 a body of **resources** that belong or are used together; an aggregate, set, or group of related **resources** (http://docs.opengeospatial.org/DRAFTS/20-024.html#terms_and_definitions[OGC 20-024, OGC API - Common - Part 2: Collections]).
@@ -17,6 +23,12 @@ a body of **resources** that belong or are used together; an aggregate, set, or 
 
 NOTE: Custom functions require support for the <<rc_functions,Functions>> requirements class.
 
+[[exterior-def]]
+==== exterior
+difference between the universe and the closure (ISO 19107:2019,definition 3.37)
+
+NOTE: The concept of exterior is applicable to both topological and geometric complexes. 
+
 [[filter-def]]
 ==== filter expression
 **predicate** encoded for transmission between systems
@@ -24,6 +36,12 @@ NOTE: Custom functions require support for the <<rc_functions,Functions>> requir
 [[function-def]]
 ==== function
 rule that associates each element from a domain (source, or domain of the function) to a unique element in another domain (target, co-domain, or range) (ISO 19107:2003, definition 4.41)
+
+[[interior]]
+==== interior
+set of all direct positions that are on a geometric object but which are not on its <<boundary-def,boundary>>
+
+NOTE: The interior of a topological object is the continuous image of the interior of any of its geometric realizations. This is not included as a definition because it follows from a theorem of topology. Another way of saying this is that any point on a geometric object is in its interior if it can be placed inside a homeomorphic image of an open set in the Euclidean space of the object’s topological dimension.
 
 [[standardized-function-def]]
 ==== standardized function
@@ -76,6 +94,8 @@ CQL2::
   Common Query Language
 CRS::
   Coordinate Reference System
+DE-9IM::
+  Dimensionally Extended Nine-Intersection Model
 HTTP::
   Hypertext Transfer Protocol
 HTTPS::
