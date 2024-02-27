@@ -6,5 +6,8 @@
 ^|B |The function SHALL accept one argument that can be a character string literal, the name of a property that evaluates to a character string literal or a function that returns a character string literal (see rules `characterLiteral`, `propertyName`, `function`).
 ^|C |The function SHALL return a character string.
 ^|D |If the argument to the function is `NULL`, the function SHALL return a `NULL` value.
-^|E |The function SHALL implement the https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[full case folding] algorithm defined in the implementation guidelines of https://www.unicode.org/versions/Unicode14.0.0[The Unicode Standard, Version 14.0] (see https://www.unicode.org/versions/Unicode14.0.0/ch05.pdf[clause 5.18 Case Mappings, sub-clause Caseless Matching]).
+^|E |The function SHALL implement the https://www.w3.org/TR/charmod-norm/#definitionCaseFolding[full case folding] algorithm defined in the implementation guidelines of the https://www.unicode.org/versions/Unicode15.0.0[Unicode 15.0.0] standard (see https://www.unicode.org/versions/Unicode15.0.0/ch05.pdf[clause 5.18 Case Mappings, sub-clause Caseless Matching], https://www.unicode.org/Public/UCD/latest/ucd/CaseFolding.txt[CaseFolding-15.0.0.txt] and https://www.unicode.org/Public/UCD/latest/ucd/SpecialCasing.txt[SpecialCasing-15.0.0.txt]).
 |===
+
+NOTE: _**Implementation Guidance for CASEI()**_ +
+The implementation of case folding makes use of the https://www.unicode.org/Public/UCD/latest/ucd/CaseFolding.txt[CaseFolding-15.0.0.txt] file and replaces code points in the source string by the corresponding sequence on lines with a 'C'(ommon) or 'F'(ull).

@@ -150,17 +150,17 @@ Then:
 [width="100%",cols="4",options="header"]
 |===
 |Dependency |Data Source |Predicate |Expected number of items
-|n/a |ne_110m_populated_places_simple |`ACCENTI(name)=accenti('København')` |1
-|n/a |ne_110m_populated_places_simple |`ACCENTI(name)=accenti('Kobenhavn')` |1
+|n/a |ne_110m_populated_places_simple |`ACCENTI(name)=accenti('Chișinău')` |1
+|n/a |ne_110m_populated_places_simple |`ACCENTI(name)=accenti('Chisinau')` |1
 |n/a |ne_110m_populated_places_simple |`ACCENTI(name)=accenti('Kiev')` |1
-|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('københavn'))` |1
-|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('kobenhavn'))` |1
-|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('KOBENHAVN'))` |1
-|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('KØBENHAVN'))` |1
-|Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(name) LIKE accenti('Ko%')` |2
-|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) LIKE accenti(casei('kØ%'))` |2
-|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) LIKE accenti(casei('kO%'))` |2
-|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) IN (accenti(casei('Kiev')), accenti(casei('kobenhavn')), accenti(casei('Berlin')), accenti(casei('athens')), accenti(casei('foo')))` |4
+|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('chișinău'))` |1
+|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('chisinau'))` |1
+|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('CHISINAU'))` |1
+|Case-insensitive Comparison |ne_110m_populated_places_simple |`ACCENTI(CASEI(name))=accenti(casei('CHIȘINĂU'))` |1
+|Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(name) LIKE accenti('Ch%')` |2
+|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) LIKE accenti(casei('Chiș%'))` |2
+|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) LIKE accenti(casei('cHis%'))` |2
+|Case-insensitive Comparison, Advanced Comparison Operators |ne_110m_populated_places_simple |`ACCENTI(CASEI(name)) IN (accenti(casei('Kiev')), accenti(casei('chișinău')), accenti(casei('Berlin')), accenti(casei('athens')), accenti(casei('foo')))` |4
 |===
 
 :conf-test: logical

@@ -148,6 +148,39 @@ include::schema/examples/json/clause7_05.json[]
 
 Like `CASEI`, the `ACCENTI` function returns a string typed representation of the input expression that is guaranteed to be equal to any other accent insensitive representation of that string. In order to ensure correct comparisons, the function should be applied to both sides of an expression.  So, for example, the only durable accent-insensitive equality comparison would be `ACCENTI(some_property) = ACCENTI('papá')`. An expression such as `ACCENTI(some_property) = 'papa'` might work but is not guaranteed to work across implementations or between versions of the same implementation.
 
+[NOTE]
+====
+_**Implementation guidance for ACCENTI()**_
+
+The implementation of an ACCENTI() function requires the use of fields 3 and 5 from https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt[UnicodeData.txt] and the application of the Unicode Normalization Algorithm (NFD or NFKD) by:
+
+* Recursively replacing code points in the source string by their field 5 Decomposition Mappings for those rows with canonical mappings (i.e. those mappings not prefixed by a tag from https://www.unicode.org/reports/tr44/#Character_Decomposition_Mappings[Table 14], or any of them if applying NFKD; the decomposition type is also available in https://www.unicode.org/Public/UCD/latest/ucd/extracted/DerivedDecompositionType.txt[DerivedDecompositionType.txt]).
+* Applying special rules to decompose Hangul syllables which do not have a decomposition mapping set up.  There are some details in http://www.unicode.org/versions/Unicode9.0.0/ch03.pdf Section 3.12 of the Unicode Standard (from page 142) and https://stackoverflow.com/questions/41309402/breaking-down-a-hangul-syllable-into-letters-jamo. The following C code implements the hangul syllable decomposition:
+
+[source,C]
+----
+if(codePoint >= 0xAC00 && codePoint < 0xD7B0)
+{
+   unsigned int syllable = codePoint - 0xAC00;
+   unsigned int t = syllable % 28, v, l;
+   syllable /= 28;
+   v = syllable % 21, l = syllable / 21;
+   add(0x1100 + l);
+   add(0x1161 + v);
+   if(t) add(0x11A7 + t);
+}
+----
+
+* Applying the Canonical Ordering algorithm which is stable-sorting (e.g., bubble-sort) the decomposed mapping code points by the value of that combining class for any sub-string where the Combining Class (field 3) (also in https://www.unicode.org/Public/UCD/latest/ucd/extracted/DerivedCombiningClass.txt[DerivedCombiningClass.txt]) value is non-zero. This step is necessary if there were combining marks in the source text; the Decomposition Mappings should otherwise already be in the correct order. The canonical ordering will only matter for code points that do not get stripped, so it will not matter for any of the combining characters that are non-spacing marks.
+
+then:
+
+* Removing Nonspacing Marks (category `Mn`) (general category is field 2 of https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt[UnicodeData.txt], also available in https://www.unicode.org/Public/UCD/latest/ucd/extracted/DerivedGeneralCategory.txt[DerivedGeneralCategory.txt]).
+* An exception should be made for some characters categorized as `Mn`, as stripping some non-spacing marks -- like the Japanese voicing marks (dakuten [ ゛] U+3099 and handakuten [゜] U+309A) -- can be a lossy change that would turn はじめ "hajime" (beginning) into はしめ "hashime" (fastener).
+====
+
+include::recommendations/accent-insensitive-comparison/REC_special_japanese_non_spacing_marks.adoc[]
+
 [[basic-spatial-functions]]
 === Requirements Class "Basic Spatial Functions"
 

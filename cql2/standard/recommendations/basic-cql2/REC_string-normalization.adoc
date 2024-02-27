@@ -1,0 +1,7 @@
+[[rec_core_string-normalization]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/string-normalization*
+^|A |For any string comparisons, server SHOULD implement https://www.w3.org/TR/charmod-norm/#unicodeNormalization[unicode normalization] described in the implementation guidelines of the https://www.unicode.org/versions/Unicode15.0.0[Unicode 15.0.0] standard (see https://www.unicode.org/versions/Unicode14.0.0/ch05.pdf[clause 5.6 Normalization]).
+^|B |The recommended normalization form is cannonical decomposition (https://www.w3.org/TR/charmod-norm/#normalization_forms[NFD]).
+|===
