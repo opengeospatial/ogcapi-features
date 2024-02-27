@@ -4,4 +4,5 @@
 ^|*Requirement {counter:req-id}* |*/req/arithmetic/arithmetic*
 ^|A |The server SHALL support arithmetic expressions as defined by the BNF rules 
 `arithmeticExpression` in <<cql2-bnf>> with the exception of the rule `function` in `arithmeticOperand`.
+^|B |Is any `arithmeticOperand` in an arithmetic expression is `NULL`, then the expression SHALL evaluate to `NULL`.
 |===

@@ -1,7 +1,7 @@
 {
   "op": "=",
   "args": [
-    { "casei": { "property": "owner" } },
-    { "casei": "somebody else" }
+    { "op": "casei", "args": [ { "property": "owner" } ] },
+    { "op": "casei", "args": [ "somebody else" ] }
   ]
 }

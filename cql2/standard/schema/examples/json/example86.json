@@ -2,6 +2,6 @@
   "op": "like",
   "args": [
     { "property": "name" },
-    { "casei": "FOO%" }
+    { "op": "casei", "args": [ "FOO%" ] }
   ]
 }

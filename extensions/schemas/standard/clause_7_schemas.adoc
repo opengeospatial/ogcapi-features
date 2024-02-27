@@ -39,11 +39,11 @@ In addition to the JSON Schema data types, geospatial data typically uses spatia
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |Each property SHALL include a "type" member, except for spatial properties.
 ^|B |Each spatial property SHALL not include a "type" or "$ref" member.
-^|C |Each spatial property SHALL include a "format" member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case with "any" as the wildcard for any geometry type. I.e., the values for the Simple Feature geometry types are: "geometry-any", "geometry-point", "geometry-multipoint", "geometry-linestring", "geometry-multilinestring", "geometry-polygon", "geometry-multipolygon", and "geometry-geometrycollection".
+^|C |Each spatial property SHALL include a "format" member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case. I.e., the values for the Simple Feature geometry types are: "geometry-point", "geometry-multipoint", "geometry-linestring", "geometry-multilinestring", "geometry-polygon", "geometry-multipolygon", and "geometry-geometrycollection". In addition, the following special values are supported: "geometry-any" as the wildcard for any geometry type, "geometry-point-or-multipoint" for a Point or MultiPoint, "geometry-linestring-or-multilinestring" for a LineString or MultiLineString, and "geometry-polygon-or-multipolygon" for a Polygon or MultiPolygon.
 ^|D |Each temporal property SHALL be a "string" literal with the appropriate format (e.g., "date-time" or "date" for instances, depending on the temporal granularity).
-^|E  |Properties that are only applicable when creating new data or updating existing data SHALL include "writeOnly: true".
-^|F  |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
-^|G  |The "additionalProperties" member with a value of "true" (the default) or "false" is used to state the expected behavior with respect to properties that are not explicitly declared in the schema. If "additionalProperties" is set to "false", properties that are not explicitly declared in the schema SHALL NOT be allowed, otherwise they SHALL be allowed.
+^|E |Properties that are only applicable when creating new data or updating existing data SHALL include "writeOnly: true".
+^|F |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
+^|G |The "additionalProperties" member with a value of "true" (the default) or "false" is used to state the expected behavior with respect to properties that are not explicitly declared in the schema. If "additionalProperties" is set to "false", properties that are not explicitly declared in the schema SHALL NOT be allowed, otherwise they SHALL be allowed.
 |===
 
 The following recommendations are intended to simplify parsing a schema and to help understanding the meaning of the properties:

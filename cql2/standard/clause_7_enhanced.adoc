@@ -30,22 +30,16 @@ include::requirements/advanced-comparison-operators/REQ_like-predicate.adoc[]
 
 include::recommendations/advanced-comparison-operators/PER_like-predicate.adoc[]
 
-[[example_7_1]]
+[[example_7_01]]
 .Example of a LIKE predicate
 ====
 ----
-name LIKE 'Smith%'
+include::schema/examples/text/clause7_01.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "like",
-  "args": [
-    { "property": "name" },
-    "Smith%"
-  ]
-}
+include::schema/examples/json/clause7_01.json[]
 ----
 ====
 
@@ -53,23 +47,16 @@ include::requirements/advanced-comparison-operators/REQ_between-predicate.adoc[]
 
 include::recommendations/advanced-comparison-operators/PER_between-predicate.adoc[]
 
-[[example_7_2]]
+[[example_7_02]]
 .Examples of a BETWEEN predicate
 ====
 ----
-depth BETWEEN 100.0 and 150.0
+include::schema/examples/text/clause7_02.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "between",
-  "args": [
-    { "property": "depth" },
-    100.0,
-    150.0
-  ]
-}
+include::schema/examples/json/clause7_02.json[]
 ----
 ====
 
@@ -77,42 +64,25 @@ include::requirements/advanced-comparison-operators/REQ_in-predicate.adoc[]
 
 include::recommendations/advanced-comparison-operators/PER_in-predicate.adoc[]
 
-[[example_7_3]]
+[[example_7_03]]
 .Examples of a IN predicate
 ====
 ----
-cityName IN ('Toronto','Frankfurt','Tokyo','New York')
+include::schema/examples/text/clause7_03a.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "in",
-  "args": [
-     { "property": "cityName" },
-     [ "Toronto", "Frankfurt", "Tokyo", "New York" ]
-  ]
-}
+include::schema/examples/json/clause7_03a.json[]
 ----
 
 ----
-category NOT IN (1,2,3,4)
+include::schema/examples/text/clause7_03b.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "not",
-  "args": [
-    {
-      "op": "in",
-      "args": [
-        { "property": "category" },
-        [ 1, 2, 3, 4 ]
-      ]
-    }
-  ]
-}
+include::schema/examples/json/clause7_03b.json[]
 ----
 ====
 
@@ -131,26 +101,17 @@ Implementations of the `CASEI` function can be complex and depend on the locale,
 
 include::requirements/case-insensitive-comparison/REQ_casei-function.adoc[]
 
-[[example_7_4_casei]]
+[[example_7_04]]
 .Example case-insensitive comparison
 ====
 
 ----
-CASEI(road_class) IN (CASEI('Οδος'),CASEI('Straße'))
+include::schema/examples/text/clause7_04.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "in",
-  "args": [
-    { "casei": { "property": "road_class" } },
-    [
-      { "casei": "Οδος" },
-      { "casei": "Straße"}
-    ]
-  ]
-}
+include::schema/examples/json/clause7_04.json[]
 ----
 ====
 
@@ -171,23 +132,17 @@ Implementations of the `ACCENTI` function can be complex, but in many cases the 
 
 include::requirements/accent-insensitive-comparison/REQ_accenti-function.adoc[]
 
-[[example_7_4_accenti]]
+[[example_7_05]]
 .Example accent-insensitive comparison
 ====
 
 ----
-ACCENTI(etat_vol) = ACCENTI('débárquér')
+include::schema/examples/text/clause7_05.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "=",
-  "args": [
-    { "accenti": { "property": "etat_vol" } },
-    { "accenti": "débárquér" }
-  ]
-}
+include::schema/examples/json/clause7_05.json[]
 ----
 ====
 
@@ -265,7 +220,7 @@ In JSON, the BBox type is encoded as a JSON object with a "bbox" member with an 
 
 Since WKT and GeoJSON do not provide a capability to specify the CRS of a geometry literal, the server has to determine the CRS of the geometry literals in a filter expression through another mechanism. For example, a query parameter `filter-crs` is used in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>> to pass the CRS information to the server.
 
-[[example_8_1_b]]
+[[example_7_06]]
 .Spatial literal example
 ====
 
@@ -309,29 +264,20 @@ include::recommendations/basic-spatial-functions/PER_spatial-data-types.adoc[]
 
 ==== Examples
 
-[[example_7_5]]
+[[example_7_07]]
 .Example spatial predicate
 ====
 ----
-S_INTERSECTS(geometry,POINT(36.319836 32.288087))
+include::schema/examples/text/clause7_07.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "s_intersects",
-  "args": [
-    { "property": "geometry" },
-    {
-      "type": "Point",
-      "coordinates": [36.319836, 32.288087]
-    }
-  ]
-}
+include::schema/examples/json/clause7_07.json[]
 ----
 ====
 
-[[example_7_6]]
+[[example_7_08]]
 .Example for the filter-crs query parameter
 ====
 ----
@@ -373,7 +319,7 @@ Existing representations are used for literal values:
 * Text: an OGC Well-Known Text (WKT) literal (see clause 7 of <<ogc06-103r4,Simple feature access - Part 1: Common architecture>>)
 * JSON: a GeoJSON geometry object (see clause 3.1 of <<GeoJSON,GeoJSON>>)
 
-[[example_8_1_b2]]
+[[example_7_09]]
 .Spatial literal example
 ====
 
@@ -447,37 +393,16 @@ image::images/within.png[alt=Within,width=70%]
 
 NOTE: If geometry *_a_* `S_CONTAINS` geometry *_b_*, then geometry *_b_* is `S_WITHIN` geometry *_a_*.
 
-[[example_7_7]]
+[[example_7_10]]
 .Example of a spatial relationship between a property and a literal geometry.
 ====
 ----
-S_CROSSES(road,POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972,
-                        43.7326 -79.2971, 43.7350 -79.2981, 43.7350 -79.2982,
-                        43.7352 -79.2982, 43.7357 -79.2956, 43.7337 -79.2948,
-                        43.7343 -79.2933, 43.7339 -79.2923, 43.7327 -79.2947,
-                        43.7320 -79.2942, 43.7322 -79.2937, 43.7306 -79.2930,
-                        43.7303 -79.2930, 43.7299 -79.2928, 43.7286 -79.2986)))
+include::schema/examples/text/clause7_10.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "s_crosses",
-  "args": [
-    {"property": "road"},
-    {
-      "type": "Polygon",
-      "coordinates": [
-        [43.7286,-79.2986], [43.7311,-79.2996], [43.7323,-79.2972],
-        [43.7326,-79.2971], [43.7350,-79.2981], [43.7350,-79.2982],
-        [43.7352,-79.2982], [43.7357,-79.2956], [43.7337,-79.2948],
-        [43.7343,-79.2933], [43.7339,-79.2923], [43.7327,-79.2947],
-        [43.7320,-79.2942], [43.7322,-79.2937], [43.7306,-79.2930],
-        [43.7303,-79.2930], [43.7299,-79.2928], [43.7286,-79.2986]
-      ]
-    }
-  ]
-}
+include::schema/examples/json/clause7_10.json[]
 ----
 ====
 
@@ -511,7 +436,7 @@ In case two instants are provided, both instants have the same granularity (i.e.
 
 NOTE: Instants are also scalar data types; for the representations and examples of instances see <<scalar-data-types>>.
 
-[[example_8_1_c]]
+[[example_7_11]]
 .Interval examples
 ====
 
@@ -595,41 +520,29 @@ For example, a system that evaluates the interval `INTERVAL('2022-01-01','2022-0
 
 ==== Examples
 
-[[example_7_8]]
+[[example_7_12]]
 .Examples of temporal predicate using T_INTERSECTS
 ====
 ----
-T_INTERSECTS(event_date, INTERVAL("1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z"))
+include::schema/examples/text/clause7_12.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "t_intersects",
-  "args": [
-    { "property": "event_date" },
-    { "interval": [ "1969-07-16T05:32:00Z", "1969-07-24T16:50:35Z" ] }
-  ]
-}
+include::schema/examples/json/clause7_12.json[]
 ----
 ====
 
-[[example_7_9]]
+[[example_7_13]]
 .Examples of temporal relationships using a property and a temporal literal.
 ====
 ----
-T_DURING(touchdown, INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
+include::schema/examples/text/clause7_13.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "t_during",
-  "args": [
-    {"property": "touchdown"},
-    {"interval": [ "1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"] }
-  ]
-}
+include::schema/examples/json/clause7_13.json[]
 ----
 ====
 
@@ -645,15 +558,15 @@ This clause specifies requirements for supporting array expression in CQL2.
 An array is a bracket-delimited, comma-separated list of array elements. An array element is either a scalar value,
 a geometry, an interval, or another array.
 
-[[example_8_1_d]]
+[[example_7_14]]
 .Array examples
 ====
 
 * arrays (Text)
 ----
-[ 'a', 'c' ]
-[ 'a', true, 1 ]
-[ DATE('1969-07-16'), DATE('1969-07-20'), DATE('1969-07-24') ]
+( 'a', 'c' )
+( 'a', true, 1 )
+( DATE('1969-07-16'), DATE('1969-07-20'), DATE('1969-07-24') )
 ----
 * arrays (JSON)
 [source,JSON]
@@ -682,22 +595,16 @@ the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
 ==== Examples
 
-[[example_7_10]]
+[[example_7_15]]
 .Evaluate if the value of an array property contains the specified subset of values.
 ====
 ----
-A_CONTAINS(layer:ids, ["layers-ca","layers-us"])
+include::schema/examples/text/clause7_15.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "a_contains",
-  "args": [
-    {"property": "layer:ids"},
-    ["layers-ca","layers-us"]
-  ]
-}
+include::schema/examples/json/clause7_15.json[]
 ----
 ====
 
@@ -710,65 +617,29 @@ This requirements class adds support for properties on the right side of predica
 
 include::requirements/property-property/REQ_withdraw-permissions.adoc[]
 
-[[example_7_11]]
+[[example_7_16]]
 .Example of a spatial relationship between two literal geometries.
 ====
 ----
-S_CROSSES(LINESTRING(43.72992 -79.2998, 43.73005 -79.2991, 43.73006 -79.2984,
-                     43.73140 -79.2956, 43.73259 -79.2950, 43.73266 -79.2945,
-                     43.73320 -79.2936, 43.73378 -79.2936, 43.73486 -79.2917),
-        POLYGON((43.7286 -79.2986, 43.7311 -79.2996, 43.7323 -79.2972, 43.7326 -79.2971,
-                 43.7350 -79.2981, 43.7350 -79.2982, 43.7352 -79.2982, 43.7357 -79.2956,
-                 43.7337 -79.2948, 43.7343 -79.2933, 43.7339 -79.2923, 43.7327 -79.2947,
-                 43.7320 -79.2942, 43.7322 -79.2937, 43.7306 -79.2930, 43.7303 -79.2930,
-                 43.7299 -79.2928, 43.7286 -79.2986)))
+include::schema/examples/text/clause7_16.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "s_crosses",
-  "args": [
-    {
-      "type": "LineString",
-      "coordinates": [
-        [43.72992,-79.2998], [43.73005,-79.2991], [43.73006,-79.2984],
-        [43.73140,-79.2956], [43.73259,-79.2950], [43.73266,-79.2945],
-        [43.73320,-79.2936], [43.73378,-79.2936], [43.73486,-79.2917]
-      ]
-    },
-    {
-      "type": "Polygon",
-      "coordinates": [
-        [43.7286,-79.2986], [43.7311,-79.2996], [43.7323,-79.2972],
-        [43.7326,-79.2971], [43.7350,-79.2981], [43.7350,-79.2982],
-        [43.7352,-79.2982], [43.7357,-79.2956], [43.7337,-79.2948],
-        [43.7343,-79.2933], [43.7339,-79.2923], [43.7327,-79.2947],
-        [43.7320,-79.2942], [43.7322,-79.2937], [43.7306,-79.2930],
-        [43.7303,-79.2930], [43.7299,-79.2928], [43.7286,-79.2986]
-      ]
-    }
-  ]
-}
+include::schema/examples/json/clause7_16.json[]
 ----
 ====
 
-[[example_7_12]]
+[[example_7_17]]
 .Examples of temporal relationships using temporal literals.
 ====
 ----
-T_DURING(DATE("1969-07-20T20:17:40Z"), INTERVAL("1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"))
+include::schema/examples/text/clause7_17.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "t_during",
-  "args": [
-    { "timestamp": "1969-07-20T20:17:40Z" },
-    { "interval": ["1969-07-16T13:32:00Z", "1969-07-24T16:50:35Z"] }
-  ]
-}
+include::schema/examples/json/clause7_17.json[]
 ----
 ====
 
@@ -785,33 +656,18 @@ include::requirements/functions/REQ_functions.adoc[]
 NOTE: Support for the BNF rule `arithmeticExpression` is added by
 the requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
-[[example_7_13]]
+[[example_7_18]]
 .Example of a spatial relationship between a property and a function that return a geometry value.
 ====
 It should be noted that the function "Buffer()" in this example is not part of CQL2 but is an example of a function that an implementation may offer that returns a geometry value.
 
 ----
-S_WITHIN(road,Buffer(geometry,10,"m"))
+include::schema/examples/text/clause7_18.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": "s_within",
-  "args": [
-    {"property": "road"},
-    {
-      "function": {
-        "name":"Buffer",
-        "args": [
-          {"property": "geometry"},
-          10,
-          "m"
-        ]
-      }
-    }
-  ]
-}
+include::schema/examples/json/clause7_18.json[]
 ----
 ====
 
@@ -831,27 +687,15 @@ include::requirements/arithmetic/REQ_arithmetic.adoc[]
 
 NOTE: Support for the BNF rule `function` is added by the requirements class <<rc_functions,Functions>>.
 
-[[example_7_14]]
+[[example_7_19]]
 .Predicate with an arithmetic expression finding all vehicles that are too tall to pass under a bridge.
 ====
 ----
-vehicle_height > (bridge_clearance-1)
+include::schema/examples/text/clause7_19.txt[]
 ----
 
 [source,JSON]
 ----
-{
-  "op": ">",
-  "args": [
-    {"property":"vehicle_height"},
-    {
-      "op": "-",
-      "args": [
-        {"property":"bridge_clearance"},
-        1
-      ]
-    }
-  ]
-}
+include::schema/examples/json/clause7_19.json[]
 ----
 ====

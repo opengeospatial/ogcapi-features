@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/fc-time-definition*
-^|A |The operation SHALL support a parameter `datetime` with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+^|A |The operation SHALL support a parameter `datetime` based upon the following OpenAPI 3.0 fragment:
 
 [source,YAML]
 ----
@@ -26,3 +26,5 @@ datetime                    = date-time / interval
 ^|C |The syntax of `date-time` is specified by link:https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6[RFC 3339, 5.6].
 ^|D |Half-bounded time intervals are supported using a double-dot (`..`) or an empty string for the start/end.
 |===
+
+NOTE: APIs can specify a default value for the `datetime` parameter.

@@ -1,0 +1,11 @@
+[[per_create-replace-delete_put-create]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/create-replace-delete/put-create*
+^|A |A server MAY support the PUT method on a non-existing resource. 
+|===
+
+In case PUT on a non-existing resource is supported, such a request can create a new resource with the `resourceId` specified in the URI of the resource endpoint. Not, however, that the 
+
+To ensure that an update request is not treated as an insert, the client MAY specify an If-Match header in the update request. The service MUST NOT treat an update request containing an If-Match header as an insert.
+

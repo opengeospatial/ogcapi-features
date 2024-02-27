@@ -1,7 +1,8 @@
-[[req_create-replace-delete_update-put-put-op]]
+[[req_create-replace-delete_put-op]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/create-replace-delete/update-put-op*
-^|A |For every resource in a collection, the server SHALL support the HTTP PUT operation.
+^|*Requirement {counter:req-id}* |*/req/create-replace-delete/put-op*
+^|Condition |Server declares support for the PUT method on the resources endpoint via the `Allow` header in the response to an OPTIONS request.
+^|A |For every resource in the collection, the server SHALL support the HTTP PUT operation.
 |===
 
