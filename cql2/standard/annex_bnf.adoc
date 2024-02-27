@@ -5,7 +5,19 @@
 [reftext="CQL2 BNF"]
 == CQL2 BNF (Normative)
 
+[NOTE]
+====
+Because there are many variations of EBNF, this standard has focused on verifying that this grammar validates using the following online validator:
+
+`https://www.icosaedro.it/bnf_chk/bnf_chk-on-line.html`
+
+If other tools are used (e.g. ANTLR), the grammar will likely need to be adapted to suite the target implementation context.
+====
+
 [source,abnf]
 ----
 include::schema/cql2.bnf[]
 ----
+
+
+
