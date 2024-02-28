@@ -79,8 +79,6 @@ In the "schema-less" case, as long as the incoming feature meets the requirement
 
 In the case where the server imposes schema constraints, the server should publish schemas in order to help clients create requests that are not rejected.  As recommended in clause <<feature-representations,Representation of features>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
 
-NOTE: How schemas are obtained is still an open issue.  See https://github.com/opengeospatial/ogcapi-features/issues/740[issue #740] and https://github.com/opengeospatial/ogcapi-features/issues/612[612].
-
 [[create]]
 === Adding a new resource to a collection (CREATE)
 
