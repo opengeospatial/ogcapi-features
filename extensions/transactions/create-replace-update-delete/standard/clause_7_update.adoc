@@ -73,3 +73,17 @@ The example uses a <<rfc7396,JSON Merge Patch>> document to describe the changes
 [#update-example,reftext=`Update Example`]
 .Update a Portion of an Existing Feature Example
 include::../examples/json/ex03_update.adoc[]
+
+=== Adding and removing resources properties
+
+In addition to modifying the value of existing resource properties, modifying
+a resource can also include adding and removing properties from the structure
+of a resource.  For servers that are "schema-less" such mutations do not
+present a problem.  However, for servers that include schema constraints, such
+mutations may result in exception conditions.  In order to mitigate this 
+possibility, the following recommendation is made:
+
+include::recommendations/update/REC_schema.adoc[]
+
+If a server publishes a schema, update requests presented to the server should
+endeavour to honour the published schema.
