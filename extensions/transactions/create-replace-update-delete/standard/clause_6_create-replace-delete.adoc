@@ -77,7 +77,7 @@ This specification makes no assumptions about any schema constraints that a serv
 
 In the "schema-less" case, as long as the incoming feature meets the requirements of the declared media type (e.g. a valid GeoJSON feature) then the resource should be created/updated with a 20x status response.  
 
-In the case where the server imposes schema constraints, the server should publish schemas in order to help clients create requests that are not rejected.  As recommended in clause <<feature-representations,Representation of features>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
+In the case where the server imposes schema constraints, the server should publish schemas in order to help clients create requests that are not rejected.  As recommended in clause <<schemas,Feature schemas>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
 
 [[create]]
 === Adding a new resource to a collection (CREATE)
