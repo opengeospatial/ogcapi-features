@@ -2,19 +2,14 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/queryables/queryables-schema*
-^|A |Each property SHOULD have a human readable title (`title`) and where
-necessary a description (`description`).
-^|B |The `type` SHOULD be one of the following values: `string` (string or 
-temporal properties), `number`/`integer` (numeric properties), 
-`boolean` (boolean properties), or `array` (array properties).
-^|C |For string properties, `minLength`, `maxLength`, `enum` and/or `pattern`
-SHOULD be provided, where applicable.
-^|D |For numeric properties, `multipleOf`, `minimum`, `exclusiveMinimum`,
-`maximum`, `exclusiveMaximum` SHOULD be provided, where applicable.
-^|E |For integer properties that represent enumerated values, `enum` SHOULD
-be provided.
-^|F |For temporal properties, the property SHOULD be a `string` literal with 
-the appropriate format `date-time` or `date`, depending on the temporal granularity.
-^|G |For array properties, the property SHOULD consist of items that are strings
-or numbers.
+^|A |Each property SHOULD have a human readable title (`title`) and, where necessary for the understanding of the property, a description (`description`).
+^|B |The `type` SHOULD be one of the following values: `string` (string or temporal properties), `number`/`integer` (numeric properties), `boolean` (boolean properties), `object` (object properties) or `array` (array properties).
+^|C |Properties that represent a URI SHOULD be represented as a string with format `uri` or `uri-reference`.
+^|D |Properties that represent a URI template SHOULD be represented as a string with format `uri-template`.
+^|E |Properties that represent a UUID SHOULD be represented as a string with format `uuid`.
+^|F |For string properties that are , `minLength`, `maxLength`, `enum` and/or `pattern` SHOULD be provided, where applicable.
+^|G |For numeric properties, `multipleOf`, `minimum`, `exclusiveMinimum`, `maximum`, `exclusiveMaximum` SHOULD be provided, where applicable.
+^|H |For integer properties that represent enumerated values, `enum` SHOULD be provided.
+^|I |For array properties, the property SHOULD consist of items that are strings or numbers.
+^|J |The JSON Schema keywords SHOULD be constrained to the those mentioned in this recommendation and requirement `/req/queryables/get-queryables-response`.
 |===

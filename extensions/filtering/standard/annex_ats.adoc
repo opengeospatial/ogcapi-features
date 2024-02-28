@@ -52,7 +52,7 @@ When:
 Then:
 
 * assert successful execution (status code is "200", `Content-Type` header is "application/json");
-* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+* assert that `$.conformsTo` is a string array that includes the value "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
 |===
 
 
@@ -79,7 +79,7 @@ When:
 Then:
 
 * assert successful execution (status code is "200");
-* assert that the response includes a `Link` header with `rel` set to `\http://www.opengis.net/def/rel/ogc/1.0/queryables` or `[ogc-rel:queryables]`;
+* assert that the response includes a `Link` header with `rel` set to `\http://www.opengis.net/def/rel/ogc/1.0/queryables`;
 * store the `href` value as the Queryables URI for the filterable resource ({queryablesUri}).
 |===
 
@@ -94,7 +94,7 @@ Then:
 Given:
 
 * test "get-queryables-uris" was successful
-* the list of Queryables URI for the filterable resource ({queryablesUri}) 
+* the list of Queryables URIs for the filterable resources (list of {queryablesUri}) 
 
 When:
 
@@ -114,11 +114,11 @@ Then:
 * assert that each member in `$.properties` has an object as its value and the object either includes `type` member or a `format` member whose value starts with `geometry-`;
 * assert that the response is a valid JSON Schema;
 * store the key of an arbitrary property with a `type` member as the sample queryable of the filterable resource;
-* store the key of an arbitrary property of the object as the spatial queryable of the filterable resource, if the value of member is an object that includes no `type` member and a `format` member with a value `geometry-{type}` where `{type}` is one of "point", "multipoint", "linestring", "multilinestring", "polygon", "multipolygon", or "geometry";
+* store the key of an arbitrary property of the object as the spatial queryable of the filterable resource, if the value of member is an object that includes no `type` member and a `format` member with a value `geometry-{type}` where `{type}` is one of "point", "multipoint", "linestring", "multilinestring", "polygon", "multipolygon", "geometrycollection", "any", "point-or-multipoint", "linestring-or-multilinestring", or "polygon-or-multipolygon";
 * store the value of the `additionalProperties` member or `true`, if it is not provided.
 |===
 
-NOTE: Sub-requirement F of `/req/queryables/get-queryables-response` can only be checked when executing filter queries in dependent conformance classes.
+NOTE: Sub-requirement G of `/req/queryables/get-queryables-response` can only be checked when executing filter queries in dependent conformance classes.
 
 === Conformance Class "Queryables as Query Parameters"
 
@@ -238,7 +238,7 @@ The following table lists input given to all tests in this conformance class:
 * A flag that indicates whether the filter language is the default filter language;
 * A valid filter expression in the filter language for a queryable `{queryable}` (`{filter-valid}`; default: `{queryable} IS NULL`);
 * An invalid filter expression in the filter language (`{filter-invalid}`; default: `THIS IS NOT A FILTER`);
-* A valid bbox filter expression in the filter language for a spatial queryable `{spatialQueryable}` and two longitude/latitude positions in WGS 84 `{x1}`/`{y1}` and `{x2}`/`{y2}` (`{bbox-filter}`; default: `S_INTERSECTS({spatialQueryable},ENVELOPE({x1},{y1},{x2},{y2})`);
+* A valid bbox filter expression in the filter language for a spatial queryable `{spatialQueryable}` and two longitude/latitude positions in WGS 84 `{x1}`/`{y1}` and `{x2}`/`{y2}` (`{bbox-filter}`; default: `S_INTERSECTS({spatialQueryable},BBOX({x1},{y1},{x2},{y2})`);
 * A flag that indicates whether the API supports custom functions in filter expressions;
 * The information stored during the execution of conformance tests of conformance class "Queryables".
 
@@ -614,7 +614,7 @@ When:
 Then:
 
 * assert successful execution (status code is "200", `Content-Type` header is "application/json");
-* assert that a non-negative integer `n` exists where `$.links[{n}].rel` is "http://www.opengis.net/def/rel/ogc/1.0/queryables" or "[ogc-rel:queryables]" and where `$.links[{n}].href` is (after normalization) the URI `{apiURI}/collections/{collectionId}/queryables`;
+* assert that a non-negative integer `n` exists where `$.links[{n}].rel` is "http://www.opengis.net/def/rel/ogc/1.0/queryables" and where `$.links[{n}].href` is (after normalization) the URI `{apiURI}/collections/{collectionId}/queryables`;
 * store `$.extent.spatial.bbox[0]` as the WGS84 bbox of the collection
 * store `$.crs[*]` as the list of CRS supported for the collection
 |===
