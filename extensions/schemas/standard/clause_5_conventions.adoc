@@ -15,8 +15,8 @@ All requirements and conformance tests that appear in this document are denoted 
 The following OGC link relation types are introduced in this document (no applicable link relation type in the <<link-relations,IANA link relation type register>> could be identified):
 
 * **\http://www.opengis.net/def/rel/ogc/1.0/schema**: Refers to a resource that lists the properties of geospatial data in the collection represented by the link's context.
-* **\http://www.opengis.net/def/rel/ogc/1.0/queryables**: Refers to a resource that lists properties that can be used to filter items in the collection represented by the link's context.
-* **\http://www.opengis.net/def/rel/ogc/1.0/sortables**: Refers to a resource that lists properties that can be used to sort items in the collection represented by the link's context.
+* **\http://www.opengis.net/def/rel/ogc/1.0/queryables**: Refers to a resource that lists properties that can be used to filter sub-resources of the link's context.
+* **\http://www.opengis.net/def/rel/ogc/1.0/sortables**: Refers to a resource that lists properties that can be used to sort sub-resources of the link's context.
 
 As an alternative, the https://docs.ogc.org/pol/09-048r6.html#toc14[Compact URI (CURIE)], e.g., **[ogc-rel:schema]**, can be used, too, where a CURIE is an allowed value.
 
