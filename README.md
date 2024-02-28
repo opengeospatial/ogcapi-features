@@ -102,9 +102,9 @@ The OGC Features API SWG has identified the following extensions as the highest 
 * [OGC API - Features - Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r1.html) and [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065.html)
   * Drafts with multiple implementations. Once all comments have been resolved and at least two implementations updated to the release candidate, the release candidate will enter the OGC approval process.
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
-  * The draft is fairly complete, but needs more implementations, testing and review to move to the Public Review.
+  * The draft is complete and is expected to soon move to the OGC Architecture Board review and the Public Comment Period.
 * [OGC API - Features - Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058.html)
-  * Incomplete draft.
+  * The draft is complete and is expected to soon move to the OGC Architecture Board review and the Public Comment Period.
 
 ## Additional information
 
@@ -128,7 +128,7 @@ Additional links:
 * [The next version of WFS - an overview](docs/overview.md)
 * [UML for Part 1, Core](docs/uml/README.md)
 * [Status of Part 1, Core, in ISO](https://www.iso.org/standard/32586.html)
-* [Home of the standard on the OGC website](https://www.opengeospatial.org/standards/ogcapi-features)
+* [Home of the standard on the OGC website](https://www.ogc.org/standards/ogcapi-features)
 
 ## Building
 
