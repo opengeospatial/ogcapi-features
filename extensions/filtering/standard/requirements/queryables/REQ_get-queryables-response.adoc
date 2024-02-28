@@ -7,20 +7,14 @@ with a HTTP status code `200`.
 ^|B |For responses that use `application/schema+json` as the `Content-Type` of
 the response, the response SHALL have the following characteristics:
 
-* The property `$schema` is `\https://json-schema.org/draft/2019-09/schema` 
-or `\https://json-schema.org/draft/2020-12/schema`.
+* The property `$schema` is `\https://json-schema.org/draft/2020-12/schema`.
 * The property `$id` is the URI of the resource without query parameters.
 * The `type` is `object` and each property is a queryable.
 ^|C |Each property SHALL include a `type` member, except for spatial properties.
 ^|D |Each spatial property SHALL not include a `type` or `$ref` member.
-^|E |Each spatial property SHALL include a `format` member with a string value 
-"geometry", followed by a hyphen, followed by the name of the geometry type in 
-lower case with "any" as the wildcard for any geometry type. I.e., the values 
-for the Simple Feature geometry types are: 
-`geometry-any`, `geometry-point`, `geometry-multipoint`, `geometry-linestring`, 
-`geometry-multilinestring`, `geometry-polygon`, `geometry-multipolygon`, and
-`geometry-geometrycollection`.
-^|F |The `additionalProperties` member with a value of `true` or `false` is used
+^|E |Each spatial property SHALL include a `format` member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case. I.e., the values for the Simple Feature geometry types are: "geometry-point", "geometry-multipoint", "geometry-linestring", "geometry-multilinestring", "geometry-polygon", "geometry-multipolygon", and "geometry-geometrycollection". In addition, the following special values are supported: "geometry-any" as the wildcard for any geometry type, "geometry-point-or-multipoint" for a Point or MultiPoint, "geometry-linestring-or-multilinestring" for a LineString or MultiLineString, and "geometry-polygon-or-multipolygon" for a Polygon or MultiPolygon.
+^|F |Each temporal property SHALL be a string literal with the appropriate format (e.g., `date-time` or `date` for instances, depending on the temporal granularity).
+^|G |The `additionalProperties` member with a value of `true` or `false` is used
 to state the behavior with respect to properties that are not explicitly declared 
 in the queryables schema. 
 
