@@ -8,7 +8,6 @@ paths: {}
 components:
   schemas:
     booleanExpression:
-      type: object
       oneOf:
         - $ref: '#/components/schemas/andOrExpression'
         - $ref: '#/components/schemas/notExpression'
@@ -67,10 +66,10 @@ components:
           type: string
           enum:
             - '='
-            - '<>'
-            - '<'
+            - <>
+            - <
             - '>'
-            - '<='
+            - <=
             - '>='
         args:
           $ref: '#/components/schemas/scalarOperands'
@@ -83,14 +82,10 @@ components:
     scalarExpression:
       oneOf:
         - $ref: '#/components/schemas/characterExpression'
-        - $ref: '#/components/schemas/temporalInstantExpression'
         - $ref: '#/components/schemas/numericExpression'
         - $ref: '#/components/schemas/booleanExpression'
-    temporalInstantExpression:
-      oneOf:
         - $ref: '#/components/schemas/instantInstance'
         - $ref: '#/components/schemas/propertyRef'
-        - $ref: '#/components/schemas/functionRef'
     isLikePredicate:
       type: object
       required:
@@ -109,25 +104,43 @@ components:
       maxItems: 2
       items:
         oneOf:
-          - $ref: '#/components/schemas/characterExpression'
+          - oneOf:
+              - $ref: '#/components/schemas/characterExpression'
+              - $ref: '#/components/schemas/propertyRef'
+              - $ref: '#/components/schemas/functionRef'
           - $ref: '#/components/schemas/patternExpression'
-      description: >-
-        The first argument is a characterExpression and the second item
-        is a patternExpression.
     patternExpression:
       oneOf:
         - type: object
           required:
-            - casei
+            - op
+            - args
           properties:
-            casei:
-              $ref: '#/components/schemas/patternExpression'
+            op:
+              type: string
+              enum:
+                - casei
+            args:
+              type: array
+              items:
+                $ref: '#/components/schemas/patternExpression'
+              minItems: 1
+              maxItems: 1
         - type: object
           required:
-            - accenti
+            - op
+            - args
           properties:
-            accenti:
-              $ref: '#/components/schemas/patternExpression'
+            op:
+              type: string
+              enum:
+                - accenti
+            args:
+              type: array
+              items:
+                $ref: '#/components/schemas/patternExpression'
+              minItems: 1
+              maxItems: 1
         - type: string
     isBetweenPredicate:
       type: object
@@ -146,13 +159,14 @@ components:
       minItems: 3
       maxItems: 3
       items:
-        $ref: '#/components/schemas/numericExpression'
+        oneOf:
+          - $ref: '#/components/schemas/numericExpression'
+          - $ref: '#/components/schemas/propertyRef'
+          - $ref: '#/components/schemas/functionRef'
     numericExpression:
       oneOf:
         - $ref: '#/components/schemas/arithmeticExpression'
         - type: number
-        - $ref: '#/components/schemas/propertyRef'
-        - $ref: '#/components/schemas/functionRef'
     isInListPredicate:
       type: object
       required:
@@ -175,9 +189,6 @@ components:
           - type: array
             items:
               $ref: '#/components/schemas/scalarExpression'
-      description: >-
-        The first item is a scalarExpression and the second item is an array
-        of scalarExpression. 
     isNullPredicate:
       type: object
       required:
@@ -198,9 +209,10 @@ components:
         oneOf:
           - $ref: '#/components/schemas/characterExpression'
           - $ref: '#/components/schemas/numericExpression'
-          - $ref: '#/components/schemas/temporalExpression'
           - $ref: '#/components/schemas/booleanExpression'
-          - $ref: '#/components/schemas/geomExpression'
+          - $ref: '#/components/schemas/spatialInstance'
+          - $ref: '#/components/schemas/temporalInstance'
+          - $ref: '#/components/schemas/propertyRef'
     spatialPredicate:
       type: object
       required:
@@ -225,12 +237,10 @@ components:
       minItems: 2
       maxItems: 2
       items:
-        $ref: '#/components/schemas/geomExpression'
-    geomExpression:
-      oneOf:
-        - $ref: '#/components/schemas/spatialInstance'
-        - $ref: '#/components/schemas/propertyRef'
-        - $ref: '#/components/schemas/functionRef'
+        oneOf:
+          - $ref: '#/components/schemas/spatialInstance'
+          - $ref: '#/components/schemas/propertyRef'
+          - $ref: '#/components/schemas/functionRef'
     temporalPredicate:
       type: object
       required:
@@ -262,12 +272,10 @@ components:
       minItems: 2
       maxItems: 2
       items:
-        $ref: '#/components/schemas/temporalExpression'
-    temporalExpression:
-      oneOf:
-        - $ref: '#/components/schemas/temporalInstance'
-        - $ref: '#/components/schemas/propertyRef'
-        - $ref: '#/components/schemas/functionRef'
+        oneOf:
+          - $ref: '#/components/schemas/temporalInstance'
+          - $ref: '#/components/schemas/propertyRef'
+          - $ref: '#/components/schemas/functionRef'
     arrayPredicate:
       type: object
       required:
@@ -289,9 +297,9 @@ components:
       maxItems: 2
       items:
         oneOf:
+          - $ref: '#/components/schemas/array'
           - $ref: '#/components/schemas/propertyRef'
           - $ref: '#/components/schemas/functionRef'
-          - $ref: '#/components/schemas/array'
     array:
       type: array
       items:
@@ -299,9 +307,10 @@ components:
           - $ref: '#/components/schemas/characterExpression'
           - $ref: '#/components/schemas/numericExpression'
           - $ref: '#/components/schemas/booleanExpression'
-          - $ref: '#/components/schemas/geomExpression'
-          - $ref: '#/components/schemas/temporalExpression'
+          - $ref: '#/components/schemas/spatialInstance'
+          - $ref: '#/components/schemas/temporalInstance'
           - $ref: '#/components/schemas/array'
+          - $ref: '#/components/schemas/propertyRef'
     arithmeticExpression:
       type: object
       required:
@@ -311,13 +320,13 @@ components:
         op:
           type: string
           enum:
-            - '+'
+            - +
             - '-'
             - '*'
-            - '/'
-            - '^'
+            - /
+            - ^
             - '%'
-            - 'div'
+            - div
         args:
           $ref: '#/components/schemas/arithmeticOperands'
     arithmeticOperands:
@@ -340,38 +349,105 @@ components:
     casei:
       type: object
       required:
-        - casei
+        - op
+        - args
       properties:
-        casei:
-          $ref: '#/components/schemas/characterExpression'
+        op:
+          type: string
+          enum:
+            - casei
+        args:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/characterExpression'
+              - $ref: '#/components/schemas/propertyRef'
+              - $ref: '#/components/schemas/functionRef'
+          minItems: 1
+          maxItems: 1
     accenti:
       type: object
       required:
-        - accenti
+        - op
+        - args
       properties:
-        accenti:
-          $ref: '#/components/schemas/characterExpression'
+        op:
+          type: string
+          enum:
+            - accenti
+        args:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/characterExpression'
+              - $ref: '#/components/schemas/propertyRef'
+              - $ref: '#/components/schemas/functionRef'
+          minItems: 1
+          maxItems: 1
     characterExpression:
       oneOf:
         - $ref: '#/components/schemas/casei'
         - $ref: '#/components/schemas/accenti'
         - type: string
-        - $ref: '#/components/schemas/propertyRef'
-        - $ref: '#/components/schemas/functionRef'
     functionRef:
       type: object
       required:
-        - function
+        - op
+        - args
       properties:
-        function:
-          $ref: '#/components/schemas/function'
-    function:
-      type: object
-      required:
-        - name
-      properties:
-        name:
+        op:
           type: string
+          not:
+            enum:
+              - and
+              - or
+              - not
+              - '='
+              - <>
+              - <
+              - '>'
+              - <=
+              - '>='
+              - like
+              - between
+              - in
+              - isNull
+              - casei
+              - accenti
+              - s_contains
+              - s_crosses
+              - s_disjoint
+              - s_equals
+              - s_intersects
+              - s_overlaps
+              - s_touches
+              - s_within
+              - t_after
+              - t_before
+              - t_contains
+              - t_disjoint
+              - t_during
+              - t_equals
+              - t_finishedBy
+              - t_finishes
+              - t_intersects
+              - t_meets
+              - t_metBy
+              - t_overlappedBy
+              - t_overlaps
+              - t_startedBy
+              - t_starts
+              - a_containedBy
+              - a_contains
+              - a_equals
+              - a_overlaps
+              - +
+              - '-'
+              - '*'
+              - /
+              - ^
+              - '%'
+              - div
         args:
           type: array
           items:
@@ -379,9 +455,10 @@ components:
               - $ref: '#/components/schemas/characterExpression'
               - $ref: '#/components/schemas/numericExpression'
               - $ref: '#/components/schemas/booleanExpression'
-              - $ref: '#/components/schemas/geomExpression'
-              - $ref: '#/components/schemas/temporalExpression'
-              - $ref: '#/components/schemas/arrayExpression'
+              - $ref: '#/components/schemas/spatialInstance'
+              - $ref: '#/components/schemas/temporalInstance'
+              - $ref: '#/components/schemas/array'
+              - $ref: '#/components/schemas/propertyRef'
     scalarLiteral:
       oneOf:
         - type: string
@@ -400,6 +477,7 @@ components:
         - $ref: '#/components/schemas/multipoint'
         - $ref: '#/components/schemas/multilinestring'
         - $ref: '#/components/schemas/multipolygon'
+        - $ref: '#/components/schemas/geometrycollection'
     point:
       title: GeoJSON Point
       type: object
@@ -548,6 +626,28 @@ components:
           minItems: 4
           items:
             type: number
+    geometrycollection:
+      title: GeoJSON GeometryCollection
+      type: object
+      required:
+        - type
+        - geometries
+      properties:
+        type:
+          type: string
+          enum:
+            - GeometryCollection
+        geometries:
+          type: array
+          minItems: 2
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/point'
+              - $ref: '#/components/schemas/linestring'
+              - $ref: '#/components/schemas/polygon'
+              - $ref: '#/components/schemas/multipoint'
+              - $ref: '#/components/schemas/multilinestring'
+              - $ref: '#/components/schemas/multipolygon'
     bboxLiteral:
       type: object
       required:
@@ -570,9 +670,9 @@ components:
         - $ref: '#/components/schemas/intervalInstance'
     instantInstance:
       oneOf:
-        - $ref: '#/components/schemas/dateInsant'
+        - $ref: '#/components/schemas/dateInstant'
         - $ref: '#/components/schemas/timestampInstant'
-    dateInsant:
+    dateInstant:
       type: object
       required:
         - date
@@ -592,10 +692,10 @@ components:
         - $ref: '#/components/schemas/timestampString'
     dateString:
       type: string
-      format: date
+      pattern: ^\d{4}-\d{2}-\d{2}$
     timestampString:
       type: string
-      format: date-time
+      pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$
     intervalInstance:
       type: object
       required:
