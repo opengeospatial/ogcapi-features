@@ -88,6 +88,12 @@ include::requirements/cql2-text/REQ_accent-insensitive-comparison.adoc[]
 
 include::requirements/cql2-text/REQ_basic-spatial-functions.adoc[]
 
+include::requirements/cql2-text/REQ_basic-spatial-functions-plus.adoc[]
+
+OGC WKT uses a "Z" character to distinguish the dimensionality of the coordinate reference system (CRS), e.g. `POINT(7 51)` for a 2D CRS and `POINT Z(7 51 100)` for a 3D CRS. In CQL2 Text, processors are required to be more tolerant and to determine the coordinate dimension from the coordinates.
+
+When creating a CQL2 Text expression, it is recommended to encode a geometry literal as required by OGC WKT.
+
 include::requirements/cql2-text/REQ_spatial-functions.adoc[]
 
 include::requirements/cql2-text/REQ_temporal-functions.adoc[]
@@ -119,6 +125,8 @@ include::requirements/cql2-json/REQ_case-insensitive-comparison.adoc[]
 include::requirements/cql2-json/REQ_accent-insensitive-comparison.adoc[]
 
 include::requirements/cql2-json/REQ_basic-spatial-functions.adoc[]
+
+include::requirements/cql2-json/REQ_basic-spatial-functions-plus.adoc[]
 
 include::requirements/cql2-json/REQ_spatial-functions.adoc[]
 

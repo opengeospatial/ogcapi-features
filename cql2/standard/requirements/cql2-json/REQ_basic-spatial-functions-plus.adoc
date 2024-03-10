@@ -1,0 +1,9 @@
+[[req_cql2-json_basic-spatial-functions-plus]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cql2-json/basic-spatial-functions-plus* 
+^|Condition |Server implements requirements class <<rc_basic-spatial-functions-plus,Basic Spatial Functions with additional Spatial Data Types>>
+^|A |The server SHALL be able to parse and evaluate filter expressions encoded as JSON that use the following schema components:
+
+* "#/$defs/spatialPredicate" where property "op" has the value "s_intersects"
+|===
