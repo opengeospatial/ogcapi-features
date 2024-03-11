@@ -513,28 +513,30 @@ booleanLiteral = "TRUE" | "FALSE";
 # NOTE: This is basically BNF that define WKT encoding. It would be nice
 #       to instead reference some normative BNF for WKT.
 #=============================================================================#
-spatialInstance = pointTaggedText
+spatialInstance = geometryLiteral       
+                | geometryCollectionTaggedText
+                | bboxTaggedText;
+
+geometryLiteral = pointTaggedText
                 | linestringTaggedText
                 | polygonTaggedText
                 | multipointTaggedText
                 | multilinestringTaggedText
-                | multipolygonTaggedText
-                | geometryCollectionTaggedText
-                | bboxTaggedText;
+                | multipolygonTaggedText;
 
-pointTaggedText = "POINT" pointText;
+pointTaggedText = "POINT" ["Z"] pointText;
 
-linestringTaggedText = "LINESTRING" lineStringText;
+linestringTaggedText = "LINESTRING" ["Z"] lineStringText;
 
-polygonTaggedText = "POLYGON" polygonText;
+polygonTaggedText = "POLYGON" ["Z"] polygonText;
 
-multipointTaggedText = "MULTIPOINT" multiPointText;
+multipointTaggedText = "MULTIPOINT" ["Z"] multiPointText;
 
-multilinestringTaggedText = "MULTILINESTRING" multiLineStringText;
+multilinestringTaggedText = "MULTILINESTRING" ["Z"] multiLineStringText;
 
-multipolygonTaggedText = "MULTIPOLYGON" multiPolygonText;
+multipolygonTaggedText = "MULTIPOLYGON" ["Z"] multiPolygonText;
 
-geometryCollectionTaggedText = "GEOMETRYCOLLECTION" geometryCollectionText;
+geometryCollectionTaggedText = "GEOMETRYCOLLECTION" ["Z"] geometryCollectionText;
 
 pointText = "(" point ")";
 
@@ -546,9 +548,11 @@ yCoord = signedNumericLiteral;
 
 zCoord = signedNumericLiteral;
 
-lineStringText = "(" point {"," point} ")";
+lineStringText = "(" point "," point {"," point} ")";
 
-polygonText =  "(" lineStringText {"," lineStringText} ")";
+linearRingText = emptySet | "(" point "," point "," point "," point {"," point } ")";
+
+polygonText =  "(" linearRingText {"," linearRingText} ")";
 
 multiPointText = "(" pointText {"," pointText} ")";
 
@@ -556,7 +560,7 @@ multiLineStringText = "(" lineStringText {"," lineStringText} ")";
 
 multiPolygonText = "(" polygonText {"," polygonText} ")";
 
-geometryCollectionText = "(" spatialInstance {"," spatialInstance} ")";
+geometryCollectionText = "(" geometryLiteral {"," geometryLiteral} ")";
 
 bboxTaggedText = "BBOX" bboxText;
 
