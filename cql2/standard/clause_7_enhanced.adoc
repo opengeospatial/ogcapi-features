@@ -252,7 +252,7 @@ BBOX(160.6,-55.95,-170,-25.89)
 
 ==== Spatial Functions
 
-In this conformance class, the only required spatial comparison function is _intersects_ and the only required spatial data types are point and BBox. Additional spatial comparison functions and spatial data types are specified in the <<rc_spatial-functions,Spatial Functions>> requirements class.
+In this conformance class, the only required spatial comparison function is _intersects_ and the only required spatial literals are point and BBox. Additional spatial literals are specified in the <<rc_basic-spatial-functions-plus,Basic Spatial Functions with additional Spatial Literals>> requirements class and additional spatial comparison functions are specified in the <<rc_spatial-functions,Spatial Functions>> requirements class.
 
 include::requirements/basic-spatial-functions/REQ_spatial-predicate.adoc[]
 
@@ -290,16 +290,16 @@ Note that the values of the `filter-crs` and `filter` parameters have not been p
 ====
 
 [[basic-spatial-functions-plus]]
-=== Requirements Class "Basic Spatial Functions with additional Spatial Data Types"
+=== Requirements Class "Basic Spatial Functions with additional Spatial Literals"
 
 include::requirements/requirements_class_basic-spatial-functions-plus.adoc[]
 
-This requirements class is similar to the <<basic-spatial-functions,Basic Spatial Functions>> requirements class except it removes the restrictions on the spatial data types that can participate in the expression.
+This requirements class is similar to the <<basic-spatial-functions,Basic Spatial Functions>> requirements class except it removes the restrictions on the spatial literals that can participate in the expression.
 
 [[additional-spatial-data-types]]
 ==== Additional spatial data types and literal values
 
-In addition to the spatial types listed in the <<basic-spatial-functions,Basic Spatial Functions>> requirements class (i.e. "Point", "BBox"), this requirements class allows the following additional spatial data types (part of rule `spatialInstance`):
+In addition to the spatial types listed in the <<basic-spatial-functions,Basic Spatial Functions>> requirements class (i.e. "Point", "BBox"), this requirements class allows the following Spatial Literals (part of rule `spatialInstance`):
 
 * "LineString": a curve with linear interpolation between the vertices;
 * "Polygon": a planar surface bounded by closed line strings;
