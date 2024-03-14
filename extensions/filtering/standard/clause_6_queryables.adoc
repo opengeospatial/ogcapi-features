@@ -21,6 +21,8 @@ to allow high-performance queries on those properties.
 
 include::requirements/queryables/REQ_queryables-link.adoc[]
 
+It is http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_link_headers[recommended to include the link in the response via an HTTP header].
+
 include::requirements/queryables/REQ_get-queryables-op.adoc[]
 
 The response is returned as a JSON Schema document that describes a single JSON object where each property is a queryable.
