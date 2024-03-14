@@ -396,14 +396,6 @@
         }
       }
     },
-    "scalarLiteral": {
-      "oneOf": [
-        {"type": "string"                                    },
-        {"type": "number"                                    },
-        {"type": "boolean"                                   },
-        {                   "$ref": "#/$defs/instantInstance"}
-      ]
-    },
     "spatialInstance": {
       "oneOf": [
         {"$ref": "#/$defs/geometryLiteral"},
