@@ -99,7 +99,7 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r1.html) and [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065.html)
+* [OGC API - Features - Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r2.html) and [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r1.html)
   * Drafts with multiple implementations. Once all comments have been resolved and at least two implementations updated to the release candidate, the release candidate will enter the OGC approval process.
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
   * The draft is complete and is expected to soon move to the OGC Architecture Board review and the Public Comment Period.
