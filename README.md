@@ -101,14 +101,18 @@ The OGC Features API SWG has identified the following extensions as the highest 
 
 * [OGC API - Features - Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r2.html) and [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r1.html)
   * Drafts with multiple implementations. Once all comments have been resolved and at least two implementations updated to the release candidate, the release candidate will enter the OGC approval process.
-* [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html)
+* [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r1.html)
   * The draft is complete and is expected to soon move to the OGC Architecture Board review and the Public Comment Period.
-* [OGC API - Features - Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058.html)
+* [OGC API - Features - Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)
   * The draft is complete and is expected to soon move to the OGC Architecture Board review and the Public Comment Period.
+
+## OGC API Features in ISO
+
+Part 1 (Core) has been published by ISO as [ISO 19168-1:2020](https://www.iso.org/standard/32586.html).
+
+Part 2 (Coordinate Reference Systems by Reference) has been published by ISO as [ISO 19168-2:2022](https://www.iso.org/standard/82464.html).
 
 ## Additional information
-
-Part 1 (Core) has also been published by ISO as [ISO 19168-1:2020](https://www.iso.org/standard/32586.html).
 
 Open issues for all parts are organized in [GitHub projects](https://github.com/opengeospatial/ogcapi-features/projects):
 
