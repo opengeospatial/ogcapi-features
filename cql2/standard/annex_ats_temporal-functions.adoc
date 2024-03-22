@@ -172,7 +172,7 @@ Then:
 |ne_110m_populated_places_simple |`t_intersects(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:09Z'))` |2
 |ne_110m_populated_places_simple |`T_CONTAINS(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |1
 |ne_110m_populated_places_simple |`T_DURING(interval(start,end),interval('2022-01-01T00:00:00Z','2022-12-31T23:59:59Z'))` |1
-|ne_110m_populated_places_simple |`T_FINISHES(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:16:06Z'))` |1
+|ne_110m_populated_places_simple |`T_FINISHES(interval(start,end),interval('2020-04-16T10:13:19Z','2022-04-16T10:16:06Z'))` |1
 |ne_110m_populated_places_simple |`T_FINISHEDBY(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:16:06Z'))` |1
 |ne_110m_populated_places_simple |`T_MEETS(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |0
 |ne_110m_populated_places_simple |`T_METBY(interval(start,end),interval('2022-04-16T10:13:19Z','2022-04-16T10:15:10Z'))` |1

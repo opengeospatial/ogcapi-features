@@ -76,7 +76,7 @@ Then:
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,POINT(7.02 49.92))` |1
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50)) and S_INTERSECTS(geom,BBOX(5,50,10,60))` |3
 |ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50)) and not S_INTERSECTS(geom,BBOX(5,50,10,60))` |5
-|ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50)) or S_INTERSECTS(geom,BBOX(-90,40,-60,50))` |11
+|ne_110m_admin_0_countries |`S_INTERSECTS(geom,BBOX(0,40,10,50)) or S_INTERSECTS(geom,BBOX(-90,40,-60,50))` |10
 |ne_110m_populated_places_simple |`S_INTERSECTS(geom,BBOX(0,40,10,50))` |7
 |ne_110m_rivers_lake_centerlines |`S_INTERSECTS(geom,BBOX(-180,-90,0,90))` |4
 |===
