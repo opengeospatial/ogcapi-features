@@ -64,8 +64,9 @@
       "oneOf": [
         {"$ref": "#/$defs/characterExpression"},
         {"$ref": "#/$defs/numericExpression"}  ,
-        {"$dynamicRef": "#cql2expression"}     ,
+        {"type": "boolean"}  ,
         {"$ref": "#/$defs/instantInstance"}    ,
+        {"$ref": "#/$defs/functionRef"},
         {"$ref": "#/$defs/propertyRef"}
       ]
     },

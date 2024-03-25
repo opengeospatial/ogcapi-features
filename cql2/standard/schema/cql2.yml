@@ -83,8 +83,9 @@ components:
       oneOf:
         - $ref: '#/components/schemas/characterExpression'
         - $ref: '#/components/schemas/numericExpression'
-        - $ref: '#/components/schemas/booleanExpression'
+        - type: 'boolean'
         - $ref: '#/components/schemas/instantInstance'
+        - $ref: '#/components/schemas/functionRef'
         - $ref: '#/components/schemas/propertyRef'
     isLikePredicate:
       type: object
@@ -459,12 +460,6 @@ components:
               - $ref: '#/components/schemas/temporalInstance'
               - $ref: '#/components/schemas/array'
               - $ref: '#/components/schemas/propertyRef'
-    scalarLiteral:
-      oneOf:
-        - type: string
-        - type: number
-        - type: boolean
-        - $ref: '#/components/schemas/instantInstance'
     spatialInstance:
       oneOf:
         - $ref: '#/components/schemas/geometryLiteral'
