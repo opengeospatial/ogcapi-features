@@ -1,0 +1,1 @@
+This folder contains proposals that have been converted to a draft or candidate standard or that are no longer planned.
