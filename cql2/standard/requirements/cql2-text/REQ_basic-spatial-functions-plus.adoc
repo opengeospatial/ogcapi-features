@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/cql2-text/basic-spatial-functions-plus*
-^|Condition |Server implements requirements class <<rc_basic-spatial-functions-plus,Basic Spatial Functions with additional Spatial Data Types>>
-^|A |The server SHALL support be able to parse all spatial instances encoded as a text string that validate against the BNF production fragments identified in the <<rc_basic-spatial-functions-plus,Basic Spatial Functions with additional Spatial Data Types>> requirements class.
+^|Condition |Server implements requirements class <<rc_basic-spatial-functions-plus,Basic Spatial Functions with additional Spatial Literals>>
+^|A |The server SHALL support be able to parse all spatial instances encoded as a text string that validate against the BNF production fragments identified in the <<rc_basic-spatial-functions-plus,Basic Spatial Functions with additional Spatial Literals>> requirements class.
 ^|B |The server SHALL support spatial literals with coordinates in a 2D or 3D CRS, independent of including the `Z` or not in the value.
 |===
