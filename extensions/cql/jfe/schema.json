@@ -1,0 +1,894 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/BooleanExpression",
+  "definitions": {
+    "BooleanExpression": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "title": "Comparison Expressions",
+          "$ref": "#/definitions/ComparisonExpression"
+        },
+        {
+          "title": "Spatial Expressions",
+          "$ref": "#/definitions/SpatialExpression"
+        },
+        {
+          "title": "Temporal Expressions",
+          "$ref": "#/definitions/TemporalExpression"
+        },
+        {
+          "title": "Logical Expressions",
+          "$ref": "#/definitions/LogicalExpression"
+        },
+        {
+          "$ref": "#/definitions/Get"
+        }
+      ]
+    },
+    "NumericExpression": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "$ref": "#/definitions/Get"
+        },
+        {
+          "$ref": "#/definitions/Add"
+        },
+        {
+          "$ref": "#/definitions/Subtract"
+        },
+        {
+          "$ref": "#/definitions/Multiply"
+        },
+        {
+          "$ref": "#/definitions/Divide"
+        },
+        {
+          "$ref": "#/definitions/Modulo"
+        },
+        {
+          "$ref": "#/definitions/Power"
+        },
+        {
+          "$ref": "#/definitions/Abs"
+        },
+        {
+          "$ref": "#/definitions/Floor"
+        },
+        {
+          "$ref": "#/definitions/Ceil"
+        },
+        {
+          "$ref": "#/definitions/Min"
+        },
+        {
+          "$ref": "#/definitions/Max"
+        }
+      ]
+    },
+    "StringExpression": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/Get"
+        },
+        {
+          "$ref": "#/definitions/Id"
+        }
+      ]
+    },
+    "ValueExpression": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/BooleanExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "GeometryExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Geometry"
+        },
+        {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        {
+          "$ref": "https://geojson.org/schema/Geometry.json"
+        }
+      ]
+    },
+    "LogicalExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/All"
+        },
+        {
+          "$ref": "#/definitions/Any"
+        },
+        {
+          "$ref": "#/definitions/Not"
+        }
+      ]
+    },
+    "ComparisonExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Equal"
+        },
+        {
+          "$ref": "#/definitions/NotEqual"
+        },
+        {
+          "$ref": "#/definitions/GreaterThan"
+        },
+        {
+          "$ref": "#/definitions/GreaterThanOrEqual"
+        },
+        {
+          "$ref": "#/definitions/LessThan"
+        },
+        {
+          "$ref": "#/definitions/LessThanOrEqual"
+        },
+        {
+          "$ref": "#/definitions/Like"
+        },
+        {
+          "$ref": "#/definitions/In"
+        }
+      ]
+    },
+    "SpatialExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Intersects"
+        },
+        {
+          "$ref": "#/definitions/Within"
+        }
+      ]
+    },
+    "TemporalExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Before"
+        },
+        {
+          "$ref": "#/definitions/After"
+        },
+        {
+          "$ref": "#/definitions/During"
+        }
+      ]
+    },
+    "Get": {
+      "title": "get",
+      "description": "Get a property value.",
+      "examples": [
+        ["==", ["get", "height"], 50]
+      ],
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "get"
+          ]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "Id": {
+      "title": "id",
+      "description": "Get the feature identifier.",
+      "examples": [
+        ["==", ["id"], "b087dd1d-f2bb-4bf5-ada5-c3d9cd35ef75"]
+      ],
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "id"
+          ]
+        }
+      ]
+    },
+    "All": {
+      "title": "all",
+      "description": "Returns true if all of the arguments evaluate to true.",
+      "examples": [
+        [
+          "all",
+          [">", ["get", "height"], 50],
+          ["==", ["get", "type"], "commercial"],
+          ["get", "occupied"]
+        ]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "all"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#/definitions/BooleanExpression"
+      }
+    },
+    "Any": {
+      "title": "any",
+      "description": "Returns true if any of the arguments evaluate to true.",
+      "examples": [
+        [
+          "any",
+          ["<", ["get", "height"], 50],
+          ["!", ["get", "occupied"]]
+        ]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "any"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#/definitions/BooleanExpression"
+      }
+    },
+    "Not": {
+      "title": "!",
+      "description": "Returns the opposite of a boolean value.",
+      "examples": [
+        ["!", ["get", "private"]]
+      ],
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "!"
+          ]
+        },
+        {
+          "$ref": "#/definitions/BooleanExpression"
+        }
+      ]
+    },
+    "Equal": {
+      "title": "==",
+      "description": "Returns true if two values are equal.",
+      "examples": [
+        ["==", ["get", "height"], 42]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "=="
+          ]
+        },
+        {
+          "$ref": "#/definitions/ValueExpression"
+        },
+        {
+          "$ref": "#/definitions/ValueExpression"
+        }
+      ]
+    },
+    "NotEqual": {
+      "title": "!=",
+      "description": "Returns true if two values are not equal.",
+      "examples": [
+        ["!=", ["get", "height"], 42]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "!="
+          ]
+        },
+        {
+          "$ref": "#/definitions/ValueExpression"
+        },
+        {
+          "$ref": "#/definitions/ValueExpression"
+        }
+      ]
+    },
+    "GreaterThan": {
+      "title": ">",
+      "description": "Returns true if the first value is greater than the second.",
+      "examples": [
+        [">", ["get", "height"], 42]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            ">"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "GreaterThanOrEqual": {
+      "title": ">=",
+      "description": "Returns true if the first value is greater than or equal to the second.",
+      "examples": [
+        [">=", ["get", "height"], 42]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            ">="
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "LessThan": {
+      "title": "<",
+      "description": "Returns true if the first value is less than the second.",
+      "examples": [
+        ["<", ["get", "height"], 42]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "<"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "LessThanOrEqual": {
+      "title": "<=",
+      "description": "Returns true if the first value is less than or equal to the second.",
+      "examples": [
+        ["<=", ["get", "height"], 42]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "<="
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "Like": {
+      "title": "like",
+      "description": "Returns true if a string is matched by the provided pattern.  The optional third argument can include a wildCard property (defaults to '%').",
+      "examples": [
+        ["like", ["get", "name"], "% Smith"],
+        ["like", ["get", "name"], "* Smith", {"wildCard": "*"}]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 4,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "like"
+          ]
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        }
+      ],
+      "additionalItems": {
+        "type": "object",
+        "properties": {
+          "wildCard": {
+            "type": "string",
+            "default": "%"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "In": {
+      "title": "in",
+      "description": "Returns true if the first value is equal to at least one of the following values.",
+      "examples": [
+        ["in", ["get", "class"], "business", "factory", "mercantile"]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "in"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#/definitions/ValueExpression"
+      }
+    },
+    "Before": {
+      "title": "before",
+      "description": "Returns true if the first time occurs before the second time.  String values are interpreted as RFC-3339 formatted date-times.",
+      "examples": [
+        ["before", ["get", "updated"], "2017-06-10T07:30:00Z"]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "before"
+          ]
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        }
+      ]
+    },
+    "After": {
+      "title": "after",
+      "description": "Returns true if the first time occurs after the second time.  String values are interpreted as RFC-3339 formatted date-times.",
+      "examples": [
+        ["after", ["get", "updated"], "2017-06-10T07:30:00Z"]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "after"
+          ]
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        }
+      ]
+    },
+    "During": {
+      "title": "during",
+      "description": "Returns true if the first time occurs during the interval time given by the start and end date-times (inclusive).  String values are interpreted as RFC-3339 formatted date-times.",
+      "examples": [
+        ["during", ["get", "built"], "2017-06-10T07:30:00Z", "2018-06-10T07:30:00Z"]
+      ],
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "during"
+          ]
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        },
+        {
+          "$ref": "#/definitions/StringExpression"
+        }
+      ]
+    },
+    "Geometry": {
+      "title": "geometry",
+      "description": "Get the feature's geometry.  The optional second arg can be used to get a non-default geometry.",
+      "examples": [
+        ["intersects", ["geometry"], {"type": "Point", "coordinates": [0, 0]}],
+        ["intersects", ["geometry", "location"], {"type": "Point", "coordinates": [0, 0]}]
+      ],
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "geometry"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "type": "string"
+      }
+    },
+    "BoundingBox": {
+      "title": "bbox",
+      "description": "Returns a polygon geometry from the provided min longitude, min latitude, max longitude, max latitude values.",
+      "examples": [
+        ["intersects", ["geometry"], ["bbox", -180, -90, 180, 90]]
+      ],
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "bbox"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "type": "number"
+      }
+    },
+    "Intersects": {
+      "title": "intersects",
+      "description": "Returns true if two geometries intersect one another.",
+      "examples": [
+        ["intersects", ["geometry"], {"type": "Point", "coordinates": [0, 0]}]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "intersects"
+          ]
+        },
+        {
+          "$ref": "#/definitions/GeometryExpression"
+        },
+        {
+          "$ref": "#/definitions/GeometryExpression"
+        }
+      ]
+    },
+    "Within": {
+      "title": "within",
+      "description": "Returns true if the first geometry is completely within the second.",
+      "examples": [
+        ["within", {"type": "Point", "coordinates": [0, 0]}, ["geometry"]]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "within"
+          ]
+        },
+        {
+          "$ref": "#/definitions/GeometryExpression"
+        },
+        {
+          "$ref": "#/definitions/GeometryExpression"
+        }
+      ]
+    },
+    "Add": {
+      "title": "+",
+      "description": "Returns the sum of two or more values.",
+      "examples": [
+        [">", ["+", ["get", "age"], ["get", "income"]], 100]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "+"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#/definitions/NumericExpression"
+      }
+    },
+    "Subtract": {
+      "title": "-",
+      "description": "Returns the result of subtracting the second value from the first.",
+      "examples": [
+        [">", ["-", ["get", "age"], ["get", "income"]], 10]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "-"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "Multiply": {
+      "title": "*",
+      "description": "Returns the product of two or more values.",
+      "examples": [
+        [">", ["*", ["get", "age"], ["get", "income"]], 1000]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "*"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#/definitions/NumericExpression"
+      }
+    },
+    "Divide": {
+      "title": "/",
+      "description": "Returns the result of dividing the first value by the first.",
+      "examples": [
+        [">", ["/", ["get", "width"], ["get", "height"]], 1.5]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "/"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "Modulo": {
+      "title": "%",
+      "description": "Returns the remainder after integer division of the first value by the second.",
+      "examples": [
+        [">", ["%", ["get", "width"], 256], 128]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "%"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "Floor": {
+      "title": "floor",
+      "description": "Returns the largest integer less than or equal to a given number.",
+      "examples": [
+        ["==", ["floor", ["get", "age"]], 42]
+      ],
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "floor"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "Ceil": {
+      "title": "ceil",
+      "description": "Returns the smallest integer greater than or equal to a given number.",
+      "examples": [
+        ["==", ["ceil", ["get", "age"]], 42]
+      ],
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "ceil"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "Abs": {
+      "title": "abs",
+      "description": "Returns the absolute value of a number.",
+      "examples": [
+        [">", ["abs", ["get", "delta"]], 1]
+      ],
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "abs"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "Power": {
+      "title": "^",
+      "description": "Returns the result of raising the first value to the power given by the second.",
+      "examples": [
+        [">", ["^", ["get", "size"], 2], 100]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "^"
+          ]
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        },
+        {
+          "$ref": "#/definitions/NumericExpression"
+        }
+      ]
+    },
+    "Min": {
+      "title": "min",
+      "description": "Returns smallest of two or more values.",
+      "examples": [
+        [">", ["min", ["get", "wins"], ["get", "ties"]], 10]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "min"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#/definitions/NumericExpression"
+      }
+    },
+    "Max": {
+      "title": "max",
+      "description": "Returns largest of two or more values.",
+      "examples": [
+        [">", ["max", ["get", "wins"], ["get", "ties"]], 10]
+      ],
+      "type": "array",
+      "minItems": 3,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "max"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "$ref": "#/definitions/NumericExpression"
+      }
+    }
+  }
+}
