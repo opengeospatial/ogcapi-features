@@ -142,12 +142,12 @@ NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt
 ^|B |The value of the keyword "x-ogc-definition" SHALL be a URI.
 |===
 
-=== Example
+=== Examples
 
-The following example is the schema of a feature type that also includes additional keywords that apply to feature data (specified in the next Clause).
+The following example is the schema of a feature type representing cultural entities. The schema includes additional keywords that apply to feature data (specified in the next Clause).
 
 [[example_7_1]]
-.Schema example of a feature type
+.Schema of a "Cultural (Points)" feature type 
 ====
 [source,JSON]
 ----
@@ -156,6 +156,7 @@ The following example is the schema of a feature type that also includes additio
   "$id" : "https://demo.ldproxy.net/daraa/collections/CulturePnt/schema",
   "type" : "object",
   "title" : "Cultural (Points)",
+  "description" : "Information about features on the landscape that have been constructed by man.",
   "properties" : {
     "FID" : {
       "readOnly" : true,
@@ -213,6 +214,51 @@ The following example is the schema of a feature type that also includes additio
       "type" : "string",
       "x-ogc-propertySeq": 10
     }
+  }
+}
+----
+====
+
+The next example is the schema of a feature type representing observations of atmospheric pressure.
+
+[[example_7_2]]
+.Schema of an "Atmospheric Pressure Observation" feature type
+====
+[source,JSON]
+----
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://api.example.org/foo/bar/collections/atmospheric-pressure-obs/schema",
+  "type" : "object",
+  "title" : "Atmospheric Pressure Observation",
+  "properties" : {
+    "id" : {
+      "readOnly" : true,
+      "x-ogc-role" : "id",
+      "type" : "integer",
+      "x-ogc-propertySeq": 1
+    },
+    "location" : {
+      "x-ogc-role" : "primary-geometry",
+      "format" : "geometry-point",
+      "x-ogc-propertySeq": 2
+    },
+    "phenomenonTime" : {
+      "title" : "Phenomenon Time",
+      "x-ogc-role" : "primary-instant",
+      "type" : "string",
+      "format" : "date-time",
+      "x-ogc-propertySeq": 3
+    },
+    "result" : {
+      "title" : "Atmospheric Pressure [hPa]",
+      "description": "The pressure exerted by the weight of the air above it at any point on the earth's surface. At sea level the atmosphere will support a column of mercury about 760 mm high. This decreases with increasing altitude. The standard value for the atmospheric pressure at sea level is 1.01325 hectopascal.",
+      "type" : "number",
+      "x-ogc-definition": "https://qudt.org/vocab/quantitykind/AtmosphericPressure",
+      "x-ogc-unit": "https://qudt.org/vocab/unit/HectoPA",
+      "x-ogc-unitLang": "QUDT",
+      "x-ogc-propertySeq": 4
+    },
   }
 }
 ----
