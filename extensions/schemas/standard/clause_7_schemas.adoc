@@ -100,15 +100,15 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 ^|C |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
 |===
 
-For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-property-seq".
+For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-propertySeq".
 
 :req: property-seq
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |The keyword "x-ogc-property-seq" SHALL be used to declare a specific relative position of the property.
-^|B |The value of the keyword "x-ogc-property-seq" SHALL be an integer representing the relative position in ascending order.
+^|A |The keyword "x-ogc-propertySeq" SHALL be used to declare a specific relative position of the property.
+^|B |The value of the keyword "x-ogc-propertySeq" SHALL be an integer representing the relative position in ascending order.
 ^|C |Each value of the keyword SHALL be unique for all members of a "properties" object in the JSON Schema.
 |===
 
@@ -121,9 +121,9 @@ In geospatial data, numeric property values often represent a measurement and ha
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |The keyword "x-ogc-unit" SHALL be used to declare the unit of measure of the property.
 ^|B |The value of the keyword "x-ogc-unit" SHALL be a string representing the unit of measure.
-^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unit-lang".
-^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unit-lang", SHALL be "UCUM". 
-^|E |The value for the QUDT Units Vocabulary, if declared as the language for units in keyword "x-ogc-unit-lang", SHALL be "QUDT". 
+^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unitLang".
+^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unitLang", SHALL be "UCUM". 
+^|E |The value for the QUDT Units Vocabulary, if declared as the language for units in keyword "x-ogc-unitLang", SHALL be "QUDT". 
 ^|F |The value of the keyword "x-ogc-unit" SHALL be the URI of the unit for values from the QUDT Units Vocabulary.
 |===
 
@@ -161,57 +161,57 @@ The following example is the schema of a feature type that also includes additio
       "readOnly" : true,
       "x-ogc-role" : "id",
       "type" : "integer",
-      "x-ogc-property-seq": 1
+      "x-ogc-propertySeq": 1
     },
     "F_CODE" : {
       "title" : "Feature Type Code",
       "x-ogc-role" : "type",
       "enum" : [ "AK121", "AL012", "AL030", "AL130", "BH075" ],
       "type" : "string",
-      "x-ogc-property-seq": 2
+      "x-ogc-propertySeq": 2
     },
     "geometry" : {
       "x-ogc-role" : "primary-geometry",
       "format" : "geometry-point",
-      "x-ogc-property-seq": 3
+      "x-ogc-propertySeq": 3
     },
     "ZI001_SDV" : {
       "title" : "Last Change",
       "x-ogc-role" : "primary-instant",
       "format" : "date-time",
       "type" : "string",
-      "x-ogc-property-seq": 4
+      "x-ogc-propertySeq": 4
     },
     "UFI" : {
       "title" : "Unique Entity Identifier",
       "type" : "string",
-      "x-ogc-property-seq": 5
+      "x-ogc-propertySeq": 5
     },
     "ZI005_FNA" : {
       "title" : "Name",
       "type" : "string",
-      "x-ogc-property-seq": 6
+      "x-ogc-propertySeq": 6
     },
     "FCSUBTYPE" : {
       "title" : "Feature Subtype Code",
       "type" : "integer",
-      "x-ogc-property-seq": 7
+      "x-ogc-propertySeq": 7
     },
     "ZI037_REL" : {
       "title" : "Religious Designation",
       "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
       "type" : "integer",
-      "x-ogc-property-seq": 8
+      "x-ogc-propertySeq": 8
     },
     "ZI006_MEM" : {
       "title" : "Memorandum",
       "type" : "string",
-      "x-ogc-property-seq": 9
+      "x-ogc-propertySeq": 9
     },
     "ZI001_SDP" : {
       "title" : "Source Description",
       "type" : "string",
-      "x-ogc-property-seq": 10
+      "x-ogc-propertySeq": 10
     }
   }
 }
