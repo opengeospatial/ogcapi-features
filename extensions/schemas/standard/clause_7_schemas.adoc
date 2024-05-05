@@ -12,6 +12,7 @@ The Requirements Class "Schemas" specifies basic provisions for schemas of items
 |Indirect Dependency |<<json-schema-validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>
 |Indirect Dependency |<<ogc06_103r4,Simple feature access - Part 1: Common architecture>>
 |Indirect Dependency |<<ucum,The Unified Code for Units of Measure>>
+|Indirect Dependency |<<qudtunits,QUDT Units Vocabulary>>
 |===
 
 [#schema-representation]
@@ -122,11 +123,15 @@ In geospatial data, numeric property values often represent a measurement and ha
 ^|B |The value of the keyword "x-ogc-unit" SHALL be a string representing the unit of measure.
 ^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unit-lang".
 ^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unit-lang", SHALL be "UCUM". 
+^|E |The value for the QUDT Units Vocabulary, if declared as the language for units in keyword "x-ogc-unit-lang", SHALL be "QUDT". 
+^|F |The value of the keyword "x-ogc-unit" SHALL be the URI of the unit for values from the QUDT Units Vocabulary.
 |===
 
-Communities or other OGC Standards can specify additional values for other unit languages, e.g., the https://www.qudt.org/doc/DOC_VOCAB-UNITS.html[QUDT Units] or https://www.opengis.net/def/uom[units registered in the OGC Rainbow]. For each language it must be specified how units have to be represented in the "x-ogc-unit" value.
+Communities or other OGC Standards can specify additional values for other unit languages, e.g., https://www.opengis.net/def/uom[units registered in the OGC Rainbow]. For each language it must be specified how units have to be represented in the "x-ogc-unit" value.
 
 NOTE: UCUM provides a language to define units while QUDT provides a units vocabulary. The term "language" is used as it is the broader term.
+
+NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt.org/vocab/unit/HectoPA` in QUDT.
 
 :req: definition
 [#{req-class}_{req}]
