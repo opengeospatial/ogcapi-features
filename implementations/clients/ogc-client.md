@@ -12,7 +12,7 @@ Supported protocols are:
 ## How to use it
 
 The `OgcApiEndpoint` class lets us interact with an OGC API compliant endpoint in various ways. Since most operations in an OGC API endpoint revolves around doing requests to various linked addresses,
-this class offers an abstraction pased on simple promises.
+this class offers an abstraction based on simple promises.
 
 For instance, to get a list of collections:
 
@@ -21,7 +21,7 @@ const endpoint = new OgcApiEndpoint('https://my.endpoint.org/ogcapi');
 console.log(await endpoint.allCollections);
 ```
 
-More detailed information on collection can be fetched like so:
+More detailed information on a single collection can be fetched like so:
 
 ```js
 const collection = await endpoint.getCollectionInfo('city-roads');
