@@ -482,16 +482,16 @@ whitespace = "\x0009"  # Character tabulation
 #=============================================================================#
 numericLiteral = unsignedNumericLiteral | signedNumericLiteral;
 
-unsignedNumericLiteral = exactNumericLiteral | approximateNumericLiteral;
+unsignedNumericLiteral = decimalNumericLiteral | scientificNumericLiteral;
 
-signedNumericLiteral = [sign] exactNumericLiteral | approximateNumericLiteral;
+signedNumericLiteral = [sign] unsignedNumericLiteral;
 
-exactNumericLiteral = unsignedInteger [ "." [ unsignedInteger ] ]
-                      | "." unsignedInteger;
+decimalNumericLiteral = unsignedInteger [ "." [ unsignedInteger ] ]
+                        | "." unsignedInteger;
 
-approximateNumericLiteral = mantissa "E" exponent;
+scientificNumericLiteral = mantissa "E" exponent;
 
-mantissa = exactNumericLiteral;
+mantissa = decimalNumericLiteral;
 
 exponent = signedInteger;
 
