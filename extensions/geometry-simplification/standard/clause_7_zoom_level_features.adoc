@@ -1,0 +1,21 @@
+:req-class: zoom-level-features
+[#rc_{req-class}]
+== Requirements Class "Geometry Simplification (Features)"
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web API
+|Dependency |<<rc_zoom-level>>
+|Dependency |<<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "Core">>
+|===
+
+The Requirements Class "Geometry Simplification (Features)" binds the query parameter "zoom-level" to the Features and Feature resources. The requirements apply only to collections with no `itemType` or with a value "feature".
+
+:req: request
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The HTTP GET operation on the `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{featureId}` paths SHALL support the "zoom-level" query parameter as defined in <<rc_zoom-level>>.
+|===

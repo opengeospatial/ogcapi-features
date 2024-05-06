@@ -102,5 +102,35 @@
                 "r":[
                         "asciidoctor-diagram"
                 ]
+        },
+        "7":  {
+                "OGC_doc_number": "24-019",
+                "urn":"http://www.opengis.net/doc/IS/ogcapi-features-6/1.0",
+                "title":"OGC API - Features - Part 6: Property Selection",
+                "path":"extensions/property-selection/standard/24-019.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "8":  {
+                "OGC_doc_number": "24-020",
+                "urn":"http://www.opengis.net/doc/IS/ogcapi-features-7/1.0",
+                "title":"OGC API - Features - Part 7: Geometry Simplification",
+                "path":"extensions/geometry-simplification/standard/24-020.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
         }
 }
