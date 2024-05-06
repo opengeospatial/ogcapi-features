@@ -1,0 +1,21 @@
+:req-class: properties-features
+[#rc_{req-class}]
+== Requirements Class "Property Selection (Features)"
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web API
+|Dependency |<<rc_properties,Requirements Class "Property Selection">>
+|Dependency |<<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "Core">>
+|===
+
+The Requirements Class "Property Selection (Features)" binds the query parameter "properties" to the Features and Feature resources. The requirements apply only to collections with no `itemType` or with a value "feature".
+
+:req: request
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The HTTP GET operation on the `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{featureId}` paths SHALL support the "properties" query parameter as defined in <<rc_properties>>.
+|===

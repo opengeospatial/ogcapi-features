@@ -1,0 +1,19 @@
+== Conformance
+
+This standard defines two requirements classes:
+
+* <<rc_zoom-level>>;
+* <<rc_zoom-level-features>>.
+
+The standardization target is Web API.
+
+Conformance with this standard shall be checked using all the relevant tests specified in <<ats,Annex A>> of this document for each conformance class. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
+
+[#conf_class_uris,reftext='{table-caption} {counter:table-num}']
+.Conformance class URIs
+[cols="25,75",options="header"]
+|===
+|Conformance class |URI
+|Geometry Simplification |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/zoom-level`
+|Geometry Simplification (Features) |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/zoom-level-features`
+|===

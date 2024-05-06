@@ -1,0 +1,81 @@
+:req-class: zoom-level
+[#rc_{req-class}]
+== Requirements Class "Geometry Simplification"
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web API
+|===
+
+The Requirements Class "Geometry Simplification" specifies the "zoom-level" query parameter. 
+
+The query parameter is the zoom level / scale at which the requesting client will render geometries on a map.
+
+The query parameter can be applied to web resources that can be represented as an object with one or more spatial properties or to resources that are collections of such objects; for example, a collection of features or a single feature.
+
+:req: parameter
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A | If a web resource supports a query parameter "zoom-level", the query parameter SHALL be based on the following OpenAPI 3.0 fragment:
+
+[source,YAML]
+----
+include::schema/zoom-level.yaml[]
+----
+|===
+
+NOTE: Decimal values are allowed as zoom levels, not just integers.
+
+:req: response
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A | If the query parameter "zoom-level" is provided, geometries in the response SHALL be simplified so that they are suitable for rendering on a map at the zoom level in the popular "WebMercatorQuad" tiling scheme that is commonly used for visualizing geospatial data in maps.
+^|B | The geometry type of the simplified geometry SHALL be consistent with the allowed geometry types for a geometry in the schema of the resource, if one is specified. 
+|===
+
+The zoom level is a measure of how far the map is zoomed in or out. The map scale is the ratio of the distance on the map to the corresponding distance on the ground. The map scale is reciprocal to the zoom level.
+
+The mapping between zoom levels and map scales at the equator is shown in <<zoom_levels>>. This Standard uses the zoom level instead of the scale, because in web mapping zoom levels are more commonly used than map scales. The WebMercatorQuad tiling scheme assumes that the map is rendered in the Web Mercator projection and uses a tile size of 256x256.
+
+The simplification of geometries is a lossy operation. The simplified geometries are approximations of the original geometries. The simplification will typically reduce the number of vertices in a curve or a surface ring. The degree of simplification of geometries is implementation-dependent. 
+
+[[table_7_1]]
+[#zoom_levels,reftext='{table-caption} {counter:table-num}']
+.Zoom levels and the equivalent map scale
+[width="50%",cols="25,25",options="header"]
+|===
+^|*Zoom Level* |*Map Scale*
+|0 |559082264.028717
+|1 |279541132.014358
+|2 |139770566.007179
+|3 |69885283.0035897
+|4 |34942641.5017948
+|5 |17471320.7508974
+|6 |8735660.37544871
+|7 |4367830.18772435
+|8 |2183915.09386217
+|9 |1091957.54693108
+|10 |545978.773465544
+|11 |272989.386732772
+|12 |136494.693366386
+|13 |68247.346683193
+|14 |34123.6733415964
+|15 |17061.8366707982
+|16 |8530.91833539913
+|17 |4265.45916769956
+|18 |2132.72958384978
+|19 |1066.36479192489
+|20 |533.182395962445
+|21 |266.591197981222
+|22 |133.295598990611
+|23 |66.6477994953056
+|24 |33.3238997476528
+|===
+
+TODO: add example
+
