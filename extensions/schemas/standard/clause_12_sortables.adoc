@@ -2,7 +2,7 @@
 [#rc_{req-class}]
 == Requirements Class "Sortables"
 
-The Requirements Class "Sortables" specifies the web resources representing the schema with the <<sortable-def,sortable>> properties of a collection in OGC Web APIs.
+The Requirements Class "Sortables" specifies the web resources representing the schema with the <<sortable-def,sortable>> properties of a collection returned by Web API endpoint(s) implementing OGC API Standards.
 
 [cols="2,7",width="90%"]
 |===
@@ -13,7 +13,7 @@ The Requirements Class "Sortables" specifies the web resources representing the 
 
 This requirements class supports clients that want to discover the list of resource properties with their types and constraints that may be used to sort the resources in a collection.
 
-OGC API standards do not assume that the content schema of a resource being queried is available for inspection. Therefore, a means needs to exist to interrogate an <<endpoint-def,endpoint>> to determine the names and types of the properties that may be used to sort data ("sortables").
+OGC API Standards do not assume that the content schema of a resource being queried is available for inspection. Therefore, a means needs to exist to interrogate an <<endpoint-def,endpoint>> to determine the names and types of the properties that may be used to sort data ("sortables").
 
 In addition, a <<publisher-def,publisher>> may want to support <<sortable-def,sortable>> that are not directly represented as resource properties in the content schema of the resource. Or the <<publisher-def,publisher>> may want to restrict sorting on certain properties. For example, because the backend datastore has not been configured to allow high-performance queries on those properties.
 
@@ -41,8 +41,8 @@ In addition, a <<publisher-def,publisher>> may want to support <<sortable-def,so
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|B |For responses that use `application/schema+json` as the `Content-Type` of the response, the response SHALL conform to <<rc_schemas>>.
 ^|C |No property SHALL be of type "object" or "array".
-^|C |No property SHALL be a spatial property.
-^|D |If `additionalProperties` is not included or has the default value `true`, any property name is valid in a sorting expression on the collection that is evalutated by the Web API and the property reference SHALL evaluate to `null`, if the property does not exist for a resource.
+^|D |No property SHALL be a spatial property.
+^|E |If `additionalProperties` is not included or has the default value `true`, any property name is valid in a sorting expression on the collection that is evaluated by the server and the property reference SHALL evaluate to `null`, if the property does not exist for a resource.
 
 If `additionalProperties` is set to false, property references that are not explicitly declared in the sortables schema SHALL result in a 400 response.
 |===

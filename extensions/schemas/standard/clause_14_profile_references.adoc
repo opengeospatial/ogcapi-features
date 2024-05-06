@@ -2,9 +2,9 @@
 [#rc_{req-class}]
 == Requirements Class "Profiles for feature references"
 
-The Requirements Class "Profiles for feature references" specifies three profiles for representing references other features.
+The Requirements Class "Profiles for feature references" specifies three profiles for representing references to other features.
 
-NOTE: Like in <<rc_feature-references>>, we can probably generalize this requirements class to cover also other types of references, but this requires a better understanding about the types of references that have to be supported.
+NOTE: As with <<rc_feature-references>>, this requirements class can probably be generalized to cover also other types of references, but this requires a better understanding about the types of references that have to be supported.
 
 [cols="2,7",width="90%"]
 |===
@@ -120,7 +120,7 @@ How the object is represented in a media type will depend on the media type. For
 [[example_14_3]]
 .Encoding of a road accident feature in GeoJSON and profile "rel-as-link"
 ====
-The feature includes a "roadSegment" property that is a reference to the road segment on which the accident occured.
+The feature includes a "roadSegment" property that is a reference to the road segment on which the accident occurred.
 
 [source,JSON]
 ----
@@ -155,7 +155,7 @@ The feature includes a "roadSegment" property that is a reference to the road se
 
 Servers will typically not support the profile "rel-as-link" for media types that do not have an adequate representation for such an object. Examples include CSV or FlatGeobuf.
 
-"rel-as-link" will typically be the most useful representation, if a human user interacts with the feature, because of the possibility to include a descriptive label of the referenced feature. Of course, this only applies, if the server can provide a meaningful title for each link, in which case this information can help the user to understand the referenced feature.
+"rel-as-link" will typically be the most useful representation, if a human user interacts with the feature. This is because of the possibility to include a descriptive label of the referenced feature. Of course, this only applies if the server can provide a meaningful title for each link, in which case this information can help the user to understand the referenced feature.
 
 :rec: default
 [#{req-class}_{rec}]

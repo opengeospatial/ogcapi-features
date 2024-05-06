@@ -3,5 +3,5 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/optimistic-locking-etags/patch-etag-response*
 ^|Condition |Server implements the <<rc_update,Update>> conformance class.
-^|A |A resource successfully update by a HTTP PATCH operation SHALL include an `ETag` header in the response whose value is an opaque token that represents the state of the resource as determined at the conclusion of handing the request.
+^|A |A resource successfully updated by a HTTP PATCH operation SHALL include an `ETag` header in the response whose value is an opaque token that represents the state of the resource as determined at the conclusion of handing the request.
 |===

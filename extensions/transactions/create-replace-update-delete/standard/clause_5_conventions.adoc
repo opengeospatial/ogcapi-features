@@ -6,14 +6,13 @@ See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clauses 5 and 6.
 
 === Identifiers
 
-The normative provisions in this standard are denoted by the URI `http://www.opengis.net/spec/ogcapi-features-4/1.0`.
+The normative provisions in this Standard are denoted by the URI `http://www.opengis.net/spec/ogcapi-features-4/1.0`.
 
-All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
+All requirements and conformance tests that appear in this Standard are denoted by partial URIs which are relative to this base.
 
 === Sequence diagrams
 
-This document uses sequence diagrams to illustrate the flow of requests and responses 
-between client and server.
+This Standard uses sequence diagrams to illustrate the flow of requests and responses between client and server.
 
 The token `<resources endpoint>` is used for an endpoint that accesses
 resources from a collection. 
@@ -35,8 +34,8 @@ URI template `{landingPageUri}/process/{processId}`. See <<OAProc-1,OGC API - Pr
 
 === Dependencies to other requirements classes
 
-The requirements classes in this extension distinguish two types of dependencies to other specifications or requirements classes:
+The requirements classes in this extension distinguish two types of dependencies to other Standards or requirements classes:
 
-First, there are the "regular" dependencies. Every server implementing the requirements class has to conform to the referenced specification or requirements class.
+First, there are the "direct dependencies". Every server implementing the requirements class has to conform to the referenced Standard or requirements class.
 
-In addition, requirements classes can also have "conditional dependencies". Servers implementing the requirements class do not have to conform to the referenced specification or requirements class, but if they do, they have to conform to the requirements that identify the conditional dependency as a pre-condition for the normative statement.
+In addition, requirements classes can also have "indirect dependencies". Servers implementing the requirements class do not have to conform to the referenced Standard or requirements class, but if they do, they have to conform to the requirements that identify the indirect dependency as a pre-condition for the normative statement.

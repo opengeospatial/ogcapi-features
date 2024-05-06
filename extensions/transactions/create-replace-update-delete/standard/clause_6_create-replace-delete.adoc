@@ -19,12 +19,12 @@ If the HTTP PUT method is executed on a non-existing resource in a collection, t
 Finally, the HTTP DELETE method is used to remove a resource from a collection.
 
 Adding or replacing a resource requires that a representation of that resource
-be provided by the client.  This standard does not mandate that a specific
-specific resource encoding be supported by a server.
+be provided by the client.  This Standard does not mandate that a specific
+resource encoding be supported by a server.
 
 NOTE: The use of the HTTP PATCH method is not defined in this requirements class.  The <<rc_update,Update>> requirements class defines the use of the HTTP PATCH method.
 
-NOTE: In order to promote interoperability, each standard that extends this standard should make recommendations concerning the representation of resources.  See <<features,Features>> for a discussion of feature representations.
+NOTE: In order to promote interoperability, each OGC Standard that extends this Standard should make recommendations concerning the representation of resources.  See <<features,Features>> for a discussion of feature representations.
 
 include::requirements/create-replace-delete/REQ_methods.adoc[]
 
@@ -35,7 +35,7 @@ Note that the POST, PUT and/or DELETE methods will typically only be available f
 
 API clients should be prepared to handle any registered HTTP or HTTPS status code.
 
-The *Status Codes* listed in <<status_codes>> are of particular relevance to implementors of this standard. Status codes 200, 201, 202, 204 and 404 are called out in API requirements. Therefore, support for some of these status codes is mandatory for all compliant implementations. The remainder of the status codes in <<status_codes>> are not mandatory, but are important for the implementation of a well functioning API. Support for these status codes is strongly encouraged for both client and server implementations.
+The *Status Codes* listed in <<status_codes>> are of relevance to implementors of this Standard. Status codes 200, 201, 202, 204 and 404 are called out in this Standard's requirements. Therefore, support for some of these status codes is mandatory for all compliant implementations. The remainder of the status codes in <<status_codes>> are not mandatory but are important for the implementation of a well-functioning API. Support for these status codes is strongly encouraged for both client and server implementations.
 
 [#status_codes,reftext='{table-caption} {counter:table-num}']
 .Typical HTTP status codes[[table_2]]
@@ -44,18 +44,18 @@ The *Status Codes* listed in <<status_codes>> are of particular relevance to imp
 |Status code |Description
 |`200` |A successful request.
 |`201` |The server has been fulfilled the operation and a new resource has been created. 
-|`202` |The request has been accepted for processing, but the processing has not been completed. The request might or might not eventually be acted upon, as it might be disallowed when processing actually takes place.
+|`202` |The request has been accepted for processing, but the processing has not been completed. The request might or might not eventually be acted upon, as it might be disallowed when processing happens.
 |`204` |A successful request with no additional content to send in the response.
 |`400` |The server cannot or will not process the request due to an apparent client error. For example, a query parameter had an incorrect value.
 |`401` |The request requires user authentication. The response includes a `WWW-Authenticate` header field containing a challenge applicable to the requested resource.
-|`403` |The server understood the request, but is refusing to fulfill it. While status code `401` indicates missing or bad authentication, status code `403` indicates that authentication is not the issue, but the client is not authorized to perform the requested operation on the resource.
+|`403` |The server understood the request but is refusing to fulfill it. While status code `401` indicates missing or bad authentication, status code `403` indicates that authentication is not the issue, but the client is not authorized to perform the requested operation on the resource.
 |`404` |The requested resource does not exist on the server. For example, a path parameter had an incorrect value.
 |`405` |The request method is not supported. For example, a POST request was submitted, but the resource only supports GET requests.
 |`406` |Content negotiation failed. For example, the `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
 |`412` |The status code indicates that one or more conditions given in the request header fields evaluated to false when tested by the server.
 |`413` |The server is refusing to process the request because the request content is larger than the server is willing or able to process.
 |`415` |The server is refusing to service the request because the content is in a format not supported by this method on the target resource.
-|`422` |The server understands the content type of the request content and the syntax of the request content is correct, but was unable to process the contained instructions. For example, the submitted resource does not meet a semantic constraint, e.g. a mandatory property is missing.
+|`422` |The server understands the content type of the request content and the syntax of the request content is correct but was unable to process the contained instructions. For example, the submitted resource does not meet a semantic constraint, e.g. a mandatory property is missing.
 |`428` |The server requires the request to be conditional.
 |`500` |An internal error occurred in the server.
 !===
@@ -64,7 +64,7 @@ More specific guidance is provided for each resource, where applicable.
 
 include::recommendations/create-replace-delete/PER_additional-status-codes.adoc[]
 
-The API Description Document describes the HTTP status codes generated by that API. This should not be an exhaustive list of all possible status codes. It is not reasonable to expect an API designer to control the use of HTTP status codes which are not generated by their software. Therefore, it is recommended that the API Description Document limit itself to describing HTTP status codes relevant to the proper operation of the API application logic. Client implementations should be prepared to receive HTTP status codes in addition to those described in the API Description Document.
+The https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_definition_2[API Description Document] describes the HTTP status codes generated by an API. This should not be an exhaustive list of all possible status codes. Expecting an API designer to control the use of HTTP status codes which are not generated by their software is not reasonable. Therefore, it is recommended that the API Description Document limit itself to describing HTTP status codes relevant to the proper operation of the API application logic. Client implementations should be prepared to receive HTTP status codes in addition to those described in the API Description Document.
 
 [[cross_origin]]
 ==== Cross-origin requests
@@ -73,11 +73,11 @@ See <<OAFeat-1,OGC API - Features - Part 1: Core>>, section link:http://www.open
 
 ==== Schemas
 
-This specification makes no assumptions about any schema constraints that a server may impose upon incoming features.  The intent is to support both "schema-less" servers (such as those back-ended by document data stores) as well as servers that have underlying schema constraints (such as those back-ended by an RDBMS).
+This Standard makes no assumptions about any schema constraints that a server may impose upon incoming feature data.  The intent is to support both "schema-less" servers (such as those back-ended by document data stores) as well as servers that have underlying schema constraints (such as those back-ended by an RDBMS).
 
 In the "schema-less" case, as long as the incoming feature meets the requirements of the declared media type (e.g. a valid GeoJSON feature) then the resource should be created/updated with a 20x status response.  
 
-In the case where the server imposes schema constraints, the server should publish schemas in order to help clients create requests that are not rejected.  As recommended in clause <<schemas,Feature schemas>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
+In the case where the server imposes schema constraints, the server should publish schemas to help clients create requests that are not rejected.  As recommended in clause <<schemas,Feature schemas>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
 
 [[create]]
 === Adding a new resource to a collection (CREATE)
@@ -150,8 +150,7 @@ The following diagram illustrates the sequence diagram for replacing the content
 of an existing resource in a collection. The identifier of the resource does not
 change. 
 
-NOTE: The new content replaces the old content of the resource; version control is not 
-discussed in this standard.
+NOTE: The new content replaces the old content of the resource. Version control is not discussed in this Standard.
 
 ....
    Client                                                            Server
@@ -172,7 +171,6 @@ include::requirements/create-replace-delete/replace/REQ_put-op.adoc[]
 
 include::recommendations/create-replace-delete/replace/PER_create.adoc[]
 
-
 ==== Request body
 
 ==== Overview 
@@ -189,19 +187,16 @@ See https://www.rfc-editor.org/rfc/rfc9110#field.content-type[section 8.3 of RFC
 
 include::requirements/create-replace-delete/replace/REQ_response.adoc[]
 
-The status code depends on the server. If the server has updated the resource, the
-response is either `200`, if the response includes additional content, or `204`, 
-if the response has no additional content. 
+The status code depends on the server. If the server has updated the resource, the response is either `200` if the response includes additional content, or `204` if the response has no additional content. 
 
-If the server will process the update request later, it will return a `202`. In this
-case, the processing can succeed or fail, without further notification to the client.
+If the server will process the update request later, the server will return a `202`. In this case, the processing can succeed or fail, without further notification to the client.
 
 include::requirements/create-replace-delete/replace/REQ_rid.adoc[]
 
 ==== Exceptions
 
 If the server does not support the PUT method on non-existing resources, 
-the assignment of resource identifiers is the perview of the server and as a
+the assignment of resource identifiers is the purview of the server and as a
 result, clients cannot use the HTTP PUT operation to create a new resource.
 In this case, the creation of new resource instances has be performed
 using the HTTP POST operation as described in <<create>>.
@@ -266,9 +261,9 @@ include::../examples/json/ex04_delete.adoc[]
 
 ==== Overview
 
-A server is not required to implement every method described in this specification (i.e. POST, PUT, <<update_clause,PATCH>> or DELETE) for every mutable resource that it offers.  Furthermore, a server that supports the ability to add, modify or remove resources from collections is not likely to be an open server.  That is, access to the server, and specifically the operations that allow resource creation, modification and/or removal, will be controlled.  Such controls might, for example, take the form of policy requirements (e.g. resources on this server can be inserted or updated but not deleted) or user access control requirements (e.g. user "X" is only allowed to create resources but not update or delete resources).  Regardless of the controls the server must be able to advertise, within the control context in place, which methods are available for each resource that it offers.  This is accomplished using the https://www.rfc-editor.org/rfc/rfc2616.html#section-9.2[HTTP OPTIONS] method.
+A server is not required to implement every method described in this Standard (i.e. POST, PUT, <<update_clause,PATCH>> or DELETE) for every mutable resource that it offers.  Furthermore, a server that supports the ability to add, modify or remove resources from collections is not likely to be an open server.  That is, access to the server, and specifically the operations that allow resource creation, modification and/or removal, will be controlled.  Such controls might, for example, take the form of policy requirements (e.g. resources on this server can be inserted or updated but not deleted) or user access control requirements (e.g. user "X" is only allowed to create resources but not update or delete resources).  Regardless of the controls the server must be able to advertise, within the control context in place, which methods are available for each resource that it offers.  This is accomplished using the https://www.rfc-editor.org/rfc/rfc2616.html#section-9.2[HTTP OPTIONS] method.
 
-The HTTP OPTIONS method allows the server to explicitly declare which HTTP methods are supported for a particular resource(s) endpoint.  This specification deals with the HTTP POST, PUT, PATCH and DELETE methods but any relevant HTTP method may be listed for a particular resource.
+The HTTP OPTIONS method allows the server to explicitly declare which HTTP methods are supported for a particular resource(s) endpoint.  This Standard deals with the HTTP POST, PUT, PATCH and DELETE methods but any relevant HTTP method may be listed for a particular resource.
 
 ==== Sequence diagram
 
@@ -307,7 +302,7 @@ See <<http_status_codes,HTTP status codes>>.
 
 ==== Examples
 
-The following example illustrate how to get the supported HTTP methods for specific feature resources.  A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
+The following example illustrates how to get the supported HTTP methods for specific feature resources.  A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
 
 [#options-example-1,reftext=`OPTIONS Example 1`]
 .Get the OPTIONS available at the "items" endpoint.

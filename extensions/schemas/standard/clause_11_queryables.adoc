@@ -2,7 +2,7 @@
 [#rc_{req-class}]
 == Requirements Class "Queryables"
 
-The Requirements Class "Queryables" specifies the web resources representing the schema with the <<queryable-def,queryable>> properties of a collection in OGC Web APIs.
+The Requirements Class "Queryables" specifies the web resources representing the schema with the <<queryable-def,queryable>> properties of a collection returned by Web API endpoint(s) implementing OGC API Standards.
 
 [cols="2,7",width="90%"]
 |===
@@ -13,7 +13,7 @@ The Requirements Class "Queryables" specifies the web resources representing the
 
 This requirements class supports clients that want to discover the list of resource properties with their types and constraints that may be used to construct filter expressions on a collection of resources, for example, a set of features.
 
-OGC API standards do not assume that the content schema of a resource being queried is available for inspection. Therefore, a means needs to exist to interrogate an <<endpoint-def,endpoint>> to determine the names and types of the properties that may be used to construct a filter expression ("queryables").
+OGC API Standards do not assume that the content schema of a resource being queried is available for inspection. Therefore, a means needs to exist to interrogate an <<endpoint-def,endpoint>> to determine the names and types of the properties that may be used to construct a filter expression ("queryables").
 
 In addition, a <<publisher-def,publisher>> may want to support <<queryable-def,queryables>> that are not directly represented as resource properties in the content schema of the resource. Or the <<publisher-def,publisher>> may want to restrict filtering on certain properties. For example, because the backend datastore has not been configured to allow high-performance queries on those properties.
 
@@ -45,7 +45,7 @@ In addition, a <<publisher-def,publisher>> may want to support <<queryable-def,q
 If `additionalProperties` is set to false, property references that are not explicitly declared in the queryables schema SHALL result in a 400 response.
 |===
 
-NOTE: Depending on the filter language, some properties can not be supported in filter expressions. For example, if the filter language does not support predicates on object-valued properties, using such properties in a filter expression will result in an error.
+NOTE: Depending on the filter language, some properties cannot be supported in filter expressions. For example, if the filter language does not support predicates on object-valued properties, using such properties in a filter expression will result in an error.
 
 [[example_11_1]]
 .Filtering on complex data structures

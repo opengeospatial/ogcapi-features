@@ -42,7 +42,7 @@ include::requirements/features/crs/REQ_default-crs.adoc[]
 
 include::requirements/features/crs/REQ_other-crs.adoc[]
 
-This approach is consistent with the use of WGS84 longitude/latitude as the default CRS for all feature-related requests in the APIs. If both the server and the client are CRS-aware and have the capability to handle geometries in other CRSs, this requirement enables the client to negotiate to some other mutually agreeable CRS.
+This approach is consistent with the use of WGS84 longitude/latitude as the default CRS for all feature-related requests in API implementation instances. If both the server and the client are CRS-aware and have the capability to handle geometries in other CRSs, this requirement enables the client to negotiate to some other mutually agreeable CRS.
 
 *Example*
 
@@ -56,16 +56,10 @@ If the server includes the `storageCrs` property in the Collection resource, as 
 
 include::recommendations/features/REC_storage-crs.adoc[]
 
-NOTE: See https://github.com/opengeospatial/ogcapi-features/issues/505[Issue 505]. 
-This does not provide a clear mechanism how a client can determine all the CRSs that 
-are supported for a specific request and it may involve some try and error. Adding yet
-more information to the Collection resource does not seem to be the right approach.
-Use OPTIONS for this?
-
 [[schemas]]
 === Feature schemas
 
-Adding, replacing or updating a feature requires that a representation of that feature or the updated properties be provided by the client. As is the case in Part 1 (Core), this standard does not mandate that a specific feature encoding be supported by a server.
+Adding, replacing, or updating a feature requires that a representation of that feature or the updated properties be provided by the client. As is the case in Part 1 (Core), this Standard does not mandate that a specific feature encoding be supported by a server.
 
 If features in a collection are constrained to a specific schema and schema information is provided by a server, the Schema resource of a collection is available at `{landingPageUri}/collections/{collectionId}/schema` as specified by Part 5 (Schemas). This information enables clients to generate feature representations that are acceptable to the server. 
 
@@ -73,7 +67,7 @@ include::requirements/features/REQ_schema.adoc[]
 
 The schema identifies the feature properties that can be used in a mutation request (Receivables), that is, all properties that are not tagged as `readOnly`.
 
-The mapping between the properties in the encoded feature and the properties in the JSON Schema depends on the feature encoding. This Standard provides guidance for APIs that support GeoJSON.
+The mapping between the properties in the encoded feature and the properties in the JSON Schema depends on the feature encoding. This Standard provides guidance for API implementation instances that support GeoJSON.
 
 *Example*
 
@@ -97,7 +91,7 @@ include::requirements/features/REQ_update-json-merge-patch.adoc[]
 
 include::requirements/features/REQ_geojson-create-replace.adoc[]
 
-GeoJSON normatively supports WGS84 longitude/latitude, but the https://www.rfc-editor.org/rfc/rfc7946.html#section-4["prior arrangement" provision] allows that other CRSs are used, if both client and server agree on the CRS. Clients that want to use a CRS that is not the default CRS have to state the CRS in the POST, PUT or PATCH request using the `Content-Crs` HTTP header to invoke the "prior arrangement" provision. 
+GeoJSON normatively supports WGS84 longitude/latitude, but the https://www.rfc-editor.org/rfc/rfc7946.html#section-4["prior arrangement" provision] allows that other CRSs can be used if both client and server agree on the CRS. Clients that want to use a CRS that is not the default CRS have to state the CRS in the POST, PUT or PATCH request using the `Content-Crs` HTTP header to invoke the "prior arrangement" provision. 
 
 [[feature-gml]]
 === Geography Markup Language (GML)
@@ -106,7 +100,7 @@ include::requirements/features/REQ_gml-create-replace.adoc[]
 
 include::requirements/features/crs/REQ_gml-srsname.adoc[]
 
-This standard does not specify an XML PATCH syntax / semantics that could be applied for GML feature updates. Two options are:
+This Standard does not specify an XML PATCH syntax / semantics that could be applied for GML feature updates. Two options are:
 
 - use of the http://docs.opengeospatial.org/is/09-025r2/09-025r2.html#283[Update action from OGC Web Feature Service 2.0]; 
 - use of <<rfc5261,RFC 5261 (An Extensible Markup Language (XML) Patch Operations Framework Utilizing XML Path Language (XPath) Selectors)>>.

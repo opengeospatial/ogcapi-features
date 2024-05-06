@@ -176,7 +176,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_queryables-query-parameters-parameters,/req/{conf-class}/queryables-query-parameters-parameters>>
+|Requirements: | <<req_{conf-class}_parameters,/req/{conf-class}/parameters>>
 |Test purpose: | Check that query parameters for queryables is supported
 |Test method: | 
 Given:
@@ -371,7 +371,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_queryables_get-queryables-response,/req/queryables/get-queryables-response>> F
+|Requirements: | <<req_queryables_get-queryables-response,/req/queryables/get-queryables-response>>
 |Test purpose: | Check that unknown queryables are rejected, if this is declared in the Queryables resource
 |Test method: | 
 Given:
@@ -650,7 +650,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_filter_mixing-expression,/req/filter/mixing-expression>>
+|Requirements: | <<req_filter_mixing-expressions,/req/filter/mixing-expressions>>
 |Test purpose: | Check that a filter and a bbox parameter are evaluated with an AND
 |Test method: | 
 Given:

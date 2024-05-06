@@ -7,12 +7,12 @@ This Standard specifies two types of requirements classes.
 
 The schemas describing geospatial data specified by this Standard are logical schemas describing the data, independent of a particular format to represent the data. 
 
-In order to use the schema for data validation, the schema first has to be converted into a schema representation suitable for validating data in the specific data format, for example, an XML Schema that is a GML application schema or a JSON Schema for GeoJSON or JSON-FG.
+In order to use the schema for data validation, the schema first has to be converted into a schema representation suitable for validating data in the specific data format. For example, an XML Schema that is a GML application schema or a JSON Schema for GeoJSON or JSON-FG.
 
-While the schema is a logical schema, a machine-readable representation is needed. Instead of specifying a custom schema language for geospatial data, this Standard uses JSON Schema as the schema language with 
+While the schema is a logical schema, a machine-readable representation is needed. Instead of specifying a custom schema language for geospatial data, this Standard uses JSON Schema as the schema language with:
 
-* extensions for additional aspects that are common in geospatial data; and 
-* recommendations for restricting the use of JSON Schema capabilities in order to simplify parsing a schema.
+* Extensions for additional aspects that are common in geospatial data,
+* Recommendations for restricting the use of JSON Schema capabilities to simplify parsing a schema.
 
 That is, JSON Schema is primarily used as a data description language.
 
@@ -22,15 +22,15 @@ The main reasons for using JSON Schema are:
 * JSON data types (string, number, boolean, array, object, null) are simple and easy to understand; and
 * JSON is often used for encoding geospatial data, i.e., the schema of a property can be used to validate property values without conversion.
 
-=== Requirements and recommendations for schemas in OGC Web APIs
+=== Requirements and recommendations for schemas in OGC Web API Implementations
 
 These requirements classes specify API building blocks related to schemas. 
 
-In OGC Web APIs, geospatial data is shared in collections (path `/collections/{collectionId}`). The schema of items in a collection provides information how to interact with the collection. 
+As specified in OGC Web API Standards, geospatial data is shared in collections (path `/collections/{collectionId}`). The schema of items in a collection provides information about how to interact with the collection. 
 
 Examples of interactions, where information about the schema are required, include:
 
-* An application that wants to fetch data often needs information about the properties included in the data to process, present or store the data properly ("returnable" properties or "Returnables").
+* An application that wants to fetch data often needs information about the properties included in the data to process, present, or store the data properly ("returnable" properties or "Returnables").
 * An application that wants to fetch data restricted to a subset of the available properties needs the list of the properties in the data (again, "returnable" properties or "Returnables").
 * An application that wants to fetch a subset of the data needs information about the properties that can be used to filter the data ("queryable" properties or "Queryables").
 * An application that wants to fetch data in a specific order needs information about the properties that can be used to sort the data ("sortable" properties or "Sortables").

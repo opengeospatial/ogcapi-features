@@ -6,22 +6,22 @@ Since CREATE, REPLACE, DELETE and UPDATE operations will change the resources an
 
 Users making modifications to resources need to:
 
-. be authenticated,
-. have "modification privileges" on one or more of the resource collections offered by the API,
-. have access to one or more of the POST, PUT, PATCH and/or DELETE methods on the resources / resource endpoints.
+1. Be authenticated,
+2. Have "modification privileges" on one or more of the resource collections offered by the API implementation instance and related endpoints,
+3. Have access to one or more of the POST, PUT, PATCH and/or DELETE methods on the resources / resource endpoints.
 
-The API definition has to reflect this in the resource paths and their available methods.
+The https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_definition_2[API definition] must reflect this in the resource paths and their available methods.
 
 The examples in the chapters specifying the requirements classes focus on the mechanics of the POST, PUT, DELETE, and PATCH methods and exclude authentication. Since authentication will typically be required for all requests, this section provides some examples/guidance:
 
-The OpenAPI definition will declare the authentication schemes that the API supports for each operation (or for all operations in the API).
+The OpenAPI definition will declare the authentication schemes that the server supports for each operation (or for all operations supported by the server).
 
 A member "security" in the OpenAPI definition object can be provided to list the default security schemes supported by all operations. Individual operations can override this default by providing a "security" member for the individual operation.
 
 [#auth-example-1,reftext=`Example OpenAPI definition with security requirements`]
 .Example OpenAPI definition with security requirements
 ====
-The following OpenAPI definition declares that the API accepts either api keys in an "X-API-Key" header or JWT bearer tokens to authenticate the requestor. The API will decide, if an authenticated request is rejected or executed based on privileges of the authenticated user.
+The following OpenAPI definition declares that the API accepts either api keys in an "X-API-Key" header or JWT bearer tokens to authenticate the requestor. The server will decide, if an authenticated request is rejected or executed based on privileges of the authenticated user.
 
 [source,JSON]
 ----
@@ -58,9 +58,9 @@ The following OpenAPI definition declares that the API accepts either api keys i
 ----
 ====
 
-If the authentication of a secured request fails or if the user does not have sufficient privileges, the API will return an error.
+If the authentication of a secured request fails or if the user does not have sufficient privileges, the server will return an error.
 
-In case the request does not include information to authenticate the user, the server will respond with a 401 response ("Unauthorized"). The response will include a "WWW-Authenticate" header with hints how to provide authentication credentials.
+In case the request does not include information to authenticate the user, the server will respond with a 401 response ("Unauthorized"). The response will include a "WWW-Authenticate" header with hints as to how to provide authentication credentials.
 
 [#auth-example-2,reftext=`Unauthorized request`]
 .Unauthorized request
@@ -87,7 +87,7 @@ In case the request does not include information to authenticate the user, the s
      |<------------------------------------------------------------------|
 ....
 
-If valid authentication credentials have been provided, but the API refuses to execute the operation, because the user has insufficient privileges, the server will typically return a 403 response ("Forbidden").
+If valid authentication credentials have been provided, but the server refuses to execute the operation, because the user has insufficient privileges, the server will typically return a 403 response ("Forbidden").
 
 [#auth-example-3,reftext=`Forbidden request`]
 .Forbidden request

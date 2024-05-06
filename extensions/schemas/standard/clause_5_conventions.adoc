@@ -6,7 +6,7 @@ See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clauses 5 and 6.
 
 === Identifiers
 
-The normative provisions in this standard are denoted by the URI `\http://www.opengis.net/spec/{standard}/{m_n}`.
+The normative provisions in this Standard are denoted by the URI `\http://www.opengis.net/spec/{standard}/{m_n}`.
 
 All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
 
@@ -18,13 +18,13 @@ The following OGC link relation types are introduced in this document (no applic
 * **\http://www.opengis.net/def/rel/ogc/1.0/queryables**: Refers to a resource that lists properties that can be used to filter sub-resources of the link's context.
 * **\http://www.opengis.net/def/rel/ogc/1.0/sortables**: Refers to a resource that lists properties that can be used to sort sub-resources of the link's context.
 
-As an alternative, the https://docs.ogc.org/pol/09-048r6.html#toc14[Compact URI (CURIE)], e.g., **[ogc-rel:schema]**, can be used, too, where a CURIE is an allowed value.
+As an alternative, the https://docs.ogc.org/pol/09-048r6.html#toc14[Compact URI (CURIE)], e.g., **[ogc-rel:schema]**, can also be used when a CURIE is an allowed value.
 
 NOTE: This link relation type needs to be registered in the <<ogc-link-relations,OGC Link Relation Type Register>> as well as in the <<ogc-curies,OGC CURIE Register>>. This note has to be removed before publication.
 
 === HTTP URIs
 
-If URIs include reserved characters that are delimiters in the URI subcomponent, these have to be percent-encoded. See Clause 2 of <<rfc3986,RFC 3986>> for details. Not all URIs in this document are properly percent-encoded for better readability.
+If URIs include reserved characters that are delimiters in the URI subcomponent, these must be percent-encoded. See Clause 2 of <<rfc3986,RFC 3986 Uniform Resource Identifier (URI): Generic Syntax>> for details. Not all URIs in this document are properly percent-encoded for better readability.
 
 ////
 
