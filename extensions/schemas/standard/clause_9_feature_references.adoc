@@ -2,9 +2,9 @@
 [#rc_{req-class}]
 == Requirements Class "Feature references"
 
-The Requirements Class "Feature references" specifies additional provisons for properties that reference another feature.
+The Requirements Class "Feature references" specifies additional provisions for properties that reference another feature.
 
-NOTE: We can probably generalize this requirements class to cover also other types of references, but this requires a better understanding about the types of references that have to be supported.
+NOTE: This requirements class can probably be generalized to cover also other types of references, but this requires a better understanding about the types of references that must be supported.
 
 [cols="2,7",width="90%"]
 |===
@@ -22,17 +22,17 @@ If the features have a property that represents a reference to another feature i
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |A property with "x-ogc-role" set to "reference" SHALL be a string or integer property.
 ^|B |If the property is of type "integer", the property with role "id" of the referenced feature type SHALL be of type "integer", too.
-^|C |If all instances of the property reference another feature in a fixed collection of the same API, the id of that collection SHALL be provided in "x-ogc-collectionId".
-^|D |If C does not apply, but all instances of the property reference another feature in the same API, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
-^|E |If C and D do not apply, the URI template SHALL be provided in "x-ogc-uriTemplate" with a template parameter `featureId`.
-^|F |If E applies, and the referenced features can be in different collections, the URI template SHALL also include a template parameter `collectionId`.
-^|G |If F applies, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
+^|C |If all instances of the property reference another feature in a fixed collection of the same server, the id of that collection SHALL be provided in "x-ogc-collectionId".
+^|D |If Requirement C does not apply, but all instances of the property reference another feature in the same server, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
+^|E |If Requirements C and D do not apply, the URI template SHALL be provided in "x-ogc-uriTemplate" with a template parameter `featureId`.
+^|F |If Requirement E applies, and the referenced features can be in different collections, the URI template SHALL also include a template parameter `collectionId`.
+^|G |If Requirement F applies, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
 |===
 
 [[example_9_1]]
 .Schema example 
 ====
-This is the schema of a raod accident feature type. The "roadSegment" property is a reference to the road segment on which the accident occured.
+This is the schema of a road accident feature type. The "roadSegment" property is a reference to the road segment on which the accident occurred.
 
 [source,JSON]
 ----

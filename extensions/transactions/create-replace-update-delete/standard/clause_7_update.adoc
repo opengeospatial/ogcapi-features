@@ -10,7 +10,7 @@ A server that implements this requirements class provides the ability to use
 the HTTP PATCH method to modify parts of an existing resource without the need
 to transmit a complete replacement resource.
 
-Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This standard does not mandate that a specific encoding for this document be supported by a server.
+Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This Standard does not mandate that a specific encoding for this document be supported by a server.
 
 include::requirements/update/REQ_methods.adoc[]
 
@@ -45,7 +45,7 @@ include::requirements/update/REQ_patch-op.adoc[]
 
 include::requirements/update/REQ_body.adoc[]
 
-Details how a PATCH request body has to be processed by a server depends on the resource representation and have to be specified for each resource type and its representations.
+Details how a PATCH request body must be processed by a server depends on the resource representation and must be specified for each resource type and its representations.
 
 ==== Response
 
@@ -68,7 +68,7 @@ See <<http_status_codes,HTTP status codes>>.
 
 The following example updates two properties (`geom`, the geometry, and `apnid`) and adds a new property named `primary_material` to the feature created by the <<replace-example>>.  
 
-The example uses a <<rfc7396,JSON Merge Patch>> document to describe the changes to be made. The replacement geometry is specified using the default CRS of http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS 84 longitude/latitude). The server responds to the operation by presenting the updated feature, as GeoJSON, in the response body.
+The example uses a <<rfc7396,JSON Merge Patch>> document to describe the changes to be made. The replacement geometry is specified using the default CRS of http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS 84 longitude/latitude). The server responds to the operation by presenting the updated feature, formatted as GeoJSON, in the response body.
 
 [#update-example,reftext=`Update Example`]
 .Update a Portion of an Existing Feature Example
@@ -86,4 +86,4 @@ possibility, the following recommendation is made:
 include::recommendations/update/REC_schema.adoc[]
 
 If a server publishes a schema, update requests presented to the server should
-endeavour to honour the published schema.
+endeavor to honor the published schema.

@@ -70,7 +70,7 @@ NOTE: The alphabetic letters delimited using `[]` are time instants and correspo
 
 Optimistic locking resolves such change conflicts by exchanging state information (e.g., ETags or timestamps) between clients and servers using HTTP headers to ensure that a resource's state has not changed between a read request to fetch a resource and a subsequent update request.  If the state of the resource has changed in the intervening time interval the exchanged state information will not match and the operation fails. This necessitates a re-read of the resource to obtain the most recent state and a subsequent retry of the update operation. 
 
-This standard supports optimistic locking using the two different types of state information supported by HTTP:
+This Standard supports optimistic locking using the two different types of state information supported by HTTP:
 
 * The `Last-Modified` field is the date and time at which the server believes the selected representation was last modified. 
 * The `ETag` field is an opaque value (entity tag) derived by the server from the selected representation. An ETag can be strong or weak. A strong ETag requires that the representation of a resource is always byte-by-byte equal to a previous response as long as the ETag does not change. With a weak ETag the representation can change without changing the ETag as long as the server considers the representations to be semantically equivalent.
@@ -78,11 +78,11 @@ This standard supports optimistic locking using the two different types of state
 A requirements class is specified for each field, because the two options have different characteristics and API providers need to decide which option they can support.
 
 * The ETag can be derived from the current state of the resource, while Last-Modified requires that metadata about the last change to a resource is maintained and available.
-* However, all ETags must be strong ETags to support optimistic locking using HTTP. For some resources specified in OGC API standards (for example, features), semantical equivalency would be sufficient to avoid 'lost updates'. Byte-for-byte identity is not necessary and often hard to achieve, because representations in OGC Web APIs can include various parts that can change without any semantic change to the resource and which are often dynamically created during each request. One example are self and alternate links, which can change without any change to the resource in the backend datastore (link titles can change with a new software version; an alternate link will be added, if a new encoding is supported by the API; etc.). Other changes could be differences in whitespace or differences in the sequence of members in a JSON object. Byte-for-byte identity is essential for caching and supporting range requests, but not always for PUT validation.
+* However, all ETags must be strong ETags to support optimistic locking using HTTP. For some resources specified in OGC API Standards (for example, features), semantical equivalency would be sufficient to avoid 'lost updates'. Byte-for-byte identity is not necessary and often hard to achieve, because representations in OGC Web APIs can include various parts that can change without any semantic change to the resource and which are often dynamically created during each request. One example is self and alternate links, which can change without any change to the resource in the backend datastore (link titles can change with a new software version. An alternate link will be added, if a new encoding is supported by the API; etc.). Other changes could be differences in whitespace or differences in the sequence of members in a JSON object. Byte-for-byte identity is essential for caching and supporting range requests, but not always for PUT validation.
 
 NOTE: It is still useful to provide weak ETag headers, because for other conditional requests weak ETag validation is sufficient. For example, for `If-None-Match` headers weak validation is used. I.e., the use of weak ETags is sufficient to support 304 status responses (Not Modified) on GET requests to resources.
 
-That is, ETags are a good option for optimistic locking when the API can provide strong ETags for all representations of a resource. Otherwise Last-Modified has to be used and the metadata about changes to the resource has to be maintained. Of course, a server can also support both validator fields.
+That is, ETags are a good option for optimistic locking when the server can provide strong ETags for all representations of a resource. Otherwise Last-Modified must be used and the metadata about changes to the resource has to be maintained. Of course, a server can also support both validator fields.
 
 [[timestamps]]
 === Optimistic locking using timestamps
@@ -91,12 +91,12 @@ That is, ETags are a good option for optimistic locking when the API can provide
 
 include::requirements/requirements_class_optimistic-locking-timestamps.adoc[]
 
-A server that implements this conformance class generates a https://www.rfc-editor.org/rfc/rfc9110#field.last-modified[Last-Modified] header when the resource is fetched or modified representing the last time the resource was changed and recognizes the https://www.rfc-editor.org/rfc/rfc9110#field.if-unmodified-since[If-Unmodified-Since] conditional HTTP header in order to implement optimistic locking of resources to support concurrency.
+A server that implements this requirements class generates a https://www.rfc-editor.org/rfc/rfc9110#field.last-modified[Last-Modified] header when the resource is fetched or modified representing the last time the resource was changed and recognizes the https://www.rfc-editor.org/rfc/rfc9110#field.if-unmodified-since[If-Unmodified-Since] conditional HTTP header in order to implement optimistic locking of resources to support concurrency.
 
 [[last-modified]]
 ==== Last-modified 
 
-As defined in https://www.rfc-editor.org/rfc/rfc9110[RFC 9110], for the purposes of this conformance class, the value of the https://www.rfc-editor.org/rfc/rfc9110#name-last-modified[Last-Modified] header is a timestamp indicating the date and time at which the origin server believes that the selected representation was last modified, as determined at the conclusion of handling the request.
+As defined in https://www.rfc-editor.org/rfc/rfc9110[RFC 9110: HTTP Semantics], for the purposes of this requirements class, the value of the https://www.rfc-editor.org/rfc/rfc9110#name-last-modified[Last-Modified] header is a timestamp indicating the date and time at which the origin server believes that the selected representation was last modified, as determined at the conclusion of handling the request.
 
 include::requirements/optimistic-locking-timestamps/REQ_lastmodified-get-response.adoc[]
 
@@ -111,12 +111,12 @@ Optimistic resource locking is implemented using the https://www.rfc-editor.org/
 
 If the https://www.rfc-editor.org/rfc/rfc9110#field.if-unmodified-since[If-Unmodified-Since] HTTP header evaluation results in a value of `true` then the operation can proceed.
 
-If the https://www.rfc-editor.org/rfc/rfc9110#field.if-unmodified-since[If-Unmodified-Since] HTTP header evaluation, however, evaluates to `false` then the server generates a response according to the rules defined in https://www.rfc-editor.org/rfc/rfc9110#section-13.1.4[RFC 9110].  Normally, in this case, the response is a HTTP status code of 412, precondition failed.  However, if the requested change is already reflected in the current state of the resource then the server can respond with a 2xx, successful HTTP status code.
+If the https://www.rfc-editor.org/rfc/rfc9110#field.if-unmodified-since[If-Unmodified-Since] HTTP header evaluation, however, evaluates to `false` then the server generates a response according to the rules defined in https://www.rfc-editor.org/rfc/rfc9110#section-13.1.4[RFC 9110].  Normally, in this case, the response is a HTTP status code of 412, precondition failed.  However, if the requested change is already reflected in the current state of the resource, then the server can respond with a 2xx, successful HTTP status code.
 
-The client submitting the request will set the value of the `If-Unmodified-Since` header
+The client submitting the request will set the value of the `If-Unmodified-Since` header:
 
-* to a timestamp representing the last time the representation of the resource was retrieved; or 
-* to the value of the `Last-Modified` header of the response when the representation of the resource was retrieved last.
+* To a timestamp representing the last time the representation of the resource was retrieved; or 
+* To the value of the `Last-Modified` header of the response when the representation of the resource was retrieved last.
 
 If no `If-Unmodified-Since` header is provided by the client, the behavior will depend on the server. The appropriate behavior will vary depending on the dataset and use case.
 
@@ -132,9 +132,7 @@ include::recommendations/optimistic-locking-timestamps/PER_ifunmodifiedsince-mis
 
 ==== Example
 
-The following example, taken from the <<optimistic-locking-overview>>,
-optimistically locks the resources being operated on using the 
-the https://www.rfc-editor.org/rfc/rfc9110#field.if-unmodified-since[If-Unmodified-Since] header.
+The following example, taken from the <<optimistic-locking-overview>>, optimistically locks the resources being operated on using the https://www.rfc-editor.org/rfc/rfc9110#field.if-unmodified-since[If-Unmodified-Since] header.
 Client A successfully updates the resource while Client B's update fails.
 Client B, then proceeded to re-fetch the resource and try the update again.
 
@@ -206,13 +204,13 @@ NOTE: The alphabetic letters delimited using `[]` are time instants and correspo
 |C |The server responds to Client B.  The response includes `Last-Modified: Sat,13 Mar 2021 11:28:17 GMT` .
 |D |The server responds to Client A.  The response also includes `Last-Modified: Sat,13 Mar 2021 11:28:17 GMT` since the feature has not changed since the server responded to Client B.
 |E |Client A modifies its local copy of `OB.2` and pushes the changes to the server.  The client includes the `If-Unmodified-Since: Sat,13 Mar 2021 11:28:17 GMT`.
-|F |Since the resource has not changes since the timestamp specified by the `If-Unmodified-Since` header -- indicating the Client A's understanding of the state of the resource is current - the server successfully processes Client A's request. A new `Last-Modified` timestamp, `Sun,14 Mar 2021 13:14:15 GMT`, is generated to reflect the the most recent time the resource was changed.
+|F |Since the resource has not changes since the timestamp specified by the `If-Unmodified-Since` header -- indicating the Client A's understanding of the state of the resource is current - the server successfully processes Client A's request. A new `Last-Modified` timestamp, `Sun,14 Mar 2021 13:14:15 GMT`, is generated to reflect the most recent time the resource was changed.
 |G |Client B, unaware of Client A's changes, modifies its local copy of `OB.2` and pushes the changes to the server using an `If-Unmodified-Since` HTTP header value of `Sat,13 Mar 2021 11:28:17 GMT` which reflects Client B's outdated understanding of the resource's state.
 |H |The server evaluates the `If-Unmodified-Since` HTTP header value specified by Client B and because the resource has changed since the specified timestamp the operation's precondition fails and thus the operation fails.  The server responds with a HTTP status code of 412.
 |I |The Client B re-fetches the resource to obtain its current state.
 |J |The server responds and includes `Last-Modified: Sun,14 Mar 2021 13:14:15 GMT` representing the most recent time the resource was changed.
 |K |Client B once again modifies its local copy of `OB.2` and pushes the changes to the server using the latest received modification date as the value of the `If-Unmodified-Since` HTTP header.
-|L |Since the resource has not changes since the specified timestamp -- indicating the Client B's understanding of the state of the resource is current -- the server successfully processes Client B's request. A new `Last-Modified` value, `Sun,14 Mar 2021 13:14:27 GMT`, is generated to reflect the most recent time the resource was changed.
+|L |Since the resource has not changed since the specified timestamp -- indicating the Client B's understanding of the state of the resource is current -- the server successfully processes Client B's request. A new `Last-Modified` value, `Sun,14 Mar 2021 13:14:27 GMT`, is generated to reflect the most recent time the resource was changed.
 |===
 
 [[etags]]
@@ -222,11 +220,11 @@ NOTE: The alphabetic letters delimited using `[]` are time instants and correspo
 
 include::requirements/requirements_class_optimistic-locking-etags.adoc[]
 
-A server that implements this conformance class generates an https://www.rfc-editor.org/rfc/rfc9110#field.etag[entity tag] representing the state of the resource when the resource is fetched or modified and recognizes the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] conditional HTTP header in order to implement optimistic locking of resources to support concurrency.
+A server that implements this requirements class generates an https://www.rfc-editor.org/rfc/rfc9110#field.etag[entity tag] representing the state of the resource when the resource is fetched or modified and recognizes the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] conditional HTTP header in order to implement optimistic locking of resources to support concurrency.
 
 ==== Entity tags
 
-As defined in https://www.rfc-editor.org/rfc/rfc9110[RFC 9110], for the purposes of this conformance class, an https://www.rfc-editor.org/rfc/rfc9110#field.etag[ETag] is an opaque token generated by the server for differentiating between multiple representations of the same resource resulting from state changes over time.
+As defined in https://www.rfc-editor.org/rfc/rfc9110[RFC 9110: HTTP Semantics], for the purposes of this requirements class, an https://www.rfc-editor.org/rfc/rfc9110#field.etag[ETag] is an opaque token generated by the server for differentiating between multiple representations of the same resource resulting from state changes over time.
 
 include::requirements/optimistic-locking-etags/REQ_etag-get-response.adoc[]
 
@@ -241,7 +239,7 @@ Optimistic resource locking is implemented using the https://www.rfc-editor.org/
 
 If the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] HTTP header evaluation by the server results in a value of `true` then the operation can proceed.
 
-If the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] HTTP header evaluation by the server, however, evaluates to `false` then the server generates a response according to the rules defined in https://www.rfc-editor.org/rfc/rfc9110#section-13.1.1[RFC 9110].  Normally, in this case, the server responds with a HTTP status code of 412, precondition failed.  However, if the requested change is already reflected in the current state of the resource then the server can respond with a 2xx, successful HTTP status code.
+However, if the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] HTTP header evaluation by the server evaluates to `false` then the server generates a response according to the rules defined in https://www.rfc-editor.org/rfc/rfc9110#section-13.1.1[RFC 9110].  Normally, in this case, the server responds with a HTTP status code of 412, precondition failed.  However, if the requested change is already reflected in the current state of the resource, then the server can respond with a 2xx, successful HTTP status code.
 
 The value of the `If-Match` header will be a strong `ETag` token obtained by a preceding HTTP GET operation used to fetch a representation of the resource to be changed. Note that submitting a weak `ETag` token will always result in a failed precondition.
 
@@ -261,11 +259,7 @@ include::recommendations/optimistic-locking-etags/PER_ifmatch-star.adoc[]
 
 ==== Example
 
-The following example, taken from the <<optimistic-locking-overview>>,
-optimistically locks the resources being operated on using the 
-the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] header.
-Client A successfully updates the resource while Client B's update fails.
-Client B, then proceeded to re-fetch the resource and try the update again.
+The following example, taken from the <<optimistic-locking-overview>>, optimistically locks the resources being operated on using the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] header.  Client A successfully updates the resource while Client B's update fails.  Client B, then proceeded to re-fetch the resource and try the update again.
 
 NOTE: The request and response payload are intentionally omitted in the example to highlight the HTTP header interactions between the server and the clients.
 

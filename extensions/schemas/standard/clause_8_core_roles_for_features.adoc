@@ -11,14 +11,14 @@ The Requirements Class "Core roles for features" specifies additional property r
 |Dependency |<<rc_schemas>>
 |===
 
-In order to understand how features are encoded in a specific feature format, additional property roles need to be identified in the logical schema, depending on the format.
+To understand how features are encoded in a specific format, additional property roles need to be identified in the logical schema. These roles depend on the format.
 
-For example, the role "primary-geometry" is needed in feature types with multiple spatial properties to decide
+For example, the role "primary-geometry" is needed in feature types with multiple spatial properties to decide:
 
-* which geometry is encoded as the geometry of a feature in encodings like FlatGeobuf, Shapefile or Mapbox Vector Tiles, which only support a single geometry; or
-* which geometry is encoded in the "geometry" member in GeoJSON.
+* Which geometry is encoded as the geometry of a feature in formats such as FlatGeobuf, Shapefile or Mapbox Vector Tiles, which only support a single geometry; or,
+* Which geometry is encoded in the "geometry" member in GeoJSON.
 
-The other roles specified in this requirements class support feature formats that support representing primary temporal information or the type of the feature, e.g., JSON-FG.
+The other roles specified in this requirements class support feature formats that support representing primary temporal information or the type of the feature, such as JSON-FG.
 
 === Primary geometry
 
@@ -34,7 +34,7 @@ If the features have multiple spatial properties, the role "primary-geometry" ca
 ^|C |If the schema has only one spatial property, the property SHALL be the primary geometry even if the property is not explicitly tagged with the role "primary-geometry".
 |===
 
-NOTE: Since only a single property can be tagged in the schema as the primary geometry, varying primary geometries at different zoom levels are currently not supported. This would require the capability to assign the role depening on the zoom level.
+NOTE: Since only a single property can be tagged in the schema as the primary geometry, varying primary geometries at different zoom levels are currently not supported. This would require the capability to assign the role depending on the zoom level.
 
 === Primary temporal information
 
@@ -77,7 +77,7 @@ If the features have multiple temporal properties, the roles "primary-instant", 
 ^|B |If a schema has properties with both roles "primary-interval-start" and "primary-interval-end", both properties SHALL have the same temporal granularity ("date" or "date-time").
 |===
 
-NOTE: Consider to add a role "primary-interval" with a proper representation of an interval, e.g., the interval representation in JSON-FG (an array with two dates or timestamps).
+NOTE: FUTURE WORK? Consider adding a role "primary-interval" with a proper representation of an interval, e.g., the interval representation in JSON-FG (an array with two dates or timestamps).
 
 === Feature type
 

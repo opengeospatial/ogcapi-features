@@ -2,7 +2,7 @@
 [#rc_{req-class}]
 == Requirements Class "Profile query parameter"
 
-The Requirements Class "Profile query parameter" specifies additional provisons for properties that reference another resource.
+The Requirements Class "Profile query parameter" specifies additional provisions for properties that reference another resource.
 
 [cols="2,7",width="90%"]
 |===
@@ -12,9 +12,9 @@ The Requirements Class "Profile query parameter" specifies additional provisons 
 
 Some properties may be represented in multiple representations in the same format, depending on the intended use of the data. One example are references to another web resource (see the <<rc_profile-references>>).
 
-IETF defines the concept of a profile to support such use cases. See <<rfc6906,RFC 6906>>:
+<<rfc6906,RFC 6906 The 'profile' Link Relation Type>> defines the concept of a profile to support such use cases.
 
-> A profile is defined not to alter the semantics of the resource representation itself, but to allow clients to learn about additional semantics (constraints, conventions, extensions) that are associated with the resource representation, in addition to those defined by the media type and possibly other mechanisms.
+A profile is defined not to alter the semantics of the resource representation itself, but to allow clients to learn about additional semantics (constraints, conventions, extensions) that are associated with the resource representation, in addition to those defined by the media type and possibly other mechanisms.
 
 To request one or more profiles, a query parameter "profile" can be used:
 
@@ -82,7 +82,7 @@ The server will select the profile(s) of the response, if any, from the list of 
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |The query parameter is not required, that is, omitting the parameter in a request SHALL not result in an error. 
-^|B |If the media type of the response supports web links in accordance with <<rfc8288,RFC 8288>>, the response SHALL include links to the selected profile(s) with the link relation type "profile".
+^|B |If the media type of the response supports web links in accordance with <<rfc8288,RFC 8288 Web Linking>>, the response SHALL include links to the selected profile(s) with the link relation type "profile".
 |===
 
 :rec: profile-link-header

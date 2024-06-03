@@ -1,25 +1,25 @@
 == Scope
 
-This document specifies an extension that defines the behaviour of a server
+This Standard specifies an extension that defines the behavior of a server
 that supports operations to add, replace, modify or delete individual resources 
 from a collection.
 
-NOTE: Additional specifications are planned to handle transactions that require batch or atomicity semantics.
+NOTE: Additional OGC Standards are planned to handle transactions that require batch or atomicity semantics.
 
-Specifically, this document specifies:
+Specifically, this Standard specifies:
 
 * How to add a new resource instance to a collection (i.e. create).
 
-* How to modify an existing resource from a collection; this includes entirely replacing the existing resource (i.e. replace) or simply modifying one or more properties of a resource (i.e. update).
+* How to modify an existing resource from a collection: This includes entirely replacing the existing resource (i.e. replace) or simply modifying one or more properties of a resource (i.e. update).
 
 * How to remove an existing resource from a collection (i.e. delete).
 
 The following table crosswalks each of the resource endpoints discussed in this
-standard with the HTTP methods POST, PUT, PATCH and DELETE.  Each intersecting
+Standard with the HTTP methods POST, PUT, PATCH and DELETE.  Each intersecting
 cell in the table either contains the name of the operation for that 
-combination of resource endpoint and HTTP method, or it contains the
-phrase "n/a" which is used to indicate that this specification does not
-specify any behaviour for that combination of resource endpoint and HTTP 
+combination of resource endpoint and HTTP method or it contains the
+phrase "n/a" which is used to indicate that this Standard does not
+specify any behavior for that combination of resource endpoint and HTTP 
 method.
 
 [#endpoint_method_matrix,reftext='{table-caption} {counter:table-num}']
