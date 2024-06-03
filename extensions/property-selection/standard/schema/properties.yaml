@@ -1,0 +1,12 @@
+name: properties
+in: query
+required: false
+style: form
+explode: false
+schema:
+  type: array
+  items:
+    type: string
+    enum:
+    - foo
+    - bar

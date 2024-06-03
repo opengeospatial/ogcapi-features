@@ -12,6 +12,7 @@ The Requirements Class "Schemas" specifies basic provisions for schemas of items
 |Indirect Dependency |<<json-schema-validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>
 |Indirect Dependency |<<ogc06_103r4,Simple feature access - Part 1: Common architecture>>
 |Indirect Dependency |<<ucum,The Unified Code for Units of Measure>>
+|Indirect Dependency |<<qudtunits,QUDT Units Vocabulary>>
 |===
 
 [#schema-representation]
@@ -99,15 +100,15 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 ^|C |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
 |===
 
-For cases where the properties of the data must be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-property-seq".
+For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-propertySeq".
 
 :req: property-seq
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |The keyword "x-ogc-property-seq" SHALL be used to declare a specific relative position of the property.
-^|B |The value of the keyword "x-ogc-property-seq" SHALL be an integer representing the relative position in ascending order.
+^|A |The keyword "x-ogc-propertySeq" SHALL be used to declare a specific relative position of the property.
+^|B |The value of the keyword "x-ogc-propertySeq" SHALL be an integer representing the relative position in ascending order.
 ^|C |Each value of the keyword SHALL be unique for all members of a "properties" object in the JSON Schema.
 |===
 
@@ -120,13 +121,17 @@ In geospatial data, numeric property values often represent a measurement and ha
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |The keyword "x-ogc-unit" SHALL be used to declare the unit of measure of the property.
 ^|B |The value of the keyword "x-ogc-unit" SHALL be a string representing the unit of measure.
-^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unit-lang".
-^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unit-lang", SHALL be "UCUM". 
+^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unitLang".
+^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unitLang", SHALL be "UCUM". 
+^|E |The value for the QUDT Units Vocabulary, if declared as the language for units in keyword "x-ogc-unitLang", SHALL be "QUDT". 
+^|F |The value of the keyword "x-ogc-unit" SHALL be the URI of the unit for values from the QUDT Units Vocabulary.
 |===
 
-Communities or other OGC Standards can specify additional values for other unit languages, e.g., the https://www.qudt.org/doc/DOC_VOCAB-UNITS.html[QUDT Units] or https://www.opengis.net/def/uom[units registered in the OGC Rainbow]. For each language it must be specified how units have to be represented in the "x-ogc-unit" value.
+Communities or other OGC Standards can specify additional values for other unit languages, e.g., https://www.opengis.net/def/uom[units registered in the OGC Rainbow]. For each language it must be specified how units have to be represented in the "x-ogc-unit" value.
 
 NOTE: UCUM provides a language to define units while QUDT provides a units of measure vocabulary. The term "language" is used as it is the broader term.
+
+NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt.org/vocab/unit/HectoPA` in QUDT.
 
 :req: definition
 [#{req-class}_{req}]
@@ -137,12 +142,12 @@ NOTE: UCUM provides a language to define units while QUDT provides a units of me
 ^|B |The value of the keyword "x-ogc-definition" SHALL be a URI.
 |===
 
-=== Example
+=== Examples
 
-The following example is the schema of a feature type that also includes additional keywords that apply to feature data (specified in the next Clause).
+The following example is the schema of a feature type representing cultural entities. The schema includes additional keywords that apply to feature data (specified in the next Clause).
 
 [[example_7_1]]
-.Schema example of a feature type
+.Schema of a "Cultural (Points)" feature type 
 ====
 [source,JSON]
 ----
@@ -151,63 +156,109 @@ The following example is the schema of a feature type that also includes additio
   "$id" : "https://demo.ldproxy.net/daraa/collections/CulturePnt/schema",
   "type" : "object",
   "title" : "Cultural (Points)",
+  "description" : "Information about features on the landscape that have been constructed by man.",
   "properties" : {
     "FID" : {
       "readOnly" : true,
       "x-ogc-role" : "id",
       "type" : "integer",
-      "x-ogc-property-seq": 1
+      "x-ogc-propertySeq": 1
     },
     "F_CODE" : {
       "title" : "Feature Type Code",
       "x-ogc-role" : "type",
       "enum" : [ "AK121", "AL012", "AL030", "AL130", "BH075" ],
       "type" : "string",
-      "x-ogc-property-seq": 2
+      "x-ogc-propertySeq": 2
     },
     "geometry" : {
       "x-ogc-role" : "primary-geometry",
       "format" : "geometry-point",
-      "x-ogc-property-seq": 3
+      "x-ogc-propertySeq": 3
     },
     "ZI001_SDV" : {
       "title" : "Last Change",
       "x-ogc-role" : "primary-instant",
       "format" : "date-time",
       "type" : "string",
-      "x-ogc-property-seq": 4
+      "x-ogc-propertySeq": 4
     },
     "UFI" : {
       "title" : "Unique Entity Identifier",
       "type" : "string",
-      "x-ogc-property-seq": 5
+      "x-ogc-propertySeq": 5
     },
     "ZI005_FNA" : {
       "title" : "Name",
       "type" : "string",
-      "x-ogc-property-seq": 6
+      "x-ogc-propertySeq": 6
     },
     "FCSUBTYPE" : {
       "title" : "Feature Subtype Code",
       "type" : "integer",
-      "x-ogc-property-seq": 7
+      "x-ogc-propertySeq": 7
     },
     "ZI037_REL" : {
       "title" : "Religious Designation",
       "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
       "type" : "integer",
-      "x-ogc-property-seq": 8
+      "x-ogc-propertySeq": 8
     },
     "ZI006_MEM" : {
       "title" : "Memorandum",
       "type" : "string",
-      "x-ogc-property-seq": 9
+      "x-ogc-propertySeq": 9
     },
     "ZI001_SDP" : {
       "title" : "Source Description",
       "type" : "string",
-      "x-ogc-property-seq": 10
+      "x-ogc-propertySeq": 10
     }
+  }
+}
+----
+====
+
+The next example is the schema of a feature type representing observations of atmospheric pressure.
+
+[[example_7_2]]
+.Schema of an "Atmospheric Pressure Observation" feature type
+====
+[source,JSON]
+----
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://api.example.org/foo/bar/collections/atmospheric-pressure-obs/schema",
+  "type" : "object",
+  "title" : "Atmospheric Pressure Observation",
+  "properties" : {
+    "id" : {
+      "readOnly" : true,
+      "x-ogc-role" : "id",
+      "type" : "integer",
+      "x-ogc-propertySeq": 1
+    },
+    "location" : {
+      "x-ogc-role" : "primary-geometry",
+      "format" : "geometry-point",
+      "x-ogc-propertySeq": 2
+    },
+    "phenomenonTime" : {
+      "title" : "Phenomenon Time",
+      "x-ogc-role" : "primary-instant",
+      "type" : "string",
+      "format" : "date-time",
+      "x-ogc-propertySeq": 3
+    },
+    "result" : {
+      "title" : "Atmospheric Pressure [hPa]",
+      "description": "The pressure exerted by the weight of the air above it at any point on the earth's surface. At sea level the atmosphere will support a column of mercury about 760 mm high. This decreases with increasing altitude. The standard value for the atmospheric pressure at sea level is 1.01325 hectopascal.",
+      "type" : "number",
+      "x-ogc-definition": "https://qudt.org/vocab/quantitykind/AtmosphericPressure",
+      "x-ogc-unit": "https://qudt.org/vocab/unit/HectoPA",
+      "x-ogc-unitLang": "QUDT",
+      "x-ogc-propertySeq": 4
+    },
   }
 }
 ----

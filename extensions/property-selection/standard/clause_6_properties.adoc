@@ -1,0 +1,108 @@
+:req-class: properties
+[#rc_{req-class}]
+== Requirements Class "Property Selection"
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web API
+|===
+
+The Requirements Class "Property Selection" specifies the "properties" query parameter. 
+
+The query parameter takes a comma-separated list of property names that are to be included in the response. Properties where the name is not included in the query parameter value are in general not included in the response.
+
+The query parameter can be applied to web resources that can be represented as an object with properties or to resources that are collections of such objects; for example, a collection of features, a single feature or a vector tile.
+
+The list of valid property names can be determined from the API definition or, if a schema of the returnables is available, from the JSON Schema according to <<OAFeat-5,OGC API - Features - Part 5: Schemas>>, Requirements Class "Returnables and Receivables".
+
+:req: parameter
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A | If a web resource supports a query parameter "properties", the query parameter SHALL be based on the following OpenAPI 3.0 fragment:
+
+[source,YAML]
+----
+include::schema/properties.yaml[]
+----
+^|B | The "enum" values in the schema of the query parameter "properties" in sub-requirement `A` are placeholders. The enum array SHALL either be removed or replaced with the actual returnables of the web resource.
+|===
+
+:req: response
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A | The query parameter "properties" is optional. If it is not provided, all properties SHALL be returned.
+^|B | If the query parameter "properties" is provided, only the selected returnable properties included in the parameter value SHALL be returned.
+^|C | For properties that are object-valued: Selecting the name of an object-valued property will return the complete object. Selecting properties inside the object will return only the selected properties.
+|===
+
+:per: required-properties
+[#{req-class}_{per}]
+[width="90%",cols="2,7a"]
+|===
+^|*Permission {counter:per-num}* |/per/{req-class}/{per}
+^|A | By deviation from requirement `/req/properties/response`, sub-requirement `B`, the response MAY include properties in the response that have not been requested in the query parameter "properties", if this is required by the media type of the response.
+|===
+
+:per: unknown-properties
+[#{req-class}_{per}]
+[width="90%",cols="2,7a"]
+|===
+^|*Permission {counter:per-num}* |/per/{req-class}/{per}
+^|A | If the parameter value includes unknown properties, the server MAY either return a 400 (Bad Request) response or ignore the unknown properties.
+|===
+
+[[example_7_1]]
+.Example of a feature collection with selected properties
+====
+The request https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&properties=F_CODE,ZI005_FNA returns
+
+[source,JSON]
+----
+{
+  "type": "FeatureCollection",
+  "numberReturned": 5,
+  "numberMatched": 5,
+  "timeStamp": "2024-05-06T06:01:29Z",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {"F_CODE": "AL030", "ZI005_FNA": "مقبرة البحارة"}
+    },
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {"F_CODE": "AL130", "ZI005_FNA": "ساحة الكرامة"}
+    },
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {"F_CODE": "BH075", "ZI005_FNA": "نافورة البانوراما"}
+    },
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {"F_CODE": "AK121", "ZI005_FNA": "مدرج درعا الأثري"}
+    },
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {"F_CODE": "AL012", "ZI005_FNA": "Roman Graves"}
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/geo+json",
+      "title": "This document",
+      "href": "https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&properties=F_CODE,ZI005_FNA"
+    }
+  ]
+}
+----
+====
