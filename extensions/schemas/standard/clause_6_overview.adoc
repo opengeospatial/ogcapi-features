@@ -22,11 +22,11 @@ The main reasons for using JSON Schema are:
 * JSON data types (string, number, boolean, array, object, null) are simple and easy to understand; and
 * JSON is often used for encoding geospatial data, i.e., the schema of a property can be used to validate property values without conversion.
 
-=== Requirements and recommendations for schemas in OGC Web API Implementations
+=== Requirements and recommendations for schemas in OGC Web APIs
 
 These requirements classes specify API building blocks related to schemas. 
 
-As specified in OGC Web API Standards, geospatial data is shared in collections (path `/collections/{collectionId}`). The schema of items in a collection provides information about how to interact with the collection. 
+In OGC Web APIs, geospatial data is shared in collections (path `/collections/{collectionId}`). The schema of items in a collection provides information about how to interact with the collection. 
 
 Examples of interactions, where information about the schema are required, include:
 

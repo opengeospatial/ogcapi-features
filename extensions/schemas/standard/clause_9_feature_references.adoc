@@ -13,7 +13,7 @@ NOTE: This requirements class can probably be generalized to cover also other ty
 |Dependency |<<rc_schemas>>
 |===
 
-If the features have a property that represents a reference to another feature in the same or another OGC Web API endpoint, the role "reference" can be used for this property. The property is a foreign key, the `featureId` of the referenced feature.
+If the features have a property that represents a reference to another feature in the same or another OGC Web API, the role "reference" can be used for this property. The property is a foreign key, the `featureId` of the referenced feature.
 
 :req: role-reference
 [#{req-class}_{req}]
