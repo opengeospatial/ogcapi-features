@@ -42,37 +42,41 @@ include::recommendations/queryables/REC_queryables-schema.adoc[]
 [source,JSON]
 ----
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "$id": "https://demo.ldproxy.net/zoomstack/collections/roads_national/queryables",
-  "type": "object",
-  "title": "National Roads",
-  "description": "Lines representing the road network. A road is defined as a metalled way for vehicles.",
-  "properties": {
-    "geom": {
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://demo.ldproxy.net/zoomstack/collections/roads_national/queryables",
+  "type" : "object",
+  "title" : "National Roads",
+  "description" : "Lines representing the road network. A road is defined as a metalled way for vehicles.",
+  "properties" : {
+    "geom" : {
       "title": "Centerline",
       "description": "The geometry of the road.",
+      "x-ogc-role" : "primary-geometry",
       "format" : "geometry-linestring"
     },
-    "name": {
-      "title": "Road Name",
+    "name" : {
+      "title" : "Road Name",
       "description": "The common, human readable, name of the road.",
-      "type": "string"
+      "type" : "string"
     },
-    "number": {
-      "title": "Road Identifier",
+    "number" : {
+      "title" : "Road Identifier",
       "description": "The official number of the road.",
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 9999
+      "type" : "string"
     },
-    "type": {
-      "title": "Road Type",
+    "type" : {
+      "title" : "Type",
       "description": "The road type, one of 'Primary' or 'Motorway'.",
-      "type": "string",
-      "enum": [ "Primary", "Motorway" ]
+      "enum" : [ "Primary", "Motorway" ],
+      "type" : "string"
+    },
+    "level" : {
+      "title" : "Level",
+      "enum" : [ 0, 1, 2 ],
+      "type" : "integer"
     }
   },
-  "additionalProperties": false
+  "additionalProperties" : false
 }
 ----
 ====
@@ -110,7 +114,7 @@ This could be implemented using a queryable `common_band_names` defined as an ar
 [source,JSON]
 ----
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.net/stac/collections/landsat/queryables",
   "type": "object",
   "title": "A STAC item",

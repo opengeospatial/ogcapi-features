@@ -6,16 +6,7 @@
 
 [source,YAML]
 ----
-name: filter-lang
-in: query
-required: false
-schema:
-  type: string
-  enum:
-     - 'cql2-text'
-     - 'cql2-json'
-  default: 'cql2-text'
-style: form
+include::../../openapi/parameters/filter-lang.yml[]
 ----
 ^|B |The `enum` array in the schema of `filter-lang` SHALL list the filter encodings that the server supports for the resource.
 ^|C |The `default` value in the schema of `filter-lang` SHALL identify the filter encoding that the server will assume, if a `filter` is provided, but no `filter-lang`.

@@ -1,0 +1,10 @@
+name: filter-lang
+in: query
+required: false
+schema:
+  type: string
+  enum:
+     - 'cql2-text'
+     - 'cql2-json'
+  default: 'cql2-text'
+style: form
