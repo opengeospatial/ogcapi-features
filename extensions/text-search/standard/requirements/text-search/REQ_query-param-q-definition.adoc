@@ -1,0 +1,24 @@
+[[req_text-search_q-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/text-search/q-definition*
+^|A |A searchable endpoint SHALL support the Text Search (`q`) parameter for the operation.
+^|B |The `q` parameter SHALL have the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: q
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: string
+explode: false
+----
+
+^|C |Search terms that may appear together (logical OR) in a resource SHALL be separated by literal commas.
+^|D |Search terms that must appear together, and in the order specified, in a resource SHALL be separated by one or more white space characters.
+^|E |Keyword searches using the `q` parameter SHALL be case insensitive.
+^|F |The specific set of text keys/fields/properties of a resource to which the `q` operator is applied SHALL be left to the discretion of the implementation.
+|===
