@@ -1,0 +1,9 @@
+== Scope
+
+This document specifies an extension to the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard that defines the behavior of a server that supports sorting of query responses based on a specified set of properties and sort orders.
+
+This document defines
+
+* Query parameters for specifying the list of properties upon which the results of a query should be sorted.
+* A notation for indicating the sort order (ascending or descending) of each specified sort property.
+* How the set of properties that can be used to construct a sorting expression ("sortables") are published by a Web API.

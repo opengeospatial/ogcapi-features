@@ -1,0 +1,58 @@
+[[sortables]]
+== Requirements Class "Sortables"
+
+=== Overview
+
+include::requirements/requirements_class_sortables.adoc[]
+
+This requirements class defines the Sortables resource for discovering a list of resource properties with their types and constraints that may be used to construct sorting expressions on a collection of resources, for example, a set of features.
+
+This standard does not assume that the content schema of a resource being queried is available for inspection. Therefore, a means needs to exist to interrogate an <<endpoint-def,endpoint>> to determine the names and types of the properties that may be used to construct a sorting expression ("sortables").
+
+In addition, a <<publisher-def,publisher>> may want to support <<sortable-def,sortables>> that are not directly represented as resource properties in the content schema of the resource. Or the <<publisher-def,publisher>> may want to restrict sorting on certain properties. For example, because the backend datastore has not been configured to allow high-performance sorting on those properties.
+
+=== Discovery
+
+include::requirements/sortables/REQ_sortables-link.adoc[]
+
+It is http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#_link_headers[recommended to include the link in the response via an HTTP header].
+
+=== Operation
+
+include::requirements/sortables/REQ_get-sortables-op.adoc[]
+
+include::recommendations/sortables/PER_synthetic.adoc[]
+
+The response is returned as a JSON Schema document that describes a single JSON object where each property is a sortable.
+
+include::requirements/sortables/REQ_get-sortables-success.adoc[]
+
+NOTE: The sortables schema does not specify a schema of any object that can be retrieved from the API. JSON Schema is used for the sortables to have a consistent approach for describing schema information. The sortables schema describes a "virtual" resource view for the purpose of sorting. JSON Schema will also be used in Part 5: Schemas of OGC API Features to describe schemas for feature content.
+
+To support clients, providing additional detail about the meaning of the sortables is recommended:
+
+include::recommendations/sortables/REC_sortables-schema.adoc[]
+
+In an OpenAPI 3.0 document, the Sortables resource has the following schema:
+
+[[schema_sortables]]
+.link:https://github.com/opengeospatial/ogcapi-records/blob/master/core/openapi/responses/Sortables.yaml[Schema for the list of sortable properties (Sortables.yaml)]
+[source,YAML]
+----
+include::openapi/responses/Sortables.yaml[]
+----
+
+=== Declaring default sort order
+
+This Specification does not mandate a specific default sort order for resource fetched from a server.  However, servers can declare a default sort order.
+
+include::requirements/sortables/REQ_defaultSortOrder-definition.adoc[]
+
+=== Sorting by relevance (informative)
+
+A common practice is to sort search results by relevance.
+
+This capability is accomodated in this Standard by using <<per_sorting_sortables-synthetic,synthetic>> sortables.  That is, using a sortable that is derived or synthesized by the server.
+
+A sever implementing relevance ranking might include, in its list of sortables, a sortable named `relevance` that is dynamically computed for each result in a result set.  How exactly the value of the `relevance` score is computed is left to the server's discretion.  The value of the synthetic `relevance` sortable could, for example, be between 0 and 10 with zero indicating least relevance and 10 indicating most relevance.  A `sortBy` clause specified on a request specifying a descending sort by the `relevance` property would present search results from most to least relevant.
+

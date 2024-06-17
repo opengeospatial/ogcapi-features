@@ -1,0 +1,24 @@
+[[req_sorting_sortby-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/sorting/sortby-definition*
+
+^|A |At a sortable resource endpoint, the operation SHALL support a parameter `sortby` with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: sortby
+in: query
+required: false
+schema:
+  type: array
+  minItems: 1
+  items:
+    type: string
+    pattern: '[+\|-]?[A-Za-z_].*'
+explode: false
+style: form
+----
+
+^|B |The default sort order SHALL be ascending (i.e. `+`).
+|===
