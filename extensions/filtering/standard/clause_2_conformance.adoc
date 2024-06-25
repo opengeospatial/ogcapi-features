@@ -5,13 +5,13 @@ grouped by their standardization target:
 
 * Web API
 ** <<rc_queryables,Queryables>>
-** <<rc_queryables_param,Queryables as Query Parameters>>
+** <<rc_queryable-query-parameters,Queryables as Query Parameters>>
 ** <<rc_filter,Filter>>
 ** <<rc_features-filter,Features Filter>>
 
 The <<rc_queryables,Queryables>> requirements class defines the Queryables resource (at path `/collections/{collectionId}/queryables`) and its representation as a JSON Schema. Queryables can be used to determine the list of property names and their schemas that may be used to construct filter expressions.
 
-The <<rc_queryables_param,Queryables as Query Parameters>> requirements class adds the requirement to provide query parameters for queryables according to recommendation in the section https://docs.ogc.org/is/17-069r4/17-069r4.html#rec_core_fc-filters[Parameters for filtering on feature properties] in OGC API - Features - Part 1: Core.
+The <<rc_queryable-query-parameters,Queryables as Query Parameters>> requirements class adds the requirement to provide query parameters for queryables according to recommendation in the section https://docs.ogc.org/is/17-069r4/17-069r4.html#rec_core_fc-filters[Parameters for filtering on feature properties] in OGC API - Features - Part 1: Core.
 
 The <<rc_filter,Filter>> requirements class defines a set of HTTP query
 parameters that may be used to specify complex filter expressions on
