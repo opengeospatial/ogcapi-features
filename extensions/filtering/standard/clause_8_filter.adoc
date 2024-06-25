@@ -35,10 +35,10 @@ defines the `filter-lang` parameter.
 include::requirements/filter/REQ_filter-lang-param.adoc[]
 
 The enumerated value `cql2-text` is used to indicate that the value of the
-<<filter-param,`filter`>> parameter is the https://docs.ogc.org/DRAFTS/21-065.html#basic-cql2-text[text encoding of CQL2].
+<<filter-param,`filter`>> parameter is the https://docs.ogc.org/is/21-065r1/21-065r1.html#basic-cql2-text[text encoding of CQL2].
 
 The enumerated value `cql2-json` is used to indicate that the value of the
-<<filter-param,`filter`>> parameter is the https://docs.ogc.org/DRAFTS/21-065.html#basic-cql2-JSON[JSON encoding of CQL2].
+<<filter-param,`filter`>> parameter is the https://docs.ogc.org/is/21-065r1/21-065r1.html#basic-cql2-JSON[JSON encoding of CQL2].
 
 Servers that support other filtering languages can extend this list of values
 as necessary although the meanings of any additional values are not described
@@ -47,7 +47,7 @@ in this standard.
 [[filter-crs-param]]
 === Parameter filter-crs
 
-For reasons discussed in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>, spatial coordinates by default are in the coordinate reference system WGS 84 longitude and latitude for 2D coordinates and WGS 84 longitude, latitude and ellipsoidal height in meters for 3D coordinates. For server that support geometries in other coordinate reference systems, the `filter-crs` parameter defined in this clause allows clients to assert which CRS is being used to encode geometric values in a filter expression.  Otherwiese, the `filter-crs` parameter has no use.
+For reasons discussed in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>, spatial coordinates by default are in the coordinate reference system WGS 84 longitude and latitude for 2D coordinates and WGS 84 longitude, latitude and ellipsoidal height in meters for 3D coordinates. For servers that support geometries in other coordinate reference systems, the `filter-crs` parameter defined in this clause allows clients to assert which CRS is being used to encode geometric values in a filter expression.  Otherwiese, the `filter-crs` parameter has no use.
 
 include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
 
