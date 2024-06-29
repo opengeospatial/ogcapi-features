@@ -23,8 +23,8 @@ NOTE: "Server" is used in this Standard to identify any executable software that
 able to evaluate filter expressions on data.
 
 The <<rc_basic-cql2,Basic CQL2>> requirements class defines the minimal subset
-of the Common Query Language (CQL2) that all implementations must support
-("Basic CQL2"). Basic CQL2 is intended to be a useful, but limited set of
+of the Common Query Language (CQL2) that all implementations must support. 
+Basic CQL2 is intended to be a useful, but limited set of
 predicates that support fine-grained read-access to collections of resources. 
 
 The specific set of operators defined in this requirements class is:
@@ -42,7 +42,7 @@ The specific set of operators defined in this requirements class is:
 ** greater than or equal to
 ** is null
 
-Basic CQL2 only requires support for property-literal comparisons. That means that servers only have to support property references as expressions on the left hand side of an operator, and only literal values as expressions on the right hand side.
+Basic CQL2 only requires support for property-literal comparisons. That means that servers only have to support property references as expressions on the left-hand side of an operator, and only literal values as expressions on the right-hand side.
 
 An encoding of CQL2 may be used as the value of the filter parameters defined
 in the "Filter" requirements class specified in <<OGCFeat-3,OGC API - Features - Part 3: Filtering>>.
@@ -108,7 +108,7 @@ The array comparison functions that must be supported are:
 * a_equals 
 * a_overlaps
 
-The <<rc_property-property,Property-Property Comparisons>> requirements class drops the permission to restrict expressions on the left hand side to properties and to restrict expressions on the right hand side to literal values. This supports property-property, but also literal-literal or literal-property comparisons.
+The <<rc_property-property,Property-Property Comparisons>> requirements class drops the permission to restrict expressions on the left-hand side to properties and to restrict expressions on the right-hand side to literal values. This supports property-property, but also literal-literal or literal-property comparisons.
 
 The <<rc_functions,Functions>> requirements class specifies requirements for
 supporting function calls (e.g. min, max, etc.) in a CQL2 expression. Function
