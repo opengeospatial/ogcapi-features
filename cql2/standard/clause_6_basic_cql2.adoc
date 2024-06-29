@@ -44,7 +44,7 @@ If a CQL2 filter expression overall evaluates to `FALSE` or `NULL` for an item, 
 
 include::requirements/basic-cql2/REQ_cql2-filter.adoc[]
 
-Literal values do not have to be supported on the left hand side of predicates and property references do not have to be supported on the right hand side of
+Literal values do not have to be supported on the left-hand side of predicates and property references do not have to be supported on the right-hand side of
 predicates.
 
 include::recommendations/basic-cql2/PER_cql2-filter.adoc[]
@@ -60,7 +60,7 @@ requirements classes in <<cql2-enhancements>>:
 * The rule `spatialPredicate` is added by requirements classes <<rc_basic-spatial-functions,Basic Spatial Functions>> and <<rc_spatial-functions,Spatial Functions>>;
 * The rule `temporalPredicate` is added by requirements class <<rc_temporal-functions,Temporal Functions>>.
 * The rule `arrayPredicate` is added by requirements class <<rc_array-functions,Array Functions>>;
-* The permission to not support the literal rules on the left hand side of predicates and the rule `propertyName` on the right hand side is removed by requirements class <<rc_property-property,Property-Property Comparisons>>;
+* The permission to not support the literal rules on the left-hand side of predicates and the rule `propertyName` on the right-hand side is removed by requirements class <<rc_property-property,Property-Property Comparisons>>;
 * The rule `function` is added by requirements class <<rc_functions,Functions>>;
 * The rule `arithmeticExpression` is added by requirements class <<rc_arithmetic,Arithmetic Expressions>>.
 
@@ -93,9 +93,9 @@ For character string, numeric and boolean literals, the standard representations
 
 Conceptually, an instant is a "temporal entity with zero extent or duration" [<<owl-time,Time Ontology in OWL>>]. In practice, the temporal position of an instant is described using data types where each value has some duration or granularity that is sufficient for the intended use of the data. 
 
-CQL2 supports two commonly used granularities: a second or smaller (data type "timestamp") and days (data type "date"). Literal timestamps are always in the time zone UTC ("Z"), dates are local dates without an associated timezone. 
+CQL2 supports two commonly used granularities: a second or smaller (data type "timestamp") and days (data type "date"). Literal timestamps are always in the time zone UTC ("Z"), dates are local dates without an associated time zone. 
 
-If timezone information is important for the intended use, then the "date" data type should not be used and the temporal information should be provided as an interval with start and end timestamps.
+If time zone information is important for the intended use, then the "date" data type should not be used and the temporal information should be provided as an interval with start and end timestamps.
 
 NOTE: While instants (timestamps and dates) are scalar data types that can be used with the basic comparison operators, intervals are more complex data types. Support for intervals is added in the requirements class <<rc_temporal-functions,Temporal Functions>> where intervals can be provided as arguments in temporal comparison functions.
 
@@ -151,7 +151,7 @@ DATE('1969-07-20')
 
 In general, escaping special character sequences in a string literal will be handled according to the rules of the specific encoding being used.  For example, for the JSON encoding of CQL2, an embedded newline in a string literal would be encoded as `\n`.  If, however, an XML encoding of CQL2 existed the embedded newline character would be encoded as `&#xA`.  Furthermore, additional processing of a string literal may be necessary before it can be passed down to an underlying platform (e.g. RDBMS) for further handling.
 
-For the text encoding of CQL2 see <<cql2-text>> and requirement <<req_cql2-text_escaping>> for additional requirements concerning escaping in string literals.
+For the text encoding of CQL2 see <<cql2-text>> and requirement <<req_cql2-text_escaping,/req/cql2-text/escaping>> for additional requirements concerning escaping in string literals.
 
 [[type-casts]]
 ==== Type casts
@@ -160,10 +160,10 @@ include::recommendations/basic-cql2/PER_type-casts.adoc[]
 
 This Standard does not prescribe how types are cast. The evaluation of filter expressions that involve type casts will, therefore, be system dependent.
 
-For example, a system that evaluates the an expression `'5' > 4` can, for example,
+For example, a system that evaluates an expression `'5' > 4` can, for example,
 
 * throw an error (incompatible types in a comparison operator);
-* cast the number to an string (`'5' > '4'`);
+* cast the number to a string (`'5' > '4'`);
 * cast the string to a number (`5 > 4`).
 
 [[basic-cql2_identifier]]
@@ -203,7 +203,7 @@ include::requirements/basic-cql2/REQ_binary-comparison-predicate.adoc[]
 
 include::recommendations/basic-cql2/REC_string-normalization.adoc[]
 
-Instants (timestamps and dates) are scalar data types. All implementations have to support the comparison of two timestamps or two dates. How this is implemented is a decision of the server and will depend on the internal represenation. For example, the server could compare the RFC 3339 string representations of the two timestamps.
+Instants (timestamps and dates) are scalar data types. All implementations have to support the comparison of two timestamps or two dates. How this is implemented is a decision of the server and will depend on the internal representation. For example, the server could compare the RFC 3339 string representations of the two timestamps.
 
 [[example_6_02]]
 .Binary comparison predicates

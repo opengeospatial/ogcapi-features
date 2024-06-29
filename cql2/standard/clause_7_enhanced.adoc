@@ -429,7 +429,7 @@ This requirements class adds:
 
 include::requirements/spatial-functions/REQ_spatial-functions.adoc[]
 
-This clause specifies a set of standardized spatial comparison functions that can be used to evaludate whether a specific spatial relationship exists between a pair of geometries.  
+This clause specifies a set of standardized spatial comparison functions that can be used to evaluate whether a specific spatial relationship exists between a pair of geometries.  
 
 The definition of these spatial comparison functions is based on a Dimensionally Extended 9-Intersection Model (DE-9IM) and further discussion and explanation about this model can be found at <<DE-9IM,DE-9IM>> and <<PostGIS-26,Dimensionally Extended 9-Intersection Model>>.
 
@@ -454,7 +454,7 @@ These values are sometimes simplified to:
 
 * `T` representing `{0,1,2}` (if the actual value of the dimension does not matter),
 * `F` representing the empty set and,
-* `*` representing a value that is not relevant to the evalutation of a spatial comparison function.
+* `*` representing a value that is not relevant to the evaluation of a spatial comparison function.
 
 An example of such an intersection matrix is:
 
@@ -529,7 +529,7 @@ CQL2 follows ISO 8601-1/ISO 8601-2 in defining intervals as closed at both start
 
 Depending on the implementation environment, the underlying datastore may or may not support intervals as data types of properties. If not, intervals are typically represented by two separate properties that are instants, one for the start and one for the end of the interval.
 
-All temporal geometries are in the Gregorian Calendar. This is a deliberate restriction to keep implementations of CQL2 simple, avoiding requirements to transform time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API standards.
+All temporal geometries are in the Gregorian Calendar. This is a deliberate restriction to keep implementations of CQL2 simple, avoiding requirements to transform time instants to other temporal coordinate reference systems, but still cover a large number of use cases. This is consistent with the use of RFC 3339 as a key standard for expressing date and time on the internet, including in the OGC API Standards.
 
 For intervals, the following representations are used:
 

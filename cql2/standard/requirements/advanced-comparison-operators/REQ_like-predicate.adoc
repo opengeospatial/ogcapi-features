@@ -3,7 +3,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/advanced-comparison-operators/like-predicate*
 ^|A |The _like predicate_ (rule `isLikePredicate`) tests whether a string value matches the specified pattern. If the value matches the pattern (rule `patternExpression`), then the predicate SHALL evaluate to the Boolean value `TRUE`. 
-^|B |If the value does not match the pattern (`patternExpression`), then the predicate SHALL evaluate ot the Boolean value `FALSE`.
+^|B |If the value does not match the pattern (`patternExpression`), then the predicate SHALL evaluate to the Boolean value `FALSE`.
 ^|C |If the character expression (rule `characterExpression`) and/or the pattern expression (rule `patternExpression`) in the predicate is `NULL`, then the predicate SHALL evaluate to the value `NULL`. 
 ^|D |The character expression (rule `characterExpression`) in rule `isLikePredicate` SHALL evaluate to a `characterLiteral`.
 ^|E |The wildcard character SHALL be the percent character (ASCII x25, `%`).
