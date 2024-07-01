@@ -109,6 +109,8 @@ The OGC Features API SWG has identified the following extensions as the highest 
   * The draft is an initial, complete draft.
 * [OGC API - Features - Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
   * The draft is an initial, complete draft.
+* [OGC API - Features - Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
+  * The draft is an initial, complete draft.
 
 ## OGC API Features in ISO
 
@@ -150,6 +152,7 @@ The latest drafts of each standard in this repository are build daily (based on 
 * [Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)
 * [Part 6: Property Selection](https://docs.ogc.org/DRAFTS/24-019.html)
 * [Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
+* [Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
 
 * [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r1.html)
 
@@ -174,6 +177,8 @@ asciidoctor extensions/schemas/standard/23-058.adoc
 asciidoctor extensions/property-selection/standard/24-019.adoc
 # Part 7: Geometry Simplification
 asciidoctor extensions/geometry-simplification/standard/24-020.adoc
+# Part 9: Text Search
+asciidoctor extensions/text-search/standard/24-031.adoc
 ```
 
 The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.

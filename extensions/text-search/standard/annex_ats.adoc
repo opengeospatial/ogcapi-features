@@ -1,0 +1,207 @@
+[[ats]]
+[appendix]
+:appendix-caption: Annex
+== Abstract Test Suite (Normative)
+
+This test suite uses the https://en.wikipedia.org/wiki/Given-When-Then[Given-When-Then] notation to specify the tests.
+
+In order to execute tests against the Web API under test, the Web API needs to support one of the specified encodings. Since all known implementations at this time support JSON, this test suite uses the JSON encoding and adds a dependency to the Conformance Class "JSON" in OGC API - Common - Part 1: Core for the general "Sorting" tests and to the Conformance Class "GeoJSON" in OGC API - Features - Part 1: Core for the feature-specific tests. 
+
+The Web API under test can require authorization. Any Executable Test Suite implementing this test suite should implement the following security schemes supported by OpenAPI 3.0: HTTP Authorization schemes "basic" and "bearer", API keys, and OAuth2 flow "authorizationCode".
+
+=== Conformance Class "Text Search"
+
+:conf-class: text-search
+[[conf_text-search]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_text-search,Requirements Class "Text Search">>
+|===
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API (`{apiURI}`);
+* Authentication credentials (optional);
+* The list of resources in the API (`{apiURI}/{pathToResource}`);
+* The media type of the response when accessing these resources (`{responseMediaType}`)
+* The list of acceptable status codes for a successful text search execution (default: "200", "204");
+* The list of acceptable status codes for an unsuccessful text search execution (default: "400");
+* A valid text search expression (`{text-search-valid}`) using search terms that are known to exist in the data;
+* An invalid text search expression (`{text-search-invalid}`) using search terms that are known to not exist in the data;
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: `GET`
+** path: `{apiURI}/conformance`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: q-param
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_q-param,/req/{conf-class}/q-param>>
+|Test purpose: | Check that the query parameter `q` is supported
+|Test method: | 
+Given:
+
+* the list of resources 
+* a set of search terms that are known to exist in the data
+
+When:
+
+* a request for each resource is executed with a valid test search expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `q={text-search-valid}` where `{text-search-valid}` is composed of search terms known to exist in the data
+** query parameters (before percent encoding): `q={text-search-invalid}` where `{text-search-invalid}` is composed of search terms that are known not to exist in the data
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* assert that each returned resource contains one or more of the specified search terms
+
+When:
+
+* a request for each resource is executed with an invalid text search expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `q={text-search-invalid}` where `{text-search-invalid}` contains search terms that are known not to exist in the data
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert an empty response (the status code is in the list of acceptable status codes for a successful execution).
+|===
+
+=== Conformance Class "Features Text Search"
+
+:conf-class: features-filter
+[[conf_features-filter]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_features-filter,Requirements Class "Features Sorting">>
+|Dependency |<<conf_filter,Conformance Class "Sorting">>
+|Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|===
+
+NOTE: The Conformance Class "GeoJSON" has a dependency to the Conformance Class "Core"; that is, testing against "GeoJSON" will automatically test against the dependencies.
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API (`{apiURI}`);
+* Authentication credentials (optional);
+* The name of the filter language to test  (`{filter-lang}`; default: "cql2-text");
+* A flag that indicates whether the filter language is the default filter language;
+* A valid filter expression in the filter language for a queryable `{queryable}` (`{filter-valid}`; default: `{queryable} IS NULL`);
+* An invalid filter expression in the filter language (`{filter-invalid}`; default: `THIS IS NOT A FILTER`);
+* A valid bbox filter expression in the filter language for a spatial queryable `{spatialQueryable}` and two longitude/latitude positions in WGS 84 `{x1}`/`{y1}` and `{x2}`/`{y2}` (`{bbox-filter}`; default: `S_INTERSECTS({spatialQueryable},ENVELOPE({x1},{y1},{x2},{y2})`);
+* A flag that indicates whether the API supports custom functions in filter expressions.
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: `GET`
+** path: `{apiURI}/conformance`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: get-collections
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Retrieve the list of collections provided by the API
+|Test method: | 
+Given:
+
+* test "get-conformance" was successful
+
+When:
+
+* the request for the Collections page is executed
+** method: `GET`
+** path: `{apiURI}/collections`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.collections` is an array;
+* store the array as the list of collections.
+|===
+
+:conf-test: text-search-on-items
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_q-param,/req/{conf-class}/q-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the API supports text searching on the Features resource.
+|Test method: | 
+Given:
+
+* test "get-conformance" was successful
+
+When:
+
+* the tests for the "Test Search" conformance class are executed with the following input parameters:
+** All input parameters given to this conformance class (see above);
+** The path template to the resource is `{apiURI}/collections/{collectionId}/items` with a response media type `application/geo+json` (GeoJSON);
+** The acceptable status codes for a successful filter execution are: "200";
+** The list of acceptable status codes for an unsuccessful filter execution are: "400".
+
+Then:
+
+* the Web API under test passes the tests.
+|===
+

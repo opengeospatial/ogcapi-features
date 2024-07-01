@@ -1,0 +1,20 @@
+== Requirements Class "Features Text Search"
+
+[[features-text-search-overview]]
+=== Overview
+
+include::requirements/requirements_class_features-text-search.adoc[]
+
+This clause defines the binding between the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard and the text-search parameters defined in the <<rc_text-search,Text Search conformance class>>.
+
+=== Features
+
+==== Operation
+
+As per the <<OAFeat-1,OGC API - Features - Part 1: Core>> Standard, features are accessed using the HTTP GET method via the `/collections/{collectionId}/items` path (see http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items[Features]).  The following additional requirements bind the parameters <<filter-param,filter>>, <<filter-lang-param,filter-lang>> and <<filter-filter-crs,filter-crs>> to the GET operation on this path.
+
+include::requirements/features-text-search/REQ_q-param.adoc[]
+
+==== Response
+
+include::requirements/features-text-search/REQ_response.adoc[]

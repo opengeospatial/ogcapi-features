@@ -1,0 +1,40 @@
+[[clause-text-search]]
+== Requirements Class "Text Search"
+
+[[text-search-overview]]
+=== Overview
+
+include::requirements/requirements_class_text-search.adoc[]
+
+The `Text Search` Requirements Class defines the requirements for supporting a simple, easy-to-implement keyword search capability across one or more text fields in a resource.  
+
+[[q-parameter]]
+=== Parameter q
+
+include::requirements/text-search/REQ_query-param-q-definition.adoc[]
+
+The specific text fields in a resource that are to be searched is not mandated in this Standard.
+
+include::recommendations/text-search/REC_param-q.adoc[]
+
+include::requirements/text-search/REQ_query-param-q-response.adoc[]
+
+For example, the following `q` parameter specification:
+
+----
+q=ocean,climate%20%09change,desalination
+----
+
+represents the query predicate:
+
+----
+(anytext CONTAINS 'ocean') OR
+(anytext CONTAINS 'climate\s+change') OR
+(anytext CONTAINS 'desalination')`
+----
+
+NOTES:
+
+* The term `anytext` represents the set of text fields that are searched by the operation.
+* The `CONTAINS` operator used above is just an example of an operator that searches a text field(s) for specific search terms.  How this operator is implemented and what it is named in the system backing a catalog implementation is beyond the scope of this Standard.
+* The regular expression `\s+` represents one or more white spaces.

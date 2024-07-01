@@ -1,0 +1,17 @@
+---
+allOf:
+  - $ref: 'https://schemas.opengis.net/ogcapi/processes/part1/1.0/openapi/schemas/processSummary.yaml'
+  - $ref: '../../../openapi/schemas/recordCommonProperties.yaml'
+    properties:
+      links:
+        description:
+          A list of static links associated with this record.
+        type: array
+        items:
+          $ref: '../../../openapi/schemas/linkBase.yaml'
+      linkTemplates:
+        description:
+          A list of dynamic links associated with this record.
+        type: array
+        items:
+          $ref: '../../../openapi/schemas/linkTemplate.yaml'

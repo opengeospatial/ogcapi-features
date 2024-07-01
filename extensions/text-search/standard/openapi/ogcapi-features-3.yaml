@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: "Building Blocks specified in OGC API - Features - Part 3: Filtering"
+  description: |-
+    Common components used in the
+    [OGC standard "OGC API - Features - Part 3: Filtering"](https://docs.ogc.org/is/19-079r2/19-079r2.html).
+
+    OGC API - Features - Part 3: Filtering 1.0 is an OGC Standard.
+    Copyright (c) 2024 Open Geospatial Consortium.
+    To obtain additional rights of use, visit https://www.ogc.org/legal/ .
+
+    This document is also available in the
+    [OGC Schema Repository](https://schemas.opengis.net/ogcapi/features/part3/1.0/openapi/ogcapi-features-3.yaml).
+  version: '1.0.0'
+  contact:
+    name: Clemens Portele
+    email: portele@interactive-instruments.de
+  license:
+    name: OGC License
+    url: 'https://www.ogc.org/legal/'
+paths:
+  /collections/{collectionId}/queryables:
+    get:
+      summary: Get the list of supported queryables for a collection
+      description: |-
+        This operation returns the list of supported queryables of a collection. Queryables are 
+        the properties that may be used to construct a filter expression on items in the collection.
+        The response is a JSON Schema of a object where each property is a queryable.
+      operationId: getQueryables
+      parameters:
+        - $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/parameters/collectionId.yaml'
+      responses:
+        '200':
+          description: The queryable properties of the collection.
+          content:
+            application/schema+json:
+              schema:
+                type: object
+  /functions:
+    get:
+      summary: Get the list of supported functions
+      description: |-
+        This operation returns the list of custom functions supported in CQL2 expressions.
+      operationId: getFunctions
+      responses:
+        '200':
+          description: The list of custom functions supported in CQL2 expressions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/functions'
+components:
+  parameters:
+    filter:
+      name: filter
+      in: query
+      required: false
+      schema:
+        type: string
+      style: form
+      explode: false
+    filter-lang:
+      name: filter-lang
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - 'cql2-text'
+          - 'cql2-json'
+        default: 'cql2-text'
+      style: form
+    filter-crs:
+      name: filter-crs
+      in: query
+      required: false
+      schema:
+        type: string
+        format: uri-reference
+      style: form
+      explode: false
+  schemas:
+    functions:
+      type: object
+      required:
+      - functions
+      properties:
+        functions:
+          type: array
+          items:
+            type: object
+            required:
+            - name
+            - returns
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              metadataUrl:
+                type: string
+                format: uri-reference
+              arguments:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - type
+                  properties:
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    type:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                        - string
+                        - number
+                        - integer
+                        - datetime
+                        - geometry
+                        - boolean
+              returns:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - string
+                  - number
+                  - integer
+                  - datetime
+                  - geometry
+                  - boolean
