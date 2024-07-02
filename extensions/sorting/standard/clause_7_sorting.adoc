@@ -1,0 +1,67 @@
+[[clause-sorting]]
+== Requirements Class "Sorting"
+
+[[sorting-overview]]
+=== Overview
+
+include::requirements/requirements_class_sorting.adoc[]
+
+The `Sorting` Requirements Class defines the requirements for specifying how resources in a response should be ordered for presentation.
+
+[[sortby-parameter]]
+=== Parameter sortby
+
+include::requirements/sorting/REQ_sortby-definition.adoc[]
+
+[NOTE]
+======================================================================
+The core definition of the `sortby` parameter only defines a single directive that controls the sort order of the corresponding property.  It is anticipated extensions would add additional search facets such as directives for:
+
+. Handling missing values,
+. Specifying a high value indicating that the corresponding property be sorted as if it were the highest possible value,
+. Specifying a low value indicating that the corresponding property be sorted as if it were the lowest possible value,
+. Allowing resources to be omitted from the result set based on their sort order,
+. Specify a fixed value and a fixed value that sorts the corresponding property as if it were the specified fixed value.
+======================================================================
+
+include::requirements/sorting/REQ_sortby-response.adoc[]
+
+=== Examples
+
+[#defaultSortOrder-example,reftext=`Default Sort Order Example`]
+.Default Sort Order Example
+[source,json]
+----
+include::examples/json/defaultSortOrder.json[]
+----
+
+The following examples assume the following set of sortables retrieved from the servers `/collection/{collectionID}/sortables` endpoint:
+
+[#sortables-example,reftext=`Sortables Example`]
+.List of sortables
+[source,json]
+----
+include::examples/json/sortables.json[]
+----
+
+[#sortby-example,reftext=`SortBy Example`]
+.sortby Example of descending sort by updated date and ascending sort of resource identifier.
+[source]
+----
+.../collections/mycat/items?...&sortby=%2Dupdated,%2Bid&...
+----
+
+[#sortby-extent-example,reftext=`SortBy Extent Example`]
+.sortby Example of an ascending sort by extent (i.e. smallest area first)
+[source]
+----
+.../collections/mycat/items?...&sortby=%2Bextent&...
+----
+
+[#sortby-relevance-example,reftext=`SortBy Relevance Example`]
+.sortby Example of a descending sort by relevance (i.e. most relevant first)
+[source]
+----
+.../collections/mycat/items?...&sortby=%2Drelevance&...
+----
+

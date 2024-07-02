@@ -1,0 +1,21 @@
+[[req_sorting_defaultSortOrder-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/sorting/defaultSortOrder-definition*
+
+^|A |The information model of a sortable resource SHALL include the `defaultSortOrder` member with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+  defaultSortOrder:
+    type: array
+    items:
+      type: string
+----
+
+^|B |Each string in the array SHALL be the name of a sortable.
+^|C |If a listed sortable is prepended with a `+` this SHALL indicate that the sort order is ascending.
+^|D |If a listed sortable is prepended with a `-` this SHALL indicate that the sort order is descending.
+^|E |If a listed sortables is not prepended with a `+` or `-` then the sort order SHALL be assumed to be ascending.
+^|F |If the `defaultSortOrder` member is not present in the response, then no sorting information SHALL be assumed.
+|===

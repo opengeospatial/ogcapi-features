@@ -1,0 +1,22 @@
+[[req_sorting_get-sortables-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/sorting/get-sortables-success*
+
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |For responses that use `application/schema+json` as the `Content-Type` of the response, the response SHALL have the following characteristics:
+
+* The property `$schema` is `\http://json-schema.org/2019-09/schema#` or
+`\https://json-schema.org/draft/2019-09/schema`.
+* The property `$id` is the URI of the resource without query parameters.
+* The `type` is `object` and each property is a sortable.
+* The property `$schema` is `\https://json-schema.org/draft/2019-09/schema` 
+or `\https://json-schema.org/draft/2020-12/schema`.
+* The property `$id` is the URI of the resource without query parameters.
+* The `type` is `object` and each property is a sortable.
+
+^|C |Each property SHALL include a `type` member, except for spatial properties.
+^|D |Each spatial property SHALL not include a `type` or `$ref` member.
+^|E |Each spatial property SHALL include a `format` member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case with "any" as the wildcard for any geometry type. In other words, the values for the https://portal.ogc.org/files/?artifact_id=25355[Simple Feature] geometry types are: `geometry-any`, `geometry-point`, `geometry-multipoint`, `geometry-linestring`, `geometry-multilinestring`, `geometry-polygon`, `geometry-multipolygon`, and `geometry-geometrycollection`.
+^|F |If included, the `additionalProperties` member SHALL have a value of `false`.
+|===

@@ -1,0 +1,7 @@
+[[req_features-sorting_get-sortables-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features-sorting/get-sortables-op*
+^|A |For every feature collection, the server SHALL support the Sortables resource at the path `/collections/{collectionId}/sortables`.
+^|B |The parameter `collectionId` is each `id` property in the Collections resource (JSONPath: `$.collections[*].id`).
+|===

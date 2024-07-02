@@ -1,0 +1,410 @@
+[[ats]]
+[appendix]
+:appendix-caption: Annex
+== Abstract Test Suite (Normative)
+
+This test suite uses the https://en.wikipedia.org/wiki/Given-When-Then[Given-When-Then] notation to specify the tests.
+
+In order to execute tests against the Web API under test, the Web API needs to support one of the specified encodings. Since all known implementations at this time support JSON, this test suite uses the JSON encoding and adds a dependency to the Conformance Class "JSON" in OGC API - Common - Part 1: Core for the general "Sorting" tests and to the Conformance Class "GeoJSON" in OGC API - Features - Part 1: Core for the feature-specific tests. 
+
+The Web API under test can require authorization. Any Executable Test Suite implementing this test suite should implement the following security schemes supported by OpenAPI 3.0: HTTP Authorization schemes "basic" and "bearer", API keys, and OAuth2 flow "authorizationCode".
+
+=== Conformance Class "Sortables"
+
+:conf-class: sortables
+[[conf_sortables]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_sortables,Requirements Class "Sortables">>
+|Dependency |OGC API - Common - Part 1: Core, Conformance Class "JSON"
+|===
+
+NOTE: The Conformance Class "JSON" in Common Core has a dependency to the Conformance Classes "Core" and "Landing Page"; that is, testing against "JSON" will automatically test against the dependencies.
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API (`{apiURI}`);
+* A list of sortable resources in the API (`{apiURI}/{pathToResource}`);
+* Authentication credentials (optional);
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: `GET`
+** path: `{apiURI}/conformance`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.conformsTo` is a string array that includes the value "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+
+:conf-test: get-sortables-uris
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_sortables-link,/req/{conf-class}/sortables-link>>
+|Test purpose: | Check that a link to the Sortables resource exists for every sortable resource
+|Test method: | 
+Given:
+
+* the list of sortable resources (`{apiURI}/{pathToResource}`);
+
+When:
+
+* a request is executed for every sortable resource
+** method: `HEAD` (if `HEAD` results in a 405 response, use `GET` instead)
+** path: `{apiURI}/{pathToResource}`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* assert that the response includes a `Link` header with `rel` set to `\http://www.opengis.net/def/rel/ogc/1.0/sortables`;
+* store the `href` value as the Sortables URI for the sortable resource ({sortablesUri}).
+|===
+
+:conf-test: get-sortables
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_get-sortables-op,/req/{conf-class}/get-sortables-op>>; <<req_{conf-class}_get-sortables-response,/req/{conf-class}/get-sortables-response>>
+|Test purpose: | Check that the Sortables resource exists for every sortable resource
+|Test method: | 
+Given:
+
+* test "get-sortables-uris" was successful
+* the list of Sortables URIs for the sortable resources (list of {sortablesUri}) 
+
+When:
+
+* the request for the Sortables page is executed for every sortable resource
+** method: `GET`
+** path: `{sortablesUri}`
+** header: `Accept: application/schema+json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/schema+json");
+* assert that the value of the `$schema` member is "\https://json-schema.org/draft/2019-09/schema" or "\https://json-schema.org/draft/2020-12/schema"
+* assert that the value of the `$id` member is "{sortablesUri}".
+* assert that the value of the `type` member is "object".
+* assert that `$.properties` is a non-empty object;
+* assert that each member in `$.properties` has an object as its value and the object either includes `type` member or a `format` member whose value starts with `geometry-`;
+* assert that the response is a valid JSON Schema;
+* store the key of an arbitrary property with a `type` member as the sample queryable of the sortable resource;
+* store the key of an arbitrary property of the object as the spatial queryable of the sortable resource, if the value of member is an object that includes no `type` member and a `format` member with a value `geometry-{type}` where `{type}` is one of "point", "multipoint", "linestring", "multilinestring", "polygon", "multipolygon", "geometrycollection", "any", "point-or-multipoint", "linestring-or-multilinestring", or "polygon-or-multipolygon";
+* store the value of the `additionalProperties` member or `true`, if it is not provided.
+|===
+
+NOTE: Sub-requirement G of `/req/sortables/get-sortables-response` can only be checked when executing sortby queries in dependent conformance classes.
+
+=== Conformance Class "Sorting"
+
+:conf-class: sorting
+[[conf_sorting]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_sorting,Requirements Class "Sorting">>
+|Dependency |<<conf_sortables,Conformance Class "Sortables">>
+|===
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API (`{apiURI}`);
+* Authentication credentials (optional);
+* The list of sortable resources in the API (`{apiURI}/{pathToResource}`);
+* The media type of the response when accessing these resources (`{responseMediaType}`)
+* The list of acceptable status codes for a successful sortby execution (default: "200", "204");
+* The list of acceptable status codes for an unsuccessful sortby execution (default: "400");
+* A valid sortby expression for a sortable `{sortable}` (`{sorting-valid}`; default: `{sortable}`);
+* An invalid sortby expression (`{sorting-invalid}`; default: `THIS IS NOT A SORTBY EXPRESSION`);
+* The information stored during the execution of conformance tests of conformance class "Sortables".
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: `GET`
+** path: `{apiURI}/conformance`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: sortby-param
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_sortby-param,/req/{conf-class}/sortby-param>>
+|Test purpose: | Check that the query parameter `sortby` is supported
+|Test method: | 
+Given:
+
+* test "get-sortables" was successful
+* the list of sortable resources 
+* the sample sortable of every sortable resource
+
+When:
+
+* a request for each resource that supports sorting is executed without a sortby parameter
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* store the result as the unsorted result of the resource.
+
+When:
+
+* a request for each resource that supports sorting is executed with a valid sortby expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `sortby={sortby-valid}` where `{sortable}` in `{sortby-valid}` is replaced by the sample sortable of the sortable resource
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* assert that each returned resource matches the order specified by the sortby expression.
+
+When:
+
+* a request for each resource that supports sorting is executed with an invalid sortby expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `sortby={sortby-invalid}` where `{sortable}` in `{sortby-invalid}` is replaced by the sample sortable of the sortable resource
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
+|===
+
+:conf-test: sortby-order-default
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_filter-param,/req/{conf-class}/filter-param>>, <<req_{conf-class}_filter-lang-param,/req/{conf-class}/filter-lang-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the default sort order is supported.
+|Test method: | 
+Given:
+
+* test "get-sortables" was successful
+* the list of sortable resources that include a `defaultSortOrder` property
+
+When:
+
+* a request for each resource that supports sorting is executed without a valid sort by expression
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution, `Content-Type` header is `{responseMediaType}`);
+* assert that each returned resource is in the correct order according to the `defaultSortOrder` parameter
+|===
+
+:conf-test: expression-construction
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_sortables_get-sortables-response,/req/sortables/get-sortables-response>>
+|Test purpose: | Check that unknown sortables are rejected, if this is declared in the Sortables resource
+|Test method: | 
+Given:
+
+* test "get-sortables" was successful
+* the list of sortable resources, reduced to those where `additionalProperties` is `false``
+* the sample queryable of every sortable resource in the list
+
+When:
+
+* a request for each resource is executed with a sortby expression with an unsupported queryable
+** method: `GET`
+** path: `{apiURI}/{pathToResource}`
+** query parameters (before percent encoding): `sortby={sortby-valid}` where `{sortables}` in `{sortby-valid}` is replaced by "this_is_not_a_sortable"
+** header: `Accept: {responseMediaType}`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert unsuccessful execution (the status code is in the list of acceptable status codes for an unsuccessful execution).
+|===
+
+=== Conformance Class "Features Sorting"
+
+:conf-class: features-sorting
+[[conf_features-filter]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_features-filter,Requirements Class "Features Sorting">>
+|Dependency |<<conf_filter,Conformance Class "Sorting">>
+|Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|===
+
+NOTE: The Conformance Class "GeoJSON" has a dependency to the Conformance Class "Core"; that is, testing against "GeoJSON" will automatically test against the dependencies.
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API (`{apiURI}`);
+* Authentication credentials (optional);
+* A valid sort by expression for a sortable `{sortable}` (`{sortby-valid}`);
+* An invalid sort by expression (`{sortby-invalid}`; default: `THIS IS NOT A SORTABLE`);
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: `GET`
+** path: `{apiURI}/conformance`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.conformsTo` is a string array that includes the value "\http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: get-collections
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Retrieve the list of collections provided by the API
+|Test method: | 
+Given:
+
+* test "get-conformance" was successful
+
+When:
+
+* the request for the Collections page is executed
+** method: `GET`
+** path: `{apiURI}/collections`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that `$.collections` is an array;
+* store the array as the list of collections.
+|===
+
+:conf-test: get-collection
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_sortables-link,/req/{conf-class}/sortables-link>>
+|Test purpose: | Check that a link to the Sortables resource exists for every collection
+|Test method: | 
+Given:
+
+* test "get-collections" was successful
+* the list of collections 
+
+When:
+
+* the request for the Collection page is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`)
+** method: `GET`
+** path: `{apiURI}/collections/{collectionId}`
+** header: `Accept: application/json`
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", `Content-Type` header is "application/json");
+* assert that a non-negative integer `n` exists where `$.links[{n}].rel` is "http://www.opengis.net/def/rel/ogc/1.0/sortables" and where `$.links[{n}].href` is (after normalization) the URI `{apiURI}/collections/{collectionId}/sortables`
+|===
+
+:conf-test: filter-sorting
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_sortby-param,/req/{conf-class}/sortby-param>>, <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the API supports sorting on the Features resource.
+|Test method: | 
+Given:
+
+* test "get-conformance" was successful
+
+When:
+
+* the tests for the "Sorting" conformance class are executed with the following input parameters:
+** All input parameters given to this conformance class (see above);
+** The path template to the resource that supports sorting is `{apiURI}/collections/{collectionId}/items` with a response media type `application/geo+json` (GeoJSON);
+** The acceptable status codes for a successful filter execution are: "200";
+** The list of acceptable status codes for an unsuccessful filter execution are: "400".
+
+Then:
+
+* the Web API under test passes the tests.
+|===

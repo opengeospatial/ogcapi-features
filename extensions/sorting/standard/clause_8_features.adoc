@@ -1,0 +1,32 @@
+== Requirements Class "Features Sorting"
+
+[[features-sorting-overview]]
+=== Overview
+
+include::requirements/requirements_class_features-sorting.adoc[]
+
+This clause defines the binding between the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard and the sorting parameters defined in the <<rc_sorting,Sorting conformance class>> as well as the Sortables resource defined in the <<rc_sortables,Sortables conformance class>>.
+
+=== Sortables
+
+==== Operation
+
+include::requirements/features-sorting/REQ_get-sortables-op.adoc[]
+
+=== Feature Collection
+
+==== Response
+
+include::requirements/features-sorting/REQ_sortables-link.adoc[]
+
+=== Features
+
+==== Operation
+
+As per the <<OAFeat-1,OGC API - Features - Part 1: Core>> Standard, features are accessed using the HTTP GET method via the `/collections/{collectionId}/items` path (see http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items[Features]).  The following additional requirements bind the parameters <<filter-param,filter>>, <<filter-lang-param,filter-lang>> and <<filter-filter-crs,filter-crs>> to the GET operation on this path.
+
+include::requirements/features-sorting/REQ_sortby-param.adoc[]
+
+==== Response
+
+include::requirements/features-sorting/REQ_response.adoc[]
