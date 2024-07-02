@@ -13,7 +13,7 @@ With just the knowledge about the queryables and their data types, the tests can
 
 In addition, to properly test an implementation, conditional tests are provided, if the implementation operates on a test dataset and where the queryables are properties of the features.
 
-The test dataset contains feature types with point, line string and polygon geometries. It is available as a GeoPackage file with the associated queryables specified in JSON Schema for each feature collection in the link:https://github.com/opengeospatial/ogcapi-features/tree/master/cql2/standard/data[OGC API Features GitHub repository]. The test dataset has been derived from three layers of the link:[Natural Earth vector dataset] at scale 1:110 million (ne_110m_admin_0_countries, ne_110m_populated_places_simple, ne_110m_rivers_lake_centerlines). Some columns have been removed and a few columns have been added with random data in order to test also filter expressions on date, timestamp and boolean properties.
+The test dataset contains feature types with point, line string and polygon geometries. It is available as a GeoPackage file with the associated queryables specified in JSON Schema for each feature collection in the link:https://github.com/opengeospatial/ogcapi-features/tree/master/cql2/standard/data[OGC API Features GitHub repository]. The test dataset has been derived from three layers of the link:[Natural Earth vector dataset] at scale 1:110 million (ne_110m_admin_0_countries, ne_110m_populated_places_simple, ne_110m_rivers_lake_centerlines). Some columns have been removed and a few columns have been added with random data in order to also test filter expressions on date, timestamp and boolean properties.
 
 The tests assume that 
 
