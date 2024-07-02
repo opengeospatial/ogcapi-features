@@ -1,0 +1,9 @@
+[[req_text-search_q-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/text-search/q-response*
+
+^|A |If a single search term is specified, then only resources that contain that search term in one or more of the searched text fields SHALL be in the result set.
+^|B |For multiple search terms that are comma separated (logical OR), only resources that contain one or more the specified search terms in one or more of the searched text fields SHALL be in the result set.
+^|C |For multiple search terms that are white space separated, only resources that contain all the search terms specified, in the order specified and separated by any number of white spaces in one or more of the searched text fields SHALL be in the result set.
+|===
