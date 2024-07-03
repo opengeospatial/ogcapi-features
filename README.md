@@ -110,6 +110,7 @@ The OGC Features API SWG has identified the following extensions as the highest 
 * [OGC API - Features - Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
   * The draft is an initial, complete draft.
 * [OGC API - Features - Part 8: Sorting](https://docs.ogc.org/DRAFTS/24-030.html)
+  * The draft is an initial, complete draft.
 * [OGC API - Features - Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
   * The draft is an initial, complete draft.
 
