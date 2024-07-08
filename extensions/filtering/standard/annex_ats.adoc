@@ -177,7 +177,7 @@ Then:
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
 |Requirements: | <<req_{conf-class}_parameters,/req/{conf-class}/parameters>>
-|Test purpose: | Check that query parameters for queryables is supported
+|Test purpose: | Check that query parameters for queryables are supported
 |Test method: | 
 Given:
 
@@ -201,7 +201,7 @@ Then:
 
 When:
 
-* a request for every filterable resource that supports filtering is executed and every queryable (`queryable`) with a invalid value for the queryable (`{invalid-value}`)
+* a request for every filterable resource that supports filtering is executed and every queryable (`queryable`) with an invalid value for the queryable (`{invalid-value}`)
 ** method: `GET`
 ** path: `{apiURI}/collections/{collectionId}/items`
 ** query parameters (before percent encoding): `{queryable}={invalid-value}`
@@ -414,7 +414,7 @@ When:
 * a request for each filterable resource is executed with a filter expression with a spatial predicate
 ** method: `GET`
 ** path: `{apiURI}/{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the resource, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by the spatial queryable, `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the resource, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
 ** header: `Accept: {responseMediaType}`
 ** authentication, if authentication credentials are provided
 
@@ -428,7 +428,7 @@ When:
 * a request for each filterable resource with a filter expression with a spatial predicate
 ** method: `GET`
 ** path: `{apiURI}/{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{x1}` is replaced by "1000000", `{y1}` by "1000000", `{x2}` by "2000000", and `{y2}`  by "2000000"
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by the spatial queryable, `{x1}` is replaced by "1000000", `{y1}` by "1000000", `{x2}` by "2000000", and `{y2}`  by "2000000"
 ** header: `Accept: {responseMediaType}`
 ** authentication, if authentication credentials are provided
 
@@ -457,7 +457,7 @@ When:
 * a request for each filterable resource and every CRS for that resource with a filter expression with a spatial predicate
 ** method: `GET`
 ** path: `{apiURI}/{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter-crs={crsId}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{crsId}` by the URI of the CRS, `{x1}` and `{y1}` by the coordinates of the west-bound longitude and south-bound latitude of the WGS84 bbox of the collection transformed to the CRS, and `{x2}` and `{y2}` by the coordinates of the east-bound longitude and north-bound latitude of the WGS84 bbox of the collection transformed to the CRS
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter-crs={crsId}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by the spatial queryable, `{crsId}` by the URI of the CRS, `{x1}` and `{y1}` by the coordinates of the west-bound longitude and south-bound latitude of the WGS84 bbox of the collection transformed to the CRS, and `{x2}` and `{y2}` by the coordinates of the east-bound longitude and north-bound latitude of the WGS84 bbox of the collection transformed to the CRS
 ** header: `Accept: {responseMediaType}`
 ** authentication, if authentication credentials are provided
 
@@ -471,7 +471,7 @@ When:
 * a request for each filterable resource with a filter expression with a spatial predicate
 ** method: `GET`
 ** path: `{apiURI}/{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter-crs={crsId}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{crsId}` by "http://www.opengis.net/def/crs/OGC/0/does_not_exist", `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter-crs={crsId}&filter={bbox-filter}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by the spatial queryable, `{crsId}` by "http://www.opengis.net/def/crs/OGC/0/does_not_exist", `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
 ** header: `Accept: {responseMediaType}`
 ** authentication, if authentication credentials are provided
 
@@ -665,7 +665,7 @@ When:
 * a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with a filter expression with a spatial predicate, where the collection has a WGS84 bbox and a spatial queryable
 ** method: `GET`
 ** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}&bbox={x1},{y1},{x2},{y2}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}&bbox={x1},{y1},{x2},{y2}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by the spatial queryable, `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, and `{y2}` by the north-bound latitude
 ** header: `Accept: {responseMediaType}`
 ** authentication, if authentication credentials are provided
 
@@ -679,7 +679,7 @@ When:
 * a request for the resource that supports filtering is executed for every collection in the list (`collectionId`: JSONPath `$.collections[*].id`) with a filter expression with a spatial predicate, where the collection has a WGS84 bbox and a spatial queryable
 ** method: `GET`
 ** path: `{pathToResource}`
-** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}&bbox={x3},{y3},{x4},{y4}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by by the spatial queryable, `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, `{y2}` by the north-bound latitude, and where the bbox `{x3}`,`{y3}`,`{x4}`,`{y4}` does not intersect the WGS84 bbox of the collection
+** query parameters (before percent encoding): `filter-lang={filter-lang}&filter={bbox-filter}&bbox={x3},{y3},{x4},{y4}` where `{spatialQueryable}` in `{bbox-filter}` is replaced by the spatial queryable, `{x1}` is replaced by the west-bound longitude of the WGS84 bbox of the collection, `{y1}` by the south-bound latitude, `{x2}` by the east-bound longitude, `{y2}` by the north-bound latitude, and where the bbox `{x3}`,`{y3}`,`{x4}`,`{y4}` does not intersect the WGS84 bbox of the collection
 ** header: `Accept: {responseMediaType}`
 ** authentication, if authentication credentials are provided
 
