@@ -42,12 +42,12 @@ The enumerated value `cql2-json` is used to indicate that the value of the
 
 Servers that support other filtering languages can extend this list of values
 as necessary although the meanings of any additional values are not described
-in this standard.
+in this Standard.
 
 [[filter-crs-param]]
 === Parameter filter-crs
 
-For reasons discussed in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>, spatial coordinates by default are in the coordinate reference system WGS 84 longitude and latitude for 2D coordinates and WGS 84 longitude, latitude and ellipsoidal height in meters for 3D coordinates. For servers that support geometries in other coordinate reference systems, the `filter-crs` parameter defined in this clause allows clients to assert which CRS is being used to encode geometric values in a filter expression.  Otherwiese, the `filter-crs` parameter has no use.
+For reasons discussed in the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>, spatial coordinates by default are in the coordinate reference system WGS 84 longitude and latitude for 2D coordinates and WGS 84 longitude, latitude and ellipsoidal height in meters for 3D coordinates. For servers that support geometries in other coordinate reference systems, the `filter-crs` parameter defined in this clause allows clients to assert which CRS is being used to encode geometric values in a filter expression.  Otherwise, the `filter-crs` parameter has no use.
 
 include::requirements/filter/REQ_filter-crs-wgs84.adoc[]
 
@@ -119,7 +119,7 @@ include::requirements/filter/REQ_get-functions-response-json.adoc[]
 
 === Filter expression languages
 
-This standard only specifies `filter-lang` values for the <<CQL2,Common Query Language (CQL2)>>. However, support for
+This Standard only specifies `filter-lang` values for the <<CQL2,Common Query Language (CQL2)>>. However, support for
 this filter expression language is not mandatory and other languages 
 can be used as the value of the <<filter-param,filter parameter>>, too.  
 
