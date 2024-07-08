@@ -107,7 +107,7 @@ When:
 Then:
 
 * assert successful execution (status code is "200", `Content-Type` header is "application/schema+json");
-* assert that the value of the `$schema` member is "\https://json-schema.org/draft/2019-09/schema" or "\https://json-schema.org/draft/2020-12/schema"
+* assert that the value of the `$schema` member is "\https://json-schema.org/draft/2020-12/schema"
 * assert that the value of the `$id` member is "{queryablesUri}".
 * assert that the value of the `type` member is "object".
 * assert that `$.properties` is a non-empty object;
