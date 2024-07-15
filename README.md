@@ -122,7 +122,7 @@ Part 2 (Coordinate Reference Systems by Reference) has been published by ISO as 
 
 ## Additional information
 
-Open issues for all parts are organized in GitHub projects:
+Open issues for all parts are organized in [GitHub projects](https://github.com/opengeospatial/ogcapi-features/projects?query=is%3Aopen):
 
 * [Open issues for Part 1: Core](https://github.com/orgs/opengeospatial/projects/18),
 * [Open issues for Part 2: Coordinate Reference Systems by Reference](https://github.com/orgs/opengeospatial/projects/19)
