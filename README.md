@@ -79,6 +79,11 @@ in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
 * [Server implementations - examples, more information and how-to guides](implementations/servers/README.md)
 * [Client implementations - examples, more information and how-to guides](implementations/clients/README.md)
 
+To test APIs, the following resources are available:
+
+* [OGC Checker (by Geonovum)](https://geonovum-labs.github.io/ogc-checker/?#/ogc-api)
+* [OGC Validator (by OGC)](https://cite.opengeospatial.org/teamengine/)
+
 ### OGC Product Database
 
 OGC maintains a public database of software products implementing approved OGC standards. The database also identifies products that pass the [OGC Compliance Test](https://www.ogc.org/compliance) for the standard, where available.
