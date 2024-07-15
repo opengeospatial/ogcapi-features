@@ -122,18 +122,18 @@ Part 2 (Coordinate Reference Systems by Reference) has been published by ISO as 
 
 ## Additional information
 
-Open issues for all parts are organized in [GitHub projects](https://github.com/opengeospatial/ogcapi-features/projects):
+Open issues for all parts are organized in GitHub projects:
 
-* [Open issues for Part 1: Core](https://github.com/opengeospatial/ogcapi-features/projects/1),
-* [Open issues for Part 2: Coordinate Reference Systems by Reference](https://github.com/opengeospatial/ogcapi-features/projects/2)
-* [Open issues for Part 3: Filtering / Common Query Language (CQL2)](https://github.com/opengeospatial/ogcapi-features/projects/4)
-* [Open issues for Part 4: Create, Replace, Update and Delete](https://github.com/opengeospatial/ogcapi-features/projects/3)
-* [Open issues for Part 5: Schemas](https://github.com/opengeospatial/ogcapi-features/projects/11)
-* [Open issues for Part 6: Property Selection](https://github.com/opengeospatial/ogcapi-features/projects/12)
-* [Open issues for Part 7: Geometry Simplification](https://github.com/opengeospatial/ogcapi-features/projects/13)
-* [Open issues for Part 8: Sorting](https://github.com/opengeospatial/ogcapi-features/projects/15)
-* [Open issues for Part 9: Text Search](https://github.com/opengeospatial/ogcapi-features/projects/16)
-* [Open issues for Part 10: Search/Queries](https://github.com/opengeospatial/ogcapi-features/projects/10)
+* [Open issues for Part 1: Core](https://github.com/orgs/opengeospatial/projects/18),
+* [Open issues for Part 2: Coordinate Reference Systems by Reference](https://github.com/orgs/opengeospatial/projects/19)
+* [Open issues for Part 3: Filtering / Common Query Language (CQL2)](https://github.com/orgs/opengeospatial/projects/20)
+* [Open issues for Part 4: Create, Replace, Update and Delete](https://github.com/orgs/opengeospatial/projects/21)
+* [Open issues for Part 5: Schemas](https://github.com/orgs/opengeospatial/projects/22)
+* [Open issues for Part 6: Property Selection](https://github.com/orgs/opengeospatial/projects/17)
+* [Open issues for Part 7: Geometry Simplification](https://github.com/orgs/opengeospatial/projects/23)
+* [Open issues for Part 8: Sorting](https://github.com/orgs/opengeospatial/projects/24)
+* [Open issues for Part 9: Text Search](https://github.com/orgs/opengeospatial/projects/25)
+* [Open issues for Part 10: Search/Queries](https://github.com/orgs/opengeospatial/projects/26)
 
 Additional links:
 
