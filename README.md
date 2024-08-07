@@ -81,8 +81,12 @@ in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
 
 To test APIs, the following resources are available:
 
-* [OGC Checker (by Geonovum)](https://geonovum-labs.github.io/ogc-checker/?#/ogc-api)
 * [OGC Validator (by OGC)](https://cite.opengeospatial.org/teamengine/)
+* [OGC Checker (by Geonovum)](https://geonovum-labs.github.io/ogc-checker/?#/ogc-api)
+
+The OGC Validator is approved by the OGC Membership and is also used in the [OGC Compliance Program](https://cite.opengeospatial.org/) to certify software products implementing OGC API Features. It currently tests against version 1.0.0 of Part 1 and Part 2.
+
+The OGC Checker requests the Landing Page, Conformance Declaration and API Definition. Tests are mainly executed against the API Definition. It currently tests against version 1.0.1 of Part 1.
 
 ### OGC Product Database
 
