@@ -65,12 +65,21 @@ The standard is on the OGC website:
 * OGC API - Features - Part 2: Coordinate Reference Systems by Reference
   * [Version 1.0.1 (latest approved version)](https://docs.ogc.org/is/18-058r1/18-058r1.html)
   * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/18-058r2.html)
+* OGC API - Features - Part 3: Filtering
+  * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/19-079r2/19-079r2.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/19-079r3.html)
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
 
 The reference version of the OpenAPI components and XML schemas are published
 in the [OGC schema repository](http://schemas.opengis.net/ogcapi/features/).
+
+Closely related is the Common Query Language (CQL2) standard:
+
+* Common Query Language (CQL2)
+  * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/21-065r2/21-065r2.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/21-065r3.html)
 
 ## Server and client implementations
 
@@ -108,12 +117,10 @@ so browse there to get a good idea of what is happening, as well as past decisio
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r2.html) and [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r1.html)
-  * The OGC approval vote for these documents is ongoing.
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r1.html)
-  * The draft is complete and is expected to soon move to the Public Comment Period.
+  * The draft is complete and in the Public Comment Period.
 * [OGC API - Features - Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)
-  * The draft is complete and is expected to soon move to the Public Comment Period.
+  * The draft is complete and in the Public Comment Period.
 * [OGC API - Features - Part 6: Property Selection](https://docs.ogc.org/DRAFTS/24-019.html)
   * The draft is an initial, complete draft.
 * [OGC API - Features - Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
@@ -158,14 +165,14 @@ The latest drafts of each standard in this repository are build daily (based on 
 
 * [Part 1: Core](https://docs.ogc.org/DRAFTS/17-069r5.html)
 * [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r2.html)
-* [Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r2.html)
+* [Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r3.html)
 * [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r1.html)
 * [Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)
 * [Part 6: Property Selection](https://docs.ogc.org/DRAFTS/24-019.html)
 * [Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
 * [Part 8: Sorting](https://docs.ogc.org/DRAFTS/24-030.html)
 * [Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
-* [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r1.html)
+* [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r3.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
 [Asciidoctor](https://asciidoctor.org/) set up and [installed](https://asciidoctor.org/docs/#get-started-with-asciidoctor).
