@@ -3,7 +3,7 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/conf/oas30/security* 
 ^|Test Purpose |Verify that any authentication protocols implemented by the API are documented in the OpenAPI document. 
-^|Requirement |<<req_oas30_security,/req/oas30/security>>
+^|Requirement |<<req_oas_security,/req/oas/security>>
 ^|Test Method |. Identify all authentication protocols supported by the API.
 . Validate that each authentication protocol is described in the OpenAPI document by a Security Schema Object and its use is specified by a Security Requirement Object.
 |===

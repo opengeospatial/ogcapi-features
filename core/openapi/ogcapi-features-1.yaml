@@ -1,23 +1,23 @@
-openapi: 3.0.2
+openapi: 3.1.0
 info:
   title: "Building Blocks specified in OGC API - Features - Part 1: Core"
   description: |-
     Common components used in the
-    [OGC standard "OGC API - Features - Part 1: Core"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html).
+    [OGC standard "OGC API - Features - Part 1: Core"](https://docs.ogc.org/is/17-069r5/17-069r5.html).
 
     OGC API - Features - Part 1: Core 1.0 is an OGC Standard.
-    Copyright (c) 2019 Open Geospatial Consortium.
-    To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ .
+    Copyright (c) 2024 Open Geospatial Consortium.
+    To obtain additional rights of use, visit https://www.ogc.org/legal/ .
 
     This document is also available on
-    [OGC](http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml).
+    [OGC](https://schemas.opengis.net/ogcapi/features/part1/1.1/openapi/ogcapi-features-1.yaml).
   version: '1.0.0'
   contact:
     name: Clemens Portele
     email: portele@interactive-instruments.de
   license:
     name: OGC License
-    url: 'http://www.opengeospatial.org/legal/'
+    url: 'https://www.ogc.org/legal/'
 components:
   parameters:
     bbox:
@@ -149,7 +149,7 @@ components:
           items:
             $ref: "#/components/schemas/link"
           example:
-            - href: http://data.example.com/buildings
+            - href: https://data.example.com/buildings
               rel: item
             - href: http://example.com/concepts/buildings.html
               rel: describedby
@@ -432,7 +432,7 @@ components:
       properties:
         href:
           type: string
-          example: http://data.example.com/buildings/123
+          example: https://data.example.com/buildings/123
         rel:
           type: string
           example: alternate
@@ -638,10 +638,10 @@ components:
             $ref: '#/components/schemas/confClasses'
           example:
             conformsTo:
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
+              - 'http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/core'
+              - 'http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/oas31'
+              - 'http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/html'
+              - 'http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/geojson'
         text/html:
           schema:
             type: string
@@ -801,15 +801,15 @@ components:
           example:
             type: FeatureCollection
             links:
-              - href: 'http://data.example.com/collections/buildings/items.json'
+              - href: 'https://data.example.com/collections/buildings/items.json'
                 rel: self
                 type: application/geo+json
                 title: this document
-              - href: 'http://data.example.com/collections/buildings/items.html'
+              - href: 'https://data.example.com/collections/buildings/items.html'
                 rel: alternate
                 type: text/html
                 title: this document as HTML
-              - href: 'http://data.example.com/collections/buildings/items.json&offset=10&limit=2'
+              - href: 'https://data.example.com/collections/buildings/items.json&offset=10&limit=2'
                 rel: next
                 type: application/geo+json
                 title: next page
@@ -851,18 +851,18 @@ components:
           example:
             type: Feature
             links:
-              - href: 'http://data.example.com/id/building/123'
+              - href: 'https://data.example.com/id/building/123'
                 rel: canonical
                 title: canonical URI of the building
-              - href: 'http://data.example.com/collections/buildings/items/123.json'
+              - href: 'https://data.example.com/collections/buildings/items/123.json'
                 rel: self
                 type: application/geo+json
                 title: this document
-              - href: 'http://data.example.com/collections/buildings/items/123.html'
+              - href: 'https://data.example.com/collections/buildings/items/123.html'
                 rel: alternate
                 type: text/html
                 title: this document as HTML
-              - href: 'http://data.example.com/collections/buildings'
+              - href: 'https://data.example.com/collections/buildings'
                 rel: collection
                 type: application/geo+json
                 title: the collection document

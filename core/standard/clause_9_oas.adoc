@@ -1,34 +1,36 @@
-== Requirements class "OpenAPI 3.0"
+== OpenAPI requirements classes 
 
-=== Basic requirements
+=== Requirements Class "OpenAPI Specification"
 
-Servers conforming to this requirements class define their API by an link:http://spec.openapis.org/oas/v3.0.3#openapi-document[OpenAPI Document].
+NOTE: This requirements class is abstract. Implementations can only conform to the concrete requirements classes <<rc_oas30,OpenAPI Specification 3.0>> or <<rc_oas31,OpenAPI Specification 3.1>>.
 
-include::requirements/requirements_class_oas30.adoc[]
+==== Basic requirements
 
-include::requirements/oas30/REQ_oas-definition-1.adoc[]
+Servers conforming to this requirements class define their API by an OpenAPI Document. Note that this requirements class is not specific to a particular version of the OpenAPI specification. Requirements specific to a particular version are defined in separate, dependent requirements classes.
+
+include::requirements/requirements_class_oas.adoc[]
+
+include::requirements/oas/REQ_oas-definition.adoc[]
 
 The requirements <<req_core_root-success,/req/core/root-success>> and <<req_core_api-definition-success,/req/core/api-definition-success>> in _Core_ require that the API definition documents are referenced from the landing page.
-
-include::requirements/oas30/REQ_oas-definition-2.adoc[]
 
 [[two_appraoches_oas]]
 OpenAPI definitions can be created using different approaches. A typical example is the representation of the feature collections. One approach is to use a path parameter `collectionId,` i.e., the API definition has only a single path entry for all feature collections. Another approach is to explicitly define each feature collection in a separate path and without a path parameter, which allows to specify filter parameters or explicit feature schemas per feature collection. Both approaches are valid.
 
-include::requirements/oas30/REQ_oas-impl.adoc[]
+include::requirements/oas/REQ_oas-impl.adoc[]
 
-=== Complete definition
+==== Complete definition
 
-include::requirements/oas30/REQ_completeness.adoc[]
+include::requirements/oas/REQ_completeness.adoc[]
 
 Note that servers that, for example, are access-controlled (see <<security,Security>>), support web cache validation, CORS or that use HTTP redirection will make use of additional HTTP status codes beyond regular codes such as `200` for successful GET requests and `400`, `404` or `500` for error situations. See <<http_status_codes>>.
 
 Clients have to be prepared to receive responses not documented in the OpenAPI definition. For example, additional errors can occur in the transport layer outside of the server.
 
 [[exceptions]]
-=== Exceptions
+==== Exceptions
 
-include::requirements/oas30/REQ_exception-codes.adoc[]
+include::requirements/oas/REQ_exception-codes.adoc[]
 
 [[example_14]]
 .An exception response object definition
@@ -39,7 +41,7 @@ description: An error occurred.
 content:
   application/json:
     schema:
-      $ref: http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/exception.yaml
+      $ref: http://schemas.opengis.net/ogcapi/features/part1/1.1/openapi/schemas/exception.yaml
   text/html:
     schema:
       type: string
@@ -47,9 +49,9 @@ content:
 =================
 
 [[security]]
-=== Security
+==== Security
 
-include::requirements/oas30/REQ_security.adoc[]
+include::requirements/oas/REQ_security.adoc[]
 
 The OpenAPI specification currently supports the following link:http://spec.openapis.org/oas/v3.0.3#security-scheme-object[security schemes]:
 
@@ -61,6 +63,22 @@ The OpenAPI specification currently supports the following link:http://spec.open
 
 * OpenID Connect Discovery.
 
-=== Features
+==== Features
 
-include::recomendations/oas30/REC_f-key-properties.adoc[]
+include::recomendations/oas/REC_f-key-properties.adoc[]
+
+=== Requirements Class "OpenAPI Specification 3.0"
+
+Servers conforming to this requirements class define their API by an link:http://spec.openapis.org/oas/v3.0.3#openapi-document[OpenAPI 3.0 Document].
+
+include::requirements/requirements_class_oas30.adoc[]
+
+include::requirements/oas30/REQ_oas-definition.adoc[]
+
+=== Requirements Class "OpenAPI Specification 3.1"
+
+Servers conforming to this requirements class define their API by an link:http://spec.openapis.org/oas/v3.1.0#openapi-document[OpenAPI 3.1 Document].
+
+include::requirements/requirements_class_oas31.adoc[]
+
+include::requirements/oas31/REQ_oas-definition.adoc[]

@@ -3,6 +3,6 @@
 |===
 ^|*Abstract Test {counter:ats-id}* |*/conf/oas30/completeness* 
 ^|Test Purpose |Verify the completeness of an OpenAPI document. 
-^|Requirement |<<req_oas30_completeness,/req/oas30/completeness>>
+^|Requirement |<<req_oas_completeness,/req/oas/completeness>>
 ^|Test Method |Verify that for each operation, the OpenAPI document describes all link:http://spec.openapis.org/oas/v3.0.3#http-status-codes[HTTP Status Codes] and link:http://spec.openapis.org/oas/v3.0.3#responseObject[Response Objects] that the API uses in responses.
 |===

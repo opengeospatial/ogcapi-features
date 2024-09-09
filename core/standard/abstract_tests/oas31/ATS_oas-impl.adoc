@@ -1,0 +1,9 @@
+[[ats_oas31_oas-impl]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/oas31/oas-impl* 
+^|Test Purpose |Verify that all capabilities specified in the OpenAPI definition are implemented by the API. 
+^|Requirement |<<req_oas_oas-impl,/req/oas/oas-impl>>
+^|Test Method |. Construct a path from each URL template including all server URL options and all enumerated path parameters.
+. For each path defined in the OpenAPI document, validate that the path performs in accordance with the API definition and the API-Features standard.
+|===

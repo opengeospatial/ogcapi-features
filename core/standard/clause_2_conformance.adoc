@@ -23,11 +23,13 @@ None of these encodings are mandatory and an implementation of the _Core_ can al
 
 That said, the _Core_ requirements class includes recommendations to support, where practical, <<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings. <<overview,Clause 6 (Overview)>> includes a discussion about the recommended encodings.
 
-The _Core_ does not mandate any encoding or format for the formal definition of the API either. One option is the OpenAPI 3.0 specification and a requirements class has been specified for OpenAPI 3.0, which depends on the _Core_:
+The _Core_ does not mandate any encoding or format for the formal definition of the API either. The recommended option is the OpenAPI specification and three requirements classes have been specified for OpenAPI:
 
-* <<rc_oas30,OpenAPI Specification 3.0>>.
+* <<rc_oas,OpenAPI Specification>> (depends on _Core_),
+* <<rc_oas30,OpenAPI Specification 3.0>> (depends on _OpenAPI Specification_).
+* <<rc_oas31,OpenAPI Specification 3.1>> (depends on _OpenAPI Specification_).
 
-Like with the feature encodings, an implementation of the _Core_ requirements class can also decide to use other API definition representations in addition or instead of an OpenAPI 3.0 definition. Examples for alternative API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI specification, an OWS Common 2.0 capabilities document or WSDL.
+Like with the feature encodings, an implementation of the _Core_ requirements class can also decide to use other API definition representations in addition or instead of an OpenAPI 3.x definition. Examples for alternative API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI specification, an OWS Common 2.0 capabilities document or WSDL.
 
 The _Core_ is intended to be a minimal useful API for fine-grained read-access to a spatial dataset where geometries are represented in the coordinate reference system WGS 84 with axis order longitude/latitude.
 
@@ -40,10 +42,11 @@ Conformance with this standard shall be checked using all the relevant tests spe
 [cols="40,60",options="header"]
 !===
 |Conformance class |URI
-|<<ats_core,Core>> |http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
-|<<ats_html,HTML>> |http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html
-|<<ats_geojson,GeoJSON>> |http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson
-|<<ats_gmlsf0,GML, Simple Features Profile, Level 0>> |http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/gmlsf0
-|<<ats_gmlsf2,GML, Simple Features Profile, Level 2>> |http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/gmlsf2
-|<<ats_oas30,OpenAPI Specification 3.0>> |http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
+|<<ats_core,Core>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/core
+|<<ats_html,HTML>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/html
+|<<ats_geojson,GeoJSON>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/geojson
+|<<ats_gmlsf0,GML, Simple Features Profile, Level 0>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/gmlsf0
+|<<ats_gmlsf2,GML, Simple Features Profile, Level 2>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/gmlsf2
+|<<ats_oas30,OpenAPI Specification 3.0>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/oas30
+|<<ats_oas31,OpenAPI Specification 3.1>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/oas31
 !===

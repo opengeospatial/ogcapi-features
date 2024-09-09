@@ -1,10 +1,10 @@
-openapi: 3.0.2
+openapi: 3.1.0
 info:
   title: "A sample API conforming to the draft standard OGC API - Features - Part 1: Core"
   version: '1.0.0'
   description: |-
     This is a sample OpenAPI definition that conforms to the conformance
-    classes "Core", "GeoJSON", "HTML" and "OpenAPI 3.0" of the draft
+    classes "Core", "GeoJSON", "HTML" and "OpenAPI 3.1" of the draft
     standard "OGC API - Features - Part 1: Core".
 
     This example differs from the [other example](ogcapi-features-1-example1.yaml)
@@ -127,15 +127,15 @@ paths:
               example:
                 type: FeatureCollection
                 links:
-                  - href: 'http://data.example.com/collections/buildings/items.json'
+                  - href: 'https://data.example.com/collections/buildings/items.json'
                     rel: self
                     type: application/geo+json
                     title: this document
-                  - href: 'http://data.example.com/collections/buildings/items.html'
+                  - href: 'https://data.example.com/collections/buildings/items.html'
                     rel: alternate
                     type: text/html
                     title: this document as HTML
-                  - href: 'http://data.example.com/collections/buildings/items.json&offset=10&limit=2'
+                  - href: 'https://data.example.com/collections/buildings/items.json&offset=10&limit=2'
                     rel: next
                     type: application/geo+json
                     title: next page
@@ -193,18 +193,18 @@ paths:
               example:
                 type: Feature
                 links:
-                  - href: 'http://data.example.com/id/building/123'
+                  - href: 'https://data.example.com/id/building/123'
                     rel: canonical
                     title: canonical URI of the building
-                  - href: 'http://data.example.com/collections/buildings/items/123.json'
+                  - href: 'https://data.example.com/collections/buildings/items/123.json'
                     rel: self
                     type: application/geo+json
                     title: this document
-                  - href: 'http://data.example.com/collections/buildings/items/123.html'
+                  - href: 'https://data.example.com/collections/buildings/items/123.html'
                     rel: alternate
                     type: text/html
                     title: this document as HTML
-                  - href: 'http://data.example.com/collections/buildings'
+                  - href: 'https://data.example.com/collections/buildings'
                     rel: collection
                     type: application/geo+json
                     title: the collection document
