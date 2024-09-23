@@ -291,17 +291,17 @@ components:
             - a_equals
             - a_overlaps
         args:
-          $ref: '#/components/schemas/arrayExpression'
-    arrayExpression:
+          $ref: '#/components/schemas/arrayOperand'
+    arrayOperand:
       type: array
       minItems: 2
       maxItems: 2
       items:
         oneOf:
-          - $ref: '#/components/schemas/array'
+          - $ref: '#/components/schemas/arrayExpression'
           - $ref: '#/components/schemas/propertyRef'
           - $ref: '#/components/schemas/functionRef'
-    array:
+    arrayExpression:
       type: array
       items:
         oneOf:
@@ -310,7 +310,7 @@ components:
           - $ref: '#/components/schemas/booleanExpression'
           - $ref: '#/components/schemas/spatialInstance'
           - $ref: '#/components/schemas/temporalInstance'
-          - $ref: '#/components/schemas/array'
+          - $ref: '#/components/schemas/arrayExpression'
           - $ref: '#/components/schemas/propertyRef'
     arithmeticExpression:
       type: object
@@ -458,7 +458,7 @@ components:
               - $ref: '#/components/schemas/booleanExpression'
               - $ref: '#/components/schemas/spatialInstance'
               - $ref: '#/components/schemas/temporalInstance'
-              - $ref: '#/components/schemas/array'
+              - $ref: '#/components/schemas/arrayExpression'
               - $ref: '#/components/schemas/propertyRef'
     spatialInstance:
       oneOf:

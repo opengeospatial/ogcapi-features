@@ -250,22 +250,22 @@
           "type": "string",
           "enum": ["a_containedBy", "a_contains", "a_equals", "a_overlaps"]
         },
-        "args": {"$ref": "#/$defs/arrayExpression"}
+        "args": {"$ref": "#/$defs/arrayOperand"}
       }
     },
-    "arrayExpression": {
+    "arrayOperand": {
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
       "items": {
         "oneOf": [
-          {"$ref": "#/$defs/array"      },
+          {"$ref": "#/$defs/arrayExpression" },
           {"$ref": "#/$defs/propertyRef"},
           {"$ref": "#/$defs/functionRef"}
         ]
       }
     },
-    "array": {
+    "arrayExpression": {
       "type": "array",
       "items": {
         "oneOf": [
@@ -274,7 +274,7 @@
           {"$dynamicRef": "#cql2expression"}     ,
           {"$ref": "#/$defs/spatialInstance"}    ,
           {"$ref": "#/$defs/temporalInstance"}   ,
-          {"$ref": "#/$defs/array"}              ,
+          {"$ref": "#/$defs/arrayExpression"}    ,
           {"$ref": "#/$defs/propertyRef"}
         ]
       }
@@ -390,7 +390,7 @@
               {"$dynamicRef": "#cql2expression"}     ,
               {"$ref": "#/$defs/spatialInstance"}    ,
               {"$ref": "#/$defs/temporalInstance"}   ,
-              {"$ref": "#/$defs/array"}              ,
+              {"$ref": "#/$defs/arrayExpression"}    ,
               {"$ref": "#/$defs/propertyRef"}
             ]
           }
