@@ -4,5 +4,5 @@
 ^|*Recommendation {counter:rec-id}* |*/rec/core/fc-md-item-link-templates*
 ^|A |For each feature collection included in the response, the `linkTemplates` property of the collection SHOULD include a link template to the URI of the features (relation: `item`). 
 ^|B |The link template SHALL be encoded as a LinkTemplate object with the URI template in `uriTemplate`.
-^|C |If links are included in `Link` HTTP headers of the response, the link templates SHOULD also be included in `Link-Template` HTTP headers according to the https://datatracker.ietf.org/doc/draft-ietf-httpapi-link-template/[draft "The Link-Template HTTP Header Field" specification].
+^|C |If links are included in `Link` HTTP headers of the response, the link templates SHOULD also be included in `Link-Template` HTTP headers according to <<rfc9652,RFC 9652 (The Link-Template HTTP Header Field)>>.
 |===
