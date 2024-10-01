@@ -35,10 +35,10 @@ defines the `filter-lang` parameter.
 include::requirements/filter/REQ_filter-lang-param.adoc[]
 
 The enumerated value `cql2-text` is used to indicate that the value of the
-<<filter-param,`filter`>> parameter is the https://docs.ogc.org/is/21-065r1/21-065r1.html#basic-cql2-text[text encoding of CQL2].
+<<filter-param,`filter`>> parameter is the https://docs.ogc.org/is/21-065r2/21-065r2.html#cql2-text[text encoding of CQL2].
 
 The enumerated value `cql2-json` is used to indicate that the value of the
-<<filter-param,`filter`>> parameter is the https://docs.ogc.org/is/21-065r1/21-065r1.html#basic-cql2-JSON[JSON encoding of CQL2].
+<<filter-param,`filter`>> parameter is the https://docs.ogc.org/is/21-065r2/21-065r2.html#cql2-json[JSON encoding of CQL2].
 
 Servers that support other filtering languages can extend this list of values
 as necessary although the meanings of any additional values are not described
