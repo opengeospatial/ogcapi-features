@@ -2,7 +2,7 @@
 
 === Identifiers
 
-The normative provisions in this standard are denoted by the URI `http://www.opengis.net/spec/ogcapi-features-1/1.0`.
+The normative provisions in this standard are denoted by the URI `http://www.opengis.net/spec/ogcapi-features-1/1.1`.
 
 All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
 
@@ -64,11 +64,11 @@ This standard specifies requirements and recommendations for APIs that share fea
 
 ==== Role of OpenAPI
 
-This document uses OpenAPI 3.0 fragments as examples and to formally state requirements. However, using OpenAPI 3.0 is not required for implementing a server.
+This document uses OpenAPI 3.1 fragments as examples and to formally state requirements. However, using OpenAPI 3.1 is not required for implementing a server.
 
 Therefore, the _Core_ requirements class only requires that an API definition is provided and linked from the landing page.
 
-A separate requirements class is specified for API definitions that follow the <<rc_oas,OpenAPI specification 3.0>>. This does not preclude that in the future or in parallel other versions of OpenAPI or other API descriptions are provided by a server.
+Separate requirements classes are specified for API definitions that follow the <<rc_oas30,OpenAPI Specification 3.0>> and <<rc_oas31,OpenAPI Specification 3.1>>. This does not preclude that in the future or in parallel other versions of OpenAPI or other API descriptions are provided by a server.
 
 NOTE: This approach is used to avoid lock-in to a specific approach to defining an API as it is expected that the API landscape will continue to evolve.
 
@@ -90,7 +90,7 @@ In the case above, the following changes to the pre-defined OpenAPI component ar
 
 * Informative text may be changed or added, like comments or description properties.
 
-For API definitions that do not conform to the <<rc_oas30,OpenAPI Specification 3.0>>, the normative statement has to be interpreted in the context of the API definition language used.
+For API definitions that do not conform to the <<rc_oas31,OpenAPI Specification 3.1>>, the normative statement has to be interpreted in the context of the API definition language used.
 
 ==== Paths in OpenAPI definitions
 

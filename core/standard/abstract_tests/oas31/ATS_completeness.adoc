@@ -1,0 +1,8 @@
+[[ats_oas31_completeness]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/oas31/completeness* 
+^|Test Purpose |Verify the completeness of an OpenAPI document. 
+^|Requirement |<<req_oas_completeness,/req/oas/completeness>>
+^|Test Method |Verify that for each operation, the OpenAPI document describes all link:http://spec.openapis.org/oas/v3.1.0#http-status-codes[HTTP Status Codes] and link:http://spec.openapis.org/oas/v3.1.0#response-object[Response Objects] that the API uses in responses.
+|===

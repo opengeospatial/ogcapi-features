@@ -1,0 +1,9 @@
+[[req_oas_oas-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* | */req/oas/oas-definition*
+^|A |The content of the response of the HTTP GET operation at the landing page SHALL include the following links to the API definition:
+
+* Relation type `service-desc` and content type `application/vnd.oai.openapi+json;version=x.y` (where `x.y` is the version of the OpenAPI specification used);
+* Relation type `service-doc` and content type `text/html`.
+|===

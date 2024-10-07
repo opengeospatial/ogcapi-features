@@ -1,6 +1,6 @@
 # OpenAPI definition examples
 
-This folder includes two complete examples of an OpenAPI definition for a Web API implementing OGC API Features (the Core, HTML, GeoJSON and OpenAPI 3.0 conformance classes).
+This folder includes two complete examples of an OpenAPI definition for a Web API implementing OGC API Features (the Core, HTML, GeoJSON and OpenAPI 3.1 conformance classes).
 
 The [first example (ogcapi-features-1-example1.yaml)](ogcapi-features-1-example1.yaml) is a generic example that uses path parameters to describe all feature collections and all features. This OpenAPI definition does not provide any details on the collections or the feature content. This information is only available from the feature collection metadata. The API is also on [SwaggerHub](https://app.swaggerhub.com/apis/cportele/ogcapi-features-1-example1/1.0.0).
 
