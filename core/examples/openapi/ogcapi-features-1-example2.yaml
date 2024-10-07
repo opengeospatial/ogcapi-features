@@ -282,23 +282,24 @@ components:
         geometry:
           $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/geometryGeoJSON'
         properties:
-          type: object
-          nullable: true
-          properties:
-            name:
-              type: string
-            function:
-              type: string
-              enum:
-                - residential
-                - commercial
-                - public use
-            floors:
-              type: integer
-              minimum: 1
-            lastUpdate:
-              type: string
-              format: date-time
+          oneOf:
+            - type: null
+            - type: object
+              properties:
+                name:
+                  type: string
+                function:
+                  type: string
+                  enum:
+                    - residential
+                    - commercial
+                    - public use
+                floors:
+                  type: integer
+                  minimum: 1
+                lastUpdate:
+                  type: string
+                  format: date-time
         id:
           oneOf:
             - type: string

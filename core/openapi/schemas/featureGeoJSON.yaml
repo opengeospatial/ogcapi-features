@@ -10,12 +10,12 @@ properties:
       - Feature
   geometry:
     oneOf:
-    - enum:
-      - null
-    - $ref: geometryGeoJSON.yaml
+      - type: null
+      - $ref: geometryGeoJSON.yaml
   properties:
-    type: object
-    nullable: true
+    type: 
+      - object
+      - null
   id:
     oneOf:
       - type: string

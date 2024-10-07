@@ -303,9 +303,10 @@ components:
                 minItems: 2
                 maxItems: 2
                 items:
-                  type: string
-                  format: date-time
-                  nullable: true
+                  oneOf:
+                    - type: string
+                      format: date-time
+                    - type: null  
                 example:
                   - '2011-11-11T12:22:11Z'
                   - null
@@ -356,10 +357,13 @@ components:
           enum:
             - Feature
         geometry:
-          $ref: "#/components/schemas/geometryGeoJSON"
+          oneOf:
+            - type: null
+            - $ref: "#/components/schemas/geometryGeoJSON"
         properties:
-          type: object
-          nullable: true
+          type: 
+            - object
+            - null  
         id:
           oneOf:
             - type: string
