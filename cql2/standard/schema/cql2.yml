@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: Schema of Common Query Language (CQL2)
   description: 'For use in OpenAPI 3.0 documents.'
-  version: '1.0.0-SNAPSHOT'
+  version: '1.0.1-SNAPSHOT'
 paths: {}
 components:
   schemas:
@@ -291,8 +291,8 @@ components:
             - a_equals
             - a_overlaps
         args:
-          $ref: '#/components/schemas/arrayOperand'
-    arrayOperand:
+          $ref: '#/components/schemas/arrayOperands'
+    arrayOperands:
       type: array
       minItems: 2
       maxItems: 2

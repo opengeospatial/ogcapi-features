@@ -250,10 +250,10 @@
           "type": "string",
           "enum": ["a_containedBy", "a_contains", "a_equals", "a_overlaps"]
         },
-        "args": {"$ref": "#/$defs/arrayOperand"}
+        "args": {"$ref": "#/$defs/arrayOperands"}
       }
     },
-    "arrayOperand": {
+    "arrayOperands": {
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
