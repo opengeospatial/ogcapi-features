@@ -11,6 +11,8 @@
 #              portele[at]interactive-instruments.de  
 # 02-JUL-2024  pvretano[at]cubewerx.com               1.0.0 (final release)
 #              portele[at]interactive-instruments.de  
+# xx-xxx-2024  pvretano[at]cubewerx.com               1.0.1-SNAPHOST
+#              portele[at]interactive-instruments.de  
 
 #=============================================================================#
 # A CQL2 filter is a logically connected expression of one or more predicates.
@@ -178,16 +180,16 @@ temporalFunction = "T_AFTER"
 # a Boolean value of true.  Otherwise the function returns false.
 #=============================================================================#
 arrayPredicate = arrayFunction
-                 "(" arrayExpression "," arrayExpression ")";
+                 "(" arrayOperand "," arrayOperand ")";
 
-arrayExpression = array
-                | propertyName
-                | function;
+arrayOperand = arrayExpression
+             | propertyName
+             | function;
 
 # An array is a parentheses-delimited, comma-separated list of array
 # elements.
-array = "(" ")"
-      | "(" arrayElement [ { "," arrayElement } ] ")";
+arrayExpression = "(" ")"
+                | "(" arrayElement [ { "," arrayElement } ] ")";
 
 # An array element is either a character literal, a numeric literal,
 # a geometric literal, a temporal instance, a property name, a function,
@@ -196,7 +198,7 @@ arrayElement = characterClause
              | numericLiteral
              | temporalInstance
              | spatialInstance
-             | array
+             | arrayExpression
              | arithmeticExpression
              | booleanExpression
              | propertyName
@@ -358,7 +360,7 @@ argument = characterClause
          | numericLiteral
          | temporalInstance
          | spatialInstance
-         | array
+         | arrayExpression
          | arithmeticExpression
          | booleanExpression
          | propertyName

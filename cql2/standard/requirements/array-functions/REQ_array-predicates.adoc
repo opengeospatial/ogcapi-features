@@ -5,7 +5,7 @@
 ^|A |The server SHALL support arrays as defined by the BNF rule `arrayPredicate` in <<cql2-bnf>> 
 with the exception of the following rules:
 
-* `function` in `arrayExpression`, `arrayElement`
+* `function` in `arrayOperand`, `arrayElement`
 * `arithmeticExpression` and `function` in `arrayElement`.
 ^|B |Both array expressions SHALL be evaluated as sets. No inherent order SHALL be implied in an array of values.
 ^|C |The semantics of the standardized array comparison functions SHALL be evaluated as follows:
