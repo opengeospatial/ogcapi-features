@@ -5,8 +5,7 @@ required:
 properties:
   type:
     type: string
-    enum:
-      - MultiPoint
+    const: MultiPoint
   coordinates:
     type: array
     items:

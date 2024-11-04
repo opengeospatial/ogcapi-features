@@ -5,8 +5,7 @@ required:
 properties:
   type:
     type: string
-    enum:
-      - Polygon
+    const: Polygon
   coordinates:
     type: array
     items:

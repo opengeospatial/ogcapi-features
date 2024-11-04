@@ -329,8 +329,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - FeatureCollection
+          const: FeatureCollection
         features:
           type: array
           items:
@@ -354,8 +353,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - Feature
+          const: Feature
         geometry:
           oneOf:
             - type: null
@@ -365,9 +363,9 @@ components:
             - object
             - null  
         id:
-          oneOf:
-            - type: string
-            - type: integer
+          type:
+            - string
+            - integer
         links:
           type: array
           items:
@@ -389,8 +387,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - GeometryCollection
+          const: GeometryCollection
         geometries:
           type: array
           items:
@@ -418,8 +415,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - LineString
+          const: LineString
         coordinates:
           type: array
           minItems: 2
@@ -478,8 +474,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - MultiLineString
+          const: MultiLineString
         coordinates:
           type: array
           items:
@@ -498,8 +493,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - MultiPoint
+          const: MultiPoint
         coordinates:
           type: array
           items:
@@ -515,8 +509,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - MultiPolygon
+          const: MultiPolygon
         coordinates:
           type: array
           items:
@@ -556,8 +549,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - Point
+          const: Point
         coordinates:
           type: array
           minItems: 2
@@ -571,8 +563,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - Polygon
+          const: Polygon
         coordinates:
           type: array
           items:

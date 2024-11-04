@@ -5,8 +5,7 @@ required:
 properties:
   type:
     type: string
-    enum:
-      - MultiLineString
+    const: MultiLineString
   coordinates:
     type: array
     items:
