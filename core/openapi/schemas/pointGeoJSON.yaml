@@ -5,8 +5,7 @@ required:
 properties:
   type:
     type: string
-    enum:
-      - Point
+    const: Point
   coordinates:
     type: array
     minItems: 2

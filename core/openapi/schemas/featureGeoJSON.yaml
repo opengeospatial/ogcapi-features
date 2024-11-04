@@ -6,8 +6,7 @@ required:
 properties:
   type:
     type: string
-    enum:
-      - Feature
+    const: Feature
   geometry:
     oneOf:
       - type: null
@@ -17,9 +16,9 @@ properties:
       - object
       - null
   id:
-    oneOf:
-      - type: string
-      - type: integer
+    type:
+      - string
+      - integer
   links:
     type: array
     items:

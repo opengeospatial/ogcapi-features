@@ -5,8 +5,7 @@ required:
 properties:
   type:
     type: string
-    enum:
-      - GeometryCollection
+    const: GeometryCollection
   geometries:
     type: array
     items:
