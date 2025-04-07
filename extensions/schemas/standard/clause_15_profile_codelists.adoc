@@ -1,0 +1,113 @@
+:req-class: profile-codelists
+[#rc_{req-class}]
+== Requirements Class "Profiles for codelists"
+
+The Requirements Class "Profiles for codelists" specifies two profiles for representing enumerated values with additional information about each value, typically including a human-readable label (codelists). Enumerated values without additional information about each value are specified in the "enum" member of the JSON Schema. 
+
+It is good practice to publish codelists as resources on the web - as HTML, SKOS, a JSON object with each code value as a key, and/or another format.
+
+When requesting a schema that contains properties with values from a codelist, the response should not only list the codes, but also provide access to additional information about each code.
+
+Two different representations of a property with values from a codelist are specified as profiles.
+
+The first profile ("codelist-inline") uses "oneOf" with a schema for each code. This profile has the advantage that all information is in the schema; no external information needs to be accessed.
+
+The second profile ("codelist-ref") uses "enum" with a URI reference to the codelist resource. This has the advantage that "enum" is easier to parse/handle than "oneOf" and that a separate resource for codelists may be useful for other purposes, too, and in fact may already be published.
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web resources
+|Dependency |<<rc_schemas>>
+|Dependency |<<rc_profile-parameter>>
+|===
+
+:req: ref-profiles
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |Any schema resource SHALL provide the query parameter "profile".
+|===
+
+:req: codelist-inline
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |In the profile "codelist-inline" (`\http://www.opengis.net/def/profile/OGC/0/codelist-inline`) the schema of each property with values from a codelist SHALL be represented by a "oneOf" schema with a schema for each code. 
+^|B |The schema for each code SHALL have a "const" member with the code as the value.
+|===
+
+:rec: codelist-inline-title
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/req/{req-class}/{rec}
+^|A |In the profile "codelist-inline", the schema for each code SHOULD have a "title" member.
+|===
+
+[[example_15_1]]
+.Profile "codelist-inline"
+====
+[source,JSON]
+----
+{
+  "title": "Language",
+  "oneOf": [
+    {
+      "const": "eng",
+      "title": "English"
+    },
+    {
+      "const": "deu",
+      "title": "German"
+    },
+    {
+      "const": "fra",
+      "title": "French"
+    },
+    {
+      "const": "spa",
+      "title": "Spanish"
+    }
+  ]
+}
+----
+====
+
+:req: codelist-ref
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |In the profile "codelist-ref" (`\http://www.opengis.net/def/profile/OGC/0/codelist-ref`) the codelist SHALL be referenced by a HTTP(S) URI using the keyword "x-ogc-codelistUri".
+|===
+
+[[example_15_2]]
+.Profile "codelist-ref"
+====
+[source,JSON]
+----
+{
+  "title": "Language",
+  "type": "string",
+  "enum": [
+    "eng",
+    "deu",
+    "fra",
+    "spa"
+  ],
+  "x-ogc-codelistUri": "https://example.com/codelists/languages"
+}
+----
+====
+
+:per: default
+[#{req-class}_{per}]
+[width="90%",cols="2,7a"]
+|===
+^|*Permission {counter:per-num}* |/rec/{req-class}/{per}
+^|A |A resource MAY support only one of the profiles.
+^|B |Any codelist profile MAY be the default profile for a schema resource.
+|===
