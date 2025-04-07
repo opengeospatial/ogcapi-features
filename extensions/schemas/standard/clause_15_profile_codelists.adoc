@@ -2,7 +2,7 @@
 [#rc_{req-class}]
 == Requirements Class "Profiles for codelists"
 
-The Requirements Class "Profiles for codelists" specifies two profiles for representing enumerated values with additional information about each value, typically including a human-readable label (codelists). Enumerated values without additional information about each value are specified in the "enum" member of the JSON Schema. 
+The Requirements Class "Profiles for codelists" specifies two profiles for representing enumerated values with additional information about each value, typically including a human-readable label (codelists). Enumerated values without additional information about each value are specified in the "enum" member of the JSON Schema. Enumerated values are either strings or integers. 
 
 It is good practice to publish codelists as resources on the web - as HTML, SKOS, a JSON object with each code value as a key, and/or another format.
 
@@ -22,7 +22,7 @@ The second profile ("codelist-ref") uses "enum" with a URI reference to the code
 |Dependency |<<rc_profile-parameter>>
 |===
 
-:req: ref-profiles
+:req: query-parameter
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
