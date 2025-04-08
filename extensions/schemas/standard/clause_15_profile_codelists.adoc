@@ -2,32 +2,38 @@
 [#rc_{req-class}]
 == Requirements Class "Profiles for codelists"
 
-The Requirements Class "Profiles for codelists" specifies two profiles for representing enumerated values with additional information about each value, typically including a human-readable label (codelists). Enumerated values without additional information about each value are specified in the "enum" member of the JSON Schema. Enumerated values are either strings or integers. 
+A codelist is a list of codes with their definitions. The Requirements Class "Profiles for codelists" specifies two profiles for representing enumerated values (codes) with additional information about each value, typically including at least a human-readable label. The codes are either strings or integers. 
 
-It is good practice to publish codelists as resources on the web - as HTML, SKOS, a JSON object with each code value as a key, and/or another format.
+When requesting a schema that contains properties with values from a codelist ("codelist-valued properties"), the response should not only enumerate the codes, but also provide access to additional information about each code.
 
-When requesting a schema that contains properties with values from a codelist, the response should not only list the codes, but also provide access to additional information about each code.
+Two different representations of a codelist-valued property are specified as profiles. It is up to the API publisher to decide which profile is applied when a schema is requested. The publisher may also choose to support both profiles or other profiles.
 
-Two different representations of a property with values from a codelist are specified as profiles.
+The two profiles are:
 
-The first profile ("codelist-inline") uses "oneOf" with a schema for each code. This profile has the advantage that all information is in the schema; no external information needs to be accessed.
-
-The second profile ("codelist-ref") uses "enum" with a URI reference to the codelist resource. This has the advantage that "enum" is easier to parse/handle than "oneOf" and that a separate resource for codelists may be useful for other purposes, too, and in fact may already be published.
+- "codelist-inline": The schema of each codelist-valued property is represented by a "oneOf" schema with a schema for each code. The schema for each code has a "const" member with the code as the value. This representation has the advantage that all information is in the schema; no external information needs to be accessed.
+- "codelist-ref": The schema of each codelist-valued property is represented by an "enum" member with the codes. In addition the codelist is referenced by a HTTP(S) URI using the keyword "x-ogc-codelistUri". This profile has the advantage that "enum" is easier to parse/handle than "oneOf" and that a separate resource for codelists may be useful for other purposes, too, and in fact may already be published.
 
 [cols="2,7",width="90%"]
 |===
 ^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
 |Target type |Web resources
 |Dependency |<<rc_schemas>>
-|Dependency |<<rc_profile-parameter>>
 |===
 
-:req: query-parameter
+:req: consistency
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |Any schema resource SHALL provide the query parameter "profile".
+^|A |All codelist-valued properties in a schema SHALL use the same profile. 
+|===
+
+:rec: profile-link-header
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A |The response SHOULD include a link to the applied codelist profile in the HTTP response headers.
 |===
 
 :req: codelist-inline
@@ -35,8 +41,8 @@ The second profile ("codelist-ref") uses "enum" with a URI reference to the code
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |In the profile "codelist-inline" (`\http://www.opengis.net/def/profile/OGC/0/codelist-inline`) the schema of each property with values from a codelist SHALL be represented by a "oneOf" schema with a schema for each code. 
-^|B |The schema for each code SHALL have a "const" member with the code as the value.
+^|A |If the profile "codelist-inline" (`\http://www.opengis.net/def/profile/OGC/0/codelist-inline`) is applied, the schema of each property with values from a codelist SHALL be represented by a "oneOf" schema with a schema for each code. 
+^|B |If the profile "codelist-inline" is applied, the schema for each code SHALL have a "const" member with the code as the value.
 |===
 
 :rec: codelist-inline-title
@@ -44,7 +50,7 @@ The second profile ("codelist-ref") uses "enum" with a URI reference to the code
 [width="90%",cols="2,7a"]
 |===
 ^|*Recommendation {counter:rec-num}* |/req/{req-class}/{rec}
-^|A |In the profile "codelist-inline", the schema for each code SHOULD have a "title" member.
+^|A |If the profile "codelist-inline" is applied, the schema for each code SHOULD have a "title" member.
 |===
 
 [[example_15_1]]
@@ -54,6 +60,7 @@ The second profile ("codelist-ref") uses "enum" with a URI reference to the code
 ----
 {
   "title": "Language",
+  "description": "Languages identified by ISO 639-3 codes",
   "oneOf": [
     {
       "const": "eng",
@@ -70,6 +77,10 @@ The second profile ("codelist-ref") uses "enum" with a URI reference to the code
     {
       "const": "spa",
       "title": "Spanish"
+    },
+    {
+      "const": "ell",
+      "title": "Modern Greek"
     }
   ]
 }
@@ -81,8 +92,12 @@ The second profile ("codelist-ref") uses "enum" with a URI reference to the code
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |In the profile "codelist-ref" (`\http://www.opengis.net/def/profile/OGC/0/codelist-ref`) the codelist SHALL be referenced by a HTTP(S) URI using the keyword "x-ogc-codelistUri".
+^|A |If the profile "codelist-ref" (`\http://www.opengis.net/def/profile/OGC/0/codelist-ref`) is applied, the codelist SHALL be referenced by a HTTP(S) URI using the keyword "x-ogc-codelistUri".
 |===
+
+This standard does not specify the representation of the referenced codelist. The publisher may choose to publish the codelist in media types that are suitable for the community using the API. The reason for this approach is that different communities have different preferences for the representation of codelists. Typical representations are HTML (for human readers using a web browser or search engines), SKOS (for semantic web applications), JSON (for web applications), Genericode, etc. 
+
+Note that the "x-ogc-codelistUri" keyword may be included, too, when the "codelist-inline" profile is applied.
 
 [[example_15_2]]
 .Profile "codelist-ref"
@@ -91,23 +106,26 @@ The second profile ("codelist-ref") uses "enum" with a URI reference to the code
 ----
 {
   "title": "Language",
+  "description": "Languages identified by ISO 639-3 codes",
   "type": "string",
   "enum": [
     "eng",
     "deu",
     "fra",
-    "spa"
+    "spa",
+    "ell"
   ],
   "x-ogc-codelistUri": "https://example.com/codelists/languages"
 }
 ----
 ====
 
-:per: default
+:per: options
 [#{req-class}_{per}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Permission {counter:per-num}* |/rec/{req-class}/{per}
-^|A |A resource MAY support only one of the profiles.
-^|B |Any codelist profile MAY be the default profile for a schema resource.
+^|A |A resource MAY support only one codelist profile.
+^|B |If more than one profile is supported, any codelist profile MAY be the default profile for a schema resource.
+^|C |The schema resource MAY support the <<rc_profile-parameter,"profile">> query parameter to allow clients to request a specific profile supported by the API.
 |===
