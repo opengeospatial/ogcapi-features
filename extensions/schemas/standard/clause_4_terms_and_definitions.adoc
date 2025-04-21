@@ -45,6 +45,10 @@ the time instant or time interval that the publisher considers as the most impor
 
 NOTE: A feature can be described by multiple temporal properties. For example, an event can have a property with an instant or interval when the event occurred or will occur and another property when the event was recorded in the dataset. The primary temporal information can also be built from two properties, e.g., when the feature has two properties describing the start and end instants of an interval.
 
+[[profile-def]]
+profile::
+additional semantics (constraints, conventions, extensions) that are associated with a resource representation, in addition to those defined by the media type (<<rfc6906,RFC 6906: The 'profile' Link Relation Type>>)
+
 [[publisher-def]]
 publisher::
 entity responsible for making a resource available (https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher[Dublin Core Metadata Initiative - DCMI Metadata Terms])

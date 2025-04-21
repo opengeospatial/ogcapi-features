@@ -58,12 +58,13 @@ The following recommendations are intended to simplify parsing a schema and to h
 ^|C |Properties that represent a URI SHOULD be represented as a string with format "uri" or "uri-reference".
 ^|D |Properties that represent a URI template SHOULD be represented as a string with format "uri-template".
 ^|E |Properties that represent a UUID SHOULD be represented as a string with format "uuid".
-^|F |For string properties that are, "minLength", "maxLength", "enum" and/or "pattern" SHOULD be provided, where applicable.
+^|F |For string properties, "minLength", "maxLength", "enum" and/or "pattern" SHOULD be provided, where applicable.
 ^|G |For numeric properties, "multipleOf", "minimum", "exclusiveMinimum", "maximum", "exclusiveMaximum" SHOULD be provided, where applicable.
 ^|H |For integer properties that represent enumerated values, "enum" SHOULD be provided.
-^|I |For array properties, the property SHOULD consist of items that are strings or numbers.
-^|J |Required properties SHOULD be included in "required".
-^|K |The JSON Schema keywords SHOULD be constrained to the those mentioned in this recommendation and requirement `/req/{req-class}/properties`.
+^|I |For string or integer properties that represent codelist values, one of the profiles "codelist-inline" or "codelist-ref" (see <<rc_profile-codelists>>) SHOULD be applied.
+^|J |For array properties, the property SHOULD consist of items that are strings or numbers.
+^|K |Required properties SHOULD be included in "required".
+^|L |The JSON Schema keywords SHOULD be constrained to the those mentioned in this recommendation and requirement `/req/{req-class}/properties`.
 |===
 
 [#additional-keywords]

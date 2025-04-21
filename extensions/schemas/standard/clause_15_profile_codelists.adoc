@@ -1,0 +1,131 @@
+:req-class: profile-codelists
+[#rc_{req-class}]
+== Requirements Class "Profiles for codelists"
+
+A codelist is a list of codes with their definitions. The Requirements Class "Profiles for codelists" specifies two profiles for representing enumerated values (codes) with additional information about each value, typically including at least a human-readable label. The codes are either strings or integers. 
+
+When requesting a schema that contains properties with values from a codelist ("codelist-valued properties"), the response should not only enumerate the codes, but also provide access to additional information about each code.
+
+Two different representations of a codelist-valued property are specified as profiles. It is up to the API publisher to decide which profile is applied when a schema is requested. The publisher may also choose to support both profiles or other profiles.
+
+The two profiles are:
+
+- "codelist-inline": The schema of each codelist-valued property is represented by a "oneOf" schema with a schema for each code. The schema for each code has a "const" member with the code as the value. This representation has the advantage that all information is in the schema; no external information needs to be accessed.
+- "codelist-ref": The schema of each codelist-valued property is represented by an "enum" member with the codes. In addition the codelist is referenced by a HTTP(S) URI using the keyword "x-ogc-codelistUri". This profile has the advantage that "enum" is easier to parse/handle than "oneOf" and that a separate resource for codelists may be useful for other purposes, too, and in fact may already be published.
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web resources
+|Dependency |<<rc_schemas>>
+|===
+
+:req: consistency
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |All codelist-valued properties in a schema SHALL use the same profile. 
+|===
+
+:rec: profile-link-header
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A |The response SHOULD include a link to the applied codelist profile in the HTTP response headers.
+|===
+
+:req: codelist-inline
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |If the profile "codelist-inline" (`\http://www.opengis.net/def/profile/OGC/0/codelist-inline`) is applied, the schema of each property with values from a codelist SHALL be represented by a "oneOf" schema with a schema for each code. 
+^|B |If the profile "codelist-inline" is applied, the schema for each code SHALL have a "const" member with the code as the value.
+|===
+
+:rec: codelist-inline-title
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/req/{req-class}/{rec}
+^|A |If the profile "codelist-inline" is applied, the schema for each code SHOULD have a "title" member.
+|===
+
+[[example_15_1]]
+.Profile "codelist-inline"
+====
+[source,JSON]
+----
+{
+  "title": "Language",
+  "description": "Languages identified by ISO 639-3 codes",
+  "oneOf": [
+    {
+      "const": "eng",
+      "title": "English"
+    },
+    {
+      "const": "deu",
+      "title": "German"
+    },
+    {
+      "const": "fra",
+      "title": "French"
+    },
+    {
+      "const": "spa",
+      "title": "Spanish"
+    },
+    {
+      "const": "ell",
+      "title": "Modern Greek"
+    }
+  ]
+}
+----
+====
+
+:req: codelist-ref
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |If the profile "codelist-ref" (`\http://www.opengis.net/def/profile/OGC/0/codelist-ref`) is applied, the codelist SHALL be referenced by a HTTP(S) URI using the keyword "x-ogc-codelistUri".
+|===
+
+This standard does not specify the representation of the referenced codelist. The publisher may choose to publish the codelist in media types that are suitable for the community using the API. The reason for this approach is that different communities have different preferences for the representation of codelists. Typical representations are HTML (for human readers using a web browser or search engines), SKOS (for semantic web applications), JSON (for web applications), Genericode, etc. 
+
+Note that the "x-ogc-codelistUri" keyword may be included, too, when the "codelist-inline" profile is applied.
+
+[[example_15_2]]
+.Profile "codelist-ref"
+====
+[source,JSON]
+----
+{
+  "title": "Language",
+  "description": "Languages identified by ISO 639-3 codes",
+  "type": "string",
+  "enum": [
+    "eng",
+    "deu",
+    "fra",
+    "spa",
+    "ell"
+  ],
+  "x-ogc-codelistUri": "https://example.com/codelists/languages"
+}
+----
+====
+
+:per: options
+[#{req-class}_{per}]
+[width="90%",cols="2,7a"]
+|===
+^|*Permission {counter:per-num}* |/rec/{req-class}/{per}
+^|A |A resource MAY support only one codelist profile.
+^|B |If more than one profile is supported, any codelist profile MAY be the default profile for a schema resource.
+^|C |The schema resource MAY support the <<rc_profile-parameter,"profile">> query parameter to allow clients to request a specific profile supported by the API.
+|===
