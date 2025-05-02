@@ -1,28 +1,28 @@
-:req-class: core-roles-features
+:req-class: property-roles
 [#rc_{req-class}]
-== Requirements Class "Core roles for features"
+== Requirements Class "Property roles"
 
-The Requirements Class "Core roles for features" specifies additional property roles for feature data.
+The Requirements Class "Property roles" specifies additional property roles for data collections.
 
 [cols="2,7",width="90%"]
 |===
-^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class}
 |Target type |Web resource
 |Dependency |<<rc_schemas>>
 |===
 
-To understand how features are encoded in a specific format, additional property roles need to be identified in the logical schema. These roles depend on the format.
+To understand how data is encoded in a specific format, additional property roles need to be identified in the logical schema. These roles depend on the format.
 
 For example, the role "primary-geometry" is needed in feature types with multiple spatial properties to decide:
 
 * Which geometry is encoded as the geometry of a feature in formats such as FlatGeobuf, Shapefile or Mapbox Vector Tiles, which only support a single geometry; or,
 * Which geometry is encoded in the "geometry" member in GeoJSON.
 
-The other roles specified in this requirements class support feature formats that support representing primary temporal information or the type of the feature, such as JSON-FG.
+The other roles specified in this requirements class support formats that support representing primary temporal information or the type of a feature, such as supported by JSON-FG.
 
 === Primary geometry
 
-If the features have multiple spatial properties, the role "primary-geometry" can be used to identify the primary geometry of the features.
+If the schema defines multiple spatial properties for the collection, the role "primary-geometry" can be used to identify the primary geometry.
 
 :req: role-primary-geometry
 [#{req-class}_{req}]
@@ -38,7 +38,7 @@ NOTE: Since only a single property can be tagged in the schema as the primary ge
 
 === Primary temporal information
 
-If the features have multiple temporal properties, the roles "primary-instant", "primary-interval-start" and "primary-interval-end" can be used to identify the primary temporal information of the features.
+If the schema defines multiple temporal properties for the collection, the roles "primary-instant", "primary-interval-start" and "primary-interval-end" can be used to identify the primary temporal information.
 
 :req: role-primary-instant
 [#{req-class}_{req}]
@@ -46,7 +46,7 @@ If the features have multiple temporal properties, the roles "primary-instant", 
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |A property with "x-ogc-role" set to "primary-instant" SHALL be a temporal property.
-^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-instant".
+^|B |At most one property in a schema SHALL have "x-ogc-role" with a value of "primary-instant".
 ^|C |If the schema has only one temporal property, the property SHALL be the primary temporal information even if the property is not explicitly tagged with the role "primary-instant".
 |===
 
@@ -81,7 +81,7 @@ NOTE: FUTURE WORK? Consider adding a role "primary-interval" with a proper repre
 
 === Feature type
 
-If the features have a property that represents the feature type, the role "type" can be used for this property.
+If the data is organized as features with a property representing the feature type, the role "type" can be used for this property.
 
 :req: role-type
 [#{req-class}_{req}]
@@ -99,7 +99,7 @@ The previous Clause includes <<example_7_1,an example>> with the roles "id", "pr
 The following example is the schema of a feature type with the roles "id", "primary-geometry", "primary-interval-start" and "primary-interval-end".
 
 [[example_8_1]]
-.Schema example of a feature type 
+.Schema example of a feature type
 ====
 [source,JSON]
 ----
