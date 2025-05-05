@@ -65,6 +65,7 @@ The following recommendations are intended to simplify parsing a schema and to h
 ^|J |For array properties, the property SHOULD consist of items that are strings or numbers.
 ^|K |Required properties SHOULD be included in "required".
 ^|L |The JSON Schema keywords SHOULD be constrained to the those mentioned in this recommendation and requirement `/req/{req-class}/properties`.
+^|M |"$ref" SHOULD NOT be used, schemas that are reused SHOULD be dereferenced and represented inline.
 |===
 
 [#additional-keywords]
