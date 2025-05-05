@@ -39,9 +39,8 @@ explode: false
 ----
 ^|B |Each item SHALL be one of the follwoing:
 
-* A HTTP(S) URI of a profile, e.g., in the OGC Profile Register (\http://www.opengis.net/def/profile);
-* A Safe CURIE of a profile in the OGC Profile Register (e.g., `[ogc-profile:my-profile]`);
-* A profile identifier (the `profileId` value in the URI template `\http://www.opengis.net/def/profile/OGC/0/{profileId}`)
+* The profile identifier of a profile in the OGC Profile Register (the `profileId` value in the URI template `\http://www.opengis.net/def/profile/OGC/0/{profileId}`);
+* A HTTP(S) URI of a profile, e.g., in the OGC Profile Register (\http://www.opengis.net/def/profile).
 |===
 
 :per: profile-param-default
