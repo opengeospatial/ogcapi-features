@@ -42,9 +42,10 @@ In addition to the JSON Schema data types, geospatial data typically also uses s
 ^|B |Each spatial property SHALL not include a "type" or "$ref" member.
 ^|C |Each spatial property SHALL include a "format" member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case. I.e., the values for the Simple Feature geometry types are: "geometry-point", "geometry-multipoint", "geometry-linestring", "geometry-multilinestring", "geometry-polygon", "geometry-multipolygon", and "geometry-geometrycollection". In addition, the following special values are supported: "geometry-any" as the wildcard for any geometry type, "geometry-point-or-multipoint" for a Point or MultiPoint, "geometry-linestring-or-multilinestring" for a LineString or MultiLineString, and "geometry-polygon-or-multipolygon" for a Polygon or MultiPolygon.
 ^|D |Each temporal property SHALL be a "string" literal with the appropriate format (e.g., "date-time" or "date" for instances, depending on the temporal granularity).
-^|E |Properties that are only applicable when creating new data or updating existing data SHALL include "writeOnly: true".
-^|F |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
-^|G |The "additionalProperties" member with a value of "true" (the default) or "false" is used to state the expected behavior with respect to properties that are not explicitly declared in the schema. If "additionalProperties" is set to "false", properties that are not explicitly declared in the schema SHALL NOT be allowed, otherwise they SHALL be allowed.
+^|E |As a general rule, if the data type of a property has to be more specific than the JSON Schema data types ("number", "integer", "string"), the "format" keyword SHALL be used.
+^|F |Properties that are only applicable when creating new data or updating existing data SHALL include "writeOnly: true".
+^|G |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
+^|H |The "additionalProperties" member with a value of "true" (the default) or "false" is used to state the expected behavior with respect to properties that are not explicitly declared in the schema. If "additionalProperties" is set to "false", properties that are not explicitly declared in the schema SHALL NOT be allowed, otherwise they SHALL be allowed.
 |===
 
 The following recommendations are intended to simplify parsing a schema and to help understanding the meaning of the properties:
@@ -58,14 +59,22 @@ The following recommendations are intended to simplify parsing a schema and to h
 ^|C |Properties that represent a URI SHOULD be represented as a string with format "uri" or "uri-reference".
 ^|D |Properties that represent a URI template SHOULD be represented as a string with format "uri-template".
 ^|E |Properties that represent a UUID SHOULD be represented as a string with format "uuid".
-^|F |For string properties, "minLength", "maxLength", "enum" and/or "pattern" SHOULD be provided, where applicable.
-^|G |For numeric properties, "multipleOf", "minimum", "exclusiveMinimum", "maximum", "exclusiveMaximum" SHOULD be provided, where applicable.
-^|H |For integer properties that represent enumerated values, "enum" SHOULD be provided.
-^|I |For string or integer properties that represent codelist values, one of the profiles "codelist-inline" or "codelist-ref" (see <<rc_profile-codelists>>) SHOULD be applied.
-^|J |For array properties, the property SHOULD consist of items that are strings or numbers.
-^|K |Required properties SHOULD be included in "required".
-^|L |The JSON Schema keywords SHOULD be constrained to the those mentioned in this recommendation and requirement `/req/{req-class}/properties`.
-^|M |"$ref" SHOULD NOT be used, schemas that are reused SHOULD be dereferenced and represented inline.
+^|F |Properties that represent a password SHOULD be represented as a string with format "password" as a hint to obscure the value (defined in OpenAPI 3.1).
+^|G |Properties that represent a 32-bit floating point number SHOULD be represented as a number with format "float" (defined in OpenAPI 3.1).
+^|H |Properties that represent a 64-bit floating point number SHOULD be represented as a number with format "double" (defined in OpenAPI 3.1).
+^|I |Properties that represent a 32-bit signed integer SHOULD be represented as an integer with format "int32" (defined in OpenAPI 3.1).
+^|J |Properties that represent a 64-bit signed integer SHOULD be represented as an integer with format "int64" (defined in OpenAPI 3.1).
+^|K |Properties that represent a 32-bit unsigned integer SHOULD be represented as an integer with format "uint32".
+^|L |Properties that represent a 64-bit unsigned integer SHOULD be represented as an integer with format "uint64".
+^|M |In general, "format" values SHOULD be from the JSON Schema specifciation, the OpenAPI 3.1 specification or the OGC format register (to be established).
+^|N |For string properties, "minLength", "maxLength", "enum" and/or "pattern" SHOULD be provided, where applicable.
+^|O |For numeric properties, "multipleOf", "minimum", "exclusiveMinimum", "maximum", "exclusiveMaximum" SHOULD be provided, where applicable.
+^|P |For integer properties that represent enumerated values, "enum" SHOULD be provided.
+^|Q |For string or integer properties that represent codelist values, one of the profiles "codelist-inline" or "codelist-ref" (see <<rc_profile-codelists>>) SHOULD be applied.
+^|R |For array properties, the property SHOULD consist of items that are strings or numbers.
+^|S |Required properties SHOULD be included in "required".
+^|T |The JSON Schema keywords SHOULD be constrained to the those mentioned in this recommendation and requirement `/req/{req-class}/properties`.
+^|U |"$ref" SHOULD NOT be used, schemas that are reused SHOULD be dereferenced and represented inline.
 |===
 
 [#additional-keywords]
