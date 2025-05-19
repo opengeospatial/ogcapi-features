@@ -1,0 +1,12 @@
+[[per_features_other-update-vocabularies]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/features/other-update-vocabularies*
+
+Servers MAY, in addition to or instead of <<rfc7396,RFC 7396 (JSON Merge Patch)>>, support other vocabularies for describing feature changes in an update operation.  For example:
+
+* https://datatracker.ietf.org/doc/html/rfc6902[JavaScript Object Notation (JSON) Patch] for JSON-encoded features,
+* the https://docs.ogc.org/is/09-025r2/09-025r2.html[OGC® Web Feature Service 2.0 Interface Standard] https://docs.ogc.org/is/09-025r2/09-025r2.html#269[transaction operation] using the https://docs.ogc.org/is/09-025r2/09-025r2.html#283[update action] for https://portal.ogc.org/files/?artifact_id=74183&version=2[GML-encoded] features.
+
+Support for update vocabularies other than <<rfc7396,RFC 7396 (JSON Merge Patch)>> is not defined in this Standard.
+|===

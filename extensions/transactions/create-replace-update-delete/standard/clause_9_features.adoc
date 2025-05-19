@@ -86,6 +86,13 @@ include::../examples/json/schema.adoc[]
 
 include::requirements/features/REQ_update-json-merge-patch.adoc[]
 
+[NOTE]
+====
+Requirement <<req_features_update-json-merge-patch,/req/features/update-json-merge-patch>> is only in effect if the server supports <<rfc7396,RFC 7396 (JSON Merge Patch)>> as the vocabulary used to describe changes to feature components.
+====
+
+include::recommendations/features/PER_other_update_vocabs.adoc[]
+
 [[feature-geojson]]
 === GeoJSON
 
