@@ -1,0 +1,180 @@
+:req-class: profile-domains
+[#rc_{req-class}]
+== Requirements Class "Profiles for value domains"
+
+For properties, two profiles of value domains can be distinguished:
+
+- "valid-domain": The domain of all possible values of a property, according to the underlying data model. The domain constraints are specified in the data specification. The valid domain is a static domain: it does not change over time (unless the data specification changes). No value should be accepted by the API that is not in the valid domain. 
+- "actual-domain": The domain of all actual values of a property in the dataset at the time of the request. All queries that select features with a filter that selects property values outside of the actual domain will return an empty result set. The actual domain is a subset of the valid domain and is dynamic: it changes over time as the dataset is updated.
+
+Beyond declaring the data type of a property, the valid domain is expressed in the schema using the following keywords (see <<req_schemas_properties,Requriement /req/schemas/properties>> and <<rec_schemas_properties,Recommendation /rec/schemas/properties>>):
+
+* For textual values:
+** "enum": The property has a finite set of values;
+** "pattern": All property values match a regular expression pattern;
+** "minLength", "maxLength": The property values have a length constraint.
+* For numeric values:
+** "enum": The property has a finite set of values (integers only);
+** "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum": The property values are from a range;
+** "multipleOf": The property values are always a multiple of the specified value.
+* For geometric values:
+** "format": The property can take only certain geometry types (e.g., "geometry-point-or-multipoint").
+
+For the actual domain, the values of the following keywords will tyipically be different from the valid domain:
+
+* For textual values:
+** "enum": The list of actual values, if the values are from a finite set;
+** "minLength", "maxLength": The actual range of the length of the text strings.
+* For numeric values:
+** "enum": The list of actual values, if the values are from a finite set (integer only).
+** "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum": The actual range of the values.
+* For geometric values:
+** "format": The format value that matches the actual geometry types (e.g., "geometry-point").
+
+Which profile is most useful depends on the semantics of the schema resource:
+
+* The "actual-domain" profile is in particular useful for queryables to guide a client which values can be used to filter the current data. The same applies for the returnables to guide a client how to process or visualize the data (e.g., restrict a map legend to actual values). The "valid-domain" profile is still useful for these resources, but includes values that are not in the current data.
+* The "valid-domain" profile is important for receivables so that a client knows the values that the API accepts for new or updates resources. The "actual-domain" profile is in general not useful for receivables.
+* For sortables, the domain is in general less relevant and domain keywords could also be dropped altogether.
+
+Whether an API generates a schema with valid domains or actual domains is the choice of the API and can depend on the type of the schema resource. 
+
+Providing the actual domain is more expensive than providing the valid domain, as it requires analyzing the data. 
+
+The valid domain is static and can be cached for longer periods of time. Depending on the update frequency of the dataset, the actual domain can also be cached for a certain period of time. 
+
+[cols="2,7",width="90%"]
+|===
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+|Target type |Web resources
+|Dependency |<<rc_schemas>>
+|===
+
+:req: consistency
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |All properties with constraint keywords in a schema SHALL use the same profile. 
+|===
+
+:rec: profile-link-header
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A |The response SHOULD include a link to the applied domain profile in the HTTP response headers.
+|===
+
+:req: actual-domain
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |If the profile "actual-domain" (`\http://www.opengis.net/def/profile/OGC/0/actual-domain`) is applied,
+
+* "format" values starting with "geometry-" SHALL be restricted to the actual geometry types  in the dataset at the time of the request;
+* "enum" values SHALL be restricted to values in the dataset at the time of the request;
+* "minLength" and "maxLength" values SHALL be restricted to the actual range of the length of the text strings in the dataset at the time of the request;
+* "minimum", "maximum", "exclusiveMinimum", and "exclusiveMaximum" values SHALL be restricted to the actual numeric range of the values in the dataset at the time of the request;
+|===
+
+:per: options
+[#{req-class}_{per}]
+[width="90%",cols="2,7a"]
+|===
+^|*Permission {counter:per-num}* |/rec/{req-class}/{per}
+^|A |A resource MAY support only one domain profile.
+^|B |If more than one profile is supported, any domain profile MAY be the default profile for a schema resource.
+^|C |The schema resource MAY support the <<rc_profile-parameter,"profile">> query parameter to allow clients to request a specific profile supported by the API.
+|===
+
+[[example_domain_1]]
+.Profile "value-domain"
+====
+Request: `GET /collections/CulturePnt/queryables?f=json`
+
+In this case, the API returns the valid domain of the properties by default.
+
+[source,JSON]
+----
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://demo.ldproxy.net/daraa/collections/CulturePnt/queryables",
+  "type" : "object",
+  "title" : "Cultural (Points)",
+  "properties" : {
+    "ZI037_REL" : {
+      "title" : "Religious Designation",
+      "x-ogc-codelistUri" : "https://demo.ldproxy.net/daraa/codelists/daraa%2Frel",
+      "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+      "type" : "integer"
+    },
+    "geometry" : {
+      "title" : "geometry",
+      "x-ogc-role" : "primary-geometry",
+      "format" : "geometry-point-or-multipoint"
+    },
+    "F_CODE" : {
+      "title" : "Feature Type Code",
+      "x-ogc-codelistUri" : "https://demo.ldproxy.net/daraa/codelists/daraa%2Ff_code",
+      "x-ogc-role" : "type",
+      "enum" : [ "AK121", "AL012", "AL030", "AL130", "BH075" ],
+      "type" : "string"
+    },
+    "ZI001_SDV" : {
+      "title" : "Last Change",
+      "x-ogc-role" : "primary-instant",
+      "format" : "date-time",
+      "type" : "string"
+    }
+  },
+  "additionalProperties" : false
+}
+----
+====
+
+[[example_domain_2]]
+.Profile "actual-domain"
+====
+Request: `GET /collections/CulturePnt/queryables?f=json&profile=actual-domain`
+
+The API supports the query parameter "profile", which is used in this request to ask for the actual domain of the properties.
+
+[source,JSON]
+----
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://demo.ldproxy.net/daraa/collections/CulturePnt/queryables"
+  "type" : "object"
+  "title" : "Cultural (Points)",
+  "properties" : {
+    "ZI037_REL" : {
+      "title" : "Religious Designation",
+      "x-ogc-codelistUri" : "https://demo.ldproxy.net/daraa/codelists/daraa%2Frel",
+      "enum" : [ 3, 5, 7, 13 ],
+      "type" : "integer"
+    },
+    "geometry" : {
+      "title" : "geometry",
+      "x-ogc-role" : "primary-geometry",
+      "format" : "geometry-point"
+    },
+    "F_CODE" : {
+      "title" : "Feature Type Code",
+      "x-ogc-codelistUri" : "https://demo.ldproxy.net/daraa/codelists/daraa%2Ff_code",
+      "x-ogc-role" : "type",
+      "enum" : [ "AL012", "BH075" ],
+      "type" : "string"
+    },
+    "ZI001_SDV" : {
+      "title" : "Last Change",
+      "x-ogc-role" : "primary-instant",
+      "format" : "date-time",
+      "type" : "string"
+    }
+  },
+  "additionalProperties" : false
+}
+----
+====
