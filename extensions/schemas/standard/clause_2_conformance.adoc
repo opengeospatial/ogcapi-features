@@ -6,12 +6,14 @@ This Standard defines the following requirements classes, grouped by their stand
 ** <<rc_schemas>> specifies basic provisions for schemas of items in a collection of geospatial data, for example, features, and the representation of a schema in JSON Schema.
 ** <<rc_core-roles-features>> specifies additional property roles for feature data.
 ** <<rc_feature-references>> specifies additional provisions for properties that reference another feature.
+** <<rc_profile-references>> specifies three profiles for representing references to other resources.
+** <<rc_profile-codelists>> specifies two profiles for representing values from a codelist.
+** <<rc_profile-domains>> specifies two profiles for representing value domains.
 * Web API
 ** <<rc_returnables-and-receivables>> specifies the web resources representing the schema with the <<returnable-def,returnable>> and <<receivable-def,receivable>> properties of a collection in OGC Web APIs.
 ** <<rc_queryables>> specifies the web resources representing the schema with the <<queryable-def,queryable>> properties of a collection in OGC Web APIs.
 ** <<rc_sortables>> specifies the web resources representing the schema with the <<sortable-def,sortable>> properties of a collection in OGC Web APIs.
 ** <<rc_profile-parameter>> specifies additional provisions for properties that reference another resource.
-** <<rc_profile-references>> specifies three profiles for representing references to other resources.
 
 Conformance with this Standard shall be checked using all the relevant tests specified in <<ats,Annex A>> of this document for each conformance class. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
 
@@ -28,4 +30,6 @@ Conformance with this Standard shall be checked using all the relevant tests spe
 |Sortables |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/sortables`
 |Profile query parameter |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-parameter`
 |Profiles for feature references |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-references`
+|Profiles for codelists |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-codelists`
+|Profiles for value domains |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-domains`
 |===
