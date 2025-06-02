@@ -143,13 +143,13 @@ NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt
 ^|B |The value of the keyword "x-ogc-definition" SHALL be a URI.
 |===
 
-:req: nilvalues
+:req: nullvalues
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |The keyword "x-ogc-nilValues" SHALL be used to identify the values considered nil.
-^|B |The value of the keyword "x-ogc-nilValues" SHALL be an array of objects, each including a mandatory "const" value and an optional "title" explanation of the meaning of that particular nil value.
+^|A |The keyword "x-ogc-nullValues" SHALL be used to identify the values considered `null`, but that are for some reason represented by a value in the value domain of the data type of the property.
+^|B |The value of the keyword "x-ogc-nullValues" SHALL be an array of values (numbers or strings), depending on the data type of the property.
 |===
 
 === Examples
@@ -211,9 +211,7 @@ The following example is the schema of a feature type representing cultural enti
     "ZI037_REL" : {
       "title" : "Religious Designation",
       "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
-      "x-ogc-nilValues": [
-         { "const": -999999, "title": "unknown" }
-      ],
+      "x-ogc-nullValues": [ -999999 ],
       "type" : "integer",
       "x-ogc-propertySeq": 8
     },
@@ -289,20 +287,20 @@ The next example is the schema of a land cover collection.
    "$id" : "https://example.com/ogcapi/collections/landcover/schema",
    "title" : "Land Cover",
    "type" : "object",
-   "properties" : { "LC" : {
-      "title" : "Land Cover",
-      "type" : "integer",
-      "x-ogc-propertySeq" : 1,
-      "oneOf": [
-         { "const": 0 },
-         { "const": 1, "title": "vegetation" },
-         { "const": 2, "title": "bare soils" },
-         { "const": 3, "title": "water" },
-         { "const": 4, "title": "clouds" }
-      ],
-      "x-ogc-nilValues": [
-         { "const": 0, "title": "no data" }
-      ]
+   "properties" : { 
+      "LC" : {
+        "title" : "Land Cover",
+        "type" : "integer",
+        "x-ogc-propertySeq" : 1,
+        "oneOf": [
+          { "const": 0, "title": "no data" },
+          { "const": 1, "title": "vegetation" },
+          { "const": 2, "title": "bare soils" },
+          { "const": 3, "title": "water" },
+          { "const": 4, "title": "clouds" }
+        ],
+        "x-ogc-nullValues": [ 0 ]
+      }
    }
 }
 ----
