@@ -80,6 +80,8 @@ The following recommendations are intended to simplify parsing a schema and to h
 [#additional-keywords]
 === Additional keywords
 
+==== General rules
+
 In order to be able to map the logical schema to a format-specific schema, extensions to the JSON Schema vocabulary are needed.
 
 :req: additional-keywords
@@ -91,6 +93,8 @@ In order to be able to map the logical schema to a format-specific schema, exten
 |===
 
 CAUTION: The next version of JSON Schema will likely restrict the use of additional keywords. As a result, this Standard may need to change the prefix or change the way as to how the vocabulary is extended.
+
+==== Properties with a specific role
 
 :req: role
 [#{req-class}_{req}]
@@ -111,17 +115,32 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 ^|C |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
 |===
 
-For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-propertySeq".
+==== Ordering properties
+
+For cases, where the properties of the data should be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-propertySeq". The keyword is used to declare a hint about the relative position of the property in the object. Typical use cases are:
+
+- the representation of the schema in a human-readable format (e.g., HTML) to show related properties next to each other;
+- the representation of the data in a human-readable format (e.g., HTML) to show related property values next to each other;
+- the representation of the data in a format that requires a specific order of properties (e.g., XML based on an XML Schema that uses a `sequence` for the property elements).
 
 :req: property-seq
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |The keyword "x-ogc-propertySeq" SHALL be used to declare a specific relative position of the property.
+^|A |The keyword "x-ogc-propertySeq" SHALL be used to declare a hint about the relative position of the property in the object.
 ^|B |The value of the keyword "x-ogc-propertySeq" SHALL be an integer representing the relative position in ascending order.
-^|C |Each value of the keyword SHALL be unique for all members of a "properties" object in the JSON Schema.
 |===
+
+:rec: property-seq-unique
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/req/{req-class}/{rec}
+^|A |For each object, the value of the keyword "x-ogc-propertySeq" SHOULD be unique for each property.
+|===
+
+==== The unit of measure for a numeric property
 
 In geospatial data, numeric property values often represent a measurement and have a unit of measure. For fixed units, this can be expressed in the schema using the keyword "x-ogc-unit".
 
@@ -143,6 +162,8 @@ Communities or other OGC Standards can specify additional values for other unit 
 NOTE: UCUM provides a language to define units while QUDT provides a units vocabulary. The term "language" is used as it is the broader term.
 
 NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt.org/vocab/unit/HectoPA` in QUDT.
+
+==== Semantic definition of a property
 
 :req: definition
 [#{req-class}_{req}]
