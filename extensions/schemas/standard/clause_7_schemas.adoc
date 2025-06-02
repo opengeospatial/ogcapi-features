@@ -6,7 +6,7 @@ The Requirements Class "Schemas" specifies basic provisions for schemas of web r
 
 [cols="2,7",width="90%"]
 |===
-^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class}
 |Target type |Web resource
 |Dependency |<<json-schema,JSON Schema: A Media Type for Describing JSON Documents>>
 |Indirect Dependency |<<json-schema-validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>
@@ -27,7 +27,7 @@ The Requirements Class "Schemas" specifies basic provisions for schemas of web r
 ^|B |The schema SHALL have the following characteristics:
 
 * "$schema" is "\https://json-schema.org/draft/2020-12/schema";
-* "$id" is a HTTP(S) URI without query parameters that returns the schema, if requested with the header "Accept: application/schema+json"; and 
+* "$id" is a HTTP(S) URI without query parameters that returns the schema, if requested with the header "Accept: application/schema+json"; and
 * "type" is "object".
 |===
 
@@ -69,16 +69,18 @@ The following recommendations are intended to simplify parsing a schema and to h
 ^|M |In general, "format" values SHOULD be from the JSON Schema specifciation, the OpenAPI 3.1 specification or the OGC format register (to be established).
 ^|N |For string properties, "minLength", "maxLength", "enum" and/or "pattern" SHOULD be provided, where applicable.
 ^|O |For numeric properties, "multipleOf", "minimum", "exclusiveMinimum", "maximum", "exclusiveMaximum" SHOULD be provided, where applicable.
-^|P |For integer properties that represent enumerated values, "enum" SHOULD be provided.
+^|P |For integer properties that represent enumerated values (except for codelist values), "enum" SHOULD be provided.
 ^|Q |For string or integer properties that represent codelist values, one of the profiles "codelist-inline" or "codelist-ref" (see <<rc_profile-codelists>>) SHOULD be applied.
 ^|R |For array properties, the property SHOULD consist of items that are strings or numbers.
 ^|S |Required properties SHOULD be included in "required".
-^|T |The JSON Schema keywords SHOULD be constrained to the those mentioned in this recommendation and requirement `/req/{req-class}/properties`.
+^|T |The JSON Schema keywords SHOULD be constrained to those mentioned in this recommendation, requirement `/req/{req-class}/properties` and requirements in the _additional keywords_ section below.
 ^|U |"$ref" SHOULD NOT be used, schemas that are reused SHOULD be dereferenced and represented inline.
 |===
 
 [#additional-keywords]
 === Additional keywords
+
+==== General rules
 
 In order to be able to map the logical schema to a format-specific schema, extensions to the JSON Schema vocabulary are needed.
 
@@ -90,7 +92,9 @@ In order to be able to map the logical schema to a format-specific schema, exten
 ^|A |Additional keywords SHALL start with "x-ogc-".
 |===
 
-CAUTION: The next version of JSON Schema will likely restrict the use of additional keywords. As a result, this Standard may need to change the prefix or change the way as to how the vocabulary is extended.
+CAUTION: The next version of JSON Schema will likely restrict the use of additional keywords. As a result, this Standard may need to change the prefix or change how the vocabulary is extended.
+
+==== Properties with a specific role
 
 :req: role
 [#{req-class}_{req}]
@@ -111,17 +115,32 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 ^|C |Only one property in a schema SHALL have "x-ogc-role" with a value "id".
 |===
 
-For cases, where the properties of the data have to be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-propertySeq".
+==== Ordering properties
+
+For cases, where the properties of the data should be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-propertySeq". The keyword is used to declare a hint about the relative position of the property in the object. Typical use cases are:
+
+- the representation of the schema in a human-readable format (e.g., HTML) to show related properties next to each other;
+- the representation of the data in a human-readable format (e.g., HTML) to show related property values next to each other;
+- the representation of the data in a format that requires a specific order of properties (e.g., XML based on an XML Schema that uses a `sequence` for the property elements).
 
 :req: property-seq
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |The keyword "x-ogc-propertySeq" SHALL be used to declare a specific relative position of the property.
+^|A |The keyword "x-ogc-propertySeq" SHALL be used to declare a hint about the relative position of the property in the object.
 ^|B |The value of the keyword "x-ogc-propertySeq" SHALL be an integer representing the relative position in ascending order.
-^|C |Each value of the keyword SHALL be unique for all members of a "properties" object in the JSON Schema.
 |===
+
+:rec: property-seq-unique
+[#{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/req/{req-class}/{rec}
+^|A |For each object, the value of the keyword "x-ogc-propertySeq" SHOULD be unique for each property.
+|===
+
+==== The unit of measure for a numeric property
 
 In geospatial data, numeric property values often represent a measurement and have a unit of measure. For fixed units, this can be expressed in the schema using the keyword "x-ogc-unit".
 
@@ -133,9 +152,9 @@ In geospatial data, numeric property values often represent a measurement and ha
 ^|A |The keyword "x-ogc-unit" SHALL be used to declare the unit of measure of the property.
 ^|B |The value of the keyword "x-ogc-unit" SHALL be a string representing the unit of measure.
 ^|C |The value of the keyword "x-ogc-unit" SHALL be the case sensitive UCUM representation ("c/s") unless a different language / register for units is identified in keyword "x-ogc-unitLang".
-^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unitLang", SHALL be "UCUM". 
-^|E |The value for the QUDT Units Vocabulary, if declared as the language for units in keyword "x-ogc-unitLang", SHALL be "QUDT". 
-^|F |The value of the keyword "x-ogc-unit" SHALL be the URI of the unit for values from the QUDT Units Vocabulary.
+^|D |The value for UCUM, if explicitly declared as the language for units in keyword "x-ogc-unitLang", SHALL be "UCUM".
+^|E |For specifying a unit from QUDT Units Vocabulary, "x-ogc-unitLang", SHALL be "QUDT".
+^|F |For specifying a unit from QUDT Units Vocabulary, the value of the keyword "x-ogc-unit" SHALL be the URI of the unit.
 |===
 
 Communities or other OGC Standards can specify additional values for other unit languages, e.g., https://www.opengis.net/def/uom[units registered in the OGC Rainbow]. For each language it must be specified how units have to be represented in the "x-ogc-unit" value.
@@ -143,6 +162,8 @@ Communities or other OGC Standards can specify additional values for other unit 
 NOTE: UCUM provides a language to define units while QUDT provides a units vocabulary. The term "language" is used as it is the broader term.
 
 NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt.org/vocab/unit/HectoPA` in QUDT.
+
+==== Semantic definition of a property
 
 :req: definition
 [#{req-class}_{req}]
@@ -153,12 +174,21 @@ NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt
 ^|B |The value of the keyword "x-ogc-definition" SHALL be a URI.
 |===
 
+:req: nullvalues
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |The keyword "x-ogc-nullValues" SHALL be used to identify the values considered `null`, but that are for some reason represented by a value in the value domain of the data type of the property.
+^|B |The value of the keyword "x-ogc-nullValues" SHALL be an array of values (numbers or strings), depending on the data type of the property.
+|===
+
 === Examples
 
 The following example is the schema of a feature type representing cultural entities. The schema includes additional keywords that apply to feature data (specified in the next Clause).
 
 [[example_7_1]]
-.Schema of a "Cultural (Points)" feature type 
+.Schema of a "Cultural (Points)" feature type
 ====
 [source,JSON]
 ----
@@ -212,6 +242,7 @@ The following example is the schema of a feature type representing cultural enti
     "ZI037_REL" : {
       "title" : "Religious Designation",
       "enum" : [ -999999, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+      "x-ogc-nullValues": [ -999999 ],
       "type" : "integer",
       "x-ogc-propertySeq": 8
     },
@@ -271,6 +302,37 @@ The next example is the schema of a feature type representing observations of at
       "x-ogc-propertySeq": 4
     },
   }
+}
+----
+====
+
+The next example is the schema of a land cover collection.
+
+[[example_7_3]]
+.Schema of a land cover collection
+====
+[source,JSON]
+----
+{
+   "$schema" : "https://json-schema.org/draft/2020-12/schema",
+   "$id" : "https://example.com/ogcapi/collections/landcover/schema",
+   "title" : "Land Cover",
+   "type" : "object",
+   "properties" : { 
+      "LC" : {
+        "title" : "Land Cover",
+        "type" : "integer",
+        "x-ogc-propertySeq" : 1,
+        "oneOf": [
+          { "const": 0, "title": "no data" },
+          { "const": 1, "title": "vegetation" },
+          { "const": 2, "title": "bare soils" },
+          { "const": 3, "title": "water" },
+          { "const": 4, "title": "clouds" }
+        ],
+        "x-ogc-nullValues": [ 0 ]
+      }
+   }
 }
 ----
 ====

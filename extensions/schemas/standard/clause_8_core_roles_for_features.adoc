@@ -6,7 +6,7 @@ The Requirements Class "Core roles for features" specifies additional property r
 
 [cols="2,7",width="90%"]
 |===
-^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
+^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class}
 |Target type |Web resource
 |Dependency |<<rc_schemas>>
 |===
@@ -46,7 +46,7 @@ If the features have multiple temporal properties, the roles "primary-instant", 
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |A property with "x-ogc-role" set to "primary-instant" SHALL be a temporal property.
-^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-instant".
+^|B |At most one property in a schema SHALL have "x-ogc-role" with a value of "primary-instant".
 ^|C |If the schema has only one temporal property, the property SHALL be the primary temporal information even if the property is not explicitly tagged with the role "primary-instant".
 |===
 
@@ -99,7 +99,7 @@ The previous Clause includes <<example_7_1,an example>> with the roles "id", "pr
 The following example is the schema of a feature type with the roles "id", "primary-geometry", "primary-interval-start" and "primary-interval-end".
 
 [[example_8_1]]
-.Schema example of a feature type 
+.Schema example of a feature type
 ====
 [source,JSON]
 ----
