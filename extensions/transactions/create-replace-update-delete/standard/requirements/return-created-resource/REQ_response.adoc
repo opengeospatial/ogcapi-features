@@ -1,0 +1,7 @@
+[[rec_return-created-resource_response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/return-created-resource/response*
+^|A |A value of `true` for the `Return-Created-Resource` SHALL indicate that the server SHALL return a representation of a newly created resource in the response body of a <<create,create operation>>.
+^|B |A value of `false` or the absence of the `Return-Created-Resource` header SHALL indiciate that a representation of a newly created resource SHALL NOT be returned in the response body of a <<create,create operation>>.
+|===
