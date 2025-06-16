@@ -9,9 +9,9 @@ NOTE: As with <<rc_references>>, this requirements class can probably be general
 [cols="2,7",width="90%"]
 |===
 ^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
-|Target type |Web resources
-|Dependency |<<rc_returnables-and-receivables>>
-|Dependency |<<rc_profile-parameter>>
+|Target type |Collection of data
+|Indirect Dependency |<<rc_returnables-and-receivables>>
+|Indirect Dependency |<<rc_profile-parameter>>
 |Indirect Dependency |<<rc_references>>
 |===
 
@@ -20,8 +20,10 @@ NOTE: As with <<rc_references>>, this requirements class can probably be general
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |If the Returnables and Receivables schema of a collection includes a property with role „reference“, the GET operation at `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{resourceId}` SHALL provide the query parameter profile.
+^|A |If the Returnables and Receivables schema of a collection includes a property with role „reference“, the GET operation on resources providing representations of the data SHALL provide the query parameter profile.
 |===
+
+For features, the query parameter "profile" will be applicable to the GET operation on the paths `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{resourceId}`.
 
 :req: rel-as-key
 [#{req-class}_{req}]

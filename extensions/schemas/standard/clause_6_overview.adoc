@@ -1,7 +1,7 @@
 [[overview]]
 == Overview
 
-This Standard specifies two types of requirements classes.
+This Standard specifies three types of requirements classes.
 
 === Requirements and recommendations for schemas
 
@@ -27,7 +27,7 @@ That is, JSON Schema is primarily used as a data description language.  Addition
 |<<rc_schemas_definition,x-ogc-propertySeq>> |An integer representing the relative position of a property in a schema in ascending order.
 |<<rc-schemas_role,x-ogc-role>> |Declares a specific role of a property.
 |<<rc_schemas_unit,x-ogc-unit>> |Declares the unit of measure of a property.
-|<<rc_schemas_unit,x-ogc-unitLang>> |Declares the language /register used for the units of measure.
+|<<rc_schemas_unit,x-ogc-unitLang>> |Declares the language/register used for the unit of measure.
 |<<rc_feature-references_role-reference,x-ogc-uriTemplate>> |A URI template with a template `featureId` used to reference a resources in another local or remote collection.
 |===
 
@@ -37,9 +37,11 @@ The main reasons for using JSON Schema are:
 * JSON data types (string, number, boolean, array, object, null) are simple and easy to understand; and
 * JSON is often used for encoding geospatial data, i.e., the schema of a property can be used to validate property values without conversion.
 
+NOTE: A proposal exists for a new specification link:https://github.com/json-structure[JSON Structure] that could eventually be more directly applicable for the scope of this Standard and, if approved, be used in a future revision of this Standard.
+
 === Requirements and recommendations for schemas in OGC Web APIs
 
-These requirements classes specify API building blocks related to schemas. 
+These requirements classes specify schema resources in OGC Web APIs.
 
 In OGC Web APIs, geospatial data is shared in collections (path `/collections/{collectionId}`). The schema of items in a collection provides information about how to interact with the collection. 
 
@@ -56,3 +58,13 @@ This Standard specifies the following schema resources to support these interact
 * Returnables and Receivables at path: `/collections/{collectionId}/schema`
 * Queryables at path `/collections/{collectionId}/queryables`
 * Sortables at path `/collections/{collectionId}/sortables`
+
+=== Requirements and recommendations for profiles
+
+<<rfc6906,RFC 6906 The 'profile' Link Relation Type>> defines the concept of a profile to support such use cases.
+
+Profiles are a general mechanism that allows to support variations in the resource representation without the need for a proliferation of a new media type for each variant. A profile does not to alter the semantics of the resource representation itself, but allows clients to learn about additional semantics that are associated with the resource representation, in addition to those defined by the media type.
+
+To request one or more profiles, a query parameter "profile" can be used. The server determines the applicable profile(s) for the selected media type.
+
+In total, four profiles are specified for schemas and three profiles are specified for feature data.
