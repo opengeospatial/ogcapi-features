@@ -2,18 +2,20 @@
 
 This Standard defines the following requirements classes, grouped by their standardization target type:
 
-* Web Resource
+* Schema for a collection of data
 ** <<rc_schemas>> specifies basic provisions for schemas of items in a collection of geospatial data, for example, features, and the representation of a schema in JSON Schema.
 ** <<rc_core-roles-features>> specifies additional property roles for feature data.
-** <<rc_feature-references>> specifies additional provisions for properties that reference another feature.
-** <<rc_profile-references>> specifies three profiles for representing references to other resources.
-** <<rc_profile-codelists>> specifies two profiles for representing values from a codelist.
-** <<rc_profile-domains>> specifies two profiles for representing value domains.
+** <<rc_references>> specifies additional provisions for properties that reference another resource.
+** <<rc_profile-codelists>> specifies two profiles for representing values from a codelist in a schema.
+** <<rc_profile-domains>> specifies two profiles for representing value domains of a property in a schema.
+* Collection of data
+** <<rc_profile-references>> specifies three profiles for representing properties that are references to other resources.
 * Web API
 ** <<rc_returnables-and-receivables>> specifies the web resources representing the schema with the <<returnable-def,returnable>> and <<receivable-def,receivable>> properties of a collection in OGC Web APIs.
 ** <<rc_queryables>> specifies the web resources representing the schema with the <<queryable-def,queryable>> properties of a collection in OGC Web APIs.
 ** <<rc_sortables>> specifies the web resources representing the schema with the <<sortable-def,sortable>> properties of a collection in OGC Web APIs.
-** <<rc_profile-parameter>> specifies additional provisions for properties that reference another resource.
+** <<rc_profile-parameter>> specifies the "profile" query parameter to select profiles that should be used in the representation of a resource in the negotiated media type.
+
 
 Conformance with this Standard shall be checked using all the relevant tests specified in <<ats,Annex A>> of this document for each conformance class. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
 
@@ -24,7 +26,7 @@ Conformance with this Standard shall be checked using all the relevant tests spe
 |Conformance class |URI
 |Schemas |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/schemas`
 |Core roles for features |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/core-roles-features`
-|Feature references |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/feature-references`
+|References |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/references`
 |Returnables and Receivables |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/returnables-and-receivables`
 |Queryables |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/queryables`
 |Sortables |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/sortables`

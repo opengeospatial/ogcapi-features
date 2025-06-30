@@ -1,19 +1,17 @@
-:req-class: feature-references
+:req-class: references
 [#rc_{req-class}]
-== Requirements Class "Feature references"
+== Requirements Class "References"
 
-The Requirements Class "Feature references" specifies additional provisions for properties that reference another feature.
-
-NOTE: This requirements class can probably be generalized to cover also other types of references, but this requires a better understanding about the types of references that must be supported.
+The Requirements Class "References" specifies additional provisions for properties that reference another resource.
 
 [cols="2,7",width="90%"]
 |===
 ^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class} 
-|Target type |Web resource
+|Target type |Schema for a collection of data
 |Dependency |<<rc_schemas>>
 |===
 
-If the features have a property that represents a reference to another feature in the same or another OGC Web API, the role "reference" can be used for this property. The property is a foreign key, the `featureId` of the referenced feature.
+If resources have a property that represents a reference to another resource, the role "reference" can be used for this property. The property is a foreign key, e.g., the local feature identifier of a referenced feature in its collection.
 
 :req: role-reference
 [#{req-class}_{req}]
@@ -21,11 +19,11 @@ If the features have a property that represents a reference to another feature i
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |A property with "x-ogc-role" set to "reference" SHALL be a string or integer property.
-^|B |If the property is of type "integer", the property with role "id" of the referenced feature type SHALL be of type "integer", too.
-^|C |If all instances of the property reference another feature in a fixed collection of the same server, the id of that collection SHALL be provided in "x-ogc-collectionId".
-^|D |If Requirement C does not apply, but all instances of the property reference another feature in the same server, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
-^|E |If Requirements C and D do not apply, the URI template SHALL be provided in "x-ogc-uriTemplate" with a template parameter `featureId`.
-^|F |If Requirement E applies, and the referenced features can be in different collections, the URI template SHALL also include a template parameter `collectionId`.
+^|B |If the property is of type "integer", the property with role "id" of the referenced resource type SHALL be of type "integer", too.
+^|C |If all instances of the property reference geospatial data in a fixed collection of the same server, the id of that collection SHALL be provided in "x-ogc-collectionId".
+^|D |If Requirement C does not apply, but all instances of the property reference geospatial data in the same server, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
+^|E |If Requirements C and D do not apply, the URI template SHALL be provided in "x-ogc-uriTemplate" with a template parameter `resourceId`.
+^|F |If Requirement E applies, and the referenced geospatial data can be in different collections, the URI template SHALL also include a template parameter `collectionId`.
 ^|G |If Requirement F applies, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
 |===
 

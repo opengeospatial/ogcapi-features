@@ -2,7 +2,7 @@
 [#rc_{req-class}]
 == Requirements Class "Profile query parameter"
 
-The Requirements Class "Profile query parameter" specifies additional provisions for properties that reference another resource.
+The Requirements Class "Profile query parameter" specifies additional provisions for Web APIs that support profiles.
 
 [cols="2,7",width="90%"]
 |===
@@ -10,7 +10,7 @@ The Requirements Class "Profile query parameter" specifies additional provisions
 |Target type |Web API
 |===
 
-Some properties may be represented in multiple representations in the same format, depending on the intended use of the data. One example are references to another web resource (see the <<rc_profile-references>>).
+Some resources may be represented in with variations in the same format, depending on the intended use of the representation. One example are references to another web resource (see the <<rc_profile-references>>).
 
 <<rfc6906,RFC 6906 The 'profile' Link Relation Type>> defines the concept of a profile to support such use cases.
 
