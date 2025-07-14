@@ -4,7 +4,7 @@
 
 The Requirements Class "Profiles for references" specifies three profiles for representing references to other resources.
 
-NOTE: As with <<rc_references>>, this requirements class can probably be generalized to cover also other types of references, but this requires a better understanding about the types of references that have to be supported.
+The requirements stated in this Standard cover only simple cases. More complex cases, such as references to geospatial data in different collections, are not covered. 
 
 [cols="2,7",width="90%"]
 |===
@@ -30,12 +30,8 @@ For features, the query parameter "profile" will be applicable to the GET operat
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |In the profile "rel-as-key" (`\http://www.opengis.net/def/profile/OGC/0/rel-as-key`) a reference in the response SHALL be represented by:
-
-- The `resourceId` of the referenced resource (a string or integer, depending on the type of the identifier property in the referenced collection), if the property with role "reference" has the keyword "x-ogc-collectionId" with a string value (a fixed collection).
+^|A |In the profile "rel-as-key" (`\http://www.opengis.net/def/profile/OGC/0/rel-as-key`) a reference in the response SHALL be represented by the `resourceId` of the referenced resource (a string or integer, depending on the type of the identifier property in the referenced collection), if the property with role "reference" has the keyword "x-ogc-collectionId" with a string value (a fixed collection).
 |===
-
-NOTE: What should be provided, if "x-ogc-collectionId" is an array (that is, the referenced resources/features may be in different collections)? A string that combines the `collectionId` and `resourceId`? An object with `collectionId` and `resourceId` properties?
 
 [[example_14_1]]
 .Encoding of a road accident feature in GeoJSON and profile "rel-as-key"

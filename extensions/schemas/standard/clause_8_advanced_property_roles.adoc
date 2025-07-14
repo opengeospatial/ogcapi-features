@@ -1,28 +1,28 @@
-:req-class: core-roles-features
+:req-class: advanced-property-roles
 [#rc_{req-class}]
-== Requirements Class "Core roles for features"
+== Requirements Class "Advanced property roles"
 
-The Requirements Class "Core roles for features" specifies additional property roles for feature data.
+The Requirements Class "Advanced property roles" specifies additional property roles for geospatial data. These roles are in particular applicable to feature data.
 
 [cols="2,7",width="90%"]
 |===
 ^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class}
-|Target type |Schema for a feature collection
+|Target type |Schema for a collection of geospatial data
 |Dependency |<<rc_schemas>>
 |===
 
-To understand how features are encoded in a specific format, additional property roles need to be identified in the logical schema. These roles depend on the format.
+To understand how geospatial data is represented in a specific data format, additional property roles need to be identified in the logical schema. The mapping of the roles to the data representation depends on the format.
 
-For example, the role "primary-geometry" is needed in feature types with multiple spatial properties to decide:
+For example, the role "primary-geometry" is needed in feature types with multiple spatial properties to decide, for example:
 
 * Which geometry is encoded as the geometry of a feature in formats such as FlatGeobuf, Shapefile or Mapbox Vector Tiles, which only support a single geometry; or,
 * Which geometry is encoded in the "geometry" member in GeoJSON.
 
-The other roles specified in this requirements class support feature formats that support representing primary temporal information or the type of the feature, such as JSON-FG.
+The other roles specified in this requirements class support feature formats that support representing primary temporal information or the type, such as JSON-FG.
 
 === Primary geometry
 
-If the features have multiple spatial properties, the role "primary-geometry" can be used to identify the primary geometry of the features.
+If the data has multiple spatial properties, the role "primary-geometry" can be used to identify the primary geometry property.
 
 :req: role-primary-geometry
 [#{req-class}_{req}]
@@ -38,7 +38,7 @@ NOTE: Since only a single property can be tagged in the schema as the primary ge
 
 === Primary temporal information
 
-If the features have multiple temporal properties, the roles "primary-instant", "primary-interval-start" and "primary-interval-end" can be used to identify the primary temporal information of the features.
+If the data has multiple temporal properties, the roles "primary-instant", "primary-interval-start" and "primary-interval-end" can be used to identify the primary temporal information.
 
 :req: role-primary-instant
 [#{req-class}_{req}]
@@ -68,20 +68,29 @@ If the features have multiple temporal properties, the roles "primary-instant", 
 ^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-interval-end".
 |===
 
+:req: role-primary-interval
+[#{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A |A property with "x-ogc-role" set to "primary-interval" SHALL be a temporal property.
+^|B |At most one property in a schema SHALL have "x-ogc-role" with a value "primary-interval".
+|===
+
 :req: primary-temporal-constraints
 [#{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |If a schema has a property with role "primary-instant", the schema SHALL NOT have properties with role "primary-interval-start" or "primary-interval-end".
-^|B |If a schema has properties with both roles "primary-interval-start" and "primary-interval-end", both properties SHALL have the same temporal granularity ("date" or "date-time").
+^|A |If a schema has a property with role "primary-instant", the schema SHALL NOT have properties with role "primary-interval-start", "primary-interval-end", or "primary-interval".
+^|B |If a schema has a property with role "primary-interval", the schema SHALL NOT have properties with role "primary-interval-start", "primary-interval-end", or "primary-instant".
+^|C |If a schema has properties with both roles "primary-interval-start" and "primary-interval-end", both properties SHALL have the same temporal granularity ("date" or "date-time").
+^|D |If a schema has a property with only one the roles "primary-interval-start" or "primary-interval-end", the primary temporal information SHALL be the half-bounded interval with the specified start or end.
 |===
 
-NOTE: FUTURE WORK? Consider adding a role "primary-interval" with a proper representation of an interval, e.g., the interval representation in JSON-FG (an array with two dates or timestamps).
+=== Type
 
-=== Feature type
-
-If the features have a property that represents the feature type, the role "type" can be used for this property.
+If the data has a property that represents the type of the data, e.g., the feature type in case of feature data, the role "type" can be used for this property.
 
 :req: role-type
 [#{req-class}_{req}]

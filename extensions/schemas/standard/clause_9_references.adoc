@@ -21,11 +21,10 @@ If resources have a property that represents a reference to another resource, th
 ^|A |A property with "x-ogc-role" set to "reference" SHALL be a string or integer property.
 ^|B |If the property is of type "integer", the property with role "id" of the referenced resource type SHALL be of type "integer", too.
 ^|C |If all instances of the property reference geospatial data in a fixed collection of the same server, the id of that collection SHALL be provided in "x-ogc-collectionId".
-^|D |If Requirement C does not apply, but all instances of the property reference geospatial data in the same server, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
-^|E |If Requirements C and D do not apply, the URI template SHALL be provided in "x-ogc-uriTemplate" with a template parameter `resourceId`.
-^|F |If Requirement E applies, and the referenced geospatial data can be in different collections, the URI template SHALL also include a template parameter `collectionId`.
-^|G |If Requirement F applies, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
+^|D |If Requirements C does not apply, the URI template SHALL be provided in "x-ogc-uriTemplate" with a template parameter `resourceId`.
 |===
+
+NOTE: The requirements stated in this Standard only cover simple cases. More complex cases, such as references to geospatial data in different collections, are not covered.
 
 [[example_9_1]]
 .Schema example 

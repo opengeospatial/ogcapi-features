@@ -36,4 +36,5 @@ This requirements class supports clients that want to discover the list of resou
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|B |For responses that use `application/schema+json` as the `Content-Type` of the response, the response SHALL conform to <<rc_schemas>>.
+^|C |The "additionalProperties" member with a value of "true" (the default) or "false" is used to state the expected behavior with respect to properties that are not explicitly declared in the schema. If "additionalProperties" is set to "false", properties that are not explicitly declared in the schema SHALL NOT be allowed, otherwise they SHALL be allowed.
 |===
