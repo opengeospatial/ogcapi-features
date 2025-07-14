@@ -21,16 +21,15 @@ If resources have a property that represents a reference to another resource, th
 ^|A |A property with "x-ogc-role" set to "reference" SHALL be a string or integer property.
 ^|B |If the property is of type "integer", the property with role "id" of the referenced resource type SHALL be of type "integer", too.
 ^|C |If all instances of the property reference geospatial data in a fixed collection of the same server, the id of that collection SHALL be provided in "x-ogc-collectionId".
-^|D |If Requirement C does not apply, but all instances of the property reference geospatial data in the same server, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
-^|E |If Requirements C and D do not apply, the URI template SHALL be provided in "x-ogc-uriTemplate" with a template parameter `resourceId`.
-^|F |If Requirement E applies, and the referenced geospatial data can be in different collections, the URI template SHALL also include a template parameter `collectionId`.
-^|G |If Requirement F applies, the list of the ids of the collections that can be referenced SHALL be provided as an array in "x-ogc-collectionId".
+^|D |If Requirements C does not apply, the URI template SHALL be provided in "x-ogc-uriTemplate" with a template parameter `resourceId`.
 |===
+
+NOTE: The requirements stated in this Standard only cover simple cases. More complex cases, such as references to geospatial data in different collections, are not covered.
 
 [[example_9_1]]
 .Schema example 
 ====
-This is the schema of a road accident feature type. The "roadSegment" property is a reference to the road segment on which the accident occurred.
+This is the schema of a road accident feature type. The "roadSegment" property is a reference to the road segment on which the accident occurred, which is available in the same API.
 
 [source,JSON]
 ----
@@ -73,4 +72,19 @@ This is the schema of a road accident feature type. The "roadSegment" property i
   }
 }
 ----
+
+If the road segment would be available from a different OGC Web API, the "x-ogc-uriTemplate" keyword can be used with the `resourceId` parameter. The schema of the "roadSegment" property could look like the following:
+
+[source,JSON]
+----
+{
+  "title": "Road segment",
+  "description": "Road segment on which the accident occured, identified by its 16-character code (8 characters for the start and end node).",
+  "x-ogc-role": "reference",
+  "x-ogc-uriTemplate": "https://api.example.org/foo/bar/collections/roadsegments/items/{resourceId}",
+  "type": "string"
+}
+----
+
+A client that wants to fetch the road segment on which an accident occured would use the URI template to construct the URI of the road segment, e.g., `https://api.example.org/foo/bar/collections/roadsegments/items/5209062A5209047O`, if the value of road segment property is "5209062A5209047O". The referenced feature will include a link to its "roadsegments" collection, or a client that is OGC-API-aware can determine the collection URI ("\https://api.example.org/foo/bar/collections/roadsegments") from the URI.
 ====

@@ -2,12 +2,14 @@
 [#rc_{req-class}]
 == Requirements Class "Schemas"
 
-The Requirements Class "Schemas" specifies basic provisions for schemas of items in a data collection, such as the features in a feature collection, and the representation of a schema in JSON Schema. The schema represents a logical model, independent of the format in which the web resource is encoded.
+The Requirements Class "Schemas" specifies basic provisions for schemas for a collection of geospatial data, such as the features in a feature collection, and the representation of a schema in JSON Schema. 
+
+The schema represents a logical model, independent of the format in which the data is encoded when a representation is requested via a HTTP request.
 
 [cols="2,7",width="90%"]
 |===
 ^|*Requirements Class* |http://www.opengis.net/spec/{standard}/{m_n}/req/{req-class}
-|Target type |Schema for a collection of data
+|Target type |Schema for a collection of geospatial data
 |Dependency |<<json-schema,JSON Schema: A Media Type for Describing JSON Documents>>
 |Indirect Dependency |<<json-schema-validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>
 |Indirect Dependency |<<ogc06_103r4,Simple feature access - Part 1: Common architecture>>
@@ -40,12 +42,11 @@ In addition to the JSON Schema data types, geospatial data typically also uses s
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |Each property SHALL include a "type" member, except for spatial properties.
 ^|B |Each spatial property SHALL not include a "type" or "$ref" member.
-^|C |Each spatial property SHALL include a "format" member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case. I.e., the values for the Simple Feature geometry types are: "geometry-point", "geometry-multipoint", "geometry-linestring", "geometry-multilinestring", "geometry-polygon", "geometry-multipolygon", and "geometry-geometrycollection". In addition, the following special values are supported: "geometry-any" as the wildcard for any geometry type, "geometry-point-or-multipoint" for a Point or MultiPoint, "geometry-linestring-or-multilinestring" for a LineString or MultiLineString, and "geometry-polygon-or-multipolygon" for a Polygon or MultiPolygon.
+^|C |Each spatial property SHALL include a "format" member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case. I.e., the values for the core Simple Feature geometry types are: "geometry-point", "geometry-multipoint", "geometry-linestring", "geometry-multilinestring", "geometry-polygon", "geometry-multipolygon", and "geometry-geometrycollection". In addition, the following special values are supported: "geometry-any" as the wildcard for any geometry type, "geometry-point-or-multipoint" for a Point or MultiPoint, "geometry-linestring-or-multilinestring" for a LineString or MultiLineString, and "geometry-polygon-or-multipolygon" for a Polygon or MultiPolygon.
 ^|D |Each temporal property SHALL be a "string" literal with the appropriate format (e.g., "date-time" or "date" for instances, depending on the temporal granularity).
 ^|E |As a general rule, if the data type of a property has to be more specific than the JSON Schema data types ("number", "integer", "string"), the "format" keyword SHALL be used.
 ^|F |Properties that are only applicable when creating new data or updating existing data SHALL include "writeOnly: true".
 ^|G |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
-^|H |The "additionalProperties" member with a value of "true" (the default) or "false" is used to state the expected behavior with respect to properties that are not explicitly declared in the schema. If "additionalProperties" is set to "false", properties that are not explicitly declared in the schema SHALL NOT be allowed, otherwise they SHALL be allowed.
 |===
 
 The following recommendations are intended to simplify parsing a schema and to help understanding the meaning and representation of the properties:
@@ -66,16 +67,18 @@ The following recommendations are intended to simplify parsing a schema and to h
 ^|J |Properties that represent a 64-bit signed integer SHOULD be represented as an integer with format "int64" (defined in OpenAPI 3.1).
 ^|K |Properties that represent a 32-bit unsigned integer SHOULD be represented as an integer with format "uint32".
 ^|L |Properties that represent a 64-bit unsigned integer SHOULD be represented as an integer with format "uint64".
-^|M |In general, "format" values SHOULD be from the JSON Schema specifciation, the OpenAPI 3.1 specification or the OGC format register (to be established).
+^|M |In general, "format" values SHOULD be from the JSON Schema specifciation, the OpenAPI 3.1 specification or the OGC format register.
 ^|N |For string properties, "minLength", "maxLength", "enum" and/or "pattern" SHOULD be provided, where applicable.
 ^|O |For numeric properties, "multipleOf", "minimum", "exclusiveMinimum", "maximum", "exclusiveMaximum" SHOULD be provided, where applicable.
 ^|P |For integer properties that represent enumerated values (except for codelist values), "enum" SHOULD be provided.
 ^|Q |For string or integer properties that represent codelist values, one of the profiles "codelist-inline" or "codelist-ref" (see <<rc_profile-codelists>>) SHOULD be applied.
-^|R |For array properties, the property SHOULD consist of items that are strings or numbers.
+^|R |For array properties, the property SHOULD consist of items that are strings, numbers or objects.
 ^|S |Required properties SHOULD be included in "required".
 ^|T |The JSON Schema keywords SHOULD be constrained to those mentioned in this recommendation, requirement `/req/{req-class}/properties` and requirements in the _additional keywords_ section below.
 ^|U |"$ref" SHOULD NOT be used, schemas that are reused SHOULD be dereferenced and represented inline.
 |===
+
+NOTE: The OGC format register needs to be established.
 
 [#additional-keywords]
 === Additional keywords

@@ -4,7 +4,7 @@ This Standard defines the following requirements classes, grouped by their stand
 
 * Schema for a collection of data
 ** <<rc_schemas>> specifies basic provisions for schemas of items in a collection of geospatial data, for example, features, and the representation of a schema in JSON Schema.
-** <<rc_core-roles-features>> specifies additional property roles for feature data.
+** <<rc_advanced-property-roles>> specifies additional property roles for geospatial data, in particular, feature data.
 ** <<rc_references>> specifies additional provisions for properties that reference another resource.
 ** <<rc_profile-codelists>> specifies two profiles for representing values from a codelist in a schema.
 ** <<rc_profile-domains>> specifies two profiles for representing value domains of a property in a schema.
@@ -25,13 +25,13 @@ Conformance with this Standard shall be checked using all the relevant tests spe
 |===
 |Conformance class |URI
 |Schemas |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/schemas`
-|Core roles for features |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/core-roles-features`
+|Core roles for features |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/advanced-property-roles`
 |References |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/references`
 |Returnables and Receivables |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/returnables-and-receivables`
 |Queryables |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/queryables`
 |Sortables |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/sortables`
 |Profile query parameter |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-parameter`
-|Profiles for feature references |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-references`
+|Profiles for references |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-references`
 |Profiles for codelists |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-codelists`
 |Profiles for value domains |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/profile-domains`
 |===
