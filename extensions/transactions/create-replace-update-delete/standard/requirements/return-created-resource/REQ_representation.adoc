@@ -1,0 +1,6 @@
+[[rec_return-created-resource_representation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/return-created-resource/response*
+^|A |The representation of the resource returned in the response body of a <<create,create operation>> SHALL be negotiated using https://www.rfc-editor.org/rfc/rfc9110.html#name-content-negotiation[HTTP content negotiation] mechanisms (e.g. use of the HTTP `Accept` header).
+|===
