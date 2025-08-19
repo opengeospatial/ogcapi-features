@@ -16,7 +16,7 @@ The requirements stated in this Standard cover only simple cases. More complex c
 |===
 
 :req: ref-profiles
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -26,11 +26,11 @@ The requirements stated in this Standard cover only simple cases. More complex c
 For features, the query parameter "profile" will be applicable to the GET operation on the paths `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{resourceId}`.
 
 :req: rel-as-key
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |In the profile "rel-as-key" (`\http://www.opengis.net/def/profile/OGC/0/rel-as-key`) a reference in the response SHALL be represented by the `resourceId` of the referenced resource (a string or integer, depending on the type of the identifier property in the referenced collection), if the property with role "reference" has the keyword "x-ogc-collectionId" with a string value (a fixed collection).
+^|A |In the profile "rel-as-key" (`\http://www.opengis.net/def/profile/OGC/0/rel-as-key`) a reference in the response SHALL be represented by the `resourceId` of the referenced resource (a string or integer, depending on the type of the identifier property in the referenced collection), if the property with role "reference" has the keyword "x-ogc-collectionId".
 |===
 
 [[example_14_1]]
@@ -67,7 +67,7 @@ The examples in this Clause use the <<example_9_1,example road accident feature 
 ====
 
 :req: rel-as-uri
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -106,7 +106,7 @@ The examples in this Clause use the <<example_9_1,example road accident feature 
 ====
 
 :req: rel-as-link
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -156,7 +156,7 @@ Servers will typically not support the profile "rel-as-link" for media types tha
 "rel-as-link" will typically be the most useful representation, if a human user interacts with the resource. This is because of the possibility to include a descriptive label of the referenced resource. Of course, this only applies if the server can provide a meaningful title for each link, in which case this information can help the user to understand the referenced resource.
 
 :rec: default
-[#{req-class}_{rec}]
+[#rec_{req-class}_{rec}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}

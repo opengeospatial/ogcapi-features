@@ -25,7 +25,7 @@ The other roles specified in this requirements class support formats that suppor
 If the schema defines multiple spatial properties, the role "primary-geometry" can be used to identify the primary geometry property.
 
 :req: role-primary-geometry
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -41,7 +41,7 @@ NOTE: Since only a single property can be tagged in the schema as the primary ge
 If the schema defines multiple temporal properties, the roles "primary-instant", "primary-interval-start" and "primary-interval-end" can be used to identify the primary temporal information.
 
 :req: role-primary-instant
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -51,7 +51,7 @@ If the schema defines multiple temporal properties, the roles "primary-instant",
 |===
 
 :req: role-primary-interval-start
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -60,7 +60,7 @@ If the schema defines multiple temporal properties, the roles "primary-instant",
 |===
 
 :req: role-primary-interval-end
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -69,7 +69,7 @@ If the schema defines multiple temporal properties, the roles "primary-instant",
 |===
 
 :req: role-primary-interval
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -78,7 +78,7 @@ If the schema defines multiple temporal properties, the roles "primary-instant",
 |===
 
 :req: primary-temporal-constraints
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -93,7 +93,7 @@ If the schema defines multiple temporal properties, the roles "primary-instant",
 If the data is organized as features with a property representing the feature type, the role "type" can be used for this property.
 
 :req: role-type
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}

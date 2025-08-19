@@ -3,4 +3,1211 @@
 :appendix-caption: Annex
 == Abstract Test Suite (Normative)
 
-NOTE: Conformance classes and test cases for all requirements classes and requirements will be added once the requirements classes and requirements are final.
+This test suite uses the https://en.wikipedia.org/wiki/Given-When-Then[Given-When-Then] notation to specify the tests.
+
+In order to execute tests against a Web API under test, the Web API needs to support a well-known format. Since all known implementations at this time support JSON, the relevant Conformance Classes expect support for JSON and add a dependency to the Conformance Class "GeoJSON" in OGC API - Features - Part 1: Core. 
+
+NOTE: In the future, an alternative dependency can be added to OGC API - Common - Part 1, Conformance Class "JSON" in combination with OGC API - Common - Part 2.
+
+A Web API under test can require authorization. Any Executable Test Suite implementing this test suite should implement the following security schemes supported by OpenAPI 3.1: HTTP Authentication schemes "basic" and "bearer", API keys, and OAuth2 flow "authorizationCode".
+
+=== Conformance Class "Schemas"
+
+:conf-class: schemas
+[[conf_schemas]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Schema for a collection of geospatial data
+|Requirements class |<<rc_{conf-class},Requirements Class "Schemas">>
+|Dependency |OGC API - Common - Part 1: Core, Conformance Class "JSON" or OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|===
+
+:conf-test: basic-schema-inspection
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_json-schema,/req/{conf-class}/json-schema>>, <<req_{conf-class}_properties,/req/{conf-class}/properties>>, <<req_{conf-class}_additional-keywords,/req/{conf-class}/additional-keywords>>
+|Test purpose: | Inspect the schema
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+* a JSON Schema validator;
+
+When:
+
+* the URI in the "$id" member is dereferenced with a HTTP header "Accept: application/schema+json";
+* validate the schema using the JSON Schema validator against the schema at https://json-schema.org/draft/2020-12/schema;
+
+Then:
+
+* assert that the value of the "$schema" member is "\https://json-schema.org/draft/2020-12/schema";
+* assert that the value of the "$id" member is a URI in the "http" or "https" scheme;
+* assert that the value of the "$id" member is a URI without a query parameter;
+* assert dereferencing the URI in the "$id" member with a HTTP header "Accept: application/schema+json" results in a 200-response with "Content-Type: application/schema+json";
+* assert that the value of the "type" member is "object";
+* assert that the schema is a valid JSON Schema using the JSON Schema validator by testing it against the schema at https://json-schema.org/draft/2020-12/schema;
+* assert that each member in "$.properties" has an object as its value and the object either includes a "type" member or no "type" and no "$ref" member a "format" member whose value starts with "geometry-";
+* review the members in "$.properties" and check that if property is a temporal instant that has type "string" and "format: date" or "format: date-time";
+* review the members in "$.properties" and check that if property is a temporal interval that has type "string" and "format: interval-iso8601" or type "array" and "format: interval-array" with two items of type "string";
+* review the members in "$.properties" and check that if property has a value domain that is a named subset of a number or string that the "format" keyword is provided to indicate the value domain;
+* store the key of an arbitrary property with a "writeOnly: true" member, if one exists;
+* store the key of an arbitrary property with a "readOnly: true" member, if one exists;
+* assert that all keywords in the schema are either JSON Schema keywords or have an "x-" prefix;
+|===
+
+:conf-test: role
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-role" keyword
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* n/a;
+
+Then:
+
+* assert that all values of "x-ogc-role" are a string.
+|===
+
+:conf-test: role-id
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-role" keyword with value "id"
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* select the properties that include the "x-ogc-role" keyword with value "id";
+
+Then:
+
+* assert that exactly one property is selected;
+* assert that the property has a "type" member with value "string" or "integer".
+|===
+
+:conf-test: property-seq
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-propertySeq" keyword
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* select the properties that include the "x-ogc-propertySeq" keyword;
+
+Then:
+
+* assert that all values of "x-ogc-propertySeq" are an integer.
+|===
+
+:conf-test: unit
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-unit" keyword
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* select the properties that include the "x-ogc-unit" or "x-ogc-unitLang" keywords;
+
+Then:
+
+* assert that all values of "x-ogc-unit" and "x-ogc-unitLang" are a string;
+* assert that all selected properties have "type" "number" or "integer";
+* assert that all selected properties without "x-ogc-unitLang" have the keyword "x-ogc-unit" with a value that is a valid UCUM unit of measure in the case sensitive UCUM representation ("c/s");
+* assert that all selected properties with a "x-ogc-unitLang" value of "UCUM" have the keyword "x-ogc-unit" with a value that is a valid UCUM unit of measure in the case sensitive UCUM representation ("c/s");
+* assert that all selected properties with a "x-ogc-unitLang" value of "QUDT" have the keyword "x-ogc-unit" with a value that is a valid QUDT URI in the QUDT Unitx Vocabulary.
+
+|===
+
+:conf-test: definition
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-definition" keyword
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* select the properties that include the "x-ogc-definition" keyword;
+
+Then:
+
+* assert that all values of "x-ogc-definition" are a string that is a valid URI.
+|===
+
+:conf-test: nullvalues
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-nullValues" keyword
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* select the properties that include the "x-ogc-nullValues" keyword;
+
+Then:
+
+* assert that all values of "x-ogc-nullValues" are an array of strings (if the value of the property is a string) or an array of numbers (if the value of the property is a number).
+|===
+
+=== Conformance Class "Advanced property roles"
+
+:conf-class: advanced-property-roles
+[[conf_advanced-property-roles]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Schema for a collection of geospatial data
+|Requirements class |<<rc_{conf-class},Requirements Class "Advanced property roles">>
+|Dependency |<<conf_schemas,Conformance Class "Schemas">>
+|===
+
+:conf-test: role-primary-geometry
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-role" keyword with value "primary-geometry"
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* select the properties that include the "x-ogc-role" keyword with value "primary-geometry";
+
+Then:
+
+* assert that at most one property is selected;
+* assert that the property has no "type" and no "$ref" member, but a "format" member that starts with "geometry-";
+* assert that if no property is selected, the schema has only a single spatial property (with a "format" member that starts with "geometry-").
+|===
+
+:conf-test: role-primary-temporal
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_role-primary-instant,/req/{conf-class}/role-primary-instant>>, <<req_{conf-class}_role-primary-interval-start,/req/{conf-class}/role-primary-interval-start>>, <<req_{conf-class}_role-primary-interval-end,/req/{conf-class}/role-primary-interval-end>>, <<req_{conf-class}_role-primary-interval,/req/{conf-class}/role-primary-interval>>, <<req_{conf-class}_primary-temporal-constraints,/req/{conf-class}/primary-temporal-constraints>>
+|Test purpose: | Inspect uses of the "x-ogc-role" keyword with value "primary-instant", "primary-interval-start", "primary-interval-end", or "primary-interval"
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* select the properties that include the "x-ogc-role" keyword with value "primary-instant", "primary-interval-start", "primary-interval-end", or "primary-interval";
+
+Then:
+
+* assert that at most one property is selected with the exception of "primary-interval-start" and "primary-interval-end" which can be used together;
+* assert for role "primary-instant", "primary-interval-start" and "primary-interval-end" that each property is a string with a "format" member that is either "date" or "date-time";
+* assert for role "primary-interval" that the property is either a string with "format: interval-iso8601" or an array with "format: interval-array" containing two string items.
+|===
+
+:conf-test: role-type
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-role" keyword with value "type"
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+
+When:
+
+* select the properties that include the "x-ogc-role" keyword with value "type";
+
+Then:
+
+* assert that at most one property is selected;
+* assert that the property has "type" "string".
+|===
+
+=== Conformance Class "References"
+
+:conf-class: references
+[[conf_references]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Schema for a collection of geospatial data
+|Requirements class |<<rc_{conf-class},Requirements Class "References">>
+|Dependency |<<conf_schemas,Conformance Class "Schemas">>
+|===
+
+:conf-test: role-reference
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Inspect uses of the "x-ogc-role" keyword with value "reference"
+|Test method: | 
+Given:
+
+* the schema that is the subject under test;
+* the schemas of the collections that are referenced via "x-ogc-collectionId";
+
+When:
+
+* select the properties that include the "x-ogc-role" keyword with value "reference";
+
+Then:
+
+* assert that each selected property has "type" "string" or "integer";
+* assert that each selected property has either the keyword "x-ogc-uriTemplate" or "x-ogc-collectionId";
+* assert that each selected property with the keyword "x-ogc-uriTemplate" has a value that is a URI template with the variable "resourceId";
+* assert that each selected property with the keyword "x-ogc-collectionId" has the same type as the property with the "x-ogc-role" keyword with value "id" in the schema of the referenced collection.
+|===
+
+=== Conformance Class "Returnables and Receivables"
+
+:conf-class: returnables-and-receivables
+[[conf_returnables-and-receivables]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_{conf-class},Requirements Class "Returnables and Receivables">>
+|Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|Indirect Dependency |<<conf_schemas,Conformance Class "Schemas">>
+|===
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* authentication credentials (optional);
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: GET
+** path: "{apiURI}/conformance"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/json");
+* assert that "$.conformsTo" is a string array that includes the values "http://www.opengis.net/spec/{standard}/{m_n}/conf/schemas" and "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}";
+* store the values of "$.conformsTo" that match the URI template "http://www.opengis.net/spec/{standard}/{m_n}/conf/{cc}";
+|===
+
+:conf-test: link
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Check that a link to the schema resource exists
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+
+When:
+
+* a request is executed to determine the list of collections
+** method: GET 
+** path: "{apiURI}/collections""
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+* a request is executed to each collection found in the Collections resource
+** method: GET 
+** path: "{apiURI}/collections/{collectionId}"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* assert that each Collection response includes a link in the JSON payload with "rel" set to "\http://www.opengis.net/def/rel/ogc/1.0/schema";
+* store the "href" value as the schema URI for the collection ("{schemaUri}");
+* assert that the schema URI is "{apiUri}/collections/{collectionId}/schema";
+* store, if the collection supports features (itemType is not set or set to "features" or "records").
+|===
+
+:conf-test: op-and-response
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_op,/req/{conf-class}/op>>,  <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the schema resource exists and conforms to dependencies
+|Test method: |
+Given:
+
+* the URIs of the schema resources for each collection ("{schemaUri}");
+
+When:
+
+* a request is executed for each schema resource
+** method: GET
+** path: "{schemaURI}"
+** header: "Accept: application/schema+json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/schema+json");
+* assert that each schema passes the conformance class "Schemas";
+* if the conformance declaration includes the URI "http://www.opengis.net/spec/{standard}/{m_n}/conf/advanced-property-roles", assert that each schema passes the conformance class "Advanced property roles";
+* if the conformance declaration includes the URI "http://www.opengis.net/spec/{standard}/{m_n}/conf/references", assert that each schema passes the conformance class "References";
+|===
+
+:conf-test: response-1
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that features are valid against the schema
+|Test method: |
+Given:
+
+* the schema resource of a collection that supports features;
+
+When:
+
+* requests are executed for the feature collection
+** method: GET
+** path: "{apiURI}/collections/{collectionId}/items" and "{apiURI}/collections/{collectionId}/items/{featureId}"
+** header: "Accept: application/geo+json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution of the feature requests (status code is "200", "Content-Type" header is "application/geo+json");
+* assert that each property is valid according to the schema ("id" is validated against the schema with "x-ogc-role: id", "geometry" is validated against the schema with "x-ogc-role: primary-geometry", all other properties are validated against the schema with the same name in "properties" except "writeOnly" properties, which are ignored);
+* if the schema includes "additionalProperties: false", assert that no properties are returned that are not specified in the schema;
+* if the schema includes "additionalProperties: false", assert that no properties are returned that are specified in the schema with "writeOnly: true".
+|===
+
+:conf-test: response-2
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that features conforming to the schema are accepted in CRUD operations
+|Test method: |
+Given:
+
+* the schema resource of a collection that supports features;
+* the OGC Web API supports CRUD operations on the feature collection;
+
+When:
+
+* requests are executed for each feature collection
+** method: PUT, POST, where applicable
+** path: "{apiURI}/collections/{collectionId}/items" (POST) and "{apiURI}/collections/{collectionId}/items/{featureId}" (PUT) 
+** header: "Content-Type: application/geo+json"
+** body: a valid GeoJSON Feature, both requests that conform and do not conform to the schema 
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution for valid requests (status code is "201" for POST and "200" or "204" for PUT);
+* assert unsuccessful execution of invalid requests (status code is "400");
+* if the schema includes "additionalProperties: false", assert that the request is rejected if the body contains a property that is not specified in the schema or that is specified as "readOnly".
+|===
+
+=== Conformance Class "Queryables"
+
+:conf-class: queryables
+[[conf_queryables]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_{conf-class},Requirements Class "Queryables">>
+|Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|Dependency |OGC API - Features - Part 3: Filtering, Conformance Class "Queryables as Query Parameters" or "Features Filter"
+|Indirect Dependency |<<conf_schemas,Conformance Class "Schemas">>
+|===
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* authentication credentials (optional);
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: GET
+** path: "{apiURI}/conformance"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/json");
+* assert that "$.conformsTo" is a string array that includes the values "http://www.opengis.net/spec/{standard}/{m_n}/conf/schemas" and "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}";
+* store the values of "$.conformsTo" that match the URI template "http://www.opengis.net/spec/{standard}/{m_n}/conf/{cc}";
+|===
+
+:conf-test: link
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Check that a link to the schema resource exists
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+
+When:
+
+* a request is executed to determine the list of collections
+** method: GET 
+** path: "{apiURI}/collections""
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+* a request is executed to each collection found in the Collections resource
+** method: GET 
+** path: "{apiURI}/collections/{collectionId}"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* assert that each Collection response includes a link in the JSON payload with "rel" set to "\http://www.opengis.net/def/rel/ogc/1.0/queryables";
+* store the "href" value as the schema URI ("{schemaUri}");
+* assert that the schema URI is "{apiUri}/collections/{collectionId}/queryables";
+* store, if the collection supports features (itemType is not set or set to "features" or "records").
+|===
+
+:conf-test: op-and-response
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_op,/req/{conf-class}/op>>,  <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the schema resource exists and conforms to dependencies
+|Test method: |
+Given:
+
+* the URIs of the schema resources ("{schemaUri}");
+
+When:
+
+* a request is executed for each schema resource
+** method: GET
+** path: "{schemaURI}"
+** header: "Accept: application/schema+json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/schema+json");
+* assert that each schema passes the conformance class "Schemas";
+* if the conformance declaration includes the URI "http://www.opengis.net/spec/{standard}/{m_n}/conf/advanced-property-roles", assert that each schema passes the conformance class "Advanced property roles";
+* if the conformance declaration includes the URI "http://www.opengis.net/spec/{standard}/{m_n}/conf/references", assert that each schema passes the conformance class "References";
+* store the key of selected properties with a "type" member;
+* store the key of an arbitrary property of the object as the spatial queryable of the filterable resource, if the value of member is an object that includes no type member and a format member with a value "geometry-{type}"" where "{type}"" is one of "point", "multipoint", "linestring", "multilinestring", "polygon", "multipolygon", "geometrycollection", "any", "point-or-multipoint", "linestring-or-multilinestring", or "polygon-or-multipolygon";
+* store the value of the additionalProperties member or "true", if it is not provided;
+* if the conformance declaration includes the URI "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/queryables-query-parameters", assert that the OGC Web API passes the conformance class "Queryables as Query Parameters" for each collection that supports features;
+* if the conformance declaration includes the URI "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter", assert that the OGC Web API passes the conformance class "Features Filter" for each collection that supports features;
+|===
+
+=== Conformance Class "Sortables"
+
+:conf-class: sortables
+[[conf_sortables]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_{conf-class},Requirements Class "Sortables">>
+|Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|Indirect Dependency |<<conf_schemas,Conformance Class "Schemas">>
+|===
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* authentication credentials (optional);
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: GET
+** path: "{apiURI}/conformance"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/json");
+* assert that "$.conformsTo" is a string array that includes the values "http://www.opengis.net/spec/{standard}/{m_n}/conf/schemas" and "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}";
+* store the values of "$.conformsTo" that match the URI template "http://www.opengis.net/spec/{standard}/{m_n}/conf/{cc}";
+|===
+
+:conf-test: link
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Check that a link to the schema resource exists
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+
+When:
+
+* a request is executed to determine the list of collections
+** method: GET 
+** path: "{apiURI}/collections""
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+* a request is executed to each collection found in the Collections resource
+** method: GET 
+** path: "{apiURI}/collections/{collectionId}"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* assert that each Collection response includes a link in the JSON payload with "rel" set to "\http://www.opengis.net/def/rel/ogc/1.0/sortables";
+* store the "href" value as the schema URI ("{schemaUri}");
+* assert that the schema URI is "{apiUri}/collections/{collectionId}/sortables";
+* store, if the collection supports features (itemType is not set or set to "features" or "records").
+|===
+
+:conf-test: op-and-response
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_op,/req/{conf-class}/op>>,  <<req_{conf-class}_response,/req/{conf-class}/response>>
+|Test purpose: | Check that the schema resource exists and conforms to dependencies
+|Test method: |
+Given:
+
+* the URIs of the schema resources ("{schemaUri}");
+
+When:
+
+* a request is executed for each schema resource
+** method: GET
+** path: "{schemaURI}"
+** header: "Accept: application/schema+json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/schema+json");
+* assert that each schema passes the conformance class "Schemas";
+* if the conformance declaration includes the URI "http://www.opengis.net/spec/{standard}/{m_n}/conf/advanced-property-roles", assert that each schema passes the conformance class "Advanced property roles";
+* if the conformance declaration includes the URI "http://www.opengis.net/spec/{standard}/{m_n}/conf/references", assert that each schema passes the conformance class "References";
+* assert that each property has a "type" member;
+* assert that no property has a "type" member with value "array" or "object";
+|===
+
+NOTE: Tests that assert that the sortable properties can be used for sorting will be included in OGC API - Features - Part 8: Sorting.
+
+=== Conformance Class "Profile query parameter"
+
+:conf-class: profile-parameter
+[[conf_profile-parameter]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_{conf-class},Requirements Class "Profile query parameter">>
+|Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|===
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* authentication credentials (optional);
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: GET
+** path: "{apiURI}/conformance"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/json");
+* assert that "$.conformsTo" is a string array that includes the value "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: profile-param
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Check that the parameter "profile" is defined and supported
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* the path to resources that should support the "profile" query parameter ("{pathToProfiledResource}");
+* authentication credentials (optional);
+
+When:
+
+* a request is executed for the API definition
+** method: GET
+** path: "{apiURI}/api"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* assert that the "profile" query parameter is defined for each profiled resource as an optional list of comma-separated strings;
+* assert that the allowed values for the "profile" query parameter are either HTTP(S) URI or a non-URI value that can be converted to a URI using the URI template "http://www.opengis.net/def/profile/OGC/0/{profileId}" and that can be de-referenced (a GET or HEAD request returns a 200 status code);
+* store the allowed values for each profiled resource.
+|===
+
+
+:conf-test: profile-param-response
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test>>
+|Test purpose: | Check that the parameter "profile" is defined and supported
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* the path to resources that should support the "profile" query parameter ("{pathToProfiledResource}");
+* the allowed values for the "profile" query parameter for each profiled resource;
+* authentication credentials (optional);
+
+When:
+
+* a request is executed for each profiled resource
+** method: GET
+** path: "{apiURI}/{pathToProfiledResource}"
+** query parameters: 
+*** without a query parameter
+*** with query parameter "profile" with a value that is in the list of allowed values
+*** with query parameter "profile" with a value that is not in the list of allowed values
+*** with query parameter "profile" with two or more values that are in the list of allowed values
+*** with query parameter "profile" with two or more values where at least one is not in the list of allowed values
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200"), if no "profile" query parameter is provided or if the "profile" query parameter is provided with values that are in the list of allowed values;
+* assert unsuccessful execution (status code is "400"), if the "profile" query parameter is provided with values that are not in the list of allowed values;
+* assert that if the "profile" parameter was provided and the response payload includes links (e.g. a GeoJSON feature or feature collection), at least one link is included with "rel" set to "profile".
+|===
+
+=== Conformance Class "Profiles for references"
+
+:conf-class: profile-references
+[[conf_profile-references]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Collection of data
+|Requirements class |<<rc_{conf-class},Requirements Class "Profiles for references">>
+|Indirect Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|Indirect Dependency |<<conf_returnables-and-receivables,Conformance Class "Returnables and Receivables">>
+|Indirect Dependency |<<conf_profile-parameter,Conformance Class "Profile query parameter">>
+|Indirect Dependency |<<conf_references,Conformance Class "References>>
+|===
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}") that contains the collection of data;
+* authentication credentials (optional);
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: GET
+** path: "{apiURI}/conformance"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/json");
+* assert that "$.conformsTo" is a string array that includes the value "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: ref-profiles
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Check that the parameter "profile" is defined and supported
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* the IDs of collections ("{collectionId}") that include references in their returnables and receivables schema;
+* the path to sub-resources that should support the "profile" query parameter ("{subpathToProfiledResource}");
+* authentication credentials (optional);
+
+When:
+
+* a request is executed for profiled resources
+** method: GET
+** path: "{apiURI}/collections/{collectionId}/{subpathToProfiledResource}"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* assert that the API passes the Conformance Class "Returnables and Receivables" and that the schema passes the Conformance Class "References" for the identified collections;
+* assert that the API passes the Conformance Class "Profile query parameter" for the path "collections/{collectionId}/{subpathToProfiledResource}" and the allowed values "rel-as-key", "rel-as-uri", and "rel-as-link";
+|===
+
+:conf-test: rel-as-key
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Check the profile "rel-as-key" for references
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* the IDs of collections ("{collectionId}") that include references in their returnables and receivables schema;
+* the path to sub-resources that should support the "profile" query parameter ("{subpathToProfiledResource}");
+* authentication credentials (optional);
+
+When:
+
+* a request is executed for profiled resources
+** method: GET
+** path: "{apiURI}/collections/{collectionId}/{subpathToProfiledResource}"
+** query parameter: "profile=rel-as-key"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* if the response includes a link with "rel" set to "profile" and "href" set to "http://www.opengis.net/def/profile/OGC/0/rel-as-key", 
+** assert that all properties with "x-ogc-role" set to "reference" and which include the keyword "x-ogc-collectionId" are either a string or an integer.
+|===
+
+:conf-test: rel-as-uri
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Check the profile "rel-as-uri" for references
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* the IDs of collections ("{collectionId}") that include references in their returnables and receivables schema;
+* the path to sub-resources that should support the "profile" query parameter ("{subpathToProfiledResource}");
+* authentication credentials (optional);
+
+When:
+
+* a request is executed for profiled resources
+** method: GET
+** path: "{apiURI}/collections/{collectionId}/{subpathToProfiledResource}"
+** query parameter: "profile=rel-as-uri"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* if the response includes a link with "rel" set to "profile" and "href" set to "http://www.opengis.net/def/profile/OGC/0/rel-as-uri", 
+** assert that all properties with "x-ogc-role" set to "reference" are a URI in the HTTP or HTTPS scheme.
+|===
+
+:conf-test: rel-as-link
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_{conf-test},/req/{conf-class}/{conf-test}>>
+|Test purpose: | Check the profile "rel-as-link" for references
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* the IDs of collections ("{collectionId}") that include references in their returnables and receivables schema;
+* the path to sub-resources that should support the "profile" query parameter ("{subpathToProfiledResource}");
+* authentication credentials (optional);
+
+When:
+
+* a request is executed for profiled resources
+** method: GET
+** path: "{apiURI}/collections/{collectionId}/{subpathToProfiledResource}"
+** query parameter: "profile=rel-as-link"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* if the response includes a link with "rel" set to "profile" and "href" set to "http://www.opengis.net/def/profile/OGC/0/rel-as-link", 
+** assert that all properties with "x-ogc-role" set to "reference" are an object with a "href" member with a URI as the value.
+|===
+
+=== Conformance Class "Profiles for codelists"
+
+:conf-class: profile-codelists
+[[conf_profile-codelists]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Schema for a collection of data
+|Requirements class |<<rc_{conf-class},Requirements Class "Profiles for codelists">>
+|Indirect Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|Indirect Dependency |<<conf_schemas,Conformance Class "Schemas>>
+|===
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}") that contains the collection of data;
+* authentication credentials (optional);
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: GET
+** path: "{apiURI}/conformance"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/json");
+* assert that "$.conformsTo" is a string array that includes the value "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: codelists
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_consistency,/req/{conf-class}/consistency>>, <<req_{conf-class}_codelists-inline,/req/{conf-class}/codelists-inline>>, <<req_{conf-class}_codelists-ref,/req/{conf-class}/codelists-ref>>
+|Test purpose: | Check that all codelists use the same profile and that responses are consistent with the declared profile
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* the IDs of collections ("{collectionId}") that include codelists in their queryables or returnables and receivables schema ("{subpathToSchema}");
+* authentication credentials (optional);
+
+When:
+
+* a request is executed for schema that is the subject under test
+** method: GET
+** path: "{apiURI}/collections/{collectionId}/{subpathToSchema}"
+** header: "Accept: application/schema+json"
+** query parameters: 
+*** without a query parameter
+*** with query parameter "profile=codelists-inline"
+*** with query parameter "profile=codelists-ref"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type: application/schema+json");
+* assert that the response passes the Conformance Class "Schemas";
+* assert that the API passes the Conformance Class "Profile query parameter" for the path "collections/{collectionId}/{subpathToSchema}" and the potentially allowed values "codelists-inline" and "codelists-ref";
+* assert that all properties that specify enumerated values (either using the "enum" keyword or using a "oneOf" schema with a "const" member in each schema) follow the same pattern:
+** if a property uses type "oneOf" with a "const" member in every schema, assert that no property uses the "enum" keyword and the "x-ogc-codelistUri" keyword;
+** if a property uses type "string" or "integer" and both the "enum" and the "x-ogc-codelistUri" keyword, assert that no property uses type "oneOf" with a "const" member in every schema;
+** if a property uses type "oneOf" with a "const" member in every schema, assert that the response does not include a link with "rel" set to "profile" with "href" set to "http://www.opengis.net/def/profile/OGC/0/codelists-ref";
+** if a property uses type "string" or "integer" and both the "enum" and the "x-ogc-codelistUri" keyword, assert that the response does not include a link with "rel" set to "profile" with "href" set to "http://www.opengis.net/def/profile/OGC/0/codelists-inline".
+|===
+
+=== Conformance Class "Profiles for value domains"
+
+:conf-class: profile-domains
+[[conf_profile-domains]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Schema for a collection of data
+|Requirements class |<<rc_{conf-class},Requirements Class "Profiles for value domains">>
+|Indirect Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
+|Indirect Dependency |<<conf_schemas,Conformance Class "Schemas>>
+|===
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}") that contains the collection of data;
+* authentication credentials (optional);
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: GET
+** path: "{apiURI}/conformance"
+** header: "Accept: application/json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/json");
+* assert that "$.conformsTo" is a string array that includes the value "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+:conf-test: domains
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_consistency,/req/{conf-class}/consistency>>, <<req_{conf-class}_actual-domain,/req/{conf-class}/actual-domain>>
+|Test purpose: | Check that all value domains use the same profile and that responses are consistent with the declared profile
+|Test method: |
+Given:
+
+* the landing page URI of the OGC Web API ("{apiURI}");
+* the IDs of collections ("{collectionId}") that include properties with "enum", "pattern", "minLength", "maxLength", "minimum, "maximum", "exclusiveMinimum", "exclusiveMaximum", "format" keywords in their queryables or returnables and receivables schema ("{subpathToSchema}");
+* authentication credentials (optional);
+
+When:
+
+* a request is executed for schema that is the subject under test
+** method: GET
+** path: "{apiURI}/collections/{collectionId}/{subpathToSchema}"
+** header: "Accept: application/schema+json"
+** query parameters: 
+*** without a query parameter
+*** with query parameter "profile=actual-domain"
+*** with query parameter "profile=valid-domain"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type: application/schema+json");
+* assert that the response passes the Conformance Class "Schemas";
+* assert that the API passes the Conformance Class "Profile query parameter" for the path "collections/{collectionId}/{subpathToSchema}" and the potentially allowed values "actual-domain" and "valid-domain";
+* if the response includes a link with "rel" set to "profile" with "href" set to "http://www.opengis.net/def/profile/OGC/0/actual-domain", assert through spot checks that valid values for properties with "enum", "pattern", "minLength", "maxLength", "minimum, "maximum", "exclusiveMinimum", "exclusiveMaximum", and "format" keywords can be found in the data of the collection;
+* if the response includes a link with "rel" set to "profile" with "href" set to "http://www.opengis.net/def/profile/OGC/0/valid-domain" and if the OGC Web API supports CRUD operations on the collection, assert through spot checks that valid values for properties with "enum", "pattern", "minLength", "maxLength", "minimum, "maximum", "exclusiveMinimum", "exclusiveMaximum", and "format" keywords can be submitted to create new resources in the collection.
+|===
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+input: URI of resources, list of values
+
+check definition of the query parameter profile on GET
+
+check allowed values
+
+test without profile query parameter, 200
+
+check links to profiles
+
+---
+
+conditional check
+
+rel-as-key, rel-as-uri, rel-as-link 
+
+---
+
+
+
+
+* The URI of the schema resource in the API ("{apiURI}/{relativePathToSchema}");
+
+
+NOTE: The Conformance Class "JSON" in Common Core has a dependency to the Conformance Classes "Core" and "Landing Page"; that is, testing against "JSON" will automatically test against the dependencies.
+
+The following table lists input given to all tests in this conformance class:
+
+* The landing page URI of the OGC Web API ("{apiURI}");
+* The URI of the schema resource in the API ("{apiURI}/{relativePathToSchema}");
+* Authentication credentials (optional).
+
+:conf-test: get-conformance
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | n/a
+|Test purpose: | Check that the API declares support for the conformance class
+|Test method: | 
+Given:
+
+* n/a
+
+When:
+
+* the request for the Conformance Declaration is executed
+** method: "GET"
+** path: "{apiURI}/conformance"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200", "Content-Type" header is "application/json");
+* assert that "$.conformsTo" is a string array that includes the value "http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}".
+|===
+
+
+:conf-test: get-queryables-uris
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_{conf-class}_queryables-link,/req/{conf-class}/queryables-link>>
+|Test purpose: | Check that a link to the schema resource exists
+|Test method: |
+Given:
+
+* the schema resource ("{apiURI}/{relativePathToSchema}");
+
+When:
+
+* a request is executed for the schema resource
+** method: "HEAD" (if "HEAD" results in a 405 response, use "GET" instead)
+** path: "{apiURI}/{relativePathToSchema}"
+** header: "Accept: application/schema+json"
+** authentication, if authentication credentials are provided
+
+Then:
+
+* assert successful execution (status code is "200");
+* assert that the response includes a "Link" header with "rel" set to "\http://www.opengis.net/def/rel/ogc/1.0/queryables";
+* store the "href" value as the Queryables URI for the filterable resource ({queryablesUri}).
+|===

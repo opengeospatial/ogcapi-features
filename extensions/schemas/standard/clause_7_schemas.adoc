@@ -21,7 +21,7 @@ The schema represents a logical model, independent of the format in which the da
 === Schema representation
 
 :req: json-schema
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -36,17 +36,18 @@ The schema represents a logical model, independent of the format in which the da
 In addition to the JSON Schema data types, geospatial data typically also uses spatial and temporal data types.
 
 :req: properties
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |Each property SHALL include a "type" member, except for spatial properties.
 ^|B |Each spatial property SHALL not include a "type" or "$ref" member.
 ^|C |Each spatial property SHALL include a "format" member with a string value "geometry", followed by a hyphen, followed by the name of the geometry type in lower case. I.e., the values for the core Simple Feature geometry types are: "geometry-point", "geometry-multipoint", "geometry-linestring", "geometry-multilinestring", "geometry-polygon", "geometry-multipolygon", and "geometry-geometrycollection". In addition, the following special values are supported: "geometry-any" as the wildcard for any geometry type, "geometry-point-or-multipoint" for a Point or MultiPoint, "geometry-linestring-or-multilinestring" for a LineString or MultiLineString, and "geometry-polygon-or-multipolygon" for a Polygon or MultiPolygon.
-^|D |Each temporal property SHALL be a "string" literal with the appropriate format (e.g., "date-time" or "date" for instances, depending on the temporal granularity).
-^|E |As a general rule, if the data type of a property has to be more specific than the JSON Schema data types ("number", "integer", "string"), the "format" keyword SHALL be used.
-^|F |Properties that are only applicable when creating new data or updating existing data SHALL include "writeOnly: true".
-^|G |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
+^|D |Each temporal property that represents an instant (including the start or end of an interval) SHALL be a "string" literal with the appropriate format (e.g., "date-time" or "date", depending on the temporal granularity).
+^|E |Each temporal property that represents an interval SHALL either be a "string" literal with format "interval-iso8601" (two instants with the same granularity separated by a "/") or an array with format "interval-array" consisting of two "string"s representing the interval start and end instants. In both variants, unbounded interval ends are represented by the string "..".
+^|F |As a general rule, if the data type of a property has to be more specific than the JSON Schema data types ("number", "integer", "string"), the "format" keyword SHALL be used.
+^|G |Properties that are only applicable when creating new data or updating existing data SHALL include "writeOnly: true".
+^|H |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
 |===
 
 The following recommendations are intended to simplify parsing a schema and to help understanding the meaning and representation of the properties:
@@ -88,7 +89,7 @@ NOTE: The OGC format register needs to be established.
 In order to be able to map the logical schema to a format-specific schema, extensions to the JSON Schema vocabulary are needed.
 
 :req: additional-keywords
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -100,7 +101,7 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 ==== Properties with a specific role
 
 :req: role
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -109,7 +110,7 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 |===
 
 :req: role-id
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -127,7 +128,7 @@ For cases, where the properties of the resource should be ordered in some repres
 - the representation of the data in a format that requires a specific order of properties (e.g., XML based on an XML Schema that uses a `sequence` for the property elements).
 
 :req: property-seq
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -136,7 +137,7 @@ For cases, where the properties of the resource should be ordered in some repres
 |===
 
 :rec: property-seq-unique
-[#{req-class}_{rec}]
+[#rec_{req-class}_{rec}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Recommendation {counter:rec-num}* |/req/{req-class}/{rec}
@@ -148,7 +149,7 @@ For cases, where the properties of the resource should be ordered in some repres
 In geospatial data, numeric property values often represent a measurement and have a unit of measure. For fixed units, this can be expressed in the schema using the keyword "x-ogc-unit".
 
 :req: unit
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -169,7 +170,7 @@ NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt
 ==== Semantic definition of a property
 
 :req: definition
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -180,7 +181,7 @@ NOTE: For example, the value for hectopascal is `hPa` in UCUM and `\https://qudt
 ==== Special null values
 
 :req: nullvalues
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
