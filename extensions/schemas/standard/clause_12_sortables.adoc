@@ -18,7 +18,7 @@ OGC API Standards do not assume that the content schema of a resource being quer
 In addition, a <<publisher-def,publisher>> may want to support <<sortable-def,sortable>> that are not directly represented as resource properties in the content schema of the resource. Or the <<publisher-def,publisher>> may want to restrict sorting on certain properties. For example, because the backend datastore has not been configured to allow high-performance queries on those properties.
 
 :req: link
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -26,7 +26,7 @@ In addition, a <<publisher-def,publisher>> may want to support <<sortable-def,so
 |===
 
 :req: op
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -34,7 +34,7 @@ In addition, a <<publisher-def,publisher>> may want to support <<sortable-def,so
 |===
 
 :req: response
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}

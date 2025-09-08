@@ -19,7 +19,7 @@ A profile is defined not to alter the semantics of the resource representation i
 To request one or more profiles, a query parameter "profile" can be used:
 
 :req: profile-param
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -67,7 +67,7 @@ Different media types have different characteristics. A consequence is that it c
 The server will select the profile(s) of the response, if any, from the list of profiles supported for the media type and resource.
 
 :rec: profile-negotiation
-[#{req-class}_{rec}]
+[#rec_{req-class}_{rec}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
@@ -76,7 +76,7 @@ The server will select the profile(s) of the response, if any, from the list of 
 |===
 
 :req: profile-param-response
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -85,7 +85,7 @@ The server will select the profile(s) of the response, if any, from the list of 
 |===
 
 :rec: profile-link-header
-[#{req-class}_{rec}]
+[#rec_{req-class}_{rec}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
