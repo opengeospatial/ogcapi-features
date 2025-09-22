@@ -21,14 +21,14 @@ That is, JSON Schema is primarily used as a data description language.  Addition
 [cols="25,75",options="header"]
 |===
 |Additional element |Description
-|<<rc_profile-codelists_codelist-ref,x-ogc-codelistUri>> |A reference to a codelist.
-|<<rc_feature-references_role-reference,x-ogc-collectionId>> |Target collection of foreign key references.
-|<<rc-schemas_definition,x-ogc-definition>> |Reference to the semantic definition of a property.
-|<<rc_schemas_definition,x-ogc-propertySeq>> |An integer representing the relative position of a property in a schema in ascending order.
-|<<rc-schemas_role,x-ogc-role>> |Declares a specific role of a property.
-|<<rc_schemas_unit,x-ogc-unit>> |Declares the unit of measure of a property.
-|<<rc_schemas_unit,x-ogc-unitLang>> |Declares the language/register used for the unit of measure.
-|<<rc_feature-references_role-reference,x-ogc-uriTemplate>> |A URI template with a template `featureId` used to reference a resources in another local or remote collection.
+|<<req_profile-codelists_codelist-ref,x-ogc-codelistUri>> |A reference to a codelist.
+|<<req_references_role-reference,x-ogc-collectionId>> |Target collection of foreign key references.
+|<<req_schemas_definition,x-ogc-definition>> |Reference to the semantic definition of a property.
+|<<req_schemas_property-seq,x-ogc-propertySeq>> |An integer representing the relative position of a property in a schema in ascending order.
+|<<req_schemas_role,x-ogc-role>> |Declares a specific role of a property.
+|<<req_schemas_unit,x-ogc-unit>> |Declares the unit of measure of a property.
+|<<req_schemas_unit,x-ogc-unitLang>> |Declares the language/register used for the unit of measure.
+|<<req_references_role-reference,x-ogc-uriTemplate>> |A URI template with a template `featureId` used to reference a resources in another local or remote collection.
 |===
 
 The main reasons for using JSON Schema are:
