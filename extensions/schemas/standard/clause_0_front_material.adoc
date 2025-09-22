@@ -4,11 +4,15 @@ OGC API Standards define modular API building blocks to spatially enable Web API
 
 OGC API - Features Standard defines building blocks to create, modify and query features on the Web. The OGC API - Features Standard is comprised of multiple parts. Each part is a separate standard.
 
-The OGC API - Features - Part 5: Schemas Standard (hereafter also referred to as "this Standard" or "this document") specifies how geospatial data such as features can be described by a logical schema and how such schemas are published in an OGC Web API implementation.
+Some API building blocks are applicable in multiple OGC API Standards. These common building blocks are documented in the OGC API — Common Standard, which is comprised of multiple parts, too.
+
+This document ("Schemas") specifies how geospatial data such as features can be described by a logical schema and how such schemas are published in an OGC Web API implementation. The document is published both as Part 5 of OGC API - Features and as Part 3 of OGC API - Common. This document is hereafter also referred to as "this Standard".
+
+This Standard specifies provisions for schemas that are applicable to any type of geospatial data as well as provisions for profiles. While the provision originate from use cases involving feature data, all provisions are not specific to features.
 
 As logical schemas, the schemas describe the data independent of a particular format to represent the data. 
 
-To use a schema for data validation, the schema must be converted into a schema representation suitable for validating data in the specific data format. For example, an XML Schema that is a GML application schema or a JSON Schema for GeoJSON or the draft OGC Features and Geometries JSON (JSON-FG).
+To use a schema for data validation, the schema must be converted into a schema representation suitable for validating data in the specific data format. For example, an XML Schema that is a GML application schema or a JSON Schema for GeoJSON or JSON-FG (OGC Features and Geometries JSON).
 
 While the schema is a logical schema, a machine-readable representation is needed. Instead of specifying a custom schema language for geospatial data, this Standard uses JSON Schema as the schema language with: 
 
@@ -22,10 +26,6 @@ The main reasons for using JSON Schema are:
 * Web developers are often familiar with JSON Schema and JSON;
 * JSON data types (string, number, boolean, array, object, null) are simple and easy to understand; and
 * JSON is often used for encoding geospatial data, i.e., the schema of a property can be used to validate property values without conversion.
-
-This Standard specifies basic provisions for schemas that are applicable to any type of geospatial data as well as general provision for profiles. These provisions are not specific to features and as such could be copied in or moved to OGC API - Common in the future.
-
-Additional provisions are added for <<rc_advanced-property-roles,schemas for feature data>>.
 
 In OGC Web APIs, geospatial data is shared in collections (path `/collections/{collectionId}`). The schema of items in a collection provides information as to how to interact with the collection. 
 
@@ -72,9 +72,12 @@ Recipients of this document are requested to submit, with their comments, notifi
 
 The following organizations submitted this document to the Open Geospatial Consortium (OGC):
 
+* Compass, Inc.
 * CubeWerx Inc.
 * Ecere Corporation
+* Geonovum
 * interactive instruments
+* Met Office
 * Meteorological Service of Canada
 * Natural Resources Canada
 
@@ -86,7 +89,10 @@ All questions regarding this submission should be directed to the editors or the
 |*Name* |*Affiliation*
 |Panagiotis (Peter) A. Vretanos _(editor)_ |CubeWerx Inc.
 |Clemens Portele _(editor)_ |interactive instruments
+|Charles Reed |Compass, Inc.
+|Chris Little |Met Office
 |Jérôme Jacovella-St-Louis|Ecere Corporation
 |Joost van Ulden |Natural Resources Canada
+|Linda van den Brink |Geonovum
 |Tom Kralidis |Meteorological Service of Canada
 |===
