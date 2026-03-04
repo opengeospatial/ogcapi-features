@@ -1,0 +1,7 @@
+[[req_query-expression-json_join-properties]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/query-expression-json/join-filter*
+^|Conditions |The `collections` member in a query contains more that one collection identifier.
+^|A |In a projection clause (member: `properties`), each referenced property SHALL be identified by a composite name consisting of the source collection identifier followed by the property identifier, joined by a dot (".") separator.
+|===

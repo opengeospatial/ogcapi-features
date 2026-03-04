@@ -1,0 +1,256 @@
+[[clause-multi-resource-response]]
+== Requirements Class "Multi-Resource Response"
+
+=== Overview
+
+include::requirements/requirements_class_multi-resource-response.adoc[]
+
+When multiple queries are specified, the results must be organized in a way that preserves the context of each query.  While simple concatenation into a single Feature Collection is possible, it introduces significant challenges regarding resource identity, duplicate handling, and metadata clarity.
+
+To address these challenges, this Standard adopts the approach established in WFS 2.0. Rather than merging all results into a single collection response, this clause defines a response structure that returns an array of collections (one for each query in the expression). This offers several architectural benefits:
+
+* **Conceptual Clarity:** It avoids "hacks" like identifier prefixing or complex duplicate-handling logic by keeping result sets isolated.
+
+* **Support for Joins:** Since a query expression may contain queries that perform joins, the structure defined in this document also allows collections of tuples to be included within the response array.
+
+* **JSON-FG Compatibility:** This structure is highly beneficial for use with JSON-FG, where each collection can maintain its own homogeneous metadata and schema definitions.
+
+* **Client Versatility:** While single collections are slightly simpler for basic tools, JavaScript-based clients can process an array of collections with negligible overhead, benefiting from the clearer data separation.
+
+If the same resource satisfies the criteria of multiple queries, it should ideally be included only once in a flattened result set. However, by using the array of collections model, the resource can appear in each relevant collection without causing identifier conflicts, as its context is defined by its parent collection.
+
+[[clause-multi-resource-response-json]]
+=== JSON Response
+
+include::requirements/multi-resource-response/REQ_json-response.adoc[]
+
+[[schema_collections]]
+.link:../openapi/schemas/collections.yaml[Schema for a multi-resource response (collections.yaml)]
+[source,YAML]
+----
+include::../openapi/schemas/collections.yaml[]
+----
+
+See also <<schema_tuples,tuples.yaml>>
+
+include::requirements/multi-resource-response/REQ_resource-order.adoc[]
+
+include::recommendations/multi-resource-response/PER_resource-id.adoc[]
+
+A common strategy for reassigning identifiers is to prefix the resource identifier with the identifier of its source collection, using a dot (e.g., `collectionId.resourceId`) as a separator.
+
+include::recommendations/multi-resource-response/PER_json-pointers.adoc[]
+
+include::requirements/multi-resource-response/REQ_limit-response.adoc[]
+
+==== Examples
+
+The following example illustrates a response for a query expression containing multiple queries that retrieve resources from different collections. Notably, one of these queries also incorporates a join operation.
+
+[[example_13_7]]
+.Example of a multiple queries in a query expression.
+====
+[source,JSON]
+----
+   CLIENT                                                               SERVER
+     |                                                                     |
+     |   POST /query   HTTP/1.1                                            |
+     |   Host: www.someserver.com/                                         |
+     |   Accept: application/json                                          |
+     |   Content-Type: application/ogcqry+json                             |
+     |                                                                     |    
+     |   {                                                                 |
+     |     "queries": [                                                    |
+     |       { "collections":["runwayelement"] },                          |
+     |       { "collections":["taxiwayelement"] },                         |
+     |       {                                                             |
+     |         "collections": ["apronelement", "apron"],                   |
+     |         "filter": {                                                 |
+     |           "op": "and",                                              |
+     |           "args": [                                                 |
+     |             { "op": "=",                                            |
+     |               "args": [{"property": "apronelement.associatedApron"},|
+     |                        {"property": "apron.id"}]                    |
+     |             },                                                      |
+     |             { "op": "in",                                           |
+     |               "args": [{"property": "apronelement.airport"},        |
+     |                       ["JFK", "EWR", "LGA"]]                        |
+     |             }                                                       |
+     |           ]                                                         |
+     |         }                                                           |
+     |       }                                                             |
+     |     ]                                                               |
+     |   }                                                                 |
+     |-------------------------------------------------------------------->|
+     |                                                                     |
+     |   Content-Type: application/json                                    |
+     |   {                                                                 |
+     |     type: "Collections",                                            |
+     |     collections: [                                                  |
+     |       {                                                             |
+     |          "type": "FeatureCollection",                               |
+     |          "features": [                                              |
+     |            { ... feature ... },                                     |
+     |            { ... feature ... },                                     |
+     |            .                                                        |
+     |            .                                                        |
+     |            .                                                        |
+     |          ]                                                          |
+     |       },                                                            |
+     |       {                                                             |
+     |          "type": "FeatureCollection",                               |
+     |          "features": [                                              |
+     |            { ... feature ... },                                     |
+     |            { ... feature ... },                                     |
+     |            .                                                        |
+     |            .                                                        |
+     |            .                                                        |
+     |          ]                                                          |
+     |       },                                                            |
+     |       {                                                             |
+     |         "tuples": [                                                 |
+     |           [                                                         |
+     |             { ... feature ... },                                    |
+     |             { ... feature ... }                                     |
+     |           ],                                                        |
+     |           [                                                         |
+     |             { ... feature ... },                                    |
+     |             { ... feature ... }                                     |
+     |           ],                                                        |
+     |           .                                                         |
+     |           .                                                         |
+     |           .                                                         |
+     |         ]                                                           |
+     |       }                                                             |
+     |     ]                                                               |
+     |   }                                                                 |
+     |<--------------------------------------------------------------------|
+----
+====
+
+[[clause-join-response]]
+== Requirements Class "Join Response"
+
+=== Overview
+
+include::requirements/requirements_class_join-response.adoc[]
+
+This Standard defines a join through the inclusion of multiple entries within the `collections` member of a query. This clause outlines the required server response patterns and data structures for such operations.
+
+One approach aligns with standard SQL behavior, where properties from all participating collections are aggregated into a unified result set. However, this implementation introduces several architectural considerations that must be addressed:
+
+* **Namespace Management:** To ensure data integrity and prevent naming collisions, property identifiers in both requests and responses must follow a prefixed naming convention (e.g., collection_name.property).
+
+* **Identity Management:** A formal protocol is required for assigning unique IDs to joined features, such as the implementation of composite keys or tuple-based identifiers.
+
+* **Geometry Resolution:** Logic must be established to designate a "primary" geometry within GeoJSON representations when a join yields multiple spatial properties.
+
+* **Data Serialization:** The standard must determine whether to retain a flat, prefixed naming structure or adopt a nested object approach (grouping properties under a parent collection object) to enhance response readability.
+
+In contrast to the SQL-style merging of properties, this Standard adopts a tuple-based approach. Rather than attempting to flatten or merge joined resources, the Standard reports each tuple with its participating resources fully intact.
+
+To optimize performance and reduce data redundancy within each tuple, the Standard supports the use of pointers. By enforcing specific constraints on the order in which resources are encoded, the Standard effectively bypasses the previously identified challenges regarding namespace management, identity management, geometry resolution, and data serialization.
+
+Under this model, the raw results of the join are transmitted directly to the client, providing the flexibility for the end-user application to determine the most appropriate method for processing and presenting the joined data.
+
+[[clause-join-response-json]]
+=== JSON Response
+
+include::requirements/join-response/REQ_json-response.adoc[]
+
+[[schema_tuples]]
+.link:../openapi/schemas/tuples.yaml[Schema for join response (tuples.yaml)]
+[source,YAML]
+----
+include::../openapi/schemas/tuples.yaml[]
+----
+
+[[schema_tuple]]
+.link:../openapi/schemas/tuple.yaml[Schema for response tuple (tuple.yaml)]
+[source,YAML]
+----
+include::../openapi/schemas/tuple.yaml[]
+----
+
+include::requirements/join-response/REQ_resource-order.adoc[]
+
+include::requirements/join-response/REQ_sorting.adoc[]
+
+include::recommendations/join-response/PER_resource-id.adoc[]
+
+A common strategy for reassigning identifiers is to prefix the resource identifier with the identifier of its source collection, using a dot (e.g., `collectionId.resourceId`) as a separator.
+
+include::recommendations/join-response/PER_json-pointers.adoc[]
+
+include::requirements/join-response/REQ_limit-response.adoc[]
+
+[[example_13_3]]
+.Example of a spatial join query.
+====
+This example demonstrates how to retrieve all lakes located within Algonquin Park. The query includes a `collections` member that references the two geodata sources: Parks and Lakes.
+
+The `filter` member uses a CQL2 expression to execute a spatial join, filtering collections based on the spatial containment of their geometries. In accordance with requirement <<req_query-expression-json_join-filter,/req/query-expression-json/join-filter>>, all queryables within the CQL2 expression are prefixed with the relevant collection identifier, using a dot (".") as a separator.
+
+The resulting response is returned as an array of tuples. Since this query targets two collections, each tuple consists of a pair of features that satisfy the specified predicates.
+
+To optimize the response and eliminate redundancy, the Parks feature—which remains constant as "Algonquin Park" across all results—is only fully encoded in the first tuple. Every subsequent tuple employs a JSON Pointer to reference the initial Algonquin Park feature rather than duplicating its data.
+
+Each feature within each tuple is presented in the order in which the source collections where specified in the query: Parks first, then Lakes.
+
+Finally, the individual features within each tuple are encoded using the GeoJSON standard.
+
+[source,JSON]
+----
+   CLIENT                                                               SERVER
+     |                                                                     |
+     |   POST /query   HTTP/1.1                                            |
+     |   Host: www.someserver.com/                                         |
+     |   Accept: application/json                                          |
+     |   Content-Type: application/ogcqry+json                             |
+     |                                                                     |    
+     |   {                                                                 |
+     |      "collections": ["parks","lakes"]                               |
+     |      "filter": {                                                    |
+     |         "and": [                                                    |
+     |            {"eq": [{"property": "parks.name"},"Algonquin Park"]}    |
+     |            {"contains": [{"property": "parks.geometry"},            |
+     |                          {"property": "lakes.geometry"}]}           |
+     |         ]                                                           |
+     |      }                                                              |
+     |   }                                                                 |
+     |-------------------------------------------------------------------->|
+     |                                                                     |
+     |   Content-Type: application/json                                    |
+     |   {                                                                 |
+     |      "tuples": [                                                    |
+     |         [                                                           |
+     |            {                                                        |
+     |               "id": "park.001",                                     |
+     |               "type": "Feature",                                    |
+     |               "geometry": { ... },                                  |
+     |               "properties": { ... }                                 |
+     |            },                                                       |
+     |            {                                                        |
+     |               "id": "lake.001",                                     |
+     |               "type": "Feature",                                    |
+     |               "geometry": { ... },                                  |
+     |               "properties": { ... }                                 |
+     |            }                                                        |
+     |         ],                                                          |
+     |         [                                                           |
+     |            { "$ref": "#/tuples[0]/[0]" },                           |
+     |            {                                                        |
+     |               "id": "lake.001",                                     |
+     |               "type": "Feature",                                    |
+     |               "geometry": { ... },                                  |
+     |               "properties": { ... }                                 |
+     |            }                                                        |
+     |         ],                                                          |
+     |         .                                                           |
+     |         .                                                           |
+     |         .                                                           |
+     |      ]                                                              |
+     |   }                                                                 |
+     |<--------------------------------------------------------------------|
+----
+====

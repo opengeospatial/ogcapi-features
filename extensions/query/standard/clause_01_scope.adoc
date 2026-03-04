@@ -1,0 +1,45 @@
+== Scope
+
+While "OGC API - Feature - Part 1: Core" provides basic searching (bounding box, temporal range, and equality) and "OGC API - Features - Part 3: Filtering" introduces complex query languages like CQL2, both are limited to single-collection searches.
+
+This document, "OGC API - Feature - Part 10: Query", specifies extensions to the OGC API - Features suite of standards to support resource selection across one or more geodata collections.  The extensions defined in this document enable complex query scenarios that were previously unsupported, including:
+
+* **Complex Query Expressions**: Queries with long text strings encoding complex query predicates that exceed URL parameter limits.
+
+* **Bundled Requests**: Multiple queries fetching resources from multiple collections encoded in a single request.
+
+* **Cross-Collection Joins**: Using predicates to join data from two or more collections.
+
+* **Stored Query Management**: Support for predefined and parameterized queries.
+
+
+Specifically, this standard defines the mechanisms to:
+
+* Execute ad hoc queries referencing multiple collections.
+* Discover, inspect, and execute stored queries (including those with parameters).
+* Manage stored queries through lifecycle operations (Create, Replace, and Delete).
+
+This Standard is encoding-agnostic but strongly recommends the JSON encoding defined within this document. Similarly, while any predicate language is technically permissible, the use of CQL2 (JSON encoding) is recommended for identifying resource subsets.
+
+The following table maps the resource endpoints defined in this Standard to the HTTP methods GET, POST, PUT, and DELETE.  Each cell links to the section detailing that specific resource-method combination.  Any combination not explicitly listed in this table is considered undefined by this Standard.
+
+[#endpoint_method_matrix,reftext='{table-caption} {counter:table-num}']
+.Supported HTTP methods by resource
+[cols="40%,10%,30%,20%",options="header"]
+|====
+|Resource endpoint |HTTP METHOD |Description |Reference
+
+1.2+|/query |GET |Get the list of stored queries. |<<clause-stored-query,Stored Query>>
+1+|POST |Execute an ad-hoc query. |<<clause-adhoc-query,Adhoc Query>>
+
+1.4+|/query/{queryId} |GET |Execute this stored query. |<<clause-stored-query,Stored Query>>
+1+|POST |Execute this stored query with an application/x-www-form-urlencoded body. |<<clause-stored-query,Stored Query>>
+1+|PUT  |Create or replace a stored query. |<<clause-manage-stored-query-create,Creating a stored query>>, <<clause-manage-stored-query-update,Updating stored queries>>
+1+|DELETE |Delete this stored query. |<<clause-manage-stored-query-delete,Deleting stored queries>>
+
+|/query/{queryId}/definition |GET |Get the definition of a stored query. |<<clause-manage-stored-query-definition,Retrieving the definition of a stored query>>
+
+|/query/{queryId}/parameters |GET |Get the list of parameters for this parametertized stored query. |<<clause-parameterized-stored-query-parameter-discovery,Retrieving the list of stored query parameters>>
+
+|/query/{queryId}/parameters/{parameterId} |GET |Get the definition of this query parametery. |<<clause-parameterized-stored-query-parameter-discovery,Retrieving the definition of a query parameter>>
+|====

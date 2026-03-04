@@ -1,0 +1,10 @@
+---
+type: object
+allOf:
+  - $ref: 'linkBase.yaml'
+  - type: object
+    required:
+      - href
+    properties:
+      href:
+        type: string

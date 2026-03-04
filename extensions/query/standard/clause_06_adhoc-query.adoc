@@ -1,0 +1,24 @@
+[[clause-adhoc-query]]
+== Requirements Class "Ad hoc Query"
+
+=== Overview
+
+include::requirements/requirements_class_adhoc-query.adoc[]
+
+Ad hoc queries are custom, on-demand requests made on the fly to answer specific questions that fall outside the scope of pre-defined reporting.
+
+=== Executing an ad-hoc query
+
+include::requirements/adhoc-query/REQ_post-op.adoc[]
+
+include::requirements/adhoc-query/REQ_post-body.adoc[]
+
+This specification does not mandate a specific query expression language.
+
+This specification does, however, make the following recommendation:
+
+include::recommendations/query-expression/REC_json.adoc[]
+
+=== Response
+
+include::requirements/adhoc-query/REQ_response.adoc[]

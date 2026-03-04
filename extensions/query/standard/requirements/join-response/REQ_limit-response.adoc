@@ -1,0 +1,7 @@
+[[req_join-response_limit-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/join-response/limit-response* 
+^|A |The response SHALL not contain more join tuples than specified by the optional `limit` parameter regardless of the number of resources per tuple.
+^|B |If the API definition specifies a maximum value for `limit` parameter, the response SHALL not contain more tuples than this maximum value.
+|===

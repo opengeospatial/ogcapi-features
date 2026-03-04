@@ -1,0 +1,14 @@
+[[req_query-expression-json_query-expression-schema]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/query-expression-json/query-expression-schema*
+
+^|A | The JSON encoding of a query expression SHALL be defined by the following schema fragments:
+
+.link:../openapi/schemas/query-expression.yaml[JSON Schema for a query expression (query-expression.yaml)]
+[source,YAML]
+----
+include::../../../openapi/schemas/query-expression.yaml[]
+----
+
+|===

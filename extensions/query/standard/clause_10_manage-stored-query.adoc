@@ -1,0 +1,50 @@
+[[clause-manage-stored-query]]
+== Requirements Class "Manage Stored Query"
+
+=== Overview
+
+include::requirements/requirements_class_manage-stored-query.adoc[]
+
+Servers that implement this conformance class provide the capability to create, modify, and delete stored queries. Implementers should be aware that these operations introduce significant security implications, which are addressed in detail within the Security Considerations clause.
+
+This Standard distinguishes between "mutable" and "immutable" stored queries, recognizing that some implementations may provide preconfigured, built-in queries with opaque logic that cannot be modified.
+
+[[clause-manage-stored-query-definition]]
+=== Getting the definition of a stored query
+
+include::requirements/manage-stored-query/REQ_definition-op.adoc[]
+
+include::requirements/manage-stored-query/REQ_definition-success.adoc[]
+
+See also <<schema_stored-query,stored-query.yaml>>
+
+[[clause-manage-stored-query-create]]
+=== Creating stored queries
+
+include::requirements/manage-stored-query/REQ_put-create.adoc[]
+
+include::requirements/manage-stored-query/REQ_put-body.adoc[]
+
+This specification does not mandate a specific query expression language.
+
+This specification does, however, make the following recommendation:
+
+include::recommendations/query-expression/REC_json.adoc[]
+
+include::requirements/manage-stored-query/REQ_put-create-success.adoc[]
+
+[[clause-manage-stored-query-update]]
+=== Updating stored queries
+
+include::requirements/manage-stored-query/REQ_put-update.adoc[]
+
+See: <<req_manage-stored-query_put-body>>.
+
+include::requirements/manage-stored-query/REQ_put-update-success.adoc[]
+
+[[clause-manage-stored-query-delete]]
+=== Deleting stored queries 
+
+include::requirements/manage-stored-query/REQ_delete-op.adoc[]
+
+include::requirements/manage-stored-query/REQ_delete-success.adoc[]

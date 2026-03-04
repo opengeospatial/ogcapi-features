@@ -1,0 +1,13 @@
+[[req_query-expression-json_properties-schema]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/query-expression-json/properties-schema*
+^|A | The JSON Encoding for the projection clause of a query SHALL be defined by the following schema fragments:
+
+.link:../openapi/schemas/properties.yaml[JSON Schema for the projection clause of a query(properties.yaml)]
+[source,YAML]
+----
+include::../../../openapi/schemas/properties.yaml[]
+----
+
+|===

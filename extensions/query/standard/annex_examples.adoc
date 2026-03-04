@@ -1,0 +1,516 @@
+[appendix,obligation="informative"]
+[[annex-exmaples]]
+== Sample Expressions and Requests
+
+=== Example query expressions
+
+==== A simple, single query
+
+[source%unnumbered,json]
+----
+{
+  "title": "Fetch all apron areas",
+  "collections": ["apronelement"]
+}
+----
+
+==== A simple query with a filter, property selection and sorting of the response document
+
+[source%unnumbered,json]
+----
+{
+  "title": "Fetch all concrete apron areas of the main New York area airports (JFK, EWR and LGA)",
+  "description": "Returned are the geometry, the airport and the apron type, sorted by airport.",
+  "collections": ["apronelement"],
+  "filter": {
+    "op": "and",
+    "args": [
+      { "op": "=", "args": [{ "property": "composition" }, "CONC"] },
+      { "op": "in", "args": [{ "property": "airport" }, ["JFK", "EWR", "LGA"]] }
+    ]
+  },
+  "properties": ["geometry", "airport", "type"],
+  "sortby": ["airport"],
+  "limit": 1000
+}
+----
+
+==== The same query with two parameters (one string and one string array)
+
+[source%unnumbered,json]
+----
+{
+  "title": "Fetch the apron areas of selected airports",
+  "description": "Returned are the geometry, the airport, the apron type and the material, sorted by airport. The query accepts two parameters: the airport and the type of the apron area.",
+  "collections": ["apronelement"],
+  "filter": {
+    "op": "and",
+    "args": [
+      {
+        "op": "=",
+        "args": [
+          {"property": "type"},
+          {
+            "$parameter": {
+              "type": {
+                "title": "Type of the apron, runway or taxiway element",
+                "description": "The following types are distinguished: normal use, parking, shoulder, intersection.",
+                "type": "string",
+                "enum": ["NORMAL", "PARKING", "INTERS", "SHOULD"],
+                "default": "NORMAL"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "op": "in",
+        "args": [
+          {"property": "airport"},
+          "$parameter": {
+            "airports": {
+              "title": "Airports",
+              "description": "The 3-letter IATA airport codes or the airports to filter. Specify multiple values as a comma-separated list.",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["JFK", "EWR", "LGA", "BOS", "PIT", "PHL", "DCA", "BWI", "IAD"]
+              },
+              "default": ["JFK", "EWR", "LGA"]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "properties": ["geometry", "airport", "type", "composition"],
+  "sortby": ["airport"],
+  "limit": 1000
+}
+----
+
+==== The same query with the two parameters declared at the top level
+
+[source%unnumbered,json]
+----
+{
+  "title": "Fetch the apron areas of selected airports",
+  "description": "Returned are the geometry, the airport, the apron type and the material, sorted by airport. The query accepts two parameters: the airport and the type of the apron area.",
+  "collections": ["apronelement"],
+  "filter": {
+    "op": "and",
+    "args": [
+      {
+        "op": "=",
+        "args": [
+          {"property": "type"},
+          {"$parameter": {"$ref": "#/parameters/type"}}
+        ]
+      },
+      {
+        "op": "in",
+        "args": [
+          {"property": "airport"},
+          {"$parameter": {"$ref": "#/parameters/airport"}}
+        ]
+      }
+    ]
+  },
+  "properties": ["geometry", "airport", "type", "composition"],
+  "sortby": ["airport"],
+  "limit": 1000,
+  "parameters": {
+    "airports": {
+      "title": "Airports",
+      "description": "The 3-letter IATA airport codes or the airports to filter. Specify multiple values as a comma-separated list.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["JFK", "EWR", "LGA", "BOS", "PIT", "PHL", "DCA", "BWI", "IAD"]
+      },
+      "default": ["JFK", "EWR", "LGA"]
+    },
+    "type": {
+      "title": "Type of the apron, runway or taxiway element",
+      "description": "The following types are distinguished: normal use, parking, shoulder, intersection.",
+      "type": "string",
+      "enum": ["NORMAL", "PARKING", "INTERS", "SHOULD"],
+      "default": "NORMAL"
+    }
+  }
+}
+----
+
+==== A query on multiple collections
+
+[source%unnumbered,json]
+----
+{
+  "queries": [
+    {"collections":["apronelement"]},
+    {"collections":["runwayelement"]},
+    {"collections":["taxiwayelement"]}
+  ]
+}
+----
+
+==== A query on mulitple collections with sorting as well as global filtering and property selection
+
+[source%unnumbered,json]
+----
+{
+  "queries": [
+    {"collections":["apronelement"], "sortby": ["airport"]},
+    {"collections":["runwayelement"], "sortby": ["airport"]},
+    {"collections":["taxiwayelement"], "sortby": ["airport"]}
+  ],
+  "filter": {
+    "op": "and",
+    "args": [
+      { "op": "=", "args": [{ "property": "composition" }, "CONC"] },
+      { "op": "in", "args": [{ "property": "airport" }, ["JFK", "EWR", "LGA"]] }
+    ]
+  },
+  "properties": ["geometry", "airport", "type"],
+  "limit": 1000
+}
+----
+
+==== A query on multiple collections with a different filter expressions for each collection
+
+[source%unnumbered,json]
+----
+{
+  "queries": [
+    {
+      "collections":["apronelement"],
+      "filter": { ... }
+    },
+    {
+      "collections":["runwayelement"],
+      "filter": { ... }
+    },
+    {
+      "collections":["taxiwayelement"],
+      "filter": { ... }
+    }
+  ],
+  "limit": 1000
+}
+----
+
+==== A query on multiple collections with sorting and a different filter for each collection and a global filter plus property selection
+
+[source%unnumbered,json]
+----
+{
+  "queries": [
+    {
+      "collections":["apronelement"],
+      "filter": { ... },
+      "sortby": ["airport"]
+    },
+    {
+      "collections":["runwayelement"],
+      "filter": { ... },
+      "sortby": ["airport"]
+    },
+    {
+      "collections":["taxiwayelement"],
+      "filter": { ... },
+      "sortby": ["airport"]
+    }
+  ],
+  "filter": {
+    "op": "and",
+    "args": [
+      { "op": "=", "args": [{ "property": "composition" }, "CONC"] },
+      { "op": "in", "args": [{ "property": "airport" }, ["JFK", "EWR", "LGA"]] }
+    ]
+  },
+  "properties": ["geometry", "airport", "type"],
+  "limit": 1000
+}
+----
+
+==== A single join query
+
+[source%unnumbered,json]
+----
+{
+  "collections": ["apronelement", "apron"],
+  "filter": {
+    "op": "and",
+    "args": [
+      { "op": "=", "args": [{ "property": "apronelement.associatedApron" }, { "property": "apron.id" }] },
+      { "op": "in", "args": [{ "property": "apronelement.airport" }, ["JFK", "EWR", "LGA"]] }
+    ]
+  },
+  "sortby": ["apronelement.airport"],
+  "limit": 1000
+}
+----
+
+=== Example requests
+
+This section illustrates example requests and responses in the scenario.
+
+==== Developer Client analyzes the available data
+
+TODO: Fetch collections, their queryables, presentables, and sortables.
+
+==== Developer Client creates a stored query ("filtering rule")
+
+With the following request, the Developer Client creates a parameterized stored query on a dataset with AIXM-based airport data on the Filtering Service.
+
+The query has three parameters.
+
+* "collection": The feature type that is queried. Restricted to one of "apronelement," "runwayelement," or "taxiwayelement." The default is "runwayelement" if no parameter value is specified in the query.
+*	"type": The type of the apron/runway/taxiway element. One of "NORMAL," "PARKING," "INTERS," or "SHOULD". If no parameter value is specified in the query the default is "NORMAL."
+*	"airports": The airports for which the query should return data which is restricted to selected airports. The default is "IAD" if no parameter value is specified in the query.
+
+The query:
+
+* returns only four feature properties ("geometry," "airport," "type," "composition"), all additional properties in the data are not returned;
+* sorts the response by airport; and,
+* limits the response to 10000 features: if more are matched, the response will include a "next" link to the next page.
+
+[source%unnumbered,json]
+----
+PUT /d103_airports/search/elements-by-type-and-airport HTTP/1.1
+Host: t18.ldproxy.net
+Content-Type: application/json
+
+{
+  "title": "Fetch apron, taxiway or runway elements based on their type and airport",
+  "description": "This query fetches apron, taxiway or runway elements based on their type and airport. The response uses paging, if more than 10000 features match the query. The result is sorted by airport.",
+  "query": {
+    "collections": [
+      {
+        "$parameter": {
+          "collection": { "type": "string", "enum": ["apronelement", "runwayelement", "taxiwayelement"], "default": "apronelement" }
+        }
+      }
+    ],
+    "filter": {
+      "op": "and",
+      "args": [
+        {
+          "op": "=",
+          "args": [
+            {"property": "type"},
+            {
+              "$parameter": {
+                "type": { "type": "string", "enum": ["NORMAL", "PARKING", "INTERS", "SHOULD"], "default": "NORMAL" }
+              }
+            }
+          ]
+        },
+        {
+          "op": "in",
+          "args": [
+            {"property": "airport"},
+            {
+              "$parameter": {
+                "airports": {
+                  "type": "array",
+                  "items": { "type": "string", "enum": ["JFK", "EWR", "LGA", "BOS", "PIT", "DCA", "IAD", "BWI", "PHL"] },
+                  "default": ["IAD", "DCA", "BWI"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "properties": ["geometry", "airport", "type", "composition"],
+    "sortby": ["airport"]
+  },
+  "limit": 10000
+}
+----
+
+The server creates the stored query. If the stored query already existed, the query would be updated with the new definition.
+
+[source%unnumbered]
+----
+HTTP/1.1 204 No Content
+----
+
+==== Business Client fetches the available queries
+
+The Business Client wants to filter data and asks the Filtering Service for the available queries.
+
+NOTE: In addition to the queries stored on the server, the Filtering Service can also allow the execution of ad-hoc queries specified by a client. This scenario assumes that the Business Client does not have the capability to construct query expressions, only the Developer Client has that capability.
+
+[source%unnumbered]
+----
+GET /d103_airports/search HTTP/1.1
+Host: t18.ldproxy.net
+Accept: application/json
+----
+
+The Filtering Service responds with the list of stored queries available on the server:
+
+[source%unnumbered]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "queries": [
+    {
+      "id": "elements-by-type-and-airport",
+      "title": "Fetch apron, taxiway or runway elements based on their type and airport",
+      "description": "This query fetches apron, taxiway or runway elements based on their type and airport. The response uses paging, if more than 10000 features match the query. The result is sorted by airport.",
+      "links": [
+        {
+          "rel": "self",
+          "title": "Query 'Fetch apron, taxiway or runway elements based on their type and airport'",
+          "href": "https://t18.ldproxy.net/d103_airports/search/elements-by-type-and-airport"
+        },
+        {
+          "rel": "describedby",
+          "title": "Definition of query 'Fetch apron, taxiway or runway elements based on their type and airport'",
+          "href": "https://t18.ldproxy.net/d103_airports/search/elements-by-type-and-airport/definition"
+        }
+      ],
+      "parameters": {
+        "type": {
+          "title": "Type of the apron, runway or taxiway element",
+          "description": "The following types are distinguished: normal use, parking, shoulder, intersection.",
+          "type": "string",
+          "enum": ["NORMAL", "PARKING", "SHOULD", "INTERS"],
+          "default": "NORMAL"
+        },
+        "airports": {
+          "title": "Airports",
+          "description": "The 3-letter IATA airport codes or the airports to filter. Specify multiple values as a comma-separated list.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["JFK", "EWR", "LGA", "BOS", "PIT", "PHL", "DCA", "BWI", "IAD"]
+          },
+          "default": ["IAD", "DCA", "BWI"]
+        }
+      }
+    },
+    ...
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/json",
+      "title": "This document",
+      "href": "https://t18.ldproxy.net/d103_airports/search?f=json"
+    }
+  ]
+}
+----
+
+The Business Client is interested in the first query and retrieves information about the parameters of the query with the following request:
+
+[source%unnumbered]
+----
+GET /d103_airports/search/elements-by-type-and-airport/parameters HTTP/1.1
+Host: t18.ldproxy.net
+Accept: application/json
+----
+
+The Filtering Service responds with the list of parameters specified for the query:
+
+[source%unnumbered]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "parameters": {
+    "collection": {
+      "type": "string",
+      "enum": ["apronelement", "runwayelement", "taxiwayelement"],
+      "default": "runwayelement"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["NORMAL", "PARKING", "INTERS", "SHOULD"],
+      "default": "NORMAL"
+    },
+    "airports": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["JFK", "EWR", "LGA", "BOS", "PIT", "DCA", "IAD", "BWI", "PHL"]
+      },
+      "default": [["IAD", "DCA", "BWI"]
+    }
+  }
+}
+----
+
+==== Business Client executes the selected stored query and retrieves data
+
+With this information, the business client can execute the stored query.
+
+Since the query has default values for all parameters, the simplest query is one without parameter values.
+
+[source%unnumbered]
+----
+GET /d103_airports/search/elements-by-type-and-airport HTTP/1.1
+Host: t18.ldproxy.net
+Accept: application/geo+json
+----
+
+The Filtering Service will respond with the normal runway elements of Dulles International Airport:
+
+[source%unnumbered,json]
+----
+HTTP/1.1 200 OK
+Content-Type: application/geo+json
+
+{
+  "type": "FeatureCollection",
+  "features": [
+    ...
+  ]
+}
+----
+
+A query with other parameter values can be executed as a GET or a POST request. The apron elements for parking from the three New York area airports will be requested.
+
+First the GET variant:
+
+[source%unnumbered]
+----
+GET /d103_airports/search/elements-by-type-and-airport?collection=apronelement&type=PARKING&airports=EWR,JFK,LGA HTTP/1.1
+Host: t18.ldproxy.net
+Accept: application/geo+json
+----
+
+And the POST variant, which will typically be necessary for larger parameter values, e.g. a polygon geometry:
+
+[source%unnumbered]
+----
+POST /d103_airports/search/elements-by-type-and-airport HTTP/1.1
+Host: t18.ldproxy.net
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 57
+Accept: application/geo+json
+
+collection=apronelement&type=PARKING&airports=EWR,JFK,LGA
+----
+
+In both cases the Filtering Service will respond with the selected features as a GeoJSON feature collection:
+
+[source%unnumbered,json]
+----
+HTTP/1.1 200 OK
+Content-Type: application/geo+json
+
+{
+  "type": "FeatureCollection",
+  "features": [
+    ...
+  ]
+}
+----
