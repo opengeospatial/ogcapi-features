@@ -1,0 +1,48 @@
+[[clause-parameterized-stored-query]]
+== Requirements Class "Parameterized Stored Query"
+
+=== Overview
+
+Clause <<clause-stored-query,Stored Query>> defines a server's behavior for non-parameterized stored queries. In contrast, this section addresses parameterized stored queries, which are designed to accept arguments at runtime.
+
+include::requirements/requirements_class_parameterized-stored-query.adoc[]
+
+[[clause-parameterized-stored-query-parameter-discovery]]
+=== Parameter discovery
+
+include::requirements/parameterized-stored-query/REQ_parameters-op.adoc[]
+
+include::requirements/parameterized-stored-query/REQ_parameters-success.adoc[]
+
+See also <<schema_parameters,parameters.yaml>> for a JSON encoding of the list of stored query parameters.
+
+include::requirements/parameterized-stored-query/REQ_parameter-op.adoc[]
+
+include::requirements/parameterized-stored-query/REQ_parameter-success.adoc[]
+
+=== Executing a parameterized stored query 
+
+==== Using the GET method
+
+See <<clause-stored-query-execute,Executing stored queries>> for instructions on running an unparameterized stored query.
+
+include::requirements/parameterized-stored-query/REQ_parameters-url-mapping.adoc[]
+
+To run a parameterized stored query, use the same `/query/{queryId}` endpoint, but append the required parameters to the URL as query strings.
+
+[[example_11_1]]
+.Invoking a parameterized stored query using the HTTP GET method
+====
+This example invokes a parameterized stored query with idenfitier `MyQuery02` that takes two parameters `myParam01` and `myParam02`.
+
+----
+GET /query/MyQuery02?myParam01=X&myParam02=Y
+----
+====
+
+[[clause-parameterized-stored-query-execute-form]]
+==== Using the POST method
+
+Alternatively, a parameterized stored query can be executed using the POST method and a URL-encded form.
+
+include::requirements/parameterized-stored-query/REQ_post-op.adoc[]

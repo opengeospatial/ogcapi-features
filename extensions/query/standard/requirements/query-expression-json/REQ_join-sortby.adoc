@@ -1,0 +1,7 @@
+[[req_query-expression-json_join-sortby]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/query-expression-json/join-sortby*
+^|Conditions |The `collections` member in a query contains more that one collection identifier.
+^|A |In the sorting clause (member: `sortby`), each referenced sortable SHALL be identified by a composite name consisting of the source collection identifier followed by the sortable identifier, joined by a dot (".") separator.
+|===

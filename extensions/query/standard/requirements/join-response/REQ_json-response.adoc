@@ -1,0 +1,8 @@
+[[req_join-response_json]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/join-response/json*
+^|Condition |The query expression includes a join predicate between 2 or more collections.
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The content of that response SHALL be based upon the <<schema_tuples,tuples.yaml>> schema.
+|===

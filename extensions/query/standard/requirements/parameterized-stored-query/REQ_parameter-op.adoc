@@ -1,0 +1,8 @@
+[[req_parameterized-stored-query_parameter-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/parametrized-stored-query/parameter-op*
+^|A |For each stored query identified in the stored queries response (path: `/query`), the server SHALL support the HTTP GET operation at the path `/query/{queryId}/parameters/{parameterId}`.
+^|B |The parameter `queryId` is each `id` property (JSONPath: `$.queries[*].id`) in the stored queries response (path: `/query`).
+^|C |The parameter `parameterId` is each `id` property (JSONPath: `$.queries[*].parameters[*].id`) in the stored query parameters response (path: `/query/{queryId}/parameters`).
+|===

@@ -1,0 +1,81 @@
+[[clause-query-expression]]
+== Query Expressions
+
+=== Overview
+
+This clause defines the structure of a query expression, which may consist of either a single query or multiple queries within a single request.
+
+Each query must specify the target geodata collection(s) and may include optional projection, selection, and sorting clauses. When a query expression contains multiple queries, both local (specific to an individual query) and global selection clauses may be defined, along with the logical operation required to combine them.
+
+[#query-structure,reftext='{table-caption} {counter:table-num}']
+.Components of a query
+[cols="25%,50%,25%",options="header"]
+|====
+|Component |Description |Requirements
+|Collections |The list of geodata source being accessed |Mandatory
+|Projection |Defines which properties are returned |Optional
+|Selection |Filters results based on specific criterial (local and global) |Optional
+|Sorting |Determines the order of the result set |Optional
+|Logical Ops |Defines how to combine selection clauses |Optional (default AND)
+|====
+
+This Standard does not mandate a specific encoding for query expressions, allowing for implementation flexibility.
+
+include::recommendations/query-expression/PER_other.adoc[]
+
+This Standard, however, defines the <<clause-query-expression-json,Query Expression JSON>> requirements class for implementations utilizing a JSON-based encoding.
+
+include::recommendations/query-expression/REC_json.adoc[]
+
+[[clause-query-expression-json]]
+=== Requirements Class "Query Expression JSON"
+
+==== Overview
+
+This clause defines the JSON encoding for a query expression.  
+
+include::requirements/requirements_class_query-expression-json.adoc[]
+
+==== Query expression schema
+
+include::requirements/query-expression-json/REQ_query-expression-schema.adoc[]
+
+include::requirements/query-expression-json/REQ_query-schema.adoc[]
+
+See also <<schema_description,description.yaml>>.
+
+include::recommendations/query-expression/REC_description.adoc[]
+
+==== Projection clause
+
+include::requirements/query-expression-json/REQ_properties-schema.adoc[]
+
+include::requirements/query-expression-json/REQ_join-properties.adoc[]
+
+==== Selection clause
+
+include::requirements/query-expression-json/REQ_filter-schema.adoc[]
+
+include::requirements/query-expression-json/REQ_join-filter.adoc[]
+
+==== Sorting clause
+
+include::requirements/query-expression-json/REQ_sortby-schema.adoc[]
+
+include::requirements/query-expression-json/REQ_join-sortby.adoc[]
+
+include::requirements/query-expression-json/REQ_sortby-scope.adoc[]
+
+NOTE: Applying a global `sortby` clause requires the server to aggregate the results of all sub-queries before sorting the combined set. This approach precludes the ability to stream the response, as the entire result set must be held in memory prior to transmission.
+
+==== Parameters
+
+include::requirements/query-expression-json/REQ_parameters-schema.adoc[]
+
+For parameterized stored queries, the query expression incorporates JSON objects containing a `$parameter` member. This member identifies the parameter by name and defines its constraints using a logical JSON Schema. 
+
+include::requirements/query-expression-json/REQ_parameters-value-schema.adoc[]
+
+include::requirements/query-expression-json/REQ_parameters-sub-logic.adoc[]
+
+include::recommendations/query-expression/PER_parameters.adoc[]

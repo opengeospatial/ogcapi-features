@@ -1,0 +1,15 @@
+[[req_query-expression-json_filter-schema]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/query-expression-json/filter-schema*
+
+^|A | The JSON encoding for the selection clause of query SHALL be defined by the following schema fragments:
+
+[[schema_filter]]
+.link:../openapi/schemas/filter.yaml[Schema of a query selection clause (filter.yaml)]
+[source,YAML]
+----
+include::../../../openapi/schemas/filter.yaml[]
+----
+
+|===

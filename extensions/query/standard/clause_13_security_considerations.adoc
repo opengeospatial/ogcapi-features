@@ -1,0 +1,16 @@
+[[clause-security-considerations]]
+== Security Considerations
+
+See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clause 11.
+
+[#security_considerations_stored_query,reftext='{table-caption} {counter:table-num}']
+.Security considerations for stored queries
+[cols="30%,30%,40%",options="header"]
+|====
+|Operation |Security Risk |Mitigation
+|Create |Injection attacks |Validate query syntax and parameters
+|Modify |Unauthorized access |Implement role-based access control (RBAC)
+|Delete |Service disruption |RBAC with admin privileges
+|====
+
+

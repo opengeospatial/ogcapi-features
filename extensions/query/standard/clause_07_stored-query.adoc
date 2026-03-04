@@ -1,0 +1,54 @@
+[[clause-stored-query]]
+== Requirements Class "Stored Query"
+
+=== Overview
+
+include::requirements/requirements_class_stored-query.adoc[]
+
+A stored query is a predefined query that is available as a resource in a Web API.  This clause only deals with un-parameterized stored queries.  The <<clause-parameterized-stored-query,Parameterized Stored Query>> clause deals with stored queries that take parameters.
+
+[[clause-stored-query-discovery]]
+=== Stored Query Discovery
+
+include::requirements/stored-query/REQ_queries-op.adoc[]
+
+include::requirements/stored-query/REQ_queries-success.adoc[]
+
+[[schema_stored-queries]]
+.link:../openapi/schemas/stored-queries.yaml[Schema for the list of stored queries (stored-queries.yaml)]
+[source,YAML]
+----
+include::../openapi/schemas/stored-queries.yaml[]
+----
+
+[[schema_stored-query]]
+.link:../openapi/schemas/stored-query.yaml[Schema for describing a stored query (stored-query.yaml)]
+[source,YAML]
+----
+include::../openapi/schemas/stored-query.yaml[]
+----
+
+[[schema_description]]
+.link:../openapi/schemas/description.yaml[Schema for a generic description (description.yaml)]
+[source,YAML]
+----
+include::../openapi/schemas/description.yaml[]
+----
+
+[[schema_links]]
+.link:../openapi/schemas/links.yaml[Schema for links and templated links sections (links.yaml)]
+[source,YAML]
+----
+include::../openapi/schemas/links.yaml[]
+----
+
+[[clause-stored-query-execute]]
+=== Executing a stored query
+
+include::requirements/stored-query/REQ_get-op.adoc[]
+
+=== Response
+
+include::requirements/stored-query/REQ_get-success.adoc[]
+
+include::requirements/stored-query/REQ_limit-response.adoc[]

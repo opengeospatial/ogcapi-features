@@ -1,0 +1,10 @@
+---
+allOf:
+  - $ref: description.yaml
+  - $ref: links.yaml
+  - type: object
+    properties:
+      queries:
+        type: array
+        items:
+          $ref: stored-query.yaml

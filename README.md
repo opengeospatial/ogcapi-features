@@ -129,8 +129,8 @@ The OGC Features API SWG has identified the following extensions as the highest 
   * The draft is an initial, complete draft.
 * [OGC API - Features - Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
   * The draft is an initial, complete draft.
-* OGC API - Features - Part 10: Search/Queries
-  * A proposal and an Engineering Report are available.
+* [OGC API - Features - Part 10: Query](https://docs.ogc.org/DRAFTS/26-008.html)
+  * The draft is an initial, complete draft.
 
 ## OGC API Features in ISO
 
@@ -151,7 +151,7 @@ Open issues for all parts are organized in [GitHub projects](https://github.com/
 * [Open issues for Part 7: Geometry Simplification](https://github.com/orgs/opengeospatial/projects/23)
 * [Open issues for Part 8: Sorting](https://github.com/orgs/opengeospatial/projects/24)
 * [Open issues for Part 9: Text Search](https://github.com/orgs/opengeospatial/projects/25)
-* [Open issues for Part 10: Search/Queries](https://github.com/orgs/opengeospatial/projects/26)
+* [Open issues for Part 10: Query](https://github.com/orgs/opengeospatial/projects/26)
 
 Additional links:
 
@@ -174,6 +174,7 @@ The latest drafts of each standard in this repository are build daily (based on 
 * [Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
 * [Part 8: Sorting](https://docs.ogc.org/DRAFTS/24-030.html)
 * [Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
+* [Part 10: Query](https://docs.ogc.org/DRAFTS/26-008.html)
 * [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r3.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
@@ -201,6 +202,8 @@ asciidoctor extensions/geometry-simplification/standard/24-020.adoc
 asciidoctor extensions/sorting/standard/24-030.adoc
 # Part 9: Text Search
 asciidoctor extensions/text-search/standard/24-031.adoc
+# Part 10: Query
+asciidoctor extensions/query/standard/26-008.adoc
 ```
 
 The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.

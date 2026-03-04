@@ -1,0 +1,6 @@
+[[req_parameterized-stored-query_parameters-url-mapping]] 
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/parameterized-stored-query/parameters-url-mapping* 
+^|A |Each query parameter identifier (JSON Path: `$.queries[*].id` in the stored queries response) SHALL also be valid URL query parameter name as defined in https://www.rfc-editor.org/rfc/rfc3986.html[Uniform Resource Identifier (URI): Genertic Syntax].
+|===
