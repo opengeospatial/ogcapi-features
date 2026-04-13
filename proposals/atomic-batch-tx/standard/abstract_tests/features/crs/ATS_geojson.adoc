@@ -1,0 +1,10 @@
+[[ats_create-replace-delete_crs_geojson]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:ats-id}* |*/conf/create-replace-delete/crs/geojson* 
+^|A | TBD
+^|B | TBD
+|===
+
+((If a server implements this standard and also implements the http://fix.me[Coordinate Reference Systems by Reference] extension and the request body contains a feature encoded using GeoJSON then the prior arrangements provision of the GeoJSON standard (see https://www.rfc-editor.org/rfc/rfc7946.html#page-12) shall apply between the server and the client.))
+((The feature in the request body shall thus be subject to requirement <<req_create-replace-delete_crs_storage-crs>>.))

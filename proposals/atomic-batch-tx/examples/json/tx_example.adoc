@@ -1,0 +1,87 @@
+[source,json]
+----
+   CLIENT                                                     SERVER 
+      |                                                           | 
+      |   POST /transactions   HTTP/1.1                           | 
+      |   Host: www.someserver.com                                | 
+      |   Content-Type: application/ogc-tx+json                   | 
+      |   Accept: application/json                                | 
+      |                                                           | 
+      |   {                                                       | 
+      |     "semantic": "atomic",                                 | 
+      |     "transaction": [                                      | 
+      |       {                                                   | 
+      |         "action": "insert",                               | 
+      |         "collection": "CABLE_SEGMENTS",                   | 
+      |         "description": "add a new fibre segment",         | 
+      |         "items": [                                        |
+      |           {                                               |
+      |             "type": "Feature",                            | 
+      |             "geometry": {                                 | 
+      |               "type": "LineString",                       | 
+      |               "coordinates":                              | 
+      |                  [                                        | 
+      |                     [43.735915,-79.298053],               | 
+      |                     [43.735839,-79.298026]                | 
+      |                  ]                                        | 
+      |             },                                            | 
+      |             "properties": {                               | 
+      |               "segmentId": "SEG237",                      | 
+      |               "manufacturer": "Corning",                  | 
+      |               "all-dielectric": "yes",                    | 
+      |               "armored": "yes",                           | 
+      |               "fibre_count": 12                           | 
+      |               "fibre_type": "OM3 LAZER-OPTIMIZED 50μ",    | 
+      |               "rodent_protected: "yes",                   | 
+      |               "USDPSC_code": 26126170                     | 
+      |             }                                             | 
+      |           }                                               | 
+      |         ]                                                 |
+      |       },                                                  | 
+      |       {                                                   |
+      |         "action": "update",                               |
+      |         "collection": "POLES",                            |
+      |         "description: "move pole",                        |
+      |         "properties": {                                   |
+      |           "modify" [                                      |
+      |             {                                             |
+      |               "name": "geometry",                         |
+      |               "value": {                                  |
+      |                 "type": "Point",                          |  
+      |                 "coordinates":                            |
+      |                 [[43.735915,-79.298053]]                  |
+      |               }                                           |
+      |             },                                            |
+      |             {                                             |
+      |               "name": "updated",                          |
+      |               "value": "2019-05-28"                       |
+      |             }                                             |
+      |           ]                                               |   
+      |         },                                                |
+      |         "filter": {                                       |
+      |           "ids": [ "347901" ]                             |
+      |         }                                                 |
+      |       }                                                   | 
+      |     ]                                                     | 
+      |   }                                                       | 
+      |---------------------------------------------------------->|
+      |                                                           |
+      |                                                           |
+      |   HTTP/1.1 200 OK                                         |
+      |   Content-Type: application/json                          |
+      |                                                           |
+      |   {                                                       |
+      |     "semantic": "atomic",                                 |
+      |     "summary": {                                          |
+      |       "totalInserted": 1,                                 |
+      |       "totalUpdated": 1                                   |
+      |     },                                                    |
+      |     "insertResults": [                                    |
+      |       "/collections/CABLE_SEGMENTS/items/47341"           |
+      |     ],                                                    |
+      |     "updateResults": [                                    |
+      |       "/collections/POLES/items/347901"                   |
+      |     ]                                                     |
+      |   }                                                       |
+      |<----------------------------------------------------------|
+----

@@ -1,0 +1,13 @@
+== Scope
+
+This Standard specifies an extension that defines the behavior of a server
+that supports transactions that perform insert, update, replace or delete
+actions of resources from one or more collections.
+
+The standard defines an endpoint, `/transactions`, to which a document encoding insert, update, replace or delete action can be POSTed.
+
+Transactions can be execute using atomic or batch semantics.  For atomic transactions all actions encoded therein must successfully complete otherwise the entire transactions fails.  For batch transactions each action encoded therein is independent of other actions an the operation proceeds to completion even if some actions fails.
+
+Since transactions may take some time to execute, the standard defines requirements for executing transactions asynchronously, for monitoring the progress of asynchronously executing transactions and for getting the results of processing once transaction execution is complete.  The standard reuses the `/jobs` endpoint defined in "OGC API Processes - Part 1: Core".
+
+While any transaction encoding can be used, the standard defines and recommends the use of a JSON transactions encoding.

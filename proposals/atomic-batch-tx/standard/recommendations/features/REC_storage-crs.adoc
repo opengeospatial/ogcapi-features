@@ -1,0 +1,9 @@
+[[rec_features_crs-storage-crs]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/features/crs-storage-crs*
+^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
+^|A |The server SHOULD declare the `storageCrs` property in each Collection resource for each feature collection that supports CREATE, REPLACE or UPDATE  requests.
+^|B |The server SHOULD support all CRSs that are declared in the `crs` property of the Collection resource for each feature collection that supports CREATE, REPLACE or UPDATE  requests.
+^|C |The server MAY only support the storage CRS in CREATE, REPLACE or UPDATE requests to avoid coordinate conversion in mutations of feature resources.
+|===

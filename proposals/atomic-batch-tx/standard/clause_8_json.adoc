@@ -1,0 +1,59 @@
+[[sc_json]]
+== Requirements Class "JSON"
+
+=== Overview
+
+include::requirements/requirements_class_json.adoc[]
+
+This clause defined the JSON-encoding of a transaction.
+
+===  Transaction encoding
+
+include::requirements/json/REQ_transaction.adoc[]
+
+[[description-schema]]
+.Schema for a description
+[source,yaml]
+----
+include::../openapi/schemas/description.yaml[]
+----
+
+[[insert-schema]]
+.Schema for an insert action
+[source,yaml]
+----
+include::../openapi/schemas/insert.yaml[]
+----
+
+[[replace-schema]]
+.Schema for an replace action
+[source,yaml]
+----
+include::../openapi/schemas/replace.yaml[]
+----
+
+[[update-schema]]
+.Schema for an update action
+[source,yaml]
+----
+include::../openapi/schemas/update.yaml[]
+----
+
+[[delete-schema]]
+.Schema for an delete action
+[source,yaml]
+----
+include::../openapi/schemas/delete.yaml[]
+----
+
+==== Transaction response
+
+include::requirements/json/REQ_response.adoc[]
+
+==== Exceptions
+
+See <<http_status_codes,HTTP status codes>>.
+
+==== Examples
+
+include::../examples/json/tx_example.adoc[]

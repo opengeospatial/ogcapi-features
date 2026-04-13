@@ -1,0 +1,8 @@
+[[req_features_crs-crs84]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/crs-crs84* 
+^|Condition |Server does not implement <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
+^|A |The server SHALL interpret all geometries in request bodies of requests to the resources or resource endpoints to be in the coordinate reference system http://www.opengis.net/def/crs/OGC/1.3/CRS84 (WGS 84 longitude/latitude) for geometries without height information and http://www.opengis.net/def/crs/OGC/0/CRS84h (WGS 84 longitude/latitude plus ellipsoidal height) for geometries with height information.
+^|B |If the request declares that the coordinates are in a different coordinate reference system (e.g., by using the `Content-Crs` HTTP header with a different CRS identifier or through information in the request body), the server SHALL return an error. 
+|===

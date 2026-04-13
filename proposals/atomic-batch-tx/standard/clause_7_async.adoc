@@ -1,0 +1,46 @@
+[[sc_async-transactions]]
+== Requirements Class "Asynchronous Transactions"
+
+=== Overview
+
+include::requirements/requirements_class_async-transactions.adoc[]
+
+Because a transaction may operation of a large number of resources spanning one or more collections it is entily possible that processing the transaction may take more time than the HTTP timeout interval.  
+
+In order to accomodate such long-running operations, this requirements class defines the requirement for executing transactions asynchronously, for monitoring the execution of such transactions and for retrieving the results of processing.
+
+=== Declaring support of asynchronous transaction processing
+
+include::requirements/async/REQ_declare.adoc[]
+
+=== Executing a transactions asynchronously
+
+include::requirements/async/REQ_async-execute.adoc[]
+
+include::recommendations/async/REC_honor-prefer.adoc[]
+
+=== Getting the status of an asynchronously executing transaction
+
+include::requirements/async/REQ_job-op.adoc[]
+
+include::requirements/async/REQ_job-op-success.adoc[]
+
+include::requirements/async/REQ_job-op-failed.adoc[]
+
+include::requirements/async/REQ_job-op-failed-no-such-job.adoc[]
+
+=== Getting the results of asynchronous transactions execution
+
+include::requirements/async/REQ_job-results-op.adoc[]
+
+include::requirements/async/REQ_job-results-op-success.adoc[]
+
+include::requirements/async/REQ_job-results-op-failed-no-such-job.adoc[]
+
+include::requirements/async/REQ_job-results-op-failed-results-not-ready.adoc[]
+
+include::requirements/async/REQ_job-results-op-failed-results-not-available.adoc[]
+
+==== Exceptions
+
+See <<http_status_codes,HTTP status codes>>.

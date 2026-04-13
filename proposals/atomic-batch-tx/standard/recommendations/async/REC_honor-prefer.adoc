@@ -1,0 +1,7 @@
+[[rec_async-transactions_honor-prefer]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/async-transactions/honor-prefer*
+^|A |If a request is accompanied with the HTTP https://datatracker.ietf.org/doc/html/rfc7240#section-2[`Prefer`] header asserting a https://tools.ietf.org/html/rfc7240#section-4.1[`respond-async`] preference, then the server SHOULD honor that preference and execute the transaction asynchronously.
+^|B |If a request is accompanied with the HTTP https://datatracker.ietf.org/doc/html/rfc7240#section-2[`Prefer`] header asserting a https://tools.ietf.org/html/rfc7240#section-4.3[`wait`] preference, then the server SHOULD honor that preference when deciding whether to execute the transaction asynchronously.
+|===

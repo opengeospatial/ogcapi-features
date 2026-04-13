@@ -1,0 +1,10 @@
+type: object
+properties:
+  method:
+    type: string
+    enum: [ POST, GET, DELETE, PATCH ]
+  body: {}
+  headers:
+    type: object
+    additionalProperties:
+      type: string
