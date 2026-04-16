@@ -1,0 +1,23 @@
+---
+allOf:
+- $ref: 'description.yaml'
+- type: object
+  required:
+  - transaction
+  properties:
+    semantic:
+      type: string
+      enum:
+      - 'atomic'
+      - 'batch'
+      default: 'atomic'
+    transaction:
+      type: array
+      items:
+        type: object
+        properties:
+          oneOf:
+          - $ref: 'insert.yaml'
+          - $ref: 'replace.yaml'
+          - $ref: 'update.yaml'
+          - $ref: 'delete.yaml'

@@ -1,0 +1,9 @@
+[[req_async-transactions_jobs-results-op-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/async-transactions/job-results-op-success*
+^|Condition |The transactions was processed sucessfully.
+^|A |The server SHALL respond with an HTTP status code of 200.
+^|B |The body of the response SHALL report the number of resources created, updated, replaced and/or deleted by the transaction.
+^|C |If the transaction contains actions that create new resources, the response SHALL report the identifiers of these newly created resources.
+|===

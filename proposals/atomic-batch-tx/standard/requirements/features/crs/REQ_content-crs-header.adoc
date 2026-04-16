@@ -1,0 +1,7 @@
+[[req_features_content-crs-header]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/content-crs-header* 
+^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
+^|A |The server SHALL inspect CREATE, REPLACE and UPDATE requests for the `Content-Crs` HTTP header and interpret coordinates in the request body to be in the declared CRS.
+|===
