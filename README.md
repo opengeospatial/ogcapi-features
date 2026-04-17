@@ -131,10 +131,12 @@ The OGC Features API SWG has identified the following extensions as the highest 
   * The draft is an initial, complete draft.
 * [OGC API - Features - Part 10: Query](https://docs.ogc.org/DRAFTS/26-008.html)
   * The draft is an initial, complete draft.
+* [OGC API - Features - Part 11: Atomic and Batch Transactions](https://docs.ogc.org/DRAFTS/26-018.html)
+  * The draft is a proposal.
 
 ## OGC API Features in ISO
 
-Part 1 (Core) has been published by ISO as [ISO 19168-1:2020](https://www.iso.org/standard/32586.html).
+Part 1 (Core) has been published by ISO as [ISO 19168-1:2025](https://www.iso.org/standard/86508.html).
 
 Part 2 (Coordinate Reference Systems by Reference) has been published by ISO as [ISO 19168-2:2022](https://www.iso.org/standard/82464.html).
 
@@ -175,6 +177,7 @@ The latest drafts of each standard in this repository are build daily (based on 
 * [Part 8: Sorting](https://docs.ogc.org/DRAFTS/24-030.html)
 * [Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
 * [Part 10: Query](https://docs.ogc.org/DRAFTS/26-008.html)
+* [Part 11: Atomic and Batch Transactions](https://docs.ogc.org/DRAFTS/26-018.html)
 * [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r3.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
@@ -204,6 +207,8 @@ asciidoctor extensions/sorting/standard/24-030.adoc
 asciidoctor extensions/text-search/standard/24-031.adoc
 # Part 10: Query
 asciidoctor extensions/query/standard/26-008.adoc
+# Part 11: Atomic and Batch Transactions
+asciidoctor proposals/atomic-batch-tx/standard/26-018.adoc
 ```
 
 The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.
