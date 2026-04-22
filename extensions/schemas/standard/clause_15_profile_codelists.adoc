@@ -8,7 +8,7 @@ When requesting a schema that contains properties with values from a codelist ("
 
 Two different representations of a codelist-valued property are specified as profiles. It is up to the API publisher to decide which profile is applied when a schema is requested. The publisher may also choose to support both profiles or other profiles.
 
-The two profiles are:
+The two profiles are as follows.
 
 - "codelist-inline": The schema of each codelist-valued property is represented by a "oneOf" schema with a schema for each code. The schema for each code has a "const" member with the code as the value. This representation has the advantage that all information is in the schema; no external information needs to be accessed.
 - "codelist-ref": The schema of each codelist-valued property is represented by an "enum" member with the codes. In addition the codelist is referenced by a HTTP(S) URI using the keyword "x-ogc-codelistUri". This profile has the advantage that "enum" is easier to parse/handle than "oneOf" and that a separate resource for codelists may be useful for other purposes, too, and in fact may already be published.

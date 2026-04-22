@@ -73,7 +73,7 @@ This is the schema of a road accident feature type. The "roadSegment" property i
 }
 ----
 
-If the road segment would be available from a different OGC Web API, the "x-ogc-uriTemplate" keyword can be used with the `resourceId` parameter. The schema of the "roadSegment" property could look like the following:
+If the road segment would be available from a different OGC Web API, the "x-ogc-uriTemplate" keyword can be used with the `resourceId` parameter. The schema of the "roadSegment" property could look like the following.
 
 [source,JSON]
 ----
@@ -86,5 +86,5 @@ If the road segment would be available from a different OGC Web API, the "x-ogc-
 }
 ----
 
-A client that wants to fetch the road segment on which an accident occured would use the URI template to construct the URI of the road segment, e.g., `https://api.example.org/foo/bar/collections/roadsegments/items/5209062A5209047O`, if the value of road segment property is "5209062A5209047O". The referenced feature will include a link to its "roadsegments" collection, or a client that is OGC-API-aware can determine the collection URI ("\https://api.example.org/foo/bar/collections/roadsegments") from the URI.
+A client that wants to fetch the road segment on which an accident occurred would use the URI template to construct the URI of the road segment, e.g., `https://api.example.org/foo/bar/collections/roadsegments/items/5209062A5209047O`, if the value of road segment property is "5209062A5209047O". The referenced feature will include a link to its "roadsegments" collection, or a client that is OGC-API-aware can determine the collection URI ("\https://api.example.org/foo/bar/collections/roadsegments") from the URI.
 ====

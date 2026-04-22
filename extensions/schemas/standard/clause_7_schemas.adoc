@@ -50,7 +50,7 @@ In addition to the JSON Schema data types, geospatial data typically also uses s
 ^|H |Properties that are only applicable when data is fetched SHALL include "readOnly: true".
 |===
 
-The following recommendations are intended to simplify parsing a schema and to help understanding the meaning and representation of the properties:
+The following recommendations are intended to simplify parsing a schema and to help understanding the meaning and representation of the properties.
 
 :rec: properties
 [width="90%",cols="2,7a"]
@@ -124,7 +124,7 @@ CAUTION: The next version of JSON Schema will likely restrict the use of additio
 For cases, where the properties of the resource should be ordered in some representations of the data, the sequence of the properties can be expressed using a keyword "x-ogc-propertySeq". The keyword is used to declare a hint about the relative position of the property in the object. Typical use cases are:
 
 - the representation of the schema in a human-readable format (e.g., HTML) to show related properties next to each other;
-- the representation of the data in a human-readable format (e.g., HTML) to show related property values next to each other;
+- the representation of the data in a human-readable format (e.g., HTML) to show related property values next to each other; and
 - the representation of the data in a format that requires a specific order of properties (e.g., XML based on an XML Schema that uses a `sequence` for the property elements).
 
 :req: property-seq

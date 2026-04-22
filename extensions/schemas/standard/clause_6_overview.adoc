@@ -11,7 +11,7 @@ In order to use the schema for data validation, the schema first has to be conve
 
 While the schema is a logical schema, a machine-readable representation is needed. Instead of specifying a custom schema language for geospatial data, this Standard uses JSON Schema as the schema language with:
 
-* Extensions for additional aspects that are common in geospatial data,
+* Extensions for additional aspects that are common in geospatial data, and
 * Recommendations for restricting the use of JSON Schema capabilities to simplify parsing a schema.
 
 That is, JSON Schema is primarily used as a data description language.  Additional elements, listed in the following table, are defined in this Standard that can be used to describe additional aspects of the schema that are common in geospatial data.
@@ -45,7 +45,7 @@ These requirements classes specify schema resources in OGC Web APIs.
 
 In OGC Web APIs, geospatial data is shared in collections (path `/collections/{collectionId}`). The schema of items in a collection provides information about how to interact with the collection. 
 
-Examples of interactions, where information about the schema are required, include:
+Examples of interactions, where information about the schema are required, include the following.
 
 * An application that wants to fetch data often needs information about the properties included in the data to process, present, or store the data properly ("returnable" properties or "Returnables").
 * An application that wants to fetch data restricted to a subset of the available properties needs the list of the properties in the data (again, "returnable" properties or "Returnables").

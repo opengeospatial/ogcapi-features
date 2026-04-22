@@ -15,7 +15,7 @@ To understand how geospatial data is represented in a specific data format, addi
 
 For example, the role "primary-geometry" is needed in feature types with multiple spatial properties to decide, for example:
 
-* Which geometry is encoded as the geometry of a feature in formats such as FlatGeobuf, Shapefile or Mapbox Vector Tiles, which only support a single geometry; or,
+* Which geometry is encoded as the geometry of a feature in formats such as FlatGeobuf, Shapefile or Mapbox Vector Tiles, which only support a single geometry; or
 * Which geometry is encoded in the "geometry" member in GeoJSON.
 
 The other roles specified in this requirements class support formats that support representing primary temporal information or the type, such as JSON-FG.

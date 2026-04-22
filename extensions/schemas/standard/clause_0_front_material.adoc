@@ -29,7 +29,7 @@ The main reasons for using JSON Schema are:
 
 In OGC Web APIs, geospatial data is shared in collections (path `/collections/{collectionId}`). The schema of items in a collection provides information as to how to interact with the collection. 
 
-Examples of interactions, where information about the schema are required, include:
+Examples of interactions, where information about the schema are required, include the following.
 
 * An application that wants to fetch data often needs information about the properties included in the data to process, present, or store the data properly ("returnable" properties or "Returnables").
 * An application that wants to fetch data restricted to a subset of the available properties needs the list of the properties in the data (again, "returnable" properties or "Returnables").

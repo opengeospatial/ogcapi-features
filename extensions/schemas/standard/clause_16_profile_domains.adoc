@@ -2,36 +2,36 @@
 [#rc_{req-class}]
 == Requirements Class "Profiles for value domains"
 
-For properties, two profiles of value domains can be distinguished:
+For properties, two profiles of value domains can be distinguished.
 
 - "valid-domain": The domain of all possible values of a property, according to the underlying data model. The domain constraints are specified in the data specification. The valid domain is a static domain: it does not change over time (unless the data specification changes). No value should be accepted by the API that is not in the valid domain. 
 - "actual-domain": The domain of all actual values of a property in the dataset at the time of the request. All queries that select features with a filter that selects property values outside of the actual domain will return an empty result set. The actual domain is a subset of the valid domain and is dynamic: it changes over time as the dataset is updated.
 
-Beyond declaring the data type of a property, the valid domain is expressed in the schema using the following keywords (see <<req_schemas_properties,Requriement /req/schemas/properties>> and <<rec_schemas_properties,Recommendation /rec/schemas/properties>>):
+Beyond declaring the data type of a property, the valid domain is expressed in the schema using the following keywords (see <<req_schemas_properties,Requriement /req/schemas/properties>> and <<rec_schemas_properties,Recommendation /rec/schemas/properties>>).
 
 * For textual values:
 ** "enum": The property has a finite set of values;
-** "pattern": All property values match a regular expression pattern;
+** "pattern": All property values match a regular expression pattern; and
 ** "minLength", "maxLength": The property values have a length constraint.
 * For numeric values:
 ** "enum": The property has a finite set of values (integers only);
-** "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum": The property values are from a range;
+** "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum": The property values are from a range; and
 ** "multipleOf": The property values are always a multiple of the specified value.
 * For geometric values:
 ** "format": The property can take only certain geometry types (e.g., "geometry-point-or-multipoint").
 
-For the actual domain, the values of the following keywords will tyipically be different from the valid domain:
+For the actual domain, the values of the following keywords will tyipically be different from the valid domain.
 
 * For textual values:
-** "enum": The list of actual values, if the values are from a finite set;
+** "enum": The list of actual values, if the values are from a finite set; and
 ** "minLength", "maxLength": The actual range of the length of the text strings.
 * For numeric values:
-** "enum": The list of actual values, if the values are from a finite set (integer only).
+** "enum": The list of actual values, if the values are from a finite set (integer only); and
 ** "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum": The actual range of the values.
 * For geometric values:
 ** "format": The format value that matches the actual geometry types (e.g., "geometry-point").
 
-Which profile is most useful depends on the semantics of the schema resource:
+Which profile is most useful depends on the semantics of the schema resource.
 
 * The "actual-domain" profile is in particular useful for queryables to guide a client which values can be used to filter the current data. The same applies for the returnables to guide a client how to process or visualize the data (e.g., restrict a map legend to actual values). The "valid-domain" profile is still useful for these resources, but includes values that are not in the current data.
 * The "valid-domain" profile is important for receivables so that a client knows the values that the API accepts for new or updates resources. The "actual-domain" profile is in general not useful for receivables.
