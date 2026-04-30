@@ -68,6 +68,9 @@ The standard is on the OGC website:
 * OGC API - Features - Part 3: Filtering
   * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/19-079r2/19-079r2.html)
   * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/19-079r3.html)
+* OGC API - Features - Part 5/OGC API - Common - Part 3: Schemas
+  * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/23-058r2/23-058r2.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/23-058r2.html)
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
@@ -108,10 +111,10 @@ Implementers of OGC standards are encouraged to register their products in the d
 
 ## Communication
 
-Join the [mailing list](https://lists.ogc.org/mailman/listinfo/wfs-fes.swg) or [![chat at https://gitter.im/opengeospatial/WFS_FES](https://badges.gitter.im/opengeospatial/WFS_FES.svg)](https://gitter.im/opengeospatial/WFS_FES?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Most all work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/ogcapi-features/issues),
 so browse there to get a good idea of what is happening, as well as past decisions.
+
+If you are on OGC Agora, here is the link to the [Features API SWG](https://agora.ogc.org/c/overview-716748/).
 
 ## Additional parts of OGC API - Features
 
@@ -119,8 +122,6 @@ The OGC Features API SWG has identified the following extensions as the highest 
 
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r1.html)
   * The draft has passed the Public Comment Period and is being prepared for the approval process.
-* [OGC API - Features - Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)
-  * The draft is in the approval process.
 * [OGC API - Features - Part 6: Property Selection](https://docs.ogc.org/DRAFTS/24-019.html)
   * The draft is an initial, complete draft.
 * [OGC API - Features - Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
