@@ -15,6 +15,7 @@
 |Date |Responsible Party |Description |
 |---- | ---------------- | ---------- |
 |2026-04-27 |[Clemens Portele](https://github.com/cportele) |Initial version |
+|2026-06-01 |[Clemens Portele](https://github.com/cportele) |address feedback: remove redundant link relations, update example |
 
 ## Introduction
 
@@ -31,7 +32,7 @@ This extension supports both semantics. A server declares which interpretation a
 
 Validity intervals of two versions of the same feature do not overlap, except that the end instant of one version may coincide with the start instant of the immediately following version. This convention is consistent with the closed-interval semantics used by OGC API Features and JSON-FG and avoids artificial gaps between consecutive versions.
 
-Bitemporal modelling - recording both transaction time and validity time independently - is out of scope for this extension and may be addressed by a future extension.
+Bitemporal modelling - recording both transaction time and validity time independently - is out of scope for this extension.
 
 While this extension is designed for feature resources, the general design should be applicable to other OGC API resources as well.
 
@@ -75,14 +76,14 @@ For interval queries on the Features resource (`datetime=<interval>`), the norma
 
 ### Collection metadata
 
-A collection that conforms to this extension declares the time-axis semantics that apply to its features as part of the Collection resource (`/collections/{collectionId}`) in a `versioning` object carrying a `timeAxis` property. The declared value is exactly one of:
+A collection that conforms to this extension may declare the time-axis semantics that apply to its features as part of the Collection resource (`/collections/{collectionId}`) in a `versioning` object carrying a `timeAxis` property. The declared value is exactly one of:
 
 - `validity-time`: the timestamp of a feature version reflects when the represented real-world state began to be true;
 - `transaction-time`: the timestamp of a feature version reflects when the change was recorded in the dataset.
 
 This metadata element is mandatory for any collection conforming to this extension: clients rely on it to interpret version timestamps correctly.
 
-For collections that support mutations, the `versioning` object also carries a `mutationTime` property. This property is separate from `timeAxis`; it describes how timestamps for new versions and retirements are determined during mutations. The `mutationTime` property is required if and only if the collection conforms to the *Mutations* requirements class; its presence is therefore an unambiguous indicator that the collection accepts mutations. The declared value is exactly one of:
+For collections that support mutations, the `versioning` object carries a `mutationTime` property. This property is separate from `timeAxis`; it describes how timestamps for new versions and retirements are determined during mutations. The `mutationTime` property is required if and only if the collection supports the *Mutations* requirements class; its presence is therefore an unambiguous indicator that the collection accepts mutations. The declared value is exactly one of:
 
 - `server`: the server determines mutation timestamps, typically from the time at which the transaction is processed;
 - `client`: the client supplies mutation timestamps using receivable properties - or in case of a DELETE operation via the `OGC-Mutation-Datetime` HTTP request header.
@@ -114,24 +115,24 @@ Access to a feature and its versions is as follows (in terms of the Memento fram
   - Without a query parameter `datetime`, the response is the feature version that is valid at the time the request is processed. This extension does not define a literal `datetime=now` parameter value. Note: Adding "now" as a value could be discussed in the v1.1 revision of OGC API Features Part 1: Core.
   - With a query parameter `datetime` containing an RFC 3339 timestamp, the response is the feature version that is valid at that moment in time, after applying the version-resolution rule at shared transition instants.
   - If the feature does not exist at the requested time, the response is 410 Gone (or 404 Not Found, if the feature never existed).
-  - All 200 responses include a `Memento-Datetime` HTTP header carrying the canonical start timestamp of the returned version (this is the timestamp embedded in the canonical Memento URI for that version, which may differ from the timestamp the client supplied).
-  - All 200 responses include a `self` link reflecting the request URI (with the `datetime` query parameter as supplied by the client, if any), a `canonical` link pointing to the canonical Memento URI of the returned version (per [RFC 6596](https://www.rfc-editor.org/rfc/rfc6596.html)), an `original` link pointing to the feature URI without a `datetime` parameter, a `timemap` link and a `version-history` link referencing the Time Map (also as `Link` headers), and `predecessor-version` and `successor-version` links if a predecessor or successor exists. The `self` and `canonical` links may resolve to the same URI when the request was already made with the canonical timestamp; the `self` and `original` links may resolve to the same URI when the request was made without a `datetime` parameter.
+  - All 200 responses include a `Memento-Datetime` HTTP header carrying the start timestamp of the returned version (this is the timestamp embedded in the Memento URI for that version, which may differ from the timestamp the client supplied).
+  - All 200 responses include a `self` link reflecting the request URI (with the `datetime` query parameter as supplied by the client, if any), an `original` link pointing to the feature URI without a `datetime` parameter, a `timemap` link and a `version-history` link referencing the Time Map (also as `Link` headers), and `predecessor-version` and `successor-version` links if a predecessor or successor exists. The `self` and `original` links will reference the same URI, if the request was made without a `datetime` parameter.
   - All 410 responses include a `latest-version` link, a `timemap` link, and a `version-history` link.
-  - Responses are returned with status 200 directly (no 302/303/307 redirect to the canonical Memento URI). Clients identify the canonical version via the `canonical` link and the `Memento-Datetime` header.
+  - Responses are returned with status 200 directly (no 302/303/307 redirect to the Memento URI). Clients identify the version via the `Memento-Datetime` header.
 - Memento: a feature version (`/collections/{collectionId}/items/{featureId}?datetime={timestamp}`)
-  - The `timestamp` in the canonical Memento URI is the start of the validity of the feature version. Because version timestamps are permanent, this URI is a stable, permanent identifier for the version.
+  - The `timestamp` in the Memento URI is the start of the validity of the feature version. Because version timestamps are permanent, this URI is a stable, permanent identifier for the version.
 - Time Map: the available versions of a feature (`/collections/{collectionId}/items/{featureId}/versions`)
   - Returns all TimeMap links, in particular including a `memento` link for each feature version.
   - Each `memento` link includes a `datetime` link parameter carrying the `Memento-Datetime` value of the linked version, expressed in the HTTP-date syntax from RFC 7089 (GMT).
-  - The first and last feature version are identified by `first` and `last`/`latest-version` links.
+  - The last feature version is identified by a `latest-version` link.
   - If the "JSON" requirements class is supported, the JSON encoding of the Time Map returns a JSON object with a `links` array. Links use a single relation value per link object; where several relation values apply to the same target, separate link objects are used.
   - Support for the Media Type `application/link-format` as defined by [RFC 6690](https://www.rfc-editor.org/rfc/rfc6690.html) is recommended.
 
 ### Caching
 
-Mementos - i.e., responses to GET requests with a fully-specified `datetime` query parameter that resolves to a non-current version - are immutable: once a version has been retired, neither its content nor its canonical timestamp will ever change. Servers can therefore return such responses with strong validators (e.g., `ETag`) and aggressive freshness directives (e.g., `Cache-Control: public, max-age=..., immutable`).
+Mementos - i.e., responses to GET requests with a fully-specified `datetime` query parameter that resolves to a non-current version - are immutable: once a version has been retired, neither its content nor its timestamp will ever change. Servers can therefore return such responses with strong validators (e.g., `ETag`) and aggressive freshness directives (e.g., `Cache-Control: public, max-age=..., immutable`).
 
-The canonical version timestamp carried by `Memento-Datetime` is permanent for both current and non-current versions. However, responses that represent the current version are not immutable, because the open end of the version interval may later be replaced by a concrete end timestamp when the version is retired. Such responses are usually served with shorter freshness lifetimes or with cache validation only.
+The version timestamp carried by `Memento-Datetime` is permanent for both current and non-current versions. However, responses that represent the current version are not immutable, because the open end of the version interval may later be replaced by a concrete end timestamp when the version is retired. Such responses are usually served with shorter freshness lifetimes or with cache validation only.
 
 ### Behaviour on the Features resource
 
@@ -150,7 +151,7 @@ For GET requests to the Features resource (`/collections/{collectionId}/items`),
   - Profile `versions-as-features-unique-ids`: Each version is represented as a feature - with a unique id.
     - Similar to `versions-as-features` with the difference that the feature id is a combination of the feature id and the version id (the timestamp).
     - This ensures uniqueness, but results in differences between the feature ids depending on the temporal selection criteria.
-    - Where the selected feature format supports feature-level links, `original` and `canonical` links can be used to expose both identities explicitly: the stable feature URI and the canonical version URI.
+    - Where the selected feature format supports feature-level links, an `original` link exposes the stable feature URI.
     - `numberMatched`/`numberReturned` represent the number of feature versions in the response feature collection (same as `versions-as-features`).
   - Profile `features-with-time-slices`: The versions are merged into a single feature.
     - All (selected) versions of a feature are encoded as a single feature, with the version history represented in a more complex representation of the properties. This is conceptually cleaner than the other profiles, but it may be more difficult to handle in implementations:
@@ -178,7 +179,7 @@ For CRUD requests to a feature, the following applies:
   - If `mutationTime` is `server`, the server sets the start timestamp from its own clock at the time the transaction is processed. Any value supplied by the client for the start of the primary interval is ignored or replaced.
   - If `mutationTime` is `client`, the start timestamp is taken from the start of the primary interval in the request body. If the primary interval, or its start instant, is missing in the body, the server returns 400 Bad Request.
   - The `OGC-Mutation-Datetime` header is used for DELETE only. Servers ignore it for POST, PUT, and PATCH, or, if strict validation is preferred, return 400 Bad Request when it is supplied alongside a request that carries a body.
-- PUT, PATCH, and DELETE are not applied to canonical version URIs containing a `datetime` query parameter. Version URIs identify specific feature versions. Mutations are applied to the original feature URI without a `datetime` parameter. A request that attempts to mutate a version URI returns 405 Method Not Allowed.
+- PUT, PATCH, and DELETE are not applied to version URIs containing a `datetime` query parameter. Version URIs identify specific feature versions. Mutations are applied to the original feature URI without a `datetime` parameter. A request that attempts to mutate a version URI returns 405 Method Not Allowed.
 - If PUT or DELETE is applied to a feature that exists only in history, a 410 Gone error is returned.
 - If the feature has never existed and the collection does not allow PUT to create new features (i.e., `supportsNonAutogeneratedResourceIds: false`), a 404 Not Found error is returned.
 - No mutation creates a version whose validity starts at or before the start of the latest existing version of the same feature. No mutation creates overlapping validity intervals for versions of the same feature, except for the shared transition instant between two consecutive versions. Requests that violate these constraints are rejected with 409 Conflict.
@@ -188,33 +189,14 @@ For transactions (POST requests to `/transactions`) the same behaviour applies t
 
 ## An example
 
-The following is a building with two versions (another floor was added in 2012):
+Let's assume a building with two versions:
 
-```
-{
-    "type": "FeatureCollection",
-    "featureType": "building",
-    "conformsTo" : ["http://www.opengis.net/spec/json-fg-1/1.0/conf/core"],
-    "features": [
-        {
-            "type"       : "Feature",
-            "id"         : "1",
-            "time"       : { "interval": ["2001-07-02T10:43:17Z", "2012-10-14T16:43:17Z"] },
-            "geometry"   : { "type": "Point", "coordinates": [7, 50] },
-            "properties" : {"use": "residential building", "height_m": 10.8}
-        },
-        {
-            "type"       : "Feature",
-            "id"         : "1",
-            "time"       : { "interval": ["2012-10-14T16:43:17Z", ".."] },
-            "geometry"   : { "type": "Point", "coordinates": [7, 50] },
-            "properties" : {"use": "residential building", "height_m": 14.0}
-        }
-    ]
-}
-```
-
-NOTE: ISO 8601 time intervals are closed on both ends (`[start, end]`). Where two consecutive versions meet, their endpoints share the same instant - in the example, `2012-10-14T16:43:17Z` is both the end of the first version and the start of the second. A request whose `datetime` falls exactly on the boundary returns the later version. This convention avoids any one-second gap between consecutive versions and keeps the version sequence temporally contiguous.
+- The building was registered as feature "1" in the dataset at "2001-07-02T10:43:17Z" with the properties: 
+  - `"use": "residential building"`
+  - `"height_m": 10.8`
+  - `"geometry": { "type": "Point", "coordinates": [7, 50] }`
+- Another floor was added to the building in 2012, a successor version was registered at "2012-10-14T16:43:17Z", with the following changes:
+  - `"height_m": 14.0`
 
 A request to retrieve the feature returns the current version:
 
@@ -225,7 +207,6 @@ HTTP/2 200
 ...
 Memento-Datetime: Sun, 14 Oct 2012 16:43:17 GMT
 Link: <https://example.com/api/collections/building/items/1>; rel="self"
-Link: <https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z>; rel="canonical"
 Link: <https://example.com/api/collections/building/items/1>; rel="original"
 Link: <https://example.com/api/collections/building/items/1?datetime=2001-07-02T10:43:17Z>; rel="predecessor-version"
 Link: <https://example.com/api/collections/building/items/1/versions>; rel="timemap"
@@ -242,7 +223,7 @@ Link: <https://example.com/api/collections/building/items/1/versions>; rel="vers
 }
 ```
 
-A request to a timestamp in 2005 returns the first version. The `canonical` link uses the start timestamp of the selected version, not the timestamp supplied by the client; the `self` link reflects the request URI as supplied:
+A request to a timestamp in 2005 returns the first version. The `self` link reflects the request URI as supplied:
 
 ```
 GET /api/collections/building/items/1?datetime=2005-01-01T00:00:00Z
@@ -251,7 +232,6 @@ HTTP/2 200
 ...
 Memento-Datetime: Mon, 02 Jul 2001 10:43:17 GMT
 Link: <https://example.com/api/collections/building/items/1?datetime=2005-01-01T00:00:00Z>; rel="self"
-Link: <https://example.com/api/collections/building/items/1?datetime=2001-07-02T10:43:17Z>; rel="canonical"
 Link: <https://example.com/api/collections/building/items/1>; rel="original"
 Link: <https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z>; rel="successor-version"
 Link: <https://example.com/api/collections/building/items/1/versions>; rel="timemap"
@@ -268,6 +248,8 @@ Link: <https://example.com/api/collections/building/items/1/versions>; rel="vers
 }
 ```
 
+NOTE: ISO 8601 time intervals are closed on both ends (`[start, end]`). Where two consecutive versions meet, their endpoints share the same instant - in the example, `2012-10-14T16:43:17Z` is both the end of the first version and the start of the second. A request whose `datetime` falls exactly on the boundary returns the later version. This convention avoids any one-second gap between consecutive versions and keeps the version sequence temporally contiguous.
+
 A request exactly at the transition instant returns the later version:
 
 ```
@@ -277,13 +259,20 @@ HTTP/2 200
 ...
 Memento-Datetime: Sun, 14 Oct 2012 16:43:17 GMT
 Link: <https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z>; rel="self"
-Link: <https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z>; rel="canonical"
 Link: <https://example.com/api/collections/building/items/1>; rel="original"
 Link: <https://example.com/api/collections/building/items/1?datetime=2001-07-02T10:43:17Z>; rel="predecessor-version"
 Link: <https://example.com/api/collections/building/items/1/versions>; rel="timemap"
 Link: <https://example.com/api/collections/building/items/1/versions>; rel="version-history"
 
-...
+{
+    "type"       : "Feature",
+    "featureType": "building",
+    "conformsTo" : ["http://www.opengis.net/spec/json-fg-1/1.0/conf/core"],
+    "id"         : "1",
+    "time"       : { "interval": ["2012-10-14T16:43:17Z", ".."] },
+    "geometry"   : { "type": "Point", "coordinates": [7, 50] },
+    "properties" : {"use": "residential building", "height_m": 14.0}
+}
 ```
 
 A request to a timestamp in 1990 returns 410 Gone:
@@ -310,11 +299,9 @@ HTTP/2 200
     "links": [
         { "rel": "self", "href": "https://example.com/api/collections/building/items/1/versions" },
         { "rel": "original", "href": "https://example.com/api/collections/building/items/1" },
-        { "rel": "first", "href": "https://example.com/api/collections/building/items/1?datetime=2001-07-02T10:43:17Z" },
         { "rel": "memento", "href": "https://example.com/api/collections/building/items/1?datetime=2001-07-02T10:43:17Z", "datetime": "Mon, 02 Jul 2001 10:43:17 GMT" },
-        { "rel": "last", "href": "https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z" },
-        { "rel": "latest-version", "href": "https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z" },
-        { "rel": "memento", "href": "https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z", "datetime": "Sun, 14 Oct 2012 16:43:17 GMT" }
+        { "rel": "memento", "href": "https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z", "datetime": "Sun, 14 Oct 2012 16:43:17 GMT" },
+        { "rel": "latest-version", "href": "https://example.com/api/collections/building/items/1?datetime=2012-10-14T16:43:17Z" }
     ]
 }
 ```
@@ -496,7 +483,7 @@ In addition, the new API components allow API users/clients to discover and acce
 The design segments naturally into the following requirements classes. Dependencies are noted; the formal requirements text will be elaborated when this proposal is converted into a candidate standard.
 
 - **Core** - the foundation of the extension. Includes:
-  - the `datetime` parameter on `/collections/{collectionId}/items/{featureId}` selecting a version; 200/410/404 status codes; the `self`, `canonical`, `original`, `predecessor-version`, `successor-version`, `latest-version`, `version-history`, and `timemap` link relations as described above; the `Memento-Datetime` response header on version responses; UTC normalisation of RFC 3339 timestamps; caching guidance for immutable Mementoes; and a primary interval on the feature schema (when Part 5: Schemas is supported);
+  - the `datetime` parameter on `/collections/{collectionId}/items/{featureId}` selecting a version; 200/410/404 status codes; the `self`, `original`, `predecessor-version`, `successor-version`, `latest-version`, `version-history`, and `timemap` link relations as described above; the `Memento-Datetime` response header on version responses; UTC normalisation of RFC 3339 timestamps; caching guidance for immutable Mementoes; and a primary interval on the feature schema (when Part 5: Schemas is supported);
   - the `/collections/{collectionId}/items/{featureId}/versions` Time Map resource and its JSON encoding, including `datetime` values on `memento` links;
   - the time-axis semantics metadata element on the collection resource;
   - the version-resolution rule for shared transition instants.
@@ -509,6 +496,6 @@ The design segments naturally into the following requirements classes. Dependenc
   - **Profile: Versions as Features with Unique IDs**
   - **Profile: Features with Time Slices**
 
-- **Mutations** - PUT/PATCH/DELETE behaviour on versioned features, creation by POST and optionally by PUT upsert, the `mutationTime` collection metadata element, the `OGC-Mutation-Datetime` request header for client-supplied mutation timestamps, the prohibition on backdating and overlapping intervals except for a shared transition instant between consecutive versions, the rule that mutation requests target the original feature URI rather than canonical version URIs, and the use of `If-Unmodified-Since`. Depends on Core and on either OGC API Features Part 4 (Create, Replace, Update and Delete) or Part 11 (Atomic and Batch Transactions).
+- **Mutations** - PUT/PATCH/DELETE behaviour on versioned features, creation by POST and optionally by PUT upsert, the `mutationTime` collection metadata element, the `OGC-Mutation-Datetime` request header for client-supplied mutation timestamps, the prohibition on backdating and overlapping intervals except for a shared transition instant between consecutive versions, the rule that mutation requests target the original feature URI rather than version URIs, and the use of `If-Unmodified-Since`. Depends on Core and on either OGC API Features Part 4 (Create, Replace, Update and Delete) or Part 11 (Atomic and Batch Transactions).
 
 A minimally conformant server implements *Core*. *Multiple Versions in a Response* (with at least one profile) and *Mutations* are added as needed.
