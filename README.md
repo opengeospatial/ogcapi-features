@@ -94,7 +94,7 @@ Closely related is the Common Query Language (CQL2) standard:
 To test APIs, the following resources are available:
 
 * [OGC Validator (by OGC)](https://cite.opengeospatial.org/teamengine/)
-* [OGC Checker (by Geonovum)](https://geonovum-labs.github.io/ogc-checker/?#/ogc-api)
+* [OGC Checker (by Geonovum)](https://geonovum.github.io/ogc-checker/?#/ogc-api)
 
 The OGC Validator is approved by the OGC Membership and is also used in the [OGC Compliance Program](https://cite.opengeospatial.org/) to certify software products implementing OGC API Features. It currently tests against version 1.0.0 of Part 1 and Part 2.
 
