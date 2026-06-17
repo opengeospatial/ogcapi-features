@@ -1,0 +1,54 @@
+[[return-created-resource_clause]]
+== Requirements Class "Return Created Resource"
+
+[[return-create-resource-overview]]
+=== Overview
+
+include::requirements/requirements_class_return_created-resource.adoc[]
+
+A server that implements this requirements class provides the ability to return
+a representation of a newly created resource in the response body of a
+<<create,create resource>> operation.
+
+
+[[return-created-resource-header]]
+=== Return-Created-Resource header
+
+==== Definition
+
+include::requirements/return-created-resource/REQ_header.adoc[]
+
+==== Response
+
+include::requirements/return-created-resource/REQ_response.adoc[]
+
+include::requirements/return-created-resource/REQ_representation.adoc[]
+
+==== Exceptions
+
+See <<http_status_codes,HTTP status codes>>.
+
+==== Example
+
+The following example illustrates the use of the `Return-Creates-Resource` 
+HTTP header to request that a representation of the newly created resource be 
+returned in the response body of the <<create,create operation>>.
+
+....
+   Client                                                          Server
+     |                                                               |
+     |   POST <resources endpoint>   HTTP/1.1                        |
+     |   Content-Type: <media type of resource representation>       |
+     |   Return-Created-Resource: true                               |
+     |   Accept: <media type of returned resource representation>    |
+     |                                                               |
+     |   ... Body contains representation of the resource ...        |
+     |-------------------------------------------------------------->|
+     |                                                               |
+     |   HTTP/1.1 201 Created                                        | 
+     |   Location: <resource endpoint>                               |    
+     |                                                               |
+     |   ... Response body containing represenation of created       |
+     |       resource ...                                            |
+     |<--------------------------------------------------------------|
+....
