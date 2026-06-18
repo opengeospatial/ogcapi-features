@@ -1,10 +1,11 @@
 # MapServer
 
-[MapServer](https://www.mapserver.org) added [OGC Features API](https://www.mapserver.org/ogc/ogc_api.html) Part 1 Core support in version 8.0. 
-OGC API - Features - Part 2: Coordinate Reference Systems by Reference will be part of the upcoming MapServer 8.2 release and has been [merged](https://github.com/MapServer/MapServer/pull/6893)
+[MapServer](https://www.mapserver.org) 8.6.4 has support for [OGC Features API](https://www.mapserver.org/ogc/ogc_api.html) Part 1 Core, Part 2: Coordinate Reference Systems by Reference and Part 3: Filtering.
 into the main code branch.
 
 ## Demo deployment
+
+* Conformance declaration: ([JSON] https://demo.mapserver.org/cgi-bin/mapserv/localdemo/ogcapi/conformance?f=json) ([HTML] https://demo.mapserver.org/cgi-bin/mapserv/localdemo/ogcapi/conformance?f=html)
 
 Example requests:
 
