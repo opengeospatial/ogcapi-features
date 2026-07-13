@@ -70,7 +70,7 @@ The standard is on the OGC website:
   * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/19-079r3.html)
 * OGC API - Features - Part 5/OGC API - Common - Part 3: Schemas
   * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/23-058r2/23-058r2.html)
-  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/23-058r2.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/23-058r3.html)
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
@@ -172,7 +172,7 @@ The latest drafts of each standard in this repository are build daily (based on 
 * [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r2.html)
 * [Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r3.html)
 * [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r1.html)
-* [Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)
+* [Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r3.html)
 * [Part 6: Property Selection](https://docs.ogc.org/DRAFTS/24-019.html)
 * [Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
 * [Part 8: Sorting](https://docs.ogc.org/DRAFTS/24-030.html)
