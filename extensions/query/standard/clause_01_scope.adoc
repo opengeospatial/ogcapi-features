@@ -29,17 +29,19 @@ The following table maps the resource endpoints defined in this Standard to the 
 |====
 |Resource endpoint |HTTP METHOD |Description |Reference
 
-1.2+|/query |GET |Get the list of stored queries. |<<clause-stored-query,Stored Query>>
-1+|POST |Execute an ad-hoc query. |<<clause-adhoc-query,Adhoc Query>>
+1.3+|/query |GET |Get the list of stored queries. |<<clause-stored-query,Stored query>>
+1+|POST  |Execute an ad-hoc query using the HTTP POST method. |<<clause-adhoc-query,Adhoc query>>
+1+|QUERY  |Execute an ad-hoc query using the HTTP QUERY method. |<<http-query-method-ad-hoc,The HTTP QUERY method>>
 
-1.4+|/query/{queryId} |GET |Execute this stored query. |<<clause-stored-query,Stored Query>>
-1+|POST |Execute this stored query with an application/x-www-form-urlencoded body. |<<clause-stored-query,Stored Query>>
-1+|PUT  |Create or replace a stored query. |<<clause-manage-stored-query-create,Creating a stored query>>, <<clause-manage-stored-query-update,Updating stored queries>>
+1.5+|/query/{queryId} |GET |Execute this stored query. |<<clause-stored-query,Stored query>>
+1+|POST   |Execute this stored query with an application/x-www-form-urlencoded body. |<<clause-stored-query,Stored query>>
+1+|QUERY  |Execute this stored query with an application/x-www-form-urlencoded body using the the HTTP QUERY method. |<<http-query-method-parameterized-stored-query,The HTTP QUERY method>>
+1+|PUT    |Create or replace a stored query. |<<clause-manage-stored-query-create,Creating a stored query>>, <<clause-manage-stored-query-update,Updating stored queries>>
 1+|DELETE |Delete this stored query. |<<clause-manage-stored-query-delete,Deleting stored queries>>
 
 |/query/{queryId}/definition |GET |Get the definition of a stored query. |<<clause-manage-stored-query-definition,Retrieving the definition of a stored query>>
 
 |/query/{queryId}/parameters |GET |Get the list of parameters for this parametertized stored query. |<<clause-parameterized-stored-query-parameter-discovery,Retrieving the list of stored query parameters>>
 
-|/query/{queryId}/parameters/{parameterId} |GET |Get the definition of this query parametery. |<<clause-parameterized-stored-query-parameter-discovery,Retrieving the definition of a query parameter>>
+|/query/{queryId}/parameters/{parameterId} |GET |Get the definition of this query parameter. |<<clause-parameterized-stored-query-parameter-discovery,Retrieving the definition of a query parameter>>
 |====

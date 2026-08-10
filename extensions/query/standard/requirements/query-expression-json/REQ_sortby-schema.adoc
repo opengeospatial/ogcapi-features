@@ -2,14 +2,14 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/query-expression-json/sortby-schema*
+
 ^|A | The JSON Encoding for the sorting clause of a query SHALL be defined by the following schema fragments:
 
 [[schema_sortby]]
-.link:../openapi/schemas/sortby.yaml[JSON Schema for the sorting clause of a query(sortby.yaml)]
+.link:../../../../openapi/schemas/sortby.yaml[JSON Schema for the sorting clause of a query(sortby.yaml)]
 [source,YAML]
 ----
 include::../../../openapi/schemas/sortby.yaml[]
 ----
 
 |===
-
