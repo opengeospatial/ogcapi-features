@@ -2,5 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/create-replace-delete/put-content-type*
-^|A |The `Content-Type` header SHALL be used to indicate the media type of the request body containing the representation of the new resource content.
+^|A |The Implementation SHALL infer the media type of the request body containing a representation of the new resource content from the `Content-Type` header.
+^|B |The Implementation SHALL return a 400 client error if no `Content-Type` header is provided in the request.
 |===

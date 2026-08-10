@@ -69,15 +69,20 @@ The https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_definition_2[API Descrip
 [[cross_origin]]
 ==== Cross-origin requests
 
-See <<OAFeat-1,OGC API - Features - Part 1: Core>>, section link:http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#cross_origin[Support for cross-origin requests], about the importance of supporting cross-origin requests, typically via link:https://en.wikipedia.org/wiki/Cross-origin_resource_sharing[Cross-origin resource sharing (CORS)].
+See <<OACommon-1,OGC API - Common - Part 1: Core>>, section link:https://www.opengis.net/spec/ogcapi-common-1/1.0#cross-origin-section[Support for cross-origin requests],
+about the importance of supporting cross-origin requests, typically via link:https://en.wikipedia.org/wiki/Cross-origin_resource_sharing[Cross-origin resource sharing (CORS)].
 
 ==== Schemas
 
-This Standard makes no assumptions about any schema constraints that a server may impose upon incoming feature data.  The intent is to support both "schema-less" servers (such as those back-ended by document data stores) as well as servers that have underlying schema constraints (such as those back-ended by an RDBMS).
+This Standard makes no assumptions about any schema constraints that a server may impose upon incoming resource data.
+The intent is to support both "schema-less" servers (such as those back-ended by document data stores) as well as servers that have underlying schema constraints
+(such as those back-ended by an RDBMS).
 
-In the "schema-less" case, as long as the incoming feature meets the requirements of the declared media type (e.g. a valid GeoJSON feature) then the resource should be created/updated with a 20x status response.  
+In the "schema-less" case, as long as the incoming resource meets the requirements of the declared media type (e.g., a valid GeoJSON feature) then the resource should be
+created/updated with a 20x status response.
 
-In the case where the server imposes schema constraints, the server should publish schemas to help clients create requests that are not rejected.  As recommended in clause <<schemas,Feature schemas>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
+In the case where the server imposes schema constraints, the server should publish schemas to help clients create requests that are not rejected.
+In the case of feature resources, as recommended in clause <<schemas,Feature schemas>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
 
 [[create]]
 === Adding a new resource to a collection (CREATE)
@@ -246,7 +251,7 @@ case, the processing can succeed or fail, without further notification to the cl
 
 See <<http_status_codes,HTTP status codes>>.
 
-include::recommendations/create-replace-delete/delete/REC_no-feature.adoc[]
+include::recommendations/create-replace-delete/delete/REC_no-resource.adoc[]
 
 ==== Example
 
