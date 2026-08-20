@@ -10,6 +10,8 @@ A server that implements this requirements class provides the ability to use
 the HTTP PATCH method to modify parts of an existing resource without the need
 to transmit a complete replacement resource.
 
+In this Standard, the term "update" refers to a partial update of a resource, that is, modifying parts of the resource, in contrast to the complete update of a resource with the <<replace,Replace>> operation.
+
 Modifying parts of a resource requires that a document describing the changes to be applied be provided by the client.  This Standard does not mandate that a specific encoding for this document be supported by a server. The client declares the media type of the document in the request body in the `Content-Type` header (see <<mediatypes,Media Types>>).
 
 include::recommendations/update/PER_content-type-lenient.adoc[]

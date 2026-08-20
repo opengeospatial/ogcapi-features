@@ -25,8 +25,20 @@ EXAMPLE 1: For features, the endpoint is `{landingPageUri}/collections/{collecti
 
 EXAMPLE 2: For processes, the endpoint is `{landingPageUri}/processes/{processId}`.
 
+[[replace-def]]
+==== replace
+operation that replaces an existing resource with a new representation of the resource
+
+NOTE: A replace is a complete update of a resource.
+
+[[update-def]]
+==== update
+operation that modifies parts of an existing resource
+
+NOTE: An update is a partial update of a resource. A complete update of a resource is a <<replace-def,replace>>.
+
 [[optimistic-locking]]
 ==== optimistic locking
 locking protocol that resolves change conflicts at the very last moment
 
-NOTE: This is accomplished by a server providing HTTP validator fields describing the state of a resource and evualting preconditions submitted by clients about the current state of a resource that the client wants to change. See <<rfc9110,RFC 9110 (HTTP Semantics)>>, section 8.8. If the validator in a client request does not match the state of the resource on the server, the operation fails and the client must re-fetch the resource and retry the update operation based on the new state.
+NOTE: This is accomplished by a server providing HTTP validator fields describing the state of a resource and evaluating preconditions submitted by clients about the current state of a resource that the client wants to change. See <<rfc9110,RFC 9110 (HTTP Semantics)>>, section 8.8. If the validator in a client request does not match the state of the resource on the server, the operation fails and the client must re-fetch the resource and retry the operation based on the new state.

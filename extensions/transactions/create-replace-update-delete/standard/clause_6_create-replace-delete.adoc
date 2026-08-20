@@ -7,7 +7,9 @@
 include::requirements/requirements_class_create-replace-delete.adoc[]
 
 A server that implements this requirements class provides the ability to add,
-replace and/or remove individual resources from a collection.  Not all operations need to be implemented for all offered mutable resources.
+replace and/or remove individual resources in a collection of resources.  Not all operations need to be implemented for all offered mutable resources.
+
+NOTE: The term "collection" is used in the general sense of a set of resources of the same type, for example, the features in a feature collection (`{landingPageUri}/collections/{collectionId}/items`), the styles of a dataset (`{landingPageUri}/styles`), or the processes offered by a server (`{landingPageUri}/processes`). See also the note in the Scope clause.
 
 The HTTP POST method is used to add a new resource instance to a collection. The resource identifier is assigned by the server.
 
@@ -86,7 +88,7 @@ In the "schema-less" case, as long as the incoming resource meets the requiremen
 created/updated with a 20x status response.
 
 In the case where the server imposes schema constraints, the server should publish schemas to help clients create requests that are not rejected.
-In the case of feature resources, as recommended in clause <<schemas,Feature schemas>>, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint.
+For example, in the case of features, schemas can be obtained from the `{landingPageUri}/collections/{collectionId}/schema` endpoint, as described in clause <<schemas,Feature schemas>>.
 
 [[create]]
 === Adding a new resource to a collection (CREATE)
@@ -150,6 +152,12 @@ The following example adds a new feature to the `oakland_buildings` collection. 
 .Create a New Feature Example
 include::../examples/json/ex01_create.adoc[]
 
+The second example adds a new style to the styles of a dataset. The style is represented as a Mapbox style (see the draft <<OAStyles,OGC API - Styles>> standard).
+
+[#create-style-example,reftext=`Create Style Example`]
+.Create a New Style Example
+include::../examples/json/ex09_create-style.adoc[]
+
 [[replace]]
 === Replacing an existing resource (REPLACE)
 
@@ -198,9 +206,9 @@ See https://www.rfc-editor.org/rfc/rfc9110#field.content-type[section 8.3 of RFC
 
 include::requirements/create-replace-delete/replace/REQ_response.adoc[]
 
-The status code depends on the server. If the server has updated the resource, the response is either `200` if the response includes additional content, or `204` if the response has no additional content. 
+The status code depends on the server. If the server has replaced the resource, the response is either `200` if the response includes additional content, or `204` if the response has no additional content. 
 
-If the server will process the update request later, the server will return a `202`. In this case, the processing can succeed or fail, without further notification to the client.
+If the server will process the request later, the server will return a `202`. In this case, the processing can succeed or fail, without further notification to the client.
 
 include::requirements/create-replace-delete/replace/REQ_rid.adoc[]
 
@@ -250,7 +258,7 @@ include::requirements/create-replace-delete/delete/REQ_delete-op.adoc[]
 
 include::requirements/create-replace-delete/delete/REQ_response.adoc[]
 
-If the server will process the update request later, it will return a `202`. In this
+If the server will process the request later, it will return a `202`. In this
 case, the processing can succeed or fail, without further notification to the client.
 
 ==== Exceptions
