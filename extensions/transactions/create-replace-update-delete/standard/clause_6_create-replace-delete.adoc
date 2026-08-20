@@ -24,7 +24,7 @@ resource encoding be supported by a server.
 
 NOTE: The use of the HTTP PATCH method is not defined in this requirements class.  The <<rc_update,Update>> requirements class defines the use of the HTTP PATCH method.
 
-NOTE: In order to promote interoperability, each OGC Standard that extends this Standard should make recommendations concerning the representation of resources.  See <<features,Features>> for a discussion of feature representations.
+NOTE: In order to promote interoperability, each OGC Standard that extends this Standard should make recommendations concerning the representation of resources.  See <<features_clause,Features>> for a discussion of feature representations.
 
 include::requirements/create-replace-delete/REQ_methods.adoc[]
 
@@ -266,7 +266,7 @@ include::../examples/json/ex04_delete.adoc[]
 
 ==== Overview
 
-A server is not required to implement every method described in this Standard (i.e. POST, PUT, <<update_clause,PATCH>> or DELETE) for every mutable resource that it offers.  Furthermore, a server that supports the ability to add, modify or remove resources from collections is not likely to be an open server.  That is, access to the server, and specifically the operations that allow resource creation, modification and/or removal, will be controlled.  Such controls might, for example, take the form of policy requirements (e.g. resources on this server can be inserted or updated but not deleted) or user access control requirements (e.g. user "X" is only allowed to create resources but not update or delete resources).  Regardless of the controls the server must be able to advertise, within the control context in place, which methods are available for each resource that it offers.  This is accomplished using the https://www.rfc-editor.org/rfc/rfc2616.html#section-9.2[HTTP OPTIONS] method.
+A server is not required to implement every method described in this Standard (i.e. POST, PUT, PATCH or DELETE) for every mutable resource that it offers.  Furthermore, a server that supports the ability to add, modify or remove resources from collections is not likely to be an open server.  That is, access to the server, and specifically the operations that allow resource creation, modification and/or removal, will be controlled.  Such controls might, for example, take the form of policy requirements (e.g. resources on this server can be inserted or updated but not deleted) or user access control requirements (e.g. user "X" is only allowed to create resources but not update or delete resources).  Regardless of the controls the server must be able to advertise, within the control context in place, which methods are available for each resource that it offers.  This is accomplished using the https://www.rfc-editor.org/rfc/rfc9110#OPTIONS[HTTP OPTIONS] method.
 
 The HTTP OPTIONS method allows the server to explicitly declare which HTTP methods are supported for a particular resource(s) endpoint.  This Standard deals with the HTTP POST, PUT, PATCH and DELETE methods but any relevant HTTP method may be listed for a particular resource.
 
