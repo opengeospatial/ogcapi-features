@@ -1,0 +1,6 @@
+[[req_handling_preference-applied]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/handling/preference-applied*
+^|A |If the server has applied the `handling` preference of a request when processing the request, the response SHALL include the `Preference-Applied` header (https://www.rfc-editor.org/rfc/rfc7240#section-3[section 3 of RFC 7240]) with the preference that was applied.
+|===
