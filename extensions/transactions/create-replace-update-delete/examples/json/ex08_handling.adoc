@@ -1,0 +1,44 @@
+....
+   Client                                                              Server
+     |                                                                   |
+     | POST /collections/buildings/items   HTTP/1.1                      |
+     | Content-Type: application/geo+json                                |
+     | Prefer: handling=strict                                           |
+     |                                                                   |
+     | {                                                                 |
+     |   "type": "Feature",                                              |
+     |   "geometry": {                                                   |
+     |     "type": "Polygon",                                            |
+     |     "coordinates": [                                              |
+     |      [[8.7092045,49.4148635],[8.7093174,49.4148728],              |
+     |       [8.7093310,49.4148067],[8.7092181,49.4147974],              |
+     |       [8.7092045,49.4148635]]]                                    |
+     |   },                                                              |
+     |   "properties": {                                                 |
+     |     "name": "Main Hall"                                           |
+     |   }                                                               |
+     | }                                                                 |
+     |------------------------------------------------------------------>|
+     |                                                                   |
+     | HTTP/1.1 422 Unprocessable Content                                |
+     | Preference-Applied: handling=strict                               |
+     | Content-Type: application/problem+json                            |
+     |                                                                   |
+     | {                                                                 |
+     |   "status": 422,                                                  |
+     |   "detail": "The required property 'function' is missing."        |
+     | }                                                                 |
+     |<------------------------------------------------------------------|
+     |                                                                   |
+     | POST /collections/buildings/items   HTTP/1.1                      |
+     | Content-Type: application/geo+json                                |
+     | Prefer: handling=lenient                                          |
+     |                                                                   |
+     | ... same feature as in the first request ...                      |
+     |------------------------------------------------------------------>|
+     |                                                                   |
+     | HTTP/1.1 201 Created                                              |
+     | Preference-Applied: handling=lenient                              |
+     | Location: https://example.org/collections/buildings/items/123     |
+     |<------------------------------------------------------------------|
+....
