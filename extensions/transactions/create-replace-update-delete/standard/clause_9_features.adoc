@@ -105,6 +105,8 @@ GeoJSON normatively supports WGS84 longitude/latitude, but the https://www.rfc-e
 
 <<JSON-FG,OGC Features and Geometries JSON (JSON-FG)>> extends GeoJSON with additional capabilities, for example, support for coordinate reference systems other than WGS 84 longitude/latitude or for solid geometries. JSON-FG feature representations use the same media type as GeoJSON (`application/geo+json`). JSON-FG defines GeoJSON profiles to distinguish the different representations.
 
+A server that supports JSON-FG implements the JSON-FG requirements class "JSON-FG in Web APIs" and declares this by including the conformance class `http://www.opengis.net/spec/json-fg-1/1.0/conf/api` in its conformance declaration. This enables clients to determine from the API itself that JSON-FG extensions can be used in request bodies.
+
 To declare in a POST, PUT or PATCH request that the request body is GeoJSON with JSON-FG extensions, the request includes a link with the link relation type `profile` (<<rfc6906,RFC 6906>>) and the URI of a JSON-FG profile in the `Link` header. For example, in a POST or PUT request:
 
 ....
