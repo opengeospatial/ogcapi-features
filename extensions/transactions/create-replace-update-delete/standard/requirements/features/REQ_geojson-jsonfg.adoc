@@ -1,0 +1,9 @@
+[[req_features_geojson-jsonfg]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/geojson-jsonfg*
+^|Condition |Server implements <<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "GeoJSON">>
+^|Condition |Server supports <<JSON-FG,JSON-FG>> extensions in request bodies of CREATE, REPLACE, or UPDATE requests for a feature collection `collectionId`
+^|A |The server SHALL accept a link with the link relation type `profile` (<<rfc6906,RFC 6906>>) in the `Link` header of a CREATE, REPLACE, or UPDATE request to declare the GeoJSON profile of the feature representation in the request body, where the target of the link is one of `http://www.opengis.net/def/profile/OGC/0/rfc7946`, `http://www.opengis.net/def/profile/OGC/0/jsonfg`, or `http://www.opengis.net/def/profile/OGC/0/jsonfg-plus`.
+^|B |If the declared profile is `http://www.opengis.net/def/profile/OGC/0/jsonfg` or `http://www.opengis.net/def/profile/OGC/0/jsonfg-plus`, the server SHALL process the feature representation in the request body according to <<JSON-FG,OGC Features and Geometries JSON - Part 1: Core>>.
+|===
