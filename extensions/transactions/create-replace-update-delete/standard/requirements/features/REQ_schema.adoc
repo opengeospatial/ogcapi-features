@@ -6,4 +6,6 @@
 ^|A |The response content of a GET request to `{landingPageUri}/collections/{collectionId}/schema` SHALL be a JSON Schema.
 ^|B |The server SHALL accept mutation requests where each feature property in the request meets the schema constraints of the corresponding, receivable property in the JSON Schema.
 ^|C |Unless the JSON Schema includes a statement `"additionalProperties": false`, the server SHALL NOT reject properties that are not specified in the JSON Schema.
+^|D |If the JSON Schema includes a statement `"additionalProperties": false`, the server SHALL reject mutation requests with a property that is not specified in the JSON Schema.
+^|E |The server SHALL reject mutation requests that set a property which is specified in the JSON Schema with a statement `"readOnly": true`.
 |===

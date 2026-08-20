@@ -2,6 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/create-replace-delete/put-response*    
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200` or `204`.
-^|B |If the operation is not executed immediately, but is added to a processing queue, the response SHALL have a HTTP status code `202`.
+^|A |If the operation has replaced the content of an existing resource, a successful execution of the operation SHALL be reported as a response with a HTTP status code `200` or `204`.
+^|B |If the operation has created a new resource, a successful execution of the operation SHALL be reported as a response with a HTTP status code `201` (see <<rfc9110,section 9.3.4 of RFC 9110>>).
+^|C |If the operation is not executed immediately, but is added to a processing queue, the response SHALL have a HTTP status code `202`.
 |===

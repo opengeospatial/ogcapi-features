@@ -1,0 +1,106 @@
+---
+id: buildings
+enabled: true
+providerType: FEATURE
+providerSubType: SQL
+nativeCrs:
+  code: 25832
+  forceAxisOrder: NONE
+connectionInfo:
+  database: buildings
+  host: ${DB_HOST:-db}
+  user: postgres
+  password: cG9zdGdyZXM=
+  schemas:
+  - public
+sourcePathDefaults:
+  primaryKey: id
+  sortKey: id
+datasetChanges:
+  mode: CRUD
+types:
+  buildings:
+    sourcePath: /buildings
+    type: OBJECT
+    objectType: Building
+    label: Buildings
+    description: Test dataset for OGC API - Features - Part 4 (draft), Annex A
+    properties:
+      id:
+        sourcePath: id
+        type: STRING
+        role: ID
+      name:
+        sourcePath: name
+        type: STRING
+      function:
+        sourcePath: function
+        type: STRING
+        constraints:
+          required: true
+          enum:
+          - residential
+          - commercial
+          - public
+          - other
+      height:
+        sourcePath: height
+        type: FLOAT
+      owner:
+        sourcePath: owner
+        type: STRING
+      updated:
+        sourcePath: updated
+        type: DATETIME
+        isLastModified: true
+        excludedScopes:
+        - RECEIVABLE
+      geom:
+        sourcePath: geom
+        type: GEOMETRY
+        geometryType: POLYGON
+        role: PRIMARY_GEOMETRY
+  buildings_upsert:
+    sourcePath: /buildings_upsert
+    type: OBJECT
+    objectType: Building
+    label: Buildings (client-assigned ids)
+    description: Test dataset for OGC API - Features - Part 4 (draft), Annex A — same buildings, but with client-assigned feature identifiers
+    properties:
+      id:
+        # {generated=false}: the value is taken from the request
+        # body instead of being generated on insert, so new features are
+        # created with PUT on the resource endpoint (upsert)
+        sourcePath: id{generated=false}
+        type: STRING
+        role: ID
+      name:
+        sourcePath: name
+        type: STRING
+      function:
+        sourcePath: function
+        type: STRING
+        constraints:
+          required: true
+          enum:
+          - residential
+          - commercial
+          - public
+          - other
+      height:
+        sourcePath: height
+        type: FLOAT
+      owner:
+        sourcePath: owner
+        type: STRING
+      updated:
+        sourcePath: updated
+        type: DATETIME
+        isLastModified: true
+        excludedScopes:
+        - RECEIVABLE
+      geom:
+        sourcePath: geom
+        type: GEOMETRY
+        geometryType: POLYGON
+        role: PRIMARY_GEOMETRY

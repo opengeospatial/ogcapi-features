@@ -1,0 +1,7 @@
+[[req_update_patch-content-type]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/update/patch-content-type*
+^|A |The Implementation SHALL infer the media type of the request body containing the document describing the changes to the resource from the `Content-Type` header.
+^|B |The Implementation SHALL return a 400 client error if no `Content-Type` header is provided in the request.
+|===

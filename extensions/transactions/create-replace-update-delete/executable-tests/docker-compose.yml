@@ -1,0 +1,34 @@
+# Test deployment for the executable tests: a PostGIS database with the test
+# dataset and an ldproxy instance that publishes it as an OGC API.
+services:
+  db:
+    image: postgis/postgis:15-3.4-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=buildings
+    volumes:
+      # creates the tables and loads the test dataset on startup
+      - ./sql:/docker-entrypoint-initdb.d:ro
+    # the database is a throw-away instance: the tests change the data
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d buildings"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+  ldproxy:
+    image: iide/ldproxy:next
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "7080:7080"
+    volumes:
+      # includes resources/api-resources/buildings/buildings.xsd, a copy of the
+      # GML application schema of the test dataset, which the API publishes
+      # itself (RESOURCES building block)
+      - ./ldproxy:/ldproxy/data
+    environment:
+      - EXTERNAL_URL=http://localhost:7080

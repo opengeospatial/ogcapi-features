@@ -2,5 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/update/rid*
-^|A |If the representation of the updated resource submitted in the request body contained a resource identifier, the server SHALL ignore this identifier.
+^|A |If the document describing the changes to the resource submitted in the request body contained a resource identifier that differs from the identifier of the resource, the server SHALL ignore this identifier or reject the request. The specification of the resource type may require one of the two.
 |===
