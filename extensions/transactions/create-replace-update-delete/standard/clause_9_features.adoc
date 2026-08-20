@@ -98,7 +98,23 @@ include::recommendations/features/PER_other_update_vocabs.adoc[]
 
 include::requirements/features/REQ_geojson-create-replace.adoc[]
 
-GeoJSON normatively supports WGS84 longitude/latitude, but the https://www.rfc-editor.org/rfc/rfc7946.html#section-4["prior arrangement" provision] allows that other CRSs can be used if both client and server agree on the CRS. Clients that want to use a CRS that is not the default CRS have to state the CRS in the POST, PUT or PATCH request using the `Content-Crs` HTTP header to invoke the "prior arrangement" provision. 
+GeoJSON normatively supports WGS84 longitude/latitude, but the https://www.rfc-editor.org/rfc/rfc7946.html#section-4["prior arrangement" provision] allows that other CRSs can be used if both client and server agree on the CRS. Clients that want to use a CRS that is not the default CRS have to state the CRS in the POST, PUT or PATCH request using the `Content-Crs` HTTP header to invoke the "prior arrangement" provision.
+
+[[feature-geojson-jsonfg]]
+==== JSON-FG extensions
+
+<<JSON-FG,OGC Features and Geometries JSON (JSON-FG)>> extends GeoJSON with additional capabilities, for example, support for coordinate reference systems other than WGS 84 longitude/latitude or for solid geometries. JSON-FG feature representations use the same media type as GeoJSON (`application/geo+json`). JSON-FG defines GeoJSON profiles to distinguish the different representations.
+
+To declare in a POST, PUT or PATCH request that the request body is GeoJSON with JSON-FG extensions, the request includes a link with the link relation type `profile` (<<rfc6906,RFC 6906>>) and the URI of a JSON-FG profile in the `Link` header. For example, in a POST or PUT request:
+
+....
+Content-Type: application/geo+json
+Link: <http://www.opengis.net/def/profile/OGC/0/jsonfg>; rel=profile
+....
+
+include::requirements/features/REQ_geojson-jsonfg.adoc[]
+
+NOTE: Since the root object of a feature representation with JSON-FG extensions includes a "conformsTo" member, a server can also identify JSON-FG content by inspecting the request body, if no profile link is included in the request.
 
 [[feature-gml]]
 === Geography Markup Language (GML)
