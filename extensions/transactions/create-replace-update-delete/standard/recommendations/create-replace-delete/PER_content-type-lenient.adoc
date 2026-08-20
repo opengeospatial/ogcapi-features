@@ -1,0 +1,6 @@
+[[per_create-replace-delete_content-type-lenient]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/create-replace-delete/content-type-lenient*
+^|A |In addition to the media types of the supported resource representations (for example, `application/geo+json` for features represented as GeoJSON), a server MAY accept a more generic media type (for example, `application/json`) in the `Content-Type` header of a request, if the server can unambiguously determine the specific representation of the resource from the content of the request body.
+|===

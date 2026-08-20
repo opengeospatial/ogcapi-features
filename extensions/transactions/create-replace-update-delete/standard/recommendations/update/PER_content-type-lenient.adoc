@@ -1,0 +1,6 @@
+[[per_update_content-type-lenient]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/update/content-type-lenient*
+^|A |In addition to the media types of the supported encodings of documents describing changes (for example, `application/merge-patch+json`), a server MAY accept a more generic media type (for example, `application/json`) in the `Content-Type` header of a request, if the server can unambiguously determine the specific encoding of the document from the content of the request body.
+|===
