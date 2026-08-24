@@ -1,0 +1,7 @@
+[[req_handling_strict]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/handling/strict*
+^|A |If a CREATE, REPLACE or UPDATE request includes the `Prefer` header with the "handling=strict" preference and the content of the request body does not conform to a constraint published by the server (for example, the schema of the resources in the collection), the server SHALL reject the request and return a response with a `4xx` status code, even if the server would be capable of processing the request.
+^|B |The response SHALL include information about the error condition(s) that led to the rejection of the request.
+|===

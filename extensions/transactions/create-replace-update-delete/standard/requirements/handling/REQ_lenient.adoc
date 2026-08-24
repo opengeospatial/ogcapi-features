@@ -1,0 +1,6 @@
+[[req_handling_lenient]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/handling/lenient*
+^|A |The server SHALL NOT reject a request that includes the `Prefer` header with the "handling=lenient" preference due to an error condition in the content of the request body, if the server successfully processes the same request without the `Prefer` header.
+|===
