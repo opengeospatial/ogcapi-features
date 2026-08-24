@@ -18,6 +18,8 @@ include::recommendations/update/PER_content-type-lenient.adoc[]
 
 include::requirements/update/REQ_methods.adoc[]
 
+include::requirements/update/REQ_accept-patch.adoc[]
+
 [[update]]
 === Modifying an existing resource (UPDATE)
 
@@ -51,6 +53,8 @@ include::requirements/update/REQ_body.adoc[]
 
 Details how a PATCH request body must be processed by a server depends on the resource representation and must be specified for each resource type and its representations.
 
+include::requirements/update/REQ_content-type.adoc[]
+
 ==== Response
 
 include::requirements/update/REQ_response.adoc[]
@@ -63,6 +67,8 @@ If the server will process the update request later, it will return a `202`. In 
 case, the processing can succeed or fail, without further notification to the client.
 
 include::requirements/update/REQ_rid.adoc[]
+
+NOTE: Whether ignoring the identifier or rejecting the request is the better behaviour depends on the resource type and on the encoding of the changes. In a REPLACE operation, the request body is a representation of the resource and a resource identifier in the body is redundant, so ignoring it is unproblematic. In an UPDATE operation, however, the request body describes the changes that the server should make: a document that states a different resource identifier requests a change of the identifier, and a client that receives a successful response would assume that the change has been made. For features, the request is therefore rejected, see Requirement <<req_features_update-json-merge-patch,/req/features/update-json-merge-patch>>.
 
 ==== Exceptions
 

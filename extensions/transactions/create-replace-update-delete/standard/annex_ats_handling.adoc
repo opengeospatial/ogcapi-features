@@ -1,0 +1,110 @@
+=== Conformance Class "Handling Preference"
+
+:conf-class: handling
+[[conf_handling]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_handling,Requirements Class "Handling Preference">>
+|Conditional Dependency |<<conf_update,Conformance Class "Update">>
+|===
+
+The tests in this conformance class require an additional test parameter:
+
+* Invalid Request Body: for a mutable resource, an operation (CREATE, REPLACE or UPDATE), a media type, and a request body that does not conform to a constraint published by the server for the resources in the collection (for example, a feature where a property that is specified as required in the schema of the collection is missing, see the file `create-building-invalid.json` in the <<test-dataset,test dataset>>).
+
+:conf-test: prefer
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_handling_prefer,/req/handling/prefer>>
+|Condition: | At least one mutable resource supports the CREATE, REPLACE or UPDATE operation (test parameter).
+|Test purpose: | The server supports the handling preference
+|Test method: |
+Given:
+
+* a mutable resource that supports the CREATE, REPLACE or UPDATE operation;
+* a valid request body for the operation and its media type (test parameter);
+
+When:
+
+* the operation is executed three times with the same request body and media type: without a `Prefer` header, with a `Prefer: handling=strict` header, and with a `Prefer: handling=lenient` header;
+
+Then:
+
+* assert that all three responses have a HTTP status code in the `2xx` range.
+|===
+
+:conf-test: strict
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_handling_strict,/req/handling/strict>>
+|Condition: | A constraint published by the server applies to the resources of a mutable collection and an invalid request body is available (test parameter "Invalid Request Body").
+|Test purpose: | Strict handling rejects request bodies that do not conform to published constraints
+|Test method: |
+Given:
+
+* an invalid request body for a CREATE, REPLACE or UPDATE operation on a mutable resource (test parameter "Invalid Request Body");
+
+When:
+
+* the operation is executed with the invalid request body, its media type in the `Content-Type` header and a `Prefer: handling=strict` header;
+
+Then:
+
+* assert that the response has a `4xx` status code (typically `400` or `422`);
+* assert that the response content includes information about the error condition;
+* assert that the resource has not been created or changed by the operation.
+|===
+
+:conf-test: lenient
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_handling_lenient,/req/handling/lenient>>
+|Condition: | At least one mutable resource supports the CREATE, REPLACE or UPDATE operation (test parameter).
+|Test purpose: | Lenient handling is at least as permissive as the default handling
+|Test method: |
+Given:
+
+* a mutable resource that supports the CREATE, REPLACE or UPDATE operation;
+* a request body for the operation and its media type — execute the test for both the valid request body and the invalid request body (test parameters);
+
+When:
+
+* the operation is executed with the request body and its media type in the `Content-Type` header, without a `Prefer` header;
+* the operation is executed with the same request body and media type and a `Prefer: handling=lenient` header;
+
+Then:
+
+* skip the remaining assertion, if the response to the first request has a HTTP status code outside of the `2xx` range;
+* assert that the response to the second request has a HTTP status code in the `2xx` range.
+|===
+
+:conf-test: preference-applied
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_handling_preference-applied,/req/handling/preference-applied>>
+|Condition: | The test /conf/handling/strict has been executed.
+|Test purpose: | Responses declare the applied handling preference
+|Test method: |
+Given:
+
+* the requests and responses of the tests /conf/{conf-class}/strict and /conf/{conf-class}/lenient;
+
+When:
+
+* the response to a request with a `Prefer: handling=strict` header is a rejection with a `4xx` status code due to an error condition in the request body (the preference has been applied);
+
+Then:
+
+* assert that the response includes a `Preference-Applied` header with the value `handling=strict`.
+|===

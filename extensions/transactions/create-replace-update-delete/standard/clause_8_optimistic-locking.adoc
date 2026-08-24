@@ -128,6 +128,10 @@ include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-patch-
 
 include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-patch-eval.adoc[]
 
+include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-delete-op.adoc[]
+
+include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-delete-eval.adoc[]
+
 include::recommendations/optimistic-locking-timestamps/PER_ifunmodifiedsince-missing.adoc[]
 
 ==== Example
@@ -252,6 +256,10 @@ include::requirements/optimistic-locking-etags/REQ_ifmatch-put-eval.adoc[]
 include::requirements/optimistic-locking-etags/REQ_ifmatch-patch-op.adoc[]
 
 include::requirements/optimistic-locking-etags/REQ_ifmatch-patch-eval.adoc[]
+
+include::requirements/optimistic-locking-etags/REQ_ifmatch-delete-op.adoc[]
+
+include::requirements/optimistic-locking-etags/REQ_ifmatch-delete-eval.adoc[]
 
 include::recommendations/optimistic-locking-etags/PER_ifmatch-missing.adoc[]
 

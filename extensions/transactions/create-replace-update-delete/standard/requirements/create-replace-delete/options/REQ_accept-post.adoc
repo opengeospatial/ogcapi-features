@@ -1,0 +1,7 @@
+[[req_create-replace-delete_options-accept-post]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/create-replace-delete/options-accept-post*
+^|Condition |The `Allow` header of the response includes POST
+^|A |The response SHALL include an `Accept-Post` header (see <<LDP,W3C Linked Data Platform 1.0>>) with the media types that the server supports in the request body of a CREATE operation on the resources endpoint.
+|===

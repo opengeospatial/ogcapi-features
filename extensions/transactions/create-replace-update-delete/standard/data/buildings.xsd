@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:bldg="https://example.org/buildings"
+        targetNamespace="https://example.org/buildings"
+        elementFormDefault="qualified"
+        version="1.0">
+  <annotation>
+    <documentation>GML application schema (GML Simple Features Profile, Level 0)
+    for the test dataset of OGC API - Features - Part 4 / OGC API - Common -
+    Part 5: Create, Replace, Update and Delete. The "updated" property is
+    maintained by the server and not part of request bodies (Receivables).</documentation>
+  </annotation>
+  <import namespace="http://www.opengis.net/gml/3.2"
+          schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <element name="Building" type="bldg:BuildingType" substitutionGroup="gml:AbstractFeature"/>
+  <complexType name="BuildingType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="name" type="string" minOccurs="0"/>
+          <element name="function">
+            <simpleType>
+              <restriction base="string">
+                <enumeration value="residential"/>
+                <enumeration value="commercial"/>
+                <enumeration value="public"/>
+                <enumeration value="other"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="height" type="double" minOccurs="0"/>
+          <element name="owner" type="string" minOccurs="0"/>
+          <element name="updated" type="dateTime" minOccurs="0"/>
+          <element name="geom" type="gml:SurfacePropertyType" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+</schema>

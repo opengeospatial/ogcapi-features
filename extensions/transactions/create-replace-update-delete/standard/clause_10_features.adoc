@@ -63,6 +63,8 @@ Adding, replacing, or updating a feature requires that a representation of that 
 
 If features in a collection are constrained to a specific schema and schema information is provided by a server, the Schema resource of a collection is available at `{landingPageUri}/collections/{collectionId}/schema` as specified by Part 5 (Schemas). This information enables clients to generate feature representations that are acceptable to the server. 
 
+There is no separate resource for the schema of a feature in a request body. The Schema resource describes both the properties that the server returns and the properties that it accepts: a property that only applies when data is fetched is marked with `"readOnly": true`, a property that only applies when data is created or changed with `"writeOnly": true` (see <<OAFeat-5,OGC API - Features / OGC API - Common - Part 5: Schemas>>). The schema of a feature in a CREATE, REPLACE or UPDATE request body is therefore the Schema resource without the properties that are marked as read-only. A typical read-only property is the feature identifier, another one is a timestamp of the last change that the server maintains.
+
 include::requirements/features/REQ_schema.adoc[]
 
 The schema identifies the feature properties that can be used in a mutation request (Receivables), that is, all properties that are not tagged as `readOnly`.

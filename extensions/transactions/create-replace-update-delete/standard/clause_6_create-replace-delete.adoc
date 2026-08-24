@@ -206,7 +206,7 @@ See https://www.rfc-editor.org/rfc/rfc9110#field.content-type[section 8.3 of RFC
 
 include::requirements/create-replace-delete/replace/REQ_response.adoc[]
 
-The status code depends on the server. If the server has replaced the resource, the response is either `200` if the response includes additional content, or `204` if the response has no additional content. 
+The status code depends on the server. If the server has replaced the resource, the response is either `200` if the response includes additional content, or `204` if the response has no additional content. If the resource did not exist and the server has created it (see Permission <<per_create-replace-delete_put-create,/per/create-replace-delete/put-create>>), the response is `201`. 
 
 If the server will process the request later, the server will return a `202`. In this case, the processing can succeed or fail, without further notification to the client.
 
@@ -310,6 +310,10 @@ include::recommendations/create-replace-delete/options/PER_req-body.adoc[]
 ==== Response
 
 include::requirements/create-replace-delete/options/REQ_response.adoc[]
+
+The `Accept-Post` header informs clients which representations of a new resource the server can process. There is no such header for the REPLACE operation; clients can determine the supported media types from the API definition, if the server publishes one, or by submitting the request and evaluating a `415` response.
+
+include::requirements/create-replace-delete/options/REQ_accept-post.adoc[]
 
 include::recommendations/create-replace-delete/options/PER_other-methods.adoc[]
 

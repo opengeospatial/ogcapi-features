@@ -1,0 +1,125 @@
+=== Conformance Class "Optimistic Locking using ETags"
+
+:conf-class: optimistic-locking-etags
+[[conf_optimistic-locking-etags]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_optimistic-locking-etags,Requirements Class "Optimistic Locking using ETags">>
+|Conditional Dependency |<<conf_update,Conformance Class "Update">>
+|===
+
+:conf-test: get-etag
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_optimistic-locking-etags_get-etag-response,/req/optimistic-locking-etags/get-etag-response>>
+|Condition: | none, the test is executed for every Web API under test
+|Test purpose: | Resource representations include an ETag header
+|Test method: |
+Given:
+
+* the list of mutable resources (test parameter);
+
+When:
+
+* a GET request is submitted to each resource endpoint;
+
+Then:
+
+* assert that each response has the HTTP status code `200`;
+* assert that each response includes an `ETag` header with a valid entity tag;
+* store the `ETag` value of each resource for use in other tests.
+|===
+
+:conf-test: replace
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_optimistic-locking-etags_ifmatch-put-op,/req/optimistic-locking-etags/ifmatch-put-op>>, <<req_optimistic-locking-etags_ifmatch-put-eval,/req/optimistic-locking-etags/ifmatch-put-eval>>, <<req_optimistic-locking-etags_put-etag-response,/req/optimistic-locking-etags/put-etag-response>>
+|Condition: | At least one mutable resource supports the REPLACE operation (test parameter).
+|Test purpose: | Conditional REPLACE operations using If-Match
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the REPLACE operation;
+* the `ETag` value `{etag}` of the resource (see test /conf/{conf-class}/get-etag);
+* a valid representation of the new resource content and its media type (test parameter);
+
+When:
+
+* a first PUT request with the representation in the request body, its media type in the `Content-Type` header and an `If-Match` header with an entity tag that does not match `{etag}` (for example, `"0"`) is submitted to the resource endpoint;
+* a second PUT request with the representation in the request body, its media type in the `Content-Type` header and an `If-Match` header with the value `{etag}` is submitted to the resource endpoint;
+* a third PUT request with the representation in the request body and its media type in the `Content-Type` header, but without an `If-Match` header, is submitted to the resource endpoint;
+
+Then:
+
+* assert that the response to the first request has the HTTP status code `412` and the resource is unchanged;
+* assert that the response to the second request has the HTTP status code `200` or `204` — or `202`, if the operation has been queued for processing, in which case the remaining assertions for this request are skipped;
+* assert that the response to the second request includes an `ETag` header with an entity tag that differs from `{etag}`;
+* assert that the response to the third request has the HTTP status code `428`, `409` or a status code in the `2xx` range (see Permission <<per_optimistic-locking-etags_ifmatch-missing,/per/optimistic-locking-etags/ifmatch-missing>>).
+|===
+
+:conf-test: update
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_optimistic-locking-etags_ifmatch-patch-op,/req/optimistic-locking-etags/ifmatch-patch-op>>, <<req_optimistic-locking-etags_ifmatch-patch-eval,/req/optimistic-locking-etags/ifmatch-patch-eval>>, <<req_optimistic-locking-etags_patch-etag-response,/req/optimistic-locking-etags/patch-etag-response>>
+|Condition: | 
+* The conformance declaration includes the Conformance Class <<conf_update,"Update">> (`http://www.opengis.net/spec/{standard}/{m_n}/conf/update`).
+* At least one mutable resource supports the UPDATE operation (test parameter).
+|Test purpose: | Conditional UPDATE operations using If-Match
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the UPDATE operation;
+* the `ETag` value `{etag}` of the resource (see test /conf/{conf-class}/get-etag);
+* a valid document describing the changes to parts of the resource and its media type (test parameter);
+
+When:
+
+* a first PATCH request with the document in the request body, its media type in the `Content-Type` header and an `If-Match` header with an entity tag that does not match `{etag}` (for example, `"0"`) is submitted to the resource endpoint;
+* a second PATCH request with the document in the request body, its media type in the `Content-Type` header and an `If-Match` header with the value `{etag}` is submitted to the resource endpoint;
+* a third PATCH request with the document in the request body and its media type in the `Content-Type` header, but without an `If-Match` header, is submitted to the resource endpoint;
+
+Then:
+
+* assert that the response to the first request has the HTTP status code `412` and the resource is unchanged;
+* assert that the response to the second request has the HTTP status code `200` or `204` — or `202`, if the operation has been queued for processing, in which case the remaining assertions for this request are skipped;
+* assert that the response to the second request includes an `ETag` header with an entity tag that differs from `{etag}`;
+* assert that the response to the third request has the HTTP status code `428`, `409` or a status code in the `2xx` range (see Permission <<per_optimistic-locking-etags_ifmatch-missing,/per/optimistic-locking-etags/ifmatch-missing>>).
+|===
+
+:conf-test: delete
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_optimistic-locking-etags_ifmatch-delete-op,/req/optimistic-locking-etags/ifmatch-delete-op>>, <<req_optimistic-locking-etags_ifmatch-delete-eval,/req/optimistic-locking-etags/ifmatch-delete-eval>>
+|Condition: | At least two mutable resources support the DELETE operation (test parameter).
+|Test purpose: | Conditional DELETE operations using If-Match
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the DELETE operation;
+* the `ETag` value `{etag}` of the resource (see test /conf/{conf-class}/get-etag);
+* a resource endpoint of a second existing resource that supports the DELETE operation;
+
+When:
+
+* a first DELETE request with an `If-Match` header with an entity tag that does not match `{etag}` (for example, `"0"`) is submitted to the resource endpoint;
+* a second DELETE request with an `If-Match` header with the value `{etag}` is submitted to the resource endpoint;
+* a third DELETE request without an `If-Match` header is submitted to the resource endpoint of the second resource;
+
+Then:
+
+* assert that the response to the first request has the HTTP status code `412` and the resource has not been removed;
+* assert that the response to the second request has the HTTP status code `200` or `204` — or `202`, if the operation has been queued for processing, in which case the remaining assertion for this request is skipped;
+* assert that, after the second request has been processed, a GET request to the resource endpoint returns the HTTP status code `404`;
+* assert that the response to the third request has the HTTP status code `428`, `409` or a status code in the `2xx` range (see Permission <<per_optimistic-locking-etags_ifmatch-missing,/per/optimistic-locking-etags/ifmatch-missing>>).
+|===
