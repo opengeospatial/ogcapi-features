@@ -2,5 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/return-resource-representation-in-response/response*
-^|A |The representation of the resource returned in the response body of a <<create,create operation>> SHALL be negotiated using https://www.rfc-editor.org/rfc/rfc9110.html#name-content-negotiation[HTTP content negotiation] mechanisms (e.g. use of the HTTP `Accept` header).
+^|A |The representation of the resource returned in the response body of a <<create,create>>, <<replace,replace>> or <<update,update>> operation SHALL be negotiated using https://www.rfc-editor.org/rfc/rfc9110.html#name-content-negotiation[HTTP content negotiation] mechanisms (e.g. use of the HTTP `Accept` header).
 |===
