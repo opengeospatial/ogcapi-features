@@ -5,6 +5,8 @@ See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clause 10.
 
 The media types for the CREATE, REPLACE and UPDATE requests as well as for the schema documents depend on the representations of the resources.
 
+NOTE: Schema documents are listed, too, because clients will often use the schema information about the resources in a collection to construct the content of CREATE, REPLACE, and UPDATE requests that are acceptable to the server. See <<schemas,Feature schemas>> for details.
+
 For GeoJSON features,
 
 - CREATE and REPLACE operations will use `application/geo+json`,
@@ -16,3 +18,5 @@ For GML features,
 - CREATE and REPLACE operations will use `application/gml+xml`,
 - UPDATE operations will use `application/xml`,
 - schema documents will use `application/xml`.
+
+These media types identify the specific representations and clients should use them in the `Content-Type` header of CREATE, REPLACE and UPDATE requests. A server may, however, be lenient and also accept a more generic media type, if the server can determine the specific representation from the content of the request body. For example, a server may accept `application/json` for a feature that is represented as GeoJSON in a CREATE request. See Permissions <<per_create-replace-delete_content-type-lenient,/per/create-replace-delete/content-type-lenient>> and <<per_update_content-type-lenient,/per/update/content-type-lenient>>.
