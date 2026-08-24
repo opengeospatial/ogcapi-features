@@ -2,17 +2,27 @@
 
 This Standard specifies an extension that defines the behavior of a server
 that supports operations to add, replace, modify or delete individual resources 
-from a collection.
+from a collection of resources.
 
 NOTE: Additional OGC Standards are planned to handle transactions that require batch or atomicity semantics.
+
+NOTE: In this Standard, the term _collection_ is understood in the general sense of a list of resources,
+rather than in the more specific meaning used in OGC API - Common - Part 2: Geospatial Data,
+where collection specifically refers to a collection of data (i.e., the resources at `/collections/{collectionId}`).
+In the context of the Features requirements class, the collection of resources is the resource at
+`/collections/{collectionId}/items`.
+
 
 Specifically, this Standard specifies:
 
 * How to add a new resource instance to a collection (i.e. create).
 
-* How to modify an existing resource from a collection: This includes entirely replacing the existing resource (i.e. replace) or simply modifying one or more properties of a resource (i.e. update).
+* How to modify an existing resource from a collection: This includes entirely replacing the existing resource (replace, a complete update) or modifying parts of the resource (update, a partial update).
 
 * How to remove an existing resource from a collection (i.e. delete).
+
+* How to bind these resource management capabilities specifically for the items of a collection of features
+(that particular requirements class is only applicable to implementations of OGC API - Features).
 
 The following table crosswalks each of the resource endpoints discussed in this
 Standard with the HTTP methods POST, PUT, PATCH and DELETE.  Each intersecting
@@ -28,8 +38,8 @@ method.
 |===
 |Resource endpoint 4+|HTTP method
 | |**POST** |**PUT** |**PATCH** |**DELETE**
-|`/collections/{collectionId}/items` |<<create,create>> |n/a |n/a |n/a
-|`/collections/{collectionId}/items/{resourceId}` |n/a |<<replace,replace>>, <<create,create>> |<<update,update>> |<<delete,delete>>
+|`{resourceList} e.g., .../items` |<<create,create>> |n/a |n/a |n/a
+|`{resourceList}/{resourceId} e.g., .../items/{resourceId}` |n/a |<<replace,replace>>, <<create,create>> |<<update,update>> |<<delete,delete>>
 |===
 
 The option to create a new resource with PUT is conditional and depends on the characteristics of the collection.

@@ -1,0 +1,14 @@
+---
+allOf:
+  - $ref: properties.yaml
+  - $ref: filter.yaml
+  - $ref: sortby.yaml
+  - type: object
+    required:
+      - collections
+    properties:
+      collections:
+        type: array
+        minItems: 1
+        items:
+          type: string

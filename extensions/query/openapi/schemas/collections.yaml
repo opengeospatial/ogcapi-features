@@ -1,0 +1,27 @@
+---
+allOf:
+  - $ref: links.yaml
+  - type: object
+    required:
+      - type
+      - collections
+    properties:
+      type:
+        type: string
+        const: Collections
+      collections:
+        type: array
+        items:
+          oneOf:
+            - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/featureCollectionGeoJSON.yaml
+            - $ref: tuples.yaml
+            - comment: "other resource types here"
+      timeStamp:
+        type: string
+        format: date-time
+      numberMatched:
+        type: integer
+        minimum: 0
+      numberReturned:
+        type: integer
+        minimum: 0

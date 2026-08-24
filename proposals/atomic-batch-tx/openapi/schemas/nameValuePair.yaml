@@ -1,0 +1,10 @@
+---
+type: object
+properties:
+  name:
+    type: string
+  value:
+    oneOf:
+    - type: string
+    - type: object
+    - $ref: 'link.yaml'

@@ -5,7 +5,7 @@
 ^|A |A server MAY support the PUT method on a non-existing resource. 
 |===
 
-In case PUT on a non-existing resource is supported, such a request can create a new resource with the `resourceId` specified in the URI of the resource endpoint.
+In case PUT on a non-existing resource is supported, such a request can create a new resource with the `resourceId` specified in the URI of the resource endpoint. Since the resource is identified by the URI of the request, the response to such a request is `201`, but it does not need to include a `Location` header (see <<rfc9110,section 15.3.2 of RFC 9110>>).
 
-To ensure that an update request is not treated as an insert, the client MAY specify an If-Match header in the update request. The service MUST NOT treat an update request containing an If-Match header as an insert.
+To ensure that a replace request is not treated as an insert, the client MAY specify an `If-Match` header in the request. The server SHALL NOT treat a request containing an `If-Match` header as an insert.
 

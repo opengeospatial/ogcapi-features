@@ -1,0 +1,14 @@
+[[req_query-expression-json_parameters-schema]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/query-expression-json/parameters-schema*
+
+^|A | The JSON encoding for query parameters SHALL be defined by the following schema fragment:
+
+.link:../openapi/schemas/parameters.yaml[JSON Schema of the projection clause of a query  (parameters.yaml)]
+[source,YAML]
+----
+include::../../../openapi/schemas/parameters.yaml[]
+----
+
+|===

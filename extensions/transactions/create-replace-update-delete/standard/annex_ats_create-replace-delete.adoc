@@ -1,0 +1,215 @@
+=== Conformance Class "Create/Replace/Delete"
+
+:conf-class: create-replace-delete
+[[conf_create-replace-delete]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_create-replace-delete,Requirements Class "Create/Replace/Delete">>
+|===
+
+:conf-test: options
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_core_methods,/req/core/methods>>, <<req_create-replace-delete_options-op,/req/create-replace-delete/options-op>>, <<req_create-replace-delete_options-response,/req/create-replace-delete/options-response>>, <<req_create-replace-delete_options-accept-post,/req/create-replace-delete/options-accept-post>>
+|Condition: | none, the test is executed for every Web API under test
+|Test purpose: | The server declares the supported methods for each mutable resource
+|Test method: |
+Given:
+
+* the list of mutable resources (test parameter);
+
+When:
+
+* an OPTIONS request is submitted to each resource endpoint and to each resources endpoint;
+
+Then:
+
+* assert that each response has the HTTP status code `200`;
+* assert that each response includes an `Allow` header;
+* assert that the `Allow` header for each resource lists at least one of the methods POST, PUT, PATCH or DELETE;
+* assert that the `Allow` header lists the methods for the operations of the resource that the test should exercise (test parameter) — POST (CREATE) for resources endpoints, PUT (REPLACE), PATCH (UPDATE) and DELETE for resource endpoints;
+* assert that each response whose `Allow` header includes POST also includes an `Accept-Post` header with at least one media type;
+* store the list of supported methods for each endpoint and the media types of the `Accept-Post` headers for use in other tests.
+|===
+
+:conf-test: create
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_create-replace-delete_post-op,/req/create-replace-delete/post-op>>, <<req_create-replace-delete_post-body,/req/create-replace-delete/post-body>>, <<req_create-replace-delete_post-response,/req/create-replace-delete/post-response>>, <<req_create-replace-delete_post-response-rid,/req/create-replace-delete/post-response-rid>>
+|Condition: | At least one mutable resource supports the CREATE operation (test parameter).
+|Test purpose: | Adding a new resource to a collection
+|Test method: |
+Given:
+
+* a resources endpoint that supports the CREATE operation (POST is included in the `Allow` header, see test /conf/{conf-class}/options);
+* a valid representation of a new resource and its media type (test parameter);
+* the list of the identifiers of the existing resources in the collection;
+
+When:
+
+* a POST request with the representation of the new resource in the request body and its media type in the `Content-Type` header is submitted to the resources endpoint;
+
+Then:
+
+* assert that the response has the HTTP status code `201` — or `202`, if the operation has been queued for processing, in which case the remaining assertions are skipped;
+* assert that the response includes a `Location` header with the URI of the new resource;
+* assert that a GET request to the URI in the `Location` header returns a HTTP status code `200`;
+* assert that the response to the GET request is a representation of the resource submitted in the request body;
+* assert that the identifier of the new resource differs from the identifiers of the resources that existed in the collection before the operation.
+|===
+
+:conf-test: create-content-type
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_create-replace-delete_post-content-type,/req/create-replace-delete/post-content-type>>
+|Condition: | At least one mutable resource supports the CREATE operation (test parameter).
+|Test purpose: | CREATE requests without a Content-Type header are rejected
+|Test method: |
+Given:
+
+* a resources endpoint that supports the CREATE operation;
+* a valid representation of a new resource (test parameter);
+
+When:
+
+* a POST request with the representation of the new resource in the request body, but without a `Content-Type` header, is submitted to the resources endpoint;
+
+Then:
+
+* assert that the response has the HTTP status code `400`.
+|===
+
+:conf-test: replace
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_create-replace-delete_put-op,/req/create-replace-delete/put-op>>, <<req_create-replace-delete_put-body,/req/create-replace-delete/put-body>>, <<req_create-replace-delete_put-response,/req/create-replace-delete/put-response>>
+|Condition: | At least one mutable resource supports the REPLACE operation (test parameter).
+|Test purpose: | Replacing the content of an existing resource
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the REPLACE operation (PUT is included in the `Allow` header, see test /conf/{conf-class}/options);
+* a valid representation of the new resource content and its media type (test parameter);
+
+When:
+
+* a PUT request with the representation of the new resource content in the request body and its media type in the `Content-Type` header is submitted to the resource endpoint;
+
+Then:
+
+* assert that the response has the HTTP status code `200` or `204` — or `202`, if the operation has been queued for processing, in which case the remaining assertions are skipped;
+* assert that a GET request to the resource endpoint returns a HTTP status code `200`;
+* assert that the response to the GET request is a representation of the new resource content submitted in the request body.
+|===
+
+:conf-test: replace-content-type
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_create-replace-delete_put-content-type,/req/create-replace-delete/put-content-type>>
+|Condition: | At least one mutable resource supports the REPLACE operation (test parameter).
+|Test purpose: | REPLACE requests without a Content-Type header are rejected
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the REPLACE operation;
+* a valid representation of the new resource content (test parameter);
+
+When:
+
+* a PUT request with the representation of the new resource content in the request body, but without a `Content-Type` header, is submitted to the resource endpoint;
+
+Then:
+
+* assert that the response has the HTTP status code `400`.
+|===
+
+:conf-test: replace-rid
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_create-replace-delete_put-rid,/req/create-replace-delete/put-rid>>
+|Condition: | At least one mutable resource supports the REPLACE operation (test parameter).
+|Test purpose: | Resource identifiers in REPLACE request bodies are ignored or the request is rejected
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the REPLACE operation;
+* a valid representation of the new resource content that contains a resource identifier that differs from the identifier of the resource (constructed from the test parameter);
+
+When:
+
+* a PUT request with the representation in the request body and its media type in the `Content-Type` header is submitted to the resource endpoint;
+
+Then:
+
+* skip the remaining assertions, if the response has the HTTP status code `202` (the operation has been queued for processing);
+* skip the remaining assertions, if the response has a `4xx` status code, that is, the server rejects such requests instead of ignoring the identifier, unless the specification of the resource type requires that the identifier is ignored (for features, both are permitted, see Requirement <<req_features_geojson-create-replace,/req/features/geojson-create-replace>>);
+* assert that the response has the HTTP status code `200` or `204`;
+* assert that a GET request to the resource endpoint returns a HTTP status code `200` and the resource has the identifier from the resource endpoint URI, not the identifier submitted in the request body;
+* assert that a GET request to a resource endpoint with the identifier submitted in the request body returns the HTTP status code `404` or a resource that has not been changed by the operation.
+|===
+
+:conf-test: replace-exceptions
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_create-replace-delete_put-rid-exception,/req/create-replace-delete/put-rid-exception>>
+|Condition: | At least one mutable resource supports the REPLACE operation (test parameter).
+|Test purpose: | PUT requests to non-existing resources are handled correctly
+|Test method: |
+Given:
+
+* a resources endpoint that supports the REPLACE operation for its resources;
+* a resource endpoint below the resources endpoint with an identifier of a non-existing resource;
+* a valid representation of a new resource and its media type (test parameter);
+
+When:
+
+* a PUT request with the representation in the request body and its media type in the `Content-Type` header is submitted to the resource endpoint of the non-existing resource;
+* a second PUT request with the same body, the same `Content-Type` header and an `If-Match` header with the value `"xyz"` is submitted to a resource endpoint of another non-existing resource;
+
+Then:
+
+* assert that the response to the first request has the HTTP status code `404`, if the server does not support creating new resources using PUT for the collection — or the HTTP status code `201`, or `202` if the operation has been queued for processing, if it does;
+* assert that, if the first request was processed successfully, a GET request to the resource endpoint of the first request returns the HTTP status code `200` and a representation of the resource submitted in the request body;
+* assert that the response to the second request has the HTTP status code `412`, if the server supports creating new resources using PUT for the collection — otherwise the HTTP status code `404`, because the request is unsuccessful independently of the precondition (see <<rfc9110,section 13.2.1 of RFC 9110>>);
+* assert that a GET request to the resource endpoint of the second request returns the HTTP status code `404` (no resource has been created).
+|===
+
+:conf-test: delete
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_create-replace-delete_delete-op,/req/create-replace-delete/delete-op>>, <<req_create-replace-delete_delete-response,/req/create-replace-delete/delete-response>>
+|Condition: | At least one mutable resource supports the DELETE operation (test parameter).
+|Test purpose: | Removing an existing resource from a collection
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the DELETE operation (DELETE is included in the `Allow` header, see test /conf/{conf-class}/options);
+
+When:
+
+* a DELETE request is submitted to the resource endpoint;
+
+Then:
+
+* assert that the response has the HTTP status code `200` or `204` — or `202`, if the operation has been queued for processing, in which case the remaining assertions are skipped;
+* assert that a GET request to the resource endpoint returns the HTTP status code `404`.
+|===

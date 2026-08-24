@@ -1,0 +1,8 @@
+[[req_features_geojson-geom]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/geojson-geom*
+^|Condition |Server implements <<OAFeat-1,OGC API - Features - Part 1: Core, Requirements Class "GeoJSON">>
+^|Condition |Server implements <<OAFeat-5,OGC API - Features - Part 5: Schemas, Requirements Class "Returnables and Receivables">>
+^|A |The value of the "geometry" member SHALL be mapped to the property with the role "primary-geometry".
+|===

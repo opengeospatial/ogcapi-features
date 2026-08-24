@@ -1,0 +1,7 @@
+[[req_transactions_post-response-rid]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/transactions/post-response-rid*
+^|Condition |The transaction includes one or more actions that create new resources.
+^|A |If the operation completes successfully, the server SHALL assign a new, unique identifier for each newly created resource.
+|===

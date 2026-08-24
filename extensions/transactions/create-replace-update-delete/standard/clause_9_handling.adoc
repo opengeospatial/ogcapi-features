@@ -1,0 +1,54 @@
+[[handling_clause]]
+== Requirements Class "Handling Preference"
+
+[[handling-overview]]
+=== Overview
+
+include::requirements/requirements_class_handling.adoc[]
+
+A server that implements this requirements class supports the `Prefer` header (<<rfc7240,RFC 7240 (Prefer Header for HTTP)>>) with the `handling` preference in CREATE, REPLACE and UPDATE requests.
+
+The preference enables a client to state how the server should handle error conditions in the content of the request body that the server could recover from:
+
+- The "handling=strict" preference indicates that, while any particular error may be recoverable, the client would prefer that the server rejects the request with an error response.
+- The "handling=lenient" preference indicates that the client wishes the server to attempt to process the request, ignoring error conditions that the server can recover from.
+
+For example, a client can state whether the server should accept or reject a new resource that is not valid against the schema for the resources in the collection, but that the server could still store in its internal data store (e.g., if a property is not provided, but that property is specified as required in the schema).
+
+include::requirements/handling/REQ_prefer.adoc[]
+
+If a request does not include the `handling` preference, the handling of recoverable error conditions in the content of the request body is at the discretion of the server.
+
+[[handling-strict]]
+=== Strict handling
+
+include::requirements/handling/REQ_strict.adoc[]
+
+The constraints that a server publishes depend on the server and the resource type. For example, if the resources are features and the features in a collection are constrained by a schema (see <<schemas,Feature schemas>>), the server can validate the content of the request body against the schema that applies to mutation requests (Receivables).
+
+In addition to the published constraints, a server should reject the request also, if the server identifies any other error condition in the content of the request body that the server could recover from.
+
+Typical status codes for the rejection are `400`, if the error is related to the syntax of the content, and `422`, if the content is syntactically correct, but does not conform to a constraint (see <<http_status_codes,HTTP status codes>>).
+
+[[handling-lenient]]
+=== Lenient handling
+
+With the "handling=lenient" preference, the server attempts to process the request, ignoring error conditions in the content of the request body that the server can recover from. Which error conditions a server can recover from is at the discretion of the server. Examples include ignoring properties that are not specified in the schema of the resources in the collection or accepting content where a required property is missing.
+
+Since the recoverable error conditions are at the discretion of the server, the normative provision for lenient handling is that a request with the "handling=lenient" preference is processed at least as leniently as the same request without the preference:
+
+include::requirements/handling/REQ_lenient.adoc[]
+
+[[handling-response]]
+=== Response
+
+include::requirements/handling/REQ_preference-applied.adoc[]
+
+[[handling-example]]
+=== Example
+
+The following example adds a new feature to the `buildings` collection. The first request uses the "handling=strict" preference and is rejected by the server, because a required property is missing. The second request submits the same content with the "handling=lenient" preference and the server creates the feature. A pseudo-sequence diagram notation is used to illustrate the details of the HTTP communication between the client and the server.
+
+[#handling-example-diagram,reftext=`Handling Preference Example`]
+.Create a new feature with strict and lenient handling.
+include::../examples/json/ex08_handling.adoc[]

@@ -2,7 +2,7 @@
 [#rc_{req-class}]
 == Requirements Class "Profile query parameter"
 
-The Requirements Class "Profile query parameter" specifies additional provisions for properties that reference another resource.
+The Requirements Class "Profile query parameter" specifies additional provisions for Web APIs that support profiles.
 
 [cols="2,7",width="90%"]
 |===
@@ -10,20 +10,20 @@ The Requirements Class "Profile query parameter" specifies additional provisions
 |Target type |Web API
 |===
 
-Some properties may be represented in multiple representations in the same format, depending on the intended use of the data. One example are references to another web resource (see the <<rc_profile-references>>).
+Some resources may be represented in with variations in the same format, depending on the intended use of the representation. One example are references to another web resource (see the <<rc_profile-references>>).
 
 <<rfc6906,RFC 6906 The 'profile' Link Relation Type>> defines the concept of a profile to support such use cases.
 
 A profile is defined not to alter the semantics of the resource representation itself, but to allow clients to learn about additional semantics (constraints, conventions, extensions) that are associated with the resource representation, in addition to those defined by the media type and possibly other mechanisms.
 
-To request one or more profiles, a query parameter "profile" can be used:
+To request one or more profiles, a query parameter "profile" can be used.
 
 :req: profile-param
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A |The GET operation on selected resources SHALL support a query parameter "profile" with the following characteristics (using an OpenAPI Specification 3.0 fragment):
+^|A |The GET operation on selected resources SHALL support a query parameter "profile" with the following characteristics (using an OpenAPI Specification 3.1 fragment):
 
 [source,YAML]
 ----
@@ -40,8 +40,10 @@ explode: false
 ^|B |Each item SHALL be one of the follwoing:
 
 * The profile identifier of a profile in the OGC Profile Register (the `profileId` value in the URI template `\http://www.opengis.net/def/profile/OGC/0/{profileId}`);
-* A HTTP(S) URI of a profile, e.g., in the OGC Profile Register (\http://www.opengis.net/def/profile).
-|===
+* A HTTP(S) URI of a profile.
+|=== 
+
+NOTE: Profile URIs could be URIs from the OGC Profile Register (\http://www.opengis.net/def/profile) but they do not have to be.  For example, communities of interest can develop and document their our profile URIs without the involvement of OGC.
 
 :per: profile-param-default
 [#{req-class}_{per}]
@@ -67,7 +69,7 @@ Different media types have different characteristics. A consequence is that it c
 The server will select the profile(s) of the response, if any, from the list of profiles supported for the media type and resource.
 
 :rec: profile-negotiation
-[#{req-class}_{rec}]
+[#rec_{req-class}_{rec}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
@@ -76,7 +78,7 @@ The server will select the profile(s) of the response, if any, from the list of 
 |===
 
 :req: profile-param-response
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -85,7 +87,7 @@ The server will select the profile(s) of the response, if any, from the list of 
 |===
 
 :rec: profile-link-header
-[#{req-class}_{rec}]
+[#rec_{req-class}_{rec}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}

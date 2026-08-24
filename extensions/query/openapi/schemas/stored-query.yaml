@@ -1,0 +1,26 @@
+---
+allOf:
+  - $ref: description.yaml
+  - $ref: links.yaml
+  - type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      mutable:
+        type: boolean
+        default: false
+      query:
+        description: |-
+          PAV: I prefer including the entire text of the query in the
+          description of the stored query so that one can see which 
+          collections are being accessed, what filters are being applied,
+          etc.  If we do this we don't need the parameter member since 
+          the query text will include that information.  At least for the
+          current json encoding of a parameterized stored query.
+        oneOf:
+          - type: string
+          - type: object
+      parameters:
+        $ref: parameters.yaml

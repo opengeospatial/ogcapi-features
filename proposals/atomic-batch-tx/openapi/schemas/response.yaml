@@ -1,0 +1,46 @@
+---
+type: object
+properties:
+  semantic:
+    type: string
+    enum:
+    - atomic
+    - batch
+  summary:
+    type: object
+    properties:
+      totalInserted:
+        type: integer
+      totalUpdated:
+        type: integer
+      totalReplaced:
+        type: integer
+      totalDeleted:
+        type: integer
+  exceptions:
+    description: 
+      An optional array of OGC exception reports; mostly meant for use with BATCH transactions.
+    type: array
+    items:
+      $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/exception.yaml'
+  insertResults:
+    type: array
+    items:
+      type: string
+      format: uri
+  updateResults:
+    type: array
+    items:
+      type: string
+      format: uri
+  replaceResults:
+    type: array
+    items:
+      type: string
+      format: uri
+  deleteResults:
+    type: array
+    items:
+      type: string
+      format: uri
+

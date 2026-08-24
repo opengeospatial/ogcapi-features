@@ -1,0 +1,140 @@
+
+[[clause-terms-definition]]
+== Terms, definitions and abbreviated terms
+
+=== Terms and Definitions
+This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+
+For the purposes of this document, the following additional terms, definitions and abbreviated terms apply in addition to those defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
+
+
+
+==== ad hoc query
+
+a request for information created at the moment of need, characterized by its lack of a predetermined structure or scheduled execution; it is typically constructed using a query language (such as SQL) or a graphical interface to address a specific business question that is not covered by routine, "canned" reports
+
+==== Application Programming Interface (API)
+
+an interface that is defined in terms of a set of functions and procedures and enables a program to gain access to facilities within an application <<oxford>>.
+
+==== collection items end point
+
+the path of the end point from which the resources of items of a collection can be accesses
+
+EXAMPLE: For features, the collection items end point is  '/collections/{collectionId}/items'.
+
+EXAMPLE: For processes, the collection items end point is '/processes'
+
+==== filter expression
+
+*predicate* encoded for transmission between systems.
+
+[.source]
+<<ogc19_079>>
+
+[example]
+CQL2-Text or CQL2-JSON are examples how a predicate can be encoded as a filter expression.
+
+==== parameterized stored query
+
+a **stored query** that has one or more parameters.
+
+NOTE: When executing a parameterized stored query, the user has to provide parameter values for each parameter of a stored query. If a parameter has a default value, a parameter can be omitted from the request to execute the stored query.
+
+==== predicate
+
+set of computational operations applied to a data instance which evaluate to true or false.
+
+NOTE: In relational algebra, this is called a link:https://en.wikipedia.org/wiki/Selection_(relational_algebra)[selection].
+
+[.source]
+<<ogc09_026>>
+
+==== property selection
+
+operation to create a copy of a data instance, restricted to a subset of the properties of the data instance.
+
+NOTE: In relational algebra, this is called a link:https://en.wikipedia.org/wiki/Projection_(relational_algebra)[projection]. This term was used in the OGC Web Feature Service standard, but the Features API SWG has decided not to use the term, because in the context of geographic information the term "projection" is closely associated with map projections and causes confusion if used with a different meaning.
+
+[.source]
+<<ogc24_019>>
+
+==== query
+
+request for data from a dataset.
+
+NOTE: A query will at least identify the data that the query operates on, the predicate(s) used to select the result set, the properties of the data instances that should be included in the response, the order in which the data instances should be included in the response, and the maximum number of data instances in the response.
+
+==== queryable
+
+a token that represents a property of a resource that can be used in a *filter expression*.
+
+[.source]
+<<ogc19_079>>
+
+==== resource end point
+the path of the end point used to access a specific instance of a resource from a collection
+
+EXAMPLE: For features, the resource end point is '/collections/{collectionId}/items/{featureId}'.
+
+EXAMPLE: For processes, the resource end point is '/processes/{processId}'.
+
+==== returnable
+
+a token that represents a property of a resource that can be included in a representation of the resource.
+
+[.source]
+<<ogc23_058>>
+
+NOTE: APIs implementing OGC API Features will include all returnables in a response unless the property has no value for the instance or if the property is not included in the list of requested properties (see *property selection*).
+
+==== sortable
+
+a token that represents a property of a resource that can be used to sort a collection of resource instances.
+
+[.source]
+<<ogc24_030>>
+
+==== sorting
+
+operation to order the data instances in a set based on the values of selected properties of each data instance.
+
+[.source]
+<<ogc24_030>>
+
+==== Standardized API
+
+an API that is intended to be deployed by multiple API providers with the same API definition.
+
+NOTE: The only difference between the API definitions will be the URL(s) of the API deployment. All other aspects are identical (resources, content schemas, content constraints and business rules, content representations, parameters, etc.) so that any client that can use one deployment of the standardized API definition can also use all other deployments, too.
+
+NOTE: If the API provides access to data, different deployments of the API will typically share different content.
+
+==== Standards-based API
+
+an API that conforms to one or more conformance classes specified in one or more standards.
+
+NOTE: Since almost all APIs will conform to some standard, the term is usually used in the context of a specific standard or a specific family of standards. This ER considers Web APIs with a specific focus on the OGC API standards. Therefore, whenever the term is used in this ER, it is meant as an alias for an API that conforms to one or more conformance classes as defined in the OGC API standards.
+
+==== stored query
+
+a predefined **query** that is available a resource in a Web API.
+
+NOTE: Stored queries can be used for two purposes. The first is to save users of the API the effort of creating their own queries. The second is to constrain what users may receive and how. The second purpose was the main purpose in the testbed where a developer creates stored queries for use by business users.
+
+==== Web API
+
+an API using an architectural style that is founded on the technologies of the Web <<DWBP>>.
+
+NOTE: link:https://www.w3.org/TR/dwbp/#APIHttpVerbs[Best Practice 24: Use Web Standards as the foundation of APIs] in the W3C Data on the Web Best Practices <<DWBP>> provides more detail.
+
+NOTE: A Web API is basically an API based on the HTTP standard(s).
+
+=== Abbreviated Terms
+
+API:: Application Programming Interface
+CQL2:: OGC Common Query Language
+CRS:: Coordinate Reference System
+JSON:: JavaScript Object Notation
+OGC:: Open Geospatial Consortium
+WFS:: Web Feature Service

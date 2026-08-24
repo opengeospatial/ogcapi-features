@@ -1,0 +1,33 @@
+== Conformance
+
+This Standard defines three requirements / conformance classes:
+
+   * <<rc_transactions,Transactions>>
+   * <<rc_async_transactions,Asynchronous Transactions>>
+   * <<rc_atomic_transactions,Atomic Semantics>>
+   * <<rc_batch_transactions,Batch Semantics>>
+   * <<rc_json,JSON Encoding>>
+   * <<rc_features,Features>>
+
+The standardization target type is "Web APIs".
+
+The URIs of the associated conformance classes are: 
+
+[#conf_class_uris,reftext='{table-caption} {counter:table-num}']
+.Conformance class URIs
+[cols="25,75",options="header"]
+|===
+|Conformance class |URI
+|Transactions |http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/transactions
+|Asynchronous Transactions |http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/async-transactions
+|Atomic Semantics|http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/atomic-semantics
+|Batch Semantics|http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/batch-semantics
+|JSON Encoding|http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/json-transactions
+|Features |http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/features
+|===
+
+Conformance with this Standard shall be checked using all the relevant tests
+specified in <<ats,Annex A>> of this document. The framework, concepts, and
+methodology for testing, and the criteria to be achieved to claim conformance
+are specified in the OGC Compliance Testing Policies and Procedures and the
+OGC Compliance Testing web site.

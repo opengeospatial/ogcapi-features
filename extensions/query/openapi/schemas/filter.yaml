@@ -1,0 +1,18 @@
+---
+type: object
+properties:
+  filter-lang:
+    type: string
+    default: cql-json
+    enum:
+      - cql-json
+      - cql-text
+  filter-crs:
+    type: string
+    format: uri
+    default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+  filter:
+    oneOf:
+      - type: string
+      - type: object
+      - type: cql.yaml

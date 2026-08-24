@@ -1,0 +1,10 @@
+[[req_async-transactions_job-results-op-failed-results-not-ready]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/async-transactions/job-results-op-failed-results-not-ready*
+^|Condition |The job identifier if valid.
+^|Condition |The server is still processing the request and results are not yet ready.
+^|A |The server SHALL response with a HTTP status code 404.
+^|C |The content of that response SHALL be based upon the OpenAPI 3.0 schema https://raw.githubusercontent.com/opengeospatial/ogcapi-processes/master/openapi/schemas/common-transactions/exception.yaml[exception.yaml].
+^|D |The `type` of the exception SHALL be "http://www.opengis.net/def/exceptions/ogcapi-features-11/1.0/result-not-ready".
+|===

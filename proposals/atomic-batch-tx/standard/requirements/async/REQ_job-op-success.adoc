@@ -1,0 +1,12 @@
+[[req_async-transactions_job-op-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/async-transactions/job-op-success*
+^|Condition |The job identifier is valid.
+^|A |The server SHALL respond with a HTTP status code 200.
+^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema https://raw.githubusercontent.com/opengeospatial/ogcapi-processes/master/openapi/schemas/processes-transactions/statusInfo.yaml[statusInfo.yaml].
+^|C |The value of the `id` parameter SHALL be the identifier assigned by the server for the job.
+^|D |The value of the `status` parameter SHALL inidicate the state of the job at the time the request is made for the status information.
+^|E |The value of the `processingEntityType` parameter SHALL indicate the type of server that created the job (e.g. "ogc-api-processes", "openeo", "ogc-api-coverages", etc.).
+^|F |The value of the `processingEntityType` parameter SHALL be `ogc-api-features` to indicate that a server that conforms to this Standard created the job.
+|===

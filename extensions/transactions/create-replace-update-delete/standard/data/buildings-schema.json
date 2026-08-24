@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/collections/buildings/schema",
+  "title": "Buildings",
+  "description": "The schema of the test dataset for OGC API - Features - Part 4 / OGC API - Common - Part 5: Create, Replace, Update and Delete (Returnables and Receivables)",
+  "type": "object",
+  "required": [
+    "function"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true,
+      "x-ogc-role": "id"
+    },
+    "geometry": {
+      "format": "geometry-polygon",
+      "x-ogc-role": "primary-geometry"
+    },
+    "name": {
+      "type": "string"
+    },
+    "function": {
+      "type": "string",
+      "enum": [
+        "residential",
+        "commercial",
+        "public",
+        "other"
+      ]
+    },
+    "height": {
+      "type": "number",
+      "x-ogc-unit": "m"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "description": "The timestamp of the last change to the feature. The server updates the value on each change and uses it to derive the Last-Modified header of the feature."
+    }
+  }
+}

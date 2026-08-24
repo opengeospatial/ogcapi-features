@@ -1,0 +1,111 @@
+=== Conformance Class "Update"
+
+:conf-class: update
+[[conf_update]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_update,Requirements Class "Update">>
+|===
+
+:conf-test: options
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_update_methods,/req/update/methods>>, <<req_update_options-accept-patch,/req/update/options-accept-patch>>
+|Condition: | At least one mutable resource supports the UPDATE operation (test parameter).
+|Test purpose: | The server declares support for the PATCH method
+|Test method: |
+Given:
+
+* the list of mutable resources that support the UPDATE operation (test parameter);
+
+When:
+
+* an OPTIONS request is submitted to each resource endpoint;
+
+Then:
+
+* assert that each response has the HTTP status code `200`;
+* assert that the `Allow` header in each response includes PATCH;
+* assert that each response includes an `Accept-Patch` header with at least one media type;
+* store the media types of the `Accept-Patch` headers for use in other tests.
+|===
+
+:conf-test: update
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_patch-update_update-patch-op,/req/update/update-patch-op>>, <<req_patch-update_update-patch-body,/req/update/update-patch-body>>, <<req_patch-update_update-patch-response,/req/update/update-patch-response>>
+|Condition: | At least one mutable resource supports the UPDATE operation (test parameter).
+|Test purpose: | Updating parts of an existing resource
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the UPDATE operation (PATCH is included in the `Allow` header, see test /conf/{conf-class}/options);
+* a valid document describing the changes to parts of the resource and its media type (test parameter);
+* the representation of the resource from a GET request to the resource endpoint;
+
+When:
+
+* a PATCH request with the document in the request body and its media type in the `Content-Type` header is submitted to the resource endpoint;
+
+Then:
+
+* assert that the response has the HTTP status code `200` or `204` — or `202`, if the operation has been queued for processing, in which case the remaining assertions are skipped;
+* assert that a GET request to the resource endpoint returns a HTTP status code `200`;
+* assert that the parts of the resource described in the document have been changed accordingly;
+* assert that all other parts of the resource are unchanged.
+|===
+
+:conf-test: update-content-type
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_update_patch-content-type,/req/update/patch-content-type>>
+|Condition: | At least one mutable resource supports the UPDATE operation (test parameter).
+|Test purpose: | UPDATE requests without a Content-Type header are rejected
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the UPDATE operation;
+* a valid document describing the changes to parts of the resource (test parameter);
+
+When:
+
+* a PATCH request with the document in the request body, but without a `Content-Type` header, is submitted to the resource endpoint;
+
+Then:
+
+* assert that the response has the HTTP status code `400`.
+|===
+
+:conf-test: update-rid
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_update_rid,/req/update/rid>>
+|Condition: | At least one mutable resource supports the UPDATE operation (test parameter).
+|Test purpose: | Resource identifiers in UPDATE request bodies are ignored or the request is rejected
+|Test method: |
+Given:
+
+* a resource endpoint of an existing resource that supports the UPDATE operation;
+* a valid document describing changes to the resource that includes a resource identifier that differs from the identifier of the resource (constructed from the test parameter);
+
+When:
+
+* a PATCH request with the document in the request body and its media type in the `Content-Type` header is submitted to the resource endpoint;
+
+Then:
+
+* skip the remaining assertions, if the response has the HTTP status code `202` (the operation has been queued for processing) or a `4xx` status code, that is, the server rejects such requests instead of ignoring the identifier — which for features is what Requirement <<req_features_update-json-merge-patch,/req/features/update-json-merge-patch>> requires;
+* assert that the response has the HTTP status code `200` or `204`;
+* assert that a GET request to the resource endpoint returns a HTTP status code `200` and the resource has the identifier from the resource endpoint URI, not the identifier submitted in the request body.
+|===

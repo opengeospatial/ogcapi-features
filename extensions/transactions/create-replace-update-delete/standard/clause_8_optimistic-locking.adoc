@@ -68,7 +68,7 @@ NOTE: The alphabetic letters delimited using `[]` are time instants and correspo
 |H |The server successfully processes Client B's request and Client A's change is silently lost.  Once again, since the stage of the resource has changed, the server generates a new ETag `11e34a43` for the feature and a new last-modified timestamp.
 |===
 
-Optimistic locking resolves such change conflicts by exchanging state information (e.g., ETags or timestamps) between clients and servers using HTTP headers to ensure that a resource's state has not changed between a read request to fetch a resource and a subsequent update request.  If the state of the resource has changed in the intervening time interval the exchanged state information will not match and the operation fails. This necessitates a re-read of the resource to obtain the most recent state and a subsequent retry of the update operation. 
+Optimistic locking resolves such change conflicts by exchanging state information (e.g., ETags or timestamps) between clients and servers using HTTP headers to ensure that a resource's state has not changed between a read request to fetch a resource and a subsequent request changing the resource.  If the state of the resource has changed in the intervening time interval the exchanged state information will not match and the operation fails. This necessitates a re-read of the resource to obtain the most recent state and a subsequent retry of the operation. 
 
 This Standard supports optimistic locking using the two different types of state information supported by HTTP:
 
@@ -128,13 +128,17 @@ include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-patch-
 
 include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-patch-eval.adoc[]
 
+include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-delete-op.adoc[]
+
+include::requirements/optimistic-locking-timestamps/REQ_ifunmodifiedsince-delete-eval.adoc[]
+
 include::recommendations/optimistic-locking-timestamps/PER_ifunmodifiedsince-missing.adoc[]
 
 ==== Example
 
 The following example, taken from the <<optimistic-locking-overview>>, optimistically locks the resources being operated on using the https://www.rfc-editor.org/rfc/rfc9110#field.if-unmodified-since[If-Unmodified-Since] header.
-Client A successfully updates the resource while Client B's update fails.
-Client B, then proceeded to re-fetch the resource and try the update again.
+Client A successfully replaces the resource while Client B's request fails.
+Client B, then proceeded to re-fetch the resource and retry the request.
 
 NOTE: The request and response payload are intentionally omitted in the example to highlight the HTTP header interactions between the server and the clients.
 
@@ -253,13 +257,17 @@ include::requirements/optimistic-locking-etags/REQ_ifmatch-patch-op.adoc[]
 
 include::requirements/optimistic-locking-etags/REQ_ifmatch-patch-eval.adoc[]
 
+include::requirements/optimistic-locking-etags/REQ_ifmatch-delete-op.adoc[]
+
+include::requirements/optimistic-locking-etags/REQ_ifmatch-delete-eval.adoc[]
+
 include::recommendations/optimistic-locking-etags/PER_ifmatch-missing.adoc[]
 
 include::recommendations/optimistic-locking-etags/PER_ifmatch-star.adoc[]
 
 ==== Example
 
-The following example, taken from the <<optimistic-locking-overview>>, optimistically locks the resources being operated on using the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] header.  Client A successfully updates the resource while Client B's update fails.  Client B, then proceeded to re-fetch the resource and try the update again.
+The following example, taken from the <<optimistic-locking-overview>>, optimistically locks the resources being operated on using the https://www.rfc-editor.org/rfc/rfc9110#field.if-match[If-Match] header.  Client A successfully replaces the resource while Client B's request fails.  Client B, then proceeded to re-fetch the resource and retry the request.
 
 NOTE: The request and response payload are intentionally omitted in the example to highlight the HTTP header interactions between the server and the clients.
 

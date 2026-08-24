@@ -1,0 +1,40 @@
+[[clause-http-query-method]]
+== Requirements Class "The HTTP QUERY method"
+
+=== Overview
+
+include::requirements/requirements_class_http-query-method.adoc[]
+
+This conformance class defined the requirement for using <<rfc100008,The HTTP QUERY Method>> to execute ad-hoc query or execute stored queries.
+
+[[http-query-method-ad-hoc]]
+=== Ad-hoc query
+
+==== Executing an ad-hoc query
+
+include::requirements/http-query-method/REQ_adhoc-query-op.adoc[]
+
+include::requirements/http-query-method/REQ_adhoc-query-body.adoc[]
+
+This specification does not mandate a specific query expression language.
+
+This specification does, however, make the following recommendation:
+
+See recommendation: <<rec_query-expression_json,/rec/query-expression/json>>
+
+==== Ad-hoc query Response
+
+See requirement: <<req_adhoc-query_response,/req/adhoc-query/response>>
+
+[[http-query-method-parameterized-stored-query]]
+=== Parameterized stored query
+
+==== Executing a parameterized stored query
+
+A parameterized stored query can be executed using the HTTP QUERY method and a URL-encoded form.
+
+include::requirements/http-query-method/REQ_parameterized-query-op.adoc[]
+
+==== Parameterized stored query response
+
+See: <<clause-stored-query-execute-response,Executing a stored query response>>

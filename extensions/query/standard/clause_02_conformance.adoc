@@ -1,0 +1,42 @@
+[[clause-conformance]]
+== Conformance
+
+This standard defines the following conformance classes:
+
+   * <<clause-adhoc-query,Adhoc query>>
+
+   * <<clause-stored-query,Stored Query>>
+
+   * <<clause-multi-resource-response,Multi-Resource Response>>
+
+   * <<clause-join-response,Join Response>>
+
+   * <<clause-parameterized-stored-query,Parameterized Stored Query>>
+
+   * <<clause-manage-stored-queries,Manage Stored Queries>>
+
+   * <<clause-query-expression-json,JSON Query Expression>>
+
+The standardization target is "Web APIs".
+
+The URIs of the associated conformance classes are: 
+
+[#conf_class_uris,reftext='{table-caption} {counter:table-num}']
+.Conformance class URIs
+[cols="25,75",options="header"]
+|===
+|Conformance class |URI
+|<<rc_adhoc-query,Adhoc query>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/adhoc-query
+|<<rc_stored-query,Stored Query>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/stored-query
+|<<rc_multi-resource-response,Multi-Resource Response>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/multi-resource-response
+|<<rc_join-response,Join Response>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/join-response
+|<<rc_parameterized-stored-query,Parameterized Stored Query>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/parameterized-stored-query
+|<<rc_manage-stored-query,Manage Stored Queries>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/manage-stored-query
+|<<rc_query-expression-json,JSON Query Expression>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/query-expression-json
+|===
+
+Conformance with this standard shall be checked using all the relevant tests
+specified in <<ats,Annex A>> of this document. The framework, concepts, and
+methodology for testing, and the criteria to be achieved to claim conformance
+are specified in the OGC Compliance Testing Policies and Procedures and the
+OGC Compliance Testing web site.

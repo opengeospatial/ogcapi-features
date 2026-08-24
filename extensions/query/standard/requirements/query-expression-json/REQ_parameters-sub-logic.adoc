@@ -1,0 +1,9 @@
+[[req_query-expression-json_parameters-sub-logic]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/query-expression-json/parameters-sub-logic*
+^|A |During query execution, the server SHALL performs a substitution process, replacing every instance of a `$parameter` object with the corresponding argument provided in the execution request. 
+^|B |The provided argument SHALL strictly adhere to the constraints defined in the parameter’s JSON Schema.
+^|C |If a parameter declares a default value within its schema, the server SHALL apply that value automatically if no argument is provided in the execution request.
+^|D |If a parameter is defined as an array type, the server SHALL convert comma-separated input strings into a standard JSON array.
+|===

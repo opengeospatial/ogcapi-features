@@ -1,0 +1,9 @@
+[[req_features_schema]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/features/schema*
+^|Condition |Server implements <<OAFeat-5,OGC API - Features - Part 5: Schemas, Requirements Class "Returnables and Receivables">>
+^|A |The response content of a GET request to `{landingPageUri}/collections/{collectionId}/schema` SHALL be a JSON Schema.
+^|B |The server SHALL accept mutation requests where each feature property in the request meets the schema constraints of the corresponding, receivable property in the JSON Schema.
+^|C |Unless the JSON Schema includes a statement `"additionalProperties": false`, the server SHALL NOT reject properties that are not specified in the JSON Schema.
+|===

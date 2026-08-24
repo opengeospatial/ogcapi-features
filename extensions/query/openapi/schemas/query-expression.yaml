@@ -1,0 +1,28 @@
+---
+oneOf:
+  - allOf:
+      - $ref: description.yaml
+      - $ref: parameters.yaml
+      - $ref: limit.yaml
+      - $ref: query.yaml
+  - allOf:
+    - $ref: description.yaml
+    - $ref: parameters.yaml
+    - $ref: limit.yaml
+    - allOf:
+        - $ref: filter.yaml
+        - type: object
+          required:
+            - queries
+          properties:
+            queries:
+              type: array
+              minItems: 1
+              items:
+                $ref: query.yaml
+            filterOperator:
+              type: string
+              default: and
+              enum:
+                - and
+                - or

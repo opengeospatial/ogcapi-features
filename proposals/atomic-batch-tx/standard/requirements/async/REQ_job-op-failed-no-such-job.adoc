@@ -1,0 +1,9 @@
+[[req_async-transactions_job-op-failed-no-such-job]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/async-transactions/job-op-failed-no-such-job*
+^|Condition |The job identifier is invalid.
+^|A |The server SHALL responde with a HTTP status code 404.
+^|B |The content of that response SHALL be based upon the OpenAPI schema https://raw.githubusercontent.com/opengeospatial/ogcapi-processes/master/openapi/schemas/common-core/exception.yaml[exception.yaml].
+^|B |The `type` of the exception SHALL be "http://www.opengis.net/def/exceptions/ogcapi-features-11/1.0/no-such-job".
+|===

@@ -1,0 +1,7 @@
+[[req_transactions_batch]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/transactions/batch*
+^|Condition |The server supports transactions with batch semantics.
+^|A |The server SHALL include the URI `http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/batch-transactions` in its conformance document (path: /conformance)
+|===

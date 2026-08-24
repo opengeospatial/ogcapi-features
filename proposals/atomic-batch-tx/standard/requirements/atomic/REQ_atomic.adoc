@@ -1,0 +1,7 @@
+[[req_transactions_atomic]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/transactions/atomic*
+^|Condition |The server supports transactions with atomic semantics.
+^|A |The server SHALL include the URI `http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/atomic-transactions` in its conformance document (path: /conformance)
+|===

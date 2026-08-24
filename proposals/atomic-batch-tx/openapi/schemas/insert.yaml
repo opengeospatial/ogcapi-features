@@ -1,0 +1,20 @@
+---
+allOf:
+- $ref: 'description.yaml'
+- type: object
+  required:
+  - action
+  - collection
+  - item
+  properties:
+    action:
+      type: string
+      const: 'insert'
+    collection:
+      type: string
+    items:
+      type: array
+      items:
+        oneOf:
+        - $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/featureGeoJSON.yaml'
+        - $ref: 'link.yaml'

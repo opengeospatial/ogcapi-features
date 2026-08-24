@@ -44,9 +44,9 @@
                 ]
         },
         "3":  {
-                "OGC_doc_number": "20-002r1",
-                "urn": "http://www.opengis.net/doc/IS/ogcapi-features-4/1.0",
-                "title": "OGC API - Features - Part 4: Create, Replace, Update and Delete",
+                "OGC_doc_number": "20-002r2",
+                "urn": "http://www.opengis.net/doc/IS/ogcapi-common-5/1.0",
+                "title": "OGC API - Features - Part 4/OGC API - Common - Part 5: Create, Replace, Update and Delete",
                 "path": "extensions/transactions/create-replace-update-delete/standard/20-002.adoc",
                 "options": ["--trace"],
                 "a":[
@@ -89,9 +89,9 @@
                 ]
         },
         "6":  {
-                "OGC_doc_number": "23-058r1",
-                "urn": "http://www.opengis.net/doc/IS/ogcapi-features-5/1.0",
-                "title": "OGC API - Features - Part 5: Schemas",
+                "OGC_doc_number": "23-058r3",
+                "urn": "http://www.opengis.net/doc/IS/ogcapi-common-3/1.0",
+                "title": "OGC API - Features - Part 5/OGC API - Common - Part 3: Schemas",
                 "path": "extensions/schemas/standard/23-058.adoc",
                 "options": ["--trace"],
                 "a":[
@@ -153,6 +153,36 @@
                 "urn": "http://www.opengis.net/doc/IS/ogcapi-features-9/1.0",
                 "title": "OGC API - Features - Part 9: Text Search",
                 "path": "extensions/text-search/standard/24-031.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "11":  {
+                "OGC_doc_number": "26-008",
+                "urn": "http://www.opengis.net/doc/IS/ogcapi-features-10/1.0",
+                "title": "OGC API - Features - Part 10: Query",
+                "path": "extensions/query/standard/26-008.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "12":  {
+                "OGC_doc_number": "26-018",
+                "urn": "http://www.opengis.net/doc/IS/ogcapi-features-11/1.0",
+                "title": "OGC API - Features - Part 11: Atomic and Batch Transactions",
+                "path": "proposals/atomic-batch-tx/standard/26-018.adoc",
                 "options": ["--trace"],
                 "a":[
                         "data-uri",

@@ -3,4 +3,61 @@
 :appendix-caption: Annex
 == Abstract Test Suite (Normative)
 
-NOTE: Conformance classes and test cases for all requirements classes and requirements will be added once the requirements classes and requirements are final.
+This test suite uses the https://en.wikipedia.org/wiki/Given-When-Then[Given-When-Then] notation to specify the tests.
+
+The tests apply to the mutable resources of a Web API under test. Which resources are mutable, and which of the operations specified in this Standard each mutable resource supports, depends on the API and on the context of the test (for example, on the credentials used by the test). All conformance classes in this test suite, therefore, have the following parameter:
+
+* Mutable Resources: the list of mutable resources of the Web API under test in the context of the test, where the following information is provided for each mutable resource:
+** the resource endpoint (URI);
+** the resources endpoint (URI) of the collection of the resource;
+** the operations (CREATE, REPLACE, UPDATE, and/or DELETE) that the test should exercise;
+** for each of these operations, a media type and a valid request body.
+
+Each test states in its "Condition" row the conditions under which the test is executed; if a condition is not met, the test is skipped. The conditions are evaluated against the conformance declaration of the Web API under test (the response to a GET request to `{landingPageUri}/conformance`) and against the Mutable Resources test parameter.
+
+Some conditions depend on the media types that the server supports in the request body of an operation. These are determined from the `Accept-Post` header (CREATE) and the `Accept-Patch` header (UPDATE) of the OPTIONS response, see the tests /conf/create-replace-delete/options and /conf/update/options. If the response does not include the header — or for the REPLACE operation, for which HTTP does not specify such a header — a media type is supported, if a request with the media type in the `Content-Type` header is not rejected with the HTTP status code `415`. That is, a server that does not advertise the media types is still tested for the operations that it supports; the missing header is reported by the tests of the OPTIONS operation.
+
+A server that implements one of the Optimistic Locking conformance classes may reject every request that changes a resource unless the request states a precondition, see the Permissions <<per_optimistic-locking-timestamps_ifunmodifiedsince-missing,/per/optimistic-locking-timestamps/ifunmodifiedsince-missing>> and <<per_optimistic-locking-etags_ifmatch-missing,/per/optimistic-locking-etags/ifmatch-missing>>. The test methods of the other conformance classes do not state the conditional headers, because they do not depend on them. For such a server, the requests of those tests include the precondition: the current value of the validator field of the resource is determined with a GET request, and the mutation request states it in an `If-Unmodified-Since` or `If-Match` header. If the resource does not exist yet (a CREATE operation, or a REPLACE operation that creates the resource), the request states no precondition.
+
+Since the tests change resources, executable tests should be executed against a test deployment or a deployment where the changes made by the tests do not affect other users of the Web API.
+
+A Web API under test can require authorization. Any Executable Test Suite implementing this test suite should implement the following security schemes supported by OpenAPI 3.1: HTTP Authentication schemes "basic" and "bearer", API keys, and OAuth2 flow "authorizationCode".
+
+If an operation is not executed immediately, but added to a processing queue (HTTP status code `202`), the state of the resource cannot be assessed directly after the response has been received. The tests in this test suite, therefore, skip assertions about the state of a resource for such responses. Since this Standard does not specify a mechanism to determine the outcome of a queued operation, executable tests may poll the resource endpoint until the change is visible or a timeout is reached, and then evaluate the assertions.
+
+[[test-dataset]]
+=== Test dataset
+
+To support executable tests for Web APIs that publish feature data, a test dataset is available in the link:https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/transactions/create-replace-update-delete/standard/data[OGC API Features GitHub repository]. The test dataset consists of the following files:
+
+* `buildings.json` — a GeoJSON feature collection with three building features (identifiers `B.1`, `B.2` and `B.3`) that are replaced, updated and deleted during the tests; each feature has an `updated` property with the timestamp of the last change to the feature;
+* `buildings-schema.json` — the logical schema of the feature collection (Returnables and Receivables, see <<OAFeat-5,OGC API - Features - Part 5 / OGC API - Common - Part 3: Schemas>>) with a required property `function`;
+* `create-building.json` — a valid new building feature for CREATE tests;
+* `create-building-invalid.json` — a building feature that does not conform to the schema (the required property `function` is missing) for the tests of the <<rc_handling,Handling Preference>> conformance class;
+* `create-building-jsonfg.json` — a valid new building feature with JSON-FG extensions (the geometry is provided in the "place" member using a coordinate reference system other than WGS 84) for the JSON-FG tests;
+* `buildings.xsd` — the GML application schema of the feature type (GML Simple Features Profile, Level 0) for the GML tests;
+* `create-building.gml` — a valid new building feature in GML where the geometry declares the coordinate reference system EPSG:25832 in the `srsName` attribute (the same feature as `create-building-jsonfg.json`) for the GML tests;
+* `replace-building.gml` — a replacement representation of the building `B.2` in GML for the GML tests;
+* `replace-building.json` — a replacement representation of the building `B.2`;
+* `update-building.json` — a JSON Merge Patch document for the building `B.3` that changes the primary geometry as well as property values.
+
+To use the executable tests with the test dataset, the Web API under test publishes the test dataset as a feature collection, where
+
+* the CREATE, REPLACE, UPDATE and DELETE operations are supported;
+* GeoJSON (`application/geo+json`) is supported as a feature representation in mutation requests;
+* UPDATE requests are supported with JSON Merge Patch (`application/merge-patch+json`) documents;
+* for the GML tests, GML (`application/gml+xml`) is supported as a feature representation in mutation requests, using the feature type from the GML application schema `buildings.xsd`;
+* the schema of the feature collection is published at `{landingPageUri}/collections/{collectionId}/schema`; and
+* for the tests of the <<rc_optimistic-locking-timestamps,Optimistic Locking using Timestamps>> conformance class, the server maintains the `updated` property of each feature and derives the `Last-Modified` header of the feature from it.
+
+include::annex_ats_create-replace-delete.adoc[]
+
+include::annex_ats_update.adoc[]
+
+include::annex_ats_optimistic-locking-timestamps.adoc[]
+
+include::annex_ats_optimistic-locking-etags.adoc[]
+
+include::annex_ats_handling.adoc[]
+
+include::annex_ats_features.adoc[]

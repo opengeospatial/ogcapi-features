@@ -1,8 +1,7 @@
-:Title: OGC API - Features - Part 5: Schemas
-:titletext: OGC API - Features - Part 5: Schemas
-:standard: ogcapi-features-5
+:titletext: OGC API - Features - Part 5 / OGC API - Common - Part 3: Schemas
+:standard: ogcapi-common-3
 :m_n: 1.0
-:m_n_o: {m_n}.0-draft.2
+:m_n_o: {m_n}.1-SNAPSHOT
 :doctype: book
 :encoding: utf-8
 :lang: en
@@ -23,7 +22,7 @@
 :pygments-linenums-mode: table
 :stem:
 
-= {title}
+= {titletext}
 
 <<<
 [cols = ">",frame = "none",grid = "none"]
@@ -34,9 +33,9 @@
 |Approval Date:  <yyyy-mm-dd>
 |Publication Date:  <yyyy-mm-dd>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/IS/{standard}/{m_n}
-|Internal reference number of this OGC(R) document:    23-058r1
-|Version: {m_n_o}
-|Latest Published Draft: n/a
+|Version: link:http://docs.ogc.org/DRAFTS/23-058r3.html[{m_n_o} (Editor's draft)]
+|Latest Published Version: https://docs.ogc.org/is/23-058r2/23-058r2.html[1.0.0]
+|Internal reference number of this OGC(R) document:    23-058r3
 |Category: OGC(R) Implementation Standard
 |Editors: Clemens Portele, Panagiotis (Peter) A. Vretanos
 |===
@@ -49,8 +48,8 @@
 [cols = "^", frame = "none", grid = "none"]
 |===
 |*Copyright notice*
-|Copyright (C) 2024 Open Geospatial Consortium
-|To obtain additional rights of use, visit http://www.opengeospatial.org/legal/
+|Copyright (C) 2026 Open Geospatial Consortium
+|To obtain additional rights of use, visit https://www.ogc.org/legal/
 |===
 
 [cols = "^", frame = "none"]
@@ -65,7 +64,7 @@ Recipients of this document are invited to submit, with their comments, notifica
 [width = "50%", grid = "none"]
 |===
 |Document type:   	OGC® Standard
-|Document subtype:   	Interface
+|Document subtype:   	Implementation
 |Document stage:   	Draft
 |Document language: 	English
 |===
@@ -109,9 +108,9 @@ include::clause_6_overview.adoc[]
 
 include::clause_7_schemas.adoc[]
 
-include::clause_8_core_roles_for_features.adoc[]
+include::clause_8_advanced_property_roles.adoc[]
 
-include::clause_9_feature_references.adoc[]
+include::clause_9_references.adoc[]
 
 include::clause_10_returnables_and_receivables.adoc[]
 

@@ -68,6 +68,9 @@ The standard is on the OGC website:
 * OGC API - Features - Part 3: Filtering
   * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/19-079r2/19-079r2.html)
   * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/19-079r3.html)
+* OGC API - Features - Part 5/OGC API - Common - Part 3: Schemas
+  * [Version 1.0.0 (latest approved version)](https://docs.ogc.org/is/23-058r2/23-058r2.html)
+  * [Editor's draft (includes errata and clarifications)](https://docs.ogc.org/DRAFTS/23-058r3.html)
 
 Those who want to just see the endpoints and responses can explore [examples of
 OpenAPI definitions](https://github.com/opengeospatial/ogcapi-features/tree/master/core/examples/openapi).
@@ -91,7 +94,7 @@ Closely related is the Common Query Language (CQL2) standard:
 To test APIs, the following resources are available:
 
 * [OGC Validator (by OGC)](https://cite.opengeospatial.org/teamengine/)
-* [OGC Checker (by Geonovum)](https://geonovum-labs.github.io/ogc-checker/?#/ogc-api)
+* [OGC Checker (by Geonovum)](https://geonovum.github.io/ogc-checker/#/ogc-api-features)
 
 The OGC Validator is approved by the OGC Membership and is also used in the [OGC Compliance Program](https://cite.opengeospatial.org/) to certify software products implementing OGC API Features. It currently tests against version 1.0.0 of Part 1 and Part 2.
 
@@ -108,19 +111,17 @@ Implementers of OGC standards are encouraged to register their products in the d
 
 ## Communication
 
-Join the [mailing list](https://lists.ogc.org/mailman/listinfo/wfs-fes.swg) or [![chat at https://gitter.im/opengeospatial/WFS_FES](https://badges.gitter.im/opengeospatial/WFS_FES.svg)](https://gitter.im/opengeospatial/WFS_FES?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Most all work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/ogcapi-features/issues),
 so browse there to get a good idea of what is happening, as well as past decisions.
+
+If you are on OGC Agora, here is the link to the [Features API SWG](https://agora.ogc.org/c/overview-716748/).
 
 ## Additional parts of OGC API - Features
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
 * [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r1.html)
-  * The draft is complete and in the Public Comment Period.
-* [OGC API - Features - Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)
-  * The draft is complete and in the Public Comment Period.
+  * The draft has passed the Public Comment Period and is being prepared for the approval process.
 * [OGC API - Features - Part 6: Property Selection](https://docs.ogc.org/DRAFTS/24-019.html)
   * The draft is an initial, complete draft.
 * [OGC API - Features - Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
@@ -129,10 +130,14 @@ The OGC Features API SWG has identified the following extensions as the highest 
   * The draft is an initial, complete draft.
 * [OGC API - Features - Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
   * The draft is an initial, complete draft.
+* [OGC API - Features - Part 10: Query](https://docs.ogc.org/DRAFTS/26-008.html)
+  * The draft is an initial, complete draft.
+* [OGC API - Features - Part 11: Atomic and Batch Transactions](https://docs.ogc.org/DRAFTS/26-018.html)
+  * The draft is a proposal.
 
 ## OGC API Features in ISO
 
-Part 1 (Core) has been published by ISO as [ISO 19168-1:2020](https://www.iso.org/standard/32586.html).
+Part 1 (Core) has been published by ISO as [ISO 19168-1:2025](https://www.iso.org/standard/86508.html).
 
 Part 2 (Coordinate Reference Systems by Reference) has been published by ISO as [ISO 19168-2:2022](https://www.iso.org/standard/82464.html).
 
@@ -149,7 +154,7 @@ Open issues for all parts are organized in [GitHub projects](https://github.com/
 * [Open issues for Part 7: Geometry Simplification](https://github.com/orgs/opengeospatial/projects/23)
 * [Open issues for Part 8: Sorting](https://github.com/orgs/opengeospatial/projects/24)
 * [Open issues for Part 9: Text Search](https://github.com/orgs/opengeospatial/projects/25)
-* [Open issues for Part 10: Search/Queries](https://github.com/orgs/opengeospatial/projects/26)
+* [Open issues for Part 10: Query](https://github.com/orgs/opengeospatial/projects/26)
 
 Additional links:
 
@@ -167,11 +172,13 @@ The latest drafts of each standard in this repository are build daily (based on 
 * [Part 2: Coordinate Reference Systems by Reference](https://docs.ogc.org/DRAFTS/18-058r2.html)
 * [Part 3: Filtering](https://docs.ogc.org/DRAFTS/19-079r3.html)
 * [Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r1.html)
-* [Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)
+* [Part 5: Schemas](https://docs.ogc.org/DRAFTS/23-058r3.html)
 * [Part 6: Property Selection](https://docs.ogc.org/DRAFTS/24-019.html)
 * [Part 7: Geometry Simplification](https://docs.ogc.org/DRAFTS/24-020.html)
 * [Part 8: Sorting](https://docs.ogc.org/DRAFTS/24-030.html)
 * [Part 9: Text Search](https://docs.ogc.org/DRAFTS/24-031.html)
+* [Part 10: Query](https://docs.ogc.org/DRAFTS/26-008.html)
+* [Part 11: Atomic and Batch Transactions](https://docs.ogc.org/DRAFTS/26-018.html)
 * [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065r3.html)
 
 To generate the HTML versions of the standards from this repository yourself, ensure that you have [Ruby](https://www.ruby-lang.org/en/) and
@@ -199,6 +206,10 @@ asciidoctor extensions/geometry-simplification/standard/24-020.adoc
 asciidoctor extensions/sorting/standard/24-030.adoc
 # Part 9: Text Search
 asciidoctor extensions/text-search/standard/24-031.adoc
+# Part 10: Query
+asciidoctor extensions/query/standard/26-008.adoc
+# Part 11: Atomic and Batch Transactions
+asciidoctor proposals/atomic-batch-tx/standard/26-018.adoc
 ```
 
 The resulting HTML files will be built in the same directory as the AsciiDoc file, e.g. as `core/standard/17-069.html`.

@@ -1,0 +1,9 @@
+allOf:
+  - $ref: 'linkBase.yaml'
+  - $ref: 'linkBaseExtended.yaml'
+  - type: object
+    required:
+      - href
+    properties:
+      href:
+        type: string

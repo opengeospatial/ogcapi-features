@@ -1,0 +1,45 @@
+---
+type: object
+properties:
+  rel:
+    type: string
+    description: The type or semantics of the relation.
+  type:
+    type: string
+    description: |-
+      A hint indicating what the media type of the
+      result of dereferencing the link should be.
+  hreflang:
+    type: string
+    description: |-
+      A hint indicating what the language of the
+      result of dereferencing the link should be.
+  title:
+    type: string
+    description: |-
+      Used to label the destination of a link
+      such that it can be used as a human-readable
+      identifier.
+  length:
+    type: integer
+  profile:
+    type: array
+    description: |-
+      One or more identifiers that provide information about additional
+      semantics (constraints, conventions, extensions), in addition to 
+      those defined by the media type, that are associated with the
+      target resource.
+    items:
+      type: string
+  created:
+    type: string
+    description: |-
+      Date of creation of the resource pointed to
+      by the link.
+    format: date-time
+  updated:
+    type: string
+    description: |-
+      Most recent date on which the resource pointed
+      to by the link was changed.
+    format: date-time

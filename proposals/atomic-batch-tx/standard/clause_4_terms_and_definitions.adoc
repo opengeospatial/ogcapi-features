@@ -1,0 +1,32 @@
+== Terms, definitions and abbreviated terms
+
+=== Terms and Definitions
+This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this Standard.
+
+For the purposes of this document, the following additional terms, definitions and abbreviated terms apply in addition to those defined in <<OAFeat-1,OGC API - Features - Part 1: Core>>.
+
+[[endpoint-def]]
+==== endpoint 
+a web address (URI) at which access can be gained to a service or resource [from OGC API - Features - Part 3: Filtering and the Common Query Language (CQL2]
+
+[[resources-endpoint-def]]
+==== resources endpoint
+endpoint of the set of resource instances from a collection
+
+EXAMPLE 1: For features or records, the endpoint is `{landingPageUri}/collections/{collectionId}/items`.
+
+EXAMPLE 2: For processes, the endpoint is `{landingPageUri}/processes`.
+
+[[resource-endpoint-def]]
+==== resource endpoint
+endpoint of a specific instance of a resource from a collection
+
+EXAMPLE 1: For features, the endpoint is `{landingPageUri}/collections/{collectionId}/items/{featureId}`.
+
+EXAMPLE 2: For processes, the endpoint is `{landingPageUri}/processes/{processId}`.
+
+[[optimistic-locking]]
+==== optimistic locking
+locking protocol that resolves change conflicts at the very last moment
+
+NOTE: This is accomplished by a server providing HTTP validator fields describing the state of a resource and evualting preconditions submitted by clients about the current state of a resource that the client wants to change. See <<rfc9110,RFC 9110 (HTTP Semantics)>>, section 8.8. If the validator in a client request does not match the state of the resource on the server, the operation fails and the client must re-fetch the resource and retry the update operation based on the new state.

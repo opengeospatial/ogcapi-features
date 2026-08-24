@@ -1,0 +1,18 @@
+[[mediatypes]]
+== Media Types
+
+See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clause 10.
+
+The media types for the CREATE, REPLACE and UPDATE requests as well as for the schema documents depend on the representations of the resources.
+
+For GeoJSON features,
+
+- CREATE and REPLACE operations will use `application/geo+json`,
+- UPDATE operations will use `application/merge-patch+json`,
+- schema documents will use `application/schema+json`.
+
+For GML features,
+
+- CREATE and REPLACE operations will use `application/gml+xml`,
+- UPDATE operations will use `application/xml`,
+- schema documents will use `application/xml`.

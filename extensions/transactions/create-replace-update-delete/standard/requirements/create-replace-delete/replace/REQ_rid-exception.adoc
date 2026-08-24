@@ -3,5 +3,11 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/create-replace-delete/put-rid-exception*
 ^|A |If the target resource does not exist and the server does not support creating new resources using PUT, the server SHALL indicate an unsuccessful execution of the operation with a HTTP status code `404`.
-^|B |If the request includes an `If-Match` header and the resource does not exist, the server SHALL not create a new resource and indicate an unsuccessful execution of the operation with a HTTP status code `412`.
+^|B |If the server supports creating new resources using PUT, the request includes an `If-Match` header and the resource does not exist, the server SHALL not create a new resource and indicate an unsuccessful execution of the operation with a HTTP status code `412`.
+|===
+
+NOTE: Provision B does not apply to a server that does not support creating new resources using PUT: such a request is unsuccessful in any case and the response is `404` (provision A). <<rfc9110,Section 13.2.1 of RFC 9110>> requires that such a failure takes precedence over the evaluation of the precondition ("A server MUST ignore all received preconditions if its response to the same request without those conditions [...] would have been a status code other than a 2xx (Successful) or 412 (Precondition Failed)").
+
+[width="90%",cols="2,6a"]
+|===
 |===

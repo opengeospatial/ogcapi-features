@@ -1,0 +1,7 @@
+[[req_update_options-accept-patch]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/update/options-accept-patch*
+^|Condition |The `Allow` header of the response includes PATCH
+^|A |The response SHALL include an `Accept-Patch` header (see <<rfc5789,section 3.1 of RFC 5789>>) with the media types of the documents that the server supports in the request body of an UPDATE operation on the resource.
+|===

@@ -1,0 +1,36 @@
+---
+# Second API on the same feature provider, without the CRS building block, i.e.
+# without the conformance class "Coordinate Reference Systems by Reference" of
+# OGC API - Features - Part 2. This is the deployment for the ATS test
+# /conf/features/crs84, whose condition is that the conformance declaration does
+# NOT include that conformance class: geometries in request bodies are then
+# always in WGS 84 longitude/latitude, and a Content-Crs header with any other
+# CRS has to be rejected. The conformance declaration is per API, not per
+# collection, so this needs a second API rather than a second collection.
+id: buildings-nocrs
+enabled: true
+serviceType: OGC_API
+accessControl:
+  enabled: false
+label: Buildings (Part 4 ATS, without CRS support)
+description: Test deployment for the Abstract Test Suite of OGC API - Features - Part 4 (draft), without OGC API - Features - Part 2
+api:
+- buildingBlock: FEATURES_CORE
+  enabled: true
+  featureProvider: buildings
+- buildingBlock: GEO_JSON
+  enabled: true
+- buildingBlock: CRS
+  enabled: false
+- buildingBlock: SCHEMA
+  enabled: true
+- buildingBlock: CRUD
+  enabled: true
+  optimisticLockingLastModified: false
+- buildingBlock: SCHEMA_VALIDATION
+  enabled: true
+collections:
+  buildings:
+    id: buildings
+    label: Buildings
+    enabled: true

@@ -1,0 +1,9 @@
+[[req_transactions_post-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/transactions/post-response* 
+^|Condition |The request is not accompanied by a HTTP https://datatracker.ietf.org/doc/html/rfc7240#section-2[`Prefer`] header asserting a `return` preference.
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The body of the response SHALL report the number of resources created, updated, replaced and/or deleted.
+^|C |If the transaction contains actions that create new resources, the response SHALL report the identifiers of these newly created resources.
+|===

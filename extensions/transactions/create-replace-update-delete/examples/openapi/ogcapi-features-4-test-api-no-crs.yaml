@@ -1,0 +1,911 @@
+openapi: 3.0.3
+info:
+  title: "Buildings (Part 4 ATS, without CRS support)"
+  description: "Test deployment for the Abstract Test Suite of OGC API - Features\
+    \ - Part 4 (draft), without OGC API - Features - Part 2"
+  version: 1.0.0
+servers:
+- url: http://localhost:7080/buildings-nocrs
+tags: []
+paths:
+  /:
+    get:
+      tags:
+      - Capabilities
+      summary: landing page
+      description: "The landing page provides links to the API definition (link relations\
+        \ `service-desc` and `service-doc`), the Conformance declaration (path `/conformance`,\
+        \ link relation `conformance`), and other resources in the API."
+      operationId: getLandingPage
+      parameters:
+      - $ref: "#/components/parameters/fCommon"
+      - $ref: "#/components/parameters/prettyCommon"
+      responses:
+        "200":
+          description: The operation was executed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LandingPage"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/htmlSchema"
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "500":
+          description: Server Error
+  /conformance:
+    get:
+      tags:
+      - Capabilities
+      summary: conformance declaration
+      description: "The URIs of all conformance classes supported by the server. This\
+        \ information is provided to support 'generic' clients that want to access\
+        \ multiple OGC API implementations - and not 'just' a specific API. For clients\
+        \ accessing only a single API, this information is in general not relevant\
+        \ and the OpenAPI definition details the required information about the API."
+      operationId: getConformanceDeclaration
+      parameters:
+      - $ref: "#/components/parameters/fCommon"
+      - $ref: "#/components/parameters/prettyCommon"
+      responses:
+        "200":
+          description: The operation was executed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConformanceDeclaration"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/htmlSchema"
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "500":
+          description: Server Error
+  /collections:
+    get:
+      tags:
+      - Discover data collections
+      summary: "feature collections in the dataset 'Buildings (Part 4 ATS, without\
+        \ CRS support)'"
+      description: |-
+        The dataset is organized in feature collections. This resource provides information about and access to the feature collections.
+        The response contains the list of collections. For each collection, a link to the items in the collection (path `/collections/{collectionId}/items`, link relation `items`) as well as key information about the collection.
+        This information includes:
+
+        * A local identifier for the collection that is unique for the dataset;
+        * A title and description for the collection;
+        * An indication of the spatial and temporal extent of the data in the collection;
+        * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
+        * The CRS in which the spatial geometries are stored in the data source (if data is requested in this CRS, the geometries are returned without any coordinate conversion);
+        * An indicator about the type of the items in the collection (the default value is 'feature').
+      operationId: getCollections
+      parameters:
+      - $ref: "#/components/parameters/fCollections"
+      - $ref: "#/components/parameters/prettyCommon"
+      responses:
+        "200":
+          description: The operation was executed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collections"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/htmlSchema"
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "500":
+          description: Server Error
+  /collections/buildings:
+    get:
+      tags:
+      - Discover data collections
+      summary: feature collection 'Buildings'
+      description: |-
+        Information about the feature collection with id 'buildings'. The response contains a link to the items in the collection (path `/collections/{collectionId}/items`,link relation `items`) as well as key information about the collection. This information includes:
+
+        * A local identifier for the collection that is unique for the dataset;
+        * A title and description for the collection;
+        * An indication of the spatial and temporal extent of the data in the collection;
+        * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
+        * The CRS in which the spatial geometries are stored in the data source (if data is requested in this CRS, the geometries are returned without any coordinate conversion);
+        * An indicator about the type of the items in the collection (the default value is 'feature').
+      operationId: buildings.getCollection
+      parameters:
+      - $ref: "#/components/parameters/fCollection"
+      - $ref: "#/components/parameters/prettyCommon"
+      responses:
+        "200":
+          description: The operation was executed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collection"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/htmlSchema"
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "500":
+          description: Server Error
+  /collections/buildings/items:
+    get:
+      tags:
+      - Access data
+      summary: retrieve features in the feature collection 'buildings'
+      description: |-
+        The response is a document consisting of features in the collection. The features included in the response are determined by the server based on the query parameters of the request.
+
+        To support access to larger collections without overloading the client, the API supports paged access with links to the next page, if more features are selected that the page size (maximum page size is 10000).
+
+        The `bbox` and `datetime` parameter can be used to select only a subset of the features in the collection (the features that are in the bounding box or time interval). The `bbox` parameter matches all features in the collection that are not associated with a location, too. The `datetime` parameter matches all features in the collection that are not associated with a time stamp or interval, too. The `limit` parameter may be used to control the subset of the selected features that should be returned in the response, the page size. Each page may include information about the number of selected and returned features (`numberMatched` and `numberReturned`) as well as links to support paging (link relation `next`).
+
+        See the details of this operation for a description of additional query parameters supported by this resource.
+      operationId: buildings.getItems
+      parameters:
+      - $ref: "#/components/parameters/bbox"
+      - $ref: "#/components/parameters/datetime"
+      - $ref: "#/components/parameters/fFeatures"
+      - $ref: "#/components/parameters/limitFeatures_buildings"
+      - $ref: "#/components/parameters/offsetFeatures"
+      - $ref: "#/components/parameters/prettyFeatures"
+      - $ref: "#/components/parameters/profileFeatures_buildings"
+      responses:
+        "200":
+          description: The operation was executed successfully.
+          headers:
+            Content-Bounding-Box:
+              $ref: "#/components/headers/Content-Bounding-Box"
+            Content-Temporal-Extent:
+              $ref: "#/components/headers/Content-Temporal-Extent"
+            Link:
+              $ref: "#/components/headers/LinkInResponse"
+          content:
+            application/geo+json:
+              schema:
+                $ref: "#/components/schemas/featureCollectionGeoJson_buildings"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/htmlSchema"
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "500":
+          description: Server Error
+    post:
+      tags:
+      - Mutate data
+      summary: add a feature in the feature collection 'buildings'
+      description: The content of the request is a new feature in one of the supported
+        encodings. The URI of the new feature is returned in the header `Location`.
+      operationId: buildings.createItem
+      parameters:
+      - $ref: "#/components/parameters/LinkInRequest"
+      - $ref: "#/components/parameters/PreferCrudFeature"
+      requestBody:
+        description: The new resource to be created.
+        content:
+          application/geo+json:
+            schema:
+              $ref: "#/components/schemas/anyObject"
+        required: false
+      responses:
+        "201":
+          description: The operation was executed successfully.
+          headers:
+            Location:
+              $ref: "#/components/headers/LocationCrudFeature"
+          content: {}
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "415":
+          description: Unsupported Media Type
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Server Error
+  /collections/buildings/items/{featureId}:
+    get:
+      tags:
+      - Access data
+      summary: retrieve a feature in the feature collection 'buildings'
+      description: "Fetch the feature with id `{featureId}`."
+      operationId: buildings.getItem
+      parameters:
+      - $ref: "#/components/parameters/featureId"
+      - $ref: "#/components/parameters/fFeatures"
+      - $ref: "#/components/parameters/prettyFeatures"
+      - $ref: "#/components/parameters/profileFeatures_buildings"
+      responses:
+        "200":
+          description: The operation was executed successfully.
+          headers:
+            Content-Bounding-Box:
+              $ref: "#/components/headers/Content-Bounding-Box"
+            Content-Temporal-Extent:
+              $ref: "#/components/headers/Content-Temporal-Extent"
+            Link:
+              $ref: "#/components/headers/LinkInResponse"
+          content:
+            application/geo+json:
+              schema:
+                $ref: "#/components/schemas/featureGeoJson_buildings"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/htmlSchema"
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "406":
+          description: Not Acceptable
+        "500":
+          description: Server Error
+    put:
+      tags:
+      - Mutate data
+      summary: update a feature in the feature collection 'buildings'
+      description: "The content of the request is a feature in one of the supported\
+        \ encodings. The id of the updated feature is `{featureId}`."
+      operationId: buildings.replaceItem
+      parameters:
+      - $ref: "#/components/parameters/featureId"
+      - $ref: "#/components/parameters/LinkInRequest"
+      - $ref: "#/components/parameters/PreferCrudFeature"
+      requestBody:
+        description: The resource to be updated.
+        content:
+          application/geo+json:
+            schema:
+              $ref: "#/components/schemas/anyObject"
+        required: false
+      responses:
+        "204":
+          description: The operation was executed successfully.
+          content: {}
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "412":
+          description: Precondition Failed
+        "415":
+          description: Unsupported Media Type
+        "500":
+          description: Server Error
+    delete:
+      tags:
+      - Mutate data
+      summary: delete a feature in the feature collection 'buildings'
+      description: "The feature with id `{featureId}` will be deleted."
+      operationId: buildings.deleteItem
+      parameters:
+      - $ref: "#/components/parameters/featureId"
+      responses:
+        "204":
+          description: The operation was executed successfully.
+          content: {}
+        "404":
+          description: Not Found
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Server Error
+    patch:
+      tags:
+      - Mutate data
+      summary: update a feature in the feature collection 'buildings'
+      description: "The content of the request is a JSON merge patch document (RFC\
+        \ 7396). The id of the updated feature is `{featureId}`."
+      operationId: buildings.updateItem
+      parameters:
+      - $ref: "#/components/parameters/featureId"
+      - $ref: "#/components/parameters/LinkInRequest"
+      requestBody:
+        description: The resource to be updated.
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: "#/components/schemas/anyObject"
+          application/geo+json:
+            schema:
+              $ref: "#/components/schemas/anyObject"
+        required: false
+      responses:
+        "204":
+          description: The operation was executed successfully.
+          content: {}
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "412":
+          description: Precondition Failed
+        "415":
+          description: Unsupported Media Type
+        "500":
+          description: Server Error
+  /collections/buildings/queryables:
+    get:
+      tags:
+      - Discover data collections
+      summary: retrieve the queryables of the feature collection 'buildings'
+      description: |-
+        The Queryables resources identifies the properties that can be referenced in filter expressions to select specific features that meet the criteria identified in the filter. The response is a JSON Schema document that describes a single JSON object where each property is a queryable.
+
+        Note: The queryables schema does not specify a schema of any object that can be retrieved from the API.
+
+        The descriptive metadata (title and description of the property) as well as the schema information (data type and constraints like a list of allowed values or minimum/maxmimum values are provided to support clients to constructmeaningful queries for the data.
+      operationId: buildings.getQueryables
+      parameters:
+      - $ref: "#/components/parameters/fQueryables"
+      - $ref: "#/components/parameters/prettyCommon"
+      responses:
+        "200":
+          description: The operation was executed successfully.
+          content:
+            application/schema+json:
+              schema:
+                $ref: "#/components/schemas/anyObject"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/htmlSchema"
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "500":
+          description: Server Error
+  /collections/buildings/schema:
+    get:
+      tags:
+      - Discover data collections
+      summary: retrieve the schema of features in the feature collection 'buildings'
+      operationId: buildings.getSchema
+      parameters:
+      - $ref: "#/components/parameters/fSchema"
+      - $ref: "#/components/parameters/prettyCommon"
+      - $ref: "#/components/parameters/profileSchema_buildings"
+      responses:
+        "200":
+          description: The operation was executed successfully.
+          content:
+            application/schema+json:
+              schema:
+                $ref: "#/components/schemas/anyObject"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/htmlSchema"
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "500":
+          description: Server Error
+components:
+  schemas:
+    Link:
+      required:
+      - href
+      - rel
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+        rel:
+          type: string
+        type:
+          type: string
+        title:
+          type: string
+    LandingPage:
+      required:
+      - links
+      type: object
+      properties:
+        description:
+          type: string
+        title:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+    htmlSchema:
+      type: string
+      example: <html>...</html>
+    ConformanceDeclaration:
+      required:
+      - conformsTo
+      - links
+      type: object
+      properties:
+        conformsTo:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        title:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+    Collections:
+      required:
+      - collections
+      - links
+      type: object
+      properties:
+        crs:
+          type: array
+          items:
+            type: string
+        collections:
+          type: array
+          items:
+            $ref: "#/components/schemas/Collection"
+        description:
+          type: string
+        title:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+    InstantArray:
+      type: array
+      items:
+        type: string
+        format: date-time
+    InstantArrayArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/InstantArray"
+    Extent:
+      type: object
+      properties:
+        temporal:
+          $ref: "#/components/schemas/TemporalExtent"
+        spatial:
+          $ref: "#/components/schemas/SpatialExtent"
+    doubleArrayArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/doubleArray"
+    TemporalExtent:
+      required:
+      - interval
+      - trs
+      type: object
+      properties:
+        interval:
+          $ref: "#/components/schemas/InstantArrayArray"
+        trs:
+          type: string
+    doubleArray:
+      type: array
+      items:
+        type: number
+    Collection:
+      required:
+      - id
+      - links
+      type: object
+      properties:
+        crs:
+          type: array
+          items:
+            type: string
+        itemType:
+          type: string
+        storageCrs:
+          type: string
+        extent:
+          $ref: "#/components/schemas/Extent"
+        storageCrsCoordinateEpoch:
+          type: number
+        id:
+          type: string
+        description:
+          type: string
+        title:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+    SpatialExtent:
+      required:
+      - bbox
+      - crs
+      type: object
+      properties:
+        crs:
+          type: string
+        bbox:
+          $ref: "#/components/schemas/doubleArrayArray"
+    featureCollectionGeoJson_buildings:
+      required:
+      - features
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: "#/components/schemas/featureGeoJson_buildings"
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+        timeStamp:
+          type: string
+          description: This property indicates the time and date when the response
+            was generated.
+          format: date-time
+          example: 2017-08-17T08:05:32Z
+        numberMatched:
+          minimum: 0
+          type: integer
+          properties:
+            numberReturned:
+              minimum: 0
+              type: integer
+              description: |-
+                The number of features in the feature collection.
+
+                A server may omit this information in a response, if the information about the number of features is not known or difficult to compute.
+
+                If the value is provided, the value shall be identical to the number of items in the "features" array.
+              format: int32
+              example: 10
+          description: The number of features of the feature type that match the selection
+            parameters like `bbox`.
+          format: int32
+          example: 127
+    featureGeoJson_buildings:
+      title: Buildings
+      required:
+      - geometry
+      - properties
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+        id:
+          type: string
+          readOnly: true
+        geometry:
+          $ref: https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/ogcapi-features-1.yaml#/components/schemas/polygonGeoJSON
+        properties:
+          required:
+          - function
+          type: object
+          properties:
+            name:
+              type: string
+            function:
+              type: string
+              nullable: false
+              enum:
+              - residential
+              - commercial
+              - public
+              - other
+            height:
+              type: number
+            owner:
+              type: string
+            updated:
+              type: string
+              format: date-time
+              readOnly: true
+      description: "Test dataset for OGC API - Features - Part 4 (draft), Annex A"
+    anyObject:
+      type: object
+  parameters:
+    fCommon:
+      name: f
+      in: query
+      description: "Select the output format of the response. If no value is provided,\
+        \ the standard HTTP rules apply, i.e., the accept header will be used to determine\
+        \ the format."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+        - html
+        - json
+    prettyCommon:
+      name: pretty
+      in: query
+      description: Controls whether the response content should be pretty-printed.
+        Only applicable for JSON responses.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: boolean
+        default: false
+    fCollections:
+      name: f
+      in: query
+      description: "Select the output format of the response. If no value is provided,\
+        \ the standard HTTP rules apply, i.e., the accept header will be used to determine\
+        \ the format."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+        - html
+        - json
+    fCollection:
+      name: f
+      in: query
+      description: "Select the output format of the response. If no value is provided,\
+        \ the standard HTTP rules apply, i.e., the accept header will be used to determine\
+        \ the format."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+        - html
+        - json
+    bbox:
+      name: bbox
+      in: query
+      description: "Only features that have a geometry that intersects the bounding\
+        \ box are selected. The bounding box is provided as four numbers:\n\n* Lower\
+        \ left corner, coordinate axis 1 \n* Lower left corner, coordinate axis 2\
+        \ \n* Upper right corner, coordinate axis 1 \n* Upper right corner, coordinate\
+        \ axis 2 \nThe coordinate reference system of the values is WGS 84 longitude/latitude\
+        \ (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate\
+        \ reference system is specified in the parameter `bbox-crs`. For WGS 84 longitude/latitude\
+        \ the values are in most cases the sequence of minimum longitude, minimum\
+        \ latitude, maximum longitude and maximum latitude. However, in cases where\
+        \ the box spans the antimeridian the first value (west-most box edge) is larger\
+        \ than the third value (east-most box edge)."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        oneOf:
+        - maxItems: 4
+          minItems: 4
+        - maxItems: 6
+          minItems: 6
+        items:
+          type: number
+          format: double
+    datetime:
+      name: datetime
+      in: query
+      description: |-
+        Either a date-time or an interval. Date and time expressions adhere to RFC 3339.
+        Intervals may be bounded or half-bounded (double-dots at start or end).
+        Examples:
+
+        * A date-time: "2018-02-12T23:20:50Z"
+        * A bounded interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+        * Half-bounded intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+
+        Only features that have a temporal property that intersects the value of `datetime` are selected.
+      required: false
+      style: form
+      explode: false
+      schema:
+        pattern: "^(?:\\d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$|^(?:[nN][oO][wW])$|^(?:(?:\\\
+          d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])|(?:\\.\\.)?|(?:[nN][oO][wW]))/(?:(?:\\\
+          d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])|(?:\\.\\.)?|(?:[nN][oO][wW]))$|^(?:\\\
+          d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):(?:[0-5][0-9]):(?:[0-5][0-9]|60)(?:\\\
+          .[0-9]+)?(Z|(\\+|-)(?:[01][0-9]|2[0-3]):(?:[0-5][0-9]))$|^(?:(?:\\d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):(?:[0-5][0-9]):(?:[0-5][0-9]|60)(?:\\\
+          .[0-9]+)?(Z|(\\+|-)(?:[01][0-9]|2[0-3]):(?:[0-5][0-9]))|(?:\\.\\.)?|(?:[nN][oO][wW]))/(?:(?:\\\
+          d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):(?:[0-5][0-9]):(?:[0-5][0-9]|60)(?:\\\
+          .[0-9]+)?(Z|(\\+|-)(?:[01][0-9]|2[0-3]):(?:[0-5][0-9]))|(?:\\.\\.)?|(?:[nN][oO][wW]))$"
+        type: string
+    fFeatures:
+      name: f
+      in: query
+      description: "Select the output format of the response. If no value is provided,\
+        \ the standard HTTP rules apply, i.e., the accept header will be used to determine\
+        \ the format."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+        - html
+        - json
+    limitFeatures_buildings:
+      name: limit
+      in: query
+      description: |-
+        The optional limit parameter limits the number of items that are presented in the response document. If more items are selected, only the number of items as specified with the limit parameter are included in the response document. That is, the results is provided in pages ('paging'). Only items are counted that are on the first level of the collection in the response document. Nested objects contained within the explicitly requested items are not counted. If the value is higher than the maximum value, the maximum value is used instead of the parameter value.
+        If no parameter value is provided, the default value applies. If more items are available, a link to the next page with more results is provided with the response (link relation type: 'next'). To avoid receiving the result in pages, try to set the limit parameter to the maximum value.
+      required: false
+      style: form
+      explode: false
+      schema:
+        maximum: 10000
+        minimum: 1
+        type: integer
+        format: int32
+        default: 10
+    offsetFeatures:
+      name: offset
+      in: query
+      description: The optional offset parameter identifies the index of the first
+        feature in the response in the overall result set.
+      required: false
+      style: form
+      explode: false
+      schema:
+        minimum: 0
+        type: integer
+        format: int32
+        default: 0
+    prettyFeatures:
+      name: pretty
+      in: query
+      description: Controls whether the response content should be pretty-printed.
+        Only applicable for JSON responses.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: boolean
+        default: false
+    profileFeatures_buildings:
+      name: profile
+      in: query
+      description: "Select the profiles to be used in the response. If no value is\
+        \ provided, the default profiles will be used."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - all-as-receivable
+    featureId:
+      name: featureId
+      in: path
+      description: "The local identifier of a feature, unique within the feature collection."
+      required: true
+      schema:
+        pattern: "[^/ ]+"
+        type: string
+    LinkInRequest:
+      name: Link
+      in: header
+      description: Links associated with the payload of the request. See RFC 8288
+        for the syntax.
+      schema:
+        type: string
+    PreferCrudFeature:
+      name: Prefer
+      in: header
+      description: "'handling=strict' creates or replaces the feature after successful\
+        \ validation. Status 400 is returned, if validation fails. 'handling=lenient'\
+        \ (the default) creates or replaces the feature without validation."
+      schema:
+        type: string
+        default: handling=lenient
+        enum:
+        - handling=strict
+        - handling=lenient
+    fQueryables:
+      name: f
+      in: query
+      description: "Select the output format of the response. If no value is provided,\
+        \ the standard HTTP rules apply, i.e., the accept header will be used to determine\
+        \ the format."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+        - html
+        - json
+    fSchema:
+      name: f
+      in: query
+      description: "Select the output format of the response. If no value is provided,\
+        \ the standard HTTP rules apply, i.e., the accept header will be used to determine\
+        \ the format."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+        - html
+        - json
+    profileSchema_buildings:
+      name: profile
+      in: query
+      description: "Select the profiles to be used in the response. If no value is\
+        \ provided, the default profiles will be used."
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - validation-returnables-geojson
+          - validation-receivables-geojson
+  headers:
+    Content-Bounding-Box:
+      description: "The bounding box of the coordinates in the response. The coordinates\
+        \ are in the coordinate reference system provided in the 'Content-Crs' header.\
+        \ The header is only provided, if the response is not streamed."
+      schema:
+        maxItems: 4
+        minItems: 4
+        type: array
+        items:
+          type: number
+    Content-Temporal-Extent:
+      description: "The temporal extent of the features in the response. The values\
+        \ are seconds since epoch. The header is only provided, if the response is\
+        \ not streamed."
+      schema:
+        type: object
+        properties:
+          start:
+            minimum: 0
+            type: integer
+            format: int32
+          end:
+            minimum: 0
+            type: integer
+            format: int32
+    LinkInResponse:
+      description: Links associated with the resource in the response. See RFC 8288
+        for the syntax.
+      schema:
+        type: string
+    LocationCrudFeature:
+      description: The URI of the feature that has been created.
+      schema:
+        type: string
+        format: uri
