@@ -1,28 +1,27 @@
-[[return-created-resource_clause]]
-== Requirements Class "Return Created Resource"
+[[return-response-representation-in-response_clause]]
+== Requirements Class "Return Resource Representation in Response"
 
-[[return-create-resource-overview]]
+[[return-resource-representation-in-response-overview]]
 === Overview
 
-include::requirements/requirements_class_return_created-resource.adoc[]
+include::requirements/requirements_class_return-resource-representation-in-response.adoc[]
 
 A server that implements this requirements class provides the ability to return
-a representation of a newly created resource in the response body of a
-<<create,create resource>> operation.
+a representation of a newly created or modified resource in the response body of a <<create,create>>, <<replace,replace>> or <<update,update>>  operation.
 
 
-[[return-created-resource-header]]
+[[return-resource-representation-in-response-header]]
 === Return-Created-Resource header
 
 ==== Definition
 
-include::requirements/return-created-resource/REQ_header.adoc[]
+include::requirements/return-resource-representation-in-response/REQ_header.adoc[]
 
 ==== Response
 
-include::requirements/return-created-resource/REQ_response.adoc[]
+include::requirements/return-resource-representation-in-response/REQ_response.adoc[]
 
-include::requirements/return-created-resource/REQ_representation.adoc[]
+include::requirements/return-resource-representation-in-response/REQ_representation.adoc[]
 
 ==== Exceptions
 
@@ -39,7 +38,7 @@ returned in the response body of the <<create,create operation>>.
      |                                                               |
      |   POST <resources endpoint>   HTTP/1.1                        |
      |   Content-Type: <media type of resource representation>       |
-     |   Return-Created-Resource: true                               |
+     |   Prefer: return=representation                               |
      |   Accept: <media type of returned resource representation>    |
      |                                                               |
      |   ... Body contains representation of the resource ...        |
