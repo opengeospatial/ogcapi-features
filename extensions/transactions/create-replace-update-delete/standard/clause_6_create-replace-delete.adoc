@@ -20,11 +20,15 @@ Finally, the HTTP DELETE method is used to remove a resource from a collection.
 
 Adding or replacing a resource requires that a representation of that resource
 be provided by the client.  This Standard does not mandate that a specific
-resource encoding be supported by a server.
+resource encoding be supported by a server. The client declares the media type
+of the resource representation in the request body in the `Content-Type` header
+(see <<mediatypes,Media Types>>).
+
+include::recommendations/create-replace-delete/PER_content-type-lenient.adoc[]
 
 NOTE: The use of the HTTP PATCH method is not defined in this requirements class.  The <<rc_update,Update>> requirements class defines the use of the HTTP PATCH method.
 
-NOTE: In order to promote interoperability, each OGC Standard that extends this Standard should make recommendations concerning the representation of resources.  See <<features,Features>> for a discussion of feature representations.
+NOTE: In order to promote interoperability, each OGC Standard that extends this Standard should make recommendations concerning the representation of resources.  See <<features_clause,Features>> for a discussion of feature representations.
 
 include::requirements/create-replace-delete/REQ_methods.adoc[]
 
@@ -176,6 +180,8 @@ include::requirements/create-replace-delete/replace/REQ_put-op.adoc[]
 
 include::recommendations/create-replace-delete/replace/PER_create.adoc[]
 
+NOTE: If a server supports the PUT method on non-existing resources (Permission <<per_create-replace-delete_put-create,/per/create-replace-delete/put-create>>), the PUT method acts as an "upsert" operation: If a resource with the resource identifier stated in the request URI exists, the resource is replaced (update); otherwise, a new resource with that identifier is created (insert).
+
 ==== Request body
 
 ==== Overview 
@@ -266,7 +272,7 @@ include::../examples/json/ex04_delete.adoc[]
 
 ==== Overview
 
-A server is not required to implement every method described in this Standard (i.e. POST, PUT, <<update_clause,PATCH>> or DELETE) for every mutable resource that it offers.  Furthermore, a server that supports the ability to add, modify or remove resources from collections is not likely to be an open server.  That is, access to the server, and specifically the operations that allow resource creation, modification and/or removal, will be controlled.  Such controls might, for example, take the form of policy requirements (e.g. resources on this server can be inserted or updated but not deleted) or user access control requirements (e.g. user "X" is only allowed to create resources but not update or delete resources).  Regardless of the controls the server must be able to advertise, within the control context in place, which methods are available for each resource that it offers.  This is accomplished using the https://www.rfc-editor.org/rfc/rfc2616.html#section-9.2[HTTP OPTIONS] method.
+A server is not required to implement every method described in this Standard (i.e. POST, PUT, PATCH or DELETE) for every mutable resource that it offers.  Furthermore, a server that supports the ability to add, modify or remove resources from collections is not likely to be an open server.  That is, access to the server, and specifically the operations that allow resource creation, modification and/or removal, will be controlled.  Such controls might, for example, take the form of policy requirements (e.g. resources on this server can be inserted or updated but not deleted) or user access control requirements (e.g. user "X" is only allowed to create resources but not update or delete resources).  Regardless of the controls the server must be able to advertise, within the control context in place, which methods are available for each resource that it offers.  This is accomplished using the https://www.rfc-editor.org/rfc/rfc9110#OPTIONS[HTTP OPTIONS] method.
 
 The HTTP OPTIONS method allows the server to explicitly declare which HTTP methods are supported for a particular resource(s) endpoint.  This Standard deals with the HTTP POST, PUT, PATCH and DELETE methods but any relevant HTTP method may be listed for a particular resource.
 
