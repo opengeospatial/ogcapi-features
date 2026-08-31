@@ -319,6 +319,20 @@ include::recommendations/create-replace-delete/options/PER_other-methods.adoc[]
 
 include::recommendations/create-replace-delete/options/PER_res-body.adoc[]
 
+==== HTTP Link Hints (informative)
+
+Managing transactional capabilities requires clients to dynamically discover what mutation operations, encodings, and schemas an endpoint supports. While standard HTTP `OPTIONS` responses traditionally convey supported methods only through header fields such as `Allow`, returning a response body structured according to the https://www.ietf.org/archive/id/draft-ietf-httpapi-link-hint-02.html[IETF **HTTP Link Hints**] specification provides a standardized, machine-readable representation of endpoint capabilities. In this context, issuing an `OPTIONS` request against a collection (`/collections/{collectionId}/items`) or an individual feature resource (`/collections/{collectionId}/items/{featureId}`) yields a structured JSON object detailing allowed interactions before a mutation is attempted.
+
+Using Link Hints in the OPTIONS body allows the server to explicitly advertise actionable metadata, including supported HTTP methods (allow), acceptable request payload encodings for mutations (accept-post, accept-patch, accept-put), required authorization mechanisms via auth-schemes, and client-negotiation preferences via accept-prefer.  By communicating auth-schemes (such as Bearer or OAuth 2.0 flows) and accept-prefer directives (such as return=representation, return=minimal, or respond-async), the server signals both security prerequisites and operational behaviors up front. By including accept-prefer hints, the server can indicate which RFC 7240 Prefer header directives it understands—such as return=representation versus return=minimal on creation/updates, handling asynchronous processing (respond-async), or applying specific error-handling modes. 
+
+This structured capability discovery eliminates speculative request failures and reduces unnecessary round trips, enabling adaptive geospatial clients to authenticate correctly, tailor their payloads, and negotiate server responses strictly within the supported capabilities of the target endpoint.
+
+==== Cross-origin requests
+
+General HTTP discovery and cross-origin requests can be combined into a single HTTP OPTIONS request that includes the standard CORS preflight request headers (`Origin` and `Access-Control-Request-Method`) while targeting the specific resource URI.  When the server handles this request, it satisfies the CORS preflight verification by returning the `Access-Control-Allow-Origin` and `Access-Control-Allow-Methods` headers, and simultaneously answers the general HTTP method discovery requirement by returning the standard `Allow` response header (e.g., Allow: GET, POST, PUT, OPTIONS) along with a 200 OK or 204 No Content status code. Combining the CORS-specific access control headers with the native HTTP Allow header in the single OPTIONS response allows the client to verify both cross-origin permissions and all supported methods for that resource in one round-trip.
+
+NOTE: Servers may need to use the `Access-Control-Expose-Headers` response header to whitelist which headers client-side JavaScript is permitted to read.  When using the OPTIONS method for HTTP discovery, this allows the client to access the `Allow` header (e.g. `Access-Control-Expose-Headers: Allow`).
+
 ==== Exceptions
 
 See <<http_status_codes,HTTP status codes>>.
