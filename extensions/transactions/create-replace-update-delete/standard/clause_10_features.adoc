@@ -86,6 +86,8 @@ include::../examples/json/schema.adoc[]
 
 <<rfc7396,RFC 7396 (JSON Merge Patch)>> can be used to update selected properties of a feature, if the schema of the feature as described in the previous sub-clause is available. This is independent of the feature encodings supported by the API.
 
+NOTE: If a server accepts GeoJSON (with or without JSON-FG extensions) as the payload of a CREATE or REPLACE operation, it is more consitent and intuitive to apply the JSON Merge Path payload against the GeoJSON representation (with or without JSON-FG extensions).
+
 include::requirements/features/REQ_update-json-merge-patch.adoc[]
 
 [NOTE]
