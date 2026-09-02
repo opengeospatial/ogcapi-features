@@ -319,6 +319,25 @@ include::recommendations/create-replace-delete/options/PER_other-methods.adoc[]
 
 include::recommendations/create-replace-delete/options/PER_res-body.adoc[]
 
+==== HTTP Link Hints
+
+Managing transactional capabilities requires clients to dynamically discover what mutation operations and encodings an endpoint supports. While HTTP `OPTIONS` responses traditionally convey supported methods and characteristics through header fields such as `Allow` or `Accept-Post`, returning a response body with a `self` link to the resource can provide a standardized, machine-readable representation of endpoint capabilities. The hint vocabulary specified in the <<link-hints,HTTP Link Hints>> Internet-Draft is a candidate for additional information to include in such a link. Link hints are target attributes of a web link. A link serialization has to be selected. Examples are a JSON object with a `links` member with an array that includes a `self` link to the resource, with the hints as additional members of that link object, or the `application/link-format` media type specified in <<rfc6690,RFC 6690>>. Hint values are expressed using HTTP Structured Fields; the value of every hint mentioned below is a list of strings, which maps to a JSON array of strings.
+
+In this context, issuing an `OPTIONS` request against a feature collection (`/collections/{collectionId}/items`) or an individual feature resource (`/collections/{collectionId}/items/{featureId}`) yields a structured link detailing allowed interactions before a mutation is attempted.
+
+Hints that are relevant to the operations specified in this Standard include:
+
+- `allow` (the HTTP methods that can be used with the resource, that is, the same information as in the `Allow` header);
+- `accept-post` and `accept-patch` (the media types that the resource accepts in the request body of a CREATE or UPDATE operation, that is, the same information as in the `Accept-Post` and `Accept-Patch` headers);
+- `formats` (which, for a resource that allows PUT, includes the media types accepted in a REPLACE operation, for which no response header field is defined);
+- `precondition-req` (whether the resource expects a precondition in state-changing requests, where the values `etag` and `last-modified` correspond to the <<rc_optimistic-locking-etags,Optimistic Locking using ETags>> and <<rc_optimistic-locking-timestamps,Optimistic Locking using Timestamps>> requirements classes);
+- `accept-prefer` (the preferences specified in <<rfc7240,RFC 7240>> that the resource understands, for example `handling=strict` and `handling=lenient`, see the <<rc_handling,Handling Preference>> requirements class); and
+- `auth-schemes` (the HTTP authentication schemes that the resource requires).
+
+Link hints are advisory. As stated in the Internet-Draft, they are not a contract and the behavior of the resource at the time of the request always overrides the hinted information. A client can use hints to select an acceptable media type or to avoid a request that the server is known not to support, which reduces the number of round trips, but it still has to handle error responses.
+
+The Internet-Draft also establishes an IANA registry for link hints, so that the vocabulary can be extended. A hint that declares the coordinate reference systems in which a server accepts geometries in CREATE, REPLACE, and UPDATE requests — in particular, a restriction to the `storageCrs` of the collection, see Recommendation <<rec_features_crs-storage-crs,/rec/features/crs/storage-crs>> — would be a candidate for such an extension. Since this is not specific to features, any normative provision would be specified in a future version of this Standard or in a general OGC API Standard, once the Internet-Draft has been published as an RFC.
+
 ==== Exceptions
 
 See <<http_status_codes,HTTP status codes>>.
