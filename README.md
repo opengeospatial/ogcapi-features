@@ -120,7 +120,7 @@ If you are on OGC Agora, here is the link to the [Features API SWG](https://agor
 
 The OGC Features API SWG has identified the following extensions as the highest priority:
 
-* [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r1.html)
+* [OGC API - Features - Part 4/OGC API - Common - Part 5: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002r2.html)
   * The draft has passed the Public Comment Period and is being prepared for the approval process.
 * [OGC API - Features - Part 6: Property Selection](https://docs.ogc.org/DRAFTS/24-019.html)
   * The draft is an initial, complete draft.
