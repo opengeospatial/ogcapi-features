@@ -1,0 +1,132 @@
+=== Conformance Class "Return Resource Representation in Response"
+
+:conf-class: return-resource-representation-in-response
+[[conf_return-resource-representation-in-response]]
+[cols="1,4a",width="90%"]
+|===
+2+|*Conformance Class*
+2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
+|Target type |Web API
+|Requirements class |<<rc_return-resource-representation-in-response,Requirements Class "Return Resource Representation in Response">>
+|Conditional Dependency |<<conf_update,Conformance Class "Update">>
+|===
+
+:conf-test: prefer
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_return-resource-representation-in-response_http-header,/req/return-resource-representation-in-response/http-header>>
+|Condition: | At least one mutable resource supports the CREATE, REPLACE or UPDATE operation.
+|Test purpose: | The server supports the return preference
+|Test method: |
+Given:
+
+* a mutable resource that supports the CREATE, REPLACE or UPDATE operation;
+* a valid request body for the operation and its media type (for the test dataset: `create-building.json`);
+
+When:
+
+* the operation is executed three times with the same request body and media type: without a `Prefer` header, with a `Prefer: return=representation` header, and with a `Prefer: return=minimal` header;
+
+Then:
+
+* assert that all three responses have a HTTP status code in the `2xx` range, that is, the server recognizes the `Prefer` header and the `return` preference and does not reject a request because of the preference.
+|===
+
+:conf-test: representation
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_return-resource-representation-in-response_response,/req/return-resource-representation-in-response/response>>
+|Condition: | At least one mutable resource supports the CREATE, REPLACE or UPDATE operation.
+|Test purpose: | A representation of the resource is returned, if the client prefers it
+|Test method: |
+Given:
+
+* a mutable resource that supports the CREATE, REPLACE or UPDATE operation;
+* a valid request body for the operation and its media type (for the test dataset: `create-building.json`);
+
+When:
+
+* the operation is executed with the request body, its media type in the `Content-Type` header and a `Prefer: return=representation` header;
+
+Then:
+
+* skip the remaining assertions, if the response has the HTTP status code `202` (the operation has been queued for processing);
+* assert that the response has the HTTP status code `200` or `201`;
+* assert that the response body is a representation of the newly created or modified resource and that it reflects the content submitted in the request body.
+|===
+
+:conf-test: minimal
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_return-resource-representation-in-response_response,/req/return-resource-representation-in-response/response>>
+|Condition: | At least one mutable resource supports the CREATE, REPLACE or UPDATE operation.
+|Test purpose: | No representation of the resource is returned, unless the client prefers it
+|Test method: |
+Given:
+
+* a mutable resource that supports the CREATE, REPLACE or UPDATE operation;
+* a valid request body for the operation and its media type (for the test dataset: `create-building.json`);
+
+When:
+
+* the operation is executed with the request body and its media type in the `Content-Type` header and a `Prefer: return=minimal` header;
+* the operation is executed with the same request body and media type, but without a `Prefer` header;
+
+Then:
+
+* skip the assertions for a request, if the response has the HTTP status code `202` (the operation has been queued for processing);
+* assert that neither response body is a representation of the newly created or modified resource.
+|===
+
+:conf-test: content-negotiation
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_return-resource-representation-in-response_representation,/req/return-resource-representation-in-response/representation>>
+|Condition: | The test /conf/{conf-class}/representation has been executed successfully.
+|Test purpose: | The returned representation is negotiated using HTTP content negotiation
+|Test method: |
+Given:
+
+* a mutable resource that supports the CREATE, REPLACE or UPDATE operation;
+* a valid request body for the operation and its media type (for the test dataset: `create-building.json`);
+* a media type that the server supports for the representation of the resource (for the test dataset: `application/geo+json`);
+
+When:
+
+* the operation is executed with the request body, its media type in the `Content-Type` header, a `Prefer: return=representation` header and the media type of the representation in the `Accept` header;
+
+Then:
+
+* skip the remaining assertions, if the response has the HTTP status code `202` (the operation has been queued for processing);
+* assert that the response includes a `Content-Type` header with the media type stated in the `Accept` header.
+|===
+
+:conf-test: preference-applied
+==== Conformance Test {counter:test-id}
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | /conf/{conf-class}/{conf-test}
+|Requirements: | <<req_return-resource-representation-in-response_preference-applied,/req/return-resource-representation-in-response/preference-applied>>
+|Condition: | The test /conf/{conf-class}/representation has been executed.
+|Test purpose: | Responses declare the applied return preference
+|Test method: |
+Given:
+
+* the request and response of the test /conf/{conf-class}/representation;
+
+When:
+
+* the response to the request with the `Prefer: return=representation` header includes a representation of the resource in the response body (the preference has been applied);
+
+Then:
+
+* assert that the response includes a `Preference-Applied` header with the value `return=representation`.
+|===

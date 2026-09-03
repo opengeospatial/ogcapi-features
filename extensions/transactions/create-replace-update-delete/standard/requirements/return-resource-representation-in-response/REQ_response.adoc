@@ -1,8 +1,8 @@
-[[rec_return-resource-representation-in-response_response]]
+[[req_return-resource-representation-in-response_response]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/return-resource-representation-in-response/response*
 ^|Condition |The server responds with a HTTP status code of 200 or 201.
 ^|A |A value of `representation` for the `return` preference SHALL indicate that the server SHALL return a representation of a newly created or modified resource in the response body of a <<create,create>>, <<replace,replace>> or <<update,update>> operation.
-^|B |A value of `minimal` or the absence of the `return` preference SHALL indiciate that a representation of a newly created or modified resource SHALL NOT be returned in the response body of a <<create,create>>, <<replace,replace>> or <<update,update>> operation.
+^|B |A value of `minimal` or the absence of the `return` preference SHALL indicate that a representation of a newly created or modified resource SHALL NOT be returned in the response body of a <<create,create>>, <<replace,replace>> or <<update,update>> operation.
 |===

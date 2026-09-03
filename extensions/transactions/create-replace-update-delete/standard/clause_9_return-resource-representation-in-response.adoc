@@ -1,4 +1,4 @@
-[[return-response-representation-in-response_clause]]
+[[return-resource-representation-in-response_clause]]
 == Requirements Class "Return Resource Representation in Response"
 
 [[return-resource-representation-in-response-overview]]
@@ -7,11 +7,11 @@
 include::requirements/requirements_class_return-resource-representation-in-response.adoc[]
 
 A server that implements this requirements class provides the ability to return
-a representation of a newly created or modified resource in the response body of a <<create,create>>, <<replace,replace>> or <<update,update>>  operation.
+a representation of a newly created or modified resource in the response body of a <<create,create>>, <<replace,replace>> or <<update,update>> operation.
 
 
 [[return-resource-representation-in-response-header]]
-=== Return-Created-Resource header
+=== Prefer header
 
 ==== Definition
 
@@ -23,13 +23,19 @@ include::requirements/return-resource-representation-in-response/REQ_response.ad
 
 include::requirements/return-resource-representation-in-response/REQ_representation.adoc[]
 
+include::recommendations/return-resource-representation-in-response/REC_media-type.adoc[]
+
+A client cannot in general determine from the response content alone whether the server has applied the `return` preference. The response therefore declares the preference that was applied:
+
+include::requirements/return-resource-representation-in-response/REQ_preference-applied.adoc[]
+
 ==== Exceptions
 
 See <<http_status_codes,HTTP status codes>>.
 
 ==== Example
 
-The following example illustrates the use of the `Return-Creates-Resource` 
+The following example illustrates the use of the `Prefer`
 HTTP header to request that a representation of the newly created resource be 
 returned in the response body of the <<create,create operation>>.
 
@@ -47,7 +53,7 @@ returned in the response body of the <<create,create operation>>.
      |   HTTP/1.1 201 Created                                        | 
      |   Location: <resource endpoint>                               |    
      |                                                               |
-     |   ... Response body containing represenation of created       |
+     |   ... Response body containing representation of created       |
      |       resource ...                                            |
      |<--------------------------------------------------------------|
 ....
