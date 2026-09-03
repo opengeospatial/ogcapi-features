@@ -652,7 +652,7 @@ def test_upd_update_rid():
         return
     if 400 <= r.status < 500:
         note(f"update-rid: the request was rejected with {r.status}, which for "
-             "features is required: /req/features/update-json-merge-patch B requires "
+             "features is required: /req/features/update-json-merge-patch C requires "
              "that a document which changes the property with the role 'id' is "
              "rejected (the requirement does not prescribe the status code)")
         return
@@ -1210,6 +1210,11 @@ def test_feat_json_merge_patch():
     if not declares("schemas"):
         raise Skip('the conformance declaration does not include the Conformance Class '
                    '"Returnables and Receivables"')
+    if not declares("geojson"):
+        raise Skip('the conformance declaration does not include the Conformance Class "GeoJSON"')
+    if not supports_media_type(GEOJSON, "CREATE"):
+        raise Skip("the collection does not support application/geo+json in CREATE "
+                   "requests (Accept-Post header of the OPTIONS response)")
     patch = DATA["update-building.json"]
     step("PATCH a JSON Merge Patch document: one property is changed, one added, "
          "one removed with null, and the primary geometry is replaced")
