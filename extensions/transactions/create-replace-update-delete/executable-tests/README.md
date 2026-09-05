@@ -92,3 +92,8 @@ The four skipped tests are the tests of the conformance class "Optimistic Lockin
 using ETags", which the implementation does not support. All other tests are 
 applicable and pass; that is, every requirement of this Standard was verified 
 against an implementation.
+
+The run predates the conformance class "Return Resource Representation in 
+Response". Its five tests have not been executed yet; the implementation does not 
+declare the conformance class, so they are reported as skipped until the test 
+deployment supports the `return` preference.

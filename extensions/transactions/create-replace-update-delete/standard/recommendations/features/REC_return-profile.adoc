@@ -1,0 +1,8 @@
+[[rec_features_return-profile]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/features/return-profile*
+^|Condition |Server implements <<return-resource-representation-in-response_clause>>
+^|A |If the response includes a representation of the feature in the same media type as the request body and the request declared a profile (<<rfc6906,RFC 6906>>) for the request body, the server SHOULD use the same profile in the response.
+^|B |The server SHOULD declare the profile of the representation in the response with a link with the link relation type `profile` in the `Link` header.
+|===

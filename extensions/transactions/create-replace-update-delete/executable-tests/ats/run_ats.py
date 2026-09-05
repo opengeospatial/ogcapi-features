@@ -4,7 +4,7 @@ Executable test runner for the Abstract Test Suite (Annex A) of the draft
 OGC API - Features - Part 4 / OGC API - Common - Part 5:
 Create, Replace, Update and Delete (OGC 20-002).
 
-Implements the 34 abstract tests. Each test evaluates its "Condition" row
+Implements the 39 abstract tests. Each test evaluates its "Condition" row
 against the conformance declaration of the Web API under test and the
 Mutable Resources test parameter; tests whose condition is not met are
 reported as SKIP. Only the Python 3 standard library is required.
@@ -46,7 +46,7 @@ PROFILE_JSONFG = "http://www.opengis.net/def/profile/OGC/0/jsonfg"
 CRS84 = "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
 
 # The conformance class URIs of this Standard and of the Standards that its
-# conformance classes depend on. The five conformance classes that are shared
+# conformance classes depend on. The six conformance classes that are shared
 # with OGC API - Common - Part 5 use the "ogcapi-common-5" URIs of the
 # conformance declaration table in clause 2, the Features conformance class is
 # specific to OGC API - Features - Part 4.
@@ -59,6 +59,8 @@ CONF = {
         "http://www.opengis.net/spec/ogcapi-common-5/1.0/conf/optimistic-locking-timestamps",
     "optimistic-locking-etags":
         "http://www.opengis.net/spec/ogcapi-common-5/1.0/conf/optimistic-locking-etags",
+    "return-resource-representation-in-response":
+        "http://www.opengis.net/spec/ogcapi-common-5/1.0/conf/return-resource-representation-in-response",
     "handling":
         "http://www.opengis.net/spec/ogcapi-common-5/1.0/conf/handling",
     "features":
@@ -289,6 +291,21 @@ def queued(resp):
         note(f"{resp.url}: 202 (queued) — remaining assertions skipped")
         return True
     return False
+
+
+def is_representation(resp):
+    """Does the response body contain a representation of the resource, rather
+    than no content or a status document?"""
+    if not resp.body or not resp.body.strip():
+        return False
+    ctype = (resp.header("Content-Type") or "").split(";")[0].strip().lower()
+    if ctype not in (GEOJSON, "application/json"):
+        return False
+    try:
+        doc = json.loads(resp.body)
+    except Exception:
+        return False
+    return isinstance(doc, dict) and doc.get("type") == "Feature"
 
 
 def last_modified_or_now(fid=None):
@@ -859,6 +876,101 @@ def test_ole_delete():
 
 
 # =====================================================================
+# Conformance Class "Return Resource Representation in Response"
+# =====================================================================
+
+RRR = "return-resource-representation-in-response"
+
+
+@ats(RRR, "prefer",
+     "The server supports the return preference")
+def test_rrr_prefer():
+    body = DATA["create-building.json"]
+    for prefer in (None, "return=representation", "return=minimal"):
+        hdrs = {"Prefer": prefer} if prefer else None
+        step("POST a valid feature " + (f"with 'Prefer: {prefer}'" if prefer
+             else "without a Prefer header") + ": the server recognizes the "
+             "preference and processes the request (2xx)")
+        r = rq("POST", items_url(), body, GEOJSON, headers=hdrs)
+        check(200 <= r.status < 300,
+              f"POST with a valid body {'and Prefer: ' + prefer if prefer else 'without a Prefer header'} "
+              f"must return 2xx", r)
+
+
+@ats(RRR, "representation",
+     "A representation of the resource is returned, if the client prefers it")
+def test_rrr_representation():
+    body = DATA["create-building.json"]
+    step("POST a valid feature with 'Prefer: return=representation': the response "
+         "contains a representation of the created feature")
+    r = rq("POST", items_url(), body, GEOJSON, accept=ACCEPT_FEATURE,
+           headers={"Prefer": "return=representation"})
+    if queued(r):
+        return
+    check(r.status in (200, 201),
+          "POST with Prefer: return=representation must return 200 or 201", r)
+    check(is_representation(r),
+          "the response body must contain a representation of the created resource", r)
+    feature_matches(body, r.json())
+    STATE["return-representation-response"] = r
+
+
+@ats(RRR, "minimal",
+     "No representation of the resource is returned, unless the client prefers it")
+def test_rrr_minimal():
+    body = DATA["create-building.json"]
+    for prefer in ("return=minimal", None):
+        hdrs = {"Prefer": prefer} if prefer else None
+        label = f"with 'Prefer: {prefer}'" if prefer else "without a Prefer header"
+        step(f"POST a valid feature {label}: the response does not contain a "
+             "representation of the created feature")
+        r = rq("POST", items_url(), body, GEOJSON, accept=ACCEPT_FEATURE, headers=hdrs)
+        if queued(r):
+            continue
+        check(not is_representation(r),
+              f"the response to a POST {label} must not contain a representation "
+              "of the created resource", r)
+
+
+@ats(RRR, "content-negotiation",
+     "The returned representation is negotiated using HTTP content negotiation")
+def test_rrr_content_negotiation():
+    step("POST a valid feature with 'Prefer: return=representation' and "
+         f"'Accept: {GEOJSON}': the representation is returned in the negotiated "
+         "media type")
+    r = rq("POST", items_url(), DATA["create-building.json"], GEOJSON, accept=GEOJSON,
+           headers={"Prefer": "return=representation"})
+    if queued(r):
+        return
+    if not is_representation(r):
+        raise Skip("the response does not contain a representation of the resource")
+    ctype = (r.header("Content-Type") or "").split(";")[0].strip().lower()
+    check(ctype == GEOJSON,
+          f"the representation must be returned as {GEOJSON}, got '{ctype}'", r)
+
+
+@ats(RRR, "preference-applied",
+     "Responses declare the applied return preference")
+def test_rrr_preference_applied():
+    r = STATE.get("return-representation-response")
+    if r is None:
+        step("POST a valid feature with 'Prefer: return=representation': the "
+             "response declares the applied preference in the Preference-Applied "
+             "header")
+        r = rq("POST", items_url(), DATA["create-building.json"], GEOJSON,
+               accept=ACCEPT_FEATURE, headers={"Prefer": "return=representation"})
+        if queued(r):
+            raise Skip("the operation was queued for processing")
+    if not is_representation(r):
+        raise Skip("the response does not include a representation, "
+                   "the return preference was not applied")
+    pa = r.header("Preference-Applied")
+    check(pa is not None, "the response must include a Preference-Applied header", r)
+    check("return=representation" in pa.replace(" ", ""),
+          f"the Preference-Applied header must be 'return=representation', got '{pa}'")
+
+
+# =====================================================================
 # Conformance Class "Handling Preference"
 # =====================================================================
 
@@ -1340,6 +1452,8 @@ CLASS_LABELS = {
     "update": 'Conformance Class "Update"',
     "optimistic-locking-timestamps": 'Conformance Class "Optimistic Locking using Timestamps"',
     "optimistic-locking-etags": 'Conformance Class "Optimistic Locking using ETags"',
+    "return-resource-representation-in-response":
+        'Conformance Class "Return Resource Representation in Response"',
     "handling": 'Conformance Class "Handling Preference"',
     "features": 'Conformance Class "Features"',
 }
