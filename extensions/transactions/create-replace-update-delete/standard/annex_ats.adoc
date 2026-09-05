@@ -23,7 +23,7 @@ Since the tests change resources, executable tests should be executed against a 
 
 A Web API under test can require authorization. Any Executable Test Suite implementing this test suite should implement the following security schemes supported by OpenAPI 3.1: HTTP Authentication schemes "basic" and "bearer", API keys, and OAuth2 flow "authorizationCode".
 
-If an operation is not executed immediately, but added to a processing queue (HTTP status code `202`), the state of the resource cannot be assessed directly after the response has been received. The tests in this test suite, therefore, skip assertions about the state of a resource for such responses. Since this Standard does not specify a mechanism to determine the outcome of a queued operation, executable tests may poll the resource endpoint until the change is visible or a timeout is reached, and then evaluate the assertions.
+If an operation is not executed immediately, but accepted for processing at a later time (HTTP status code `202`, see Permissions <<per_create-replace-delete_async,/per/create-replace-delete/async>> and <<per_update_async,/per/update/async>>), the state of the resource cannot be assessed directly after the response has been received. The tests in this test suite, therefore, skip assertions about the state of a resource for such responses. Since this Standard does not specify a mechanism to determine the outcome of a queued operation, executable tests may poll the resource endpoint until the change is visible or a timeout is reached, and then evaluate the assertions.
 
 [[test-dataset]]
 === Test dataset
