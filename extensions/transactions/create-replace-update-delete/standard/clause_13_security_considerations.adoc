@@ -2,6 +2,14 @@
 
 See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clause 11.
 
+This Standard does not specify how a server authenticates users or authorizes operations. These are general concerns of Web APIs that are not specific to geospatial resources and for which established mechanisms exist. Developers who are new to Web authentication may find the following resources useful as an introduction:
+
+* <<MDN-auth,MDN: HTTP authentication>> for the basic mechanics of HTTP authentication, that is, the `401` response, the `WWW-Authenticate` and `Authorization` headers, and the authentication schemes, including bearer tokens;
+* <<oauth-net,OAuth 2.0>>, <<Parecki,OAuth 2.0 Simplified>> and <<OIDC-intro,How OpenID Connect Works>> for an introduction to the concepts and flows of OAuth 2.0 (<<rfc6749,RFC 6749>>) and OpenID Connect (<<OIDC-core,OpenID Connect Core 1.0>>), and to JSON Web Tokens (<<rfc7519,RFC 7519>>), which are commonly used as bearer tokens;
+* <<rfc9700,RFC 9700 (Best Current Practice for OAuth 2.0 Security)>> and the OWASP <<OWASP-oauth2,OAuth2>> and <<OWASP-rest,REST Security>> cheat sheets for security best practices, for example, which OAuth 2.0 flows to use and how to validate tokens;
+* <<OpenAPI-security,OpenAPI Documentation: API Security>> for declaring the supported security schemes in the API definition (see also the example below);
+* <<TB14-WFS3,OGC Testbed-14: Next Generation Web APIs - WFS 3.0 Engineering Report>>, clauses 5.2 and 6.3.2, for an example of securing an OGC API Features implementation with OpenID Connect and OAuth 2.0, and <<TB14-Security,OGC Testbed-14: Security Engineering Report>> for a broader discussion of security in OGC Web APIs.
+
 Since CREATE, REPLACE, DELETE and UPDATE operations will change the resources and not "just" query them, servers will in almost all cases restrict the access to these operations.
 
 Users making modifications to resources need to:
