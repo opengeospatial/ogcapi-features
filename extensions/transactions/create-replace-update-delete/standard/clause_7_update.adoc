@@ -63,8 +63,9 @@ The status code depends on the server. If the server has updated the resource, t
 response is either `200`, if the response includes additional content such as the
 updated representation of the resource, or `204`, if the response has no additional content. 
 
-If the server will process the update request later, it will return a `202`. In this
-case, the processing can succeed or fail, without further notification to the client.
+include::recommendations/update/PER_async.adoc[]
+
+If the server does not execute the update request immediately, but accepts it for processing at a later time, the response has the HTTP status code `202`. In this case, the processing can succeed or fail, without further notification to the client. See <<async_processing,Asynchronous processing>>.
 
 include::requirements/update/REQ_rid.adoc[]
 
