@@ -23,6 +23,11 @@ api:
 - buildingBlock: CRUD
   enabled: true
   optimisticLockingLastModified: true
+  # the option behind "Prefer: return=representation"; the conformance class "Return
+  # Resource Representation in Response" is only declared where it is enabled
+  # (ldproxy v4.9 and later; earlier versions ignore the unknown option, so the
+  # five tests of that conformance class are reported as skipped)
+  returnRepresentation: true
 - buildingBlock: SCHEMA_VALIDATION
   enabled: true
 - buildingBlock: RESOURCES

@@ -11,9 +11,9 @@ reported as SKIP. Only the Python 3 standard library is required.
 
 The tests use the test dataset of this Standard (../standard/data): a feature
 collection with the features B.1, B.2, B.3 and the request bodies
-create-building.json, create-building-invalid.json, create-building-jsonfg.json,
-create-building.gml, replace-building.json, replace-building.gml and
-update-building.json.
+create-building.json, create-building-with-id.json,
+create-building-invalid.json, create-building-jsonfg.json, create-building.gml,
+replace-building.json, replace-building.gml and update-building.json.
 
 The Web API under test is identified by its landing page URI (--landing-page)
 and the collection that publishes the test dataset (--collection); see
@@ -34,7 +34,7 @@ import time
 import email.utils
 from datetime import datetime, timedelta, timezone
 from http.client import HTTPConnection, HTTPSConnection
-from urllib.parse import urlsplit, urljoin, quote
+from urllib.parse import urlsplit, urljoin, quote, unquote
 
 GEOJSON = "application/geo+json"
 MERGE_PATCH = "application/merge-patch+json"
@@ -272,6 +272,15 @@ def location_of(resp):
     return urljoin(resp.url + "/", loc)
 
 
+def check_location_id(resp, loc, feature):
+    """The Location header of a create states the URI of the new resource, so its
+    last path segment is the identifier that the server assigned to it."""
+    loc_id = unquote(urlsplit(loc).path.rstrip("/").rsplit("/", 1)[-1])
+    check(str(feature.get("id")) == loc_id,
+          f"the identifier of the new resource ({feature.get('id')!r}) must be the "
+          f"resource identifier in the Location header ({loc_id!r})", resp)
+
+
 def parse_http_date(value):
     try:
         return email.utils.parsedate_to_datetime(value)
@@ -473,6 +482,48 @@ def test_crd_create():
     feature_matches(body, new)
     check(new.get("id") not in ids_before,
           f"the identifier of the new resource ({new.get('id')!r}) must differ from existing identifiers")
+    check_location_id(r, loc, new)
+
+    # A request body that states an identifier: the server may use it as the
+    # identifier of the new resource or assign its own (/per/create-replace-delete/
+    # rid), and it may reject the request; in every case that creates a resource,
+    # the Location header states the identifier that the server assigned
+    # (/req/create-replace-delete/post-response B, /post-response-rid A).
+    body2 = DATA["create-building-with-id.json"]
+    ids_before2 = list_ids()
+    step("POST a valid new feature whose body states a resource identifier "
+         f"({body2['id']!r}): the server uses it or assigns its own — or rejects "
+         "the request — and the Location header states the identifier of the "
+         "created feature")
+    r2 = rq("POST", items_url(), body2, GEOJSON)
+    if queued(r2):
+        return
+    if 400 <= r2.status < 500:
+        note(f"create: a request body that states the identifier {body2['id']!r} "
+             f"was rejected with {r2.status}; the server does not accept a resource "
+             "identifier in a CREATE request body")
+        check(list_ids() == ids_before2,
+              "no resource may have been created by the rejected request")
+        return
+    check(r2.status == 201, "POST with a new resource must return 201", r2)
+    loc2 = location_of(r2)
+    step("GET the URI from the Location header: it returns the submitted feature "
+         "under the identifier that the server assigned")
+    g2 = rq("GET", loc2, accept=ACCEPT_FEATURE)
+    check(g2.status == 200,
+          f"GET {loc2} must return 200 — the Location header must state the "
+          "identifier that the server assigned to the new resource, which is not "
+          "necessarily the identifier submitted in the request body", g2)
+    new2 = g2.json()
+    feature_matches(body2, new2)
+    check(new2.get("id") not in ids_before2,
+          f"the identifier of the new resource ({new2.get('id')!r}) must differ from "
+          "existing identifiers")
+    check_location_id(r2, loc2, new2)
+    if str(new2.get("id")) == str(body2["id"]):
+        note(f"create: the server used the identifier {body2['id']!r} from the "
+             "request body for the new resource (permitted by "
+             "/per/create-replace-delete/rid)")
 
 
 @ats("create-replace-delete", "create-content-type",
@@ -1493,9 +1544,9 @@ def main():
     CFG = ap.parse_args()
     CFG.landing_page = CFG.landing_page.rstrip("/")
 
-    for name in ("create-building.json", "create-building-invalid.json",
-                 "create-building-jsonfg.json", "replace-building.json",
-                 "update-building.json"):
+    for name in ("create-building.json", "create-building-with-id.json",
+                 "create-building-invalid.json", "create-building-jsonfg.json",
+                 "replace-building.json", "update-building.json"):
         with open(os.path.join(CFG.data_dir, name)) as f:
             DATA[name] = json.load(f)
     for name in ("create-building.gml", "replace-building.gml"):

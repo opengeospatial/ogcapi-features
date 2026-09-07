@@ -77,23 +77,27 @@ of all tests are met by at least one of them:
 | `buildings-nocrs` | `buildings` | the same features without support for coordinate reference systems other than WGS 84 longitude/latitude. This is the deployment required by the condition of `/conf/features/crs84`; since a conformance declaration is per API, this cannot be a second collection. |
 
 The APIs support GeoJSON, JSON-FG and GML in mutation requests, JSON Merge Patch
-for UPDATE operations, the `Prefer` header with the handling preference, and they
-publish the schema of the collections. The API also publishes the GML application
-schema of the test dataset, so that `xsi:schemaLocation` in GML responses can be
-resolved; `ldproxy/resources/api-resources/buildings/buildings.xsd` is a copy of
+for UPDATE operations, the `Prefer` header with the handling and the return
+preference, and they publish the schema of the collections. The API also
+publishes the GML application schema of the test dataset, so that
+`xsi:schemaLocation` in GML responses can be resolved; `ldproxy/resources/api-resources/buildings/buildings.xsd` is a copy of
 [buildings.xsd](../standard/data/buildings.xsd) from the test dataset.
 
 ## Result
 
-Executed on 2026-08-21 with the test dataset of this Standard. The result: 
-**30 of 34 tests pass**, 4 skipped, none failed.
+Executed on 2026-09-07 with the test dataset of this Standard, against the
+deployment in this directory (`iide/ldproxy:next`, image of 2026-08-23). The
+result: **30 of 39 tests pass**, 9 skipped, none failed — 29 tests in the main
+pass and `/conf/features/crs84` in the second pass.
 
-The four skipped tests are the tests of the conformance class "Optimistic Locking 
-using ETags", which the implementation does not support. All other tests are 
-applicable and pass; that is, every requirement of this Standard was verified 
-against an implementation.
+Four of the skipped tests are the tests of the conformance class "Optimistic
+Locking using ETags", which the implementation does not support. The other five
+are the tests of "Return Resource Representation in Response": the deployment
+enables the option `returnRepresentation`
+(`ldproxy/entities/instances/services/buildings.yml`), but an ldproxy version
+that does not know the option ignores it, so the API does not declare that
+conformance class and the five tests are skipped. They have been executed against
+a build of ldproxy that implements the option, where they pass.
 
-The run predates the conformance class "Return Resource Representation in 
-Response". Its five tests have not been executed yet; the implementation does not 
-declare the conformance class, so they are reported as skipped until the test 
-deployment supports the `return` preference.
+Every other test is applicable and passes; that is, every requirement of this
+Standard was verified against an implementation.

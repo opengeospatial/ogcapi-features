@@ -11,7 +11,8 @@ The tests apply to the mutable resources of a Web API under test. Which resource
 ** the resource endpoint (URI);
 ** the resources endpoint (URI) of the collection of the resource;
 ** the operations (CREATE, REPLACE, UPDATE, and/or DELETE) that the test should exercise;
-** for each of these operations, a media type and a valid request body.
+** for each of these operations, a media type and a valid request body;
+** for the CREATE operation, additionally a valid request body that contains a resource identifier which is not the identifier of an existing resource in the collection.
 
 Each test states in its "Condition" row the conditions under which the test is executed; if a condition is not met, the test is skipped. The conditions are evaluated against the conformance declaration of the Web API under test (the response to a GET request to `{landingPageUri}/conformance`) and against the Mutable Resources test parameter.
 
@@ -33,6 +34,7 @@ To support executable tests for Web APIs that publish feature data, a test datas
 * `buildings.json` — a GeoJSON feature collection with three building features (identifiers `B.1`, `B.2` and `B.3`) that are replaced, updated and deleted during the tests; each feature has an `updated` property with the timestamp of the last change to the feature;
 * `buildings-schema.json` — the logical schema of the feature collection (Returnables and Receivables, see <<OAFeat-5,OGC API - Features - Part 5 / OGC API - Common - Part 3: Schemas>>) with a required property `function`;
 * `create-building.json` — a valid new building feature for CREATE tests;
+* `create-building-with-id.json` — a valid new building feature whose representation contains an `id` member, for the assertions of the CREATE tests about the identifier of the new resource (otherwise `create-building.json`, with another `name` so that the two features can be told apart);
 * `create-building-invalid.json` — a building feature that does not conform to the schema (the required property `function` is missing) for the tests of the <<rc_handling,Handling Preference>> conformance class;
 * `create-building-jsonfg.json` — a valid new building feature with JSON-FG extensions (the geometry is provided in the "place" member using a coordinate reference system other than WGS 84) for the JSON-FG tests;
 * `buildings.xsd` — the GML application schema of the feature type (GML Simple Features Profile, Level 0) for the GML tests;

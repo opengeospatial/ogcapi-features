@@ -50,19 +50,23 @@ Given:
 
 * a resources endpoint that supports the CREATE operation (POST is included in the `Allow` header, see test /conf/{conf-class}/options);
 * a valid representation of a new resource and its media type (test parameter);
+* a valid representation of another new resource that contains a resource identifier which is not the identifier of an existing resource in the collection, and its media type (test parameter);
 * the list of the identifiers of the existing resources in the collection;
 
 When:
 
 * a POST request with the representation of the new resource in the request body and its media type in the `Content-Type` header is submitted to the resources endpoint;
+* a second POST request with the representation that contains a resource identifier in the request body and its media type in the `Content-Type` header is submitted to the resources endpoint;
 
 Then:
 
-* assert that the response has the HTTP status code `201` — or `202`, if the operation has been queued for processing, in which case the remaining assertions are skipped;
-* assert that the response includes a `Location` header with the URI of the new resource;
-* assert that a GET request to the URI in the `Location` header returns a HTTP status code `200`;
-* assert that the response to the GET request is a representation of the resource submitted in the request body;
-* assert that the identifier of the new resource differs from the identifiers of the resources that existed in the collection before the operation.
+* assert that the response to the first request has the HTTP status code `201` — or `202`, if the operation has been queued for processing, in which case the remaining assertions for that request are skipped;
+* assert that the response to the second request has the HTTP status code `201`, or `202`, if the operation has been queued for processing, or a `4xx` status code, if the server rejects a request body that contains a resource identifier; in the latter two cases the remaining assertions for that request are skipped and, if the status code is `4xx`, assert that no resource has been added to the collection;
+* assert that each response with the HTTP status code `201` includes a `Location` header with the URI of the new resource;
+* assert that a GET request to the URI in each `Location` header returns a HTTP status code `200`;
+* assert that the response to each GET request is a representation of the resource submitted in the corresponding request body;
+* assert that the identifier of each new resource differs from the identifiers of the resources that existed in the collection before the operation;
+* assert that the identifier of each new resource is the resource identifier in the `Location` header of the response to the request that created it. For the second request, the server may have used the resource identifier submitted in the request body or may have assigned another identifier (Permission <<per_create-replace-delete_rid,/per/create-replace-delete/rid>>); in both cases the `Location` header states the identifier that the server assigned.
 |===
 
 :conf-test: create-content-type
