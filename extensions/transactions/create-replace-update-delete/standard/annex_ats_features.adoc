@@ -227,6 +227,7 @@ Then:
 * The conformance declaration includes the Conformance Class <<conf_update,"Update">> (`http://www.opengis.net/spec/{standard}/{m_n}/conf/update`).
 * The conformance declaration includes the Conformance Class "Returnables and Receivables" (`http://www.opengis.net/spec/ogcapi-common-3/1.0/conf/returnables-and-receivables`).
 * A mutable feature collection supports the UPDATE operation with JSON Merge Patch (`application/merge-patch+json`).
+* The conformance declaration includes the Conformance Class "GeoJSON" (`http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson`) and the feature collection supports the CREATE operation with GeoJSON.
 |Test purpose: | UPDATE requests with JSON Merge Patch documents are processed correctly
 |Test method: |
 Given:
