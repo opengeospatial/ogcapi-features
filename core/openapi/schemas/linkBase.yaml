@@ -28,3 +28,14 @@ properties:
     example: "Trierer Strasse 70, 53115 Bonn"
   length:
     type: integer
+  profile:
+    type: array
+    description:
+      One or more identifiers that provide information about additional
+      semantics (constraints, conventions, extensions), in addition to
+      those defined by the media type, that are associated with the
+      target resource.
+    items:
+      type: string
+    example:
+      - http://www.opengis.net/def/profile/OGC/0/rfc7946
