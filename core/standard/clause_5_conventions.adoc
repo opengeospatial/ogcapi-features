@@ -54,6 +54,14 @@ For simplicity, this document in general only refers to the HTTP protocol. This 
 
 This document does not restrict the lexical space of URIs used in the API beyond the requirements of the <<rfc9110,HTTP>> and <<rfc3986,URI Syntax>> IETF RFCs. If URIs include reserved characters that are delimiters in the URI subcomponent, these have to be percent-encoded. See Clause 2 of <<rfc3986,RFC 3986>> for details.
 
+=== CURIEs
+
+Resources that are registered by the OGC Naming Authority - coordinate reference systems, link relation types, profiles and others - are identified by HTTP URIs. In addition, the OGC Naming Authority allows the use of <<curie,CURIEs (compact URIs)>> as a shorter representation of such a URI. The prefixes are maintained in the <<ogc-curies,OGC CURIE Register>>. For example, `epsg:4326` is a CURIE for the URI `http://www.opengis.net/def/crs/EPSG/0/4326`.
+
+OGC API Features does not use CURIEs in resource representations. Every URI in the resources specified in this document is an HTTP URI, so that a client can compare a value against the URIs that it knows without expanding a CURIE first. For example, the `rel` property of a link is a link relation type, that is, either a name as listed in <<_link_relations,Link relations>> or an HTTP URI (<<rfc8288,RFC 8288>>).
+
+None of the query parameters specified in this document has a value that is a URI. The value of a query parameter is processed by the server, not by a client, so supporting CURIEs in such a value does not affect clients that do not use them. Whether CURIEs can be used as the value of a query parameter is, therefore, a question for the parts of OGC API Features that specify a query parameter whose value is a URI.
+
 === API definition
 
 ==== General remarks
