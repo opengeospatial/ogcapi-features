@@ -1,0 +1,6 @@
+[[rec_core_fc-md-geometry-type]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/fc-md-geometry-type*
+^|A |For each feature collection included in the response, the collection SHOULD include a `geometryType` property with the value "none", if the features in the collection have no geometry; "any", if the geometry types of the features are not restricted; otherwise with the geometry type of the features or an array with the geometry types that occur in the collection.
+|===
