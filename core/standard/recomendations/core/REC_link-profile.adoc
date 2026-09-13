@@ -1,0 +1,8 @@
+[[rec_core_link-profile]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/link-profile*
+^|A |If the `type` attribute of a link states a media type that has profiles and the server knows which profiles apply to the target resource, the `profile` attribute of the link SHOULD state the URIs of those profiles.
+^|B |A link that has no `type` attribute SHOULD NOT have a `profile` attribute.
+^|C |If links are included in `Link` headers of the response, the profiles SHOULD also be stated in a `profile` link parameter with the URIs separated by whitespace.
+|===

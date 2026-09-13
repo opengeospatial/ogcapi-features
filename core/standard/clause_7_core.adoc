@@ -106,7 +106,57 @@ properties:
     type: string
   length:
     type: integer
+  profile:
+    description: >-
+      One or more identifiers that provide information about additional
+      semantics (constraints, conventions, extensions), in addition to those
+      defined by the media type, that are associated with the target resource.
+    type: array
+    items:
+      type: string
 ----
+
+A media type can have <<profile-def,profiles>>. In those cases the `type` attribute alone does not state which representation a client will receive when it dereferences the link. The `profile` attribute is a hint about the profiles that apply to the target resource. Since a profile is always a profile of a media type, `profile` is only meaningful in combination with `type`. More than one profile can apply, so the value is a list.
+
+include::recomendations/core/REC_link-profile.adoc[]
+
+The main use case in the OGC API standards at the time of writing are the profiles of GeoJSON that are registered in the link:http://www.opengis.net/def/profile[OGC Profile Register]:
+
+* `http://www.opengis.net/def/profile/OGC/0/rfc7946`: standard <<GeoJSON,GeoJSON>> without any extension;
+
+* `http://www.opengis.net/def/profile/OGC/0/jsonfg`: a JSON-FG representation;
+
+* `http://www.opengis.net/def/profile/OGC/0/jsonfg-plus`: a JSON-FG representation with GeoJSON compatibility.
+
+A server that supports more than one of them can state the profile in the `self` and `alternate` links of every resource and in the `items` links of each collection. A client can then select the representation that it can process without dereferencing the links to find out.
+
+NOTE: A profile does not have to be registered by OGC. Any HTTP URI can identify a profile.
+
+[[example_1a]]
+.Profiles of GeoJSON in the `items` links of a collection
+=================
+[source,JSON]
+----
+"links": [
+  {
+    "href": "https://data.example.org/collections/buildings/items?f=json&profile=rfc7946",
+    "rel": "items",
+    "type": "application/geo+json",
+    "profile": [ "http://www.opengis.net/def/profile/OGC/0/rfc7946" ],
+    "title": "The buildings in GeoJSON"
+  },
+  {
+    "href": "https://data.example.org/collections/buildings/items?f=json&profile=jsonfg",
+    "rel": "items",
+    "type": "application/geo+json",
+    "profile": [ "http://www.opengis.net/def/profile/OGC/0/jsonfg" ],
+    "title": "The buildings in JSON-FG"
+  }
+]
+----
+=================
+
+NOTE: This document does not specify a capability for a client to request a specific profile. Such a capability is specified in OGC API - Features - Part 5: Schemas, which defines a `profile` query parameter.
 
 Implementations are free to add additional links for all resources provided by the API. For example, an **enclosure** link could reference a bulk download of a collection. Or a **related** link on a feature could reference a related feature.
 

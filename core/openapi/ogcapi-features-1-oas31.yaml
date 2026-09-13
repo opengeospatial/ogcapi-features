@@ -459,6 +459,12 @@ components:
           example: Trierer Strasse 70, 53115 Bonn
         length:
           type: integer
+        profile:
+          type: array
+          items:
+            type: string
+          example:
+            - http://www.opengis.net/def/profile/OGC/0/rfc7946
     linkTemplate:
       type: object
       required:
@@ -478,6 +484,12 @@ components:
           example: application/geo+json
         varBase:
           type: string
+        profile:
+          type: array
+          items:
+            type: string
+          example:
+            - http://www.opengis.net/def/profile/OGC/0/rfc7946
     multilinestringGeoJSON:
       type: object
       required:
