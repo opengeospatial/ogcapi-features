@@ -566,6 +566,8 @@ properties:
     description: indicator about the type of the items in the collection (the default value is 'feature').
     type: string
     default: feature
+  geometryType:
+    $ref: http://schemas.opengis.net/ogcapi/features/part1/1.1/openapi/schemas/geometryType.yaml
   crs:
     description: the list of coordinate reference systems supported by the service
     type: array
@@ -576,6 +578,50 @@ properties:
 ----
 
 NOTE: The `itemType` property is optional with a default value "feature" to be compatible with implementations that existed before the property was introduced. It is recommended that all implementations explicitly state the `itemType` in the collection object. Other standards that specify other types of data items have to require that the `itemType` is included so there is no ambiguity.
+
+include::recomendations/core/REC_fc-md-geometry-type.adoc[]
+
+The `geometryType` property states what a client can expect as the geometry of the features in a collection, before it fetches any feature.
+
+The value `"none"` states that the features in the collection have no geometry and the value `"any"` that their geometry types are not restricted. Otherwise the value is the geometry type of the features, for example `"Polygon"`, or an array with the geometry types that occur in the collection, for example `[ "Polygon", "MultiPolygon" ]`.
+
+NOTE: The `geometryType` property is optional with a default value "any" to be compatible with implementations that existed before the property was introduced. That is, if the property is not provided, a client cannot make any assumption about the geometry types of the features in the collection.
+
+One use case is a collection in which the features have no geometry at all (`"geometryType": "none"`). Collections like these are not unusual in datasets that otherwise consist of spatial data: statistical data aggregated over administrative units, legal or administrative rules that apply to an area, or reports about a monitoring site. Such data is often related to the features in the other collections of the same dataset in a way that cannot be flattened into those features. Stating that the collection has no geometries allows a client to present it accordingly, or to skip it, without first parsing the schema or fetching features to find out.
+
+The values are the geometry types specified by <<JSONFG,OGC Features and Geometries JSON (JSON-FG)>>. The first seven of them - "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon" and "GeometryCollection" - are the geometry types of <<GeoJSON,GeoJSON>>. A server that publishes other geometry types can <<_references_to_openapi_components_in_normative_statements,add values to the enum>> in its API definition.
+
+NOTE: The `itemType` of a collection in which the features have no geometry is still "feature". A feature is an abstraction of a real world phenomenon and is not required to have a geometry. Keeping "feature" as the `itemType` also avoids a breaking change for the APIs that already publish such collections.
+
+NOTE: If the value is "none", the `extent` of the collection will not include a `spatial` member. The reverse does not hold: a collection without a `spatial` extent is not necessarily a collection without geometries, because the `extent` is optional.
+
+`geometryType` does not state whether every feature in the collection has a geometry or whether the geometry can be absent in a feature. That is a characteristic of the feature schema, not of the collection.
+
+NOTE: OGC API - Features - Part 5: Schemas specifies a Schema resource for each feature collection. The schema states the geometry type of each spatial property of the features more precisely, using "format" values such as "geometry-point", and whether the property is required. `geometryType` repeats part of that information in the Collections response, because it is information that clients need early and that would otherwise require an additional request per collection.
+
+[[example_4b]]
+.A feature collection without geometries
+=================
+The collection "monitoring-reports" is part of a dataset that otherwise consists of spatial data. Its features have no geometry, so the collection has no spatial extent. A client that is only interested in spatial data can skip the collection without fetching any feature.
+
+[source,JSON]
+----
+{
+  "id": "monitoring-reports",
+  "title": "Monitoring reports",
+  "description": "Reports about the monitoring sites in this dataset.",
+  "itemType": "feature",
+  "geometryType": "none",
+  "links": [
+    { "href": "https://data.example.org/collections/monitoring-reports",
+      "rel": "self", "title": "This collection" },
+    { "href": "https://data.example.org/collections/monitoring-reports/items",
+      "rel": "items", "type": "application/geo+json",
+      "title": "The monitoring reports" }
+  ]
+}
+----
+=================
 
 NOTE: The `crs` property of the `collection` object is not used by this requirements class, but reserved for future use.
 
@@ -621,6 +667,7 @@ Reference system information is not provided as the service provides geometries 
         }
       },
       "itemType": "feature",
+      "geometryType": "Polygon",
       "links": [
         { "href": "https://data.example.org/collections/buildings",
           "rel": "self", "title": "This collection" },

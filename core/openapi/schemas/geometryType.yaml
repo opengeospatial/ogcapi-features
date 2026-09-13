@@ -1,0 +1,52 @@
+---
+description:
+  The geometry types of the features in the collection. The value 'none' states
+  that the features have no geometry, the value 'any' that the geometry types of
+  the features are not restricted. Otherwise the value is the geometry type of
+  the features or an array with the geometry types that occur in the collection.
+  The geometry types are those specified by OGC Features and Geometries JSON
+  (JSON-FG).
+default: 'any'
+example: 'none'
+oneOf:
+  - type: string
+    enum:
+      - 'none'
+      - 'any'
+      - 'Point'
+      - 'MultiPoint'
+      - 'LineString'
+      - 'MultiLineString'
+      - 'Polygon'
+      - 'MultiPolygon'
+      - 'GeometryCollection'
+      - 'Polyhedron'
+      - 'MultiPolyhedron'
+      - 'Prism'
+      - 'MultiPrism'
+      - 'CircularString'
+      - 'CompoundCurve'
+      - 'CurvePolygon'
+      - 'MultiCurve'
+      - 'MultiSurface'
+  - type: array
+    minItems: 1
+    items:
+      type: string
+      enum:
+        - 'Point'
+        - 'MultiPoint'
+        - 'LineString'
+        - 'MultiLineString'
+        - 'Polygon'
+        - 'MultiPolygon'
+        - 'GeometryCollection'
+        - 'Polyhedron'
+        - 'MultiPolyhedron'
+        - 'Prism'
+        - 'MultiPrism'
+        - 'CircularString'
+        - 'CompoundCurve'
+        - 'CurvePolygon'
+        - 'MultiCurve'
+        - 'MultiSurface'
