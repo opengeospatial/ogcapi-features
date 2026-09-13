@@ -1,0 +1,21 @@
+[[req_ids_ids-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/ids/ids-definition*
+^|A |The GET operation on the Features resource (path `/collections/{collectionId}/items`) SHALL support a parameter `ids` based upon the following OpenAPI 3.1 fragment:
+
+[source,YAML]
+----
+name: ids
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: string
+style: form
+explode: false
+----
+
+^|B |A comma that is part of a feature identifier SHALL be percent-encoded, so that the values of the parameter can be determined by splitting the value of the parameter at the commas.
+|===

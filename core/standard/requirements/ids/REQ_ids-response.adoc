@@ -1,0 +1,8 @@
+[[req_ids_ids-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/ids/ids-response*
+^|A |If the `ids` parameter is provided in a request to the Features resource, only features with an identifier that is one of the values of the parameter SHALL be in the result set. The identifier of a feature is the value that identifies the feature in the `featureId` path parameter of the Feature resource.
+^|B |If the `ids` parameter is provided together with another parameter that filters the features in the collection, only features that match all of the predicates SHALL be in the result set.
+^|C |A value of the `ids` parameter that is not the identifier of a feature in the collection SHALL NOT result in an error.
+|===

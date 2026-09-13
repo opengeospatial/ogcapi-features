@@ -1,0 +1,14 @@
+[[ats_ids_ids-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/ids/ids-response*
+^|Test Purpose |Validate that the ids query parameter is evaluated correctly.
+^|Requirement |<<req_ids_ids-response,/req/ids/ids-response>>
+^|Test Method |. Request Features from a collection without the `ids` parameter and select the identifiers of two or more of the features in the response. A comma in an identifier has to be percent-encoded.
+. Request Features from the same collection with the `ids` parameter and the selected identifiers as its value.
+. Verify that the response includes a feature for each of the selected identifiers and no other feature.
+. Request Features from the same collection with the `ids` parameter and a value that includes, in addition to the selected identifiers, a value that is not the identifier of a feature in the collection.
+. Verify that the response is not an error and that it includes the same features as the previous response.
+. Request Features from the same collection with the `ids` parameter and a `bbox`, `datetime` or feature property parameter that does not match all of the selected features.
+. Verify that the response only includes the features that match both the `ids` parameter and the other parameter.
+|===

@@ -1,0 +1,50 @@
+[[rc_ids_clause]]
+== Requirements Class "Query by IDs"
+
+=== Overview
+
+include::requirements/requirements_class_ids.adoc[]
+
+The <<rc_core,Core>> specifies the Feature resource, which provides access to a single feature by its identifier. A client that needs a known set of features has to send one request per feature. This requirements class specifies a query parameter `ids` that selects the features with the listed identifiers from a collection in a single request.
+
+Two typical situations are that a client needs a specific set of features and only their identifiers are available in the client's context, for example, because they are referenced from another resource, and that a client presents features from a collection and has to fetch the same set of features again to update its view.
+
+=== Parameter ids
+
+include::requirements/ids/REQ_ids-definition.adoc[]
+
+The identifiers are the local identifiers of the features in the collection, that is, the values that are used in the `featureId` path parameter of the <<_feature_,Feature>> resource. They are not the URIs of the Feature resources.
+
+NOTE: Feature identifiers can contain characters that have to be percent-encoded in a URI. This includes the comma, which separates the values of the parameter. A client, therefore, percent-encodes a comma that is part of an identifier and a server determines the values by splitting the parameter value at the commas that are not percent-encoded.
+
+include::recomendations/ids/PER_ids-limit.adoc[]
+
+Unlike the `limit` parameter, a server that restricts the number of values does not silently reduce the result set. A client that asks for features by identifier needs to know which identifiers were evaluated, so a request that exceeds the limit is rejected rather than answered with the features for some of the identifiers.
+
+A template for the definition of the parameter in YAML according to OpenAPI 3.1 is available at link:http://schemas.opengis.net/ogcapi/features/part1/1.1/openapi/parameters/ids.yaml[ids.yaml].
+
+=== Response
+
+include::requirements/ids/REQ_ids-response.adoc[]
+
+`ids` is a filter parameter like `bbox` and `datetime`. The rules stated in <<_combinations_of_filter_parameters,Combinations of filter parameters>> apply: only features that match all of the predicates are in the result set.
+
+Values that do not identify a feature in the collection are ignored. A client, therefore, cannot conclude from the response whether a feature with such an identifier does not exist or whether it exists but was excluded by another filter parameter. A client that needs to distinguish these cases requests the <<_feature_,Feature>> resource for the identifier.
+
+The <<rc_core,Core>> requirements for the Features resource are unchanged. In particular, the response is paged according to the `limit` parameter, and `numberMatched` and `numberReturned` are the number of features that match all filter parameters and the number of features in the response.
+
+[[example_ids]]
+.Selecting three features by their identifier
+=================
+[source]
+----
+https://data.example.org/collections/buildings/items?ids=123,456,789
+----
+
+The response contains the features `123`, `456` and `789`, if they exist in the collection "buildings". The request can be combined with other filter parameters, for example, to select only those of the three buildings that are in a bounding box:
+
+[source]
+----
+https://data.example.org/collections/buildings/items?ids=123,456,789&bbox=7.01,50.63,7.22,50.78
+----
+=================

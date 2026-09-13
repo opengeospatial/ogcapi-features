@@ -107,6 +107,28 @@ components:
       required: true
       schema:
         type: string
+    ids:
+      name: ids
+      in: query
+      description: |-
+        Only features with one of the listed feature identifiers are selected.
+
+        The feature identifier is the value that identifies the feature in the `featureId`
+        path parameter of the Feature resource. A comma that is part of a feature identifier
+        has to be percent-encoded.
+
+        A value that is not the identifier of a feature in the collection is not an error,
+        it just does not select a feature.
+
+        The server may limit the number of feature identifiers that can be provided. The limit
+        is stated in the `maxItems` keyword of the schema, if the server has one.
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: false
     limit:
       name: limit
       in: query
