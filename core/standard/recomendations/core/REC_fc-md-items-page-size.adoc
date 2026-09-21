@@ -1,0 +1,8 @@
+[[rec_core_fc-md-items-page-size]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/fc-md-items-page-size*
+^|A |For each feature collection included in the response, the `defaultItemsPageSize` property of the collection SHOULD state the number of features that the server returns in a response to a request to the features in the collection without a `limit` parameter.
+^|B |For each feature collection included in the response, the `maximumItemsPageSize` property of the collection SHOULD state the maximum number of features that the server returns in a response to a request to the features in the collection.
+^|C |The values SHOULD be consistent with the `default` and `maximum` values of the `limit` parameter for the features in the collection in the API definition of the server.
+|===

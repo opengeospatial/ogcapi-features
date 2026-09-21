@@ -669,6 +669,20 @@ properties:
     description: indicator about the type of the items in the collection (the default value is 'feature').
     type: string
     default: feature
+  defaultItemsPageSize:
+    description: >-
+      the number of features that the server returns in a response to a request to the
+      features in the collection without a limit parameter
+    type: integer
+    minimum: 1
+    example: 100
+  maximumItemsPageSize:
+    description: >-
+      the maximum number of features that the server returns in a response to a request
+      to the features in the collection
+    type: integer
+    minimum: 1
+    example: 10000
   crs:
     description: the list of coordinate reference systems supported by the service
     type: array
@@ -679,6 +693,12 @@ properties:
 ----
 
 NOTE: The `itemType` property is optional with a default value "feature" to be compatible with implementations that existed before the property was introduced. It is recommended that all implementations explicitly state the `itemType` in the collection object. Other standards that specify other types of data items have to require that the `itemType` is included so there is no ambiguity.
+
+include::recomendations/core/REC_fc-md-items-page-size.adoc[]
+
+The number of features that a server returns in a single response is controlled by the <<_parameter_limit,`limit` parameter>>. Its default value and, in general, its maximum value are stated in the API definition of the server, and they can differ per collection. `defaultItemsPageSize` and `maximumItemsPageSize` state them in the collection, so that a client knows how many requests it will need to fetch all features of a collection before it sends the first one.
+
+NOTE: This is information that is also in the API definition. It is repeated in the collection because clients need it to access larger collections efficiently and because extracting it from an API definition is error-prone. The alternative - sending a request with a large `limit` and deriving the maximum from the `next` link in the response - costs a request and a response that the client does not need.
 
 NOTE: The `crs` property of the `collection` object is not used by this requirements class, but reserved for future use.
 
@@ -724,6 +744,8 @@ Reference system information is not provided as the service provides geometries 
         }
       },
       "itemType": "feature",
+      "defaultItemsPageSize": 100,
+      "maximumItemsPageSize": 10000,
       "links": [
         { "href": "https://data.example.org/collections/buildings",
           "rel": "self", "title": "This collection" },
