@@ -486,6 +486,12 @@ The `bbox` and `interval` properties will typically be derived automatically fro
 
 include::requirements/core/REQ_fc-md-extent-multi.adoc[]
 
+The ranges and the time intervals are closed, that is, they include their end points. This matters because an extent that is derived from the features in the collection will normally have features on its boundary: a geometry that touches the boundary of the bounding box is in the bounding box, and a feature at the start or at the end of the time interval is in the interval.
+
+NOTE: For a bounding box that spans the antimeridian the west-most value of the longitude axis is larger than the east-most value. The closed range for that axis is the range from the west-most value to 180 degrees together with the range from -180 degrees to the east-most value.
+
+NOTE: A `null` value at the start or the end of a time interval indicates a half-bounded interval, see <<req_core_fc-md-extent,`/req/core/fc-md-extent`>>. Every instant is in a closed time interval that is unbounded in that direction.
+
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
 Requirement `/req/core/fc-md-extent-multi` and recommendation `/rec/core/fc-md-extent-single` reflect that most clients will only be interested in a single extent, for example, to set the map view or a time slider. They will only have to look at the first item in each array. 

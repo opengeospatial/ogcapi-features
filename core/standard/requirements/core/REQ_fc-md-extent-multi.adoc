@@ -2,8 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/fc-md-extent-multi* 
-^|A |If the `extent` property includes a member `spatial`, each feature in the collection SHALL be inside the extent described by the first bounding box in the `bbox` array.
-^|B |If the `extent` property includes a member `spatial` and the `bbox` array has more than one item, each feature in the collection SHALL be inside the extent described by one of the other bounding boxes in the `bbox` array.
-^|C |If the `extent` property includes a member `temporal`, each feature in the collection SHALL be inside the extent described by the first time interval in the `interval` array.
-^|D |If the `extent` property includes a member `temporal` and the `interval` array has more than one item, each feature in the collection SHALL be inside the extent described by one of the other time intervals in the `interval` array.
+^|A |If the `extent` property includes a member `spatial`, every coordinate value of every spatial geometry of every feature in the collection SHALL be in the closed range that the first bounding box in the `bbox` array defines for the corresponding axis.
+^|B |If the `extent` property includes a member `spatial` and the `bbox` array has more than one item, every spatial geometry of every feature in the collection SHALL have all of its coordinate values in the closed ranges that one of the other bounding boxes in the `bbox` array defines for the corresponding axes.
+^|C |If the `extent` property includes a member `temporal`, every instant of every temporal geometry of every feature in the collection SHALL be in the closed time interval that is the first item in the `interval` array.
+^|D |If the `extent` property includes a member `temporal` and the `interval` array has more than one item, every temporal geometry of every feature in the collection SHALL have all of its instants in one of the other closed time intervals in the `interval` array.
 |===

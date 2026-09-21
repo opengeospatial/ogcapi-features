@@ -166,10 +166,6 @@ Note that the requirement `/req/gmlsf0/headers` exists for GML-SF0 (and `/req/gm
 [cols="30,35,35",options="header"]
 !===
 |Resource |Path |XML root element
-|Landing page |`/` |`core:LandingPage`
-|Conformance declaration |`/conformance` |`core:ConformsTo`
-|Feature collections |`/collections` |`core:Collections`
-|Feature collection |`/collections/{collectionId}` |`core:Collections`, with just one entry for the collection `collectionId`
 |Features |`/collections/{collectionId}/items` |`sf:FeatureCollection`
 |Feature |`/collections/{collectionId}/items/{featureId}` |substitutable for `gml:AbstractFeature`
 !===
@@ -187,6 +183,12 @@ The namespace prefixes used above and in the OGC API Features Core XML schemas a
 * `xlink`: `http://www.w3.org/1999/xlink`
 
 The mapping of the content from the responses specified in the <<rc_core,Core requirements class>> to the XML is straightforward. All links have to be encoded as HTTP header `Link.`
+
+In version 1.0 of this standard, the XML encoding also covered the landing page, the conformance declaration, the collections and the collection resource, using the root elements `core:LandingPage`, `core:ConformsTo` and `core:Collections`. The XML encoding of these four resources is deprecated in this version and this document no longer states requirements for it. The elements remain in the OGC API Features Core XML Schema and are marked as deprecated there.
+
+The reasons are that there has been no noticeable uptake of the XML encoding of these resources in clients, that extending their content model in other parts of the OGC API Features series adds complexity to the standards and to implementations that is not justified by that uptake, and that the OGC API - Common standards specify only JSON and HTML for the same resources.
+
+NOTE: This does not affect the support for GML as a feature encoding. The Features and Feature resources are not affected.
 
 See <<examples,sub-clause 6.3>> for links to example responses in XML.
 
