@@ -63,6 +63,107 @@ Each `Feature` (path `/collections/{collectionId}/items/{featureId}`) is also a 
 
 In addition to the simple path structures described above, where all features are organized in a one-level collection hierarchy, additional parts of the OGC API Feature series are expected to provide alternate access to the features served by the API via additional, deeper collection hierarchies.
 
+[[links]]
+=== Links
+
+To express relationships between resources, <<rfc8288,RFC 8288 (Web Linking)>> is used.
+
+Links are the main mechanism for clients to navigate the API. The landing page links to the API definition, the conformance declaration and the collections. Each collection links to its features. A response that does not include all selected features links to the next page. Every resource can link to alternate representations of itself. A client that follows links does not need to construct URIs from the path templates used in this document.
+
+==== Link objects
+
+In the JSON encodings specified in this document, each resource representation includes an array of links in a member `links`. The members of a link are specified in the schema below. `href` is the URI of the link target and `rel` states the type or semantics of the relation. The other members are hints about the link target.
+
+[[schema_link]]
+.link:http://schemas.opengis.net/ogcapi/features/part1/1.1/openapi/schemas/link.yaml[Schema for a link]
+[source,YAML]
+----
+type: object
+required:
+  - href
+  - rel
+properties:
+  href:
+    description: The URI of the link target.
+    type: string
+  rel:
+    description: The type or semantics of the relation.
+    type: string
+  type:
+    description: >-
+      A hint indicating what the media type of the result of dereferencing
+      the link should be.
+    type: string
+  hreflang:
+    description: >-
+      A hint indicating what the language of the result of dereferencing
+      the link should be.
+    type: string
+  title:
+    description: >-
+      Used to label the destination of a link such that it can be used as a
+      human-readable identifier.
+    type: string
+  length:
+    type: integer
+----
+
+Implementations are free to add additional links for all resources provided by the API. For example, an **enclosure** link could reference a bulk download of a collection. Or a **related** link on a feature could reference a related feature.
+
+The <<_collections_,Collections>> and <<_collection_,Collection>> responses can in addition include link templates in a member `linkTemplates`. A link template has the same members as a link, except that the link target is stated as a URI template in a member `uriTemplate`. See <<rec_core_fc-md-item-link-templates,`/rec/core/fc-md-item-link-templates`>>.
+
+How the links are represented in a response is part of the requirements class for each encoding. In <<rc_geojson,GeoJSON>>, the links are a foreign member `links` of the Feature or FeatureCollection object. In <<rc_html,HTML>>, they are `<a>` elements in the HTML `<body>`. The GML Simple Features Profile does not allow the inclusion of links in a feature collection, so in the GML encodings (<<rc_gmlsf0,Level 0>> and <<rc_gmlsf2,Level 2>>) the links are provided in `Link` headers only.
+
+==== Link relations
+
+The following <<link-relations,registered link relation types [IANA]>> are used in this document.
+
+* **alternate**: Refers to a substitute for this context.
+
+* **collection**: The target IRI points to a resource which represents the collection resource for the context IRI.
+
+* **describedby**: Refers to a resource providing information about the link's context.
+
+* **item**: The target IRI points to a resource that is a member of the collection represented by the context IRI.
+
+* **next**: Indicates that the link's context is a part of a series, and that the next in the series is the link target.
+
+* **license**: Refers to a license associated with this context.
+
+* **prev**: Indicates that the link's context is a part of a series, and that the previous in the series is the link target.
+
+** This relation is only used in examples.
+
+* **self**: Conveys an identifier for the link's context.
+
+* **service-desc**: Identifies service description for the context that is primarily intended for consumption by machines.
+
+** API definitions are considered service descriptions.
+
+* **service-doc**: Identifies service documentation for the context that is primarily intended for human consumption.
+
+In addition the following link relation types are used for which no applicable link relation type registered with IANA could be identified. They are registered in the <<ogc-link-relations,OGC Link Relation Type Register>>.
+
+* **items** (`http://www.opengis.net/def/rel/ogc/1.0/items`): Refers to a resource that is comprised of members of the collection represented by the link's context.
+
+* **conformance** (`http://www.opengis.net/def/rel/ogc/1.0/conformance`): Refers to a resource that identifies the specifications that the link's context conforms to.
+
+* **data** (`http://www.opengis.net/def/rel/ogc/1.0/data`): Refers to the root resource of a dataset in an API.
+
+<<rfc8288,RFC 8288>> requires that a link relation type is either a name that is registered with IANA or a URI. The short names `items`, `conformance` and `data` are neither. They were introduced before the OGC Link Relation Type Register existed and this document continues to require them, because existing clients depend on them, but they are deprecated in favour of the URIs from the register.
+
+include::recomendations/core/REC_ogc-link-relations.adoc[]
+
+NOTE: A server that follows the recommendation includes two links to the same target, one with the short name and one with the URI. Clients that only know the short names continue to work. The URI is globally unique, so a client that uses it does not have to know which standard the API implements in order to interpret the link.
+
+==== Link headers
+
+include::recomendations/core/REC_link-header.adoc[]
+
+==== Links to resources in other languages
+
+The `hreflang` member of a link can be used to state the language of the referenced resource. This can be used to include links to the same data in, for example, English or French. Just like with <<encodings,multiple encodings>>, a server that wants to use language-specific links will have to support a mechanism to mint language-specific URIs for resources in order to express links to, for example, the same resource in another language. This document does not mandate any particular approach as to how this is supported. See also <<string_i18n,String internationalization>>.
+
 === API landing page
 
 ==== Operation
@@ -324,7 +425,7 @@ include::recomendations/core/REC_string_i18n.adoc[]
 
 For example, if JSON-LD is used as an encoding, the built-in capabilities to link:https://www.w3.org/TR/json-ld/#string-internationalization[annotate a string with its language] can be used.
 
-The link:http://schemas.opengis.net/ogcapi/features/part1/1.1/openapi/schemas/link.yaml[link object] based on <<rfc8228,RFC 8288 (Web Linking)>> includes a `hreflang` attribute that can be used to state the language of the referenced resource. This can be used to include links to the same data in, for example, English or French. Just like with <<encodings,multiple encodings>> a server that wants to use language-specific links will have to support a mechanism to mint language-specific URIs for resources in order to express links to, for example, the same resource in another language. Again, this document does not mandate any particular approach as to how this is supported.
+Links to representations of a resource in another language are discussed in <<links,Links>>.
 
 === Coordinate reference systems
 
@@ -341,10 +442,6 @@ The Core also does not specify a capability to request feature geometries in a d
 The same principles apply for temporal geometries, which are measured relative to a temporal coordinate reference system. OGC API Features uses the Gregorian calendar and all dates or timestamps discussed in this document are in the Gregorian calendar and conform to <<rfc3339,RFC 3339>>.
 
 include::recomendations/core/REC_rfc3339.adoc[]
-
-=== Link headers
-
-include::recomendations/core/REC_link-header.adoc[]
 
 [[_collections_]]
 === Feature collections
@@ -388,6 +485,12 @@ The first bounding box/time interval describes the overall spatial/temporal exte
 The `bbox` and `interval` properties will typically be derived automatically from the feature data and be the exact minimal bounding box / time interval containing the features in the collection (or cluster).
 
 include::requirements/core/REQ_fc-md-extent-multi.adoc[]
+
+The ranges and the time intervals are closed, that is, they include their end points. This matters because an extent that is derived from the features in the collection will normally have features on its boundary: a geometry that touches the boundary of the bounding box is in the bounding box, and a feature at the start or at the end of the time interval is in the interval.
+
+NOTE: For a bounding box that spans the antimeridian the west-most value of the longitude axis is larger than the east-most value. The closed range for that axis is the range from the west-most value to 180 degrees together with the range from -180 degrees to the east-most value.
+
+NOTE: A `null` value at the start or the end of a time interval indicates a half-bounded interval, see <<req_core_fc-md-extent,`/req/core/fc-md-extent`>>. Every instant is in a closed time interval that is unbounded in that direction.
 
 include::recomendations/core/REC_fc-md-extent-single.adoc[]
 
@@ -566,6 +669,20 @@ properties:
     description: indicator about the type of the items in the collection (the default value is 'feature').
     type: string
     default: feature
+  defaultItemsPageSize:
+    description: >-
+      the number of features that the server returns in a response to a request to the
+      features in the collection without a limit parameter
+    type: integer
+    minimum: 1
+    example: 100
+  maximumItemsPageSize:
+    description: >-
+      the maximum number of features that the server returns in a response to a request
+      to the features in the collection
+    type: integer
+    minimum: 1
+    example: 10000
   crs:
     description: the list of coordinate reference systems supported by the service
     type: array
@@ -576,6 +693,12 @@ properties:
 ----
 
 NOTE: The `itemType` property is optional with a default value "feature" to be compatible with implementations that existed before the property was introduced. It is recommended that all implementations explicitly state the `itemType` in the collection object. Other standards that specify other types of data items have to require that the `itemType` is included so there is no ambiguity.
+
+include::recomendations/core/REC_fc-md-items-page-size.adoc[]
+
+The number of features that a server returns in a single response is controlled by the <<_parameter_limit,`limit` parameter>>. Its default value and, in general, its maximum value are stated in the API definition of the server, and they can differ per collection. `defaultItemsPageSize` and `maximumItemsPageSize` state them in the collection, so that a client knows how many requests it will need to fetch all features of a collection before it sends the first one.
+
+NOTE: This is information that is also in the API definition. It is repeated in the collection because clients need it to access larger collections efficiently and because extracting it from an API definition is error-prone. The alternative - sending a request with a large `limit` and deriving the maximum from the `next` link in the response - costs a request and a response that the client does not need.
 
 NOTE: The `crs` property of the `collection` object is not used by this requirements class, but reserved for future use.
 
@@ -621,6 +744,8 @@ Reference system information is not provided as the service provides geometries 
         }
       },
       "itemType": "feature",
+      "defaultItemsPageSize": 100,
+      "maximumItemsPageSize": 10000,
       "links": [
         { "href": "https://data.example.org/collections/buildings",
           "rel": "self", "title": "This collection" },
