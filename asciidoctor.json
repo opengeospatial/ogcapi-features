@@ -1,5 +1,20 @@
 {
-        "0":  { "OGC_doc_number": "18-058r2",
+        "0":  {
+                "OGC_doc_number": "17-069r5",
+                "urn": "http://www.opengis.net/doc/IS/ogcapi-features-1/1.1",
+                "title": "OGC API - Features - Part 1: Core",
+                "path": "core/standard/17-069.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri",
+                        "stylesdir=./resources/stylesheets",
+                        "dot=/usr/bin/dot"
+                ],
+                "r":[
+                        "asciidoctor-diagram"
+                ]
+        },
+        "1":  { "OGC_doc_number": "18-058r2",
                 "urn": "http://www.opengis.net/doc/IS/ogcapi-features-2/1.0",
                 "title": "OGC API - Features - Part 2: Coordinate Reference Systems by Reference",
                 "path": "extensions/crs/standard/18-058.adoc",
@@ -13,26 +28,11 @@
                         "asciidoctor-diagram"
                 ]
         },
-        "1":  {
-                "OGC_doc_number": "17-069r5",
-                "urn": "http://www.opengis.net/doc/IS/ogcapi-features-1/1.0",
-                "title": "OGC API - Features - Part 1: Core",
-                "path": "core/standard/17-069.adoc",
-                "options": ["--trace"],
-                "a":[
-                        "data-uri",
-                        "stylesdir=./resources/stylesheets",
-                        "dot=/usr/bin/dot"
-                ],
-                "r":[
-                        "asciidoctor-diagram"
-                ]
-        },
         "2":  {
-                "OGC_doc_number": "20-002r2",
-                "urn": "http://www.opengis.net/doc/IS/ogcapi-common-5/1.0",
-                "title": "OGC API - Features - Part 4/OGC API - Common - Part 5: Create, Replace, Update and Delete",
-                "path": "extensions/transactions/create-replace-update-delete/standard/20-002.adoc",
+                "OGC_doc_number": "19-079r3",
+                "urn": "http://www.opengis.net/doc/IS/ogcapi-features-3/1.0",
+                "title": "OGC API - Features - Part 3: Filtering",
+                "path": "extensions/filtering/standard/19-079.adoc",
                 "options": ["--trace"],
                 "a":[
                         "data-uri",
@@ -44,10 +44,10 @@
                 ]
         },
         "3":  {
-                "OGC_doc_number": "19-079r3",
-                "urn": "http://www.opengis.net/doc/IS/ogcapi-features-3/1.0",
-                "title": "OGC API - Features - Part 3: Filtering",
-                "path": "extensions/filtering/standard/19-079.adoc",
+                "OGC_doc_number": "20-002r2",
+                "urn": "http://www.opengis.net/doc/IS/ogcapi-common-5/1.0",
+                "title": "OGC API - Features - Part 4/OGC API - Common - Part 5: Create, Replace, Update and Delete",
+                "path": "extensions/transactions/create-replace-update-delete/standard/20-002.adoc",
                 "options": ["--trace"],
                 "a":[
                         "data-uri",
