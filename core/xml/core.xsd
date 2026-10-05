@@ -33,8 +33,15 @@
    <!-- ================================================================== -->
    <!-- =   LandingPage element                                          = -->
    <!-- ================================================================== -->
-   <xsd:element name="LandingPage" type="core:LandingPageType"/>
+   <xsd:element name="LandingPage" type="core:LandingPageType">
+      <xsd:annotation>
+         <xsd:documentation>Deprecated in version 1.1 of OGC API - Features - Part 1: Core. The XML encoding of the landing page resource is no longer specified by the standard. This declaration is retained for backwards compatibility and is expected to be removed in a future major version.</xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
    <xsd:complexType name="LandingPageType">
+      <xsd:annotation>
+         <xsd:documentation>Deprecated in version 1.1 of OGC API - Features - Part 1: Core. The XML encoding of the landing page resource is no longer specified by the standard. This declaration is retained for backwards compatibility and is expected to be removed in a future major version.</xsd:documentation>
+      </xsd:annotation>
       <xsd:complexContent>
          <xsd:extension base="core:BaseResponseType">
             <xsd:sequence>
@@ -50,8 +57,15 @@
    <!-- ================================================================== -->
    <!-- =   ConformsTo element                                           = -->
    <!-- ================================================================== -->
-   <xsd:element name="ConformsTo" type="core:ConformsToType"/>
+   <xsd:element name="ConformsTo" type="core:ConformsToType">
+      <xsd:annotation>
+         <xsd:documentation>Deprecated in version 1.1 of OGC API - Features - Part 1: Core. The XML encoding of the conformance declaration resource is no longer specified by the standard. This declaration is retained for backwards compatibility and is expected to be removed in a future major version.</xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
    <xsd:complexType name="ConformsToType">
+      <xsd:annotation>
+         <xsd:documentation>Deprecated in version 1.1 of OGC API - Features - Part 1: Core. The XML encoding of the conformance declaration resource is no longer specified by the standard. This declaration is retained for backwards compatibility and is expected to be removed in a future major version.</xsd:documentation>
+      </xsd:annotation>
       <xsd:complexContent>
          <xsd:extension base="core:BaseResponseType">
             <xsd:sequence>
@@ -65,8 +79,15 @@
    <!-- ================================================================== -->
    <!-- =   Collections element                                          = -->
    <!-- ================================================================== -->
-   <xsd:element name="Collections" type="core:CollectionsType"/>
+   <xsd:element name="Collections" type="core:CollectionsType">
+      <xsd:annotation>
+         <xsd:documentation>Deprecated in version 1.1 of OGC API - Features - Part 1: Core. The XML encoding of the collections and collection resource is no longer specified by the standard. This declaration is retained for backwards compatibility and is expected to be removed in a future major version.</xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
    <xsd:complexType name="CollectionsType">
+      <xsd:annotation>
+         <xsd:documentation>Deprecated in version 1.1 of OGC API - Features - Part 1: Core. The XML encoding of the collections and collection resource is no longer specified by the standard. This declaration is retained for backwards compatibility and is expected to be removed in a future major version.</xsd:documentation>
+      </xsd:annotation>
       <xsd:complexContent>
          <xsd:extension base="core:BaseResponseType">
             <xsd:sequence>

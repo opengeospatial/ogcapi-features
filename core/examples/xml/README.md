@@ -2,6 +2,11 @@
 
 ## Overview
 
+> **Note:** The XML encoding of the landing page, the conformance declaration, the
+> collections and the collection resource is deprecated in version 1.1 of OGC API -
+> Features - Part 1: Core. The examples for these four resources are retained to
+> document version 1.0. This does not affect the GML examples for features.
+
 This folder includes examples of XML/GML responses to illustrate how the
 OpenAPI fragments used to define the requirements for the
 Core requirements class are expressed in XML using the

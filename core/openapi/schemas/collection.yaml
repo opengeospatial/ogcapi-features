@@ -35,6 +35,20 @@ properties:
     description: indicator about the type of the items in the collection (the default value is 'feature').
     type: string
     default: feature
+  defaultItemsPageSize:
+    description: >-
+      the number of features that the server returns in a response to a request to the
+      features in the collection without a limit parameter
+    type: integer
+    minimum: 1
+    example: 100
+  maximumItemsPageSize:
+    description: >-
+      the maximum number of features that the server returns in a response to a request
+      to the features in the collection
+    type: integer
+    minimum: 1
+    example: 10000
   crs:
     description: the list of coordinate reference systems supported by the service
     type: array
