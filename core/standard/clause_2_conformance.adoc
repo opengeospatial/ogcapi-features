@@ -1,5 +1,5 @@
 == Conformance
-This standard defines six requirements / conformance classes.
+This standard defines nine requirements / conformance classes.
 
 The standardization targets of all conformance classes are "Web APIs."
 
@@ -29,6 +29,10 @@ The _Core_ does not mandate any encoding or format for the formal definition of 
 * <<rc_oas30,OpenAPI Specification 3.0>> (depends on _OpenAPI Specification_).
 * <<rc_oas31,OpenAPI Specification 3.1>> (depends on _OpenAPI Specification_).
 
+One additional requirements class specifies an optional query capability:
+
+* <<rc_ids,Query by IDs>> (depends on _Core_), which specifies a query parameter to select features by their identifier.
+
 Like with the feature encodings, an implementation of the _Core_ requirements class can also decide to use other API definition representations in addition or instead of an OpenAPI 3.x definition. Examples for alternative API definitions: OpenAPI 2.0 (Swagger), future versions of the OpenAPI specification, an OWS Common 2.0 capabilities document or WSDL.
 
 The _Core_ is intended to be a minimal useful API for fine-grained read-access to a spatial dataset where geometries are represented in the coordinate reference system WGS 84 with axis order longitude/latitude.
@@ -49,4 +53,5 @@ Conformance with this standard shall be checked using all the relevant tests spe
 |<<ats_gmlsf2,GML, Simple Features Profile, Level 2>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/gmlsf2
 |<<ats_oas30,OpenAPI Specification 3.0>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/oas30
 |<<ats_oas31,OpenAPI Specification 3.1>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/oas31
+|<<ats_ids,Query by IDs>> |http://www.opengis.net/spec/ogcapi-features-1/1.1/conf/ids
 !===

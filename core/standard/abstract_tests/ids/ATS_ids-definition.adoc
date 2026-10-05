@@ -1,0 +1,21 @@
+[[ats_ids_ids-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Abstract Test {counter:ats-id}* |*/conf/ids/ids-definition*
+^|Test Purpose |Validate that the ids query parameter is defined correctly.
+^|Requirement |<<req_ids_ids-definition,/req/ids/ids-definition>>
+^|Test Method |Verify that the `ids` query parameter complies with the following definition (using an OpenAPI Specification 3.1 fragment):
+
+[source,YAML]
+----
+name: ids
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: string
+style: form
+explode: false
+----
+|===

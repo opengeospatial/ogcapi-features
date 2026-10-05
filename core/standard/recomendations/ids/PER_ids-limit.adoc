@@ -1,0 +1,7 @@
+[[per_ids_ids-limit]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/ids/ids-limit*
+^|A |The server MAY limit the number of values in the `ids` parameter and declare the limit in the API definition using the `maxItems` keyword in the schema of the parameter.
+^|B |If the number of values in a request exceeds the limit, the server MAY respond with the status code `400`.
+|===
