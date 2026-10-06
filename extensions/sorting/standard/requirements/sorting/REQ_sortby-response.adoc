@@ -4,5 +4,5 @@
 ^|*Requirement {counter:req-id}* |*/req/core/rc-sortby-response*
 
 ^|A |If the `sortby` parameter is specified, then the resources in a response SHALL be ordered by the keys and sort directions (i.e. ascending or descending) specified.
-^|B |The specific set of keys that may be used for sorting SHALL be specified by the `/collections/{collectionId}/sortables` resource.
+^|B |The specific set of keys that may be used for sorting SHALL be specified by the Sortables resource that is referenced with a link with the link relation type `\http://www.opengis.net/def/rel/ogc/1.0/sortables`.
 |===

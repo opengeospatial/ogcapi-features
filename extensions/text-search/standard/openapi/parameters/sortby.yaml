@@ -14,6 +14,6 @@ schema:
   minItems: 1
   items:
     type: string
-    pattern: '[+|-]?[A-Za-z_].*'
+    pattern: '^[+-]?[^+\-\s].*$'
 explode: false
 style: form
