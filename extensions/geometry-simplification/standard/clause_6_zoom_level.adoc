@@ -36,6 +36,7 @@ NOTE: Decimal values are allowed as zoom levels, not just integers.
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A | If the query parameter "zoom-level" is provided, geometries in the response SHALL be simplified so that they are suitable for rendering on a map at the zoom level of the "WebMercatorQuad" tile matrix set specified in <<OGC17-083r4>>.
 ^|B | The geometry type of the simplified geometry SHALL be consistent with the allowed geometry types for a geometry in the schema of the resource, if one is specified. 
+^|C | If the query parameter "zoom-level" is provided and the web resource is a collection of objects, the objects in the response SHALL be a subset of the objects in the response to the same request without the query parameter "zoom-level".
 |===
 
 The zoom level is a measure of how far the map is zoomed in or out. The map scale is the ratio of a distance on the map to the corresponding distance on the ground. If the zoom level increases by one, the scale denominator halves.
@@ -43,6 +44,8 @@ The zoom level is a measure of how far the map is zoomed in or out. The map scal
 The mapping between zoom levels and scale denominators at the equator is shown in <<zoom_levels>>. The scale denominators assume a rendering pixel size of 0.28 mm × 0.28 mm, as in <<OGC17-083r4>>. This Standard uses the zoom level instead of the scale, because in web mapping zoom levels are more commonly used than map scales. The WebMercatorQuad tiling scheme assumes that the map is rendered in the Web Mercator projection and uses a tile size of 256x256.
 
 The simplification of geometries is a lossy operation. The simplified geometries are approximations of the original geometries. The simplification will typically reduce the number of vertices in a curve or a surface ring. The degree of simplification of geometries is implementation-dependent. 
+
+In addition to simplifying the geometries, a server can omit objects that are not relevant on a map at the zoom level, for example, minor roads or small buildings at small scales. This is similar to vector tiles, where the server determines which features are included in a tile at a zoom level. Which objects are omitted, if any, is determined by the server. A client that needs all objects, for example, for an analysis, does not use the query parameter "zoom-level".
 
 [#zoom_levels,reftext='{table-caption} {counter:table-num}']
 .Zoom levels and the equivalent scale denominators
