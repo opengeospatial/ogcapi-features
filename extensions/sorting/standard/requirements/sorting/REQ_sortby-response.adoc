@@ -4,5 +4,5 @@
 ^|*Requirement {counter:req-id}* |*/req/sorting/sortby-response*
 
 ^|A |If the `sortby` parameter is specified, then the resources in a response SHALL be ordered by the keys and sort directions (i.e. ascending or descending) specified.
-^|B |Each key SHALL be a sortable declared in the Sortables resource.
+^|B |If the value of the parameter `sortby` does not conform to the schema in requirement <<req_sorting_sortby-definition,/req/sorting/sortby-definition>>, the server SHALL respond with status code 400 (Bad Request).
 |===
