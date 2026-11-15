@@ -18,6 +18,8 @@ Omitting the geometry is useful, if a client does not need it, for example, to p
 
 If the primary geometry is not selected or is excluded, the response represents each feature as a feature without a geometry. In GeoJSON, the value of the "geometry" member is then `null`. The examples "<<example_6_1>>" and "<<example_6_2>>" show such responses. To include the geometry, its property name is included in the value of the query parameter "properties", as in the example "<<example_7_1>>".
 
+The query parameters "properties" and "exclude-properties" only determine which properties are included in the representation of each feature. They do not change which features are returned or their order. Other query parameters that select or sort the features can use properties that are not included in the response. Links of a feature that are not properties of the feature, for example, a link to the feature itself, are not affected.
+
 :req: request
 [#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
