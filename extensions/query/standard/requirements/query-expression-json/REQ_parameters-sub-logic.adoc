@@ -3,7 +3,8 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/query-expression-json/parameters-sub-logic*
 ^|A |During query execution, the server SHALL perform a substitution process, replacing every instance of a `$parameter` object with the corresponding argument provided in the execution request. 
-^|B |The provided argument SHALL strictly adhere to the constraints defined in the parameter’s JSON Schema.
+^|B |If an argument provided in the execution request does not conform to the JSON Schema of the parameter, the server SHALL respond with status code 400 (Bad Request).
 ^|C |If a parameter declares a default value within its schema, the server SHALL apply that value automatically if no argument is provided in the execution request.
 ^|D |If a parameter is defined as an array type, the server SHALL convert comma-separated input strings into a standard JSON array.
+^|E |After the substitution, the query expression SHALL conform to the requirements of this requirements class on the JSON encoding of a query expression, a query and its clauses.
 |===

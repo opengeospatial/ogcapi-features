@@ -278,7 +278,7 @@ The query:
 [source%unnumbered,json]
 ----
 PUT /d103_airports/query/elements-by-type-and-airport HTTP/1.1
-Host: t18.ldproxy.net
+Host: data.example.org
 Content-Type: application/ogc-query+json
 
 {
@@ -344,7 +344,7 @@ NOTE: In addition to the queries stored on the server, the Filtering Service can
 [source%unnumbered]
 ----
 GET /d103_airports/query HTTP/1.1
-Host: t18.ldproxy.net
+Host: data.example.org
 Accept: application/json
 ----
 
@@ -365,15 +365,22 @@ Content-Type: application/json
         {
           "rel": "self",
           "title": "Query 'Fetch apron, taxiway or runway elements based on their type and airport'",
-          "href": "https://t18.ldproxy.net/d103_airports/query/elements-by-type-and-airport"
+          "href": "https://data.example.org/d103_airports/query/elements-by-type-and-airport"
         },
         {
           "rel": "describedby",
           "title": "Definition of query 'Fetch apron, taxiway or runway elements based on their type and airport'",
-          "href": "https://t18.ldproxy.net/d103_airports/query/elements-by-type-and-airport/definition"
+          "href": "https://data.example.org/d103_airports/query/elements-by-type-and-airport/definition"
         }
       ],
       "parameters": {
+        "collection": {
+          "title": "Feature type",
+          "description": "The feature type that is queried.",
+          "type": "string",
+          "enum": ["apronelement", "runwayelement", "taxiwayelement"],
+          "default": "runwayelement"
+        },
         "type": {
           "title": "Type of the apron, runway or taxiway element",
           "description": "The following types are distinguished: normal use, parking, shoulder, intersection.",
@@ -400,7 +407,7 @@ Content-Type: application/json
       "rel": "self",
       "type": "application/json",
       "title": "This document",
-      "href": "https://t18.ldproxy.net/d103_airports/query?f=json"
+      "href": "https://data.example.org/d103_airports/query?f=json"
     }
   ]
 }
@@ -411,7 +418,7 @@ The Business Client is interested in the first query and retrieves information a
 [source%unnumbered]
 ----
 GET /d103_airports/query/elements-by-type-and-airport/parameters HTTP/1.1
-Host: t18.ldproxy.net
+Host: data.example.org
 Accept: application/parameters+json
 ----
 
@@ -455,7 +462,7 @@ Since the query has default values for all parameters, the simplest query is one
 [source%unnumbered]
 ----
 GET /d103_airports/query/elements-by-type-and-airport HTTP/1.1
-Host: t18.ldproxy.net
+Host: data.example.org
 Accept: application/geo+json
 ----
 
@@ -481,7 +488,7 @@ First the GET variant:
 [source%unnumbered]
 ----
 GET /d103_airports/query/elements-by-type-and-airport?collection=apronelement&type=PARKING&airports=EWR,JFK,LGA HTTP/1.1
-Host: t18.ldproxy.net
+Host: data.example.org
 Accept: application/geo+json
 ----
 
@@ -490,7 +497,7 @@ And the POST variant, which will typically be necessary for larger parameter val
 [source%unnumbered]
 ----
 POST /d103_airports/query/elements-by-type-and-airport HTTP/1.1
-Host: t18.ldproxy.net
+Host: data.example.org
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 57
 Accept: application/geo+json

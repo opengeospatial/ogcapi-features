@@ -72,7 +72,7 @@ NOTE: This Standard does not define a global `sortby` member. Sorting the combin
 
 include::requirements/query-expression-json/REQ_parameters-schema.adoc[]
 
-For parameterized stored queries, the query expression incorporates JSON objects containing a `$parameter` member. This member identifies the parameter by name and defines its constraints using a logical JSON Schema. 
+For parameterized stored queries, the query expression incorporates JSON objects containing a `$parameter` member. This member identifies the parameter by name and defines its constraints using a logical JSON Schema. The query expression of a parameterized stored query does not conform to the schemas of the query expression and its clauses, because it contains `$parameter` objects. The schemas apply to the query expression after the substitution of the `$parameter` objects with the arguments (see <<req_query-expression-json_parameters-sub-logic,/req/query-expression-json/parameters-sub-logic>>).
 
 include::requirements/query-expression-json/REQ_parameters-value-schema.adoc[]
 
