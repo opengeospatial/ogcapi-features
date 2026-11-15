@@ -1,0 +1,7 @@
+[[per_features_crs-storage-crs-only]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/features/crs-storage-crs-only*
+^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
+^|A |The server MAY only support the storage CRS in transactions, to avoid coordinate conversions.
+|===

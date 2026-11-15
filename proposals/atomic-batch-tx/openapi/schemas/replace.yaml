@@ -9,11 +9,13 @@ allOf:
   properties:
     action:
       type: string
-      const: 'replace'
+      enum: [ 'replace' ]
     collection:
       type: string
     properties:
       type: object
+      required:
+      - feature
       properties:
         feature:
           oneOf:
@@ -22,10 +24,11 @@ allOf:
     filter:
       oneOf:
       - type: string
-      - $ref: 'cql2.yaml'
+      - $ref: 'cql2.yaml#/components/schemas/booleanExpression'
     filter-lang:
       type: string
-      default: 'cql2-json'
+      enum: [ 'cql2-text', 'cql2-json' ]
+      description: The default is `cql2-text` if `filter` is a string and `cql2-json` otherwise.
     filter-crs:
       type: string
       default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'

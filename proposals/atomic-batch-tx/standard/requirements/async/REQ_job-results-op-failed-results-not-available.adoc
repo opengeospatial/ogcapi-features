@@ -2,9 +2,9 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/async-transactions/job-results-op-failed-results-not-available*
-^|Condition: |The job identifier is (or was) valid.
-^|Condition: |The jobs completed but the results have aged out.
-^|B |The server SHALL respond with a HTTP status code 410.
-^|C |The content of that response SHALL be based upon the OpenAPI 3.0 schema https://raw.githubusercontent.com/opengeospatial/ogcapi-processes/master/openapi/schemas/common-transactions/exception.yaml[exception.yaml].
-^|D |The `type` of the exception SHALL be "http://www.opengis.net/def/exceptions/ogcapi-features-11/1.0/results-not-available".
+^|Condition |The job identifier is (or was) valid.
+^|Condition |The job completed but the results have aged out.
+^|A |The server SHALL respond with a HTTP status code 410.
+^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema https://raw.githubusercontent.com/opengeospatial/ogcapi-processes/master/openapi/schemas/common-core/exception.yaml[exception.yaml].
+^|C |The `type` of the exception SHALL be "http://www.opengis.net/def/exceptions/ogcapi-features-11/1.0/result-not-available".
 |===

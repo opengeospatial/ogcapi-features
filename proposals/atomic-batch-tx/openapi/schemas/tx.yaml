@@ -14,10 +14,8 @@ allOf:
     transaction:
       type: array
       items:
-        type: object
-        properties:
-          oneOf:
-          - $ref: 'insert.yaml'
-          - $ref: 'replace.yaml'
-          - $ref: 'update.yaml'
-          - $ref: 'delete.yaml'
+        oneOf:
+        - $ref: 'insert.yaml'
+        - $ref: 'replace.yaml'
+        - $ref: 'update.yaml'
+        - $ref: 'delete.yaml'

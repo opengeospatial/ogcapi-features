@@ -5,11 +5,11 @@ allOf:
   required:
   - action
   - collection
-  - item
+  - items
   properties:
     action:
       type: string
-      const: 'insert'
+      enum: [ 'insert' ]
     collection:
       type: string
     items:

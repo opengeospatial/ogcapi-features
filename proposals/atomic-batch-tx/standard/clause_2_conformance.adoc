@@ -1,11 +1,11 @@
 == Conformance
 
-This Standard defines three requirements / conformance classes:
+This Standard defines six requirements / conformance classes:
 
    * <<rc_transactions,Transactions>>
-   * <<rc_async_transactions,Asynchronous Transactions>>
-   * <<rc_atomic_transactions,Atomic Semantics>>
-   * <<rc_batch_transactions,Batch Semantics>>
+   * <<rc_atomic-transactions,Atomic Semantics>>
+   * <<rc_batch-transactions,Batch Semantics>>
+   * <<rc_async-transactions,Asynchronous Transactions>>
    * <<rc_json,JSON Encoding>>
    * <<rc_features,Features>>
 
@@ -19,9 +19,9 @@ The URIs of the associated conformance classes are:
 |===
 |Conformance class |URI
 |Transactions |http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/transactions
+|Atomic Semantics |http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/atomic-transactions
+|Batch Semantics |http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/batch-transactions
 |Asynchronous Transactions |http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/async-transactions
-|Atomic Semantics|http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/atomic-semantics
-|Batch Semantics|http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/batch-semantics
 |JSON Encoding|http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/json-transactions
 |Features |http://www.opengis.net/spec/ogcapi-features-11/1.0/conf/features
 |===

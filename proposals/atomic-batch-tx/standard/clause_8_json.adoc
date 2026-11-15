@@ -1,11 +1,11 @@
 [[sc_json]]
-== Requirements Class "JSON"
+== Requirements Class "JSON Encoding"
 
 === Overview
 
 include::requirements/requirements_class_json.adoc[]
 
-This clause defined the JSON-encoding of a transaction.
+This clause defines the JSON-encoding of a transaction.
 
 ===  Transaction encoding
 
@@ -26,7 +26,7 @@ include::../openapi/schemas/insert.yaml[]
 ----
 
 [[replace-schema]]
-.Schema for an replace action
+.Schema for a replace action
 [source,yaml]
 ----
 include::../openapi/schemas/replace.yaml[]
@@ -40,7 +40,7 @@ include::../openapi/schemas/update.yaml[]
 ----
 
 [[delete-schema]]
-.Schema for an delete action
+.Schema for a delete action
 [source,yaml]
 ----
 include::../openapi/schemas/delete.yaml[]
