@@ -18,7 +18,7 @@ The two query parameters cannot be combined in a request.
 
 The query parameters can be applied to web resources that can be represented as an object with properties or to resources that are collections of such objects; for example, a collection of features, a single feature or a vector tile.
 
-The list of valid property names can be determined from the API definition or, if a schema of the returnables is available, from the JSON Schema according to <<OAFeat-5,OGC API - Features - Part 5: Schemas>>, Requirements Class "Returnables and Receivables".
+The list of valid property names can be determined from the API definition, if the schema of the query parameter lists them (see <<rec_properties_returnables-enum>>), or, if a schema of the returnables is available, from the JSON Schema according to <<OAFeat-5,OGC API - Features - Part 5: Schemas>>, Requirements Class "Returnables and Receivables".
 
 :req: parameter
 [#req_{req-class}_{req}]
@@ -31,7 +31,6 @@ The list of valid property names can be determined from the API definition or, i
 ----
 include::schema/properties.yaml[]
 ----
-^|B | The "enum" values in the schema of the query parameter "properties" in sub-requirement `A` are placeholders. The enum array SHALL either be removed or replaced with the actual returnables of the web resource.
 |===
 
 :req: response
@@ -55,7 +54,6 @@ include::schema/properties.yaml[]
 ----
 include::schema/exclude-properties.yaml[]
 ----
-^|B | The "enum" values in the schema of the query parameter "exclude-properties" in sub-requirement `A` are placeholders. The enum array SHALL either be removed or replaced with the actual returnables of the web resource.
 |===
 
 :req: exclude-response
@@ -90,6 +88,16 @@ include::schema/exclude-properties.yaml[]
 |===
 ^|*Permission {counter:per-num}* |/per/{req-class}/{per}
 ^|A | If the value of the query parameter "properties" or "exclude-properties" includes unknown properties, the server MAY either return a 400 (Bad Request) response or ignore the unknown properties.
+|===
+
+The OpenAPI fragments of the query parameters "properties" and "exclude-properties" accept any property name, because the returnables differ between web resources. Without a list of the valid property names in the API definition, clients have to determine the valid values in another way, for example, from a schema of the returnables, if one is available. An API definition that describes the operations of each collection separately can list the returnables of the collection, which also allows tools to offer a selection of the valid property names. An API definition that describes the operations of all collections using a path parameter `collectionId` cannot do this.
+
+:rec: returnables-enum
+[#rec_{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A | The schema of the array items of the query parameters "properties" and "exclude-properties" SHOULD include an "enum" member with the returnables of the web resource.
 |===
 
 [[example_6_1]]
