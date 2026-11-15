@@ -15,6 +15,18 @@ As per the <<OAFeat-1,OGC API - Features - Part 1: Core>> Standard, features are
 
 include::requirements/features-text-search/REQ_q-param.adoc[]
 
+The parameter `q` is a filter parameter like `bbox` and `datetime`. The rules stated in the subclause "Combinations of filter parameters" of <<OAFeat-1,OGC API - Features - Part 1: Core>> apply: only features that match all predicates, including the text search, are in the result set.
+
 ==== Response
 
 include::requirements/features-text-search/REQ_response.adoc[]
+
+[[example_q_relevance]]
+.Example of a text search with the most relevant features first
+====
+If the API also supports sorting according to <<OAFeat-8,OGC API - Features - Part 8: Sorting>> and provides a synthetic sortable `relevance` that ranks the features by how well they match the search terms, the following request returns the buildings that contain "school" or "hospital" in one of the searched text fields, with the most relevant buildings first:
+
+----
+.../collections/buildings/items?q=school,hospital&sortby=%2Drelevance
+----
+====
