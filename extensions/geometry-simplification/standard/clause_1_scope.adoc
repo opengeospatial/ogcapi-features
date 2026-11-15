@@ -1,3 +1,5 @@
 == Scope
 
 This document specifies a query parameter "zoom-level" that can be used to restrict the representation of geometries in a resource so that the coordinates are only provided at a certain level of detail. In a collection of objects, for example, features, the query parameter can also be used to omit objects that are not relevant on a map at that level of detail.
+
+The clipping of geometries, for example, to the bounding box of a request, and the selection of the simplification algorithm by the client are out of scope of this document.
