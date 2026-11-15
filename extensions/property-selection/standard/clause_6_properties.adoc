@@ -16,6 +16,8 @@ The query parameter "exclude-properties" takes a comma-separated list of propert
 
 The two query parameters cannot be combined in a request.
 
+Clients cannot rely on the order of the property names in the value of the query parameter "properties" to determine the order of the properties in the response. If the media type of the response has a concept of property order, the server determines the order, for example, according to the keyword "x-ogc-propertySeq" in a schema of the returnables according to <<OAFeat-5,OGC API - Features - Part 5: Schemas>>.
+
 An empty value of one of the query parameters is an empty list of property names. With `properties=`, no returnable property is selected, so the response only includes what the media type requires. With `exclude-properties=`, no property is excluded.
 
 By default, that is, if a request includes neither of the two query parameters, all properties are included in the response. An API can change this by specifying a default value for one of the two query parameters in the API definition (but not for both), for example, to omit properties that are large or rarely needed, unless a client explicitly asks for them. The default value only applies, if a request includes neither of the two query parameters. For example, if the query parameter "exclude-properties" has a default value, a client can request all properties with `exclude-properties=`.
