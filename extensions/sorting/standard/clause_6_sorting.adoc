@@ -41,6 +41,26 @@ This Standard does not mandate a specific default sort order for resources fetch
 
 include::requirements/sorting/REQ_default-sort-order.adoc[]
 
+[[order-of-values]]
+=== Order of the values of a sortable (informative)
+
+The order of the values of a sortable is determined by the server. Typically, it is the natural order of the values, for example, the numeric order of numbers, the chronological order of temporal values or the alphabetical order of strings.
+
+For some properties, the values have a meaningful order that differs from the alphabetical order, for example, a processing level with the values "Raw", "Calibrated" and "Derived", in this order. A server can use such an order when sorting by the property. Alternatively, the server can provide a synthetic sortable that assigns an increasing number to each value, see <<sortable-rank-example>>. The description of the sortable in the Sortables resource can explain the order.
+
+This Standard does not support an order of the values that is specified by the client.
+
+[#sortable-rank-example,reftext=`Sortable Rank Example`]
+.A synthetic sortable for the order of processing levels in the Sortables resource
+[source,json]
+----
+"processingLevelRank": {
+  "title": "Rank of the processing level",
+  "description": "1 = Raw, 2 = Calibrated, 3 = Derived",
+  "type": "integer"
+}
+----
+
 [[sorting-by-relevance]]
 === Sorting by relevance (informative)
 
