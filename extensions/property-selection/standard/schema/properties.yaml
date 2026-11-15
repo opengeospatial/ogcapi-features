@@ -1,5 +1,9 @@
 name: properties
 in: query
+description: >-
+  The properties to include in the representation of the resource. The value is a
+  comma-separated list of property names. If the parameter is not provided, all properties
+  are included. The parameter cannot be combined with the parameter "exclude-properties".
 required: false
 style: form
 explode: false
@@ -7,6 +11,3 @@ schema:
   type: array
   items:
     type: string
-    enum:
-    - foo
-    - bar
