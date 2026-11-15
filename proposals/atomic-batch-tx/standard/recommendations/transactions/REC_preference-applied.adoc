@@ -1,0 +1,6 @@
+[[rec_transactions_preference-applied]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/transactions/preference-applied*
+^|A |If a request is accompanied with the HTTP https://datatracker.ietf.org/doc/html/rfc7240#section-2[`Prefer`] header, then the server SHOULD include the HTTP https://datatracker.ietf.org/doc/html/rfc7240#section-3[`Preference-Applied`] header in the response to indicate which preferences were honored.
+|===

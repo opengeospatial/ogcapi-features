@@ -19,6 +19,12 @@ include::requirements/async/REQ_async-execute.adoc[]
 
 include::recommendations/async/REC_honor-prefer.adoc[]
 
+NOTE: A client that accompanies a request with the HTTP `Prefer` header asserting a `respond-async` preference and/or a `wait` preference has to be prepared to receive either an asynchronous or a synchronous response. The `Preference-Applied` header in the response indicates whether the preference was honored (see <<rec_transactions_preference-applied>>).
+
+If the server executes the transaction asynchronously, it creates a job and responds as in <<OAProc-1,OGC API - Processes - Part 1: Core>>: the status code 201 indicates that the job has been created, the `Location` header identifies the job, and the response contains the initial status information. The requirements and the recommendation in this subclause correspond to the requirements `/req/core/process-execute-default-execution-mode`, `/req/core/process-execute-auto-execution-mode` and `/req/core/process-execute-success-async` and the recommendations `/rec/core/process-execute-honor-prefer` and `/rec/core/process-execute-preference-applied` of OGC API - Processes - Part 1: Core, which apply to the execution of processes. Unlike a process, a transaction has no job control options, so a transaction is only executed asynchronously, if the client prefers an asynchronous execution.
+
+include::requirements/async/REQ_async-execute-success.adoc[]
+
 === Getting the status of an asynchronously executing transaction
 
 include::requirements/async/REQ_job-op.adoc[]

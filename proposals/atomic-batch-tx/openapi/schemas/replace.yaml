@@ -5,22 +5,17 @@ allOf:
   required:
   - action
   - collection
-  - properties
+  - feature
   properties:
     action:
       type: string
       enum: [ 'replace' ]
     collection:
       type: string
-    properties:
-      type: object
-      required:
-      - feature
-      properties:
-        feature:
-          oneOf:
-          - $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/featureGeoJSON.yaml'
-          - $ref: 'link.yaml'
+    feature:
+      oneOf:
+      - $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/featureGeoJSON.yaml'
+      - $ref: 'link.yaml'
     filter:
       oneOf:
       - type: string

@@ -8,4 +8,5 @@
 ^|C |The value of the `id` member SHALL be the identifier assigned by the server for the job.
 ^|D |The value of the `status` member SHALL indicate the state of the job at the time the request is made for the status information.
 ^|E |The value of the `processingEntityType` member SHALL be `ogc-api-features` to indicate that a server that conforms to this Standard created the job.
+^|F |The value of the `processingEntityType` member SHALL NOT change if a different representation of the job status information is requested.
 |===

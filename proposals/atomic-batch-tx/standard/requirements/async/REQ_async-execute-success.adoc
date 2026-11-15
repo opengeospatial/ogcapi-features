@@ -1,0 +1,9 @@
+[[req_async-transactions_execution-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/async-transactions/execution-success*
+^|Condition |The negotiated execution mode is asynchronous.
+^|A |The server SHALL respond with a HTTP status code 201.
+^|B |The header of the response SHALL include the HTTP `Location` header that contains a link to the newly created job (path `/jobs/{jobID}`).
+^|C |The content of the response SHALL be based upon the OpenAPI 3.0 schema https://raw.githubusercontent.com/opengeospatial/ogcapi-processes/master/openapi/schemas/processes-core/statusInfo.yaml[statusInfo.yaml].
+|===
