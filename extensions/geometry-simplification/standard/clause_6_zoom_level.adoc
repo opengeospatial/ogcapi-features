@@ -76,5 +76,18 @@ The simplification of geometries is a lossy operation. The simplified geometries
 |24 |33.3238997476528
 |===
 
-TODO: add example
+[[example_6_1]]
+.Example of simplified geometries
+====
+The feature https://demo.ldproxy.net/cshapes/collections/boundary/items/2?f=json is the boundary of the United States of America between 1959 and 2019. The table shows the number of positions in the geometry and the size of the GeoJSON document with and without the query parameter "zoom-level". In all responses, the geometry is a multi-polygon with 136 polygons.
+
+[width="70%",cols="40,30,30",options="header"]
+|===
+|Query parameter |Positions |Document size
+|none |10601 |254 KB
+|`zoom-level=6` |4550 |110 KB
+|`zoom-level=3` |1857 |47 KB
+|`zoom-level=0` |1201 |31 KB
+|===
+====
 
