@@ -1,7 +1,7 @@
-[[req_features-sorting_response]]
+[[req_features-text-search_response]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/features-sorting/response*
+^|*Requirement {counter:req-id}* |*/req/features-text-search/response*
 
-For requirment <<req_text-search_q-response,/req/text-search/q-response>> the resource SHALL be a feature.
+The features in the response to a GET request on `/collections/{collectionId}/items` with a `q` parameter SHALL meet requirement <<req_text-search_q-response,/req/text-search/q-response>>.
 |===

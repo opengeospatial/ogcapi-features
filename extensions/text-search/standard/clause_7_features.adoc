@@ -11,7 +11,7 @@ This clause defines the binding between the <<OAFeat-1,OGC API - Features - Part
 
 ==== Operation
 
-As per the <<OAFeat-1,OGC API - Features - Part 1: Core>> Standard, features are accessed using the HTTP GET method via the `/collections/{collectionId}/items` path (see http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items[Features]).  The following additional requirements bind the parameters <<filter-param,filter>>, <<filter-lang-param,filter-lang>> and <<filter-filter-crs,filter-crs>> to the GET operation on this path.
+As per the <<OAFeat-1,OGC API - Features - Part 1: Core>> Standard, features are accessed using the HTTP GET method via the `/collections/{collectionId}/items` path (see https://docs.ogc.org/is/17-069r4/17-069r4.html#_items[Features]). The following requirement binds the parameter `q` to the GET operation on this path.
 
 include::requirements/features-text-search/REQ_q-param.adoc[]
 

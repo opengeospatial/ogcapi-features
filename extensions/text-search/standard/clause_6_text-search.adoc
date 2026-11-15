@@ -30,11 +30,11 @@ represents the query predicate:
 ----
 (anytext CONTAINS 'ocean') OR
 (anytext CONTAINS 'climate\s+change') OR
-(anytext CONTAINS 'desalination')`
+(anytext CONTAINS 'desalination')
 ----
 
-NOTES:
+NOTE: The term `anytext` represents the set of text fields that are searched by the operation.
 
-* The term `anytext` represents the set of text fields that are searched by the operation.
-* The `CONTAINS` operator used above is just an example of an operator that searches a text field(s) for specific search terms.  How this operator is implemented and what it is named in the system backing a catalog implementation is beyond the scope of this Standard.
-* The regular expression `\s+` represents one or more white spaces.
+NOTE: The `CONTAINS` operator used above is just an example of an operator that searches one or more text fields for specific search terms. How this operator is implemented and what it is named in the system backing an implementation is beyond the scope of this Standard.
+
+NOTE: The regular expression `\s+` represents one or more white spaces.

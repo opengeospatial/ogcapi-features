@@ -5,7 +5,7 @@
 
 This test suite uses the https://en.wikipedia.org/wiki/Given-When-Then[Given-When-Then] notation to specify the tests.
 
-In order to execute tests against the Web API under test, the Web API needs to support one of the specified encodings. Since all known implementations at this time support JSON, this test suite uses the JSON encoding and adds a dependency to the Conformance Class "JSON" in OGC API - Common - Part 1: Core for the general "Sorting" tests and to the Conformance Class "GeoJSON" in OGC API - Features - Part 1: Core for the feature-specific tests. 
+In order to execute tests against the Web API under test, the Web API needs to support one of the specified encodings. Since all known implementations at this time support JSON, this test suite uses the JSON encoding and adds a dependency to the Conformance Class "JSON" in OGC API - Common - Part 1: Core for the general "Text Search" tests and to the Conformance Class "GeoJSON" in OGC API - Features - Part 1: Core for the feature-specific tests. 
 
 The Web API under test can require authorization. Any Executable Test Suite implementing this test suite should implement the following security schemes supported by OpenAPI 3.0: HTTP Authorization schemes "basic" and "bearer", API keys, and OAuth2 flow "authorizationCode".
 
@@ -28,9 +28,8 @@ The following table lists input given to all tests in this conformance class:
 * The list of resources in the API (`{apiURI}/{pathToResource}`);
 * The media type of the response when accessing these resources (`{responseMediaType}`)
 * The list of acceptable status codes for a successful text search execution (default: "200", "204");
-* The list of acceptable status codes for an unsuccessful text search execution (default: "400");
 * A valid text search expression (`{text-search-valid}`) using search terms that are known to exist in the data;
-* An invalid text search expression (`{text-search-invalid}`) using search terms that are known to not exist in the data;
+* A text search expression with search terms that do not occur in the data (`{text-search-nomatch}`);
 
 :conf-test: get-conformance
 ==== Conformance Test {counter:test-id}
@@ -63,7 +62,7 @@ Then:
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | /conf/{conf-class}/{conf-test}
-|Requirements: | <<req_{conf-class}_q-param,/req/{conf-class}/q-param>>
+|Requirements: | <<req_{conf-class}_q-definition,/req/{conf-class}/q-definition>>, <<req_{conf-class}_q-response,/req/{conf-class}/q-response>>
 |Test purpose: | Check that the query parameter `q` is supported
 |Test method: | 
 Given:
@@ -73,11 +72,10 @@ Given:
 
 When:
 
-* a request for each resource is executed with a valid test search expression
+* a request for each resource is executed with a valid text search expression
 ** method: `GET`
 ** path: `{apiURI}/{pathToResource}`
 ** query parameters (before percent encoding): `q={text-search-valid}` where `{text-search-valid}` is composed of search terms known to exist in the data
-** query parameters (before percent encoding): `q={text-search-invalid}` where `{text-search-invalid}` is composed of search terms that are known not to exist in the data
 ** header: `Accept: {responseMediaType}`
 ** authentication, if authentication credentials are provided
 
@@ -88,29 +86,30 @@ Then:
 
 When:
 
-* a request for each resource is executed with an invalid text search expression
+* a request for each resource is executed with search terms that do not occur in the data
 ** method: `GET`
 ** path: `{apiURI}/{pathToResource}`
-** query parameters (before percent encoding): `q={text-search-invalid}` where `{text-search-invalid}` contains search terms that are known not to exist in the data
+** query parameters (before percent encoding): `q={text-search-nomatch}` where `{text-search-nomatch}` contains search terms that are known not to exist in the data
 ** header: `Accept: {responseMediaType}`
 ** authentication, if authentication credentials are provided
 
 Then:
 
-* assert an empty response (the status code is in the list of acceptable status codes for a successful execution).
+* assert successful execution (the status code is in the list of acceptable status codes for a successful execution);
+* assert that the response contains no resources.
 |===
 
 === Conformance Class "Features Text Search"
 
-:conf-class: features-filter
-[[conf_features-filter]]
+:conf-class: features-text-search
+[[conf_features-text-search]]
 [cols="1,4a",width="90%"]
 |===
 2+|*Conformance Class*
 2+|http://www.opengis.net/spec/{standard}/{m_n}/conf/{conf-class}
 |Target type |Web API
-|Requirements class |<<rc_features-filter,Requirements Class "Features Sorting">>
-|Dependency |<<conf_filter,Conformance Class "Sorting">>
+|Requirements class |<<rc_features-text-search,Requirements Class "Features Text Search">>
+|Dependency |<<conf_text-search,Conformance Class "Text Search">>
 |Dependency |OGC API - Features - Part 1: Core, Conformance Class "GeoJSON"
 |===
 
@@ -120,12 +119,8 @@ The following table lists input given to all tests in this conformance class:
 
 * The landing page URI of the OGC Web API (`{apiURI}`);
 * Authentication credentials (optional);
-* The name of the filter language to test  (`{filter-lang}`; default: "cql2-text");
-* A flag that indicates whether the filter language is the default filter language;
-* A valid filter expression in the filter language for a queryable `{queryable}` (`{filter-valid}`; default: `{queryable} IS NULL`);
-* An invalid filter expression in the filter language (`{filter-invalid}`; default: `THIS IS NOT A FILTER`);
-* A valid bbox filter expression in the filter language for a spatial queryable `{spatialQueryable}` and two longitude/latitude positions in WGS 84 `{x1}`/`{y1}` and `{x2}`/`{y2}` (`{bbox-filter}`; default: `S_INTERSECTS({spatialQueryable},ENVELOPE({x1},{y1},{x2},{y2})`);
-* A flag that indicates whether the API supports custom functions in filter expressions.
+* A valid text search expression for each collection (`{text-search-valid}`);
+* A text search expression with search terms that do not occur in the data for each collection (`{text-search-nomatch}`);
 
 :conf-test: get-conformance
 ==== Conformance Test {counter:test-id}
@@ -194,11 +189,10 @@ Given:
 
 When:
 
-* the tests for the "Test Search" conformance class are executed with the following input parameters:
+* the tests for the "Text Search" conformance class are executed with the following input parameters:
 ** All input parameters given to this conformance class (see above);
 ** The path template to the resource is `{apiURI}/collections/{collectionId}/items` with a response media type `application/geo+json` (GeoJSON);
-** The acceptable status codes for a successful filter execution are: "200";
-** The list of acceptable status codes for an unsuccessful filter execution are: "400".
+** The acceptable status codes for a successful text search execution are: "200".
 
 Then:
 
