@@ -3,5 +3,5 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/manage-stored-query/definition-success* 
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The content of that response SHALL be based upon the schema <<schema_stored-query,stored-query.yaml>>.
+^|B |The content of that response SHALL be the query expression of the stored query, as submitted in the PUT request.
 |===

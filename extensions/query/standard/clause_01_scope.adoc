@@ -1,8 +1,8 @@
 == Scope
 
-While "OGC API - Feature - Part 1: Core" provides basic searching (bounding box, temporal range, and equality) and "OGC API - Features - Part 3: Filtering" introduces complex query languages like CQL2, both are limited to single-collection searches.
+While "OGC API - Features - Part 1: Core" provides basic searching (bounding box, temporal range, and equality) and "OGC API - Features - Part 3: Filtering" introduces complex query languages like CQL2, both are limited to single-collection searches.
 
-This document, "OGC API - Feature - Part 10: Query", specifies extensions to the OGC API - Features suite of standards to support resource selection across one or more geodata collections.  The extensions defined in this document enable complex query scenarios that were previously unsupported, including:
+This document, "OGC API - Features - Part 10: Query", specifies extensions to the OGC API - Features suite of standards to support resource selection across one or more geodata collections.  The extensions defined in this document enable complex query scenarios that were previously unsupported, including:
 
 * **Complex Query Expressions**: Queries with long text strings encoding complex query predicates that exceed URL parameter limits.
 
@@ -34,14 +34,14 @@ The following table maps the resource endpoints defined in this Standard to the 
 1+|QUERY  |Execute an ad-hoc query using the HTTP QUERY method. |<<http-query-method-ad-hoc,The HTTP QUERY method>>
 
 1.5+|/query/{queryId} |GET |Execute this stored query. |<<clause-stored-query,Stored query>>
-1+|POST   |Execute this stored query with an application/x-www-form-urlencoded body. |<<clause-stored-query,Stored query>>
-1+|QUERY  |Execute this stored query with an application/x-www-form-urlencoded body using the the HTTP QUERY method. |<<http-query-method-parameterized-stored-query,The HTTP QUERY method>>
+1+|POST   |Execute this stored query with an application/x-www-form-urlencoded body. |<<clause-parameterized-stored-query-execute-form,Parameterized stored query>>
+1+|QUERY  |Execute this stored query with an application/x-www-form-urlencoded body using the HTTP QUERY method. |<<http-query-method-parameterized-stored-query,The HTTP QUERY method>>
 1+|PUT    |Create or replace a stored query. |<<clause-manage-stored-query-create,Creating a stored query>>, <<clause-manage-stored-query-update,Updating stored queries>>
 1+|DELETE |Delete this stored query. |<<clause-manage-stored-query-delete,Deleting stored queries>>
 
 |/query/{queryId}/definition |GET |Get the definition of a stored query. |<<clause-manage-stored-query-definition,Retrieving the definition of a stored query>>
 
-|/query/{queryId}/parameters |GET |Get the list of parameters for this parametertized stored query. |<<clause-parameterized-stored-query-parameter-discovery,Retrieving the list of stored query parameters>>
+|/query/{queryId}/parameters |GET |Get the list of parameters for this parameterized stored query. |<<clause-parameterized-stored-query-parameter-discovery,Retrieving the list of stored query parameters>>
 
 |/query/{queryId}/parameters/{parameterId} |GET |Get the definition of this query parameter. |<<clause-parameterized-stored-query-parameter-discovery,Retrieving the definition of a query parameter>>
 |====

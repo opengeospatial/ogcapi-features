@@ -2,6 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/multi-resource-response/json*
+^|Condition |The query expression has a `queries` member.
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The content of that response SHALL be based upon the <<schema_collections,collection.yaml>> schema.
+^|B |The content of that response SHALL be based upon the <<schema_collections,collections.yaml>> schema.
 |===

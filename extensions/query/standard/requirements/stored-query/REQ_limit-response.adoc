@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/stored-query/limit-response* 
-^|A |The response SHALL not contain more resource than specified by the optional `limit` parameter. 
-^|B |If the API definition specifies a maximum value for `limit` parameter, the response SHALL not contain more resource than this maximum value.
-^|C |Only items are counted that are on the first level of the nested collection. Any nested objects contained within the explicitly requested items SHALL not be counted.
+^|A |The response SHALL NOT contain more resources than specified by the optional `limit` parameter.
+^|B |If the API definition specifies a maximum value for `limit` parameter, the response SHALL NOT contain more resources than this maximum value.
+^|C |The server SHALL count only the items on the first level of the response. Nested objects within these items SHALL NOT be counted.
 |===

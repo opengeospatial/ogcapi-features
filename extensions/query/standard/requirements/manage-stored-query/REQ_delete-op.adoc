@@ -1,8 +1,7 @@
-[[req_stored-query_delete-op]]
+[[req_manage-stored-query_delete-op]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/stored-query/delete-op*
-^|Condition |The value of the `mutable` property (JSONPath: `$.queries[*].mutable`) SHALL be `true`.
-^|A |For every stored query in the stored queries response (path '/query'), the server SHALL support the HTTP DELETE operation at the path '/query/{queryId}'.
-^|B |The parameter `queryId` is each `id` property in the stored queries response (JSONPath: `$.queries[*].id`).
+^|*Requirement {counter:req-id}* |*/req/manage-stored-query/delete-op*
+^|Condition |The stored query has the value `true` for `mutable` in the stored queries response (JSONPath: `$.queries[*].mutable`).
+^|A |For every stored query in the stored queries response (path `/query`), the server SHALL support the HTTP DELETE operation at the path `/query/{queryId}`, where `{queryId}` is the `id` of the stored query (JSONPath: `$.queries[*].id`).
 |===

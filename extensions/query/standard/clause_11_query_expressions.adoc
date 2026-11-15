@@ -66,7 +66,7 @@ include::requirements/query-expression-json/REQ_join-sortby.adoc[]
 
 include::requirements/query-expression-json/REQ_sortby-scope.adoc[]
 
-NOTE: Applying a global `sortby` clause requires the server to aggregate the results of all sub-queries before sorting the combined set. This approach precludes the ability to stream the response, as the entire result set must be held in memory prior to transmission.
+NOTE: This Standard does not define a global `sortby` member. Sorting the combined result of all queries would require the server to collect all results before it sends the response. The response could then not be streamed.
 
 ==== Parameters
 

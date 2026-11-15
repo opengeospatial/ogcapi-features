@@ -2,6 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/query-expression-json/join-filter*
-^|Conditions |The `collections` member in a query contains more that one collection identifier.
+^|Condition |The `collections` member in a query contains more than one collection identifier.
 ^|A |In the selection clause (member: `filter`), each referenced queryable SHALL be identified by a composite name consisting of the source collection identifier followed by the queryable identifier, joined by a dot (".") separator.
 |===
