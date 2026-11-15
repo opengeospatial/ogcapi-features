@@ -32,6 +32,10 @@ include::requirements/sorting/REQ_sortby-response.adoc[]
 
 The position of resources without a value for a sort key, that is, whether they are first or last, is determined by the server.
 
+If several resources have the same values for all sort keys, the sort keys do not determine the order of these resources. If the response is split into pages, for example, using `next` links in the Features resource, and the server orders such resources differently in each request, a resource can be returned on more than one page or on no page at all.
+
+include::recommendations/sorting/REC_stable-order.adoc[]
+
 Each sortable has to be declared in the Sortables resource. If the Sortables resource does not allow additional sortables, a request with an unknown sortable results in an error according to the Requirements Class "Sortables" of <<OAFeat-5,OGC API - Features - Part 5: Schemas>>.
 
 [[default-sort-order]]
