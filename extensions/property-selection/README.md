@@ -10,4 +10,4 @@ The document is an initial draft.
 
 ## Overview
 
-Part 6 (Property Selection) specifies how the representation of a resource, for example a feature, can be reduced to selected resource properties using the query parameter "properties".
+Part 6 (Property Selection) specifies how the representation of a resource, for example a feature, can be reduced to selected resource properties using the query parameters "properties" (the properties to include) and "exclude-properties" (the properties to omit).

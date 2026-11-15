@@ -8,11 +8,15 @@
 |Target type |Web API
 |===
 
-The Requirements Class "Property Selection" specifies the "properties" query parameter. 
+The Requirements Class "Property Selection" specifies the query parameters "properties" and "exclude-properties".
 
-The query parameter takes a comma-separated list of property names that are to be included in the response. Properties where the name is not included in the query parameter value are in general not included in the response.
+The query parameter "properties" takes a comma-separated list of property names that are to be included in the response. Properties where the name is not included in the query parameter value are in general not included in the response.
 
-The query parameter can be applied to web resources that can be represented as an object with properties or to resources that are collections of such objects; for example, a collection of features, a single feature or a vector tile.
+The query parameter "exclude-properties" takes a comma-separated list of property names that are to be omitted from the response. All other properties are included in the response. This is useful, if a resource has many properties and only a few of them are not needed, for example, a geometry with many coordinates.
+
+The two query parameters cannot be combined in a request.
+
+The query parameters can be applied to web resources that can be represented as an object with properties or to resources that are collections of such objects; for example, a collection of features, a single feature or a vector tile.
 
 The list of valid property names can be determined from the API definition or, if a schema of the returnables is available, from the JSON Schema according to <<OAFeat-5,OGC API - Features - Part 5: Schemas>>, Requirements Class "Returnables and Receivables".
 
@@ -40,12 +44,44 @@ include::schema/properties.yaml[]
 ^|C | If the name of an object-valued property is selected, the complete object SHALL be returned. If properties inside an object-valued property are selected, only the selected properties of the object SHALL be returned.
 |===
 
+:req: exclude-parameter
+[#req_{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A | If a web resource supports a query parameter "exclude-properties", the query parameter SHALL be based on the following OpenAPI 3.0 fragment:
+
+[source,YAML]
+----
+include::schema/exclude-properties.yaml[]
+----
+^|B | The "enum" values in the schema of the query parameter "exclude-properties" in sub-requirement `A` are placeholders. The enum array SHALL either be removed or replaced with the actual returnables of the web resource.
+|===
+
+:req: exclude-response
+[#req_{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A | If the query parameter "exclude-properties" is provided, the returnable properties included in the parameter value SHALL NOT be returned.
+^|B | If the query parameter "exclude-properties" is provided, all returnable properties that are not included in the parameter value SHALL be returned.
+^|C | If the name of an object-valued property is excluded, the complete object SHALL NOT be returned. If properties inside an object-valued property are excluded, only the excluded properties of the object SHALL NOT be returned.
+|===
+
+:req: exclusive-parameters
+[#req_{req-class}_{req}]
+[width="90%",cols="2,7a"]
+|===
+^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
+^|A | If a request includes both query parameters "properties" and "exclude-properties", the server SHALL respond with status code 400 (Bad Request).
+|===
+
 :per: required-properties
 [#per_{req-class}_{per}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Permission {counter:per-num}* |/per/{req-class}/{per}
-^|A | By deviation from requirement `/req/properties/response`, sub-requirement `B`, the response MAY include properties in the response that have not been requested in the query parameter "properties", if this is required by the media type of the response.
+^|A | By deviation from requirement `/req/properties/response`, sub-requirement `B`, and requirement `/req/properties/exclude-response`, sub-requirement `A`, the response MAY include properties that have not been requested in the query parameter "properties" or that have been excluded in the query parameter "exclude-properties", if this is required by the media type of the response.
 |===
 
 :per: unknown-properties
@@ -53,7 +89,7 @@ include::schema/properties.yaml[]
 [width="90%",cols="2,7a"]
 |===
 ^|*Permission {counter:per-num}* |/per/{req-class}/{per}
-^|A | If the parameter value includes unknown properties, the server MAY either return a 400 (Bad Request) response or ignore the unknown properties.
+^|A | If the value of the query parameter "properties" or "exclude-properties" includes unknown properties, the server MAY either return a 400 (Bad Request) response or ignore the unknown properties.
 |===
 
 [[example_6_1]]
@@ -101,6 +137,55 @@ The request https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&p
       "type": "application/geo+json",
       "title": "This document",
       "href": "https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&properties=F_CODE,ZI005_FNA"
+    }
+  ]
+}
+----
+====
+
+[[example_6_2]]
+.Example of a feature collection with excluded properties
+====
+The request https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&limit=2&exclude-properties=geometry,ZI006_MEM,UFI returns the features without the geometry and without the properties "ZI006_MEM" and "UFI". The GeoJSON encoding requires a "geometry" member in each feature, so its value is `null`.
+
+[source,JSON]
+----
+{
+  "type": "FeatureCollection",
+  "numberReturned": 2,
+  "numberMatched": 5,
+  "timeStamp": "2026-11-15T12:53:21Z",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": null,
+      "properties": {
+        "F_CODE": "AL030",
+        "ZI001_SDV": "2011-12-27T18:39:59Z",
+        "ZI005_FNA": "مقبرة البحارة",
+        "FCSUBTYPE": 100092,
+        "ZI037_REL": 11
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": null,
+      "properties": {
+        "F_CODE": "AL130",
+        "ZI001_SDV": "2011-12-26T20:55:27Z",
+        "ZI005_FNA": "ساحة الكرامة",
+        "FCSUBTYPE": 100108
+      }
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/geo+json",
+      "title": "This document",
+      "href": "https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&limit=2&exclude-properties=geometry,ZI006_MEM,UFI"
     }
   ]
 }
