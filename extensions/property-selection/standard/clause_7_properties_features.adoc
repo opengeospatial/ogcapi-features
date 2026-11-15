@@ -12,6 +12,12 @@
 
 The Requirements Class "Property Selection (Features)" binds the query parameters "properties" and "exclude-properties" to the Features and Feature resources. The requirements apply only to collections with no `itemType` or with a value "feature".
 
+The geometry of a feature is a property like any other property. The query parameters "properties" and "exclude-properties" select or omit spatial properties by their name, including the primary geometry of the feature. If a schema of the returnables is available, the primary geometry is the property with the role "primary-geometry" according to <<OAFeat-5,OGC API - Features - Part 5: Schemas>>, Requirements Class "Advanced property roles".
+
+Omitting the geometry is useful, if a client does not need it, for example, to present the feature properties in a table, because the geometry is often the largest part of the feature.
+
+If the primary geometry is not selected or is excluded, the response represents each feature as a feature without a geometry. In GeoJSON, the value of the "geometry" member is then `null`. The examples "<<example_6_1>>" and "<<example_6_2>>" show such responses. To include the geometry, its property name is included in the value of the query parameter "properties", as in the example "<<example_7_1>>".
+
 :req: request
 [#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
@@ -19,3 +25,47 @@ The Requirements Class "Property Selection (Features)" binds the query parameter
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A |The HTTP GET operation on the `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{featureId}` paths SHALL support the query parameters "properties" and "exclude-properties" as defined in <<rc_properties>>.
 |===
+
+[[example_7_1]]
+.Example of a feature collection with a selected geometry
+====
+The request https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&limit=2&properties=F_CODE,geometry returns the features with the primary geometry, which has the property name "geometry" in this collection, and the property "F_CODE".
+
+[source,JSON]
+----
+{
+  "type": "FeatureCollection",
+  "numberReturned": 2,
+  "numberMatched": 5,
+  "timeStamp": "2026-11-15T13:23:33Z",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [ [ 36.096493, 32.602082 ] ]
+      },
+      "properties": {"F_CODE": "AL030"}
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [ [ 36.10092, 32.612133 ] ]
+      },
+      "properties": {"F_CODE": "AL130"}
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/geo+json",
+      "title": "This document",
+      "href": "https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&limit=2&properties=F_CODE,geometry"
+    }
+  ]
+}
+----
+====
