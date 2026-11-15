@@ -1,7 +1,6 @@
 # Examples
 
 The sub-folders contain examples of responses of implementations of
-OGC API - Records - Part 1: Core.
+OGC API - Features - Part 8: Sorting.
 
 * [JSON/GeoJSON examples](json)
-* [YAML examples](yaml)

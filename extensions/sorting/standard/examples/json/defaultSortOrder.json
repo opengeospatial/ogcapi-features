@@ -1,14 +1,15 @@
 {
-    "id": "sentinel1cat",
-    "itemType": "record",
-    "title": "Sentinel-1 Catalog",
-    "description": "A sample catalog of Sentinel-1 products stored in S3 on AWS.",
+    "id": "buildings",
+    "itemType": "feature",
+    "title": "Buildings",
+    "description": "A sample collection of buildings.",
     "defaultSortOrder": [ "-updated", "-area"],
     "links": [
         {
-            "href": "http://www.pvretano.com/cubewerx/cubeserv/default/ogcapi/catalogs/collections/sentinel1cat/items",
+            "href": "https://data.example.com/collections/buildings/items",
             "rel": "items",
-            "title": "Catalog records describing SENTINEL-1 products."
+            "type": "application/geo+json",
+            "title": "The buildings"
         }
     ]
 }

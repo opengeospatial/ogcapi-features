@@ -1,11 +1,11 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://data.example.com/collections/abc/sortables",
+   "$id": "https://data.example.com/collections/buildings/sortables",
    "type": "object",
    "properties": {
       "id": {
-         "title": "Record Identifier",
-         "description": "A unique record identifier assigned by the server.",
+         "title": "Identifier",
+         "description": "A unique identifier assigned by the server.",
          "type": "string"
       },
       "updated": {
@@ -25,12 +25,6 @@
          "type": "number",
          "minimum": 0,
          "maximum": 10
-      },
-      
-      "extent": {
-         "title": "Spatio-Temporal Extent",
-         "description": "The spatio-temporal coverage of the resource.",
-         "type": "object"
-      }   
+      }
    }
  }
