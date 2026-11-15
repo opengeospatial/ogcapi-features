@@ -17,7 +17,7 @@ The query parameter can be applied to web resources that can be represented as a
 The list of valid property names can be determined from the API definition or, if a schema of the returnables is available, from the JSON Schema according to <<OAFeat-5,OGC API - Features - Part 5: Schemas>>, Requirements Class "Returnables and Receivables".
 
 :req: parameter
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
@@ -31,17 +31,17 @@ include::schema/properties.yaml[]
 |===
 
 :req: response
-[#{req-class}_{req}]
+[#req_{req-class}_{req}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
 ^|A | The query parameter "properties" is optional. If it is not provided, all properties SHALL be returned.
 ^|B | If the query parameter "properties" is provided, only the selected returnable properties included in the parameter value SHALL be returned.
-^|C | For properties that are object-valued: Selecting the name of an object-valued property will return the complete object. Selecting properties inside the object will return only the selected properties.
+^|C | If the name of an object-valued property is selected, the complete object SHALL be returned. If properties inside an object-valued property are selected, only the selected properties of the object SHALL be returned.
 |===
 
 :per: required-properties
-[#{req-class}_{per}]
+[#per_{req-class}_{per}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Permission {counter:per-num}* |/per/{req-class}/{per}
@@ -49,14 +49,14 @@ include::schema/properties.yaml[]
 |===
 
 :per: unknown-properties
-[#{req-class}_{per}]
+[#per_{req-class}_{per}]
 [width="90%",cols="2,7a"]
 |===
 ^|*Permission {counter:per-num}* |/per/{req-class}/{per}
 ^|A | If the parameter value includes unknown properties, the server MAY either return a 400 (Bad Request) response or ignore the unknown properties.
 |===
 
-[[example_7_1]]
+[[example_6_1]]
 .Example of a feature collection with selected properties
 ====
 The request https://demo.ldproxy.net/daraa/collections/CulturePnt/items?f=json&properties=F_CODE,ZI005_FNA returns
