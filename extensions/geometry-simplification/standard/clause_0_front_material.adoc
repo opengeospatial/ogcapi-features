@@ -6,7 +6,7 @@ OGC API Features provides API building blocks to create, modify and query featur
 
 By default, the complete feature is returned in a response. However, the client sometimes needs the geometry only at a certain scale or zoom level for presenting the feature on a map. A capability to restrict the response to the necessary detail can reduce the volume of data to be transmitted.
 
-To address this use case, this Standard specifies how the representation of geometry, for example in a feature, can be simplified using a query parameter.
+To address this use case, this Standard specifies how the representation of geometry, for example in a feature, can be simplified using a query parameter. The same query parameter allows a server to omit features that are not relevant on a map at the zoom level.
 
 CAUTION: This is a DRAFT version of the 7th part of the OGC API - Features standards.
 
@@ -14,7 +14,7 @@ CAUTION: This is a DRAFT version of the 7th part of the OGC API - Features stand
 
 The following are keywords to be used by search engines and document catalogues.
 
-OGC, OGC API, features, returnables, properties, geometry, geometry simplification
+OGC, OGC API, features, geometry, geometry simplification, zoom level, scale
 
 [big]*iii.   Preface*
 
