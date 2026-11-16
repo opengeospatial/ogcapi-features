@@ -9,6 +9,7 @@ oneOf:
     - $ref: description.yaml
     - $ref: parameters.yaml
     - $ref: limit.yaml
+    - $ref: properties.yaml
     - allOf:
         - $ref: filter.yaml
         - type: object

@@ -1,7 +1,6 @@
-[[req_stored-query_definition-op]]
+[[req_manage-stored-query_definition-op]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/stored-query/get-op*
-^|A |For every stored query identified in the stored queries response (path `/query`), the server SHALL support the HTTP GET operation at the path `/query/{queryId}/definition`.
-^|B |The parameter `queryId` is each `id` property in the stored queries response (JSONPath: `$.queries[*].id`).
+^|*Requirement {counter:req-id}* |*/req/manage-stored-query/definition-op*
+^|A |For every stored query in the stored queries response (path `/query`), the server SHALL support the HTTP GET operation at the path `/query/{queryId}/definition`, where `{queryId}` is the `id` of the stored query (JSONPath: `$.queries[*].id`).
 |===

@@ -3,19 +3,21 @@
 
 This standard defines the following conformance classes:
 
-   * <<clause-adhoc-query,Adhoc query>>
+   * <<clause-adhoc-query,Ad-hoc query>>
 
-   * <<clause-stored-query,Stored Query>>
+   * <<clause-stored-query,Stored query>>
 
-   * <<clause-multi-resource-response,Multi-Resource Response>>
+   * <<clause-multi-resource-response,Multi-resource response>>
 
    * <<clause-join-response,Join Response>>
 
-   * <<clause-parameterized-stored-query,Parameterized Stored Query>>
+   * <<clause-parameterized-stored-query,Parameterized stored query>>
 
-   * <<clause-manage-stored-queries,Manage Stored Queries>>
+   * <<clause-manage-stored-query,Manage stored query>>
 
-   * <<clause-query-expression-json,JSON Query Expression>>
+   * <<clause-query-expression-json,Query Expression JSON>>
+
+   * <<clause-http-query-method,The HTTP QUERY method>>
 
 The standardization target is "Web APIs".
 
@@ -26,13 +28,14 @@ The URIs of the associated conformance classes are:
 [cols="25,75",options="header"]
 |===
 |Conformance class |URI
-|<<rc_adhoc-query,Adhoc query>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/adhoc-query
-|<<rc_stored-query,Stored Query>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/stored-query
-|<<rc_multi-resource-response,Multi-Resource Response>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/multi-resource-response
-|<<rc_join-response,Join Response>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/join-response
-|<<rc_parameterized-stored-query,Parameterized Stored Query>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/parameterized-stored-query
-|<<rc_manage-stored-query,Manage Stored Queries>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/manage-stored-query
-|<<rc_query-expression-json,JSON Query Expression>> |http://www.opengis.net/spec/ogcapi-features-10/1.0/req/query-expression-json
+|<<rc_adhoc-query,Ad-hoc query>> |\http://www.opengis.net/spec/{standard}/{m_n}/conf/adhoc-query
+|<<rc_stored-query,Stored query>> |\http://www.opengis.net/spec/{standard}/{m_n}/conf/stored-query
+|<<rc_multi-resource-response,Multi-resource response>> |\http://www.opengis.net/spec/{standard}/{m_n}/conf/multi-resource-response
+|<<rc_join-response,Join Response>> |\http://www.opengis.net/spec/{standard}/{m_n}/conf/join-response
+|<<rc_parameterized-stored-query,Parameterized stored query>> |\http://www.opengis.net/spec/{standard}/{m_n}/conf/parameterized-stored-query
+|<<rc_manage-stored-query,Manage stored query>> |\http://www.opengis.net/spec/{standard}/{m_n}/conf/manage-stored-query
+|<<rc_query-expression-json,Query Expression JSON>> |\http://www.opengis.net/spec/{standard}/{m_n}/conf/query-expression-json
+|<<rc_http-query-method,The HTTP QUERY method>> |\http://www.opengis.net/spec/{standard}/{m_n}/conf/http-query-method
 |===
 
 Conformance with this standard shall be checked using all the relevant tests

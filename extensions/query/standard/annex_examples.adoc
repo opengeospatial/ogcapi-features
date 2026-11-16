@@ -67,7 +67,7 @@
         "op": "in",
         "args": [
           {"property": "airport"},
-          "$parameter": {
+          { "$parameter": {
             "airports": {
               "title": "Airports",
               "description": "The 3-letter IATA airport codes or the airports to filter. Specify multiple values as a comma-separated list.",
@@ -78,7 +78,7 @@
               },
               "default": ["JFK", "EWR", "LGA"]
             }
-          }
+          } }
         ]
       }
     ]
@@ -111,7 +111,7 @@
         "op": "in",
         "args": [
           {"property": "airport"},
-          {"$parameter": {"$ref": "#/parameters/airport"}}
+          {"$parameter": {"$ref": "#/parameters/airports"}}
         ]
       }
     ]
@@ -267,7 +267,7 @@ The query has three parameters.
 
 * "collection": The feature type that is queried. Restricted to one of "apronelement," "runwayelement," or "taxiwayelement." The default is "runwayelement" if no parameter value is specified in the query.
 *	"type": The type of the apron/runway/taxiway element. One of "NORMAL," "PARKING," "INTERS," or "SHOULD". If no parameter value is specified in the query the default is "NORMAL."
-*	"airports": The airports for which the query should return data which is restricted to selected airports. The default is "IAD" if no parameter value is specified in the query.
+*	"airports": The airports for which the query should return data which is restricted to selected airports. The default is "IAD", "DCA" and "BWI" if no parameter value is specified in the query.
 
 The query:
 
@@ -277,64 +277,62 @@ The query:
 
 [source%unnumbered,json]
 ----
-PUT /d103_airports/search/elements-by-type-and-airport HTTP/1.1
-Host: t18.ldproxy.net
-Content-Type: application/json
+PUT /d103_airports/query/elements-by-type-and-airport HTTP/1.1
+Host: data.example.org
+Content-Type: application/ogc-query+json
 
 {
   "title": "Fetch apron, taxiway or runway elements based on their type and airport",
   "description": "This query fetches apron, taxiway or runway elements based on their type and airport. The response uses paging, if more than 10000 features match the query. The result is sorted by airport.",
-  "query": {
-    "collections": [
-      {
-        "$parameter": {
-          "collection": { "type": "string", "enum": ["apronelement", "runwayelement", "taxiwayelement"], "default": "apronelement" }
-        }
+  "collections": [
+    {
+      "$parameter": {
+        "collection": { "type": "string", "enum": ["apronelement", "runwayelement", "taxiwayelement"], "default": "runwayelement" }
       }
-    ],
-    "filter": {
-      "op": "and",
-      "args": [
-        {
-          "op": "=",
-          "args": [
-            {"property": "type"},
-            {
-              "$parameter": {
-                "type": { "type": "string", "enum": ["NORMAL", "PARKING", "INTERS", "SHOULD"], "default": "NORMAL" }
+    }
+  ],
+  "filter": {
+    "op": "and",
+    "args": [
+      {
+        "op": "=",
+        "args": [
+          {"property": "type"},
+          {
+            "$parameter": {
+              "type": { "type": "string", "enum": ["NORMAL", "PARKING", "INTERS", "SHOULD"], "default": "NORMAL" }
+            }
+          }
+        ]
+      },
+      {
+        "op": "in",
+        "args": [
+          {"property": "airport"},
+          {
+            "$parameter": {
+              "airports": {
+                "type": "array",
+                "items": { "type": "string", "enum": ["JFK", "EWR", "LGA", "BOS", "PIT", "DCA", "IAD", "BWI", "PHL"] },
+                "default": ["IAD", "DCA", "BWI"]
               }
             }
-          ]
-        },
-        {
-          "op": "in",
-          "args": [
-            {"property": "airport"},
-            {
-              "$parameter": {
-                "airports": {
-                  "type": "array",
-                  "items": { "type": "string", "enum": ["JFK", "EWR", "LGA", "BOS", "PIT", "DCA", "IAD", "BWI", "PHL"] },
-                  "default": ["IAD", "DCA", "BWI"]
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "properties": ["geometry", "airport", "type", "composition"],
-    "sortby": ["airport"]
+          }
+        ]
+      }
+    ]
   },
+  "properties": ["geometry", "airport", "type", "composition"],
+  "sortby": ["airport"],
   "limit": 10000
 }
 ----
 
-The server creates the stored query. If the stored query already existed, the query would be updated with the new definition.
+The server creates the stored query and returns 201. If it already existed, the server replaces it and returns 204.
 
 [source%unnumbered]
 ----
-HTTP/1.1 204 No Content
+HTTP/1.1 201 Created
 ----
 
 ==== Business Client fetches the available queries
@@ -345,8 +343,8 @@ NOTE: In addition to the queries stored on the server, the Filtering Service can
 
 [source%unnumbered]
 ----
-GET /d103_airports/search HTTP/1.1
-Host: t18.ldproxy.net
+GET /d103_airports/query HTTP/1.1
+Host: data.example.org
 Accept: application/json
 ----
 
@@ -367,15 +365,22 @@ Content-Type: application/json
         {
           "rel": "self",
           "title": "Query 'Fetch apron, taxiway or runway elements based on their type and airport'",
-          "href": "https://t18.ldproxy.net/d103_airports/search/elements-by-type-and-airport"
+          "href": "https://data.example.org/d103_airports/query/elements-by-type-and-airport"
         },
         {
           "rel": "describedby",
           "title": "Definition of query 'Fetch apron, taxiway or runway elements based on their type and airport'",
-          "href": "https://t18.ldproxy.net/d103_airports/search/elements-by-type-and-airport/definition"
+          "href": "https://data.example.org/d103_airports/query/elements-by-type-and-airport/definition"
         }
       ],
       "parameters": {
+        "collection": {
+          "title": "Feature type",
+          "description": "The feature type that is queried.",
+          "type": "string",
+          "enum": ["apronelement", "runwayelement", "taxiwayelement"],
+          "default": "runwayelement"
+        },
         "type": {
           "title": "Type of the apron, runway or taxiway element",
           "description": "The following types are distinguished: normal use, parking, shoulder, intersection.",
@@ -402,7 +407,7 @@ Content-Type: application/json
       "rel": "self",
       "type": "application/json",
       "title": "This document",
-      "href": "https://t18.ldproxy.net/d103_airports/search?f=json"
+      "href": "https://data.example.org/d103_airports/query?f=json"
     }
   ]
 }
@@ -412,9 +417,9 @@ The Business Client is interested in the first query and retrieves information a
 
 [source%unnumbered]
 ----
-GET /d103_airports/search/elements-by-type-and-airport/parameters HTTP/1.1
-Host: t18.ldproxy.net
-Accept: application/json
+GET /d103_airports/query/elements-by-type-and-airport/parameters HTTP/1.1
+Host: data.example.org
+Accept: application/parameters+json
 ----
 
 The Filtering Service responds with the list of parameters specified for the query:
@@ -422,7 +427,7 @@ The Filtering Service responds with the list of parameters specified for the que
 [source%unnumbered]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/json
+Content-Type: application/parameters+json
 
 {
   "parameters": {
@@ -442,7 +447,7 @@ Content-Type: application/json
         "type": "string",
         "enum": ["JFK", "EWR", "LGA", "BOS", "PIT", "DCA", "IAD", "BWI", "PHL"]
       },
-      "default": [["IAD", "DCA", "BWI"]
+      "default": ["IAD", "DCA", "BWI"]
     }
   }
 }
@@ -456,12 +461,12 @@ Since the query has default values for all parameters, the simplest query is one
 
 [source%unnumbered]
 ----
-GET /d103_airports/search/elements-by-type-and-airport HTTP/1.1
-Host: t18.ldproxy.net
+GET /d103_airports/query/elements-by-type-and-airport HTTP/1.1
+Host: data.example.org
 Accept: application/geo+json
 ----
 
-The Filtering Service will respond with the normal runway elements of Dulles International Airport:
+The Filtering Service will respond with the normal runway elements of the airports IAD, DCA and BWI:
 
 [source%unnumbered,json]
 ----
@@ -482,8 +487,8 @@ First the GET variant:
 
 [source%unnumbered]
 ----
-GET /d103_airports/search/elements-by-type-and-airport?collection=apronelement&type=PARKING&airports=EWR,JFK,LGA HTTP/1.1
-Host: t18.ldproxy.net
+GET /d103_airports/query/elements-by-type-and-airport?collection=apronelement&type=PARKING&airports=EWR,JFK,LGA HTTP/1.1
+Host: data.example.org
 Accept: application/geo+json
 ----
 
@@ -491,8 +496,8 @@ And the POST variant, which will typically be necessary for larger parameter val
 
 [source%unnumbered]
 ----
-POST /d103_airports/search/elements-by-type-and-airport HTTP/1.1
-Host: t18.ldproxy.net
+POST /d103_airports/query/elements-by-type-and-airport HTTP/1.1
+Host: data.example.org
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 57
 Accept: application/geo+json

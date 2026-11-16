@@ -66,13 +66,13 @@ include::requirements/query-expression-json/REQ_join-sortby.adoc[]
 
 include::requirements/query-expression-json/REQ_sortby-scope.adoc[]
 
-NOTE: Applying a global `sortby` clause requires the server to aggregate the results of all sub-queries before sorting the combined set. This approach precludes the ability to stream the response, as the entire result set must be held in memory prior to transmission.
+NOTE: This Standard does not define a global `sortby` member. Sorting the combined result of all queries would require the server to collect all results before it sends the response. The response could then not be streamed.
 
 ==== Parameters
 
 include::requirements/query-expression-json/REQ_parameters-schema.adoc[]
 
-For parameterized stored queries, the query expression incorporates JSON objects containing a `$parameter` member. This member identifies the parameter by name and defines its constraints using a logical JSON Schema. 
+For parameterized stored queries, the query expression incorporates JSON objects containing a `$parameter` member. This member identifies the parameter by name and defines its constraints using a logical JSON Schema. The query expression of a parameterized stored query does not conform to the schemas of the query expression and its clauses, because it contains `$parameter` objects. The schemas apply to the query expression after the substitution of the `$parameter` objects with the arguments (see <<req_query-expression-json_parameters-sub-logic,/req/query-expression-json/parameters-sub-logic>>).
 
 include::requirements/query-expression-json/REQ_parameters-value-schema.adoc[]
 

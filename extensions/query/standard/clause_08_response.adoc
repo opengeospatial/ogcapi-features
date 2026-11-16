@@ -57,7 +57,7 @@ The following example illustrates a response for a query expression containing m
      |   POST /query   HTTP/1.1                                            |
      |   Host: www.someserver.com/                                         |
      |   Accept: application/json                                          |
-     |   Content-Type: application/ogcqry+json                             |
+     |   Content-Type: application/ogc-query+json                          |
      |                                                                     |    
      |   {                                                                 |
      |     "queries": [                                                    |
@@ -85,8 +85,8 @@ The following example illustrates a response for a query expression containing m
      |                                                                     |
      |   Content-Type: application/json                                    |
      |   {                                                                 |
-     |     type: "Collections",                                            |
-     |     collections: [                                                  |
+     |     "type": "Collections",                                          |
+     |     "collections": [                                                |
      |       {                                                             |
      |          "type": "FeatureCollection",                               |
      |          "features": [                                              |
@@ -108,6 +108,7 @@ The following example illustrates a response for a query expression containing m
      |          ]                                                          |
      |       },                                                            |
      |       {                                                             |
+     |         "type": "TupleCollection",                                  |
      |         "tuples": [                                                 |
      |           [                                                         |
      |             { ... feature ... },                                    |
@@ -206,15 +207,19 @@ Finally, the individual features within each tuple are encoded using the GeoJSON
      |   POST /query   HTTP/1.1                                            |
      |   Host: www.someserver.com/                                         |
      |   Accept: application/json                                          |
-     |   Content-Type: application/ogcqry+json                             |
+     |   Content-Type: application/ogc-query+json                          |
      |                                                                     |    
      |   {                                                                 |
-     |      "collections": ["parks","lakes"]                               |
+     |      "collections": ["parks", "lakes"],                             |
      |      "filter": {                                                    |
-     |         "and": [                                                    |
-     |            {"eq": [{"property": "parks.name"},"Algonquin Park"]}    |
-     |            {"contains": [{"property": "parks.geometry"},            |
-     |                          {"property": "lakes.geometry"}]}           |
+     |         "op": "and",                                                |
+     |         "args": [                                                   |
+     |            { "op": "=",                                             |
+     |              "args": [{"property": "parks.name"},                   |
+     |                       "Algonquin Park"] },                          |
+     |            { "op": "s_contains",                                    |
+     |              "args": [{"property": "parks.geometry"},               |
+     |                       {"property": "lakes.geometry"}] }             |
      |         ]                                                           |
      |      }                                                              |
      |   }                                                                 |
@@ -222,6 +227,7 @@ Finally, the individual features within each tuple are encoded using the GeoJSON
      |                                                                     |
      |   Content-Type: application/json                                    |
      |   {                                                                 |
+     |      "type": "TupleCollection",                                     |
      |      "tuples": [                                                    |
      |         [                                                           |
      |            {                                                        |
@@ -238,9 +244,9 @@ Finally, the individual features within each tuple are encoded using the GeoJSON
      |            }                                                        |
      |         ],                                                          |
      |         [                                                           |
-     |            { "$ref": "#/tuples[0]/[0]" },                           |
+     |            { "$ref": "#/tuples/0/0" },                              |
      |            {                                                        |
-     |               "id": "lake.001",                                     |
+     |               "id": "lake.002",                                     |
      |               "type": "Feature",                                    |
      |               "geometry": { ... },                                  |
      |               "properties": { ... }                                 |

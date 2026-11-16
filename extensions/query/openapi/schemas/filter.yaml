@@ -3,10 +3,10 @@ type: object
 properties:
   filter-lang:
     type: string
-    default: cql-json
+    default: cql2-json
     enum:
-      - cql-json
-      - cql-text
+      - cql2-json
+      - cql2-text
   filter-crs:
     type: string
     format: uri
@@ -14,5 +14,4 @@ properties:
   filter:
     oneOf:
       - type: string
-      - type: object
-      - type: cql.yaml
+      - $ref: 'cql2.yaml#/components/schemas/booleanExpression'
