@@ -108,3 +108,26 @@ The feature https://demo.ldproxy.net/cshapes/collections/boundary/items/2?f=json
 |===
 ====
 
+=== Coordinate precision
+
+Coordinates with more decimal places than needed for a map at the zoom level increase the size of the response without a visible difference on the map. The number of decimal places that is sufficient depends on the zoom level, that is, the map scale, and on the unit of the coordinate reference system of the response.
+
+The coordinates need to be more precise than the map scale of the requested zoom level alone suggests, though. Clients often display the data at a larger scale than the scale of the request, for example, while the user zooms in on the map. Then the rounding of the coordinates becomes visible.
+
+:rec: coordinate-precision
+[#rec_{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A | If the query parameter "zoom-level" is provided, the coordinates in the response SHOULD NOT have more decimal places than needed to represent the geometries at the zoom level.
+|===
+
+[[example_6_2]]
+.Example of the coordinate precision at a zoom level
+====
+At zoom level 12, the scale denominator is about 136 500 (see <<zoom_levels>>), so 1 mm on the map corresponds to about 136 m on the ground.
+
+Coordinates in degrees with 4 decimal places have a precision of about 11 m at the equator, that is, less than 0.1 mm on the map. However, if the client displays the data at zoom level 15, with a scale denominator of about 17 000, 11 m on the ground correspond to about 0.65 mm on the map and the rounding becomes visible. With 5 decimal places, that is, a precision of about 1 m, the coordinates are precise enough for this case, too.
+
+Coordinates in metres, for example, in a projected coordinate reference system, need no decimal places in the same situation.
+====
