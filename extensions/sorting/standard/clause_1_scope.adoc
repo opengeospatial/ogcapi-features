@@ -4,6 +4,8 @@ This document specifies an extension to the <<OAFeat-1,OGC API - Features - Part
 
 This document defines
 
-* Query parameters for specifying the list of properties upon which the results of a query should be sorted.
+* A query parameter (`sortby`) for specifying the list of properties upon which the results of a query should be sorted.
 * A notation for indicating the sort order (ascending or descending) of each specified sort property.
-* How the set of properties that can be used to construct a sorting expression ("sortables") are published by a Web API.
+* How servers declare a default sort order.
+
+The set of properties that can be used to construct a sorting expression ("sortables") is published by a Web API in the Sortables resource specified in <<OAFeat-5,OGC API - Features - Part 5: Schemas>>.

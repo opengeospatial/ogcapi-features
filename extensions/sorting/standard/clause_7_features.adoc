@@ -1,0 +1,28 @@
+== Requirements Class "Features Sorting"
+
+[[features-sorting-overview]]
+=== Overview
+
+include::requirements/requirements_class_features-sorting.adoc[]
+
+This clause defines the binding between the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard and the sorting parameters defined in the <<rc_sorting,Sorting requirements class>>.
+
+The sortables of a feature collection are declared in the Sortables resource of the collection according to the Requirements Class "Sortables" of <<OAFeat-5,OGC API - Features - Part 5: Schemas>>.
+
+=== Features
+
+==== Operation
+
+As per the <<OAFeat-1,OGC API - Features - Part 1: Core>> Standard, features are accessed using the HTTP GET method via the `/collections/{collectionId}/items` path (see https://docs.ogc.org/is/17-069r4/17-069r4.html#_items[Features]). The following requirement binds the parameter `sortby` to the GET operation on this path.
+
+include::requirements/features-sorting/REQ_sortby-param.adoc[]
+
+==== Response
+
+include::requirements/features-sorting/REQ_response.adoc[]
+
+==== Default sort order
+
+include::requirements/features-sorting/REQ_default-sort-order.adoc[]
+
+<<defaultSortOrder-example>> shows a Collection resource with a default sort order.

@@ -6,7 +6,7 @@ OGC API - Features provides API building blocks to create, modify and query
 features on the Web. OGC API Features is comprised of multiple parts. Each
 part is a separate standard.
 
-A fundamental operation performed on a <<collection-def,collection>> of features is that of sorting in order to present features in a response is a particular order.  Part eight of the OGC API - Features Standard defines query parameters (`sortby`) to specify sorting criteria in a request to an API and the Sortables resource that declares the properties of data in a collection that can be used in sort by expressions.
+A fundamental operation performed on a <<collection-def,collection>> of features is that of sorting in order to present features in a response in a particular order.  Part eight of the OGC API - Features Standard defines a query parameter (`sortby`) to specify sorting criteria in a request to an API. The properties of data in a collection that can be used in sort by expressions are declared in the Sortables resource specified in OGC API - Features - Part 5: Schemas.
 
 CAUTION: This is a DRAFT version of the 8th part of the OGC API - Features standards.
 
@@ -14,7 +14,7 @@ CAUTION: This is a DRAFT version of the 8th part of the OGC API - Features stand
 
 The following are keywords to be used by search engines and document catalogues.
 
-OGC, filter, expression, query, SQL, CQL2, where clause, selection clause, OGC API
+OGC, OGC API, features, sorting, sortby, sortables
 
 [big]*iii.   Preface*
 

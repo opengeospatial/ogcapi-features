@@ -4,15 +4,14 @@ This standard defines the following requirements classes,
 grouped by their standardization target:
 
 * Web API
-** <<rc_sortables,Sortables>>
 ** <<rc_sorting,Sorting>>
 ** <<rc_features-sorting,Features Sorting>>
 
-The <<rc_sortables,Sortables>> requirements class defines the Sortables resource (at path `/collections/{collectionId}/sortables`) and its representation as a JSON Schema. Sortables can be used to determine the list of property names and their schemas that may be used to construct sort by expressions.
-
 The <<rc_sorting,Sorting>> requirements class defines a HTTP query parameter that may be used to specify sort by expressions on HTTP requests.  The specific parameter defined in this requirements class is:
 
-* `sortby` - The filter expression.
+* `sortby` - The sort expression.
+
+The properties that may be used in sort expressions ("sortables") are declared in the Sortables resource, which is specified in the Requirements Class "Sortables" of <<OAFeat-5,OGC API - Features - Part 5: Schemas>>. The <<rc_sorting,Sorting>> requirements class depends on that requirements class.
 
 The <<rc_features-sorting,Features Sorting>> requirements class defines the binding between the <<rc_sorting,Sorting>> requirements class and the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard.
 
@@ -27,7 +26,6 @@ OGC Compliance Testing web site.
 [cols="40,60",options="header"]
 |===
 |Conformance class |URI
-|<<conf_sortables,Sortables>> |`\http://www.opengis.net/spec/ogcapi-features-8/1.0/conf/sortables`
-|<<conf_sorting,Sorting>> |`\http://www.opengis.net/spec/ogcapi-features-8/1.0/conf/sorting`
-|<<conf_features-sorting,Features Sorting>> |`\http://www.opengis.net/spec/ogcapi-features-8/1.0/conf/features-sorting`
+|<<conf_sorting,Sorting>> |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/sorting`
+|<<conf_features-sorting,Features Sorting>> |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/features-sorting`
 |===

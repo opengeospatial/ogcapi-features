@@ -1,0 +1,95 @@
+[[clause-sorting]]
+== Requirements Class "Sorting"
+
+[[sorting-overview]]
+=== Overview
+
+include::requirements/requirements_class_sorting.adoc[]
+
+The `Sorting` Requirements Class defines the requirements for specifying how resources in a response should be ordered for presentation.
+
+The properties that can be used in a sorting expression ("sortables") are declared in the Sortables resource specified in the Requirements Class "Sortables" of <<OAFeat-5,OGC API - Features - Part 5: Schemas>>.
+
+[[sortby-parameter]]
+=== Parameter sortby
+
+include::requirements/sorting/REQ_sortby-definition.adoc[]
+
+NOTE: According to <<rfc3986,RFC 3986>>, a `+` can be used unencoded in the query component of a URI. However, many implementations decode query strings like form data (media type `application/x-www-form-urlencoded`), where an unencoded `+` represents a space. To avoid that a `+` in the value of the parameter `sortby` is interpreted as a space, clients can percent-encode it as `%2B`, as in the examples in this Standard.
+
+[NOTE]
+======================================================================
+The core definition of the `sortby` parameter only defines a single directive that controls the sort order of the corresponding property.  It is anticipated extensions would add additional search facets such as directives for:
+
+. Handling missing values,
+. Specifying a high value indicating that the corresponding property be sorted as if it were the highest possible value,
+. Specifying a low value indicating that the corresponding property be sorted as if it were the lowest possible value,
+. Allowing resources to be omitted from the result set based on their sort order,
+. Specify a fixed value and a fixed value that sorts the corresponding property as if it were the specified fixed value.
+======================================================================
+
+include::requirements/sorting/REQ_sortby-response.adoc[]
+
+The position of resources without a value for a sort key, that is, whether they are first or last, is determined by the server.
+
+If several resources have the same values for all sort keys, the sort keys do not determine the order of these resources. If the response is split into pages, for example, using `next` links in the Features resource, and the server orders such resources differently in each request, a resource can be returned on more than one page or on no page at all.
+
+include::recommendations/sorting/REC_stable-order.adoc[]
+
+Each sortable has to be declared in the Sortables resource. If the Sortables resource does not allow additional sortables, a request with an unknown sortable results in an error according to the Requirements Class "Sortables" of <<OAFeat-5,OGC API - Features - Part 5: Schemas>>.
+
+[[default-sort-order]]
+=== Declaring default sort order
+
+This Standard does not mandate a specific default sort order for resources fetched from a server. However, servers can declare a default sort order. Where the default sort order is declared depends on the resource. For features, it is declared in the Collection resource (see <<req_features-sorting_default-sort-order>>).
+
+include::requirements/sorting/REQ_default-sort-order.adoc[]
+
+[[sorting-by-relevance]]
+=== Sorting by relevance (informative)
+
+A common practice is to sort search results by relevance.
+
+This capability is accommodated in this Standard by using synthetic sortables. That is, using a sortable that is derived or synthesized by the server and that is not directly represented as a property in the content schema of the resource. The Sortables resource specified in <<OAFeat-5,OGC API - Features - Part 5: Schemas>> allows such sortables.
+
+A server implementing relevance ranking might include, in its list of sortables, a sortable named `relevance` that is dynamically computed for each result in a result set. How exactly the value of the `relevance` score is computed is left to the server's discretion. The value of the synthetic `relevance` sortable could, for example, be between 0 and 10 with zero indicating least relevance and 10 indicating most relevance. A `sortby` parameter specified in a request specifying a descending sort by the `relevance` property would present search results from most to least relevant.
+
+=== Examples
+
+[#defaultSortOrder-example,reftext=`Default Sort Order Example`]
+.Default Sort Order Example
+[source,json]
+----
+include::examples/json/defaultSortOrder.json[]
+----
+
+The following examples assume the following set of sortables retrieved from the Sortables resource `/collections/{collectionId}/sortables`:
+
+[#sortables-example,reftext=`Sortables Example`]
+.List of sortables
+[source,json]
+----
+include::examples/json/sortables.json[]
+----
+
+[#sortby-example,reftext=`SortBy Example`]
+.sortby Example of descending sort by updated date and ascending sort of resource identifier.
+[source]
+----
+.../collections/buildings/items?...&sortby=%2Dupdated,%2Bid&...
+----
+
+[#sortby-area-example,reftext=`SortBy Area Example`]
+.sortby Example of an ascending sort by area (i.e. smallest area first)
+[source]
+----
+.../collections/buildings/items?...&sortby=%2Barea&...
+----
+
+[#sortby-relevance-example,reftext=`SortBy Relevance Example`]
+.sortby Example of a descending sort by relevance (i.e. most relevant first)
+[source]
+----
+.../collections/buildings/items?...&sortby=%2Drelevance&...
+----
+
