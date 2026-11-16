@@ -12,13 +12,16 @@ in: query
 required: false
 schema:
   type: array
+  minItems: 1
   items:
     type: string
+style: form
 explode: false
 ----
 
 ^|C |Search terms that may appear together (logical OR) in a resource SHALL be separated by literal commas.
-^|D |Search terms that must appear together, and in the order specified, in a resource SHALL be separated by one or more white space characters.
+^|D |Search terms that are separated by one or more white space characters SHALL be treated as a phrase: they match only if they appear together and in the order specified.
 ^|E |Keyword searches using the `q` parameter SHALL be case insensitive.
-^|F |The specific set of text keys/fields/properties of a resource to which the `q` operator is applied SHALL be left to the discretion of the implementation.
 |===
+
+NOTE: The server decides to which text properties of a resource the `q` parameter is applied.

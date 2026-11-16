@@ -4,17 +4,12 @@ This standard defines the following requirements classes,
 grouped by their standardization target:
 
 * Web API
-** <<rc_sortables,Sortables>>
-** <<rc_sorting,Sorting>>
-** <<rc_features-sorting,Features Sorting>>
+** <<rc_text-search,Text Search>>
+** <<rc_features-text-search,Features Text Search>>
 
-The <<rc_sortables,Sortables>> requirements class defines the Sortables resource (at path `/collections/{collectionId}/sortables`) and its representation as a JSON Schema. Sortables can be used to determine the list of property names and their schemas that may be used to construct sort by expressions.
+The <<rc_text-search,Text Search>> requirements class defines the query parameter `q`. The parameter selects resources that contain one or more search terms in their text properties.
 
-The <<rc_sorting,Sorting>> requirements class defines a HTTP query parameter that may be used to specify sort by expressions on HTTP requests.  The specific parameter defined in this requirements class is:
-
-* `sortby` - The filter expression.
-
-The <<rc_features-sorting,Features Sorting>> requirements class defines the binding between the <<rc_sorting,Sorting>> requirements class and the <<OAFeat-1,OGC API - Features - Part 1: Core>> standard.
+The <<rc_features-text-search,Features Text Search>> requirements class binds the <<rc_text-search,Text Search>> requirements class to the Features resource of <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 
 Conformance with this standard shall be checked using all the relevant tests
 specified in <<ats,Annex A>> of this document. The framework, concepts, and
@@ -27,7 +22,6 @@ OGC Compliance Testing web site.
 [cols="40,60",options="header"]
 |===
 |Conformance class |URI
-|<<conf_sortables,Sortables>> |`\http://www.opengis.net/spec/ogcapi-features-8/1.0/conf/sortables`
-|<<conf_sorting,Sorting>> |`\http://www.opengis.net/spec/ogcapi-features-8/1.0/conf/sorting`
-|<<conf_features-sorting,Features Sorting>> |`\http://www.opengis.net/spec/ogcapi-features-8/1.0/conf/features-sorting`
+|<<conf_text-search,Text Search>> |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/text-search`
+|<<conf_features-text-search,Features Text Search>> |`\http://www.opengis.net/spec/{standard}/{m_n}/conf/features-text-search`
 |===
