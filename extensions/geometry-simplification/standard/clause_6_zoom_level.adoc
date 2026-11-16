@@ -10,7 +10,7 @@
 
 The Requirements Class "Geometry Simplification" specifies the "zoom-level" query parameter. 
 
-The query parameter is the zoom level / scale at which the requesting client will render geometries on a map.
+The value of the query parameter is a zoom level that identifies the map scale at which the requesting client will render geometries on a map.
 
 The query parameter can be applied to web resources that can be represented as an object with one or more spatial properties or to resources that are collections of such objects; for example, a collection of features or a single feature.
 
@@ -34,15 +34,32 @@ NOTE: Decimal values are allowed as zoom levels, not just integers.
 [width="90%",cols="2,7a"]
 |===
 ^|*Requirement {counter:req-num}* |/req/{req-class}/{req}
-^|A | If the query parameter "zoom-level" is provided, geometries in the response SHALL be simplified so that they are suitable for rendering on a map at the zoom level of the "WebMercatorQuad" tile matrix set specified in <<OGC17-083r4>>.
+^|A | If the query parameter "zoom-level" is provided, geometries in the response SHALL be simplified so that they are suitable for rendering on a map at the scale 1:_s_, where _s_ = 559 082 264.028 717 / 2^_z_^ and _z_ is the value of the query parameter "zoom-level".
 ^|B | The geometry type of the simplified geometry SHALL be consistent with the allowed geometry types for a geometry in the schema of the resource, if one is specified. 
+^|C | If the query parameter "zoom-level" is provided and the web resource is a collection of objects, the objects in the response SHALL be a subset of the objects in the response to the same request without the query parameter "zoom-level".
 |===
 
 The zoom level is a measure of how far the map is zoomed in or out. The map scale is the ratio of a distance on the map to the corresponding distance on the ground. If the zoom level increases by one, the scale denominator halves.
 
-The mapping between zoom levels and scale denominators at the equator is shown in <<zoom_levels>>. The scale denominators assume a rendering pixel size of 0.28 mm × 0.28 mm, as in <<OGC17-083r4>>. This Standard uses the zoom level instead of the scale, because in web mapping zoom levels are more commonly used than map scales. The WebMercatorQuad tiling scheme assumes that the map is rendered in the Web Mercator projection and uses a tile size of 256x256.
+<<zoom_levels>> shows the scale denominators of the integer zoom levels. This Standard uses the zoom level instead of the scale denominator, because in web mapping zoom levels are more commonly used and more intuitive than map scales. The scale denominators are those of the "WebMercatorQuad" tile matrix set at the equator, see <<OGC17-083r4>>.
 
-The simplification of geometries is a lossy operation. The simplified geometries are approximations of the original geometries. The simplification will typically reduce the number of vertices in a curve or a surface ring. The degree of simplification of geometries is implementation-dependent. 
+The zoom level is only a shorthand for the scale denominator. The level of detail of the simplified geometries does not depend on the location of the geometries, on the projection of the map or on the coordinate reference system of the response.
+
+NOTE: On a map in the Web Mercator projection, the map scale increases with the distance from the equator. For example, at a latitude of 60°, the scale is twice the scale at the equator. A client that displays such a map far from the equator can request a higher zoom level, for example, one zoom level higher at a latitude of 60°.
+
+The simplification of geometries is a lossy operation. The simplified geometries are approximations of the original geometries. The simplification will typically reduce the number of vertices in a curve or a surface ring. The degree of simplification of geometries is implementation-dependent. Arcs, for example, in circular strings, can be approximated by line segments, if the schema of the resource allows the resulting geometry type (see requirement `/req/zoom-level/response`, sub-requirement `B`).
+
+Simplification can result in invalid geometries, for example, rings that intersect themselves. In addition, neighbouring geometries with a shared boundary are typically simplified independently of each other, which can result in gaps or overlaps along the boundary.
+
+:rec: valid-geometry
+[#rec_{req-class}_{rec}]
+[width="90%",cols="2,7a"]
+|===
+^|*Recommendation {counter:rec-num}* |/rec/{req-class}/{rec}
+^|A | If the query parameter "zoom-level" is provided, the simplified geometries SHOULD be valid geometries of their geometry type.
+|===
+
+In addition to simplifying the geometries, a server can omit objects that are not relevant on a map at the zoom level, for example, minor roads or small buildings at small scales. This is similar to vector tiles, where the server determines which features are included in a tile at a zoom level. Which objects are omitted, if any, is determined by the server. A client that needs all objects, for example, for an analysis, does not use the query parameter "zoom-level".
 
 [#zoom_levels,reftext='{table-caption} {counter:table-num}']
 .Zoom levels and the equivalent scale denominators
@@ -76,5 +93,18 @@ The simplification of geometries is a lossy operation. The simplified geometries
 |24 |33.3238997476528
 |===
 
-TODO: add example
+[[example_6_1]]
+.Example of simplified geometries
+====
+The feature https://demo.ldproxy.net/cshapes/collections/boundary/items/2?f=json is the boundary of the United States of America between 1959 and 2019. The table shows the number of positions in the geometry and the size of the GeoJSON document with and without the query parameter "zoom-level". In all responses, the geometry is a multi-polygon with 136 polygons.
+
+[width="70%",cols="40,30,30",options="header"]
+|===
+|Query parameter |Positions |Document size
+|none |10601 |254 KB
+|`zoom-level=6` |4550 |110 KB
+|`zoom-level=3` |1857 |47 KB
+|`zoom-level=0` |1201 |31 KB
+|===
+====
 
