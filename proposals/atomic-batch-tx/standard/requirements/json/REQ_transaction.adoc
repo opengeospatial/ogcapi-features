@@ -1,9 +1,8 @@
-[[req_json_transaction]]
+[[req_json-transactions_transaction]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/json/transaction*
-
-The following OpenAPI schema defrgment defines the JSON-encoding of a transaction:
+^|*Requirement {counter:req-id}* |*/req/json-transactions/transaction*
+^|A |If the request has a JSON-encoded transaction, the request body SHALL validate against the following OpenAPI 3.0 schema fragment:
 
 [source,yaml]
 ----

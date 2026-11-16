@@ -21,7 +21,7 @@ EXAMPLE 1: For features, these endpoints are described by the
 URI template `{landingPageUri}/collections/{collectionId}/items`. See <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 
 EXAMPLE 2: For processes, these endpoints are described by the 
-URI template `{landingPageUri}/process`. See <<OAProc-1,OGC API - Processes - Part 1: Core>>.
+URI template `{landingPageUri}/processes`. See <<OAProc-1,OGC API - Processes - Part 1: Core>>.
 
 The token `<resource endpoint>` is used for the endpoint that accesses a specific 
 resource from a collection.
@@ -30,7 +30,7 @@ EXAMPLE 3: For features, these endpoints are described by the
 URI template `{landingPageUri}/collections/{collectionId}/items/{featureId}`. See <<OAFeat-1,OGC API - Features - Part 1: Core>>.
 
 EXAMPLE 4: For processes, these endpoints are described by the 
-URI template `{landingPageUri}/process/{processId}`. See <<OAProc-1,OGC API - Processes - Part 1: Core>>.
+URI template `{landingPageUri}/processes/{processId}`. See <<OAProc-1,OGC API - Processes - Part 1: Core>>.
 
 === Dependencies to other requirements classes
 
@@ -38,4 +38,4 @@ The requirements classes in this extension distinguish two types of dependencies
 
 First, there are the "direct dependencies". Every server implementing the requirements class has to conform to the referenced Standard or requirements class.
 
-In addition, requirements classes can also have "indirect dependencies". Servers implementing the requirements class do not have to conform to the referenced Standard or requirements class, but if they do, they have to conform to the requirements that identify the indirect dependency as a pre-condition for the normative statement.
+In addition, requirements classes can also have "conditional dependencies". Servers implementing the requirements class do not have to conform to the referenced Standard or requirements class, but if they do, they have to conform to the requirements that identify the conditional dependency as a pre-condition for the normative statement.

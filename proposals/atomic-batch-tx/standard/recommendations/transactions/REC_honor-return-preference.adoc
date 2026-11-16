@@ -3,8 +3,8 @@
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/transactions/honor-prefer-return*
 ^|A |If a request *is accompanied* with the HTTP https://datatracker.ietf.org/doc/html/rfc7240#section-2[`Prefer`] header asserting a https://datatracker.ietf.org/doc/html/rfc7240#section-4.2[`return`] preference, then the server SHOULD honor that preference.
-^|B |If the `return` perference is `none` then the body of the response SHOULD be empty.
-^|C |If the `return` perference is `minimal` then the body of the response SHOULD contains a count of the number of resources created, updated, replaced or deleted by the operation.
-^|C |If the `return` perference is `representation` or then the body of the response SHOULD report the number of resources created, updated, replaced and/or deleted by the transaction.  If the transaction contains actions that create new resources, the response SHOULD report the identifiers of these newly created resources.
+^|B |If the `return` preference is `none` then the body of the response SHOULD be empty.
+^|C |If the `return` preference is `minimal` then the body of the response SHOULD contain a count of the number of resources created, updated, replaced or deleted by the operation.
+^|D |If the `return` preference is `representation`, then the body of the response SHOULD report the number of resources created, updated, replaced and/or deleted by the transaction.  If the transaction contains actions that create new resources, the response SHOULD report the identifiers of these newly created resources.
 |===
 

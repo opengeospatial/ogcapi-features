@@ -1,9 +1,0 @@
-[[req_features_gml-srsname]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/features/gml-srsname* 
-^|Condition |Server implements <<OAFeat-2,OGC API - Features - Part 2: Coordinate Reference Systems by Reference>>
-^|Condition |A CREATE, REPLACE and UPDATE request has been submitted with a `Content-Type` HTTP header with a GML media type (`application/gml+xml`).
-^|A |The server SHALL inspect the `srsName` XML attribute of the element that represents the value of each geometry-valued feature property. 
-^|B |A `srsName` XML attribute SHALL override the `Content-Type` HTTP header.
-|===

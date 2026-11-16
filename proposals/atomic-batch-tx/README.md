@@ -1,6 +1,8 @@
-# Standard template
+# OGC API - Features - Part 11: Atomic and Batch Transactions
 
-This folder contains the content for OGC API - Features - Part 11: Atomic & Batch Transactions
+This folder contains the content for OGC API - Features - Part 11: Atomic and Batch Transactions.
+
+Status: this is a draft proposal, not an OGC Standard.
 
 The repo is organized as follows:
 

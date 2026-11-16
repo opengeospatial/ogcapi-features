@@ -7,20 +7,20 @@ include::requirements/requirements_class_transactions.adoc[]
 
 A server that implements this requirements class provides the ability to execute transactions on one or more collections.
 
-Transactions can have atomic semantics which means that every action in the require must complete successfully otherwise the entire operation should fail and the server should report an exception.
+Transactions can have atomic semantics which means that every action in the request has to complete successfully. Otherwise, the entire operation fails and the server reports an exception.
 
-Transactions can also have batch semantics which means that every action is the requrest is independent of every other action in the request.  If a single action should fail, processing of the transaction continues and the failed action(s) is(are) reported in the transaction response.
+Transactions can also have batch semantics which means that every action in the request is independent of every other action in the request.  If a single action should fail, processing of the transaction continues and the failed action(s) is(are) reported in the transaction response.
 
-In either case, the transaction response should indicate the number of resource inserted, updated, replaced or deleted.  In the case of newly created resources the transaction response should also report the identifiers of the newly created resources.
+In either case, the transaction response indicates the number of resources inserted, updated, replaced or deleted.  In the case of newly created resources the transaction response also reports the identifiers of the newly created resources.
 
-NOTE: In order to promote interoperability, each OGC Standard that extends this Standard should make recommendations concerning the representation of a transaction and the representation of resources contained therein.  See <<json,JSON encoding for Transactions>> for a discussion on the representation of a transactions and <<features,Features>> for a discussion on the representions of features.
+NOTE: In order to promote interoperability, each OGC Standard that extends this Standard is expected to make recommendations concerning the representation of a transaction and the representation of resources contained therein.  See <<sc_json,JSON encoding for Transactions>> for a discussion on the representation of a transaction and <<features_clause,Features>> for a discussion on the representations of features.
 
 [[http_status_codes]]
 ==== HTTP status codes
 
 API clients should be prepared to handle any registered HTTP or HTTPS status code.
 
-The *Status Codes* listed in <<status_codes>> are of relevance to implementors of this Standard. Status codes 200, 201, 202, 204 and 404 are called out in this Standard's requirements. Therefore, support for some of these status codes is mandatory for all compliant implementations. The remainder of the status codes in <<status_codes>> are not mandatory but are important for the implementation of a well-functioning API. Support for these status codes is strongly encouraged for both client and server implementations.
+The *Status Codes* listed in <<status_codes>> are of relevance to implementors of this Standard. Status codes 200, 404 and 410 are called out in this Standard's requirements. Therefore, support for some of these status codes is mandatory for all compliant implementations. The remainder of the status codes in <<status_codes>> are not mandatory but are important for the implementation of a well-functioning API. Support for these status codes is strongly encouraged for both client and server implementations.
 
 [#status_codes,reftext='{table-caption} {counter:table-num}']
 .Typical HTTP status codes[[table_2]]
@@ -28,7 +28,7 @@ The *Status Codes* listed in <<status_codes>> are of relevance to implementors o
 !===
 |Status code |Description
 |`200` |A successful request.
-|`201` |The server has been fulfilled the operation and a new resource has been created. 
+|`201` |The server has fulfilled the operation and a new resource has been created. 
 |`202` |The request has been accepted for processing, but the processing has not been completed. The request might or might not eventually be acted upon, as it might be disallowed when processing happens.
 |`204` |A successful request with no additional content to send in the response.
 |`400` |The server cannot or will not process the request due to an apparent client error. For example, a query parameter had an incorrect value.
@@ -36,6 +36,7 @@ The *Status Codes* listed in <<status_codes>> are of relevance to implementors o
 |`403` |The server understood the request but is refusing to fulfill it. While status code `401` indicates missing or bad authentication, status code `403` indicates that authentication is not the issue, but the client is not authorized to perform the requested operation on the resource.
 |`404` |The requested resource does not exist on the server. For example, a path parameter had an incorrect value.
 |`405` |The request method is not supported. For example, a POST request was submitted, but the resource only supports GET requests.
+|`410` |The requested resource is no longer available.
 |`406` |Content negotiation failed. For example, the `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
 |`412` |The status code indicates that one or more conditions given in the request header fields evaluated to false when tested by the server.
 |`413` |The server is refusing to process the request because the request content is larger than the server is willing or able to process.
@@ -49,7 +50,7 @@ More specific guidance is provided for each resource, where applicable.
 
 include::recommendations/PER_additional-status-codes.adoc[]
 
-The https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_definition_2[API Description Document] describes the HTTP status codes generated by an API. This should not be an exhaustive list of all possible status codes. Expecting an API designer to control the use of HTTP status codes which are not generated by their software is not reasonable. Therefore, it is recommended that the API Description Document limit itself to describing HTTP status codes relevant to the proper operation of the API application logic. Client implementations should be prepared to receive HTTP status codes in addition to those described in the API Description Document.
+The https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_definition_2[API Description Document] describes the HTTP status codes generated by an API. This is not an exhaustive list of all possible status codes. Expecting an API designer to control the use of HTTP status codes which are not generated by their software is not reasonable. Therefore, the API Description Document can limit itself to describing HTTP status codes relevant to the proper operation of the API application logic. Client implementations have to be prepared to receive HTTP status codes in addition to those described in the API Description Document.
 
 [[cross_origin]]
 ==== Cross-origin requests
@@ -60,9 +61,9 @@ See <<OAFeat-1,OGC API - Features - Part 1: Core>>, section link:http://www.open
 
 This Standard makes no assumptions about any schema constraints that a server may impose upon resource data encoded in a transaction.  The intent is to support both "schema-less" servers (such as those back-ended by document data stores) as well as servers that have underlying schema constraints (such as those back-ended by an RDBMS).
 
-In the "schema-less" case, as long as the resources in the incoming transaction meet the requirements of the declared media type (e.g. valid GeoJSON features in a JSON-encoded transaction) then, if the operation is successfully processed, the server should respond with a 20x status response.
+In the "schema-less" case, as long as the resources in the incoming transaction meet the requirements of the declared media type (e.g. valid GeoJSON features in a JSON-encoded transaction) then, if the operation is successfully processed, the server responds with a 20x status response.
 
-In the case where the server imposes schema constraints, the server should publish schemas to help clients create requests that are not rejected.  In the case where the resource is a feature, see <<xxx,OGC API - Features - Part 5: Schema>>.
+In the case where the server imposes schema constraints, the server is expected to publish schemas to help clients create requests that are not rejected.  In the case where the resource is a feature, see <<OAFeat-5,OGC API - Features - Part 5: Schemas>>.
 
 === Executing transactions
 
@@ -83,7 +84,7 @@ The following diagram illustrates the sequence diagram for executing a transacti
      |                                                               |
      |   ... Body contains a report of the number of resources       |
      |       created, updated, replaced or deleted.  In the case     |
-     |       of newly created resources, the report all includes     |
+     |       of newly created resources, the report also includes     |
      |       the identifiers of those resources ...                  |
      |<--------------------------------------------------------------|
 ....
@@ -114,6 +115,8 @@ include::requirements/transactions/REQ_response.adoc[]
 
 include::recommendations/transactions/REC_honor-return-preference.adoc[]
 
+include::recommendations/transactions/REC_preference-applied.adoc[]
+
 ==== Exceptions
 
 See <<http_status_codes,HTTP status codes>>.
@@ -125,7 +128,7 @@ See <<http_status_codes,HTTP status codes>>.
 
 include::requirements/requirements_class_atomic.adoc[]
 
-If atomic semantics are being applied to the execution of a transaction then all actions contained within the transaction must complete successfully.  If any action contained within the transaction fails then the entire transaction fails and the state of all affected collections must be restored to what it was before the transaction was executed.
+If atomic semantics are being applied to the execution of a transaction then all actions contained within the transaction have to complete successfully.  If any action contained within the transaction fails then the entire transaction fails and the state of all affected collections is restored to what it was before the transaction was executed.
 
 === Declaring support of atomic semantics
 

@@ -3,16 +3,19 @@
 
 See <<OAFeat-1,OGC API - Features - Part 1: Core>>, Clause 10.
 
-The media types for the CREATE, REPLACE and UPDATE requests as well as for the schema documents depend on the representations of the resources.
+The following table lists the media types of the resources specified in this Standard.
 
-For GeoJSON features,
+[#tab_media_types,reftext='{table-caption} {counter:table-num}']
+.Media types
+[cols="45,20,35",options="header"]
+|===
+|Resource |Media type |Specified in
+|Transaction (request body of a POST request to the transactions endpoint) |`application/ogc-tx+json` |<<sc_json>>
+|Transaction report (response to a transaction, results of an asynchronous transaction) |`application/json` |<<sc_json>>, <<sc_async-transactions>>
+|Status information of an asynchronous transaction |`application/json` |<<sc_async-transactions>>
+|Schema of the features in a collection |`application/schema+json` |<<schemas>>
+|===
 
-- CREATE and REPLACE operations will use `application/geo+json`,
-- UPDATE operations will use `application/merge-patch+json`,
-- schema documents will use `application/schema+json`.
+The features in insert and replace actions are part of the transaction. In the JSON encoding, they are GeoJSON features (see <<feature-geojson>>) and are not identified by a separate media type.
 
-For GML features,
-
-- CREATE and REPLACE operations will use `application/gml+xml`,
-- UPDATE operations will use `application/xml`,
-- schema documents will use `application/xml`.
+NOTE: The media type for transactions is not final.

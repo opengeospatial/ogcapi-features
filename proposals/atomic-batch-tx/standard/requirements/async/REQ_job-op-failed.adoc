@@ -1,10 +1,10 @@
-[[req_async-transactions_job-results-failed]]
+[[req_async-transactions_job-results-op-failed]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/async-transactions/job-results-failed*
+^|*Requirement {counter:req-id}* |*/req/async-transactions/job-results-op-failed*
 ^|Condition |The job identifier is valid.
 ^|Condition |Processing of the transaction failed.
 ^|A |The server SHALL respond with a HTTP error code that corresponds to the reason for the failure. 
-^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema https://raw.githubusercontent.com/opengeospatial/ogcapi-processes/master/openapi/schemas/common-transactions/exception.yaml[exception.yaml].
-^|C |The `type` of the exception SHALL correspond to the reason of the failure, e.g. InvalidParameterValue for invalid input data.
+^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema https://raw.githubusercontent.com/opengeospatial/ogcapi-processes/master/openapi/schemas/common-core/exception.yaml[exception.yaml].
+^|C |The `type` of the exception SHALL be a URI that identifies the reason of the failure.
 |===
