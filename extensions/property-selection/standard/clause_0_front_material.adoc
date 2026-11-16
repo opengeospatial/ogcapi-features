@@ -9,7 +9,7 @@ By default, the complete feature is returned in a response. However, the client 
 - The client does not need the geometry and only wants to present a table with property information. This option is in particular relevant for line strings, polygons or solids with many coordinates.
 - The client only needs a subset of the properties, e.g. for styling the features in a map. This option is in particular relevant for features with many properties.
 
-To address these use cases, this Standard specifies how the representation of a resource, for example a feature, can be reduced to selected properties of the resource using a query parameter.
+To address these use cases, this Standard specifies how the representation of a resource, for example a feature, can be reduced to selected properties of the resource using a query parameter, either by listing the properties to include or by listing the properties to exclude.
 
 CAUTION: This is a DRAFT version of the 6th part of the OGC API - Features standards.
 
