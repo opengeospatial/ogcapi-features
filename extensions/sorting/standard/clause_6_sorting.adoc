@@ -15,7 +15,7 @@ The properties that can be used in a sorting expression ("sortables") are declar
 
 include::requirements/sorting/REQ_sortby-definition.adoc[]
 
-NOTE: According to <<rfc3986,RFC 3986>>, a `+` can be used unencoded in the query component of a URI. However, many implementations decode query strings like form data (media type `application/x-www-form-urlencoded`), where an unencoded `+` represents a space. To avoid that a `+` in the value of the parameter `sortby` is interpreted as a space, clients can percent-encode it as `%2B`, as in the examples in this Standard.
+CAUTION: Query string parsers intended for Web forms decode a `+` that is not percent-encoded as a space (following `application/x-www-form-urlencoded`). Many toolkits also offer decoders for generic URIs that pass the `+` through as data, for example https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent[`decodeURIComponent()`] in JavaScript and https://docs.python.org/3/library/urllib.parse.html#urllib.parse.unquote[`urllib.parse.unquote()`] in Python. To ensure broad interoperability, clients ideally encode the `+` sign as `%2B` (e.g., `sortby=%2Btitle`) or omit it, as ascending is the default.
 
 [NOTE]
 ======================================================================
