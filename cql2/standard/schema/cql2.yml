@@ -103,7 +103,7 @@ components:
       type: array
       minItems: 2
       maxItems: 2
-      items:
+      prefixItems:
         oneOf:
           - oneOf:
               - $ref: '#/components/schemas/characterExpression'
