@@ -352,7 +352,7 @@ identifierStart = "\x003A"              # colon
 #=============================================================================#
 # Definition of a FUNCTION
 #=============================================================================#
-function = identifier "(" {argumentList} ")";
+function = identifier "(" [argumentList] ")";
 
 argumentList = argument [ { "," argument } ];
 
